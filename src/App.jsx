@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.102";
+const SAVE_VERSION = "1.99.103";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -60,6 +60,8 @@ const QA_RELEASE_ARCHIVE_KEY = "cheonsu_v01_qa_release_archive";
 const UPDATE_MANIFEST_URL_KEY = "cheonsu_update_manifest_url";
 const PLAYTEST_UNLOCK_ALL_STAGES = true;
 const ALL_STAGE_IDS = stages.map((stage) => stage.id);
+const getPlaytestUnlockedStageIds = (stageIds = [1]) =>
+  PLAYTEST_UNLOCK_ALL_STAGES ? ALL_STAGE_IDS : stageIds;
 const MAP_ZOOM_STEPS = ["fit", "normal", "large", "xl"];
 const MAP_ZOOM_LABELS = {
   fit: "자동",
@@ -7081,7 +7083,7 @@ export default function App() {
   const [activeSupportScene, setActiveSupportScene] = useState(null);
   const [gold, setGold] = useState(300);
   const [stageRewardClaimed, setStageRewardClaimed] = useState(false);
-  const [unlockedStages, setUnlockedStages] = useState([1]);
+  const [unlockedStages, setUnlockedStages] = useState(() => getPlaytestUnlockedStageIds([1]));
   const playableStageIds = PLAYTEST_UNLOCK_ALL_STAGES ? ALL_STAGE_IDS : unlockedStages;
   const [clearedStages, setClearedStages] = useState([]);
   const [gearInventory, setGearInventory] = useState(["ironSword", "leatherArmor", "fireStaff", "mageRobe"]);
@@ -9160,7 +9162,7 @@ export default function App() {
     setActiveSupportScene(null);
     setGold(300);
     setStageRewardClaimed(false);
-    setUnlockedStages([1]);
+    setUnlockedStages(getPlaytestUnlockedStageIds([1]));
     setClearedStages([]);
     setGearInventory(["ironSword", "leatherArmor", "fireStaff", "mageRobe"]);
     setInventory(createDefaultInventory());
@@ -9171,7 +9173,7 @@ export default function App() {
   };
 
   const beginStageBattle = (stage) => {
-    if (!unlockedStages.includes(stage.id)) return;
+    if (!playableStageIds.includes(stage.id)) return;
     playSfx("start");
     setStoryScene(null);
     const chosenParty = deployedIds.length
@@ -10522,7 +10524,7 @@ export default function App() {
       ].slice(0, 8));
       setCampMessage(migratedData.campMessage);
       setStageRewardClaimed(migratedData.stageRewardClaimed);
-      setUnlockedStages(migratedData.unlockedStages);
+      setUnlockedStages(getPlaytestUnlockedStageIds(migratedData.unlockedStages));
       setClearedStages(migratedData.clearedStages);
       setStoryScene(null);
       setBattle(null);
@@ -15861,7 +15863,9 @@ export default function App() {
           </div>
 
           <div className="recruit-rule">
-            지역을 따라 진군하세요. 보스 스테이지와 동료 합류 스테이지가 월드맵에 표시됩니다.
+            {PLAYTEST_UNLOCK_ALL_STAGES
+              ? "개발 테스트 모드: 모든 스테이지가 열려 있어 바로 편성하고 전투에 들어갈 수 있습니다."
+              : "지역을 따라 진군하세요. 보스 스테이지와 동료 합류 스테이지가 월드맵에 표시됩니다."}
           </div>
 
           {campaignView === "atlas" ? (
