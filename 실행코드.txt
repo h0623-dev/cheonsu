@@ -1,0 +1,3 @@
+cd C:\Users\user\Desktop\cheonsu
+npm install
+npm run dev

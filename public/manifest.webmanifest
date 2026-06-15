@@ -1,0 +1,81 @@
+{
+  "name": "천수",
+  "short_name": "천수",
+  "version": "1.99.102",
+  "description": "동양 다크 판타지 모바일 전략 SRPG",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#120000",
+  "background_color": "#000000",
+  "lang": "ko",
+  "categories": [
+    "games",
+    "strategy"
+  ],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/promo/cheonsu_promo_main.png",
+      "sizes": "1024x1536",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/ui/cheonsu_main_menu_art.png",
+      "sizes": "1024x1536",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "id": "/",
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "shortcuts": [
+    {
+      "name": "천수 실행",
+      "short_name": "실행",
+      "description": "천수 게임을 시작합니다.",
+      "url": "/",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "홍보 페이지",
+      "short_name": "홍보",
+      "description": "천수 홍보 메인페이지를 엽니다.",
+      "url": "/",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

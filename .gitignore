@@ -1,0 +1,41 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Android / Capacitor build outputs
+android/.gradle/
+android/build/
+android/app/build/
+android/app/release/
+android/local.properties
+*.apk
+*.aab
+
+# Local generated packages
+cheonsu_*.zip
+
+# Local Codex / temporary workspace files
+.codex-remote-attachments/
+_codex_backups/
+tmp/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
