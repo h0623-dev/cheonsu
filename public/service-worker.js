@@ -1,4 +1,4 @@
-const CACHE_VERSION = "cheonsu-v199108";
+const CACHE_VERSION = "cheonsu-v199109";
 const APP_SHELL_CACHE = `${CACHE_VERSION}-app-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -6,6 +6,25 @@ const FINAL_STAGE_MAPS = Array.from(
   { length: 30 },
   (_, index) => `/maps/concept/stage_${index + 1}_frontier_final.png`
 );
+const ENEMY_VARIANT_KEYS = [
+  "raider",
+  "marauder",
+  "assassin_elite",
+  "sniper",
+  "ranger",
+  "pyromancer",
+  "frost_mage",
+  "cultist",
+  "sentinel",
+  "blackguard",
+  "warlord",
+  "void_knight",
+];
+const ENEMY_VARIANT_SPRITES = ENEMY_VARIANT_KEYS.flatMap((key) => [
+  `/sprites/map_units/${key}.png`,
+  `/sprites/enemies/${key}.png`,
+  `/sprites/sd_units/${key}.png`,
+]);
 
 const APP_SHELL_FILES = [
   "/",
@@ -116,6 +135,7 @@ const APP_SHELL_FILES = [
   "/sprites/classic/units/boss_mage.png",
   "/sprites/classic/units/garon.png",
   "/sprites/classic/units/wolf.png",
+  ...ENEMY_VARIANT_SPRITES,
 ];
 
 self.addEventListener("install", (event) => {

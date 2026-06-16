@@ -1,13 +1,14 @@
 {
   "name": "cheonsu",
   "private": true,
-  "version": "1.99.108",
+  "version": "1.99.109",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "maps:final-variants": "powershell.exe -ExecutionPolicy Bypass -File scripts/generate-stage-final-map-variants.ps1",
+    "sprites:enemy-variants": "powershell.exe -ExecutionPolicy Bypass -File scripts/generate-enemy-variants.ps1",
     "preview": "vite preview",
     "cap:copy": "npm run build && npx cap copy",
     "cap:sync": "npm run build && npx cap sync",

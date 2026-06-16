@@ -1,8 +1,27 @@
-const CACHE_NAME = "cheonsu-v1-99-108";
+const CACHE_NAME = "cheonsu-v1-99-109";
 const FINAL_STAGE_MAPS = Array.from(
   { length: 30 },
   (_, index) => `/maps/concept/stage_${index + 1}_frontier_final.png`
 );
+const ENEMY_VARIANT_KEYS = [
+  "raider",
+  "marauder",
+  "assassin_elite",
+  "sniper",
+  "ranger",
+  "pyromancer",
+  "frost_mage",
+  "cultist",
+  "sentinel",
+  "blackguard",
+  "warlord",
+  "void_knight",
+];
+const ENEMY_VARIANT_SPRITES = ENEMY_VARIANT_KEYS.flatMap((key) => [
+  `/sprites/map_units/${key}.png`,
+  `/sprites/enemies/${key}.png`,
+  `/sprites/sd_units/${key}.png`,
+]);
 
 const CORE_ASSETS = [
   "/",
@@ -102,7 +121,8 @@ const CORE_ASSETS = [
   "/sprites/classic/units/boss_knight.png",
   "/sprites/classic/units/boss_mage.png",
   "/sprites/classic/units/garon.png",
-  "/sprites/classic/units/wolf.png"
+  "/sprites/classic/units/wolf.png",
+  ...ENEMY_VARIANT_SPRITES
 ];
 
 self.addEventListener("install", (event) => {

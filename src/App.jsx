@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.108";
+const SAVE_VERSION = "1.99.109";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -1732,35 +1732,128 @@ function getLargeBattleMapSize(stage, deployCount = MAX_DEPLOY_COUNT) {
   return normalizeLargeMapSize({ width, height });
 }
 
-function getLargeAllySpawns(activeMap) {
+function normalizeSpawnCandidates(candidates, activeMap) {
   const h = activeMap?.length || LARGE_MAP_SIZE;
   const w = activeMap?.[0]?.length || LARGE_MAP_SIZE;
-  const frontCols = Math.max(5, Math.min(6, Math.floor(w * 0.4)));
-  const rows = [h - 3, h - 2, h - 1].filter((row) => row >= 0);
-  const spawns = [];
 
-  rows.forEach((row) => {
-    for (let x = 0; x < frontCols; x += 1) {
-      spawns.push({ x, y: row });
-    }
-  });
-
-  return spawns.filter((pos, index, all) =>
+  return candidates.filter((pos, index, all) =>
     pos.x >= 0 &&
     pos.y >= 0 &&
     pos.x < w &&
     pos.y < h &&
+    !isBlockedBattleTile(activeMap[pos.y]?.[pos.x]) &&
     all.findIndex((other) => other.x === pos.x && other.y === pos.y) === index
   );
 }
 
-function getLargeEnemySpawns(activeMap) {
+function getLargeAllySpawns(activeMap, stage = null) {
+  const h = activeMap?.length || LARGE_MAP_SIZE;
+  const w = activeMap?.[0]?.length || LARGE_MAP_SIZE;
+  const frontCols = Math.max(5, Math.min(7, Math.floor(w * 0.45)));
+  const baseY = Math.max(0, h - 3);
+  const formation = getStageFormationKind(stage);
+  const candidates = [];
+
+  if (formation === "wedge") {
+    candidates.push(
+      { x: 2, y: baseY },
+      { x: 1, y: baseY + 1 },
+      { x: 3, y: baseY + 1 },
+      { x: 0, y: baseY + 2 },
+      { x: 4, y: baseY + 2 },
+      { x: 2, y: baseY + 2 },
+    );
+  } else if (formation === "column") {
+    for (let y = h - 5; y < h; y += 1) {
+      candidates.push({ x: 1 + ((y + h) % 2), y });
+      candidates.push({ x: 3, y });
+    }
+  } else if (formation === "split") {
+    [h - 4, h - 3, h - 2, h - 1].forEach((y) => {
+      candidates.push({ x: 0, y }, { x: Math.min(frontCols, 5), y });
+    });
+  } else if (formation === "line") {
+    for (let x = 0; x < frontCols; x += 1) candidates.push({ x, y: h - 2 });
+    for (let x = 1; x < frontCols - 1; x += 1) candidates.push({ x, y: h - 3 });
+  } else if (formation === "ambush") {
+    candidates.push(
+      { x: 0, y: h - 5 },
+      { x: 2, y: h - 4 },
+      { x: 4, y: h - 4 },
+      { x: 1, y: h - 2 },
+      { x: 3, y: h - 2 },
+      { x: 5, y: h - 3 },
+    );
+  } else {
+    candidates.push(
+      { x: 1, y: h - 4 },
+      { x: 2, y: h - 4 },
+      { x: 0, y: h - 3 },
+      { x: 3, y: h - 3 },
+      { x: 1, y: h - 2 },
+      { x: 4, y: h - 2 },
+      { x: 2, y: h - 1 },
+    );
+  }
+
+  for (let y = h - 5; y < h; y += 1) {
+    for (let x = 0; x < frontCols; x += 1) candidates.push({ x, y });
+  }
+
+  return normalizeSpawnCandidates(candidates, activeMap);
+}
+
+function getLargeEnemySpawns(activeMap, stage = null) {
   const h = activeMap?.length || LARGE_MAP_SIZE;
   const w = activeMap?.[0]?.length || LARGE_MAP_SIZE;
   const columns = Math.max(5, Math.min(8, Math.ceil(w * 0.46)));
   const rows = Math.max(6, Math.min(h - 3, Math.ceil(h * 0.58)));
   const minX = Math.max(0, w - columns);
+  const formation = getStageFormationKind(stage);
   const spawns = [];
+  const top = 1;
+  const mid = Math.floor(h * 0.36);
+
+  if (formation === "wedge") {
+    spawns.push(
+      { x: w - 3, y: top },
+      { x: w - 4, y: top + 1 },
+      { x: w - 2, y: top + 1 },
+      { x: w - 5, y: top + 2 },
+      { x: w - 3, y: top + 2 },
+      { x: w - 1, y: top + 2 },
+    );
+  } else if (formation === "column") {
+    for (let y = top; y <= Math.min(h - 5, top + 7); y += 1) {
+      spawns.push({ x: w - 2, y });
+      if (y % 2 === 0) spawns.push({ x: w - 4, y });
+    }
+  } else if (formation === "split") {
+    for (let y = top; y <= Math.min(h - 5, top + 6); y += 1) {
+      spawns.push({ x: w - 2, y }, { x: Math.max(0, w - 7), y });
+    }
+  } else if (formation === "line") {
+    for (let x = w - 1; x >= minX; x -= 1) spawns.push({ x, y: top + 1 });
+    for (let x = w - 2; x >= minX + 1; x -= 2) spawns.push({ x, y: top + 3 });
+  } else if (formation === "ambush") {
+    spawns.push(
+      { x: w - 3, y: top },
+      { x: w - 5, y: mid },
+      { x: w - 2, y: mid + 1 },
+      { x: Math.max(0, w - 8), y: mid + 2 },
+      { x: w - 4, y: mid + 3 },
+      { x: w - 1, y: top + 4 },
+    );
+  } else {
+    spawns.push(
+      { x: w - 3, y: top },
+      { x: w - 4, y: top + 1 },
+      { x: w - 2, y: top + 2 },
+      { x: w - 5, y: top + 3 },
+      { x: w - 1, y: top + 3 },
+      { x: w - 6, y: top + 4 },
+    );
+  }
 
   for (let y = 0; y < rows; y += 1) {
     for (let x = w - 1; x >= minX; x -= 1) {
@@ -1769,7 +1862,7 @@ function getLargeEnemySpawns(activeMap) {
     }
   }
 
-  return spawns;
+  return normalizeSpawnCandidates(spawns, activeMap);
 }
 
 const BATTLEFIELD_THEMES = {
@@ -1875,6 +1968,152 @@ function isLargeMapAllyZone(x, y, width, height) {
   return y >= height - 3 && x <= Math.min(6, width - 1);
 }
 
+const STAGE_LAYOUT_KINDS = [
+  "frontierBreach",
+  "canyonFork",
+  "fortressGate",
+  "burningArc",
+  "frozenRiver",
+  "marshBridge",
+  "shadowRitual",
+  "ruinCross",
+  "splitFlank",
+  "finalCorridor",
+];
+
+const STAGE_FORMATION_KINDS = [
+  "wedge",
+  "column",
+  "split",
+  "line",
+  "ambush",
+  "siege",
+];
+
+function getStageLayoutKind(stage) {
+  const stageId = Math.max(1, Math.floor(stage?.id || 1));
+  const theme = getStageBattlefieldTheme(stage);
+
+  if (theme.id === "final") return "finalCorridor";
+  if (theme.id === "shadow") return stageId % 2 === 0 ? "shadowRitual" : "splitFlank";
+  if (theme.id === "fortress") return stageId % 2 === 0 ? "fortressGate" : "ruinCross";
+  if (theme.id === "burning") return "burningArc";
+  if (theme.id === "frozen") return "frozenRiver";
+  if (theme.id === "marsh") return "marshBridge";
+  if (theme.id === "canyon") return "canyonFork";
+
+  return STAGE_LAYOUT_KINDS[(stageId - 1) % STAGE_LAYOUT_KINDS.length];
+}
+
+function getStageFormationKind(stage) {
+  const stageId = Math.max(1, Math.floor(stage?.id || 1));
+  return STAGE_FORMATION_KINDS[(stageId - 1) % STAGE_FORMATION_KINDS.length];
+}
+
+function getThemeRoadTile(theme, seed) {
+  if (theme.id === "frozen" && seed % 5 === 0) return "ice";
+  if (theme.id === "marsh" && seed % 4 === 0) return "water";
+  if (theme.id === "shadow" && seed % 6 === 0) return "dark";
+  return "road";
+}
+
+function getThemeBlockTile(theme, seed) {
+  if (theme.id === "fortress" || theme.id === "final") return seed % 3 === 0 ? "wall" : "block";
+  if (theme.id === "canyon") return "wall";
+  if (theme.id === "frozen") return seed % 2 === 0 ? "wall" : "ice";
+  if (theme.id === "marsh") return seed % 2 === 0 ? "water" : "swamp";
+  return seed % 2 === 0 ? "forest" : "block";
+}
+
+function getStageSignatureTile({ stage, theme, tile, x, y, width, height, seed }) {
+  const layout = getStageLayoutKind(stage);
+  const centerX = Math.floor(width / 2);
+  const centerY = Math.floor(height / 2);
+  const lowerField = y >= Math.floor(height * 0.62);
+  const upperField = y <= Math.floor(height * 0.34);
+  const bossGate = x >= width - 4 && y <= 4;
+  const safeTile = HAZARD_TERRAIN_TYPES.has(tile) ? "plain" : tile;
+
+  if (bossGate) {
+    if (layout === "finalCorridor") return seed % 4 === 0 ? "rune" : seed % 3 === 0 ? "dark" : "fort";
+    if (layout === "fortressGate" || layout === "ruinCross") return x >= width - 3 || y <= 1 ? "wall" : "fort";
+  }
+
+  switch (layout) {
+    case "frontierBreach": {
+      const roadX = 2 + Math.floor(y / 5);
+      if (Math.abs(x - roadX) <= 1 && y >= 2 && y <= height - 3) return getThemeRoadTile(theme, seed);
+      if (!lowerField && (x <= 1 || x >= width - 2) && seed % 3 !== 0) return "forest";
+      if (upperField && x >= width - 5 && seed % 4 === 0) return "wall";
+      break;
+    }
+    case "canyonFork": {
+      if (Math.abs(x - centerX) <= 1 && y >= 1 && y <= height - 3) return "road";
+      if (y === centerY && x >= 2 && x <= width - 3) return "road";
+      if (!lowerField && (x <= 2 || x >= width - 3) && seed % 4 !== 0) return getThemeBlockTile(theme, seed);
+      if (seed % 13 === 0) return "hill";
+      break;
+    }
+    case "fortressGate": {
+      if (upperField && x >= width - 6) return x >= width - 3 || y <= 1 ? "wall" : "fort";
+      if (x === width - 5 && y >= 2 && y <= height - 5) return "road";
+      if (y === centerY && x >= 3 && x <= width - 5) return "road";
+      if (!lowerField && seed % 9 === 0) return "block";
+      break;
+    }
+    case "burningArc": {
+      const arcY = Math.floor(height * 0.72 - Math.sin(x / Math.max(1, width - 1) * Math.PI) * height * 0.36);
+      if (Math.abs(y - arcY) <= 1) return "road";
+      if (!lowerField && (x + y + seed) % 8 === 0) return "fire";
+      if (seed % 11 === 0) return "forest";
+      break;
+    }
+    case "frozenRiver": {
+      const riverX = Math.floor(width * 0.25 + (y / Math.max(1, height - 1)) * width * 0.48);
+      if (Math.abs(x - riverX) <= 1) return y === centerY || y === centerY + 1 ? "road" : "ice";
+      if (Math.abs(x - riverX) === 2 && seed % 2 === 0) return "water";
+      if (seed % 12 === 0) return "hill";
+      break;
+    }
+    case "marshBridge": {
+      if (y === centerY || y === centerY + 1) return x >= 1 && x <= width - 2 ? "road" : safeTile;
+      if (!lowerField && (x + y) % 5 === 0) return "water";
+      if (!lowerField && seed % 7 === 0) return "swamp";
+      break;
+    }
+    case "shadowRitual": {
+      const ring = Math.abs(Math.abs(x - centerX) + Math.abs(y - centerY) - 4);
+      if (ring === 0 && !lowerField) return seed % 2 === 0 ? "rune" : "dark";
+      if (x === centerX && y >= 2 && y <= height - 4) return "road";
+      if (seed % 15 === 0) return "trap";
+      break;
+    }
+    case "ruinCross": {
+      if (x === centerX || y === centerY) return "road";
+      if (!lowerField && (x <= 1 || x >= width - 2 || y <= 1) && seed % 3 !== 0) return "wall";
+      if (seed % 8 === 0) return "fort";
+      break;
+    }
+    case "splitFlank": {
+      if ((x === 2 || x === width - 4) && y >= 2 && y <= height - 3) return "road";
+      if (y === Math.floor(height * 0.46) && x >= 2 && x <= width - 4) return "road";
+      if (!lowerField && x >= centerX - 1 && x <= centerX + 1 && seed % 2 === 0) return getThemeBlockTile(theme, seed);
+      break;
+    }
+    case "finalCorridor": {
+      if (Math.abs(x - centerX) <= 1 && y >= 1 && y <= height - 3) return y < 5 ? "rune" : "road";
+      if (!lowerField && x >= width - 6 && y <= 5) return seed % 3 === 0 ? "dark" : "fort";
+      if (!lowerField && (x <= 1 || x >= width - 2) && seed % 2 === 0) return "wall";
+      if (seed % 10 === 0) return "rune";
+      break;
+    }
+    default:
+      break;
+  }
+
+  return null;
+}
+
 function decorateLargeBattleMap(largeMap, stage) {
   if (!Array.isArray(largeMap) || !largeMap.length) return largeMap;
 
@@ -1914,6 +2153,19 @@ function decorateLargeBattleMap(largeMap, stage) {
       }
 
       if (STRUCTURE_TERRAIN_TYPES.has(tile) && seed % 6 !== 0) return tile;
+
+      const signatureTile = getStageSignatureTile({
+        stage,
+        theme,
+        tile,
+        x,
+        y,
+        width,
+        height,
+        seed,
+      });
+
+      if (signatureTile) return signatureTile;
 
       switch (theme.id) {
         case "frontier":
@@ -1980,36 +2232,52 @@ function getThemedLargeEnemyTemplates(stage) {
 
   const byTheme = {
     frontier: [
-      { icon: "🛡️", name: "초소 방패병", aiType: "aggressive", hp: 24, atk: 7, def: 8, move: 1, range: 1, skill: "방패 강타", skillBonus: 2, skillRange: 1 },
-      { icon: "🏹", name: "숲길 궁병", aiType: "archer", hp: 18, atk: 8, def: 3, move: 2, range: 3, skill: "매복 사격", skillBonus: 2, skillRange: 3 },
+      { spriteKey: "sentinel", icon: "🛡️", name: "초소 방패병", aiType: "aggressive", hp: 24, atk: 7, def: 8, move: 1, range: 1, skill: "방패 강타", skillBonus: 2, skillRange: 1 },
+      { spriteKey: "ranger", icon: "🏹", name: "숲길 사수", aiType: "archer", hp: 18, atk: 8, def: 3, move: 2, range: 3, skill: "매복 사격", skillBonus: 2, skillRange: 3 },
+      { spriteKey: "raider", icon: "🪓", name: "전초 약탈병", aiType: "aggressive", hp: 21, atk: 8, def: 4, move: 2, range: 1, skill: "광폭참", skillBonus: 3, skillRange: 1 },
+      { spriteKey: "sniper", icon: "🏹", name: "감시탑 저격수", aiType: "archer", hp: 17, atk: 9, def: 3, move: 2, range: 3, skill: "정밀사격", skillBonus: 3, skillRange: 3 },
     ],
     canyon: [
-      { icon: "🔱", name: "협곡 투창병", aiType: "aggressive", hp: 22, atk: 9, def: 5, move: 2, range: 2, skill: "긴 창 찌르기", skillBonus: 3, skillRange: 2 },
-      { icon: "🗡️", name: "절벽 암살자", aiType: "assassin", hp: 18, atk: 10, def: 3, move: 4, range: 1, skill: "그림자 베기", skillBonus: 4, skillRange: 1 },
+      { spriteKey: "marauder", icon: "🔱", name: "협곡 투창병", aiType: "aggressive", hp: 22, atk: 9, def: 5, move: 2, range: 2, skill: "긴 창 찌르기", skillBonus: 3, skillRange: 2 },
+      { spriteKey: "assassin_elite", icon: "🗡️", name: "절벽 암살자", aiType: "assassin", hp: 18, atk: 10, def: 3, move: 4, range: 1, skill: "그림자 베기", skillBonus: 4, skillRange: 1 },
+      { spriteKey: "sniper", icon: "🏹", name: "협곡 저격수", aiType: "archer", hp: 18, atk: 10, def: 3, move: 2, range: 3, skill: "고지 사격", skillBonus: 3, skillRange: 3 },
+      { spriteKey: "raider", icon: "🪓", name: "바위길 습격병", aiType: "aggressive", hp: 24, atk: 9, def: 4, move: 3, range: 1, skill: "돌파 베기", skillBonus: 3, skillRange: 1 },
     ],
     fortress: [
-      { icon: "🛡️", name: "성벽 수비병", aiType: "aggressive", hp: 28, atk: 8, def: 10, move: 1, range: 1, skill: "철벽 강타", skillBonus: 2, skillRange: 1 },
-      { icon: "⚔️", name: "요새 기사", aiType: "aggressive", hp: 26, atk: 9, def: 7, move: 2, range: 1, skill: "수호 돌격", skillBonus: 3, skillRange: 1 },
+      { spriteKey: "sentinel", icon: "🛡️", name: "성벽 수비병", aiType: "aggressive", hp: 28, atk: 8, def: 10, move: 1, range: 1, skill: "철벽 강타", skillBonus: 2, skillRange: 1 },
+      { spriteKey: "blackguard", icon: "⚔️", name: "요새 흑기사", aiType: "aggressive", hp: 27, atk: 10, def: 8, move: 2, range: 1, skill: "수호 돌격", skillBonus: 3, skillRange: 1 },
+      { spriteKey: "sniper", icon: "🏹", name: "성벽 쇠뇌병", aiType: "archer", hp: 20, atk: 10, def: 5, move: 1, range: 3, skill: "성벽 저격", skillBonus: 3, skillRange: 3 },
+      { spriteKey: "warlord", icon: "👑", name: "관문 부장", aiType: "aggressive", hp: 30, atk: 10, def: 9, move: 2, range: 1, skill: "관문 돌격", skillBonus: 4, skillRange: 1 },
     ],
     burning: [
-      { icon: "🔥", name: "화염 술사", aiType: "archer", hp: 20, atk: 11, def: 3, move: 2, range: 2, skill: "화염 폭발", skillBonus: 4, skillRange: 2 },
-      { icon: "🪓", name: "잿불 광전사", aiType: "aggressive", hp: 26, atk: 10, def: 4, move: 2, range: 1, skill: "광폭참", skillBonus: 3, skillRange: 1 },
+      { spriteKey: "pyromancer", icon: "🔥", name: "화염 술사", aiType: "archer", hp: 20, atk: 11, def: 3, move: 2, range: 2, skill: "화염 폭발", skillBonus: 4, skillRange: 2 },
+      { spriteKey: "raider", icon: "🪓", name: "잿불 광전사", aiType: "aggressive", hp: 26, atk: 10, def: 4, move: 2, range: 1, skill: "광폭참", skillBonus: 3, skillRange: 1 },
+      { spriteKey: "blackguard", icon: "⚔️", name: "그을린 흑기사", aiType: "aggressive", hp: 28, atk: 10, def: 7, move: 2, range: 1, skill: "흑염 돌격", skillBonus: 4, skillRange: 1 },
+      { spriteKey: "cultist", icon: "🔮", name: "재의 사제", aiType: "archer", hp: 22, atk: 10, def: 5, move: 2, range: 2, skill: "잿빛 기도", skillBonus: 3, skillRange: 2 },
     ],
     frozen: [
-      { icon: "❄️", name: "빙결 마도병", aiType: "archer", hp: 21, atk: 10, def: 4, move: 2, range: 2, skill: "빙결 저주", skillBonus: 4, skillRange: 2 },
-      { icon: "🛡️", name: "설원 수비병", aiType: "aggressive", hp: 28, atk: 8, def: 9, move: 1, range: 1, skill: "철벽 강타", skillBonus: 2, skillRange: 1 },
+      { spriteKey: "frost_mage", icon: "❄️", name: "빙결 마도병", aiType: "archer", hp: 21, atk: 10, def: 4, move: 2, range: 2, skill: "빙결 저주", skillBonus: 4, skillRange: 2 },
+      { spriteKey: "sentinel", icon: "🛡️", name: "설원 수비병", aiType: "aggressive", hp: 28, atk: 8, def: 9, move: 1, range: 1, skill: "철벽 강타", skillBonus: 2, skillRange: 1 },
+      { spriteKey: "ranger", icon: "🏹", name: "설원 추적자", aiType: "archer", hp: 20, atk: 9, def: 4, move: 3, range: 3, skill: "빙판 사격", skillBonus: 3, skillRange: 3 },
+      { spriteKey: "blackguard", icon: "⚔️", name: "서리 검병", aiType: "aggressive", hp: 25, atk: 9, def: 7, move: 2, range: 1, skill: "서리 베기", skillBonus: 3, skillRange: 1 },
     ],
     marsh: [
-      { icon: "🏹", name: "여울 사수", aiType: "archer", hp: 19, atk: 9, def: 4, move: 2, range: 3, skill: "정밀사격", skillBonus: 2, skillRange: 3 },
-      { icon: "🔮", name: "늪지 사제", aiType: "archer", hp: 22, atk: 10, def: 5, move: 2, range: 2, skill: "암흑 기도", skillBonus: 3, skillRange: 2 },
+      { spriteKey: "ranger", icon: "🏹", name: "여울 사수", aiType: "archer", hp: 19, atk: 9, def: 4, move: 2, range: 3, skill: "정밀사격", skillBonus: 2, skillRange: 3 },
+      { spriteKey: "cultist", icon: "🔮", name: "늪지 사제", aiType: "archer", hp: 22, atk: 10, def: 5, move: 2, range: 2, skill: "암흑 기도", skillBonus: 3, skillRange: 2 },
+      { spriteKey: "marauder", icon: "🔱", name: "진흙 창병", aiType: "aggressive", hp: 24, atk: 9, def: 6, move: 2, range: 2, skill: "긴 창 찌르기", skillBonus: 3, skillRange: 2 },
+      { spriteKey: "raider", icon: "🪓", name: "늪지 약탈병", aiType: "aggressive", hp: 25, atk: 9, def: 5, move: 2, range: 1, skill: "습격", skillBonus: 3, skillRange: 1 },
     ],
     shadow: [
-      { icon: "🗡️", name: "흑야 암살자", aiType: "assassin", hp: 20, atk: 11, def: 4, move: 4, range: 1, skill: "그림자 베기", skillBonus: 4, skillRange: 1 },
-      { icon: "🔮", name: "의식 사제", aiType: "archer", hp: 23, atk: 10, def: 6, move: 2, range: 2, skill: "암흑 기도", skillBonus: 4, skillRange: 2 },
+      { spriteKey: "assassin_elite", icon: "🗡️", name: "흑야 암살자", aiType: "assassin", hp: 20, atk: 11, def: 4, move: 4, range: 1, skill: "그림자 베기", skillBonus: 4, skillRange: 1 },
+      { spriteKey: "cultist", icon: "🔮", name: "의식 사제", aiType: "archer", hp: 23, atk: 10, def: 6, move: 2, range: 2, skill: "암흑 기도", skillBonus: 4, skillRange: 2 },
+      { spriteKey: "void_knight", icon: "⚔️", name: "공허 기사", aiType: "aggressive", hp: 30, atk: 11, def: 9, move: 2, range: 1, skill: "공허참", skillBonus: 4, skillRange: 1 },
+      { spriteKey: "sniper", icon: "🏹", name: "흑야 저격수", aiType: "archer", hp: 21, atk: 11, def: 4, move: 2, range: 3, skill: "암흑 사격", skillBonus: 3, skillRange: 3 },
     ],
     final: [
-      { icon: "👹", name: "심연 친위대", aiType: "aggressive", hp: 32, atk: 11, def: 10, move: 2, range: 1, skill: "흑염 돌격", skillBonus: 4, skillRange: 1 },
-      { icon: "🔥", name: "종말 마도사", aiType: "archer", hp: 25, atk: 12, def: 6, move: 2, range: 2, skill: "어둠의 파동", skillBonus: 5, skillRange: 2 },
+      { spriteKey: "void_knight", icon: "👹", name: "심연 친위대", aiType: "aggressive", hp: 32, atk: 11, def: 10, move: 2, range: 1, skill: "흑염 돌격", skillBonus: 4, skillRange: 1 },
+      { spriteKey: "pyromancer", icon: "🔥", name: "종말 마도사", aiType: "archer", hp: 25, atk: 12, def: 6, move: 2, range: 2, skill: "어둠의 파동", skillBonus: 5, skillRange: 2 },
+      { spriteKey: "cultist", icon: "🔮", name: "종말 사제", aiType: "archer", hp: 26, atk: 11, def: 7, move: 2, range: 2, skill: "심연 기도", skillBonus: 5, skillRange: 2 },
+      { spriteKey: "warlord", icon: "👑", name: "왕좌 집행관", aiType: "aggressive", hp: 36, atk: 12, def: 11, move: 2, range: 1, skill: "왕좌 강타", skillBonus: 5, skillRange: 1 },
     ],
   };
 
@@ -2391,6 +2659,7 @@ function createLargeExtraEnemy(stage, index, x, y) {
   const power = Math.max(0, stageId - 1);
   const baseTemplates = [
     {
+      spriteKey: "raider",
       icon: "🪓",
       name: "전열 약탈병",
       aiType: "aggressive",
@@ -2404,6 +2673,7 @@ function createLargeExtraEnemy(stage, index, x, y) {
       skillRange: 1,
     },
     {
+      spriteKey: "sniper",
       icon: "🏹",
       name: "후열 궁병",
       aiType: "archer",
@@ -2417,6 +2687,7 @@ function createLargeExtraEnemy(stage, index, x, y) {
       skillRange: 3,
     },
     {
+      spriteKey: "marauder",
       icon: "🔱",
       name: "전열 창병",
       aiType: "aggressive",
@@ -2430,6 +2701,7 @@ function createLargeExtraEnemy(stage, index, x, y) {
       skillRange: 2,
     },
     {
+      spriteKey: "pyromancer",
       icon: "🔥",
       name: "흑염 마도사",
       aiType: "archer",
@@ -2443,6 +2715,7 @@ function createLargeExtraEnemy(stage, index, x, y) {
       skillRange: 2,
     },
     {
+      spriteKey: "sentinel",
       icon: "🛡️",
       name: "방패 수비병",
       aiType: "aggressive",
@@ -2456,6 +2729,7 @@ function createLargeExtraEnemy(stage, index, x, y) {
       skillRange: 1,
     },
     {
+      spriteKey: "assassin_elite",
       icon: "🗡️",
       name: "그림자 암살자",
       aiType: "assassin",
@@ -2469,6 +2743,7 @@ function createLargeExtraEnemy(stage, index, x, y) {
       skillRange: 1,
     },
     {
+      spriteKey: "cultist",
       icon: "🔮",
       name: "흑야 사제",
       aiType: "archer",
@@ -2495,6 +2770,7 @@ function createLargeExtraEnemy(stage, index, x, y) {
     type: "enemy",
     icon: template.icon,
     name: template.name,
+    spriteKey: template.spriteKey,
     aiType: template.aiType,
     hp,
     maxHp: hp,
@@ -2516,16 +2792,15 @@ function createLargeExtraEnemy(stage, index, x, y) {
 function expandStageForLargeBattle(stage, deployCount = MAX_DEPLOY_COUNT) {
   if (!stage) return stage;
 
-  if (Math.floor(stage.id || 0) === 1) {
-    return createFinalFrontierBattleStage(stage, deployCount);
-  }
-
   const baseMap = stage.map || [];
   const mapSize = getLargeBattleMapSize(stage, deployCount);
   const largeMap = decorateLargeBattleMap(expandMapToLarge(baseMap, mapSize), stage);
-  const allySpawns = getLargeAllySpawns(largeMap);
+  const allySpawns = getLargeAllySpawns(largeMap, stage);
+  const enemySpawns = getLargeEnemySpawns(largeMap, stage);
+  const hasBoss = (stage.units || []).some((unit) => unit.id === "boss" || unit.type === "boss");
   const occupied = new Set();
   let allyIndex = 0;
+  let enemyIndex = hasBoss ? 1 : 0;
 
   const scaledUnits = clone(stage.units || []).map((unit) => {
     const normalizedUnit = unit.id === "boss" && unit.type !== "ally"
@@ -2543,7 +2818,17 @@ function expandStageForLargeBattle(stage, deployCount = MAX_DEPLOY_COUNT) {
       };
     }
 
-    const pos = scaleEnemyPosition(normalizedUnit, baseMap, largeMap);
+    const scaledPos = scaleEnemyPosition(normalizedUnit, baseMap, largeMap);
+    const reservedIndex = normalizedUnit.type === "boss" ? 0 : enemyIndex;
+    const spawn = pickOpenFrontierSpawn(
+      enemySpawns.slice(reservedIndex),
+      largeMap,
+      occupied,
+      scaledPos
+    );
+    const pos = spawn || scaledPos;
+
+    if (normalizedUnit.type !== "boss") enemyIndex += 1;
     occupied.add(`${pos.x},${pos.y}`);
 
     return {
@@ -2559,13 +2844,14 @@ function expandStageForLargeBattle(stage, deployCount = MAX_DEPLOY_COUNT) {
     currentEnemies,
     Math.min(26, deployCount + 4 + Math.floor((stage.id || 1) / 4) + bossStageBonus)
   );
-  const enemySpawns = getLargeEnemySpawns(largeMap);
   const extraEnemies = [];
 
   for (let i = currentEnemies; i < targetEnemies; i += 1) {
-    const spawn = enemySpawns.find((pos) => !occupied.has(`${pos.x},${pos.y}`));
+    const spawn = enemySpawns.slice(enemyIndex).find((pos) => !occupied.has(`${pos.x},${pos.y}`)) ||
+      enemySpawns.find((pos) => !occupied.has(`${pos.x},${pos.y}`));
     if (!spawn) break;
 
+    enemyIndex += 1;
     occupied.add(`${spawn.x},${spawn.y}`);
     extraEnemies.push(createLargeExtraEnemy(stage, i - currentEnemies + 1, spawn.x, spawn.y));
   }
@@ -2749,6 +3035,52 @@ function isImportantLog(log) {
 
 
 
+const ENEMY_VARIANT_KEYS = new Set([
+  "raider",
+  "marauder",
+  "assassin_elite",
+  "sniper",
+  "ranger",
+  "pyromancer",
+  "frost_mage",
+  "cultist",
+  "sentinel",
+  "blackguard",
+  "warlord",
+  "void_knight",
+]);
+
+function getEnemySpriteKey(unit) {
+  if (!unit || unit.type === "ally") return null;
+  if (ENEMY_VARIANT_KEYS.has(unit.spriteKey)) return unit.spriteKey;
+
+  const text = `${unit.id || ""} ${unit.name || ""} ${unit.skill || ""}`;
+
+  if (text.includes("늑대") || text.includes("야수")) return "wolf";
+  if (unit.type === "boss") {
+    if (text.includes("가론") || text.includes("심연") || text.includes("공허") || text.includes("최종")) return "void_knight";
+    if (text.includes("빙") || text.includes("얼음") || text.includes("설원") || text.includes("서리")) return "frost_mage";
+    if (text.includes("화염") || text.includes("흑염") || text.includes("혈") || text.includes("잿") || text.includes("불")) return "pyromancer";
+    if (text.includes("마도") || text.includes("마녀") || text.includes("사제") || text.includes("주술")) return "cultist";
+    return "warlord";
+  }
+
+  if (text.includes("가론") || text.includes("심연") || text.includes("공허")) return "void_knight";
+  if (text.includes("단장") || text.includes("장군") || text.includes("집행관") || text.includes("왕좌")) return "warlord";
+  if (text.includes("빙") || text.includes("얼음") || text.includes("설원") || text.includes("서리")) return "frost_mage";
+  if (text.includes("화염") || text.includes("흑염") || text.includes("혈") || text.includes("잿") || text.includes("불")) return "pyromancer";
+  if (text.includes("사제") || text.includes("주술") || text.includes("의식") || text.includes("저주")) return "cultist";
+  if (text.includes("암살") || text.includes("그림자") || text.includes("추적")) return "assassin_elite";
+  if (text.includes("저격") || text.includes("쇠뇌") || text.includes("사수")) return "sniper";
+  if (text.includes("궁병")) return "ranger";
+  if (text.includes("투창") || text.includes("창병") || text.includes("창")) return "marauder";
+  if (text.includes("방패") || text.includes("수비") || text.includes("감시")) return "sentinel";
+  if (text.includes("기사") || text.includes("흑기사") || text.includes("검병")) return "blackguard";
+  if (text.includes("약탈") || text.includes("습격") || text.includes("광전")) return "raider";
+
+  return "raider";
+}
+
 function getUnitSprite(unit) {
   if (!unit) return null;
 
@@ -2773,6 +3105,9 @@ function getUnitSprite(unit) {
   };
 
   if (byId[unit.id]) return byId[unit.id];
+
+  const enemySpriteKey = getEnemySpriteKey(unit);
+  if (enemySpriteKey && enemySpriteKey !== "wolf") return `/sprites/enemies/${enemySpriteKey}.png`;
 
   if (unit.type === "boss") {
     if (unit.name?.includes("가론")) return "/sprites/enemies/garon.png";
@@ -2813,6 +3148,9 @@ function getBattleMapUnitSprite(unit) {
   };
 
   if (byId[unit.id]) return byId[unit.id];
+
+  const enemySpriteKey = getEnemySpriteKey(unit);
+  if (enemySpriteKey && enemySpriteKey !== "wolf") return `/sprites/map_units/${enemySpriteKey}.png`;
 
   if (unit.type === "boss") {
     if (unit.name?.includes("가론")) return "/sprites/map_units/garon.png";
@@ -2871,6 +3209,9 @@ function getUnitPortrait(unit) {
 
   if (byId[unit.id]) return byId[unit.id];
 
+  const enemySpriteKey = getEnemySpriteKey(unit);
+  if (enemySpriteKey && enemySpriteKey !== "wolf") return `/sprites/enemies/${enemySpriteKey}.png`;
+
   if (unit.type === "boss") {
     if (unit.name?.includes("가론")) return "/portraits/garon.png";
     if (unit.name?.includes("마도사") || unit.name?.includes("마녀") || unit.name?.includes("사제")) return "/portraits/mage.png";
@@ -2912,6 +3253,9 @@ function getCutsceneUnitSprite(unit) {
   };
 
   if (battleById[unit.id]) return battleById[unit.id];
+
+  const enemySpriteKey = getEnemySpriteKey(unit);
+  if (enemySpriteKey && enemySpriteKey !== "wolf") return `/sprites/enemies/${enemySpriteKey}.png`;
 
   if (text.includes("늑대") || text.includes("야수") || text.includes("포효")) {
     return "/sprites/classic/units/wolf.png";
