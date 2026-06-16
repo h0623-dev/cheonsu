@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.123";
+const SAVE_VERSION = "1.99.124";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -3722,110 +3722,40 @@ function getAllyPortraitArt(unit) {
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
 
-const ALLY_VISUAL_PROFILES = {
-  hero: {
-    battle: "/sprites/units/kyle.png",
-    map: "/sprites/map_units/hero.png",
-    portrait: "/portraits/kyle.png",
-    cutscene: "/sprites/units/kyle.png",
-  },
-  bram: {
-    battle: "/sprites/units/bram.png",
-    map: "/sprites/map_units/bram.png",
-    portrait: "/portraits/bram.png",
-    cutscene: "/sprites/units/bram.png",
-  },
-  lina: {
-    battle: "/sprites/units/lina.png",
-    map: "/sprites/map_units/lina.png",
-    portrait: "/portraits/lina.png",
-    cutscene: "/sprites/units/lina.png",
-  },
-  aria: {
-    battle: "/sprites/units/aria.png",
-    map: "/sprites/map_units/aria.png",
-    portrait: "/portraits/aria.png",
-    cutscene: "/sprites/units/aria.png",
-  },
-  leon: {
-    battle: "/sprites/units/leon.png",
-    map: "/sprites/map_units/leon.png",
-    portrait: "/portraits/leon.png",
-    cutscene: "/sprites/units/leon.png",
-  },
-  sera: {
-    battle: "/sprites/map_units/sera.png",
-    map: "/sprites/map_units/sera.png",
-    portrait: "/portraits/sera.png",
-    cutscene: "/sprites/map_units/sera.png",
-  },
-  noah: {
-    battle: "/sprites/enemies/sentinel.png",
-    map: "/sprites/map_units/sentinel.png",
-    portrait: "/portraits/shield.png",
-    cutscene: "/sprites/enemies/sentinel.png",
-  },
-  yuna: {
-    battle: "/sprites/enemies/mage.png",
-    map: "/sprites/map_units/mage.png",
-    portrait: "/portraits/mage.png",
-    cutscene: "/sprites/enemies/mage.png",
-  },
-  rakan: {
-    battle: "/sprites/enemies/wolf.png",
-    map: "/sprites/map_units/wolf.png",
-    portrait: "/sprites/enemies/wolf.png",
-    cutscene: "/sprites/enemies/wolf.png",
-  },
-  miho: {
-    battle: "/sprites/enemies/assassin_elite.png",
-    map: "/sprites/map_units/assassin_elite.png",
-    portrait: "/sprites/enemies/assassin_elite.png",
-    cutscene: "/sprites/enemies/assassin_elite.png",
-  },
-  teo: {
-    battle: "/sprites/enemies/blackguard.png",
-    map: "/sprites/map_units/blackguard.png",
-    portrait: "/portraits/shield.png",
-    cutscene: "/sprites/enemies/blackguard.png",
-  },
-  irene: {
-    battle: "/sprites/enemies/frost_mage.png",
-    map: "/sprites/map_units/frost_mage.png",
-    portrait: "/portraits/mage.png",
-    cutscene: "/sprites/enemies/frost_mage.png",
-  },
-  kaz: {
-    battle: "/sprites/enemies/assassin.png",
-    map: "/sprites/map_units/assassin.png",
-    portrait: "/sprites/enemies/assassin.png",
-    cutscene: "/sprites/enemies/assassin.png",
-  },
-  ella: {
-    battle: "/sprites/enemies/cultist.png",
-    map: "/sprites/map_units/cultist.png",
-    portrait: "/portraits/mage.png",
-    cutscene: "/sprites/enemies/cultist.png",
-  },
-  jin: {
-    battle: "/sprites/enemies/warlord.png",
-    map: "/sprites/map_units/warlord.png",
-    portrait: "/portraits/kyle.png",
-    cutscene: "/sprites/enemies/warlord.png",
-  },
-  luka: {
-    battle: "/sprites/enemies/sniper.png",
-    map: "/sprites/map_units/sniper.png",
-    portrait: "/portraits/leon.png",
-    cutscene: "/sprites/enemies/sniper.png",
-  },
-  baekho: {
-    battle: "/sprites/enemies/void_knight.png",
-    map: "/sprites/map_units/void_knight.png",
-    portrait: "/sprites/enemies/void_knight.png",
-    cutscene: "/sprites/enemies/void_knight.png",
-  },
-};
+const GENERATED_ALLY_SPRITE_IDS = [
+  "hero",
+  "bram",
+  "lina",
+  "aria",
+  "leon",
+  "sera",
+  "noah",
+  "yuna",
+  "rakan",
+  "miho",
+  "teo",
+  "irene",
+  "kaz",
+  "ella",
+  "jin",
+  "luka",
+  "baekho",
+];
+
+function makeGeneratedAllyVisualProfile(id) {
+  const src = `/sprites/generated_allies/${id}.png`;
+
+  return {
+    battle: src,
+    map: src,
+    portrait: src,
+    cutscene: src,
+  };
+}
+
+const ALLY_VISUAL_PROFILES = Object.fromEntries(
+  GENERATED_ALLY_SPRITE_IDS.map((id) => [id, makeGeneratedAllyVisualProfile(id)]),
+);
 
 function getAllyVisualProfile(unit) {
   if (!unit || unit.type !== "ally") return null;
@@ -3984,11 +3914,11 @@ function handleBattleMapUnitImageError(event, unit) {
 function getUnitPortrait(unit) {
   if (!unit) return null;
 
-  const generatedAllyPortrait = getAllyPortraitArt(unit);
-  if (generatedAllyPortrait) return generatedAllyPortrait;
-
   const allyProfile = getAllyVisualProfile(unit);
   if (allyProfile?.portrait) return allyProfile.portrait;
+
+  const generatedAllyPortrait = getAllyPortraitArt(unit);
+  if (generatedAllyPortrait) return generatedAllyPortrait;
 
   const byId = {
     hero: "/portraits/kyle.png",

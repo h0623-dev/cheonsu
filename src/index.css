@@ -38587,3 +38587,28 @@ button:focus-visible {
   max-width: 92px !important;
   max-height: 116px !important;
 }
+
+/* v1.99.124: polished generated SD ally sprites share one visual scale. */
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.ally-unit[class*="unit-visual-"] img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .map-moving-unit.ally-moving[class*="unit-visual-"] img {
+  width: min(182%, 88px) !important;
+  height: min(248%, 118px) !important;
+  max-width: 88px !important;
+  max-height: 118px !important;
+  object-fit: contain !important;
+  object-position: center bottom !important;
+  filter:
+    saturate(1.08)
+    contrast(1.10)
+    brightness(1.04)
+    drop-shadow(1px 0 0 rgba(0, 0, 0, 0.94))
+    drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.94))
+    drop-shadow(0 6px 6px rgba(0, 0, 0, 0.72))
+    drop-shadow(0 0 7px rgba(86, 190, 255, 0.14)) !important;
+}
+
+.deployment-simple-screen .deploy-avatar img,
+.deploy-avatar img {
+  object-fit: contain;
+  object-position: center bottom;
+}
