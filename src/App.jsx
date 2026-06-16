@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.122";
+const SAVE_VERSION = "1.99.123";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -3596,6 +3596,132 @@ const ENEMY_VARIANT_KEYS = new Set([
   "void_knight",
 ]);
 
+const ALLY_CHARACTER_CONCEPTS = {
+  hero: { label: "검기사", mark: "K", primary: "#2f6dff", secondary: "#b8d8ff", accent: "#f8d16c", weapon: "sword" },
+  bram: { label: "방패장", mark: "B", primary: "#b78a4b", secondary: "#315077", accent: "#d9d0b8", weapon: "shield" },
+  lina: { label: "화염술", mark: "L", primary: "#8c2fe0", secondary: "#e44a35", accent: "#ffd05c", weapon: "staff" },
+  aria: { label: "성직자", mark: "A", primary: "#fff0dc", secondary: "#ff9ba9", accent: "#7fffe0", weapon: "halo" },
+  leon: { label: "궁수", mark: "Le", primary: "#2f7a50", secondary: "#c58a3e", accent: "#e8d68a", weapon: "bow" },
+  sera: { label: "암살자", mark: "S", primary: "#372b68", secondary: "#d35fd3", accent: "#f0c0ff", weapon: "dagger" },
+  noah: { label: "전술가", mark: "N", primary: "#4d6583", secondary: "#c3b08b", accent: "#f3d684", weapon: "scroll" },
+  yuna: { label: "월빛힐", mark: "Y", primary: "#2d5c7a", secondary: "#85e0ff", accent: "#e9f7ff", weapon: "moon" },
+  rakan: { label: "야수전", mark: "R", primary: "#5b4731", secondary: "#d36b32", accent: "#ffdd8a", weapon: "claw" },
+  miho: { label: "환영검", mark: "M", primary: "#8d3d83", secondary: "#ff9b5c", accent: "#ffe1a6", weapon: "fox" },
+  teo: { label: "중갑병", mark: "T", primary: "#4d4f56", secondary: "#a56b32", accent: "#d9d9cf", weapon: "hammer" },
+  irene: { label: "빙결창", mark: "I", primary: "#6cc9ff", secondary: "#263f76", accent: "#e9fbff", weapon: "ice" },
+  kaz: { label: "그림자", mark: "Kz", primary: "#303047", secondary: "#874dd4", accent: "#ffc9ff", weapon: "shuriken" },
+  ella: { label: "별빛술", mark: "E", primary: "#3b2670", secondary: "#dca7ff", accent: "#ffe47a", weapon: "star" },
+  jin: { label: "용기사", mark: "J", primary: "#661f1f", secondary: "#d89a43", accent: "#ffda72", weapon: "dragon" },
+  luka: { label: "저격수", mark: "Lu", primary: "#2e5f45", secondary: "#8fb86a", accent: "#ffe48c", weapon: "scope" },
+  baekho: { label: "백호수", mark: "W", primary: "#f0efe2", secondary: "#38383e", accent: "#ffcf55", weapon: "tiger" },
+};
+
+const GENERATED_ALLY_PORTRAIT_IDS = new Set([
+  "noah",
+  "yuna",
+  "rakan",
+  "miho",
+  "teo",
+  "irene",
+  "kaz",
+  "ella",
+  "jin",
+  "luka",
+  "baekho",
+]);
+
+function getAllyConcept(unit) {
+  return ALLY_CHARACTER_CONCEPTS[unit?.id] || null;
+}
+
+function getUnitDisplayRole(unit) {
+  return getAllyConcept(unit)?.label || getUnitRole(unit);
+}
+
+function getUnitConceptMark(unit) {
+  return getAllyConcept(unit)?.mark || getUnitRole(unit).slice(0, 1);
+}
+
+function getAvatarWeaponSvg(weapon, theme) {
+  const { accent, secondary } = theme;
+
+  if (weapon === "shield") {
+    return `<path d="M36 20 L53 26 L49 48 Q36 60 23 48 L19 26 Z" fill="${accent}" opacity="0.9"/><path d="M36 24 L45 28 L42 45 Q36 51 30 45 L27 28 Z" fill="${secondary}" opacity="0.92"/>`;
+  }
+
+  if (weapon === "staff") {
+    return `<path d="M48 18 L53 55" stroke="${accent}" stroke-width="4" stroke-linecap="round"/><circle cx="47" cy="18" r="8" fill="${secondary}" stroke="${accent}" stroke-width="3"/>`;
+  }
+
+  if (weapon === "halo") {
+    return `<ellipse cx="36" cy="20" rx="17" ry="6" fill="none" stroke="${accent}" stroke-width="3"/><path d="M36 16 L42 32 L36 54 L30 32 Z" fill="${accent}" opacity="0.8"/>`;
+  }
+
+  if (weapon === "bow") {
+    return `<path d="M50 14 Q62 36 50 58" fill="none" stroke="${accent}" stroke-width="4"/><path d="M50 14 L50 58" stroke="#f8f0c8" stroke-width="1.5"/><path d="M16 40 L50 36" stroke="${accent}" stroke-width="3" stroke-linecap="round"/>`;
+  }
+
+  if (weapon === "dagger") {
+    return `<path d="M47 18 L56 15 L39 49 L35 45 Z" fill="${accent}"/><path d="M31 47 L39 39 L43 43 L35 51 Z" fill="${secondary}"/>`;
+  }
+
+  if (weapon === "scroll") {
+    return `<rect x="18" y="23" width="36" height="26" rx="4" fill="${accent}" opacity="0.88"/><path d="M24 30 H47 M24 37 H43 M24 44 H38" stroke="${secondary}" stroke-width="2"/>`;
+  }
+
+  if (weapon === "moon") {
+    return `<circle cx="45" cy="25" r="13" fill="${accent}"/><circle cx="51" cy="21" r="13" fill="${theme.primary}"/>`;
+  }
+
+  if (weapon === "claw") {
+    return `<path d="M45 18 L52 40 L46 56 L41 36 Z M35 18 L40 41 L34 57 L30 36 Z M25 20 L29 42 L23 55 L20 37 Z" fill="${accent}"/>`;
+  }
+
+  if (weapon === "fox") {
+    return `<path d="M18 52 C20 28 32 24 36 48 C40 24 52 28 54 52 C45 42 27 42 18 52Z" fill="${secondary}" opacity="0.9"/><path d="M31 17 L36 9 L41 17" fill="${accent}"/>`;
+  }
+
+  if (weapon === "hammer") {
+    return `<path d="M23 19 H51 V31 H23 Z" fill="${accent}"/><path d="M36 30 L43 58" stroke="${secondary}" stroke-width="6" stroke-linecap="round"/>`;
+  }
+
+  if (weapon === "ice") {
+    return `<path d="M48 12 L52 31 L45 59 L41 32 Z" fill="${accent}"/><path d="M42 21 L55 21 L48 10 Z" fill="#ffffff" opacity="0.82"/>`;
+  }
+
+  if (weapon === "shuriken") {
+    return `<path d="M44 18 L49 31 L62 36 L49 41 L44 54 L39 41 L26 36 L39 31 Z" fill="${accent}"/><circle cx="44" cy="36" r="4" fill="${secondary}"/>`;
+  }
+
+  if (weapon === "star") {
+    return `<path d="M43 12 L48 28 L64 28 L51 38 L56 54 L43 44 L30 54 L35 38 L22 28 L38 28 Z" fill="${accent}"/>`;
+  }
+
+  if (weapon === "dragon") {
+    return `<path d="M17 45 C22 21 35 23 36 41 C39 23 52 21 57 45 C48 38 24 38 17 45Z" fill="${secondary}"/><path d="M36 15 L49 38 L36 32 L23 38 Z" fill="${accent}"/>`;
+  }
+
+  if (weapon === "scope") {
+    return `<path d="M17 42 L57 29" stroke="${accent}" stroke-width="5" stroke-linecap="round"/><circle cx="51" cy="31" r="8" fill="none" stroke="${secondary}" stroke-width="3"/>`;
+  }
+
+  if (weapon === "tiger") {
+    return `<path d="M24 23 Q36 10 48 23 V43 Q36 58 24 43 Z" fill="${accent}"/><path d="M29 25 L24 18 M36 23 V15 M43 25 L48 18" stroke="${secondary}" stroke-width="3" stroke-linecap="round"/>`;
+  }
+
+  return `<path d="M48 15 L54 18 L30 55 L25 51 Z" fill="${accent}"/><path d="M24 51 L33 43 L37 47 L28 56 Z" fill="${secondary}"/>`;
+}
+
+function getAllyPortraitArt(unit) {
+  const theme = getAllyConcept(unit);
+
+  if (!theme || !GENERATED_ALLY_PORTRAIT_IDS.has(unit.id)) return null;
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72"><defs><radialGradient id="bg" cx="50%" cy="35%" r="68%"><stop offset="0%" stop-color="${theme.secondary}"/><stop offset="52%" stop-color="${theme.primary}"/><stop offset="100%" stop-color="#09070b"/></radialGradient></defs><rect width="72" height="72" rx="12" fill="url(#bg)"/><circle cx="36" cy="32" r="23" fill="rgba(255,255,255,0.08)"/><path d="M16 64 C20 44 29 36 36 36 C43 36 52 44 56 64 Z" fill="${theme.primary}" stroke="#090909" stroke-width="2"/><circle cx="36" cy="26" r="10" fill="#d8b48c" stroke="#110b08" stroke-width="2"/><path d="M24 27 C25 14 47 13 49 27 C43 20 32 20 24 27Z" fill="${theme.secondary}"/><path d="M21 64 H51" stroke="${theme.accent}" stroke-width="4" stroke-linecap="round"/><g opacity="0.98">${getAvatarWeaponSvg(theme.weapon, theme)}</g><text x="9" y="17" fill="#fff5ce" font-family="Arial, sans-serif" font-size="9" font-weight="800">${theme.mark}</text></svg>`;
+
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
 const ALLY_VISUAL_PROFILES = {
   hero: {
     battle: "/sprites/units/kyle.png",
@@ -3857,6 +3983,9 @@ function handleBattleMapUnitImageError(event, unit) {
 
 function getUnitPortrait(unit) {
   if (!unit) return null;
+
+  const generatedAllyPortrait = getAllyPortraitArt(unit);
+  if (generatedAllyPortrait) return generatedAllyPortrait;
 
   const allyProfile = getAllyVisualProfile(unit);
   if (allyProfile?.portrait) return allyProfile.portrait;
@@ -6955,12 +7084,15 @@ function getPartyForStageAccess(party, stage, clearedStages) {
 function getUnitRole(unit) {
   if (!unit) return "미정";
 
-  if (unit.skillType === "heal") return "힐러";
-  if ((unit.def || 0) >= 9 || unit.id === "bram" || unit.id === "baekho") return "탱커";
-  if ((unit.range || 1) >= 3 || unit.id === "luka") return "저격";
-  if ((unit.range || 1) >= 2 || unit.id === "leon" || unit.id === "lina") return "원거리";
-  if ((unit.move || 3) >= 4 || ["sera", "miho", "kaz"].includes(unit.id)) return "암살";
   if (["noah"].includes(unit.id)) return "전술";
+  if (["bram", "teo", "baekho"].includes(unit.id)) return "탱커";
+  if (["sera", "miho", "kaz"].includes(unit.id)) return "암살";
+  if (["luka"].includes(unit.id)) return "저격";
+  if (unit.skillType === "heal") return "힐러";
+  if ((unit.def || 0) >= 9) return "탱커";
+  if ((unit.range || 1) >= 3) return "저격";
+  if ((unit.range || 1) >= 2 || unit.id === "leon" || unit.id === "lina") return "원거리";
+  if ((unit.move || 3) >= 4) return "암살";
   return "근접";
 }
 
@@ -17478,16 +17610,19 @@ export default function App() {
           <div className="deployment-list">
             {displayedDeployUnits.map((unit) => {
               const selectedDeploy = deployedIds.includes(unit.id);
-              const role = getUnitRole(unit);
+              const role = getUnitDisplayRole(unit);
               const locked = unit.id === "hero";
 
               return (
                 <button
-                  className={`deploy-unit-card ${selectedDeploy ? "selected" : ""} ${locked ? "locked-deploy" : ""}`}
+                  className={`deploy-unit-card ${getUnitVisualClass(unit)} ${selectedDeploy ? "selected" : ""} ${locked ? "locked-deploy" : ""}`}
                   key={unit.id}
                   onClick={() => toggleDeployUnit(unit.id)}
                 >
-                  <img src={getUnitPortrait(unit)} alt={unit.name} onError={(event) => { event.currentTarget.style.display = "none"; }} />
+                  <div className={`deploy-avatar ${getUnitVisualClass(unit)}`}>
+                    <img src={getUnitPortrait(unit)} alt={unit.name} onError={(event) => { event.currentTarget.style.display = "none"; }} />
+                    <i>{getUnitConceptMark(unit)}</i>
+                  </div>
                   <div>
                     <strong>
                       {unit.name} Lv.{unit.level}
