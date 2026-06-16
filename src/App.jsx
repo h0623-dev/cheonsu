@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.107";
+const SAVE_VERSION = "1.99.108";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -2941,7 +2941,8 @@ function getStageMapArt(stage) {
 }
 
 function getClassicBattleMapArt(stage) {
-  return "/maps/concept/stage_1_frontier_final.png";
+  const id = Math.min(30, Math.max(1, Math.floor(stage?.id || 1)));
+  return `/maps/concept/stage_${id}_frontier_final.png`;
 }
 
 function isFinalConceptStage(stage) {

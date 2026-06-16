@@ -1,4 +1,9 @@
-const CACHE_NAME = "cheonsu-v1-99-107";
+const CACHE_NAME = "cheonsu-v1-99-108";
+const FINAL_STAGE_MAPS = Array.from(
+  { length: 30 },
+  (_, index) => `/maps/concept/stage_${index + 1}_frontier_final.png`
+);
+
 const CORE_ASSETS = [
   "/",
   "/manifest.webmanifest",
@@ -14,7 +19,7 @@ const CORE_ASSETS = [
   "/maps/stage_4.jpg",
   "/maps/stage_5.jpg",
   "/maps/stage_6.jpg",
-  "/maps/concept/stage_1_frontier_final.png",
+  ...FINAL_STAGE_MAPS,
   "/maps/classic/stage_1.png",
   "/maps/classic/stage_2.png",
   "/maps/classic/stage_3.png",
