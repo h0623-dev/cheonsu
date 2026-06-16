@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.111";
+const SAVE_VERSION = "1.99.112";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -1676,8 +1676,134 @@ const ACTS = [
   { id: 5, title: "ACT 5 · 마지막 천수", start: 25, end: 30 },
 ];
 
+const ACT_ROUTE_LAYOUTS = {
+  1: {
+    routeHint: "1장 출발점 → 6장 보스의 성",
+    startLabel: "출발점",
+    bossLabel: "보스의 성",
+    midLabels: ["국경 초소", "협곡 관문", "성문 앞", "불타는 숲길"],
+    nodePositions: [
+      { x: 14, y: 76 },
+      { x: 30, y: 63 },
+      { x: 43, y: 50 },
+      { x: 58, y: 38 },
+      { x: 73, y: 27 },
+      { x: 87, y: 15 },
+    ],
+    landmarks: [
+      { key: "camp", className: "landmark-camp", label: "기사단 야영지", x: 8, y: 82 },
+      { key: "watch", className: "landmark-watch", label: "감시탑", x: 35, y: 35 },
+      { key: "castle", className: "landmark-castle", label: "보스의 성", x: 79, y: 8 },
+    ],
+  },
+  2: {
+    routeHint: "7장 재집결 → 12장 빙화 관문",
+    startLabel: "재집결지",
+    bossLabel: "빙화 관문",
+    midLabels: ["불길 능선", "숲의 균열", "얼음 여울", "쌍둥이 초소"],
+    nodePositions: [
+      { x: 18, y: 72 },
+      { x: 33, y: 54 },
+      { x: 52, y: 62 },
+      { x: 65, y: 44 },
+      { x: 78, y: 30 },
+      { x: 86, y: 16 },
+    ],
+    landmarks: [
+      { key: "ember", className: "landmark-ember", label: "그을린 숲", x: 18, y: 28 },
+      { key: "ice", className: "landmark-ice", label: "빙결 계곡", x: 70, y: 58 },
+      { key: "gate", className: "landmark-gate", label: "관문", x: 82, y: 10 },
+    ],
+  },
+  3: {
+    routeHint: "13장 폐성 외곽 → 18장 무너진 왕성",
+    startLabel: "폐성 외곽",
+    bossLabel: "무너진 왕성",
+    midLabels: ["석교", "성벽 잔해", "동문 전장", "왕성 광장"],
+    nodePositions: [
+      { x: 12, y: 68 },
+      { x: 28, y: 55 },
+      { x: 44, y: 40 },
+      { x: 59, y: 48 },
+      { x: 74, y: 32 },
+      { x: 87, y: 18 },
+    ],
+    landmarks: [
+      { key: "bridge", className: "landmark-bridge", label: "석교", x: 29, y: 48 },
+      { key: "ruin", className: "landmark-ruin", label: "성벽 잔해", x: 54, y: 26 },
+      { key: "keep", className: "landmark-keep", label: "왕성", x: 80, y: 10 },
+    ],
+  },
+  4: {
+    routeHint: "19장 북부 진입 → 24장 흑야 성채",
+    startLabel: "북부 진입",
+    bossLabel: "흑야 성채",
+    midLabels: ["눈길", "얼음 다리", "저주 숲", "성채 비탈"],
+    nodePositions: [
+      { x: 15, y: 78 },
+      { x: 27, y: 61 },
+      { x: 42, y: 45 },
+      { x: 60, y: 56 },
+      { x: 74, y: 35 },
+      { x: 86, y: 17 },
+    ],
+    landmarks: [
+      { key: "snow", className: "landmark-snow", label: "빙설 평원", x: 15, y: 36 },
+      { key: "rift", className: "landmark-rift", label: "저주 균열", x: 57, y: 66 },
+      { key: "dark", className: "landmark-dark", label: "흑야 성채", x: 79, y: 9 },
+    ],
+  },
+  5: {
+    routeHint: "25장 최후의 집결 → 30장 붉은 왕좌",
+    startLabel: "최후의 집결",
+    bossLabel: "붉은 왕좌",
+    midLabels: ["붉은 길", "천수 제단", "흑월 협곡", "왕좌의 문"],
+    nodePositions: [
+      { x: 14, y: 74 },
+      { x: 31, y: 59 },
+      { x: 49, y: 48 },
+      { x: 60, y: 31 },
+      { x: 76, y: 40 },
+      { x: 87, y: 18 },
+    ],
+    landmarks: [
+      { key: "altar", className: "landmark-altar", label: "천수 제단", x: 45, y: 38 },
+      { key: "moon", className: "landmark-moon", label: "흑월", x: 66, y: 16 },
+      { key: "throne", className: "landmark-throne", label: "왕좌", x: 82, y: 10 },
+    ],
+  },
+};
+
 function getActInfo(stageId) {
   return ACTS.find((act) => stageId >= act.start && stageId <= act.end) || ACTS[0];
+}
+
+function getActRouteLayout(actId) {
+  return ACT_ROUTE_LAYOUTS[actId] || ACT_ROUTE_LAYOUTS[1];
+}
+
+function getActRouteNodePosition(actId, index, total) {
+  const layout = getActRouteLayout(actId);
+  if (layout.nodePositions[index]) return layout.nodePositions[index];
+
+  const progress = total > 1 ? index / (total - 1) : 0;
+  return {
+    x: 14 + progress * 72,
+    y: 76 - progress * 58,
+  };
+}
+
+function getActRouteLinePoints(actId, total) {
+  return Array.from({ length: total }, (_, index) => {
+    const point = getActRouteNodePosition(actId, index, total);
+    return `${point.x},${point.y}`;
+  }).join(" ");
+}
+
+function getActRouteStageLabel(route, index, total) {
+  if (index === 0) return route.startLabel;
+  if (index === total - 1) return route.bossLabel;
+  return route.midLabels[index - 1] || `${index + 1}장 거점`;
 }
 
 
@@ -16417,16 +16543,18 @@ export default function App() {
           <div className="world-map-panel">
             {ACTS.map((act) => {
               const region = getWorldRegionInfo(act.start);
+              const route = getActRouteLayout(act.id);
               const actStages = stages.filter(
                 (stage) => stage.id >= act.start && stage.id <= act.end
               );
               const actCleared = actStages.filter((stage) =>
                 clearedStages.includes(stage.id)
               ).length;
+              const routeLinePoints = getActRouteLinePoints(act.id, actStages.length);
 
               return (
                 <div
-                  className={`world-region-card ${region.tone}`}
+                  className={`world-region-card act-route-card act-route-${act.id} ${region.tone}`}
                   key={act.id}
                   style={{ "--region-art": `url(${region.image})` }}
                 >
@@ -16442,6 +16570,7 @@ export default function App() {
                       <span>ACT {act.id}</span>
                       <strong>{region.name}</strong>
                       <small>{region.desc}</small>
+                      <small className="region-route-copy">{route.routeHint}</small>
                     </div>
                     <b>{actCleared}/{actStages.length}</b>
                   </div>
@@ -16449,54 +16578,84 @@ export default function App() {
                     <i style={{ width: `${Math.round((actCleared / Math.max(1, actStages.length)) * 100)}%` }} />
                   </div>
 
-                  <div className="world-path">
-                    {actStages.map((stage, index) => {
-                      const nodeState = getStageNodeClass(stage, clearedStages, playableStageIds);
-                      const nodeType = getStageNodeType(stage);
-                      const mission = getStageMissionOrder(stage);
-                      const threat = getStageThreatLevel(stage, MAX_DEPLOY_COUNT);
-                      const enemySummary = getStageEnemySummary(stage, MAX_DEPLOY_COUNT);
-                      const recruitId = RECRUIT_BY_STAGE[stage.id];
-                      const recruitName = recruitId ? getRecruitName(recruitId) : "";
-                      const mastery = stageMastery[String(stage.id)];
+                  <div className={`act-route-map act-route-map-${act.id}`} aria-label={`${act.title} 진행 지도`}>
+                    <div className="act-route-bg" />
+                    {route.landmarks.map((landmark) => (
+                      <span
+                        className={`act-landmark ${landmark.className}`}
+                        key={landmark.key}
+                        style={{ "--landmark-x": `${landmark.x}%`, "--landmark-y": `${landmark.y}%` }}
+                      >
+                        <b />
+                        <em>{landmark.label}</em>
+                      </span>
+                    ))}
+                    <svg
+                      className="act-route-lines"
+                      viewBox="0 0 100 100"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                    >
+                      <polyline className="route-line-shadow" points={routeLinePoints} />
+                      <polyline className="route-line-main" points={routeLinePoints} />
+                    </svg>
+                    <div className="world-path act-route-path">
+                      {actStages.map((stage, index) => {
+                        const nodeState = getStageNodeClass(stage, clearedStages, playableStageIds);
+                        const nodeType = getStageNodeType(stage);
+                        const mission = getStageMissionOrder(stage);
+                        const threat = getStageThreatLevel(stage, MAX_DEPLOY_COUNT);
+                        const enemySummary = getStageEnemySummary(stage, MAX_DEPLOY_COUNT);
+                        const recruitId = RECRUIT_BY_STAGE[stage.id];
+                        const recruitName = recruitId ? getRecruitName(recruitId) : "";
+                        const mastery = stageMastery[String(stage.id)];
+                        const nodePosition = getActRouteNodePosition(act.id, index, actStages.length);
+                        const routeStageLabel = getActRouteStageLabel(route, index, actStages.length);
+                        const isRouteStart = index === 0;
+                        const isRouteBoss = index === actStages.length - 1;
 
-                      return (
-                        <button
-                          key={stage.id}
-                          className={`world-stage-node ${nodeState} node-${nodeType} ${threat.className}`}
-                          disabled={!playableStageIds.includes(stage.id)}
-                          onClick={() => startStage(stage)}
-                          style={{ "--node-index": index }}
-                        >
-                          <span className="node-number">{stage.id}</span>
-                          <div className="node-line" />
-                          <div className="node-body">
-                            <strong>{stage.title}</strong>
-                            <em>
-                              {mission.type} · {mission.title}
-                              {mastery ? ` · ${mastery.bestRank} ${getRankStars(mastery.bestRank)}` : ""}
-                            </em>
-                            <small>
-                              위험도 {threat.level} · 적 {enemySummary.total}명
-                              {recruitName ? ` · 동료 ${recruitName}` : ""}
-                              {getStageNote(stageNotes, stage) ? " · 메모 있음" : ""}
-                              {getStageTags(stageNoteTags, stage).length ? ` · 태그 ${getStageTags(stageNoteTags, stage).length}` : ""}
-                            </small>
-                          </div>
-                          <i>
-                            {nodeState === "cleared"
-                              ? (mastery ? mastery.bestRank : "✓")
-                              : nodeState === "locked"
-                              ? "잠김"
-                              : nodeType === "boss"
-                              ? "보스"
-                              : nodeType === "recruit"
-                              ? "동료"
-                              : "편성"}
-                          </i>
-                        </button>
-                      );
-                    })}
+                        return (
+                          <button
+                            key={stage.id}
+                            className={`world-stage-node ${nodeState} node-${nodeType} ${threat.className} ${isRouteStart ? "route-start" : ""} ${isRouteBoss ? "route-boss" : ""}`}
+                            disabled={!playableStageIds.includes(stage.id)}
+                            onClick={() => startStage(stage)}
+                            style={{
+                              "--node-index": index,
+                              "--node-x": `${nodePosition.x}%`,
+                              "--node-y": `${nodePosition.y}%`,
+                            }}
+                          >
+                            <span className="node-number">{stage.id}</span>
+                            <div className="node-line" />
+                            <div className="node-body">
+                              <strong>{stage.title.replace(/^\d+장\.\s*/, "")}</strong>
+                              <em>{routeStageLabel}</em>
+                              <small>
+                                {mission.type} · 위험도 {threat.level} · 적 {enemySummary.total}명
+                                {recruitName ? ` · 동료 ${recruitName}` : ""}
+                                {mastery ? ` · ${mastery.bestRank} ${getRankStars(mastery.bestRank)}` : ""}
+                                {getStageNote(stageNotes, stage) ? " · 메모" : ""}
+                                {getStageTags(stageNoteTags, stage).length ? ` · 태그 ${getStageTags(stageNoteTags, stage).length}` : ""}
+                              </small>
+                            </div>
+                            <i>
+                              {nodeState === "cleared"
+                                ? (mastery ? mastery.bestRank : "완료")
+                                : nodeState === "locked"
+                                ? "잠김"
+                                : isRouteBoss
+                                ? "종착지"
+                                : nodeType === "recruit"
+                                ? "동료"
+                                : isRouteStart
+                                ? "출발"
+                                : "진입"}
+                            </i>
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               );

@@ -35404,6 +35404,367 @@ button:focus-visible {
   background: rgba(0, 0, 0, 0.32);
 }
 
+.campaign-stage-select .region-route-copy {
+  display: block;
+  margin-top: 4px;
+  color: #ffd986 !important;
+  font-size: 12px;
+}
+
+.campaign-stage-select .act-route-card {
+  padding-bottom: 17px !important;
+}
+
+.campaign-stage-select .act-route-map {
+  position: relative;
+  z-index: 1;
+  min-height: 360px;
+  margin-top: 14px;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(230, 174, 82, 0.30);
+  background:
+    linear-gradient(180deg, rgba(255, 220, 132, 0.08), transparent 28%),
+    linear-gradient(135deg, rgba(45, 87, 50, 0.82), rgba(75, 49, 25, 0.82) 50%, rgba(30, 24, 20, 0.94));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 239, 184, 0.06),
+    inset 0 -28px 70px rgba(0, 0, 0, 0.36),
+    0 14px 24px rgba(0, 0, 0, 0.24);
+}
+
+.campaign-stage-select .act-route-map::before,
+.campaign-stage-select .act-route-map::after,
+.campaign-stage-select .act-route-bg {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.campaign-stage-select .act-route-map::before {
+  background:
+    radial-gradient(ellipse at 18% 80%, rgba(51, 99, 58, 0.66), transparent 30%),
+    radial-gradient(ellipse at 86% 16%, rgba(102, 62, 32, 0.64), transparent 28%),
+    linear-gradient(112deg, transparent 0 33%, rgba(167, 117, 58, 0.72) 35% 43%, transparent 46%),
+    linear-gradient(122deg, transparent 0 50%, rgba(54, 90, 47, 0.58) 52% 68%, transparent 71%);
+  opacity: 0.96;
+}
+
+.campaign-stage-select .act-route-map::after {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.28), transparent 18%, transparent 82%, rgba(0, 0, 0, 0.38)),
+    linear-gradient(180deg, rgba(255, 224, 152, 0.08), transparent 18%, transparent 74%, rgba(0, 0, 0, 0.32));
+}
+
+.campaign-stage-select .act-route-bg {
+  background-image:
+    linear-gradient(rgba(255, 236, 168, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 236, 168, 0.028) 1px, transparent 1px),
+    radial-gradient(circle at 22% 30%, rgba(37, 69, 35, 0.70) 0 8px, transparent 9px),
+    radial-gradient(circle at 30% 36%, rgba(28, 64, 35, 0.64) 0 7px, transparent 8px),
+    radial-gradient(circle at 74% 30%, rgba(88, 80, 62, 0.62) 0 7px, transparent 8px),
+    radial-gradient(circle at 68% 68%, rgba(34, 68, 37, 0.58) 0 9px, transparent 10px);
+  background-size:
+    28px 28px,
+    28px 28px,
+    120px 120px,
+    130px 130px,
+    150px 150px,
+    140px 140px;
+  opacity: 0.84;
+  mix-blend-mode: screen;
+}
+
+.campaign-stage-select .act-route-2 .act-route-map {
+  background:
+    linear-gradient(180deg, rgba(255, 146, 75, 0.12), transparent 31%),
+    linear-gradient(135deg, rgba(85, 48, 28, 0.92), rgba(34, 72, 58, 0.78) 48%, rgba(39, 58, 76, 0.92));
+}
+
+.campaign-stage-select .act-route-3 .act-route-map {
+  background:
+    linear-gradient(180deg, rgba(239, 198, 122, 0.10), transparent 35%),
+    linear-gradient(135deg, rgba(71, 63, 49, 0.92), rgba(38, 48, 43, 0.86) 48%, rgba(58, 42, 34, 0.96));
+}
+
+.campaign-stage-select .act-route-4 .act-route-map {
+  background:
+    linear-gradient(180deg, rgba(165, 224, 255, 0.14), transparent 36%),
+    linear-gradient(135deg, rgba(39, 66, 77, 0.96), rgba(53, 61, 82, 0.86) 50%, rgba(21, 27, 44, 0.96));
+}
+
+.campaign-stage-select .act-route-5 .act-route-map {
+  background:
+    linear-gradient(180deg, rgba(245, 68, 87, 0.13), transparent 34%),
+    linear-gradient(135deg, rgba(49, 25, 30, 0.96), rgba(37, 33, 41, 0.88) 50%, rgba(20, 10, 16, 0.98));
+}
+
+.campaign-stage-select .act-route-lines {
+  position: absolute;
+  inset: 12px;
+  z-index: 2;
+  width: calc(100% - 24px);
+  height: calc(100% - 24px);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.campaign-stage-select .act-route-lines polyline {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.campaign-stage-select .route-line-shadow {
+  stroke: rgba(0, 0, 0, 0.56);
+  stroke-width: 6;
+}
+
+.campaign-stage-select .route-line-main {
+  stroke: rgba(255, 208, 113, 0.72);
+  stroke-width: 2.5;
+  stroke-dasharray: 5 6;
+  filter: drop-shadow(0 0 7px rgba(255, 193, 78, 0.22));
+}
+
+.campaign-stage-select .act-landmark {
+  position: absolute;
+  left: var(--landmark-x);
+  top: var(--landmark-y);
+  z-index: 1;
+  width: 74px;
+  min-height: 54px;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  color: #ffe3a7;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.80);
+}
+
+.campaign-stage-select .act-landmark b {
+  display: block;
+  width: 48px;
+  height: 36px;
+  border: 1px solid rgba(255, 221, 145, 0.16);
+  background:
+    linear-gradient(180deg, rgba(132, 87, 42, 0.72), rgba(47, 29, 17, 0.86));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 236, 171, 0.13),
+    0 10px 16px rgba(0, 0, 0, 0.30);
+}
+
+.campaign-stage-select .act-landmark em {
+  margin-top: 2px;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.campaign-stage-select .landmark-camp b {
+  clip-path: polygon(50% 3%, 92% 88%, 8% 88%);
+  background: linear-gradient(160deg, #244d73, #142434 54%, #7b4a25 55%);
+}
+
+.campaign-stage-select .landmark-watch b,
+.campaign-stage-select .landmark-gate b,
+.campaign-stage-select .landmark-keep b {
+  border-radius: 4px 4px 0 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 225, 158, 0.20) 0 4px, transparent 4px 9px),
+    linear-gradient(180deg, #776a55, #2c251e);
+}
+
+.campaign-stage-select .landmark-castle b,
+.campaign-stage-select .landmark-dark b,
+.campaign-stage-select .landmark-throne b {
+  width: 64px;
+  height: 44px;
+  border-radius: 5px 5px 0 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 220, 137, 0.22) 0 5px, transparent 5px 11px),
+    linear-gradient(180deg, #5e5750, #211918);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 236, 171, 0.18),
+    0 0 20px rgba(255, 71, 53, 0.14),
+    0 12px 18px rgba(0, 0, 0, 0.36);
+}
+
+.campaign-stage-select .landmark-ember b,
+.campaign-stage-select .landmark-rift b,
+.campaign-stage-select .landmark-moon b {
+  border-radius: 50% 50% 42% 42%;
+  background:
+    radial-gradient(circle at 50% 28%, rgba(255, 196, 92, 0.72), transparent 33%),
+    linear-gradient(180deg, #8d3425, #29110e);
+}
+
+.campaign-stage-select .landmark-ice b,
+.campaign-stage-select .landmark-snow b {
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(203, 242, 255, 0.86), rgba(63, 107, 132, 0.76)),
+    linear-gradient(180deg, #ecfbff, #4d6d83);
+}
+
+.campaign-stage-select .landmark-bridge b {
+  width: 58px;
+  height: 22px;
+  border-radius: 10px;
+  background:
+    repeating-linear-gradient(90deg, rgba(30, 18, 10, 0.35) 0 4px, transparent 4px 9px),
+    linear-gradient(180deg, #a8733e, #59341d);
+}
+
+.campaign-stage-select .landmark-ruin b,
+.campaign-stage-select .landmark-altar b {
+  border-radius: 6px;
+  background:
+    linear-gradient(135deg, transparent 0 16%, rgba(255, 229, 154, 0.12) 17% 28%, transparent 29%),
+    linear-gradient(180deg, #70685a, #2b241f);
+}
+
+.campaign-stage-select .act-route-path {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: block;
+  margin: 0;
+}
+
+.campaign-stage-select .act-route-path .world-stage-node {
+  position: absolute;
+  left: clamp(68px, var(--node-x), calc(100% - 68px));
+  top: clamp(48px, var(--node-y), calc(100% - 48px));
+  width: min(136px, 35vw);
+  min-height: 72px !important;
+  padding: 9px 9px 9px 44px !important;
+  transform: translate(-50%, -50%);
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 5px;
+  border-radius: 12px !important;
+  background:
+    linear-gradient(180deg, rgba(25, 15, 9, 0.92), rgba(8, 5, 4, 0.95)) !important;
+  backdrop-filter: blur(4px);
+}
+
+.campaign-stage-select .act-route-path .world-stage-node:hover,
+.campaign-stage-select .act-route-path .world-stage-node:focus-visible {
+  transform: translate(-50%, -50%) translateY(-2px);
+}
+
+.campaign-stage-select .act-route-path .node-line {
+  display: none;
+}
+
+.campaign-stage-select .act-route-path .node-number {
+  left: 8px;
+  width: 28px !important;
+  height: 28px !important;
+  font-size: 13px;
+}
+
+.campaign-stage-select .act-route-path .node-body {
+  min-width: 0;
+}
+
+.campaign-stage-select .act-route-path .node-body strong,
+.campaign-stage-select .act-route-path .node-body em,
+.campaign-stage-select .act-route-path .node-body small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.campaign-stage-select .act-route-path .node-body strong {
+  font-size: 13px !important;
+}
+
+.campaign-stage-select .act-route-path .node-body em {
+  margin-top: 2px;
+  font-size: 10px;
+}
+
+.campaign-stage-select .act-route-path .node-body small {
+  margin-top: 2px;
+  font-size: 9px;
+  color: #d4c0a4;
+}
+
+.campaign-stage-select .act-route-path .world-stage-node i {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  padding: 3px 6px;
+  font-size: 9px;
+}
+
+.campaign-stage-select .act-route-path .route-start {
+  border-color: rgba(95, 212, 255, 0.50) !important;
+  box-shadow:
+    0 0 0 1px rgba(83, 204, 255, 0.10),
+    0 0 18px rgba(62, 183, 255, 0.15),
+    0 9px 18px rgba(0, 0, 0, 0.30);
+}
+
+.campaign-stage-select .act-route-path .route-start .node-number {
+  background:
+    radial-gradient(circle at 42% 22%, rgba(207, 245, 255, 0.62), rgba(31, 102, 132, 0.84) 48%, rgba(11, 23, 31, 0.98));
+}
+
+.campaign-stage-select .act-route-path .route-boss {
+  width: min(150px, 38vw);
+  border-color: rgba(255, 95, 72, 0.62) !important;
+  background:
+    linear-gradient(180deg, rgba(67, 16, 11, 0.95), rgba(13, 5, 4, 0.98)) !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 99, 72, 0.14),
+    0 0 26px rgba(255, 58, 40, 0.18),
+    0 12px 22px rgba(0, 0, 0, 0.36);
+}
+
+.campaign-stage-select .act-route-path .route-boss .node-number {
+  background:
+    radial-gradient(circle at 42% 22%, rgba(255, 226, 150, 0.52), rgba(135, 31, 26, 0.86) 50%, rgba(32, 8, 7, 0.98));
+}
+
+@media (max-width: 430px) {
+  .campaign-stage-select .act-route-map {
+    min-height: 345px;
+  }
+
+  .campaign-stage-select .act-route-path .world-stage-node {
+    left: clamp(60px, var(--node-x), calc(100% - 60px));
+    width: min(118px, 33vw);
+    min-height: 66px !important;
+    padding-left: 39px !important;
+  }
+
+  .campaign-stage-select .act-route-path .route-boss {
+    width: min(130px, 36vw);
+  }
+
+  .campaign-stage-select .act-route-path .node-number {
+    left: 7px;
+    width: 25px !important;
+    height: 25px !important;
+    font-size: 12px;
+  }
+
+  .campaign-stage-select .act-route-path .node-body strong {
+    font-size: 12px !important;
+  }
+
+  .campaign-stage-select .act-route-path .node-body small {
+    display: none;
+  }
+
+  .campaign-stage-select .act-landmark em {
+    font-size: 9px;
+  }
+}
+
 @media (max-width: 390px) {
   .campaign-stage-select .campaign-header {
     padding: 14px 11px;
