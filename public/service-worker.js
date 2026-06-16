@@ -1,4 +1,4 @@
-const CACHE_VERSION = "cheonsu-v199114";
+const CACHE_VERSION = "cheonsu-v199115";
 const APP_SHELL_CACHE = `${CACHE_VERSION}-app-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 

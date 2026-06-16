@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.114";
+const SAVE_VERSION = "1.99.115";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -1965,9 +1965,9 @@ const ACT_ONE_ROUTE_STAGE_CONFIGS = {
     battleObjective: "목표: 성채로 향하는 진군로 확보",
     themeLabel: "국경 출발지",
     themeId: "frontier",
-    allySpawns: [{ x: 1, y: 23 }, { x: 2, y: 22 }, { x: 3, y: 23 }, { x: 1, y: 24 }, { x: 4, y: 22 }, { x: 2, y: 24 }],
-    enemySpawns: [{ x: 5, y: 17 }, { x: 7, y: 16 }, { x: 6, y: 18 }, { x: 8, y: 15 }, { x: 4, y: 16 }, { x: 9, y: 17 }],
-    bossSpawn: { x: 7, y: 14 },
+    allySpawns: [{ x: 2, y: 18 }, { x: 3, y: 17 }, { x: 1, y: 18 }, { x: 4, y: 17 }, { x: 2, y: 19 }, { x: 5, y: 18 }],
+    enemySpawns: [{ x: 5, y: 12 }, { x: 7, y: 11 }, { x: 6, y: 13 }, { x: 8, y: 10 }, { x: 4, y: 11 }, { x: 9, y: 12 }],
+    bossSpawn: { x: 7, y: 9 },
     maxEnemies: 5,
   },
   2: {
@@ -1975,9 +1975,9 @@ const ACT_ONE_ROUTE_STAGE_CONFIGS = {
     battleObjective: "목표: 초소 방어선 돌파",
     themeLabel: "협곡 진입로",
     themeId: "canyon",
-    allySpawns: [{ x: 2, y: 21 }, { x: 3, y: 20 }, { x: 1, y: 21 }, { x: 4, y: 20 }, { x: 2, y: 22 }, { x: 5, y: 21 }],
-    enemySpawns: [{ x: 6, y: 14 }, { x: 8, y: 13 }, { x: 7, y: 15 }, { x: 9, y: 12 }, { x: 5, y: 13 }, { x: 10, y: 14 }],
-    bossSpawn: { x: 8, y: 12 },
+    allySpawns: [{ x: 2, y: 17 }, { x: 3, y: 16 }, { x: 1, y: 17 }, { x: 4, y: 16 }, { x: 2, y: 18 }, { x: 5, y: 17 }],
+    enemySpawns: [{ x: 6, y: 11 }, { x: 8, y: 10 }, { x: 7, y: 12 }, { x: 9, y: 9 }, { x: 5, y: 10 }, { x: 10, y: 11 }],
+    bossSpawn: { x: 8, y: 8 },
     maxEnemies: 6,
   },
   3: {
@@ -1985,9 +1985,9 @@ const ACT_ONE_ROUTE_STAGE_CONFIGS = {
     battleObjective: "목표: 외곽 수비대 격파",
     themeLabel: "성문 외곽",
     themeId: "fortress",
-    allySpawns: [{ x: 3, y: 19 }, { x: 4, y: 18 }, { x: 2, y: 19 }, { x: 5, y: 18 }, { x: 3, y: 20 }, { x: 6, y: 19 }],
-    enemySpawns: [{ x: 6, y: 11 }, { x: 8, y: 10 }, { x: 7, y: 12 }, { x: 9, y: 9 }, { x: 5, y: 10 }, { x: 10, y: 11 }],
-    bossSpawn: { x: 8, y: 8 },
+    allySpawns: [{ x: 3, y: 16 }, { x: 4, y: 15 }, { x: 2, y: 16 }, { x: 5, y: 15 }, { x: 3, y: 17 }, { x: 6, y: 16 }],
+    enemySpawns: [{ x: 6, y: 9 }, { x: 8, y: 8 }, { x: 7, y: 10 }, { x: 9, y: 7 }, { x: 5, y: 8 }, { x: 10, y: 9 }],
+    bossSpawn: { x: 8, y: 6 },
     maxEnemies: 7,
   },
   4: {
@@ -1995,9 +1995,9 @@ const ACT_ONE_ROUTE_STAGE_CONFIGS = {
     battleObjective: "목표: 불길 속 전초선 돌파",
     themeLabel: "불타는 숲길",
     themeId: "burning",
-    allySpawns: [{ x: 4, y: 17 }, { x: 5, y: 16 }, { x: 3, y: 17 }, { x: 6, y: 16 }, { x: 4, y: 18 }, { x: 7, y: 17 }],
-    enemySpawns: [{ x: 6, y: 9 }, { x: 8, y: 8 }, { x: 7, y: 10 }, { x: 9, y: 7 }, { x: 5, y: 8 }, { x: 10, y: 9 }],
-    bossSpawn: { x: 8, y: 6 },
+    allySpawns: [{ x: 4, y: 15 }, { x: 5, y: 14 }, { x: 3, y: 15 }, { x: 6, y: 14 }, { x: 4, y: 16 }, { x: 7, y: 15 }],
+    enemySpawns: [{ x: 6, y: 8 }, { x: 8, y: 7 }, { x: 7, y: 9 }, { x: 9, y: 6 }, { x: 5, y: 7 }, { x: 10, y: 8 }],
+    bossSpawn: { x: 8, y: 5 },
     maxEnemies: 7,
   },
   5: {
@@ -2005,9 +2005,9 @@ const ACT_ONE_ROUTE_STAGE_CONFIGS = {
     battleObjective: "목표: 성벽 방어선 붕괴",
     themeLabel: "무너진 성벽",
     themeId: "fortress",
-    allySpawns: [{ x: 4, y: 15 }, { x: 5, y: 14 }, { x: 3, y: 15 }, { x: 6, y: 14 }, { x: 4, y: 16 }, { x: 7, y: 15 }],
-    enemySpawns: [{ x: 6, y: 7 }, { x: 8, y: 6 }, { x: 7, y: 8 }, { x: 9, y: 5 }, { x: 5, y: 7 }, { x: 10, y: 6 }],
-    bossSpawn: { x: 8, y: 4 },
+    allySpawns: [{ x: 4, y: 14 }, { x: 5, y: 13 }, { x: 3, y: 14 }, { x: 6, y: 13 }, { x: 4, y: 15 }, { x: 7, y: 14 }],
+    enemySpawns: [{ x: 6, y: 6 }, { x: 8, y: 5 }, { x: 7, y: 7 }, { x: 9, y: 4 }, { x: 5, y: 6 }, { x: 10, y: 5 }],
+    bossSpawn: { x: 8, y: 3 },
     maxEnemies: 8,
   },
   6: {
@@ -2015,9 +2015,9 @@ const ACT_ONE_ROUTE_STAGE_CONFIGS = {
     battleObjective: "목표: 성채 보스 격파",
     themeLabel: "보스의 성",
     themeId: "fortress",
-    allySpawns: [{ x: 4, y: 13 }, { x: 5, y: 12 }, { x: 3, y: 13 }, { x: 6, y: 12 }, { x: 4, y: 14 }, { x: 7, y: 13 }],
-    enemySpawns: [{ x: 6, y: 4 }, { x: 8, y: 3 }, { x: 7, y: 5 }, { x: 9, y: 4 }, { x: 5, y: 5 }, { x: 10, y: 3 }],
-    bossSpawn: { x: 8, y: 2 },
+    allySpawns: [{ x: 4, y: 12 }, { x: 5, y: 11 }, { x: 3, y: 12 }, { x: 6, y: 11 }, { x: 4, y: 13 }, { x: 7, y: 12 }],
+    enemySpawns: [{ x: 6, y: 3 }, { x: 8, y: 2 }, { x: 7, y: 4 }, { x: 9, y: 3 }, { x: 5, y: 4 }, { x: 10, y: 2 }],
+    bossSpawn: { x: 7, y: 1 },
     maxEnemies: 9,
   },
 };
