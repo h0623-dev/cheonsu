@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.109";
+const SAVE_VERSION = "1.99.110";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -1970,15 +1970,24 @@ function isLargeMapAllyZone(x, y, width, height) {
 
 const STAGE_LAYOUT_KINDS = [
   "frontierBreach",
+  "forestPass",
   "canyonFork",
+  "ridgeSwitchback",
   "fortressGate",
+  "gateCourtyard",
+  "marketStreets",
   "burningArc",
+  "burnScar",
   "frozenRiver",
+  "iceBridge",
   "marshBridge",
+  "marshIslands",
   "shadowRitual",
+  "ritualSpokes",
   "ruinCross",
   "splitFlank",
   "finalCorridor",
+  "finalSpiral",
 ];
 
 const STAGE_FORMATION_KINDS = [
@@ -1990,17 +1999,21 @@ const STAGE_FORMATION_KINDS = [
   "siege",
 ];
 
+function pickStageLayout(stageId, layouts) {
+  return layouts[(stageId - 1) % layouts.length];
+}
+
 function getStageLayoutKind(stage) {
   const stageId = Math.max(1, Math.floor(stage?.id || 1));
   const theme = getStageBattlefieldTheme(stage);
 
-  if (theme.id === "final") return "finalCorridor";
-  if (theme.id === "shadow") return stageId % 2 === 0 ? "shadowRitual" : "splitFlank";
-  if (theme.id === "fortress") return stageId % 2 === 0 ? "fortressGate" : "ruinCross";
-  if (theme.id === "burning") return "burningArc";
-  if (theme.id === "frozen") return "frozenRiver";
-  if (theme.id === "marsh") return "marshBridge";
-  if (theme.id === "canyon") return "canyonFork";
+  if (theme.id === "final") return pickStageLayout(stageId, ["finalCorridor", "finalSpiral", "ritualSpokes"]);
+  if (theme.id === "shadow") return pickStageLayout(stageId, ["shadowRitual", "splitFlank", "ritualSpokes"]);
+  if (theme.id === "fortress") return pickStageLayout(stageId, ["fortressGate", "ruinCross", "gateCourtyard", "marketStreets"]);
+  if (theme.id === "burning") return pickStageLayout(stageId, ["burningArc", "burnScar", "frontierBreach"]);
+  if (theme.id === "frozen") return pickStageLayout(stageId, ["frozenRiver", "iceBridge", "ridgeSwitchback"]);
+  if (theme.id === "marsh") return pickStageLayout(stageId, ["marshBridge", "marshIslands", "splitFlank"]);
+  if (theme.id === "canyon") return pickStageLayout(stageId, ["canyonFork", "ridgeSwitchback", "splitFlank"]);
 
   return STAGE_LAYOUT_KINDS[(stageId - 1) % STAGE_LAYOUT_KINDS.length];
 }
@@ -2047,11 +2060,32 @@ function getStageSignatureTile({ stage, theme, tile, x, y, width, height, seed }
       if (upperField && x >= width - 5 && seed % 4 === 0) return "wall";
       break;
     }
+    case "forestPass": {
+      const laneA = Math.floor(width * 0.25 + Math.sin(y * 0.7) * 1.6);
+      const laneB = Math.floor(width * 0.62 - Math.sin(y * 0.5) * 1.2);
+      if ((Math.abs(x - laneA) <= 1 || (y > centerY && Math.abs(x - laneB) <= 1)) && y > 1 && y < height - 2) {
+        return getThemeRoadTile(theme, seed);
+      }
+      if ((x <= 2 || x >= width - 3 || seed % 6 === 0) && !lowerField) return "forest";
+      if (seed % 17 === 0) return "hill";
+      break;
+    }
     case "canyonFork": {
       if (Math.abs(x - centerX) <= 1 && y >= 1 && y <= height - 3) return "road";
       if (y === centerY && x >= 2 && x <= width - 3) return "road";
       if (!lowerField && (x <= 2 || x >= width - 3) && seed % 4 !== 0) return getThemeBlockTile(theme, seed);
       if (seed % 13 === 0) return "hill";
+      break;
+    }
+    case "ridgeSwitchback": {
+      const band = Math.floor((y / Math.max(1, height - 1)) * 4);
+      const leftToRight = band % 2 === 0;
+      const pathX = leftToRight
+        ? 2 + Math.floor((x + y) % Math.max(3, width - 4))
+        : width - 3 - Math.floor((x + y) % Math.max(3, width - 4));
+      if (Math.abs(x - pathX) <= 1 || y === Math.floor(height * 0.28) || y === Math.floor(height * 0.62)) return "road";
+      if ((x <= 1 || x >= width - 2 || seed % 5 === 0) && !lowerField) return getThemeBlockTile(theme, seed);
+      if (seed % 11 === 0) return "hill";
       break;
     }
     case "fortressGate": {
@@ -2061,11 +2095,35 @@ function getStageSignatureTile({ stage, theme, tile, x, y, width, height, seed }
       if (!lowerField && seed % 9 === 0) return "block";
       break;
     }
+    case "gateCourtyard": {
+      if (upperField && (x >= width - 6 || y <= 2)) return x === width - 4 || y === 2 ? "gate" : "fort";
+      if (x === centerX && y >= 2 && y <= height - 3) return "road";
+      if ((x === centerX - 3 || x === centerX + 3) && y >= 4 && y <= centerY + 2) return "fort";
+      if (y === centerY && x >= 2 && x <= width - 3) return "road";
+      if (seed % 12 === 0) return "block";
+      break;
+    }
+    case "marketStreets": {
+      const streetA = x === 2 || x === centerX || x === width - 4;
+      const streetB = y === Math.floor(height * 0.34) || y === Math.floor(height * 0.58);
+      if ((streetA || streetB) && x > 0 && y > 0 && x < width - 1 && y < height - 2) return "road";
+      if (!lowerField && seed % 5 === 0) return seed % 10 === 0 ? "gate" : "fort";
+      if (seed % 13 === 0) return "block";
+      break;
+    }
     case "burningArc": {
       const arcY = Math.floor(height * 0.72 - Math.sin(x / Math.max(1, width - 1) * Math.PI) * height * 0.36);
       if (Math.abs(y - arcY) <= 1) return "road";
       if (!lowerField && (x + y + seed) % 8 === 0) return "fire";
       if (seed % 11 === 0) return "forest";
+      break;
+    }
+    case "burnScar": {
+      const scarA = Math.abs(y - (height - 3 - Math.floor(x * 0.72))) <= 1;
+      const scarB = Math.abs(y - Math.floor(height * 0.32 + x * 0.24)) <= 1 && x > 2;
+      if (scarA || scarB) return seed % 4 === 0 ? "fire" : "road";
+      if (!lowerField && seed % 5 === 0) return "fire";
+      if (seed % 9 === 0) return "forest";
       break;
     }
     case "frozenRiver": {
@@ -2075,10 +2133,24 @@ function getStageSignatureTile({ stage, theme, tile, x, y, width, height, seed }
       if (seed % 12 === 0) return "hill";
       break;
     }
+    case "iceBridge": {
+      if (y === centerY || y === centerY + 1) return x >= 2 && x <= width - 3 ? "road" : "ice";
+      if (Math.abs(y - centerY) <= 3 && seed % 3 !== 0) return "ice";
+      if (!lowerField && seed % 11 === 0) return "water";
+      if (seed % 13 === 0) return "hill";
+      break;
+    }
     case "marshBridge": {
       if (y === centerY || y === centerY + 1) return x >= 1 && x <= width - 2 ? "road" : safeTile;
       if (!lowerField && (x + y) % 5 === 0) return "water";
       if (!lowerField && seed % 7 === 0) return "swamp";
+      break;
+    }
+    case "marshIslands": {
+      const island = ((x - 3) ** 2 + (y - centerY) ** 2 <= 10) || ((x - centerX - 2) ** 2 + (y - centerY + 3) ** 2 <= 12);
+      if (island) return seed % 6 === 0 ? "forest" : "plain";
+      if (x === centerX || y === centerY + 2) return "road";
+      if (!lowerField && seed % 3 !== 0) return seed % 2 === 0 ? "water" : "swamp";
       break;
     }
     case "shadowRitual": {
@@ -2086,6 +2158,15 @@ function getStageSignatureTile({ stage, theme, tile, x, y, width, height, seed }
       if (ring === 0 && !lowerField) return seed % 2 === 0 ? "rune" : "dark";
       if (x === centerX && y >= 2 && y <= height - 4) return "road";
       if (seed % 15 === 0) return "trap";
+      break;
+    }
+    case "ritualSpokes": {
+      const diagonalA = Math.abs((x - centerX) - (y - centerY)) <= 1;
+      const diagonalB = Math.abs((x - centerX) + (y - centerY)) <= 1;
+      const ritualCore = Math.abs(x - centerX) + Math.abs(y - centerY) <= 3;
+      if (!lowerField && ritualCore) return seed % 2 === 0 ? "rune" : "dark";
+      if (!lowerField && (diagonalA || diagonalB || x === centerX || y === centerY)) return seed % 3 === 0 ? "rune" : "road";
+      if (seed % 11 === 0) return "trap";
       break;
     }
     case "ruinCross": {
@@ -2105,6 +2186,15 @@ function getStageSignatureTile({ stage, theme, tile, x, y, width, height, seed }
       if (!lowerField && x >= width - 6 && y <= 5) return seed % 3 === 0 ? "dark" : "fort";
       if (!lowerField && (x <= 1 || x >= width - 2) && seed % 2 === 0) return "wall";
       if (seed % 10 === 0) return "rune";
+      break;
+    }
+    case "finalSpiral": {
+      const ring = Math.round(Math.hypot(x - centerX, y - centerY));
+      const swirl = (ring + Math.floor((Math.atan2(y - centerY, x - centerX) + Math.PI) * 2)) % 5;
+      if (!lowerField && swirl <= 1) return seed % 3 === 0 ? "dark" : "rune";
+      if (Math.abs(x - centerX) <= 1 && y >= 2 && y <= height - 3) return y <= centerY ? "rune" : "road";
+      if (!lowerField && x >= width - 6 && y <= 6) return seed % 2 === 0 ? "fort" : "dark";
+      if (seed % 9 === 0) return "fire";
       break;
     }
     default:
