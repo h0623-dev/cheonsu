@@ -1,4 +1,4 @@
-const CACHE_VERSION = "cheonsu-v199126";
+const CACHE_VERSION = "cheonsu-v199127";
 const APP_SHELL_CACHE = `${CACHE_VERSION}-app-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -10,6 +10,12 @@ const ENEMY_VARIANT_KEYS = [
   "raider",
   "marauder",
   "assassin_elite",
+  "iron_lancer",
+  "plague_doctor",
+  "beast_tamer",
+  "storm_mage",
+  "blade_dancer",
+  "siege_gunner",
   "sniper",
   "ranger",
   "pyromancer",

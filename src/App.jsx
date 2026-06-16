@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.126";
+const SAVE_VERSION = "1.99.127";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -2432,10 +2432,12 @@ function getThemedLargeEnemyTemplates(stage) {
     frontier: [
       { spriteKey: "sentinel", icon: "🛡️", name: "초소 방패병", aiType: "aggressive", hp: 24, atk: 7, def: 8, move: 1, range: 1, skill: "방패 강타", skillBonus: 2, skillRange: 1 },
       { spriteKey: "ranger", icon: "🏹", name: "숲길 사수", aiType: "archer", hp: 18, atk: 8, def: 3, move: 2, range: 3, skill: "매복 사격", skillBonus: 2, skillRange: 3 },
+      { spriteKey: "beast_tamer", icon: "🪶", name: "초소 조련병", aiType: "assassin", hp: 20, atk: 8, def: 4, move: 3, range: 2, skill: "채찍 몰이", skillBonus: 3, skillRange: 2 },
       { spriteKey: "raider", icon: "🪓", name: "전초 약탈병", aiType: "aggressive", hp: 21, atk: 8, def: 4, move: 2, range: 1, skill: "광폭참", skillBonus: 3, skillRange: 1 },
       { spriteKey: "sniper", icon: "🏹", name: "감시탑 저격수", aiType: "archer", hp: 17, atk: 9, def: 3, move: 2, range: 3, skill: "정밀사격", skillBonus: 3, skillRange: 3 },
     ],
     canyon: [
+      { spriteKey: "iron_lancer", icon: "🔱", name: "협곡 철창병", aiType: "aggressive", hp: 25, atk: 9, def: 7, move: 2, range: 2, skill: "철창 돌파", skillBonus: 3, skillRange: 2 },
       { spriteKey: "marauder", icon: "🔱", name: "협곡 투창병", aiType: "aggressive", hp: 22, atk: 9, def: 5, move: 2, range: 2, skill: "긴 창 찌르기", skillBonus: 3, skillRange: 2 },
       { spriteKey: "assassin_elite", icon: "🗡️", name: "절벽 암살자", aiType: "assassin", hp: 18, atk: 10, def: 3, move: 4, range: 1, skill: "그림자 베기", skillBonus: 4, skillRange: 1 },
       { spriteKey: "sniper", icon: "🏹", name: "협곡 저격수", aiType: "archer", hp: 18, atk: 10, def: 3, move: 2, range: 3, skill: "고지 사격", skillBonus: 3, skillRange: 3 },
@@ -2444,11 +2446,13 @@ function getThemedLargeEnemyTemplates(stage) {
     fortress: [
       { spriteKey: "sentinel", icon: "🛡️", name: "성벽 수비병", aiType: "aggressive", hp: 28, atk: 8, def: 10, move: 1, range: 1, skill: "철벽 강타", skillBonus: 2, skillRange: 1 },
       { spriteKey: "blackguard", icon: "⚔️", name: "요새 흑기사", aiType: "aggressive", hp: 27, atk: 10, def: 8, move: 2, range: 1, skill: "수호 돌격", skillBonus: 3, skillRange: 1 },
+      { spriteKey: "siege_gunner", icon: "💥", name: "성벽 포병", aiType: "archer", hp: 24, atk: 12, def: 6, move: 1, range: 3, skill: "공성 포격", skillBonus: 4, skillRange: 3 },
       { spriteKey: "sniper", icon: "🏹", name: "성벽 쇠뇌병", aiType: "archer", hp: 20, atk: 10, def: 5, move: 1, range: 3, skill: "성벽 저격", skillBonus: 3, skillRange: 3 },
       { spriteKey: "warlord", icon: "👑", name: "관문 부장", aiType: "aggressive", hp: 30, atk: 10, def: 9, move: 2, range: 1, skill: "관문 돌격", skillBonus: 4, skillRange: 1 },
     ],
     burning: [
       { spriteKey: "pyromancer", icon: "🔥", name: "화염 술사", aiType: "archer", hp: 20, atk: 11, def: 3, move: 2, range: 2, skill: "화염 폭발", skillBonus: 4, skillRange: 2 },
+      { spriteKey: "storm_mage", icon: "⚡", name: "폭풍 마도병", aiType: "archer", hp: 21, atk: 11, def: 4, move: 2, range: 2, skill: "낙뢰 사슬", skillBonus: 4, skillRange: 2 },
       { spriteKey: "raider", icon: "🪓", name: "잿불 광전사", aiType: "aggressive", hp: 26, atk: 10, def: 4, move: 2, range: 1, skill: "광폭참", skillBonus: 3, skillRange: 1 },
       { spriteKey: "blackguard", icon: "⚔️", name: "그을린 흑기사", aiType: "aggressive", hp: 28, atk: 10, def: 7, move: 2, range: 1, skill: "흑염 돌격", skillBonus: 4, skillRange: 1 },
       { spriteKey: "cultist", icon: "🔮", name: "재의 사제", aiType: "archer", hp: 22, atk: 10, def: 5, move: 2, range: 2, skill: "잿빛 기도", skillBonus: 3, skillRange: 2 },
@@ -2461,12 +2465,14 @@ function getThemedLargeEnemyTemplates(stage) {
     ],
     marsh: [
       { spriteKey: "ranger", icon: "🏹", name: "여울 사수", aiType: "archer", hp: 19, atk: 9, def: 4, move: 2, range: 3, skill: "정밀사격", skillBonus: 2, skillRange: 3 },
+      { spriteKey: "plague_doctor", icon: "☠️", name: "역병 의술사", aiType: "archer", hp: 23, atk: 10, def: 5, move: 2, range: 2, skill: "독성 기도", skillBonus: 4, skillRange: 2 },
       { spriteKey: "cultist", icon: "🔮", name: "늪지 사제", aiType: "archer", hp: 22, atk: 10, def: 5, move: 2, range: 2, skill: "암흑 기도", skillBonus: 3, skillRange: 2 },
       { spriteKey: "marauder", icon: "🔱", name: "진흙 창병", aiType: "aggressive", hp: 24, atk: 9, def: 6, move: 2, range: 2, skill: "긴 창 찌르기", skillBonus: 3, skillRange: 2 },
       { spriteKey: "raider", icon: "🪓", name: "늪지 약탈병", aiType: "aggressive", hp: 25, atk: 9, def: 5, move: 2, range: 1, skill: "습격", skillBonus: 3, skillRange: 1 },
     ],
     shadow: [
       { spriteKey: "assassin_elite", icon: "🗡️", name: "흑야 암살자", aiType: "assassin", hp: 20, atk: 11, def: 4, move: 4, range: 1, skill: "그림자 베기", skillBonus: 4, skillRange: 1 },
+      { spriteKey: "blade_dancer", icon: "🗡️", name: "쌍검 무희", aiType: "assassin", hp: 21, atk: 12, def: 4, move: 4, range: 1, skill: "연속 난무", skillBonus: 5, skillRange: 1 },
       { spriteKey: "cultist", icon: "🔮", name: "의식 사제", aiType: "archer", hp: 23, atk: 10, def: 6, move: 2, range: 2, skill: "암흑 기도", skillBonus: 4, skillRange: 2 },
       { spriteKey: "void_knight", icon: "⚔️", name: "공허 기사", aiType: "aggressive", hp: 30, atk: 11, def: 9, move: 2, range: 1, skill: "공허참", skillBonus: 4, skillRange: 1 },
       { spriteKey: "sniper", icon: "🏹", name: "흑야 저격수", aiType: "archer", hp: 21, atk: 11, def: 4, move: 2, range: 3, skill: "암흑 사격", skillBonus: 3, skillRange: 3 },
@@ -2488,6 +2494,12 @@ const ENEMY_ARCHETYPE_TEMPLATES = {
   sniper: { spriteKey: "sniper", icon: "🏹", aiType: "archer", hp: 17, atk: 9, def: 3, move: 2, range: 3, skill: "정밀사격", skillBonus: 3, skillRange: 3 },
   marauder: { spriteKey: "marauder", icon: "🔱", aiType: "aggressive", hp: 22, atk: 9, def: 5, move: 2, range: 2, skill: "긴 창 찌르기", skillBonus: 3, skillRange: 2 },
   assassin_elite: { spriteKey: "assassin_elite", icon: "🗡️", aiType: "assassin", hp: 18, atk: 10, def: 3, move: 4, range: 1, skill: "그림자 베기", skillBonus: 4, skillRange: 1 },
+  iron_lancer: { spriteKey: "iron_lancer", icon: "🔱", aiType: "aggressive", hp: 25, atk: 9, def: 7, move: 2, range: 2, skill: "철창 돌파", skillBonus: 3, skillRange: 2 },
+  plague_doctor: { spriteKey: "plague_doctor", icon: "☠️", aiType: "archer", hp: 23, atk: 10, def: 5, move: 2, range: 2, skill: "독성 기도", skillBonus: 4, skillRange: 2 },
+  beast_tamer: { spriteKey: "beast_tamer", icon: "🪶", aiType: "assassin", hp: 20, atk: 8, def: 4, move: 3, range: 2, skill: "채찍 몰이", skillBonus: 3, skillRange: 2 },
+  storm_mage: { spriteKey: "storm_mage", icon: "⚡", aiType: "archer", hp: 21, atk: 11, def: 4, move: 2, range: 2, skill: "낙뢰 사슬", skillBonus: 4, skillRange: 2 },
+  blade_dancer: { spriteKey: "blade_dancer", icon: "🗡️", aiType: "assassin", hp: 21, atk: 12, def: 4, move: 4, range: 1, skill: "연속 난무", skillBonus: 5, skillRange: 1 },
+  siege_gunner: { spriteKey: "siege_gunner", icon: "💥", aiType: "archer", hp: 24, atk: 12, def: 6, move: 1, range: 3, skill: "공성 포격", skillBonus: 4, skillRange: 3 },
   sentinel: { spriteKey: "sentinel", icon: "🛡️", aiType: "aggressive", hp: 26, atk: 7, def: 9, move: 1, range: 1, skill: "철벽 강타", skillBonus: 2, skillRange: 1 },
   blackguard: { spriteKey: "blackguard", icon: "⚔️", aiType: "aggressive", hp: 27, atk: 10, def: 8, move: 2, range: 1, skill: "수호 돌격", skillBonus: 3, skillRange: 1 },
   warlord: { spriteKey: "warlord", icon: "👑", aiType: "aggressive", hp: 30, atk: 10, def: 9, move: 2, range: 1, skill: "지휘 강타", skillBonus: 4, skillRange: 1 },
@@ -2510,12 +2522,12 @@ const STAGE_ENEMY_SQUADS = {
   1: [
     enemySquadUnit("sentinel", "국경 방패병", { hp: 22, def: 7 }),
     enemySquadUnit("ranger", "초소 정찰궁병", { name: "초소 정찰궁병" }),
+    enemySquadUnit("beast_tamer", "국경 조련병", { hp: 19 }),
     enemySquadUnit("raider", "밀수 약탈병"),
-    enemySquadUnit("sniper", "감시탑 사수"),
   ],
   2: [
     enemySquadUnit("assassin_elite", "절벽 암살자"),
-    enemySquadUnit("marauder", "협곡 투창병"),
+    enemySquadUnit("iron_lancer", "협곡 철창병"),
     enemySquadUnit("sniper", "고지 저격수"),
     enemySquadUnit("raider", "바위길 습격병", { move: 3 }),
   ],
@@ -2527,8 +2539,8 @@ const STAGE_ENEMY_SQUADS = {
   ],
   4: [
     enemySquadUnit("pyromancer", "흑염 술사"),
+    enemySquadUnit("storm_mage", "검은 번개술사"),
     enemySquadUnit("raider", "잿불 광전사"),
-    enemySquadUnit("cultist", "재의 사제"),
     enemySquadUnit("blackguard", "그을린 검병"),
   ],
   5: [
@@ -2545,26 +2557,26 @@ const STAGE_ENEMY_SQUADS = {
   ],
   7: [
     enemySquadUnit("assassin_elite", "흑야 추적자"),
-    enemySquadUnit("ranger", "그림자 사수"),
+    enemySquadUnit("beast_tamer", "숲의 조련병"),
     enemySquadUnit("cultist", "숲의 주술사"),
     enemySquadUnit("void_knight", "공허 척후병"),
   ],
   8: [
     enemySquadUnit("ranger", "여울 사수"),
     enemySquadUnit("marauder", "진흙 창병"),
-    enemySquadUnit("cultist", "혈의 사제"),
+    enemySquadUnit("plague_doctor", "여울 역병의"),
     enemySquadUnit("raider", "붉은 여울 약탈병"),
   ],
   9: [
     enemySquadUnit("raider", "폐허 약탈병"),
     enemySquadUnit("sniper", "시장 지붕 저격수"),
-    enemySquadUnit("assassin_elite", "골목 암살자"),
+    enemySquadUnit("blade_dancer", "골목 쌍검수"),
     enemySquadUnit("marauder", "잔해 창병"),
   ],
   10: [
     enemySquadUnit("cultist", "탑의 의식사제"),
     enemySquadUnit("pyromancer", "흑염 연구자"),
-    enemySquadUnit("sentinel", "탑 경비병"),
+    enemySquadUnit("siege_gunner", "탑 포병"),
     enemySquadUnit("void_knight", "공허 기사"),
   ],
   11: [
@@ -2580,19 +2592,19 @@ const STAGE_ENEMY_SQUADS = {
     enemySquadUnit("warlord", "재의 집행관"),
   ],
   13: [
-    enemySquadUnit("assassin_elite", "골목 살수"),
+    enemySquadUnit("blade_dancer", "암시장 쌍검수"),
     enemySquadUnit("sniper", "지붕 저격수"),
     enemySquadUnit("raider", "암시장 칼잡이"),
     enemySquadUnit("cultist", "은밀한 주술사"),
   ],
   14: [
-    enemySquadUnit("cultist", "저주 사제"),
+    enemySquadUnit("plague_doctor", "저주 의술사"),
     enemySquadUnit("sentinel", "사원 수호병"),
     enemySquadUnit("frost_mage", "봉인 마도병"),
     enemySquadUnit("void_knight", "저주받은 기사"),
   ],
   15: [
-    enemySquadUnit("marauder", "달그늘 투창병"),
+    enemySquadUnit("iron_lancer", "달그늘 철창병"),
     enemySquadUnit("assassin_elite", "협곡 암살자"),
     enemySquadUnit("sniper", "달 없는 저격수"),
     enemySquadUnit("blackguard", "암벽 검병"),
@@ -2600,17 +2612,17 @@ const STAGE_ENEMY_SQUADS = {
   16: [
     enemySquadUnit("sentinel", "사슬 간수"),
     enemySquadUnit("blackguard", "감옥 흑기사"),
-    enemySquadUnit("marauder", "쇠사슬 창병"),
-    enemySquadUnit("cultist", "고문 사제"),
+    enemySquadUnit("iron_lancer", "쇠사슬 철창병"),
+    enemySquadUnit("plague_doctor", "감옥 역병의"),
   ],
   17: [
     enemySquadUnit("blackguard", "성벽 흑기사"),
-    enemySquadUnit("sniper", "암벽 쇠뇌병"),
+    enemySquadUnit("siege_gunner", "암벽 공성병"),
     enemySquadUnit("sentinel", "그림자 방패병"),
     enemySquadUnit("void_knight", "공허 성벽병"),
   ],
   18: [
-    enemySquadUnit("assassin_elite", "밤의 집행자"),
+    enemySquadUnit("blade_dancer", "밤의 쌍검 집행자"),
     enemySquadUnit("warlord", "처형 부장"),
     enemySquadUnit("void_knight", "공허 처형병"),
     enemySquadUnit("sniper", "처형장 저격수"),
@@ -2625,22 +2637,22 @@ const STAGE_ENEMY_SQUADS = {
     enemySquadUnit("blackguard", "왕도 잔당기사"),
     enemySquadUnit("warlord", "몰락 장군"),
     enemySquadUnit("pyromancer", "화재 마도병"),
-    enemySquadUnit("sniper", "폐성 저격수"),
+    enemySquadUnit("siege_gunner", "폐성 포병"),
   ],
   21: [
     enemySquadUnit("cultist", "도서관 사서사제"),
-    enemySquadUnit("frost_mage", "봉인 기록관"),
+    enemySquadUnit("storm_mage", "폭풍 기록관"),
     enemySquadUnit("void_knight", "심연 기사"),
     enemySquadUnit("pyromancer", "금서 화염술사"),
   ],
   22: [
-    enemySquadUnit("cultist", "검은 기도사"),
+    enemySquadUnit("plague_doctor", "검은 역병의"),
     enemySquadUnit("sentinel", "기도실 수문병"),
-    enemySquadUnit("assassin_elite", "침묵 암살자"),
+    enemySquadUnit("blade_dancer", "침묵 쌍검수"),
     enemySquadUnit("void_knight", "기도실 공허병"),
   ],
   23: [
-    enemySquadUnit("marauder", "황혼 창병"),
+    enemySquadUnit("iron_lancer", "황혼 철창병"),
     enemySquadUnit("sniper", "다리 저격수"),
     enemySquadUnit("ranger", "강변 사수"),
     enemySquadUnit("blackguard", "교량 흑기사"),
@@ -2648,17 +2660,17 @@ const STAGE_ENEMY_SQUADS = {
   24: [
     enemySquadUnit("void_knight", "흑야 심장병"),
     enemySquadUnit("cultist", "심장 사제"),
-    enemySquadUnit("pyromancer", "어둠 화염술사"),
+    enemySquadUnit("storm_mage", "어둠 폭풍술사"),
     enemySquadUnit("warlord", "흑야 집행관"),
   ],
   25: [
     enemySquadUnit("sentinel", "계단 수호병"),
     enemySquadUnit("blackguard", "상층 흑기사"),
-    enemySquadUnit("sniper", "계단 저격수"),
+    enemySquadUnit("siege_gunner", "계단 포병"),
     enemySquadUnit("void_knight", "공허 계단병"),
   ],
   26: [
-    enemySquadUnit("pyromancer", "붉은 달 술사"),
+    enemySquadUnit("storm_mage", "붉은 달 폭풍술사"),
     enemySquadUnit("cultist", "성소 사제"),
     enemySquadUnit("void_knight", "달그림자 기사"),
     enemySquadUnit("warlord", "성소 집행관"),
@@ -2666,7 +2678,7 @@ const STAGE_ENEMY_SQUADS = {
   27: [
     enemySquadUnit("warlord", "천공 관문장"),
     enemySquadUnit("sniper", "관문 저격수"),
-    enemySquadUnit("marauder", "천공 창병"),
+    enemySquadUnit("iron_lancer", "천공 철창병"),
     enemySquadUnit("frost_mage", "고공 빙결사"),
   ],
   28: [
@@ -2676,16 +2688,17 @@ const STAGE_ENEMY_SQUADS = {
     enemySquadUnit("blackguard", "수호 흑기사"),
   ],
   29: [
-    enemySquadUnit("raider", "파멸 약탈병"),
+    enemySquadUnit("beast_tamer", "파멸 조련병"),
     enemySquadUnit("void_knight", "파멸 기사"),
     enemySquadUnit("pyromancer", "종말 화염술사"),
-    enemySquadUnit("assassin_elite", "평원 암살자"),
+    enemySquadUnit("blade_dancer", "평원 쌍검수"),
   ],
   30: [
     enemySquadUnit("void_knight", "심연 친위대"),
     enemySquadUnit("warlord", "왕좌 집행관"),
     enemySquadUnit("cultist", "종말 사제"),
-    enemySquadUnit("pyromancer", "종말 마도사"),
+    enemySquadUnit("siege_gunner", "왕좌 포병"),
+    enemySquadUnit("storm_mage", "종말 폭풍술사"),
     enemySquadUnit("frost_mage", "최후의 봉인술사"),
   ],
 };
@@ -3715,6 +3728,12 @@ const ENEMY_VARIANT_KEYS = new Set([
   "raider",
   "marauder",
   "assassin_elite",
+  "iron_lancer",
+  "plague_doctor",
+  "beast_tamer",
+  "storm_mage",
+  "blade_dancer",
+  "siege_gunner",
   "sniper",
   "ranger",
   "pyromancer",
@@ -3919,13 +3938,19 @@ function getEnemySpriteKey(unit) {
   }
 
   if (text.includes("가론") || text.includes("심연") || text.includes("공허")) return "void_knight";
+  if (text.includes("공성") || text.includes("포병") || text.includes("포격") || text.includes("대포")) return "siege_gunner";
   if (text.includes("단장") || text.includes("장군") || text.includes("집행관") || text.includes("왕좌")) return "warlord";
+  if (text.includes("폭풍") || text.includes("번개") || text.includes("낙뢰") || text.includes("천둥")) return "storm_mage";
+  if (text.includes("역병") || text.includes("독") || text.includes("의술")) return "plague_doctor";
   if (text.includes("빙") || text.includes("얼음") || text.includes("설원") || text.includes("서리")) return "frost_mage";
   if (text.includes("화염") || text.includes("흑염") || text.includes("혈") || text.includes("잿") || text.includes("불")) return "pyromancer";
   if (text.includes("사제") || text.includes("주술") || text.includes("의식") || text.includes("저주")) return "cultist";
+  if (text.includes("조련") || text.includes("채찍") || text.includes("몰이")) return "beast_tamer";
+  if (text.includes("쌍검") || text.includes("무희") || text.includes("난무")) return "blade_dancer";
   if (text.includes("암살") || text.includes("그림자") || text.includes("추적")) return "assassin_elite";
   if (text.includes("저격") || text.includes("쇠뇌") || text.includes("사수")) return "sniper";
   if (text.includes("궁병")) return "ranger";
+  if (text.includes("철창")) return "iron_lancer";
   if (text.includes("투창") || text.includes("창병") || text.includes("창")) return "marauder";
   if (text.includes("방패") || text.includes("수비") || text.includes("감시")) return "sentinel";
   if (text.includes("기사") || text.includes("흑기사") || text.includes("검병")) return "blackguard";

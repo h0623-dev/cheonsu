@@ -1,4 +1,4 @@
-const CACHE_NAME = "cheonsu-v1-99-126";
+const CACHE_NAME = "cheonsu-v1-99-127";
 const FINAL_STAGE_MAPS = Array.from(
   { length: 30 },
   (_, index) => `/maps/concept/stage_${index + 1}_frontier_final.png`
@@ -7,6 +7,12 @@ const ENEMY_VARIANT_KEYS = [
   "raider",
   "marauder",
   "assassin_elite",
+  "iron_lancer",
+  "plague_doctor",
+  "beast_tamer",
+  "storm_mage",
+  "blade_dancer",
+  "siege_gunner",
   "sniper",
   "ranger",
   "pyromancer",
