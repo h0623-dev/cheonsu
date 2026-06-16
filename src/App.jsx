@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.112";
+const SAVE_VERSION = "1.99.113";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -1676,134 +1676,8 @@ const ACTS = [
   { id: 5, title: "ACT 5 · 마지막 천수", start: 25, end: 30 },
 ];
 
-const ACT_ROUTE_LAYOUTS = {
-  1: {
-    routeHint: "1장 출발점 → 6장 보스의 성",
-    startLabel: "출발점",
-    bossLabel: "보스의 성",
-    midLabels: ["국경 초소", "협곡 관문", "성문 앞", "불타는 숲길"],
-    nodePositions: [
-      { x: 14, y: 76 },
-      { x: 30, y: 63 },
-      { x: 43, y: 50 },
-      { x: 58, y: 38 },
-      { x: 73, y: 27 },
-      { x: 87, y: 15 },
-    ],
-    landmarks: [
-      { key: "camp", className: "landmark-camp", label: "기사단 야영지", x: 8, y: 82 },
-      { key: "watch", className: "landmark-watch", label: "감시탑", x: 35, y: 35 },
-      { key: "castle", className: "landmark-castle", label: "보스의 성", x: 79, y: 8 },
-    ],
-  },
-  2: {
-    routeHint: "7장 재집결 → 12장 빙화 관문",
-    startLabel: "재집결지",
-    bossLabel: "빙화 관문",
-    midLabels: ["불길 능선", "숲의 균열", "얼음 여울", "쌍둥이 초소"],
-    nodePositions: [
-      { x: 18, y: 72 },
-      { x: 33, y: 54 },
-      { x: 52, y: 62 },
-      { x: 65, y: 44 },
-      { x: 78, y: 30 },
-      { x: 86, y: 16 },
-    ],
-    landmarks: [
-      { key: "ember", className: "landmark-ember", label: "그을린 숲", x: 18, y: 28 },
-      { key: "ice", className: "landmark-ice", label: "빙결 계곡", x: 70, y: 58 },
-      { key: "gate", className: "landmark-gate", label: "관문", x: 82, y: 10 },
-    ],
-  },
-  3: {
-    routeHint: "13장 폐성 외곽 → 18장 무너진 왕성",
-    startLabel: "폐성 외곽",
-    bossLabel: "무너진 왕성",
-    midLabels: ["석교", "성벽 잔해", "동문 전장", "왕성 광장"],
-    nodePositions: [
-      { x: 12, y: 68 },
-      { x: 28, y: 55 },
-      { x: 44, y: 40 },
-      { x: 59, y: 48 },
-      { x: 74, y: 32 },
-      { x: 87, y: 18 },
-    ],
-    landmarks: [
-      { key: "bridge", className: "landmark-bridge", label: "석교", x: 29, y: 48 },
-      { key: "ruin", className: "landmark-ruin", label: "성벽 잔해", x: 54, y: 26 },
-      { key: "keep", className: "landmark-keep", label: "왕성", x: 80, y: 10 },
-    ],
-  },
-  4: {
-    routeHint: "19장 북부 진입 → 24장 흑야 성채",
-    startLabel: "북부 진입",
-    bossLabel: "흑야 성채",
-    midLabels: ["눈길", "얼음 다리", "저주 숲", "성채 비탈"],
-    nodePositions: [
-      { x: 15, y: 78 },
-      { x: 27, y: 61 },
-      { x: 42, y: 45 },
-      { x: 60, y: 56 },
-      { x: 74, y: 35 },
-      { x: 86, y: 17 },
-    ],
-    landmarks: [
-      { key: "snow", className: "landmark-snow", label: "빙설 평원", x: 15, y: 36 },
-      { key: "rift", className: "landmark-rift", label: "저주 균열", x: 57, y: 66 },
-      { key: "dark", className: "landmark-dark", label: "흑야 성채", x: 79, y: 9 },
-    ],
-  },
-  5: {
-    routeHint: "25장 최후의 집결 → 30장 붉은 왕좌",
-    startLabel: "최후의 집결",
-    bossLabel: "붉은 왕좌",
-    midLabels: ["붉은 길", "천수 제단", "흑월 협곡", "왕좌의 문"],
-    nodePositions: [
-      { x: 14, y: 74 },
-      { x: 31, y: 59 },
-      { x: 49, y: 48 },
-      { x: 60, y: 31 },
-      { x: 76, y: 40 },
-      { x: 87, y: 18 },
-    ],
-    landmarks: [
-      { key: "altar", className: "landmark-altar", label: "천수 제단", x: 45, y: 38 },
-      { key: "moon", className: "landmark-moon", label: "흑월", x: 66, y: 16 },
-      { key: "throne", className: "landmark-throne", label: "왕좌", x: 82, y: 10 },
-    ],
-  },
-};
-
 function getActInfo(stageId) {
   return ACTS.find((act) => stageId >= act.start && stageId <= act.end) || ACTS[0];
-}
-
-function getActRouteLayout(actId) {
-  return ACT_ROUTE_LAYOUTS[actId] || ACT_ROUTE_LAYOUTS[1];
-}
-
-function getActRouteNodePosition(actId, index, total) {
-  const layout = getActRouteLayout(actId);
-  if (layout.nodePositions[index]) return layout.nodePositions[index];
-
-  const progress = total > 1 ? index / (total - 1) : 0;
-  return {
-    x: 14 + progress * 72,
-    y: 76 - progress * 58,
-  };
-}
-
-function getActRouteLinePoints(actId, total) {
-  return Array.from({ length: total }, (_, index) => {
-    const point = getActRouteNodePosition(actId, index, total);
-    return `${point.x},${point.y}`;
-  }).join(" ");
-}
-
-function getActRouteStageLabel(route, index, total) {
-  if (index === 0) return route.startLabel;
-  if (index === total - 1) return route.bossLabel;
-  return route.midLabels[index - 1] || `${index + 1}장 거점`;
 }
 
 
@@ -2055,6 +1929,86 @@ const FINAL_FRONTIER_EXTRA_ENEMY_SPAWNS = [
   { x: 7, y: 8 },
   { x: 5, y: 9 },
 ];
+
+const ACT_ONE_ROUTE_TACTICAL_MAP = [
+  ["wall", "wall", "wall", "wall", "fort", "fort", "gate", "gate", "fort", "wall", "wall", "wall"],
+  ["wall", "wall", "forest", "fort", "fort", "gate", "road", "gate", "fort", "fort", "wall", "wall"],
+  ["wall", "forest", "plain", "fort", "gate", "road", "road", "road", "fort", "gate", "fort", "wall"],
+  ["forest", "plain", "hill", "plain", "road", "road", "road", "plain", "fort", "fort", "wall", "forest"],
+  ["forest", "block", "plain", "road", "road", "plain", "hill", "road", "road", "fort", "wall", "forest"],
+  ["forest", "plain", "plain", "road", "forest", "plain", "plain", "road", "plain", "road", "forest", "block"],
+  ["block", "forest", "plain", "road", "plain", "hill", "plain", "road", "forest", "road", "wall", "wall"],
+  ["forest", "forest", "plain", "road", "road", "plain", "forest", "road", "plain", "road", "plain", "wall"],
+  ["forest", "plain", "block", "plain", "road", "road", "plain", "road", "plain", "road", "forest", "wall"],
+  ["forest", "plain", "plain", "plain", "road", "plain", "plain", "road", "forest", "road", "forest", "block"],
+  ["block", "forest", "plain", "road", "road", "plain", "hill", "plain", "road", "road", "forest", "block"],
+  ["forest", "plain", "road", "road", "plain", "forest", "plain", "road", "plain", "forest", "forest", "block"],
+  ["forest", "plain", "road", "plain", "plain", "plain", "road", "road", "plain", "plain", "forest", "block"],
+  ["block", "plain", "road", "plain", "forest", "plain", "road", "plain", "forest", "plain", "block", "forest"],
+  ["forest", "plain", "road", "road", "plain", "plain", "plain", "road", "plain", "plain", "forest", "forest"],
+  ["forest", "forest", "plain", "road", "plain", "hill", "plain", "road", "plain", "forest", "block", "forest"],
+  ["forest", "plain", "plain", "road", "road", "plain", "forest", "road", "plain", "plain", "forest", "block"],
+  ["block", "forest", "plain", "plain", "road", "plain", "plain", "road", "plain", "block", "forest", "forest"],
+  ["forest", "plain", "road", "road", "plain", "forest", "plain", "road", "plain", "plain", "forest", "block"],
+  ["forest", "plain", "road", "plain", "plain", "plain", "road", "road", "plain", "forest", "forest", "block"],
+  ["block", "plain", "road", "plain", "forest", "plain", "road", "plain", "plain", "plain", "block", "forest"],
+  ["forest", "plain", "road", "road", "plain", "plain", "plain", "road", "plain", "forest", "forest", "block"],
+  ["forest", "forest", "plain", "road", "plain", "hill", "plain", "road", "plain", "forest", "block", "forest"],
+  ["forest", "plain", "road", "road", "plain", "plain", "forest", "road", "plain", "plain", "forest", "block"],
+  ["block", "plain", "plain", "road", "road", "plain", "plain", "road", "plain", "block", "forest", "forest"],
+  ["forest", "forest", "plain", "plain", "road", "road", "plain", "plain", "forest", "forest", "block", "block"],
+];
+
+const ACT_ONE_ROUTE_STAGE_CONFIGS = {
+  1: {
+    themeLabel: "국경 출발지",
+    themeId: "frontier",
+    allySpawns: [{ x: 1, y: 23 }, { x: 2, y: 22 }, { x: 3, y: 23 }, { x: 1, y: 24 }, { x: 4, y: 22 }, { x: 2, y: 24 }],
+    enemySpawns: [{ x: 5, y: 17 }, { x: 7, y: 16 }, { x: 6, y: 18 }, { x: 8, y: 15 }, { x: 4, y: 16 }, { x: 9, y: 17 }],
+    bossSpawn: { x: 7, y: 14 },
+    maxEnemies: 5,
+  },
+  2: {
+    themeLabel: "협곡 진입로",
+    themeId: "canyon",
+    allySpawns: [{ x: 2, y: 21 }, { x: 3, y: 20 }, { x: 1, y: 21 }, { x: 4, y: 20 }, { x: 2, y: 22 }, { x: 5, y: 21 }],
+    enemySpawns: [{ x: 6, y: 14 }, { x: 8, y: 13 }, { x: 7, y: 15 }, { x: 9, y: 12 }, { x: 5, y: 13 }, { x: 10, y: 14 }],
+    bossSpawn: { x: 8, y: 12 },
+    maxEnemies: 6,
+  },
+  3: {
+    themeLabel: "성문 외곽",
+    themeId: "fortress",
+    allySpawns: [{ x: 3, y: 19 }, { x: 4, y: 18 }, { x: 2, y: 19 }, { x: 5, y: 18 }, { x: 3, y: 20 }, { x: 6, y: 19 }],
+    enemySpawns: [{ x: 6, y: 11 }, { x: 8, y: 10 }, { x: 7, y: 12 }, { x: 9, y: 9 }, { x: 5, y: 10 }, { x: 10, y: 11 }],
+    bossSpawn: { x: 8, y: 8 },
+    maxEnemies: 7,
+  },
+  4: {
+    themeLabel: "불타는 숲길",
+    themeId: "burning",
+    allySpawns: [{ x: 4, y: 17 }, { x: 5, y: 16 }, { x: 3, y: 17 }, { x: 6, y: 16 }, { x: 4, y: 18 }, { x: 7, y: 17 }],
+    enemySpawns: [{ x: 6, y: 9 }, { x: 8, y: 8 }, { x: 7, y: 10 }, { x: 9, y: 7 }, { x: 5, y: 8 }, { x: 10, y: 9 }],
+    bossSpawn: { x: 8, y: 6 },
+    maxEnemies: 7,
+  },
+  5: {
+    themeLabel: "무너진 성벽",
+    themeId: "fortress",
+    allySpawns: [{ x: 4, y: 15 }, { x: 5, y: 14 }, { x: 3, y: 15 }, { x: 6, y: 14 }, { x: 4, y: 16 }, { x: 7, y: 15 }],
+    enemySpawns: [{ x: 6, y: 7 }, { x: 8, y: 6 }, { x: 7, y: 8 }, { x: 9, y: 5 }, { x: 5, y: 7 }, { x: 10, y: 6 }],
+    bossSpawn: { x: 8, y: 4 },
+    maxEnemies: 8,
+  },
+  6: {
+    themeLabel: "보스의 성",
+    themeId: "fortress",
+    allySpawns: [{ x: 4, y: 13 }, { x: 5, y: 12 }, { x: 3, y: 13 }, { x: 6, y: 12 }, { x: 4, y: 14 }, { x: 7, y: 13 }],
+    enemySpawns: [{ x: 6, y: 4 }, { x: 8, y: 3 }, { x: 7, y: 5 }, { x: 9, y: 4 }, { x: 5, y: 5 }, { x: 10, y: 3 }],
+    bossSpawn: { x: 8, y: 2 },
+    maxEnemies: 9,
+  },
+};
 
 function getStageBattlefieldTheme(stage) {
   const stageId = Math.max(1, Math.floor(stage?.id || 1));
@@ -2529,6 +2483,61 @@ function cloneFinalFrontierMap() {
   return FINAL_FRONTIER_TACTICAL_MAP.map((row) => row.slice());
 }
 
+function isActOneRouteStage(stage) {
+  const stageId = Math.max(1, Math.floor(stage?.id || 1));
+  return stageId >= 1 && stageId <= 6;
+}
+
+function getActOneRouteStageConfig(stage) {
+  const stageId = Math.max(1, Math.floor(stage?.id || 1));
+  return ACT_ONE_ROUTE_STAGE_CONFIGS[stageId] || ACT_ONE_ROUTE_STAGE_CONFIGS[1];
+}
+
+function cloneActOneRouteMap(stage) {
+  const stageId = Math.max(1, Math.floor(stage?.id || 1));
+  const map = ACT_ONE_ROUTE_TACTICAL_MAP.map((row) => row.slice());
+
+  return map.map((row, y) =>
+    row.map((tile, x) => {
+      const seed = getStageTileSeed(stageId, x, y, 211);
+      const topCastle = y <= 4 && x >= 5 && x <= 10;
+      const centralAdvance = y >= 7 && y <= 17 && x >= 3 && x <= 8;
+
+      if (stageId >= 6 && topCastle) {
+        if (x === 6 || x === 7) return "gate";
+        if (seed % 5 === 0) return "fort";
+        return tile === "plain" || tile === "forest" ? "fort" : tile;
+      }
+
+      if (stageId >= 5 && y <= 8 && x >= 6) {
+        if (tile === "plain" && seed % 4 === 0) return "fort";
+        if (tile === "forest" && seed % 3 === 0) return "wall";
+      }
+
+      if (stageId === 4 && centralAdvance && tile !== "road" && tile !== "gate" && tile !== "fort") {
+        if (seed % 5 === 0) return "fire";
+        if (seed % 7 === 0) return "hill";
+      }
+
+      if (stageId === 3 && y >= 6 && y <= 13 && x >= 5 && x <= 9) {
+        if (tile === "plain" && seed % 6 === 0) return "fort";
+        if (tile === "forest" && seed % 4 === 0) return "block";
+      }
+
+      if (stageId === 2 && y >= 10 && y <= 18) {
+        if ((x <= 1 || x >= 10) && tile !== "road") return "wall";
+        if (tile === "plain" && seed % 8 === 0) return "hill";
+      }
+
+      if (stageId === 1 && y >= 20 && x <= 5 && tile === "forest" && seed % 3 === 0) {
+        return "plain";
+      }
+
+      return tile;
+    })
+  );
+}
+
 function pickOpenFrontierSpawn(spawns, activeMap, occupied, fallback = { x: 0, y: 0 }) {
   const openSpawn = spawns.find((pos) =>
     inActiveMap(pos.x, pos.y, activeMap) &&
@@ -2544,6 +2553,78 @@ function pickOpenFrontierSpawn(spawns, activeMap, occupied, fallback = { x: 0, y
     !occupied.has(`${fallback.x},${fallback.y}`)
     ? fallback
     : null;
+}
+
+function createActOneRouteBattleStage(stage, deployCount = MAX_DEPLOY_COUNT) {
+  const map = cloneActOneRouteMap(stage);
+  const config = getActOneRouteStageConfig(stage);
+  const occupied = new Set();
+  let allyIndex = 0;
+  let enemyIndex = 0;
+
+  const positionedUnits = clone(stage.units || []).map((unit) => {
+    const normalizedUnit = unit.id === "boss" && unit.type !== "ally"
+      ? { ...unit, type: "boss" }
+      : unit;
+
+    if (normalizedUnit.type === "ally") {
+      const spawn = pickOpenFrontierSpawn(
+        config.allySpawns.slice(allyIndex),
+        map,
+        occupied,
+        config.allySpawns[config.allySpawns.length - 1]
+      ) || { x: 1, y: map.length - 2 };
+      allyIndex += 1;
+      occupied.add(`${spawn.x},${spawn.y}`);
+      return { ...normalizedUnit, x: spawn.x, y: spawn.y };
+    }
+
+    const preferred = normalizedUnit.type === "boss"
+      ? config.bossSpawn
+      : config.enemySpawns[enemyIndex] || config.enemySpawns[config.enemySpawns.length - 1];
+    const spawn = pickOpenFrontierSpawn(
+      [preferred, ...config.enemySpawns.slice(enemyIndex)],
+      map,
+      occupied,
+      preferred
+    ) || preferred;
+
+    if (normalizedUnit.type !== "boss") enemyIndex += 1;
+    occupied.add(`${spawn.x},${spawn.y}`);
+    return { ...normalizedUnit, x: spawn.x, y: spawn.y };
+  });
+
+  const currentEnemies = positionedUnits.filter((unit) => unit.type !== "ally").length;
+  const targetEnemies = Math.max(currentEnemies, Math.min(config.maxEnemies, deployCount + Math.ceil((stage.id || 1) / 2)));
+  const extraEnemies = [];
+
+  for (let i = currentEnemies; i < targetEnemies; i += 1) {
+    const spawn = pickOpenFrontierSpawn(
+      config.enemySpawns.slice(enemyIndex),
+      map,
+      occupied,
+      null
+    ) || config.enemySpawns.find((pos) => !occupied.has(`${pos.x},${pos.y}`));
+
+    if (!spawn) break;
+
+    enemyIndex += 1;
+    occupied.add(`${spawn.x},${spawn.y}`);
+    extraEnemies.push(createLargeExtraEnemy(stage, i - currentEnemies + 1, spawn.x, spawn.y));
+  }
+
+  return {
+    ...stage,
+    map,
+    units: [...positionedUnits, ...extraEnemies],
+    largeBattle: true,
+    battlefieldTheme: config.themeLabel,
+    battlefieldThemeId: config.themeId,
+    largeMapSize: `${map[0]?.length || 0}x${map.length || 0}`,
+    baseMapSize: `${stage.map?.[0]?.length || 0}x${stage.map?.length || 0}`,
+    finalConceptLayout: true,
+    actRouteBattleMap: true,
+  };
 }
 
 function createFinalFrontierBattleStage(stage, deployCount = MAX_DEPLOY_COUNT) {
@@ -3023,6 +3104,7 @@ function createLargeExtraEnemy(stage, index, x, y) {
 
 function expandStageForLargeBattle(stage, deployCount = MAX_DEPLOY_COUNT) {
   if (!stage) return stage;
+  if (isActOneRouteStage(stage)) return createActOneRouteBattleStage(stage, deployCount);
 
   const baseMap = stage.map || [];
   const mapSize = getLargeBattleMapSize(stage, deployCount);
@@ -7831,7 +7913,12 @@ export default function App() {
 
   const activeStage = selectedStage || stages[0];
   const activeMissionOrder = getStageMissionOrder(activeStage);
-  const activeBattlefieldTheme = getStageBattlefieldTheme(activeStage);
+  const activeBattlefieldTheme = activeStage?.battlefieldTheme
+    ? {
+        id: activeStage.battlefieldThemeId || getStageBattlefieldTheme(activeStage).id,
+        label: activeStage.battlefieldTheme,
+      }
+    : getStageBattlefieldTheme(activeStage);
   const activeRoundLimit = getStageRoundLimit(activeStage);
   const activeBaseMap = activeStage?.map?.length ? activeStage.map : stages[0].map;
   const activeMap = useMemo(
@@ -16543,18 +16630,16 @@ export default function App() {
           <div className="world-map-panel">
             {ACTS.map((act) => {
               const region = getWorldRegionInfo(act.start);
-              const route = getActRouteLayout(act.id);
               const actStages = stages.filter(
                 (stage) => stage.id >= act.start && stage.id <= act.end
               );
               const actCleared = actStages.filter((stage) =>
                 clearedStages.includes(stage.id)
               ).length;
-              const routeLinePoints = getActRouteLinePoints(act.id, actStages.length);
 
               return (
                 <div
-                  className={`world-region-card act-route-card act-route-${act.id} ${region.tone}`}
+                  className={`world-region-card ${region.tone}`}
                   key={act.id}
                   style={{ "--region-art": `url(${region.image})` }}
                 >
@@ -16570,7 +16655,6 @@ export default function App() {
                       <span>ACT {act.id}</span>
                       <strong>{region.name}</strong>
                       <small>{region.desc}</small>
-                      <small className="region-route-copy">{route.routeHint}</small>
                     </div>
                     <b>{actCleared}/{actStages.length}</b>
                   </div>
@@ -16578,84 +16662,54 @@ export default function App() {
                     <i style={{ width: `${Math.round((actCleared / Math.max(1, actStages.length)) * 100)}%` }} />
                   </div>
 
-                  <div className={`act-route-map act-route-map-${act.id}`} aria-label={`${act.title} 진행 지도`}>
-                    <div className="act-route-bg" />
-                    {route.landmarks.map((landmark) => (
-                      <span
-                        className={`act-landmark ${landmark.className}`}
-                        key={landmark.key}
-                        style={{ "--landmark-x": `${landmark.x}%`, "--landmark-y": `${landmark.y}%` }}
-                      >
-                        <b />
-                        <em>{landmark.label}</em>
-                      </span>
-                    ))}
-                    <svg
-                      className="act-route-lines"
-                      viewBox="0 0 100 100"
-                      preserveAspectRatio="none"
-                      aria-hidden="true"
-                    >
-                      <polyline className="route-line-shadow" points={routeLinePoints} />
-                      <polyline className="route-line-main" points={routeLinePoints} />
-                    </svg>
-                    <div className="world-path act-route-path">
-                      {actStages.map((stage, index) => {
-                        const nodeState = getStageNodeClass(stage, clearedStages, playableStageIds);
-                        const nodeType = getStageNodeType(stage);
-                        const mission = getStageMissionOrder(stage);
-                        const threat = getStageThreatLevel(stage, MAX_DEPLOY_COUNT);
-                        const enemySummary = getStageEnemySummary(stage, MAX_DEPLOY_COUNT);
-                        const recruitId = RECRUIT_BY_STAGE[stage.id];
-                        const recruitName = recruitId ? getRecruitName(recruitId) : "";
-                        const mastery = stageMastery[String(stage.id)];
-                        const nodePosition = getActRouteNodePosition(act.id, index, actStages.length);
-                        const routeStageLabel = getActRouteStageLabel(route, index, actStages.length);
-                        const isRouteStart = index === 0;
-                        const isRouteBoss = index === actStages.length - 1;
+                  <div className="world-path">
+                    {actStages.map((stage, index) => {
+                      const nodeState = getStageNodeClass(stage, clearedStages, playableStageIds);
+                      const nodeType = getStageNodeType(stage);
+                      const mission = getStageMissionOrder(stage);
+                      const threat = getStageThreatLevel(stage, MAX_DEPLOY_COUNT);
+                      const enemySummary = getStageEnemySummary(stage, MAX_DEPLOY_COUNT);
+                      const recruitId = RECRUIT_BY_STAGE[stage.id];
+                      const recruitName = recruitId ? getRecruitName(recruitId) : "";
+                      const mastery = stageMastery[String(stage.id)];
 
-                        return (
-                          <button
-                            key={stage.id}
-                            className={`world-stage-node ${nodeState} node-${nodeType} ${threat.className} ${isRouteStart ? "route-start" : ""} ${isRouteBoss ? "route-boss" : ""}`}
-                            disabled={!playableStageIds.includes(stage.id)}
-                            onClick={() => startStage(stage)}
-                            style={{
-                              "--node-index": index,
-                              "--node-x": `${nodePosition.x}%`,
-                              "--node-y": `${nodePosition.y}%`,
-                            }}
-                          >
-                            <span className="node-number">{stage.id}</span>
-                            <div className="node-line" />
-                            <div className="node-body">
-                              <strong>{stage.title.replace(/^\d+장\.\s*/, "")}</strong>
-                              <em>{routeStageLabel}</em>
-                              <small>
-                                {mission.type} · 위험도 {threat.level} · 적 {enemySummary.total}명
-                                {recruitName ? ` · 동료 ${recruitName}` : ""}
-                                {mastery ? ` · ${mastery.bestRank} ${getRankStars(mastery.bestRank)}` : ""}
-                                {getStageNote(stageNotes, stage) ? " · 메모" : ""}
-                                {getStageTags(stageNoteTags, stage).length ? ` · 태그 ${getStageTags(stageNoteTags, stage).length}` : ""}
-                              </small>
-                            </div>
-                            <i>
-                              {nodeState === "cleared"
-                                ? (mastery ? mastery.bestRank : "완료")
-                                : nodeState === "locked"
-                                ? "잠김"
-                                : isRouteBoss
-                                ? "종착지"
-                                : nodeType === "recruit"
-                                ? "동료"
-                                : isRouteStart
-                                ? "출발"
-                                : "진입"}
-                            </i>
-                          </button>
-                        );
-                      })}
-                    </div>
+                      return (
+                        <button
+                          key={stage.id}
+                          className={`world-stage-node ${nodeState} node-${nodeType} ${threat.className}`}
+                          disabled={!playableStageIds.includes(stage.id)}
+                          onClick={() => startStage(stage)}
+                          style={{ "--node-index": index }}
+                        >
+                          <span className="node-number">{stage.id}</span>
+                          <div className="node-line" />
+                          <div className="node-body">
+                            <strong>{stage.title}</strong>
+                            <em>
+                              {mission.type} · {mission.title}
+                              {mastery ? ` · ${mastery.bestRank} ${getRankStars(mastery.bestRank)}` : ""}
+                            </em>
+                            <small>
+                              위험도 {threat.level} · 적 {enemySummary.total}명
+                              {recruitName ? ` · 동료 ${recruitName}` : ""}
+                              {getStageNote(stageNotes, stage) ? " · 메모 있음" : ""}
+                              {getStageTags(stageNoteTags, stage).length ? ` · 태그 ${getStageTags(stageNoteTags, stage).length}` : ""}
+                            </small>
+                          </div>
+                          <i>
+                            {nodeState === "cleared"
+                              ? (mastery ? mastery.bestRank : "✓")
+                              : nodeState === "locked"
+                              ? "잠김"
+                              : nodeType === "boss"
+                              ? "보스"
+                              : nodeType === "recruit"
+                              ? "동료"
+                              : "편성"}
+                          </i>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               );
