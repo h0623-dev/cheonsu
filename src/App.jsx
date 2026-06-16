@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.113";
+const SAVE_VERSION = "1.99.114";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -1961,6 +1961,8 @@ const ACT_ONE_ROUTE_TACTICAL_MAP = [
 
 const ACT_ONE_ROUTE_STAGE_CONFIGS = {
   1: {
+    battleTitle: "1장. 국경 출발점",
+    battleObjective: "목표: 성채로 향하는 진군로 확보",
     themeLabel: "국경 출발지",
     themeId: "frontier",
     allySpawns: [{ x: 1, y: 23 }, { x: 2, y: 22 }, { x: 3, y: 23 }, { x: 1, y: 24 }, { x: 4, y: 22 }, { x: 2, y: 24 }],
@@ -1969,6 +1971,8 @@ const ACT_ONE_ROUTE_STAGE_CONFIGS = {
     maxEnemies: 5,
   },
   2: {
+    battleTitle: "2장. 국경 초소",
+    battleObjective: "목표: 초소 방어선 돌파",
     themeLabel: "협곡 진입로",
     themeId: "canyon",
     allySpawns: [{ x: 2, y: 21 }, { x: 3, y: 20 }, { x: 1, y: 21 }, { x: 4, y: 20 }, { x: 2, y: 22 }, { x: 5, y: 21 }],
@@ -1977,6 +1981,8 @@ const ACT_ONE_ROUTE_STAGE_CONFIGS = {
     maxEnemies: 6,
   },
   3: {
+    battleTitle: "3장. 성문 외곽",
+    battleObjective: "목표: 외곽 수비대 격파",
     themeLabel: "성문 외곽",
     themeId: "fortress",
     allySpawns: [{ x: 3, y: 19 }, { x: 4, y: 18 }, { x: 2, y: 19 }, { x: 5, y: 18 }, { x: 3, y: 20 }, { x: 6, y: 19 }],
@@ -1985,6 +1991,8 @@ const ACT_ONE_ROUTE_STAGE_CONFIGS = {
     maxEnemies: 7,
   },
   4: {
+    battleTitle: "4장. 불타는 숲길",
+    battleObjective: "목표: 불길 속 전초선 돌파",
     themeLabel: "불타는 숲길",
     themeId: "burning",
     allySpawns: [{ x: 4, y: 17 }, { x: 5, y: 16 }, { x: 3, y: 17 }, { x: 6, y: 16 }, { x: 4, y: 18 }, { x: 7, y: 17 }],
@@ -1993,6 +2001,8 @@ const ACT_ONE_ROUTE_STAGE_CONFIGS = {
     maxEnemies: 7,
   },
   5: {
+    battleTitle: "5장. 무너진 성벽",
+    battleObjective: "목표: 성벽 방어선 붕괴",
     themeLabel: "무너진 성벽",
     themeId: "fortress",
     allySpawns: [{ x: 4, y: 15 }, { x: 5, y: 14 }, { x: 3, y: 15 }, { x: 6, y: 14 }, { x: 4, y: 16 }, { x: 7, y: 15 }],
@@ -2001,6 +2011,8 @@ const ACT_ONE_ROUTE_STAGE_CONFIGS = {
     maxEnemies: 8,
   },
   6: {
+    battleTitle: "6장. 보스의 성",
+    battleObjective: "목표: 성채 보스 격파",
     themeLabel: "보스의 성",
     themeId: "fortress",
     allySpawns: [{ x: 4, y: 13 }, { x: 5, y: 12 }, { x: 3, y: 13 }, { x: 6, y: 12 }, { x: 4, y: 14 }, { x: 7, y: 13 }],
@@ -2615,6 +2627,8 @@ function createActOneRouteBattleStage(stage, deployCount = MAX_DEPLOY_COUNT) {
 
   return {
     ...stage,
+    title: config.battleTitle || stage.title,
+    objective: config.battleObjective || stage.objective,
     map,
     units: [...positionedUnits, ...extraEnemies],
     largeBattle: true,
@@ -3600,6 +3614,7 @@ function getStageMapArt(stage) {
 
 function getClassicBattleMapArt(stage) {
   const id = Math.min(30, Math.max(1, Math.floor(stage?.id || 1)));
+  if (stage?.actRouteBattleMap || id <= 6) return "/maps/concept/stage_1_frontier_final.png";
   return `/maps/concept/stage_${id}_frontier_final.png`;
 }
 
