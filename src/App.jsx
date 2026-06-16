@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.110";
+const SAVE_VERSION = "1.99.111";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -1971,6 +1971,7 @@ function isLargeMapAllyZone(x, y, width, height) {
 const STAGE_LAYOUT_KINDS = [
   "frontierBreach",
   "forestPass",
+  "canyonAmbush",
   "canyonFork",
   "ridgeSwitchback",
   "fortressGate",
@@ -2013,7 +2014,10 @@ function getStageLayoutKind(stage) {
   if (theme.id === "burning") return pickStageLayout(stageId, ["burningArc", "burnScar", "frontierBreach"]);
   if (theme.id === "frozen") return pickStageLayout(stageId, ["frozenRiver", "iceBridge", "ridgeSwitchback"]);
   if (theme.id === "marsh") return pickStageLayout(stageId, ["marshBridge", "marshIslands", "splitFlank"]);
-  if (theme.id === "canyon") return pickStageLayout(stageId, ["canyonFork", "ridgeSwitchback", "splitFlank"]);
+  if (theme.id === "canyon") {
+    if (stageId === 2) return "canyonAmbush";
+    return pickStageLayout(stageId, ["canyonFork", "ridgeSwitchback", "splitFlank"]);
+  }
 
   return STAGE_LAYOUT_KINDS[(stageId - 1) % STAGE_LAYOUT_KINDS.length];
 }
@@ -2075,6 +2079,18 @@ function getStageSignatureTile({ stage, theme, tile, x, y, width, height, seed }
       if (y === centerY && x >= 2 && x <= width - 3) return "road";
       if (!lowerField && (x <= 2 || x >= width - 3) && seed % 4 !== 0) return getThemeBlockTile(theme, seed);
       if (seed % 13 === 0) return "hill";
+      break;
+    }
+    case "canyonAmbush": {
+      const ravineX = Math.floor(width * 0.44 + Math.sin(y * 0.85) * 1.4);
+      const upperFork = upperField && y >= 2 && (Math.abs(x - (ravineX - 3)) <= 1 || Math.abs(x - (ravineX + 3)) <= 1);
+      const centerPass = Math.abs(x - ravineX) <= 1 && y >= 1 && y <= height - 3;
+      const ambushShelf = (y === centerY - 2 || y === centerY + 1) && x >= 2 && x <= width - 3;
+      if (centerPass || upperFork || ambushShelf) return "road";
+      if (x <= 2 || x >= width - 3) return seed % 5 === 0 ? "hill" : "wall";
+      if (!lowerField && seed % 6 === 0) return "trap";
+      if (!lowerField && seed % 4 === 0) return "hill";
+      if (seed % 13 === 0) return "forest";
       break;
     }
     case "ridgeSwitchback": {

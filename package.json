@@ -1,7 +1,7 @@
 {
   "name": "cheonsu",
   "private": true,
-  "version": "1.99.110",
+  "version": "1.99.111",
   "type": "module",
   "scripts": {
     "dev": "vite",

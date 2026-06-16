@@ -248,6 +248,37 @@ function Draw-Particles {
   $brush.Dispose()
 }
 
+function Draw-StageTwoCanyonOverlay {
+  param(
+    [System.Drawing.Graphics]$Graphics,
+    [System.Random]$Rng,
+    [int]$Width,
+    [int]$Height
+  )
+
+  Fill-Polygon $Graphics @(@(-0.06, -0.04), @(0.24, -0.02), @(0.18, 0.32), @(0.27, 0.62), @(0.20, 1.05), @(-0.08, 1.06)) $Width $Height (New-Color 46 74 47 28)
+  Fill-Polygon $Graphics @(@(0.78, -0.05), @(1.08, -0.03), @(1.08, 1.06), @(0.82, 1.04), @(0.74, 0.66), @(0.84, 0.28)) $Width $Height (New-Color 44 68 44 28)
+
+  Fill-Radial $Graphics ($Width * 0.28) ($Height * 0.22) ($Width * 0.26) (New-Color 52 220 132 52)
+  Fill-Radial $Graphics ($Width * 0.74) ($Height * 0.68) ($Width * 0.22) (New-Color 46 218 128 50)
+  Fill-Radial $Graphics ($Width * 0.52) ($Height * 0.42) ($Width * 0.18) (New-Color 24 255 218 138)
+
+  $rockBrush = [System.Drawing.SolidBrush]::new((New-Color 44 56 45 34))
+  $edgeBrush = [System.Drawing.SolidBrush]::new((New-Color 30 130 94 55))
+  for ($i = 0; $i -lt 46; $i++) {
+    $side = if ($i % 2 -eq 0) { $Rng.NextDouble() * 0.22 } else { 0.78 + $Rng.NextDouble() * 0.18 }
+    $y = $Rng.NextDouble()
+    $rw = (0.022 + $Rng.NextDouble() * 0.05) * $Width
+    $rh = (0.012 + $Rng.NextDouble() * 0.034) * $Height
+    $Graphics.FillEllipse($rockBrush, [float]($side * $Width), [float]($y * $Height), [float]$rw, [float]$rh)
+    $Graphics.FillEllipse($edgeBrush, [float](($side + 0.012) * $Width), [float](($y + 0.006) * $Height), [float]($rw * 0.45), [float]($rh * 0.38))
+  }
+  $rockBrush.Dispose()
+  $edgeBrush.Dispose()
+
+  Draw-Particles $Graphics $Rng $Width $Height (New-Color 34 236 172 82) 60 0.02 0.92
+}
+
 function Draw-PathNetwork {
   param(
     [System.Drawing.Graphics]$Graphics,
@@ -365,6 +396,10 @@ function Draw-StageVariant {
 
   $cropW = [int]($w * (0.72 + (($StageId % 5) * 0.035)))
   $cropH = [int]($h * (0.72 + (($StageId % 4) * 0.045)))
+  if ($StageId -eq 2) {
+    $cropW = [int]($w * 0.58)
+    $cropH = [int]($h * 0.58)
+  }
   $maxX = [Math]::Max(0, $w - $cropW)
   $maxY = [Math]::Max(0, $h - $cropH)
   $focus = ($StageId - 1) % 7
@@ -386,10 +421,17 @@ function Draw-StageVariant {
     5 { [int]($rng.NextDouble() * $maxY) }
     default { [int]($maxY * 0.5) }
   }
+  if ($StageId -eq 2) {
+    $srcX = [int]($maxX * 0.08)
+    $srcY = $maxY
+  }
   $srcRect = [System.Drawing.Rectangle]::new($srcX, $srcY, $cropW, $cropH)
   $dstRect = [System.Drawing.Rectangle]::new(0, 0, $w, $h)
 
-  if ($StageId % 2 -eq 0) {
+  $shouldFlip = $StageId % 2 -eq 0
+  if ($StageId -eq 2) { $shouldFlip = $false }
+
+  if ($shouldFlip) {
     $g.TranslateTransform($w, 0)
     $g.ScaleTransform(-1, 1)
     $g.DrawImage($Source, $dstRect, $srcRect, [System.Drawing.GraphicsUnit]::Pixel)
@@ -403,6 +445,9 @@ function Draw-StageVariant {
   $tintBrush.Dispose()
 
   Draw-ThemeOverlay $g $rng $StageId $theme $w $h
+  if ($StageId -eq 2) {
+    Draw-StageTwoCanyonOverlay $g $rng $w $h
+  }
 
   Fill-Radial $g ($w * (0.20 + ($rng.NextDouble() * 0.58))) ($h * (0.08 + ($rng.NextDouble() * 0.36))) ($w * (0.22 + $rng.NextDouble() * 0.22)) $theme.Glow
 
