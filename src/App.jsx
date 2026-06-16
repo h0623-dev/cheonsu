@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.119";
+const SAVE_VERSION = "1.99.120";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -2482,6 +2482,321 @@ function getThemedLargeEnemyTemplates(stage) {
   return (byTheme[theme.id] || byTheme.frontier).map(withBonus);
 }
 
+const ENEMY_ARCHETYPE_TEMPLATES = {
+  raider: { spriteKey: "raider", icon: "🪓", aiType: "aggressive", hp: 21, atk: 8, def: 4, move: 2, range: 1, skill: "광폭참", skillBonus: 3, skillRange: 1 },
+  ranger: { spriteKey: "ranger", icon: "🏹", aiType: "archer", hp: 18, atk: 8, def: 3, move: 2, range: 3, skill: "매복 사격", skillBonus: 2, skillRange: 3 },
+  sniper: { spriteKey: "sniper", icon: "🏹", aiType: "archer", hp: 17, atk: 9, def: 3, move: 2, range: 3, skill: "정밀사격", skillBonus: 3, skillRange: 3 },
+  marauder: { spriteKey: "marauder", icon: "🔱", aiType: "aggressive", hp: 22, atk: 9, def: 5, move: 2, range: 2, skill: "긴 창 찌르기", skillBonus: 3, skillRange: 2 },
+  assassin_elite: { spriteKey: "assassin_elite", icon: "🗡️", aiType: "assassin", hp: 18, atk: 10, def: 3, move: 4, range: 1, skill: "그림자 베기", skillBonus: 4, skillRange: 1 },
+  sentinel: { spriteKey: "sentinel", icon: "🛡️", aiType: "aggressive", hp: 26, atk: 7, def: 9, move: 1, range: 1, skill: "철벽 강타", skillBonus: 2, skillRange: 1 },
+  blackguard: { spriteKey: "blackguard", icon: "⚔️", aiType: "aggressive", hp: 27, atk: 10, def: 8, move: 2, range: 1, skill: "수호 돌격", skillBonus: 3, skillRange: 1 },
+  warlord: { spriteKey: "warlord", icon: "👑", aiType: "aggressive", hp: 30, atk: 10, def: 9, move: 2, range: 1, skill: "지휘 강타", skillBonus: 4, skillRange: 1 },
+  pyromancer: { spriteKey: "pyromancer", icon: "🔥", aiType: "archer", hp: 20, atk: 11, def: 3, move: 2, range: 2, skill: "화염 폭발", skillBonus: 4, skillRange: 2 },
+  frost_mage: { spriteKey: "frost_mage", icon: "❄️", aiType: "archer", hp: 21, atk: 10, def: 4, move: 2, range: 2, skill: "빙결 저주", skillBonus: 4, skillRange: 2 },
+  cultist: { spriteKey: "cultist", icon: "🔮", aiType: "archer", hp: 22, atk: 10, def: 5, move: 2, range: 2, skill: "암흑 기도", skillBonus: 3, skillRange: 2 },
+  void_knight: { spriteKey: "void_knight", icon: "👹", aiType: "aggressive", hp: 30, atk: 11, def: 9, move: 2, range: 1, skill: "공허참", skillBonus: 4, skillRange: 1 },
+};
+
+function enemySquadUnit(kind, name, overrides = {}) {
+  const base = ENEMY_ARCHETYPE_TEMPLATES[kind] || ENEMY_ARCHETYPE_TEMPLATES.raider;
+  return {
+    ...base,
+    name,
+    ...overrides,
+  };
+}
+
+const STAGE_ENEMY_SQUADS = {
+  1: [
+    enemySquadUnit("sentinel", "국경 방패병", { hp: 22, def: 7 }),
+    enemySquadUnit("ranger", "초소 정찰궁병", { name: "초소 정찰궁병" }),
+    enemySquadUnit("raider", "밀수 약탈병"),
+    enemySquadUnit("sniper", "감시탑 사수"),
+  ],
+  2: [
+    enemySquadUnit("assassin_elite", "절벽 암살자"),
+    enemySquadUnit("marauder", "협곡 투창병"),
+    enemySquadUnit("sniper", "고지 저격수"),
+    enemySquadUnit("raider", "바위길 습격병", { move: 3 }),
+  ],
+  3: [
+    enemySquadUnit("sentinel", "성문 방패병"),
+    enemySquadUnit("blackguard", "성문 흑기사"),
+    enemySquadUnit("sniper", "성벽 쇠뇌병"),
+    enemySquadUnit("warlord", "관문 부장"),
+  ],
+  4: [
+    enemySquadUnit("pyromancer", "흑염 술사"),
+    enemySquadUnit("raider", "잿불 광전사"),
+    enemySquadUnit("cultist", "재의 사제"),
+    enemySquadUnit("blackguard", "그을린 검병"),
+  ],
+  5: [
+    enemySquadUnit("sentinel", "요새 방패병", { def: 10 }),
+    enemySquadUnit("blackguard", "요새 흑기사"),
+    enemySquadUnit("marauder", "성벽 창병"),
+    enemySquadUnit("sniper", "무너진 성벽 사수"),
+  ],
+  6: [
+    enemySquadUnit("frost_mage", "빙결 마도병"),
+    enemySquadUnit("sentinel", "설원 수비병"),
+    enemySquadUnit("ranger", "설원 추적자"),
+    enemySquadUnit("blackguard", "서리 검병"),
+  ],
+  7: [
+    enemySquadUnit("assassin_elite", "흑야 추적자"),
+    enemySquadUnit("ranger", "그림자 사수"),
+    enemySquadUnit("cultist", "숲의 주술사"),
+    enemySquadUnit("void_knight", "공허 척후병"),
+  ],
+  8: [
+    enemySquadUnit("ranger", "여울 사수"),
+    enemySquadUnit("marauder", "진흙 창병"),
+    enemySquadUnit("cultist", "혈의 사제"),
+    enemySquadUnit("raider", "붉은 여울 약탈병"),
+  ],
+  9: [
+    enemySquadUnit("raider", "폐허 약탈병"),
+    enemySquadUnit("sniper", "시장 지붕 저격수"),
+    enemySquadUnit("assassin_elite", "골목 암살자"),
+    enemySquadUnit("marauder", "잔해 창병"),
+  ],
+  10: [
+    enemySquadUnit("cultist", "탑의 의식사제"),
+    enemySquadUnit("pyromancer", "흑염 연구자"),
+    enemySquadUnit("sentinel", "탑 경비병"),
+    enemySquadUnit("void_knight", "공허 기사"),
+  ],
+  11: [
+    enemySquadUnit("marauder", "항구 작살병"),
+    enemySquadUnit("ranger", "부두 사수"),
+    enemySquadUnit("raider", "해안 습격병"),
+    enemySquadUnit("cultist", "해무 사제"),
+  ],
+  12: [
+    enemySquadUnit("pyromancer", "왕좌 화염술사"),
+    enemySquadUnit("blackguard", "재의 흑기사"),
+    enemySquadUnit("cultist", "왕좌 사제"),
+    enemySquadUnit("warlord", "재의 집행관"),
+  ],
+  13: [
+    enemySquadUnit("assassin_elite", "골목 살수"),
+    enemySquadUnit("sniper", "지붕 저격수"),
+    enemySquadUnit("raider", "암시장 칼잡이"),
+    enemySquadUnit("cultist", "은밀한 주술사"),
+  ],
+  14: [
+    enemySquadUnit("cultist", "저주 사제"),
+    enemySquadUnit("sentinel", "사원 수호병"),
+    enemySquadUnit("frost_mage", "봉인 마도병"),
+    enemySquadUnit("void_knight", "저주받은 기사"),
+  ],
+  15: [
+    enemySquadUnit("marauder", "달그늘 투창병"),
+    enemySquadUnit("assassin_elite", "협곡 암살자"),
+    enemySquadUnit("sniper", "달 없는 저격수"),
+    enemySquadUnit("blackguard", "암벽 검병"),
+  ],
+  16: [
+    enemySquadUnit("sentinel", "사슬 간수"),
+    enemySquadUnit("blackguard", "감옥 흑기사"),
+    enemySquadUnit("marauder", "쇠사슬 창병"),
+    enemySquadUnit("cultist", "고문 사제"),
+  ],
+  17: [
+    enemySquadUnit("blackguard", "성벽 흑기사"),
+    enemySquadUnit("sniper", "암벽 쇠뇌병"),
+    enemySquadUnit("sentinel", "그림자 방패병"),
+    enemySquadUnit("void_knight", "공허 성벽병"),
+  ],
+  18: [
+    enemySquadUnit("assassin_elite", "밤의 집행자"),
+    enemySquadUnit("warlord", "처형 부장"),
+    enemySquadUnit("void_knight", "공허 처형병"),
+    enemySquadUnit("sniper", "처형장 저격수"),
+  ],
+  19: [
+    enemySquadUnit("cultist", "묘지 주술사"),
+    enemySquadUnit("void_knight", "고분 기사"),
+    enemySquadUnit("frost_mage", "창백한 마도병"),
+    enemySquadUnit("sentinel", "묘역 수호병"),
+  ],
+  20: [
+    enemySquadUnit("blackguard", "왕도 잔당기사"),
+    enemySquadUnit("warlord", "몰락 장군"),
+    enemySquadUnit("pyromancer", "화재 마도병"),
+    enemySquadUnit("sniper", "폐성 저격수"),
+  ],
+  21: [
+    enemySquadUnit("cultist", "도서관 사서사제"),
+    enemySquadUnit("frost_mage", "봉인 기록관"),
+    enemySquadUnit("void_knight", "심연 기사"),
+    enemySquadUnit("pyromancer", "금서 화염술사"),
+  ],
+  22: [
+    enemySquadUnit("cultist", "검은 기도사"),
+    enemySquadUnit("sentinel", "기도실 수문병"),
+    enemySquadUnit("assassin_elite", "침묵 암살자"),
+    enemySquadUnit("void_knight", "기도실 공허병"),
+  ],
+  23: [
+    enemySquadUnit("marauder", "황혼 창병"),
+    enemySquadUnit("sniper", "다리 저격수"),
+    enemySquadUnit("ranger", "강변 사수"),
+    enemySquadUnit("blackguard", "교량 흑기사"),
+  ],
+  24: [
+    enemySquadUnit("void_knight", "흑야 심장병"),
+    enemySquadUnit("cultist", "심장 사제"),
+    enemySquadUnit("pyromancer", "어둠 화염술사"),
+    enemySquadUnit("warlord", "흑야 집행관"),
+  ],
+  25: [
+    enemySquadUnit("sentinel", "계단 수호병"),
+    enemySquadUnit("blackguard", "상층 흑기사"),
+    enemySquadUnit("sniper", "계단 저격수"),
+    enemySquadUnit("void_knight", "공허 계단병"),
+  ],
+  26: [
+    enemySquadUnit("pyromancer", "붉은 달 술사"),
+    enemySquadUnit("cultist", "성소 사제"),
+    enemySquadUnit("void_knight", "달그림자 기사"),
+    enemySquadUnit("warlord", "성소 집행관"),
+  ],
+  27: [
+    enemySquadUnit("warlord", "천공 관문장"),
+    enemySquadUnit("sniper", "관문 저격수"),
+    enemySquadUnit("marauder", "천공 창병"),
+    enemySquadUnit("frost_mage", "고공 빙결사"),
+  ],
+  28: [
+    enemySquadUnit("sentinel", "잊힌 수호병"),
+    enemySquadUnit("warlord", "고대 수문장"),
+    enemySquadUnit("frost_mage", "봉인 빙술사"),
+    enemySquadUnit("blackguard", "수호 흑기사"),
+  ],
+  29: [
+    enemySquadUnit("raider", "파멸 약탈병"),
+    enemySquadUnit("void_knight", "파멸 기사"),
+    enemySquadUnit("pyromancer", "종말 화염술사"),
+    enemySquadUnit("assassin_elite", "평원 암살자"),
+  ],
+  30: [
+    enemySquadUnit("void_knight", "심연 친위대"),
+    enemySquadUnit("warlord", "왕좌 집행관"),
+    enemySquadUnit("cultist", "종말 사제"),
+    enemySquadUnit("pyromancer", "종말 마도사"),
+    enemySquadUnit("frost_mage", "최후의 봉인술사"),
+  ],
+};
+
+function getStageEnemySquadTemplates(stage) {
+  const stageId = Math.max(1, Math.floor(stage?.id || 1));
+  const stageSquad = STAGE_ENEMY_SQUADS[stageId] || [];
+  const themedSquad = getThemedLargeEnemyTemplates(stage);
+  const seen = new Set();
+
+  return [...stageSquad, ...themedSquad].filter((template) => {
+    const key = `${template.spriteKey}:${template.name}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function getStageBossSpriteKey(stage, boss) {
+  if (boss?.spriteKey && ENEMY_VARIANT_KEYS.has(boss.spriteKey)) return boss.spriteKey;
+
+  const stageId = Math.max(1, Math.floor(stage?.id || 1));
+  const byStage = {
+    1: "sentinel",
+    2: "raider",
+    3: "void_knight",
+    4: "pyromancer",
+    5: "warlord",
+    6: "frost_mage",
+    7: "void_knight",
+    8: "cultist",
+    9: "raider",
+    10: "cultist",
+    11: "marauder",
+    12: "warlord",
+    13: "assassin_elite",
+    14: "cultist",
+    15: "void_knight",
+    16: "warlord",
+    17: "blackguard",
+    18: "warlord",
+    19: "void_knight",
+    20: "warlord",
+    21: "cultist",
+    22: "void_knight",
+    23: "blackguard",
+    24: "void_knight",
+    25: "warlord",
+    26: "pyromancer",
+    27: "warlord",
+    28: "sentinel",
+    29: "void_knight",
+    30: "void_knight",
+  };
+
+  return byStage[stageId] || "warlord";
+}
+
+function applyStageEnemyIdentity(unit, stage, index = 0) {
+  if (!unit || unit.type === "ally") return unit;
+
+  const stageId = Math.max(1, Math.floor(stage?.id || 1));
+  const power = Math.max(0, stageId - 1);
+
+  if (unit.type === "boss") {
+    return {
+      ...unit,
+      aiType: "boss",
+      spriteKey: getStageBossSpriteKey(stage, unit),
+      stageEnemyRole: "boss",
+    };
+  }
+
+  const templates = getStageEnemySquadTemplates(stage);
+  const template = templates[index % templates.length] || ENEMY_ARCHETYPE_TEMPLATES.raider;
+  const hp = Math.max(unit.maxHp || unit.hp || 1, template.hp + Math.floor(power * 0.85));
+  const atk = Math.max(unit.atk || 1, template.atk + Math.floor(power / 4));
+  const def = Math.max(unit.def || 0, template.def + Math.floor(power / 6));
+
+  return {
+    ...unit,
+    icon: template.icon,
+    name: template.name,
+    spriteKey: template.spriteKey,
+    aiType: template.aiType,
+    hp,
+    maxHp: hp,
+    atk,
+    def,
+    move: template.move,
+    range: template.range,
+    skill: template.skill,
+    skillType: "attack",
+    skillBonus: template.skillBonus + Math.floor(power / 8),
+    skillRange: template.skillRange,
+    stageEnemyRole: template.spriteKey,
+  };
+}
+
+function applyStageEnemyIdentities(units, stage) {
+  let enemyIndex = 0;
+
+  return (units || []).map((unit) => {
+    if (!unit || unit.type === "ally") return unit;
+    if (unit.type === "boss") return applyStageEnemyIdentity(unit, stage, enemyIndex);
+    const nextUnit = applyStageEnemyIdentity(unit, stage, enemyIndex);
+    enemyIndex += 1;
+    return nextUnit;
+  });
+}
+
 
 function inActiveMap(x, y, activeMap) {
   return y >= 0 && y < activeMap.length && x >= 0 && x < activeMap[0].length;
@@ -2606,7 +2921,8 @@ function createActOneRouteBattleStage(stage, deployCount = MAX_DEPLOY_COUNT) {
     return { ...normalizedUnit, x: spawn.x, y: spawn.y };
   });
 
-  const currentEnemies = positionedUnits.filter((unit) => unit.type !== "ally").length;
+  const stageThemedUnits = applyStageEnemyIdentities(positionedUnits, stage);
+  const currentEnemies = stageThemedUnits.filter((unit) => unit.type !== "ally").length;
   const targetEnemies = Math.max(currentEnemies, Math.min(config.maxEnemies, deployCount + Math.ceil((stage.id || 1) / 2)));
   const extraEnemies = [];
 
@@ -2630,7 +2946,7 @@ function createActOneRouteBattleStage(stage, deployCount = MAX_DEPLOY_COUNT) {
     title: config.battleTitle || stage.title,
     objective: config.battleObjective || stage.objective,
     map,
-    units: [...positionedUnits, ...extraEnemies],
+    units: [...stageThemedUnits, ...extraEnemies],
     largeBattle: true,
     battlefieldTheme: config.themeLabel,
     battlefieldThemeId: config.themeId,
@@ -2687,7 +3003,8 @@ function createFinalFrontierBattleStage(stage, deployCount = MAX_DEPLOY_COUNT) {
     return { ...normalizedUnit, x: spawn.x, y: spawn.y };
   });
 
-  const currentEnemies = positionedUnits.filter((unit) => unit.type !== "ally").length;
+  const stageThemedUnits = applyStageEnemyIdentities(positionedUnits, stage);
+  const currentEnemies = stageThemedUnits.filter((unit) => unit.type !== "ally").length;
   const targetEnemies = Math.max(currentEnemies, Math.min(7, deployCount + 2));
   const extraEnemies = [];
 
@@ -2708,7 +3025,7 @@ function createFinalFrontierBattleStage(stage, deployCount = MAX_DEPLOY_COUNT) {
   return {
     ...stage,
     map,
-    units: [...positionedUnits, ...extraEnemies],
+    units: [...stageThemedUnits, ...extraEnemies],
     largeBattle: true,
     battlefieldTheme: getStageBattlefieldTheme(stage).label,
     battlefieldThemeId: getStageBattlefieldTheme(stage).id,
@@ -2984,107 +3301,7 @@ function scaleEnemyPosition(unit, fromMap, toMap) {
 function createLargeExtraEnemy(stage, index, x, y) {
   const stageId = stage?.id || 1;
   const power = Math.max(0, stageId - 1);
-  const baseTemplates = [
-    {
-      spriteKey: "raider",
-      icon: "🪓",
-      name: "전열 약탈병",
-      aiType: "aggressive",
-      hp: 20,
-      atk: 8,
-      def: 4,
-      move: 2,
-      range: 1,
-      skill: "광폭참",
-      skillBonus: 3,
-      skillRange: 1,
-    },
-    {
-      spriteKey: "sniper",
-      icon: "🏹",
-      name: "후열 궁병",
-      aiType: "archer",
-      hp: 18,
-      atk: 8,
-      def: 3,
-      move: 2,
-      range: 3,
-      skill: "정밀사격",
-      skillBonus: 2,
-      skillRange: 3,
-    },
-    {
-      spriteKey: "marauder",
-      icon: "🔱",
-      name: "전열 창병",
-      aiType: "aggressive",
-      hp: 22,
-      atk: 8,
-      def: 5,
-      move: 2,
-      range: 2,
-      skill: "긴 창 찌르기",
-      skillBonus: 2,
-      skillRange: 2,
-    },
-    {
-      spriteKey: "pyromancer",
-      icon: "🔥",
-      name: "흑염 마도사",
-      aiType: "archer",
-      hp: 17,
-      atk: 10,
-      def: 3,
-      move: 2,
-      range: 2,
-      skill: "다크 플레임",
-      skillBonus: 4,
-      skillRange: 2,
-    },
-    {
-      spriteKey: "sentinel",
-      icon: "🛡️",
-      name: "방패 수비병",
-      aiType: "aggressive",
-      hp: 26,
-      atk: 7,
-      def: 9,
-      move: 1,
-      range: 1,
-      skill: "철벽 강타",
-      skillBonus: 2,
-      skillRange: 1,
-    },
-    {
-      spriteKey: "assassin_elite",
-      icon: "🗡️",
-      name: "그림자 암살자",
-      aiType: "assassin",
-      hp: 18,
-      atk: 10,
-      def: 3,
-      move: 4,
-      range: 1,
-      skill: "그림자 베기",
-      skillBonus: 4,
-      skillRange: 1,
-    },
-    {
-      spriteKey: "cultist",
-      icon: "🔮",
-      name: "흑야 사제",
-      aiType: "archer",
-      hp: 20,
-      atk: 9,
-      def: 5,
-      move: 2,
-      range: 2,
-      skill: "암흑 기도",
-      skillBonus: 3,
-      skillRange: 2,
-    },
-  ];
-  const templates = [...getThemedLargeEnemyTemplates(stage), ...baseTemplates];
+  const templates = getStageEnemySquadTemplates(stage);
   const template = templates[(stageId + index) % templates.length];
   const hp = template.hp + Math.floor(power * 1.05);
   const atk = template.atk + Math.floor(power / 4);
@@ -3166,7 +3383,8 @@ function expandStageForLargeBattle(stage, deployCount = MAX_DEPLOY_COUNT) {
     };
   });
 
-  const currentEnemies = scaledUnits.filter((unit) => unit.type !== "ally").length;
+  const stageThemedUnits = applyStageEnemyIdentities(scaledUnits, stage);
+  const currentEnemies = stageThemedUnits.filter((unit) => unit.type !== "ally").length;
   const bossStageBonus = stage.id % 6 === 0 ? 3 : 0;
   const targetEnemies = Math.max(
     currentEnemies,
@@ -3187,7 +3405,7 @@ function expandStageForLargeBattle(stage, deployCount = MAX_DEPLOY_COUNT) {
   return {
     ...stage,
     map: largeMap,
-    units: [...scaledUnits, ...extraEnemies],
+    units: [...stageThemedUnits, ...extraEnemies],
     largeBattle: true,
     battlefieldTheme: getStageBattlefieldTheme(stage).label,
     battlefieldThemeId: getStageBattlefieldTheme(stage).id,
