@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.118";
+const SAVE_VERSION = "1.99.119";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -3418,14 +3418,14 @@ function getUnitSprite(unit) {
     lina: "/sprites/units/lina.png",
     aria: "/sprites/units/aria.png",
     leon: "/sprites/units/leon.png",
-    sera: "/sprites/units/sera.png",
+    sera: "/portraits/sera.png",
     noah: "/sprites/units/aria.png",
     yuna: "/sprites/units/aria.png",
     rakan: "/sprites/units/bram.png",
-    miho: "/sprites/units/sera.png",
+    miho: "/portraits/sera.png",
     teo: "/sprites/units/kyle.png",
     irene: "/sprites/units/lina.png",
-    kaz: "/sprites/units/sera.png",
+    kaz: "/portraits/sera.png",
     ella: "/sprites/units/aria.png",
     jin: "/sprites/units/kyle.png",
     luka: "/sprites/units/leon.png",

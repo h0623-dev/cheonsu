@@ -36220,6 +36220,102 @@ button:focus-visible {
   right: 23% !important;
 }
 
+/* v1.99.119 release-grade battlefield unit presentation. */
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map {
+  --field-unit-scale: 0.98;
+  --field-boss-scale: 1.04;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.ally-unit,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.enemy-unit {
+  inset: -38% -30% 3% !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.ally-unit img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.enemy-unit img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .map-moving-unit.ally-moving img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .map-moving-unit.enemy-moving img {
+  width: min(190%, 92px) !important;
+  height: min(246%, 116px) !important;
+  min-width: 54px !important;
+  min-height: 68px !important;
+  max-width: 92px !important;
+  max-height: 116px !important;
+  object-fit: contain !important;
+  object-position: center bottom !important;
+  image-rendering: auto !important;
+  backface-visibility: hidden;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.ally-unit img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .map-moving-unit.ally-moving img {
+  filter:
+    saturate(1.14)
+    contrast(1.16)
+    brightness(1.08)
+    drop-shadow(1px 0 0 rgba(0, 0, 0, 0.92))
+    drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.92))
+    drop-shadow(0 1px 0 rgba(0, 0, 0, 0.94))
+    drop-shadow(0 6px 5px rgba(0, 0, 0, 0.66))
+    drop-shadow(0 0 7px rgba(83, 222, 255, 0.20)) !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.enemy-unit img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .map-moving-unit.enemy-moving img {
+  filter:
+    saturate(1.10)
+    contrast(1.17)
+    brightness(1.05)
+    drop-shadow(1px 0 0 rgba(0, 0, 0, 0.94))
+    drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.94))
+    drop-shadow(0 1px 0 rgba(0, 0, 0, 0.95))
+    drop-shadow(0 6px 5px rgba(0, 0, 0, 0.70))
+    drop-shadow(0 0 7px rgba(255, 78, 62, 0.18)) !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.boss-unit {
+  inset: -42% -34% 3% !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.boss-unit img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .map-moving-unit.boss-moving img {
+  width: min(204%, 100px) !important;
+  height: min(264%, 126px) !important;
+  min-width: 58px !important;
+  min-height: 74px !important;
+  max-width: 100px !important;
+  max-height: 126px !important;
+  filter:
+    saturate(1.13)
+    contrast(1.18)
+    brightness(1.04)
+    drop-shadow(1px 0 0 rgba(0, 0, 0, 0.96))
+    drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.96))
+    drop-shadow(0 1px 0 rgba(0, 0, 0, 0.96))
+    drop-shadow(0 7px 6px rgba(0, 0, 0, 0.74))
+    drop-shadow(0 0 8px rgba(255, 92, 58, 0.22)) !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit::before {
+  left: 22% !important;
+  right: 22% !important;
+  bottom: calc(var(--unit-ground-y, 4px) + 1px) !important;
+  height: 9% !important;
+  opacity: calc(var(--unit-shadow-alpha, 0.52) * 0.88) !important;
+  filter: blur(2px) !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .acted-unit img {
+  opacity: 0.72 !important;
+  filter:
+    saturate(0.78)
+    contrast(1.10)
+    brightness(0.84)
+    drop-shadow(1px 0 0 rgba(0, 0, 0, 0.92))
+    drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.92))
+    drop-shadow(0 4px 4px rgba(0, 0, 0, 0.62)) !important;
+}
+
 /* v1.99.97 compact pre-battle preview */
 .vs-preview-modal {
   z-index: 230 !important;
