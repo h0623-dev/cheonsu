@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.120";
+const SAVE_VERSION = "1.99.121";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -6794,6 +6794,30 @@ function applyRecruitProgress(party, clearedStages) {
   return applyEquipmentToParty(nextParty);
 }
 
+function getRecruitProgressStagesForStage(clearedStages, stageId) {
+  const progress = new Set(clearedStages || []);
+
+  if (PLAYTEST_UNLOCK_ALL_STAGES) {
+    Object.keys(RECRUIT_BY_STAGE).forEach((recruitStageId) => {
+      const recruitStage = Number(recruitStageId);
+
+      if (recruitStage <= stageId) {
+        progress.add(recruitStage);
+      }
+    });
+  }
+
+  return [...progress];
+}
+
+function getPartyForStageAccess(party, stage, clearedStages) {
+  const stageId = Math.max(1, Math.floor(stage?.id || 1));
+  const baseParty = party?.length ? party : getInitialParty();
+  const recruitProgress = getRecruitProgressStagesForStage(clearedStages, stageId);
+
+  return applyRecruitProgress(baseParty, recruitProgress);
+}
+
 
 function getUnitRole(unit) {
   if (!unit) return "미정";
@@ -10072,17 +10096,23 @@ export default function App() {
     if (!playableStageIds.includes(stage.id)) return;
     playSfx("start");
     setStoryScene(null);
+    const stageAccessParty = applyGearEnhanceToParty(
+      getPartyForStageAccess(party, stage, clearedStages),
+      gearEnhance
+    );
+    const battleRoster = stageAccessParty.length ? stageAccessParty : party;
     const chosenParty = deployedIds.length
       ? deployedIds
-          .map((id) => party.find((unit) => unit.id === id))
+          .map((id) => battleRoster.find((unit) => unit.id === id))
           .filter(Boolean)
-      : party;
-    const battleParty = chosenParty.length ? chosenParty : party.slice(0, MAX_DEPLOY_COUNT);
+      : battleRoster;
+    const battleParty = chosenParty.length ? chosenParty : battleRoster.slice(0, MAX_DEPLOY_COUNT);
     const battleStage = expandStageForLargeBattle(stage, battleParty.length);
+    setParty(stageAccessParty);
     setSelectedStage(battleStage);
     const stagedUnits = mergePartyIntoStage(
       battleStage,
-      applyGearEnhanceToParty(battleParty, gearEnhance)
+      battleParty
     );
     const battleUnits = applyDifficultyToUnits(stagedUnits, settings.difficulty, settings.balancePreset);
     const openingAlly = battleUnits.find((unit) => unit.id === "hero" && unit.type === "ally") ||
@@ -11039,21 +11069,26 @@ export default function App() {
   const startStage = (stage) => {
     if (!playableStageIds.includes(stage.id)) return;
 
-    const availableIds = party.map((unit) => unit.id);
+    const stageAccessParty = applyGearEnhanceToParty(
+      getPartyForStageAccess(party, stage, clearedStages),
+      gearEnhance
+    );
+    const availableIds = stageAccessParty.map((unit) => unit.id);
     const current = deployedIds.filter((id) => availableIds.includes(id));
-    const recommended = getRecommendedDeployment(party, stage, "balanced", MAX_DEPLOY_COUNT);
+    const recommended = getRecommendedDeployment(stageAccessParty, stage, "balanced", MAX_DEPLOY_COUNT);
     const stageOneDefaultDeploy = stage.id === 1
       ? STAGE_ONE_DEFAULT_DEPLOY_IDS.filter((id) => availableIds.includes(id))
       : [];
     const initialDeploy = stageOneDefaultDeploy.length >= 4
       ? [...new Set([...stageOneDefaultDeploy, ...current])].slice(0, MAX_DEPLOY_COUNT)
       : current.length
-      ? current.slice(0, MAX_DEPLOY_COUNT)
+      ? [...new Set([...current, ...recommended])].slice(0, MAX_DEPLOY_COUNT)
       : recommended.length
       ? recommended
       : availableIds.slice(0, MAX_DEPLOY_COUNT);
 
     playSfx("confirm");
+    setParty(stageAccessParty);
     setDeploymentStage(stage);
     setSelectedStage(stage);
     setDeployedIds(initialDeploy);
