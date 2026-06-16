@@ -33977,12 +33977,12 @@ button:focus-visible {
 .battle-final-concept.battle-board-only .selected-unit-status-hud {
   left: 12px !important;
   right: auto !important;
-  bottom: calc(98px + max(8px, env(safe-area-inset-bottom))) !important;
-  width: min(320px, calc(100vw - 24px)) !important;
-  min-height: 92px;
-  grid-template-columns: 78px minmax(0, 1fr) !important;
-  gap: 11px !important;
-  padding: 9px 10px !important;
+  bottom: calc(88px + max(8px, env(safe-area-inset-bottom))) !important;
+  width: min(268px, calc(100vw - 24px)) !important;
+  min-height: 68px;
+  grid-template-columns: 56px minmax(0, 1fr) !important;
+  gap: 8px !important;
+  padding: 7px 8px !important;
   border-radius: 3px !important;
   border-color: rgba(231, 185, 104, 0.64) !important;
   background:
@@ -33994,36 +33994,38 @@ button:focus-visible {
 }
 
 .battle-final-concept.battle-board-only.has-post-move-menu .selected-unit-status-hud {
-  bottom: calc(98px + max(8px, env(safe-area-inset-bottom))) !important;
+  bottom: calc(88px + max(8px, env(safe-area-inset-bottom))) !important;
 }
 
 .battle-final-concept.battle-board-only .selected-status-face {
-  width: 78px !important;
-  height: 78px !important;
+  width: 56px !important;
+  height: 56px !important;
   border-radius: 2px !important;
 }
 
 .battle-final-concept.battle-board-only .selected-status-head strong {
-  font-size: 21px !important;
+  font-size: 17px !important;
   color: #ffe19a !important;
 }
 
 .battle-final-concept.battle-board-only .selected-status-bars {
-  gap: 6px !important;
+  gap: 4px !important;
 }
 
 .battle-final-concept.battle-board-only .selected-meter {
-  grid-template-columns: 24px minmax(0, 1fr) 48px !important;
-  font-size: 11px !important;
+  grid-template-columns: 20px minmax(0, 1fr) 38px !important;
+  gap: 4px !important;
+  font-size: 9px !important;
 }
 
 .battle-final-concept.battle-board-only .selected-meter i {
-  height: 9px !important;
+  height: 7px !important;
 }
 
 .battle-final-concept.battle-board-only .selected-status-stats span {
   border-radius: 2px !important;
-  font-size: 10px !important;
+  padding: 2px 4px !important;
+  font-size: 9px !important;
 }
 
 .battle-final-concept.battle-board-only .cinematic-command-bar {
@@ -34142,18 +34144,19 @@ button:focus-visible {
   }
 
   .battle-final-concept.battle-board-only .selected-unit-status-hud {
-    grid-template-columns: 62px minmax(0, 1fr) !important;
-    bottom: calc(88px + max(8px, env(safe-area-inset-bottom))) !important;
-    min-height: 78px;
+    grid-template-columns: 50px minmax(0, 1fr) !important;
+    bottom: calc(84px + max(8px, env(safe-area-inset-bottom))) !important;
+    width: min(248px, calc(100vw - 22px)) !important;
+    min-height: 64px;
   }
 
   .battle-final-concept.battle-board-only .selected-status-face {
-    width: 62px !important;
-    height: 62px !important;
+    width: 50px !important;
+    height: 50px !important;
   }
 
   .battle-final-concept.battle-board-only .selected-status-head strong {
-    font-size: 18px !important;
+    font-size: 15px !important;
   }
 
   .battle-final-concept.battle-board-only .cinematic-command-bar {
