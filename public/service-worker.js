@@ -1,6 +1,10 @@
-const CACHE_VERSION = "cheonsu-v19972";
+const CACHE_VERSION = "cheonsu-v199106";
 const APP_SHELL_CACHE = `${CACHE_VERSION}-app-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
+const ILLUSTRATED_STAGE_MAPS = Array.from(
+  { length: 29 },
+  (_, index) => `/maps/concept/stage_${index + 2}_illustrated.svg`
+);
 
 const APP_SHELL_FILES = [
   "/",
@@ -21,6 +25,8 @@ const APP_SHELL_FILES = [
   "/maps/stage_4.jpg",
   "/maps/stage_5.jpg",
   "/maps/stage_6.jpg",
+  "/maps/concept/stage_1_frontier_final.png",
+  ...ILLUSTRATED_STAGE_MAPS,
   "/maps/classic/stage_1.png",
   "/maps/classic/stage_2.png",
   "/maps/classic/stage_3.png",

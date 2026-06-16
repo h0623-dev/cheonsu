@@ -1,12 +1,13 @@
 {
   "name": "cheonsu",
   "private": true,
-  "version": "1.99.105",
+  "version": "1.99.106",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
+    "maps:illustrated": "node scripts/generate-illustrated-stage-maps.mjs",
     "preview": "vite preview",
     "cap:copy": "npm run build && npx cap copy",
     "cap:sync": "npm run build && npx cap sync",
