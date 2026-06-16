@@ -33994,7 +33994,8 @@ button:focus-visible {
 }
 
 .battle-final-concept.battle-board-only .selected-status-main {
-  max-width: 206px !important;
+  width: 100% !important;
+  max-width: none !important;
 }
 
 .battle-final-concept.battle-board-only.has-post-move-menu .selected-unit-status-hud {
@@ -34154,7 +34155,7 @@ button:focus-visible {
   }
 
   .battle-final-concept.battle-board-only .selected-status-main {
-    max-width: 188px !important;
+    max-width: none !important;
   }
 
   .battle-final-concept.battle-board-only .selected-status-face {
