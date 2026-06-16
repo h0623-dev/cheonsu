@@ -38351,3 +38351,153 @@ button:focus-visible {
     height: 64vw;
   }
 }
+
+/* v1.99.122: clearer unit silhouettes for the expanded ally/enemy roster. */
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit[class*="unit-visual-"] img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .map-moving-unit[class*="unit-visual-"] img {
+  transform-origin: 50% 100% !important;
+  object-position: center bottom !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-hero img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-bram img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-lina img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-aria img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-leon img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-sera img {
+  filter:
+    saturate(1.16)
+    contrast(1.17)
+    brightness(1.08)
+    drop-shadow(1px 0 0 rgba(0, 0, 0, 0.92))
+    drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.92))
+    drop-shadow(0 6px 5px rgba(0, 0, 0, 0.66))
+    drop-shadow(0 0 7px rgba(83, 222, 255, 0.20)) !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-noah img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-teo img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-sentinel img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-blackguard img {
+  width: min(206%, 98px) !important;
+  height: min(258%, 124px) !important;
+  max-width: 98px !important;
+  max-height: 124px !important;
+  filter:
+    saturate(1.05)
+    contrast(1.20)
+    brightness(1.02)
+    drop-shadow(1px 0 0 rgba(0, 0, 0, 0.96))
+    drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.96))
+    drop-shadow(0 7px 6px rgba(0, 0, 0, 0.72)) !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-yuna img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-irene img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-ella img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-pyromancer img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-frost_mage img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-cultist img {
+  width: min(184%, 88px) !important;
+  height: min(244%, 116px) !important;
+  max-width: 88px !important;
+  max-height: 116px !important;
+  filter:
+    saturate(1.25)
+    contrast(1.18)
+    brightness(1.10)
+    drop-shadow(1px 0 0 rgba(0, 0, 0, 0.94))
+    drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.94))
+    drop-shadow(0 6px 5px rgba(0, 0, 0, 0.68))
+    drop-shadow(0 0 8px rgba(151, 112, 255, 0.22)) !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-irene img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-frost_mage img {
+  filter:
+    saturate(1.15)
+    contrast(1.20)
+    brightness(1.13)
+    hue-rotate(182deg)
+    drop-shadow(1px 0 0 rgba(0, 0, 0, 0.94))
+    drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.94))
+    drop-shadow(0 6px 5px rgba(0, 0, 0, 0.68))
+    drop-shadow(0 0 9px rgba(117, 222, 255, 0.28)) !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-miho img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-kaz img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-assassin img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-assassin_elite img {
+  width: min(170%, 80px) !important;
+  height: min(232%, 110px) !important;
+  max-width: 80px !important;
+  max-height: 110px !important;
+  filter:
+    saturate(1.22)
+    contrast(1.22)
+    brightness(1.06)
+    drop-shadow(1px 0 0 rgba(0, 0, 0, 0.94))
+    drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.94))
+    drop-shadow(0 5px 5px rgba(0, 0, 0, 0.66))
+    drop-shadow(0 0 8px rgba(255, 91, 163, 0.18)) !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-rakan img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-baekho img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-wolf img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-void_knight img {
+  width: min(218%, 104px) !important;
+  height: min(258%, 124px) !important;
+  max-width: 104px !important;
+  max-height: 124px !important;
+  filter:
+    saturate(1.18)
+    contrast(1.23)
+    brightness(1.02)
+    drop-shadow(1px 0 0 rgba(0, 0, 0, 0.98))
+    drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.98))
+    drop-shadow(0 8px 7px rgba(0, 0, 0, 0.78))
+    drop-shadow(0 0 9px rgba(255, 64, 46, 0.22)) !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-luka img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-ranger img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-sniper img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-marauder img {
+  width: min(172%, 82px) !important;
+  height: min(238%, 112px) !important;
+  max-width: 82px !important;
+  max-height: 112px !important;
+  filter:
+    saturate(1.15)
+    contrast(1.18)
+    brightness(1.07)
+    drop-shadow(1px 0 0 rgba(0, 0, 0, 0.94))
+    drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.94))
+    drop-shadow(0 5px 5px rgba(0, 0, 0, 0.66))
+    drop-shadow(0 0 7px rgba(255, 207, 96, 0.18)) !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-jin img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-warlord img {
+  width: min(212%, 102px) !important;
+  height: min(268%, 128px) !important;
+  max-width: 102px !important;
+  max-height: 128px !important;
+  filter:
+    saturate(1.18)
+    contrast(1.22)
+    brightness(1.06)
+    drop-shadow(1px 0 0 rgba(0, 0, 0, 0.98))
+    drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.98))
+    drop-shadow(0 8px 7px rgba(0, 0, 0, 0.78))
+    drop-shadow(0 0 10px rgba(255, 189, 88, 0.26)) !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit-visual-raider img {
+  width: min(196%, 92px) !important;
+  height: min(244%, 116px) !important;
+  max-width: 92px !important;
+  max-height: 116px !important;
+}

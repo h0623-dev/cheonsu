@@ -1,4 +1,4 @@
-const CACHE_NAME = "cheonsu-v1-99-121";
+const CACHE_NAME = "cheonsu-v1-99-122";
 const FINAL_STAGE_MAPS = Array.from(
   { length: 30 },
   (_, index) => `/maps/concept/stage_${index + 1}_frontier_final.png`

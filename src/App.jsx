@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.121";
+const SAVE_VERSION = "1.99.122";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -3596,6 +3596,127 @@ const ENEMY_VARIANT_KEYS = new Set([
   "void_knight",
 ]);
 
+const ALLY_VISUAL_PROFILES = {
+  hero: {
+    battle: "/sprites/units/kyle.png",
+    map: "/sprites/map_units/hero.png",
+    portrait: "/portraits/kyle.png",
+    cutscene: "/sprites/units/kyle.png",
+  },
+  bram: {
+    battle: "/sprites/units/bram.png",
+    map: "/sprites/map_units/bram.png",
+    portrait: "/portraits/bram.png",
+    cutscene: "/sprites/units/bram.png",
+  },
+  lina: {
+    battle: "/sprites/units/lina.png",
+    map: "/sprites/map_units/lina.png",
+    portrait: "/portraits/lina.png",
+    cutscene: "/sprites/units/lina.png",
+  },
+  aria: {
+    battle: "/sprites/units/aria.png",
+    map: "/sprites/map_units/aria.png",
+    portrait: "/portraits/aria.png",
+    cutscene: "/sprites/units/aria.png",
+  },
+  leon: {
+    battle: "/sprites/units/leon.png",
+    map: "/sprites/map_units/leon.png",
+    portrait: "/portraits/leon.png",
+    cutscene: "/sprites/units/leon.png",
+  },
+  sera: {
+    battle: "/sprites/map_units/sera.png",
+    map: "/sprites/map_units/sera.png",
+    portrait: "/portraits/sera.png",
+    cutscene: "/sprites/map_units/sera.png",
+  },
+  noah: {
+    battle: "/sprites/enemies/sentinel.png",
+    map: "/sprites/map_units/sentinel.png",
+    portrait: "/portraits/shield.png",
+    cutscene: "/sprites/enemies/sentinel.png",
+  },
+  yuna: {
+    battle: "/sprites/enemies/mage.png",
+    map: "/sprites/map_units/mage.png",
+    portrait: "/portraits/mage.png",
+    cutscene: "/sprites/enemies/mage.png",
+  },
+  rakan: {
+    battle: "/sprites/enemies/wolf.png",
+    map: "/sprites/map_units/wolf.png",
+    portrait: "/sprites/enemies/wolf.png",
+    cutscene: "/sprites/enemies/wolf.png",
+  },
+  miho: {
+    battle: "/sprites/enemies/assassin_elite.png",
+    map: "/sprites/map_units/assassin_elite.png",
+    portrait: "/sprites/enemies/assassin_elite.png",
+    cutscene: "/sprites/enemies/assassin_elite.png",
+  },
+  teo: {
+    battle: "/sprites/enemies/blackguard.png",
+    map: "/sprites/map_units/blackguard.png",
+    portrait: "/portraits/shield.png",
+    cutscene: "/sprites/enemies/blackguard.png",
+  },
+  irene: {
+    battle: "/sprites/enemies/frost_mage.png",
+    map: "/sprites/map_units/frost_mage.png",
+    portrait: "/portraits/mage.png",
+    cutscene: "/sprites/enemies/frost_mage.png",
+  },
+  kaz: {
+    battle: "/sprites/enemies/assassin.png",
+    map: "/sprites/map_units/assassin.png",
+    portrait: "/sprites/enemies/assassin.png",
+    cutscene: "/sprites/enemies/assassin.png",
+  },
+  ella: {
+    battle: "/sprites/enemies/cultist.png",
+    map: "/sprites/map_units/cultist.png",
+    portrait: "/portraits/mage.png",
+    cutscene: "/sprites/enemies/cultist.png",
+  },
+  jin: {
+    battle: "/sprites/enemies/warlord.png",
+    map: "/sprites/map_units/warlord.png",
+    portrait: "/portraits/kyle.png",
+    cutscene: "/sprites/enemies/warlord.png",
+  },
+  luka: {
+    battle: "/sprites/enemies/sniper.png",
+    map: "/sprites/map_units/sniper.png",
+    portrait: "/portraits/leon.png",
+    cutscene: "/sprites/enemies/sniper.png",
+  },
+  baekho: {
+    battle: "/sprites/enemies/void_knight.png",
+    map: "/sprites/map_units/void_knight.png",
+    portrait: "/sprites/enemies/void_knight.png",
+    cutscene: "/sprites/enemies/void_knight.png",
+  },
+};
+
+function getAllyVisualProfile(unit) {
+  if (!unit || unit.type !== "ally") return null;
+  return ALLY_VISUAL_PROFILES[unit.id] || null;
+}
+
+function getUnitVisualClass(unit) {
+  if (!unit) return "";
+
+  if (unit.type === "ally") {
+    return `unit-visual-${unit.id || "ally"}`;
+  }
+
+  const enemyKey = getEnemySpriteKey(unit) || "enemy";
+  return `unit-visual-${enemyKey}`;
+}
+
 function getEnemySpriteKey(unit) {
   if (!unit || unit.type === "ally") return null;
   if (ENEMY_VARIANT_KEYS.has(unit.spriteKey)) return unit.spriteKey;
@@ -3629,6 +3750,9 @@ function getEnemySpriteKey(unit) {
 
 function getUnitSprite(unit) {
   if (!unit) return null;
+
+  const allyProfile = getAllyVisualProfile(unit);
+  if (allyProfile?.battle) return allyProfile.battle;
 
   const byId = {
     hero: "/sprites/units/kyle.png",
@@ -3672,6 +3796,9 @@ function getUnitSprite(unit) {
 
 function getBattleMapUnitSprite(unit) {
   if (!unit) return null;
+
+  const allyProfile = getAllyVisualProfile(unit);
+  if (allyProfile?.map) return allyProfile.map;
 
   const byId = {
     hero: "/sprites/map_units/hero.png",
@@ -3731,6 +3858,9 @@ function handleBattleMapUnitImageError(event, unit) {
 function getUnitPortrait(unit) {
   if (!unit) return null;
 
+  const allyProfile = getAllyVisualProfile(unit);
+  if (allyProfile?.portrait) return allyProfile.portrait;
+
   const byId = {
     hero: "/portraits/kyle.png",
     bram: "/portraits/bram.png",
@@ -3776,6 +3906,9 @@ function getUnitPortrait(unit) {
 
 function getCutsceneUnitSprite(unit) {
   if (!unit) return null;
+
+  const allyProfile = getAllyVisualProfile(unit);
+  if (allyProfile?.cutscene) return allyProfile.cutscene;
 
   const text = `${unit.id || ""} ${unit.name || ""} ${unit.skill || ""}`;
   const battleById = {
@@ -18510,7 +18643,7 @@ export default function App() {
                             : movingUnit.unit.type === "boss"
                             ? "boss-moving"
                             : "enemy-moving"
-                        }`}
+                        } ${getUnitVisualClass(movingUnit.unit)}`}
                         style={{
                           "--from-x": 0,
                           "--from-y": 0,
@@ -18553,7 +18686,7 @@ export default function App() {
                     {unit && !isMovingUnit && (
                       <>
                         <div
-                          className={`unit sprite-unit ${unit.type === "ally" ? "ally-unit" : unit.type === "enemy" ? "enemy-unit" : "boss-unit"} ${!unitActionMotion ? "free-motion-unit" : ""} ${turn === "ally" && unit.type === "ally" && isUnitReady(unit) ? "ready-motion-unit" : ""} ${unit.maxHp && unit.hp / unit.maxHp <= 0.35 ? "wounded-motion-unit" : ""} ${isMovingUnit ? "moving-hidden moving-source-shadow" : ""} ${inspectedUnitId === unit.id ? "inspected-unit" : ""} ${selectedUnit === unit.id ? "selected-unit" : ""} ${unit.phase2 ? "phase2-unit" : ""} ${unit.acted ? "acted-unit" : ""} ${unit.hitFlash ? "hit-flash-unit" : ""} ${unitActionMotion ? `action-motion action-${unitActionMotion.type} action-dir-${unitActionMotion.direction}` : ""}`}
+                          className={`unit sprite-unit ${unit.type === "ally" ? "ally-unit" : unit.type === "enemy" ? "enemy-unit" : "boss-unit"} ${getUnitVisualClass(unit)} ${!unitActionMotion ? "free-motion-unit" : ""} ${turn === "ally" && unit.type === "ally" && isUnitReady(unit) ? "ready-motion-unit" : ""} ${unit.maxHp && unit.hp / unit.maxHp <= 0.35 ? "wounded-motion-unit" : ""} ${isMovingUnit ? "moving-hidden moving-source-shadow" : ""} ${inspectedUnitId === unit.id ? "inspected-unit" : ""} ${selectedUnit === unit.id ? "selected-unit" : ""} ${unit.phase2 ? "phase2-unit" : ""} ${unit.acted ? "acted-unit" : ""} ${unit.hitFlash ? "hit-flash-unit" : ""} ${unitActionMotion ? `action-motion action-${unitActionMotion.type} action-dir-${unitActionMotion.direction}` : ""}`}
                           onPointerDown={(event) => event.stopPropagation()}
                           onPointerUp={(event) => event.stopPropagation()}
                           onClick={(event) => handleBattleUnitPress(event, unit)}
