@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.104";
+const SAVE_VERSION = "1.99.105";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -59,7 +59,7 @@ const QA_FIX_HISTORY_KEY = "cheonsu_v01_qa_fix_history";
 const QA_RELEASE_ARCHIVE_KEY = "cheonsu_v01_qa_release_archive";
 const UPDATE_MANIFEST_URL_KEY = "cheonsu_update_manifest_url";
 const PLAYTEST_UNLOCK_ALL_STAGES = true;
-const PLAYTEST_SKIP_STAGE_INTRO = PLAYTEST_UNLOCK_ALL_STAGES;
+const PLAYTEST_STORY_CAN_SKIP = PLAYTEST_UNLOCK_ALL_STAGES;
 const ALL_STAGE_IDS = stages.map((stage) => stage.id);
 const getPlaytestUnlockedStageIds = (stageIds = [1]) =>
   PLAYTEST_UNLOCK_ALL_STAGES ? ALL_STAGE_IDS : stageIds;
@@ -10327,11 +10327,6 @@ export default function App() {
 
     localStorage.setItem("cheonsu_last_deploy_v1", JSON.stringify(deployedIds));
     setFinalDeployCheckOpen(false);
-    if (PLAYTEST_SKIP_STAGE_INTRO) {
-      beginStageBattle(deploymentStage);
-      return;
-    }
-
     openStoryScene(deploymentStage, "intro", "battle");
   };
 
@@ -10340,11 +10335,6 @@ export default function App() {
 
     localStorage.setItem("cheonsu_last_deploy_v1", JSON.stringify(deployedIds));
     setFinalDeployCheckOpen(false);
-    if (PLAYTEST_SKIP_STAGE_INTRO) {
-      beginStageBattle(deploymentStage);
-      return;
-    }
-
     openStoryScene(deploymentStage, "intro", "battle");
   };
 
@@ -13301,9 +13291,11 @@ export default function App() {
               </div>
               <h1>{storyScene.stage?.title}</h1>
             </div>
-            <button className="back-btn" onClick={skipStoryScene}>
-              건너뛰기
-            </button>
+            {PLAYTEST_STORY_CAN_SKIP && (
+              <button className="back-btn story-skip-btn" onClick={skipStoryScene}>
+                {storyScene.onComplete === "battle" ? "바로 전투" : "건너뛰기"}
+              </button>
+            )}
           </div>
 
           <div className="story-character-stage">
