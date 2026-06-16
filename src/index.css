@@ -38612,3 +38612,66 @@ button:focus-visible {
   object-fit: contain;
   object-position: center bottom;
 }
+
+/* v1.99.125: shared battlefield scale and clear acted-unit state. */
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map {
+  --field-unit-scale: 0.94;
+  --field-boss-scale: 0.96;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.ally-unit,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.enemy-unit,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.boss-unit {
+  inset: -34% -26% 5% !important;
+  transform:
+    translateY(calc(var(--unit-ground-y, 4px) * -0.20))
+    scale(calc(var(--unit-depth-scale, 1) * var(--field-unit-scale))) !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .map-moving-unit.ally-moving,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .map-moving-unit.enemy-moving,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .map-moving-unit.boss-moving {
+  transform:
+    translateY(calc(var(--unit-ground-y, 4px) * -0.20))
+    scale(calc(var(--unit-depth-scale, 1) * var(--field-unit-scale))) !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.ally-unit img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.enemy-unit img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.boss-unit img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .map-moving-unit.ally-moving img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .map-moving-unit.enemy-moving img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .map-moving-unit.boss-moving img {
+  width: min(176%, 84px) !important;
+  height: min(226%, 108px) !important;
+  min-width: 48px !important;
+  min-height: 62px !important;
+  max-width: 84px !important;
+  max-height: 108px !important;
+  object-fit: contain !important;
+  object-position: center bottom !important;
+  image-rendering: auto !important;
+  filter:
+    saturate(1.08)
+    contrast(1.12)
+    brightness(1.04)
+    drop-shadow(1px 0 0 rgba(0, 0, 0, 0.94))
+    drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.94))
+    drop-shadow(0 6px 6px rgba(0, 0, 0, 0.70)) !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.acted-unit img {
+  opacity: 0.54 !important;
+  filter:
+    grayscale(1)
+    saturate(0)
+    contrast(0.94)
+    brightness(0.70)
+    drop-shadow(1px 0 0 rgba(0, 0, 0, 0.90))
+    drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.90))
+    drop-shadow(0 4px 4px rgba(0, 0, 0, 0.66)) !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.acted-unit::before {
+  opacity: 0.26 !important;
+}

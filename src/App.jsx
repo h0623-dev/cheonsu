@@ -50,7 +50,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.124";
+const SAVE_VERSION = "1.99.125";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -2882,6 +2882,127 @@ function pickOpenFrontierSpawn(spawns, activeMap, occupied, fallback = { x: 0, y
     : null;
 }
 
+const FORMATION_MIN_OPPONENT_GAP = 7;
+const FORMATION_MIN_TEAM_GAP = 2;
+
+function getFormationColumnOrder(width, side) {
+  const columns = Array.from({ length: width }, (_, x) => x);
+  const ideal = side === "ally"
+    ? Math.min(width - 1, Math.max(1, Math.floor(width * 0.22)))
+    : Math.max(0, Math.min(width - 2, Math.floor(width * 0.78)));
+
+  return columns.sort((a, b) => {
+    const da = Math.abs(a - ideal);
+    const db = Math.abs(b - ideal);
+    if (da !== db) return da - db;
+    return side === "ally" ? a - b : b - a;
+  });
+}
+
+function getFormationRowOrder(height, side) {
+  const rows = Array.from({ length: height }, (_, y) => y);
+  const ideal = side === "ally"
+    ? Math.max(0, height - 4)
+    : Math.min(height - 1, Math.max(1, Math.floor(height * 0.20)));
+
+  return rows.sort((a, b) => {
+    const da = Math.abs(a - ideal);
+    const db = Math.abs(b - ideal);
+    if (da !== db) return da - db;
+    return side === "ally" ? b - a : a - b;
+  });
+}
+
+function getFormationCandidates(activeMap, side) {
+  const height = activeMap?.length || 0;
+  const width = activeMap?.[0]?.length || 0;
+  const rows = getFormationRowOrder(height, side);
+  const columns = getFormationColumnOrder(width, side);
+  const candidates = [];
+
+  rows.forEach((y) => {
+    columns.forEach((x) => {
+      if (!inActiveMap(x, y, activeMap)) return;
+      if (isBlockedBattleTile(activeMap[y]?.[x])) return;
+
+      const lowerHalf = y >= Math.floor(height * 0.45);
+      const upperHalf = y <= Math.ceil(height * 0.55);
+
+      if (side === "ally" && !lowerHalf && candidates.length < 18) return;
+      if (side !== "ally" && !upperHalf && candidates.length < 18) return;
+
+      candidates.push({ x, y });
+    });
+  });
+
+  return candidates;
+}
+
+function isFormationCandidateValid(pos, activeMap, occupied, ownTeam, opposingTeam, teamGap, opponentGap) {
+  if (!inActiveMap(pos.x, pos.y, activeMap)) return false;
+  if (isBlockedBattleTile(activeMap[pos.y]?.[pos.x])) return false;
+  if (occupied.has(`${pos.x},${pos.y}`)) return false;
+  if (ownTeam.some((unit) => Math.abs(unit.x - pos.x) + Math.abs(unit.y - pos.y) < teamGap)) return false;
+  if (opposingTeam.some((unit) => Math.abs(unit.x - pos.x) + Math.abs(unit.y - pos.y) < opponentGap)) return false;
+
+  return true;
+}
+
+function placeFormationTeam(sourceUnits, candidates, activeMap, occupied, opposingTeam, side) {
+  const placed = [];
+
+  sourceUnits.forEach((unit) => {
+    const opponentGapSteps = side === "ally"
+      ? [0]
+      : [FORMATION_MIN_OPPONENT_GAP, FORMATION_MIN_OPPONENT_GAP - 1, FORMATION_MIN_OPPONENT_GAP - 2, 0];
+    const teamGapSteps = [FORMATION_MIN_TEAM_GAP, 1, 0];
+    let picked = null;
+
+    for (const opponentGap of opponentGapSteps) {
+      for (const teamGap of teamGapSteps) {
+        picked = candidates.find((pos) =>
+          isFormationCandidateValid(pos, activeMap, occupied, placed, opposingTeam, teamGap, opponentGap)
+        );
+        if (picked) break;
+      }
+      if (picked) break;
+    }
+
+    if (!picked) {
+      picked = candidates.find((pos) =>
+        inActiveMap(pos.x, pos.y, activeMap) &&
+        !isBlockedBattleTile(activeMap[pos.y]?.[pos.x]) &&
+        !occupied.has(`${pos.x},${pos.y}`)
+      );
+    }
+
+    const nextUnit = picked ? { ...unit, x: picked.x, y: picked.y } : unit;
+    occupied.add(`${nextUnit.x},${nextUnit.y}`);
+    placed.push(nextUnit);
+  });
+
+  return placed;
+}
+
+function spaceBattleFormations(stage, sourceUnits) {
+  const activeMap = stage?.map || [];
+  if (!activeMap.length || !activeMap[0]?.length) return sourceUnits;
+
+  const units = clone(sourceUnits || []);
+  const allies = units.filter((unit) => unit.type === "ally");
+  const bosses = units.filter((unit) => unit.type === "boss");
+  const enemies = units.filter((unit) => unit.type !== "ally" && unit.type !== "boss");
+  const allyCandidates = getFormationCandidates(activeMap, "ally");
+  const enemyCandidates = getFormationCandidates(activeMap, "enemy");
+  const occupied = new Set();
+  const placedAllies = placeFormationTeam(allies, allyCandidates, activeMap, occupied, [], "ally");
+  const placedBosses = placeFormationTeam(bosses, enemyCandidates, activeMap, occupied, placedAllies, "enemy");
+  const placedEnemies = placeFormationTeam(enemies, enemyCandidates, activeMap, occupied, placedAllies, "enemy");
+  const byId = new Map([...placedAllies, ...placedBosses, ...placedEnemies].map((unit) => [unit.id, unit]));
+
+  return units.map((unit) => byId.get(unit.id) || unit);
+}
+
 function createActOneRouteBattleStage(stage, deployCount = MAX_DEPLOY_COUNT) {
   const map = cloneActOneRouteMap(stage);
   const config = getActOneRouteStageConfig(stage);
@@ -2946,7 +3067,10 @@ function createActOneRouteBattleStage(stage, deployCount = MAX_DEPLOY_COUNT) {
     title: config.battleTitle || stage.title,
     objective: config.battleObjective || stage.objective,
     map,
-    units: [...stageThemedUnits, ...extraEnemies],
+    units: spaceBattleFormations(
+      { ...stage, map },
+      [...stageThemedUnits, ...extraEnemies]
+    ),
     largeBattle: true,
     battlefieldTheme: config.themeLabel,
     battlefieldThemeId: config.themeId,
@@ -3025,7 +3149,10 @@ function createFinalFrontierBattleStage(stage, deployCount = MAX_DEPLOY_COUNT) {
   return {
     ...stage,
     map,
-    units: [...stageThemedUnits, ...extraEnemies],
+    units: spaceBattleFormations(
+      { ...stage, map },
+      [...stageThemedUnits, ...extraEnemies]
+    ),
     largeBattle: true,
     battlefieldTheme: getStageBattlefieldTheme(stage).label,
     battlefieldThemeId: getStageBattlefieldTheme(stage).id,
@@ -3405,7 +3532,10 @@ function expandStageForLargeBattle(stage, deployCount = MAX_DEPLOY_COUNT) {
   return {
     ...stage,
     map: largeMap,
-    units: [...stageThemedUnits, ...extraEnemies],
+    units: spaceBattleFormations(
+      { ...stage, map: largeMap },
+      [...stageThemedUnits, ...extraEnemies]
+    ),
     largeBattle: true,
     battlefieldTheme: getStageBattlefieldTheme(stage).label,
     battlefieldThemeId: getStageBattlefieldTheme(stage).id,
@@ -10309,7 +10439,10 @@ export default function App() {
       battleStage,
       battleParty
     );
-    const battleUnits = applyDifficultyToUnits(stagedUnits, settings.difficulty, settings.balancePreset);
+    const battleUnits = spaceBattleFormations(
+      battleStage,
+      applyDifficultyToUnits(stagedUnits, settings.difficulty, settings.balancePreset)
+    );
     const openingAlly = battleUnits.find((unit) => unit.id === "hero" && unit.type === "ally") ||
       battleUnits.find((unit) => unit.type === "ally");
 
