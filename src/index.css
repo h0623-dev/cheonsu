@@ -38675,3 +38675,37 @@ button:focus-visible {
 .battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.acted-unit::before {
   opacity: 0.26 !important;
 }
+
+/* v1.99.126: prevent tall SD unit heads and portraits from being cropped. */
+.battle-screen.battle-final-concept.battle-board-only .battle-map.classic-pixel-map,
+.battle-screen.battle-final-concept.battle-board-only .battle-map.final-illustrated-map {
+  padding-top: calc(var(--battle-tile-size, 44px) * 0.34) !important;
+  overflow: visible !important;
+}
+
+.battle-screen.battle-final-concept.battle-board-only .battle-map.classic-pixel-map > .tile,
+.battle-screen.battle-final-concept.battle-board-only .battle-map.final-illustrated-map > .tile {
+  overflow: visible !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.ally-unit,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.enemy-unit,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.boss-unit {
+  inset: -40% -26% 5% !important;
+}
+
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.ally-unit img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.enemy-unit img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .unit.sprite-unit.boss-unit img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .map-moving-unit.ally-moving img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .map-moving-unit.enemy-moving img,
+.battle-final-concept.final-illustrated-battle .battle-map.final-illustrated-map .map-moving-unit.boss-moving img {
+  object-fit: contain !important;
+  object-position: center bottom !important;
+}
+
+.battle-final-concept .image-portrait img,
+.battle-final-concept .selected-status-face img {
+  object-fit: contain !important;
+  object-position: center center !important;
+}
