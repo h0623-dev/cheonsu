@@ -33976,9 +33976,9 @@ button:focus-visible {
 
 .battle-final-concept.battle-board-only .selected-unit-status-hud {
   left: 12px !important;
-  right: auto !important;
+  right: 12px !important;
   bottom: calc(88px + max(8px, env(safe-area-inset-bottom))) !important;
-  width: min(268px, calc(100vw - 24px)) !important;
+  width: auto !important;
   min-height: 68px;
   grid-template-columns: 56px minmax(0, 1fr) !important;
   gap: 8px !important;
@@ -33991,6 +33991,10 @@ button:focus-visible {
     0 0 0 1px rgba(0, 0, 0, 0.78),
     inset 0 0 0 1px rgba(255, 236, 176, 0.08),
     0 10px 26px rgba(0, 0, 0, 0.58) !important;
+}
+
+.battle-final-concept.battle-board-only .selected-status-main {
+  max-width: 206px !important;
 }
 
 .battle-final-concept.battle-board-only.has-post-move-menu .selected-unit-status-hud {
@@ -34146,8 +34150,11 @@ button:focus-visible {
   .battle-final-concept.battle-board-only .selected-unit-status-hud {
     grid-template-columns: 50px minmax(0, 1fr) !important;
     bottom: calc(84px + max(8px, env(safe-area-inset-bottom))) !important;
-    width: min(248px, calc(100vw - 22px)) !important;
     min-height: 64px;
+  }
+
+  .battle-final-concept.battle-board-only .selected-status-main {
+    max-width: 188px !important;
   }
 
   .battle-final-concept.battle-board-only .selected-status-face {
