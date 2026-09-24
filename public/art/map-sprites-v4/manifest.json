@@ -1,0 +1,412 @@
+{
+  "hero": {
+    "source": "/art/world-v2/units/hero.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.2587
+  },
+  "bram": {
+    "source": "/art/world-v2/units/bram.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.374
+  },
+  "lina": {
+    "source": "/art/world-v2/units/lina.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 0.9114
+  },
+  "aria": {
+    "source": "/art/world-v2/units/aria.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.1077
+  },
+  "leon": {
+    "source": "/art/world-v2/units/leon.webp",
+    "canvas": [
+      405,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.3793
+  },
+  "sera": {
+    "source": "/art/world-v2/units/sera.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.0227
+  },
+  "noah": {
+    "source": "/art/world-v2/units/noah.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1
+  },
+  "yuna": {
+    "source": "/art/world-v2/units/yuna.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 0.9651
+  },
+  "rakan": {
+    "source": "/art/world-v2/units/rakan.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.0375
+  },
+  "miho": {
+    "source": "/art/world-v2/units/miho.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 0.989
+  },
+  "teo": {
+    "source": "/art/world-v2/units/teo.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 0.9704
+  },
+  "irene": {
+    "source": "/art/world-v2/units/irene.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 0.96
+  },
+  "kaz": {
+    "source": "/art/world-v2/units/kaz.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.0876
+  },
+  "ella": {
+    "source": "/art/world-v2/units/ella.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 0.9626
+  },
+  "jin": {
+    "source": "/art/world-v2/units/jin.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.2766
+  },
+  "luka": {
+    "source": "/art/world-v2/units/luka.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.2811
+  },
+  "baekho": {
+    "source": "/art/world-v2/units/baekho.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 0.9809
+  },
+  "raider": {
+    "source": "/art/enemies-v3/motion/raider-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.0976
+  },
+  "ranger": {
+    "source": "/art/enemies-v3/motion/ranger-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 0.9091
+  },
+  "marauder": {
+    "source": "/art/enemies-v3/motion/marauder-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 0.9114
+  },
+  "iron_lancer": {
+    "source": "/art/enemies-v3/motion/iron_lancer-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 0.973
+  },
+  "warlord": {
+    "source": "/art/enemies-v3/motion/warlord-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.0198
+  },
+  "cultist": {
+    "source": "/art/enemies-v3/motion/cultist-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 0.8592
+  },
+  "sniper": {
+    "source": "/art/enemies-v3/motion/sniper-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.0345
+  },
+  "assassin_elite": {
+    "source": "/art/enemies-v3/motion/assassin_elite-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.0465
+  },
+  "plague_doctor": {
+    "source": "/art/enemies-v3/motion/plague_doctor-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 0.96
+  },
+  "beast_tamer": {
+    "source": "/art/enemies-v3/motion/beast_tamer-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 0.9677
+  },
+  "storm_mage": {
+    "source": "/art/enemies-v3/motion/storm_mage-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.0588
+  },
+  "blade_dancer": {
+    "source": "/art/enemies-v3/motion/blade_dancer-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.0112
+  },
+  "siege_gunner": {
+    "source": "/art/enemies-v3/motion/siege_gunner-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 0.9945
+  },
+  "sentinel": {
+    "source": "/art/enemies-v3/motion/sentinel-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.0435
+  },
+  "blackguard": {
+    "source": "/art/enemies-v3/motion/blackguard-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.0651
+  },
+  "pyromancer": {
+    "source": "/art/enemies-v3/motion/pyromancer-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.0526
+  },
+  "frost_mage": {
+    "source": "/art/enemies-v3/motion/frost_mage-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 0.9651
+  },
+  "void_knight": {
+    "source": "/art/enemies-v3/motion/void_knight-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.1429
+  },
+  "wolf": {
+    "source": "/art/enemies-v3/motion/wolf-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 250,
+    "foot": 447,
+    "combatScale": 0.9426
+  },
+  "boss_commander": {
+    "source": "/art/bosses-v1/boss_commander-ready.webp",
+    "canvas": [
+      450,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.1502
+  },
+  "boss_frost": {
+    "source": "/art/bosses-v1/boss_frost-ready.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.1111
+  },
+  "boss_ember": {
+    "source": "/art/bosses-v1/boss_ember-ready.webp",
+    "canvas": [
+      443,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.1502
+  },
+  "boss_oracle": {
+    "source": "/art/bosses-v1/boss_oracle-ready.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 0.9499
+  },
+  "boss_abyss": {
+    "source": "/art/bosses-v1/boss_abyss-ready.webp",
+    "canvas": [
+      447,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.1429
+  }
+}

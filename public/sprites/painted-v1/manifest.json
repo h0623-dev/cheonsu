@@ -1,0 +1,362 @@
+{
+  "hero": {
+    "sprite": "/sprites/painted-v1/hero.webp",
+    "portrait": "/sprites/painted-v1/portraits/hero.webp",
+    "sourceBounds": {
+      "left": 56,
+      "top": 10,
+      "width": 169,
+      "height": 271
+    }
+  },
+  "bram": {
+    "sprite": "/sprites/painted-v1/bram.webp",
+    "portrait": "/sprites/painted-v1/portraits/bram.webp",
+    "sourceBounds": {
+      "left": 308,
+      "top": 2,
+      "width": 217,
+      "height": 280
+    }
+  },
+  "lina": {
+    "sprite": "/sprites/painted-v1/lina.webp",
+    "portrait": "/sprites/painted-v1/portraits/lina.webp",
+    "sourceBounds": {
+      "left": 608,
+      "top": 9,
+      "width": 185,
+      "height": 268
+    }
+  },
+  "aria": {
+    "sprite": "/sprites/painted-v1/aria.webp",
+    "portrait": "/sprites/painted-v1/portraits/aria.webp",
+    "sourceBounds": {
+      "left": 887,
+      "top": 3,
+      "width": 185,
+      "height": 277
+    }
+  },
+  "leon": {
+    "sprite": "/sprites/painted-v1/leon.webp",
+    "portrait": "/sprites/painted-v1/portraits/leon.webp",
+    "sourceBounds": {
+      "left": 49,
+      "top": 281,
+      "width": 220,
+      "height": 287
+    }
+  },
+  "sera": {
+    "sprite": "/sprites/painted-v1/sera.webp",
+    "portrait": "/sprites/painted-v1/portraits/sera.webp",
+    "sourceBounds": {
+      "left": 327,
+      "top": 286,
+      "width": 203,
+      "height": 284
+    }
+  },
+  "noah": {
+    "sprite": "/sprites/painted-v1/noah.webp",
+    "portrait": "/sprites/painted-v1/portraits/noah.webp",
+    "sourceBounds": {
+      "left": 617,
+      "top": 280,
+      "width": 140,
+      "height": 288
+    }
+  },
+  "yuna": {
+    "sprite": "/sprites/painted-v1/yuna.webp",
+    "portrait": "/sprites/painted-v1/portraits/yuna.webp",
+    "sourceBounds": {
+      "left": 871,
+      "top": 281,
+      "width": 191,
+      "height": 287
+    }
+  },
+  "rakan": {
+    "sprite": "/sprites/painted-v1/rakan.webp",
+    "portrait": "/sprites/painted-v1/portraits/rakan.webp",
+    "sourceBounds": {
+      "left": 48,
+      "top": 565,
+      "width": 199,
+      "height": 281
+    }
+  },
+  "miho": {
+    "sprite": "/sprites/painted-v1/miho.webp",
+    "portrait": "/sprites/painted-v1/portraits/miho.webp",
+    "sourceBounds": {
+      "left": 313,
+      "top": 574,
+      "width": 257,
+      "height": 267
+    }
+  },
+  "teo": {
+    "sprite": "/sprites/painted-v1/teo.webp",
+    "portrait": "/sprites/painted-v1/portraits/teo.webp",
+    "sourceBounds": {
+      "left": 591,
+      "top": 565,
+      "width": 229,
+      "height": 277
+    }
+  },
+  "irene": {
+    "sprite": "/sprites/painted-v1/irene.webp",
+    "portrait": "/sprites/painted-v1/portraits/irene.webp",
+    "sourceBounds": {
+      "left": 864,
+      "top": 529,
+      "width": 224,
+      "height": 319
+    }
+  },
+  "kaz": {
+    "sprite": "/sprites/painted-v1/kaz.webp",
+    "portrait": "/sprites/painted-v1/portraits/kaz.webp",
+    "sourceBounds": {
+      "left": 40,
+      "top": 840,
+      "width": 215,
+      "height": 275
+    }
+  },
+  "ella": {
+    "sprite": "/sprites/painted-v1/ella.webp",
+    "portrait": "/sprites/painted-v1/portraits/ella.webp",
+    "sourceBounds": {
+      "left": 317,
+      "top": 834,
+      "width": 202,
+      "height": 280
+    }
+  },
+  "jin": {
+    "sprite": "/sprites/painted-v1/jin.webp",
+    "portrait": "/sprites/painted-v1/portraits/jin.webp",
+    "sourceBounds": {
+      "left": 574,
+      "top": 813,
+      "width": 232,
+      "height": 305
+    }
+  },
+  "luka": {
+    "sprite": "/sprites/painted-v1/luka.webp",
+    "portrait": "/sprites/painted-v1/portraits/luka.webp",
+    "sourceBounds": {
+      "left": 881,
+      "top": 854,
+      "width": 200,
+      "height": 264
+    }
+  },
+  "baekho": {
+    "sprite": "/sprites/painted-v1/baekho.webp",
+    "portrait": "/sprites/painted-v1/portraits/baekho.webp",
+    "sourceBounds": {
+      "left": 56,
+      "top": 1107,
+      "width": 181,
+      "height": 286
+    }
+  },
+  "raider": {
+    "sprite": "/sprites/painted-v1/raider.webp",
+    "portrait": "/sprites/painted-v1/portraits/raider.webp",
+    "sourceBounds": {
+      "left": 24,
+      "top": 15,
+      "width": 207,
+      "height": 270
+    }
+  },
+  "ranger": {
+    "sprite": "/sprites/painted-v1/ranger.webp",
+    "portrait": "/sprites/painted-v1/portraits/ranger.webp",
+    "sourceBounds": {
+      "left": 310,
+      "top": 9,
+      "width": 247,
+      "height": 277
+    }
+  },
+  "sniper": {
+    "sprite": "/sprites/painted-v1/sniper.webp",
+    "portrait": "/sprites/painted-v1/portraits/sniper.webp",
+    "sourceBounds": {
+      "left": 625,
+      "top": 14,
+      "width": 197,
+      "height": 271
+    }
+  },
+  "marauder": {
+    "sprite": "/sprites/painted-v1/marauder.webp",
+    "portrait": "/sprites/painted-v1/portraits/marauder.webp",
+    "sourceBounds": {
+      "left": 870,
+      "top": 28,
+      "width": 199,
+      "height": 263
+    }
+  },
+  "assassin_elite": {
+    "sprite": "/sprites/painted-v1/assassin_elite.webp",
+    "portrait": "/sprites/painted-v1/portraits/assassin_elite.webp",
+    "sourceBounds": {
+      "left": 49,
+      "top": 289,
+      "width": 196,
+      "height": 277
+    }
+  },
+  "iron_lancer": {
+    "sprite": "/sprites/painted-v1/iron_lancer.webp",
+    "portrait": "/sprites/painted-v1/portraits/iron_lancer.webp",
+    "sourceBounds": {
+      "left": 332,
+      "top": 279,
+      "width": 200,
+      "height": 287
+    }
+  },
+  "plague_doctor": {
+    "sprite": "/sprites/painted-v1/plague_doctor.webp",
+    "portrait": "/sprites/painted-v1/portraits/plague_doctor.webp",
+    "sourceBounds": {
+      "left": 589,
+      "top": 289,
+      "width": 220,
+      "height": 275
+    }
+  },
+  "beast_tamer": {
+    "sprite": "/sprites/painted-v1/beast_tamer.webp",
+    "portrait": "/sprites/painted-v1/portraits/beast_tamer.webp",
+    "sourceBounds": {
+      "left": 858,
+      "top": 294,
+      "width": 247,
+      "height": 275
+    }
+  },
+  "storm_mage": {
+    "sprite": "/sprites/painted-v1/storm_mage.webp",
+    "portrait": "/sprites/painted-v1/portraits/storm_mage.webp",
+    "sourceBounds": {
+      "left": 44,
+      "top": 563,
+      "width": 220,
+      "height": 267
+    }
+  },
+  "blade_dancer": {
+    "sprite": "/sprites/painted-v1/blade_dancer.webp",
+    "portrait": "/sprites/painted-v1/portraits/blade_dancer.webp",
+    "sourceBounds": {
+      "left": 313,
+      "top": 559,
+      "width": 239,
+      "height": 268
+    }
+  },
+  "siege_gunner": {
+    "sprite": "/sprites/painted-v1/siege_gunner.webp",
+    "portrait": "/sprites/painted-v1/portraits/siege_gunner.webp",
+    "sourceBounds": {
+      "left": 590,
+      "top": 564,
+      "width": 188,
+      "height": 269
+    }
+  },
+  "sentinel": {
+    "sprite": "/sprites/painted-v1/sentinel.webp",
+    "portrait": "/sprites/painted-v1/portraits/sentinel.webp",
+    "sourceBounds": {
+      "left": 839,
+      "top": 553,
+      "width": 243,
+      "height": 284
+    }
+  },
+  "blackguard": {
+    "sprite": "/sprites/painted-v1/blackguard.webp",
+    "portrait": "/sprites/painted-v1/portraits/blackguard.webp",
+    "sourceBounds": {
+      "left": 13,
+      "top": 822,
+      "width": 273,
+      "height": 283
+    }
+  },
+  "warlord": {
+    "sprite": "/sprites/painted-v1/warlord.webp",
+    "portrait": "/sprites/painted-v1/portraits/warlord.webp",
+    "sourceBounds": {
+      "left": 306,
+      "top": 823,
+      "width": 276,
+      "height": 284
+    }
+  },
+  "pyromancer": {
+    "sprite": "/sprites/painted-v1/pyromancer.webp",
+    "portrait": "/sprites/painted-v1/portraits/pyromancer.webp",
+    "sourceBounds": {
+      "left": 612,
+      "top": 825,
+      "width": 224,
+      "height": 290
+    }
+  },
+  "frost_mage": {
+    "sprite": "/sprites/painted-v1/frost_mage.webp",
+    "portrait": "/sprites/painted-v1/portraits/frost_mage.webp",
+    "sourceBounds": {
+      "left": 898,
+      "top": 830,
+      "width": 211,
+      "height": 285
+    }
+  },
+  "cultist": {
+    "sprite": "/sprites/painted-v1/cultist.webp",
+    "portrait": "/sprites/painted-v1/portraits/cultist.webp",
+    "sourceBounds": {
+      "left": 59,
+      "top": 1086,
+      "width": 187,
+      "height": 297
+    }
+  },
+  "void_knight": {
+    "sprite": "/sprites/painted-v1/void_knight.webp",
+    "portrait": "/sprites/painted-v1/portraits/void_knight.webp",
+    "sourceBounds": {
+      "left": 277,
+      "top": 1087,
+      "width": 286,
+      "height": 301
+    }
+  },
+  "wolf": {
+    "sprite": "/sprites/painted-v1/wolf.webp",
+    "portrait": "/sprites/painted-v1/portraits/wolf.webp",
+    "sourceBounds": {
+      "left": 594,
+      "top": 1169,
+      "width": 245,
+      "height": 189
+    }
+  }
+}

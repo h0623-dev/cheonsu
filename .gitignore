@@ -20,6 +20,10 @@ android/app/release/
 android/local.properties
 *.apk
 *.aab
+*.jks
+*.keystore
+.env
+.env.*
 
 # Local generated packages
 cheonsu_*.zip
@@ -28,6 +32,14 @@ cheonsu_*.zip
 .codex-remote-attachments/
 _codex_backups/
 tmp/
+
+# Superseded handoff documents and previews; keep local copies only
+/handoff_docs/
+/README_적용방법.txt
+/실행코드.txt
+/stage_select_region_preview.png
+/unit_preview_v196.png
+/unit_preview_v197_portrait_map.png
 
 # Editor directories and files
 .vscode/*

@@ -1,6 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+import './battle-art.css'
+import './world-art.css'
+import './combat-scene.css'
+import './interface-theme.css'
+import './battle-controls.css'
+import './discoveries.css'
+import './journey-ui.css'
 import App from './App.jsx'
 import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 

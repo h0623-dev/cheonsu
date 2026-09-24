@@ -1,0 +1,192 @@
+{
+  "units": {
+    "hero": {
+      "sprite": "/art/world-v2/units/hero.webp",
+      "portrait": "/art/world-v2/portraits/hero.webp"
+    },
+    "bram": {
+      "sprite": "/art/world-v2/units/bram.webp",
+      "portrait": "/art/world-v2/portraits/bram.webp"
+    },
+    "lina": {
+      "sprite": "/art/world-v2/units/lina.webp",
+      "portrait": "/art/world-v2/portraits/lina.webp"
+    },
+    "aria": {
+      "sprite": "/art/world-v2/units/aria.webp",
+      "portrait": "/art/world-v2/portraits/aria.webp"
+    },
+    "leon": {
+      "sprite": "/art/world-v2/units/leon.webp",
+      "portrait": "/art/world-v2/portraits/leon.webp"
+    },
+    "sera": {
+      "sprite": "/art/world-v2/units/sera.webp",
+      "portrait": "/art/world-v2/portraits/sera.webp"
+    },
+    "noah": {
+      "sprite": "/art/world-v2/units/noah.webp",
+      "portrait": "/art/world-v2/portraits/noah.webp"
+    },
+    "yuna": {
+      "sprite": "/art/world-v2/units/yuna.webp",
+      "portrait": "/art/world-v2/portraits/yuna.webp"
+    },
+    "rakan": {
+      "sprite": "/art/world-v2/units/rakan.webp",
+      "portrait": "/art/world-v2/portraits/rakan.webp"
+    },
+    "miho": {
+      "sprite": "/art/world-v2/units/miho.webp",
+      "portrait": "/art/world-v2/portraits/miho.webp"
+    },
+    "teo": {
+      "sprite": "/art/world-v2/units/teo.webp",
+      "portrait": "/art/world-v2/portraits/teo.webp"
+    },
+    "irene": {
+      "sprite": "/art/world-v2/units/irene.webp",
+      "portrait": "/art/world-v2/portraits/irene.webp"
+    },
+    "kaz": {
+      "sprite": "/art/world-v2/units/kaz.webp",
+      "portrait": "/art/world-v2/portraits/kaz.webp"
+    },
+    "ella": {
+      "sprite": "/art/world-v2/units/ella.webp",
+      "portrait": "/art/world-v2/portraits/ella.webp"
+    },
+    "jin": {
+      "sprite": "/art/world-v2/units/jin.webp",
+      "portrait": "/art/world-v2/portraits/jin.webp"
+    },
+    "luka": {
+      "sprite": "/art/world-v2/units/luka.webp",
+      "portrait": "/art/world-v2/portraits/luka.webp"
+    },
+    "baekho": {
+      "sprite": "/art/world-v2/units/baekho.webp",
+      "portrait": "/art/world-v2/portraits/baekho.webp"
+    },
+    "raider": {
+      "sprite": "/art/world-v2/units/raider.webp",
+      "portrait": "/art/world-v2/portraits/raider.webp"
+    },
+    "ranger": {
+      "sprite": "/art/world-v2/units/ranger.webp",
+      "portrait": "/art/world-v2/portraits/ranger.webp"
+    },
+    "sniper": {
+      "sprite": "/art/world-v2/units/sniper.webp",
+      "portrait": "/art/world-v2/portraits/sniper.webp"
+    },
+    "marauder": {
+      "sprite": "/art/world-v2/units/marauder.webp",
+      "portrait": "/art/world-v2/portraits/marauder.webp"
+    },
+    "assassin_elite": {
+      "sprite": "/art/world-v2/units/assassin_elite.webp",
+      "portrait": "/art/world-v2/portraits/assassin_elite.webp"
+    },
+    "iron_lancer": {
+      "sprite": "/art/world-v2/units/iron_lancer.webp",
+      "portrait": "/art/world-v2/portraits/iron_lancer.webp"
+    },
+    "plague_doctor": {
+      "sprite": "/art/world-v2/units/plague_doctor.webp",
+      "portrait": "/art/world-v2/portraits/plague_doctor.webp"
+    },
+    "beast_tamer": {
+      "sprite": "/art/world-v2/units/beast_tamer.webp",
+      "portrait": "/art/world-v2/portraits/beast_tamer.webp"
+    },
+    "storm_mage": {
+      "sprite": "/art/world-v2/units/storm_mage.webp",
+      "portrait": "/art/world-v2/portraits/storm_mage.webp"
+    },
+    "blade_dancer": {
+      "sprite": "/art/world-v2/units/blade_dancer.webp",
+      "portrait": "/art/world-v2/portraits/blade_dancer.webp"
+    },
+    "siege_gunner": {
+      "sprite": "/art/world-v2/units/siege_gunner.webp",
+      "portrait": "/art/world-v2/portraits/siege_gunner.webp"
+    },
+    "sentinel": {
+      "sprite": "/art/world-v2/units/sentinel.webp",
+      "portrait": "/art/world-v2/portraits/sentinel.webp"
+    },
+    "blackguard": {
+      "sprite": "/art/world-v2/units/blackguard.webp",
+      "portrait": "/art/world-v2/portraits/blackguard.webp"
+    },
+    "warlord": {
+      "sprite": "/art/world-v2/units/warlord.webp",
+      "portrait": "/art/world-v2/portraits/warlord.webp"
+    },
+    "pyromancer": {
+      "sprite": "/art/world-v2/units/pyromancer.webp",
+      "portrait": "/art/world-v2/portraits/pyromancer.webp"
+    },
+    "frost_mage": {
+      "sprite": "/art/world-v2/units/frost_mage.webp",
+      "portrait": "/art/world-v2/portraits/frost_mage.webp"
+    },
+    "cultist": {
+      "sprite": "/art/world-v2/units/cultist.webp",
+      "portrait": "/art/world-v2/portraits/cultist.webp"
+    },
+    "void_knight": {
+      "sprite": "/art/world-v2/units/void_knight.webp",
+      "portrait": "/art/world-v2/portraits/void_knight.webp"
+    },
+    "wolf": {
+      "sprite": "/art/world-v2/units/wolf.webp",
+      "portrait": "/art/world-v2/portraits/wolf.webp"
+    }
+  },
+  "props": [
+    "oak",
+    "pine",
+    "rocks",
+    "wall",
+    "arch",
+    "pillar",
+    "snow-pine",
+    "ice-crystal",
+    "dead-tree",
+    "crystal",
+    "crates",
+    "brazier",
+    "shrub",
+    "maple",
+    "monument",
+    "palisade"
+  ],
+  "terrain": [
+    "grass",
+    "road",
+    "forest",
+    "rock",
+    "stone",
+    "paving",
+    "water",
+    "swamp",
+    "snow",
+    "ice",
+    "dark",
+    "rune",
+    "fire",
+    "trap",
+    "flowers",
+    "gravel"
+  ],
+  "scenes": [
+    "frontier",
+    "forest",
+    "fortress",
+    "snow",
+    "citadel",
+    "camp"
+  ]
+}

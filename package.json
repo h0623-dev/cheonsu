@@ -1,8 +1,9 @@
 {
   "name": "cheonsu",
   "private": true,
-  "version": "1.99.127",
+  "version": "1.99.133",
   "type": "module",
+  "engines": { "node": ">=24" },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -17,13 +18,20 @@
     "cap:open:android": "npx cap open android",
     "cap:open:ios": "npx cap open ios",
     "android:sync": "npm run build && npx cap sync android",
-    "android:apk": "cd android && gradlew.bat assembleDebug",
+    "android:apk": "node scripts/build-android.mjs",
+    "setup": "node scripts/setup.mjs",
+    "test": "node --test scripts/*.test.mjs",
+    "test:ui": "node scripts/verify-combat-patch.cjs && node scripts/verify-combat-motion.cjs && node scripts/verify-battle-controls.cjs",
+    "art:combat": "node scripts/prepare-combat-art.cjs",
+    "art:motion": "node scripts/prepare-combat-motion.cjs",
+    "package:source": "node scripts/package-source.mjs",
     "android:open": "npx cap open android"
   },
   "dependencies": {
     "@capacitor/android": "^7.0.0",
     "@capacitor/core": "^7.0.0",
     "@capacitor/ios": "^7.0.0",
+    "lucide-react": "^1.47.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
@@ -33,10 +41,13 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
+    "archiver": "^8.0.0",
     "eslint": "^10.3.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+    "playwright": "^1.63.0",
+    "sharp": "^0.35.4",
     "vite": "^8.0.12"
   }
 }

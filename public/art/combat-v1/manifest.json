@@ -1,0 +1,166 @@
+{
+  "units": {
+    "hero": {
+      "ready": "/art/combat-v1/units/hero-ready.webp",
+      "action": "/art/combat-v1/units/hero-action.webp"
+    },
+    "bram": {
+      "ready": "/art/combat-v1/units/bram-ready.webp",
+      "action": "/art/combat-v1/units/bram-action.webp"
+    },
+    "lina": {
+      "ready": "/art/combat-v1/units/lina-ready.webp",
+      "action": "/art/combat-v1/units/lina-action.webp"
+    },
+    "aria": {
+      "ready": "/art/combat-v1/units/aria-ready.webp",
+      "action": "/art/combat-v1/units/aria-action.webp"
+    },
+    "leon": {
+      "ready": "/art/combat-v1/units/leon-ready.webp",
+      "action": "/art/combat-v1/units/leon-action.webp"
+    },
+    "sera": {
+      "ready": "/art/combat-v1/units/sera-ready.webp",
+      "action": "/art/combat-v1/units/sera-action.webp"
+    },
+    "noah": {
+      "ready": "/art/combat-v1/units/noah-ready.webp",
+      "action": "/art/combat-v1/units/noah-action.webp"
+    },
+    "yuna": {
+      "ready": "/art/combat-v1/units/yuna-ready.webp",
+      "action": "/art/combat-v1/units/yuna-action.webp"
+    },
+    "rakan": {
+      "ready": "/art/combat-v1/units/rakan-ready.webp",
+      "action": "/art/combat-v1/units/rakan-action.webp"
+    },
+    "miho": {
+      "ready": "/art/combat-v1/units/miho-ready.webp",
+      "action": "/art/combat-v1/units/miho-action.webp"
+    },
+    "teo": {
+      "ready": "/art/combat-v1/units/teo-ready.webp",
+      "action": "/art/combat-v1/units/teo-action.webp"
+    },
+    "irene": {
+      "ready": "/art/combat-v1/units/irene-ready.webp",
+      "action": "/art/combat-v1/units/irene-action.webp"
+    },
+    "kaz": {
+      "ready": "/art/combat-v1/units/kaz-ready.webp",
+      "action": "/art/combat-v1/units/kaz-action.webp"
+    },
+    "ella": {
+      "ready": "/art/combat-v1/units/ella-ready.webp",
+      "action": "/art/combat-v1/units/ella-action.webp"
+    },
+    "jin": {
+      "ready": "/art/combat-v1/units/jin-ready.webp",
+      "action": "/art/combat-v1/units/jin-action.webp"
+    },
+    "luka": {
+      "ready": "/art/combat-v1/units/luka-ready.webp",
+      "action": "/art/combat-v1/units/luka-action.webp"
+    },
+    "baekho": {
+      "ready": "/art/combat-v1/units/baekho-ready.webp",
+      "action": "/art/combat-v1/units/baekho-action.webp"
+    },
+    "raider": {
+      "ready": "/art/combat-v1/units/raider-ready.webp",
+      "action": "/art/combat-v1/units/raider-action.webp"
+    },
+    "ranger": {
+      "ready": "/art/combat-v1/units/ranger-ready.webp",
+      "action": "/art/combat-v1/units/ranger-action.webp"
+    },
+    "sniper": {
+      "ready": "/art/combat-v1/units/sniper-ready.webp",
+      "action": "/art/combat-v1/units/sniper-action.webp"
+    },
+    "marauder": {
+      "ready": "/art/combat-v1/units/marauder-ready.webp",
+      "action": "/art/combat-v1/units/marauder-action.webp"
+    },
+    "assassin_elite": {
+      "ready": "/art/combat-v1/units/assassin_elite-ready.webp",
+      "action": "/art/combat-v1/units/assassin_elite-action.webp"
+    },
+    "iron_lancer": {
+      "ready": "/art/combat-v1/units/iron_lancer-ready.webp",
+      "action": "/art/combat-v1/units/iron_lancer-action.webp"
+    },
+    "plague_doctor": {
+      "ready": "/art/combat-v1/units/plague_doctor-ready.webp",
+      "action": "/art/combat-v1/units/plague_doctor-action.webp"
+    },
+    "beast_tamer": {
+      "ready": "/art/combat-v1/units/beast_tamer-ready.webp",
+      "action": "/art/combat-v1/units/beast_tamer-action.webp"
+    },
+    "storm_mage": {
+      "ready": "/art/combat-v1/units/storm_mage-ready.webp",
+      "action": "/art/combat-v1/units/storm_mage-action.webp"
+    },
+    "blade_dancer": {
+      "ready": "/art/combat-v1/units/blade_dancer-ready.webp",
+      "action": "/art/combat-v1/units/blade_dancer-action.webp"
+    },
+    "siege_gunner": {
+      "ready": "/art/combat-v1/units/siege_gunner-ready.webp",
+      "action": "/art/combat-v1/units/siege_gunner-action.webp"
+    },
+    "sentinel": {
+      "ready": "/art/combat-v1/units/sentinel-ready.webp",
+      "action": "/art/combat-v1/units/sentinel-action.webp"
+    },
+    "blackguard": {
+      "ready": "/art/combat-v1/units/blackguard-ready.webp",
+      "action": "/art/combat-v1/units/blackguard-action.webp"
+    },
+    "warlord": {
+      "ready": "/art/combat-v1/units/warlord-ready.webp",
+      "action": "/art/combat-v1/units/warlord-action.webp"
+    },
+    "pyromancer": {
+      "ready": "/art/combat-v1/units/pyromancer-ready.webp",
+      "action": "/art/combat-v1/units/pyromancer-action.webp"
+    },
+    "frost_mage": {
+      "ready": "/art/combat-v1/units/frost_mage-ready.webp",
+      "action": "/art/combat-v1/units/frost_mage-action.webp"
+    },
+    "cultist": {
+      "ready": "/art/combat-v1/units/cultist-ready.webp",
+      "action": "/art/combat-v1/units/cultist-action.webp"
+    },
+    "void_knight": {
+      "ready": "/art/combat-v1/units/void_knight-ready.webp",
+      "action": "/art/combat-v1/units/void_knight-action.webp"
+    },
+    "wolf": {
+      "ready": "/art/combat-v1/units/wolf-ready.webp",
+      "action": "/art/combat-v1/units/wolf-action.webp"
+    }
+  },
+  "effects": {
+    "slash": "/art/combat-v1/effects/slash.webp",
+    "thrust": "/art/combat-v1/effects/thrust.webp",
+    "arrow": "/art/combat-v1/effects/arrow.webp",
+    "heavy": "/art/combat-v1/effects/heavy.webp",
+    "guard": "/art/combat-v1/effects/guard.webp",
+    "fire": "/art/combat-v1/effects/fire.webp",
+    "ice": "/art/combat-v1/effects/ice.webp",
+    "lightning": "/art/combat-v1/effects/lightning.webp",
+    "shadow": "/art/combat-v1/effects/shadow.webp",
+    "holy": "/art/combat-v1/effects/holy.webp",
+    "heal": "/art/combat-v1/effects/heal.webp",
+    "poison": "/art/combat-v1/effects/poison.webp",
+    "music": "/art/combat-v1/effects/music.webp",
+    "claw": "/art/combat-v1/effects/claw.webp",
+    "impact": "/art/combat-v1/effects/impact.webp",
+    "cast": "/art/combat-v1/effects/cast.webp"
+  }
+}

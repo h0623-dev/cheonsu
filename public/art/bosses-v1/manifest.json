@@ -1,0 +1,69 @@
+{
+  "units": {
+    "boss_commander": {
+      "ready": "/art/bosses-v1/boss_commander-ready.webp",
+      "map": "/art/map-sprites-v4/boss_commander.webp",
+      "portrait": "/art/bosses-v1/boss_commander-portrait.webp",
+      "motion": {
+        "run-a": "/art/bosses-v1/boss_commander-run-a.webp",
+        "run-b": "/art/bosses-v1/boss_commander-run-b.webp",
+        "windup": "/art/bosses-v1/boss_commander-windup.webp",
+        "strike": "/art/bosses-v1/boss_commander-strike.webp",
+        "recoil": "/art/bosses-v1/boss_commander-recoil.webp",
+        "recover": "/art/bosses-v1/boss_commander-ready.webp"
+      }
+    },
+    "boss_frost": {
+      "ready": "/art/bosses-v1/boss_frost-ready.webp",
+      "map": "/art/map-sprites-v4/boss_frost.webp",
+      "portrait": "/art/bosses-v1/boss_frost-portrait.webp",
+      "motion": {
+        "run-a": "/art/bosses-v1/boss_frost-run-a.webp",
+        "run-b": "/art/bosses-v1/boss_frost-run-b.webp",
+        "windup": "/art/bosses-v1/boss_frost-windup.webp",
+        "strike": "/art/bosses-v1/boss_frost-strike.webp",
+        "recoil": "/art/bosses-v1/boss_frost-recoil.webp",
+        "recover": "/art/bosses-v1/boss_frost-ready.webp"
+      }
+    },
+    "boss_ember": {
+      "ready": "/art/bosses-v1/boss_ember-ready.webp",
+      "map": "/art/map-sprites-v4/boss_ember.webp",
+      "portrait": "/art/bosses-v1/boss_ember-portrait.webp",
+      "motion": {
+        "run-a": "/art/bosses-v1/boss_ember-run-a.webp",
+        "run-b": "/art/bosses-v1/boss_ember-run-b.webp",
+        "windup": "/art/bosses-v1/boss_ember-windup.webp",
+        "strike": "/art/bosses-v1/boss_ember-strike.webp",
+        "recoil": "/art/bosses-v1/boss_ember-recoil.webp",
+        "recover": "/art/bosses-v1/boss_ember-ready.webp"
+      }
+    },
+    "boss_oracle": {
+      "ready": "/art/bosses-v1/boss_oracle-ready.webp",
+      "map": "/art/map-sprites-v4/boss_oracle.webp",
+      "portrait": "/art/bosses-v1/boss_oracle-portrait.webp",
+      "motion": {
+        "run-a": "/art/bosses-v1/boss_oracle-run-a.webp",
+        "run-b": "/art/bosses-v1/boss_oracle-run-b.webp",
+        "windup": "/art/bosses-v1/boss_oracle-windup.webp",
+        "strike": "/art/bosses-v1/boss_oracle-strike.webp",
+        "recoil": "/art/bosses-v1/boss_oracle-recoil.webp",
+        "recover": "/art/bosses-v1/boss_oracle-ready.webp"
+      }
+    },
+    "boss_abyss": {
+      "ready": "/art/bosses-v1/boss_abyss-ready.webp",
+      "map": "/art/map-sprites-v4/boss_abyss.webp",
+      "portrait": "/art/bosses-v1/boss_abyss-portrait.webp",
+      "motion": {
+        "run-a": "/art/bosses-v1/boss_abyss-run-a.webp",
+        "run-b": "/art/bosses-v1/boss_abyss-run-b.webp",
+        "windup": "/art/bosses-v1/boss_abyss-windup.webp",
+        "strike": "/art/bosses-v1/boss_abyss-strike.webp",
+        "recoil": "/art/bosses-v1/boss_abyss-recoil.webp",
+        "recover": "/art/bosses-v1/boss_abyss-ready.webp"
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+.victory-dialog { width: min(380px, calc(100% - 24px)); max-height: calc(100dvh - 28px); margin: auto; padding: 0; overflow: hidden; border: 1px solid #809285; border-radius: 8px; background: #20332e; color: #f0f3e9; box-shadow: 0 12px 40px #0008; letter-spacing: 0; }
+.victory-dialog[open] { display: flex; flex-direction: column; }
+.victory-dialog::backdrop { background: #0e191bbb; }
+.victory-dialog header { display: flex; align-items: center; gap: 12px; padding: 18px; border-bottom: 1px solid #53695f; }
+.victory-dialog header svg, .victory-rank { color: #e2c47c; flex-shrink: 0; }
+.victory-dialog header div { min-width: 0; }
+.victory-dialog h2 { margin: 3px 0 0; font-size: 22px; }
+.victory-dialog small { font-size: 12px; overflow-wrap: anywhere; }
+.victory-rank { margin-left: auto; font-size: 24px; }
+.victory-body { overflow: auto; padding: 14px 18px; font-size: 13px; min-height: 0; }
+.victory-body p { margin: 0 0 10px; }
+.victory-body dl { display: flex; gap: 24px; margin: 0 0 12px; }
+.victory-body dt { font-size: 12px; color: #bacdbf; }
+.victory-body dd { margin: 3px 0 0; font-size: 17px; }
+.victory-mvp strong { margin-left: 8px; }
+.victory-body summary { cursor: pointer; padding: 8px 0; color: #bcd1d5; }
+.victory-dialog footer { flex-shrink: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 12px 18px 18px; border-top: 1px solid #53695f; }
+.victory-dialog button { display: flex; justify-content: center; align-items: center; gap: 7px; min-height: 42px; padding: 8px; background: #354c43; border: 1px solid #718c7b; color: #f0f3e9; border-radius: 5px; font: inherit; font-size: 14px; }
+.victory-dialog button.victory-next { grid-column: 1 / -1; background: #426555; }
+.victory-dialog button:focus-visible { outline: 2px solid #e2c47c; outline-offset: 2px; }

@@ -26,6 +26,7 @@ export function addOrRefreshStatus(statuses = [], status) {
 
 export function getSkillStatus(attacker, mode) {
   if (mode !== "skill") return null;
+  if (attacker.skillSpec) return attacker.skillSpec.status ? { type: attacker.skillSpec.status, turns: 2 } : null;
 
   if (attacker.id === "lina" || attacker.skill === "파이어볼" || attacker.skill === "다크 플레임" || attacker.skill === "화염 폭발") {
     return { type: "burn", turns: 2 };

@@ -1,0 +1,279 @@
+/* Shared art direction. Legacy battle geometry remains in battle-art.css. */
+.app.world-art-app {
+  background: #1d2928;
+  color: #f0f4ed;
+  letter-spacing: 0;
+  --world-ink: #182624;
+  --world-panel: #223632;
+  --world-line: #71877c;
+  --world-text: #edf2e7;
+}
+
+.world-art-app .overlay { display: none; }
+.world-art-app button { letter-spacing: 0 !important; }
+.world-art-app button:focus-visible { outline: 2px solid #cee9e2 !important; outline-offset: 3px; }
+.world-art-app :is(.campaign-screen, .camp-screen, .deployment-screen, .deployment-simple-screen) {
+  background-color: #182624 !important;
+  background-image: none !important;
+}
+.world-art-app :is(.screen-panel-header, .campaign-header, .camp-header) { background: #1b2b28 !important; }
+.world-art-app :is(h1, h2, .unit-name, .camp-title, .stage-title) { color: #edf2e7; letter-spacing: 0; }
+.world-art-app :is(.back-btn, .enter-btn, .camp-btn, .battle-buttons button, .result-btn) {
+  background: #33534a !important;
+  color: #f1f4eb !important;
+  border: 1px solid #6c8b7c !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+}
+.world-art-app :is(.portrait, .image-portrait, .deploy-avatar, .selected-status-face, .camp-avatar) {
+  background: #394941 !important;
+  border-color: #829481 !important;
+  border-radius: 6px !important;
+}
+.world-art-app :is(.portrait, .image-portrait, .deploy-avatar, .selected-status-face, .camp-avatar) img {
+  filter: none !important;
+  image-rendering: auto !important;
+}
+.world-art-app .camp-visual {
+  background: url('/art/world-v2/scenes/camp.webp') center 65% / cover !important;
+  border-radius: 6px !important;
+  border-color: #71877c !important;
+  box-shadow: none !important;
+}
+.world-art-app .camp-fire { visibility: hidden; }
+.world-art-app .camp-screen { display: block !important; padding-bottom: max(24px, env(safe-area-inset-bottom)) !important; }
+.world-art-app .camp-screen .camp-visual { height: 160px; min-height: 160px; }
+.world-art-app .camp-screen .camp-tab-panel { background: none !important; border: 0 !important; padding: 0 !important; transform: none !important; }
+.world-art-app .camp-screen .camp-character-row.upgraded { max-height: none; overflow: visible; padding: 0; }
+.world-art-app .camp-screen .camp-menu-grid.compact { position: static; background: none; margin: 12px 0 0; padding: 0; }
+.world-art-app .camp-screen :is(.camp-character, .hud-box, .camp-dashboard-stat) { background: #273a32 !important; border-color: #637760 !important; border-radius: 6px !important; }
+.world-art-app .camp-screen :is(.camp-character, .hud-box, .camp-dashboard-stat) strong { color: #edf3e5 !important; }
+.world-art-app .camp-screen .hud-row { background: none !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; }
+.world-art-app .camp-screen .camp-message { max-height: none; border: 0; background: none; border-radius: 0; padding: 10px 0; }
+.world-art-app .camp-screen .camp-tab-row button { background: #293f36; border-radius: 4px; color: #dae5d9; }
+.world-art-app .camp-screen .camp-tab-row button.selected { background: #496f58; border-color: #91a887; color: #fff; }
+
+/* The title and menu are real UI, no invisible hit boxes over painted text. */
+.world-art-app .title-container.art-menu {
+  max-width: 100%;
+  min-height: 100%;
+  overflow-y: auto;
+  padding: max(40px, env(safe-area-inset-top)) 24px max(44px, env(safe-area-inset-bottom));
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  isolation: isolate;
+}
+.world-art-app .main-menu-art {
+  position: fixed;
+  object-position: center;
+  filter: none;
+  z-index: -2;
+}
+.world-art-app .art-menu::after {
+  position: fixed;
+  background: linear-gradient(180deg, rgb(21 37 34 / 5%) 15%, rgb(21 37 34 / 30%) 45%, rgb(21 37 34 / 86%) 100%);
+  z-index: -1;
+}
+.world-menu-heading { text-align: center; text-shadow: 0 2px 12px #1d3028; }
+.world-menu-heading h1 { font-family: 'Batang', serif; font-size: 88px; line-height: 1.2; color: #fcfff3 !important; font-weight: 700; }
+.world-menu-heading p { font-size: 15px; color: #f5f8ef; margin-top: 10px; }
+.world-wordmark { font: 700 64px / 1.2 'Batang', serif; color: #eff5e8; }
+.world-art-app .main-menu-hit-area {
+  position: relative;
+  inset: auto;
+  width: min(100%, 340px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  z-index: 1;
+}
+.world-art-app .menu-hit-btn {
+  display: block;
+  position: static;
+  width: auto;
+  height: 42px;
+  min-height: 42px;
+  padding: 0 6px;
+  border: 1px solid rgb(211 229 211 / 38%);
+  border-radius: 5px;
+  background: rgb(28 49 43 / 87%);
+  color: #eff4e9;
+  font-size: 13px;
+  font-weight: 600;
+  text-indent: 0;
+  opacity: 1;
+}
+.world-art-app .menu-hit-btn:nth-child(-n+2) { grid-column: 1 / -1; height: 54px; font-size: 18px; }
+.world-art-app .menu-hit-btn:first-child { background: #426b59; border-color: #c0d3b2; }
+.world-art-app .menu-hit-btn:hover { background: #456d5e; }
+.world-art-app .menu-hit-btn:nth-child(8) { font-size: 0; }
+.world-art-app .menu-hit-btn:nth-child(8)::after { content: '빌드 정보'; font-size: 13px; }
+.world-art-app :is(.promo-small-btn, .release-small-btn) { display: none; }
+.world-art-app .menu-version-line { position: static; color: #cad8cf; font-size: 10px; z-index: 1; }
+
+.world-art-app .battle-screen.battle-final-concept.battle-board-only {
+  background: #1d2928 !important;
+}
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .battle-map-scroll-shell {
+  background: #506847 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+  padding-top: 72px !important;
+}
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .battle-map-scroll-shell::before,
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .battle-map-scroll-shell::after { display: none !important; }
+
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .battle-map.classic-pixel-map.final-illustrated-map.world-battlefield {
+  background: var(--world-ground) 0 0 / calc(var(--battle-tile-size) * 3) calc(var(--battle-row-size) * 3) repeat !important;
+  border-radius: 0 !important;
+  margin-top: 0 !important;
+  box-shadow: none !important;
+
+  & > .tile {
+    background: none !important;
+    background-image: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    filter: none !important;
+    transform: none !important;
+    z-index: auto !important;
+    isolation: auto !important;
+    aspect-ratio: auto !important;
+  }
+  & > .tile::before, & > .tile::after { display: none !important; }
+  & .world-ground {
+    position: absolute;
+    inset: -0.25px;
+    border-radius: var(--ground-radius);
+    background: var(--ground-image) var(--ground-position) / 300% 300%;
+    mask-image: linear-gradient(to right, transparent, #000 var(--blend-left), #000 calc(100% - var(--blend-right)), transparent), linear-gradient(to bottom, transparent, #000 var(--blend-top), #000 calc(100% - var(--blend-bottom)), transparent);
+    mask-composite: intersect;
+    pointer-events: none;
+    z-index: 0;
+  }
+  & .world-prop {
+    display: block;
+    position: absolute;
+    left: var(--prop-x);
+    top: var(--prop-ground);
+    width: calc(var(--battle-tile-size) * var(--prop-height));
+    height: calc(var(--battle-tile-size) * var(--prop-height));
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+    object-position: center bottom;
+    transform: translate(-50%, -100%);
+    filter: drop-shadow(2px 3px 2px rgb(21 36 27 / 22%));
+    z-index: var(--prop-z);
+    pointer-events: none;
+    image-rendering: auto;
+  }
+  & .low-prop { opacity: 0.85; }
+  & :is(.ground-rune, .ground-trap, .ground-fire) { background-size: 100% 100%; background-position: center; border-radius: 35%; }
+  & .ground-dark { border-radius: 30%; }
+  & .unit.sprite-unit { filter: none !important; opacity: 1 !important; }
+  & .map-hp-strip { z-index: calc(var(--row-z) + 1) !important; border: 0 !important; border-radius: 2px; }
+  & .map-hp-strip.hp-ally > span { background: #87c4b6 !important; }
+  & .map-hp-strip.hp-enemy > span { background: #da877b !important; }
+  & .map-hp-strip.hp-boss > span { background: #e6b875 !important; }
+  & .move-tile {
+    inset: 1px !important;
+    background: rgb(169 215 211 / 24%) !important;
+    border: 1px solid rgb(207 241 232 / 78%) !important;
+    border-radius: 3px !important;
+    box-shadow: none !important;
+    animation: none !important;
+    z-index: 1 !important;
+  }
+  & .attack-tile, & .enemy-threat-tile {
+    background: rgb(195 91 78 / 23%) !important;
+    border: 1px solid rgb(231 147 126 / 75%) !important;
+    box-shadow: none !important;
+    animation: none !important;
+    z-index: 1 !important;
+  }
+  & :is(.move-tile, .attack-tile)::before,
+  & :is(.move-tile, .attack-tile)::after { display: none !important; }
+  & :is(.enemy-hp-peek, .status-badges, .skill-cd-badge, .assist-used-badge) { z-index: calc(var(--row-z) + 2) !important; }
+}
+
+.world-art-app .battle-screen.battle-final-concept.battle-board-only :is(.cinematic-stage-card, .cinematic-stage-actions button, .battle-zoom-controls, .battle-zoom-controls button, .cinematic-hud-restore, .selected-unit-status-hud, .battle-settings-card) {
+  background: rgb(26 43 39 / 96%) !important;
+  border-color: #7c9180 !important;
+  color: #f0f3e8 !important;
+  border-radius: 5px !important;
+  box-shadow: 0 2px 7px rgb(12 24 20 / 18%) !important;
+  text-shadow: none !important;
+}
+.world-art-app .battle-screen.battle-final-concept.battle-board-only :is(.cinematic-stage-card, .selected-unit-status-hud) :is(strong, span, em, b) { color: #edf2e7 !important; }
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .selected-status-stats span { background: #32483d !important; border-color: #657a69 !important; }
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .selected-meter.hp-meter i b { background: #83c0a3 !important; }
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .selected-meter.mp-meter i b { background: #94b7d2 !important; }
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .action-panel.post-move-action-panel {
+  background: #192c28 !important;
+  border-color: #657d70 !important;
+  border-radius: 0 !important;
+}
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .action-panel.post-move-action-panel button {
+  background: #33544a !important;
+  color: #f3f5ec !important;
+  border: 1px solid #739182 !important;
+  box-shadow: none !important;
+  font-size: 16px !important;
+  border-radius: 5px !important;
+}
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .action-panel.post-move-action-panel button:nth-child(2) { background: #704640 !important; border-color: #bb8e83 !important; }
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .action-panel.post-move-action-panel button:nth-child(3) { background: #4a566a !important; border-color: #8d9cb6 !important; }
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .action-panel.post-move-action-panel button:nth-child(4) { background: #326166 !important; border-color: #7fa6a5 !important; }
+.world-art-app :is(.dk-character-body, .story-portrait img) { image-rendering: auto !important; filter: drop-shadow(0 3px 3px rgb(20 31 26 / 25%)) !important; }
+.world-art-app .dk-stage { filter: none !important; }
+
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .cinematic-command-bar {
+  background: #192c28 !important;
+  border-color: #61786b !important;
+  box-shadow: none !important;
+}
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .cinematic-command-bar button {
+  background: #33544a !important;
+  border: 1px solid #779583 !important;
+  color: #f2f5ec !important;
+  border-radius: 5px !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-size: 17px !important;
+}
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .cinematic-command-bar .cmd-attack { background: #704640 !important; border-color: #bd8c81 !important; }
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .cinematic-command-bar .cmd-skill { background: #4d596a !important; border-color: #97a5b9 !important; }
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .cinematic-command-bar .cmd-item { background: #356269 !important; border-color: #86aeb1 !important; }
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .battle-end-turn-float { background: #5d443c !important; border-color: #b69a80 !important; color: #f2f4e9 !important; box-shadow: none !important; }
+.world-art-app .deployment-simple-screen :is(.deployment-rule-card, .deployment-equipment-card, .deployment-briefing-card, .deployment-count, .deployment-summary, .deploy-unit-card, .deployment-unit, .deploy-unit, .deployment-actions, .deploy-recommend-card) {
+  background: #263a32 !important;
+  border-color: #73846d !important;
+  box-shadow: none !important;
+  border-radius: 6px !important;
+}
+.world-art-app .deployment-simple-screen button { background: #33534a !important; border-color: #75917d !important; color: #eff4e8 !important; border-radius: 5px !important; }
+.world-art-app .deployment-simple-screen .deployment-actions button:last-child { background: #496d56 !important; }
+.world-art-app :is(.campaign-region-art img, .story-bg img) { filter: none !important; image-rendering: auto !important; }
+.world-art-app .deployment-simple-screen :is(.stage-briefing-card, .deploy-count-box, .briefing-recommend, .deployment-rule-card) { background: #22362e !important; border-color: #718370 !important; border-radius: 6px !important; }
+.world-art-app .deployment-simple-screen :is(.briefing-head, .deploy-unit-card, .briefing-mission-row) strong { color: #edf3e6 !important; }
+.world-art-app .deployment-simple-screen .briefing-boss-row { background: #4b3431 !important; border-color: #9c766b !important; }
+.world-art-app .dk-final-vs-card { background: #1c3029 !important; border-color: #8b9c82 !important; box-shadow: none !important; }
+.world-art-app .dk-final-vs-card .dk-cutscene-bg { background: var(--dk-cutscene-bg-art) center / cover !important; filter: none !important; }
+.world-art-app .dk-final-vs-card .dk-cutscene-bg::after { background: linear-gradient(180deg, rgb(20 36 29 / 15%), transparent 30% 65%, rgb(20 36 29 / 45%)) !important; }
+.world-art-app .dk-final-vs-card .dk-duel-stage { background: none !important; }
+.world-art-app .dk-final-vs-card .dk-cutscene-title { background: #243e34 !important; }
+.world-art-app :is(.story-header, .story-dialogue-panel) { background: rgb(27 46 38 / 96%) !important; border-color: #81937d !important; border-radius: 6px !important; box-shadow: none !important; }
+.world-art-app .story-bg-vignette { background: linear-gradient(180deg, rgb(20 34 28 / 6%), transparent 50%, rgb(20 34 28 / 40%)) !important; }
+.world-art-app .story-character-stage img { filter: drop-shadow(0 5px 3px rgb(20 33 25 / 32%)) !important; }
+.world-art-app :is(.story-speaker, .story-line) { color: #f0f5e9 !important; }
+.world-art-app .story-footer button { background: #426a53 !important; border-radius: 5px; }
+
+@media (max-height: 650px) {
+  .world-art-app .title-container.art-menu { justify-content: flex-start; gap: 14px; padding-top: 20px; }
+  .world-menu-heading h1 { font-size: 56px; }
+  .world-menu-heading p { margin-top: 2px; }
+}

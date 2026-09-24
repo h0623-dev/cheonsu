@@ -12,7 +12,7 @@ export function makeAlly(unit) {
     level: unit.level || 1,
     exp: unit.exp || 0,
     baseAtk: unit.baseAtk || unit.atk,
-    baseDef: unit.baseDef || unit.def,
+    baseDef: unit.baseDef ?? (unit.def - (unit.skillGuardBoost || 0)),
     baseSkillBonus: unit.baseSkillBonus ?? unit.skillBonus ?? 0,
     skillLevel: unit.skillLevel || 0,
     equipment: unit.equipment || { weapon: null, armor: null },
@@ -41,7 +41,8 @@ export function applyEquipmentStats(unit) {
   if (unit.type !== "ally") return unit;
 
   const baseAtk = unit.baseAtk ?? unit.atk;
-  const baseDef = unit.baseDef ?? unit.def;
+  const skillGuardBoost = unit.skillGuardBoost || 0;
+  const baseDef = unit.baseDef ?? (unit.def - skillGuardBoost);
   const gearEnhance = unit.gearEnhance || {};
 
   const weapon = unit.equipment?.weapon ? EQUIPMENT[unit.equipment.weapon] : null;
@@ -67,13 +68,18 @@ export function applyEquipmentStats(unit) {
     baseAtk,
     baseDef,
     atk: baseAtk + atkBonus,
-    def: baseDef + defBonus,
+    def: baseDef + defBonus + skillGuardBoost,
   };
 }
 
 
 export function applyEquipmentToParty(party) {
-  return party.map((u) => applyEquipmentStats(makeAlly(u)));
+  return party.map((unit) => applyEquipmentStats(makeAlly({
+    ...unit,
+    def: unit.def - (unit.skillGuardBoost || 0),
+    skillGuardBoost: 0,
+    guard: false,
+  })));
 }
 
 
@@ -153,7 +159,9 @@ export function mergePartyIntoStage(stage, party) {
         moved: false,
         acted: false,
         guard: false,
+        skillGuardBoost: 0,
         skillCooldown: 0,
+        skillCooldowns: {},
         supportUsed: false,
         status: [],
       });
@@ -175,7 +183,9 @@ export function mergePartyIntoStage(stage, party) {
       moved: false,
       acted: false,
       guard: false,
+      skillGuardBoost: 0,
       skillCooldown: 0,
+      skillCooldowns: {},
       supportUsed: false,
       status: [],
     });
@@ -189,8 +199,12 @@ export function mergePartyIntoStage(stage, party) {
 
 
 export function mergePartyFromUnits(prevParty, currentUnits) {
-  const allies = currentUnits.filter((u) => u.type === "ally").map(makeAlly).map(applyEquipmentStats);
-  return prevParty.map((unit) => allies.find((ally) => ally.id === unit.id) || unit);
+  const allies = currentUnits.filter((unit) => unit.type === "ally");
+  return applyEquipmentToParty(prevParty.map((unit) => ({
+    ...(allies.find((ally) => ally.id === unit.id) || unit),
+    skillCooldown: 0,
+    skillCooldowns: {},
+  })));
 }
 
 
@@ -203,7 +217,7 @@ export function grantExp(units, attackerId, expAmount) {
     messages.push(`${unit.name} EXP +${expAmount}`);
     if (nextExp >= 100) {
       const oldBaseAtk = nextUnit.baseAtk ?? nextUnit.atk;
-      const oldBaseDef = nextUnit.baseDef ?? nextUnit.def;
+      const oldBaseDef = nextUnit.baseDef ?? (nextUnit.def - (nextUnit.skillGuardBoost || 0));
       nextUnit = {
         ...nextUnit,
         level: (unit.level || 1) + 1,

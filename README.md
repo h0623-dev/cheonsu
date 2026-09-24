@@ -1,78 +1,68 @@
 # 천수 (Cheonsu)
 
-React + Vite 기반 모바일 세로 SRPG 프로토타입입니다.
+현재 개발 빌드: **1.99.133 / Android versionCode 332**
 
-현재 빌드: `v1.99.1`
+## 다운로드
 
-## 개발 실행
+- [1.99.133 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.133)
+- [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
+- [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)
 
-```bash
-npm install
-npm run dev
+APK는 디버그 서명의 개발 테스트용입니다. 기존 설치를 삭제하기 전에는 게임 설정에서 저장을 내보내세요. 이 저장소의 `main`은 현재 개발본이며, 교체 전 파일은 Git 이력에서 확인할 수 있습니다.
+
+1.99.133: 지형·역할에 따른 시작 배치 분산, 30장 전투 전후 이야기, 인물 표시·이전 대사·대화 기록, 승리 후 대화와 목적지 연결. 원정 지도·편성·야영지 UI를 정리하고 전투 시작 시 선택한 아군으로 시점을 맞췄습니다. 상세: `docs/JOURNEY_PATCH_1.99.133.md`.
+
+1.99.132: 턴당 공격 1회(스킬/협공 포함), 적 지휘관 처치 승리, 작은 승리창과 다음 스테이지/상점/대기실 이동, 보스 전용 5종, 아군/적 크기 통일, 장별 지형 변형, 반복 BGM 및 효과음 수정. 기본 전장 130%, 기본 2배속. 상세: `docs/BATTLE_REFINEMENT_1.99.132.md`.
+
+1.99.131: 용의 기사2에서 영감을 받은 개별 영웅 육성/탐색 방향. 적 19종의 맵/초상화/전투 이미지 교체, 무기별 컷신 동작 개선, 초반 10장에 발견 요소 8곳과 비전 기술 4개 및 숨겨진 전직 2종 추가. 상세 내용은 `docs/DISCOVERY_PATCH_1.99.131.md` 참조.
+
+소스나 게임 이미지를 변경한 작업은 최종 소스에서 새 APK를 빌드하고 함께 전달합니다.
+
+1.99.130: 전투 좌측 상단 정보창 축소, 모든 아군 이동력 +1 (기존 저장 포함, 적군 변경 없음).
+
+React 19 + Vite + Capacitor 7 기반 전술 SRPG입니다. 30개 스테이지, 아군 17종, 적군 19종, 캠프 성장, 스킬, 아이템, 보스 패턴, 저장/복원을 포함합니다.
+
+## 다른 PC에서 시작
+
+Node.js 24를 설치한 뒤, 개발 통합 ZIP을 풀고 `package.json`이 있는 폴더에서 실행합니다.
+
+```sh
+npm ci
+npm run setup
+npm run dev -- --host 127.0.0.1
 ```
 
-브라우저 주소:
+터미널에 표시되는 주소를 엽니다. 소스와 게임 이미지는 모두 포함되어 있어 이미지 생성 도구나 API 키가 없어도 개발할 수 있습니다.
 
-```text
-http://localhost:5173/
-```
+## 검사와 APK
 
-## 웹 빌드
-
-```bash
+```sh
+npm test
 npm run build
-```
-
-## 앱 패키징 상태
-
-천수는 Capacitor 기반 Android 앱 프로젝트가 준비되어 있습니다.
-
-- 앱 ID: `com.cheonsu.game`
-- 앱 이름: `천수`
-- Android 프로젝트: `android/`
-- 웹 빌드 출력: `dist/`
-- Android 앱 버전: `1.99.1`
-- Android `versionCode`: `200`
-- 앱 내 업데이트 확인: `설정 > 앱 업데이트`
-- 앱 아이콘: `public/icons/cheonsu-app-icon-master.png`
-
-웹 빌드를 Android 프로젝트에 반영합니다.
-
-```bash
-npm run android:sync
-```
-
-Android Studio에서 프로젝트를 엽니다.
-
-```bash
-npm run android:open
-```
-
-디버그 APK를 만듭니다.
-
-```bash
 npm run android:apk
 ```
 
-APK 생성 위치:
+APK 빌드는 Android Studio, SDK Platform 35, JDK 21 이상이 추가로 필요합니다. 마지막 명령이 웹 빌드, Capacitor 동기화, Android 빌드를 순서대로 처리합니다.
 
-```text
-android/app/build/outputs/apk/debug/app-debug.apk
-```
+결과: `android/app/build/outputs/apk/debug/app-debug.apk`
 
-## APK 빌드 준비물
+## 이번 변경
 
-현재 프로젝트 설정은 앱 빌드 준비가 되어 있지만, 이 PC에서 APK를 만들려면 Android 빌드 환경이 필요합니다.
+- 전투 캐릭터 36종에 달리기 2자세, 공격 준비, 타격, 후속 자세, 피격의 216개 모션 이미지.
+- 근접 보법과 무기 동작, 활 조준과 발사, 마법 시전, 피격/회피/회복/수호/격파 연출.
+- 1배속/2배속/3배속 전환. 이동, 전투, 적 행동과 연출 시간을 함께 조절.
+- 아군 17명에게 각각 2개씩 총 34개 스킬, 선택창과 개별 재사용 대기시간.
+- 공격/스킬 선택 상태와 대상 표시. 패배 후 대기실 복귀 또는 재도전.
+- 아이템 창의 취소, 닫기, 바깥 영역, Esc 동작 및 자동 전투 간섭 방지.
+- 턴 전환 카메라 자동 이동. 확대 배율 유지.
+- 설정, 도감, 기록, 정보, 전투 설정창 색상과 여백 통일.
+- 재현 가능한 의존성 잠금 파일, 설치 확인, 크로스플랫폼 APK 명령, 수동 GitHub 빌드 워크플로.
 
-- Android Studio
-- Android SDK Platform 35
-- JDK 17 이상
-- `JAVA_HOME` 환경 변수
+## 문서
 
-자세한 절차는 [docs/APP_BUILD_GUIDE.md](docs/APP_BUILD_GUIDE.md)를 확인하세요.
+- [개발 인계와 다른 PC 작업 절차](docs/DEVELOPMENT_HANDOFF.md)
+- [전투 그래픽 원본 및 생성 프롬프트](docs/art/combat-v1/ART_DIRECTION.md)
+- [새 전투 모션 생성 프롬프트](docs/art/combat-v2/PROMPTS.md)
+- [맵 그래픽 기준](docs/art/world-v2/ART_DIRECTION.md)
 
-## 참고 문서
-
-- 앱 빌드 가이드: [docs/APP_BUILD_GUIDE.md](docs/APP_BUILD_GUIDE.md)
-- 앱 업데이트 가이드: [docs/APP_UPDATE_GUIDE.md](docs/APP_UPDATE_GUIDE.md)
-- 앱 출시 체크리스트: [docs/APP_RELEASE_CHECKLIST.md](docs/APP_RELEASE_CHECKLIST.md)
+`npm run package:source`로 최신 개발 통합 ZIP을 다시 만들 수 있습니다. APK와 소스 ZIP은 서로 다른 용도입니다. APK만으로는 소스 개발을 이어갈 수 없습니다.

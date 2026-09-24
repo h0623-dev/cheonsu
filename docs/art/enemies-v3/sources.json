@@ -1,0 +1,75 @@
+{
+  "generator": "Built-in image_gen.imagegen tool",
+  "batches": [
+    {
+      "id": "batch-1",
+      "file": "sources/batch-1.png",
+      "width": 1254,
+      "height": 1254,
+      "generatedImage": "exec-164e5406-c361-4f2b-9e89-e065de31593a.png",
+      "originalPath": "C:/Users/user/.codex/generated_images/01a0aa06-d9a9-79c0-b8b2-11f50732c6ae/exec-164e5406-c361-4f2b-9e89-e065de31593a.png",
+      "keys": ["raider", "ranger", "marauder", "iron_lancer", "warlord", "cultist"],
+      "portraitCrops": {
+        "raider": { "left": 890, "top": 17, "width": 100, "height": 109 },
+        "ranger": { "left": 883, "top": 219, "width": 120, "height": 120 },
+        "marauder": { "left": 902, "top": 412, "width": 125, "height": 125 },
+        "iron_lancer": { "left": 890, "top": 646, "width": 115, "height": 115 },
+        "warlord": { "left": 886, "top": 835, "width": 116, "height": 116 },
+        "cultist": { "left": 875, "top": 1051, "width": 121, "height": 121 }
+      },
+      "prompt": null,
+      "promptDocument": "GENERATION_PROMPTS.md#batch-1",
+      "promptStatus": "Actual built-in ImageGen prompt recorded in promptDocument; inline text omitted to avoid duplication."
+    },
+    {
+      "id": "batch-2",
+      "file": "sources/batch-2.png",
+      "width": 1254,
+      "height": 1254,
+      "generatedImage": "exec-a8778145-5281-4eb9-b604-0d013d4871e3.png",
+      "originalPath": "C:/Users/user/.codex/generated_images/01a0aa06-d9a9-79c0-b8b2-11f50732c6ae/exec-a8778145-5281-4eb9-b604-0d013d4871e3.png",
+      "keys": ["sniper", "assassin_elite", "plague_doctor", "beast_tamer", "storm_mage", "blade_dancer"],
+      "ownershipSplits": [
+        {
+          "slots": [26, 32],
+          "divideY": 1036,
+          "lowerOutline": [[464, 1036], [488, 1030], [508, 1023], [530, 1019], [550, 1018], [558, 1020], [570, 1024], [570, 1027], [543, 1025], [525, 1028], [502, 1036]],
+          "note": "Blade dancer windup sword touches storm mage windup front boot. Assign the visible sword edge to the lower row; no hidden pixels are reconstructed."
+        }
+      ],
+      "portraitCrops": {
+        "sniper": { "left": 875, "top": 4, "width": 120, "height": 120 },
+        "assassin_elite": { "left": 886, "top": 204, "width": 125, "height": 125 },
+        "plague_doctor": { "left": 883, "top": 409, "width": 125, "height": 125 },
+        "beast_tamer": { "left": 885, "top": 616, "width": 122, "height": 122 },
+        "storm_mage": { "left": 882, "top": 826, "width": 125, "height": 125 },
+        "blade_dancer": { "left": 885, "top": 1030, "width": 125, "height": 125 }
+      },
+      "prompt": null,
+      "promptDocument": "GENERATION_PROMPTS.md#batch-2",
+      "promptStatus": "Actual built-in ImageGen prompt recorded in promptDocument; inline text omitted to avoid duplication."
+    },
+    {
+      "id": "batch-3",
+      "file": "sources/batch-3.png",
+      "width": 1161,
+      "height": 1355,
+      "generatedImage": "exec-80dc4e4c-8f3b-400e-b1e9-ae1fcc56f74b.png",
+      "originalPath": "C:/Users/user/.codex/generated_images/01a0aa06-d9a9-79c0-b8b2-11f50732c6ae/exec-80dc4e4c-8f3b-400e-b1e9-ae1fcc56f74b.png",
+      "keys": ["siege_gunner", "sentinel", "blackguard", "pyromancer", "frost_mage", "void_knight", "wolf"],
+      "poseAliases": { "wolf": { "windup": "recover" } },
+      "portraitCrops": {
+        "siege_gunner": { "left": 809, "top": 4, "width": 116, "height": 116 },
+        "sentinel": { "left": 816, "top": 186, "width": 120, "height": 120 },
+        "blackguard": { "left": 816, "top": 377, "width": 120, "height": 120 },
+        "pyromancer": { "left": 809, "top": 559, "width": 118, "height": 118 },
+        "frost_mage": { "left": 807, "top": 754, "width": 121, "height": 121 },
+        "void_knight": { "left": 817, "top": 948, "width": 125, "height": 125 },
+        "wolf": { "left": 851, "top": 1172, "width": 121, "height": 112 }
+      },
+      "prompt": null,
+      "promptDocument": "GENERATION_PROMPTS.md#batch-3",
+      "promptStatus": "Actual built-in ImageGen prompt recorded in promptDocument. Wolf row has five figures: run-a, run-b, leap, ready, recoil; ready is intentionally used for windup and recover."
+    }
+  ]
+}

@@ -156,8 +156,14 @@ function sortByCost(queue) {
 }
 
 
+// Keep saved base stats unchanged so the ally bonus never stacks on reload.
+export function getUnitMoveRange(unit) {
+  return unit ? (unit.move || 0) + (unit.type === "ally" ? 1 : 0) : 0;
+}
+
 export function getMoveTiles(unit, units, activeMap) {
   if (!unit || unit.acted || unit.moved || hasFreezeStatus(unit)) return [];
+  const moveRange = getUnitMoveRange(unit);
 
   const occupied = new Set(
     units
@@ -217,7 +223,7 @@ export function getMoveTiles(unit, units, activeMap) {
 
       const nextCost = cur.cost + tileCost;
 
-      if (nextCost > unit.move) continue;
+      if (nextCost > moveRange) continue;
       if (bestCost.has(key) && bestCost.get(key) <= nextCost) continue;
 
       bestCost.set(key, nextCost);

@@ -1,9 +1,32 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { X, Swords, Sparkles, BookOpen, ArrowRight, Save, ShoppingBag, Check, Users, Shield, Backpack, Settings } from "lucide-react";
+import DiscoveryDialog from "./components/DiscoveryDialog.jsx";
+import PromotionDialog from "./components/PromotionDialog.jsx";
+import { DISCOVERIES } from "./data/discoveries.js";
+import { getStageDiscoveries, getVisibleDiscoveries, normalizeExploration, claimDiscovery, applyDiscoveryUnlocks, getSecretPromotion, canSecretPromote, applySecretPromotion } from "./engine/discoveryEngine.js";
+import ItemDialog from "./components/ItemDialog.jsx";
+import CombatScene from "./components/CombatScene.jsx";
+import SkillDialog from "./components/SkillDialog.jsx";
+import DefeatDialog from "./components/DefeatDialog.jsx";
+import VictoryDialog from "./components/VictoryDialog.jsx";
+import StoryScene from "./components/StoryScene.jsx";
+import { distributeBattleFormations } from "./engine/formations.js";
+import { getBattleOutcome, spendAction } from "./engine/battleOutcome.js";
+import { getAudioContext, createMusicPlayer } from "./engine/audioEngine.js";
+import { playCheonsuSfx } from "./engine/soundEffects.js";
+import { getUnitSkills, getSkill, withSkill, getSkillCooldown, applyCooldown, tickCooldowns, applySupportSkill } from "./data/skills.js";
+import { BATTLE_SPEED_OPTIONS, getBattleSpeedConfig, scaleBattleTime } from "./engine/battleSpeed.js";
+import { getTurnCameraTarget, getCellScrollTarget } from "./engine/battleCamera.js";
+import { getCombatSprite, preloadCombatArt } from "./data/combatArt.js";
+import { getBossSpriteKey } from "./data/bossArt.js";
 import { stages } from "./data/stages.js";
 import { EQUIPMENT } from "./data/equipment.js";
 import { STATUS_INFO } from "./data/statuses.js";
 import { SUPPORT_PAIRS, SUPPORT_RANK_THRESHOLDS } from "./data/supports.js";
 import { STORY_SCENES } from "./data/storyScenes.js";
+import { BATTLE_GROUND_ROW_RATIO, getPaintedVisualProfile } from "./data/unitVisuals.js";
+import { createStageTerrain } from "./data/stageTerrain.js";
+import { getWorldBiome, getWorldScene, getWorldTileVisual, getWorldMapStyle, WORLD_ART_ROOT } from "./data/worldArt.js";
 import {
   clone,
   applyEquipmentStats,
@@ -20,7 +43,7 @@ import {
   getUnitNameById,
 } from "./engine/supportEngine.js";
 import { normalizeSaveData } from "./engine/saveEngine.js";
-import { getMoveTiles, getAttackTiles, findMovePath, getUnitMoveTrait } from "./engine/movement.js";
+import { getMoveTiles, getAttackTiles, findMovePath, getUnitMoveTrait, getUnitMoveRange } from "./engine/movement.js";
 import { getTargetInRange, moveEnemyToward, getAITypeLabel } from "./engine/enemyAI.js";
 import {
   DEFAULT_UPDATE_MANIFEST_URL,
@@ -50,7 +73,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.127";
+const SAVE_VERSION = "1.99.133";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -59,7 +82,6 @@ const QA_FIX_HISTORY_KEY = "cheonsu_v01_qa_fix_history";
 const QA_RELEASE_ARCHIVE_KEY = "cheonsu_v01_qa_release_archive";
 const UPDATE_MANIFEST_URL_KEY = "cheonsu_update_manifest_url";
 const PLAYTEST_UNLOCK_ALL_STAGES = true;
-const PLAYTEST_STORY_CAN_SKIP = PLAYTEST_UNLOCK_ALL_STAGES;
 const ALL_STAGE_IDS = stages.map((stage) => stage.id);
 const getPlaytestUnlockedStageIds = (stageIds = [1]) =>
   PLAYTEST_UNLOCK_ALL_STAGES ? ALL_STAGE_IDS : stageIds;
@@ -1170,6 +1192,7 @@ function getEventRewardText(reward = {}) {
 
 
 function canCounter(attacker, defender, activeMap) {
+  if (defender?.counterUsed) return false;
   if (!attacker || !defender) return false;
   if (defender.hp <= 0 || defender.acted) return false;
 
@@ -1515,6 +1538,7 @@ function createAssistPreview(attacker, defender, units, activeMap) {
 
 
 function getSkillAreaRadius(unit) {
+  if (unit?.skillSpec) return unit.skillSpec.radius || 0;
   if (!unit || unit.skillType !== "attack") return 0;
 
   const skill = String(unit.skill || "");
@@ -1541,6 +1565,7 @@ function getSkillAreaRadius(unit) {
 }
 
 function getSkillAreaDamageRate(unit) {
+  if (unit?.skillSpec) return 0.6;
   const level = getSkillUpgradeLevel(unit);
 
   if (level >= 5) return 0.72;
@@ -2895,129 +2920,12 @@ function pickOpenFrontierSpawn(spawns, activeMap, occupied, fallback = { x: 0, y
     : null;
 }
 
-const FORMATION_MIN_OPPONENT_GAP = 7;
-const FORMATION_MIN_TEAM_GAP = 2;
-
-function getFormationColumnOrder(width, side) {
-  const columns = Array.from({ length: width }, (_, x) => x);
-  const ideal = side === "ally"
-    ? Math.min(width - 1, Math.max(1, Math.floor(width * 0.22)))
-    : Math.max(0, Math.min(width - 2, Math.floor(width * 0.78)));
-
-  return columns.sort((a, b) => {
-    const da = Math.abs(a - ideal);
-    const db = Math.abs(b - ideal);
-    if (da !== db) return da - db;
-    return side === "ally" ? a - b : b - a;
-  });
-}
-
-function getFormationRowOrder(height, side) {
-  const rows = Array.from({ length: height }, (_, y) => y);
-  const ideal = side === "ally"
-    ? Math.max(0, height - 4)
-    : Math.min(height - 1, Math.max(1, Math.floor(height * 0.20)));
-
-  return rows.sort((a, b) => {
-    const da = Math.abs(a - ideal);
-    const db = Math.abs(b - ideal);
-    if (da !== db) return da - db;
-    return side === "ally" ? b - a : a - b;
-  });
-}
-
-function getFormationCandidates(activeMap, side) {
-  const height = activeMap?.length || 0;
-  const width = activeMap?.[0]?.length || 0;
-  const rows = getFormationRowOrder(height, side);
-  const columns = getFormationColumnOrder(width, side);
-  const candidates = [];
-
-  rows.forEach((y) => {
-    columns.forEach((x) => {
-      if (!inActiveMap(x, y, activeMap)) return;
-      if (isBlockedBattleTile(activeMap[y]?.[x])) return;
-
-      const lowerHalf = y >= Math.floor(height * 0.45);
-      const upperHalf = y <= Math.ceil(height * 0.55);
-
-      if (side === "ally" && !lowerHalf && candidates.length < 18) return;
-      if (side !== "ally" && !upperHalf && candidates.length < 18) return;
-
-      candidates.push({ x, y });
-    });
-  });
-
-  return candidates;
-}
-
-function isFormationCandidateValid(pos, activeMap, occupied, ownTeam, opposingTeam, teamGap, opponentGap) {
-  if (!inActiveMap(pos.x, pos.y, activeMap)) return false;
-  if (isBlockedBattleTile(activeMap[pos.y]?.[pos.x])) return false;
-  if (occupied.has(`${pos.x},${pos.y}`)) return false;
-  if (ownTeam.some((unit) => Math.abs(unit.x - pos.x) + Math.abs(unit.y - pos.y) < teamGap)) return false;
-  if (opposingTeam.some((unit) => Math.abs(unit.x - pos.x) + Math.abs(unit.y - pos.y) < opponentGap)) return false;
-
-  return true;
-}
-
-function placeFormationTeam(sourceUnits, candidates, activeMap, occupied, opposingTeam, side) {
-  const placed = [];
-
-  sourceUnits.forEach((unit) => {
-    const opponentGapSteps = side === "ally"
-      ? [0]
-      : [FORMATION_MIN_OPPONENT_GAP, FORMATION_MIN_OPPONENT_GAP - 1, FORMATION_MIN_OPPONENT_GAP - 2, 0];
-    const teamGapSteps = [FORMATION_MIN_TEAM_GAP, 1, 0];
-    let picked = null;
-
-    for (const opponentGap of opponentGapSteps) {
-      for (const teamGap of teamGapSteps) {
-        picked = candidates.find((pos) =>
-          isFormationCandidateValid(pos, activeMap, occupied, placed, opposingTeam, teamGap, opponentGap)
-        );
-        if (picked) break;
-      }
-      if (picked) break;
-    }
-
-    if (!picked) {
-      picked = candidates.find((pos) =>
-        inActiveMap(pos.x, pos.y, activeMap) &&
-        !isBlockedBattleTile(activeMap[pos.y]?.[pos.x]) &&
-        !occupied.has(`${pos.x},${pos.y}`)
-      );
-    }
-
-    const nextUnit = picked ? { ...unit, x: picked.x, y: picked.y } : unit;
-    occupied.add(`${nextUnit.x},${nextUnit.y}`);
-    placed.push(nextUnit);
-  });
-
-  return placed;
-}
-
 function spaceBattleFormations(stage, sourceUnits) {
-  const activeMap = stage?.map || [];
-  if (!activeMap.length || !activeMap[0]?.length) return sourceUnits;
-
-  const units = clone(sourceUnits || []);
-  const allies = units.filter((unit) => unit.type === "ally");
-  const bosses = units.filter((unit) => unit.type === "boss");
-  const enemies = units.filter((unit) => unit.type !== "ally" && unit.type !== "boss");
-  const allyCandidates = getFormationCandidates(activeMap, "ally");
-  const enemyCandidates = getFormationCandidates(activeMap, "enemy");
-  const occupied = new Set();
-  const placedAllies = placeFormationTeam(allies, allyCandidates, activeMap, occupied, [], "ally");
-  const placedBosses = placeFormationTeam(bosses, enemyCandidates, activeMap, occupied, placedAllies, "enemy");
-  const placedEnemies = placeFormationTeam(enemies, enemyCandidates, activeMap, occupied, placedAllies, "enemy");
-  const byId = new Map([...placedAllies, ...placedBosses, ...placedEnemies].map((unit) => [unit.id, unit]));
-
-  return units.map((unit) => byId.get(unit.id) || unit);
+  return distributeBattleFormations(stage, sourceUnits);
 }
 
 function createActOneRouteBattleStage(stage, deployCount = MAX_DEPLOY_COUNT) {
-  const map = cloneActOneRouteMap(stage);
+  const map = createStageTerrain(cloneActOneRouteMap(stage), stage.id);
   const config = getActOneRouteStageConfig(stage);
   const occupied = new Set();
   let allyIndex = 0;
@@ -3078,7 +2986,8 @@ function createActOneRouteBattleStage(stage, deployCount = MAX_DEPLOY_COUNT) {
   return {
     ...stage,
     title: config.battleTitle || stage.title,
-    objective: config.battleObjective || stage.objective,
+    objective: '적 지휘관 격파',
+    terrainRevision: 2,
     map,
     units: spaceBattleFormations(
       { ...stage, map },
@@ -3479,7 +3388,8 @@ function expandStageForLargeBattle(stage, deployCount = MAX_DEPLOY_COUNT) {
 
   const baseMap = stage.map || [];
   const mapSize = getLargeBattleMapSize(stage, deployCount);
-  const largeMap = decorateLargeBattleMap(expandMapToLarge(baseMap, mapSize), stage);
+  const decoratedMap = decorateLargeBattleMap(expandMapToLarge(baseMap, mapSize), stage);
+  const largeMap = createStageTerrain(extendMapForPlayableBoard(decoratedMap, stage), stage.id);
   const allySpawns = getLargeAllySpawns(largeMap, stage);
   const enemySpawns = getLargeEnemySpawns(largeMap, stage);
   const hasBoss = (stage.units || []).some((unit) => unit.id === "boss" || unit.type === "boss");
@@ -3545,6 +3455,8 @@ function expandStageForLargeBattle(stage, deployCount = MAX_DEPLOY_COUNT) {
   return {
     ...stage,
     map: largeMap,
+    terrainRevision: 2,
+    objective: hasBoss ? '적 지휘관 격파' : '적 전멸',
     units: spaceBattleFormations(
       { ...stage, map: largeMap },
       [...stageThemedUnits, ...extraEnemies]
@@ -3908,7 +3820,7 @@ const ALLY_VISUAL_PROFILES = Object.fromEntries(
 
 function getAllyVisualProfile(unit) {
   if (!unit || unit.type !== "ally") return null;
-  return ALLY_VISUAL_PROFILES[unit.id] || null;
+  return getPaintedVisualProfile(unit.id) || ALLY_VISUAL_PROFILES[unit.id] || null;
 }
 
 function getUnitVisualClass(unit) {
@@ -3924,6 +3836,7 @@ function getUnitVisualClass(unit) {
 
 function getEnemySpriteKey(unit) {
   if (!unit || unit.type === "ally") return null;
+  if (unit.type === "boss") return getBossSpriteKey(unit);
   if (ENEMY_VARIANT_KEYS.has(unit.spriteKey)) return unit.spriteKey;
 
   const text = `${unit.id || ""} ${unit.name || ""} ${unit.skill || ""}`;
@@ -3961,6 +3874,9 @@ function getEnemySpriteKey(unit) {
 
 function getUnitSprite(unit) {
   if (!unit) return null;
+
+  const painted = getPaintedVisualProfile(unit.type === "ally" ? unit.id : getEnemySpriteKey(unit));
+  if (painted) return painted.battle;
 
   const allyProfile = getAllyVisualProfile(unit);
   if (allyProfile?.battle) return allyProfile.battle;
@@ -4007,6 +3923,9 @@ function getUnitSprite(unit) {
 
 function getBattleMapUnitSprite(unit) {
   if (!unit) return null;
+
+  const painted = getPaintedVisualProfile(unit.type === "ally" ? unit.id : getEnemySpriteKey(unit));
+  if (painted) return painted.map;
 
   const allyProfile = getAllyVisualProfile(unit);
   if (allyProfile?.map) return allyProfile.map;
@@ -4069,6 +3988,9 @@ function handleBattleMapUnitImageError(event, unit) {
 function getUnitPortrait(unit) {
   if (!unit) return null;
 
+  const painted = getPaintedVisualProfile(unit.type === "ally" ? unit.id : getEnemySpriteKey(unit));
+  if (painted) return painted.portrait;
+
   const allyProfile = getAllyVisualProfile(unit);
   if (allyProfile?.portrait) return allyProfile.portrait;
 
@@ -4120,6 +4042,9 @@ function getUnitPortrait(unit) {
 
 function getCutsceneUnitSprite(unit) {
   if (!unit) return null;
+
+  const painted = getPaintedVisualProfile(unit.type === "ally" ? unit.id : getEnemySpriteKey(unit));
+  if (painted) return painted.cutscene;
 
   const allyProfile = getAllyVisualProfile(unit);
   if (allyProfile?.cutscene) return allyProfile.cutscene;
@@ -4173,14 +4098,11 @@ function getCutsceneUnitSprite(unit) {
 
 
 function getStageMapArt(stage) {
-  const id = stage?.id || 1;
-  return `/maps/stage_${id}.jpg`;
+  return getWorldScene(stage?.id);
 }
 
 function getClassicBattleMapArt(stage) {
-  const id = Math.min(30, Math.max(1, Math.floor(stage?.id || 1)));
-  if (stage?.actRouteBattleMap || id <= 6) return "/maps/concept/stage_1_frontier_final.png";
-  return `/maps/concept/stage_${id}_frontier_final.png`;
+  return getWorldScene(stage?.id);
 }
 
 function isFinalConceptStage(stage) {
@@ -4293,7 +4215,6 @@ function getTerrainVisualStyle(tile, x, y) {
 function getSkillMotionEffectType(battleInfo, outcome) {
   if (!battleInfo) return "skill-aura";
 
-  const skillName = String(battleInfo.attacker?.skill || "");
   const mode = battleInfo.mode;
 
   if (mode !== "skill") {
@@ -4302,14 +4223,10 @@ function getSkillMotionEffectType(battleInfo, outcome) {
     return "attack-motion";
   }
 
-  if (outcome?.heal || battleInfo.attacker?.skillType === "heal") return "skill-heal-cast";
-  if (skillName.includes("불") || skillName.includes("화염") || skillName.includes("재") || skillName.includes("파이어")) return "skill-fire-cast";
-  if (skillName.includes("얼음") || skillName.includes("빙")) return "skill-ice-cast";
-  if (skillName.includes("어둠") || skillName.includes("그림자") || skillName.includes("흑") || skillName.includes("다크")) return "skill-shadow-cast";
-  if (skillName.includes("저격") || skillName.includes("화살") || skillName.includes("궁")) return "skill-arrow-cast";
-  if (skillName.includes("수호") || skillName.includes("방패")) return "skill-guard-cast";
-
-  return "skill-aura";
+  const motionKey = getSkillMotionKey(battleInfo, outcome);
+  return ["fire", "ice", "shadow", "arrow", "heal", "guard"].includes(motionKey)
+    ? `skill-${motionKey}-cast`
+    : "skill-aura";
 }
 
 function getCombatDirection(attacker, defender) {
@@ -4323,7 +4240,16 @@ function getCombatDirection(attacker, defender) {
 function getSkillMotionKey(battleInfo, outcome) {
   const skillName = String(battleInfo?.attacker?.skill || "");
 
+  if (outcome?.guard) return "guard";
   if (outcome?.heal || battleInfo?.attacker?.skillType === "heal") return "heal";
+  const effect = battleInfo?.attacker?.skillSpec?.effect;
+  if (effect) {
+    return {
+      slash: "sword", thrust: "sword", heavy: "sword", impact: "sword",
+      arrow: "arrow", guard: "guard", heal: "heal", fire: "fire", ice: "ice",
+      shadow: "shadow", poison: "shadow",
+    }[effect] || "aura";
+  }
   if (skillName.includes("불") || skillName.includes("화염") || skillName.includes("재") || skillName.includes("파이어") || skillName.includes("플레임")) return "fire";
   if (skillName.includes("얼음") || skillName.includes("빙")) return "ice";
   if (skillName.includes("어둠") || skillName.includes("그림자") || skillName.includes("흑") || skillName.includes("다크") || skillName.includes("암영")) return "shadow";
@@ -4345,6 +4271,11 @@ function getSkillMotionKey(battleInfo, outcome) {
 function getUnitWeaponMotionKey(unit, battleInfo, outcome) {
   if (!unit) return "sword";
   if (battleInfo?.mode === "skill") return getSkillMotionKey(battleInfo, outcome);
+  if (outcome?.guard) return "guard";
+  if (outcome?.heal) return "heal";
+  if (unit.type === "ally") {
+    return { bow: "arrow", magic: "aura", beast: "bite" }[getUnitCombatClass(unit)] || "sword";
+  }
 
   const text = `${unit.id || ""} ${unit.name || ""} ${unit.skill || ""}`;
   const staffUnitIds = new Set(["lina", "aria", "noah", "yuna", "irene", "ella"]);
@@ -4444,9 +4375,11 @@ function getCombatImpactEffectType(battleInfo, outcome) {
 }
 
 function getEffectType(battle, outcome) {
+  if (outcome?.guard) return "guard";
   if (outcome?.heal) return "heal";
   if (!outcome?.hit) return "miss";
 
+  if (battle?.mode === "skill" && battle.attacker?.skillSpec?.effect) return battle.attacker.skillSpec.effect;
   const skill = battle?.attacker?.skill || "";
 
   if (outcome.crit) return "crit";
@@ -4461,6 +4394,15 @@ function getEffectType(battle, outcome) {
   if (battle?.mode === "counter") return "counter";
 
   return "slash";
+}
+
+function getMapEffectType(effectType) {
+  // Preserve semantic effects for cutscene labels; only map CSS needs these aliases.
+  return {
+    arrow: "slash", thrust: "slash", heavy: "slash", impact: "slash",
+    guard: "skill-guard-cast", lightning: "magic", music: "magic",
+    poison: "shadow", wind: "magic", light: "magic",
+  }[effectType] || effectType;
 }
 
 function getPopupText(outcome) {
@@ -4483,6 +4425,16 @@ function getCutsceneEffectLabel(effectType) {
     ice: "빙결",
     shadow: "흑야",
     magic: "마법",
+    arrow: "사격",
+    thrust: "찌르기",
+    heavy: "강타",
+    impact: "타격",
+    guard: "수호",
+    lightning: "낙뢰",
+    music: "공명",
+    poison: "독",
+    wind: "바람",
+    light: "성빛",
     counter: "반격",
     heal: "회복",
     finish: "마무리",
@@ -4500,6 +4452,16 @@ function getCutsceneEffectIcon(effectType) {
     ice: "❄",
     shadow: "◈",
     magic: "✧",
+    arrow: "➶",
+    thrust: "➤",
+    heavy: "◆",
+    impact: "✦",
+    guard: "◈",
+    lightning: "↯",
+    music: "♪",
+    poison: "◉",
+    wind: "≈",
+    light: "✧",
     counter: "↯",
     heal: "✚",
     finish: "★",
@@ -5208,7 +5170,8 @@ function createDefaultSettings() {
     shakeOn: true,
     logLines: 6,
     difficulty: "normal",
-    battleSpeed: "normal",
+    battleSpeed: "fast",
+    battleSpeedRevision: 132,
     cutsceneMode: "full",
     autoBattleMode: "safe",
     autoUseSkills: true,
@@ -5224,39 +5187,7 @@ function createDefaultSettings() {
 
 
 
-const BATTLE_SPEED_OPTIONS = [
-  {
-    id: "normal",
-    label: "보통",
-    desc: "연출을 충분히 보여줍니다.",
-    allyStepMs: 175,
-    enemyStepMs: 190,
-    enemyDelayMs: 700,
-    stepGapMs: 35,
-  },
-  {
-    id: "fast",
-    label: "빠름",
-    desc: "대규모 전투를 빠르게 진행합니다.",
-    allyStepMs: 95,
-    enemyStepMs: 105,
-    enemyDelayMs: 350,
-    stepGapMs: 18,
-  },
-  {
-    id: "turbo",
-    label: "초고속",
-    desc: "파밍과 반복 전투용 속도입니다.",
-    allyStepMs: 45,
-    enemyStepMs: 55,
-    enemyDelayMs: 140,
-    stepGapMs: 8,
-  },
-];
 
-function getBattleSpeedConfig(id) {
-  return BATTLE_SPEED_OPTIONS.find((option) => option.id === id) || BATTLE_SPEED_OPTIONS[0];
-}
 
 function getNextBattleSpeedId(currentId) {
   const ids = BATTLE_SPEED_OPTIONS.map((option) => option.id);
@@ -5477,227 +5408,14 @@ function getDifficultyRewardGold(value, difficultyId, balancePresetId = "standar
   return Math.max(0, Math.round((value || 0) * config.reward * balance.reward));
 }
 
-let cheonsuAudioContext = null;
-
-function getCheonsuAudioContext() {
-  if (typeof window === "undefined") return null;
-
-  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-  if (!AudioContextClass) return null;
-
-  if (!cheonsuAudioContext) {
-    cheonsuAudioContext = new AudioContextClass();
-  }
-
-  if (cheonsuAudioContext.state === "suspended") {
-    cheonsuAudioContext.resume().catch(() => {});
-  }
-
-  return cheonsuAudioContext;
-}
-
-function playTone(ctx, { freq = 440, start = 0, duration = 0.08, type = "sine", gain = 0.035, detune = 0 }) {
-  const now = ctx.currentTime;
-  const oscillator = ctx.createOscillator();
-  const volume = ctx.createGain();
-
-  oscillator.type = type;
-  oscillator.frequency.setValueAtTime(freq, now + start);
-  oscillator.detune.setValueAtTime(detune, now + start);
-
-  volume.gain.setValueAtTime(0.0001, now + start);
-  volume.gain.exponentialRampToValueAtTime(gain, now + start + 0.012);
-  volume.gain.exponentialRampToValueAtTime(0.0001, now + start + duration);
-
-  oscillator.connect(volume);
-  volume.connect(ctx.destination);
-
-  oscillator.start(now + start);
-  oscillator.stop(now + start + duration + 0.02);
-}
-
-function playCheonsuSfx(type, enabled = true, volume = 1) {
-  if (!enabled) return;
-
-  const ctx = getCheonsuAudioContext();
-  if (!ctx) return;
-
-  const presets = {
-    confirm: [
-      { freq: 520, start: 0, duration: 0.055, type: "triangle", gain: 0.032 },
-      { freq: 780, start: 0.055, duration: 0.075, type: "triangle", gain: 0.028 },
-    ],
-    save: [
-      { freq: 660, start: 0, duration: 0.06, type: "sine", gain: 0.026 },
-      { freq: 880, start: 0.06, duration: 0.10, type: "sine", gain: 0.022 },
-    ],
-    start: [
-      { freq: 196, start: 0, duration: 0.12, type: "sawtooth", gain: 0.022 },
-      { freq: 392, start: 0.08, duration: 0.12, type: "triangle", gain: 0.025 },
-      { freq: 784, start: 0.16, duration: 0.16, type: "triangle", gain: 0.022 },
-    ],
-    turn: [
-      { freq: 330, start: 0, duration: 0.08, type: "triangle", gain: 0.022 },
-      { freq: 440, start: 0.07, duration: 0.08, type: "triangle", gain: 0.020 },
-    ],
-    slash: [
-      { freq: 220, start: 0, duration: 0.055, type: "sawtooth", gain: 0.035 },
-      { freq: 110, start: 0.035, duration: 0.065, type: "square", gain: 0.020 },
-    ],
-    counter: [
-      { freq: 180, start: 0, duration: 0.055, type: "square", gain: 0.030 },
-      { freq: 360, start: 0.04, duration: 0.075, type: "triangle", gain: 0.024 },
-    ],
-    fire: [
-      { freq: 130, start: 0, duration: 0.13, type: "sawtooth", gain: 0.027 },
-      { freq: 520, start: 0.035, duration: 0.12, type: "triangle", gain: 0.024 },
-      { freq: 780, start: 0.075, duration: 0.10, type: "sine", gain: 0.018 },
-    ],
-    ice: [
-      { freq: 980, start: 0, duration: 0.075, type: "sine", gain: 0.022 },
-      { freq: 1240, start: 0.055, duration: 0.10, type: "triangle", gain: 0.018 },
-    ],
-    magic: [
-      { freq: 440, start: 0, duration: 0.08, type: "triangle", gain: 0.020 },
-      { freq: 660, start: 0.05, duration: 0.10, type: "triangle", gain: 0.022 },
-      { freq: 990, start: 0.11, duration: 0.11, type: "sine", gain: 0.018 },
-    ],
-    shadow: [
-      { freq: 90, start: 0, duration: 0.15, type: "sawtooth", gain: 0.030 },
-      { freq: 180, start: 0.06, duration: 0.14, type: "square", gain: 0.018 },
-    ],
-    crit: [
-      { freq: 160, start: 0, duration: 0.055, type: "square", gain: 0.040 },
-      { freq: 720, start: 0.045, duration: 0.105, type: "sawtooth", gain: 0.030 },
-      { freq: 1080, start: 0.095, duration: 0.11, type: "triangle", gain: 0.024 },
-    ],
-    miss: [
-      { freq: 260, start: 0, duration: 0.06, type: "sine", gain: 0.016, detune: -40 },
-      { freq: 210, start: 0.045, duration: 0.07, type: "sine", gain: 0.014, detune: -120 },
-    ],
-    heal: [
-      { freq: 523, start: 0, duration: 0.08, type: "sine", gain: 0.022 },
-      { freq: 659, start: 0.06, duration: 0.08, type: "sine", gain: 0.021 },
-      { freq: 784, start: 0.12, duration: 0.12, type: "sine", gain: 0.018 },
-    ],
-    guard: [
-      { freq: 150, start: 0, duration: 0.08, type: "square", gain: 0.028 },
-      { freq: 300, start: 0.05, duration: 0.08, type: "triangle", gain: 0.020 },
-    ],
-    hazard: [
-      { freq: 80, start: 0, duration: 0.18, type: "sawtooth", gain: 0.036 },
-      { freq: 160, start: 0.055, duration: 0.14, type: "square", gain: 0.026 },
-      { freq: 60, start: 0.12, duration: 0.20, type: "sawtooth", gain: 0.030 },
-    ],
-    phase: [
-      { freq: 70, start: 0, duration: 0.22, type: "sawtooth", gain: 0.034 },
-      { freq: 140, start: 0.10, duration: 0.20, type: "square", gain: 0.028 },
-      { freq: 280, start: 0.22, duration: 0.18, type: "sawtooth", gain: 0.022 },
-    ],
-    boss: [
-      { freq: 55, start: 0, duration: 0.26, type: "sawtooth", gain: 0.038 },
-      { freq: 110, start: 0.12, duration: 0.22, type: "square", gain: 0.030 },
-      { freq: 220, start: 0.28, duration: 0.18, type: "triangle", gain: 0.024 },
-    ],
-    equip: [
-      { freq: 420, start: 0, duration: 0.05, type: "triangle", gain: 0.024 },
-      { freq: 630, start: 0.05, duration: 0.07, type: "triangle", gain: 0.022 },
-      { freq: 315, start: 0.10, duration: 0.08, type: "sine", gain: 0.018 },
-    ],
-    item: [
-      { freq: 560, start: 0, duration: 0.06, type: "sine", gain: 0.022 },
-      { freq: 700, start: 0.06, duration: 0.08, type: "sine", gain: 0.020 },
-    ],
-    loot: [
-      { freq: 660, start: 0, duration: 0.06, type: "triangle", gain: 0.024 },
-      { freq: 990, start: 0.07, duration: 0.08, type: "triangle", gain: 0.024 },
-      { freq: 1320, start: 0.15, duration: 0.12, type: "sine", gain: 0.018 },
-    ],
-    finish: [
-      { freq: 130, start: 0, duration: 0.06, type: "square", gain: 0.040 },
-      { freq: 520, start: 0.055, duration: 0.10, type: "sawtooth", gain: 0.032 },
-      { freq: 1040, start: 0.14, duration: 0.16, type: "triangle", gain: 0.026 },
-    ],
-    levelup: [
-      { freq: 523, start: 0, duration: 0.06, type: "triangle", gain: 0.024 },
-      { freq: 659, start: 0.06, duration: 0.06, type: "triangle", gain: 0.024 },
-      { freq: 784, start: 0.12, duration: 0.08, type: "triangle", gain: 0.024 },
-      { freq: 1046, start: 0.20, duration: 0.14, type: "sine", gain: 0.020 },
-    ],
-    menu: [
-      { freq: 392, start: 0, duration: 0.045, type: "sine", gain: 0.018 },
-      { freq: 494, start: 0.045, duration: 0.055, type: "sine", gain: 0.016 },
-    ],
-    victory: [
-      { freq: 392, start: 0, duration: 0.10, type: "triangle", gain: 0.026 },
-      { freq: 523, start: 0.09, duration: 0.10, type: "triangle", gain: 0.026 },
-      { freq: 784, start: 0.18, duration: 0.18, type: "triangle", gain: 0.024 },
-    ],
-    defeat: [
-      { freq: 220, start: 0, duration: 0.12, type: "triangle", gain: 0.024 },
-      { freq: 165, start: 0.10, duration: 0.14, type: "triangle", gain: 0.022 },
-      { freq: 110, start: 0.22, duration: 0.22, type: "sine", gain: 0.020 },
-    ],
-  };
-
-  const sequence = presets[type] || presets.confirm;
-  const safeVolume = Math.max(0, Math.min(1, Number(volume) || 0));
-  sequence.forEach((tone) =>
-    playTone(ctx, {
-      ...tone,
-      gain: (tone.gain || 0.02) * safeVolume,
-    })
-  );
-}
-
-function playCheonsuJingle(type, enabled = true, volume = 1) {
-  if (!enabled) return;
-
-  const ctx = getCheonsuAudioContext();
-  if (!ctx) return;
-
-  const jingles = {
-    camp: [
-      { freq: 196, start: 0, duration: 0.18, type: "sine", gain: 0.012 },
-      { freq: 247, start: 0.18, duration: 0.18, type: "sine", gain: 0.012 },
-      { freq: 294, start: 0.36, duration: 0.22, type: "sine", gain: 0.010 },
-    ],
-    battle: [
-      { freq: 110, start: 0, duration: 0.16, type: "sawtooth", gain: 0.014 },
-      { freq: 220, start: 0.12, duration: 0.16, type: "triangle", gain: 0.012 },
-      { freq: 330, start: 0.24, duration: 0.18, type: "triangle", gain: 0.010 },
-    ],
-    world: [
-      { freq: 262, start: 0, duration: 0.16, type: "sine", gain: 0.012 },
-      { freq: 330, start: 0.16, duration: 0.16, type: "sine", gain: 0.012 },
-      { freq: 392, start: 0.32, duration: 0.22, type: "sine", gain: 0.010 },
-    ],
-  };
-
-  const safeVolume = Math.max(0, Math.min(1, Number(volume) || 0));
-  (jingles[type] || jingles.world).forEach((tone) =>
-    playTone(ctx, {
-      ...tone,
-      gain: (tone.gain || 0.01) * safeVolume,
-    })
-  );
-}
 
 
 
 function getStoryPortrait(speaker) {
-  const portraits = {
-    카일: "/portraits/kyle.png",
-    브람: "/portraits/bram.png",
-    리나: "/portraits/lina.png",
-    아리아: "/portraits/aria.png",
-    레온: "/portraits/leon.png",
-    세라: "/portraits/sera.png",
-    "흑천 가론": "/portraits/garon.png",
-    가론: "/portraits/garon.png",
-  };
-
-  return portraits[speaker] || "/portraits/kyle.png";
+  if (speaker === "아이린") return getPaintedVisualProfile("irene").cutscene;
+  if (["가론", "흑천 가론"].includes(speaker)) return getPaintedVisualProfile("boss_commander").cutscene;
+  const keys = { 카일: 'hero', 브람: 'bram', 리나: 'lina', 아리아: 'aria', 레온: 'leon', 세라: 'sera', 노아: 'noah', 유나: 'yuna', 라칸: 'rakan', 미호: 'miho', 테오: 'teo', 이레네: 'irene', 카즈: 'kaz', 엘라: 'ella', 진: 'jin', 루카: 'luka', 백호: 'baekho', '흑천 가론': 'warlord', 가론: 'warlord' };
+  return getPaintedVisualProfile(keys[speaker] || 'hero').cutscene;
 }
 
 
@@ -5717,7 +5435,7 @@ function getWorldRegionInfo(stageId) {
     4: { name: "빙결 계곡", icon: "❄️", image: "/ui/stage-select/act-4.png", tone: "region-ice", desc: "빙결과 저주가 흐르는 북부 협곡" },
     5: { name: "흑야 왕좌", icon: "🌑", image: "/ui/stage-select/act-5.png", tone: "region-dark", desc: "붉은 달 아래 최종 결전으로 향하는 땅" },
   };
-  return { act, ...(regionThemes[act?.id] || regionThemes[1]) };
+  return { act, ...(regionThemes[act?.id] || regionThemes[1]), image: getWorldScene(stageId) };
 }
 
 function getStageNodeClass(stage, clearedStages, unlockedStages) {
@@ -7549,7 +7267,7 @@ function getReinforcementSpawnPositions(activeMap) {
   const height = activeMap?.length || 8;
   const width = activeMap?.[0]?.length || 8;
 
-  return [
+  const edgePositions = [
     { x: width - 1, y: 0 },
     { x: width - 2, y: 0 },
     { x: width - 1, y: 1 },
@@ -7558,7 +7276,11 @@ function getReinforcementSpawnPositions(activeMap) {
     { x: 1, y: 0 },
     { x: width - 1, y: 2 },
     { x: 0, y: 1 },
-  ].filter((pos) => pos.x >= 0 && pos.y >= 0 && pos.x < width && pos.y < height);
+  ];
+  const openApproaches = activeMap.flatMap((row, y) =>
+    y <= Math.ceil(height * 0.4) ? row.map((_, x) => ({ x, y })) : []
+  );
+  return normalizeSpawnCandidates([...edgePositions, ...openApproaches], activeMap);
 }
 
 function createStageReinforcements(stage, nextRound, units, activeMap) {
@@ -8304,6 +8026,9 @@ export default function App() {
   const [deploySort, setDeploySort] = useState("default");
   const [deploymentHint, setDeploymentHint] = useState("균형 편성을 추천합니다.");
   const [party, setParty] = useState(getInitialParty());
+  const [exploration, setExploration] = useState(() => normalizeExploration());
+  const [discoveryReceipt, setDiscoveryReceipt] = useState(null);
+  const [journalOpen, setJournalOpen] = useState(false);
   const [units, setUnits] = useState(clone(stages[0].units));
   const [selectedUnit, setSelectedUnit] = useState(null);
   const [inspectedUnitId, setInspectedUnitId] = useState(null);
@@ -8317,6 +8042,8 @@ export default function App() {
   const [bossCutscene, setBossCutscene] = useState(null);
   const [result, setResult] = useState(null);
   const [itemOpen, setItemOpen] = useState(false);
+  const [skillChoiceOpen, setSkillChoiceOpen] = useState(false);
+  const [activeSkillChoice, setActiveSkillChoice] = useState(null);
   const [shopOpen, setShopOpen] = useState(false);
   const [campTab, setCampTab] = useState("party");
   const [tutorialOpen, setTutorialOpen] = useState(false);
@@ -8382,7 +8109,11 @@ export default function App() {
   const [settings, setSettings] = useState(() => {
     try {
       const raw = localStorage.getItem("cheonsu_settings_v1");
-      return raw ? { ...createDefaultSettings(), ...JSON.parse(raw) } : createDefaultSettings();
+      const saved = raw ? JSON.parse(raw) : {};
+      return { ...createDefaultSettings(), ...saved,
+        battleSpeed: !saved.battleSpeedRevision && (!saved.battleSpeed || saved.battleSpeed === 'normal') ? 'fast' : saved.battleSpeed || 'fast',
+        battleSpeedRevision: 132,
+      };
     } catch {
       return createDefaultSettings();
     }
@@ -8418,7 +8149,37 @@ export default function App() {
   const [movingUnit, setMovingUnit] = useState(null);
   const [moveUndo, setMoveUndo] = useState(null);
   const [actionMotion, setActionMotion] = useState(null);
-  const [mapZoom, setMapZoom] = useState("fit");
+  const [mapZoom, setMapZoom] = useState("large");
+  const actionResolvingRef = useRef(false);
+  const victorySettledRef = useRef(false);
+  useEffect(() => {
+    let player;
+    let disposed = false;
+    const theme = screen === 'battle' ? 'battle' : screen === 'camp' ? 'camp' : 'world';
+    const enabled = settings.soundOn && settings.musicOn && settings.sfxVolume > 0 && !result;
+    const sync = async (gesture = false) => {
+      if (!enabled || document.hidden) { player?.stop(); return; }
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      if (gesture && ctx.state === 'suspended') await ctx.resume().catch(() => {});
+      if (disposed || document.hidden || ctx.state !== 'running' || player) return;
+      player = createMusicPlayer(ctx);
+      player.start(theme, settings.sfxVolume / 100);
+    };
+    const unlock = () => { void sync(true); };
+    const visibility = () => { player?.stop(); player = null; void sync(); };
+    window.addEventListener('pointerdown', unlock);
+    window.addEventListener('keydown', unlock);
+    document.addEventListener('visibilitychange', visibility);
+    void sync();
+    return () => {
+      disposed = true;
+      player?.stop();
+      window.removeEventListener('pointerdown', unlock);
+      window.removeEventListener('keydown', unlock);
+      document.removeEventListener('visibilitychange', visibility);
+    };
+  }, [screen, result, settings.soundOn, settings.musicOn, settings.sfxVolume]);
   const [mapVisibility, setMapVisibility] = useState("tactical");
   const [battleCompact, setBattleCompact] = useState(true);
   const [mobileBattlePanelOpen, setMobileBattlePanelOpen] = useState(false);
@@ -8440,6 +8201,14 @@ export default function App() {
   });
   const suppressBattleMapClickRef = useRef(false);
   const [screenShake, setScreenShake] = useState(false);
+  const visualTimersRef = useRef(new Set());
+  const combatBusy = Boolean(turnBusy || movingUnit || battleResolving || combatCutscene || bossCutscene);
+  const battleInputLocked = Boolean(combatBusy || battle || result || itemOpen || skillChoiceOpen || battleSettingsOpen || discoveryReceipt || journalOpen);
+
+  useEffect(() => {
+    const timers = visualTimersRef.current;
+    return () => timers.forEach(timer => window.clearTimeout(timer));
+  }, []);
 
   const closeMobileCombatPanels = () => {
     setMobileBattlePanelOpen(false);
@@ -8456,6 +8225,7 @@ export default function App() {
   };
 
   const setBattleModeFromMobile = (nextMode) => {
+    if (battleInputLocked) return;
     const activeUnit = selected;
 
     if (!activeUnit) {
@@ -8483,21 +8253,11 @@ export default function App() {
     }
 
     if (nextMode === "skill") {
-      if (selectedSkillCooldown > 0) {
-        setLogs((p) => [
-          `${activeUnit.name}의 ${activeUnit.skill}은 ${selectedSkillCooldown}턴 후 사용할 수 있습니다.`,
-          ...p,
-        ]);
-        return;
-      }
-
-      if (activeUnit.skillType !== "attack") {
-        closeMobileCombatPanels();
-        void activateSkill();
-        return;
-      }
+      activateSkill();
+      return;
     }
 
+    setActiveSkillChoice(null);
     setMode(nextMode);
     setMobileBattlePanelOpen(false);
     setMobileAllyPanelOpen(false);
@@ -8533,6 +8293,8 @@ export default function App() {
     [activeBaseMap, activeStage]
   );
   window.__CHEONSU_ACTIVE_MAP__ = activeMap;
+  const stageDiscoveries = useMemo(() => getStageDiscoveries(activeStage.id, activeMap, activeStage.units), [activeStage, activeMap]);
+  const visibleDiscoveries = getVisibleDiscoveries(stageDiscoveries, units, exploration, 3);
   const enemiesAlive = units.filter((unit) => unit.type !== "ally" && unit.hp > 0);
   const alliesAlive = units.filter((unit) => unit.type === "ally" && unit.hp > 0);
   const activeBoss = enemiesAlive.find((unit) => unit.type === "boss");
@@ -8543,7 +8305,9 @@ export default function App() {
   const nextReinforcementRound = getReinforcementRounds(activeStage).find(
     (reinforceRound) => reinforceRound >= round
   );
-  const selected = units.find((u) => u.id === selectedUnit);
+  const selected = withSkill(units.find((u) => u.id === selectedUnit), activeSkillChoice?.unitId === selectedUnit ? activeSkillChoice.skillId : undefined);
+  const canCommandSelected = Boolean(selected?.type === "ally" && selected.hp > 0 && !selected.acted && turn === "ally" && !battleInputLocked);
+  const targetSelectionActive = Boolean(canCommandSelected && (mode === "attack" || (mode === "skill" && selected.skillType === "attack")));
   const inspectedUnit = units.find((u) => u.id === inspectedUnitId);
   const viewedUnit = inspectedUnit || selected;
   const showPostMoveCommandMenu = Boolean(
@@ -8552,16 +8316,13 @@ export default function App() {
     selected.type === "ally" &&
     selected.moved &&
     !selected.acted &&
-    !turnBusy &&
-    !movingUnit &&
-    !battle &&
-    !result
+    !battleInputLocked
   );
   const canUndoMove = Boolean(showPostMoveCommandMenu && moveUndo?.unitId === selected?.id);
   const moveTiles = getMoveTiles(selected, units, activeMap).filter(
     (tile) => !isBlockedBattleTile(activeMap[tile.y]?.[tile.x])
   );
-  const attackTiles = getAttackTiles(selected, mode, activeMap).filter(
+  const attackTiles = (mode === "skill" && selected?.skillType !== "attack" ? [] : getAttackTiles(selected, mode, activeMap)).filter(
     (tile) => !isBlockedBattleTile(activeMap[tile.y]?.[tile.x])
   );
   const enemyThreatTileKeys = useMemo(() => {
@@ -8836,6 +8597,20 @@ export default function App() {
 
 
   const battleSpeedConfig = getBattleSpeedConfig(settings.battleSpeed);
+  const battleSpeedRef = useRef(battleSpeedConfig);
+  useEffect(() => {
+    battleSpeedRef.current = getBattleSpeedConfig(settings.battleSpeed);
+  }, [settings.battleSpeed]);
+
+  // Callers pass base milliseconds; stored durations and movement configs are already scaled.
+  const scheduleBattleVisual = (callback, duration) => {
+    const timer = window.setTimeout(() => {
+      visualTimersRef.current.delete(timer);
+      callback();
+    }, scaleBattleTime(duration, battleSpeedRef.current));
+    visualTimersRef.current.add(timer);
+    return timer;
+  };
   const cutsceneConfig = getCutsceneConfig(settings.cutsceneMode);
   const autoBattleModeConfig = getAutoBattleModeConfig(settings.autoBattleMode);
   const balancePresetConfig = getBalancePresetConfig(settings.balancePreset);
@@ -8967,25 +8742,25 @@ export default function App() {
     const metrics = getBattleMapGridMetrics(mapElement);
     const cellWidth = metrics.gridScrollWidth / cols;
     const cellHeight = metrics.gridScrollHeight / rows;
-    const targetLeft = Math.max(
-      0,
-      metrics.paddingLeft + x * cellWidth - shell.clientWidth / 2 + cellWidth / 2
-    );
-    const targetTop = Math.max(
-      0,
-      metrics.paddingTop + y * cellHeight - shell.clientHeight / 2 + cellHeight / 2
-    );
+    const shellRect = shell.getBoundingClientRect();
+    const target = getCellScrollTarget({
+      mapLeft: metrics.rect.left - shellRect.left + shell.scrollLeft + metrics.paddingLeft,
+      mapTop: metrics.rect.top - shellRect.top + shell.scrollTop + metrics.paddingTop,
+      cellWidth, cellHeight, x, y,
+      viewportWidth: shell.clientWidth, viewportHeight: shell.clientHeight,
+      topInset: shell.clientWidth < 700 ? 142 : 100,
+      bottomInset: shell.clientWidth < 700 ? 188 : 130,
+    });
 
     shell.scrollTo({
-      left: targetLeft,
-      top: targetTop,
-      behavior,
+      ...target,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : behavior,
     });
 
     const focusId = `${x}-${y}-${Date.now()}`;
     setCameraFocus({ id: focusId, x, y });
 
-    setTimeout(() => {
+    scheduleBattleVisual(() => {
       setCameraFocus((current) => (current?.id === focusId ? null : current));
     }, 900);
   };
@@ -9001,6 +8776,16 @@ export default function App() {
 
     scrollBattleMapToCell(unit.x, unit.y, behavior);
   };
+
+  useEffect(() => {
+    if (screen !== "battle") return;
+    const target = getTurnCameraTarget(units, turn, selectedUnit);
+    if (!target) return;
+    const timer = window.setTimeout(() => scrollBattleMapToCell(target.x, target.y, "instant"), 120);
+    return () => window.clearTimeout(timer);
+    // Only entering a battlefield recenters it; ordinary commands keep the player's pan.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [screen, selectedStage?.id]);
 
   const getBattleMapTileFromPointerEvent = (event) => {
     const shell = battleMapShellRef.current;
@@ -9137,45 +8922,11 @@ export default function App() {
 
 
 
-  const getSkillCooldownValue = (unit) => Math.max(0, unit?.skillCooldown || 0);
-
-  const getSkillCooldownTurns = (unit) => {
-    if (!unit) return 2;
-
-    const skillLevel = getSkillUpgradeLevel(unit);
-    const cooldownReduction = skillLevel >= 4 ? 1 : 0;
-    let baseCooldown = 2;
-
-    const heavySkillNames = ["저격", "백호 포효", "별빛 폭발", "재의 심판", "어둠의 파동"];
-
-    if (heavySkillNames.some((name) => String(unit.skill || "").includes(name))) {
-      baseCooldown = 3;
-    }
-
-    return Math.max(1, baseCooldown - cooldownReduction);
-  };
-
-  const applySkillCooldown = (sourceUnits, unitId, cooldown = 2) => {
-    return sourceUnits.map((unit) =>
-      unit.id === unitId
-        ? {
-            ...unit,
-            skillCooldown: cooldown,
-          }
-        : unit
-    );
-  };
-
-  const decrementSkillCooldowns = (sourceUnits) => {
-    return sourceUnits.map((unit) => {
-      if (unit.type !== "ally") return unit;
-
-      return {
-        ...unit,
-        skillCooldown: Math.max(0, (unit.skillCooldown || 0) - 1),
-      };
-    });
-  };
+  const getSkillCooldownValue = (unit) => getSkillCooldown(unit, unit?.activeSkillId);
+  const getSkillCooldownTurns = (unit) => unit?.skillSpec?.cooldown || getSkill(unit)?.cooldown || 2;
+  const applySkillCooldown = (sourceUnits, unitId, cooldown = 2, skillId) =>
+    applyCooldown(sourceUnits, unitId, skillId || getUnitSkills(sourceUnits.find(unit => unit.id === unitId))[0]?.id, cooldown);
+  const decrementSkillCooldowns = tickCooldowns;
 
   const selectedSkillCooldown = getSkillCooldownValue(selected);
   const readyAllyCount = units.filter(isUnitReady).length;
@@ -9444,19 +9195,15 @@ export default function App() {
       autoBattleEnabled &&
       screen === "battle" &&
       turn === "ally" &&
-      !turnBusy &&
-      !movingUnit &&
-      !battle &&
-      !battleResolving &&
-      !result &&
+      !battleInputLocked &&
       units.some(isUnitReady)
     ) {
-      const timer = setTimeout(() => commandAutoBattleTurn(), 320);
+      const timer = setTimeout(() => commandAutoBattleTurn(), scaleBattleTime(320, battleSpeedRef.current));
       return () => clearTimeout(timer);
     }
 
     return undefined;
-  }, [autoBattleEnabled, screen, turn, turnBusy, movingUnit, battle, battleResolving, result, units]);
+  }, [autoBattleEnabled, screen, turn, battleInputLocked, units, settings.battleSpeed]);
 
 
   const resetSaveData = () => {
@@ -9471,6 +9218,7 @@ export default function App() {
   };
 
   const updateSetting = (key, value) => {
+    if (key === "battleSpeed") battleSpeedRef.current = getBattleSpeedConfig(value);
     setSettings((prev) => ({
       ...prev,
       [key]: value,
@@ -9572,11 +9320,8 @@ export default function App() {
   };
 
   const playSfx = (type) => {
-    playCheonsuSfx(type, settings.soundOn, settings.sfxVolume / 100);
-  };
-
-  const playMusicCue = (type) => {
-    playCheonsuJingle(type, settings.musicOn, settings.sfxVolume / 100);
+    const soundType = { impact: "heavy", music: "magic", poison: "shadow", wind: "magic", light: "holy", cast: "magic", claw: "slash" }[type] || type;
+    playCheonsuSfx(soundType, settings.soundOn, settings.sfxVolume / 100);
   };
 
   const copyRuntimeError = async () => {
@@ -9813,11 +9558,11 @@ export default function App() {
     if (!settings.effectsOn) return;
 
     const id = `${Date.now()}-${Math.random()}`;
-    const nextEffect = { id, ...effect };
+    const nextEffect = { id, ...effect, type: getMapEffectType(effect.type), duration: scaleBattleTime(effect.duration || 720, battleSpeedRef.current) };
 
     setVisualEffects((prev) => [...prev, nextEffect]);
 
-    setTimeout(() => {
+    scheduleBattleVisual(() => {
       setVisualEffects((prev) => prev.filter((item) => item.id !== id));
     }, effect.duration || 720);
   };
@@ -9826,11 +9571,11 @@ export default function App() {
     if (!settings.effectsOn) return;
 
     const id = `${Date.now()}-${Math.random()}`;
-    const nextPopup = { id, ...popup };
+    const nextPopup = { id, ...popup, duration: scaleBattleTime(popup.duration || 900, battleSpeedRef.current) };
 
     setDamagePopups((prev) => [...prev, nextPopup]);
 
-    setTimeout(() => {
+    scheduleBattleVisual(() => {
       setDamagePopups((prev) => prev.filter((item) => item.id !== id));
     }, popup.duration || 900);
   };
@@ -9840,7 +9585,7 @@ export default function App() {
 
     setScreenShake(strong ? "strong" : "normal");
 
-    setTimeout(() => {
+    scheduleBattleVisual(() => {
       setScreenShake(false);
     }, strong ? 520 : 320);
   };
@@ -9873,24 +9618,24 @@ export default function App() {
       direction,
       motionKey: getUnitWeaponMotionKey(battleInfo.attacker, battleInfo, outcome),
       type,
-      duration,
+      duration: scaleBattleTime(duration, battleSpeedRef.current),
     });
 
-    setTimeout(() => {
+    scheduleBattleVisual(() => {
       setActionMotion((current) => (current?.id === id ? null : current));
     }, duration + 80);
   };
 
-  const triggerCombatVisual = (battleInfo, outcome, delay = 0) => {
+  const triggerCombatVisual = (battleInfo, outcome, delay = 0, playAudio = true) => {
     if (!battleInfo?.defender) return;
 
-    setTimeout(() => {
+    scheduleBattleVisual(() => {
       const type = getEffectType(battleInfo, outcome);
       const direction = getCombatDirection(battleInfo.attacker, battleInfo.defender);
       const motionKey = getUnitWeaponMotionKey(battleInfo.attacker, battleInfo, outcome);
       const motionDuration = getCombatMotionDuration(battleInfo, outcome);
       const impactDelay = getCombatImpactDelay(battleInfo, outcome);
-      playSfx(type);
+      if (playAudio) playSfx(type);
 
       if (battleInfo.attacker) {
         triggerUnitActionMotion(battleInfo, outcome);
@@ -9917,7 +9662,7 @@ export default function App() {
         });
       }
 
-      setTimeout(() => {
+      scheduleBattleVisual(() => {
         pushVisualEffect({
           x: battleInfo.defender.x,
           y: battleInfo.defender.y,
@@ -10041,24 +9786,28 @@ export default function App() {
       duration,
     });
 
+    // Start the timer after React has mounted and painted the moving sprite.
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
     await waitForMove(duration);
   };
 
-  const animateUnitMovePath = async (unit, path, stepDuration = 185) => {
+  const animateUnitMovePath = async (unit, path) => {
     if (!unit || !path || path.length === 0) return;
 
-    playSfx(unit.type === "ally" ? "confirm" : "turn");
+    playSfx("step");
 
     let current = { ...unit };
 
     for (let index = 0; index < path.length; index += 1) {
       const step = path[index];
+      const speed = battleSpeedRef.current;
+      const stepDuration = unit.type === "ally" ? speed.allyStepMs : speed.enemyStepMs;
 
       await animateUnitMove(
         current,
         step.x,
         step.y,
-        Math.max(135, stepDuration),
+        Math.max(scaleBattleTime(135, speed), stepDuration),
         index
       );
 
@@ -10068,14 +9817,14 @@ export default function App() {
         y: step.y,
       };
 
-      await waitForMove(battleSpeedConfig.stepGapMs);
+      await waitForMove(battleSpeedRef.current.stepGapMs);
     }
 
     return current;
   };
 
   const moveSelectedUnitTo = async (x, y, moveTileInfo = null) => {
-    if (turn !== "ally" || turnBusy || movingUnit || battle || result) return;
+    if (turn !== "ally" || battleInputLocked) return;
 
     const movingAlly = units.find((unit) => unit.id === selectedUnit);
     const targetInfo =
@@ -10108,17 +9857,30 @@ export default function App() {
       if (!stayingInPlace) {
         await animateUnitMovePath(
           movingAlly,
-          movePath.length ? movePath : [{ x, y }],
-          battleSpeedConfig.allyStepMs
+          movePath.length ? movePath : [{ x, y }]
         );
       }
 
-      setUnits((prev) =>
-        prev.map((unit) =>
-          unit.id === movingAlly.id ? { ...unit, x, y, moved: true } : unit
-        )
-      );
-      setMoveUndo({
+      let movedUnits = units.map(unit => unit.id === movingAlly.id ? { ...unit, x, y, moved: true } : unit);
+      const discovery = stageDiscoveries.find(entry => entry.x === x && entry.y === y);
+      const claim = discovery ? claimDiscovery(exploration, discovery, movedUnits.find(unit => unit.id === movingAlly.id)) : null;
+      if (claim?.reward) {
+        let rewardMessages = [];
+        if (claim.reward.xp) {
+          const growth = grantExp(movedUnits, movingAlly.id, claim.reward.xp);
+          movedUnits = growth.units;
+          rewardMessages = growth.messages;
+        }
+        movedUnits = movedUnits.map(unit => applyDiscoveryUnlocks(unit, claim.progress));
+        setExploration(claim.progress);
+        setParty(prev => mergePartyFromUnits(prev, movedUnits).map(unit => applyDiscoveryUnlocks(unit, claim.progress)));
+        setDiscoveryReceipt({ ...discovery, message: claim.message, growth: rewardMessages });
+        setLogs(prev => [claim.message, ...rewardMessages, ...prev]);
+        playSfx("confirm");
+      }
+      setUnits(movedUnits);
+      // Discovery rewards commit the move; undo must not let a scout collect for free.
+      setMoveUndo(claim?.reward ? null : {
         unitId: movingAlly.id,
         from: { x: movingAlly.x, y: movingAlly.y },
         to: { x, y },
@@ -10138,7 +9900,7 @@ export default function App() {
       setLogs((prev) => [
         stayingInPlace
           ? `${movingAlly.name} 제자리 이동 완료. 공격, 스킬 또는 대기를 선택하세요.`
-          : `${movingAlly.name} 이동 완료. 이동력 ${targetInfo?.cost || 1}/${movingAlly.move || "-"} 사용${traitNote}. 공격 또는 대기를 선택하세요.`,
+          : `${movingAlly.name} 이동 완료. 이동력 ${targetInfo?.cost || 1}/${getUnitMoveRange(movingAlly)} 사용${traitNote}. 공격 또는 대기를 선택하세요.`,
         ...prev,
       ]);
     } finally {
@@ -10148,7 +9910,7 @@ export default function App() {
   };
 
   const undoSelectedMove = () => {
-    if (!selected || !canUndoMove || turnBusy || movingUnit || battle || result) return;
+    if (!selected || !canUndoMove || battleInputLocked) return;
 
     const originOccupied = units.some(
       (unit) =>
@@ -10175,6 +9937,7 @@ export default function App() {
     setInspectedUnitId(null);
     setMode("move");
     setMoveUndo(null);
+    setActiveSkillChoice(null);
     closeMobileCombatPanels();
     scrollBattleMapToCell(moveUndo.from.x, moveUndo.from.y, "smooth");
     playSfx("confirm");
@@ -10182,8 +9945,9 @@ export default function App() {
   };
 
   const selectBattleAllyForAction = (unit, sourceLabel = "선택") => {
-    if (!unit || unit.type !== "ally") return false;
+    if (!unit || unit.type !== "ally" || unit.acted || unit.hp <= 0 || turn !== "ally" || battleInputLocked) return false;
 
+    setActiveSkillChoice(null);
     setSelectedUnit(unit.id);
     setInspectedUnitId(null);
     setMode(unit.moved ? "attack" : "move");
@@ -10205,7 +9969,7 @@ export default function App() {
   };
 
   const handleBattleTilePress = (x, y, source = "click") => {
-    if (turn !== "ally" || turnBusy || movingUnit || battle || result) return false;
+    if (turn !== "ally" || battleInputLocked) return false;
 
     const tileType = activeMap[y]?.[x];
     const unit = units.find((candidate) => candidate.x === x && candidate.y === y);
@@ -10270,18 +10034,30 @@ export default function App() {
   };
 
   const clearVisuals = () => {
+    setSkillChoiceOpen(false);
+    setActiveSkillChoice(null);
+    setBattleSettingsOpen(false);
+    visualTimersRef.current.forEach(timer => window.clearTimeout(timer));
+    visualTimersRef.current.clear();
     setVisualEffects([]);
     setDamagePopups([]);
     setMovingUnit(null);
     setScreenShake(false);
+    setActionMotion(null);
+    setCombatCutscene(null);
+    setBossCutscene(null);
+    setStageBanner(null);
+    setPhaseBanner(null);
+    setTurnPhaseBanner(null);
+    setCameraFocus(null);
   };
 
 
   const showStageBanner = (banner, duration = 1650) => {
     const id = `${Date.now()}-${Math.random()}`;
-    setStageBanner({ id, ...banner });
+    setStageBanner({ id, ...banner, duration: scaleBattleTime(duration, battleSpeedRef.current) });
 
-    setTimeout(() => {
+    scheduleBattleVisual(() => {
       setStageBanner((current) => (current?.id === id ? null : current));
     }, duration);
   };
@@ -10331,7 +10107,7 @@ export default function App() {
     playSfx(isPhase ? "phase" : "boss");
     triggerScreenShake(true);
 
-    setTimeout(() => {
+    scheduleBattleVisual(() => {
       setBossCutscene((current) => (current?.id === id ? null : current));
     }, duration);
   };
@@ -10350,7 +10126,7 @@ export default function App() {
         : `${nextRound}라운드 · 적의 행동이 시작됩니다`,
     });
 
-    window.setTimeout(() => {
+    scheduleBattleVisual(() => {
       setTurnPhaseBanner((current) => (current?.id === id ? null : current));
     }, 1350);
   };
@@ -10387,6 +10163,9 @@ export default function App() {
     setDeploymentHint("균형 편성을 추천합니다.");
     setGearEnhance({});
     const enhancedFreshParty = applyGearEnhanceToParty(freshParty, {});
+    setExploration(normalizeExploration());
+    setDiscoveryReceipt(null);
+    setJournalOpen(false);
     setParty(enhancedFreshParty);
     setUnits(mergePartyIntoStage(stages[0], enhancedFreshParty));
     setSelectedUnit(null);
@@ -10443,6 +10222,10 @@ export default function App() {
   };
 
   const beginStageBattle = (stage) => {
+    actionResolvingRef.current = false;
+    victorySettledRef.current = false;
+    setSkillChoiceOpen(false);
+    setActiveSkillChoice(null);
     if (!playableStageIds.includes(stage.id)) return;
     playSfx("start");
     setStoryScene(null);
@@ -10512,7 +10295,6 @@ export default function App() {
     setLogFilter("all");
     setScreen("battle");
     showTurnPhaseBanner("ally", 1);
-    playMusicCue("battle");
     showStageBanner(
       {
         type: "start",
@@ -10525,7 +10307,7 @@ export default function App() {
 
     const bossUnit = battleStage.units.find((unit) => unit.type === "boss");
     if (bossUnit) {
-      setTimeout(() => showBossCutscene(bossUnit, "intro", 1850), 720);
+      scheduleBattleVisual(() => showBossCutscene(bossUnit, "intro", 1850), 720);
     }
   };
 
@@ -10537,8 +10319,8 @@ export default function App() {
         beginStageBattle(stage);
       }
 
-      if (onComplete === "camp") {
-        finishGoCamp();
+      if (["camp", "shop", "next"].includes(onComplete)) {
+        finishGoCamp(onComplete);
       }
 
       return;
@@ -11637,8 +11419,8 @@ export default function App() {
       return;
     }
 
-    if (action === "camp") {
-      finishGoCamp();
+    if (["camp", "shop", "next"].includes(action)) {
+      finishGoCamp(action);
       return;
     }
 
@@ -11672,6 +11454,7 @@ export default function App() {
     }
     const saveData = {
       version: SAVE_VERSION,
+      exploration,
       screen,
       selectedStage,
       currentStageId: selectedStage?.id || null,
@@ -11737,12 +11520,28 @@ export default function App() {
     }
 
     try {
-      const migratedData = normalizeSaveData(JSON.parse(raw), SAVE_VERSION);
+      const savedData = JSON.parse(raw);
+      const migratedData = normalizeSaveData(savedData, SAVE_VERSION);
+      const savedHeroDefeated = savedData.screen === "battle" && Array.isArray(savedData.units) &&
+        !savedData.units.some(unit => unit?.id === "hero" && unit.hp > 0);
+      // Migration can backfill a fallen hero from the stage's starting roster.
+      const restoredUnits = migratedData.units.filter(unit => !savedHeroDefeated || unit.id !== "hero");
+      const restoredRoundLimit = getStageRoundLimit(migratedData.selectedStage);
+      const restoredAllyTurnEnded = migratedData.turn === "enemy" ||
+        restoredUnits.filter(unit => unit.type === "ally" && unit.hp > 0).every(unit => unit.acted);
+      const restoredDefeat = migratedData.screen === "battle" && (
+        !restoredUnits.some(unit => unit.id === "hero" && unit.hp > 0) ||
+        (restoredUnits.some(unit => unit.type !== "ally" && unit.hp > 0) && (
+          migratedData.round > restoredRoundLimit ||
+          (migratedData.round >= restoredRoundLimit && restoredAllyTurnEnded)
+        ))
+      );
 
       localStorage.setItem(
         SAVE_KEY,
         JSON.stringify({
           ...migratedData,
+          units: restoredUnits,
           savedAt: new Date().toISOString(),
         })
       );
@@ -11768,9 +11567,13 @@ export default function App() {
       setDeployedIds(restoredDeployedIds.length ? restoredDeployedIds : availableDeployIds.slice(0, MAX_DEPLOY_COUNT));
       setDeploymentHint("저장된 출전 편성을 불러왔습니다.");
       setParty(restoredParty);
-      setUnits(migratedData.units);
+      setExploration(normalizeExploration(migratedData.exploration));
+      setDiscoveryReceipt(null);
+      setJournalOpen(false);
+      setUnits(restoredUnits);
       setSelectedUnit(migratedData.selectedUnit);
-      setMode(migratedData.mode);
+      // Skill choice is transient; resume without projecting an unrelated default skill.
+      setMode(migratedData.mode === "skill" ? "attack" : migratedData.mode);
       setTurn(migratedData.turn);
       setRound(migratedData.round);
       setInventory(normalizeBattleInventory(migratedData.inventory));
@@ -11813,11 +11616,14 @@ export default function App() {
       setStoryScene(null);
       setBattle(null);
       setBattleResolving(false);
-      setResult(null);
+      const restoredOutcome = migratedData.screen === "battle" ? getBattleOutcome(migratedData.selectedStage, restoredUnits) : null;
+      setResult(restoredOutcome || (restoredDefeat ? "defeat" : null));
+      victorySettledRef.current = false;
+      actionResolvingRef.current = false;
       setPhaseBanner(null);
       setStageBanner(null);
       setTurnPhaseBanner(null);
-      setLastClearSummary(null);
+      setLastClearSummary(restoredOutcome === "victory" ? calculateClearSummary(migratedData.selectedStage, migratedData.round, restoredUnits) : null);
       setHazards(migratedData.hazards);
       setTurnBusy(false);
       setMoveUndo(null);
@@ -11839,7 +11645,14 @@ export default function App() {
     }
   };
 
-  const openBattle = (attacker, defender, battleMode = "attack") => {
+  const openBattle = (sourceAttacker, defender, battleMode = "attack") => {
+    const liveAttacker = units.find(unit => unit.id === sourceAttacker?.id);
+    if (actionResolvingRef.current || !liveAttacker || liveAttacker.acted) return;
+    if (battleInputLocked || turn !== "ally" || !sourceAttacker || !defender || sourceAttacker.acted || sourceAttacker.hp <= 0 || defender.hp <= 0) return;
+    const attacker = sourceAttacker.type === "ally" && battleMode === "skill" ? withSkill(sourceAttacker, sourceAttacker.activeSkillId) : sourceAttacker;
+    if (battleMode === "skill" && attacker.skillType !== "attack") return;
+    if (!getAttackTiles(attacker, battleMode, activeMap).some(tile => tile.x === defender.x && tile.y === defender.y)) return;
+    if (battleMode === "skill" && attacker.type === "ally" && getSkillCooldown(attacker, attacker.activeSkillId) > 0) return;
     const preview = applyPassiveToPreview(
       applyBattleTactics(
         {
@@ -11944,6 +11757,7 @@ export default function App() {
           createBattleTactics(counterActor, counterTarget, workingUnits, activeMap)
         );
         const counterOutcome = rollCombat(counterPreview);
+        workingUnits = workingUnits.map(unit => unit.id === counterActor.id ? { ...unit, counterUsed: true } : unit);
         await showCombatCutscene(counterPreview, counterOutcome);
         let counterKilled = false;
 
@@ -12001,6 +11815,12 @@ export default function App() {
     let workingUnits = [...startUnits];
     const enemies = workingUnits.filter((u) => u.type !== "ally");
     for (const enemy of enemies) {
+      if (getBattleOutcome(selectedStage, workingUnits) === "victory") {
+        const summary = calculateClearSummary(selectedStage, round, workingUnits);
+        setUnits(workingUnits); setParty(prev => mergePartyFromUnits(prev, workingUnits));
+        playSfx("victory"); showVictoryDirecting(summary); setResult("victory"); setTurnBusy(false);
+        return;
+      }
       const freshEnemy = workingUnits.find((u) => u.id === enemy.id);
       if (!freshEnemy) continue;
       const allies = workingUnits.filter((u) => u.type === "ally");
@@ -12033,8 +11853,7 @@ export default function App() {
 
         await animateUnitMovePath(
           freshEnemy,
-          enemyPath.length ? enemyPath : [{ x: movedEnemy.x, y: movedEnemy.y }],
-          battleSpeedConfig.enemyStepMs
+          enemyPath.length ? enemyPath : [{ x: movedEnemy.x, y: movedEnemy.y }]
         );
 
         scrollBattleMapToCell(movedEnemy.x, movedEnemy.y, "smooth");
@@ -12052,7 +11871,7 @@ export default function App() {
 
       if (postMoveTarget) {
         if (didMove) {
-          await new Promise((resolve) => window.setTimeout(resolve, Math.min(220, battleSpeedConfig.enemyDelayMs)));
+          await waitForMove(scaleBattleTime(220, battleSpeedRef.current));
         }
 
         const attackResult = await resolveEnemyAttack(
@@ -12075,6 +11894,12 @@ export default function App() {
           : `${freshEnemy.name} 대기. 사거리 내 대상 없음.`,
         ...p,
       ]);
+    }
+    if (getBattleOutcome(selectedStage, workingUnits) === "victory") {
+      const summary = calculateClearSummary(selectedStage, round, workingUnits);
+      setUnits(workingUnits); setParty(prev => mergePartyFromUnits(prev, workingUnits));
+      playSfx("victory"); showVictoryDirecting(summary); setResult("victory"); setTurnBusy(false);
+      return;
     }
     const allyStatusResult = processTurnStartStatuses(workingUnits, "ally");
     const allyTerrainResult = processTerrainStartEffects(allyStatusResult.units, "ally", activeMap);
@@ -12149,9 +11974,12 @@ export default function App() {
         moved: false,
         guard: false,
         supportUsed: false,
+        counterUsed: false,
       };
     });
     setUnits(resetUnits);
+    const allyFocus = getTurnCameraTarget(resetUnits, "ally", selectedUnit);
+    if (allyFocus) scrollBattleMapToCell(allyFocus.x, allyFocus.y);
     playSfx("turn");
     setTurn("ally");
     setRound((r) => r + 1);
@@ -12172,6 +12000,9 @@ export default function App() {
     if (turnBusy || result) return;
 
     setTurnBusy(true);
+    setSkillChoiceOpen(false);
+    setActiveSkillChoice(null);
+    nextUnits = nextUnits.map(unit => ({ ...unit, counterUsed: false }));
     playSfx("turn");
     setTurn("enemy");
     showTurnPhaseBanner("enemy", round);
@@ -12207,10 +12038,12 @@ export default function App() {
       if (phaseBoss) {
         showBossCutscene(phaseBoss, "phase2", 1900);
       }
-      setTimeout(() => setPhaseBanner(null), 1400);
+      scheduleBattleVisual(() => setPhaseBanner(null), 1400);
     }
 
     setUnits(processedUnits);
+    const enemyFocus = getTurnCameraTarget(processedUnits, "enemy");
+    if (enemyFocus) scrollBattleMapToCell(enemyFocus.x, enemyFocus.y);
     setLogs((p) => [
       "적 턴 시작.",
       ...hazardResult.messages,
@@ -12220,7 +12053,7 @@ export default function App() {
       ...p,
     ]);
 
-    if (enemiesLeft.length === 0) {
+    if (getBattleOutcome(selectedStage, processedUnits) === "victory") {
       const summary = calculateClearSummary(selectedStage, round, processedUnits);
       playSfx("victory");
       showVictoryDirecting(summary);
@@ -12238,11 +12071,12 @@ export default function App() {
       return;
     }
 
-    setTimeout(() => executeEnemyTurn(processedUnits), battleSpeedConfig.enemyDelayMs);
+    setTimeout(() => executeEnemyTurn(processedUnits), battleSpeedRef.current.enemyDelayMs);
   };
 
   const selectNextReadyAlly = (preferredRole = null) => {
-    if (turn !== "ally" || turnBusy || movingUnit || result) return;
+    if (turn !== "ally" || battleInputLocked) return;
+    setActiveSkillChoice(null);
 
     const readyAllies = units.filter((unit) => {
       if (!isUnitReady(unit)) return false;
@@ -12273,7 +12107,7 @@ export default function App() {
   };
 
   const commandGuardSquad = () => {
-    if (turn !== "ally" || turnBusy || movingUnit || result) return;
+    if (turn !== "ally" || battleInputLocked) return;
 
     const guardedRoles = ["front"];
     const guardedUnits = units.map((unit) => {
@@ -12315,7 +12149,7 @@ export default function App() {
   };
 
   const commandAllWait = () => {
-    if (turn !== "ally" || turnBusy || movingUnit || battle || result) return;
+    if (turn !== "ally" || battleInputLocked) return;
 
     const readyCount = units.filter(isUnitReady).length;
     const alliesLeft = units.some((unit) => unit.type === "ally" && unit.hp > 0);
@@ -12357,7 +12191,7 @@ export default function App() {
   const endAllyTurn = commandAllWait;
 
   const commandSupportFocus = () => {
-    if (turn !== "ally" || turnBusy || movingUnit || result) return;
+    if (turn !== "ally" || battleInputLocked) return;
 
     const injured = units
       .filter((unit) => unit.type === "ally" && unit.hp > 0 && unit.hp < unit.maxHp)
@@ -12469,12 +12303,14 @@ export default function App() {
         }
       }
 
-      if (settings.autoUseSkills && ally.skillType === "attack" && getSkillCooldownValue(ally) === 0) {
-        const skillTiles = getAttackTiles(ally, "skill", activeMap);
-
-        for (const enemy of enemies) {
-          if (skillTiles.some((tile) => tile.x === enemy.x && tile.y === enemy.y)) {
-            options.push(scoreAutoBattleOption(ally, enemy, "skill"));
+      if (settings.autoUseSkills) {
+        for (const skill of getUnitSkills(ally).filter(skill => skill.type === "attack" && getSkillCooldown(ally, skill.id) === 0)) {
+          const actor = withSkill(ally, skill.id);
+          const skillTiles = getAttackTiles(actor, "skill", activeMap);
+          for (const enemy of enemies) {
+            if (skillTiles.some((tile) => tile.x === enemy.x && tile.y === enemy.y)) {
+              options.push(scoreAutoBattleOption(actor, enemy, "skill"));
+            }
           }
         }
       }
@@ -12484,7 +12320,7 @@ export default function App() {
   };
 
   const commandRecommendedAttack = () => {
-    if (turn !== "ally" || turnBusy || movingUnit || result) return;
+    if (turn !== "ally" || battleInputLocked) return;
 
     const best = findBestRecommendedAttack();
 
@@ -12494,6 +12330,7 @@ export default function App() {
     }
 
     setSelectedUnit(best.attacker.id);
+    setActiveSkillChoice(best.mode === "skill" ? { unitId: best.attacker.id, skillId: best.attacker.activeSkillId } : null);
     setMode(best.mode);
     focusUnitOnMap(best.defender);
     playSfx("confirm");
@@ -12518,7 +12355,7 @@ export default function App() {
   };
 
   const commandAutoAdvance = () => {
-    if (turn !== "ally" || turnBusy || movingUnit || result) return;
+    if (turn !== "ally" || battleInputLocked) return;
 
     const actor =
       selected && isUnitReady(selected)
@@ -12566,11 +12403,11 @@ export default function App() {
 
     const movePath = findMovePath(actor, bestTile.x, bestTile.y, units, activeMap);
 
+    setTurnBusy(true);
     (async () => {
       await animateUnitMovePath(
         actor,
-        movePath.length ? movePath : [{ x: bestTile.x, y: bestTile.y }],
-        battleSpeedConfig.allyStepMs
+        movePath.length ? movePath : [{ x: bestTile.x, y: bestTile.y }]
       );
 
       setUnits((prev) =>
@@ -12581,6 +12418,7 @@ export default function App() {
         )
       );
       setMovingUnit(null);
+      setTurnBusy(false);
       setSelectedUnit(actor.id);
       setMode("attack");
       scrollBattleMapToCell(bestTile.x, bestTile.y, "smooth");
@@ -12605,21 +12443,23 @@ export default function App() {
       }
     });
 
-    if (settings.autoUseSkills && actor.skillType === "attack" && getSkillCooldownValue(actor) === 0) {
-      const skillTiles = getAttackTiles(actor, "skill", activeMap);
-
-      enemies.forEach((enemy) => {
-        if (skillTiles.some((tile) => tile.x === enemy.x && tile.y === enemy.y)) {
-          options.push(scoreAutoBattleOption(actor, enemy, "skill"));
-        }
-      });
+    if (settings.autoUseSkills) {
+      for (const skill of getUnitSkills(actor).filter(skill => skill.type === "attack" && getSkillCooldown(actor, skill.id) === 0)) {
+        const skillActor = withSkill(actor, skill.id);
+        const skillTiles = getAttackTiles(skillActor, "skill", activeMap);
+        enemies.forEach((enemy) => {
+          if (skillTiles.some((tile) => tile.x === enemy.x && tile.y === enemy.y)) {
+            options.push(scoreAutoBattleOption(skillActor, enemy, "skill"));
+          }
+        });
+      }
     }
 
     return options.sort((a, b) => b.score - a.score)[0] || null;
   };
 
   const commandAutoBattleTurn = async () => {
-    if (turn !== "ally" || turnBusy || movingUnit || result || battle) return;
+    if (turn !== "ally" || battleInputLocked) return;
 
     if (settings.autoUseItems) {
       const criticalAlly = units
@@ -12648,14 +12488,15 @@ export default function App() {
 
     if (attackOption) {
       setSelectedUnit(actor.id);
+      setActiveSkillChoice(attackOption.mode === "skill" ? { unitId: actor.id, skillId: attackOption.attacker.activeSkillId } : null);
       setMode(attackOption.mode);
       focusUnitOnMap(attackOption.defender);
       playSfx("confirm");
       setLogs((p) => [
-        `자동 전투: ${actor.name} → ${attackOption.defender.name} ${attackOption.mode === "skill" ? actor.skill : "공격"}`,
+        `자동 전투: ${actor.name} → ${attackOption.defender.name} ${attackOption.mode === "skill" ? attackOption.attacker.skill : "공격"}`,
         ...p,
       ]);
-      openBattle(actor, attackOption.defender, attackOption.mode);
+      openBattle(attackOption.attacker, attackOption.defender, attackOption.mode);
       return;
     }
 
@@ -12693,8 +12534,7 @@ export default function App() {
 
     await animateUnitMovePath(
       actor,
-      movePath.length ? movePath : [{ x: bestTile.x, y: bestTile.y }],
-      battleSpeedConfig.allyStepMs
+      movePath.length ? movePath : [{ x: bestTile.x, y: bestTile.y }]
     );
 
     const movedUnits = units.map((unit) =>
@@ -12731,8 +12571,11 @@ export default function App() {
   const markActed = (unitId, sourceUnits = units) => {
     if (turnBusy || result) return;
 
+    setActiveSkillChoice(null);
+    setSkillChoiceOpen(false);
+    closeMobileCombatPanels();
     setMoveUndo(null);
-    const actedUnits = sourceUnits.map((u) => u.id === unitId ? { ...u, acted: true, moved: true } : u);
+    const actedUnits = spendAction(sourceUnits, unitId);
     setUnits(actedUnits);
     setSelectedUnit(null);
     setMode("move");
@@ -12745,12 +12588,14 @@ export default function App() {
 
   const showCombatCutscene = async (battleInfo, outcome) => {
     if (!battleInfo?.attacker || !battleInfo?.defender) return;
-    if (settings.cutsceneMode === "off") {
+    const effectType = getEffectType(battleInfo, outcome);
+    const sound = outcome?.crit ? 'crit' : outcome?.hit || outcome?.heal || outcome?.guard ? effectType : 'miss';
+    if (settings.cutsceneMode === "off" || !settings.effectsOn) {
+      playSfx(sound);
       return;
     }
 
     const cutsceneId = `${Date.now()}-${Math.random()}`;
-    const effectType = getEffectType(battleInfo, outcome);
     const motionKey = getUnitWeaponMotionKey(battleInfo.attacker, battleInfo, outcome);
     const defenderPostHp = outcome?.heal
       ? Math.min(battleInfo.defender.maxHp || battleInfo.defender.hp, battleInfo.defender.hp + (outcome.damage || 0))
@@ -12759,6 +12604,13 @@ export default function App() {
       : battleInfo.defender.hp;
     const finish = outcome?.hit && !outcome?.heal && defenderPostHp <= 0;
     const attackerPostHp = battleInfo.attacker.hp;
+    const durationMs = scaleBattleTime(finish ? cutsceneConfig.duration + 360 : cutsceneConfig.duration, battleSpeedRef.current);
+
+    await preloadCombatArt(
+      battleInfo.attacker.type === "ally" ? battleInfo.attacker.id : getEnemySpriteKey(battleInfo.attacker),
+      battleInfo.defender.type === "ally" ? battleInfo.defender.id : getEnemySpriteKey(battleInfo.defender),
+      { ...battleInfo, effectType, outcome }
+    );
 
     setCombatCutscene({
       id: cutsceneId,
@@ -12767,15 +12619,15 @@ export default function App() {
       attackerPostHp,
       defenderPostHp,
       mode: battleInfo.mode,
-      effectType: finish ? "finish" : effectType,
+      effectType,
       effectLabel: finish ? getCutsceneEffectLabel("finish") : getCutsceneEffectLabel(effectType),
       effectIcon: finish ? getCutsceneEffectIcon("finish") : getCutsceneEffectIcon(effectType),
       motionKey,
-      durationMs: finish ? cutsceneConfig.duration + 360 : cutsceneConfig.duration,
+      durationMs,
       finish,
       outcome,
       title:
-        outcome?.heal
+        outcome?.guard ? battleInfo.attacker.skill : outcome?.heal
           ? "회복"
           : finish
           ? "FINISH"
@@ -12788,15 +12640,19 @@ export default function App() {
           : "공격",
     });
 
-    playSfx(finish ? "finish" : outcome?.crit ? "crit" : outcome?.hit ? effectType : "miss");
+    scheduleBattleVisual(() => playSfx(finish ? 'finish' : sound), (finish ? cutsceneConfig.duration + 360 : cutsceneConfig.duration) * .46);
 
-    await waitForMove(settings.effectsOn ? (finish ? cutsceneConfig.duration + 360 : cutsceneConfig.duration) : 120);
+    await waitForMove(durationMs);
 
     setCombatCutscene((current) => (current?.id === cutsceneId ? null : current));
   };
 
   const resolveBattle = async () => {
-    if (!battle || battleResolving) return;
+    if (!battle || battleResolving || actionResolvingRef.current || turn !== "ally" || result) return;
+    const actor = units.find(unit => unit.id === battle.attacker.id);
+    if (!actor || actor.acted || actor.hp <= 0) { setBattle(null); return; }
+    actionResolvingRef.current = true;
+    try {
 
     setBattleResolving(true);
     setBattle(null);
@@ -12804,7 +12660,7 @@ export default function App() {
 
     const outcome = rollCombat(battle);
     await showCombatCutscene(battle, outcome);
-    triggerCombatVisual(battle, outcome);
+    triggerCombatVisual(battle, outcome, 0, false);
 
     if (outcome.hit) {
       addBattleStats({
@@ -12827,7 +12683,7 @@ export default function App() {
 
     let defenderDied = false;
 
-    let nextUnits = units
+    let nextUnits = spendAction(units, battle.attacker.id)
       .map((u) => {
         if (u.id === battle.defender.id && outcome.hit) {
           const hp = Math.max(0, u.hp - outcome.damage);
@@ -12859,7 +12715,8 @@ export default function App() {
       nextUnits = applySkillCooldown(
         nextUnits,
         battle.attacker.id,
-        getSkillCooldownTurns(battle.attacker)
+        getSkillCooldownTurns(battle.attacker),
+        battle.attacker.activeSkillId
       );
     }
 
@@ -12976,7 +12833,7 @@ export default function App() {
         );
         const assistOutcome = rollCombat(freshAssist);
         await showCombatCutscene(freshAssist, assistOutcome);
-        triggerCombatVisual(freshAssist, assistOutcome, 360);
+        triggerCombatVisual(freshAssist, assistOutcome, 360, false);
 
         let assistKilled = false;
 
@@ -12992,7 +12849,7 @@ export default function App() {
               }
 
               if (unit.id === assistActor.id) {
-                return { ...unit, supportUsed: true };
+                return { ...unit, supportUsed: true, acted: true, moved: true };
               }
 
               return unit;
@@ -13000,7 +12857,7 @@ export default function App() {
             .filter((unit) => unit.hp > 0);
         } else {
           nextUnits = nextUnits.map((unit) =>
-            unit.id === assistActor.id ? { ...unit, supportUsed: true } : unit
+            unit.id === assistActor.id ? { ...unit, supportUsed: true, acted: true, moved: true } : unit
           );
         }
 
@@ -13043,6 +12900,7 @@ export default function App() {
           createBattleTactics(counterActor, counterTarget, nextUnits, activeMap)
         );
         const counterOutcome = rollCombat(freshCounter);
+        nextUnits = nextUnits.map(unit => unit.id === counterActor.id ? { ...unit, counterUsed: true } : unit);
         triggerCombatVisual(freshCounter, counterOutcome, 260);
         let counterKilled = false;
 
@@ -13085,7 +12943,7 @@ export default function App() {
       setPhaseBanner("보스 2페이즈");
       playSfx("phase");
       triggerScreenShake(true);
-      setTimeout(() => setPhaseBanner(null), 1400);
+      scheduleBattleVisual(() => setPhaseBanner(null), 1400);
     }
 
     setLogs((p) => [
@@ -13122,7 +12980,7 @@ export default function App() {
       return;
     }
 
-    if (enemiesLeft.length === 0) {
+    if (getBattleOutcome(selectedStage, nextUnits) === "victory") {
       const summary = calculateClearSummary(selectedStage, round, nextUnits);
       setUnits(nextUnits);
       setParty((prev) => mergePartyFromUnits(prev, nextUnits));
@@ -13141,117 +12999,72 @@ export default function App() {
     }
 
     markActed(battle.attacker.id, nextUnits);
+    } finally {
+      actionResolvingRef.current = false;
+      setBattleResolving(false);
+    }
   };
 
   const waitUnit = () => {
-    if (!selected || selected.acted || turn !== "ally" || turnBusy || movingUnit || result) return;
+    if (!canCommandSelected) return;
     setLogs((p) => [`${selected.name} 대기.`, ...p]);
     markActed(selected.id);
   };
 
-  const activateSkill = async () => {
-    if (!selected || selected.acted || turn !== "ally" || turnBusy || movingUnit || result) return;
+  const activateSkill = () => {
+    if (!canCommandSelected || !getUnitSkills(selected).length) return;
+    closeMobileCombatPanels();
+    playSfx("confirm");
+    setSkillChoiceOpen(true);
+  };
 
-    if (selectedSkillCooldown > 0) {
-      setLogs((p) => [
-        `${selected.name}의 ${selected.skill}은 ${selectedSkillCooldown}턴 후 사용 가능합니다.`,
-        ...p,
-      ]);
-      return;
-    }
-
-    if (selected.skillType === "heal") {
-      const injuredAllies = units
-        .filter((unit) => unit.type === "ally" && unit.hp > 0 && unit.hp < unit.maxHp)
-        .sort((a, b) => a.hp / a.maxHp - b.hp / b.maxHp);
-
-      const targets = injuredAllies.slice(0, getHealTargetCount(selected));
-
-      if (!targets.length) {
-        setLogs((p) => [`${selected.name}: 회복할 아군이 없습니다.`, ...p]);
-        return;
-      }
-
-      const healPower = 14 + getSkillUpgradeLevel(selected) * 3 + getPassiveHealBonus(selected);
-      const healSummary = targets.map((target) => {
-        const healAmount = Math.min(healPower, target.maxHp - target.hp);
-        return `${target.name} +${healAmount}`;
-      });
-      const targetIds = new Set(targets.map((target) => target.id));
-      const healedUnits = units.map((unit) =>
-        targetIds.has(unit.id)
-          ? { ...unit, hp: Math.min(unit.maxHp, unit.hp + healPower) }
-          : unit
-      );
-
-      const cooldownUnits = applySkillCooldown(
-        healedUnits,
-        selected.id,
-        getSkillCooldownTurns(selected)
-      );
-
-      const totalHealDone = targets.reduce((sum, target) => sum + Math.min(healPower, target.maxHp - target.hp), 0);
-      addBattleStats({ healingDone: totalHealDone, skillsUsed: 1 });
-      addUnitBattleStats(selected.id, { healingDone: totalHealDone, skillsUsed: 1 });
-      await showCombatCutscene(
-        { attacker: selected, defender: targets[0], mode: "heal" },
-        { hit: true, heal: true, damage: totalHealDone, crit: false }
-      );
-      playSfx("heal");
-      setLogs((p) => [
-        `${selected.name} 스킬 사용: ${selected.skill} → ${healSummary.join(", ")} 회복 · 쿨다운 ${getSkillCooldownTurns(selected)}턴`,
-        ...p,
-      ]);
-      markActed(selected.id, cooldownUnits);
-      return;
-    }
-
-    if (selected.skillType === "guard") {
-      const guardBonus = getSkillUpgradeLevel(selected);
-      const guardedUnits = applySkillCooldown(
-        units.map((u) =>
-          u.id === selected.id
-            ? {
-                ...u,
-                guard: true,
-                def: u.def + guardBonus,
-                skillGuardBoost: guardBonus,
-              }
-            : u
-        ),
-        selected.id,
-        getSkillCooldownTurns(selected)
-      );
-      playSfx("guard");
-      setLogs((p) => [
-        `${selected.name} 스킬 사용: ${selected.skill}. 받는 피해가 감소합니다.${guardBonus ? ` 방어 +${guardBonus}` : ""} · 쿨다운 ${getSkillCooldownTurns(selected)}턴`,
-        ...p,
-      ]);
-      markActed(selected.id, guardedUnits);
-      return;
-    }
-    if (selected.skillType === "attack") {
-      playSfx("magic");
+  const chooseBattleSkill = async (skillId) => {
+    if (!skillChoiceOpen || !selected || selected.acted || turn !== "ally" || combatBusy || battle || itemOpen || result) return;
+    const skill = getSkill(selected, skillId);
+    if (!skill || getSkillCooldown(selected, skill.id) > 0) return;
+    const actor = withSkill(selected, skill.id);
+    setActiveSkillChoice({ unitId: selected.id, skillId: skill.id });
+    setSkillChoiceOpen(false);
+    playSfx("magic");
+    if (skill.type === "attack") {
       setMode("skill");
-      setMobileBattlePanelOpen(false);
       setMobileTargetPanelOpen(true);
-      setMobileAllyPanelOpen(false);
-      setMobileTurnPanelOpen(false);
-      setLogs((p) => [
-        `${selected.name} 스킬 준비: ${selected.skill} · 사용 후 쿨다운 ${getSkillCooldownTurns(selected)}턴`,
-        ...p,
-      ]);
+      setLogs(previous => [`${actor.name}: ${skill.name} 선택.`, ...previous]);
+      return;
+    }
+    const applied = applySupportSkill(actor, skill, units);
+    if (!applied.targets.length) return;
+    setBattleResolving(true);
+    try {
+      const first = applied.targets[0];
+      const firstAfter = applied.units.find(unit => unit.id === first.id);
+      await showCombatCutscene(
+        { attacker: actor, defender: first, mode: "skill" },
+        { hit: true, heal: skill.type === "heal", guard: skill.type === "guard", damage: skill.type === "heal" ? firstAfter.hp - first.hp : 0, crit: false }
+      );
+      applied.targets.forEach(target => {
+        pushVisualEffect({ x: target.x, y: target.y, type: skill.type === "heal" ? "heal" : "guard" });
+        pushDamagePopup({ x: target.x, y: target.y, text: skill.type === "heal" ? `+${applied.units.find(unit => unit.id === target.id).hp - target.hp}` : "수호", kind: skill.type === "heal" ? "heal" : "guard" });
+      });
+      addBattleStats({ skillsUsed: 1, healingDone: applied.healing });
+      addUnitBattleStats(actor.id, { skillsUsed: 1, healingDone: applied.healing });
+      const cooldownUnits = applySkillCooldown(applied.units, actor.id, skill.cooldown, skill.id);
+      setLogs(previous => [`${actor.name}: ${skill.name} → ${applied.targets.map(unit => unit.name).join(", ")}`, ...previous]);
+      markActed(actor.id, cooldownUnits);
+    } finally {
+      setBattleResolving(false);
     }
   };
 
   const openItem = () => {
-    if (!selected || selected.acted || turn !== "ally" || turnBusy || movingUnit || result) return;
+    if (!canCommandSelected) return;
+    closeMobileCombatPanels();
     playSfx("confirm");
     setItemOpen(true);
   };
 
   const consumeBattleItem = (itemId) => {
-    if (!selected || selected.acted || turn !== "ally" || turnBusy || movingUnit || result) return;
+    if (!itemOpen || !selected || selected.acted || turn !== "ally" || combatBusy || battle || result) return;
 
     const item = ITEM_DEFS[itemId];
 
@@ -13349,7 +13162,20 @@ export default function App() {
     markActed(selected.id, nextUnits);
   };
 
-  const finishGoCamp = () => {
+  const finishGoCamp = (destination = "camp") => {
+    if (victorySettledRef.current) return;
+    victorySettledRef.current = true;
+    setTurnBusy(false);
+    setAutoBattleEnabled(false);
+    setCombatCutscene(null);
+    setBossCutscene(null);
+    setBattleSettingsOpen(false);
+    setSkillChoiceOpen(false);
+    setActiveSkillChoice(null);
+    setMoveUndo(null);
+    setCampTab(destination === "shop" ? "supply" : "party");
+    closeMobileCombatPanels();
+    clearVisuals();
     playSfx("confirm");
     setResult(null); setBattle(null); setBattleResolving(false); setItemOpen(false); setShopOpen(false); setEquipmentOpen(false); setForgeOpen(false); setTrainingOpen(false); setDispatchOpen(false); setSkillOpen(false); setPromoteOpen(false); setSupportOpen(false); setSelectedUnit(null); setMode("move"); setTrainingUsed(false); setDispatchUsed(false);
     const stageId = selectedStage?.id;
@@ -13427,7 +13253,15 @@ export default function App() {
       setCampMessage(`${selectedStage?.title} 전투가 끝났다. 이미 클리어한 장이라 추가 보상은 없다.`);
     }
     setBattleLoot(createEmptyLoot());
-    setScreen("camp");
+    if (destination === "next" && nextStage) {
+      setDeploymentStage(nextStage);
+      setSelectedStage(nextStage);
+      setDeploymentHint(`${nextStage.title} 출전 부대를 편성하세요.`);
+      setScreen("deployment");
+    } else {
+      setShopOpen(destination === "shop");
+      setScreen("camp");
+    }
   };
 
 
@@ -13451,7 +13285,45 @@ export default function App() {
     openStoryScene(selectedStage, "clear", "camp");
   };
 
-  const goNextBattle = () => { setCampMessage("다음 전투를 선택하세요."); setScreen("campaign"); };
+  const returnToCampAfterDefeat = (destination = "camp") => {
+    if (result !== "defeat") return;
+    const recoveredParty = mergePartyFromUnits(party, units).map(unit => ({ ...unit, hp: unit.maxHp, status: [], acted: false, moved: false, guard: false, skillCooldown: 0, skillCooldowns: {} }));
+    setParty(recoveredParty);
+    setUnits(recoveredParty);
+    setResult(null);
+    setBattle(null);
+    setBattleResolving(false);
+    setTurnBusy(false);
+    setTurn("ally");
+    setAutoBattleEnabled(false);
+    setItemOpen(false);
+    setSkillChoiceOpen(false);
+    setActiveSkillChoice(null);
+    setSelectedUnit(null);
+    setInspectedUnitId(null);
+    setMode("move");
+    setMoveUndo(null);
+    setHazards([]);
+    setBattleLoot(createEmptyLoot());
+    setBattleStats(createDefaultBattleStats());
+    setUnitBattleStats(createDefaultUnitBattleStats());
+    setStageRewardClaimed(false);
+    setBattleSettingsOpen(false);
+    setLastClearSummary(null);
+    setTrainingUsed(false);
+    setDispatchUsed(false);
+    setCampTab("party");
+    setCampMessage(`${selectedStage?.title || "전장"}에서 철수했습니다. 부대를 재정비합니다.`);
+    closeMobileCombatPanels();
+    clearVisuals();
+    setScreen(destination);
+  };
+
+  const goNextBattle = () => {
+    const nextStage = stages.find(stage => stage.id === (selectedStage?.id || 0) + 1);
+    if (nextStage && playableStageIds.includes(nextStage.id)) startStage(nextStage);
+    else setScreen("campaign");
+  };
 
   const buyItem = (itemId) => {
     const item = ITEM_DEFS[itemId];
@@ -13791,11 +13663,22 @@ export default function App() {
     );
   };
 
+  const promoteSecretUnit = (unitId) => {
+    const target = party.find(unit => unit.id === unitId);
+    const check = canSecretPromote(target, exploration);
+    if (!check.ok) { setCampMessage(check.reason); return; }
+    const promotion = applySecretPromotion(target, exploration);
+    setParty(prev => prev.map(unit => unit.id === unitId ? promotion.unit : unit));
+    setExploration(promotion.progress);
+    setCampMessage(promotion.message);
+    playSfx("confirm");
+  };
+
   const renderPromotionModal = () => {
     if (!promoteOpen) return null;
 
     return (
-      <div className="battle-modal">
+      <PromotionDialog onClose={() => setPromoteOpen(false)}>
         <div className="battle-card equipment-card promotion-card">
           <div className="battle-title">전직</div>
           <div className="result-sub">
@@ -13806,6 +13689,8 @@ export default function App() {
             {party.map((unit) => {
               const check = canPromoteUnit(unit, gold);
               const cost = getPromotionCost(unit);
+              const secret = getSecretPromotion(unit, exploration);
+              const secretCheck = canSecretPromote(unit, exploration);
 
               return (
                 <div
@@ -13845,6 +13730,12 @@ export default function App() {
                       {unit.promoted ? "완료" : "전직"}
                     </button>
                   </div>
+                  {secret && (secret.hasRelic || unit.secretClass) && <div className="secret-promotion-row">
+                    <div><strong>{secret.classTitle}</strong><span>{unit.secretClass ? "숨겨진 전직 완료" : secretCheck.reason}</span>
+                      {!unit.secretClass && <small>HP +{secret.bonuses.hp} · 공격 +{secret.bonuses.atk} · 방어 +{secret.bonuses.def} · 전용 기술</small>}
+                    </div>
+                    <button disabled={!secretCheck.ok} onClick={() => promoteSecretUnit(unit.id)}>비전 전직</button>
+                  </div>}
                 </div>
               );
             })}
@@ -13857,7 +13748,7 @@ export default function App() {
             닫기
           </button>
         </div>
-      </div>
+      </PromotionDialog>
     );
   };
 
@@ -14345,11 +14236,14 @@ export default function App() {
   };
 
   return (
-    <div className={`app ${screenShake ? `screen-shake-${screenShake}` : ""}`}>
+    <div className={`app world-art-app ${screenShake ? `screen-shake-${screenShake}` : ""}`} style={{ "--battle-speed": battleSpeedConfig.multiplier }}>
+      {(discoveryReceipt || journalOpen) && <DiscoveryDialog receipt={discoveryReceipt} progress={exploration}
+        entries={DISCOVERIES.filter(entry => unlockedStages.includes(entry.stageId) || exploration.claimed.includes(entry.id))}
+        onClose={() => { setDiscoveryReceipt(null); setJournalOpen(false); }} />}
       <div className="overlay" />
       {phaseBanner && <div className="phase-banner">{phaseBanner}</div>}
       {stageBanner && (
-        <div className={`stage-directing-banner stage-banner-${stageBanner.type}`}>
+        <div className={`stage-directing-banner stage-banner-${stageBanner.type}`} style={{ animationDuration: `${stageBanner.duration}ms` }}>
           <div className="stage-banner-label">{stageBanner.label}</div>
           <div className="stage-banner-title">{stageBanner.title}</div>
           <div className="stage-banner-subtitle">{stageBanner.subtitle}</div>
@@ -14392,121 +14286,10 @@ export default function App() {
         </div>
       )}
       {combatCutscene && (
-        <div className="combat-cutscene-overlay dk-cutscene-overlay dk-final-vs-overlay">
-          <div
-            className={`combat-cutscene-card dk-cutscene-card dk-final-vs-card dk-effect-${combatCutscene.effectType || "slash"} dk-motion-${combatCutscene.motionKey || "sword"} ${combatCutscene.finish ? "finish-cutscene" : ""} ${combatCutscene.outcome?.heal ? "heal-cutscene" : ""} ${combatCutscene.outcome?.crit ? "crit-cutscene" : ""} ${!combatCutscene.outcome?.hit ? "miss-cutscene" : ""}`}
-            style={{
-              "--dk-cutscene-ms": `${combatCutscene.durationMs || cutsceneConfig.duration || 1800}ms`,
-              "--dk-cutscene-bg-art": `url("${getClassicBattleMapArt(activeStage)}")`,
-            }}
-          >
-            <div className="dk-cutscene-bg">
-              <div className="dk-moon" />
-              <div className="dk-horizon" />
-              <div className="dk-floor" />
-            </div>
-
-            <div className="combat-cutscene-title dk-cutscene-title">
-              <span className="dk-action-name">{combatCutscene.title}</span>
-              <span className="dk-effect-badge">
-                {combatCutscene.effectIcon} {combatCutscene.effectLabel}
-              </span>
-              <span className="dk-result-tag">
-                {combatCutscene.outcome?.heal
-                  ? `HEAL · ${combatCutscene.outcome.damage}`
-                  : combatCutscene.finish
-                  ? `FINISH · ${combatCutscene.outcome.damage}`
-                  : combatCutscene.outcome?.hit
-                  ? combatCutscene.outcome?.crit
-                    ? `CRITICAL · ${combatCutscene.outcome.damage}`
-                    : `${combatCutscene.outcome.damage} DAMAGE`
-                  : "MISS"}
-              </span>
-            </div>
-
-            <div className="dk-duel-stage">
-              <div className="dk-duel-sidewash dk-duel-sidewash-ally" />
-              <div className="dk-duel-sidewash dk-duel-sidewash-enemy" />
-              <img className="dk-duel-cutin dk-duel-cutin-attacker" src={getUnitPortrait(combatCutscene.attacker)} alt="" aria-hidden="true" />
-              <img className="dk-duel-cutin dk-duel-cutin-defender" src={getUnitPortrait(combatCutscene.defender)} alt="" aria-hidden="true" />
-              <div className="dk-duel-clash-crest">
-                <span>VS</span>
-              </div>
-              <div className="dk-duel-action-line">
-                <span>{combatCutscene.attacker.name}</span>
-                <b>{combatCutscene.title}</b>
-                <span>{combatCutscene.defender.name}</span>
-              </div>
-              <div className="dk-fighter dk-attacker">
-                <div className="dk-platform" />
-                <span className="dk-fighter-afterimage" />
-                <span className="dk-cast-aura" />
-                <div className={`dk-fighter-rig dk-attacker-rig dk-unit-${combatCutscene.attacker.id || "unit"}`}>
-                  <img className="dk-character-body" src={getCutsceneUnitSprite(combatCutscene.attacker)} alt={combatCutscene.attacker.name} />
-                  <span className="dk-cutscene-weapon" />
-                  <span className="dk-cutscene-trail" />
-                </div>
-              </div>
-
-              <div className="dk-fighter dk-defender">
-                <div className="dk-platform" />
-                <span className="dk-hit-guard" />
-                <div className={`dk-fighter-rig dk-defender-rig dk-unit-${combatCutscene.defender.id || "unit"}`}>
-                  <img className="dk-character-body" src={getCutsceneUnitSprite(combatCutscene.defender)} alt={combatCutscene.defender.name} />
-                </div>
-              </div>
-
-              <div className="dk-impact-layer">
-                <div className="dk-motion-projectile" />
-                <div className="dk-motion-spell-ring" />
-                <div className="dk-motion-impact-flash" />
-                <div className="dk-finish-beam" />
-                <div className="cutscene-slash dk-slash" />
-                <div className="dk-spark dk-spark-a" />
-                <div className="dk-spark dk-spark-b" />
-                <div className="dk-effect-orb dk-orb-a" />
-                <div className="dk-effect-orb dk-orb-b" />
-                <div className="dk-effect-orb dk-orb-c" />
-                <b>{combatCutscene.outcome?.heal ? `+${combatCutscene.outcome.damage}` : combatCutscene.outcome?.hit ? combatCutscene.outcome.damage : "MISS"}</b>
-              </div>
-            </div>
-
-            <div className="dk-status-row">
-              <div className="dk-status-panel attacker-panel">
-                <strong>{combatCutscene.attacker.name}</strong>
-                <span>{getCombatClassLabel(getUnitCombatClass(combatCutscene.attacker))} · {combatCutscene.attacker.skill}</span>
-                <div className="dk-hpbar">
-                  <i style={{ width: `${combatCutscene.attacker.maxHp ? Math.max(0, Math.min(100, ((combatCutscene.attackerPostHp ?? combatCutscene.attacker.hp) / combatCutscene.attacker.maxHp) * 100)) : 0}%` }} />
-                </div>
-                <small>HP {combatCutscene.attackerPostHp ?? combatCutscene.attacker.hp}/{combatCutscene.attacker.maxHp}</small>
-              </div>
-
-              <div className="dk-vs-mark">VS</div>
-
-              <div className="dk-status-panel defender-panel">
-                <strong>{combatCutscene.defender.name}</strong>
-                <span>{getCombatClassLabel(getUnitCombatClass(combatCutscene.defender))} · {getInspectUnitKind(combatCutscene.defender)}</span>
-                <div className="dk-hpbar enemy">
-                  <i
-                    className="dk-hp-before"
-                    style={{ width: `${combatCutscene.defender.maxHp ? Math.max(0, Math.min(100, (combatCutscene.defender.hp / combatCutscene.defender.maxHp) * 100)) : 0}%` }}
-                  />
-                  <i
-                    className="dk-hp-after"
-                    style={{ width: `${combatCutscene.defender.maxHp ? Math.max(0, Math.min(100, ((combatCutscene.defenderPostHp ?? combatCutscene.defender.hp) / combatCutscene.defender.maxHp) * 100)) : 0}%` }}
-                  />
-                </div>
-                <small>
-                  HP {combatCutscene.defenderPostHp ?? combatCutscene.defender.hp}/{combatCutscene.defender.maxHp}
-                  {combatCutscene.outcome?.heal && combatCutscene.outcome.damage ? ` (+${combatCutscene.outcome.damage})` : combatCutscene.outcome?.hit && combatCutscene.outcome.damage ? ` (-${combatCutscene.outcome.damage})` : ""}
-                </small>
-              </div>
-            </div>
-
-            <div className="dk-skill-caption">{combatCutscene.attacker.name}의 {combatCutscene.title}</div>
-            <div className="dk-touch-hint">전투 컷씬 진행 중</div>
-          </div>
-        </div>
+        <CombatScene key={combatCutscene.id} scene={combatCutscene}
+          attackerKey={combatCutscene.attacker.type === "ally" ? combatCutscene.attacker.id : getEnemySpriteKey(combatCutscene.attacker)}
+          defenderKey={combatCutscene.defender.type === "ally" ? combatCutscene.defender.id : getEnemySpriteKey(combatCutscene.defender)}
+          background={getWorldScene(activeStage.id)} effectsEnabled={settings.effectsOn} />
       )}
 
 
@@ -14558,56 +14341,12 @@ export default function App() {
         </div>
       )}
       {screen === "story" && storyScene && (
-        <div className={`story-screen story-${storyScene.type}`}>
-          <div className="story-bg">
-            <img
-              src={`/maps/stage_${storyScene.stage?.id || 1}.jpg`}
-              alt={storyScene.stage?.title || "스토리 배경"}
-            />
-            <div className="story-bg-vignette" />
-          </div>
-
-          <div className="story-header">
-            <div>
-              <div className="screen-kicker">
-                {storyScene.type === "intro" ? "전투 전야" : "전투 이후"}
-              </div>
-              <h1>{storyScene.stage?.title}</h1>
-            </div>
-            {PLAYTEST_STORY_CAN_SKIP && (
-              <button className="back-btn story-skip-btn" onClick={skipStoryScene}>
-                {storyScene.onComplete === "battle" ? "바로 전투" : "건너뛰기"}
-              </button>
-            )}
-          </div>
-
-          <div className="story-character-stage">
-            <img
-              src={getStoryPortrait(storyScene.lines[storyScene.index]?.speaker)}
-              alt={storyScene.lines[storyScene.index]?.speaker}
-            />
-          </div>
-
-          <div className="story-dialogue-panel" onClick={nextStoryLine}>
-            <div className="story-speaker">
-              {storyScene.lines[storyScene.index]?.speaker}
-            </div>
-            <div className="story-line">
-              {storyScene.lines[storyScene.index]?.text}
-            </div>
-            <div className="story-footer">
-              <span>
-                {storyScene.index + 1} / {storyScene.lines.length}
-              </span>
-              <button onClick={(event) => {
-                event.stopPropagation();
-                nextStoryLine();
-              }}>
-                {storyScene.index >= storyScene.lines.length - 1 ? "계속" : "다음"}
-              </button>
-            </div>
-          </div>
-        </div>
+        <StoryScene key={`${storyScene.stage.id}-${storyScene.type}`} scene={storyScene}
+          background={getWorldScene(storyScene.stage.id)}
+          portrait={getStoryPortrait(storyScene.lines[storyScene.index].speaker)}
+          onNext={nextStoryLine}
+          onPrevious={() => setStoryScene(prev => ({ ...prev, index: Math.max(0, prev.index - 1) }))}
+          onSkip={skipStoryScene} />
       )}
 
 
@@ -15779,6 +15518,7 @@ export default function App() {
               </div>
               <button
                 className={settings.soundOn ? "setting-toggle on" : "setting-toggle"}
+                role="switch" aria-label="사운드" aria-checked={settings.soundOn}
                 onClick={() => updateSetting("soundOn", !settings.soundOn)}
               >
                 {settings.soundOn ? "ON" : "OFF"}
@@ -15800,11 +15540,12 @@ export default function App() {
 
             <div className="setting-row">
               <div>
-                <strong>음악 큐</strong>
-                <span>캠프/전투/월드맵 진입 짧은 음악 효과</span>
+                <strong>배경 음악</strong>
+                <span>전장 · 대기실 · 월드맵</span>
               </div>
               <button
                 className={settings.musicOn ? "setting-toggle on" : "setting-toggle"}
+                role="switch" aria-label="배경 음악" aria-checked={settings.musicOn}
                 onClick={() => updateSetting("musicOn", !settings.musicOn)}
               >
                 {settings.musicOn ? "ON" : "OFF"}
@@ -15813,11 +15554,11 @@ export default function App() {
 
             <div className="setting-row vertical-setting sound-volume-row">
               <div>
-                <strong>효과음 볼륨</strong>
+                <strong>전체 음량</strong>
                 <span>현재 {settings.sfxVolume}%</span>
               </div>
               <div className="sound-volume-selector">
-                {[40, 60, 80, 100].map((volume) => (
+                {[0, 40, 60, 80, 100].map((volume) => (
                   <button
                     key={volume}
                     className={settings.sfxVolume === volume ? "selected" : ""}
@@ -15859,6 +15600,7 @@ export default function App() {
               </div>
               <button
                 className={settings.effectsOn ? "setting-toggle on" : "setting-toggle"}
+                role="switch" aria-label="전투 이펙트" aria-checked={settings.effectsOn}
                 onClick={() => updateSetting("effectsOn", !settings.effectsOn)}
               >
                 {settings.effectsOn ? "ON" : "OFF"}
@@ -15872,6 +15614,7 @@ export default function App() {
               </div>
               <button
                 className={settings.shakeOn ? "setting-toggle on" : "setting-toggle"}
+                role="switch" aria-label="화면 흔들림" aria-checked={settings.shakeOn}
                 onClick={() => updateSetting("shakeOn", !settings.shakeOn)}
               >
                 {settings.shakeOn ? "ON" : "OFF"}
@@ -15952,6 +15695,7 @@ export default function App() {
                   <button
                     key={option.id}
                     className={settings.battleSpeed === option.id ? "selected" : ""}
+                    aria-pressed={battleSpeedConfig.id === option.id}
                     onClick={() => updateSetting("battleSpeed", option.id)}
                   >
                     <strong>{option.label}</strong>
@@ -16047,6 +15791,7 @@ export default function App() {
               </div>
               <button
                 className={settings.photoWatermark ? "setting-toggle on" : "setting-toggle"}
+                role="switch" aria-label="포토 모드 워터마크" aria-checked={settings.photoWatermark}
                 onClick={() => updateSetting("photoWatermark", !settings.photoWatermark)}
               >
                 {settings.photoWatermark ? "ON" : "OFF"}
@@ -16909,7 +16654,7 @@ export default function App() {
           </div>
 
           <div className="release-hero-card">
-            <img src="/ui/cheonsu_logo.png" alt="천수" />
+            <span className="world-wordmark">천수</span>
             <div>
               <strong>붉은 하늘 아래, 마지막 수호가 시작된다</strong>
               <span>
@@ -16981,7 +16726,7 @@ export default function App() {
           <div className="promo-poster-wrap">
             <img
               className="promo-poster"
-              src="/promo/cheonsu_promo_main.png"
+              src="/art/world-v2/scenes/frontier.webp"
               alt="천수 홍보 이미지"
             />
             <div className="promo-vignette" />
@@ -16989,7 +16734,7 @@ export default function App() {
 
           <div className="promo-content">
             <div className="promo-kicker">모바일 전술 SRPG</div>
-            <img className="promo-logo" src="/ui/cheonsu_logo.png" alt="천수" />
+            <span className="world-wordmark promo-logo">천수</span>
             <div className="promo-title">붉은 하늘 아래, 마지막 수호가 시작된다</div>
 
             <div className="promo-tags">
@@ -17032,10 +16777,11 @@ export default function App() {
         <div className="title-container art-menu">
           <img
             className="main-menu-art"
-            src="/ui/cheonsu_main_menu_art.png"
+            src="/art/world-v2/scenes/frontier.webp"
             alt="천수 메인 메뉴"
           />
 
+          <div className="world-menu-heading"><h1>천수</h1><p>천수 기사단의 여정</p></div>
           <div className="main-menu-hit-area">
             <button className="menu-hit-btn" onClick={newGame} aria-label="새 게임">
               새 게임
@@ -17121,7 +16867,7 @@ export default function App() {
       {screen === "campaign" && (
         <div className={`campaign-screen campaign-stage-select ${campaignView === "atlas" ? "atlas-mode" : "world-mode"}`}>
           <div className="campaign-header">
-            <h1>{campaignView === "atlas" ? "전체 맵" : "월드맵"}</h1>
+            <h1>{campaignView === "atlas" ? "전술 지도" : "원정 지도"}</h1>
             <div className="campaign-header-actions">
               <button
                 className="back-btn"
@@ -17136,7 +16882,7 @@ export default function App() {
           <div className="campaign-progress-card world-progress-card">
             <div>
               <span>총 캠페인</span>
-              <strong>{clearedStages.length} / {stages.length}장 클리어</strong>
+              <strong>{clearedStages.length} / {stages.length}장</strong>
             </div>
             <div>
               <span>보유 동료</span>
@@ -17148,11 +16894,9 @@ export default function App() {
             </div>
           </div>
 
-          <div className="recruit-rule">
-            {PLAYTEST_UNLOCK_ALL_STAGES
-              ? "개발 테스트 모드: 모든 스테이지가 열려 있어 바로 편성하고 전투에 들어갈 수 있습니다."
-              : "지역을 따라 진군하세요. 보스 스테이지와 동료 합류 스테이지가 월드맵에 표시됩니다."}
-          </div>
+          {campaignView === "world" && <nav className="campaign-act-nav" aria-label="원정 지역">
+            {ACTS.map(act => <button key={act.id} onClick={() => document.getElementById(`campaign-act-${act.id}`)?.scrollIntoView({ behavior: "smooth", block: "start" })}>제{act.id}막</button>)}
+          </nav>}
 
           {campaignView === "atlas" ? (
             <div className="stage-map-atlas">
@@ -17194,7 +16938,7 @@ export default function App() {
                     >
                       <div className="stage-map-card-head">
                         <div>
-                          <span>ACT {Math.ceil(stage.id / 5)} · {mission.type}</span>
+                          <span>제{Math.ceil(stage.id / 6)}막 · {mission.type}</span>
                           <strong>{stage.id}장. {stage.title.replace(/^\d+장\.\s*/, "")}</strong>
                           <small>{mission.title}</small>
                         </div>
@@ -17262,6 +17006,7 @@ export default function App() {
                 <div
                   className={`world-region-card ${region.tone}`}
                   key={act.id}
+                  id={`campaign-act-${act.id}`}
                   style={{ "--region-art": `url(${region.image})` }}
                 >
                   <div className="world-region-head">
@@ -17273,7 +17018,7 @@ export default function App() {
                       )}
                     </div>
                     <div>
-                      <span>ACT {act.id}</span>
+                      <span>제{act.id}막</span>
                       <strong>{region.name}</strong>
                       <small>{region.desc}</small>
                     </div>
@@ -17358,7 +17103,8 @@ export default function App() {
           </div>
 
           {deploymentStage && deploymentEnemySummary && deploymentThreat && (
-            <div className="stage-briefing-card">
+            <details className="stage-briefing-card deployment-briefing">
+              <summary><span><Swords size={18} /> {deploymentEnemySummary.boss ? `${deploymentEnemySummary.boss.name} 격파` : "모든 적 격파"}</span><small>적 {deploymentEnemySummary.total}명 · 전장 정보</small></summary>
               <div className="briefing-head">
                 <div>
                   <span>작전 브리핑</span>
@@ -17389,7 +17135,7 @@ export default function App() {
               </div>
 
               <div className="briefing-mission-row">
-                <span>작전 목표</span>
+                <span>추가 목표</span>
                 <strong>{getStageMissionOrder(deploymentStage).title}</strong>
                 <em>{getStageMissionOrder(deploymentStage).desc}</em>
               </div>
@@ -17578,9 +17324,10 @@ export default function App() {
                   })}
                 </div>
               </div>
-            </div>
+            </details>
           )}
 
+          <details className="deployment-advanced"><summary><Settings size={18} /> 편성 및 보급 관리</summary>
           {deploymentReadiness && (
             <div className={`deployment-readiness-card ${deploymentReadiness.className}`}>
               <div className="readiness-head">
@@ -17634,11 +17381,6 @@ export default function App() {
             </button>
           </div>
 
-          <div className="deployment-rule-card">
-            <strong>출전 인원 {deployedIds.length} / {MAX_DEPLOY_COUNT}</strong>
-            <span>{deploymentHint}</span>
-          </div>
-
           <div className="deploy-preset-grid">
             {["balanced", "attack", "guard", "range"].map((type) => (
               <button key={type} onClick={() => applyDeployPreset(type)}>
@@ -17671,28 +17413,22 @@ export default function App() {
             <button onClick={() => applyFormationOrder("rear")}>후열 정렬</button>
             <button onClick={() => applyFormationOrder("balanced")}>균형 정렬</button>
           </div>
+          </details>
 
-          <div className="deploy-filter-panel">
-            <div className="deploy-filter-head">
-              <strong>동료 목록</strong>
-              <span>
-                {getDeployFilterLabel(deployFilter)} · {getDeploySortLabel(deploySort)} · {displayedDeployUnits.length}명
-              </span>
-            </div>
-            <div className="deploy-filter-row">
-              {["all", "selected", "tank", "healer", "ranged", "assassin", "promoted"].map((filter) => (
-                <button key={filter} className={deployFilter === filter ? "selected" : ""} onClick={() => setDeployFilter(filter)}>
-                  {getDeployFilterLabel(filter)}
-                </button>
-              ))}
-            </div>
-            <div className="deploy-sort-row">
-              {["default", "level", "power", "role", "name"].map((sort) => (
-                <button key={sort} className={deploySort === sort ? "selected" : ""} onClick={() => setDeploySort(sort)}>
-                  {getDeploySortLabel(sort)}
-                </button>
-              ))}
-            </div>
+          <div className="deployment-rule-card" role="status">
+            <strong><Users size={18} /> 출전 {deployedIds.length} / {MAX_DEPLOY_COUNT}</strong>
+            <span>{deploymentHint}</span>
+          </div>
+
+          <div className="deploy-roster-tools">
+            <label>역할<select aria-label="동료 역할" value={deployFilter} onChange={event => setDeployFilter(event.target.value)}>
+              {["all", "selected", "tank", "healer", "ranged", "assassin", "promoted"].map(filter =>
+                <option key={filter} value={filter}>{getDeployFilterLabel(filter)}</option>)}
+            </select></label>
+            <label>정렬<select aria-label="동료 정렬" value={deploySort} onChange={event => setDeploySort(event.target.value)}>
+              {["default", "level", "power", "role", "name"].map(sort =>
+                <option key={sort} value={sort}>{getDeploySortLabel(sort)}</option>)}
+            </select></label>
           </div>
 
           <div className="deployment-list">
@@ -17705,6 +17441,8 @@ export default function App() {
                 <button
                   className={`deploy-unit-card ${getUnitVisualClass(unit)} ${selectedDeploy ? "selected" : ""} ${locked ? "locked-deploy" : ""}`}
                   key={unit.id}
+                  aria-pressed={selectedDeploy}
+                  aria-label={`${unit.name} ${locked ? "필수 출전" : selectedDeploy ? "출전 중" : "대기 중"}`}
                   onClick={() => toggleDeployUnit(unit.id)}
                 >
                   <div className={`deploy-avatar ${getUnitVisualClass(unit)}`}>
@@ -17717,11 +17455,12 @@ export default function App() {
                       {locked ? " · 필수" : ""}
                     </strong>
                     <span>
-                      전력 {getDeployUnitPower(unit)} · {unit.skill}+{getSkillUpgradeLevel(unit)} · {getUnitDisplayClass(unit)} · {getCombatClassLabel(getUnitCombatClass(unit))} 타입 · 이동 {unit.move} · {getUnitMoveTrait(unit).name}
+                      전력 {getDeployUnitPower(unit)} · {unit.skill}+{getSkillUpgradeLevel(unit)} · {getUnitDisplayClass(unit)} · {getCombatClassLabel(getUnitCombatClass(unit))} 타입 · 이동 {getUnitMoveRange(unit)} · {getUnitMoveTrait(unit).name}
                     </span>
                     <em className={`deploy-role-badge ${getUnitRoleClass(unit)}`}>
                       {role}
                     </em>
+                    <small className="deploy-combat-stats">HP {unit.maxHp} · 공격 {unit.atk} · 이동 {getUnitMoveRange(unit)}</small>
                     <small className="deploy-equipment-line">
                       장비: {unit.equipment?.weapon ? EQUIPMENT[unit.equipment.weapon]?.name : "무기 없음"} / {unit.equipment?.armor ? EQUIPMENT[unit.equipment.armor]?.name : "방어구 없음"}
                     </small>
@@ -17729,7 +17468,7 @@ export default function App() {
                       패시브: {getUnitPassiveDef(unit).name} · {getUnitPassiveDef(unit).desc}
                     </small>
                   </div>
-                  <b>{selectedDeploy ? "출전" : "대기"}</b>
+                  <b>{selectedDeploy ? <Check size={19} aria-label="출전" /> : "대기"}</b>
                 </button>
               );
             })}
@@ -17737,10 +17476,10 @@ export default function App() {
 
           <div className="deployment-actions">
             <button onClick={() => applyDeployPreset("balanced")}>
-              자동 편성
+              <Users size={18} /> 자동 편성
             </button>
             <button className="start-deploy-btn" onClick={confirmDeployment}>
-              전투 시작
+              <Swords size={18} /> 전투 시작
             </button>
           </div>
         </div>
@@ -17864,28 +17603,35 @@ export default function App() {
             </div>
           </div>
 
-          <div className="camp-message">{campMessage}</div>
+          <details className="camp-message"><summary>야영지 소식</summary><p>{campMessage}</p></details>
 
-          <div className="camp-tab-row">
+          <div className="camp-tab-row" role="tablist" aria-label="야영지 관리" onKeyDown={event => {
+            const tabs = [...event.currentTarget.querySelectorAll('[role="tab"]')];
+            const index = tabs.indexOf(document.activeElement);
+            const next = event.key === "ArrowRight" ? (index + 1) % tabs.length : event.key === "ArrowLeft" ? (index + tabs.length - 1) % tabs.length : event.key === "Home" ? 0 : event.key === "End" ? tabs.length - 1 : -1;
+            if (next >= 0) { event.preventDefault(); tabs[next].focus(); tabs[next].click(); }
+          }}>
             {[
-              ["party", "동료"],
-              ["growth", "성장"],
-              ["gear", "장비"],
-              ["supply", "보급"],
-              ["system", "관리"],
-            ].map(([id, label]) => (
+              ["party", "동료", Users],
+              ["growth", "성장", Sparkles],
+              ["gear", "장비", Shield],
+              ["supply", "보급", Backpack],
+              ["system", "관리", Settings],
+            ].map(([id, label, Icon]) => (
               <button
                 key={id}
+                role="tab"
+                aria-selected={campTab === id}
                 className={campTab === id ? "selected" : ""}
                 onClick={() => setCampTab(id)}
               >
-                {label}
+                <Icon size={19} />{label}
               </button>
             ))}
           </div>
 
           {campTab === "party" && (
-            <div className="camp-tab-panel">
+            <div className="camp-tab-panel" role="tabpanel" aria-label="동료">
               <div className="camp-character-row upgraded">
                 {party.map((unit) => (
                   <div className="camp-character" key={unit.id}>
@@ -17905,17 +17651,18 @@ export default function App() {
           )}
 
           {campTab === "growth" && (
-            <div className="camp-tab-panel">
+            <div className="camp-tab-panel" role="tabpanel" aria-label="성장">
               <div className="camp-action-grid">
                 <button className="camp-btn" onClick={() => setTrainingOpen(true)}>훈련</button>
                 <button className="camp-btn" onClick={() => setSkillOpen(true)}>스킬 강화</button>
                 <button className="camp-btn" onClick={() => setPromoteOpen(true)}>전직</button>
+                <button className="camp-btn" onClick={() => setJournalOpen(true)}><BookOpen size={18} /> 탐색 기록</button>
               </div>
             </div>
           )}
 
           {campTab === "gear" && (
-            <div className="camp-tab-panel">
+            <div className="camp-tab-panel" role="tabpanel" aria-label="장비">
               <div className="camp-action-grid">
                 <button className="camp-btn" onClick={() => setEquipmentOpen(true)}>장비 관리</button>
                 <button className="camp-btn" onClick={() => setForgeOpen(true)}>제련소</button>
@@ -17925,7 +17672,7 @@ export default function App() {
           )}
 
           {campTab === "supply" && (
-            <div className="camp-tab-panel">
+            <div className="camp-tab-panel" role="tabpanel" aria-label="보급">
               <div className="camp-action-grid">
                 <button className="camp-btn" onClick={() => setShopOpen(true)}>상점</button>
                 <button className="camp-btn" disabled={dailyLoginStatus.claimedToday} onClick={claimDailyLoginReward}>
@@ -17949,7 +17696,7 @@ export default function App() {
           )}
 
           {campTab === "system" && (
-            <div className="camp-tab-panel">
+            <div className="camp-tab-panel" role="tabpanel" aria-label="관리">
               <div className="camp-action-grid">
                 <button className="camp-btn" onClick={saveGame}>저장</button>
                 <button className="camp-btn" onClick={() => setScreen("records")}>기록</button>
@@ -17962,6 +17709,11 @@ export default function App() {
               </div>
             </div>
           )}
+          <div className="camp-travel-actions">
+            <button title="진행 저장" aria-label="진행 저장" onClick={saveGame}><Save size={21} /></button>
+            <button onClick={() => setShopOpen(true)}><ShoppingBag size={19} /> 상점</button>
+            <button className="camp-next" onClick={goNextBattle}>다음 전투 <ArrowRight size={19} /></button>
+          </div>
           {shopOpen && (
             <div className="battle-modal">
               <div className="battle-card shop-card">
@@ -18014,7 +17766,7 @@ export default function App() {
       )}
 
       {screen === "battle" && (
-        <div className={`battle-screen battle-final-concept battle-board-only ${isFinalConceptStage(activeStage) ? "final-illustrated-battle" : ""} ${showPostMoveCommandMenu ? "has-post-move-menu" : ""} ${battleHudHidden ? "battle-hud-hidden" : ""} ${battleCompact ? "battle-compact-mode battle-simple-mode" : "battle-detail-mode"}`}>
+        <div className={`battle-screen battle-final-concept battle-board-only ${isFinalConceptStage(activeStage) ? "final-illustrated-battle" : ""} ${showPostMoveCommandMenu ? "has-post-move-menu" : ""} ${targetSelectionActive ? "has-target-selection" : ""} ${battleHudHidden ? "battle-hud-hidden" : ""} ${battleCompact ? "battle-compact-mode battle-simple-mode" : "battle-detail-mode"}`} aria-busy={combatBusy}>
           <div className="battle-top">
             <div className="battle-title-block">
               <div className="battle-kicker">모바일 전술 SRPG · 천수</div>
@@ -18046,11 +17798,12 @@ export default function App() {
                   <strong>{selectedStage?.title}</strong>
                   <span>턴 {round} / {activeRoundLimit}</span>
                   <em>승리 조건</em>
-                  <b>{activeMissionOrder.title}</b>
+                  <b>{activeStage.units.some(unit => unit.type === 'boss' || unit.id === 'boss') ? '적 지휘관 격파' : '적 전멸'}</b>
                 </div>
                 <div className="cinematic-stage-actions">
                   <button type="button" onClick={cycleMapVisibility}>위험 범위</button>
                   <button type="button" onClick={() => setBattleHudHidden(true)}>정보 숨김</button>
+                  <button type="button" title="탐색 기록" aria-label="탐색 기록" disabled={battleInputLocked} onClick={() => setJournalOpen(true)}><BookOpen size={18} /></button>
                   <button
                     type="button"
                     onClick={() => {
@@ -18125,7 +17878,7 @@ export default function App() {
                 <div className="battle-settings-section-title">게임 옵션</div>
                 <div className="battle-settings-menu">
                   <button type="button" onClick={() => updateSetting("soundOn", !settings.soundOn)}>
-                    <span>효과음</span>
+                    <span>전체 사운드</span>
                     <strong>{settings.soundOn ? "ON" : "OFF"}</strong>
                   </button>
                   <button type="button" onClick={() => updateSetting("effectsOn", !settings.effectsOn)}>
@@ -18349,19 +18102,16 @@ export default function App() {
                   )}
                 </div>
                 <div className="mobile-battle-dock-actions">
-                  <button disabled={!selected} onClick={() => setBattleModeFromMobile("move")}>이동</button>
-                  <button disabled={!selected} onClick={() => setBattleModeFromMobile("attack")}>공격</button>
-                  <button disabled={!selected || selectedSkillCooldown > 0} onClick={() => setBattleModeFromMobile("skill")}>스킬</button>
+                  <button disabled={!canCommandSelected} aria-pressed={mode === "move"} onClick={() => setBattleModeFromMobile("move")}>이동</button>
+                  <button disabled={!canCommandSelected} aria-pressed={mode === "attack"} onClick={() => setBattleModeFromMobile("attack")}>공격</button>
+                  <button disabled={!canCommandSelected} aria-pressed={mode === "skill" || skillChoiceOpen} onClick={activateSkill}>스킬</button>
                   <button onClick={() => focusUnitOnMap(viewedUnit || selected || alliesAlive[0])}>초점</button>
                   <button onClick={() => toggleMobileCombatPanel("ally")}>아군목록</button>
                   <button onClick={() => toggleMobileCombatPanel("target")}>대상목록</button>
                   <button onClick={() => toggleMobileCombatPanel("turn")}>순서</button>
                   <button onClick={cycleMapVisibility}>시야 {mapVisibilityConfig.label}</button>
                   <button onClick={cycleBattleSpeed}>{getBattleSpeedConfig(settings.battleSpeed).label}</button>
-                  <button onClick={() => {
-                    closeMobileCombatPanels();
-                    setItemOpen(true);
-                  }}>아이템</button>
+                  <button disabled={!canCommandSelected} onClick={openItem}>아이템</button>
                 </div>
               </div>
             )}
@@ -18370,7 +18120,8 @@ export default function App() {
           <div className="mobile-bottom-action-bar">
             <button
               className={mode === "move" ? "active" : ""}
-              disabled={!selected}
+              aria-pressed={mode === "move"}
+              disabled={!canCommandSelected}
               onClick={() => setBattleModeFromMobile("move")}
             >
               이동
@@ -18389,10 +18140,11 @@ export default function App() {
             </button>
             <button
               className={mode === "attack" ? "active" : ""}
-              disabled={!selected}
+              aria-pressed={mode === "attack"}
+              disabled={!canCommandSelected}
               onClick={() => setBattleModeFromMobile("attack")}
             >
-              공격
+              <Swords size={18} aria-hidden="true" /> 공격
             </button>
             <button
               className={`compact-extra-action ${mobileTargetPanelOpen ? "active" : ""}`}
@@ -18402,18 +18154,16 @@ export default function App() {
             </button>
             <button
               className={mode === "skill" ? "active" : ""}
-              disabled={!selected || selectedSkillCooldown > 0}
+              aria-pressed={mode === "skill" || skillChoiceOpen}
+              disabled={!canCommandSelected}
               onClick={() => setBattleModeFromMobile("skill")}
             >
-              스킬{selectedSkillCooldown > 0 ? ` ${selectedSkillCooldown}` : ""}
+              스킬
             </button>
-            <button onClick={() => {
-              closeMobileCombatPanels();
-              setItemOpen(true);
-            }}>
+            <button disabled={!canCommandSelected} onClick={openItem}>
               아이템
             </button>
-            <button onClick={() => {
+            <button disabled={battleInputLocked || turn !== "ally"} onClick={() => {
               closeMobileCombatPanels();
               endAllyTurn();
             }}>
@@ -18433,7 +18183,7 @@ export default function App() {
                   {mobileMoveDestinationList.map((tile) => (
                     <button
                       key={`move-${tile.x}-${tile.y}`}
-                      disabled={turnBusy || !!movingUnit}
+                      disabled={!canCommandSelected}
                       onClick={() => moveSelectedUnitTo(tile.x, tile.y, tile)}
                     >
                       <strong>{tile.x + 1},{tile.y + 1}</strong>
@@ -18534,7 +18284,7 @@ export default function App() {
             </div>
           )}
 
-          {mobileTargetPanelOpen && (
+          {mobileTargetPanelOpen && !targetSelectionActive && !battleInputLocked && (
             <div className="mobile-target-panel">
               <div className="mobile-target-head">
                 <strong>대상 선택</strong>
@@ -18553,6 +18303,7 @@ export default function App() {
                       <button
                         key={enemy.id}
                         className={inRange ? "in-range" : ""}
+                        disabled={battleInputLocked}
                         onClick={() => {
                           setInspectedUnitId(enemy.id);
                           focusUnitOnMap(enemy);
@@ -18622,7 +18373,7 @@ export default function App() {
                 <div className="selected-status-stats">
                   <span>공 {viewedUnit.atk}</span>
                   <span>방 {viewedUnit.def}</span>
-                  <span>이 {viewedUnit.move}</span>
+                  <span>이 {getUnitMoveRange(viewedUnit)}</span>
                   <span>사 {viewedUnit.range || 1}</span>
                   {viewedUnit.type === "ally" && (
                     <span>{viewedSkillCooldown > 0 ? `스킬 ${viewedSkillCooldown}턴` : "스킬 가능"}</span>
@@ -18671,11 +18422,7 @@ export default function App() {
             className="battle-end-turn-float"
             disabled={
               turn !== "ally" ||
-              turnBusy ||
-              !!movingUnit ||
-              !!battle ||
-              battleResolving ||
-              !!result ||
+              battleInputLocked ||
               !alliesAlive.length ||
               !enemiesAlive.length
             }
@@ -18702,11 +18449,13 @@ export default function App() {
             onPointerCancel={handleBattleMapPointerEnd}
           >
           <div
-            className={`battle-map expanded-map large-map classic-pixel-map ${isFinalConceptStage(activeStage) ? "final-illustrated-map" : ""}`}
+            className={`battle-map expanded-map large-map classic-pixel-map grounded-battlefield world-battlefield biome-${getWorldBiome(activeStage.id)} ${isFinalConceptStage(activeStage) ? "final-illustrated-map" : ""}`}
             style={{
               gridTemplateColumns: `repeat(${activeMap[0].length}, var(--battle-tile-size, minmax(0, 1fr)))`,
               "--map-cols": activeMap[0].length,
               "--map-rows": activeMap.length,
+              "--map-art-aspect": activeMap[0].length / (activeMap.length * BATTLE_GROUND_ROW_RATIO),
+              ...getWorldMapStyle(activeStage.id),
               "--classic-map-image": `url(${getClassicBattleMapArt(activeStage)})`,
             }}
           >
@@ -18800,6 +18549,8 @@ export default function App() {
                 const movingUnitStartsHere =
                   movingUnit && movingUnit.from.x === x && movingUnit.from.y === y;
                 const movingOverlayClassName = isMovingUnit ? "moving-overlay-hidden" : "";
+                const terrainVisual = getWorldTileVisual(activeMap, x, y, activeStage.id);
+                const discovery = visibleDiscoveries.find(entry => entry.x === x && entry.y === y);
                 const terrainClassName = [
                   "tile",
                   tile,
@@ -18813,8 +18564,10 @@ export default function App() {
                   <div
                     className={terrainClassName}
                     key={`${x}-${y}`}
+                    data-map-x={x}
+                    data-map-y={y}
                     title={getInspectTerrainLabel(tile)}
-                    style={getTerrainVisualStyle(tile, x, y)}
+                    style={{ ...getTerrainVisualStyle(tile, x, y), ...terrainVisual.style }}
                     onClick={() => {
                       if (suppressBattleMapClickRef.current) {
                         suppressBattleMapClickRef.current = false;
@@ -18823,9 +18576,12 @@ export default function App() {
 
                       handleBattleTilePress(x, y);
                     }}>
-                    <span className="terrain-decal terrain-decal-a" />
-                    <span className="terrain-decal terrain-decal-b" />
-                    <span className="terrain-decal terrain-decal-c" />
+                    <span className={`world-ground ground-${terrainVisual.material}`} aria-hidden="true" />
+                    {terrainVisual.prop && <img className={`world-prop ${terrainVisual.blocked ? 'blocking-prop' : 'low-prop'}`} src={`${WORLD_ART_ROOT}/props/${terrainVisual.prop}.webp`} alt="" aria-hidden="true" draggable="false" />}
+                    {discovery && <span className={`discovery-marker discovery-${discovery.kind}`} data-discovery-id={discovery.id} title={discovery.title}>
+                      <img src={`/art/world-v2/props/${discovery.kind === 'relic' ? 'crystal' : discovery.kind === 'technique' ? 'monument' : 'crates'}.webp`} alt={discovery.title} draggable="false" />
+                      <Sparkles size={16} />
+                    </span>}
                     {danger && (
                       <div className={`danger-tile danger-${hazardInfo?.pattern || "wave"}`}>
                         <span>{hazardInfo?.damage || 6}</span>
@@ -18837,12 +18593,14 @@ export default function App() {
                       <div
                         key={effect.id}
                         className={`combat-effect effect-${effect.type} ${effect.direction ? `effect-dir-${effect.direction}` : ""}`}
+                        style={{ animationDuration: `${effect.duration}ms`, "--effect-duration": `${effect.duration}ms` }}
                       />
                     ))}
                     {cellPopups.map((popup) => (
                       <div
                         key={popup.id}
                         className={`damage-popup popup-${popup.kind}`}
+                        style={{ animationDuration: `${popup.duration}ms` }}
                       >
                         {popup.text}
                       </div>
@@ -19138,7 +18896,7 @@ export default function App() {
 
                   <div className="unit-class">
                     {viewedUnit.type === "ally"
-                      ? `${viewedUnit.skill} · 스킬 ${viewedSkillCooldown > 0 ? `${viewedSkillCooldown}턴` : "가능"} · 협공 ${viewedUnit.supportUsed ? "사용" : "대기"} · 이동 ${viewedUnit.move} · ${getUnitMoveTrait(viewedUnit).name} · EXP ${viewedUnit.exp || 0} · 상태 ${getStatusText(viewedUnit.status)}`
+                      ? `${viewedUnit.skill} · 스킬 ${viewedSkillCooldown > 0 ? `${viewedSkillCooldown}턴` : "가능"} · 협공 ${viewedUnit.supportUsed ? "사용" : "대기"} · 이동 ${getUnitMoveRange(viewedUnit)} · ${getUnitMoveTrait(viewedUnit).name} · EXP ${viewedUnit.exp || 0} · 상태 ${getStatusText(viewedUnit.status)}`
                       : `${viewedUnit.skill || "기본 공격"} · AI ${getInspectUnitRole(viewedUnit)} · 사거리 ${viewedUnit.range || 1} / 스킬 ${viewedUnit.skillRange || viewedUnit.range || 1} · 상태 ${getStatusText(viewedUnit.status)}`}
                   </div>
 
@@ -19155,7 +18913,7 @@ export default function App() {
                   <div className="inspect-stat-grid">
                     <div><span>공격</span><strong>{viewedUnit.atk}</strong></div>
                     <div><span>방어</span><strong>{viewedUnit.def}</strong></div>
-                    <div><span>이동</span><strong>{viewedUnit.move}</strong></div>
+                    <div><span>이동</span><strong>{getUnitMoveRange(viewedUnit)}</strong></div>
                     <div><span>사거리</span><strong>{viewedUnit.range || 1}</strong></div>
                     <div><span>지형</span><strong>{getInspectTerrainLabel(viewedTerrain)}</strong></div>
                     <div><span>좌표</span><strong>{viewedUnit.x + 1},{viewedUnit.y + 1}</strong></div>
@@ -19171,57 +18929,92 @@ export default function App() {
           <div className="action-panel post-move-action-panel">
             <button
               className="undo-move-action"
-              disabled={!canUndoMove || turnBusy || !!movingUnit || !!result || !selected || selected.acted}
+              disabled={!canUndoMove || !canCommandSelected}
               onClick={undoSelectedMove}
             >
               이동 취소
             </button>
-            <button className={mode === "attack" ? "active-action" : ""} disabled={turnBusy || !!movingUnit || !!result || !selected || selected.acted} onClick={() => setBattleModeFromMobile("attack")}>공격</button>
+            <button className={mode === "attack" ? "active-action" : ""} aria-pressed={mode === "attack"} disabled={!canCommandSelected} onClick={() => setBattleModeFromMobile("attack")}>공격</button>
             <button
-              className={selectedSkillCooldown > 0 ? "skill-action-btn cooldown" : "skill-action-btn"}
-              disabled={turnBusy || !!movingUnit || !!result || !selected || selected.acted}
+              className="skill-action-btn"
+              aria-pressed={mode === "skill" || skillChoiceOpen}
+              disabled={!canCommandSelected}
               onClick={activateSkill}
             >
-              {selectedSkillCooldown > 0 ? `스킬 ${selectedSkillCooldown}` : "스킬"}
+              <Sparkles size={18} aria-hidden="true" /> 스킬
             </button>
-            <button disabled={turnBusy || !!movingUnit || !!result || !selected || selected.acted} onClick={openItem}>아이템</button>
-            <button disabled={turnBusy || !!movingUnit || !!result || !selected || selected.acted} onClick={waitUnit}>대기</button>
+            <button disabled={!canCommandSelected} onClick={openItem}>아이템</button>
+            <button disabled={!canCommandSelected} onClick={waitUnit}>대기</button>
           </div>
           )}
           {!battle && (
           <div className={`cinematic-command-bar ${canUndoMove ? "has-undo" : ""}`}>
+            <div className="battle-control-heading">
+              <span role="status">{combatBusy ? "전투 진행 중" : selected ? `${selected.name} · HP ${selected.hp}/${selected.maxHp}` : "아군 선택"}</span>
+              <div className="battle-speed-controls" role="group" aria-label="전투 배속">
+                {BATTLE_SPEED_OPTIONS.map(option => (
+                  <button key={option.id} type="button" aria-label={`전투 ${option.multiplier}배속`}
+                    aria-pressed={battleSpeedConfig.id === option.id}
+                    onClick={() => updateSetting("battleSpeed", option.id)}>{option.multiplier}x</button>
+                ))}
+              </div>
+            </div>
+            {targetSelectionActive && (
+              <section className="battle-command-feedback" aria-label="선택한 전투 명령">
+                <div className="battle-selection-heading">
+                  <strong role="status">{mode === "skill" ? <Sparkles size={18} /> : <Swords size={18} />}{mode === "skill" ? selected.skill : "공격"} 선택됨</strong>
+                  <button type="button" className="battle-selection-cancel" title="명령 선택 취소" aria-label="명령 선택 취소"
+                    onClick={() => { setMode("move"); setActiveSkillChoice(null); closeMobileCombatPanels(); }}><X size={18} /></button>
+                </div>
+                <div className="battle-target-buttons" role="group" aria-label="공격 대상">
+                  {mobileTargetList.map(enemy => {
+                    const inRange = attackTiles.some(tile => tile.x === enemy.x && tile.y === enemy.y);
+                    return <button type="button" key={enemy.id} disabled={!inRange || !canCommandSelected}
+                      onClick={() => { setInspectedUnitId(enemy.id); focusUnitOnMap(enemy); closeMobileCombatPanels(); openBattle(selected, enemy, mode); }}>
+                      <strong>{enemy.name}</strong>
+                      <span>HP {enemy.hp}/{enemy.maxHp}</span>
+                      <span style={{ whiteSpace: "nowrap" }}>{inRange ? "대상 선택" : "사거리 밖"}</span>
+                    </button>;
+                  })}
+                </div>
+                {!mobileTargetList.some(enemy => attackTiles.some(tile => tile.x === enemy.x && tile.y === enemy.y)) && <p role="status">사거리 안에 적이 없습니다.</p>}
+              </section>
+            )}
             {canUndoMove && (
-              <button className="cmd-undo" disabled={turnBusy || !!movingUnit || !!result} onClick={undoSelectedMove}>
+              <button className="cmd-undo" disabled={!canCommandSelected} onClick={undoSelectedMove}>
                 취소
               </button>
             )}
             <button
               className="cmd-attack"
-              disabled={!selected || selected.acted || turn !== "ally" || turnBusy || !!movingUnit || !!result}
+              aria-pressed={Boolean(selected && mode === "attack")}
+              disabled={!canCommandSelected}
               onClick={() => setBattleModeFromMobile("attack")}
             >
-              공격
+              <Swords size={18} aria-hidden="true" /> 공격
             </button>
             <button
               className="cmd-skill"
-              disabled={!selected || selected.acted || selectedSkillCooldown > 0 || turn !== "ally" || turnBusy || !!movingUnit || !!result}
+              aria-pressed={Boolean(selected && (mode === "skill" || skillChoiceOpen))}
+              aria-haspopup="dialog"
+              disabled={!canCommandSelected}
               onClick={activateSkill}
             >
-              {selectedSkillCooldown > 0 ? `스킬 ${selectedSkillCooldown}` : "스킬"}
+              <Sparkles size={18} aria-hidden="true" /> 스킬
             </button>
             <button
               className="cmd-item"
-              disabled={!selected || selected.acted || turn !== "ally" || turnBusy || !!movingUnit || !!result}
+              disabled={!canCommandSelected}
               onClick={openItem}
             >
-              아이템
+              <Backpack size={18} aria-hidden="true" /> 아이템
             </button>
             <button
               className="cmd-wait"
-              disabled={!selected || selected.acted || turn !== "ally" || turnBusy || !!movingUnit || !!result}
+              disabled={!canCommandSelected}
               onClick={waitUnit}
             >
-              대기
+              <Shield size={18} aria-hidden="true" /> 대기
             </button>
           </div>
           )}
@@ -19283,7 +19076,7 @@ export default function App() {
                   </div>
                   <div className="vs-preview-side vs-preview-attacker">
                     <div className="battle-icon image-battle-icon ally-unit">
-                      <img src={getCutsceneUnitSprite(battle.attacker)} alt={battle.attacker.name} />
+                      <img src={getCombatSprite(battle.attacker.type === "ally" ? battle.attacker.id : getEnemySpriteKey(battle.attacker))} alt={battle.attacker.name} />
                     </div>
                     <div className="battle-name">{battle.attacker.name}</div>
                     <div className="vs-preview-unit-role">{getCombatClassLabel(getUnitCombatClass(battle.attacker))} · {getInspectUnitRole(battle.attacker)}</div>
@@ -19298,7 +19091,7 @@ export default function App() {
                   <div className="vs">VS</div>
                   <div className="vs-preview-side vs-preview-defender">
                     <div className="battle-icon image-battle-icon enemy-unit">
-                      <img src={getCutsceneUnitSprite(battle.defender)} alt={battle.defender.name} />
+                      <img src={getCombatSprite(battle.defender.type === "ally" ? battle.defender.id : getEnemySpriteKey(battle.defender))} alt={battle.defender.name} />
                     </div>
                     <div className="battle-name">{battle.defender.name}</div>
                     <div className="vs-preview-unit-role">{getCombatClassLabel(getUnitCombatClass(battle.defender))} · {getInspectUnitRole(battle.defender)}</div>
@@ -19347,155 +19140,29 @@ export default function App() {
               </div>
             </div>
           )}
+          {skillChoiceOpen && selected && !combatBusy && !battle && !result && (
+            <SkillDialog unit={selected} units={units} onSelect={chooseBattleSkill} onClose={() => setSkillChoiceOpen(false)} />
+          )}
           {itemOpen && (
-            <div className="battle-modal">
-              <div className="battle-card item-card">
-                <div className="battle-title">아이템</div>
-                <div className="result-sub">
-                  사용할 아이템을 선택하세요. 아이템 사용 시 행동이 종료됩니다.
-                </div>
-
-                <div className="item-list">
-                  {Object.values(ITEM_DEFS).map((item) => {
-                    const count = getItemCount(inventory, item.id);
-
-                    return (
-                      <button
-                        key={item.id}
-                        disabled={count <= 0}
-                        onClick={() => consumeBattleItem(item.id)}
-                      >
-                        <strong>{item.name}</strong>
-                        <span>{item.desc}</span>
-                        <b>{count}개</b>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <button className="result-btn second" onClick={() => setItemOpen(false)}>
-                  취소
-                </button>
-              </div>
-            </div>
+            <ItemDialog
+              items={Object.values(ITEM_DEFS).map(item => ({ ...item, count: getItemCount(inventory, item.id) }))}
+              onUse={consumeBattleItem} onClose={() => setItemOpen(false)} />
           )}
           {result === "victory" && (
-            <div className="battle-modal">
-              <div className="result-card">
-                <div className="result-title">VICTORY</div>
-                <div className="result-sub">전투에서 승리했습니다.</div>
-                {lastClearSummary && (
-                  <div className={`clear-rank-card rank-${lastClearSummary.rank}`}>
-                    <div className="clear-rank-letter">{lastClearSummary.rank}</div>
-                    <div>
-                      <strong>{getClearRankText(lastClearSummary.rank)}</strong>
-                      <span>
-                        {lastClearSummary.round}라운드 · 카일 HP {lastClearSummary.heroHp}/{lastClearSummary.heroMaxHp} · 생존 {lastClearSummary.aliveAllies}명
-                      </span>
-                    </div>
-                  </div>
-                )}
-                {lastClearSummary?.missionOrder && (
-                  <div className="mission-result-card">
-                    <div className="mission-result-title">주 작전 완료</div>
-                    <strong>{lastClearSummary.missionOrder.title}</strong>
-                    <span>{lastClearSummary.missionOrder.desc}</span>
-                  </div>
-                )}
-                {lastClearSummary?.tacticalGoals && (
-                  <div className="bonus-goal-card">
-                    <div className="bonus-goal-title">전술 목표</div>
-                    {lastClearSummary.tacticalGoals.map((goal) => (
-                      <div
-                        className={`bonus-goal-row ${goal.met ? "goal-met" : "goal-failed"}`}
-                        key={goal.id}
-                      >
-                        <span>{goal.met ? "✓" : "×"}</span>
-                        <div>
-                          <strong>{goal.title}</strong>
-                          <small>
-                            {goal.desc} · 보상 {goal.reward.gold || 0}G
-                            {goal.reward.potion ? ` / 회복약 ${goal.reward.potion}` : ""}
-                          </small>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {battleMvp && (
-                  <div className="mvp-card">
-                    <div className="mvp-title">MVP</div>
-                    <div className="mvp-main">
-                      <img src={getUnitPortrait(battleMvp.unit)} alt={battleMvp.unit.name} />
-                      <div>
-                        <strong>{battleMvp.unit.name}</strong>
-                        <span>
-                          점수 {Math.round(battleMvp.score)} · 피해 {battleMvp.stats.damageDealt} · 회복 {battleMvp.stats.healingDone} · 처치 {battleMvp.stats.kills}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                <div className="battle-stats-card">
-                  <div className="battle-stats-title">전투 통계</div>
-                  <div className="battle-stats-grid">
-                    <div><span>가한 피해</span><strong>{battleStats.damageDealt}</strong></div>
-                    <div><span>받은 피해</span><strong>{battleStats.damageTaken}</strong></div>
-                    <div><span>회복량</span><strong>{battleStats.healingDone}</strong></div>
-                    <div><span>처치</span><strong>{battleStats.kills}</strong></div>
-                    <div><span>협공</span><strong>{battleStats.assists}</strong></div>
-                    <div><span>전리품</span><strong>{battleStats.lootDrops}</strong></div>
-                  </div>
-
-                  {topBattleUnits.length > 0 && (
-                    <div className="battle-top-units">
-                      {topBattleUnits.map((entry, index) => (
-                        <div key={entry.unitId}>
-                          <span>{index + 1}</span>
-                          <strong>{entry.unit.name}</strong>
-                          <small>
-                            피해 {entry.stats.damageDealt} · 회복 {entry.stats.healingDone} · 처치 {entry.stats.kills}
-                          </small>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {!isLootEmpty(battleLoot) && (
-                  <div className="loot-card">
-                    <div className="loot-title">전리품</div>
-                    <div className="loot-line">{formatLoot(battleLoot)}</div>
-                  </div>
-                )}
-                <div className="reward-box">
-                  <div>획득 골드: {selectedStage?.reward?.gold || 500}G</div>
-                  <div>획득 아이템: 회복약 x{selectedStage?.reward?.potion || 2}</div>
-                  {selectedStage?.reward?.gear && (
-                    <div>
-                      장비 보상:{" "}
-                      {selectedStage.reward.gear
-                        .map((gearId) => EQUIPMENT[gearId]?.name || gearId)
-                        .join(", ")}
-                    </div>
-                  )}
-                  <div>숨겨진 조건: 미달성</div>
-                </div>
-                <button className="result-btn" onClick={goCamp}>캠프로 이동</button>
-              </div>
-            </div>
+            <VictoryDialog title={selectedStage?.title} summary={lastClearSummary} mvp={battleMvp}
+              reward={{
+                gold: clearedStages.includes(selectedStage?.id) ? 0 : getDifficultyRewardGold((selectedStage?.reward?.gold ?? 500), settings.difficulty) + getDifficultyRewardGold(lastClearSummary?.bonusReward?.gold || 0, settings.difficulty) + (battleLoot.gold || 0),
+                potion: clearedStages.includes(selectedStage?.id) ? 0 : (selectedStage?.reward?.potion ?? 2) + (lastClearSummary?.bonusReward?.potion || 0),
+              }}
+              loot={formatLoot(battleLoot)} hasNext={stages.some(stage => stage.id === selectedStage?.id + 1)}
+              onContinue={(destination) => openStoryScene(selectedStage, "clear", destination)} />
           )}
           {result === "defeat" && (
-            <div className="battle-modal">
-              <div className="result-card defeat-card">
-                <div className="result-title defeat-title">DEFEAT</div>
-                <div className="result-sub">카일이 쓰러졌습니다.</div>
-                <div className="reward-box"><div>실패 원인: 주인공 사망</div><div>체크포인트: 없음</div></div>
-                <button className="result-btn" onClick={() => beginStageBattle(selectedStage)}>재도전</button>
-                <button className="result-btn second" onClick={() => setScreen("campaign")}>캠페인으로</button>
-              </div>
-            </div>
+            <DefeatDialog stageTitle={selectedStage?.title}
+              reason={units.some(unit => unit.id === "hero" && unit.hp > 0) ? "작전 제한 턴을 초과했습니다." : "카일이 쓰러졌습니다."}
+              onRetry={() => beginStageBattle(stages.find(stage => stage.id === selectedStage.id) || selectedStage)}
+              onCamp={() => returnToCampAfterDefeat()}
+              onCampaign={() => returnToCampAfterDefeat("campaign")} />
           )}
         </div>
       )}

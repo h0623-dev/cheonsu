@@ -2,6 +2,7 @@ import { stages } from "../data/stages.js";
 import { DEFAULT_GEAR_INVENTORY } from "../data/equipment.js";
 import { DEFAULT_SUPPORT_POINTS, DEFAULT_SUPPORT_DIALOGUES_SEEN } from "../data/supports.js";
 import { inMap } from "./movement.js";
+import { normalizeExploration, applyDiscoveryUnlocks } from "./discoveryEngine.js";
 import {
   clone,
   getInitialParty,
@@ -264,7 +265,9 @@ export function normalizeUnits(rawUnits, stage, party) {
   }
 
   const stageUnits = clone(stage.units);
-  const normalized = stageUnits.map((stageUnit) => {
+  // An explicit live roster is authoritative: absent units have fallen or were not deployed.
+  const templates = incoming.filter(unit => unit?.id).map(unit => stageUnits.find(base => base.id === unit.id) || unit);
+  const normalized = templates.map((stageUnit) => {
     const saved = incoming.find((unit) => unit?.id === stageUnit.id);
     const base = saved || stageUnit;
 
@@ -308,8 +311,9 @@ export function normalizeUnits(rawUnits, stage, party) {
 export function normalizeSaveData(raw, saveVersion = "0.12") {
   const data = safeObject(raw, {});
   const stage = resolveStageFromSave(data);
-  const party = normalizeParty(data.party);
-  const units = normalizeUnits(data.units, stage, party);
+  const exploration = normalizeExploration(data.exploration);
+  const party = normalizeParty(data.party).map((unit) => applyDiscoveryUnlocks(unit, exploration));
+  const units = normalizeUnits(data.units, stage, party).map((unit) => applyDiscoveryUnlocks(unit, exploration));
 
   const validScreens = ["promo", "menu", "campaign", "deployment", "battle", "camp", "records", "settings", "pwa", "release", "qa", "analytics", "codex", "profile", "gallery", "hall", "planner", "strategyArchive", "finalRc", "saveHealth", "launch", "postLaunch", "crashLogs", "qaBoard", "qaHistory", "qaChangelog", "qaReleaseNotes", "qaReleaseArchive"];
   const validTurns = ["ally", "enemy"];
@@ -320,6 +324,7 @@ export function normalizeSaveData(raw, saveVersion = "0.12") {
     screen: validScreens.includes(data.screen) ? data.screen : "campaign",
     selectedStage: stage,
     currentStageId: stage.id,
+    exploration,
     party,
     units,
     selectedUnit:

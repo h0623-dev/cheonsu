@@ -1,9 +1,16 @@
 import { inMap } from "./movement.js";
 import { getStatusDefPenalty } from "./statusEngine.js";
 
+const ALLY_COMBAT_CLASSES = {
+  hero: 'sword', bram: 'shield', lina: 'bow', aria: 'magic', leon: 'spear', sera: 'dagger',
+  noah: 'magic', yuna: 'magic', rakan: 'shield', miho: 'magic', teo: 'bow', irene: 'magic',
+  kaz: 'dagger', ella: 'magic', jin: 'sword', luka: 'sword', baekho: 'shield',
+};
 
 export function getUnitCombatClass(unit) {
   if (!unit) return "sword";
+  // A selected ability must not change the character's weapon affinity.
+  if (ALLY_COMBAT_CLASSES[unit.id]) return ALLY_COMBAT_CLASSES[unit.id];
 
   const id = unit.id || "";
   const name = unit.name || "";
@@ -244,7 +251,7 @@ export function clampNumber(value, min, max) {
 }
 
 export function calculateHit(attacker, defender, mode = "attack") {
-  const skillHitBonus = mode === "skill" ? 7 : 0;
+  const skillHitBonus = mode === "skill" ? 7 + (attacker.skillSpec?.accuracy ?? 0) : 0;
   const attackerFocus = attacker.skl || attacker.atk || 5;
   const defenderAvoid = (defender.spd || defender.move || 3) * 3 + (defender.guard ? 5 : 0);
   const affinity = getCombatAffinity(attacker, defender);
@@ -255,7 +262,7 @@ export function calculateHit(attacker, defender, mode = "attack") {
 }
 
 export function calculateCrit(attacker, defender, mode = "attack") {
-  const skillCritBonus = mode === "skill" ? 8 : 0;
+  const skillCritBonus = mode === "skill" ? 8 + (attacker.skillSpec?.critical ?? 0) : 0;
   const attackerFocus = attacker.skl || attacker.atk || 5;
   const defenderLuck = defender.luk || 4;
   const affinity = getCombatAffinity(attacker, defender);

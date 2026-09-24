@@ -7,8 +7,8 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#120000",
-  "background_color": "#000000",
+  "theme_color": "#1d2928",
+  "background_color": "#1d2928",
   "lang": "ko",
   "categories": [
     "games",
@@ -16,19 +16,19 @@
   ],
   "icons": [
     {
-      "src": "/icons/icon-192.png",
+      "src": "/art/world-v2/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-512.png",
+      "src": "/art/world-v2/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/maskable-512.png",
+      "src": "/art/world-v2/icon-maskable.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -36,16 +36,16 @@
   ],
   "screenshots": [
     {
-      "src": "/promo/cheonsu_promo_main.png",
-      "sizes": "1024x1536",
+      "src": "/art/world-v2/screenshot-mobile.png",
+      "sizes": "390x844",
       "type": "image/png",
       "form_factor": "narrow"
     },
     {
-      "src": "/ui/cheonsu_main_menu_art.png",
-      "sizes": "1024x1536",
+      "src": "/art/world-v2/screenshot-desktop.png",
+      "sizes": "1280x900",
       "type": "image/png",
-      "form_factor": "narrow"
+      "form_factor": "wide"
     }
   ],
   "id": "/",
@@ -60,7 +60,7 @@
       "url": "/",
       "icons": [
         {
-          "src": "/icons/icon-192.png",
+          "src": "/art/world-v2/icon-192.png",
           "sizes": "192x192"
         }
       ]
@@ -72,7 +72,7 @@
       "url": "/",
       "icons": [
         {
-          "src": "/icons/icon-192.png",
+          "src": "/art/world-v2/icon-192.png",
           "sizes": "192x192"
         }
       ]

@@ -10,8 +10,8 @@
 - Android 프로젝트 생성 완료: `android/`
 - Android 앱 ID: `com.cheonsu.game`
 - Android 앱 이름: `천수`
-- 현재 앱 버전: `1.83`
-- Android `versionCode`: `183`
+- 현재 앱 버전: `1.99.133`
+- Android `versionCode`: `332`
 
 참고: 네이티브 Capacitor 앱 안에서는 서비스 워커 등록을 건너뜁니다. 웹/PWA 캐시는 유지하되, APK에서는 새 버전 설치로 리소스를 갱신하는 방향입니다.
 

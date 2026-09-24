@@ -1,0 +1,292 @@
+{
+  "units": {
+    "hero": {
+      "run-a": "/art/combat-v2/units/hero-run-a.webp",
+      "run-b": "/art/combat-v2/units/hero-run-b.webp",
+      "windup": "/art/combat-v2/units/hero-windup.webp",
+      "strike": "/art/combat-v2/units/hero-strike.webp",
+      "recover": "/art/combat-v2/units/hero-recover.webp",
+      "recoil": "/art/combat-v2/units/hero-recoil.webp"
+    },
+    "bram": {
+      "run-a": "/art/combat-v2/units/bram-run-a.webp",
+      "run-b": "/art/combat-v2/units/bram-run-b.webp",
+      "windup": "/art/combat-v2/units/bram-windup.webp",
+      "strike": "/art/combat-v2/units/bram-strike.webp",
+      "recover": "/art/combat-v2/units/bram-recover.webp",
+      "recoil": "/art/combat-v2/units/bram-recoil.webp"
+    },
+    "lina": {
+      "run-a": "/art/combat-v2/units/lina-run-a.webp",
+      "run-b": "/art/combat-v2/units/lina-run-b.webp",
+      "windup": "/art/combat-v2/units/lina-windup.webp",
+      "strike": "/art/combat-v2/units/lina-strike.webp",
+      "recover": "/art/combat-v2/units/lina-recover.webp",
+      "recoil": "/art/combat-v2/units/lina-recoil.webp"
+    },
+    "aria": {
+      "run-a": "/art/combat-v2/units/aria-run-a.webp",
+      "run-b": "/art/combat-v2/units/aria-run-b.webp",
+      "windup": "/art/combat-v2/units/aria-windup.webp",
+      "strike": "/art/combat-v2/units/aria-strike.webp",
+      "recover": "/art/combat-v2/units/aria-recover.webp",
+      "recoil": "/art/combat-v2/units/aria-recoil.webp"
+    },
+    "leon": {
+      "run-a": "/art/combat-v2/units/leon-run-a.webp",
+      "run-b": "/art/combat-v2/units/leon-run-b.webp",
+      "windup": "/art/combat-v2/units/leon-windup.webp",
+      "strike": "/art/combat-v2/units/leon-strike.webp",
+      "recover": "/art/combat-v2/units/leon-recover.webp",
+      "recoil": "/art/combat-v2/units/leon-recoil.webp"
+    },
+    "sera": {
+      "run-a": "/art/combat-v2/units/sera-run-a.webp",
+      "run-b": "/art/combat-v2/units/sera-run-b.webp",
+      "windup": "/art/combat-v2/units/sera-windup.webp",
+      "strike": "/art/combat-v2/units/sera-strike.webp",
+      "recover": "/art/combat-v2/units/sera-recover.webp",
+      "recoil": "/art/combat-v2/units/sera-recoil.webp"
+    },
+    "noah": {
+      "run-a": "/art/combat-v2/units/noah-run-a.webp",
+      "run-b": "/art/combat-v2/units/noah-run-b.webp",
+      "windup": "/art/combat-v2/units/noah-windup.webp",
+      "strike": "/art/combat-v2/units/noah-strike.webp",
+      "recover": "/art/combat-v2/units/noah-recover.webp",
+      "recoil": "/art/combat-v2/units/noah-recoil.webp"
+    },
+    "yuna": {
+      "run-a": "/art/combat-v2/units/yuna-run-a.webp",
+      "run-b": "/art/combat-v2/units/yuna-run-b.webp",
+      "windup": "/art/combat-v2/units/yuna-windup.webp",
+      "strike": "/art/combat-v2/units/yuna-strike.webp",
+      "recover": "/art/combat-v2/units/yuna-recover.webp",
+      "recoil": "/art/combat-v2/units/yuna-recoil.webp"
+    },
+    "rakan": {
+      "run-a": "/art/combat-v2/units/rakan-run-a.webp",
+      "run-b": "/art/combat-v2/units/rakan-run-b.webp",
+      "windup": "/art/combat-v2/units/rakan-windup.webp",
+      "strike": "/art/combat-v2/units/rakan-strike.webp",
+      "recover": "/art/combat-v2/units/rakan-recover.webp",
+      "recoil": "/art/combat-v2/units/rakan-recoil.webp"
+    },
+    "miho": {
+      "run-a": "/art/combat-v2/units/miho-run-a.webp",
+      "run-b": "/art/combat-v2/units/miho-run-b.webp",
+      "windup": "/art/combat-v2/units/miho-windup.webp",
+      "strike": "/art/combat-v2/units/miho-strike.webp",
+      "recover": "/art/combat-v2/units/miho-recover.webp",
+      "recoil": "/art/combat-v2/units/miho-recoil.webp"
+    },
+    "teo": {
+      "run-a": "/art/combat-v2/units/teo-run-a.webp",
+      "run-b": "/art/combat-v2/units/teo-run-b.webp",
+      "windup": "/art/combat-v2/units/teo-windup.webp",
+      "strike": "/art/combat-v2/units/teo-strike.webp",
+      "recover": "/art/combat-v2/units/teo-recover.webp",
+      "recoil": "/art/combat-v2/units/teo-recoil.webp"
+    },
+    "irene": {
+      "run-a": "/art/combat-v2/units/irene-run-a.webp",
+      "run-b": "/art/combat-v2/units/irene-run-b.webp",
+      "windup": "/art/combat-v2/units/irene-windup.webp",
+      "strike": "/art/combat-v2/units/irene-strike.webp",
+      "recover": "/art/combat-v2/units/irene-recover.webp",
+      "recoil": "/art/combat-v2/units/irene-recoil.webp"
+    },
+    "kaz": {
+      "run-a": "/art/combat-v2/units/kaz-run-a.webp",
+      "run-b": "/art/combat-v2/units/kaz-run-b.webp",
+      "windup": "/art/combat-v2/units/kaz-windup.webp",
+      "strike": "/art/combat-v2/units/kaz-strike.webp",
+      "recover": "/art/combat-v2/units/kaz-recover.webp",
+      "recoil": "/art/combat-v2/units/kaz-recoil.webp"
+    },
+    "ella": {
+      "run-a": "/art/combat-v2/units/ella-run-a.webp",
+      "run-b": "/art/combat-v2/units/ella-run-b.webp",
+      "windup": "/art/combat-v2/units/ella-windup.webp",
+      "strike": "/art/combat-v2/units/ella-strike.webp",
+      "recover": "/art/combat-v2/units/ella-recover.webp",
+      "recoil": "/art/combat-v2/units/ella-recoil.webp"
+    },
+    "jin": {
+      "run-a": "/art/combat-v2/units/jin-run-a.webp",
+      "run-b": "/art/combat-v2/units/jin-run-b.webp",
+      "windup": "/art/combat-v2/units/jin-windup.webp",
+      "strike": "/art/combat-v2/units/jin-strike.webp",
+      "recover": "/art/combat-v2/units/jin-recover.webp",
+      "recoil": "/art/combat-v2/units/jin-recoil.webp"
+    },
+    "luka": {
+      "run-a": "/art/combat-v2/units/luka-run-a.webp",
+      "run-b": "/art/combat-v2/units/luka-run-b.webp",
+      "windup": "/art/combat-v2/units/luka-windup.webp",
+      "strike": "/art/combat-v2/units/luka-strike.webp",
+      "recover": "/art/combat-v2/units/luka-recover.webp",
+      "recoil": "/art/combat-v2/units/luka-recoil.webp"
+    },
+    "baekho": {
+      "run-a": "/art/combat-v2/units/baekho-run-a.webp",
+      "run-b": "/art/combat-v2/units/baekho-run-b.webp",
+      "windup": "/art/combat-v2/units/baekho-windup.webp",
+      "strike": "/art/combat-v2/units/baekho-strike.webp",
+      "recover": "/art/combat-v2/units/baekho-recover.webp",
+      "recoil": "/art/combat-v2/units/baekho-recoil.webp"
+    },
+    "raider": {
+      "run-a": "/art/combat-v2/units/raider-run-a.webp",
+      "run-b": "/art/combat-v2/units/raider-run-b.webp",
+      "windup": "/art/combat-v2/units/raider-windup.webp",
+      "strike": "/art/combat-v2/units/raider-strike.webp",
+      "recover": "/art/combat-v2/units/raider-recover.webp",
+      "recoil": "/art/combat-v2/units/raider-recoil.webp"
+    },
+    "ranger": {
+      "run-a": "/art/combat-v2/units/ranger-run-a.webp",
+      "run-b": "/art/combat-v2/units/ranger-run-b.webp",
+      "windup": "/art/combat-v2/units/ranger-windup.webp",
+      "strike": "/art/combat-v2/units/ranger-strike.webp",
+      "recover": "/art/combat-v2/units/ranger-recover.webp",
+      "recoil": "/art/combat-v2/units/ranger-recoil.webp"
+    },
+    "sniper": {
+      "run-a": "/art/combat-v2/units/sniper-run-a.webp",
+      "run-b": "/art/combat-v2/units/sniper-run-b.webp",
+      "windup": "/art/combat-v2/units/sniper-windup.webp",
+      "strike": "/art/combat-v2/units/sniper-strike.webp",
+      "recover": "/art/combat-v2/units/sniper-recover.webp",
+      "recoil": "/art/combat-v2/units/sniper-recoil.webp"
+    },
+    "marauder": {
+      "run-a": "/art/combat-v2/units/marauder-run-a.webp",
+      "run-b": "/art/combat-v2/units/marauder-run-b.webp",
+      "windup": "/art/combat-v2/units/marauder-windup.webp",
+      "strike": "/art/combat-v2/units/marauder-strike.webp",
+      "recover": "/art/combat-v2/units/marauder-recover.webp",
+      "recoil": "/art/combat-v2/units/marauder-recoil.webp"
+    },
+    "assassin_elite": {
+      "run-a": "/art/combat-v2/units/assassin_elite-run-a.webp",
+      "run-b": "/art/combat-v2/units/assassin_elite-run-b.webp",
+      "windup": "/art/combat-v2/units/assassin_elite-windup.webp",
+      "strike": "/art/combat-v2/units/assassin_elite-strike.webp",
+      "recover": "/art/combat-v2/units/assassin_elite-recover.webp",
+      "recoil": "/art/combat-v2/units/assassin_elite-recoil.webp"
+    },
+    "iron_lancer": {
+      "run-a": "/art/combat-v2/units/iron_lancer-run-a.webp",
+      "run-b": "/art/combat-v2/units/iron_lancer-run-b.webp",
+      "windup": "/art/combat-v2/units/iron_lancer-windup.webp",
+      "strike": "/art/combat-v2/units/iron_lancer-strike.webp",
+      "recover": "/art/combat-v2/units/iron_lancer-recover.webp",
+      "recoil": "/art/combat-v2/units/iron_lancer-recoil.webp"
+    },
+    "plague_doctor": {
+      "run-a": "/art/combat-v2/units/plague_doctor-run-a.webp",
+      "run-b": "/art/combat-v2/units/plague_doctor-run-b.webp",
+      "windup": "/art/combat-v2/units/plague_doctor-windup.webp",
+      "strike": "/art/combat-v2/units/plague_doctor-strike.webp",
+      "recover": "/art/combat-v2/units/plague_doctor-recover.webp",
+      "recoil": "/art/combat-v2/units/plague_doctor-recoil.webp"
+    },
+    "beast_tamer": {
+      "run-a": "/art/combat-v2/units/beast_tamer-run-a.webp",
+      "run-b": "/art/combat-v2/units/beast_tamer-run-b.webp",
+      "windup": "/art/combat-v2/units/beast_tamer-windup.webp",
+      "strike": "/art/combat-v2/units/beast_tamer-strike.webp",
+      "recover": "/art/combat-v2/units/beast_tamer-recover.webp",
+      "recoil": "/art/combat-v2/units/beast_tamer-recoil.webp"
+    },
+    "storm_mage": {
+      "run-a": "/art/combat-v2/units/storm_mage-run-a.webp",
+      "run-b": "/art/combat-v2/units/storm_mage-run-b.webp",
+      "windup": "/art/combat-v2/units/storm_mage-windup.webp",
+      "strike": "/art/combat-v2/units/storm_mage-strike.webp",
+      "recover": "/art/combat-v2/units/storm_mage-recover.webp",
+      "recoil": "/art/combat-v2/units/storm_mage-recoil.webp"
+    },
+    "blade_dancer": {
+      "run-a": "/art/combat-v2/units/blade_dancer-run-a.webp",
+      "run-b": "/art/combat-v2/units/blade_dancer-run-b.webp",
+      "windup": "/art/combat-v2/units/blade_dancer-windup.webp",
+      "strike": "/art/combat-v2/units/blade_dancer-strike.webp",
+      "recover": "/art/combat-v2/units/blade_dancer-recover.webp",
+      "recoil": "/art/combat-v2/units/blade_dancer-recoil.webp"
+    },
+    "siege_gunner": {
+      "run-a": "/art/combat-v2/units/siege_gunner-run-a.webp",
+      "run-b": "/art/combat-v2/units/siege_gunner-run-b.webp",
+      "windup": "/art/combat-v2/units/siege_gunner-windup.webp",
+      "strike": "/art/combat-v2/units/siege_gunner-strike.webp",
+      "recover": "/art/combat-v2/units/siege_gunner-recover.webp",
+      "recoil": "/art/combat-v2/units/siege_gunner-recoil.webp"
+    },
+    "sentinel": {
+      "run-a": "/art/combat-v2/units/sentinel-run-a.webp",
+      "run-b": "/art/combat-v2/units/sentinel-run-b.webp",
+      "windup": "/art/combat-v2/units/sentinel-windup.webp",
+      "strike": "/art/combat-v2/units/sentinel-strike.webp",
+      "recover": "/art/combat-v2/units/sentinel-recover.webp",
+      "recoil": "/art/combat-v2/units/sentinel-recoil.webp"
+    },
+    "blackguard": {
+      "run-a": "/art/combat-v2/units/blackguard-run-a.webp",
+      "run-b": "/art/combat-v2/units/blackguard-run-b.webp",
+      "windup": "/art/combat-v2/units/blackguard-windup.webp",
+      "strike": "/art/combat-v2/units/blackguard-strike.webp",
+      "recover": "/art/combat-v2/units/blackguard-recover.webp",
+      "recoil": "/art/combat-v2/units/blackguard-recoil.webp"
+    },
+    "warlord": {
+      "run-a": "/art/combat-v2/units/warlord-run-a.webp",
+      "run-b": "/art/combat-v2/units/warlord-run-b.webp",
+      "windup": "/art/combat-v2/units/warlord-windup.webp",
+      "strike": "/art/combat-v2/units/warlord-strike.webp",
+      "recover": "/art/combat-v2/units/warlord-recover.webp",
+      "recoil": "/art/combat-v2/units/warlord-recoil.webp"
+    },
+    "pyromancer": {
+      "run-a": "/art/combat-v2/units/pyromancer-run-a.webp",
+      "run-b": "/art/combat-v2/units/pyromancer-run-b.webp",
+      "windup": "/art/combat-v2/units/pyromancer-windup.webp",
+      "strike": "/art/combat-v2/units/pyromancer-strike.webp",
+      "recover": "/art/combat-v2/units/pyromancer-recover.webp",
+      "recoil": "/art/combat-v2/units/pyromancer-recoil.webp"
+    },
+    "frost_mage": {
+      "run-a": "/art/combat-v2/units/frost_mage-run-a.webp",
+      "run-b": "/art/combat-v2/units/frost_mage-run-b.webp",
+      "windup": "/art/combat-v2/units/frost_mage-windup.webp",
+      "strike": "/art/combat-v2/units/frost_mage-strike.webp",
+      "recover": "/art/combat-v2/units/frost_mage-recover.webp",
+      "recoil": "/art/combat-v2/units/frost_mage-recoil.webp"
+    },
+    "cultist": {
+      "run-a": "/art/combat-v2/units/cultist-run-a.webp",
+      "run-b": "/art/combat-v2/units/cultist-run-b.webp",
+      "windup": "/art/combat-v2/units/cultist-windup.webp",
+      "strike": "/art/combat-v2/units/cultist-strike.webp",
+      "recover": "/art/combat-v2/units/cultist-recover.webp",
+      "recoil": "/art/combat-v2/units/cultist-recoil.webp"
+    },
+    "void_knight": {
+      "run-a": "/art/combat-v2/units/void_knight-run-a.webp",
+      "run-b": "/art/combat-v2/units/void_knight-run-b.webp",
+      "windup": "/art/combat-v2/units/void_knight-windup.webp",
+      "strike": "/art/combat-v2/units/void_knight-strike.webp",
+      "recover": "/art/combat-v2/units/void_knight-recover.webp",
+      "recoil": "/art/combat-v2/units/void_knight-recoil.webp"
+    },
+    "wolf": {
+      "run-a": "/art/combat-v2/units/wolf-run-a.webp",
+      "run-b": "/art/combat-v2/units/wolf-run-b.webp",
+      "windup": "/art/combat-v2/units/wolf-windup.webp",
+      "strike": "/art/combat-v2/units/wolf-strike.webp",
+      "recover": "/art/combat-v2/units/wolf-recover.webp",
+      "recoil": "/art/combat-v2/units/wolf-recoil.webp"
+    }
+  }
+}

@@ -1,4 +1,10 @@
-const CACHE_VERSION = "cheonsu-v199127";
+importScripts('/art/world-v2/precache.js');
+importScripts('/art/combat-v1/precache.js');
+importScripts('/art/combat-v2/precache.js');
+importScripts('/art/enemies-v3/precache.js');
+importScripts('/art/bosses-v1/precache.js');
+importScripts('/art/map-sprites-v4/precache.js');
+const CACHE_VERSION = "cheonsu-v199133-journey";
 const APP_SHELL_CACHE = `${CACHE_VERSION}-app-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -31,8 +37,18 @@ const ENEMY_VARIANT_SPRITES = ENEMY_VARIANT_KEYS.flatMap((key) => [
   `/sprites/enemies/${key}.png`,
   `/sprites/sd_units/${key}.png`,
 ]);
+const PAINTED_UNIT_SPRITES = [
+  "hero", "bram", "lina", "aria", "leon", "sera", "noah", "yuna", "rakan",
+  "miho", "teo", "irene", "kaz", "ella", "jin", "luka", "baekho", "wolf",
+  ...ENEMY_VARIANT_KEYS,
+].flatMap((key) => [
+  `/sprites/painted-v1/${key}.webp`,
+  `/sprites/painted-v1/portraits/${key}.webp`,
+]);
 
 const APP_SHELL_FILES = [
+  ...self.BOSS_ART_FILES,
+  ...self.MAP_SPRITE_FILES,
   "/",
   "/index.html",
   "/manifest.webmanifest",
@@ -142,6 +158,11 @@ const APP_SHELL_FILES = [
   "/sprites/classic/units/garon.png",
   "/sprites/classic/units/wolf.png",
   ...ENEMY_VARIANT_SPRITES,
+  ...PAINTED_UNIT_SPRITES,
+  ...self.WORLD_ART_FILES,
+  ...self.COMBAT_ART_FILES,
+  ...self.COMBAT_MOTION_FILES,
+  ...self.ENEMY_REFRESH_FILES,
 ];
 
 self.addEventListener("install", (event) => {
