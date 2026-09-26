@@ -1,9 +1,11 @@
 {
   "name": "cheonsu",
   "private": true,
-  "version": "1.99.133",
+  "version": "1.99.136",
   "type": "module",
-  "engines": { "node": ">=24" },
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -25,12 +27,15 @@
     "art:combat": "node scripts/prepare-combat-art.cjs",
     "art:motion": "node scripts/prepare-combat-motion.cjs",
     "package:source": "node scripts/package-source.mjs",
+    "update:package": "node scripts/package-update.mjs",
+    "update:publish": "node scripts/publish-update.mjs",
     "android:open": "npx cap open android"
   },
   "dependencies": {
     "@capacitor/android": "^7.0.0",
     "@capacitor/core": "^7.0.0",
     "@capacitor/ios": "^7.0.0",
+    "@capawesome/capacitor-live-update": "7.5.2",
     "lucide-react": "^1.47.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"

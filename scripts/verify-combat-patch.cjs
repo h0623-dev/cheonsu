@@ -42,6 +42,14 @@ async function main() {
       assert.ok(settingsRows.every(Boolean), 'Settings controls must fit');
       await page.getByRole('button', { name: '뒤로', exact: true }).click();
       await page.getByRole('button', { name: '새 게임', exact: true }).click();
+      await page.locator('.campaign-header .prominent-save').click();
+      await page.evaluate(() => {
+        const key = 'cheonsu_v01_save'; const data = JSON.parse(localStorage.getItem(key));
+        data.clearedStages = Array.from({ length: 10 }, (_, i) => i + 1);
+        localStorage.setItem(key, JSON.stringify(data));
+      });
+      await page.reload();
+      await page.getByRole('button', { name: '이어하기', exact: true }).click();
       await page.locator('.campaign-stage-select button').filter({ hasText: /^11장\./ }).click();
       await page.getByRole('button', { name: '전투 시작', exact: true }).click();
       await page.getByRole('button', { name: '바로 전투', exact: true }).click();

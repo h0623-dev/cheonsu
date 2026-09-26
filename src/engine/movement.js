@@ -255,16 +255,25 @@ export function getMoveTiles(unit, units, activeMap) {
 
 
 export function getAttackTiles(unit, mode, activeMap) {
-  if (!unit || unit.acted) return [];
-  const range = mode === "skill" ? unit.skillRange || unit.range || 1 : unit.range || 1;
+  if (!unit || unit.acted || unit.hp <= 0) return [];
+  const skillType = unit.skillSpec?.type ?? unit.skillType;
+  if (mode === "skill" && skillType && skillType !== "attack") return [];
+  const range = mode === "skill"
+    ? unit.skillSpec?.range ?? unit.skillRange ?? unit.range ?? 1
+    : unit.range ?? 1;
+  return getTilesInRadius(unit, range, activeMap, 1);
+}
+
+export function getTilesInRadius(center, radius, activeMap, minDistance = 0) {
+  if (!center || !activeMap?.length || !Number.isFinite(radius) || radius < minDistance) return [];
   const result = [];
   for (let y = 0; y < activeMap.length; y++) {
-    for (let x = 0; x < activeMap[0].length; x++) {
-      const d = Math.abs(unit.x - x) + Math.abs(unit.y - y);
+    for (let x = 0; x < activeMap[y].length; x++) {
+      const d = Math.abs(center.x - x) + Math.abs(center.y - y);
       const tile = activeMap[y]?.[x];
 
       if (isTerrainBlocked(tile)) continue;
-      if (d >= 1 && d <= range) result.push({ x, y });
+      if (d >= minDistance && d <= radius) result.push({ x, y });
     }
   }
   return result;

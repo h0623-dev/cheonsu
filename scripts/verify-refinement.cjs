@@ -98,11 +98,10 @@ async function main() {
         } else {
           await page.locator('.camp-screen').waitFor();
           if(destination==='shop') {
-            const shop=page.locator('.shop-card'); await shop.waitFor();
-            await shop.getByRole('button',{name:'닫기',exact:true}).click();
+            const shop=page.locator('.town-facility-dialog'); await shop.waitFor();
+            await shop.getByRole('button',{name:'시설 닫기',exact:true}).click();
           }
-          await page.locator('.camp-tab-row').getByRole('tab',{name:'관리',exact:true}).click();
-          await page.locator('.camp-screen').getByRole('button',{name:'저장',exact:true}).click();
+          await page.locator('.camp-header .prominent-save').click();
           const saved=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),saveKey);
           assert.ok(saved.clearedStages.includes(1));
           assert.equal(saved.clearedStages.filter(id=>id===1).length,1);

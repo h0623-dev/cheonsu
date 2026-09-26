@@ -1,0 +1,116 @@
+.world-art-app button.prominent-save, .town-facility-dialog button.prominent-save {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  background: #366858; border: 1px solid #c0d9b3; color: #fff;
+  min-height: 44px; padding: 8px 12px; border-radius: 5px; font-size: 14px; font-weight: 700;
+  white-space: nowrap; flex-shrink: 0; letter-spacing: 0;
+}
+.save-notice { position: fixed; z-index: 25000; top: max(12px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%);
+  width: max-content; max-width: calc(100vw - 24px); display: flex; align-items: center; gap: 10px;
+  box-sizing: border-box; padding: 6px 8px 6px 14px; color: #f4fff6; background: #214a3d; border: 1px solid #a3c8ad; border-radius: 5px;
+  font-size: 14px; box-shadow: 0 5px 24px #0008;
+}
+.save-notice span { min-width: 0; overflow-wrap: anywhere; }
+.save-notice svg { flex-shrink: 0; }
+.save-notice button { display: grid; place-items: center; min-width: 40px; min-height: 40px; padding: 0; }
+.save-failed, .clear-save-pending { color: #ffb3a5; }
+.clear-save-ok { color: #b4eac1; }
+.world-art-app .camp-screen { max-width: 1040px; }
+.world-art-app .camp-header { gap: 12px; }
+.world-art-app .camp-header > div:first-child { min-width: 0; }
+.world-art-app .camp-header .camp-title { font-size: 24px; }
+.world-art-app .camp-header .camp-sub { font-size: 12px; overflow-wrap: anywhere; }
+.world-art-app .camp-screen .hud-row { margin: 8px 0; }
+.world-art-app .camp-management { border-top: 1px solid #637767; margin-top: 14px; padding-top: 8px; }
+.camp-management > summary { display: flex; align-items: center; gap: 8px; padding: 12px 0; cursor: pointer; font-weight: 700; }
+.camp-management > summary::after { content: '+'; margin-left: auto; font-size: 24px; }
+.camp-management[open] > summary::after { content: '-'; }
+.town-hub { margin-top: 16px; }
+.world-art-app .town-hub button, .save-notice button { color: #f0f5ec; background: #304d42; border: 1px solid #879d8a; border-radius: 4px; font-family: inherit; cursor: pointer; }
+.world-art-app .town-hub button:hover { background: #486756; border-color: #dce8b8; }
+.town-destinations { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin-bottom: 8px; }
+.town-destinations button { display: flex; gap: 6px; justify-content: center; align-items: center; min-height: 44px; padding: 8px 4px; font-size: 14px; }
+.town-map-shell { width: 100%; max-height: 440px; height: 52dvh; min-height: 280px; overflow: auto; overscroll-behavior: contain; background: #233c2d; }
+.town-world { position: relative; width: 100%; min-width: 640px; aspect-ratio: 3 / 2; overflow: hidden; }
+.town-background { width: 100%; height: 100%; object-fit: cover; display: block; user-select: none; pointer-events: none; }
+.world-art-app .town-door { position: absolute; transform: translate(-50%, -100%); margin-top: -7%; min-height: 36px; display: flex; align-items: center; gap: 5px;
+  padding: 5px 9px; background: #192e28ed; border: 1px solid #d1dab3; color: #fff; font-size: 13px; white-space: nowrap; box-shadow: 0 3px 8px #0008; z-index: 3;
+}
+.town-walker { position: absolute; width: 7.2%; aspect-ratio: 1; transform: translate(-50%, -88%); transition: left 100ms linear, top 100ms linear; pointer-events: none; z-index: 4; }
+.town-walker::after { content: ''; position: absolute; width: 50%; height: 12%; bottom: 7%; left: 25%; border: 2px solid #bcebc4; border-radius: 50%; background: #173b2760; }
+.town-walker img { width: 100%; height: 100%; object-fit: contain; transform: scaleX(var(--town-facing)); position: relative; z-index: 1; filter: drop-shadow(1px 3px 2px #0007); }
+.town-walker.is-walking img { animation: town-walk 220ms infinite alternate; }
+@keyframes town-walk { from { transform: scaleX(var(--town-facing)) rotate(-3deg) translateY(0); } to { transform: scaleX(var(--town-facing)) rotate(3deg) translateY(-3px); } }
+.town-waypoint { position: absolute; width: 18px; height: 12px; transform: translate(-50%, -50%); border: 2px solid #ffeaa2; border-radius: 50%; pointer-events: none; }
+.town-controls { display: flex; align-items: end; gap: 8px; margin-top: 10px; min-height: 65px; }
+.town-controls label { display: grid; gap: 4px; min-width: 0; flex: 1; font-size: 12px; color: #c9d8cb; }
+.town-controls select, .town-unit-select select { min-height: 44px; width: 100%; min-width: 0; color: #f4f8ef; background: #203b32; border: 1px solid #819685; border-radius: 4px; padding: 6px 8px; font-size: 14px; }
+.town-dpad { display: grid; grid-template-columns: repeat(4, 44px); gap: 4px; }
+.town-dpad button, .town-cancel { width: 44px; height: 44px; padding: 0; display: grid; place-items: center; }
+.town-cancel { position: absolute; right: 16px; margin-bottom: 78px; z-index: 5; }
+.town-location { font-size: 12px; color: #bcd4c2; margin-top: 6px; }
+.town-facility-dialog { box-sizing: border-box; width: min(580px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); padding: 0; margin: auto;
+  background: #233b33; color: #eef4ec; border: 1px solid #92a681; border-radius: 6px; box-shadow: 0 12px 60px #000a; overflow: hidden; }
+.town-facility-dialog[open] { display: flex; flex-direction: column; }
+.town-facility-dialog::backdrop { background: #071911b3; }
+.town-facility-dialog header { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid #657763; flex-shrink: 0; }
+.town-facility-dialog h2 { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 20px; flex: 1; }
+.town-facility-dialog header > strong { font-size: 14px; color: #ebdca8; }
+.town-facility-dialog button, .support-target-dialog button { min-height: 44px; font-family: inherit; color: #f6f9ed; background: #36554a; border: 1px solid #869985; border-radius: 5px; padding: 8px 12px; font-size: 14px; cursor: pointer; }
+.town-facility-dialog button:disabled, .support-target-dialog button:disabled { opacity: .45; cursor: default; }
+.town-facility-dialog .icon-button { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; flex-shrink: 0; }
+.town-facility-body { padding: 16px; overflow: auto; min-height: 0; overscroll-behavior: contain; }
+.town-shop-tabs { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 10px; }
+.town-shop-tabs [aria-selected=true] { background: #637246; border-color: #dfdba6; }
+.town-stock-list { display: grid; }
+.town-stock-list article { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid #4f6655; }
+.town-stock-list article > div { display: grid; gap: 4px; flex: 1; min-width: 0; }
+.town-stock-list :is(strong, span, small) { overflow-wrap: anywhere; }
+.town-stock-list span { font-size: 13px; color: #c5d8d1; line-height: 1.5; }
+.town-stock-list small { color: #dbcea4; font-size: 12px; }
+.town-stock-list button { display: flex; align-items: center; justify-content: center; gap: 5px; min-width: 82px; flex-shrink: 0; }
+.town-unit-select { display: grid; gap: 6px; font-size: 13px; }
+.town-unit-summary { display: flex; gap: 14px; align-items: center; padding: 14px 0; }
+.town-unit-summary img { width: 68px; height: 68px; object-fit: cover; border-radius: 4px; }
+.town-unit-summary > div { display: grid; gap: 5px; font-size: 14px; }
+.town-equipment-slots > div { display: flex; align-items: center; gap: 10px; border-top: 1px solid #4f6655; padding: 8px 0; font-size: 13px; }
+.town-equipment-slots strong { flex: 1; overflow-wrap: anywhere; }
+.town-rest-party { display: grid; gap: 8px; margin-bottom: 16px; }
+.town-rest-party > div { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.town-rest-party img { width: 42px; height: 42px; object-fit: cover; border-radius: 4px; }
+.town-rest-party strong { flex: 1; }
+.town-facility-dialog .town-primary-action { display: flex; gap: 8px; justify-content: center; align-items: center; width: 100%; background: #506d4c; }
+.town-secondary-action { margin-top: 14px; }
+.town-training-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.town-training-actions button { display: flex; align-items: center; gap: 8px; justify-content: center; }
+.town-facility-message { font-size: 13px; color: #c9dcb6; line-height: 1.5; overflow-wrap: anywhere; margin-bottom: 0; }
+.town-facility-dialog footer { display: flex; gap: 10px; align-items: center; padding: 12px 16px; border-top: 1px solid #657763; flex-shrink: 0; }
+.town-facility-dialog footer span { flex: 1; min-width: 0; font-size: 12px; overflow-wrap: anywhere; }
+.support-target-dialog { width: min(520px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); }
+.support-target-dialog .world-item-sheet { max-height: calc(100dvh - 26px); display: flex; flex-direction: column; overflow: hidden; }
+.support-target-dialog .world-item-sheet header { flex-shrink: 0; }
+.support-selection-count { padding: 8px 16px; font-size: 13px; color: #d5dab8; }
+.support-target-list { display: grid; gap: 8px; padding: 8px 16px 16px; overflow: auto; min-height: 0; }
+.support-target-list > button { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; }
+.support-target-list > button[aria-pressed=true] { background: #536d41; border-color: #eee4a6; }
+.support-target-list img { width: 48px; height: 48px; object-fit: cover; border-radius: 4px; }
+.support-target-list > button > span { flex: 1; min-width: 0; display: grid; gap: 5px; }
+.support-target-list span span, .support-target-list small { font-size: 12px; }
+.support-target-list svg { flex-shrink: 0; }
+.support-target-dialog footer { display: flex; justify-content: flex-end; gap: 8px; flex-shrink: 0; }
+.world-art-app .battle-control-heading > span { flex: 1; }
+.world-art-app .battle-control-heading .prominent-save { min-height: 38px; padding: 5px 8px; font-size: 12px; gap: 4px; }
+.world-art-app .campaign-header-actions { flex-wrap: wrap; justify-content: end; }
+@media (max-width: 480px) {
+  .town-destinations button { flex-direction: column; gap: 4px; font-size: 12px; }
+  .town-map-shell { min-height: 260px; height: 43dvh; }
+  .world-art-app .camp-header .camp-title { font-size: 20px; }
+  .town-controls { gap: 6px; }
+  .town-dpad { gap: 2px; grid-template-columns: repeat(4, 40px); }
+  .town-dpad button { width: 40px; }
+  .town-facility-body { padding: 12px; }
+  .town-facility-dialog header, .town-facility-dialog footer { padding: 10px 12px; }
+  .world-art-app .battle-control-heading { gap: 5px; }
+  .world-art-app .battle-control-heading > span { font-size: 11px; }
+  .battle-speed-controls { grid-template-columns: repeat(3, 34px); }
+}
+@media (prefers-reduced-motion: reduce) { .town-walker.is-walking img { animation: none; } }

@@ -121,6 +121,15 @@ function synchronizeStage(fixture) {
 
 async function bootstrap(page) {
   await page.getByRole('button', { name: '새 게임', exact: true }).click();
+  await page.locator('.campaign-header .prominent-save').click();
+  await page.evaluate(() => {
+    const key = 'cheonsu_v01_save';
+    const data = JSON.parse(localStorage.getItem(key));
+    data.clearedStages = Array.from({ length: 10 }, (_, i) => i + 1);
+    localStorage.setItem(key, JSON.stringify(data));
+  });
+  await page.reload();
+  await page.getByRole('button', { name: '이어하기', exact: true }).click();
   await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: /^11장\./ }) }).click();
   await page.getByRole('button', { name: '전투 시작', exact: true }).click();
   await page.getByRole('button', { name: '바로 전투', exact: true }).click();
@@ -194,8 +203,7 @@ async function campWithoutRewards(page, test, fixture) {
   const gold = page.locator('.camp-screen .hud-box').filter({ hasText: '골드' }).locator('strong');
   assert.equal((await gold.innerText()).trim(), `${fixture.gold}G`, 'Defeat camp return must not award gold');
   await snapshot(page, test, 'camp');
-  await page.locator('.camp-tab-row').getByRole('tab', { name: '관리', exact: true }).click();
-  await page.locator('.camp-screen').getByRole('button', { name: '저장', exact: true }).click();
+  await page.locator('.camp-header .prominent-save').click();
   const after = await readSave(page);
   assert.equal(after.screen, 'camp');
   assert.equal(after.gold, fixture.gold);
@@ -211,6 +219,124 @@ async function campWithoutRewards(page, test, fixture) {
 }
 
 const scenarios = [
+  ['hud-zoom', async (page, test, { fixture, settings }) => {
+    await restore(page, fixture, settings);
+    const zoom = page.locator('.battle-zoom-controls');
+    await zoom.getByRole('button', { name: '전장 확대', exact: true }).click();
+    const label = await zoom.locator('.battle-zoom-reset').innerText();
+    await page.getByRole('button', { name: '정보 숨김', exact: true }).click();
+    assert.equal(await zoom.count(), 0, 'Hidden HUD must remove zoom controls from view and keyboard navigation');
+    await snapshot(page, test, 'hidden');
+    await page.getByRole('button', { name: '정보 표시', exact: true }).click();
+    assert.equal(await zoom.locator('.battle-zoom-reset').innerText(), label, 'Restoring HUD preserves zoom');
+    await snapshot(page, test, 'restored');
+  }],
+  ['range-geometry', async (page, test, { fixture, settings }) => {
+    await restore(page, fixture, settings);
+    await selectUnit(page, 'lina');
+    const actor = (await saveBattle(page)).units.find(unit => unit.id === 'lina');
+    for (const [id, range] of [['ember', 3], ['snipe', 4], ['ember', 3]]) {
+      await (await openSkills(page)).locator(`[data-skill-id="${id}"]`).click();
+      const geometry = await page.locator('.world-battlefield .tile').evaluateAll((elements, { actor, range }) => {
+        const expected = [], actual = [], problems = [];
+        for (const tile of elements) {
+          const x = Number(tile.dataset.mapX), y = Number(tile.dataset.mapY);
+          const key = `${x},${y}`, distance = Math.abs(x - actor.x) + Math.abs(y - actor.y);
+          if (!['block', 'wall', 'void'].some(type => tile.classList.contains(`terrain-${type}`)) && distance >= 1 && distance <= range) expected.push(key);
+          const overlay = tile.querySelector('.skill-range-tile');
+          if (!overlay) continue;
+          actual.push(key);
+          const parent = tile.getBoundingClientRect(), child = overlay.getBoundingClientRect();
+          if (Math.abs(child.width - (parent.width - 2)) > 1 || Math.abs(child.height - (parent.height - 2)) > 1) problems.push(key);
+          if (getComputedStyle(overlay).transform !== 'none') problems.push(`${key}: transformed`);
+        }
+        return { expected, actual, problems };
+      }, { actor, range });
+      assert.deepEqual(geometry.actual, geometry.expected, `${id}: painted tiles equal legal skill targets`);
+      assert.deepEqual(geometry.problems, [], 'Range overlays must fit actual tile bounds');
+      assert.equal(await page.locator('.enemy-threat-tile').count(), 0, 'Enemy danger must not look like additional skill range');
+      assert.match(await page.locator('.battle-range-summary').innerText(), new RegExp(`사거리 ${range}칸`));
+      await snapshot(page, test, id);
+    }
+    await cancelTarget(page);
+    assert.equal(await page.locator('.command-range-tile').count(), 0);
+    assert.ok(await page.locator('.enemy-threat-tile').count() > 0, 'Enemy danger is restored after command cancellation');
+  }],
+  ['area-range', async (page, test, { fixture, settings }) => {
+    await restore(page, fixture, settings);
+    const tiles = await page.locator('.world-battlefield .tile').evaluateAll(elements => elements.map(tile => ({
+      x: Number(tile.dataset.mapX), y: Number(tile.dataset.mapY),
+      blocked: ['block', 'wall', 'void'].some(type => tile.classList.contains(`terrain-${type}`)),
+    })));
+    const data = structuredClone(fixture);
+    const caster = data.units.find(unit => unit.id === 'lina');
+    Object.assign(caster, { id: 'noah', name: '노아', skl: 999 });
+    const target = data.units.find(unit => unit.type !== 'ally');
+    const splashCell = tiles.find(tile => !tile.blocked && Math.abs(tile.x - target.x) + Math.abs(tile.y - target.y) === 1 &&
+      !data.units.some(unit => unit.x === tile.x && unit.y === tile.y));
+    assert.ok(splashCell);
+    data.units.push({ ...target, id: 'splash-target', name: '광역 대상', x: splashCell.x, y: splashCell.y });
+    synchronizeStage(data);
+    await restore(page, data, settings);
+    await page.evaluate(() => { const random = Math.random; Math.random = () => 0.5 + random() * 0.001; });
+    await selectUnit(page, 'noah');
+    await (await openSkills(page)).locator('[data-skill-id="chain"]').click();
+    const button = page.locator('.battle-target-buttons button').filter({ hasText: target.name });
+    await button.focus();
+    const expected = tiles.filter(tile => !tile.blocked && Math.abs(tile.x - target.x) + Math.abs(tile.y - target.y) <= 1).map(tile => `${tile.x},${tile.y}`).sort();
+    const actual = await page.locator('.skill-impact-tile').evaluateAll(elements => elements.map(element => `${element.parentElement.dataset.mapX},${element.parentElement.dataset.mapY}`).sort());
+    assert.deepEqual(actual, expected, 'Area preview includes the center and all legal cells, not just secondary enemy positions');
+    assert.equal(await page.locator('.enemy-threat-tile').count(), 0);
+    await snapshot(page, test, 'preview');
+    await button.click();
+    const preview = page.locator('.vs-preview-modal');
+    assert.match(await preview.innerText(), /광역\s*1명/);
+    await preview.getByRole('button', { name: '스킬 실행', exact: true }).click();
+    await page.waitForFunction(() => {
+      const endTurn = document.querySelector('.battle-end-turn-float');
+      return !document.querySelector('.vs-preview-modal, .painted-combat-overlay') && endTurn && !endTurn.disabled;
+    }, null, { timeout: 20000 });
+    await page.waitForFunction(() => !document.querySelector('.combat-effect, .damage-popup, .action-motion'), null, { timeout: 15000 });
+    const after = await saveBattle(page);
+    for (const id of [target.id, 'splash-target']) assert.ok(after.units.find(unit => unit.id === id).hp < target.hp, `${id} is damaged`);
+    assert.equal(after.units.find(unit => unit.id === 'hero').hp, data.units.find(unit => unit.id === 'hero').hp, 'No friendly splash damage');
+    assert.equal(after.units.find(unit => unit.id === 'hero').acted, false);
+    assert.equal(await page.locator('.skill-impact-tile, .command-range-tile').count(), 0, 'Resolved skills leave no stale range');
+  }],
+  ['no-follow-up', async (page, test, { fixture, settings }) => {
+    const data = structuredClone(fixture);
+    const hero = data.units.find(unit => unit.id === 'hero');
+    const lina = data.units.find(unit => unit.id === 'lina');
+    const enemy = data.units.find(unit => unit.type !== 'ally');
+    hero.supportUsed = false;
+    lina.skl = 999;
+    lina.range = 4;
+    synchronizeStage(data);
+    await restore(page, data, settings);
+    await page.evaluate(() => { const random = Math.random; Math.random = () => 0.5 + random() * 0.001; });
+    await selectUnit(page, 'lina');
+    const before = await saveBattle(page);
+    assert.equal(Math.abs(hero.x - enemy.x) + Math.abs(hero.y - enemy.y), 1, 'An available swordsman is adjacent to the target');
+    await page.locator('.cmd-attack').click();
+    await page.locator('.battle-target-buttons button').filter({ hasText: enemy.name }).click();
+    const preview = page.locator('.vs-preview-modal');
+    assert.doesNotMatch(await preview.innerText(), /협공/);
+    const damage = Number(await preview.locator('.battle-stats > div').filter({ hasText: /^피해/ }).locator('strong').innerText());
+    await preview.getByRole('button', { name: '공격 실행', exact: true }).click();
+    await page.waitForFunction(() => {
+      const endTurn = document.querySelector('.battle-end-turn-float');
+      return !document.querySelector('.vs-preview-modal, .painted-combat-overlay') && endTurn && !endTurn.disabled;
+    }, null, { timeout: 20000 });
+    const after = await saveBattle(page);
+    const untouched = after.units.find(unit => unit.id === 'hero');
+    assert.equal(after.turn, 'ally');
+    for (const key of ['acted', 'moved', 'supportUsed', 'hp', 'exp']) assert.equal(untouched[key], before.units.find(unit => unit.id === 'hero')[key], `Swordsman's ${key} must not change`);
+    assert.equal(after.units.find(unit => unit.id === 'lina').acted, true);
+    assert.equal(enemy.hp - after.units.find(unit => unit.id === enemy.id).hp, damage, 'Only the archer deals damage');
+    assert.equal(after.battleStats.assists, before.battleStats.assists);
+    assert.doesNotMatch(after.logs.slice(0, 4).join(' '), /협공/);
+    await snapshot(page, test, 'resolved');
+  }],
   ['quick-speed', async (page, test, { fixture, settings }) => {
     await restore(page, fixture, settings);
     const before = await saveBattle(page);
@@ -296,19 +422,25 @@ const scenarios = [
     const before = await saveBattle(page);
     const dialog = await openSkills(page);
     await dialog.locator('[data-skill-id="oath"]').click();
+    await page.locator('.support-target-dialog [data-target-id="hero"]').click();
+    await page.locator('.support-target-dialog').getByRole('button', { name: '마법 사용', exact: true }).click();
     const scene = page.locator('.painted-combat.is-guarding');
-    await scene.waitFor();
-    assert.equal((await scene.locator('h2').innerText()).trim(), '수호의 맹세');
-    assert.ok(await scene.evaluate(element => element.classList.contains('is-self-support')));
-    assert.equal(await scene.locator('.painted-fighter').count(), 1, 'Self guard must render one actor');
-    assert.equal(await scene.locator('.combat-health').count(), 1, 'Self guard must render one health display');
-    assert.ok(await scene.evaluate(element => {
+    // Read short-lived cutscene state atomically before its normal playback ends.
+    const frame = await scene.evaluate(element => {
       const arena = element.querySelector('.painted-combat-arena');
       const actor = element.querySelector('.fighter-attacker');
-      return Math.abs(actor.offsetLeft + actor.offsetWidth / 2 - arena.clientWidth / 2) <= 2;
-    }), 'The self-support actor must be centered in the arena');
-    await scene.locator('.fighter-action').evaluate(image => image.decode());
-    assert.ok(await scene.locator('.fighter-action').evaluate(image => image.complete && image.naturalWidth > 0));
+      const image = element.querySelector('.fighter-action');
+      return { title: element.querySelector('h2').textContent.trim(), self: element.classList.contains('is-self-support'),
+        actors: element.querySelectorAll('.painted-fighter').length, health: element.querySelectorAll('.combat-health').length,
+        centered: Math.abs(actor.offsetLeft + actor.offsetWidth / 2 - arena.clientWidth / 2) <= 2,
+        loaded: image.complete && image.naturalWidth > 0 };
+    });
+    assert.equal(frame.title, '수호의 맹세');
+    assert.ok(frame.self);
+    assert.equal(frame.actors, 1, 'Self guard must render one actor');
+    assert.equal(frame.health, 1, 'Self guard must render one health display');
+    assert.ok(frame.centered, 'The self-support actor must be centered in the arena');
+    assert.ok(frame.loaded);
     await snapshot(page, test, 'scene');
     await page.locator('.painted-combat-overlay').waitFor({ state: 'detached', timeout: 20000 });
     const after = await saveBattle(page);
@@ -366,7 +498,7 @@ const scenarios = [
     const actor = attackFixture.units.find(unit => unit.id === 'lina');
     const enemy = attackFixture.units.find(unit => unit.type !== 'ally');
     actor.skl = 999;
-    attackFixture.units.find(unit => unit.id === 'hero').supportUsed = true;
+    attackFixture.units.find(unit => unit.id === 'hero').supportUsed = false;
     synchronizeStage(attackFixture);
     let landed = false;
     for (let attempt = 1; attempt <= 3; attempt++) {
@@ -383,10 +515,10 @@ const scenarios = [
       assert.match(await preview.locator('.battle-title').innerText(), /정밀 사격/);
       await preview.getByRole('button', { name: '스킬 실행', exact: true }).click();
       const scene = page.locator('.painted-combat').filter({ has: page.getByRole('heading', { name: '정밀 사격', exact: true }) });
-      await scene.waitFor();
-      const missed = await scene.evaluate(element => element.classList.contains('is-miss'));
-      await scene.locator('.fighter-action').evaluate(image => image.decode());
-      assert.ok(await scene.locator('.fighter-action').evaluate(image => image.complete && image.naturalWidth > 0));
+      const frame = await scene.evaluate(element => ({ missed: element.classList.contains('is-miss'),
+        loaded: [...element.querySelectorAll('.fighter-action')].every(image => image.complete && image.naturalWidth > 0) }));
+      const missed = frame.missed;
+      assert.ok(frame.loaded);
       await snapshot(page, test, `scene-${attempt}`);
       await page.waitForFunction(() => {
         const endTurn = document.querySelector('.battle-end-turn-float');
@@ -517,8 +649,8 @@ async function main() {
   let selectedScenarios = [];
   let reportName = 'result.json';
   try {
-    selectedViewports = viewports.filter(viewport => !options.viewport || String(viewport.width) === options.viewport);
-    selectedScenarios = scenarios.filter(([name]) => !options.case || name === options.case);
+    selectedViewports = viewports.filter(viewport => !options.viewport || options.viewport.split(',').includes(String(viewport.width)));
+    selectedScenarios = scenarios.filter(([name]) => !options.case || options.case.split(',').includes(name));
     assert.ok(selectedViewports.length, `Unknown viewport: ${options.viewport}`);
     assert.ok(selectedScenarios.length, `Unknown case: ${options.case}`);
     if (options.case || options.viewport) reportName = `result-${options.case || 'all'}-${options.viewport || 'all'}.json`;

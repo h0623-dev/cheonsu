@@ -1,4 +1,5 @@
 import { stages } from "../data/stages.js";
+import { getUnlockedStageIds } from './campaignProgress.js';
 import { DEFAULT_GEAR_INVENTORY } from "../data/equipment.js";
 import { DEFAULT_SUPPORT_POINTS, DEFAULT_SUPPORT_DIALOGUES_SEEN } from "../data/supports.js";
 import { inMap } from "./movement.js";
@@ -379,13 +380,7 @@ export function normalizeSaveData(raw, saveVersion = "0.12") {
         ? data.campMessage
         : "이어하기 완료.",
     stageRewardClaimed: Boolean(data.stageRewardClaimed),
-    unlockedStages: safeArray(data.unlockedStages, [1]).filter((id) =>
-      stages.some((stage) => stage.id === id)
-    ).length
-      ? safeArray(data.unlockedStages, [1]).filter((id) =>
-          stages.some((stage) => stage.id === id)
-        )
-      : [1],
+    unlockedStages: getUnlockedStageIds(safeArray(data.clearedStages, [])),
     clearedStages: safeArray(data.clearedStages, []).filter((id) =>
       stages.some((stage) => stage.id === id)
     ),

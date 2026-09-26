@@ -85,15 +85,22 @@ export function tickCooldowns(units) {
     return { ...unit, skillCooldowns, skillCooldown: skillCooldowns[skills[0]?.id] ?? legacyCooldown };
   });
 }
-export function getSupportSkillTargets(actor, skill, units) {
+export function getSupportSkillCandidates(actor, skill, units) {
   const distance = unit => Math.abs(unit.x - actor.x) + Math.abs(unit.y - actor.y);
   const candidates = units.filter(unit => unit.type === 'ally' && unit.hp > 0 && distance(unit) <= (skill.type === 'guard' ? skill.radius : skill.range));
   if (skill.type === 'guard') return candidates;
-  return candidates.filter(unit => unit.hp < unit.maxHp || (skill.cleanse && unit.status?.length))
-    .sort((a, b) => a.hp / a.maxHp - b.hp / b.maxHp || a.id.localeCompare(b.id)).slice(0, skill.targets);
+  return candidates.filter(unit => unit.hp < unit.maxHp || (skill.cleanse && unit.status?.length));
 }
-export function applySupportSkill(actor, skill, units) {
-  const targets = getSupportSkillTargets(actor, skill, units);
+export function getSupportSkillTargets(actor, skill, units, selectedIds) {
+  const candidates = getSupportSkillCandidates(actor, skill, units);
+  if (selectedIds !== undefined) {
+    return [...new Set(selectedIds)].map(id => candidates.find(unit => unit.id === id)).filter(Boolean).slice(0, skill.targets ?? candidates.length);
+  }
+  if (skill.type === 'guard') return candidates;
+  return candidates.sort((a, b) => a.hp / a.maxHp - b.hp / b.maxHp || a.id.localeCompare(b.id)).slice(0, skill.targets);
+}
+export function applySupportSkill(actor, skill, units, selectedIds) {
+  const targets = getSupportSkillTargets(actor, skill, units, selectedIds);
   const ids = new Set(targets.map(unit => unit.id));
   const power = (skill.power || 0) + (actor.skillLevel || 0) * 3;
   const nextUnits = units.map(unit => {

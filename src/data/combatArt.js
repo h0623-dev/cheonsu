@@ -1,8 +1,17 @@
 import enemyManifest from '../../public/art/enemies-v3/manifest.json' with { type: 'json' };
 import bossManifest from '../../public/art/bosses-v1/manifest.json' with { type: 'json' };
 import mapManifest from '../../public/art/map-sprites-v4/manifest.json' with { type: 'json' };
+import combatFrameMetrics from './combatFrameMetrics.json' with { type: 'json' };
 
 export function getCombatScale(key) { return mapManifest[key]?.combatScale || 1; }
+
+export function getCombatFrameStyle(key, pose) {
+  const metrics = combatFrameMetrics[key]?.[pose];
+  if (!metrics) return { '--combat-sprite-scale': getCombatScale(key) };
+  const visibleFraction = key === 'wolf' ? 0.45 : 0.703125;
+  const scale = visibleFraction * metrics.height / (metrics.bottom - metrics.top + 1);
+  return { '--combat-sprite-scale': scale, '--combat-foot-offset': `${100 * scale * (0.9375 - (metrics.bottom + 1) / metrics.height)}%` };
+}
 
 const weapons = {
   boss_commander: 'heavy', boss_frost: 'ice', boss_ember: 'fire', boss_oracle: 'holy', boss_abyss: 'shadow',

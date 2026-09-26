@@ -24,6 +24,8 @@ android/local.properties
 *.keystore
 .env
 .env.*
+.update-keys/
+update-release/
 
 # Local generated packages
 cheonsu_*.zip

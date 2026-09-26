@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 import { X, Swords, Sparkles, BookOpen, ArrowRight, Save, ShoppingBag, Check, Users, Shield, Backpack, Settings } from "lucide-react";
 import DiscoveryDialog from "./components/DiscoveryDialog.jsx";
 import PromotionDialog from "./components/PromotionDialog.jsx";
@@ -7,9 +7,15 @@ import { getStageDiscoveries, getVisibleDiscoveries, normalizeExploration, claim
 import ItemDialog from "./components/ItemDialog.jsx";
 import CombatScene from "./components/CombatScene.jsx";
 import SkillDialog from "./components/SkillDialog.jsx";
+import SupportTargetDialog from './components/SupportTargetDialog.jsx';
+import TownHub from './components/TownHub.jsx';
+import TownFacilityDialog from './components/TownFacilityDialog.jsx';
+import { PatchSettings, PatchTitleStatus } from './components/PatchUpdates.jsx';
+import { usePatchUpdates } from './engine/usePatchUpdates.js';
 import DefeatDialog from "./components/DefeatDialog.jsx";
 import VictoryDialog from "./components/VictoryDialog.jsx";
 import StoryScene from "./components/StoryScene.jsx";
+import { getUnlockedStageIds, createVictoryCheckpoint, writeProgressSave } from './engine/campaignProgress.js';
 import { distributeBattleFormations } from "./engine/formations.js";
 import { getBattleOutcome, spendAction } from "./engine/battleOutcome.js";
 import { getAudioContext, createMusicPlayer } from "./engine/audioEngine.js";
@@ -43,13 +49,8 @@ import {
   getUnitNameById,
 } from "./engine/supportEngine.js";
 import { normalizeSaveData } from "./engine/saveEngine.js";
-import { getMoveTiles, getAttackTiles, findMovePath, getUnitMoveTrait, getUnitMoveRange } from "./engine/movement.js";
+import { getMoveTiles, getAttackTiles, getTilesInRadius, findMovePath, getUnitMoveTrait, getUnitMoveRange } from "./engine/movement.js";
 import { getTargetInRange, moveEnemyToward, getAITypeLabel } from "./engine/enemyAI.js";
-import {
-  DEFAULT_UPDATE_MANIFEST_URL,
-  compareVersions,
-  fetchUpdateManifest,
-} from "./engine/updateEngine.js";
 import { getStageRoundLimit } from "./engine/stageRules.js";
 import {
   getStatusText,
@@ -73,18 +74,14 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.133";
+const SAVE_VERSION = "1.99.136";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
 const CRASH_LOG_KEY = "cheonsu_v01_crash_logs";
 const QA_FIX_HISTORY_KEY = "cheonsu_v01_qa_fix_history";
 const QA_RELEASE_ARCHIVE_KEY = "cheonsu_v01_qa_release_archive";
-const UPDATE_MANIFEST_URL_KEY = "cheonsu_update_manifest_url";
-const PLAYTEST_UNLOCK_ALL_STAGES = true;
-const ALL_STAGE_IDS = stages.map((stage) => stage.id);
-const getPlaytestUnlockedStageIds = (stageIds = [1]) =>
-  PLAYTEST_UNLOCK_ALL_STAGES ? ALL_STAGE_IDS : stageIds;
+const PLAYTEST_UNLOCK_ALL_STAGES = false;
 const MAP_ZOOM_STEPS = ["fit", "normal", "large", "xl"];
 const MAP_ZOOM_LABELS = {
   fit: "자동",
@@ -95,23 +92,6 @@ const MAP_ZOOM_LABELS = {
 
 function getManualSaveSlotKey(slot) {
   return `cheonsu_v01_manual_slot_${slot}`;
-}
-
-function loadUpdateManifestUrl() {
-  try {
-    return localStorage.getItem(UPDATE_MANIFEST_URL_KEY) || DEFAULT_UPDATE_MANIFEST_URL;
-  } catch {
-    return DEFAULT_UPDATE_MANIFEST_URL;
-  }
-}
-
-function createIdleUpdateState() {
-  return {
-    status: "idle",
-    message: "최신 버전 정보를 아직 확인하지 않았습니다.",
-    latest: null,
-    checkedAt: null,
-  };
 }
 
 function getSaveSummary(raw) {
@@ -974,7 +954,7 @@ function getCodexEntries({ party, clearedStages, settings }) {
   });
 
   const systemEntries = [
-    { id: "sys-battle", category: "시스템", title: "전투 컷씬", subtitle: "용의기사풍 사이드뷰 연출", desc: "공격, 스킬, 협공, 반격, 회복, FINISH 연출이 표시됩니다.", unlocked: true, icon: "⚔️" },
+    { id: "sys-battle", category: "시스템", title: "전투 컷씬", subtitle: "용의기사풍 사이드뷰 연출", desc: "공격, 스킬, 반격, 회복, FINISH 연출이 표시됩니다.", unlocked: true, icon: "⚔️" },
     { id: "sys-auto", category: "시스템", title: "자동 전투 전략", subtitle: getAutoBattleModeConfig(settings?.autoBattleMode).label, desc: "안전, 공격, 보스 집중, 파밍 모드로 자동 전투 판단을 변경할 수 있습니다.", unlocked: true, icon: "🤖" },
     { id: "sys-boss", category: "시스템", title: "보스 패턴", subtitle: "2페이즈 장판", desc: "십자 파동, 암흑 직선, 흑성 낙뢰, 붕괴 장판 등 보스 패턴이 등장합니다.", unlocked: true, icon: "☠️" },
     { id: "sys-growth", category: "시스템", title: "캠프 성장", subtitle: "훈련 / 스킬 / 전직 / 장비", desc: "캠프에서 동료 성장과 장비, 보급, 파견을 관리할 수 있습니다.", unlocked: true, icon: "🏕️" },
@@ -1280,7 +1260,7 @@ function createBattleTactics(attacker, defender, units, activeMap) {
   if (pressureCount >= 1) {
     damageMod += 1;
     hitMod += 3;
-    labels.push("연계 압박");
+    labels.push("포위 압박");
   }
 
   if (pressureCount >= 2) {
@@ -1333,7 +1313,7 @@ function getTacticsLogText(tactics) {
 
 function getUnitPassiveDef(unit) {
   const defs = {
-    hero: { name: "천수의 깃발", desc: "아군 협공/명중 보조" },
+    hero: { name: "천수의 깃발", desc: "아군 명중 보조" },
     bram: { name: "수호의 맹세", desc: "주변 아군 피해 감소" },
     lina: { name: "화염 각인", desc: "화염/마법 스킬 피해 증가" },
     aria: { name: "성빛의 가호", desc: "회복량 증가" },
@@ -1491,50 +1471,6 @@ function createCounterPreview(attacker, defender, activeMap, units = []) {
 
 
 
-function canAssistAttack(assistUnit, attacker, defender, activeMap) {
-  if (!assistUnit || !attacker || !defender) return false;
-  if (attacker.type !== "ally") return false;
-  if (assistUnit.type !== "ally") return false;
-  if (assistUnit.id === attacker.id) return false;
-  if (assistUnit.hp <= 0) return false;
-  if (assistUnit.supportUsed) return false;
-  if (assistUnit.acted) return false;
-
-  const tiles = getAttackTiles(assistUnit, "attack", activeMap);
-
-  return tiles.some((tile) => tile.x === defender.x && tile.y === defender.y);
-}
-
-function createAssistPreview(attacker, defender, units, activeMap) {
-  if (!attacker || attacker.type !== "ally" || !defender) return null;
-
-  const candidates = units
-    .filter((unit) => canAssistAttack(unit, attacker, defender, activeMap))
-    .map((unit) => {
-      const rawDamage = calculateDamage(unit, defender, "attack");
-      const damage = Math.max(1, Math.floor(rawDamage * 0.55));
-      const hit = Math.round(Math.max(30, Math.min(95, calculateHit(unit, defender, "attack") - 5)));
-
-      return applyPassiveToPreview(
-        applyBattleTactics(
-          {
-            attacker: unit,
-            defender,
-            damage,
-            hit,
-            crit: 0,
-            mode: "assist",
-            affinity: getCombatAffinity(unit, defender),
-          },
-          createBattleTactics(unit, defender, units, activeMap)
-        ),
-        units
-      );
-    })
-    .sort((a, b) => b.damage + b.hit / 100 - (a.damage + a.hit / 100));
-
-  return candidates[0] || null;
-}
 
 
 function getSkillAreaRadius(unit) {
@@ -1580,6 +1516,7 @@ function getAreaTargets(attacker, center, units, activeMap) {
   if (!radius || !center) return [];
 
   const attackerIsAlly = attacker.type === "ally";
+  const areaKeys = new Set(getTilesInRadius(center, radius, activeMap).map(tile => `${tile.x},${tile.y}`));
 
   return (units || []).filter((unit) => {
     if (!unit || unit.hp <= 0) return false;
@@ -1589,9 +1526,7 @@ function getAreaTargets(attacker, center, units, activeMap) {
     if (attackerIsAlly && unit.type === "ally") return false;
     if (!attackerIsAlly && unit.type !== "ally") return false;
 
-    const distance = Math.abs(unit.x - center.x) + Math.abs(unit.y - center.y);
-
-    return distance <= radius;
+    return areaKeys.has(`${unit.x},${unit.y}`);
   });
 }
 
@@ -1619,8 +1554,6 @@ function makeAttackLog(attacker, defender, mode, outcome, prefix = "") {
       ? attacker.skill
       : mode === "counter"
       ? "반격"
-      : mode === "assist"
-      ? "협공"
       : "공격";
   const affinity = getCombatAffinity(attacker, defender);
   const affinityText =
@@ -4219,7 +4152,6 @@ function getSkillMotionEffectType(battleInfo, outcome) {
 
   if (mode !== "skill") {
     if (mode === "counter") return "counter-motion";
-    if (mode === "assist") return "assist-motion";
     return "attack-motion";
   }
 
@@ -4316,7 +4248,6 @@ function getUnitWeaponMotionKey(unit, battleInfo, outcome) {
 function getCombatMotionDuration(battleInfo, outcome) {
   if (battleInfo?.mode === "skill") return 1560;
   if (battleInfo?.mode === "counter") return 1220;
-  if (battleInfo?.mode === "assist") return 1220;
   if (!outcome?.hit) return 1040;
   return 1260;
 }
@@ -4324,7 +4255,6 @@ function getCombatMotionDuration(battleInfo, outcome) {
 function getCombatImpactDelay(battleInfo, outcome) {
   if (battleInfo?.mode === "skill") return 620;
   if (battleInfo?.mode === "counter") return 430;
-  if (battleInfo?.mode === "assist") return 460;
   if (!outcome?.hit) return 360;
   return 480;
 }
@@ -4351,7 +4281,6 @@ function getCombatLaunchEffectType(battleInfo, outcome) {
   }
 
   if (battleInfo.mode === "counter") return "motion-counter-launch";
-  if (battleInfo.mode === "assist") return "motion-assist-launch";
   if (isRangedCombatMotion(battleInfo)) return "motion-arrow-launch";
 
   return "motion-melee-launch";
@@ -4368,7 +4297,6 @@ function getCombatImpactEffectType(battleInfo, outcome) {
 
   if (outcome?.crit) return "motion-critical-impact";
   if (battleInfo?.mode === "counter") return "motion-counter-impact";
-  if (battleInfo?.mode === "assist") return "motion-assist-impact";
   if (isRangedCombatMotion(battleInfo)) return "motion-arrow-impact";
 
   return "motion-melee-impact";
@@ -4842,7 +4770,7 @@ const TUTORIAL_GUIDES = [
     desc: "이동, 공격, 스킬, 아이템, 부대 명령으로 전투를 진행합니다.",
     tips: [
       "아군을 선택한 뒤 파란 칸으로 이동하고, 붉은 칸의 적을 공격합니다.",
-      "전투 예측창에서 피해량, 명중률, 반격, 협공을 확인하세요.",
+      "전투 예측창에서 피해량, 명중률, 반격을 확인하세요.",
       "모바일에서는 하단 아군/대상/순서 버튼으로 필요한 패널을 하나씩 열어 확인합니다.",
       "아이템이나 턴종료를 누르면 열린 패널이 자동으로 닫혀 전장을 가리지 않습니다.",
       "시야 버튼으로 전술 타일 강조와 배경맵 아트 가시성을 전환할 수 있습니다.",
@@ -7941,6 +7869,7 @@ function normalizeBattleStats(stats) {
 }
 
 export default function App() {
+  const patch = usePatchUpdates();
   useEffect(() => {
     const nativeClassName = "native-capacitor-app";
     const isNativeApp = isNativeCapacitorRuntime();
@@ -8043,8 +7972,11 @@ export default function App() {
   const [result, setResult] = useState(null);
   const [itemOpen, setItemOpen] = useState(false);
   const [skillChoiceOpen, setSkillChoiceOpen] = useState(false);
+  const [supportSkillChoice, setSupportSkillChoice] = useState(null);
   const [activeSkillChoice, setActiveSkillChoice] = useState(null);
+  const [rangePreviewTargetId, setRangePreviewTargetId] = useState(null);
   const [shopOpen, setShopOpen] = useState(false);
+  const [campFacility, setCampFacility] = useState(null);
   const [campTab, setCampTab] = useState("party");
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const [codexCategory, setCodexCategory] = useState("전체");
@@ -8058,7 +7990,7 @@ export default function App() {
   const [feedbackReports, setFeedbackReports] = useState(() => loadFeedbackReports());
   const [equipmentOpen, setEquipmentOpen] = useState(false);
   const [forgeOpen, setForgeOpen] = useState(false);
-  const [equipmentUnitId, setEquipmentUnitId] = useState("hero");
+  const equipmentUnitId = 'hero';
   const [trainingOpen, setTrainingOpen] = useState(false);
   const [dispatchOpen, setDispatchOpen] = useState(false);
   const [skillOpen, setSkillOpen] = useState(false);
@@ -8075,8 +8007,10 @@ export default function App() {
   const [activeSupportScene, setActiveSupportScene] = useState(null);
   const [gold, setGold] = useState(300);
   const [stageRewardClaimed, setStageRewardClaimed] = useState(false);
-  const [unlockedStages, setUnlockedStages] = useState(() => getPlaytestUnlockedStageIds([1]));
-  const playableStageIds = PLAYTEST_UNLOCK_ALL_STAGES ? ALL_STAGE_IDS : unlockedStages;
+  const [unlockedStages, setUnlockedStages] = useState([1]);
+  const playableStageIds = unlockedStages;
+  const [saveNotice, setSaveNotice] = useState(null);
+  const [clearReceipt, setClearReceipt] = useState(null);
   const [clearedStages, setClearedStages] = useState([]);
   const [gearInventory, setGearInventory] = useState(["ironSword", "leatherArmor", "fireStaff", "mageRobe"]);
   const [gearEnhance, setGearEnhance] = useState({});
@@ -8136,8 +8070,6 @@ export default function App() {
     standalone: false,
     online: typeof navigator !== "undefined" ? navigator.onLine : true,
   });
-  const [updateManifestUrl, setUpdateManifestUrl] = useState(loadUpdateManifestUrl);
-  const [updateCheck, setUpdateCheck] = useState(createIdleUpdateState);
   const [phaseBanner, setPhaseBanner] = useState(null);
   const [stageBanner, setStageBanner] = useState(null);
   const [lastClearSummary, setLastClearSummary] = useState(null);
@@ -8203,7 +8135,7 @@ export default function App() {
   const [screenShake, setScreenShake] = useState(false);
   const visualTimersRef = useRef(new Set());
   const combatBusy = Boolean(turnBusy || movingUnit || battleResolving || combatCutscene || bossCutscene);
-  const battleInputLocked = Boolean(combatBusy || battle || result || itemOpen || skillChoiceOpen || battleSettingsOpen || discoveryReceipt || journalOpen);
+  const battleInputLocked = Boolean(combatBusy || battle || result || itemOpen || skillChoiceOpen || supportSkillChoice || battleSettingsOpen || discoveryReceipt || journalOpen);
 
   useEffect(() => {
     const timers = visualTimersRef.current;
@@ -8325,6 +8257,13 @@ export default function App() {
   const attackTiles = (mode === "skill" && selected?.skillType !== "attack" ? [] : getAttackTiles(selected, mode, activeMap)).filter(
     (tile) => !isBlockedBattleTile(activeMap[tile.y]?.[tile.x])
   );
+  const showAttackRange = Boolean(selected?.type === "ally" && !selected.acted && turn === "ally" &&
+    (mode === "attack" || (mode === "skill" && selected.skillType === "attack")) &&
+    !combatBusy && !result && !skillChoiceOpen && !itemOpen);
+  const rangeTarget = battle?.defender || enemiesAlive.find(unit => unit.id === rangePreviewTargetId &&
+    attackTiles.some(tile => tile.x === unit.x && tile.y === unit.y));
+  const skillAreaTiles = showAttackRange && mode === "skill" && rangeTarget && getSkillAreaRadius(selected) > 0
+    ? getTilesInRadius(rangeTarget, getSkillAreaRadius(selected), activeMap) : [];
   const enemyThreatTileKeys = useMemo(() => {
     if (mapVisibility === "art") return new Set();
 
@@ -9102,6 +9041,7 @@ export default function App() {
 
 
   const registerLootDrop = (enemy) => {
+    if (clearedStages.includes(selectedStage?.id)) return [];
     const loot = rollEnemyLoot(enemy, selectedStage, settings.difficulty);
     const lootText = formatLoot(loot);
 
@@ -9226,96 +9166,6 @@ export default function App() {
 
     if (key === "soundOn" && value) {
       playCheonsuSfx("confirm", true, settings.sfxVolume / 100);
-    }
-  };
-
-  const saveUpdateManifestUrl = (nextUrl = updateManifestUrl) => {
-    const normalizedUrl = String(nextUrl || "").trim() || DEFAULT_UPDATE_MANIFEST_URL;
-    setUpdateManifestUrl(normalizedUrl);
-
-    try {
-      localStorage.setItem(UPDATE_MANIFEST_URL_KEY, normalizedUrl);
-    } catch {
-      // Local storage can fail in private or restricted WebView contexts.
-    }
-
-    setUpdateCheck(createIdleUpdateState());
-    playSfx("confirm");
-  };
-
-  const resetUpdateManifestUrl = () => {
-    saveUpdateManifestUrl(DEFAULT_UPDATE_MANIFEST_URL);
-  };
-
-  const checkForAppUpdate = async () => {
-    const url = String(updateManifestUrl || "").trim() || DEFAULT_UPDATE_MANIFEST_URL;
-
-    saveUpdateManifestUrl(url);
-    setUpdateCheck({
-      status: "checking",
-      message: "최신 버전 정보를 확인하는 중입니다.",
-      latest: null,
-      checkedAt: null,
-    });
-
-    try {
-      const latest = await fetchUpdateManifest(url);
-      const comparison = compareVersions(latest.version, SAVE_VERSION);
-      const checkedAt = new Date().toLocaleString();
-
-      if (comparison > 0) {
-        setUpdateCheck({
-          status: "available",
-          message: `새 버전 v${latest.version}을 설치할 수 있습니다.`,
-          latest,
-          checkedAt,
-        });
-        playSfx(latest.required ? "boss" : "confirm");
-        return;
-      }
-
-      setUpdateCheck({
-        status: "current",
-        message: `현재 v${SAVE_VERSION}이 최신 버전입니다.`,
-        latest,
-        checkedAt,
-      });
-      playSfx("confirm");
-    } catch (error) {
-      setUpdateCheck({
-        status: "error",
-        message: error?.message || "업데이트 확인에 실패했습니다.",
-        latest: null,
-        checkedAt: new Date().toLocaleString(),
-      });
-      playSfx("miss");
-    }
-  };
-
-  const openUpdateDownload = () => {
-    const url = updateCheck.latest?.apkUrl;
-
-    if (!url) {
-      alert("다운로드 링크가 아직 없습니다.");
-      return;
-    }
-
-    const opened = window.open(url, "_blank", "noopener,noreferrer");
-    if (!opened) {
-      window.location.href = url;
-    }
-  };
-
-  const copyUpdateDownloadLink = async () => {
-    const url = updateCheck.latest?.apkUrl || updateManifestUrl;
-
-    try {
-      await navigator.clipboard.writeText(url);
-      playSfx("confirm");
-      alert("업데이트 링크를 복사했습니다.");
-    } catch {
-      playSfx("miss");
-      alert(url);
     }
   };
 
@@ -9602,8 +9452,6 @@ export default function App() {
       ? "skill"
       : battleInfo.mode === "counter"
       ? "counter"
-      : battleInfo.mode === "assist"
-      ? "assist"
       : outcome?.hit
       ? "attack"
       : "miss";
@@ -9948,6 +9796,7 @@ export default function App() {
     if (!unit || unit.type !== "ally" || unit.acted || unit.hp <= 0 || turn !== "ally" || battleInputLocked) return false;
 
     setActiveSkillChoice(null);
+    setRangePreviewTargetId(null);
     setSelectedUnit(unit.id);
     setInspectedUnitId(null);
     setMode(unit.moved ? "attack" : "move");
@@ -10034,6 +9883,8 @@ export default function App() {
   };
 
   const clearVisuals = () => {
+    setCampFacility(null);
+    setSupportSkillChoice(null);
     setSkillChoiceOpen(false);
     setActiveSkillChoice(null);
     setBattleSettingsOpen(false);
@@ -10133,6 +9984,8 @@ export default function App() {
 
 
   const newGame = () => {
+    setSaveNotice(null);
+    setClearReceipt(null);
     playSfx("start");
     const freshParty = getInitialParty();
     setSelectedStage(null);
@@ -10211,7 +10064,7 @@ export default function App() {
     setActiveSupportScene(null);
     setGold(300);
     setStageRewardClaimed(false);
-    setUnlockedStages(getPlaytestUnlockedStageIds([1]));
+    setUnlockedStages([1]);
     setClearedStages([]);
     setGearInventory(["ironSword", "leatherArmor", "fireStaff", "mageRobe"]);
     setInventory(createDefaultInventory());
@@ -10224,9 +10077,10 @@ export default function App() {
   const beginStageBattle = (stage) => {
     actionResolvingRef.current = false;
     victorySettledRef.current = false;
+    setClearReceipt(null);
     setSkillChoiceOpen(false);
     setActiveSkillChoice(null);
-    if (!playableStageIds.includes(stage.id)) return;
+    if (!playableStageIds.includes(stage.id) && !(result === 'defeat' && selectedStage?.id === stage.id)) return;
     playSfx("start");
     setStoryScene(null);
     const stageAccessParty = applyGearEnhanceToParty(
@@ -11446,13 +11300,7 @@ export default function App() {
     completeStoryScene();
   };
 
-  const saveGame = () => {
-    if (!selectedStage && screen !== "campaign") return;
-    if (screen === "battle" && turn !== "ally") {
-      setLogs((p) => ["적 턴에는 저장할 수 없습니다.", ...p]);
-      return;
-    }
-    const saveData = {
+  const getSaveData = () => ({
       version: SAVE_VERSION,
       exploration,
       screen,
@@ -11500,17 +11348,33 @@ export default function App() {
       trainingUsed,
       dispatchUsed,
       savedAt: new Date().toISOString(),
-    };
-    const previousRaw = localStorage.getItem(SAVE_KEY);
-    if (previousRaw) {
-      localStorage.setItem(SAVE_PREVIOUS_KEY, previousRaw);
+    });
+
+  const persistProgress = (data, automatic = false) => {
+    try {
+      const { backupOk } = writeProgressSave(localStorage, { ...data, savedAt: new Date().toISOString() });
+      setSaveNotice({ ok: true, text: `${automatic ? '클리어 자동저장' : '저장'} 완료${backupOk ? '' : ' · 백업 공간 부족'}` });
+      if (!automatic) playSfx('save');
+      return true;
+    } catch {
+      setSaveNotice({ ok: false, text: '저장 실패 · 저장 공간을 확인하고 다시 저장해 주세요.' });
+      return false;
     }
-    localStorage.setItem(SAVE_KEY, JSON.stringify(saveData));
-    localStorage.setItem(SAVE_BACKUP_KEY, JSON.stringify(saveData));
-    playSfx("save");
-    if (screen === "camp") setCampMessage("저장 완료. 다음 전투를 준비할 수 있다.");
-    if (screen === "battle") setLogs((p) => ["저장 완료.", ...p]);
   };
+
+  const saveGame = () => {
+    if (screen === 'battle' && (turn !== 'ally' || combatBusy || battle || result || itemOpen || skillChoiceOpen || supportSkillChoice)) {
+      setSaveNotice({ ok: false, text: '명령이 끝난 아군 턴에 저장할 수 있습니다.' });
+      return;
+    }
+    persistProgress(getSaveData());
+  };
+
+  useEffect(() => {
+    if (!saveNotice?.ok || result) return;
+    const timer = setTimeout(() => setSaveNotice(null), 3200);
+    return () => clearTimeout(timer);
+  }, [saveNotice, result]);
 
   const continueGame = () => {
     const raw = localStorage.getItem(SAVE_KEY);
@@ -11537,15 +11401,7 @@ export default function App() {
         ))
       );
 
-      localStorage.setItem(
-        SAVE_KEY,
-        JSON.stringify({
-          ...migratedData,
-          units: restoredUnits,
-          savedAt: new Date().toISOString(),
-        })
-      );
-
+      // Loading stays read-only; migrated data is committed on the next successful save.
       const restoredGearEnhance = normalizeGearEnhance(migratedData.gearEnhance);
       const restoredBaseParty = migratedData.party || [];
       const starterBackfill = getInitialParty().filter(
@@ -11611,7 +11467,7 @@ export default function App() {
       ].slice(0, 8));
       setCampMessage(migratedData.campMessage);
       setStageRewardClaimed(migratedData.stageRewardClaimed);
-      setUnlockedStages(getPlaytestUnlockedStageIds(migratedData.unlockedStages));
+      setUnlockedStages(getUnlockedStageIds(migratedData.clearedStages));
       setClearedStages(migratedData.clearedStages);
       setStoryScene(null);
       setBattle(null);
@@ -11619,6 +11475,7 @@ export default function App() {
       const restoredOutcome = migratedData.screen === "battle" ? getBattleOutcome(migratedData.selectedStage, restoredUnits) : null;
       setResult(restoredOutcome || (restoredDefeat ? "defeat" : null));
       victorySettledRef.current = false;
+      setClearReceipt(null);
       actionResolvingRef.current = false;
       setPhaseBanner(null);
       setStageBanner(null);
@@ -11669,17 +11526,12 @@ export default function App() {
       units
     );
     const counter = createCounterPreview(attacker, defender, activeMap, units);
-    const assist =
-      battleMode === "assist"
-        ? null
-        : createAssistPreview(attacker, defender, units, activeMap);
     const aoeTargets =
       battleMode === "skill" ? getAreaTargets(attacker, defender, units, activeMap) : [];
 
     setBattle({
       ...preview,
       aoeTargets,
-      assist,
       counter,
     });
   };
@@ -12635,8 +12487,6 @@ export default function App() {
           ? battleInfo.attacker.skill
           : battleInfo.mode === "counter"
           ? "반격"
-          : battleInfo.mode === "assist"
-          ? "협공"
           : "공격",
     });
 
@@ -12811,72 +12661,6 @@ export default function App() {
       addUnitBattleStats(battle.attacker.id, { kills: 1 });
     }
 
-    let assistMessages = [];
-    let assistExpMessages = [];
-
-    if (outcome.hit && !defenderDied && battle.assist && battle.attacker.type === "ally") {
-      const assistActor = nextUnits.find((unit) => unit.id === battle.assist.attacker.id);
-      const assistTarget = nextUnits.find((unit) => unit.id === battle.defender.id);
-
-      if (assistActor && assistTarget && canAssistAttack(assistActor, battle.attacker, assistTarget, activeMap)) {
-        const freshAssist = applyBattleTactics(
-          {
-            attacker: assistActor,
-            defender: assistTarget,
-            damage: Math.max(1, Math.floor(calculateDamage(assistActor, assistTarget, "attack") * 0.55)),
-            hit: Math.round(Math.max(30, Math.min(95, calculateHit(assistActor, assistTarget, "attack") - 5))),
-            crit: 0,
-            mode: "assist",
-            affinity: getCombatAffinity(assistActor, assistTarget),
-          },
-          createBattleTactics(assistActor, assistTarget, nextUnits, activeMap)
-        );
-        const assistOutcome = rollCombat(freshAssist);
-        await showCombatCutscene(freshAssist, assistOutcome);
-        triggerCombatVisual(freshAssist, assistOutcome, 360, false);
-
-        let assistKilled = false;
-
-        if (assistOutcome.hit) {
-          addBattleStats({ assists: 1, damageDealt: assistOutcome.damage });
-          addUnitBattleStats(assistActor.id, { assists: 1, damageDealt: assistOutcome.damage });
-          nextUnits = nextUnits
-            .map((unit) => {
-              if (unit.id === assistTarget.id) {
-                const hp = Math.max(0, unit.hp - assistOutcome.damage);
-                if (hp === 0) assistKilled = true;
-                return { ...unit, hp };
-              }
-
-              if (unit.id === assistActor.id) {
-                return { ...unit, supportUsed: true, acted: true, moved: true };
-              }
-
-              return unit;
-            })
-            .filter((unit) => unit.hp > 0);
-        } else {
-          nextUnits = nextUnits.map((unit) =>
-            unit.id === assistActor.id ? { ...unit, supportUsed: true, acted: true, moved: true } : unit
-          );
-        }
-
-        assistMessages.push(
-          makeAttackLog(assistActor, assistTarget, "assist", assistOutcome, "🤝 ")
-        );
-
-        if (assistKilled) {
-          defenderDied = true;
-          const expAmount = assistTarget.type === "boss" ? 50 : 30;
-          const expResult = grantExp(nextUnits, assistActor.id, expAmount);
-          nextUnits = expResult.units;
-          assistExpMessages = [
-            ...expResult.messages,
-            ...registerLootDrop(assistTarget),
-          ];
-        }
-      }
-    }
 
     let counterMessages = [];
     let counterExpMessages = [];
@@ -12957,8 +12741,6 @@ export default function App() {
       ...areaLootMessages,
       ...expMessages,
       ...lootMessages,
-      ...assistMessages,
-      ...assistExpMessages,
       ...counterMessages,
       ...counterExpMessages,
       ...phaseResult.messages,
@@ -13014,6 +12796,7 @@ export default function App() {
   const activateSkill = () => {
     if (!canCommandSelected || !getUnitSkills(selected).length) return;
     closeMobileCombatPanels();
+    setRangePreviewTargetId(null);
     playSfx("confirm");
     setSkillChoiceOpen(true);
   };
@@ -13032,8 +12815,19 @@ export default function App() {
       setLogs(previous => [`${actor.name}: ${skill.name} 선택.`, ...previous]);
       return;
     }
-    const applied = applySupportSkill(actor, skill, units);
+    setSupportSkillChoice({ unitId: actor.id, skillId: skill.id });
+  };
+
+  const executeSupportSkill = async (targetIds) => {
+    if (!supportSkillChoice || actionResolvingRef.current || combatBusy || battle || result || turn !== 'ally') return;
+    const source = units.find(unit => unit.id === supportSkillChoice.unitId && unit.hp > 0 && !unit.acted);
+    const skill = getSkill(source, supportSkillChoice.skillId);
+    if (!source || !skill || skill.type === 'attack' || getSkillCooldown(source, skill.id) > 0) return;
+    const actor = withSkill(source, skill.id);
+    const applied = applySupportSkill(actor, skill, units, targetIds);
     if (!applied.targets.length) return;
+    actionResolvingRef.current = true;
+    setSupportSkillChoice(null);
     setBattleResolving(true);
     try {
       const first = applied.targets[0];
@@ -13052,6 +12846,7 @@ export default function App() {
       setLogs(previous => [`${actor.name}: ${skill.name} → ${applied.targets.map(unit => unit.name).join(", ")}`, ...previous]);
       markActed(actor.id, cooldownUnits);
     } finally {
+      actionResolvingRef.current = false;
       setBattleResolving(false);
     }
   };
@@ -13162,104 +12957,69 @@ export default function App() {
     markActed(selected.id, nextUnits);
   };
 
-  const finishGoCamp = (destination = "camp") => {
-    if (victorySettledRef.current) return;
-    victorySettledRef.current = true;
-    setTurnBusy(false);
-    setAutoBattleEnabled(false);
-    setCombatCutscene(null);
-    setBossCutscene(null);
-    setBattleSettingsOpen(false);
-    setSkillChoiceOpen(false);
-    setActiveSkillChoice(null);
-    setMoveUndo(null);
-    setCampTab(destination === "shop" ? "supply" : "party");
-    closeMobileCombatPanels();
-    clearVisuals();
-    playSfx("confirm");
-    setResult(null); setBattle(null); setBattleResolving(false); setItemOpen(false); setShopOpen(false); setEquipmentOpen(false); setForgeOpen(false); setTrainingOpen(false); setDispatchOpen(false); setSkillOpen(false); setPromoteOpen(false); setSupportOpen(false); setSelectedUnit(null); setMode("move"); setTrainingUsed(false); setDispatchUsed(false);
-    const stageId = selectedStage?.id;
-    const alreadyCleared = clearedStages.includes(stageId);
-    const recruitId = !alreadyCleared ? RECRUIT_BY_STAGE[stageId] : null;
-    const recruitUnit = recruitId ? createRecruitAlly(recruitId) : null;
-
-    setParty((prev) => {
-      const merged = mergePartyFromUnits(prev, units);
-
-      if (!recruitUnit || merged.some((unit) => unit.id === recruitUnit.id)) {
-        return applyGearEnhanceToParty(merged, gearEnhance);
-      }
-
-      return applyGearEnhanceToParty([...merged, recruitUnit], gearEnhance);
+  const settleStageClear = () => {
+    if (victorySettledRef.current) return victorySettledRef.current;
+    const data = getSaveData();
+    const stageId = selectedStage.id;
+    const replay = clearedStages.includes(stageId) || stageRewardClaimed;
+    const summary = lastClearSummary || calculateClearSummary(selectedStage, round, units);
+    const recruitId = !replay ? RECRUIT_BY_STAGE[stageId] : null;
+    const recruit = recruitId ? createRecruitAlly(recruitId) : null;
+    let nextParty = mergePartyFromUnits(party, units);
+    if (recruit && !nextParty.some(unit => unit.id === recruit.id)) nextParty = [...nextParty, recruit];
+    nextParty = applyGearEnhanceToParty(nextParty.map(unit => ({
+      ...unit, acted: false, moved: false, guard: false, skillGuardBoost: 0,
+      skillCooldown: 0, skillCooldowns: {},
+    })), gearEnhance);
+    const reward = selectedStage.reward || { gold: 500, potion: 2 };
+    const bonus = summary.bonusReward || {};
+    const rewardGold = getDifficultyRewardGold(reward.gold, settings.difficulty) + getDifficultyRewardGold(bonus.gold || 0, settings.difficulty) + (battleLoot.gold || 0);
+    const nextStage = stages.find(stage => stage.id === stageId + 1);
+    const message = replay
+      ? `${selectedStage.title} 재도전 완료. 전투에서 획득한 경험치를 보존했습니다. 골드와 아이템은 지급되지 않습니다.`
+      : `${selectedStage.title} 클리어! ${rewardGold}G, 회복약 ${(reward.potion || 0) + (bonus.potion || 0)}개 획득.${recruit ? ` ${recruit.name} 합류.` : ''} ${nextStage ? `${nextStage.title} 해금.` : '모든 스테이지를 클리어했습니다.'}`;
+    const receipt = createVictoryCheckpoint(data, {
+      party: nextParty, reward: { gold: rewardGold, potion: (reward.potion || 0) + (bonus.potion || 0) },
+      careerStats: mergeCareerStats(careerStats, battleStats, battleMvp?.unitId || null, true),
+      stageMastery: updateStageMasteryRecord(stageMastery, selectedStage, summary), message,
     });
+    receipt.loot = replay ? '' : formatLoot(battleLoot);
+    victorySettledRef.current = receipt;
+    setClearReceipt(receipt);
+    const saved = receipt.checkpoint;
+    setParty(saved.party); setGold(saved.gold); setInventory(saved.inventory);
+    setGearInventory(saved.gearInventory); setClearedStages(saved.clearedStages);
+    setUnlockedStages(saved.unlockedStages); setStageRewardClaimed(true);
+    setCareerStats(saved.careerStats); setStageMastery(saved.stageMastery);
+    setSupportPoints(saved.supportPoints); setCampMessage(saved.campMessage);
+    setBattleLoot(saved.battleLoot);
+    persistProgress(saved, true);
+    return receipt;
+  };
 
-    const nextStage = stages.find((s) => s.id === stageId + 1);
-    const reward = selectedStage?.reward || { gold: 500, potion: 2 };
-    if (stageId && !alreadyCleared) {
-      setClearedStages((prev) => [...prev, stageId]);
-      if (nextStage) setUnlockedStages((prev) => prev.includes(nextStage.id) ? prev : [...prev, nextStage.id]);
-      const bonusReward = lastClearSummary?.bonusReward || { gold: 0, potion: 0 };
-      const rewardGold = getDifficultyRewardGold(reward.gold, settings.difficulty);
-      const bonusGold = getDifficultyRewardGold(bonusReward.gold || 0, settings.difficulty);
-      if (selectedStage && lastClearSummary) {
-      setStageMastery((prev) => updateStageMasteryRecord(prev, selectedStage, lastClearSummary));
-    }
+  const settleVictoryOnResult = useEffectEvent(() => settleStageClear());
+  useEffect(() => {
+    if (result === 'victory') settleVictoryOnResult();
+  }, [result]);
 
-    const currentLoot = normalizeLoot(battleLoot);
-      setGold((prev) => prev + rewardGold + bonusGold + (currentLoot.gold || 0));
-      setInventory((prev) => {
-        const nextInventory = {
-          ...normalizeBattleInventory(prev),
-          potion:
-            getItemCount(prev, "potion") +
-            (reward.potion || 0) +
-            (bonusReward.potion || 0),
-        };
-
-        for (const [itemId, count] of Object.entries(currentLoot.items || {})) {
-          nextInventory[itemId] = getItemCount(nextInventory, itemId) + count;
-        }
-
-        return nextInventory;
-      });
-      if (reward.gear || currentLoot.gear?.length) {
-        setGearInventory((prev) => [
-          ...new Set([...prev, ...(reward.gear || []), ...(currentLoot.gear || [])]),
-        ]);
-      }
-      setCareerStats((prev) =>
-        mergeCareerStats(prev, battleStats, battleMvp?.unitId || null, true)
-      );
-      setStageRewardClaimed(true);
-      setSupportPoints((prev) => ({
-        hero_lina: (prev.hero_lina || 0) + 5,
-        hero_bram: (prev.hero_bram || 0) + 5,
-        lina_bram: (prev.lina_bram || 0) + 5,
-      }));
-      const bonusText =
-        lastClearSummary?.bonusReward &&
-        ((lastClearSummary.bonusReward.gold || 0) > 0 || (lastClearSummary.bonusReward.potion || 0) > 0)
-          ? ` 전술 보너스: ${bonusGold || 0}G, 회복약 ${lastClearSummary.bonusReward.potion || 0}개 추가 획득.`
-          : "";
-      const recruitText =
-        recruitUnit && !party.some((unit) => unit.id === recruitUnit.id)
-          ? ` 새 동료 ${recruitUnit.name}이(가) 합류했다.`
-          : "";
-      const lootText = formatLoot(currentLoot)
-        ? ` 전리품 정산: ${formatLoot(currentLoot)}.`
-        : "";
-      setCampMessage(`${selectedStage?.title} 클리어! ${rewardGold}G와 회복약 ${reward.potion || 0}개를 획득했다. 난이도: ${getDifficultyConfig(settings.difficulty).label}.${bonusText}${lootText}${recruitText} ${reward.gear ? "희귀 장비도 획득했다. " : ""}${nextStage ? `${nextStage.title}이 해금되었다.${nextStage.id === 4 ? ' 야영진 근처에서 무녀 아리아가 부상자를 돌보고 있다.' : nextStage.id === 5 ? ' 멀리 무너진 요새에서 전투의 북소리가 들려온다.' : nextStage.id === 6 ? ' 차가운 바람이 설혼 계곡의 저주를 실어온다.' : ''}` : "현재 공개된 모든 장을 클리어했다."}`);
+  const finishGoCamp = (destination = "camp") => {
+    const receipt = victorySettledRef.current || settleStageClear();
+    setTurnBusy(false); setAutoBattleEnabled(false);
+    setCombatCutscene(null); setBossCutscene(null); setBattleSettingsOpen(false);
+    setSkillChoiceOpen(false); setActiveSkillChoice(null); setMoveUndo(null);
+    setCampTab("party");
+    closeMobileCombatPanels(); clearVisuals(); playSfx("confirm");
+    setResult(null); setBattle(null); setBattleResolving(false); setItemOpen(false);
+    setShopOpen(destination === "shop"); setEquipmentOpen(false); setForgeOpen(false);
+    setTrainingOpen(false); setDispatchOpen(false); setSkillOpen(false); setPromoteOpen(false);
+    setSupportOpen(false); setSelectedUnit(null); setMode("move");
+    setTrainingUsed(false); setDispatchUsed(false); setTurn("ally"); setHazards([]);
+    setUnits(receipt.checkpoint.units);
+    const nextStage = stages.find(stage => stage.id === selectedStage.id + 1);
+    if (destination === "next" && nextStage && receipt.checkpoint.unlockedStages.includes(nextStage.id)) {
+      setDeploymentStage(nextStage); setSelectedStage(nextStage);
+      setDeploymentHint(`${nextStage.title} 출전 부대를 편성하세요.`); setScreen("deployment");
     } else {
-      setCampMessage(`${selectedStage?.title} 전투가 끝났다. 이미 클리어한 장이라 추가 보상은 없다.`);
-    }
-    setBattleLoot(createEmptyLoot());
-    if (destination === "next" && nextStage) {
-      setDeploymentStage(nextStage);
-      setSelectedStage(nextStage);
-      setDeploymentHint(`${nextStage.title} 출전 부대를 편성하세요.`);
-      setScreen("deployment");
-    } else {
-      setShopOpen(destination === "shop");
       setScreen("camp");
     }
   };
@@ -13326,6 +13086,7 @@ export default function App() {
   };
 
   const buyItem = (itemId) => {
+    setSaveNotice(null);
     const item = ITEM_DEFS[itemId];
 
     if (!item) return;
@@ -13345,6 +13106,7 @@ export default function App() {
   };
 
   const buyGear = (gearId, price) => {
+    setSaveNotice(null);
     if (gearInventory.includes(gearId)) { setCampMessage("이미 보유한 장비입니다."); return; }
     if (gold < price) { setCampMessage("골드가 부족합니다."); return; }
     setGold((prev) => prev - price);
@@ -13352,14 +13114,16 @@ export default function App() {
     setCampMessage(`${EQUIPMENT[gearId].name}을 구매했습니다.`);
   };
 
-  const equipGear = (gearId) => {
+  const equipGear = (gearId, unitId = equipmentUnit?.id) => {
+    setSaveNotice(null);
     const gear = EQUIPMENT[gearId];
-    if (!gear || !equipmentUnit) return;
-    if (!gear.allowed.includes(equipmentUnit.id)) { setCampMessage(`${equipmentUnit.name}은 ${gear.name}을 장착할 수 없습니다.`); return; }
+    const target = party.find(unit => unit.id === unitId);
+    if (!gear || !target || !gearInventory.includes(gearId)) return;
+    if (!gear.allowed.includes(target.id)) { setCampMessage(`${target.name}은 ${gear.name}을 장착할 수 없습니다.`); return; }
     setParty((prev) =>
       applyGearEnhanceToParty(
         prev.map((unit) =>
-          unit.id === equipmentUnit.id
+          unit.id === target.id
             ? {
                 ...unit,
                 equipment: {
@@ -13372,15 +13136,17 @@ export default function App() {
         gearEnhance
       )
     );
-    setCampMessage(`${equipmentUnit.name}이 ${gear.name}을 장착했습니다.`);
+    setCampMessage(`${target.name}이 ${gear.name}을 장착했습니다.`);
   };
 
-  const unequipGear = (slot) => {
-    if (!equipmentUnit) return;
+  const unequipGear = (slot, unitId = equipmentUnit?.id) => {
+    setSaveNotice(null);
+    const target = party.find(unit => unit.id === unitId);
+    if (!target || !['weapon', 'armor'].includes(slot)) return;
     setParty((prev) =>
       applyGearEnhanceToParty(
         prev.map((unit) =>
-          unit.id === equipmentUnit.id
+          unit.id === target.id
             ? {
                 ...unit,
                 equipment: {
@@ -13393,7 +13159,7 @@ export default function App() {
         gearEnhance
       )
     );
-    setCampMessage(`${equipmentUnit.name}의 ${slot === "weapon" ? "무기" : "방어구"}를 해제했습니다.`);
+    setCampMessage(`${target.name}의 ${slot === "weapon" ? "무기" : "방어구"}를 해제했습니다.`);
   };
 
 
@@ -14057,55 +13823,24 @@ export default function App() {
   };
 
   const renderEquipmentModal = () => {
-    if (!equipmentOpen) return null;
-    const weapon = equipmentUnit?.equipment?.weapon ? EQUIPMENT[equipmentUnit.equipment.weapon] : null;
-    const armor = equipmentUnit?.equipment?.armor ? EQUIPMENT[equipmentUnit.equipment.armor] : null;
-    return (
-      <div className="battle-modal">
-        <div className="battle-card equipment-card">
-          <div className="battle-title">장비</div>
-          <div className="equipment-unit-tabs">
-            {party.map((unit) => (
-              <button key={unit.id} className={equipmentUnitId === unit.id ? "active-tab" : ""} onClick={() => setEquipmentUnitId(unit.id)}>
-                {unit.icon} {unit.name}
-              </button>
-            ))}
-          </div>
-          <div className="battle-stats">
-            <div>병과 <strong>{getUnitDisplayClass(equipmentUnit)}</strong></div>
-            <div>현재 능력 <strong>공격 {equipmentUnit.atk} / 방어 {equipmentUnit.def}</strong></div>
-            <div>
-              무기{" "}
-              <strong>
-                {weapon ? `${weapon.name} +${getGearEnhanceLevel(gearEnhance, weapon.id)}` : "없음"}
-              </strong>
-            </div>
-            <div>
-              방어구{" "}
-              <strong>
-                {armor ? `${armor.name} +${getGearEnhanceLevel(gearEnhance, armor.id)}` : "없음"}
-              </strong>
-            </div>
-          </div>
-          <div className="equipment-list">
-            {gearInventory.map((gearId) => {
-              const gear = EQUIPMENT[gearId];
-              const canUse = gear.allowed.includes(equipmentUnit.id);
-              return (
-                <button key={gearId} disabled={!canUse} onClick={() => equipGear(gearId)}>
-                  {gear.name} +{getGearEnhanceLevel(gearEnhance, gearId)} · {gear.desc} · {getGearEnhanceText(gear, getGearEnhanceLevel(gearEnhance, gearId))}
-                </button>
-              );
-            })}
-          </div>
-          <div className="battle-buttons">
-            <button onClick={() => unequipGear("weapon")}>무기 해제</button>
-            <button onClick={() => unequipGear("armor")}>방어구 해제</button>
-          </div>
-          <button className="result-btn second" onClick={() => setEquipmentOpen(false)}>닫기</button>
-        </div>
-      </div>
-    );
+    const facility = shopOpen ? 'shop' : equipmentOpen ? 'armory' : campFacility;
+    if (!facility) return null;
+    const close = () => { setShopOpen(false); setEquipmentOpen(false); setCampFacility(null); };
+    return <TownFacilityDialog key={facility} facility={facility} party={party} getPortrait={getUnitPortrait}
+      items={ITEM_DEFS} inventory={inventory} equipment={EQUIPMENT} gearInventory={gearInventory} gold={gold}
+      message={campMessage} onClose={close} onBuyItem={buyItem} onBuyGear={buyGear} onEquip={equipGear} onUnequip={unequipGear}
+      onSave={saveGame} saveNotice={saveNotice} onRest={() => {
+        setSaveNotice(null);
+        setParty(previous => applyGearEnhanceToParty(previous.map(unit => ({ ...unit, hp: unit.maxHp, status: [], guard: false, skillGuardBoost: 0, acted: false, moved: false, skillCooldown: 0, skillCooldowns: {} })), gearEnhance));
+        setCampMessage('모든 동료가 휴식을 마쳤습니다. 체력과 상태가 회복되었습니다.'); playSfx('heal');
+      }} onAction={action => {
+        close();
+        if (action === 'forge') setForgeOpen(true);
+        if (action === 'training') setTrainingOpen(true);
+        if (action === 'skill') setSkillOpen(true);
+        if (action === 'promote') setPromoteOpen(true);
+        if (action === 'journal') setJournalOpen(true);
+      }} />;
   };
 
   const copyQaFixPlan = async (item) => {
@@ -14237,6 +13972,9 @@ export default function App() {
 
   return (
     <div className={`app world-art-app ${screenShake ? `screen-shake-${screenShake}` : ""}`} style={{ "--battle-speed": battleSpeedConfig.multiplier }}>
+      {saveNotice && !result && !shopOpen && !equipmentOpen && !campFacility && <div className={`save-notice ${saveNotice.ok ? '' : 'save-failed'}`} role="status">
+        <Save size={18} /><span>{saveNotice.text}</span><button title="알림 닫기" aria-label="저장 알림 닫기" onClick={() => setSaveNotice(null)}><X size={18} /></button>
+      </div>}
       {(discoveryReceipt || journalOpen) && <DiscoveryDialog receipt={discoveryReceipt} progress={exploration}
         entries={DISCOVERIES.filter(entry => unlockedStages.includes(entry.stageId) || exploration.claimed.includes(entry.id))}
         onClose={() => { setDiscoveryReceipt(null); setJournalOpen(false); }} />}
@@ -15812,58 +15550,7 @@ export default function App() {
             <button onClick={() => setScreen("pwa")}>설치 / 점검 화면</button>
           </div>
 
-          <div className="settings-danger app-update-card">
-            <h2>앱 업데이트</h2>
-            <div className="setting-mini-info">
-              <span>현재 버전</span>
-              <strong>v{SAVE_VERSION}</strong>
-            </div>
-            <label className="update-url-field">
-              <span>업데이트 정보 URL</span>
-              <input
-                value={updateManifestUrl}
-                onChange={(event) => setUpdateManifestUrl(event.target.value)}
-                onBlur={() => saveUpdateManifestUrl()}
-                placeholder={DEFAULT_UPDATE_MANIFEST_URL}
-              />
-            </label>
-            <div className={`update-status update-${updateCheck.status}`}>
-              <strong>
-                {updateCheck.status === "available"
-                  ? "업데이트 가능"
-                  : updateCheck.status === "current"
-                  ? "최신 상태"
-                  : updateCheck.status === "checking"
-                  ? "확인 중"
-                  : updateCheck.status === "error"
-                  ? "확인 실패"
-                  : "대기"}
-              </strong>
-              <span>{updateCheck.message}</span>
-              {updateCheck.checkedAt && <small>{updateCheck.checkedAt}</small>}
-              {updateCheck.latest?.notes?.length > 0 && (
-                <ul>
-                  {updateCheck.latest.notes.map((note) => (
-                    <li key={note}>{note}</li>
-                  ))}
-                </ul>
-              )}
-            </div>
-            <div className="update-actions">
-              <button disabled={updateCheck.status === "checking"} onClick={checkForAppUpdate}>
-                업데이트 확인
-              </button>
-              <button disabled={!updateCheck.latest?.apkUrl} onClick={openUpdateDownload}>
-                다운로드
-              </button>
-              <button onClick={copyUpdateDownloadLink}>
-                링크 복사
-              </button>
-              <button onClick={resetUpdateManifestUrl}>
-                기본값
-              </button>
-            </div>
-          </div>
+          <PatchSettings patch={patch} />
 
           <div className="settings-danger save-manager-card">
             <h2>저장 데이터 관리</h2>
@@ -16861,6 +16548,7 @@ export default function App() {
             v1.68.9.8.7.6.5.4.3.2
           </button>
           <div className="menu-version-line">BUILD v{SAVE_VERSION}</div>
+          <PatchTitleStatus patch={patch} />
         </div>
       )}
 
@@ -16869,6 +16557,8 @@ export default function App() {
           <div className="campaign-header">
             <h1>{campaignView === "atlas" ? "전술 지도" : "원정 지도"}</h1>
             <div className="campaign-header-actions">
+              <button className="prominent-save" onClick={saveGame}><Save size={18} />저장</button>
+              <button className="back-btn" onClick={() => setScreen('camp')}>마을</button>
               <button
                 className="back-btn"
                 onClick={() => setCampaignView((prev) => (prev === "atlas" ? "world" : "atlas"))}
@@ -17056,6 +16746,7 @@ export default function App() {
                               {mastery ? ` · ${mastery.bestRank} ${getRankStars(mastery.bestRank)}` : ""}
                             </em>
                             <small>
+                              {nodeState === 'cleared' ? '재도전 · 경험치 | ' : ''}
                               위험도 {threat.level} · 적 {enemySummary.total}명
                               {recruitName ? ` · 동료 ${recruitName}` : ""}
                               {getStageNote(stageNotes, stage) ? " · 메모 있음" : ""}
@@ -17567,23 +17258,27 @@ export default function App() {
         <div className="camp-screen">
           <div className="camp-header">
             <div>
-              <div className="camp-title">야영진</div>
+              <div className="camp-title">천수 마을</div>
               <div className="camp-sub">{selectedStage?.title || "천수 기사단"}</div>
             </div>
             <div style={{ display: "flex", gap: "8px" }}>
-              <button className="back-btn" onClick={() => openTutorial("camp")}>도움말</button>
+              <button className="prominent-save" onClick={saveGame}><Save size={18} />저장</button>
               <button className="back-btn" onClick={() => setScreen("menu")}>메뉴</button>
             </div>
           </div>
-          <div className="camp-visual camp-bg-image">
-            <div className="camp-fire">🔥</div>
-            <div className="camp-moon">붉은 달 아래, 잠시의 휴식</div>
-          </div>
+          <TownHub party={party} onVisit={facility => {
+            setCampMessage(''); setSaveNotice(null);
+            if (facility === 'gate') setScreen('campaign');
+            else if (facility === 'shop') setShopOpen(true);
+            else if (facility === 'armory') setEquipmentOpen(true);
+            else setCampFacility(facility);
+          }} />
           <div className="hud-row">
             <div className="hud-box"><span>골드</span><strong>{gold}G</strong></div>
             <div className="hud-box"><span>소모품</span><strong>{getTotalItemCount(inventory)}개</strong></div>
             <div className="hud-box"><span>장비</span><strong>{gearInventory.length}개</strong></div>
           </div>
+          <details className="camp-management"><summary><Users size={18} />기사단 관리</summary>
           <div className="camp-dashboard-card">
             <div className="camp-dashboard-stat">
               <span>동료</span>
@@ -17710,50 +17405,11 @@ export default function App() {
             </div>
           )}
           <div className="camp-travel-actions">
-            <button title="진행 저장" aria-label="진행 저장" onClick={saveGame}><Save size={21} /></button>
-            <button onClick={() => setShopOpen(true)}><ShoppingBag size={19} /> 상점</button>
+            <button className="prominent-save" onClick={saveGame}><Save size={21} />저장</button>
+            <button onClick={() => setScreen('campaign')}>원정 지도</button>
             <button className="camp-next" onClick={goNextBattle}>다음 전투 <ArrowRight size={19} /></button>
           </div>
-          {shopOpen && (
-            <div className="battle-modal">
-              <div className="battle-card shop-card">
-                <div className="battle-title">야영지 상점</div>
-                <div className="battle-stats">
-                  <div>보유 골드 <strong>{gold}G</strong></div>
-                  <div>소모품 <strong>{getTotalItemCount(inventory)}개</strong></div>
-                </div>
-
-                <div className="shop-section-title">소모품</div>
-                <div className="shop-item-list">
-                  {Object.values(ITEM_DEFS).map((item) => (
-                    <button key={item.id} onClick={() => buyItem(item.id)}>
-                      <strong>{item.name}</strong>
-                      <span>{item.desc}</span>
-                      <b>{item.price}G</b>
-                    </button>
-                  ))}
-                </div>
-
-                <div className="shop-section-title">장비</div>
-                <div className="shop-item-list">
-                  <button onClick={() => buyGear("ironSword", 500)}>
-                    <strong>철검</strong>
-                    <span>카일 계열 기본 무기</span>
-                    <b>500G</b>
-                  </button>
-                  <button onClick={() => buyGear("chainArmor", 800)}>
-                    <strong>사슬 갑옷</strong>
-                    <span>방어 +2</span>
-                    <b>800G</b>
-                  </button>
-                </div>
-
-                <button className="result-btn second" onClick={() => setShopOpen(false)}>
-                  닫기
-                </button>
-              </div>
-            </div>
-          )}
+          </details>
           {renderEquipmentModal()}
           {renderForgeModal()}
           {renderTrainingModal()}
@@ -18383,7 +18039,7 @@ export default function App() {
             </div>
           )}
 
-          <div
+          {!battleHudHidden && <div
             className="battle-zoom-controls"
             onPointerDown={(event) => event.stopPropagation()}
             onPointerUp={(event) => event.stopPropagation()}
@@ -18415,7 +18071,7 @@ export default function App() {
             >
               +
             </button>
-          </div>
+          </div>}
 
           <button
             type="button"
@@ -18513,11 +18169,11 @@ export default function App() {
                 const tileBlocked = isBlockedBattleTile(tile);
                 const moveTileInfo = tileBlocked ? null : moveTiles.find((m) => m.x === x && m.y === y);
                 const movable = !tileBlocked && turn === "ally" && mode === "move" && selectedUnit && Boolean(moveTileInfo);
-                const attackable = !tileBlocked && turn === "ally" && (mode === "attack" || mode === "skill") && selectedUnit && attackTiles.some((m) => m.x === x && m.y === y);
-                const enemyThreat = !tileBlocked && enemyThreatTileKeys.has(`${x},${y}`);
+                const attackable = showAttackRange && attackTiles.some((m) => m.x === x && m.y === y);
+                const enemyThreat = !tileBlocked && !showAttackRange && !skillChoiceOpen && enemyThreatTileKeys.has(`${x},${y}`);
                 const hazardInfo = hazards.find((h) => h.x === x && h.y === y);
                 const danger = Boolean(hazardInfo);
-                const aoePreview = battle?.aoeTargets?.some((target) => target.x === x && target.y === y);
+                const aoePreview = skillAreaTiles.some((target) => target.x === x && target.y === y);
                 const cameraFocused = cameraFocus?.x === x && cameraFocus?.y === y;
                 const cellEffects = visualEffects.filter((effect) => effect.x === x && effect.y === y);
                 const cellPopups = damagePopups.filter((popup) => popup.x === x && popup.y === y);
@@ -18566,6 +18222,8 @@ export default function App() {
                     key={`${x}-${y}`}
                     data-map-x={x}
                     data-map-y={y}
+                    onPointerEnter={() => { if (targetSelectionActive) setRangePreviewTargetId(unit?.type !== "ally" ? unit?.id || null : null); }}
+                    onPointerLeave={() => setRangePreviewTargetId(null)}
                     title={getInspectTerrainLabel(tile)}
                     style={{ ...getTerrainVisualStyle(tile, x, y), ...terrainVisual.style }}
                     onClick={() => {
@@ -18587,7 +18245,7 @@ export default function App() {
                         <span>{hazardInfo?.damage || 6}</span>
                       </div>
                     )}
-                    {aoePreview && <div className="aoe-preview-tile" />}
+                    {aoePreview && <div className="skill-impact-tile" aria-hidden="true" />}
                     {cameraFocused && <div className="camera-focus-tile" />}
                     {cellEffects.map((effect) => (
                       <div
@@ -18657,9 +18315,7 @@ export default function App() {
                       </div>
                     )}
                     {attackable && (
-                      <div className="attack-tile">
-                        <span className="attack-target-mark">TARGET</span>
-                      </div>
+                      <div className={`attack-tile command-range-tile ${mode === "skill" ? "skill-range-tile" : ""} ${unit?.hp > 0 && unit.type !== "ally" ? "is-range-target" : ""}`} aria-hidden="true" />
                     )}
                     {enemyThreat && !attackable && (
                       <div className="enemy-threat-tile" />
@@ -18683,8 +18339,6 @@ export default function App() {
                             "--counter-ready-y": `${unitActionMotion.dy * -6}px`,
                             "--counter-strike-x": `${unitActionMotion.dx * 9}px`,
                             "--counter-strike-y": `${unitActionMotion.dy * 9}px`,
-                            "--assist-step-x": `${unitActionMotion.dx * 7}px`,
-                            "--assist-step-y": `${unitActionMotion.dy * 7}px`,
                             "--miss-step-x": `${unitActionMotion.dx * 8}px`,
                             "--miss-step-y": `${unitActionMotion.dy * 8}px`,
                             "--miss-back-x": `${unitActionMotion.dx * -7}px`,
@@ -18712,9 +18366,6 @@ export default function App() {
                         )}
                         {unit.skillCooldown > 0 && (
                           <div className={`skill-cd-badge ${movingOverlayClassName}`}>CD {unit.skillCooldown}</div>
-                        )}
-                        {unit.supportUsed && (
-                          <div className={`assist-used-badge ${movingOverlayClassName}`}>협</div>
                         )}
                         {unit.status && unit.status.length > 0 && (
                           <div className={`status-badges ${movingOverlayClassName}`}>
@@ -18896,7 +18547,7 @@ export default function App() {
 
                   <div className="unit-class">
                     {viewedUnit.type === "ally"
-                      ? `${viewedUnit.skill} · 스킬 ${viewedSkillCooldown > 0 ? `${viewedSkillCooldown}턴` : "가능"} · 협공 ${viewedUnit.supportUsed ? "사용" : "대기"} · 이동 ${getUnitMoveRange(viewedUnit)} · ${getUnitMoveTrait(viewedUnit).name} · EXP ${viewedUnit.exp || 0} · 상태 ${getStatusText(viewedUnit.status)}`
+                      ? `${viewedUnit.skill} · 스킬 ${viewedSkillCooldown > 0 ? `${viewedSkillCooldown}턴` : "가능"} · 이동 ${getUnitMoveRange(viewedUnit)} · ${getUnitMoveTrait(viewedUnit).name} · EXP ${viewedUnit.exp || 0} · 상태 ${getStatusText(viewedUnit.status)}`
                       : `${viewedUnit.skill || "기본 공격"} · AI ${getInspectUnitRole(viewedUnit)} · 사거리 ${viewedUnit.range || 1} / 스킬 ${viewedUnit.skillRange || viewedUnit.range || 1} · 상태 ${getStatusText(viewedUnit.status)}`}
                   </div>
 
@@ -18951,6 +18602,7 @@ export default function App() {
           <div className={`cinematic-command-bar ${canUndoMove ? "has-undo" : ""}`}>
             <div className="battle-control-heading">
               <span role="status">{combatBusy ? "전투 진행 중" : selected ? `${selected.name} · HP ${selected.hp}/${selected.maxHp}` : "아군 선택"}</span>
+              <button className="prominent-save" disabled={combatBusy || turn !== 'ally' || Boolean(result) || itemOpen || skillChoiceOpen || Boolean(supportSkillChoice)} onClick={saveGame}><Save size={16} />저장</button>
               <div className="battle-speed-controls" role="group" aria-label="전투 배속">
                 {BATTLE_SPEED_OPTIONS.map(option => (
                   <button key={option.id} type="button" aria-label={`전투 ${option.multiplier}배속`}
@@ -18966,10 +18618,13 @@ export default function App() {
                   <button type="button" className="battle-selection-cancel" title="명령 선택 취소" aria-label="명령 선택 취소"
                     onClick={() => { setMode("move"); setActiveSkillChoice(null); closeMobileCombatPanels(); }}><X size={18} /></button>
                 </div>
+                <div className="battle-range-summary">사거리 {mode === "skill" ? selected.skillRange : selected.range || 1}칸{mode === "skill" ? ` · ${getAreaSkillLabel(selected)}` : ""}</div>
                 <div className="battle-target-buttons" role="group" aria-label="공격 대상">
                   {mobileTargetList.map(enemy => {
                     const inRange = attackTiles.some(tile => tile.x === enemy.x && tile.y === enemy.y);
                     return <button type="button" key={enemy.id} disabled={!inRange || !canCommandSelected}
+                      onPointerEnter={() => setRangePreviewTargetId(enemy.id)} onPointerLeave={() => setRangePreviewTargetId(null)}
+                      onFocus={() => setRangePreviewTargetId(enemy.id)} onBlur={() => setRangePreviewTargetId(null)}
                       onClick={() => { setInspectedUnitId(enemy.id); focusUnitOnMap(enemy); closeMobileCombatPanels(); openBattle(selected, enemy, mode); }}>
                       <strong>{enemy.name}</strong>
                       <span>HP {enemy.hp}/{enemy.maxHp}</span>
@@ -19126,9 +18781,6 @@ export default function App() {
                       {battle.affinity?.label || "보통"}
                     </strong>
                   </div>
-                  {battle.assist && (
-                    <div>협공 <strong>{battle.assist.damage}</strong></div>
-                  )}
                   {battle.counter && (
                     <div>반격 <strong>{battle.counter.damage}</strong></div>
                   )}
@@ -19148,13 +18800,17 @@ export default function App() {
               items={Object.values(ITEM_DEFS).map(item => ({ ...item, count: getItemCount(inventory, item.id) }))}
               onUse={consumeBattleItem} onClose={() => setItemOpen(false)} />
           )}
+          {supportSkillChoice && selected && !combatBusy && !result && (
+            <SupportTargetDialog actor={selected} skill={getSkill(selected, supportSkillChoice.skillId)} units={units}
+              getPortrait={getUnitPortrait} onConfirm={executeSupportSkill}
+              onClose={() => { setSupportSkillChoice(null); setActiveSkillChoice(null); }} />
+          )}
           {result === "victory" && (
             <VictoryDialog title={selectedStage?.title} summary={lastClearSummary} mvp={battleMvp}
-              reward={{
-                gold: clearedStages.includes(selectedStage?.id) ? 0 : getDifficultyRewardGold((selectedStage?.reward?.gold ?? 500), settings.difficulty) + getDifficultyRewardGold(lastClearSummary?.bonusReward?.gold || 0, settings.difficulty) + (battleLoot.gold || 0),
-                potion: clearedStages.includes(selectedStage?.id) ? 0 : (selectedStage?.reward?.potion ?? 2) + (lastClearSummary?.bonusReward?.potion || 0),
-              }}
-              loot={formatLoot(battleLoot)} hasNext={stages.some(stage => stage.id === selectedStage?.id + 1)}
+              reward={clearReceipt?.reward || { gold: 0, potion: 0 }}
+              saveNotice={saveNotice} replay={clearReceipt?.replay}
+              onRetrySave={() => clearReceipt && persistProgress(clearReceipt.checkpoint, true)}
+              loot={clearReceipt?.loot} hasNext={stages.some(stage => stage.id === selectedStage?.id + 1)}
               onContinue={(destination) => openStoryScene(selectedStage, "clear", destination)} />
           )}
           {result === "defeat" && (

@@ -197,7 +197,36 @@
   }
   & :is(.move-tile, .attack-tile)::before,
   & :is(.move-tile, .attack-tile)::after { display: none !important; }
-  & :is(.enemy-hp-peek, .status-badges, .skill-cd-badge, .assist-used-badge) { z-index: calc(var(--row-z) + 2) !important; }
+  & :is(.enemy-hp-peek, .status-badges, .skill-cd-badge) { z-index: calc(var(--row-z) + 2) !important; }
+  & .command-range-tile, & .skill-impact-tile {
+    position: absolute !important;
+    inset: 1px !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    border-radius: 3px !important;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: none !important;
+  }
+  & .command-range-tile {
+    background: rgb(197 84 73 / 18%) !important;
+    border: 1px solid rgb(255 165 149 / 85%) !important;
+  }
+  & .skill-range-tile {
+    background: rgb(235 189 77 / 18%) !important;
+    border-color: rgb(255 224 140 / 90%) !important;
+  }
+  & .is-range-target {
+    border-width: 2px !important;
+    background: rgb(197 84 73 / 38%) !important;
+  }
+  & .skill-range-tile.is-range-target { background: rgb(235 189 77 / 38%) !important; }
+  & .skill-impact-tile {
+    z-index: 2 !important;
+    border: 2px dashed #fff3cb !important;
+    background: rgb(240 226 182 / 28%) !important;
+  }
 }
 
 .world-art-app .battle-screen.battle-final-concept.battle-board-only :is(.cinematic-stage-card, .cinematic-stage-actions button, .battle-zoom-controls, .battle-zoom-controls button, .cinematic-hud-restore, .selected-unit-status-hud, .battle-settings-card) {

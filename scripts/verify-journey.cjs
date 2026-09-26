@@ -95,6 +95,7 @@ async function main() {
           while(await page.getByRole('button',{name:'다음',exact:true}).count()) await page.getByRole('button',{name:'다음',exact:true}).click();
           await page.getByRole('button',{name:'계속',exact:true}).click();
           await page.locator('.camp-screen').waitFor();
+          await page.locator('.camp-management > summary').click();
           await noOverflow(page,'.camp-screen, .camp-tab-row, .camp-character, .camp-travel-actions');
           await shot(page,`camp-${viewport.width}`);
           const growth=page.getByRole('tab',{name:'성장',exact:true});
@@ -102,7 +103,7 @@ async function main() {
           await growth.focus(); await page.keyboard.press('ArrowRight');
           assert.equal(await page.getByRole('tab',{name:'장비',exact:true}).getAttribute('aria-selected'),'true');
           await page.getByRole('tab',{name:'관리',exact:true}).click();
-          await page.locator('.camp-screen').getByRole('button',{name:'저장',exact:true}).click();
+          await page.locator('.camp-header .prominent-save').click();
           const saved=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),saveKey);
           assert.equal(saved.clearedStages.filter(id=>id===1).length,1);
           assert.ok(saved.gold>fixture.gold);
@@ -110,7 +111,7 @@ async function main() {
           assert.ok((await page.locator('.deployment-screen h1').innerText()).startsWith('2장.'));
         } else {
           await page.getByRole('button',{name:'건너뛰기',exact:true}).click();
-          await page.locator(destination==='shop'?'.shop-card':'.deployment-screen').waitFor();
+          await page.locator(destination==='shop'?'.town-facility-dialog':'.deployment-screen').waitFor();
         }
       }
       assert.deepEqual(errors,[]);

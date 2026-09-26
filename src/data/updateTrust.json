@@ -1,0 +1,6 @@
+{
+  "publicKey": "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAtUXYpt9XlmP/5B0jiJfW\nkjIqf0v0x9ItaaF252vvVQATs2FXrjuwGcZh6VmMLWF7egAi6M2WZ0tBOn1gzYGu\n/ql1+knZ39Kbj6WHtTMG3eMTMBEuvVGYLenGZV5+IQJK8TcFlc81j8LHLM5OkXVW\nAE71T/uV2ANxJs8Tfm6nWEf1gsBmQM/NFLJ61s/kqR2c6z6UATJXIugNnt8wy4zE\nzCb6F03idRh/4igiUPU04BJwxDn6pi2v5jOSZ4hcJeW0Xesw6WzOrN3gF4Sku5yM\nAcFwUKVITf6O4dENuG6TYtDw9zyPAOgfSsWZgPRMPDaSfYOP9keaL5Tv35zqmysn\n4RU8FMSGIVuQ0EvXc3BY/cPPa7KCN6ynwrUY+BjyHFSVjVYaz4eSNTgOvhm11HEU\n9DmxEVB44lZ3k79Oqtn/I98tZ+snTYiPmEuS63mF/dhce4FUXWg9/banN+iycx1y\nyRMAlbmCIxHq4zpvJsiMKR6zP12Q+k+4+iDG5lxXjVojAgMBAAE=\n-----END PUBLIC KEY-----\n",
+  "manifestUrl": "https://raw.githubusercontent.com/h0623-dev/cheonsu/updates/latest.json",
+  "repository": "h0623-dev/cheonsu",
+  "minNativeVersion": 335
+}

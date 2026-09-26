@@ -5,7 +5,7 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist', 'android', 'ios', '_codex_backups']),
+  globalIgnores(['dist', 'android', 'ios', '_codex_backups', 'tmp', 'update-release']),
   {
     files: ['**/*.{js,jsx}'],
     extends: [
@@ -25,4 +25,5 @@ export default defineConfig([
       "react-hooks/purity": "off",
     },
   },
+  { files: ['public/service-worker.js', 'public/sw.js'], languageOptions: { globals: globals.serviceworker } },
 ])

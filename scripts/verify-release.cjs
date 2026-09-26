@@ -24,6 +24,13 @@ const assert = require('node:assert/strict');
     page.on('response', response => { if (response.status() >= 400) errors.push(`${response.status()}: ${response.url()}`); });
     await page.goto(url);
     await page.getByRole('button', { name: '새 게임', exact: true }).click();
+    await page.locator('.campaign-header .prominent-save').click();
+    await page.evaluate(() => {
+      const key = 'cheonsu_v01_save'; const data = JSON.parse(localStorage.getItem(key));
+      data.clearedStages = [1]; localStorage.setItem(key, JSON.stringify(data));
+    });
+    await page.reload();
+    await page.getByRole('button', { name: '이어하기', exact: true }).click();
     await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: /^2장\./ }) }).click();
     await page.getByRole('button', { name: '전투 시작', exact: true }).click();
     await page.locator('.narrative-actor img').evaluate(image => image.decode());

@@ -8,6 +8,7 @@ import './interface-theme.css'
 import './battle-controls.css'
 import './discoveries.css'
 import './journey-ui.css'
+import './village-ui.css'
 import App from './App.jsx'
 import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 

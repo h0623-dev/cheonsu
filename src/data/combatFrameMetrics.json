@@ -1,0 +1,1314 @@
+{
+  "boss_commander": {
+    "run-a": {
+      "height": 512,
+      "top": 195,
+      "bottom": 477
+    },
+    "run-b": {
+      "height": 512,
+      "top": 197,
+      "bottom": 476
+    },
+    "windup": {
+      "height": 512,
+      "top": 128,
+      "bottom": 478
+    },
+    "strike": {
+      "height": 512,
+      "top": 217,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 167,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 242,
+      "bottom": 479
+    }
+  },
+  "boss_frost": {
+    "run-a": {
+      "height": 512,
+      "top": 191,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 190,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 142,
+      "bottom": 478
+    },
+    "strike": {
+      "height": 512,
+      "top": 201,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 155,
+      "bottom": 478
+    },
+    "recoil": {
+      "height": 512,
+      "top": 201,
+      "bottom": 478
+    }
+  },
+  "boss_ember": {
+    "run-a": {
+      "height": 512,
+      "top": 191,
+      "bottom": 473
+    },
+    "run-b": {
+      "height": 512,
+      "top": 208,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 125,
+      "bottom": 478
+    },
+    "strike": {
+      "height": 512,
+      "top": 216,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 166,
+      "bottom": 478
+    },
+    "recoil": {
+      "height": 512,
+      "top": 251,
+      "bottom": 478
+    }
+  },
+  "boss_oracle": {
+    "run-a": {
+      "height": 512,
+      "top": 148,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 124,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 111,
+      "bottom": 478
+    },
+    "strike": {
+      "height": 512,
+      "top": 153,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 101,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 197,
+      "bottom": 478
+    }
+  },
+  "boss_abyss": {
+    "run-a": {
+      "height": 512,
+      "top": 199,
+      "bottom": 477
+    },
+    "run-b": {
+      "height": 512,
+      "top": 230,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 126,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 215,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 164,
+      "bottom": 478
+    },
+    "recoil": {
+      "height": 512,
+      "top": 228,
+      "bottom": 479
+    }
+  },
+  "hero": {
+    "run-a": {
+      "height": 512,
+      "top": 168,
+      "bottom": 476
+    },
+    "run-b": {
+      "height": 512,
+      "top": 176,
+      "bottom": 476
+    },
+    "windup": {
+      "height": 512,
+      "top": 144,
+      "bottom": 475
+    },
+    "strike": {
+      "height": 512,
+      "top": 191,
+      "bottom": 475
+    },
+    "recover": {
+      "height": 512,
+      "top": 192,
+      "bottom": 477
+    },
+    "recoil": {
+      "height": 512,
+      "top": 187,
+      "bottom": 475
+    }
+  },
+  "bram": {
+    "run-a": {
+      "height": 512,
+      "top": 179,
+      "bottom": 476
+    },
+    "run-b": {
+      "height": 512,
+      "top": 179,
+      "bottom": 476
+    },
+    "windup": {
+      "height": 512,
+      "top": 171,
+      "bottom": 475
+    },
+    "strike": {
+      "height": 512,
+      "top": 196,
+      "bottom": 475
+    },
+    "recover": {
+      "height": 512,
+      "top": 216,
+      "bottom": 477
+    },
+    "recoil": {
+      "height": 512,
+      "top": 195,
+      "bottom": 477
+    }
+  },
+  "lina": {
+    "run-a": {
+      "height": 512,
+      "top": 72,
+      "bottom": 476
+    },
+    "run-b": {
+      "height": 512,
+      "top": 88,
+      "bottom": 476
+    },
+    "windup": {
+      "height": 512,
+      "top": 90,
+      "bottom": 476
+    },
+    "strike": {
+      "height": 512,
+      "top": 96,
+      "bottom": 475
+    },
+    "recover": {
+      "height": 512,
+      "top": 81,
+      "bottom": 475
+    },
+    "recoil": {
+      "height": 512,
+      "top": 86,
+      "bottom": 476
+    }
+  },
+  "aria": {
+    "run-a": {
+      "height": 512,
+      "top": 126,
+      "bottom": 474
+    },
+    "run-b": {
+      "height": 512,
+      "top": 136,
+      "bottom": 476
+    },
+    "windup": {
+      "height": 512,
+      "top": 93,
+      "bottom": 476
+    },
+    "strike": {
+      "height": 512,
+      "top": 147,
+      "bottom": 476
+    },
+    "recover": {
+      "height": 512,
+      "top": 152,
+      "bottom": 476
+    },
+    "recoil": {
+      "height": 512,
+      "top": 95,
+      "bottom": 476
+    }
+  },
+  "leon": {
+    "run-a": {
+      "height": 512,
+      "top": 199,
+      "bottom": 476
+    },
+    "run-b": {
+      "height": 512,
+      "top": 212,
+      "bottom": 476
+    },
+    "windup": {
+      "height": 512,
+      "top": 191,
+      "bottom": 476
+    },
+    "strike": {
+      "height": 512,
+      "top": 230,
+      "bottom": 477
+    },
+    "recover": {
+      "height": 512,
+      "top": 218,
+      "bottom": 478
+    },
+    "recoil": {
+      "height": 512,
+      "top": 180,
+      "bottom": 476
+    }
+  },
+  "sera": {
+    "run-a": {
+      "height": 512,
+      "top": 109,
+      "bottom": 475
+    },
+    "run-b": {
+      "height": 512,
+      "top": 113,
+      "bottom": 474
+    },
+    "windup": {
+      "height": 512,
+      "top": 82,
+      "bottom": 476
+    },
+    "strike": {
+      "height": 512,
+      "top": 115,
+      "bottom": 476
+    },
+    "recover": {
+      "height": 512,
+      "top": 125,
+      "bottom": 476
+    },
+    "recoil": {
+      "height": 512,
+      "top": 118,
+      "bottom": 475
+    }
+  },
+  "noah": {
+    "run-a": {
+      "height": 512,
+      "top": 72,
+      "bottom": 476
+    },
+    "run-b": {
+      "height": 512,
+      "top": 82,
+      "bottom": 476
+    },
+    "windup": {
+      "height": 512,
+      "top": 95,
+      "bottom": 474
+    },
+    "strike": {
+      "height": 512,
+      "top": 104,
+      "bottom": 475
+    },
+    "recover": {
+      "height": 512,
+      "top": 117,
+      "bottom": 476
+    },
+    "recoil": {
+      "height": 512,
+      "top": 142,
+      "bottom": 475
+    }
+  },
+  "yuna": {
+    "run-a": {
+      "height": 512,
+      "top": 72,
+      "bottom": 473
+    },
+    "run-b": {
+      "height": 512,
+      "top": 81,
+      "bottom": 474
+    },
+    "windup": {
+      "height": 512,
+      "top": 50,
+      "bottom": 475
+    },
+    "strike": {
+      "height": 512,
+      "top": 98,
+      "bottom": 474
+    },
+    "recover": {
+      "height": 512,
+      "top": 104,
+      "bottom": 476
+    },
+    "recoil": {
+      "height": 512,
+      "top": 70,
+      "bottom": 475
+    }
+  },
+  "rakan": {
+    "run-a": {
+      "height": 512,
+      "top": 71,
+      "bottom": 475
+    },
+    "run-b": {
+      "height": 512,
+      "top": 79,
+      "bottom": 475
+    },
+    "windup": {
+      "height": 512,
+      "top": 47,
+      "bottom": 476
+    },
+    "strike": {
+      "height": 512,
+      "top": 126,
+      "bottom": 476
+    },
+    "recover": {
+      "height": 512,
+      "top": 130,
+      "bottom": 476
+    },
+    "recoil": {
+      "height": 512,
+      "top": 109,
+      "bottom": 475
+    }
+  },
+  "miho": {
+    "run-a": {
+      "height": 512,
+      "top": 72,
+      "bottom": 475
+    },
+    "run-b": {
+      "height": 512,
+      "top": 93,
+      "bottom": 478
+    },
+    "windup": {
+      "height": 512,
+      "top": 109,
+      "bottom": 476
+    },
+    "strike": {
+      "height": 512,
+      "top": 116,
+      "bottom": 476
+    },
+    "recover": {
+      "height": 512,
+      "top": 111,
+      "bottom": 474
+    },
+    "recoil": {
+      "height": 512,
+      "top": 124,
+      "bottom": 475
+    }
+  },
+  "teo": {
+    "run-a": {
+      "height": 512,
+      "top": 71,
+      "bottom": 475
+    },
+    "run-b": {
+      "height": 512,
+      "top": 79,
+      "bottom": 474
+    },
+    "windup": {
+      "height": 512,
+      "top": 50,
+      "bottom": 474
+    },
+    "strike": {
+      "height": 512,
+      "top": 65,
+      "bottom": 474
+    },
+    "recover": {
+      "height": 512,
+      "top": 104,
+      "bottom": 474
+    },
+    "recoil": {
+      "height": 512,
+      "top": 123,
+      "bottom": 475
+    }
+  },
+  "irene": {
+    "run-a": {
+      "height": 512,
+      "top": 78,
+      "bottom": 473
+    },
+    "run-b": {
+      "height": 512,
+      "top": 94,
+      "bottom": 476
+    },
+    "windup": {
+      "height": 512,
+      "top": 33,
+      "bottom": 473
+    },
+    "strike": {
+      "height": 512,
+      "top": 70,
+      "bottom": 474
+    },
+    "recover": {
+      "height": 512,
+      "top": 101,
+      "bottom": 475
+    },
+    "recoil": {
+      "height": 512,
+      "top": 76,
+      "bottom": 474
+    }
+  },
+  "kaz": {
+    "run-a": {
+      "height": 512,
+      "top": 99,
+      "bottom": 475
+    },
+    "run-b": {
+      "height": 512,
+      "top": 113,
+      "bottom": 476
+    },
+    "windup": {
+      "height": 512,
+      "top": 94,
+      "bottom": 475
+    },
+    "strike": {
+      "height": 512,
+      "top": 141,
+      "bottom": 475
+    },
+    "recover": {
+      "height": 512,
+      "top": 145,
+      "bottom": 475
+    },
+    "recoil": {
+      "height": 512,
+      "top": 147,
+      "bottom": 476
+    }
+  },
+  "ella": {
+    "run-a": {
+      "height": 512,
+      "top": 72,
+      "bottom": 474
+    },
+    "run-b": {
+      "height": 512,
+      "top": 68,
+      "bottom": 476
+    },
+    "windup": {
+      "height": 512,
+      "top": 61,
+      "bottom": 475
+    },
+    "strike": {
+      "height": 512,
+      "top": 106,
+      "bottom": 476
+    },
+    "recover": {
+      "height": 512,
+      "top": 102,
+      "bottom": 475
+    },
+    "recoil": {
+      "height": 512,
+      "top": 112,
+      "bottom": 474
+    }
+  },
+  "jin": {
+    "run-a": {
+      "height": 512,
+      "top": 158,
+      "bottom": 475
+    },
+    "run-b": {
+      "height": 512,
+      "top": 162,
+      "bottom": 476
+    },
+    "windup": {
+      "height": 512,
+      "top": 147,
+      "bottom": 476
+    },
+    "strike": {
+      "height": 512,
+      "top": 200,
+      "bottom": 477
+    },
+    "recover": {
+      "height": 512,
+      "top": 196,
+      "bottom": 477
+    },
+    "recoil": {
+      "height": 512,
+      "top": 201,
+      "bottom": 477
+    }
+  },
+  "luka": {
+    "run-a": {
+      "height": 512,
+      "top": 163,
+      "bottom": 476
+    },
+    "run-b": {
+      "height": 512,
+      "top": 172,
+      "bottom": 477
+    },
+    "windup": {
+      "height": 512,
+      "top": 140,
+      "bottom": 476
+    },
+    "strike": {
+      "height": 512,
+      "top": 188,
+      "bottom": 476
+    },
+    "recover": {
+      "height": 512,
+      "top": 197,
+      "bottom": 477
+    },
+    "recoil": {
+      "height": 512,
+      "top": 182,
+      "bottom": 476
+    }
+  },
+  "baekho": {
+    "run-a": {
+      "height": 512,
+      "top": 71,
+      "bottom": 475
+    },
+    "run-b": {
+      "height": 512,
+      "top": 78,
+      "bottom": 474
+    },
+    "windup": {
+      "height": 512,
+      "top": 92,
+      "bottom": 475
+    },
+    "strike": {
+      "height": 512,
+      "top": 105,
+      "bottom": 475
+    },
+    "recover": {
+      "height": 512,
+      "top": 108,
+      "bottom": 474
+    },
+    "recoil": {
+      "height": 512,
+      "top": 127,
+      "bottom": 474
+    }
+  },
+  "raider": {
+    "run-a": {
+      "height": 512,
+      "top": 182,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 174,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 144,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 189,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 152,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 185,
+      "bottom": 479
+    }
+  },
+  "ranger": {
+    "run-a": {
+      "height": 512,
+      "top": 113,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 101,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 76,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 38,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 84,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 122,
+      "bottom": 479
+    }
+  },
+  "sniper": {
+    "run-a": {
+      "height": 512,
+      "top": 137,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 142,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 139,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 136,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 132,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 151,
+      "bottom": 479
+    }
+  },
+  "marauder": {
+    "run-a": {
+      "height": 512,
+      "top": 100,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 103,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 39,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 143,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 85,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 123,
+      "bottom": 479
+    }
+  },
+  "assassin_elite": {
+    "run-a": {
+      "height": 512,
+      "top": 140,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 148,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 128,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 151,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 136,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 154,
+      "bottom": 479
+    }
+  },
+  "iron_lancer": {
+    "run-a": {
+      "height": 512,
+      "top": 163,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 161,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 120,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 162,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 110,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 120,
+      "bottom": 479
+    }
+  },
+  "plague_doctor": {
+    "run-a": {
+      "height": 512,
+      "top": 106,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 113,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 54,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 137,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 105,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 136,
+      "bottom": 479
+    }
+  },
+  "beast_tamer": {
+    "run-a": {
+      "height": 512,
+      "top": 100,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 122,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 94,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 147,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 108,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 130,
+      "bottom": 479
+    }
+  },
+  "storm_mage": {
+    "run-a": {
+      "height": 512,
+      "top": 156,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 144,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 86,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 168,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 140,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 169,
+      "bottom": 479
+    }
+  },
+  "blade_dancer": {
+    "run-a": {
+      "height": 512,
+      "top": 140,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 149,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 99,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 163,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 124,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 146,
+      "bottom": 479
+    }
+  },
+  "siege_gunner": {
+    "run-a": {
+      "height": 512,
+      "top": 130,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 140,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 164,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 151,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 118,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 144,
+      "bottom": 479
+    }
+  },
+  "sentinel": {
+    "run-a": {
+      "height": 512,
+      "top": 138,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 143,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 144,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 151,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 135,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 162,
+      "bottom": 479
+    }
+  },
+  "blackguard": {
+    "run-a": {
+      "height": 512,
+      "top": 149,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 141,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 122,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 129,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 142,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 166,
+      "bottom": 479
+    }
+  },
+  "warlord": {
+    "run-a": {
+      "height": 512,
+      "top": 162,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 169,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 126,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 190,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 127,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 174,
+      "bottom": 479
+    }
+  },
+  "pyromancer": {
+    "run-a": {
+      "height": 512,
+      "top": 142,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 148,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 138,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 117,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 138,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 178,
+      "bottom": 479
+    }
+  },
+  "frost_mage": {
+    "run-a": {
+      "height": 512,
+      "top": 119,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 116,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 70,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 67,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 107,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 143,
+      "bottom": 479
+    }
+  },
+  "cultist": {
+    "run-a": {
+      "height": 512,
+      "top": 76,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 108,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 39,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 126,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 61,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 125,
+      "bottom": 479
+    }
+  },
+  "void_knight": {
+    "run-a": {
+      "height": 512,
+      "top": 171,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 184,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 163,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 201,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 165,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 204,
+      "bottom": 479
+    }
+  },
+  "wolf": {
+    "run-a": {
+      "height": 512,
+      "top": 239,
+      "bottom": 479
+    },
+    "run-b": {
+      "height": 512,
+      "top": 254,
+      "bottom": 479
+    },
+    "windup": {
+      "height": 512,
+      "top": 236,
+      "bottom": 479
+    },
+    "strike": {
+      "height": 512,
+      "top": 250,
+      "bottom": 479
+    },
+    "recover": {
+      "height": 512,
+      "top": 236,
+      "bottom": 479
+    },
+    "recoil": {
+      "height": 512,
+      "top": 272,
+      "bottom": 479
+    }
+  }
+}

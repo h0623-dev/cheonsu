@@ -223,3 +223,4 @@
   :is(.skill-choice-dialog, .defeat-dialog) h2 { font-size: 18px; }
   .world-art-app .battle-screen.battle-final-concept.battle-board-only .cinematic-command-bar > button { font-size: 14px !important; }
 }
+.battle-range-summary { color: #e4cd8e; font-size: 12px; line-height: 1.4; margin: 0 0 6px; }

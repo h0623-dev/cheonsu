@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getCombatMotionSprite, getCombatEffect, getCombatPresentation, getCombatScale } from '../data/combatArt.js';
+import { getCombatMotionSprite, getCombatEffect, getCombatPresentation, getCombatFrameStyle } from '../data/combatArt.js';
 
 const weaponLabels = { slash: '검', thrust: '창', heavy: '중병기', guard: '방패', quick: '단검', beast: '야수', whip: '채찍', fist: '권격', bow: '활', cannon: '포격', cast: '마법' };
 
@@ -15,9 +15,10 @@ function getWeaponMotion(unitKey) {
 
 function FighterPoses({ unitKey, name, defender = false }) {
   const poses = defender ? ['ready', 'recoil', 'evade'] : ['ready', 'run-a', 'run-b', 'windup', 'strike', 'recover'];
-  return <div className="fighter-body" style={{ '--combat-sprite-scale': getCombatScale(unitKey) }}><div className="fighter-poses">
+  return <div className="fighter-body"><div className="fighter-poses">
     {poses.map(pose => <img key={pose} data-pose={pose}
       className={`fighter-frame fighter-${pose}${pose === 'strike' ? ' fighter-action' : ''}`}
+      style={getCombatFrameStyle(unitKey, pose === 'ready' ? 'recover' : pose === 'evade' ? 'run-a' : pose)}
       src={getCombatMotionSprite(unitKey, pose === 'ready' ? 'recover' : pose === 'evade' ? 'run-a' : pose)}
       alt={pose === 'ready' ? name : ''} draggable="false" />)}
   </div></div>;

@@ -1,0 +1,12 @@
+.patch-settings h2, .patch-settings .update-actions button, .patch-apk-link { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.patch-settings h2 { justify-content: flex-start; }
+.patch-toggle { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; }
+.patch-toggle input { width: 23px; height: 23px; accent-color: #76bca5; flex: none; }
+.patch-settings progress { width: 100%; height: 12px; accent-color: #76bca5; }
+.patch-settings .update-status { overflow-wrap: anywhere; }
+.patch-apk-link { color: #f0d998; text-decoration: underline; min-height: 44px; }
+.patch-title-status { position: relative; width: min(100%, 340px); flex: none; z-index: 1; display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #162e29f5; color: #eaf7ee; border: 1px solid #83ac95; border-radius: 6px; font-size: 13px; }
+.patch-title-status > svg { flex: none; }
+.patch-title-status span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.patch-title-status button { display: flex; align-items: center; gap: 5px; flex: none; min-height: 40px; padding: 6px 10px; font-size: 13px; color: #eff4e9; background: #426b59; border: 1px solid #9fc2ad; border-radius: 4px; cursor: pointer; }
+@media (max-width: 420px) { .patch-title-status { gap: 6px; padding: 8px; } .patch-title-status > svg { display: none; } }
