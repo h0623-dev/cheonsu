@@ -10,8 +10,10 @@ function Choice({ label, value, options, onChange }) {
   return <fieldset className="ux-choice"><legend>{label}</legend><div>{options.map(option => <button key={option.id} aria-pressed={value === option.id} onClick={() => onChange(option.id)}>{option.label}</button>)}</div></fieldset>;
 }
 export default function PlayerSettings({ initialTab = 'sound', version, settings, onSetting, onBack, options, onSound, slots,
-  onSaveSlot, onLoadSlot, onSave, canSave, canCopyCheckpoint, onBackup, onExport, onClearSlots, onReset, onOpen, saveNotice }) {
+  onSaveSlot, onLoadSlot, onSave, canSave, canCopyCheckpoint, onBackup, onExport, onClearSlots, onReset, onOpen, saveNotice,
+  onRecoverProgress, canRecoverProgress, hasRecoveryBackup, onRestoreProgressBackup }) {
   const [tab, setTab] = useState(initialTab);
+  const [completedThrough, setCompletedThrough] = useState(1);
   const change = key => value => onSetting(key, value);
   return <main className="player-settings ux-screen">
     <header className="ux-page-header"><div><small>천수 · v{version}</small><h1>설정</h1></div><button onClick={onBack}><ArrowLeft size={19} />뒤로</button></header>
@@ -43,6 +45,11 @@ export default function PlayerSettings({ initialTab = 'sound', version, settings
         <p className="ux-status" role="status">{saveNotice?.text || (!canSave ? '현재 진행 중인 여정이 없거나 저장할 수 없는 전투 상태입니다.' : '클리어한 진행은 자동으로 저장됩니다.')}</p>
         <div className="ux-save-slots">{slots.map(({ id, summary }) => <article key={id}><div><strong>슬롯 {id}</strong><span>{summary?.stage || '비어 있음'}</span><small>{summary?.dateText || ''}</small></div><div><button aria-label={`슬롯 ${id} 저장`} onClick={() => onSaveSlot(id)} disabled={!canSave && !canCopyCheckpoint}><Save size={17} />저장</button><button aria-label={`슬롯 ${id} 불러오기`} disabled={!summary?.ok} onClick={() => onLoadSlot(id)}><Upload size={17} />불러오기</button></div></article>)}</div>
         <div className="ux-action-grid"><button onClick={() => onBackup(false)}><RotateCcw size={17} />자동 백업 복구</button><button onClick={() => onBackup(true)}><RotateCcw size={17} />이전 저장 복구</button><button onClick={onExport}><Upload size={17} />저장 데이터 복사</button></div>
+        <details className="ux-details progress-recovery"><summary>클리어 진행도 복구</summary>
+          <label>실제로 완료한 마지막 장<select aria-label="완료한 마지막 장" value={completedThrough} onChange={event => setCompletedThrough(Number(event.target.value))}>{Array.from({ length: 31 }, (_, id) => <option key={id} value={id}>{id === 0 ? '완료한 장 없음' : `${id}장까지 완료`}</option>)}</select></label>
+          <p className="ux-status">캐릭터·장비·골드는 유지됩니다. 현재 전투를 종료하고 원정 화면으로 이동합니다. 원본 저장은 별도로 백업됩니다.</p>
+          <div className="ux-action-grid"><button disabled={!canRecoverProgress} onClick={() => onRecoverProgress(completedThrough)}><RotateCcw size={17}/>진행도 복구 적용</button><button disabled={!hasRecoveryBackup} onClick={onRestoreProgressBackup}>복구 전 원본 되돌리기</button></div>
+        </details>
         <details className="ux-details ux-danger"><summary>저장 삭제</summary><button onClick={onClearSlots}>수동 슬롯 비우기</button><button onClick={onReset}>현재 저장 데이터 초기화</button></details>
       </section>}
       {tab === 'update' && <section aria-label="업데이트 설정"><PatchSettings />

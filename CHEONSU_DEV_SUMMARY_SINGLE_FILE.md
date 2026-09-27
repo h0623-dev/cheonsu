@@ -2,11 +2,13 @@
 
 마지막 확인일: 2026-09-27
 프로젝트 위치: `C:\Users\user\Desktop\cheonsu`
-현재 앱/패키지 버전: `1.99.144` (Android 343)
+현재 앱/패키지 버전: `1.99.145` (Android 344)
 
-GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.144 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.144). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
+GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.145 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.145). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
 
-최신 산출물: `cheonsu_1.99.144_update_debug.apk`, `cheonsu_development_1.99.144.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+최신 산출물: `cheonsu_1.99.145_update_debug.apk`, `cheonsu_development_1.99.145.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+
+1.99.145 변경: 전투 설정의 타이틀/월드맵/대기실 버튼을 안전 영역 내 고정하고 옵션만 스크롤합니다. 완료한 장과 가장 먼저 미완료인 장만 선택 가능하며, 뒤쪽 장의 이전 기록이 중간 장을 전부 열지 않습니다. 출전 편성 저장 후 이어하기의 전투 시작도 복원합니다. 실제 완료가 1장인데 클리어 기록까지 잘못된 경우 설정 > 저장 > 클리어 진행도 복구 > 1장까지 완료 > 진행도 복구 적용을 선택합니다. 캐릭터/장비/골드를 유지하고 복구 전 원본은 별도 보관합니다. [QA/복구 방법](docs/QA_SETTINGS_PROGRESS_1.99.145.md).
 
 1.99.144 변경: 모든 1~30장에 개별 환경 원화 30종을 제작했습니다. 목록용 미리보기 30종과 함께 출전·대화·기록실·일대일 전투·전장 외곽에 적용합니다. 실제 타일과 캐릭터/보스, 전투 규칙, 저장 데이터는 유지합니다. 이전의 "타이틀 1장"은 메인 화면 그림 한 장이라는 뜻입니다. [전 장 아트 보고서](docs/CHAPTER_ART_1.99.144.md), [원본과 프롬프트](docs/art/chapters-v1/README.md).
 

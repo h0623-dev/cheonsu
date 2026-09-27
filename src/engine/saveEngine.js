@@ -1,5 +1,5 @@
 import { stages } from "../data/stages.js";
-import { getUnlockedStageIds } from './campaignProgress.js';
+import { getUnlockedStageIds, normalizeClearedStageIds } from './campaignProgress.js';
 import { DEFAULT_GEAR_INVENTORY } from "../data/equipment.js";
 import { DEFAULT_SUPPORT_POINTS, DEFAULT_SUPPORT_DIALOGUES_SEEN } from "../data/supports.js";
 import { inMap } from "./movement.js";
@@ -315,6 +315,8 @@ export function normalizeSaveData(raw, saveVersion = "0.12") {
   const exploration = normalizeExploration(data.exploration);
   const party = normalizeParty(data.party).map((unit) => applyDiscoveryUnlocks(unit, exploration));
   const units = normalizeUnits(data.units, stage, party).map((unit) => applyDiscoveryUnlocks(unit, exploration));
+  const clearedStages = normalizeClearedStageIds(data.clearedStages);
+  const unlockedStages = getUnlockedStageIds(clearedStages);
 
   const validScreens = ["promo", "menu", "campaign", "deployment", "battle", "camp", "records", "settings", "pwa", "release", "qa", "analytics", "codex", "profile", "gallery", "hall", "planner", "strategyArchive", "finalRc", "saveHealth", "launch", "postLaunch", "crashLogs", "qaBoard", "qaHistory", "qaChangelog", "qaReleaseNotes", "qaReleaseArchive"];
   const validTurns = ["ally", "enemy"];
@@ -322,7 +324,7 @@ export function normalizeSaveData(raw, saveVersion = "0.12") {
 
   return {
     version: saveVersion,
-    screen: validScreens.includes(data.screen) ? data.screen : "campaign",
+    screen: data.screen === 'deployment' && !unlockedStages.includes(stage.id) ? 'campaign' : validScreens.includes(data.screen) ? data.screen : "campaign",
     selectedStage: stage,
     currentStageId: stage.id,
     exploration,
@@ -380,10 +382,8 @@ export function normalizeSaveData(raw, saveVersion = "0.12") {
         ? data.campMessage
         : "이어하기 완료.",
     stageRewardClaimed: Boolean(data.stageRewardClaimed),
-    unlockedStages: getUnlockedStageIds(safeArray(data.clearedStages, [])),
-    clearedStages: safeArray(data.clearedStages, []).filter((id) =>
-      stages.some((stage) => stage.id === id)
-    ),
+    unlockedStages,
+    clearedStages,
     hazards: safeArray(data.hazards, []).filter(
       (hazard) =>
         hazard &&

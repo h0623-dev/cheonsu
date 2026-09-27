@@ -1,15 +1,21 @@
 import { stages } from '../data/stages.js';
 
+export function normalizeClearedStageIds(cleared = []) {
+  const valid = new Set(Array.isArray(cleared) ? cleared : []);
+  return stages.filter(stage => valid.has(stage.id)).map(stage => stage.id);
+}
+
 export function getUnlockedStageIds(cleared = []) {
-  const valid = cleared.filter(id => stages.some(stage => stage.id === id));
-  const frontier = Math.min(stages.length, Math.max(0, ...valid) + 1);
-  return stages.filter(stage => stage.id <= frontier).map(stage => stage.id);
+  const completed = new Set(normalizeClearedStageIds(cleared));
+  const next = stages.find(stage => !completed.has(stage.id))?.id;
+  // Preserve older out-of-order clears for replay, but never open the gaps before them.
+  return stages.filter(stage => completed.has(stage.id) || stage.id === next).map(stage => stage.id);
 }
 
 export function createVictoryCheckpoint(data, settlement) {
   const id = data.selectedStage.id;
   const replay = data.clearedStages.includes(id) || data.stageRewardClaimed;
-  const clearedStages = [...new Set([...data.clearedStages, id])];
+  const clearedStages = normalizeClearedStageIds([...data.clearedStages, id]);
   const reward = replay ? { gold: 0, potion: 0 } : settlement.reward;
   const inventory = { ...data.inventory };
   if (!replay) {

@@ -1,13 +1,15 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.144 / Android versionCode 343**
+현재 개발 빌드: **1.99.145 / Android versionCode 344**
+
+1.99.145: 전투 설정의 나가기 버튼을 시스템 바 안전 영역에 고정했습니다. 이어하기 시 완료 기록으로 순차 해금을 계산하며, 잘못 기록된 진행도는 캐릭터·장비·골드를 보존하고 원본 백업 후 복구할 수 있습니다. 출전 편성에서 저장 후 이어할 때 전투 시작이 막히던 문제도 수정했습니다. [설정/진행도 QA 및 복구 방법](docs/QA_SETTINGS_PROGRESS_1.99.145.md).
 
 1.99.144: 1~30장 전용 환경 원화 30종. 원정 목록, 출전 편성, 전투 전후 대화, 기록실, 일대일 전투와 전장 외곽에 연결했습니다. 목록용 경량 미리보기 30종을 별도로 제공합니다. 기존 캐릭터·타일·규칙·저장은 유지합니다. [전 장 아트 보고서](docs/CHAPTER_ART_1.99.144.md), [원본과 프롬프트](docs/art/chapters-v1/README.md).
 
 ## 다운로드
 
-- 로컬 최신 산출물: `cheonsu_1.99.144_update_debug.apk`, `cheonsu_development_1.99.144.zip`
-- [1.99.144 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.144)
+- 로컬 최신 산출물: `cheonsu_1.99.145_update_debug.apk`, `cheonsu_development_1.99.145.zip`
+- [1.99.145 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.145)
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)

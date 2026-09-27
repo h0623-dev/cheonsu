@@ -46,6 +46,8 @@
 .ux-action-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
 .ux-action-grid > button { flex: 1 1 130px; }
 .ux-status { font-size: 13px; color: #b7cabe; line-height: 1.7; }
+.progress-recovery label { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; }
+.progress-recovery select { min-height: 44px; max-width: 100%; background: #253a31; color: #edf3e8; border: 1px solid #728c7e; border-radius: 4px; padding: 8px; font: inherit; }
 .ux-save-slots article { padding: 20px 0; display: flex; gap: 14px; align-items: center; border-bottom: 1px solid #43554e; }
 .ux-save-slots article > div:first-child { flex: 1; min-width: 0; }
 .ux-save-slots article > div:last-child { display: flex; gap: 6px; }

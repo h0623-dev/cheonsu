@@ -5,6 +5,8 @@ import PromotionDialog from "./components/PromotionDialog.jsx";
 import { DISCOVERIES } from "./data/discoveries.js";
 import { getStageDiscoveries, getVisibleDiscoveries, normalizeExploration, claimDiscovery, applyDiscoveryUnlocks, getSecretPromotion, canSecretPromote, applySecretPromotion } from "./engine/discoveryEngine.js";
 import ItemDialog from "./components/ItemDialog.jsx";
+import BattleSettingsDialog from './components/BattleSettingsDialog.jsx';
+import { recoverCampaignProgress, PROGRESS_RECOVERY_BACKUP } from './engine/progressRecovery.js';
 import CombatScene from "./components/CombatScene.jsx";
 import SkillDialog from "./components/SkillDialog.jsx";
 import SupportTargetDialog from './components/SupportTargetDialog.jsx';
@@ -87,7 +89,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.144";
+const SAVE_VERSION = "1.99.145";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -8258,11 +8260,11 @@ export default function App() {
   const [activeSupportScene, setActiveSupportScene] = useState(null);
   const [gold, setGold] = useState(300);
   const [stageRewardClaimed, setStageRewardClaimed] = useState(false);
-  const [unlockedStages, setUnlockedStages] = useState([1]);
+  const [clearedStages, setClearedStages] = useState([]);
+  const unlockedStages = useMemo(() => getUnlockedStageIds(clearedStages), [clearedStages]);
   const playableStageIds = unlockedStages;
   const [saveNotice, setSaveNotice] = useState(null);
   const [clearReceipt, setClearReceipt] = useState(null);
-  const [clearedStages, setClearedStages] = useState([]);
   const [gearInventory, setGearInventory] = useState(["ironSword", "leatherArmor", "fireStaff", "mageRobe"]);
   const [gearEnhance, setGearEnhance] = useState({});
   const [inventory, setInventory] = useState(createDefaultInventory());
@@ -10335,7 +10337,6 @@ export default function App() {
     setActiveSupportScene(null);
     setGold(300);
     setStageRewardClaimed(false);
-    setUnlockedStages([1]);
     setClearedStages([]);
     setGearInventory(["ironSword", "leatherArmor", "fireStaff", "mageRobe"]);
     setInventory(createDefaultInventory());
@@ -11479,7 +11480,7 @@ export default function App() {
   };
 
   const applyOneClickPreparation = () => {
-    if (!deploymentStage) return;
+    if (!deploymentStage || !playableStageIds.includes(deploymentStage.id)) return;
 
     const filledIds = getAutoFillDeploymentIds(party, deployedIds, MAX_DEPLOY_COUNT);
     const purchasePlan = getRecommendedSupplyPurchasePlan(deploymentStage, inventory, gold);
@@ -11507,7 +11508,7 @@ export default function App() {
   };
 
   const confirmDeployment = () => {
-    if (!deploymentStage) return;
+    if (!deploymentStage || !playableStageIds.includes(deploymentStage.id)) return;
 
     if (deployedIds.length === 0) {
       alert("최소 1명은 출전해야 합니다.");
@@ -11520,7 +11521,7 @@ export default function App() {
   };
 
   const startDeploymentAfterFinalCheck = () => {
-    if (!deploymentStage) return;
+    if (!deploymentStage || !playableStageIds.includes(deploymentStage.id)) return;
 
     localStorage.setItem("cheonsu_last_deploy_v1", JSON.stringify(deployedIds));
     setFinalDeployCheckOpen(false);
@@ -11695,7 +11696,7 @@ export default function App() {
 
       setSelectedStage(migratedData.selectedStage);
       setBattleHudHidden(true);
-      setDeploymentStage(null);
+      setDeploymentStage(migratedData.screen === 'deployment' ? migratedData.selectedStage : null);
       setGearEnhance(restoredGearEnhance);
       setDeployedIds(restoredDeployedIds.length ? restoredDeployedIds : availableDeployIds.slice(0, MAX_DEPLOY_COUNT));
       setDeploymentHint("저장된 출전 편성을 불러왔습니다.");
@@ -11744,7 +11745,6 @@ export default function App() {
       ].slice(0, 8));
       setCampMessage(migratedData.campMessage);
       setStageRewardClaimed(migratedData.stageRewardClaimed);
-      setUnlockedStages(getUnlockedStageIds(migratedData.clearedStages));
       setClearedStages(migratedData.clearedStages);
       setStoryScene(null);
       setBattle(null);
@@ -13274,7 +13274,7 @@ export default function App() {
     const saved = receipt.checkpoint;
     setParty(saved.party); setGold(saved.gold); setInventory(saved.inventory);
     setGearInventory(saved.gearInventory); setClearedStages(saved.clearedStages);
-    setUnlockedStages(saved.unlockedStages); setStageRewardClaimed(true);
+    setStageRewardClaimed(true);
     setCareerStats(saved.careerStats); setStageMastery(saved.stageMastery);
     setSupportPoints(saved.supportPoints); setCampMessage(saved.campMessage);
     setBattleLoot(saved.battleLoot);
@@ -15486,6 +15486,17 @@ export default function App() {
         canSave={sessionStarted && (lastPlayScreen !== 'battle' || (turn === 'ally' && !combatBusy && !battle && !result && !itemOpen && !skillChoiceOpen && !supportSkillChoice))}
         onBackup={previous => restoreAutoBackup(previous ? SAVE_PREVIOUS_KEY : SAVE_BACKUP_KEY)}
         onExport={exportSaveToClipboard} onClearSlots={clearManualSlots} onReset={resetSaveData}
+        onRecoverProgress={completedThrough => {
+          if (!window.confirm(`${completedThrough}장까지 완료한 진행도로 복구할까요? 캐릭터·장비·골드는 유지되고 현재 전투에서는 나갑니다. 원본 저장은 별도로 보관됩니다.`)) return;
+          try {
+            recoverCampaignProgress(localStorage, completedThrough, sessionStarted ? getSaveData() : null);
+            continueGame();
+            setSaveNotice({ ok: true, text: `${completedThrough}장까지 완료한 진행도로 복구했습니다.` });
+          } catch (error) { setSaveNotice({ ok: false, text: error.message }); }
+        }}
+        canRecoverProgress={sessionStarted ? lastPlayScreen !== 'battle' || (turn === 'ally' && !combatBusy && !battle && !result) : Boolean(menuCheckpoint.data)}
+        hasRecoveryBackup={Boolean(localStorage.getItem(PROGRESS_RECOVERY_BACKUP))}
+        onRestoreProgressBackup={() => restoreAutoBackup(PROGRESS_RECOVERY_BACKUP)}
         onOpen={openUtility} saveNotice={saveNotice} />}
 
       {screen === "analytics" && (
@@ -16447,6 +16458,7 @@ export default function App() {
                       <button
                         type="button"
                         className="stage-map-preview"
+                        disabled={!playableStageIds.includes(stage.id)}
                         onClick={() => startStage(stage)}
                         style={{ gridTemplateColumns: `repeat(${mapWidth}, minmax(0, 1fr))` }}
                         aria-label={`${stage.title} 맵 보기`}
@@ -17291,24 +17303,19 @@ export default function App() {
             )}
           </div>
           {battleSettingsOpen && (
-            <div className="battle-settings-popover" role="dialog" aria-label="전투 설정">
-              <button
-                type="button"
-                className="battle-settings-scrim"
-                aria-label="전투 설정 닫기"
-                onClick={() => setBattleSettingsOpen(false)}
-              />
+            <BattleSettingsDialog onClose={() => setBattleSettingsOpen(false)}>
               <div className="battle-settings-card">
                 <div className="battle-settings-head">
                   <div>
                     <span>전투 설정</span>
                     <strong>{selectedStage?.title}</strong>
                   </div>
-                  <button type="button" onClick={() => setBattleSettingsOpen(false)}>
-                    닫기
+                  <button type="button" aria-label="전투 설정 닫기" title="닫기" onClick={() => setBattleSettingsOpen(false)}>
+                    <X size={20} />
                   </button>
                 </div>
 
+                <div className="battle-settings-body">
                 <div className="battle-settings-grid">
                   <button type="button" onClick={() => setBattleCompact((prev) => !prev)}>
                     <span>화면</span>
@@ -17374,8 +17381,8 @@ export default function App() {
                   </button>
                 </div>
 
-                <div className="battle-settings-section-title">나가기</div>
-                <div className="battle-settings-menu battle-settings-exit-menu">
+                </div>
+                <div className="battle-settings-menu battle-settings-exit-menu" aria-label="전투 나가기">
                   <button
                     type="button"
                     onClick={() => {
@@ -17416,7 +17423,7 @@ export default function App() {
                   </button>
                 </div>
               </div>
-            </div>
+            </BattleSettingsDialog>
           )}
           <div className="hud-row classic-hud-row">
             <div className="hud-box"><span>턴</span><strong>{turn === "ally" ? "아군" : "적"}</strong></div>

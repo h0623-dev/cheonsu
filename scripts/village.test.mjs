@@ -12,8 +12,8 @@ test('stage progression ignores old testing unlocks and preserves cleared-stage 
   assert.deepEqual(getUnlockedStageIds(), [1]);
   assert.deepEqual(getUnlockedStageIds([1]), [1, 2]);
   assert.deepEqual(getUnlockedStageIds([1, 2]), [1, 2, 3]);
-  assert.deepEqual(getUnlockedStageIds([5, 99, -1]), [1, 2, 3, 4, 5, 6]);
-  assert.equal(getUnlockedStageIds([30]).length, 30);
+  assert.deepEqual(getUnlockedStageIds([5, 99, -1]), [1, 5]);
+  assert.deepEqual(getUnlockedStageIds([30]), [1, 30]);
   const legacy = normalizeSaveData({ unlockedStages: stages.map(stage => stage.id), clearedStages: [1], selectedStage: stages[4], screen: 'battle' });
   assert.deepEqual(legacy.unlockedStages, [1, 2]);
   assert.equal(legacy.selectedStage.id, 5, 'an existing in-progress battle survives migration');
