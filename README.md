@@ -1,6 +1,8 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.145 / Android versionCode 344**
+현재 개발 빌드: **1.99.146 / Android versionCode 345**
+
+1.99.146: 아군·적군·보스 41종의 후면 그림과 이동/공격/반격 방향 전환. 대기는 마지막 방향을 유지하고 취소/저장/이어하기에도 방향을 보존합니다. 일반 공격과 스킬의 템포를 분리하고 스킬 초상화 컷인, 시전 준비, 속성 타격과 전용 효과음을 추가했습니다. [방향과 스킬 연출 보고서](docs/FACING_SKILLS_1.99.146.md).
 
 1.99.145: 전투 설정의 나가기 버튼을 시스템 바 안전 영역에 고정했습니다. 이어하기 시 완료 기록으로 순차 해금을 계산하며, 잘못 기록된 진행도는 캐릭터·장비·골드를 보존하고 원본 백업 후 복구할 수 있습니다. 출전 편성에서 저장 후 이어할 때 전투 시작이 막히던 문제도 수정했습니다. [설정/진행도 QA 및 복구 방법](docs/QA_SETTINGS_PROGRESS_1.99.145.md).
 
@@ -8,8 +10,8 @@
 
 ## 다운로드
 
-- 로컬 최신 산출물: `cheonsu_1.99.145_update_debug.apk`, `cheonsu_development_1.99.145.zip`
-- [1.99.145 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.145)
+- 로컬 최신 산출물: `cheonsu_1.99.146_update_debug.apk`, `cheonsu_development_1.99.146.zip`
+- [1.99.146 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.146)
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)

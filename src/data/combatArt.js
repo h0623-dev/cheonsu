@@ -2,6 +2,16 @@ import enemyManifest from '../../public/art/enemies-v3/manifest.json' with { typ
 import bossManifest from '../../public/art/bosses-v1/manifest.json' with { type: 'json' };
 import mapManifest from '../../public/art/map-sprites-v4/manifest.json' with { type: 'json' };
 import combatFrameMetrics from './combatFrameMetrics.json' with { type: 'json' };
+import { getPaintedVisualProfile } from './unitVisuals.js';
+
+export function getCombatTiming(scene) {
+  const skill = scene.mode === 'skill' || Boolean(scene.outcome?.heal || scene.outcome?.guard);
+  return { skill, lead: skill ? .24 : 0, action: skill ? .76 : 1, impact: skill ? .62 : .5, durationScale: skill ? 1.22 : .84 };
+}
+
+export function getSkillPalette(effect) {
+  return { fire: '#ff9a57', ice: '#9ceaff', lightning: '#ffe77e', shadow: '#c4a0ee', holy: '#fff0a0', heal: '#9ce6a6', guard: '#86dfe7', poison: '#badd73', music: '#f7b7dd', arrow: '#bfe2a1' }[effect] || '#f4d18c';
+}
 
 export function getCombatScale(key) { return mapManifest[key]?.combatScale || 1; }
 
@@ -66,6 +76,7 @@ export function preloadCombatArt(attackerKey, defenderKey, scene) {
   const paths = [...combatMotionPoses.map(pose => getCombatMotionSprite(attackerKey, pose)),
     ...['recover', 'recoil', 'run-a'].map(pose => getCombatMotionSprite(defenderKey, pose)),
     getCombatEffect(effect), getCombatEffect('cast'), getCombatEffect('impact')];
+  if (getCombatTiming(scene).skill) paths.push(getPaintedVisualProfile(attackerKey)?.portrait || getCombatSprite(attackerKey));
   return Promise.all(paths.map(src => {
     if (!loaded.has(src)) {
       const img = new Image();

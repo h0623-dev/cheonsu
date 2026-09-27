@@ -1,0 +1,371 @@
+{
+  "hero": {
+    "rear": "/art/directions-v1/hero-back.webp",
+    "canvas": [
+      439,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "bram": {
+    "rear": "/art/directions-v1/bram-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "lina": {
+    "rear": "/art/directions-v1/lina-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "aria": {
+    "rear": "/art/directions-v1/aria-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "leon": {
+    "rear": "/art/directions-v1/leon-back.webp",
+    "canvas": [
+      425,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "sera": {
+    "rear": "/art/directions-v1/sera-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "noah": {
+    "rear": "/art/directions-v1/noah-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "yuna": {
+    "rear": "/art/directions-v1/yuna-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "rakan": {
+    "rear": "/art/directions-v1/rakan-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "miho": {
+    "rear": "/art/directions-v1/miho-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "teo": {
+    "rear": "/art/directions-v1/teo-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "irene": {
+    "rear": "/art/directions-v1/irene-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "kaz": {
+    "rear": "/art/directions-v1/kaz-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "ella": {
+    "rear": "/art/directions-v1/ella-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "jin": {
+    "rear": "/art/directions-v1/jin-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "luka": {
+    "rear": "/art/directions-v1/luka-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "baekho": {
+    "rear": "/art/directions-v1/baekho-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "raider": {
+    "rear": "/art/directions-v1/raider-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "ranger": {
+    "rear": "/art/directions-v1/ranger-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "sniper": {
+    "rear": "/art/directions-v1/sniper-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "marauder": {
+    "rear": "/art/directions-v1/marauder-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "assassin_elite": {
+    "rear": "/art/directions-v1/assassin_elite-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "iron_lancer": {
+    "rear": "/art/directions-v1/iron_lancer-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "plague_doctor": {
+    "rear": "/art/directions-v1/plague_doctor-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "beast_tamer": {
+    "rear": "/art/directions-v1/beast_tamer-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "storm_mage": {
+    "rear": "/art/directions-v1/storm_mage-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "blade_dancer": {
+    "rear": "/art/directions-v1/blade_dancer-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "siege_gunner": {
+    "rear": "/art/directions-v1/siege_gunner-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "sentinel": {
+    "rear": "/art/directions-v1/sentinel-back.webp",
+    "canvas": [
+      386,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "blackguard": {
+    "rear": "/art/directions-v1/blackguard-back.webp",
+    "canvas": [
+      426,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "warlord": {
+    "rear": "/art/directions-v1/warlord-back.webp",
+    "canvas": [
+      449,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "pyromancer": {
+    "rear": "/art/directions-v1/pyromancer-back.webp",
+    "canvas": [
+      401,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "frost_mage": {
+    "rear": "/art/directions-v1/frost_mage-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "cultist": {
+    "rear": "/art/directions-v1/cultist-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "void_knight": {
+    "rear": "/art/directions-v1/void_knight-back.webp",
+    "canvas": [
+      461,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "wolf": {
+    "rear": "/art/directions-v1/wolf-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 260,
+    "foot": 447
+  },
+  "boss_commander": {
+    "rear": "/art/directions-v1/boss_commander-back.webp",
+    "canvas": [
+      474,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "boss_frost": {
+    "rear": "/art/directions-v1/boss_frost-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "boss_ember": {
+    "rear": "/art/directions-v1/boss_ember-back.webp",
+    "canvas": [
+      474,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "boss_oracle": {
+    "rear": "/art/directions-v1/boss_oracle-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  },
+  "boss_abyss": {
+    "rear": "/art/directions-v1/boss_abyss-back.webp",
+    "canvas": [
+      522,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
+  }
+}

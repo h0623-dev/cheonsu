@@ -4,6 +4,8 @@ const tone = (freq,duration,gain=.035,start=0,instrument='bell',extra={}) => ({f
 const air = (duration,gain,cutoff,start=0) => tone(440,duration,gain,start,'noise',{cutoff});
 const notes = (pitches, gap=.08, instrument='bell',gain=.035) => pitches.map((freq,i)=>tone(freq,.22,gain,i*gap,instrument));
 export const SFX_PRESETS = {
+  'skill-charge': [tone(196,.3,.02,0,'strings',{freqEnd:392}), ...notes([392,587,784],.06,'bell',.012), air(.19,.01,2400,.03)],
+  'skill-hit': [tone(96,.2,.025,0,'drum',{freqEnd:36}), air(.095,.018,2100), tone(587,.15,.009,.025,'bell')],
   step: [air(.07,.023,420),tone(88,.07,.025,.012,'drum',{freqEnd:45})],
   arrow: [air(.16,.024,4800),tone(580,.12,.015,0,'flute',{freqEnd:220}),air(.055,.03,1300,.14)],
   slash: [air(.17,.035,2700),tone(480,.14,.026,.045,'horn',{freqEnd:100})],

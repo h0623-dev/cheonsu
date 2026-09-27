@@ -2,7 +2,8 @@
 
 ## 현재 상태
 
-- 버전 1.99.145, Android 344, 패키지 com.cheonsu.game.
+- 버전 1.99.146, Android 345, 패키지 com.cheonsu.game.
+- 방향은 `unitFacing.js`/`useUnitFacings.js`에서 관리합니다. 이동/공격/반격 시 갱신하고 대기/저장/복원에 유지합니다. 아군·적군·보스 41종의 후면 그림은 `public/art/directions-v1`, 원본/제작 기록은 `docs/art/directions-v1`입니다. `CombatScene`과 `skill-presentation.css`는 스킬 준비/컷인/속성 타격을 추가하며 `getCombatTiming`으로 체력/음향 시점을 맞춥니다. [1.99.146 구현 및 검증](FACING_SKILLS_1.99.146.md).
 - 전투 설정은 `BattleSettingsDialog` 최상위 모달이며 헤더/나가기 버튼은 고정, 옵션만 스크롤합니다. `native-insets.css`에서 이전 APK 335의 보호 여백과 현재 APK의 실제 inset을 구분합니다. 해금은 `clearedStages`에서 파생하며 가장 먼저 미완료인 장과 완료한 장만 입장됩니다. 기존 뒤쪽 장의 완료 기록은 재도전용으로 보존하되 중간 장을 전부 해금하지 않습니다.
 - 잘못 기록된 전체 완료 상태는 설정 > 저장 > 클리어 진행도 복구에서 명시적으로 복구합니다. `progressRecovery.js`가 원본을 `cheonsu_v01_progress_recovery_backup`에 먼저 보관하고 성장/장비/골드는 유지합니다. 정당한 전체 클리어 저장은 자동 축소하지 않습니다. 출전 편성 저장은 `deploymentStage`까지 복원합니다. 상세: `QA_SETTINGS_PROGRESS_1.99.145.md`.
 - 30장 전용 환경 원화와 경량 미리보기: `public/art/chapters-v1`, 원본/프롬프트: `docs/art/chapters-v1`. `worldArt.js`가 장 번호로 배경을 선택합니다. 출전/대화/일대일 전투/기록실/전장 외곽에 연결하며 실제 타일/규칙/저장은 유지합니다. `npm run art:chapters`로 재인코딩. 상세: `CHAPTER_ART_1.99.144.md`.
@@ -32,7 +33,7 @@
 ## 새 PC 준비
 
 1. Node.js 24 설치. macOS/Linux에서 nvm을 사용하면 `nvm install`과 `nvm use`를 실행합니다.
-2. `cheonsu_development_1.99.145.zip`을 원하는 폴더에 풉니다.
+2. `cheonsu_development_1.99.146.zip`을 원하는 폴더에 풉니다.
 3. 내부 `cheonsu` 폴더에서 `npm ci`, `npm run setup`, `npm run dev`를 실행합니다.
 4. Vite가 출력하는 로컬 주소를 엽니다. 사용 중인 포트가 있으면 다른 포트를 사용합니다.
 

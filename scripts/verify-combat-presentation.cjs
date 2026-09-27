@@ -18,10 +18,11 @@ async function render(page, changes) {
 }
 
 async function seek(page, fraction, duration) {
+  const timing = await page.locator('.painted-combat').evaluate(el => ({ lead: parseFloat(el.style.getPropertyValue('--combat-lead')) || 0, action: parseFloat(el.style.getPropertyValue('--combat-action-duration')) }));
   await page.evaluate(time => document.getAnimations().forEach(animation => {
     animation.pause();
     animation.currentTime = time;
-  }), fraction * duration);
+  }), timing.lead + fraction * (timing.action || duration));
 }
 
 async function main() {
@@ -77,7 +78,7 @@ async function main() {
               const visible = await page.locator(`.fighter-${side} .fighter-frame`).evaluateAll(images => images.filter(image => +getComputedStyle(image).opacity > .5).length);
               assert.equal(visible, 1, `${unit}/${speed}/${fraction}/${side}: one visible body`);
             }
-            if ([.38, .5, .58].includes(fraction)) bodyTransforms.push(await page.locator('.fighter-attacker .fighter-body').evaluate(el => getComputedStyle(el).transform));
+            if ([.38, .5, .58].includes(fraction)) bodyTransforms.push(await page.locator('.fighter-attacker .fighter-body').evaluate(el => Array.from(new DOMMatrixReadOnly(getComputedStyle(el).transform).toFloat64Array(), value => Number(value.toFixed(5))).join(',')));
           }
           assert.equal(new Set(bodyTransforms).size, 3, `${unit}: anticipation, strike, followthrough differ`);
           const signature = bodyTransforms.join('|');
@@ -85,7 +86,7 @@ async function main() {
           else assert.equal(signature, signatures.get(profile), `${unit}: speed preserves staging`);
           const bounds = await page.locator('.painted-combat').boundingBox();
           assert.ok(bounds.x >= 0 && bounds.y >= 0 && bounds.x + bounds.width <= viewport.width && bounds.y + bounds.height <= viewport.height, 'scene fits viewport');
-          await page.clock.runFor(duration * .49);
+          await page.clock.runFor(duration * .61);
           assert.match(await page.locator('.combat-health').last().innerText(), /30 \/ 50/);
           await page.clock.runFor(duration * .02 + 1);
           assert.match(await page.locator('.combat-health').last().innerText(), /18 \/ 50/, `${unit}/${speed}: health changes at impact`);

@@ -6,6 +6,9 @@ import { DISCOVERIES } from "./data/discoveries.js";
 import { getStageDiscoveries, getVisibleDiscoveries, normalizeExploration, claimDiscovery, applyDiscoveryUnlocks, getSecretPromotion, canSecretPromote, applySecretPromotion } from "./engine/discoveryEngine.js";
 import ItemDialog from "./components/ItemDialog.jsx";
 import BattleSettingsDialog from './components/BattleSettingsDialog.jsx';
+import { directionTo, getFacingArt, getUnitFacing } from './engine/unitFacing.js';
+import { useUnitFacings } from './engine/useUnitFacings.js';
+import directionArt from '../public/art/directions-v1/manifest.json';
 import { recoverCampaignProgress, PROGRESS_RECOVERY_BACKUP } from './engine/progressRecovery.js';
 import CombatScene from "./components/CombatScene.jsx";
 import SkillDialog from "./components/SkillDialog.jsx";
@@ -36,7 +39,7 @@ import { playCheonsuSfx, stopSoundEffects } from "./engine/soundEffects.js";
 import { getUnitSkills, getSkill, withSkill, getSkillCooldown, applyCooldown, tickCooldowns, applySupportSkill } from "./data/skills.js";
 import { BATTLE_SPEED_OPTIONS, getBattleSpeedConfig, scaleBattleTime } from "./engine/battleSpeed.js";
 import { getTurnCameraTarget, getCellScrollTarget } from "./engine/battleCamera.js";
-import { getCombatSprite, preloadCombatArt } from "./data/combatArt.js";
+import { getCombatSprite, preloadCombatArt, getCombatTiming } from "./data/combatArt.js";
 import { getBossSpriteKey, getBossSplash } from "./data/bossArt.js";
 import BossSplash from "./components/BossSplash.jsx";
 import { stages } from "./data/stages.js";
@@ -89,7 +92,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.145";
+const SAVE_VERSION = "1.99.146";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -3856,8 +3859,11 @@ function getUnitSprite(unit) {
   return "/sprites/enemies/bandit.png";
 }
 
-function getBattleMapUnitSprite(unit) {
+function getBattleMapUnitSprite(unit, facing) {
   if (!unit) return null;
+
+  const key = unit.type === 'ally' ? unit.id : getEnemySpriteKey(unit);
+  if (facing && getFacingArt(facing).rear && directionArt[key]) return directionArt[key].rear;
 
   const painted = getPaintedVisualProfile(unit.type === "ally" ? unit.id : getEnemySpriteKey(unit));
   if (painted) return painted.map;
@@ -4164,8 +4170,8 @@ function getSkillMotionEffectType(battleInfo, outcome) {
 }
 
 function getCombatDirection(attacker, defender) {
-  const dx = Math.sign((defender?.x ?? 0) - (attacker?.x ?? 0));
-  const dy = Math.sign((defender?.y ?? 0) - (attacker?.y ?? 0));
+  const dx = (defender?.x ?? 0) - (attacker?.x ?? 0);
+  const dy = (defender?.y ?? 0) - (attacker?.y ?? 0);
 
   if (Math.abs(dx) >= Math.abs(dy)) return dx < 0 ? "left" : "right";
   return dy < 0 ? "up" : "down";
@@ -7883,7 +7889,7 @@ function useSkillAreaPreview(selected, rangeTarget, mode, showAttackRange, activ
     ? getTilesInRadius(rangeTarget, getSkillAreaRadius(selected), activeMap) : [], [showAttackRange, mode, rangeTarget, selected, activeMap]);
 }
 
-const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, units, moveTiles, attackTiles, skillAreaTiles, turn, mode, selectedUnit, inspectedUnitId, showAttackRange, skillChoiceOpen, enemyThreatTileKeys, hazards, cameraFocus, visualEffects, damagePopups, movingUnit, actionMotion, visibleDiscoveries, targetSelectionActive, setRangePreviewTargetId }) {
+const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, units, facings, moveTiles, attackTiles, skillAreaTiles, turn, mode, selectedUnit, inspectedUnitId, showAttackRange, skillChoiceOpen, enemyThreatTileKeys, hazards, cameraFocus, visualEffects, damagePopups, movingUnit, actionMotion, visibleDiscoveries, targetSelectionActive, setRangePreviewTargetId }) {
   const terrain = useMemo(() => activeMap.map((row, y) => row.map((tile, x) => {
     const visual = getWorldTileVisual(activeMap, x, y, stageId);
     return { ...visual, style: { ...getTerrainVisualStyle(tile, x, y), ...visual.style } };
@@ -7891,6 +7897,7 @@ const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, un
   return activeMap.flatMap((row, y) =>
   row.map((tile, x) => {
     const unit = units.find((u) => u.x === x && u.y === y);
+    const facing = getUnitFacing(unit, units, facings);
     const unitActionMotion = unit && actionMotion?.attackerId === unit.id ? actionMotion : null;
     const tileBlocked = isBlockedBattleTile(tile);
     const moveTileInfo = tileBlocked ? null : moveTiles.find((m) => m.x === x && m.y === y);
@@ -8026,7 +8033,9 @@ const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, un
             <span className="move-step-dust dust-b" />
             <span className="move-motion-ring" />
             <img
-              src={getBattleMapUnitSprite(movingUnit.unit)}
+              src={getBattleMapUnitSprite(movingUnit.unit, movingUnit.direction)}
+              data-facing={movingUnit.direction}
+              style={{ '--facing-flip': getFacingArt(movingUnit.direction).flip }}
               alt={movingUnit.unit.name}
               onError={(event) => handleBattleMapUnitImageError(event, movingUnit.unit)}
             />
@@ -8071,7 +8080,7 @@ const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, un
                   <span className={`unit-action-weapon weapon-${unitActionMotion.motionKey || "sword"} weapon-dir-${unitActionMotion.direction || "right"}`} />
                 </>
               )}
-              <img src={getBattleMapUnitSprite(unit)} alt={unit.name} onError={(event) => handleBattleMapUnitImageError(event, unit)} />
+              <img src={getBattleMapUnitSprite(unit, facing)} data-facing={facing} style={{ '--facing-flip': getFacingArt(facing).flip }} alt={unit.name} onError={(event) => handleBattleMapUnitImageError(event, unit)} />
               <span className="unit-emoji-fallback">{unit.icon}</span>
               <span className={`unit-map-marker ${unit.type === "ally" ? "unit-map-ally" : unit.type === "boss" ? "unit-map-boss" : "unit-map-enemy"}`}>
                 {unit.type === "ally" ? "A" : unit.type === "boss" ? "B" : "E"}
@@ -8212,6 +8221,7 @@ export default function App() {
   const [discoveryReceipt, setDiscoveryReceipt] = useState(null);
   const [journalOpen, setJournalOpen] = useState(false);
   const [units, setUnits] = useState(clone(stages[0].units));
+  const { facings, faceUnit, faceCombat, resetFacings, saveFacings } = useUnitFacings();
   const [selectedUnit, setSelectedUnit] = useState(null);
   const [inspectedUnitId, setInspectedUnitId] = useState(null);
   const [mode, setMode] = useState("move");
@@ -9716,9 +9726,7 @@ export default function App() {
 
     const rawDx = Math.sign((battleInfo.defender.x ?? 0) - (battleInfo.attacker.x ?? 0));
     const rawDy = Math.sign((battleInfo.defender.y ?? 0) - (battleInfo.attacker.y ?? 0));
-    const direction = Math.abs(rawDx) >= Math.abs(rawDy)
-      ? rawDx >= 0 ? "right" : "left"
-      : rawDy >= 0 ? "down" : "up";
+    const direction = getCombatDirection(battleInfo.attacker, battleInfo.defender);
     const type = battleInfo.mode === "skill"
       ? "skill"
       : battleInfo.mode === "counter"
@@ -9749,6 +9757,7 @@ export default function App() {
     if (!battleInfo?.defender) return;
 
     scheduleBattleVisual(() => {
+      faceCombat(battleInfo);
       const type = getEffectType(battleInfo, outcome);
       const direction = getCombatDirection(battleInfo.attacker, battleInfo.defender);
       const motionKey = getUnitWeaponMotionKey(battleInfo.attacker, battleInfo, outcome);
@@ -9886,6 +9895,8 @@ export default function App() {
       return;
     }
 
+    const direction = directionTo(unit, { x: toX, y: toY });
+    faceUnit(unit, null, direction);
     setMovingUnit({
       id: unit.id,
       frame: `${unit.id}-${frame}-${Date.now()}`,
@@ -9894,14 +9905,7 @@ export default function App() {
       to: { x: toX, y: toY },
       dx: toX - unit.x,
       dy: toY - unit.y,
-      direction:
-        Math.abs(toX - unit.x) >= Math.abs(toY - unit.y)
-          ? toX - unit.x >= 0
-            ? "right"
-            : "left"
-          : toY - unit.y >= 0
-          ? "down"
-          : "up",
+      direction,
       duration,
     });
 
@@ -10001,7 +10005,7 @@ export default function App() {
       // Discovery rewards commit the move; undo must not let a scout collect for free.
       setMoveUndo(claim?.reward ? null : {
         unitId: movingAlly.id,
-        from: { x: movingAlly.x, y: movingAlly.y },
+        from: { x: movingAlly.x, y: movingAlly.y, facing: getUnitFacing(movingAlly, units, facings) },
         to: { x, y },
         round,
       });
@@ -10045,6 +10049,7 @@ export default function App() {
       return;
     }
 
+    faceUnit(selected, null, moveUndo.from.facing || getUnitFacing(selected));
     setUnits((prev) =>
       prev.map((unit) =>
         unit.id === selected.id
@@ -10293,6 +10298,7 @@ export default function App() {
     setDiscoveryReceipt(null);
     setJournalOpen(false);
     setParty(enhancedFreshParty);
+    resetFacings();
     setUnits(mergePartyIntoStage(stages[0], enhancedFreshParty));
     setSelectedUnit(null);
     setInspectedUnitId(null);
@@ -10380,6 +10386,7 @@ export default function App() {
     const openingAlly = battleUnits.find((unit) => unit.id === "hero" && unit.type === "ally") ||
       battleUnits.find((unit) => unit.type === "ally");
 
+    resetFacings(battleUnits, true);
     setUnits(battleUnits);
     setSelectedUnit(openingAlly?.id || null);
     setInspectedUnitId(null);
@@ -11583,7 +11590,7 @@ export default function App() {
       selectedStage,
       currentStageId: selectedStage?.id || null,
       party,
-      units,
+      units: saveFacings(units),
       selectedUnit,
       deployedIds,
       mode,
@@ -11704,6 +11711,7 @@ export default function App() {
       setExploration(normalizeExploration(migratedData.exploration));
       setDiscoveryReceipt(null);
       setJournalOpen(false);
+      resetFacings(restoredUnits);
       setUnits(restoredUnits);
       setSelectedUnit(migratedData.selectedUnit);
       // Skill choice is transient; resume without projecting an unrelated default skill.
@@ -12718,6 +12726,7 @@ export default function App() {
 
   const showCombatCutscene = async (battleInfo, outcome) => {
     if (!battleInfo?.attacker || !battleInfo?.defender) return;
+    faceCombat(battleInfo);
     const effectType = getEffectType(battleInfo, outcome);
     const sound = outcome?.crit ? 'crit' : outcome?.hit || outcome?.heal || outcome?.guard ? effectType : 'miss';
     if (settings.cutsceneMode === "off" || !settings.effectsOn) {
@@ -12734,7 +12743,9 @@ export default function App() {
       : battleInfo.defender.hp;
     const finish = outcome?.hit && !outcome?.heal && defenderPostHp <= 0;
     const attackerPostHp = battleInfo.attacker.hp;
-    const durationMs = scaleBattleTime(finish ? cutsceneConfig.duration + 360 : cutsceneConfig.duration, battleSpeedRef.current);
+    const timing = getCombatTiming({ ...battleInfo, outcome });
+    const baseDuration = (cutsceneConfig.duration + (finish ? 360 : 0)) * timing.durationScale;
+    const durationMs = scaleBattleTime(baseDuration, battleSpeedRef.current);
 
     await preloadCombatArt(
       battleInfo.attacker.type === "ally" ? battleInfo.attacker.id : getEnemySpriteKey(battleInfo.attacker),
@@ -12768,7 +12779,11 @@ export default function App() {
           : "공격",
     });
 
-    scheduleBattleVisual(() => playSfx(finish ? 'finish' : sound), (finish ? cutsceneConfig.duration + 360 : cutsceneConfig.duration) * .46);
+    if (timing.skill) playSfx(outcome?.heal || outcome?.guard ? 'magic' : 'skill-charge');
+    scheduleBattleVisual(() => {
+      playSfx(finish ? 'finish' : sound);
+      if (timing.skill && outcome?.hit && !outcome?.heal && !outcome?.guard) playSfx('skill-hit');
+    }, baseDuration * timing.impact);
 
     await waitForMove(durationMs);
 
@@ -14287,7 +14302,7 @@ export default function App() {
         <CombatScene key={combatCutscene.id} scene={combatCutscene}
           attackerKey={combatCutscene.attacker.type === "ally" ? combatCutscene.attacker.id : getEnemySpriteKey(combatCutscene.attacker)}
           defenderKey={combatCutscene.defender.type === "ally" ? combatCutscene.defender.id : getEnemySpriteKey(combatCutscene.defender)}
-          background={getWorldScene(activeStage.id)} effectsEnabled={settings.effectsOn} />
+          background={getWorldScene(activeStage.id)} effectsEnabled={settings.effectsOn} shakeEnabled={settings.shakeOn} />
       )}
 
 
@@ -17991,7 +18006,9 @@ export default function App() {
                   <span className="move-step-dust dust-b" />
                   <span className="move-motion-ring" />
                   <img
-                    src={getBattleMapUnitSprite(movingUnit.unit)}
+                    src={getBattleMapUnitSprite(movingUnit.unit, movingUnit.direction)}
+                    data-facing={movingUnit.direction}
+                    style={{ '--facing-flip': getFacingArt(movingUnit.direction).flip }}
                     alt={movingUnit.unit.name}
                     onError={(event) => handleBattleMapUnitImageError(event, movingUnit.unit)}
                   />
@@ -18000,7 +18017,7 @@ export default function App() {
               </div>
             )}
             <BattlefieldTiles
-              activeMap={activeMap} stageId={activeStage.id} units={units}
+              activeMap={activeMap} stageId={activeStage.id} units={units} facings={facings}
               moveTiles={moveTiles} attackTiles={attackTiles} skillAreaTiles={skillAreaTiles}
               turn={turn} mode={mode} selectedUnit={selectedUnit} inspectedUnitId={inspectedUnitId}
               showAttackRange={showAttackRange} skillChoiceOpen={skillChoiceOpen}
