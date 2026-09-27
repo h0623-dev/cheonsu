@@ -112,3 +112,19 @@ test('web runtime never invokes native download or checks the remote feed', asyn
   const manager = createPatchManager({ native: null, version: '1.99.136', trust, storage: {}, fetcher: () => { throw new Error('must not run'); } });
   await manager.ready(); await manager.check({ manual: true }); assert.equal(manager.getState().status, 'web');
 });
+
+test('thousands of native download events notify UI only when the integer percent advances', async () => {
+  const { manager } = fixture({ overrides: {
+    addListener: async (name, handler) => {
+      for (let i = 0; i <= 24000; i++) handler({ bundleId: base.bundleId, progress: i / 24000 });
+      for (const progress of [NaN, Infinity, -1, 0.5]) handler({ bundleId: base.bundleId, progress });
+      handler({ bundleId: 'unrelated', progress: 1 });
+      return { remove: async () => {} };
+    },
+  } });
+  const values = [];
+  manager.subscribe(state => { if (state.status === 'downloading') values.push(state.progress); });
+  await manager.check();
+  assert.deepEqual(values, Array.from({ length: 101 }, (_, i) => i));
+  assert.equal(manager.getState().status, 'pending');
+});

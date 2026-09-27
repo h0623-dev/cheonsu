@@ -1,4 +1,4 @@
-import { useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 import { X, Swords, Sparkles, BookOpen, ArrowRight, Save, ShoppingBag, Check, Users, Shield, Backpack, Settings, Undo2 } from "lucide-react";
 import DiscoveryDialog from "./components/DiscoveryDialog.jsx";
 import PromotionDialog from "./components/PromotionDialog.jsx";
@@ -11,7 +11,8 @@ import SupportTargetDialog from './components/SupportTargetDialog.jsx';
 import TownHub from './components/TownHub.jsx';
 import TownFacilityDialog from './components/TownFacilityDialog.jsx';
 import { PatchSettings, PatchTitleStatus } from './components/PatchUpdates.jsx';
-import { usePatchUpdates } from './engine/usePatchUpdates.js';
+import { usePatchLifecycle } from './engine/usePatchUpdates.js';
+import { createStagePreviewReader } from './engine/stagePreviewCache.js';
 import { LiveUpdate } from '@capawesome/capacitor-live-update';
 import { installNativeInsets } from './engine/nativeInsets.js';
 import DefeatDialog from "./components/DefeatDialog.jsx";
@@ -76,7 +77,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.137";
+const SAVE_VERSION = "1.99.138";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -6280,10 +6281,12 @@ function getMasteryPlannerSummary(stageMastery, clearedStages) {
 
 
 
+const getStagePreview = createStagePreviewReader(expandStageForLargeBattle);
+
 function getStageThreatLevel(stage, deployCount = MAX_DEPLOY_COUNT) {
   if (!stage) return { level: "일반", score: 0, className: "threat-normal" };
 
-  const previewStage = expandStageForLargeBattle(stage, deployCount);
+  const previewStage = getStagePreview(stage, deployCount);
   const enemies = (previewStage.units || []).filter((unit) => unit.type !== "ally");
   const boss = enemies.find((unit) => unit.type === "boss");
   const reinforcementCount = getReinforcementRounds(stage).length;
@@ -6303,7 +6306,7 @@ function getStageThreatLevel(stage, deployCount = MAX_DEPLOY_COUNT) {
 function getStageEnemySummary(stage, deployCount = MAX_DEPLOY_COUNT) {
   if (!stage) return { total: 0, boss: null, ranged: 0, melee: 0, magic: 0 };
 
-  const previewStage = expandStageForLargeBattle(stage, deployCount);
+  const previewStage = getStagePreview(stage, deployCount);
   const enemies = (previewStage.units || []).filter((unit) => unit.type !== "ally");
   const boss = enemies.find((unit) => unit.type === "boss");
 
@@ -7870,8 +7873,241 @@ function normalizeBattleStats(stats) {
   );
 }
 
+function useBattleSelection(units, selectedUnit, activeSkillChoice, activeMap, mode) {
+  const selected = useMemo(() => withSkill(units.find(unit => unit.id === selectedUnit),
+    activeSkillChoice?.unitId === selectedUnit ? activeSkillChoice.skillId : undefined), [units, selectedUnit, activeSkillChoice]);
+  const moveTiles = useMemo(() => getMoveTiles(selected, units, activeMap).filter(
+    tile => !isBlockedBattleTile(activeMap[tile.y]?.[tile.x])), [selected, units, activeMap]);
+  const attackTiles = useMemo(() => (mode === "skill" && selected?.skillType !== "attack" ? [] : getAttackTiles(selected, mode, activeMap)).filter(
+    tile => !isBlockedBattleTile(activeMap[tile.y]?.[tile.x])), [selected, mode, activeMap]);
+  return { selected, moveTiles, attackTiles };
+}
+
+function useSkillAreaPreview(selected, rangeTarget, mode, showAttackRange, activeMap) {
+  return useMemo(() => showAttackRange && mode === "skill" && rangeTarget && getSkillAreaRadius(selected) > 0
+    ? getTilesInRadius(rangeTarget, getSkillAreaRadius(selected), activeMap) : [], [showAttackRange, mode, rangeTarget, selected, activeMap]);
+}
+
+const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, units, moveTiles, attackTiles, skillAreaTiles, turn, mode, selectedUnit, inspectedUnitId, showAttackRange, skillChoiceOpen, enemyThreatTileKeys, hazards, cameraFocus, visualEffects, damagePopups, movingUnit, actionMotion, visibleDiscoveries, targetSelectionActive, setRangePreviewTargetId }) {
+  const terrain = useMemo(() => activeMap.map((row, y) => row.map((tile, x) => {
+    const visual = getWorldTileVisual(activeMap, x, y, stageId);
+    return { ...visual, style: { ...getTerrainVisualStyle(tile, x, y), ...visual.style } };
+  })), [activeMap, stageId]);
+  return activeMap.flatMap((row, y) =>
+  row.map((tile, x) => {
+    const unit = units.find((u) => u.x === x && u.y === y);
+    const unitActionMotion = unit && actionMotion?.attackerId === unit.id ? actionMotion : null;
+    const tileBlocked = isBlockedBattleTile(tile);
+    const moveTileInfo = tileBlocked ? null : moveTiles.find((m) => m.x === x && m.y === y);
+    const movable = !tileBlocked && turn === "ally" && mode === "move" && selectedUnit && Boolean(moveTileInfo);
+    const attackable = showAttackRange && attackTiles.some((m) => m.x === x && m.y === y);
+    const enemyThreat = !tileBlocked && !showAttackRange && !skillChoiceOpen && enemyThreatTileKeys.has(`${x},${y}`);
+    const hazardInfo = hazards.find((h) => h.x === x && h.y === y);
+    const danger = Boolean(hazardInfo);
+    const aoePreview = skillAreaTiles.some((target) => target.x === x && target.y === y);
+    const cameraFocused = cameraFocus?.x === x && cameraFocus?.y === y;
+    const cellEffects = visualEffects.filter((effect) => effect.x === x && effect.y === y);
+    const cellPopups = damagePopups.filter((popup) => popup.x === x && popup.y === y);
+    const unitSeed = unit ? (x + 1) * 137 + (y + 1) * 83 + unit.id.length * 29 : 0;
+    const unitIdleSide = unit ? (unitSeed % 3) - 1 : 0;
+    const unitIdleTilt = unit ? (unitSeed % 2 === 0 ? -1 : 1) * (1 + (unitSeed % 3)) : 0;
+    const unitDepth = unit ? y / Math.max(1, activeMap.length - 1) : 0.5;
+    const unitDepthScale = unit
+      ? (unit.type === "boss" ? 0.94 : 0.84) + unitDepth * (unit.type === "boss" ? 0.22 : 0.24)
+      : 1;
+    const unitShadowAlpha = unit ? 0.38 + unitDepth * 0.26 : 0.55;
+    const unitFreeMotionStyle = unit ? {
+      "--unit-idle-delay": `${-(unitSeed % 1300)}ms`,
+      "--unit-idle-up": `${-(2 + (unitSeed % 3))}px`,
+      "--unit-idle-down": `${unitSeed % 2}px`,
+      "--unit-idle-side": `${unitIdleSide}px`,
+      "--unit-idle-side-away": `${unitIdleSide * -1}px`,
+      "--unit-idle-tilt": `${unitIdleTilt}deg`,
+      "--unit-idle-tilt-away": `${unitIdleTilt * -1}deg`,
+      "--unit-idle-tilt-soft": `${unitIdleTilt * -0.65}deg`,
+      "--unit-depth": unitDepth.toFixed(3),
+      "--unit-depth-scale": unitDepthScale.toFixed(3),
+      "--unit-shadow-alpha": unitShadowAlpha.toFixed(3),
+      "--unit-ground-y": `${Math.round(2 + unitDepth * 5)}px`,
+      "--unit-z": `${Math.round((unit.type === "boss" ? 64 : 56) + unitDepth * 18)}`,
+    } : undefined;
+    const isMovingUnit =
+      unit && (movingUnit?.id === unit.id || movingUnit?.unit?.id === unit.id);
+    const movingUnitStartsHere =
+      movingUnit && movingUnit.from.x === x && movingUnit.from.y === y;
+    const movingOverlayClassName = isMovingUnit ? "moving-overlay-hidden" : "";
+    const terrainVisual = terrain[y][x];
+    const discovery = visibleDiscoveries.find(entry => entry.x === x && entry.y === y);
+    const terrainClassName = [
+      "tile",
+      tile,
+      "terrain-rich-tile",
+      `terrain-${tile}`,
+      getTerrainVariantClassName(x, y),
+      getTerrainEdgeClassNames(activeMap, x, y, tile),
+      movable ? "movable-tile-cell" : "",
+    ].filter(Boolean).join(" ");
+    return (
+      <div
+        className={terrainClassName}
+        key={`${x}-${y}`}
+        data-map-x={x}
+        data-map-y={y}
+        onPointerEnter={() => { if (targetSelectionActive) setRangePreviewTargetId(unit?.type !== "ally" ? unit?.id || null : null); }}
+        onPointerLeave={() => setRangePreviewTargetId(null)}
+        title={getInspectTerrainLabel(tile)}
+        style={terrainVisual.style}
+        >
+        <span className={`world-ground ground-${terrainVisual.material}`} aria-hidden="true" />
+        {terrainVisual.prop && <img className={`world-prop ${terrainVisual.blocked ? 'blocking-prop' : 'low-prop'}`} src={`${WORLD_ART_ROOT}/props/${terrainVisual.prop}.webp`} alt="" aria-hidden="true" draggable="false" />}
+        {discovery && <span className={`discovery-marker discovery-${discovery.kind}`} data-discovery-id={discovery.id} title={discovery.title}>
+          <img src={`/art/world-v2/props/${discovery.kind === 'relic' ? 'crystal' : discovery.kind === 'technique' ? 'monument' : 'crates'}.webp`} alt={discovery.title} draggable="false" />
+          <Sparkles size={16} />
+        </span>}
+        {danger && (
+          <div className={`danger-tile danger-${hazardInfo?.pattern || "wave"}`}>
+            <span>{hazardInfo?.damage || 6}</span>
+          </div>
+        )}
+        {aoePreview && <div className="skill-impact-tile" aria-hidden="true" />}
+        {cameraFocused && <div className="camera-focus-tile" />}
+        {cellEffects.map((effect) => (
+          <div
+            key={effect.id}
+            className={`combat-effect effect-${effect.type} ${effect.direction ? `effect-dir-${effect.direction}` : ""}`}
+            style={{ animationDuration: `${effect.duration}ms`, "--effect-duration": `${effect.duration}ms` }}
+          />
+        ))}
+        {cellPopups.map((popup) => (
+          <div
+            key={popup.id}
+            className={`damage-popup popup-${popup.kind}`}
+            style={{ animationDuration: `${popup.duration}ms` }}
+          >
+            {popup.text}
+          </div>
+        ))}
+        {movable && (
+          <div
+            className={`move-tile ${moveTileInfo?.stay ? "stay-move-tile" : ""} ${moveTileInfo?.traitBonus ? "trait-bonus-tile" : ""} ${moveTileInfo?.traitPenalty ? "trait-penalty-tile" : ""}`}
+            title={`${moveTileInfo?.label || "지형"} · 이동력 ${moveTileInfo?.cost}`}
+          >
+            <span className="move-cost-badge">
+              {moveTileInfo?.stay ? "제" : moveTileInfo?.cost}
+            </span>
+          </div>
+        )}
+        {movingUnitStartsHere && (
+          <div
+            key={movingUnit.frame}
+            className={`map-moving-unit tile-moving-unit moving-${movingUnit.direction || "down"} ${
+              movingUnit.unit.type === "ally"
+                ? "ally-moving"
+                : movingUnit.unit.type === "boss"
+                ? "boss-moving"
+                : "enemy-moving"
+            } ${getUnitVisualClass(movingUnit.unit)}`}
+            style={{
+              "--from-x": 0,
+              "--from-y": 0,
+              "--cols": 1,
+              "--rows": 1,
+              "--dx": movingUnit.to.x - movingUnit.from.x,
+              "--dy": movingUnit.to.y - movingUnit.from.y,
+              "--move-duration": `${movingUnit.duration || 460}ms`,
+              "--unit-depth": `${(movingUnit.from.y / Math.max(1, activeMap.length - 1)).toFixed(3)}`,
+              "--unit-depth-scale": `${(
+                (movingUnit.unit.type === "boss" ? 0.94 : 0.84) +
+                (movingUnit.from.y / Math.max(1, activeMap.length - 1)) * (movingUnit.unit.type === "boss" ? 0.22 : 0.24)
+              ).toFixed(3)}`,
+              "--unit-shadow-alpha": `${(0.38 + (movingUnit.from.y / Math.max(1, activeMap.length - 1)) * 0.26).toFixed(3)}`,
+              "--unit-ground-y": `${Math.round(2 + (movingUnit.from.y / Math.max(1, activeMap.length - 1)) * 5)}px`,
+              "--unit-z": `${Math.round((movingUnit.unit.type === "boss" ? 64 : 56) + (movingUnit.from.y / Math.max(1, activeMap.length - 1)) * 18)}`,
+            }}
+          >
+            <span className="move-trail move-trail-a" />
+            <span className="move-trail move-trail-b" />
+            <span className="move-step-dust dust-a" />
+            <span className="move-step-dust dust-b" />
+            <span className="move-motion-ring" />
+            <img
+              src={getBattleMapUnitSprite(movingUnit.unit)}
+              alt={movingUnit.unit.name}
+              onError={(event) => handleBattleMapUnitImageError(event, movingUnit.unit)}
+            />
+            <span className="moving-unit-fallback">{movingUnit.unit.icon}</span>
+          </div>
+        )}
+        {attackable && (
+          <div className={`attack-tile command-range-tile ${mode === "skill" ? "skill-range-tile" : ""} ${unit?.hp > 0 && unit.type !== "ally" ? "is-range-target" : ""}`} aria-hidden="true" />
+        )}
+        {enemyThreat && !attackable && (
+          <div className="enemy-threat-tile" />
+        )}
+        {unit && !isMovingUnit && (
+          <>
+            <div
+              className={`unit sprite-unit ${unit.type === "ally" ? "ally-unit" : unit.type === "enemy" ? "enemy-unit" : "boss-unit"} ${getUnitVisualClass(unit)} ${!unitActionMotion ? "free-motion-unit" : ""} ${turn === "ally" && unit.type === "ally" && isUnitReady(unit) ? "ready-motion-unit" : ""} ${unit.maxHp && unit.hp / unit.maxHp <= 0.35 ? "wounded-motion-unit" : ""} ${isMovingUnit ? "moving-hidden moving-source-shadow" : ""} ${inspectedUnitId === unit.id ? "inspected-unit" : ""} ${selectedUnit === unit.id ? "selected-unit" : ""} ${unit.phase2 ? "phase2-unit" : ""} ${unit.acted ? "acted-unit" : ""} ${unit.hitFlash ? "hit-flash-unit" : ""} ${unitActionMotion ? `action-motion action-${unitActionMotion.type} action-dir-${unitActionMotion.direction}` : ""}`}
+              onPointerDown={(event) => event.stopPropagation()}
+              onPointerUp={(event) => event.stopPropagation()}
+              data-unit-id={unit.id}
+              style={unitActionMotion ? {
+                ...unitFreeMotionStyle,
+                "--action-dx": unitActionMotion.dx,
+                "--action-dy": unitActionMotion.dy,
+                "--action-step-x": `${unitActionMotion.dx * 7}px`,
+                "--action-step-y": `${unitActionMotion.dy * 7}px`,
+                "--action-back-x": `${unitActionMotion.dx * -3}px`,
+                "--action-back-y": `${unitActionMotion.dy * -3}px`,
+                "--counter-ready-x": `${unitActionMotion.dx * -6}px`,
+                "--counter-ready-y": `${unitActionMotion.dy * -6}px`,
+                "--counter-strike-x": `${unitActionMotion.dx * 9}px`,
+                "--counter-strike-y": `${unitActionMotion.dy * 9}px`,
+                "--miss-step-x": `${unitActionMotion.dx * 8}px`,
+                "--miss-step-y": `${unitActionMotion.dy * 8}px`,
+                "--miss-back-x": `${unitActionMotion.dx * -7}px`,
+                "--miss-back-y": `${unitActionMotion.dy * -7}px`,
+                "--action-duration": `${unitActionMotion.duration}ms`,
+              } : unitFreeMotionStyle}
+            >
+              {unitActionMotion && (
+                <>
+                  <span className={`unit-action-burst burst-${unitActionMotion.motionKey || "sword"}`} />
+                  <span className={`unit-action-weapon weapon-${unitActionMotion.motionKey || "sword"} weapon-dir-${unitActionMotion.direction || "right"}`} />
+                </>
+              )}
+              <img src={getBattleMapUnitSprite(unit)} alt={unit.name} onError={(event) => handleBattleMapUnitImageError(event, unit)} />
+              <span className="unit-emoji-fallback">{unit.icon}</span>
+              <span className={`unit-map-marker ${unit.type === "ally" ? "unit-map-ally" : unit.type === "boss" ? "unit-map-boss" : "unit-map-enemy"}`}>
+                {unit.type === "ally" ? "A" : unit.type === "boss" ? "B" : "E"}
+              </span>
+            </div>
+            <div className={`map-hp-strip ${unit.type === "ally" ? "hp-ally" : unit.type === "boss" ? "hp-boss" : "hp-enemy"} ${movingOverlayClassName}`}>
+              <span style={{ width: `${unit.maxHp ? Math.max(0, Math.min(100, (unit.hp / unit.maxHp) * 100)) : 0}%` }} />
+            </div>
+            {unit.type !== "ally" && (
+              <div className={`enemy-hp-peek ${movingOverlayClassName}`}>{unit.hp}</div>
+            )}
+            {unit.skillCooldown > 0 && (
+              <div className={`skill-cd-badge ${movingOverlayClassName}`}>CD {unit.skillCooldown}</div>
+            )}
+            {unit.status && unit.status.length > 0 && (
+              <div className={`status-badges ${movingOverlayClassName}`}>
+                {unit.status.map((s) => (
+                  <span key={s.type}>{STATUS_INFO[s.type]?.icon || "•"}</span>
+                ))}
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    );
+  })
+);
+});
+
 export default function App() {
-  const patch = usePatchUpdates();
+  usePatchLifecycle();
   useEffect(() => {
     const nativeClassName = "native-capacitor-app";
     const isNativeApp = isNativeCapacitorRuntime();
@@ -8130,6 +8366,7 @@ export default function App() {
   const [battleSettingsOpen, setBattleSettingsOpen] = useState(false);
   const [cameraFocus, setCameraFocus] = useState(null);
   const battleMapShellRef = useRef(null);
+  const battleMapPanFrameRef = useRef(null);
   const battleMapPanRef = useRef({
     pointerId: null,
     startX: 0,
@@ -8141,12 +8378,15 @@ export default function App() {
   const suppressBattleMapClickRef = useRef(false);
   const [screenShake, setScreenShake] = useState(false);
   const visualTimersRef = useRef(new Set());
-  const combatBusy = Boolean(turnBusy || movingUnit || battleResolving || combatCutscene || bossCutscene);
+  const combatBusy = Boolean(turnBusy || movingUnit || battleResolving || combatCutscene || bossCutscene || stageBanner?.type === "start");
   const battleInputLocked = Boolean(combatBusy || battle || result || itemOpen || skillChoiceOpen || supportSkillChoice || battleSettingsOpen || discoveryReceipt || journalOpen);
 
   useEffect(() => {
     const timers = visualTimersRef.current;
-    return () => timers.forEach(timer => window.clearTimeout(timer));
+    return () => {
+      timers.forEach(timer => window.clearTimeout(timer));
+      cancelAnimationFrame(battleMapPanFrameRef.current);
+    };
   }, []);
 
   const closeMobileCombatPanels = () => {
@@ -8233,7 +8473,7 @@ export default function App() {
   );
   window.__CHEONSU_ACTIVE_MAP__ = activeMap;
   const stageDiscoveries = useMemo(() => getStageDiscoveries(activeStage.id, activeMap, activeStage.units), [activeStage, activeMap]);
-  const visibleDiscoveries = getVisibleDiscoveries(stageDiscoveries, units, exploration, 3);
+  const visibleDiscoveries = useMemo(() => getVisibleDiscoveries(stageDiscoveries, units, exploration, 3), [stageDiscoveries, units, exploration]);
   const enemiesAlive = units.filter((unit) => unit.type !== "ally" && unit.hp > 0);
   const alliesAlive = units.filter((unit) => unit.type === "ally" && unit.hp > 0);
   const activeBoss = enemiesAlive.find((unit) => unit.type === "boss");
@@ -8244,7 +8484,7 @@ export default function App() {
   const nextReinforcementRound = getReinforcementRounds(activeStage).find(
     (reinforceRound) => reinforceRound >= round
   );
-  const selected = withSkill(units.find((u) => u.id === selectedUnit), activeSkillChoice?.unitId === selectedUnit ? activeSkillChoice.skillId : undefined);
+  const { selected, moveTiles, attackTiles } = useBattleSelection(units, selectedUnit, activeSkillChoice, activeMap, mode);
   const canCommandSelected = Boolean(selected?.type === "ally" && selected.hp > 0 && !selected.acted && turn === "ally" && !battleInputLocked);
   const targetSelectionActive = Boolean(canCommandSelected && (mode === "attack" || (mode === "skill" && selected.skillType === "attack")));
   const inspectedUnit = units.find((u) => u.id === inspectedUnitId);
@@ -8258,19 +8498,12 @@ export default function App() {
     !battleInputLocked
   );
   const canUndoMove = Boolean(showPostMoveCommandMenu && moveUndo?.unitId === selected?.id);
-  const moveTiles = getMoveTiles(selected, units, activeMap).filter(
-    (tile) => !isBlockedBattleTile(activeMap[tile.y]?.[tile.x])
-  );
-  const attackTiles = (mode === "skill" && selected?.skillType !== "attack" ? [] : getAttackTiles(selected, mode, activeMap)).filter(
-    (tile) => !isBlockedBattleTile(activeMap[tile.y]?.[tile.x])
-  );
   const showAttackRange = Boolean(selected?.type === "ally" && !selected.acted && turn === "ally" &&
     (mode === "attack" || (mode === "skill" && selected.skillType === "attack")) &&
     !combatBusy && !result && !skillChoiceOpen && !itemOpen);
   const rangeTarget = battle?.defender || enemiesAlive.find(unit => unit.id === rangePreviewTargetId &&
     attackTiles.some(tile => tile.x === unit.x && tile.y === unit.y));
-  const skillAreaTiles = showAttackRange && mode === "skill" && rangeTarget && getSkillAreaRadius(selected) > 0
-    ? getTilesInRadius(rangeTarget, getSkillAreaRadius(selected), activeMap) : [];
+  const skillAreaTiles = useSkillAreaPreview(selected, rangeTarget, mode, showAttackRange, activeMap);
   const enemyThreatTileKeys = useMemo(() => {
     if (mapVisibility === "art") return new Set();
 
@@ -8341,14 +8574,14 @@ export default function App() {
 
   const activeTutorialGuide = getTutorialGuide(tutorialGuideId);
 
-  const saveHealthReport = getSaveHealthReport();
-  const saveRecoverySuggestion = getSaveRecoverySuggestion();
+  const saveHealthReport = screen === "saveHealth" || screen === "postLaunch" ? getSaveHealthReport() : null;
+  const saveRecoverySuggestion = screen === "saveHealth" ? getSaveRecoverySuggestion() : null;
 
 
 
 
   const deploymentPreviewStage = deploymentStage
-    ? expandStageForLargeBattle(deploymentStage, Math.max(1, deployedIds.length || MAX_DEPLOY_COUNT))
+    ? getStagePreview(deploymentStage, Math.max(1, deployedIds.length || MAX_DEPLOY_COUNT))
     : null;
   const deploymentEnemySummary = deploymentStage
     ? getStageEnemySummary(deploymentStage, Math.max(1, deployedIds.length || MAX_DEPLOY_COUNT))
@@ -8380,8 +8613,8 @@ export default function App() {
   const deploymentAnyQuickSlots = getAnyQuickSlotEntries(strategyReportArchive, strategyQuickSlots);
   const stageMapAtlas = useMemo(
     () =>
-      stages.map((stage) => {
-        const previewStage = expandStageForLargeBattle(stage, MAX_DEPLOY_COUNT);
+      screen === "campaign" && campaignView === "atlas" ? stages.map((stage) => {
+        const previewStage = getStagePreview(stage, MAX_DEPLOY_COUNT);
 
         return {
           stage,
@@ -8390,8 +8623,8 @@ export default function App() {
           threat: getStageThreatLevel(stage, MAX_DEPLOY_COUNT),
           enemySummary: getStageEnemySummary(stage, MAX_DEPLOY_COUNT),
         };
-      }),
-    []
+      }) : [],
+    [screen, campaignView]
   );
 
   const visibleStrategyArchive = filterStrategyArchive(
@@ -8768,6 +9001,8 @@ export default function App() {
   };
 
   const resetBattleMapPan = () => {
+    cancelAnimationFrame(battleMapPanFrameRef.current);
+    battleMapPanFrameRef.current = null;
     battleMapPanRef.current = {
       pointerId: null,
       startX: 0,
@@ -8785,6 +9020,7 @@ export default function App() {
 
     if (!shell) return;
 
+    resetBattleMapPan();
     battleMapPanRef.current = {
       pointerId: event.pointerId,
       startX: event.clientX,
@@ -8806,20 +9042,26 @@ export default function App() {
 
     if (!pan.dragging && Math.abs(dx) + Math.abs(dy) > 14) {
       pan.dragging = true;
-      shell.classList.add("is-panning");
-
-      try {
-        shell.setPointerCapture(event.pointerId);
-      } catch {
-        // Pointer capture is best-effort; native scroll remains available.
+      if (event.pointerType !== "touch") {
+        try { shell.setPointerCapture(event.pointerId); } catch {
+          // Pointer capture is best-effort in older WebViews.
+        }
       }
     }
 
     if (!pan.dragging) return;
 
+    // Touch scrolling belongs to the WebView compositor, including momentum.
+    if (event.pointerType === "touch") return;
     event.preventDefault();
-    shell.scrollLeft = pan.scrollLeft - dx;
-    shell.scrollTop = pan.scrollTop - dy;
+    pan.nextLeft = pan.scrollLeft - dx;
+    pan.nextTop = pan.scrollTop - dy;
+    if (battleMapPanFrameRef.current === null) {
+      battleMapPanFrameRef.current = requestAnimationFrame(() => {
+        battleMapPanFrameRef.current = null;
+        shell.scrollTo({ left: pan.nextLeft, top: pan.nextTop, behavior: "instant" });
+      });
+    }
   };
 
   const handleBattleMapPointerEnd = (event) => {
@@ -8827,7 +9069,10 @@ export default function App() {
 
     if (pan.pointerId !== event.pointerId) return;
 
-    if (pan.dragging) {
+    if (pan.dragging || event.type === "pointercancel") {
+      if (pan.dragging && event.pointerType !== "touch" && Number.isFinite(pan.nextLeft)) {
+        event.currentTarget.scrollTo({ left: pan.nextLeft, top: pan.nextTop, behavior: "instant" });
+      }
       suppressBattleMapClickRef.current = true;
       window.setTimeout(() => {
         suppressBattleMapClickRef.current = false;
@@ -8842,8 +9087,6 @@ export default function App() {
         }, 80);
       }
     }
-
-    event.currentTarget.classList.remove("is-panning");
 
     try {
       event.currentTarget.releasePointerCapture(event.pointerId);
@@ -13979,7 +14222,7 @@ export default function App() {
   };
 
   return (
-    <div className={`app world-art-app ${screenShake ? `screen-shake-${screenShake}` : ""}`} style={{ "--battle-speed": battleSpeedConfig.multiplier }}>
+    <div className="app world-art-app" style={{ "--battle-speed": battleSpeedConfig.multiplier }}>
       {saveNotice && !result && !shopOpen && !equipmentOpen && !campFacility && <div className={`save-notice ${saveNotice.ok ? '' : 'save-failed'}`} role="status">
         <Save size={18} /><span>{saveNotice.text}</span><button title="알림 닫기" aria-label="저장 알림 닫기" onClick={() => setSaveNotice(null)}><X size={18} /></button>
       </div>}
@@ -15558,7 +15801,7 @@ export default function App() {
             <button onClick={() => setScreen("pwa")}>설치 / 점검 화면</button>
           </div>
 
-          <PatchSettings patch={patch} />
+          <PatchSettings />
 
           <div className="settings-danger save-manager-card">
             <h2>저장 데이터 관리</h2>
@@ -16556,7 +16799,7 @@ export default function App() {
             v1.68.9.8.7.6.5.4.3.2
           </button>
           <div className="menu-version-line">BUILD v{SAVE_VERSION}</div>
-          <PatchTitleStatus patch={patch} />
+          <PatchTitleStatus />
         </div>
       )}
 
@@ -18101,7 +18344,7 @@ export default function App() {
 
           <div
             ref={battleMapShellRef}
-            className={`battle-map-scroll-shell map-zoom-${mapZoom} map-visibility-${mapVisibility} ${isFinalConceptStage(activeStage) ? "final-illustrated-shell" : ""}`}
+            className={`battle-map-scroll-shell map-zoom-${mapZoom} map-visibility-${mapVisibility} ${isFinalConceptStage(activeStage) ? "final-illustrated-shell" : ""} ${screenShake ? `screen-shake-${screenShake}` : ""}`}
             style={{
               "--map-cols": activeMap[0].length,
               "--map-rows": activeMap.length,
@@ -18114,6 +18357,19 @@ export default function App() {
           >
           <div
             className={`battle-map expanded-map large-map classic-pixel-map grounded-battlefield world-battlefield biome-${getWorldBiome(activeStage.id)} ${isFinalConceptStage(activeStage) ? "final-illustrated-map" : ""}`}
+            onClick={event => {
+              if (suppressBattleMapClickRef.current) {
+                suppressBattleMapClickRef.current = false;
+                return;
+              }
+              const unitElement = event.target.closest('[data-unit-id]');
+              if (unitElement) {
+                handleBattleUnitPress(event, units.find(unit => unit.id === unitElement.dataset.unitId));
+                return;
+              }
+              const tile = event.target.closest('[data-map-x][data-map-y]');
+              if (tile) handleBattleTilePress(Number(tile.dataset.mapX), Number(tile.dataset.mapY));
+            }}
             style={{
               gridTemplateColumns: `repeat(${activeMap[0].length}, var(--battle-tile-size, minmax(0, 1fr)))`,
               "--map-cols": activeMap[0].length,
@@ -18170,306 +18426,19 @@ export default function App() {
                 </div>
               </div>
             )}
-            {activeMap.flatMap((row, y) =>
-              row.map((tile, x) => {
-                const unit = units.find((u) => u.x === x && u.y === y);
-                const unitActionMotion = unit && actionMotion?.attackerId === unit.id ? actionMotion : null;
-                const tileBlocked = isBlockedBattleTile(tile);
-                const moveTileInfo = tileBlocked ? null : moveTiles.find((m) => m.x === x && m.y === y);
-                const movable = !tileBlocked && turn === "ally" && mode === "move" && selectedUnit && Boolean(moveTileInfo);
-                const attackable = showAttackRange && attackTiles.some((m) => m.x === x && m.y === y);
-                const enemyThreat = !tileBlocked && !showAttackRange && !skillChoiceOpen && enemyThreatTileKeys.has(`${x},${y}`);
-                const hazardInfo = hazards.find((h) => h.x === x && h.y === y);
-                const danger = Boolean(hazardInfo);
-                const aoePreview = skillAreaTiles.some((target) => target.x === x && target.y === y);
-                const cameraFocused = cameraFocus?.x === x && cameraFocus?.y === y;
-                const cellEffects = visualEffects.filter((effect) => effect.x === x && effect.y === y);
-                const cellPopups = damagePopups.filter((popup) => popup.x === x && popup.y === y);
-                const unitSeed = unit ? (x + 1) * 137 + (y + 1) * 83 + unit.id.length * 29 : 0;
-                const unitIdleSide = unit ? (unitSeed % 3) - 1 : 0;
-                const unitIdleTilt = unit ? (unitSeed % 2 === 0 ? -1 : 1) * (1 + (unitSeed % 3)) : 0;
-                const unitDepth = unit ? y / Math.max(1, activeMap.length - 1) : 0.5;
-                const unitDepthScale = unit
-                  ? (unit.type === "boss" ? 0.94 : 0.84) + unitDepth * (unit.type === "boss" ? 0.22 : 0.24)
-                  : 1;
-                const unitShadowAlpha = unit ? 0.38 + unitDepth * 0.26 : 0.55;
-                const unitFreeMotionStyle = unit ? {
-                  "--unit-idle-delay": `${-(unitSeed % 1300)}ms`,
-                  "--unit-idle-up": `${-(2 + (unitSeed % 3))}px`,
-                  "--unit-idle-down": `${unitSeed % 2}px`,
-                  "--unit-idle-side": `${unitIdleSide}px`,
-                  "--unit-idle-side-away": `${unitIdleSide * -1}px`,
-                  "--unit-idle-tilt": `${unitIdleTilt}deg`,
-                  "--unit-idle-tilt-away": `${unitIdleTilt * -1}deg`,
-                  "--unit-idle-tilt-soft": `${unitIdleTilt * -0.65}deg`,
-                  "--unit-depth": unitDepth.toFixed(3),
-                  "--unit-depth-scale": unitDepthScale.toFixed(3),
-                  "--unit-shadow-alpha": unitShadowAlpha.toFixed(3),
-                  "--unit-ground-y": `${Math.round(2 + unitDepth * 5)}px`,
-                  "--unit-z": `${Math.round((unit.type === "boss" ? 64 : 56) + unitDepth * 18)}`,
-                } : undefined;
-                const isMovingUnit =
-                  unit && (movingUnit?.id === unit.id || movingUnit?.unit?.id === unit.id);
-                const movingUnitStartsHere =
-                  movingUnit && movingUnit.from.x === x && movingUnit.from.y === y;
-                const movingOverlayClassName = isMovingUnit ? "moving-overlay-hidden" : "";
-                const terrainVisual = getWorldTileVisual(activeMap, x, y, activeStage.id);
-                const discovery = visibleDiscoveries.find(entry => entry.x === x && entry.y === y);
-                const terrainClassName = [
-                  "tile",
-                  tile,
-                  "terrain-rich-tile",
-                  `terrain-${tile}`,
-                  getTerrainVariantClassName(x, y),
-                  getTerrainEdgeClassNames(activeMap, x, y, tile),
-                  movable ? "movable-tile-cell" : "",
-                ].filter(Boolean).join(" ");
-                return (
-                  <div
-                    className={terrainClassName}
-                    key={`${x}-${y}`}
-                    data-map-x={x}
-                    data-map-y={y}
-                    onPointerEnter={() => { if (targetSelectionActive) setRangePreviewTargetId(unit?.type !== "ally" ? unit?.id || null : null); }}
-                    onPointerLeave={() => setRangePreviewTargetId(null)}
-                    title={getInspectTerrainLabel(tile)}
-                    style={{ ...getTerrainVisualStyle(tile, x, y), ...terrainVisual.style }}
-                    onClick={() => {
-                      if (suppressBattleMapClickRef.current) {
-                        suppressBattleMapClickRef.current = false;
-                        return;
-                      }
-
-                      handleBattleTilePress(x, y);
-                    }}>
-                    <span className={`world-ground ground-${terrainVisual.material}`} aria-hidden="true" />
-                    {terrainVisual.prop && <img className={`world-prop ${terrainVisual.blocked ? 'blocking-prop' : 'low-prop'}`} src={`${WORLD_ART_ROOT}/props/${terrainVisual.prop}.webp`} alt="" aria-hidden="true" draggable="false" />}
-                    {discovery && <span className={`discovery-marker discovery-${discovery.kind}`} data-discovery-id={discovery.id} title={discovery.title}>
-                      <img src={`/art/world-v2/props/${discovery.kind === 'relic' ? 'crystal' : discovery.kind === 'technique' ? 'monument' : 'crates'}.webp`} alt={discovery.title} draggable="false" />
-                      <Sparkles size={16} />
-                    </span>}
-                    {danger && (
-                      <div className={`danger-tile danger-${hazardInfo?.pattern || "wave"}`}>
-                        <span>{hazardInfo?.damage || 6}</span>
-                      </div>
-                    )}
-                    {aoePreview && <div className="skill-impact-tile" aria-hidden="true" />}
-                    {cameraFocused && <div className="camera-focus-tile" />}
-                    {cellEffects.map((effect) => (
-                      <div
-                        key={effect.id}
-                        className={`combat-effect effect-${effect.type} ${effect.direction ? `effect-dir-${effect.direction}` : ""}`}
-                        style={{ animationDuration: `${effect.duration}ms`, "--effect-duration": `${effect.duration}ms` }}
-                      />
-                    ))}
-                    {cellPopups.map((popup) => (
-                      <div
-                        key={popup.id}
-                        className={`damage-popup popup-${popup.kind}`}
-                        style={{ animationDuration: `${popup.duration}ms` }}
-                      >
-                        {popup.text}
-                      </div>
-                    ))}
-                    {movable && (
-                      <div
-                        className={`move-tile ${moveTileInfo?.stay ? "stay-move-tile" : ""} ${moveTileInfo?.traitBonus ? "trait-bonus-tile" : ""} ${moveTileInfo?.traitPenalty ? "trait-penalty-tile" : ""}`}
-                        title={`${moveTileInfo?.label || "지형"} · 이동력 ${moveTileInfo?.cost}`}
-                      >
-                        <span className="move-cost-badge">
-                          {moveTileInfo?.stay ? "제" : moveTileInfo?.cost}
-                        </span>
-                      </div>
-                    )}
-                    {movingUnitStartsHere && (
-                      <div
-                        key={movingUnit.frame}
-                        className={`map-moving-unit tile-moving-unit moving-${movingUnit.direction || "down"} ${
-                          movingUnit.unit.type === "ally"
-                            ? "ally-moving"
-                            : movingUnit.unit.type === "boss"
-                            ? "boss-moving"
-                            : "enemy-moving"
-                        } ${getUnitVisualClass(movingUnit.unit)}`}
-                        style={{
-                          "--from-x": 0,
-                          "--from-y": 0,
-                          "--cols": 1,
-                          "--rows": 1,
-                          "--dx": movingUnit.to.x - movingUnit.from.x,
-                          "--dy": movingUnit.to.y - movingUnit.from.y,
-                          "--move-duration": `${movingUnit.duration || 460}ms`,
-                          "--unit-depth": `${(movingUnit.from.y / Math.max(1, activeMap.length - 1)).toFixed(3)}`,
-                          "--unit-depth-scale": `${(
-                            (movingUnit.unit.type === "boss" ? 0.94 : 0.84) +
-                            (movingUnit.from.y / Math.max(1, activeMap.length - 1)) * (movingUnit.unit.type === "boss" ? 0.22 : 0.24)
-                          ).toFixed(3)}`,
-                          "--unit-shadow-alpha": `${(0.38 + (movingUnit.from.y / Math.max(1, activeMap.length - 1)) * 0.26).toFixed(3)}`,
-                          "--unit-ground-y": `${Math.round(2 + (movingUnit.from.y / Math.max(1, activeMap.length - 1)) * 5)}px`,
-                          "--unit-z": `${Math.round((movingUnit.unit.type === "boss" ? 64 : 56) + (movingUnit.from.y / Math.max(1, activeMap.length - 1)) * 18)}`,
-                        }}
-                      >
-                        <span className="move-trail move-trail-a" />
-                        <span className="move-trail move-trail-b" />
-                        <span className="move-step-dust dust-a" />
-                        <span className="move-step-dust dust-b" />
-                        <span className="move-motion-ring" />
-                        <img
-                          src={getBattleMapUnitSprite(movingUnit.unit)}
-                          alt={movingUnit.unit.name}
-                          onError={(event) => handleBattleMapUnitImageError(event, movingUnit.unit)}
-                        />
-                        <span className="moving-unit-fallback">{movingUnit.unit.icon}</span>
-                      </div>
-                    )}
-                    {attackable && (
-                      <div className={`attack-tile command-range-tile ${mode === "skill" ? "skill-range-tile" : ""} ${unit?.hp > 0 && unit.type !== "ally" ? "is-range-target" : ""}`} aria-hidden="true" />
-                    )}
-                    {enemyThreat && !attackable && (
-                      <div className="enemy-threat-tile" />
-                    )}
-                    {unit && !isMovingUnit && (
-                      <>
-                        <div
-                          className={`unit sprite-unit ${unit.type === "ally" ? "ally-unit" : unit.type === "enemy" ? "enemy-unit" : "boss-unit"} ${getUnitVisualClass(unit)} ${!unitActionMotion ? "free-motion-unit" : ""} ${turn === "ally" && unit.type === "ally" && isUnitReady(unit) ? "ready-motion-unit" : ""} ${unit.maxHp && unit.hp / unit.maxHp <= 0.35 ? "wounded-motion-unit" : ""} ${isMovingUnit ? "moving-hidden moving-source-shadow" : ""} ${inspectedUnitId === unit.id ? "inspected-unit" : ""} ${selectedUnit === unit.id ? "selected-unit" : ""} ${unit.phase2 ? "phase2-unit" : ""} ${unit.acted ? "acted-unit" : ""} ${unit.hitFlash ? "hit-flash-unit" : ""} ${unitActionMotion ? `action-motion action-${unitActionMotion.type} action-dir-${unitActionMotion.direction}` : ""}`}
-                          onPointerDown={(event) => event.stopPropagation()}
-                          onPointerUp={(event) => event.stopPropagation()}
-                          onClick={(event) => handleBattleUnitPress(event, unit)}
-                          style={unitActionMotion ? {
-                            ...unitFreeMotionStyle,
-                            "--action-dx": unitActionMotion.dx,
-                            "--action-dy": unitActionMotion.dy,
-                            "--action-step-x": `${unitActionMotion.dx * 7}px`,
-                            "--action-step-y": `${unitActionMotion.dy * 7}px`,
-                            "--action-back-x": `${unitActionMotion.dx * -3}px`,
-                            "--action-back-y": `${unitActionMotion.dy * -3}px`,
-                            "--counter-ready-x": `${unitActionMotion.dx * -6}px`,
-                            "--counter-ready-y": `${unitActionMotion.dy * -6}px`,
-                            "--counter-strike-x": `${unitActionMotion.dx * 9}px`,
-                            "--counter-strike-y": `${unitActionMotion.dy * 9}px`,
-                            "--miss-step-x": `${unitActionMotion.dx * 8}px`,
-                            "--miss-step-y": `${unitActionMotion.dy * 8}px`,
-                            "--miss-back-x": `${unitActionMotion.dx * -7}px`,
-                            "--miss-back-y": `${unitActionMotion.dy * -7}px`,
-                            "--action-duration": `${unitActionMotion.duration}ms`,
-                          } : unitFreeMotionStyle}
-                        >
-                          {unitActionMotion && (
-                            <>
-                              <span className={`unit-action-burst burst-${unitActionMotion.motionKey || "sword"}`} />
-                              <span className={`unit-action-weapon weapon-${unitActionMotion.motionKey || "sword"} weapon-dir-${unitActionMotion.direction || "right"}`} />
-                            </>
-                          )}
-                          <img src={getBattleMapUnitSprite(unit)} alt={unit.name} onError={(event) => handleBattleMapUnitImageError(event, unit)} />
-                          <span className="unit-emoji-fallback">{unit.icon}</span>
-                          <span className={`unit-map-marker ${unit.type === "ally" ? "unit-map-ally" : unit.type === "boss" ? "unit-map-boss" : "unit-map-enemy"}`}>
-                            {unit.type === "ally" ? "A" : unit.type === "boss" ? "B" : "E"}
-                          </span>
-                        </div>
-                        <div className={`map-hp-strip ${unit.type === "ally" ? "hp-ally" : unit.type === "boss" ? "hp-boss" : "hp-enemy"} ${movingOverlayClassName}`}>
-                          <span style={{ width: `${unit.maxHp ? Math.max(0, Math.min(100, (unit.hp / unit.maxHp) * 100)) : 0}%` }} />
-                        </div>
-                        {unit.type !== "ally" && (
-                          <div className={`enemy-hp-peek ${movingOverlayClassName}`}>{unit.hp}</div>
-                        )}
-                        {unit.skillCooldown > 0 && (
-                          <div className={`skill-cd-badge ${movingOverlayClassName}`}>CD {unit.skillCooldown}</div>
-                        )}
-                        {unit.status && unit.status.length > 0 && (
-                          <div className={`status-badges ${movingOverlayClassName}`}>
-                            {unit.status.map((s) => (
-                              <span key={s.type}>{STATUS_INFO[s.type]?.icon || "•"}</span>
-                            ))}
-                          </div>
-                        )}
-                      </>
-                    )}
-                  </div>
-                );
-              })
-            )}
+            <BattlefieldTiles
+              activeMap={activeMap} stageId={activeStage.id} units={units}
+              moveTiles={moveTiles} attackTiles={attackTiles} skillAreaTiles={skillAreaTiles}
+              turn={turn} mode={mode} selectedUnit={selectedUnit} inspectedUnitId={inspectedUnitId}
+              showAttackRange={showAttackRange} skillChoiceOpen={skillChoiceOpen}
+              enemyThreatTileKeys={enemyThreatTileKeys} hazards={hazards} cameraFocus={cameraFocus}
+              visualEffects={visualEffects} damagePopups={damagePopups} movingUnit={movingUnit}
+              actionMotion={actionMotion} visibleDiscoveries={visibleDiscoveries}
+              targetSelectionActive={targetSelectionActive} setRangePreviewTargetId={setRangePreviewTargetId}
+            />
           </div>
           </div>
 
-          <div className="mini-map-panel">
-            <div className="mini-map-head">
-              <strong>전장 미니맵</strong>
-              <span>{activeMap[0].length}x{activeMap.length} · 아군 {alliesAlive.length} / 적 {enemiesAlive.length}</span>
-            </div>
-            <div
-              className="mini-map-grid"
-              style={{
-                gridTemplateColumns: `repeat(${activeMap[0].length}, minmax(0, 1fr))`,
-              }}
-            >
-              {activeMap.flatMap((row, y) =>
-                row.map((tile, x) => {
-                  const miniUnit = units.find((unit) => unit.x === x && unit.y === y);
-                  const miniHazard = hazards.some((hazard) => hazard.x === x && hazard.y === y);
-                  const miniSelected = miniUnit && (miniUnit.id === selectedUnit || miniUnit.id === inspectedUnitId);
-                  const miniMoveInfo =
-                    turn === "ally" && mode === "move" && selectedUnit
-                      ? moveTiles.find((moveTile) => moveTile.x === x && moveTile.y === y)
-                      : null;
-                  const miniStayMove = Boolean(miniMoveInfo) && miniUnit?.id === selectedUnit;
-                  const miniMovable = Boolean(miniMoveInfo) && (!miniUnit || miniStayMove);
-
-                  return (
-                    <button
-                      key={`mini-${x}-${y}`}
-                      type="button"
-                      className={`mini-map-cell mini-${tile} ${
-                        miniUnit
-                          ? miniUnit.type === "ally"
-                            ? "mini-ally"
-                            : miniUnit.type === "boss"
-                            ? "mini-boss"
-                            : "mini-enemy"
-                          : ""
-                      } ${miniHazard ? "mini-hazard" : ""} ${miniSelected ? "mini-selected" : ""} ${miniMovable ? "mini-move" : ""}`}
-                      onClick={() => {
-                        if (miniMovable) {
-                          void moveSelectedUnitTo(x, y, miniMoveInfo);
-                          return;
-                        }
-
-                        if (mapZoom === "fit") setMapZoom("large");
-
-                        setTimeout(() => scrollBattleMapToCell(x, y, "smooth"), 80);
-
-                        if (miniUnit?.type === "ally" && turn === "ally" && !miniUnit.acted) {
-                          selectBattleAllyForAction(miniUnit, "미니맵에서 선택됨");
-                        } else if (miniUnit) {
-                          inspectBattleUnit(miniUnit, miniUnit.type === "ally" ? "미니맵 아군 확인" : "미니맵 확인");
-                        } else {
-                          setLogs((p) => [`미니맵 위치 이동: (${x + 1}, ${y + 1})`, ...p]);
-                        }
-                      }}
-                      aria-label={miniMovable ? `${x + 1},${y + 1} 이동 가능` : miniUnit ? `${miniUnit.name} 위치` : `${x},${y}`}
-                    >
-                      {miniUnit && (
-                        <span className={`mini-unit-portrait ${miniUnit.type === "ally" ? "mini-unit-ally" : miniUnit.type === "boss" ? "mini-unit-boss" : "mini-unit-enemy"}`}>
-                          <img
-                            src={getBattleMapUnitSprite(miniUnit)}
-                            alt={miniUnit.name}
-                            onError={(event) => { event.currentTarget.style.display = "none"; }}
-                          />
-                          <em>{miniUnit.icon || (miniUnit.type === "ally" ? "🛡️" : miniUnit.type === "boss" ? "👹" : "⚔️")}</em>
-                        </span>
-                      )}
-                    </button>
-                  );
-                })
-              )}
-            </div>
-            <div className="mini-map-legend">
-              <span className="legend-ally">아군</span>
-              <span className="legend-move">이동</span>
-              <span className="legend-enemy">적</span>
-              <span className="legend-boss">보스</span>
-              <span className="legend-hazard">위험</span>
-            </div>
-          </div>
 
           <div className="squad-command-panel">
             <div className="squad-command-head">

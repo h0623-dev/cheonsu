@@ -54,6 +54,19 @@ try {
     const box = await card.boundingBox();
     assert.ok(box.x >= 0 && box.x + box.width <= viewport.width + 1, 'settings must fit');
     await card.screenshot({ path: `tmp/update-qa/downloading-${viewport.width}.png` });
+    await page.evaluate(async bundleId => {
+      let map = window.__CHEONSU_ACTIVE_MAP__;
+      window.__rootRendersDuringDownload = 0;
+      Object.defineProperty(window, '__CHEONSU_ACTIVE_MAP__', { configurable: true,
+        get: () => map, set: value => { map = value; window.__rootRendersDuringDownload++; } });
+      for (let i = 520; i <= 800; i++) {
+        window.__progress({ bundleId, progress: i / 1000 });
+        if (i % 10 === 0) await new Promise(resolve => setTimeout(resolve, 10));
+      }
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    }, manifest.bundleId);
+    assert.equal(await card.getByRole('progressbar').getAttribute('value'), '80');
+    assert.equal(await page.evaluate(() => window.__rootRendersDuringDownload), 0, 'Background patch progress must not re-render the game root');
     await card.getByRole('checkbox').uncheck();
     assert.equal(await page.evaluate(() => localStorage.getItem('cheonsu_auto_patch')), 'false');
     await page.evaluate(() => window.__finishDownload());

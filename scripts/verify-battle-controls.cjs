@@ -134,6 +134,7 @@ async function bootstrap(page) {
   await page.getByRole('button', { name: '전투 시작', exact: true }).click();
   await page.getByRole('button', { name: '바로 전투', exact: true }).click();
   await page.locator('.world-battlefield .unit-visual-hero').waitFor();
+  await page.waitForFunction(() => document.querySelector('.cinematic-command-bar .prominent-save')?.disabled === false);
   const fixture = await saveBattle(page);
   assert.equal(fixture.selectedStage.id, 11, 'Fixtures originate from stage 11 started through the UI');
   const hero = fixture.units.find(unit => unit.id === 'hero');

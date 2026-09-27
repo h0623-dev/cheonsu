@@ -84,7 +84,9 @@ export function createPatchManager({ native, version, trust, storage, fetcher = 
         if (pending !== patch.bundleId) {
           emit({ status: 'downloading', message: `v${patch.version} 패치 다운로드 중`, progress: 0 });
           progressListener = await native.addListener('downloadBundleProgress', (event) => {
-            if (event.bundleId === patch.bundleId) emit({ progress: Math.max(0, Math.min(100, Math.round(event.progress * 100))) });
+            if (event.bundleId !== patch.bundleId || !Number.isFinite(event.progress)) return;
+            const progress = Math.max(0, Math.min(100, Math.round(event.progress * 100)));
+            if (progress > state.progress) emit({ progress });
           });
           const downloaded = await native.getDownloadedBundles();
           if (!downloaded.bundleIds.includes(patch.bundleId)) await native.downloadBundle({

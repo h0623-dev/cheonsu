@@ -1,3 +1,4 @@
+param([switch]$ApkOnly)
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $version = (Get-Content (Join-Path $root 'package.json') -Raw | ConvertFrom-Json).version
@@ -35,12 +36,15 @@ function Compare-ZipFiles($zip, $prefix) {
     return $count
 }
 $apk = [IO.Compression.ZipFile]::OpenRead($apkPath)
-$ota = [IO.Compression.ZipFile]::OpenRead($otaPath)
+$ota = if (!$ApkOnly) { [IO.Compression.ZipFile]::OpenRead($otaPath) } else { $null }
 try {
     $apkCount = Compare-ZipFiles $apk 'assets/public/'
-    $otaCount = Compare-ZipFiles $ota ''
-    foreach ($entry in $ota.Entries) {
-        if ($entry.FullName -match '(^/|(^|/)\.\.(/|$)|\\|\.pem$|\.keystore$)') { throw 'Unsafe OTA ZIP entry.' }
+    $otaCount = 'not packaged'
+    if ($ota) {
+        $otaCount = Compare-ZipFiles $ota ''
+        foreach ($entry in $ota.Entries) {
+            if ($entry.FullName -match '(^/|(^|/)\.\.(/|$)|\\|\.pem$|\.keystore$)') { throw 'Unsafe OTA ZIP entry.' }
+        }
     }
     $config = Read-ZipText $apk 'assets/capacitor.config.json' | ConvertFrom-Json
     $trust = Get-Content (Join-Path $root 'src/data/updateTrust.json') -Raw | ConvertFrom-Json
@@ -49,5 +53,6 @@ try {
     $plugins = Read-ZipText $apk 'assets/capacitor.plugins.json'
     if ($plugins -notmatch 'LiveUpdatePlugin') { throw 'LiveUpdate native plugin missing from APK.' }
     "PASS APK web files: $apkCount; OTA files: $otaCount; signature, native plugin, rollback and origin"
-} finally { $apk.Dispose(); $ota.Dispose() }
-Get-FileHash -Algorithm SHA256 -LiteralPath $apkPath, $otaPath | Select-Object Path, Hash
+} finally { $apk.Dispose(); if ($ota) { $ota.Dispose() } }
+$artifacts = if ($ApkOnly) { @($apkPath) } else { @($apkPath, $otaPath) }
+Get-FileHash -Algorithm SHA256 -LiteralPath $artifacts | Select-Object Path, Hash

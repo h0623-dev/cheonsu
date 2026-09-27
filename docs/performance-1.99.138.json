@@ -1,0 +1,237 @@
+{
+  "environment": "Windows / headless Edge / 390x844 / CPU slowdown 4x / production / isolated storage / stage 1; not physical Android",
+  "baseline": {
+    "version": "1.99.137",
+    "cpuRate": 4,
+    "results": [
+      {
+        "name": "campaign",
+        "elapsedMs": 1687,
+        "LayoutDuration": 104,
+        "RecalcStyleDuration": 18,
+        "ScriptDuration": 1467,
+        "TaskDuration": 1646,
+        "longTasks": [
+          881,
+          715
+        ]
+      },
+      {
+        "name": "deployment",
+        "elapsedMs": 227,
+        "LayoutDuration": 57,
+        "RecalcStyleDuration": 13,
+        "ScriptDuration": 73,
+        "TaskDuration": 189,
+        "longTasks": [
+          114
+        ]
+      },
+      {
+        "name": "story",
+        "elapsedMs": 189,
+        "LayoutDuration": 17,
+        "RecalcStyleDuration": 7,
+        "ScriptDuration": 57,
+        "TaskDuration": 111,
+        "longTasks": [
+          76
+        ]
+      },
+      {
+        "name": "battle-entry",
+        "elapsedMs": 2052,
+        "LayoutDuration": 82,
+        "RecalcStyleDuration": 322,
+        "ScriptDuration": 576,
+        "TaskDuration": 1175,
+        "longTasks": [
+          486,
+          79,
+          69,
+          64,
+          62,
+          65,
+          54
+        ]
+      },
+      {
+        "name": "commands-0",
+        "elapsedMs": 1058,
+        "LayoutDuration": 28,
+        "RecalcStyleDuration": 493,
+        "ScriptDuration": 240,
+        "TaskDuration": 996,
+        "longTasks": [
+          129,
+          322,
+          215,
+          123
+        ]
+      },
+      {
+        "name": "commands-1",
+        "elapsedMs": 966,
+        "LayoutDuration": 7,
+        "RecalcStyleDuration": 480,
+        "ScriptDuration": 215,
+        "TaskDuration": 878,
+        "longTasks": [
+          78,
+          298,
+          234,
+          119
+        ]
+      },
+      {
+        "name": "commands-2",
+        "elapsedMs": 726,
+        "LayoutDuration": 7,
+        "RecalcStyleDuration": 209,
+        "ScriptDuration": 250,
+        "TaskDuration": 634,
+        "longTasks": [
+          61,
+          55,
+          163,
+          94,
+          120
+        ]
+      },
+      {
+        "name": "map-pan",
+        "elapsedMs": 2480,
+        "LayoutDuration": 0,
+        "RecalcStyleDuration": 564,
+        "ScriptDuration": 148,
+        "TaskDuration": 1454,
+        "longTasks": [
+          51,
+          148,
+          60,
+          66,
+          59,
+          92,
+          60,
+          89,
+          55
+        ]
+      }
+    ],
+    "dom": {
+      "nodes": 1532,
+      "tiles": 312,
+      "animations": 1,
+      "mapWidth": 548,
+      "mapHeight": 974
+    },
+    "frameP95Ms": 50,
+    "framesOver50": 3
+  },
+  "updated": {
+    "version": "1.99.138",
+    "cpuRate": 4,
+    "results": [
+      {
+        "name": "campaign",
+        "elapsedMs": 2314,
+        "LayoutDuration": 99,
+        "RecalcStyleDuration": 18,
+        "ScriptDuration": 503,
+        "TaskDuration": 692,
+        "longTasks": [
+          625
+        ]
+      },
+      {
+        "name": "deployment",
+        "elapsedMs": 193,
+        "LayoutDuration": 58,
+        "RecalcStyleDuration": 15,
+        "ScriptDuration": 45,
+        "TaskDuration": 167,
+        "longTasks": [
+          92
+        ]
+      },
+      {
+        "name": "story",
+        "elapsedMs": 142,
+        "LayoutDuration": 16,
+        "RecalcStyleDuration": 6,
+        "ScriptDuration": 16,
+        "TaskDuration": 66,
+        "longTasks": []
+      },
+      {
+        "name": "battle-entry",
+        "elapsedMs": 1898,
+        "LayoutDuration": 85,
+        "RecalcStyleDuration": 299,
+        "ScriptDuration": 201,
+        "TaskDuration": 770,
+        "longTasks": [
+          415
+        ]
+      },
+      {
+        "name": "commands-0",
+        "elapsedMs": 697,
+        "LayoutDuration": 26,
+        "RecalcStyleDuration": 362,
+        "ScriptDuration": 71,
+        "TaskDuration": 619,
+        "longTasks": [
+          73,
+          269,
+          76,
+          69
+        ]
+      },
+      {
+        "name": "commands-1",
+        "elapsedMs": 479,
+        "LayoutDuration": 7,
+        "RecalcStyleDuration": 171,
+        "ScriptDuration": 51,
+        "TaskDuration": 406,
+        "longTasks": [
+          105,
+          73,
+          62
+        ]
+      },
+      {
+        "name": "commands-2",
+        "elapsedMs": 741,
+        "LayoutDuration": 7,
+        "RecalcStyleDuration": 438,
+        "ScriptDuration": 52,
+        "TaskDuration": 640,
+        "longTasks": [
+          237,
+          207,
+          63
+        ]
+      },
+      {
+        "name": "map-pan",
+        "elapsedMs": 1744,
+        "LayoutDuration": 0,
+        "RecalcStyleDuration": 37,
+        "ScriptDuration": 100,
+        "TaskDuration": 990,
+        "longTasks": []
+      }
+    ],
+    "dom": {
+      "nodes": 1182,
+      "tiles": 312,
+      "animations": 1,
+      "mapWidth": 548,
+      "mapHeight": 974
+    },
+    "frameP95Ms": 16.799999999999272,
+    "framesOver50": 0
+  }
+}

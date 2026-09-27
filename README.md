@@ -1,16 +1,18 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.137 / Android versionCode 336**
+현재 개발 빌드: **1.99.138 / Android versionCode 337**
 
 ## 다운로드
 
-- 로컬 최신 산출물: `cheonsu_1.99.137_update_debug.apk`, `cheonsu_development_1.99.137.zip`
-- [1.99.137 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.137)
+- 로컬 최신 산출물: `cheonsu_1.99.138_update_debug.apk`, `cheonsu_development_1.99.138.zip`
+- [1.99.138 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.138)
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)
 
-APK는 디버그 서명의 개발 테스트용입니다. 1.99.136이 설치되어 있으면 이번 버튼 겹침 보호 수정도 자동 패치로 받을 수 있습니다. 새 APK는 시스템 바 크기에 맞춰 WebView 영역을 자동 조정합니다. 앱을 삭제하지 말고 기존 앱 위에 설치하세요. 중요한 저장은 설정에서 내보내기를 권장합니다.
+APK는 디버그 서명의 개발 테스트용입니다. 1.99.136 이상이 설치되어 있으면 이번 성능 개선도 자동 패치로 받을 수 있습니다. 앱을 삭제하지 말고 기존 앱 위에 설치하세요. 중요한 저장은 설정에서 내보내기를 권장합니다.
+
+1.99.138: 스테이지 미리보기 캐시, 전장 렌더링 분리, 이동/사거리 계산 재사용, 터치 스크롤 충돌 제거, 마우스 드래그 프레임 처리, 자동 패치 진행률의 게임 전체 렌더링 차단. 상세: `docs/PERFORMANCE_PATCH_1.99.138.md`.
 
 1.99.137: Android 하단 내비게이션과 이동 후 취소/공격/스킬/아이템/대기 버튼 겹침 수정. 대상 목록만 스크롤하고 명령 버튼 유지, 5개 명령 아이콘/글자 배치 개선. 상세: `docs/NAVIGATION_PATCH_1.99.137.md`.
 

@@ -1,8 +1,10 @@
 import { Download, RefreshCw, CheckCircle, RotateCw } from 'lucide-react';
 import { version } from '../../package.json';
+import { usePatchUpdates } from '../engine/usePatchUpdates.js';
 import '../patch-updates.css';
 
-export function PatchSettings({ patch }) {
+export function PatchSettings() {
+  const patch = usePatchUpdates();
   const busy = ['checking', 'downloading'].includes(patch.status);
   return <section className="settings-danger app-update-card patch-settings" aria-labelledby="patch-heading">
     <h2 id="patch-heading"><Download size={20} aria-hidden="true" /> 게임 업데이트</h2>
@@ -22,7 +24,8 @@ export function PatchSettings({ patch }) {
   </section>;
 }
 
-export function PatchTitleStatus({ patch }) {
+export function PatchTitleStatus() {
+  const patch = usePatchUpdates();
   if (!['downloading', 'pending', 'rollback', 'native'].includes(patch.status)) return null;
   return <div className="patch-title-status" role="status">
     {patch.status === 'pending' ? <CheckCircle size={18} aria-hidden="true" /> : <Download size={18} aria-hidden="true" />}

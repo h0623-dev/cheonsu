@@ -2,11 +2,13 @@
 
 마지막 확인일: 2026-09-27
 프로젝트 위치: `C:\Users\user\Desktop\cheonsu`
-현재 앱/패키지 버전: `1.99.137` (Android 336)
+현재 앱/패키지 버전: `1.99.138` (Android 337)
 
-GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.137 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.137). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
+GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.138 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.138). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
 
-최신 산출물: `cheonsu_1.99.137_update_debug.apk`, `cheonsu_development_1.99.137.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+최신 산출물: `cheonsu_1.99.138_update_debug.apk`, `cheonsu_development_1.99.138.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+
+1.99.138 변경: 화면 전환 시 30개 스테이지의 중복 지형·배치 계산 제거. 전장 지형 렌더링 분리와 이동·사거리 계산 캐시, 화면 밖 저장 검사 생략, 숨겨진 미니맵의 DOM 제거. 터치 스크롤과 수동 스크롤의 충돌 제거 및 드래그 중 스타일 재계산 감소. 백그라운드 패치 진행률 갱신은 업데이트 UI만 다시 그립니다. 저장/행동 규칙은 동일합니다. 상세: `docs/PERFORMANCE_PATCH_1.99.138.md`.
 
 1.99.137 변경: Android 시스템 버튼 영역과 겹치던 전투 명령 버튼 보호. 기존 1.99.136 APK는 OTA 여백 보완, 새 APK는 실제 시스템 바 크기에 따라 화면 영역 조정. 긴 대상 목록만 스크롤, 이동 후 5개 명령 아이콘/글자 정렬, 스킬/아이템 창 취소 버튼 안전 영역 반영. 저장 형식과 전투 행동 규칙은 유지. 상세: `docs/NAVIGATION_PATCH_1.99.137.md`.
 
