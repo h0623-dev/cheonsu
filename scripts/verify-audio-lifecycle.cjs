@@ -11,6 +11,7 @@ const fs=require('node:fs/promises');
       window.audioTest={created:0,active:0};
       window.AudioContext=class extends NativeAudio {
         createOscillator(){const node=super.createOscillator();window.audioTest.created++;window.audioTest.active++;node.addEventListener('ended',()=>window.audioTest.active--);return node;}
+        createBufferSource(){const node=super.createBufferSource();window.audioTest.created++;window.audioTest.active++;node.addEventListener('ended',()=>window.audioTest.active--);return node;}
       };
       localStorage.setItem('cheonsu_settings_v1',JSON.stringify({soundOn:true,musicOn:true,sfxVolume:80,cutsceneMode:'off',effectsOn:false}));
     });
@@ -24,6 +25,7 @@ const fs=require('node:fs/promises');
     const count=()=>page.evaluate(()=>({...window.audioTest}));
     const first=await count();await page.waitForTimeout(1200);const playing=await count();
     assert.ok(playing.created>first.created,'BGM keeps scheduling past the entry cue');
+    await page.getByRole('button',{name:'정보 표시',exact:true}).click();
     await page.locator('.cinematic-stage-actions button').filter({hasText:'설정'}).click();
     const music=page.locator('.battle-settings-menu button').filter({has:page.locator('span',{hasText:/^음악$/})});
     await music.click();await page.waitForTimeout(400);const off=await count();await page.waitForTimeout(1000);

@@ -114,6 +114,20 @@
 
 .world-art-app .battle-screen.battle-final-concept.battle-board-only {
   background: #1d2928 !important;
+  width: min(100dvw, 1120px) !important;
+}
+
+.world-art-app .battle-screen.battle-board-only .battle-map-scroll-shell.map-zoom-fit .battle-map.classic-pixel-map {
+  --battle-tile-size: clamp(28px, calc((min(100dvw, 1120px) - 10px) / var(--map-cols)), 48px) !important;
+}
+.world-art-app .battle-screen.battle-board-only .battle-map-scroll-shell.map-zoom-normal .battle-map.classic-pixel-map {
+  --battle-tile-size: clamp(34px, calc(((min(100dvw, 1120px) - 10px) / var(--map-cols)) + 6px), 58px) !important;
+}
+.world-art-app .battle-screen.battle-board-only .battle-map-scroll-shell.map-zoom-large .battle-map.classic-pixel-map {
+  --battle-tile-size: clamp(42px, calc(((min(100dvw, 1120px) - 10px) / var(--map-cols)) + 14px), 70px) !important;
+}
+.world-art-app .battle-screen.battle-board-only .battle-map-scroll-shell.map-zoom-xl .battle-map.classic-pixel-map {
+  --battle-tile-size: clamp(50px, calc(((min(100dvw, 1120px) - 10px) / var(--map-cols)) + 22px), 86px) !important;
 }
 .world-art-app .battle-screen.battle-final-concept.battle-board-only .battle-map-scroll-shell {
   background: #506847 !important;

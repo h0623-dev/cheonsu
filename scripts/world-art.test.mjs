@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, access } from 'node:fs/promises';
-import { getWorldBiome, getWorldScene, getWorldTileVisual, WORLD_BIOMES } from '../src/data/worldArt.js';
+import { getWorldBiome, getWorldScene, getWorldTileVisual } from '../src/data/worldArt.js';
+import { getBattlefieldPlan } from '../src/data/battlefieldPlans.js';
 
 const manifest = JSON.parse(await readFile(new URL('../public/art/world-v2/manifest.json', import.meta.url), 'utf8'));
 const types = ['plain', 'block', 'wall', 'void', 'forest', 'hill', 'fort', 'gate', 'road', 'dark', 'rune', 'trap', 'swamp', 'water', 'ice', 'fire'];
@@ -20,7 +21,7 @@ for (let stage = 1; stage <= 30; stage++) {
   test(`Stage ${stage}: all terrain is drawn from actual tile data in the correct biome`, () => {
     const map = Array.from({ length: 4 }, () => [...types]);
     const original = JSON.stringify(map);
-    assert.equal(getWorldBiome(stage), WORLD_BIOMES[Math.floor((stage - 1) / 6)]);
+    assert.equal(getWorldBiome(stage), getBattlefieldPlan(stage).biome);
     assert.ok(getWorldScene(stage).endsWith(`${getWorldBiome(stage)}.webp`));
     for (let y = 0; y < map.length; y++) {
       for (let x = 0; x < map[y].length; x++) {
@@ -38,9 +39,14 @@ for (let stage = 1; stage <= 30; stage++) {
 }
 
 test('Matching path tiles have no internal fading seams', () => {
-  const map = Array.from({ length: 3 }, () => ['road', 'plain', 'road']);
+  const map = Array.from({ length: 3 }, () => ['road', 'road', 'road']);
   const center = getWorldTileVisual(map, 1, 1, 1);
   for (const edge of ['left', 'right', 'top', 'bottom']) assert.equal(center.style[`--blend-${edge}`], '0px');
+});
+
+test('Open grass and the road use visibly different terrain materials', () => {
+  const map = [['plain', 'road']];
+  assert.notEqual(getWorldTileVisual(map, 0, 0, 1).material, getWorldTileVisual(map, 1, 0, 1).material);
 });
 
 test('Icon and screenshot metadata reference local files with current artwork', async () => {

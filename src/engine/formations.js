@@ -1,4 +1,5 @@
 import { isTerrainBlocked } from './movement.js';
+import { getBattlefieldPlan, orientBattlePoint, deploymentDepth } from '../data/battlefieldPlans.js';
 
 const key = ({ x, y }) => `${x},${y}`;
 const distance = (a, b) => Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
@@ -30,6 +31,16 @@ function rearRole(unit) {
     || ['lina', 'aria', 'noah', 'yuna', 'irene', 'ella', 'luka'].includes(unit.id);
 }
 
+export function getReinforcementApproaches(stage, map) {
+  const height=map.length, width=map[0]?.length || 0;
+  if(width<2 || height<2) return [];
+  const direction=getBattlefieldPlan(stage.id).direction;
+  return connectedGround(map).map(cell=>({...cell,depth:deploymentDepth(cell.x/(width-1),cell.y/(height-1),direction)}))
+    .filter(cell=>cell.depth<=.4)
+    .sort((a,b)=>a.depth-b.depth || a.y-b.y || a.x-b.x)
+    .map(({x,y})=>({x,y}));
+}
+
 export function distributeBattleFormations(stage, sourceUnits = []) {
   const map = stage?.map || [];
   const height = map.length, width = map[0]?.length || 0;
@@ -38,6 +49,7 @@ export function distributeBattleFormations(stage, sourceUnits = []) {
   if (ground.length < sourceUnits.length) return sourceUnits;
   const placed = [], occupied = new Set(), byId = new Map();
   const seed = Number(stage.id) || 1;
+  const direction = stage.terrainRevision >= 3 ? getBattlefieldPlan(stage.id).direction : 'south';
   const teams = [sourceUnits.filter(u => u.type === 'ally'), sourceUnits.filter(u => u.type !== 'ally')];
   teams.forEach((team, side) => {
     const allies = side === 0;
@@ -47,12 +59,10 @@ export function distributeBattleFormations(stage, sourceUnits = []) {
     ordered.forEach((unit, index) => {
       const rear = rearRole(unit);
       const phase = ((index * 0.61803398875 + seed * 0.137) % 1);
-      const target = {
-        x: (width - 1) * (0.16 + phase * 0.68),
-        y: (height - 1) * (allies
+      const [u, v] = orientBattlePoint(0.16 + phase * 0.68, allies
           ? (rear ? .85 : .7) + ((index + seed) % 3 - 1) * .045
-          : (rear ? .12 : .29) + ((index + seed) % 3 - 1) * .045),
-      };
+          : (rear ? .12 : .29) + ((index + seed) % 3 - 1) * .045, direction);
+      const target = { x: (width-1)*u, y: (height-1)*v };
       const score = cell => {
         const sameRow = own.filter(other => other.y === cell.y).length;
         const sameColumn = own.filter(other => other.x === cell.x).length;
@@ -67,7 +77,9 @@ export function distributeBattleFormations(stage, sourceUnits = []) {
       let chosen;
       for (const bandOnly of [true, false]) {
         for (const gap of [3, 2, 1]) {
-          chosen = candidates.find(cell => (!bandOnly || (allies ? cell.y >= height * .57 : cell.y <= height * .43))
+          chosen = candidates.find(cell => (!bandOnly || (allies
+            ? deploymentDepth(cell.x/(width-1),cell.y/(height-1),direction) >= .57
+            : deploymentDepth(cell.x/(width-1),cell.y/(height-1),direction) <= .43))
             && own.every(other => distance(cell, other) >= gap)
             && opponents.every(other => distance(cell, other) >= 7));
           if (chosen) break;

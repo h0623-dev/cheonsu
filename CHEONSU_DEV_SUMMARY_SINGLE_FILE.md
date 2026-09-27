@@ -2,11 +2,13 @@
 
 마지막 확인일: 2026-09-27
 프로젝트 위치: `C:\Users\user\Desktop\cheonsu`
-현재 앱/패키지 버전: `1.99.139` (Android 338)
+현재 앱/패키지 버전: `1.99.140` (Android 339)
 
-GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.139 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.139). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
+GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.140 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.140). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
 
-최신 산출물: `cheonsu_1.99.139_update_debug.apk`, `cheonsu_development_1.99.139.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+최신 산출물: `cheonsu_1.99.140_update_debug.apk`, `cheonsu_development_1.99.140.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+
+1.99.140 변경: 전투 정보 숨김 기본값. 30개 전장의 크기와 방향, 협곡·쌍교·항구·성문 등 10종 경로 재설계. 8방향 분산 배치와 적 진영 증원, 소형 맵의 세로 강제 확장 제거, 넓은 화면 활용. 기존 전투 지형과 위치는 유지하며 재입장부터 새 맵 사용. 원곡 BGM 9종의 32마디 4구간 편곡, 효과음 35종, 배경 전환/음소거 검사. 상세: `docs/MAPS_SOUND_1.99.140.md`.
 
 1.99.139 변경: 일반 공격의 사거리 2는 2칸에서만 유효하며 1칸/3칸을 공격할 수 없습니다. 반격도 방어자의 일반 공격 사거리를 사용합니다. 화살 스킬은 최소 2칸, 여러 거리의 스킬은 2~3칸처럼 구간 표시. 타일/대상/예측/실행/AI 판정 통일. 장비점 초상화 선택, 무기·방어구 분류, 강화 수치를 포함한 장착 전 능력치 비교, 고정 장착·저장 버튼. 기존 저장과 장비 ID는 유지. 상세: `docs/RANGE_ARMORY_1.99.139.md`.
 

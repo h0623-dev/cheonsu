@@ -5,7 +5,8 @@ import { runInNewContext } from 'node:vm';
 import { parse } from 'espree';
 import { stages } from '../src/data/stages.js';
 import { alignMapToArtwork, isPaintedGround } from '../src/data/battlefieldGround.js';
-import { createStageTerrain } from '../src/data/stageTerrain.js';
+import { createBattlefieldTerrain } from '../src/data/stageTerrain.js';
+import { getBattlefieldPlan } from '../src/data/battlefieldPlans.js';
 import { distributeBattleFormations } from '../src/engine/formations.js';
 import { DISCOVERIES, DISCOVERY_TECHNIQUES, SECRET_PROMOTIONS } from '../src/data/discoveries.js';
 import {
@@ -47,9 +48,9 @@ assert.ok(start >= 0 && end > start, 'The actual battlefield builders must be av
 const appHelpers = runInNewContext([
   ...body.slice(start, end).map((node) => source.slice(node.start, node.end)),
   ...['ENEMY_VARIANT_KEYS', 'createRecruitAlly', 'getPromotionTitle', 'promoteAllyUnit'].map(declaration),
-  '({ expandStageForLargeBattle, spaceBattleFormations, createRecruitAlly, promoteAllyUnit })',
+  '({ expandStageForLargeBattle, extendMapForPlayableBoard, spaceBattleFormations, createRecruitAlly, promoteAllyUnit })',
 ].join('\n'), {
-  alignMapToArtwork, createStageTerrain, applyEquipmentStats, distributeBattleFormations,
+  alignMapToArtwork, createBattlefieldTerrain, getBattlefieldPlan, applyEquipmentStats, distributeBattleFormations,
   clone: (value) => JSON.parse(JSON.stringify(value)),
   Math: Object.assign(Object.create(Math), { random: () => { throw new Error('Random map placement'); } }),
 });
@@ -112,7 +113,9 @@ for (const stage of stages) {
           if (count === 4) assert.ok(gap >= 3, 'Opening party and guards have two cells of Manhattan separation');
         }
       }
-      assert.ok(active.map.length >= 26, 'Use expanded terrain, not the original 8x8 stage');
+      assert.equal(active.map.length, getBattlefieldPlan(stage.id).height);
+      assert.equal(active.map[0].length, getBattlefieldPlan(stage.id).width);
+      assert.equal(appHelpers.extendMapForPlayableBoard(active.map, active), active.map, 'Rendering must not stretch authored maps back to the old portrait size');
       const entries = getStageDiscoveries(stage.id, active.map, units);
       assert.deepEqual(entries, getStageDiscoveries(String(stage.id), active.map, [...units].reverse()));
       assert.equal(entries.length, DISCOVERIES.filter((entry) => entry.stageId === stage.id).length);
@@ -121,7 +124,7 @@ for (const stage of stages) {
         getMoveTiles({ ...unit, move: 10000, moved: false, acted: false, status: [] }, units, active.map).map(key)));
       for (const entry of entries) {
         assert.equal(isTerrainBlocked(active.map[entry.y]?.[entry.x]), false);
-        assert.equal(active.terrainRevision, 2, 'Current maps render the actual terrain tiles, not the legacy traced image');
+        assert.equal(active.terrainRevision, 3, 'Current maps render the chapter-specific terrain');
         assert.equal(occupied.has(key(entry)), false);
         assert.ok(reachable.has(key(entry)), 'At least one ally must have a legal route with the current occupants');
         assert.deepEqual(Object.keys(entry).sort(), ['hint', 'id', 'kind', 'reward', 'stageId', 'title', 'x', 'y']);

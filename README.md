@@ -1,16 +1,18 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.139 / Android versionCode 338**
+현재 개발 빌드: **1.99.140 / Android versionCode 339**
 
 ## 다운로드
 
-- 로컬 최신 산출물: `cheonsu_1.99.139_update_debug.apk`, `cheonsu_development_1.99.139.zip`
-- [1.99.139 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.139)
+- 로컬 최신 산출물: `cheonsu_1.99.140_update_debug.apk`, `cheonsu_development_1.99.140.zip`
+- [1.99.140 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.140)
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)
 
-APK는 디버그 서명의 개발 테스트용입니다. 1.99.136 이상이 설치되어 있으면 이번 사거리/장비점 개선도 자동 패치로 받을 수 있습니다. 앱을 삭제하지 말고 기존 앱 위에 설치하세요. 중요한 저장은 설정에서 내보내기를 권장합니다.
+APK는 디버그 서명의 개발 테스트용입니다. 1.99.136 이상이 설치되어 있으면 이번 맵/사운드 개선도 자동 패치로 받을 수 있습니다. 앱을 삭제하지 말고 기존 앱 위에 설치하세요. 중요한 저장은 설정에서 내보내기를 권장합니다.
+
+1.99.140: 정보 숨김 기본값, 30장별 크기·방향·경로·지형 재설계, 8방향 배치와 증원. BGM 9종의 32마디 편곡과 효과음 35종. 기존 전투 저장은 유지하고 새 입장부터 새 맵 적용. 상세: `docs/MAPS_SOUND_1.99.140.md`.
 
 1.99.139: 일반 공격과 반격의 정확한 사거리, 화살 스킬 최소 2칸과 범위 구간 표시. 적 AI 이동/사거리 재검사. 초상화로 동료를 선택하는 장비점, 무기/방어구 분류와 강화 포함 교체 능력치 비교. 상세: `docs/RANGE_ARMORY_1.99.139.md`.
 

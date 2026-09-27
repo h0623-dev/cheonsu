@@ -26,6 +26,8 @@ async function readSave(page) {
 }
 
 async function saveBattle(page) {
+  const reveal = page.getByRole('button', { name: '정보 표시', exact: true });
+  if (await reveal.isVisible()) await reveal.click();
   await page.locator('.cinematic-stage-actions button').filter({ hasText: '설정' }).click();
   await page.locator('.battle-settings-menu button').filter({ hasText: '진행 저장' }).click();
   await page.locator('.battle-settings-menu').first().waitFor({ state: 'hidden' });
@@ -273,6 +275,10 @@ const scenarios = [
   ['hud-zoom', async (page, test, { fixture, settings }) => {
     await restore(page, fixture, settings);
     const zoom = page.locator('.battle-zoom-controls');
+    assert.equal(await zoom.count(), 0, 'Saved battles start with information hidden');
+    assert.ok(await page.getByRole('button', { name: '정보 표시', exact: true }).isVisible());
+    await snapshot(page, test, 'default-hidden');
+    await page.getByRole('button', { name: '정보 표시', exact: true }).click();
     await zoom.getByRole('button', { name: '전장 확대', exact: true }).click();
     const label = await zoom.locator('.battle-zoom-reset').innerText();
     await page.getByRole('button', { name: '정보 숨김', exact: true }).click();

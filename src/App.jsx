@@ -19,10 +19,11 @@ import DefeatDialog from "./components/DefeatDialog.jsx";
 import VictoryDialog from "./components/VictoryDialog.jsx";
 import StoryScene from "./components/StoryScene.jsx";
 import { getUnlockedStageIds, createVictoryCheckpoint, writeProgressSave } from './engine/campaignProgress.js';
-import { distributeBattleFormations } from "./engine/formations.js";
+import { distributeBattleFormations, getReinforcementApproaches } from "./engine/formations.js";
 import { getBattleOutcome, spendAction } from "./engine/battleOutcome.js";
 import { getAudioContext, createMusicPlayer } from "./engine/audioEngine.js";
-import { playCheonsuSfx } from "./engine/soundEffects.js";
+import { getMusicTheme } from "./data/musicScore.js";
+import { playCheonsuSfx, stopSoundEffects } from "./engine/soundEffects.js";
 import { getUnitSkills, getSkill, withSkill, getSkillCooldown, applyCooldown, tickCooldowns, applySupportSkill } from "./data/skills.js";
 import { BATTLE_SPEED_OPTIONS, getBattleSpeedConfig, scaleBattleTime } from "./engine/battleSpeed.js";
 import { getTurnCameraTarget, getCellScrollTarget } from "./engine/battleCamera.js";
@@ -34,7 +35,8 @@ import { STATUS_INFO } from "./data/statuses.js";
 import { SUPPORT_PAIRS, SUPPORT_RANK_THRESHOLDS } from "./data/supports.js";
 import { STORY_SCENES } from "./data/storyScenes.js";
 import { BATTLE_GROUND_ROW_RATIO, getPaintedVisualProfile } from "./data/unitVisuals.js";
-import { createStageTerrain } from "./data/stageTerrain.js";
+import { createBattlefieldTerrain } from "./data/stageTerrain.js";
+import { getBattlefieldPlan } from "./data/battlefieldPlans.js";
 import { getWorldBiome, getWorldScene, getWorldTileVisual, getWorldMapStyle, WORLD_ART_ROOT } from "./data/worldArt.js";
 import {
   clone,
@@ -77,7 +79,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.139";
+const SAVE_VERSION = "1.99.140";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -2848,7 +2850,7 @@ function spaceBattleFormations(stage, sourceUnits) {
 }
 
 function createActOneRouteBattleStage(stage, deployCount = MAX_DEPLOY_COUNT) {
-  const map = createStageTerrain(cloneActOneRouteMap(stage), stage.id);
+  const map = createBattlefieldTerrain(stage.id);
   const config = getActOneRouteStageConfig(stage);
   const occupied = new Set();
   let allyIndex = 0;
@@ -2910,14 +2912,14 @@ function createActOneRouteBattleStage(stage, deployCount = MAX_DEPLOY_COUNT) {
     ...stage,
     title: config.battleTitle || stage.title,
     objective: '적 지휘관 격파',
-    terrainRevision: 2,
+    terrainRevision: 3,
     map,
     units: spaceBattleFormations(
-      { ...stage, map },
+      { ...stage, map, terrainRevision: 3 },
       [...stageThemedUnits, ...extraEnemies]
     ),
     largeBattle: true,
-    battlefieldTheme: config.themeLabel,
+    battlefieldTheme: getBattlefieldPlan(stage.id).name,
     battlefieldThemeId: config.themeId,
     largeMapSize: `${map[0]?.length || 0}x${map.length || 0}`,
     baseMapSize: `${stage.map?.[0]?.length || 0}x${stage.map?.length || 0}`,
@@ -3172,6 +3174,7 @@ function expandMapToLarge(baseMap, targetSize = LARGE_MAP_SIZE) {
 }
 
 function extendMapForPlayableBoard(baseMap, stage, minRows = BOARD_PLAYABLE_MIN_ROWS) {
+  if (stage?.terrainRevision >= 3) return baseMap;
   if (!Array.isArray(baseMap) || !baseMap.length || !Array.isArray(baseMap[0])) {
     return baseMap;
   }
@@ -3310,9 +3313,7 @@ function expandStageForLargeBattle(stage, deployCount = MAX_DEPLOY_COUNT) {
   if (isActOneRouteStage(stage)) return createActOneRouteBattleStage(stage, deployCount);
 
   const baseMap = stage.map || [];
-  const mapSize = getLargeBattleMapSize(stage, deployCount);
-  const decoratedMap = decorateLargeBattleMap(expandMapToLarge(baseMap, mapSize), stage);
-  const largeMap = createStageTerrain(extendMapForPlayableBoard(decoratedMap, stage), stage.id);
+  const largeMap = createBattlefieldTerrain(stage.id);
   const allySpawns = getLargeAllySpawns(largeMap, stage);
   const enemySpawns = getLargeEnemySpawns(largeMap, stage);
   const hasBoss = (stage.units || []).some((unit) => unit.id === "boss" || unit.type === "boss");
@@ -3378,14 +3379,14 @@ function expandStageForLargeBattle(stage, deployCount = MAX_DEPLOY_COUNT) {
   return {
     ...stage,
     map: largeMap,
-    terrainRevision: 2,
+    terrainRevision: 3,
     objective: hasBoss ? '적 지휘관 격파' : '적 전멸',
     units: spaceBattleFormations(
-      { ...stage, map: largeMap },
+      { ...stage, map: largeMap, terrainRevision: 3 },
       [...stageThemedUnits, ...extraEnemies]
     ),
     largeBattle: true,
-    battlefieldTheme: getStageBattlefieldTheme(stage).label,
+    battlefieldTheme: getBattlefieldPlan(stage.id).name,
     battlefieldThemeId: getStageBattlefieldTheme(stage).id,
     largeMapSize: `${largeMap[0]?.length || 0}x${largeMap.length || 0}`,
     baseMapSize: `${baseMap[0]?.length || 0}x${baseMap.length || 0}`,
@@ -7220,7 +7221,9 @@ function createStageReinforcements(stage, nextRound, units, activeMap) {
   }
 
   const occupied = new Set(units.map((unit) => `${unit.x},${unit.y}`));
-  const positions = getReinforcementSpawnPositions(activeMap);
+  const positions = stage.terrainRevision >= 3
+    ? getReinforcementApproaches(stage, activeMap)
+    : getReinforcementSpawnPositions(activeMap);
   const bossWave = stageId % 6 === 0;
   const count = bossWave && nextRound >= 5 ? 3 : nextRound >= 5 ? 2 : 1;
   const spawned = [];
@@ -8317,9 +8320,10 @@ export default function App() {
   useEffect(() => {
     let player;
     let disposed = false;
-    const theme = screen === 'battle' ? 'battle' : screen === 'camp' ? 'camp' : 'world';
+    const theme = getMusicTheme(screen, selectedStage?.id);
     const enabled = settings.soundOn && settings.musicOn && settings.sfxVolume > 0 && !result;
     const sync = async (gesture = false) => {
+      if (!settings.soundOn || settings.sfxVolume <= 0 || document.hidden) stopSoundEffects();
       if (!enabled || document.hidden) { player?.stop(); return; }
       const ctx = getAudioContext();
       if (!ctx) return;
@@ -8341,7 +8345,7 @@ export default function App() {
       window.removeEventListener('keydown', unlock);
       document.removeEventListener('visibilitychange', visibility);
     };
-  }, [screen, result, settings.soundOn, settings.musicOn, settings.sfxVolume]);
+  }, [screen, selectedStage?.id, result, settings.soundOn, settings.musicOn, settings.sfxVolume]);
   const [mapVisibility, setMapVisibility] = useState("tactical");
   const [battleCompact, setBattleCompact] = useState(true);
   const [mobileBattlePanelOpen, setMobileBattlePanelOpen] = useState(false);
@@ -8349,7 +8353,7 @@ export default function App() {
   const [mobileAllyPanelOpen, setMobileAllyPanelOpen] = useState(false);
   const [mobileTurnPanelOpen, setMobileTurnPanelOpen] = useState(false);
   const [battleGuideHidden, setBattleGuideHidden] = useState(false);
-  const [battleHudHidden, setBattleHudHidden] = useState(false);
+  const [battleHudHidden, setBattleHudHidden] = useState(true);
   const [battleSettingsOpen, setBattleSettingsOpen] = useState(false);
   const [cameraFocus, setCameraFocus] = useState(null);
   const battleMapShellRef = useRef(null);
@@ -10367,6 +10371,7 @@ export default function App() {
     setMoveUndo(null);
     setAutoBattleEnabled(false);
     setBattleGuideHidden(false);
+    setBattleHudHidden(true);
     closeMobileCombatPanels();
     clearVisuals();
     setItemOpen(false);
@@ -11656,6 +11661,7 @@ export default function App() {
         .slice(0, MAX_DEPLOY_COUNT);
 
       setSelectedStage(migratedData.selectedStage);
+      setBattleHudHidden(true);
       setDeploymentStage(null);
       setGearEnhance(restoredGearEnhance);
       setDeployedIds(restoredDeployedIds.length ? restoredDeployedIds : availableDeployIds.slice(0, MAX_DEPLOY_COUNT));

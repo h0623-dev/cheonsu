@@ -23,6 +23,10 @@ try {
     await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: /^1장\./ }) }).click();
     await page.getByRole('button', { name: '전투 시작', exact: true }).click();
     await page.getByRole('button', { name: '바로 전투', exact: true }).click();
+    // Chapter 1 is now compact: enlarge once so there is enough vertical travel to test inertia.
+    await page.getByRole('button', { name: '정보 표시', exact: true }).click();
+    await page.getByRole('button', { name: '전장 확대', exact: true }).click();
+    await page.getByRole('button', { name: '정보 숨김', exact: true }).click();
     const save = page.locator('.cinematic-command-bar .prominent-save');
     await save.click();
     const unitsBefore = await page.evaluate(() => JSON.parse(localStorage.getItem('cheonsu_v01_save')).units);

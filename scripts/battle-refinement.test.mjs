@@ -71,10 +71,10 @@ test('41 map sprites share visible height and foot anchor, with natural quadrupe
     assert.ok(Math.abs(bottom-top+1-entry.visibleHeight)<=3,`${id} height`);
   }
 });
-test('zero or invalid volume never creates a tone; music has a repeatable 32-beat phrase',()=>{
+test('zero or invalid volume never creates a tone; music has a repeatable 32-bar arrangement',()=>{
   for(const gain of [0,-1,NaN]) assert.equal(playTone({state:'running',createOscillator(){throw new Error('silent audio allocated');}}, {gain}),null);
   for(const theme of ['camp','world','battle']) {
-    assert.deepEqual(musicBeat(theme,0),musicBeat(theme,32));
+    assert.deepEqual(musicBeat(theme,0),musicBeat(theme,256));
     assert.ok(musicBeat(theme,0).notes.length>=5);
   }
 });

@@ -1,8 +1,9 @@
+import { getBattlefieldPlan } from './battlefieldPlans.js';
 export const WORLD_ART_ROOT = '/art/world-v2';
 export const WORLD_BIOMES = ['frontier', 'forest', 'fortress', 'snow', 'citadel'];
 
 export function getWorldBiome(stageId = 1) {
-  return WORLD_BIOMES[Math.min(4, Math.max(0, Math.floor((stageId - 1) / 6)))];
+  return getBattlefieldPlan(stageId).biome;
 }
 
 export function getWorldScene(stageId = 1) {
@@ -21,7 +22,7 @@ const BLOCK_PROPS = {
 const PROP_HEIGHT = { oak: 2.05, pine: 2.15, 'snow-pine': 2.15, 'dead-tree': 1.95, maple: 1.7, wall: 1.1, rocks: 0.92, pillar: 1.5, crystal: 1.2, 'ice-crystal': 1.2, shrub: 0.42, monument: 0.6, crates: 0.52, brazier: 0.55, arch: 1.6, palisade: 1.1 };
 
 function materialFor(tile, biome) {
-  if (tile === 'plain') return biome === 'frontier' ? 'road' : BASE_GROUND[biome];
+  if (tile === 'plain') return BASE_GROUND[biome];
   if (['plain', 'block', 'wall', 'void'].includes(tile)) return BASE_GROUND[biome];
   if (tile === 'forest' && biome === 'snow') return 'snow';
   if (tile === 'road' && biome === 'snow') return 'gravel';
