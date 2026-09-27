@@ -187,13 +187,14 @@
   .world-art-app .camp-screen .camp-message { margin: 0 !important; padding: 0 !important; }
   .world-art-app .camp-screen .hud-row { margin-top: 6px !important; }
 }
-@media (max-height: 540px) and (min-width: 600px) {
+@media (max-height: 540px) and (orientation: landscape) {
   .world-art-app .narrative-stage { grid-template-columns: 38% minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); padding: 12px 24px !important; }
   .narrative-header { grid-column: 1 / -1; }
   .narrative-header h1 { font-size: 20px; }
   .narrative-actor { height: 100%; }
-  .narrative-dialogue { align-self: end; padding: 10px 16px; }
-  .narrative-line { font-size: 16px; min-height: 5.4em; margin: 4px 0 8px; }
+  .narrative-dialogue { align-self: end; padding: 10px 16px; max-height: 100%; min-height: 0; display: flex; flex-direction: column; }
+  .narrative-dialogue :is(.narrative-speaker, footer) { flex-shrink: 0; }
+  .narrative-line { font-size: 16px; min-height: 0; margin: 4px 0 8px; overflow-y: auto; }
 }
 @media (prefers-reduced-motion: reduce) { .narrative-actor { animation: none; } }
 @media (max-width: 360px) {

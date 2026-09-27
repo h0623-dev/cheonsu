@@ -41,7 +41,7 @@ try {
     await page.close();
   }
   const fallbackPage=await browser.newPage({serviceWorkers:'block'});
-  await fallbackPage.route('**/boss-splash-v2/boss_commander.webp',route=>route.fulfill({status:404,body:''}));
+  await fallbackPage.route('**/enemy-illustrations-v1/boss_commander.webp',route=>route.fulfill({status:404,body:''}));
   await fallbackPage.goto(`${base}/tests/fixtures/boss-splash.html`);
   await fallbackPage.waitForFunction(()=>document.querySelector('.boss-splash-art.is-fallback')?.naturalWidth>0);
   await fallbackPage.close();

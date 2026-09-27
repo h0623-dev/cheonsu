@@ -18,6 +18,7 @@ import { installNativeInsets } from './engine/nativeInsets.js';
 import DefeatDialog from "./components/DefeatDialog.jsx";
 import VictoryDialog from "./components/VictoryDialog.jsx";
 import StoryScene from "./components/StoryScene.jsx";
+import { getStoryPortrait } from "./data/storyArt.js";
 import { getUnlockedStageIds, createVictoryCheckpoint, writeProgressSave } from './engine/campaignProgress.js';
 import { distributeBattleFormations, getReinforcementApproaches } from "./engine/formations.js";
 import { getBattleOutcome, spendAction } from "./engine/battleOutcome.js";
@@ -80,7 +81,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.141";
+const SAVE_VERSION = "1.99.142";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -5331,12 +5332,6 @@ function getDifficultyRewardGold(value, difficultyId, balancePresetId = "standar
 
 
 
-function getStoryPortrait(speaker) {
-  if (speaker === "아이린") return getPaintedVisualProfile("irene").cutscene;
-  if (["가론", "흑천 가론"].includes(speaker)) return getPaintedVisualProfile("boss_commander").cutscene;
-  const keys = { 카일: 'hero', 브람: 'bram', 리나: 'lina', 아리아: 'aria', 레온: 'leon', 세라: 'sera', 노아: 'noah', 유나: 'yuna', 라칸: 'rakan', 미호: 'miho', 테오: 'teo', 이레네: 'irene', 카즈: 'kaz', 엘라: 'ella', 진: 'jin', 루카: 'luka', 백호: 'baekho', '흑천 가론': 'warlord', 가론: 'warlord' };
-  return getPaintedVisualProfile(keys[speaker] || 'hero').cutscene;
-}
 
 
 function getStageSpeedLimit(stage) {

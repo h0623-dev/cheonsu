@@ -4,7 +4,7 @@ importScripts('/art/combat-v2/precache.js');
 importScripts('/art/enemies-v3/precache.js');
 importScripts('/art/bosses-v1/precache.js');
 importScripts('/art/map-sprites-v4/precache.js');
-const CACHE_VERSION = "cheonsu-v199141-boss-splash";
+const CACHE_VERSION = "cheonsu-v199142-enemy-illustrations";
 const APP_SHELL_CACHE = `${CACHE_VERSION}-app-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -47,7 +47,10 @@ const PAINTED_UNIT_SPRITES = [
 ]);
 
 const APP_SHELL_FILES = [
-  ...['commander', 'frost', 'ember', 'oracle', 'abyss'].map(key => `/art/boss-splash-v2/boss_${key}.webp`),
+  ...['commander', 'frost', 'ember', 'oracle', 'abyss'].flatMap(key => [
+    `/art/enemy-illustrations-v1/boss_${key}.webp`,
+    `/art/enemy-illustrations-v1/portraits/boss_${key}.webp`,
+  ]),
   '/art/world-v2/scenes/village.webp',
   ...self.BOSS_ART_FILES,
   ...self.MAP_SPRITE_FILES,

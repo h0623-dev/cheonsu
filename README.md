@@ -1,18 +1,20 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.141 / Android versionCode 340**
+현재 개발 빌드: **1.99.142 / Android versionCode 341**
 
 ## 다운로드
 
-- 로컬 최신 산출물: `cheonsu_1.99.141_update_debug.apk`, `cheonsu_development_1.99.141.zip`
-- [1.99.141 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.141)
+- 로컬 최신 산출물: `cheonsu_1.99.142_update_debug.apk`, `cheonsu_development_1.99.142.zip`
+- [1.99.142 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.142)
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)
 
 APK는 디버그 서명의 개발 테스트용입니다. 1.99.136 이상이 설치되어 있으면 이번 보스 컷신 개선도 자동 패치로 받을 수 있습니다. 앱을 삭제하지 말고 기존 앱 위에 설치하세요. 중요한 저장은 설정에서 내보내기를 권장합니다.
 
-1.99.141: 보스 5계열의 등장·각성 전용 원화(1024×1536), 휴대폰 세로/가로 컷신 재구성. 기존 전투 스프라이트와 규칙·저장 유지. 원본과 생성 프롬프트: `docs/art/boss-splash-v2`, 게임 원화: `public/art/boss-splash-v2`.
+1.99.142: 실제 아군 3종을 스타일 참조로 보스 5종의 일러스트 재제작. 이야기의 가론 전용 그림과 보스 등장/각성/정보창의 디자인 통일. 투명 배경 전신 및 상반신 썸네일 적용. 아군 그림, 전투 동작/규칙, 저장 유지. 원본/프롬프트: `docs/art/enemy-illustrations-v1`, 게임 원화: `public/art/enemy-illustrations-v1`.
+
+1.99.141: 보스 등장·각성 컷신 UI, 휴대폰 세로/가로 배치 및 자동 종료. 당시 제작된 사실적인 원화는 1.99.142의 아군 기준 화풍으로 교체했습니다.
 
 1.99.140: 정보 숨김 기본값, 30장별 크기·방향·경로·지형 재설계, 8방향 배치와 증원. BGM 9종의 32마디 편곡과 효과음 35종. 기존 전투 저장은 유지하고 새 입장부터 새 맵 적용. 상세: `docs/MAPS_SOUND_1.99.140.md`.
 

@@ -2,8 +2,8 @@
 
 ## 현재 상태
 
-- 버전 1.99.141, Android 340, 패키지 com.cheonsu.game.
-- 보스 등장/각성은 `BossSplash.jsx`와 `boss-splash.css`, 원화 선택은 `bossArt.js`입니다. 5계열 전용 원화는 `public/art/boss-splash-v2`, 생성 원본/프롬프트는 `docs/art/boss-splash-v2`. 전투 모션 스프라이트와 저장은 그대로 유지합니다.
+- 버전 1.99.142, Android 341, 패키지 com.cheonsu.game.
+- 아군 기준으로 새로 제작한 보스 5종 원화는 `public/art/enemy-illustrations-v1`, 원본/프롬프트는 `docs/art/enemy-illustrations-v1`입니다. `enemyIllustrations.js`에서 전신과 초상을 공통 선택하며 `storyArt.js`는 모든 대화 화자를 명시합니다. 가론은 `boss_abyss`를 사용합니다. `BossSplash.jsx`의 등장/각성과 정보창에도 동일 디자인을 사용하며 전투 모션 스프라이트와 저장은 유지합니다.
 - 정보 숨김 기본값, 장별 가변 크기 맵/8방향 배치/증원과 BGM 9종/효과음 35종: `MAPS_SOUND_1.99.140.md`. terrainRevision 3 이상은 이전 세로 확장을 적용하지 않습니다. 저장된 전투는 재생성하지 않습니다.
 - 공격/반격의 단일 사거리는 정확한 거리, 여러 거리는 `minRange`로 명시합니다. 초상화 장비점과 교체 비교: `RANGE_ARMORY_1.99.139.md`.
 - 화면 전환/전장 스크롤 성능: `PERFORMANCE_PATCH_1.99.138.md`. 미리보기 캐시는 읽기 전용이고 실제 전투는 새 유닛을 생성합니다. 터치는 WebView 기본 스크롤, 마우스는 requestAnimationFrame으로 처리합니다.
@@ -28,7 +28,7 @@
 ## 새 PC 준비
 
 1. Node.js 24 설치. macOS/Linux에서 nvm을 사용하면 `nvm install`과 `nvm use`를 실행합니다.
-2. `cheonsu_development_1.99.141.zip`을 원하는 폴더에 풉니다.
+2. `cheonsu_development_1.99.142.zip`을 원하는 폴더에 풉니다.
 3. 내부 `cheonsu` 폴더에서 `npm ci`, `npm run setup`, `npm run dev`를 실행합니다.
 4. Vite가 출력하는 로컬 주소를 엽니다. 사용 중인 포트가 있으면 다른 포트를 사용합니다.
 
@@ -36,7 +36,7 @@
 
 ## Git으로 PC 간 이동
 
-저장소 원격 주소는 `https://github.com/h0623-dev/cheonsu.git`입니다. 1.99.141 소스는 `main`, 배포 파일은 `v1.99.141` 릴리스, 자동 패치 안내는 `updates` 브랜치에서 관리합니다. 기존 게임 개선도 모두 포함합니다.
+저장소 원격 주소는 `https://github.com/h0623-dev/cheonsu.git`입니다. 1.99.142 소스는 `main`, 배포 파일은 `v1.99.142` 릴리스, 자동 패치 안내는 `updates` 브랜치에서 관리합니다. 기존 게임 개선도 모두 포함합니다.
 
 ```sh
 git clone https://github.com/h0623-dev/cheonsu.git

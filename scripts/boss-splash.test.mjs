@@ -10,7 +10,7 @@ test('every campaign boss receives the correct entrance illustration without mut
     const before=JSON.stringify(boss),art=getBossSplash(boss);
     assert.equal(art.key,getBossSpriteKey(boss));
     assert.ok(bossCombatIds.includes(art.key));
-    assert.match(art.src,/^\/art\/boss-splash-v2\/boss_\w+\.webp$/);
+    assert.match(art.src,/^\/art\/enemy-illustrations-v1\/boss_\w+\.webp$/);
     assert.equal(JSON.stringify(boss),before);
   }
   assert.equal(getBossSplash({type:'boss',name:'도적장'}).key,'boss_commander');
@@ -20,8 +20,8 @@ test('every campaign boss receives the correct entrance illustration without mut
   assert.equal(getBossSplash({type:'boss',name:'가론'}).key,'boss_abyss');
 });
 for(const key of bossCombatIds) test(`${key}: high-resolution original and compact runtime image exist`,async()=>{
-  const source=await readFile(new URL(`../docs/art/boss-splash-v2/${key}.png`,import.meta.url));
-  const asset=await readFile(new URL(`../public/art/boss-splash-v2/${key}.webp`,import.meta.url));
+  const source=await readFile(new URL(`../docs/art/enemy-illustrations-v1/${key}.png`,import.meta.url));
+  const asset=await readFile(new URL(`../public/art/enemy-illustrations-v1/${key}.webp`,import.meta.url));
   const original=await sharp(source).metadata(),runtime=await sharp(asset).metadata();
   assert.equal(runtime.width,1024);assert.equal(runtime.height,1536);
   assert.equal(original.width,runtime.width);assert.equal(original.height,runtime.height);

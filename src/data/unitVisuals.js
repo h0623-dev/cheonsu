@@ -1,10 +1,11 @@
 import manifest from '../../public/art/world-v2/manifest.json' with { type: 'json' };
 import enemyManifest from '../../public/art/enemies-v3/manifest.json' with { type: 'json' };
 import bossManifest from '../../public/art/bosses-v1/manifest.json' with { type: 'json' };
+import { getEnemyIllustration } from './enemyIllustrations.js';
 
 export function getPaintedVisualProfile(key) {
   const boss = bossManifest.units[key];
-  if (boss) return { map: boss.map, battle: boss.ready, portrait: boss.portrait, cutscene: boss.ready };
+  if (boss) return { map: boss.map, battle: boss.ready, ...getEnemyIllustration(key) };
   if (Object.hasOwn(enemyManifest.units, key)) {
     const enemy = enemyManifest.units[key];
     return { map: `/art/map-sprites-v4/${key}.webp`, battle: enemy.ready, portrait: enemy.portrait, cutscene: enemy.ready };
