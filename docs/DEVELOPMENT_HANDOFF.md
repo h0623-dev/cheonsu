@@ -2,7 +2,8 @@
 
 ## 현재 상태
 
-- 버전 1.99.143, Android 342, 패키지 com.cheonsu.game.
+- 버전 1.99.144, Android 343, 패키지 com.cheonsu.game.
+- 30장 전용 환경 원화와 경량 미리보기: `public/art/chapters-v1`, 원본/프롬프트: `docs/art/chapters-v1`. `worldArt.js`가 장 번호로 배경을 선택합니다. 출전/대화/일대일 전투/기록실/전장 외곽에 연결하며 실제 타일/규칙/저장은 유지합니다. `npm run art:chapters`로 재인코딩. 상세: `CHAPTER_ART_1.99.144.md`.
 - 메인/설정/기사단/기록실은 `TitleMenu`, `PlayerSettings`, `CompanyRoster`, `JourneyLibrary`로 분리했습니다. 마지막 플레이 화면과 유틸리티 복귀 경로를 보존합니다. 읽기 전용 기록실은 저장을 불러오기 전 보상을 수령하거나 전투를 진행하지 않습니다. `playerExperience.js`, `characterProfiles.js`, `chapterBriefs.js`, `player-experience.css`와 [전체 정비 보고서](PLAYER_EXPERIENCE_1.99.143.md)를 참조하세요.
 - 아군 기준으로 새로 제작한 보스 5종 원화는 `public/art/enemy-illustrations-v1`, 원본/프롬프트는 `docs/art/enemy-illustrations-v1`입니다. `enemyIllustrations.js`에서 전신과 초상을 공통 선택하며 `storyArt.js`는 모든 대화 화자를 명시합니다. 가론은 `boss_abyss`를 사용합니다. `BossSplash.jsx`의 등장/각성과 정보창에도 동일 디자인을 사용하며 전투 모션 스프라이트와 저장은 유지합니다.
 - 정보 숨김 기본값, 장별 가변 크기 맵/8방향 배치/증원과 BGM 9종/효과음 35종: `MAPS_SOUND_1.99.140.md`. terrainRevision 3 이상은 이전 세로 확장을 적용하지 않습니다. 저장된 전투는 재생성하지 않습니다.
@@ -29,7 +30,7 @@
 ## 새 PC 준비
 
 1. Node.js 24 설치. macOS/Linux에서 nvm을 사용하면 `nvm install`과 `nvm use`를 실행합니다.
-2. `cheonsu_development_1.99.143.zip`을 원하는 폴더에 풉니다.
+2. `cheonsu_development_1.99.144.zip`을 원하는 폴더에 풉니다.
 3. 내부 `cheonsu` 폴더에서 `npm ci`, `npm run setup`, `npm run dev`를 실행합니다.
 4. Vite가 출력하는 로컬 주소를 엽니다. 사용 중인 포트가 있으면 다른 포트를 사용합니다.
 

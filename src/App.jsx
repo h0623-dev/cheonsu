@@ -45,7 +45,7 @@ import { STORY_SCENES } from "./data/storyScenes.js";
 import { BATTLE_GROUND_ROW_RATIO, getPaintedVisualProfile } from "./data/unitVisuals.js";
 import { createBattlefieldTerrain } from "./data/stageTerrain.js";
 import { getBattlefieldPlan } from "./data/battlefieldPlans.js";
-import { getWorldBiome, getWorldScene, getWorldTileVisual, getWorldMapStyle, WORLD_ART_ROOT } from "./data/worldArt.js";
+import { getWorldBiome, getWorldScene, getWorldSceneThumbnail, getWorldTileVisual, getWorldMapStyle, WORLD_ART_ROOT } from "./data/worldArt.js";
 import {
   clone,
   applyEquipmentStats,
@@ -87,7 +87,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.143";
+const SAVE_VERSION = "1.99.144";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -16546,7 +16546,7 @@ export default function App() {
                           onClick={() => startStage(stage)}
                           style={{ "--node-index": index }}
                         >
-                          <span className="node-number">{stage.id}</span>
+                          <span className="chapter-node-preview"><img src={getWorldSceneThumbnail(stage.id)} alt="" loading="lazy" decoding="async" width="480" height="320"/><span className="node-number">{stage.id}</span></span>
                           <div className="node-line" />
                           <div className="node-body">
                             <strong>{stage.title}</strong>
@@ -16602,7 +16602,7 @@ export default function App() {
             </div>
           </div>
 
-          {deploymentStage && <section className="chapter-brief"><div><small>이번 여정</small><h2>{getChapterBrief(deploymentStage.id)?.title}</h2><p>{getChapterBrief(deploymentStage.id)?.text}</p></div><img src={getWorldScene(deploymentStage.id)} alt="" /></section>}
+          {deploymentStage && <section className="chapter-brief"><img src={getWorldScene(deploymentStage.id)} alt={`${deploymentStage.title} 전경`} width="1536" height="1024"/><div><small>이번 여정</small><h2>{getChapterBrief(deploymentStage.id)?.title}</h2><p>{getChapterBrief(deploymentStage.id)?.text}</p></div></section>}
 
           {deploymentStage && deploymentEnemySummary && deploymentThreat && (
             <details className="stage-briefing-card deployment-briefing">

@@ -1,0 +1,186 @@
+{
+  "mode": "built-in image_gen",
+  "generatedOn": "2026-09-27",
+  "images": [
+    {
+      "id": 1,
+      "title": "국경 초소",
+      "sourceFile": "exec-ffb4dddc-aba6-42fc-a973-93694b8980d8.png",
+      "savedFile": "chapter-01.png"
+    },
+    {
+      "id": 2,
+      "title": "협곡 매복",
+      "sourceFile": "exec-6653cfca-d1fa-4292-bf73-e09e05697790.png",
+      "savedFile": "chapter-02.png"
+    },
+    {
+      "id": 3,
+      "title": "성문 돌파",
+      "sourceFile": "exec-3827f869-a380-4c2c-96df-578d0f8863a5.png",
+      "savedFile": "chapter-03.png"
+    },
+    {
+      "id": 4,
+      "title": "불타는 숲",
+      "sourceFile": "exec-eb0b6622-7458-4660-906b-61f0f59bb01d.png",
+      "savedFile": "chapter-04.png"
+    },
+    {
+      "id": 5,
+      "title": "무너진 요새",
+      "sourceFile": "exec-48410765-b300-4657-a3fa-26ea7005a9f1.png",
+      "savedFile": "chapter-05.png"
+    },
+    {
+      "id": 6,
+      "title": "얼어붙은 계곡",
+      "sourceFile": "exec-0799e04c-9ad3-4a83-ba7d-ac057272b831.png",
+      "savedFile": "chapter-06.png"
+    },
+    {
+      "id": 7,
+      "title": "그림자 숲",
+      "sourceFile": "exec-20672083-6bfa-4b65-a19c-43b6509df4bd.png",
+      "savedFile": "chapter-07.png"
+    },
+    {
+      "id": 8,
+      "title": "붉은 여울",
+      "sourceFile": "exec-e968994f-6814-4dc7-a02d-1214d6cb1f82.png",
+      "savedFile": "chapter-08.png"
+    },
+    {
+      "id": 9,
+      "title": "폐허의 시장",
+      "sourceFile": "exec-62e26166-06f0-4862-b7c4-0c4a7af20992.png",
+      "savedFile": "chapter-09.png"
+    },
+    {
+      "id": 10,
+      "title": "흑야의 탑",
+      "sourceFile": "exec-730b8fd5-038d-459c-9ca1-09c8d73202ed.png",
+      "savedFile": "chapter-10.png"
+    },
+    {
+      "id": 11,
+      "title": "불길한 항구",
+      "sourceFile": "exec-c7f98df6-5007-42d9-8b04-a3c0120a068c.png",
+      "savedFile": "chapter-11.png"
+    },
+    {
+      "id": 12,
+      "title": "재의 왕좌",
+      "sourceFile": "exec-d6fcba85-4512-40ea-a78d-de50a8173459.png",
+      "savedFile": "chapter-12.png"
+    },
+    {
+      "id": 13,
+      "title": "암살자의 골목",
+      "sourceFile": "exec-d3c1e6c9-c63b-4509-9304-359d96165b69.png",
+      "savedFile": "chapter-13.png"
+    },
+    {
+      "id": 14,
+      "title": "저주받은 사원",
+      "sourceFile": "exec-8eced2de-9691-41fd-8bd2-47e249adf3fc.png",
+      "savedFile": "chapter-14.png"
+    },
+    {
+      "id": 15,
+      "title": "달 없는 협곡",
+      "sourceFile": "exec-c0421f10-0bc5-43d9-970e-f7a92bbb83ad.png",
+      "savedFile": "chapter-15.png"
+    },
+    {
+      "id": 16,
+      "title": "사슬 감옥",
+      "sourceFile": "exec-840756d3-8804-424d-a016-991482568319.png",
+      "savedFile": "chapter-16.png"
+    },
+    {
+      "id": 17,
+      "title": "그림자 성벽",
+      "sourceFile": "exec-25e20361-8d5f-494e-81b1-5318490cb3ec.png",
+      "savedFile": "chapter-17.png"
+    },
+    {
+      "id": 18,
+      "title": "밤의 집행자",
+      "sourceFile": "exec-7a1d0b09-5d41-4593-ab17-09f6f6b9f470.png",
+      "savedFile": "chapter-18.png"
+    },
+    {
+      "id": 19,
+      "title": "옛 천수의 묘",
+      "sourceFile": "exec-ff5f1212-5bdb-4eb7-b9a2-e03b4bcf572c.png",
+      "savedFile": "chapter-19.png"
+    },
+    {
+      "id": 20,
+      "title": "무너진 왕도",
+      "sourceFile": "exec-1a1bc112-74f0-4650-92b0-9515a9b4fc42.png",
+      "savedFile": "chapter-20.png"
+    },
+    {
+      "id": 21,
+      "title": "심연의 도서관",
+      "sourceFile": "exec-c082b8b0-84d3-499e-84f8-482701d1d171.png",
+      "savedFile": "chapter-21.png"
+    },
+    {
+      "id": 22,
+      "title": "검은 기도실",
+      "sourceFile": "exec-ff69cb98-ac20-46ea-8f8d-1183bbea36b5.png",
+      "savedFile": "chapter-22.png"
+    },
+    {
+      "id": 23,
+      "title": "황혼의 다리",
+      "sourceFile": "exec-ab09ce4c-183a-48c0-9e70-2c91121d6230.png",
+      "savedFile": "chapter-23.png"
+    },
+    {
+      "id": 24,
+      "title": "흑야의 심장",
+      "sourceFile": "exec-720c7563-16dc-4609-909a-77355cb4411e.png",
+      "savedFile": "chapter-24.png"
+    },
+    {
+      "id": 25,
+      "title": "끝없는 계단",
+      "sourceFile": "exec-3d287fcd-fe95-4a50-855c-19f9bd8c5605.png",
+      "savedFile": "chapter-25.png"
+    },
+    {
+      "id": 26,
+      "title": "붉은 달의 성소",
+      "sourceFile": "exec-247c719c-a3e8-4f79-93b0-f17426767e41.png",
+      "savedFile": "chapter-26.png"
+    },
+    {
+      "id": 27,
+      "title": "천공 관문",
+      "sourceFile": "exec-c4942164-a265-4780-81e6-0f0653401681.png",
+      "savedFile": "chapter-27.png"
+    },
+    {
+      "id": 28,
+      "title": "잊힌 수호자",
+      "sourceFile": "exec-384b888a-2b04-444b-a12f-934c60d3ef11.png",
+      "savedFile": "chapter-28.png"
+    },
+    {
+      "id": 29,
+      "title": "파멸의 평원",
+      "sourceFile": "exec-35215915-ef3f-46c5-8374-7b43a784e26a.png",
+      "savedFile": "chapter-29.png"
+    },
+    {
+      "id": 30,
+      "title": "마지막 천수",
+      "sourceFile": "exec-feed17a1-dcc3-49df-acd1-fa79e5e7be24.png",
+      "savedFile": "chapter-30.png"
+    }
+  ]
+}

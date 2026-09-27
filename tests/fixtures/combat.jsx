@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import CombatScene from '../../src/components/CombatScene.jsx';
+import { getWorldScene } from '../../src/data/worldArt.js';
 import '../../src/combat-scene.css';
 
 const params = new URLSearchParams(location.search);
@@ -16,4 +17,4 @@ const scene = {
   title: heal ? '치유의 빛' : kind === 'skill' ? '정령의 기도' : '공격', effectLabel: '전투',
   outcome: { heal, guard, hit, damage: guard ? 0 : 12, crit: params.has('crit') }, durationMs: 4000,
 };
-createRoot(document.getElementById('root')).render(<CombatScene scene={scene} attackerKey={key} defenderKey={heal || guard ? 'hero' : 'blackguard'} background="/art/world-v2/scenes/forest.webp" />);
+createRoot(document.getElementById('root')).render(<CombatScene scene={scene} attackerKey={key} defenderKey={heal || guard ? 'hero' : 'blackguard'} background={getWorldScene(params.get('stage'))} />);

@@ -7,7 +7,11 @@ export function getWorldBiome(stageId = 1) {
 }
 
 export function getWorldScene(stageId = 1) {
-  return `${WORLD_ART_ROOT}/scenes/${getWorldBiome(stageId)}.webp`;
+  return `/art/chapters-v1/chapter-${String(getBattlefieldPlan(stageId).id).padStart(2, '0')}.webp`;
+}
+
+export function getWorldSceneThumbnail(stageId = 1) {
+  return getWorldScene(stageId).replace('.webp', '-thumb.webp');
 }
 
 const BASE_GROUND = { frontier: 'grass', forest: 'forest', fortress: 'stone', snow: 'snow', citadel: 'dark' };

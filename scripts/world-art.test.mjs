@@ -22,7 +22,7 @@ for (let stage = 1; stage <= 30; stage++) {
     const map = Array.from({ length: 4 }, () => [...types]);
     const original = JSON.stringify(map);
     assert.equal(getWorldBiome(stage), getBattlefieldPlan(stage).biome);
-    assert.ok(getWorldScene(stage).endsWith(`${getWorldBiome(stage)}.webp`));
+    assert.equal(getWorldScene(stage), `/art/chapters-v1/chapter-${String(stage).padStart(2, '0')}.webp`);
     for (let y = 0; y < map.length; y++) {
       for (let x = 0; x < map[y].length; x++) {
         const visual = getWorldTileVisual(map, x, y, stage);

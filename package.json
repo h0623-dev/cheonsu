@@ -1,7 +1,7 @@
 {
   "name": "cheonsu",
   "private": true,
-  "version": "1.99.143",
+  "version": "1.99.144",
   "type": "module",
   "engines": {
     "node": ">=24"
@@ -26,6 +26,7 @@
     "test:ui": "node scripts/verify-combat-patch.cjs && node scripts/verify-combat-motion.cjs && node scripts/verify-battle-controls.cjs",
     "art:combat": "node scripts/prepare-combat-art.cjs",
     "art:motion": "node scripts/prepare-combat-motion.cjs",
+    "art:chapters": "node scripts/prepare-chapter-art.mjs",
     "package:source": "node scripts/package-source.mjs",
     "update:package": "node scripts/package-update.mjs",
     "update:publish": "node scripts/publish-update.mjs",

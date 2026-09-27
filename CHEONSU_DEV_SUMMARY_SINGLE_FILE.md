@@ -2,11 +2,13 @@
 
 마지막 확인일: 2026-09-27
 프로젝트 위치: `C:\Users\user\Desktop\cheonsu`
-현재 앱/패키지 버전: `1.99.143` (Android 342)
+현재 앱/패키지 버전: `1.99.144` (Android 343)
 
-GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.143 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.143). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
+GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.144 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.144). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
 
-최신 산출물: `cheonsu_1.99.143_update_debug.apk`, `cheonsu_development_1.99.143.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+최신 산출물: `cheonsu_1.99.144_update_debug.apk`, `cheonsu_development_1.99.144.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+
+1.99.144 변경: 모든 1~30장에 개별 환경 원화 30종을 제작했습니다. 목록용 미리보기 30종과 함께 출전·대화·기록실·일대일 전투·전장 외곽에 적용합니다. 실제 타일과 캐릭터/보스, 전투 규칙, 저장 데이터는 유지합니다. 이전의 "타이틀 1장"은 메인 화면 그림 한 장이라는 뜻입니다. [전 장 아트 보고서](docs/CHAPTER_ART_1.99.144.md), [원본과 프롬프트](docs/art/chapters-v1/README.md).
 
 1.99.143 변경: 아군 4인 기준의 타이틀 원화, 이어하기 중심 메뉴, 4분류 설정, 초상화 기사단과 선택 캐릭터 장비 관리, 마을의 주요 메뉴/출전 연결. 30장 상황 설명과 1장 도입 보강, 60장면 213대사 이야기 다시보기/자동 진행. 메인 화면 저장 보호, 새 게임 확인, 현재 상태 수동 슬롯 저장. 스토리 다시보기는 실제 전투/보상을 바꾸지 않습니다. [전체 정비 보고서](docs/PLAYER_EXPERIENCE_1.99.143.md), [원화 프롬프트](docs/art/journey-v1/PROMPT.md).
 

@@ -130,7 +130,7 @@
   --battle-tile-size: clamp(50px, calc(((min(100dvw, 1120px) - 10px) / var(--map-cols)) + 22px), 86px) !important;
 }
 .world-art-app .battle-screen.battle-final-concept.battle-board-only .battle-map-scroll-shell {
-  background: #506847 !important;
+  background: #506847 var(--classic-map-image) center / cover no-repeat !important;
   border: 0 !important;
   box-shadow: none !important;
   filter: none !important;

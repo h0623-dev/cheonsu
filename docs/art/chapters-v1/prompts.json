@@ -1,0 +1,190 @@
+{
+  "mode": "built-in image_gen",
+  "references": [
+    "docs/art/journey-v1/title.png",
+    "public/art/world-v2/units/hero.webp"
+  ],
+  "commonPrompt": "Create ONE finished landscape 1536x1024 environment illustration for Cheonsu, an original Korean tactical JRPG. The attached title painting and allied swordsman are STYLE references only, not people to insert. Match their softly outlined hand-painted anime fantasy style, matte gouache textures, carefully shaped stone and foliage, clean readable forms, gentle outdoor light or readable indoor light, no photorealism or 3D. This is a distinct chapter location used behind full-body dialogue portraits AND side-view combat sprites. Ground-level eye height, broad level empty foreground across the lower 38% for two standing fighters, strong location landmark in the upper central 60%, recognizable also in a center portrait crop. Natural perspective, coherent walkable terrain, no top-down map or tile grid, no fish-eye. No people, characters, creatures, silhouettes, text, symbols resembling letters, numbers, UI, border, watermark, decorative orbs or bokeh. Clear richly colored scenery, not a monochrome wash. Deliver only this one scene, not a collage. CHAPTER LOCATION: ",
+  "chapters": [
+    {
+      "id": 1,
+      "title": "국경 초소",
+      "prompt": "A modest frontier stone watchtower and timber palisade beside a forked dirt road through green meadows, unlit beacon basket atop tower, refugee water jars and closed wooden gate, bright early morning with soft blue sky. Friendly kingdom architecture under uneasy silence. Blue cloth pennant without markings. Low stones and grass edge foreground, road center open.",
+      "file": "chapter-01.webp"
+    },
+    {
+      "id": 2,
+      "title": "협곡 매복",
+      "prompt": "A rugged narrow limestone gorge with two crossing tracks on different levels and a small wooden lookout hidden on the upper ridge, hanging rope bridge far above, sparse green brush clinging to pale cliffs. Clear late morning daylight, green valley visible between cliffs. Broad gravel pass in foreground, cliff opening framed centrally. No buildings from the frontier tower.",
+      "file": "chapter-02.webp"
+    },
+    {
+      "id": 3,
+      "title": "성문 돌파",
+      "prompt": "Massive pale stone northern castle gate with iron portcullis, twin square crenellated towers and long black pennants, old turquoise enamel insignia with no letters. A broad stone approach and flanking walls, blue sky and small green vines. Gatehouse is imposing but human-scale. Foreground broad empty stone courtyard.",
+      "file": "chapter-03.webp"
+    },
+    {
+      "id": 4,
+      "title": "불타는 숲",
+      "prompt": "An old forest sanctuary partly burned by unnatural dark-red embers, split tree trunks and broken shrine stones amongst still-green canopies. Thin distant smoke only, no haze hiding the scene. A firebreak of exposed earth crosses foreground safely, ruined arch deeper in trees, patches of living white flowers. Late afternoon filtered sunlight. No wall of fire, foreground remains readable.",
+      "file": "chapter-04.webp"
+    },
+    {
+      "id": 5,
+      "title": "무너진 요새",
+      "prompt": "A broken hilltop border fortress atop green ridges, collapsed curtain wall opens a winding side route; distant keep with breached tower, ivy and scattered limestone blocks, weathered supply crates by an old gateway. Clear breezy afternoon light with dramatic white clouds, broad worn grass-and-earth foreground terrace. Emphasize sloping ramparts and safe side path.",
+      "file": "chapter-05.webp"
+    },
+    {
+      "id": 6,
+      "title": "얼어붙은 계곡",
+      "prompt": "A frozen mountain valley crossed by two parallel old stone bridges over a turquoise icy stream, tall blue ice shelves and snowy conifers. Beneath ice near far shrine a few faint crimson trapped embers. Crisp bright winter daylight, white snow balanced by blue water and gray masonry. Level packed-snow foreground approach, twin bridges recognizable centrally.",
+      "file": "chapter-06.webp"
+    },
+    {
+      "id": 7,
+      "title": "그림자 숲",
+      "prompt": "Ancient deep green forest with enormous interlocking roots surrounding a round clearing, narrow reflective creek winding toward back, small tied fabric trail marks without writing on a branch. Thin low mist only behind trees, clearly lit moss and ferns, dappled cool daylight. Broad moss-and-earth foreground clearing, center path through rooted trees.",
+      "file": "chapter-07.webp"
+    },
+    {
+      "id": 8,
+      "title": "붉은 여울",
+      "prompt": "A wide shallow river with pale stepping stones and two old low stone crossings connecting grassy islets. Natural crimson mineral crystals UNDER clear water tint the rapids red without blood, far bank has small dismantled ritual stone plinths. Warm clear evening light and green riverside reeds. Broad dry gravel island foreground, both crossings visible.",
+      "file": "chapter-08.webp"
+    },
+    {
+      "id": 9,
+      "title": "폐허의 시장",
+      "prompt": "Abandoned medieval market lane swallowed by a wooded ravine: moss-covered half-timbered stalls, folded striped cloth awnings, small lamps still burning without owners, crooked stone steps between tree roots, cliffs beyond. Green vegetation and muted red/blue cloth, bright overcast light. Wide empty worn cobblestone foreground; center alley leads toward an old gate.",
+      "file": "chapter-09.webp"
+    },
+    {
+      "id": 10,
+      "title": "흑야의 탑",
+      "prompt": "A tall dark stone bell-tower rising behind layered outer fortress walls, narrow arched windows lit dim amber, black banners and broken stained-glass fragments near a chapel stair. Cool dusk sky still luminous, ash-gray stone, muted burgundy accents and green ivy. Broad empty flagstone forecourt; tower and gateway central.",
+      "file": "chapter-10.webp"
+    },
+    {
+      "id": 11,
+      "title": "불길한 항구",
+      "prompt": "A medieval fortified harbor quay with one wooden transport ship moored beside stone warehouses, cargo crates containing dull red crystals, rope coils, timber cranes, green-gray sea, seabirds absent. Pale morning sky after rain, wet reflections subtle not glossy. Broad dry stone dock in foreground, ship and waterfront keep readable in center.",
+      "file": "chapter-11.webp"
+    },
+    {
+      "id": 12,
+      "title": "재의 왕좌",
+      "prompt": "Roofless ash-covered sanctuary with an empty broken throne on a small central dais, circular cracked stone seal below, dark-red crystal fragments embedded in weathered columns. Daylight shaft through ruined ceiling, neutral gray stone, pale green patina and restrained amber braziers. Broad level dusty tiled foreground with no glowing objects floating in air.",
+      "file": "chapter-12.webp"
+    },
+    {
+      "id": 13,
+      "title": "암살자의 골목",
+      "prompt": "A terraced medieval hill town on a reddish plateau, narrow stair-stepped alleys between pale stone houses, shutters and suspended plain laundry, crossed balconies and secluded side paths. Green vines, teal shutters and dusty rose rock, long slanted late afternoon shadows. Broad open stone landing foreground with alley passage center, not a vast landscape.",
+      "file": "chapter-13.webp"
+    },
+    {
+      "id": 14,
+      "title": "저주받은 사원",
+      "prompt": "An ancient stone temple at a city crossroads, four processional paths converging toward a weathered facade with fractured knight statues, erased blank name plaques, oxidized copper roof, red-leaf vine accents. Diffuse clear daylight, pale limestone and green patina. Broad cracked ceremonial paving foreground, temple doors centered, no readable engravings.",
+      "file": "chapter-14.webp"
+    },
+    {
+      "id": 15,
+      "title": "달 없는 협곡",
+      "prompt": "A moonless wooded canyon with black rock pillars supporting huge natural overhang, a sheltered root-filled garden in its middle, thin waterfall and distant arched passage. Night scene still readable under diffuse blue starlight and a few amber lanterns fixed to rock, green ferns and pale stone contrasts. Flat gravel-and-root foreground, NO visible moon.",
+      "file": "chapter-15.webp"
+    },
+    {
+      "id": 16,
+      "title": "사슬 감옥",
+      "prompt": "A winter mountain prison built across a glacial chasm, two narrow stone access bridges, iron cage doors under heavy buttresses, thick hanging chains and small amber window lights, frozen blue waterfalls. Bright snow around dark gray walls, cold afternoon sky. Broad snowy stone platform in foreground, prison gateway centered, no prisoners or skeletons.",
+      "file": "chapter-16.webp"
+    },
+    {
+      "id": 17,
+      "title": "그림자 성벽",
+      "prompt": "A long fortified city wall reflected in a narrow canal, massive buttresses and a low water-gate, accessible stone towpath under archways, timber service walkways, dark pennants without emblems. Clear blue-hour light balanced by warm fixed lanterns and muted moss greens. Broad empty flagstone quay foreground, central arch and canal vanish into distance.",
+      "file": "chapter-17.webp"
+    },
+    {
+      "id": 18,
+      "title": "밤의 집행자",
+      "prompt": "An imposing roofed tribunal hall above a deep sealed chamber, circular black stone dais with empty high-backed seat, tall narrow windows and torn burgundy standards, scattered blank parchment sheets. Strong pale light through upper windows and restrained amber braziers, dark stone with silver edges, not pitch black. Broad empty level floor foreground.",
+      "file": "chapter-18.webp"
+    },
+    {
+      "id": 19,
+      "title": "옛 천수의 묘",
+      "prompt": "A snow-covered grove of ancient knight memorials, weathered upright stone tablets with unreadable worn blank faces, empty sword-shaped memorial markers and a central sealed tomb under an old cedar. Gentle late winter daylight, ivory snow, green conifers and small rusty-red leaves. Peaceful melancholy, broad packed snow path foreground, no skulls or people.",
+      "file": "chapter-19.webp"
+    },
+    {
+      "id": 20,
+      "title": "무너진 왕도",
+      "prompt": "A once-grand royal avenue ruined by war and winter: fractured triumphal arch and distant collapsed palace on an icy ridge, fallen stone rooftops, snow-softened rubble leaving an open path. Pale gold sunrise across white snow and turquoise ice, faded crimson roof tiles. Broad snowy cobblestone foreground, palace silhouette centered and readable.",
+      "file": "chapter-20.webp"
+    },
+    {
+      "id": 21,
+      "title": "심연의 도서관",
+      "prompt": "A vast ancient archive carved into frozen cavern walls, rows of stone bookshelves surrounding separate icebound platforms connected by low masonry causeways, central open reading dais, suspended iron lamps fixed to beams. Soft cyan ice light and warm parchment/wood accents, clearly visible geometry. Broad empty stone reading terrace foreground, archive behind; no floating books.",
+      "file": "chapter-21.webp"
+    },
+    {
+      "id": 22,
+      "title": "검은 기도실",
+      "prompt": "A ruined military chapel within a fortress barracks: collapsed side aisles, worn pew fragments pushed aside, central altar under a fractured round stained-glass window with abstract teal and gold glass. Shafts of quiet daylight through broken roof, dark charcoal stone balanced with pale lime plaster and green moss. Broad unobstructed flagstone aisle foreground.",
+      "file": "chapter-22.webp"
+    },
+    {
+      "id": 23,
+      "title": "황혼의 다리",
+      "prompt": "An old high stone bridge spanning a snowy mountain gorge at twilight, three strong arches, worn parapets and a distant lantern-lit checkpoint. Peach horizon fading into clear blue sky, snow and dark evergreen slopes, delicate violet-gray shadows but natural varied palette. Broad level bridge approach foreground, whole bridge sweeps into center background.",
+      "file": "chapter-23.webp"
+    },
+    {
+      "id": 24,
+      "title": "흑야의 심장",
+      "prompt": "A monumental sealed sky citadel gate surrounding a faceted deep-crimson crystal HEART fixed inside iron chains and a stone cradle, flanking dark columns, fractured white stone stair terraces. Readable luminous overcast sky through roofless chamber, muted teal copper and silver masonry. Crystal is an architectural object, NOT an orb. Broad empty tiled forecourt foreground.",
+      "file": "chapter-24.webp"
+    },
+    {
+      "id": 25,
+      "title": "끝없는 계단",
+      "prompt": "Impossible-looking but solid ancient stone stairways branching and returning around a tall central citadel pillar, intersecting landings, carved balustrades and small fixed amber lanterns. Gray and pale green masonry in luminous dusk, clouds visible through large open arches. Broad horizontal lower landing in foreground for fighters; stairs dominate upper center without covering foreground.",
+      "file": "chapter-25.webp"
+    },
+    {
+      "id": 26,
+      "title": "붉은 달의 성소",
+      "prompt": "A living forest sanctuary around a circular stone shrine with climbing flowering vines, giant old trees curve open toward an immense red moon low on horizon. Deep green leaves, pale marble, pink-white flowers and copper moonlight, clear detailed forms rather than black silhouettes. Broad level mossy stone clearing foreground, shrine center, moon architectural backdrop not floating decorative lights.",
+      "file": "chapter-26.webp"
+    },
+    {
+      "id": 27,
+      "title": "천공 관문",
+      "prompt": "A colossal white-and-dark stone gateway at the end of two parallel arched bridges above a black reflective river far below, exposed mountain peaks and luminous rolling clouds. Worn gold trim, verdigris copper insets, pale gray masonry, late dawn sky. Broad flat bridgehead platform foreground with low guardrails, giant gate centered, no people or floating islands cluttering passage.",
+      "file": "chapter-27.webp"
+    },
+    {
+      "id": 28,
+      "title": "잊힌 수호자",
+      "prompt": "A forgotten fortress water-gate with tall spillway doors and quiet blue-green water cascading beside broad stone stairs, an empty armor-shaped monumental statue carved into the central facade, ivy and white wildflowers reclaiming parapets. Clear late afternoon sun, weathered warm-gray stone, dark iron and green water. Broad dry stone landing foreground.",
+      "file": "chapter-28.webp"
+    },
+    {
+      "id": 29,
+      "title": "파멸의 평원",
+      "prompt": "A windswept ruined high plain fractured into broad rock terraces, shallow chasms connected by intact natural stone causeways, shattered siege walls and distant jagged citadel spires. Luminous storm sky breaking with pale dawn light, charcoal ground, sparse green grass, deep red banners attached to ruined posts. Broad level dry stone-and-earth foreground, no lava covering walkable surface.",
+      "file": "chapter-29.webp"
+    },
+    {
+      "id": 30,
+      "title": "마지막 천수",
+      "prompt": "The final open-air throne sanctuary at dawn, a grand circular stone oath dais and empty throne framed by tall broken silver-white pillars, black crystal chains lying broken at edges, distant valley and rising sun through an immense arch. Hopeful blue sky, green valley, ivory stone and restrained gold metal, no uniform gold wash. Broad empty circular tiled foreground, dignified final location, no people or text.",
+      "file": "chapter-30.webp"
+    }
+  ]
+}

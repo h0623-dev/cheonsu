@@ -3,7 +3,7 @@ import { ArrowLeft, BookOpen, Users, Trophy, Images, ScrollText, Lock, Play, Che
 import { stages } from '../data/stages.js';
 import { STORY_ARCS } from '../data/storyScenes.js';
 import { getChapterBrief } from '../data/chapterBriefs.js';
-import { getWorldScene } from '../data/worldArt.js';
+import { getWorldSceneThumbnail } from '../data/worldArt.js';
 import { canReplayStory } from '../engine/playerExperience.js';
 
 const records = [['roster','기사단',Users],['codex','도감',BookOpen],['records','전투 기록',ScrollText],['profile','지휘관',UserRound],['gallery','갤러리',Images],['hall','명예의 전당',Trophy],['planner','육성 계획',Map],['strategyArchive','전략 보관함',ScrollText]];
@@ -22,7 +22,7 @@ export default function JourneyLibrary({ cleared, onBack, onOpen, onReplay, sess
       <div className="library-chapters">{stages.filter(stage => Math.floor((stage.id - 1) / 6) === act).map(stage => {
         const intro = canReplayStory(stage.id, 'intro', cleared), clear = canReplayStory(stage.id, 'clear', cleared);
         return <article key={stage.id} className={intro ? '' : 'is-locked'}>
-          <img src={getWorldScene(stage.id)} alt="" loading="lazy"/>
+          <img src={getWorldSceneThumbnail(stage.id)} alt="" loading="lazy" decoding="async" width="480" height="320"/>
           <div><small>{clear ? <><Check size={14}/>완료</> : intro ? '진행 가능' : <><Lock size={14}/>미개방</>}</small><h3>{stage.title}</h3><p>{intro ? getChapterBrief(stage.id)?.text : '앞선 장을 완료하면 이야기가 열립니다.'}</p>
             <div className="library-replay-actions"><button disabled={!intro} onClick={() => onReplay(stage, 'intro')} aria-label={`${stage.id}장 전투 전 이야기`}><Play size={15}/>전투 전</button><button disabled={!clear} onClick={() => onReplay(stage, 'clear')} aria-label={`${stage.id}장 전투 후 이야기`}><Play size={15}/>전투 후</button></div>
           </div>
