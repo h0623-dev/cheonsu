@@ -48,6 +48,7 @@ try {
     await page.goto(base);
     await page.locator('.patch-title-status').filter({ hasText: '51%' }).waitFor();
     await page.getByRole('button', { name: '설정', exact: true }).click();
+    await page.getByRole('button', { name: '업데이트', exact: true }).click();
     const card = page.locator('.patch-settings');
     await card.scrollIntoViewIfNeeded();
     assert.equal(await card.getByRole('progressbar').getAttribute('value'), '51');
@@ -73,10 +74,10 @@ try {
     await card.getByText('설치 준비 완료', { exact: true }).waitFor();
     assert.equal(await page.evaluate(() => window.__nativeCalls.some(call => call.method === 'reload')), false);
     assert.match(await page.evaluate(() => localStorage.getItem('cheonsu_v01_save')), /keep-me/);
-    await page.locator('.settings-screen .back-btn').click();
+    await page.locator('.player-settings').getByRole('button', { name: '뒤로', exact: true }).click();
     await page.locator('.patch-title-status').getByRole('button', { name: '지금 적용' }).waitFor();
     const patchBox = await page.locator('.patch-title-status').boundingBox();
-    const menuBox = await page.locator('.main-menu-hit-area').boundingBox();
+    const menuBox = await page.locator('.journey-title-actions').boundingBox();
     assert.ok(patchBox.y >= menuBox.y + menuBox.height, 'patch status must not overlap title or menu');
     assert.ok(patchBox.x >= 0 && patchBox.x + patchBox.width <= viewport.width + 1);
     await page.screenshot({ path: `tmp/update-qa/pending-${viewport.width}.png` });
@@ -89,6 +90,7 @@ try {
   const page = await browser.newPage({ serviceWorkers: 'block' });
   await page.routeWebSocket('**', () => {});
   await page.goto(base); await page.getByRole('button', { name: '설정', exact: true }).click();
+  await page.getByRole('button', { name: '업데이트', exact: true }).click();
   await page.getByText('자동 패치는 Android 앱에서 제공됩니다.', { exact: true }).waitFor();
   assert.equal(await page.locator('.patch-settings').getByRole('checkbox').isDisabled(), true);
   console.log('PASS 웹 실행: 네이티브 기능 미지원 안내');

@@ -8,6 +8,7 @@ import { getWorldScene } from '../../src/data/worldArt.js';
 import { stages } from '../../src/data/stages.js';
 import '../../src/index.css';
 import '../../src/journey-ui.css';
+import '../../src/player-experience.css';
 
 const root = createRoot(document.getElementById('root'));
 window.renderStoryArt = ({ stageId = 3, type = 'intro', index = 1 } = {}) => {

@@ -72,8 +72,8 @@ function Loadout({ unit, equipment, gearInventory, getPortrait, onEquip, onUnequ
   </>;
 }
 
-export default function ArmoryPanel({ party, getPortrait, ...props }) {
-  const [unitId, setUnitId] = useState(party[0]?.id);
+export default function ArmoryPanel({ party, getPortrait, initialUnitId, ...props }) {
+  const [unitId, setUnitId] = useState(initialUnitId || party[0]?.id);
   const unit = party.find(member => member.id === unitId) || party[0];
   if (!unit) return <p>아직 합류한 동료가 없습니다.</p>;
   const onRosterKey = event => {

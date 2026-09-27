@@ -11,6 +11,7 @@ import './journey-ui.css'
 import './village-ui.css'
 import './armory-ui.css'
 import './native-insets.css'
+import './player-experience.css'
 import App from './App.jsx'
 import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 

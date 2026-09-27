@@ -2,11 +2,13 @@
 
 마지막 확인일: 2026-09-27
 프로젝트 위치: `C:\Users\user\Desktop\cheonsu`
-현재 앱/패키지 버전: `1.99.142` (Android 341)
+현재 앱/패키지 버전: `1.99.143` (Android 342)
 
-GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.142 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.142). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
+GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.143 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.143). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
 
-최신 산출물: `cheonsu_1.99.142_update_debug.apk`, `cheonsu_development_1.99.142.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+최신 산출물: `cheonsu_1.99.143_update_debug.apk`, `cheonsu_development_1.99.143.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+
+1.99.143 변경: 아군 4인 기준의 타이틀 원화, 이어하기 중심 메뉴, 4분류 설정, 초상화 기사단과 선택 캐릭터 장비 관리, 마을의 주요 메뉴/출전 연결. 30장 상황 설명과 1장 도입 보강, 60장면 213대사 이야기 다시보기/자동 진행. 메인 화면 저장 보호, 새 게임 확인, 현재 상태 수동 슬롯 저장. 스토리 다시보기는 실제 전투/보상을 바꾸지 않습니다. [전체 정비 보고서](docs/PLAYER_EXPERIENCE_1.99.143.md), [원화 프롬프트](docs/art/journey-v1/PROMPT.md).
 
 1.99.142 변경: 카일·브람·리나 원화를 내장 image_gen의 실제 스타일 참조로 사용해 적 보스 5종을 다시 제작했습니다. 스토리의 가론이 일반 지휘관 전투 스프라이트를 확대해서 쓰던 문제를 수정하고 전용 원화를 적용합니다. 이야기·보스 등장/각성·정보창은 같은 디자인을 사용합니다. 아군 그림, 전장과 전투 모션/규칙/저장은 유지합니다. 원본 및 프롬프트: `docs/art/enemy-illustrations-v1/PROMPTS.md`.
 

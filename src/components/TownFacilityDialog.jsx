@@ -7,7 +7,7 @@ const facilities = { shop: ['상점', ShoppingBag], inn: ['여관', BedDouble], 
 const gearPrices = { ironSword: 500, chainArmor: 800 };
 
 export default function TownFacilityDialog({ facility, party, getPortrait, items, inventory, equipment, gearInventory, gold,
-  message, onClose, onBuyItem, onBuyGear, onEquip, onUnequip, onRest, onAction, onSave, saveNotice }) {
+  message, onClose, onBuyItem, onBuyGear, onEquip, onUnequip, onRest, onAction, onSave, saveNotice, initialUnitId }) {
   const ref = useRef(null);
   const [tab, setTab] = useState('items');
   const [title, Icon] = facilities[facility];
@@ -27,7 +27,7 @@ export default function TownFacilityDialog({ facility, party, getPortrait, items
           : Object.entries(gearPrices).map(([id, price]) => <article key={id}><GearIcon gear={equipment[id]} /><div><strong>{equipment[id].name}</strong><span>{equipment[id].desc}</span></div>
             <button disabled={gold < price || gearInventory.includes(id)} onClick={() => onBuyGear(id, price)}>{gearInventory.includes(id) ? '보유 중' : `${price}G`}</button></article>)}</div>
       </>}
-      {facility === 'armory' && <ArmoryPanel party={party} getPortrait={getPortrait} equipment={equipment} gearInventory={gearInventory}
+      {facility === 'armory' && <ArmoryPanel party={party} initialUnitId={initialUnitId} getPortrait={getPortrait} equipment={equipment} gearInventory={gearInventory}
         onEquip={onEquip} onUnequip={onUnequip} onForge={() => onAction('forge')} />}
       {facility === 'inn' && <>
         <div className="town-rest-party">{party.map(member => <div key={member.id}><img src={getPortrait(member)} alt="" /><strong>{member.name}</strong><span>HP {member.hp} / {member.maxHp}</span></div>)}</div>

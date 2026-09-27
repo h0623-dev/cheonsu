@@ -1,4 +1,4 @@
-import { memo, useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 import { X, Swords, Sparkles, BookOpen, ArrowRight, Save, ShoppingBag, Check, Users, Shield, Backpack, Settings, Undo2 } from "lucide-react";
 import DiscoveryDialog from "./components/DiscoveryDialog.jsx";
 import PromotionDialog from "./components/PromotionDialog.jsx";
@@ -10,7 +10,13 @@ import SkillDialog from "./components/SkillDialog.jsx";
 import SupportTargetDialog from './components/SupportTargetDialog.jsx';
 import TownHub from './components/TownHub.jsx';
 import TownFacilityDialog from './components/TownFacilityDialog.jsx';
-import { PatchSettings, PatchTitleStatus } from './components/PatchUpdates.jsx';
+import TitleMenu from './components/TitleMenu.jsx';
+import PlayerSettings from './components/PlayerSettings.jsx';
+import CompanyRoster from './components/CompanyRoster.jsx';
+import JourneyLibrary from './components/JourneyLibrary.jsx';
+import { readMenuCheckpoint, canReplayStory, getNextChapter } from './engine/playerExperience.js';
+import { getCharacterProfile } from './data/characterProfiles.js';
+import { getChapterBrief } from './data/chapterBriefs.js';
 import { usePatchLifecycle } from './engine/usePatchUpdates.js';
 import { createStagePreviewReader } from './engine/stagePreviewCache.js';
 import { LiveUpdate } from '@capawesome/capacitor-live-update';
@@ -81,7 +87,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.142";
+const SAVE_VERSION = "1.99.143";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -940,7 +946,8 @@ function getCodexEntries({ party, clearedStages, settings }) {
     category: "동료",
     title: unit.name,
     subtitle: `${getUnitDisplayClass(unit)} · ${getUnitPassiveDef(unit).name}`,
-    desc: `${unit.skill} / ${getUnitPassiveDef(unit).desc}`,
+    desc: `${getCharacterProfile(unit.id).bio} ${getUnitSkills(unit).map(skill => skill.name).join(' · ')}`,
+    portrait: getPaintedVisualProfile(unit.id)?.portrait,
     unlocked: true,
     icon: unit.icon || "👤",
   }));
@@ -7309,7 +7316,7 @@ function promoteAllyUnit(unit) {
 
 function getUnitDisplayClass(unit) {
   if (!unit) return "";
-  return unit.promoted ? unit.classTitle || getPromotionTitle(unit) : "기본 병과";
+  return unit.promoted ? unit.classTitle || getPromotionTitle(unit) : getCharacterProfile(unit.id).role;
 }
 
 
@@ -8173,7 +8180,22 @@ export default function App() {
     };
   }, []);
 
-  const [screen, setScreen] = useState("menu");
+  const [screen, setCurrentScreen] = useState("menu");
+  const [lastPlayScreen, setLastPlayScreen] = useState('campaign');
+  const setScreen = useCallback(destination => {
+    setCurrentScreen(destination);
+    if (['campaign', 'deployment', 'camp', 'battle'].includes(destination)) setLastPlayScreen(destination);
+  }, []);
+  const [sessionStarted, setSessionStarted] = useState(false);
+  const [settingsTab, setSettingsTab] = useState('sound');
+  const [armorySelectedId, setArmorySelectedId] = useState(null);
+  const utilityHistory = useRef([]);
+  const openUtility = (destination, tab = 'sound') => {
+    utilityHistory.current.push(screen);
+    if (destination === 'settings') setSettingsTab(tab);
+    setScreen(destination);
+  };
+  const closeUtility = () => setScreen(utilityHistory.current.pop() || 'menu');
   const [storyScene, setStoryScene] = useState(null);
   const [selectedStage, setSelectedStage] = useState(null);
   const [deploymentStage, setDeploymentStage] = useState(null);
@@ -8733,7 +8755,11 @@ export default function App() {
     careerStats,
   });
   const completedSeasonMissionCount = seasonMissions.filter((mission) => mission.completed).length;
-  const codexEntries = getCodexEntries({ party, clearedStages, settings });
+  const menuCheckpoint = ['menu', 'settings', 'library', 'roster', 'codex'].includes(screen)
+    ? readMenuCheckpoint(localStorage) : { exists: false, data: null };
+  const browsingParty = sessionStarted ? party : menuCheckpoint.data?.party || party;
+  const browsingCleared = sessionStarted ? clearedStages : menuCheckpoint.data?.clearedStages || [];
+  const codexEntries = getCodexEntries({ party: browsingParty, clearedStages: browsingCleared, settings });
   const codexCategories = getCodexCategories(codexEntries);
   const visibleCodexEntries = filterCodexEntries(codexEntries, codexCategory, codexQuery);
   const unlockedCodexCount = codexEntries.filter((entry) => entry.unlocked).length;
@@ -9389,10 +9415,15 @@ export default function App() {
     if (!ok) return;
 
     localStorage.removeItem(SAVE_KEY);
+    setSessionStarted(false);
+    setParty(getInitialParty());
+    setClearedStages([]);
+    setLastPlayScreen('campaign');
+    utilityHistory.current = [];
     playSfx("miss");
     setCampMessage("저장 데이터가 초기화되었습니다.");
     alert("저장 데이터가 초기화되었습니다.");
-    setScreen("promo");
+    setScreen("menu");
   };
 
   const updateSetting = (key, value) => {
@@ -10222,6 +10253,8 @@ export default function App() {
 
 
   const newGame = () => {
+    setSessionStarted(true);
+    utilityHistory.current = [];
     setSaveNotice(null);
     setClearReceipt(null);
     playSfx("start");
@@ -10440,24 +10473,16 @@ export default function App() {
   };
 
   const saveManualSlot = (slot) => {
-    const raw = localStorage.getItem(SAVE_KEY);
-
-    if (!raw) {
-      saveGame();
-      const saved = localStorage.getItem(SAVE_KEY);
-
-      if (saved) {
-        localStorage.setItem(getManualSaveSlotKey(slot), saved);
-        playSfx("save");
-        alert(`수동 저장 슬롯 ${slot}에 저장했습니다.`);
-      }
-
-      return;
+    if (sessionStarted && !saveGame()) return;
+    try {
+      const raw = localStorage.getItem(SAVE_KEY);
+      if (!raw) return;
+      localStorage.setItem(getManualSaveSlotKey(slot), raw);
+      playSfx('save');
+      setSaveNotice({ ok: true, text: `슬롯 ${slot}에 저장했습니다.` });
+    } catch {
+      setSaveNotice({ ok: false, text: '슬롯 저장 실패 · 저장 공간을 확인해 주세요.' });
     }
-
-    localStorage.setItem(getManualSaveSlotKey(slot), raw);
-    playSfx("save");
-    alert(`수동 저장 슬롯 ${slot}에 저장했습니다.`);
   };
 
   const loadManualSlot = (slot) => {
@@ -11151,6 +11176,7 @@ export default function App() {
     if (!ok) return;
 
     [1, 2, 3].forEach((slot) => localStorage.removeItem(getManualSaveSlotKey(slot)));
+    setSaveNotice({ ok: true, text: '수동 저장 슬롯을 비웠습니다.' });
     playSfx("miss");
     alert("수동 저장 슬롯을 비웠습니다.");
   };
@@ -11177,7 +11203,10 @@ export default function App() {
   };
 
   const forceSaveBackupNow = () => {
-    saveGame();
+    if (!saveGame()) {
+      alert("현재 상태를 저장할 수 없습니다. 저장된 여정은 변경되지 않았습니다.");
+      return;
+    }
     setSaveHealthRefreshKey((prev) => prev + 1);
     alert("현재 상태 저장과 자동 백업을 갱신했습니다.");
   };
@@ -11509,6 +11538,11 @@ export default function App() {
 
     setStoryScene(null);
 
+    if (action === 'library') {
+      setScreen('library');
+      return;
+    }
+
     if (action === "battle") {
       beginStageBattle(stage);
       return;
@@ -11544,7 +11578,7 @@ export default function App() {
   const getSaveData = () => ({
       version: SAVE_VERSION,
       exploration,
-      screen,
+      screen: ['campaign', 'deployment', 'camp', 'battle'].includes(screen) ? screen : lastPlayScreen,
       selectedStage,
       currentStageId: selectedStage?.id || null,
       party,
@@ -11604,11 +11638,12 @@ export default function App() {
   };
 
   const saveGame = () => {
-    if (screen === 'battle' && (turn !== 'ally' || combatBusy || battle || result || itemOpen || skillChoiceOpen || supportSkillChoice)) {
+    if (!sessionStarted) return false;
+    if ((screen === 'battle' || lastPlayScreen === 'battle') && (turn !== 'ally' || combatBusy || battle || result || itemOpen || skillChoiceOpen || supportSkillChoice)) {
       setSaveNotice({ ok: false, text: '명령이 끝난 아군 턴에 저장할 수 있습니다.' });
-      return;
+      return false;
     }
-    persistProgress(getSaveData());
+    return persistProgress(getSaveData());
   };
 
   useEffect(() => {
@@ -11737,6 +11772,9 @@ export default function App() {
       setPromoteOpen(false);
       setSupportOpen(false);
       playSfx("confirm");
+      setSessionStarted(true);
+      utilityHistory.current = [];
+      setLastPlayScreen(['battle', 'camp', 'campaign', 'deployment'].includes(migratedData.screen) ? migratedData.screen : 'campaign');
       setScreen(migratedData.screen);
     } catch (error) {
       console.error("Save load failed:", error);
@@ -14073,7 +14111,7 @@ export default function App() {
     const facility = shopOpen ? 'shop' : equipmentOpen ? 'armory' : campFacility;
     if (!facility) return null;
     const close = () => { setShopOpen(false); setEquipmentOpen(false); setCampFacility(null); };
-    return <TownFacilityDialog key={facility} facility={facility} party={party} getPortrait={getUnitPortrait}
+    return <TownFacilityDialog key={facility} facility={facility} party={party} getPortrait={getUnitPortrait} initialUnitId={armorySelectedId}
       items={ITEM_DEFS} inventory={inventory} equipment={EQUIPMENT} gearInventory={gearInventory} gold={gold}
       message={campMessage} onClose={close} onBuyItem={buyItem} onBuyGear={buyGear} onEquip={equipGear} onUnequip={unequipGear}
       onSave={saveGame} saveNotice={saveNotice} onRest={() => {
@@ -14317,9 +14355,7 @@ export default function App() {
               <div className="screen-kicker">천수 앱 설치</div>
               <h1>PWA 점검</h1>
             </div>
-            <button className="back-btn" onClick={() => setScreen("promo")}>
-              뒤로
-            </button>
+            <button className="back-btn" onClick={closeUtility}>뒤로</button>
           </div>
 
           <div className="pwa-hero-card">
@@ -14386,9 +14422,7 @@ export default function App() {
               <h1>명예의 전당</h1>
               <span className="settings-version-label">천수 기사단의 주요 기록</span>
             </div>
-            <button className="back-btn" onClick={() => setScreen("menu")}>
-              메뉴
-            </button>
+            <button className="back-btn" onClick={closeUtility}>뒤로</button>
           </div>
 
           <div className="hall-hero-card">
@@ -14433,9 +14467,7 @@ export default function App() {
               <h1>스냅샷 갤러리</h1>
               <span className="settings-version-label">저장된 스냅샷 {snapshotGallery.length}개</span>
             </div>
-            <button className="back-btn" onClick={() => setScreen("menu")}>
-              메뉴
-            </button>
+            <button className="back-btn" onClick={closeUtility}>뒤로</button>
           </div>
 
           <div className="gallery-guide-card">
@@ -14486,9 +14518,7 @@ export default function App() {
               <h1>지휘관 프로필</h1>
               <span className="settings-version-label">현재 칭호: {selectedPlayerTitleName}</span>
             </div>
-            <button className="back-btn" onClick={() => setScreen("menu")}>
-              메뉴
-            </button>
+            <button className="back-btn" onClick={closeUtility}>뒤로</button>
           </div>
 
           <div className={`profile-hero-card ${activeProfileFrame.className}`}>
@@ -14594,9 +14624,7 @@ export default function App() {
             </div>
             <div style={{ display: "flex", gap: "8px" }}>
               <button className="back-btn photo-toggle-btn" onClick={togglePhotoMode}>포토</button>
-              <button className="back-btn" onClick={() => setScreen("menu")}>
-                메뉴
-              </button>
+              <button className="back-btn" onClick={closeUtility}>뒤로</button>
             </div>
           </div>
 
@@ -14622,7 +14650,7 @@ export default function App() {
           <div className="codex-grid">
             {visibleCodexEntries.map((entry) => (
               <div key={entry.id} className={`codex-card ${entry.unlocked ? "unlocked" : "locked"}`}>
-                <div className="codex-icon">{entry.unlocked ? entry.icon : "?"}</div>
+                <div className="codex-icon">{entry.unlocked && entry.portrait ? <img src={entry.portrait} alt="" /> : entry.unlocked ? <BookOpen size={24} /> : '?'}</div>
                 <div>
                   <span>{entry.category}</span>
                   <strong>{entry.unlocked ? entry.title : "미해금 항목"}</strong>
@@ -14647,9 +14675,7 @@ export default function App() {
                 저장 {strategyArchiveStats.total}개 · 우수 {strategyArchiveStats.highCount}개
               </span>
             </div>
-            <button className="back-btn" onClick={() => setScreen("records")}>
-              기록
-            </button>
+            <button className="back-btn" onClick={closeUtility}>뒤로</button>
           </div>
 
           <div className="strategy-archive-stats">
@@ -14878,9 +14904,7 @@ export default function App() {
                 완성도 {masteryPlannerSummary.completion}% · 별 {masteryPlannerSummary.totalStars}/{masteryPlannerSummary.maxStars}
               </span>
             </div>
-            <button className="back-btn" onClick={() => setScreen("records")}>
-              기록
-            </button>
+            <button className="back-btn" onClick={closeUtility}>뒤로</button>
           </div>
 
           <div className="planner-summary-card">
@@ -14984,9 +15008,7 @@ export default function App() {
               <div className="screen-kicker">천수 기록실</div>
               <h1>기록</h1>
             </div>
-            <button className="back-btn" onClick={() => setScreen("menu")}>
-              뒤로
-            </button>
+            <button className="back-btn" onClick={closeUtility}>뒤로</button>
           </div>
 
           <div className="record-hero-card">
@@ -15348,9 +15370,7 @@ export default function App() {
               <h1>저장 상태 점검</h1>
               <span className="settings-version-label">총 용량 {formatBytes(saveHealthReport.totalSize)} · 정상 {saveHealthReport.validCount}개</span>
             </div>
-            <button className="back-btn" onClick={() => setScreen("settings")}>
-              설정
-            </button>
+            <button className="back-btn" onClick={closeUtility}>뒤로</button>
           </div>
 
           <div className="save-health-summary-card">
@@ -15457,375 +15477,16 @@ export default function App() {
         </div>
       )}
 
-      {screen === "settings" && (
-        <div className="settings-screen">
-          <div className="screen-panel-header">
-            <div>
-              <div className="screen-kicker">천수 환경 설정</div>
-              <h1>설정</h1>
-              <span className="settings-version-label">현재 버전 v{SAVE_VERSION}</span>
-            </div>
-            <button className="back-btn" onClick={() => setScreen("menu")}>
-              뒤로
-            </button>
-          </div>
-
-          <div className="settings-card">
-            <div className="setting-row">
-              <div>
-                <strong>사운드</strong>
-                <span>전투 효과음과 메뉴 효과음을 켜고 끕니다.</span>
-              </div>
-              <button
-                className={settings.soundOn ? "setting-toggle on" : "setting-toggle"}
-                role="switch" aria-label="사운드" aria-checked={settings.soundOn}
-                onClick={() => updateSetting("soundOn", !settings.soundOn)}
-              >
-                {settings.soundOn ? "ON" : "OFF"}
-              </button>
-            </div>
-
-            <div className="setting-row sound-test-row">
-              <div>
-                <strong>효과음 테스트</strong>
-                <span>현재 사운드 설정으로 테스트 효과음을 재생합니다.</span>
-              </div>
-              <button
-                className="setting-test-btn"
-                onClick={() => playSfx("confirm")}
-              >
-                재생
-              </button>
-            </div>
-
-            <div className="setting-row">
-              <div>
-                <strong>배경 음악</strong>
-                <span>전장 · 대기실 · 월드맵</span>
-              </div>
-              <button
-                className={settings.musicOn ? "setting-toggle on" : "setting-toggle"}
-                role="switch" aria-label="배경 음악" aria-checked={settings.musicOn}
-                onClick={() => updateSetting("musicOn", !settings.musicOn)}
-              >
-                {settings.musicOn ? "ON" : "OFF"}
-              </button>
-            </div>
-
-            <div className="setting-row vertical-setting sound-volume-row">
-              <div>
-                <strong>전체 음량</strong>
-                <span>현재 {settings.sfxVolume}%</span>
-              </div>
-              <div className="sound-volume-selector">
-                {[0, 40, 60, 80, 100].map((volume) => (
-                  <button
-                    key={volume}
-                    className={settings.sfxVolume === volume ? "selected" : ""}
-                    onClick={() => updateSetting("sfxVolume", volume)}
-                  >
-                    {volume}%
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="setting-row vertical-setting sound-board-row">
-              <div>
-                <strong>사운드 보드</strong>
-                <span>전투/스킬/보스/승리 효과음을 미리 들어봅니다.</span>
-              </div>
-              <div className="sound-board-grid">
-                {[
-                  ["slash", "검격"],
-                  ["fire", "화염"],
-                  ["ice", "빙결"],
-                  ["shadow", "흑야"],
-                  ["heal", "회복"],
-                  ["boss", "보스"],
-                  ["finish", "FINISH"],
-                  ["victory", "승리"],
-                ].map(([type, label]) => (
-                  <button key={type} onClick={() => playSfx(type)}>
-                    {label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="setting-row">
-              <div>
-                <strong>전투 이펙트</strong>
-                <span>베기/마법/피해 숫자 연출</span>
-              </div>
-              <button
-                className={settings.effectsOn ? "setting-toggle on" : "setting-toggle"}
-                role="switch" aria-label="전투 이펙트" aria-checked={settings.effectsOn}
-                onClick={() => updateSetting("effectsOn", !settings.effectsOn)}
-              >
-                {settings.effectsOn ? "ON" : "OFF"}
-              </button>
-            </div>
-
-            <div className="setting-row">
-              <div>
-                <strong>화면 흔들림</strong>
-                <span>치명타/광역기 흔들림 연출</span>
-              </div>
-              <button
-                className={settings.shakeOn ? "setting-toggle on" : "setting-toggle"}
-                role="switch" aria-label="화면 흔들림" aria-checked={settings.shakeOn}
-                onClick={() => updateSetting("shakeOn", !settings.shakeOn)}
-              >
-                {settings.shakeOn ? "ON" : "OFF"}
-              </button>
-            </div>
-
-            <div className="setting-row vertical-setting">
-              <div>
-                <strong>전투 로그 표시 줄 수</strong>
-                <span>현재 {settings.logLines}줄 표시</span>
-              </div>
-              <div className="log-line-selector">
-                {[4, 6, 8].map((count) => (
-                  <button
-                    key={count}
-                    className={settings.logLines === count ? "selected" : ""}
-                    onClick={() => updateSetting("logLines", count)}
-                  >
-                    {count}줄
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="setting-row vertical-setting difficulty-setting-row">
-              <div>
-                <strong>난이도</strong>
-                <span>
-                  현재 {getDifficultyConfig(settings.difficulty).label} · {getDifficultyConfig(settings.difficulty).desc}
-                </span>
-              </div>
-              <div className="difficulty-selector">
-                {DIFFICULTY_OPTIONS.map((option) => (
-                  <button
-                    key={option.id}
-                    className={settings.difficulty === option.id ? "selected" : ""}
-                    onClick={() => updateSetting("difficulty", option.id)}
-                  >
-                    <strong>{option.label}</strong>
-                    <small>{option.desc}</small>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="setting-row vertical-setting balance-setting-row">
-              <div>
-                <strong>밸런스 프리셋</strong>
-                <span>
-                  현재 {balancePresetConfig.label} · {balancePresetConfig.desc}
-                </span>
-              </div>
-              <div className="balance-selector">
-                {BALANCE_PRESET_OPTIONS.map((option) => (
-                  <button
-                    key={option.id}
-                    className={settings.balancePreset === option.id ? "selected" : ""}
-                    onClick={() => updateSetting("balancePreset", option.id)}
-                  >
-                    <strong>{option.label}</strong>
-                    <small>
-                      HP x{option.hp} · ATK x{option.atk} · DEF x{option.def}
-                    </small>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="setting-row vertical-setting speed-setting-row">
-              <div>
-                <strong>전투 속도</strong>
-                <span>
-                  현재 {battleSpeedConfig.label} · {battleSpeedConfig.desc}
-                </span>
-              </div>
-              <div className="speed-selector">
-                {BATTLE_SPEED_OPTIONS.map((option) => (
-                  <button
-                    key={option.id}
-                    className={settings.battleSpeed === option.id ? "selected" : ""}
-                    aria-pressed={battleSpeedConfig.id === option.id}
-                    onClick={() => updateSetting("battleSpeed", option.id)}
-                  >
-                    <strong>{option.label}</strong>
-                    <small>{option.desc}</small>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="setting-row vertical-setting cutscene-setting-row">
-              <div>
-                <strong>전투 컷씬</strong>
-                <span>
-                  현재 {cutsceneConfig.label} · {cutsceneConfig.desc}
-                </span>
-              </div>
-              <div className="cutscene-selector">
-                {CUTSCENE_OPTIONS.map((option) => (
-                  <button
-                    key={option.id}
-                    className={settings.cutsceneMode === option.id ? "selected" : ""}
-                    onClick={() => updateSetting("cutsceneMode", option.id)}
-                  >
-                    <strong>{option.label}</strong>
-                    <small>{option.desc}</small>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="setting-row vertical-setting auto-battle-setting-row">
-              <div>
-                <strong>자동 전투</strong>
-                <span>
-                  현재 {autoBattleModeConfig.label} · {autoBattleModeConfig.desc}
-                </span>
-              </div>
-              <div className="auto-battle-selector">
-                {AUTO_BATTLE_MODE_OPTIONS.map((option) => (
-                  <button
-                    key={option.id}
-                    className={settings.autoBattleMode === option.id ? "selected" : ""}
-                    onClick={() => updateSetting("autoBattleMode", option.id)}
-                  >
-                    <strong>{option.label}</strong>
-                    <small>{option.desc}</small>
-                  </button>
-                ))}
-              </div>
-              <div className="auto-battle-toggle-row">
-                <button
-                  className={settings.autoUseSkills ? "selected" : ""}
-                  onClick={() => updateSetting("autoUseSkills", !settings.autoUseSkills)}
-                >
-                  스킬 사용 {settings.autoUseSkills ? "ON" : "OFF"}
-                </button>
-                <button
-                  className={settings.autoUseItems ? "selected" : ""}
-                  onClick={() => updateSetting("autoUseItems", !settings.autoUseItems)}
-                >
-                  아이템 제안 {settings.autoUseItems ? "ON" : "OFF"}
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="settings-card photo-settings-card">
-            <div className="setting-row vertical-setting">
-              <div>
-                <strong>포토 모드 테마</strong>
-                <span>
-                  현재 {photoThemeConfig.label} · {photoThemeConfig.desc}
-                </span>
-              </div>
-              <div className="photo-theme-selector">
-                {PHOTO_THEME_OPTIONS.map((theme) => (
-                  <button
-                    key={theme.id}
-                    className={settings.photoTheme === theme.id ? "selected" : ""}
-                    onClick={() => updateSetting("photoTheme", theme.id)}
-                  >
-                    <strong>{theme.label}</strong>
-                    <small>{theme.desc}</small>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="setting-row">
-              <div>
-                <strong>포토 모드 워터마크</strong>
-                <span>스냅샷 하단의 빌드/모드 표시를 켜고 끕니다.</span>
-              </div>
-              <button
-                className={settings.photoWatermark ? "setting-toggle on" : "setting-toggle"}
-                role="switch" aria-label="포토 모드 워터마크" aria-checked={settings.photoWatermark}
-                onClick={() => updateSetting("photoWatermark", !settings.photoWatermark)}
-              >
-                {settings.photoWatermark ? "ON" : "OFF"}
-              </button>
-            </div>
-          </div>
-
-          <div className="settings-danger pwa-settings-card">
-            <h2>앱 설치 / PWA</h2>
-            <div className="setting-mini-info">
-              <span>실행 상태</span>
-              <strong>{pwaStatus.standalone ? "앱 모드" : "브라우저"}</strong>
-            </div>
-            <div className="setting-mini-info">
-              <span>서비스워커</span>
-              <strong>{pwaStatus.serviceWorker ? "지원" : "미지원"}</strong>
-            </div>
-            <button onClick={() => setScreen("pwa")}>설치 / 점검 화면</button>
-          </div>
-
-          <PatchSettings />
-
-          <div className="settings-danger save-manager-card">
-            <h2>저장 데이터 관리</h2>
-            <div className="save-manager-grid">
-              {[1, 2, 3].map((slot) => {
-                const summary = getManualSlotSummary(slot);
-
-                return (
-                  <div className="save-slot-card" key={slot}>
-                    <strong>수동 슬롯 {slot}</strong>
-                    <span>
-                      {summary
-                        ? `${summary.stage} · ${summary.dateText}`
-                        : "비어 있음"}
-                    </span>
-                    <div>
-                      <button onClick={() => saveManualSlot(slot)}>저장</button>
-                      <button onClick={() => loadManualSlot(slot)}>불러오기</button>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className="save-recovery-grid">
-              <button onClick={saveGame}>현재 상태 저장</button>
-              <button onClick={() => restoreAutoBackup(SAVE_BACKUP_KEY)}>자동 백업 복구</button>
-              <button onClick={() => restoreAutoBackup(SAVE_PREVIOUS_KEY)}>이전 저장 복구</button>
-              <button onClick={exportSaveToClipboard}>저장 데이터 복사</button>
-            </div>
-
-            <button className="danger-btn" onClick={clearManualSlots}>
-              수동 슬롯 비우기
-            </button>
-            <button className="danger-btn" onClick={resetSaveData}>
-              현재 저장 데이터 초기화
-            </button>
-          </div>
-
-          <div className="records-actions">
-            <button onClick={() => setScreen("promo")}>홍보 페이지</button>
-            <button onClick={() => setScreen("release")}>출시 노트</button>
-            <button onClick={() => setScreen("codex")}>도감</button>
-            <button onClick={() => setScreen("planner")}>마스터리 플래너</button>
-            <button onClick={() => setScreen("strategyArchive")}>전략 보관함</button>
-            <button onClick={() => setScreen("profile")}>프로필</button>
-            <button onClick={() => setScreen("qa")}>QA 점검</button>
-            <button onClick={() => setScreen("finalRc")}>v1.68.9.8.7.6.5.4.3.2 최종 점검</button>
-            <button onClick={() => setScreen("analytics")}>플레이테스트</button>
-            <button onClick={() => setScreen("campaign")}>캠페인</button>
-          </div>
-        </div>
-      )}
+      {screen === "settings" && <PlayerSettings key={settingsTab} initialTab={settingsTab} version={SAVE_VERSION}
+        settings={settings} onSetting={updateSetting} onBack={closeUtility} onSound={playSfx}
+        options={{ speed: BATTLE_SPEED_OPTIONS, cutscene: CUTSCENE_OPTIONS, difficulty: DIFFICULTY_OPTIONS,
+          balance: BALANCE_PRESET_OPTIONS, auto: AUTO_BATTLE_MODE_OPTIONS, photo: PHOTO_THEME_OPTIONS }}
+        slots={[1, 2, 3].map(id => ({ id, summary: getManualSlotSummary(id) }))} canCopyCheckpoint={!sessionStarted && Boolean(menuCheckpoint.data)}
+        onSaveSlot={saveManualSlot} onLoadSlot={loadManualSlot} onSave={saveGame}
+        canSave={sessionStarted && (lastPlayScreen !== 'battle' || (turn === 'ally' && !combatBusy && !battle && !result && !itemOpen && !skillChoiceOpen && !supportSkillChoice))}
+        onBackup={previous => restoreAutoBackup(previous ? SAVE_PREVIOUS_KEY : SAVE_BACKUP_KEY)}
+        onExport={exportSaveToClipboard} onClearSlots={clearManualSlots} onReset={resetSaveData}
+        onOpen={openUtility} saveNotice={saveNotice} />}
 
       {screen === "analytics" && (
         <div className="analytics-screen">
@@ -15835,9 +15496,7 @@ export default function App() {
               <h1>플레이테스트 리포트</h1>
               <span className="settings-version-label">현재 빌드 v{SAVE_VERSION}</span>
             </div>
-            <button className="back-btn" onClick={() => setScreen("menu")}>
-              메뉴
-            </button>
+            <button className="back-btn" onClick={closeUtility}>뒤로</button>
           </div>
 
           <div className="analytics-hero-card">
@@ -16171,9 +15830,7 @@ export default function App() {
               <h1>QA 점검 센터</h1>
               <span className="settings-version-label">현재 빌드 v{SAVE_VERSION}</span>
             </div>
-            <button className="back-btn" onClick={() => setScreen("menu")}>
-              메뉴
-            </button>
+            <button className="back-btn" onClick={closeUtility}>뒤로</button>
           </div>
 
           <div className="qa-summary-card">
@@ -16481,9 +16138,7 @@ export default function App() {
               <h1>천수 v1.68.9.8.7.6.5.4.3.2 최종 출격 센터</h1>
               <span className="settings-version-label">v1.36부터 v1.68.9.8.7.6.5.4.3.2까지 통합 완료</span>
             </div>
-            <button className="back-btn" onClick={() => setScreen("menu")}>
-              메뉴
-            </button>
+            <button className="back-btn" onClick={closeUtility}>뒤로</button>
           </div>
 
           <div className="final-rc-hero">
@@ -16557,9 +16212,7 @@ export default function App() {
               <h1>천수 v{SAVE_VERSION}</h1>
               <span className="settings-version-label">출시 후보 빌드</span>
             </div>
-            <button className="back-btn" onClick={() => setScreen("menu")}>
-              메뉴
-            </button>
+            <button className="back-btn" onClick={closeUtility}>뒤로</button>
           </div>
 
           <div className="release-hero-card">
@@ -16682,97 +16335,26 @@ export default function App() {
         </div>
       )}
 
-      {screen === "menu" && (
-        <div className="title-container art-menu">
-          <img
-            className="main-menu-art"
-            src="/art/world-v2/scenes/frontier.webp"
-            alt="천수 메인 메뉴"
-          />
+      {screen === "menu" && <TitleMenu version={SAVE_VERSION} checkpoint={menuCheckpoint}
+        onNew={newGame} onContinue={continueGame} onOpen={openUtility} onHelp={() => openTutorial('deploy')} />}
 
-          <div className="world-menu-heading"><h1>천수</h1><p>천수 기사단의 여정</p></div>
-          <div className="main-menu-hit-area">
-            <button className="menu-hit-btn" onClick={newGame} aria-label="새 게임">
-              새 게임
-            </button>
-            <button className="menu-hit-btn" onClick={continueGame} aria-label="이어하기">
-              이어하기
-            </button>
-            <button
-              className="menu-hit-btn"
-              onClick={() => setScreen("records")}
-              aria-label="기록"
-            >
-              기록
-            </button>
-            <button
-              className="menu-hit-btn"
-              onClick={() => setScreen("codex")}
-              aria-label="도감"
-            >
-              도감
-            </button>
-            <button
-              className="menu-hit-btn"
-              onClick={() => setScreen("profile")}
-              aria-label="프로필"
-            >
-              프로필
-            </button>
-            <button
-              className="menu-hit-btn"
-              onClick={() => setScreen("gallery")}
-              aria-label="갤러리"
-            >
-              갤러리
-            </button>
-            <button
-              className="menu-hit-btn"
-              onClick={() => setScreen("hall")}
-              aria-label="명예의 전당"
-            >
-              명예
-            </button>
-            <button
-              className="menu-hit-btn"
-              onClick={() => setScreen("finalRc")}
-              aria-label="v1.68.9.8.7.6.5.4.3.2"
-            >
-              v1.68.9.8.7.6.5.4.3.2
-            </button>
-            <button
-              className="menu-hit-btn"
-              onClick={() => setScreen("settings")}
-              aria-label="설정"
-            >
-              설정
-            </button>
-            <button
-              className="menu-hit-btn"
-              onClick={() => openTutorial("deploy")}
-              aria-label="도움말"
-            >
-              도움말
-            </button>
-            <button
-              className="menu-hit-btn"
-              onClick={() => setScreen("promo")}
-              aria-label="종료"
-            >
-              종료
-            </button>
-          </div>
+      {screen === 'library' && <JourneyLibrary cleared={browsingCleared} onBack={closeUtility} onOpen={openUtility}
+        sessionActive={sessionStarted} checkpoint={menuCheckpoint.data} onContinue={continueGame}
+        onReplay={(stage, type) => {
+          if (!canReplayStory(stage.id, type, browsingCleared)) return;
+          setStoryScene({ stage, type, lines: STORY_SCENES[stage.id][type], index: 0, onComplete: 'library' });
+          setScreen('story');
+        }} />}
 
-          <button className="promo-small-btn" onClick={() => setScreen("promo")}>
-            홍보
-          </button>
-          <button className="release-small-btn" onClick={() => setScreen("release")}>
-            v1.68.9.8.7.6.5.4.3.2
-          </button>
-          <div className="menu-version-line">BUILD v{SAVE_VERSION}</div>
-          <PatchTitleStatus />
-        </div>
-      )}
+      {screen === 'roster' && <CompanyRoster party={browsingParty} onBack={closeUtility}
+        canManage={sessionStarted && lastPlayScreen !== 'battle'}
+        onManage={(action, unitId) => {
+          utilityHistory.current = [];
+          setArmorySelectedId(unitId);
+          setScreen('camp');
+          if (action === 'armory') setEquipmentOpen(true);
+          else setCampFacility('training');
+        }} />}
 
       {screen === "campaign" && (
         <div className={`campaign-screen campaign-stage-select ${campaignView === "atlas" ? "atlas-mode" : "world-mode"}`}>
@@ -16804,6 +16386,11 @@ export default function App() {
               <span>출전 가능</span>
               <strong>최대 {MAX_DEPLOY_COUNT}명</strong>
             </div>
+          </div>
+
+          <div className="campaign-continue-band">
+            <div><small>{getNextChapter(clearedStages) ? '다음 여정' : '원정 완료'}</small><strong>{getNextChapter(clearedStages) ? stages.find(stage => stage.id === getNextChapter(clearedStages))?.title : '천수 기사단의 귀환'}</strong></div>
+            {getNextChapter(clearedStages) && <button className="ux-primary" onClick={() => startStage(stages.find(stage => stage.id === getNextChapter(clearedStages)))}>출전 준비<ArrowRight size={18} /></button>}
           </div>
 
           {campaignView === "world" && <nav className="campaign-act-nav" aria-label="원정 지역">
@@ -17014,6 +16601,8 @@ export default function App() {
               </button>
             </div>
           </div>
+
+          {deploymentStage && <section className="chapter-brief"><div><small>이번 여정</small><h2>{getChapterBrief(deploymentStage.id)?.title}</h2><p>{getChapterBrief(deploymentStage.id)?.text}</p></div><img src={getWorldScene(deploymentStage.id)} alt="" /></section>}
 
           {deploymentStage && deploymentEnemySummary && deploymentThreat && (
             <details className="stage-briefing-card deployment-briefing">
@@ -17500,6 +17089,12 @@ export default function App() {
             <div className="hud-box"><span>소모품</span><strong>{getTotalItemCount(inventory)}개</strong></div>
             <div className="hud-box"><span>장비</span><strong>{gearInventory.length}개</strong></div>
           </div>
+          <nav className="town-player-nav" aria-label="마을 주요 메뉴">
+            <button onClick={() => openUtility('roster')}><Users size={19} />기사단</button>
+            <button onClick={() => openUtility('library')}><BookOpen size={19} />기록실</button>
+            <button onClick={() => openUtility('settings')}><Settings size={19} />설정</button>
+            <button className="ux-primary" onClick={goNextBattle}>출전 준비<ArrowRight size={18} /></button>
+          </nav>
           <details className="camp-management"><summary><Users size={18} />기사단 관리</summary>
           <div className="camp-dashboard-card">
             <div className="camp-dashboard-stat">

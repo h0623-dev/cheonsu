@@ -1,0 +1,10 @@
+# 기사단 타이틀 원화
+
+- 내장 image_gen으로 생성했습니다.
+- 참조: `public/art/world-v2/units/hero.webp`, `bram.webp`, `lina.webp`, `aria.webp`. 얼굴·의상·무기와 손그림 채색을 유지하는 스타일 및 인물 참조입니다.
+- 원본: 이 폴더의 `title.png`. 런타임: `public/art/journey-v1/title.webp`.
+- 기존 스프라이트와 보스 원화는 보존합니다. 타이틀 원화는 기존 아군이 함께 등장하는 새로운 장면입니다.
+
+```text
+Create one landscape 1536x1024 hand-painted JRPG title illustration for the original Korean tactical RPG Cheonsu. The 4 attached allied sprites are mandatory CHARACTER IDENTITY and STYLE references in order: Kyle brown-haired young swordsman in teal scarf and blue steel armor; Bram sturdy bearded brown-haired veteran with green tabard, plate armor and shield; Lina auburn ponytailed female archer with green cape and bow; Aria silver-haired healer in ivory/teal robes carrying a round-headed staff. Keep faces, hair, costumes and weapons recognizable. Same softly painted contour lines and matte colors as sprites, stylized illustrated faces, no photorealism, no 3D, no anime glossy rendering. Show these four companions together overlooking their journey from a grassy stone roadside above a lush valley and a sunlit old stone fortress. Kyle foreground three-quarter face visible looking toward distant city, Bram standing calmly with shield behind him, Lina smiling and listening to Aria, natural quiet moment before departure. Characters occupy LEFT 58% of frame, roughly knee-up to full length, heads around middle third with sky above. RIGHT 42% has beautiful simple distant green valley, soft low-detail clouds and broad road, intentionally quiet for game menu overlay. Daylight blue sky, green trees, silver armor and touches warm red roof. Real expansive background integrated organically, no flat blank panel, no divide between halves. The four people are THE subject, faces legible at mobile sizes. Wide cinematic composition, rich but readable, gentle outdoor lighting. No text, title, logo, watermark, particles, orb, border, UI or decorative cards. User wants coherent art matching existing game, not an unrelated key visual.
+```
