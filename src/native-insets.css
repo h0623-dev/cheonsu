@@ -1,0 +1,81 @@
+/* APK 335 and earlier do not fit the WebView around Android system bars. */
+html.native-legacy-insets {
+  --native-safe-bottom: 56px;
+  --native-safe-left: 0px;
+  --native-safe-right: 0px;
+}
+
+html.native-fitted-insets,
+html.native-fitted-insets body.native-capacitor-app {
+  --native-safe-top: 0px;
+  --native-safe-bottom: 0px;
+  --native-safe-left: 0px;
+  --native-safe-right: 0px;
+}
+
+@media (orientation: landscape) {
+  html.native-legacy-insets {
+    --native-safe-left: 56px;
+    --native-safe-right: 56px;
+  }
+}
+
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .cinematic-command-bar {
+  left: max(env(safe-area-inset-left, 0px), var(--native-safe-left, 0px));
+  right: max(env(safe-area-inset-right, 0px), var(--native-safe-right, 0px));
+  padding-bottom: calc(8px + max(env(safe-area-inset-bottom, 0px), var(--native-safe-bottom, 0px)));
+  max-height: min(400px, 62dvh);
+  overflow: hidden;
+  grid-template-rows: auto auto;
+}
+
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .cinematic-command-bar:has(.battle-command-feedback) {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.cinematic-command-bar .battle-command-feedback {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.app.world-art-app .battle-screen.battle-final-concept.battle-board-only .cinematic-command-bar.has-undo > button {
+  flex-direction: column;
+  gap: 2px;
+  white-space: nowrap;
+  font-size: 13px !important;
+}
+
+.cinematic-command-bar.has-undo > button svg { width: 16px; height: 16px; }
+
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .action-panel.post-move-action-panel {
+  display: none !important;
+}
+
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .battle-control-heading > .prominent-save {
+  flex: none;
+  height: 40px;
+  min-height: 40px;
+  padding: 0 8px;
+  font-size: 13px !important;
+}
+
+.world-art-app .battle-screen.battle-final-concept.battle-board-only .selected-unit-status-hud {
+  bottom: calc(122px + max(8px, env(safe-area-inset-bottom, 0px), var(--native-safe-bottom, 0px))) !important;
+}
+
+html.native-legacy-insets .world-item-dialog {
+  --dialog-safe-top: max(12px, env(safe-area-inset-top, 0px), var(--native-safe-top, 42px));
+  --dialog-safe-bottom: calc(12px + max(env(safe-area-inset-bottom, 0px), var(--native-safe-bottom, 0px)));
+  top: var(--dialog-safe-top);
+  bottom: var(--dialog-safe-bottom);
+  left: var(--native-safe-left, 0px);
+  right: var(--native-safe-right, 0px);
+  max-width: calc(100vw - var(--native-safe-left, 0px) - var(--native-safe-right, 0px) - 24px);
+  max-height: calc(100dvh - var(--dialog-safe-top) - var(--dialog-safe-bottom));
+}
+
+html.native-legacy-insets .world-item-dialog .world-item-sheet {
+  max-height: calc(100dvh - var(--dialog-safe-top) - var(--dialog-safe-bottom) - 2px);
+  overflow: hidden;
+}

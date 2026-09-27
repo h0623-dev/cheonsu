@@ -3,6 +3,9 @@
   "appName": "천수",
   "webDir": "dist",
   "bundledWebRuntime": false,
+  "android": {
+    "adjustMarginsForEdgeToEdge": "auto"
+  },
   "server": {
     "androidScheme": "https"
   },

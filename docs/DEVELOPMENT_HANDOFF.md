@@ -2,7 +2,8 @@
 
 ## 현재 상태
 
-- 버전 1.99.136, Android 335, 패키지 com.cheonsu.game.
+- 버전 1.99.137, Android 336, 패키지 com.cheonsu.game.
+- Android 시스템 바 겹침 수정: `NAVIGATION_PATCH_1.99.137.md`. APK 335는 OTA 보호 여백, APK 336 이상은 실제 WebView inset 자동 적용으로 구분합니다.
 - GitHub 서명 자동 패치와 APK 배포: `AUTO_UPDATE_1.99.136.md`. 개인 서명 키는 소스 ZIP에 없으며 다른 PC 배포 시 별도로 안전하게 전달해야 합니다.
 - 마을 이동/시설, 눈에 띄는 저장 버튼과 클리어 즉시 자동저장, 순차 해금/경험치용 재도전, 보조 마법 수동 대상 선택. 상세: `VILLAGE_PATCH_1.99.135.md`.
 - 전투 41종 246개 자세의 알파 경계와 발 기준 보정은 `combatFrameMetrics.json`, 재생성은 `node scripts/measure-combat-frames.mjs`입니다.
@@ -23,7 +24,7 @@
 ## 새 PC 준비
 
 1. Node.js 24 설치. macOS/Linux에서 nvm을 사용하면 `nvm install`과 `nvm use`를 실행합니다.
-2. `cheonsu_development_1.99.136.zip`을 원하는 폴더에 풉니다.
+2. `cheonsu_development_1.99.137.zip`을 원하는 폴더에 풉니다.
 3. 내부 `cheonsu` 폴더에서 `npm ci`, `npm run setup`, `npm run dev`를 실행합니다.
 4. Vite가 출력하는 로컬 주소를 엽니다. 사용 중인 포트가 있으면 다른 포트를 사용합니다.
 
@@ -31,7 +32,7 @@
 
 ## Git으로 PC 간 이동
 
-저장소 원격 주소는 `https://github.com/h0623-dev/cheonsu.git`입니다. 1.99.136 소스는 `main`, 배포 파일은 `v1.99.136` 릴리스, 자동 패치 안내는 `updates` 브랜치에서 관리합니다. 기존 게임 개선도 모두 포함합니다.
+저장소 원격 주소는 `https://github.com/h0623-dev/cheonsu.git`입니다. 1.99.137 소스는 `main`, 배포 파일은 `v1.99.137` 릴리스, 자동 패치 안내는 `updates` 브랜치에서 관리합니다. 기존 게임 개선도 모두 포함합니다.
 
 ```sh
 git clone https://github.com/h0623-dev/cheonsu.git

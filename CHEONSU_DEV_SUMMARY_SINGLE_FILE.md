@@ -1,12 +1,14 @@
 # 천수 개발현황 통파일
 
-마지막 확인일: 2026-09-26
+마지막 확인일: 2026-09-27
 프로젝트 위치: `C:\Users\user\Desktop\cheonsu`
-현재 앱/패키지 버전: `1.99.136` (Android 335)
+현재 앱/패키지 버전: `1.99.137` (Android 336)
 
-GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.136 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.136). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
+GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.137 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.137). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
 
-최신 산출물: `cheonsu_1.99.136_update_debug.apk`, `cheonsu_development_1.99.136.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+최신 산출물: `cheonsu_1.99.137_update_debug.apk`, `cheonsu_development_1.99.137.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+
+1.99.137 변경: Android 시스템 버튼 영역과 겹치던 전투 명령 버튼 보호. 기존 1.99.136 APK는 OTA 여백 보완, 새 APK는 실제 시스템 바 크기에 따라 화면 영역 조정. 긴 대상 목록만 스크롤, 이동 후 5개 명령 아이콘/글자 정렬, 스킬/아이템 창 취소 버튼 안전 영역 반영. 저장 형식과 전투 행동 규칙은 유지. 상세: `docs/NAVIGATION_PATCH_1.99.137.md`.
 
 1.99.136 변경: 최초 한 번 자동 패치 지원 APK를 설치하면 이후 호환되는 게임 패치를 자동 다운로드하고 다음 실행 때 적용합니다. 고정 공개 키로 안내와 ZIP 서명을 검증하며 실행 실패 시 APK 내장 버전 복구/재설치 차단. 전투 중 강제 재시작 없이 기존 저장 유지. 네이티브 변경은 APK 설치 안내. 운영 절차는 `docs/AUTO_UPDATE_1.99.136.md`.
 

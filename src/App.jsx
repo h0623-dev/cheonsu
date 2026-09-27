@@ -1,5 +1,5 @@
 import { useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
-import { X, Swords, Sparkles, BookOpen, ArrowRight, Save, ShoppingBag, Check, Users, Shield, Backpack, Settings } from "lucide-react";
+import { X, Swords, Sparkles, BookOpen, ArrowRight, Save, ShoppingBag, Check, Users, Shield, Backpack, Settings, Undo2 } from "lucide-react";
 import DiscoveryDialog from "./components/DiscoveryDialog.jsx";
 import PromotionDialog from "./components/PromotionDialog.jsx";
 import { DISCOVERIES } from "./data/discoveries.js";
@@ -12,6 +12,8 @@ import TownHub from './components/TownHub.jsx';
 import TownFacilityDialog from './components/TownFacilityDialog.jsx';
 import { PatchSettings, PatchTitleStatus } from './components/PatchUpdates.jsx';
 import { usePatchUpdates } from './engine/usePatchUpdates.js';
+import { LiveUpdate } from '@capawesome/capacitor-live-update';
+import { installNativeInsets } from './engine/nativeInsets.js';
 import DefeatDialog from "./components/DefeatDialog.jsx";
 import VictoryDialog from "./components/VictoryDialog.jsx";
 import StoryScene from "./components/StoryScene.jsx";
@@ -74,7 +76,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.136";
+const SAVE_VERSION = "1.99.137";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -7875,6 +7877,10 @@ export default function App() {
     const isNativeApp = isNativeCapacitorRuntime();
     document.documentElement.classList.toggle(nativeClassName, isNativeApp);
     document.body.classList.toggle(nativeClassName, isNativeApp);
+    const cleanupNativeInsets = installNativeInsets(document.documentElement, {
+      native: isNativeApp,
+      readVersionCode: () => LiveUpdate.getVersionCode(),
+    });
 
     const checkStandalone = () =>
       window.matchMedia?.("(display-mode: standalone)")?.matches ||
@@ -7941,6 +7947,7 @@ export default function App() {
       window.removeEventListener("offline", refreshPwaStatus);
       document.documentElement.classList.remove(nativeClassName);
       document.body.classList.remove(nativeClassName);
+      cleanupNativeInsets();
     };
   }, []);
 
@@ -8682,13 +8689,14 @@ export default function App() {
     const cellWidth = metrics.gridScrollWidth / cols;
     const cellHeight = metrics.gridScrollHeight / rows;
     const shellRect = shell.getBoundingClientRect();
+    const commandRect = shell.closest('.battle-screen')?.querySelector('.cinematic-command-bar')?.getBoundingClientRect();
     const target = getCellScrollTarget({
       mapLeft: metrics.rect.left - shellRect.left + shell.scrollLeft + metrics.paddingLeft,
       mapTop: metrics.rect.top - shellRect.top + shell.scrollTop + metrics.paddingTop,
       cellWidth, cellHeight, x, y,
       viewportWidth: shell.clientWidth, viewportHeight: shell.clientHeight,
       topInset: shell.clientWidth < 700 ? 142 : 100,
-      bottomInset: shell.clientWidth < 700 ? 188 : 130,
+      bottomInset: Math.max(shell.clientWidth < 700 ? 188 : 130, commandRect ? shellRect.bottom - commandRect.top : 0),
     });
 
     shell.scrollTo({
@@ -18637,7 +18645,7 @@ export default function App() {
             )}
             {canUndoMove && (
               <button className="cmd-undo" disabled={!canCommandSelected} onClick={undoSelectedMove}>
-                취소
+                <Undo2 size={18} aria-hidden="true" /> 취소
               </button>
             )}
             <button

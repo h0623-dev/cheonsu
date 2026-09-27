@@ -44,6 +44,7 @@ try {
     }
     $config = Read-ZipText $apk 'assets/capacitor.config.json' | ConvertFrom-Json
     $trust = Get-Content (Join-Path $root 'src/data/updateTrust.json') -Raw | ConvertFrom-Json
+    if ($config.android.adjustMarginsForEdgeToEdge -ne 'auto') { throw 'Android system-bar fitting is disabled.' }
     if ($config.plugins.LiveUpdate.publicKey -ne $trust.publicKey -or $config.plugins.LiveUpdate.readyTimeout -ne 30000 -or !$config.plugins.LiveUpdate.autoBlockRolledBackBundles -or $config.server.url) { throw 'Native OTA trust/rollback/origin configuration mismatch.' }
     $plugins = Read-ZipText $apk 'assets/capacitor.plugins.json'
     if ($plugins -notmatch 'LiveUpdatePlugin') { throw 'LiveUpdate native plugin missing from APK.' }

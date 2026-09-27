@@ -1,16 +1,18 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.136 / Android versionCode 335**
+현재 개발 빌드: **1.99.137 / Android versionCode 336**
 
 ## 다운로드
 
-- 로컬 최신 산출물: `cheonsu_1.99.136_update_debug.apk`, `cheonsu_development_1.99.136.zip`
-- [1.99.136 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.136)
+- 로컬 최신 산출물: `cheonsu_1.99.137_update_debug.apk`, `cheonsu_development_1.99.137.zip`
+- [1.99.137 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.137)
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)
 
-APK는 디버그 서명의 개발 테스트용입니다. 자동 패치를 사용하려면 이번 APK를 한 번 기존 앱 위에 설치하세요. 이후 호환되는 게임 패치는 앱에서 자동으로 받고 다음 실행 때 적용합니다. Android 기능 변경에는 새 APK가 필요합니다. 기존 앱을 삭제하지 마세요. 중요한 저장은 설정에서 내보내기를 권장합니다.
+APK는 디버그 서명의 개발 테스트용입니다. 1.99.136이 설치되어 있으면 이번 버튼 겹침 보호 수정도 자동 패치로 받을 수 있습니다. 새 APK는 시스템 바 크기에 맞춰 WebView 영역을 자동 조정합니다. 앱을 삭제하지 말고 기존 앱 위에 설치하세요. 중요한 저장은 설정에서 내보내기를 권장합니다.
+
+1.99.137: Android 하단 내비게이션과 이동 후 취소/공격/스킬/아이템/대기 버튼 겹침 수정. 대상 목록만 스크롤하고 명령 버튼 유지, 5개 명령 아이콘/글자 배치 개선. 상세: `docs/NAVIGATION_PATCH_1.99.137.md`.
 
 1.99.136: GitHub 자동 패치 채널, 서명 검증, 백그라운드 다운로드, 전투 중 재시작 방지, 실행 실패 시 내장 버전 복구. 상세: `docs/AUTO_UPDATE_1.99.136.md`.
 
