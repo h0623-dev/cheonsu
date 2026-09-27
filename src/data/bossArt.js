@@ -1,4 +1,10 @@
 export const bossCombatIds = ['boss_commander', 'boss_frost', 'boss_ember', 'boss_oracle', 'boss_abyss'];
+export const BOSS_SPLASH_ROOT = '/art/boss-splash-v2';
+const splashAccents = { boss_commander: '#e7c98b', boss_frost: '#a7e8ff', boss_ember: '#ffb675', boss_oracle: '#96ebca', boss_abyss: '#d0baff' };
+export function getBossSplash(unit) {
+  const key = getBossSpriteKey(unit) || 'boss_commander';
+  return { key, src: `${BOSS_SPLASH_ROOT}/${key}.webp`, accent: splashAccents[key] };
+}
 export function getBossSpriteKey(unit) {
   if (unit?.type !== 'boss') return null;
   if (bossCombatIds.includes(unit.spriteKey)) return unit.spriteKey;

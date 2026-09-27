@@ -1,0 +1,25 @@
+# 보스 등장 원화 v2
+
+내장 image_gen 도구로 새로 생성한 원화 5종입니다. 기존 게임 이미지의 단순 확대가 아닙니다. 원본 PNG는 이 폴더에, 게임용 WebP는 `public/art/boss-splash-v2`에 있습니다. 지휘관 원화의 투명도는 WebP에서도 유지하며 나머지 네 원화는 배경이 포함된 구성입니다.
+
+게임용 변환: sharp WebP 품질 88, 원본 해상도 유지. 지도/공격 모션 스프라이트는 변경하지 않습니다.
+
+## commander
+
+Use case: stylized-concept. Asset type: high-resolution original boss entrance splash illustration for a Korean tactical fantasy RPG. Create ONE imposing handsome adult male imperial warlord, knees-up portrait, ornate silver and antique-gold plate armor, sculpted winged crown, deep crimson embroidered cape swept sideways, enormous ceremonial sword held diagonally below his face. Strong elegant anatomy, beautiful sharp face, confident cold expression. Premium hand-painted fantasy game illustration, crisp detailed materials, dramatic warm rim lighting, realistic stylized proportions, not chibi, not a tiny sprite. Centered portrait composition, entire crown and broad shoulders visible, generous clear margins around silhouette, face in upper third. Genuinely transparent background with clean alpha; no scenery, no circle or halo, no text, no logo, no UI. Portrait 2:3 composition. Rich elaborate silhouette that clearly reads as a boss, refined rather than grotesque.
+
+## frost
+
+Use case: stylized-concept. Asset type: original premium boss entrance illustration, portrait 2:3. ONE magnificent adult male frost sovereign, handsome stern face, long silver-white hair, crystalline asymmetric crown, intricate silver armor with blue sapphire inlays and luxurious white fur mantle, elaborate frost scepter. Knees-up composition, crown fully visible with margin, face upper third, majestic wide silhouette and elegant powerful anatomy. Hand-painted high-detail fantasy RPG key art, crisp face and intricate materials, not chibi or a sprite. Glacial blue and silver palette with fine golden accents, sharp icy rim lighting; background is a subdued painted frozen cathedral with thin ice shards, clear subject separation, no giant circular halo, no text, no logo, no UI. Match a polished regal fantasy boss collection; striking and beautiful rather than monstrous.
+
+## ember
+
+Use case: stylized-concept. Original premium fantasy RPG boss entrance key art, portrait 2:3. ONE striking adult male ember warlord with dark auburn swept-back hair, handsome mature sharp face and commanding expression, elaborate blackened steel armor engraved with luminous red-gold filigree, jagged gilded crown, heavy scarlet mantle. He grips an immense elegant flame-edged sword diagonally across his lower body; face and broad armored shoulders unobstructed. Knees-up low-angle portrait, entire crown in frame with margin, face upper third. Painterly highly detailed fantasy game illustration with convincing anatomy and expensive metal textures, not chibi or sprite. Angular sparks and bright orange tongues of flame frame the silhouette against a subdued ruined volcanic fortress. Black steel, scarlet, molten gold; refined powerful beauty, no gore, no text, no logo, no giant halo, no UI.
+
+## oracle
+
+Use case: stylized-concept. Original premium fantasy RPG boss entrance key art, portrait 2:3. ONE beautiful imposing adult high sorceress, regal composed face, long dark hair, intricate silver headdress with emerald gems, elegant fully clothed emerald and ivory layered ceremonial robes with armored shoulders and engraved gold clasps. Holds a tall ornate arcane staff and an open floating ancient book. Elaborate sweeping silhouette, refined powerful antagonist, knees-up portrait, face in upper third with crown fully in frame. Crisp painterly fantasy game illustration, luxurious fabrics, convincing anatomy, detailed hands and face, not chibi or sprite. Angular teal magical script-like light shards and thin luminous ribbons around staff, dim painted ancient library-cathedral behind her. Dominant emerald, ivory, silver with gold accents. Dramatic luminous lighting without hiding facial detail. No circular halo, no readable writing, no text, no logos, no UI, no sexualized outfit.
+
+## abyss
+
+Use case: stylized-concept. Original premium fantasy tactical RPG final boss entrance illustration, portrait 2:3. ONE breathtaking adult male abyss emperor, pale handsome severe face, long raven hair with silver streaks, towering black silver crown with sharp architectural spires, incredibly elaborate obsidian armor with platinum filigree, luminous violet crystal set into breastplate, immense flowing midnight cape with silver embroidery. Holds a majestic long black sword with a narrow luminous violet edge, blade diagonally in lower frame. Strong elegant human anatomy, confident composed posture, overwhelming royal presence, knees-up low-angle framing, entire crown visible with margin and face in upper third. Highly detailed polished painterly fantasy key art, face crisp and well lit, not a sprite or chibi. Shattered obsidian throne architecture and thin silver-violet lightning fissures behind him. Black, silver, violet accents, clear separation and luxurious textures; no giant circular halo, no gore, no text, no logo, no UI.

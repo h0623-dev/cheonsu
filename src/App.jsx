@@ -28,7 +28,8 @@ import { getUnitSkills, getSkill, withSkill, getSkillCooldown, applyCooldown, ti
 import { BATTLE_SPEED_OPTIONS, getBattleSpeedConfig, scaleBattleTime } from "./engine/battleSpeed.js";
 import { getTurnCameraTarget, getCellScrollTarget } from "./engine/battleCamera.js";
 import { getCombatSprite, preloadCombatArt } from "./data/combatArt.js";
-import { getBossSpriteKey } from "./data/bossArt.js";
+import { getBossSpriteKey, getBossSplash } from "./data/bossArt.js";
+import BossSplash from "./components/BossSplash.jsx";
 import { stages } from "./data/stages.js";
 import { EQUIPMENT } from "./data/equipment.js";
 import { STATUS_INFO } from "./data/statuses.js";
@@ -79,7 +80,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.140";
+const SAVE_VERSION = "1.99.141";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -10404,6 +10405,8 @@ export default function App() {
 
     const bossUnit = battleStage.units.find((unit) => unit.type === "boss");
     if (bossUnit) {
+      const splash = new Image();
+      splash.src = getBossSplash(bossUnit).src;
       scheduleBattleVisual(() => showBossCutscene(bossUnit, "intro", 1850), 720);
     }
   };
@@ -14245,32 +14248,7 @@ export default function App() {
       )}
       {turnBusy && <div className="turn-busy-banner">{turn === "enemy" ? "적 행동 중..." : "이동 처리 중..."}</div>}
       {bossCutscene && (
-        <div className={`boss-cutscene-overlay boss-${bossCutscene.type}`}>
-          <div className="boss-cutscene-card">
-            <div className="boss-cutscene-bg">
-              <div className="boss-red-moon" />
-              <div className="boss-aura" />
-            </div>
-
-            <div className="boss-cutscene-label">{bossCutscene.label}</div>
-
-            <div className="boss-cutscene-stage">
-              <img src={getUnitPortrait(bossCutscene.boss)} alt={bossCutscene.boss.name} />
-              <div className="boss-cutscene-flare" />
-            </div>
-
-            <div className="boss-cutscene-info">
-              <h2>{bossCutscene.title}</h2>
-              <p>{bossCutscene.subtitle}</p>
-
-              <div className="boss-stat-row">
-                <span>HP {bossCutscene.boss.hp}/{bossCutscene.boss.maxHp}</span>
-                <span>공격 {bossCutscene.boss.atk}</span>
-                <span>방어 {bossCutscene.boss.def}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <BossSplash key={bossCutscene.id} scene={bossCutscene} fallbackSrc={getUnitPortrait(bossCutscene.boss)} effectsEnabled={settings.effectsOn} />
       )}
       {combatCutscene && (
         <CombatScene key={combatCutscene.id} scene={combatCutscene}
