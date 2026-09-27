@@ -148,7 +148,7 @@ async function bootstrap(page) {
   const distance = (a, b) => Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
   const adjacent = tiles.find(tile => !tile.blocked && distance(tile, hero) === 1);
   assert.ok(adjacent, 'Hero needs a legal adjacent enemy tile');
-  const linaTile = tiles.find(tile => !tile.blocked && distance(tile, hero) > 0 && distance(tile, adjacent) > 0 && distance(tile, adjacent) <= 3);
+  const linaTile = tiles.find(tile => !tile.blocked && distance(tile, hero) > 0 && distance(tile, adjacent) >= 2 && distance(tile, adjacent) <= 3);
   assert.ok(linaTile, 'Lina needs a separate tile within attack-skill range');
   for (const ally of [hero, lina]) Object.assign(ally, {
     hp: ally.maxHp, acted: false, moved: false, guard: false, skillGuardBoost: 0,
@@ -220,6 +220,56 @@ async function campWithoutRewards(page, test, fixture) {
 }
 
 const scenarios = [
+  ['strict-range-execution', async (page, test, { fixture, settings }) => {
+    for (const [steps, enemyRange] of [[1, 2], [2, 1], [2, 2], [3, 2]]) {
+      const data = structuredClone(fixture);
+      const archer = data.units.find(unit => unit.id === 'lina');
+      const enemy = data.units.find(unit => unit.type !== 'ally');
+      const cell = data.selectedStage.map.flatMap((row, y) => row.flatMap((tile, x) =>
+        !['block', 'wall', 'void'].includes(tile) && Math.abs(x - archer.x) + Math.abs(y - archer.y) === steps &&
+        !data.units.some(unit => unit.type === 'ally' && unit.x === x && unit.y === y) ? [{ x, y }] : []))[0];
+      assert.ok(cell);
+      Object.assign(archer, { range: 2, skl: 999, hp: 200, maxHp: 200 });
+      Object.assign(enemy, cell, { range: enemyRange, skillRange: enemyRange, skl: 999, atk: 10 });
+      synchronizeStage(data);
+      await restore(page, data, { ...settings, cutsceneMode: 'off', battleSpeed: 'turbo' });
+      await page.evaluate(() => { Math.random = () => .5; });
+      await selectUnit(page, 'lina');
+      const before = await saveBattle(page);
+      await page.locator('.cmd-attack').click();
+      assert.match(await page.locator('.battle-range-summary').innerText(), /사거리 2칸/);
+      const button = page.locator('.battle-target-buttons button').filter({ hasText: enemy.name });
+      assert.equal(await button.isEnabled(), steps === 2);
+      if (steps !== 2) {
+        const after = await saveBattle(page);
+        assert.deepEqual(battleState(after), battleState(before), 'invalid distance must not spend an action or damage HP');
+        assert.equal(await page.locator('.vs-preview-modal').count(), 0);
+        continue;
+      }
+      await button.click();
+      assert.equal((await page.locator('.compact-battle-stats').innerText()).includes('반격'), enemyRange === 2);
+      await snapshot(page, test, `counter-${enemyRange}`);
+      await page.getByRole('button', { name: '공격 실행', exact: true }).click();
+      await page.waitForFunction(() => document.querySelector('.cinematic-command-bar .prominent-save')?.disabled === false);
+      const after = await saveBattle(page);
+      const actualArcher = after.units.find(unit => unit.id === 'lina');
+      assert.equal(actualArcher.acted, true);
+      assert.ok(after.units.find(unit => unit.id === enemy.id).hp < before.units.find(unit => unit.id === enemy.id).hp);
+      assert.equal(actualArcher.hp < before.units.find(unit => unit.id === 'lina').hp, enemyRange === 2, 'actual counter must agree with the preview');
+    }
+    const data = structuredClone(fixture);
+    const hero = data.units.find(unit => unit.id === 'hero');
+    const enemy = data.units.find(unit => unit.type !== 'ally');
+    data.units = [hero, { ...enemy, aiType: 'archer', range: 2, skillRange: 2, move: 0 }];
+    synchronizeStage(data);
+    await restore(page, data, { ...settings, cutsceneMode: 'off', battleSpeed: 'turbo' });
+    const before = await saveBattle(page);
+    await page.locator('.battle-end-turn-float').click();
+    await page.waitForFunction(() => document.querySelector('.cinematic-command-bar .prominent-save')?.disabled === false);
+    const after = await saveBattle(page);
+    assert.equal(after.round, before.round + 1);
+    assert.equal(after.units.find(unit => unit.id === 'hero').hp, before.units.find(unit => unit.id === 'hero').hp, 'immobile adjacent archer cannot attack');
+  }],
   ['hud-zoom', async (page, test, { fixture, settings }) => {
     await restore(page, fixture, settings);
     const zoom = page.locator('.battle-zoom-controls');
@@ -243,7 +293,7 @@ const scenarios = [
         for (const tile of elements) {
           const x = Number(tile.dataset.mapX), y = Number(tile.dataset.mapY);
           const key = `${x},${y}`, distance = Math.abs(x - actor.x) + Math.abs(y - actor.y);
-          if (!['block', 'wall', 'void'].some(type => tile.classList.contains(`terrain-${type}`)) && distance >= 1 && distance <= range) expected.push(key);
+          if (!['block', 'wall', 'void'].some(type => tile.classList.contains(`terrain-${type}`)) && distance >= 2 && distance <= range) expected.push(key);
           const overlay = tile.querySelector('.skill-range-tile');
           if (!overlay) continue;
           actual.push(key);
@@ -256,7 +306,7 @@ const scenarios = [
       assert.deepEqual(geometry.actual, geometry.expected, `${id}: painted tiles equal legal skill targets`);
       assert.deepEqual(geometry.problems, [], 'Range overlays must fit actual tile bounds');
       assert.equal(await page.locator('.enemy-threat-tile').count(), 0, 'Enemy danger must not look like additional skill range');
-      assert.match(await page.locator('.battle-range-summary').innerText(), new RegExp(`사거리 ${range}칸`));
+      assert.match(await page.locator('.battle-range-summary').innerText(), new RegExp(`사거리 2~${range}칸`));
       await snapshot(page, test, id);
     }
     await cancelTarget(page);
@@ -311,7 +361,7 @@ const scenarios = [
     const enemy = data.units.find(unit => unit.type !== 'ally');
     hero.supportUsed = false;
     lina.skl = 999;
-    lina.range = 4;
+    lina.range = Math.abs(lina.x - enemy.x) + Math.abs(lina.y - enemy.y);
     synchronizeStage(data);
     await restore(page, data, settings);
     await page.evaluate(() => { const random = Math.random; Math.random = () => 0.5 + random() * 0.001; });
@@ -482,8 +532,8 @@ const scenarios = [
     for (const [id, label] of [['ember', '불꽃 화살'], ['snipe', '정밀 사격']]) {
       const dialog = await openSkills(page);
       assert.deepEqual(await dialog.locator('[data-skill-id] strong').allTextContents(), ['불꽃 화살', '정밀 사격']);
-      assert.match(await dialog.locator('[data-skill-id="ember"]').innerText(), /사거리 3.*재사용 2턴/s);
-      assert.match(await dialog.locator('[data-skill-id="snipe"]').innerText(), /사거리 4.*재사용 3턴/s);
+      assert.match(await dialog.locator('[data-skill-id="ember"]').innerText(), /사거리 2~3칸.*재사용 2턴/s);
+      assert.match(await dialog.locator('[data-skill-id="snipe"]').innerText(), /사거리 2~4칸.*재사용 3턴/s);
       assert.equal(await dialog.locator('[data-skill-id]:enabled').count(), 2);
       if (id === 'ember') await snapshot(page, test, 'picker');
       await dialog.locator(`[data-skill-id="${id}"]`).click();

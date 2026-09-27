@@ -254,14 +254,48 @@ export function getMoveTiles(unit, units, activeMap) {
 }
 
 
-export function getAttackTiles(unit, mode, activeMap) {
-  if (!unit || unit.acted || unit.hp <= 0) return [];
+export function getAttackRange(unit, mode = "attack") {
+  const max = mode === "skill"
+    ? unit?.skillSpec?.range ?? unit?.skillRange ?? unit?.range ?? 1
+    : unit?.range ?? 1;
+  // A single distance is an exact ring. Bands must explicitly declare a minimum.
+  const min = mode === "skill"
+    ? unit?.skillSpec?.minRange ?? unit?.skillMinRange ?? max
+    : unit?.minRange ?? max;
+  return { min, max };
+}
+
+export function formatAttackRange(unit, mode = "attack") {
+  const { min, max } = getAttackRange(unit, mode);
+  return min === max ? `${max}` : `${min}~${max}`;
+}
+
+function canUseAttack(unit, mode) {
+  if (!unit || unit.acted || unit.hp <= 0) return false;
   const skillType = unit.skillSpec?.type ?? unit.skillType;
-  if (mode === "skill" && skillType && skillType !== "attack") return [];
-  const range = mode === "skill"
-    ? unit.skillSpec?.range ?? unit.skillRange ?? unit.range ?? 1
-    : unit.range ?? 1;
-  return getTilesInRadius(unit, range, activeMap, 1);
+  if (mode === "skill" && skillType && skillType !== "attack") return false;
+  const { min, max } = getAttackRange(unit, mode);
+  return Number.isInteger(min) && Number.isInteger(max) && min >= 1 && max >= min;
+}
+
+export function canAttackTarget(unit, target, mode, activeMap) {
+  if (!canUseAttack(unit, mode) || !target || target.hp <= 0) return false;
+  if ((unit.type === "ally") === (target.type === "ally")) return false;
+  if (!activeMap?.[unit.y]?.[unit.x] || !activeMap?.[target.y]?.[target.x]) return false;
+  if (isTerrainBlocked(activeMap[target.y][target.x])) return false;
+  const { min, max } = getAttackRange(unit, mode);
+  const steps = distance(unit, target);
+  return steps >= min && steps <= max;
+}
+
+export function canCounter(attacker, defender, activeMap) {
+  return !defender?.counterUsed && canAttackTarget(defender, attacker, "attack", activeMap);
+}
+
+export function getAttackTiles(unit, mode, activeMap) {
+  if (!canUseAttack(unit, mode)) return [];
+  const { min, max } = getAttackRange(unit, mode);
+  return getTilesInRadius(unit, max, activeMap, min);
 }
 
 export function getTilesInRadius(center, radius, activeMap, minDistance = 0) {

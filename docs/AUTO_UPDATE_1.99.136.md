@@ -29,8 +29,8 @@
 
 1. 코드와 `package.json`, `src/App.jsx` 저장 버전, Android 버전, 서비스워커 버전, `docs/update-notes.json`을 함께 갱신합니다.
 2. 테스트, 화면 검증, `npm run android:apk`를 실행하고 최종 APK의 버전, 기존 서명, 웹 파일 해시를 검증합니다.
-3. APK를 `cheonsu_<버전>_update_debug.apk`로 복사합니다. `npm run update:package`로 서명된 OTA와 안내 정보를 만듭니다.
-4. `npm run package:source`를 실행하고 최종 소스를 커밋한 뒤 GitHub에 push합니다.
+3. APK를 `cheonsu_<버전>_update_debug.apk`로 복사하고 `scripts/verify-update-artifacts.ps1 -ApkOnly`로 검증합니다.
+4. `npm run package:source`로 최종 소스를 패키징하고 커밋/push한 뒤, `npm run update:package`로 서명된 OTA와 안내 정보를 만듭니다. `scripts/verify-update-artifacts.ps1`로 APK/OTA 일치를 확인합니다.
 5. `npm run update:publish`를 실행합니다. 현재 PC의 GitHub 인증을 사용합니다. 토큰을 앱에 포함하지 않습니다.
 6. 배포 스크립트가 OTA/APK/소스 업로드 해시와 익명 접근을 검증한 뒤 채널을 마지막에 갱신합니다. 이미 배포된 같은 버전 파일은 덮어쓰지 않습니다.
 7. 공개 채널 서명과 버전을 확인합니다. 실패 시 채널 변경 여부를 확인하고 같은 버전/같은 파일로 재시도합니다.

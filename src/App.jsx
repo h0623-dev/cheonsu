@@ -52,8 +52,8 @@ import {
   getUnitNameById,
 } from "./engine/supportEngine.js";
 import { normalizeSaveData } from "./engine/saveEngine.js";
-import { getMoveTiles, getAttackTiles, getTilesInRadius, findMovePath, getUnitMoveTrait, getUnitMoveRange } from "./engine/movement.js";
-import { getTargetInRange, moveEnemyToward, getAITypeLabel } from "./engine/enemyAI.js";
+import { getMoveTiles, getAttackTiles, getTilesInRadius, findMovePath, getUnitMoveTrait, getUnitMoveRange, canAttackTarget, canCounter, formatAttackRange } from "./engine/movement.js";
+import { getEnemyAttackChoice, moveEnemyToward, getAITypeLabel } from "./engine/enemyAI.js";
 import { getStageRoundLimit } from "./engine/stageRules.js";
 import {
   getStatusText,
@@ -77,7 +77,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.138";
+const SAVE_VERSION = "1.99.139";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -1172,19 +1172,6 @@ function getEventRewardText(reward = {}) {
 
 
 
-
-
-function canCounter(attacker, defender, activeMap) {
-  if (defender?.counterUsed) return false;
-  if (!attacker || !defender) return false;
-  if (defender.hp <= 0 || defender.acted) return false;
-
-  const counterTiles = getAttackTiles(defender, "attack", activeMap);
-
-  return counterTiles.some(
-    (tile) => tile.x === attacker.x && tile.y === attacker.y
-  );
-}
 
 
 function clampBattleValue(value, min, max) {
@@ -11759,7 +11746,7 @@ export default function App() {
     if (battleInputLocked || turn !== "ally" || !sourceAttacker || !defender || sourceAttacker.acted || sourceAttacker.hp <= 0 || defender.hp <= 0) return;
     const attacker = sourceAttacker.type === "ally" && battleMode === "skill" ? withSkill(sourceAttacker, sourceAttacker.activeSkillId) : sourceAttacker;
     if (battleMode === "skill" && attacker.skillType !== "attack") return;
-    if (!getAttackTiles(attacker, battleMode, activeMap).some(tile => tile.x === defender.x && tile.y === defender.y)) return;
+    if (!canAttackTarget(attacker, defender, battleMode, activeMap)) return;
     if (battleMode === "skill" && attacker.type === "ally" && getSkillCooldown(attacker, attacker.activeSkillId) > 0) return;
     const preview = applyPassiveToPreview(
       applyBattleTactics(
@@ -11792,7 +11779,7 @@ export default function App() {
     const attacker = workingUnits.find((u) => u.id === enemyUnit?.id);
     const target = workingUnits.find((u) => u.id === targetUnit?.id && u.type === "ally" && u.hp > 0);
 
-    if (!attacker || !target) {
+    if (!canAttackTarget(attacker, target, enemyMode, activeMap)) {
       return { units: workingUnits, attacked: false, defeated: false };
     }
 
@@ -11928,11 +11915,9 @@ export default function App() {
       if (!freshEnemy) continue;
       const allies = workingUnits.filter((u) => u.type === "ally");
       if (allies.length === 0) { setUnits(workingUnits); playSfx("defeat"); showDefeatDirecting(); setResult("defeat"); return; }
-      const enemyUsesSkill = freshEnemy.skillType === "attack";
-      const enemyMode = enemyUsesSkill ? "skill" : "attack";
-      const target = getTargetInRange(freshEnemy, allies, enemyMode, activeMap);
-      if (target) {
-        const attackResult = await resolveEnemyAttack(freshEnemy, target, enemyMode, workingUnits);
+      const choice = getEnemyAttackChoice(freshEnemy, allies, activeMap);
+      if (choice) {
+        const attackResult = await resolveEnemyAttack(freshEnemy, choice.target, choice.mode, workingUnits);
         workingUnits = attackResult.units;
         if (attackResult.defeated) {
           return;
@@ -11968,19 +11953,19 @@ export default function App() {
 
       const movedFreshEnemy = workingUnits.find((u) => u.id === freshEnemy.id);
       const postMoveAllies = workingUnits.filter((u) => u.type === "ally");
-      const postMoveTarget = movedFreshEnemy
-        ? getTargetInRange(movedFreshEnemy, postMoveAllies, enemyMode, activeMap)
+      const postMoveChoice = movedFreshEnemy
+        ? getEnemyAttackChoice(movedFreshEnemy, postMoveAllies, activeMap)
         : null;
 
-      if (postMoveTarget) {
+      if (postMoveChoice) {
         if (didMove) {
           await waitForMove(scaleBattleTime(220, battleSpeedRef.current));
         }
 
         const attackResult = await resolveEnemyAttack(
           movedFreshEnemy,
-          postMoveTarget,
-          enemyMode,
+          postMoveChoice.target,
+          postMoveChoice.mode,
           workingUnits,
           didMove ? "이동 후 " : ""
         );
@@ -12752,6 +12737,13 @@ export default function App() {
     if (!battle || battleResolving || actionResolvingRef.current || turn !== "ally" || result) return;
     const actor = units.find(unit => unit.id === battle.attacker.id);
     if (!actor || actor.acted || actor.hp <= 0) { setBattle(null); return; }
+    const target = units.find(unit => unit.id === battle.defender.id);
+    const liveActor = battle.mode === "skill" ? withSkill(actor, battle.attacker.activeSkillId) : actor;
+    if (!canAttackTarget(liveActor, target, battle.mode, activeMap)) {
+      setBattle(null);
+      setLogs(previous => ["사거리가 맞지 않아 공격을 취소했습니다.", ...previous]);
+      return;
+    }
     actionResolvingRef.current = true;
     try {
 
@@ -18224,7 +18216,7 @@ export default function App() {
                             setMobileTurnPanelOpen(false);
                             setLogs((p) => [
                               selected
-                                ? `${enemy.name}은 사거리 밖입니다. 거리 ${targetDistance}, ${selected.name} 사거리 ${mode === "skill" ? selected.skillRange || selected.range || 1 : selected.range || 1}.`
+                                ? `${enemy.name}은 사거리 밖입니다. 거리 ${targetDistance}, ${selected.name} 사거리 ${formatAttackRange(selected, mode)}칸.`
                                 : "먼저 행동할 아군을 선택하세요.",
                               ...p,
                             ]);
@@ -18281,7 +18273,7 @@ export default function App() {
                   <span>공 {viewedUnit.atk}</span>
                   <span>방 {viewedUnit.def}</span>
                   <span>이 {getUnitMoveRange(viewedUnit)}</span>
-                  <span>사 {viewedUnit.range || 1}</span>
+                  <span>사 {formatAttackRange(viewedUnit)}</span>
                   {viewedUnit.type === "ally" && (
                     <span>{viewedSkillCooldown > 0 ? `스킬 ${viewedSkillCooldown}턴` : "스킬 가능"}</span>
                   )}
@@ -18525,7 +18517,7 @@ export default function App() {
                   <div className="unit-class">
                     {viewedUnit.type === "ally"
                       ? `${viewedUnit.skill} · 스킬 ${viewedSkillCooldown > 0 ? `${viewedSkillCooldown}턴` : "가능"} · 이동 ${getUnitMoveRange(viewedUnit)} · ${getUnitMoveTrait(viewedUnit).name} · EXP ${viewedUnit.exp || 0} · 상태 ${getStatusText(viewedUnit.status)}`
-                      : `${viewedUnit.skill || "기본 공격"} · AI ${getInspectUnitRole(viewedUnit)} · 사거리 ${viewedUnit.range || 1} / 스킬 ${viewedUnit.skillRange || viewedUnit.range || 1} · 상태 ${getStatusText(viewedUnit.status)}`}
+                      : `${viewedUnit.skill || "기본 공격"} · AI ${getInspectUnitRole(viewedUnit)} · 사거리 ${formatAttackRange(viewedUnit)} / 스킬 ${formatAttackRange(viewedUnit, "skill")} · 상태 ${getStatusText(viewedUnit.status)}`}
                   </div>
 
                   <div className="hp-bar">
@@ -18542,7 +18534,7 @@ export default function App() {
                     <div><span>공격</span><strong>{viewedUnit.atk}</strong></div>
                     <div><span>방어</span><strong>{viewedUnit.def}</strong></div>
                     <div><span>이동</span><strong>{getUnitMoveRange(viewedUnit)}</strong></div>
-                    <div><span>사거리</span><strong>{viewedUnit.range || 1}</strong></div>
+                    <div><span>사거리</span><strong>{formatAttackRange(viewedUnit)}</strong></div>
                     <div><span>지형</span><strong>{getInspectTerrainLabel(viewedTerrain)}</strong></div>
                     <div><span>좌표</span><strong>{viewedUnit.x + 1},{viewedUnit.y + 1}</strong></div>
                   </div>
@@ -18595,7 +18587,7 @@ export default function App() {
                   <button type="button" className="battle-selection-cancel" title="명령 선택 취소" aria-label="명령 선택 취소"
                     onClick={() => { setMode("move"); setActiveSkillChoice(null); closeMobileCombatPanels(); }}><X size={18} /></button>
                 </div>
-                <div className="battle-range-summary">사거리 {mode === "skill" ? selected.skillRange : selected.range || 1}칸{mode === "skill" ? ` · ${getAreaSkillLabel(selected)}` : ""}</div>
+                <div className="battle-range-summary">사거리 {formatAttackRange(selected, mode)}칸{mode === "skill" ? ` · ${getAreaSkillLabel(selected)}` : ""}</div>
                 <div className="battle-target-buttons" role="group" aria-label="공격 대상">
                   {mobileTargetList.map(enemy => {
                     const inRange = attackTiles.some(tile => tile.x === enemy.x && tile.y === enemy.y);

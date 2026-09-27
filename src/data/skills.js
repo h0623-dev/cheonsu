@@ -1,13 +1,13 @@
 import { DISCOVERY_TECHNIQUES, SECRET_PROMOTIONS } from './discoveries.js';
 
-const attack = (id, name, bonus, range, cooldown, effect, extra = {}) => ({ id, name, type: 'attack', bonus, range, cooldown, effect, ...extra });
+const attack = (id, name, bonus, range, cooldown, effect, extra = {}) => ({ id, name, type: 'attack', bonus, minRange: 1, range, cooldown, effect, ...extra });
 const heal = (id, name, power, targets, range, cooldown, cleanse = false) => ({ id, name, type: 'heal', power, targets, range, cooldown, effect: 'heal', cleanse });
 const guard = (id, name, defense, radius, cooldown) => ({ id, name, type: 'guard', defense, radius, range: radius, cooldown, effect: 'guard' });
 
 export const CHARACTER_SKILLS = {
   hero: [attack('gale', '돌풍 베기', 4, 1, 2, 'slash', { status: 'armorBreak' }), guard('oath', '수호의 맹세', 3, 0, 3)],
   bram: [guard('bulwark', '철벽 수호', 4, 0, 2), attack('bash', '방패 강타', 5, 1, 3, 'guard', { status: 'armorBreak' })],
-  lina: [attack('ember', '불꽃 화살', 3, 3, 2, 'fire', { status: 'burn' }), attack('snipe', '정밀 사격', 6, 4, 3, 'arrow', { accuracy: 15 })],
+  lina: [attack('ember', '불꽃 화살', 3, 3, 2, 'fire', { minRange: 2, status: 'burn' }), attack('snipe', '정밀 사격', 6, 4, 3, 'arrow', { minRange: 2, accuracy: 15 })],
   aria: [heal('light', '성빛 치유', 16, 1, 3, 2), heal('sanctuary', '성역의 기도', 9, 3, 2, 3, true)],
   leon: [attack('pierce', '관통 찌르기', 4, 2, 2, 'thrust', { status: 'armorBreak' }), attack('charge', '질풍 돌격', 8, 1, 3, 'thrust')],
   sera: [attack('shade', '암영 베기', 4, 1, 2, 'shadow', { status: 'bleed' }), attack('opening', '방어 틈새', 6, 1, 3, 'slash', { status: 'armorBreak' })],
@@ -15,7 +15,7 @@ export const CHARACTER_SKILLS = {
   yuna: [heal('moon', '달빛 회복', 12, 2, 3, 2), heal('purify', '정화의 기도', 8, 3, 2, 3, true)],
   rakan: [attack('crush', '대지 분쇄', 6, 1, 3, 'heavy', { status: 'armorBreak' }), guard('roar', '불굴의 포효', 5, 0, 2)],
   miho: [attack('foxfire', '여우불', 4, 3, 2, 'fire', { status: 'burn' }), attack('illusion', '환영 폭발', 6, 2, 3, 'shadow', { radius: 1 })],
-  teo: [attack('rapid', '속사', 5, 3, 2, 'arrow'), attack('breaker', '관통 화살', 3, 4, 3, 'arrow', { status: 'armorBreak' })],
+  teo: [attack('rapid', '속사', 5, 3, 2, 'arrow', { minRange: 2 }), attack('breaker', '관통 화살', 3, 4, 3, 'arrow', { minRange: 2, status: 'armorBreak' })],
   irene: [attack('ice-lance', '빙결창', 4, 3, 3, 'ice', { status: 'freeze' }), attack('frost-wave', '서리 파동', 3, 2, 2, 'ice', { radius: 1 })],
   kaz: [attack('ambush', '그림자 습격', 5, 1, 2, 'shadow', { status: 'bleed' }), attack('vital', '급소 찌르기', 8, 1, 3, 'thrust', { accuracy: 15, critical: 10 })],
   ella: [heal('melody', '치유의 선율', 10, 3, 2, 3), attack('resonance', '공명의 화살', 5, 3, 2, 'music')],

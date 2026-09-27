@@ -2,11 +2,11 @@
 export const DISCOVERY_TECHNIQUES = Object.freeze({
   'hero-dawn-slash': Object.freeze({
     id: 'hero-dawn-slash', unitId: 'hero', name: '여명참',
-    type: 'attack', bonus: 7, range: 2, cooldown: 4, effect: 'slash', status: 'armorBreak',
+    type: 'attack', bonus: 7, minRange: 1, range: 2, cooldown: 4, effect: 'slash', status: 'armorBreak',
   }),
   'lina-phoenix-flare': Object.freeze({
     id: 'lina-phoenix-flare', unitId: 'lina', name: '불사조의 불꽃',
-    type: 'attack', bonus: 6, range: 3, cooldown: 4, effect: 'fire', status: 'burn', radius: 1,
+    type: 'attack', bonus: 6, minRange: 2, range: 3, cooldown: 4, effect: 'fire', status: 'burn', radius: 1,
   }),
   'aria-sanctuary-song': Object.freeze({
     id: 'aria-sanctuary-song', unitId: 'aria', name: '성역의 노래',

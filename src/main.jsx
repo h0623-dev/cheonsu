@@ -9,6 +9,7 @@ import './battle-controls.css'
 import './discoveries.css'
 import './journey-ui.css'
 import './village-ui.css'
+import './armory-ui.css'
 import './native-insets.css'
 import App from './App.jsx'
 import { isNativeCapacitorRuntime } from "./engine/runtime.js";

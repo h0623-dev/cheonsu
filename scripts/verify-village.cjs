@@ -102,10 +102,10 @@ async function main() {
             assert.ok(bought.gold < before.gold); assert.equal(bought.inventory.potion, before.inventory.potion + 1);
           }
           if (place === '장비점') {
-            await dialog.getByLabel('장비 캐릭터').selectOption('hero');
+            await dialog.getByRole('tab', { name: '카일 장비', exact: true }).click();
+            await dialog.getByRole('button', { name: '철검 선택', exact: true }).click();
             const equip = dialog.getByRole('button', { name: '철검 장착', exact: true });
-            if (await equip.isDisabled()) await dialog.locator('.town-equipment-slots > div').first().getByRole('button').click();
-            await equip.click();
+            if (await equip.isEnabled()) await equip.click();
             await dialog.locator('.prominent-save').click();
             assert.equal((await read(page)).party.find(unit => unit.id === 'hero').equipment.weapon, 'ironSword');
           }

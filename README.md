@@ -1,16 +1,18 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.138 / Android versionCode 337**
+현재 개발 빌드: **1.99.139 / Android versionCode 338**
 
 ## 다운로드
 
-- 로컬 최신 산출물: `cheonsu_1.99.138_update_debug.apk`, `cheonsu_development_1.99.138.zip`
-- [1.99.138 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.138)
+- 로컬 최신 산출물: `cheonsu_1.99.139_update_debug.apk`, `cheonsu_development_1.99.139.zip`
+- [1.99.139 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.139)
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)
 
-APK는 디버그 서명의 개발 테스트용입니다. 1.99.136 이상이 설치되어 있으면 이번 성능 개선도 자동 패치로 받을 수 있습니다. 앱을 삭제하지 말고 기존 앱 위에 설치하세요. 중요한 저장은 설정에서 내보내기를 권장합니다.
+APK는 디버그 서명의 개발 테스트용입니다. 1.99.136 이상이 설치되어 있으면 이번 사거리/장비점 개선도 자동 패치로 받을 수 있습니다. 앱을 삭제하지 말고 기존 앱 위에 설치하세요. 중요한 저장은 설정에서 내보내기를 권장합니다.
+
+1.99.139: 일반 공격과 반격의 정확한 사거리, 화살 스킬 최소 2칸과 범위 구간 표시. 적 AI 이동/사거리 재검사. 초상화로 동료를 선택하는 장비점, 무기/방어구 분류와 강화 포함 교체 능력치 비교. 상세: `docs/RANGE_ARMORY_1.99.139.md`.
 
 1.99.138: 스테이지 미리보기 캐시, 전장 렌더링 분리, 이동/사거리 계산 재사용, 터치 스크롤 충돌 제거, 마우스 드래그 프레임 처리, 자동 패치 진행률의 게임 전체 렌더링 차단. 상세: `docs/PERFORMANCE_PATCH_1.99.138.md`.
 

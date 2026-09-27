@@ -1,0 +1,110 @@
+.town-facility-dialog {
+  --facility-line: #46534f;
+  --facility-accent: #91dbc5;
+  --facility-muted: #b5c0bc;
+  background: #202725;
+  border-color: #626d65;
+  border-radius: 8px;
+  font-family: "Noto Sans KR", sans-serif;
+  letter-spacing: 0;
+  top: max(env(safe-area-inset-top, 0px), var(--native-safe-top, 0px));
+  bottom: max(env(safe-area-inset-bottom, 0px), var(--native-safe-bottom, 0px));
+  left: max(env(safe-area-inset-left, 0px), var(--native-safe-left, 0px));
+  right: max(env(safe-area-inset-right, 0px), var(--native-safe-right, 0px));
+  max-width: calc(100vw - 24px - max(env(safe-area-inset-left, 0px), var(--native-safe-left, 0px)) - max(env(safe-area-inset-right, 0px), var(--native-safe-right, 0px)));
+  max-height: calc(100dvh - 24px - max(env(safe-area-inset-top, 0px), var(--native-safe-top, 0px)) - max(env(safe-area-inset-bottom, 0px), var(--native-safe-bottom, 0px)));
+}
+.town-facility-dialog * { box-sizing: border-box; letter-spacing: 0; }
+.town-facility-dialog > header, .town-facility-dialog > footer { border-color: var(--facility-line); background: #252f2b; }
+.town-facility-dialog > header > strong { display: flex; align-items: center; gap: 5px; font-variant-numeric: tabular-nums; }
+.town-facility-dialog button { background: #303b37; border-color: #53625b; border-radius: 6px; font-weight: 600; }
+.town-facility-dialog button:not(:disabled):hover { background: #3c4e46; border-color: #9ec4b2; }
+.town-facility-dialog button:focus-visible { outline: 2px solid #fae2a4; outline-offset: -3px; }
+.town-facility-dialog button[aria-pressed=true] { border-color: var(--facility-accent); background: #294b40; }
+.town-facility-dialog button svg { flex-shrink: 0; }
+.town-facility-dialog .town-shop-tabs { gap: 8px; }
+.town-shop-tabs > button { display: flex; justify-content: center; align-items: center; gap: 8px; }
+.town-stock-list article { border-color: var(--facility-line); }
+.town-stock-list article > svg { color: #e3cf98; flex-shrink: 0; }
+.town-stock-list article strong { font-size: 15px; }
+.town-facility-dialog.facility-armory { width: min(800px, calc(100vw - 24px)); height: 740px; }
+.facility-armory .town-facility-body { display: flex; flex: 1; padding: 0; overflow: hidden; }
+.armory-panel, .armory-character-panel { display: flex; flex-direction: column; min-width: 0; min-height: 0; flex: 1; }
+.armory-roster { display: flex; gap: 8px; overflow-x: auto; padding: 12px 16px; flex-shrink: 0; border-bottom: 1px solid var(--facility-line); scrollbar-width: thin; }
+.town-facility-dialog .armory-roster > button { display: grid; grid-template-columns: 52px; justify-items: center; gap: 3px; flex: 0 0 72px; min-height: 100px; padding: 6px; font-size: 12px; background: transparent; border-color: transparent; }
+.armory-roster img { width: 52px; height: 52px; object-fit: cover; border-radius: 5px; background: #3c4942; }
+.armory-roster span { width: 100%; overflow-wrap: anywhere; text-align: center; }
+.armory-roster small { color: var(--facility-muted); font-size: 10px; }
+.town-facility-dialog .armory-roster [aria-selected=true] { background: #34473e; border-color: #dac996; box-shadow: inset 0 -3px #dac996; }
+.armory-workspace { display: grid; grid-template-columns: minmax(180px, .8fr) minmax(0, 1.2fr); gap: 24px; padding: 20px; overflow-y: auto; min-height: 0; flex: 1; align-content: start; overscroll-behavior: contain; }
+.armory-unit-overview { display: grid; grid-template-columns: 1fr; align-content: start; gap: 12px; min-width: 0; }
+.armory-hero-portrait { width: 120px; height: 120px; object-fit: cover; border-radius: 6px; }
+.armory-unit-heading h3 { margin: 4px 0 6px; font-size: 24px; color: #f4f2e8; }
+.armory-unit-heading > small { font-size: 12px; color: #dbc991; }
+.armory-unit-heading > span { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--facility-accent); }
+.armory-base-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; gap: 8px; padding: 12px 0; border-top: 1px solid var(--facility-line); }
+.armory-base-stats dt { font-size: 12px; color: var(--facility-muted); }
+.armory-base-stats dd { margin: 6px 0 0; font-size: 22px; font-weight: 700; }
+.armory-base-stats dd small { font-size: 12px; margin-left: 3px; }
+.town-facility-dialog .armory-forge { display: flex; align-items: center; gap: 6px; justify-content: center; background: transparent; font-size: 12px; }
+.armory-loadout { min-width: 0; }
+.armory-slot-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.armory-slot-tabs button { display: flex; align-items: center; justify-content: center; gap: 7px; }
+.armory-current { display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 8px 0; font-size: 12px; }
+.armory-current small { flex-shrink: 0; color: var(--facility-muted); }
+.armory-current strong { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.armory-current svg { flex-shrink: 0; color: var(--facility-accent); }
+.armory-inventory { display: grid; gap: 8px; }
+.town-facility-dialog .armory-gear { display: flex; align-items: center; text-align: left; width: 100%; gap: 10px; padding: 10px; min-height: 66px; background: #2a3330; }
+.town-facility-dialog .armory-gear[aria-pressed=true] { background: #304b40; border-color: var(--facility-accent); }
+.armory-gear-icon { display: grid; place-items: center; color: #e6d39c; width: 32px; flex-shrink: 0; }
+.armory-gear > span:not(.armory-gear-icon) { flex: 1; min-width: 0; display: grid; gap: 5px; }
+.armory-gear strong { font-size: 13px; overflow-wrap: anywhere; }
+.armory-gear small { font-size: 11px; color: var(--facility-muted); }
+.armory-gear em { font-style: normal; font-size: 10px; color: var(--facility-accent); display: flex; gap: 3px; align-items: center; flex-shrink: 0; }
+.town-facility-dialog .armory-remove { min-height: 44px; font-size: 12px; background: transparent; color: var(--facility-muted); }
+.armory-empty { font-size: 13px; line-height: 1.6; color: var(--facility-muted); }
+.armory-comparison { display: grid; grid-template-columns: 1fr 160px; gap: 10px 24px; padding: 14px 20px; flex-shrink: 0; background: #18221e; border-top: 1px solid var(--facility-line); }
+.armory-comparison-title { display: flex; align-items: center; gap: 10px; min-width: 0; font-size: 13px; }
+.armory-comparison-title span { font-size: 11px; color: var(--facility-muted); flex-shrink: 0; }
+.armory-comparison-title strong { overflow-wrap: anywhere; }
+.armory-comparison-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; grid-row: 2; }
+.armory-comparison-stats > div { display: flex; gap: 6px; align-items: center; font-size: 13px; font-variant-numeric: tabular-nums; }
+.armory-comparison-stats span { display: flex; gap: 4px; align-items: center; color: var(--facility-muted); font-size: 11px; margin-right: auto; white-space: nowrap; flex-shrink: 0; }
+.armory-comparison-stats small { display: flex; align-items: center; min-width: 26px; font-size: 11px; color: var(--facility-muted); }
+.armory-comparison-stats .stat-up { color: #9ee3b3; }
+.armory-comparison-stats .stat-down { color: #ffb3a5; }
+.town-facility-dialog .armory-equip { grid-column: 2; grid-row: 1 / 3; display: flex; align-items: center; justify-content: center; gap: 6px; color: #14251e; background: #addcc5; border-color: #addcc5; }
+.town-facility-dialog .armory-equip:not(:disabled):hover { background: #d0efdf; }
+.town-facility-dialog .armory-equip:disabled { color: #c4cfc8; background: #34473e; border-color: #526259; opacity: 1; }
+@media (max-width: 580px) {
+  .armory-roster { padding: 8px 10px; gap: 4px; }
+  .town-facility-dialog .armory-roster > button { flex-basis: 66px; min-height: 92px; padding: 4px; }
+  .armory-workspace { grid-template-columns: 1fr; gap: 14px; padding: 12px; }
+  .armory-unit-overview { grid-template-columns: 64px minmax(0, 1fr) 72px; gap: 10px; align-items: center; }
+  .armory-hero-portrait { width: 64px; height: 64px; }
+  .armory-unit-heading h3 { font-size: 20px; }
+  .armory-unit-heading > span { font-size: 11px; }
+  .armory-base-stats { grid-column: 1 / -1; grid-row: 2; padding: 10px 0 0; text-align: center; }
+  .armory-base-stats > div { display: flex; align-items: baseline; justify-content: center; gap: 7px; }
+  .armory-base-stats dd { font-size: 18px; margin: 0; }
+  .town-facility-dialog .armory-forge { padding: 4px; font-size: 11px; gap: 4px; }
+  .armory-forge > svg:last-child { display: none; }
+  .armory-comparison { grid-template-columns: minmax(0, 1fr); padding: 10px 12px; gap: 8px; }
+  .armory-comparison-stats { grid-row: auto; gap: 16px; }
+  .town-facility-dialog .armory-equip { grid-column: 1; grid-row: auto; }
+  .town-stock-list article { gap: 8px; }
+  .town-stock-list article > svg { display: none; }
+}
+@media (max-height: 520px) {
+  .town-facility-dialog.facility-armory .town-facility-body { overflow-y: auto; }
+  .armory-panel, .armory-character-panel { flex: none; }
+  .armory-panel { width: 100%; }
+  .armory-workspace { flex: none; overflow: visible; }
+  .armory-roster { overflow-y: hidden; }
+}
+@media (max-width: 360px) {
+  .armory-comparison-stats { gap: 12px; }
+  .armory-comparison-stats > div { gap: 4px; font-size: 12px; }
+  .armory-comparison-stats span > svg, .armory-comparison-stats small > svg { display: none; }
+}

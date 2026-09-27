@@ -1,4 +1,4 @@
-import { distance, inMap, getAttackTiles, getMoveTiles, isTerrainBlocked } from "./movement.js";
+import { distance, getAttackTiles, getAttackRange, getMoveTiles } from "./movement.js";
 
 function isAlive(unit) {
   return unit && unit.hp > 0;
@@ -85,36 +85,23 @@ export function getTargetInRange(enemy, allies, mode, activeMap) {
   })[0];
 }
 
-function getOpenAdjacentTiles(unit, units, activeMap) {
-  const occupied = new Set(units.map((u) => `${u.x},${u.y}`));
-
-  return [
-    { x: unit.x + 1, y: unit.y },
-    { x: unit.x - 1, y: unit.y },
-    { x: unit.x, y: unit.y + 1 },
-    { x: unit.x, y: unit.y - 1 },
-  ].filter(
-    (p) =>
-      inMap(p.x, p.y, activeMap) &&
-      !isTerrainBlocked(activeMap[p.y]?.[p.x]) &&
-      !occupied.has(`${p.x},${p.y}`)
-  );
-}
-
 function getOpenMoveTiles(unit, units, activeMap) {
-  const moveTiles = getMoveTiles(unit, units, activeMap).filter(
+  return getMoveTiles(unit, units, activeMap).filter(
     (tile) => tile.x !== unit.x || tile.y !== unit.y
   );
-
-  return moveTiles.length ? moveTiles : getOpenAdjacentTiles(unit, units, activeMap);
 }
 
-function getEnemyAttackMode(enemy) {
-  return enemy?.skillType === "attack" ? "skill" : "attack";
+export function getEnemyAttackChoice(enemy, allies, activeMap) {
+  const modes = enemy?.skillType === "attack" ? ["skill", "attack"] : ["attack"];
+  for (const mode of modes) {
+    const target = getTargetInRange(enemy, allies, mode, activeMap);
+    if (target) return { mode, target };
+  }
+  return null;
 }
 
 function canAttackFrom(enemy, tile, allies, activeMap) {
-  return Boolean(getTargetInRange({ ...enemy, x: tile.x, y: tile.y }, allies, getEnemyAttackMode(enemy), activeMap));
+  return Boolean(getEnemyAttackChoice({ ...enemy, x: tile.x, y: tile.y }, allies, activeMap));
 }
 
 function minDistanceToAllies(tile, allies) {
@@ -129,7 +116,7 @@ function moveArcher(enemy, allies, units, activeMap) {
   const candidates = getOpenMoveTiles(enemy, units, activeMap);
   if (candidates.length === 0) return enemy;
 
-  const desiredRange = enemy.range || 2;
+  const { min: minimumRange, max: desiredRange } = getAttackRange(enemy);
 
   const best = [...candidates].sort((a, b) => {
     const aCanAttack = canAttackFrom(enemy, a, allies, activeMap);
@@ -140,13 +127,13 @@ function moveArcher(enemy, allies, units, activeMap) {
     const da = distance(a, target);
     const db = distance(b, target);
 
-    const aInRange = da >= 2 && da <= desiredRange;
-    const bInRange = db >= 2 && db <= desiredRange;
+    const aInRange = da >= minimumRange && da <= desiredRange;
+    const bInRange = db >= minimumRange && db <= desiredRange;
 
     if (aInRange !== bInRange) return aInRange ? -1 : 1;
 
-    const aTooClose = minDistanceToAllies(a, allies) <= 1;
-    const bTooClose = minDistanceToAllies(b, allies) <= 1;
+    const aTooClose = minDistanceToAllies(a, allies) < minimumRange;
+    const bTooClose = minDistanceToAllies(b, allies) < minimumRange;
 
     if (aTooClose !== bTooClose) return aTooClose ? 1 : -1;
 

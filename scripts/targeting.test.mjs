@@ -14,12 +14,12 @@ test('all 34 skill ranges match their specification, never the normal weapon ran
     for (const skill of skills) {
       const unit = withSkill({ ...actor, id }, skill.id);
       const tiles = getAttackTiles(unit, 'skill', map);
-      assert.equal(tiles.length, skill.type === 'attack' ? 2 * skill.range * (skill.range + 1) : 0, skill.id);
+      assert.equal(tiles.length, skill.type === 'attack' ? 2 * (skill.range * (skill.range + 1) - skill.minRange * (skill.minRange - 1)) : 0, skill.id);
       for (const tile of tiles) {
         const distance = Math.abs(tile.x - unit.x) + Math.abs(tile.y - unit.y);
-        assert.ok(distance >= 1 && distance <= skill.range, skill.id);
+        assert.ok(distance >= skill.minRange && distance <= skill.range, skill.id);
       }
-      assert.equal(getAttackTiles(unit, 'attack', map).length, 12);
+      assert.equal(getAttackTiles(unit, 'attack', map).length, 8);
     }
   }
 });
@@ -31,7 +31,7 @@ test('explicit zero range, dead/acted units, map edges and blocked cells cannot 
   assert.deepEqual(getAttackTiles(actor, 'attack', []), []);
   const irregular = [['plain', 'wall', 'plain'], ['plain'], ['void', 'block', 'plain']];
   assert.deepEqual(getAttackTiles({ ...actor, x: 0, y: 0, range: 4 }, 'attack', irregular), [
-    { x: 2, y: 0 }, { x: 0, y: 1 }, { x: 2, y: 2 },
+    { x: 2, y: 2 },
   ]);
   assert.deepEqual(getTilesInRadius({ x: 0, y: 0 }, 0, irregular), [{ x: 0, y: 0 }]);
 });
@@ -40,14 +40,14 @@ test('discovered techniques use their own ranges after loading learned skill IDs
   for (const skill of Object.values(DISCOVERY_TECHNIQUES)) {
     const unit = withSkill({ ...actor, id: skill.unitId, learnedTechniques: [skill.id] }, skill.id);
     assert.equal(unit.activeSkillId, skill.id);
-    assert.equal(getAttackTiles(unit, 'skill', map).length, skill.type === 'attack' ? 2 * skill.range * (skill.range + 1) : 0);
+    assert.equal(getAttackTiles(unit, 'skill', map).length, skill.type === 'attack' ? 2 * (skill.range * (skill.range + 1) - skill.minRange * (skill.minRange - 1)) : 0);
   }
 });
 
 test('chosen skill specification overrides stale legacy skillRange fields', () => {
   const unit = withSkill({ ...actor, id: 'lina' }, 'snipe');
   unit.skillRange = 1;
-  assert.equal(getAttackTiles(unit, 'skill', map).length, 40);
+  assert.equal(getAttackTiles(unit, 'skill', map).length, 36);
 });
 
 test('area preview and damage share a Manhattan footprint without friendly fire', async () => {

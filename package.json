@@ -1,7 +1,7 @@
 {
   "name": "cheonsu",
   "private": true,
-  "version": "1.99.138",
+  "version": "1.99.139",
   "type": "module",
   "engines": {
     "node": ">=24"

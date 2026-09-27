@@ -2,11 +2,13 @@
 
 마지막 확인일: 2026-09-27
 프로젝트 위치: `C:\Users\user\Desktop\cheonsu`
-현재 앱/패키지 버전: `1.99.138` (Android 337)
+현재 앱/패키지 버전: `1.99.139` (Android 338)
 
-GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.138 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.138). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
+GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.139 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.139). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
 
-최신 산출물: `cheonsu_1.99.138_update_debug.apk`, `cheonsu_development_1.99.138.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+최신 산출물: `cheonsu_1.99.139_update_debug.apk`, `cheonsu_development_1.99.139.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+
+1.99.139 변경: 일반 공격의 사거리 2는 2칸에서만 유효하며 1칸/3칸을 공격할 수 없습니다. 반격도 방어자의 일반 공격 사거리를 사용합니다. 화살 스킬은 최소 2칸, 여러 거리의 스킬은 2~3칸처럼 구간 표시. 타일/대상/예측/실행/AI 판정 통일. 장비점 초상화 선택, 무기·방어구 분류, 강화 수치를 포함한 장착 전 능력치 비교, 고정 장착·저장 버튼. 기존 저장과 장비 ID는 유지. 상세: `docs/RANGE_ARMORY_1.99.139.md`.
 
 1.99.138 변경: 화면 전환 시 30개 스테이지의 중복 지형·배치 계산 제거. 전장 지형 렌더링 분리와 이동·사거리 계산 캐시, 화면 밖 저장 검사 생략, 숨겨진 미니맵의 DOM 제거. 터치 스크롤과 수동 스크롤의 충돌 제거 및 드래그 중 스타일 재계산 감소. 백그라운드 패치 진행률 갱신은 업데이트 UI만 다시 그립니다. 저장/행동 규칙은 동일합니다. 상세: `docs/PERFORMANCE_PATCH_1.99.138.md`.
 
