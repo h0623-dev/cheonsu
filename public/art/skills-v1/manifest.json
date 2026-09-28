@@ -1,0 +1,308 @@
+{
+  "hero:gale": {
+    "src": "/art/skills-v1/hero-gale.webp",
+    "width": 768,
+    "height": 768,
+    "top": 240,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "hero:oath": {
+    "src": "/art/skills-v1/hero-oath.webp",
+    "width": 768,
+    "height": 768,
+    "top": 213,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "bram:bulwark": {
+    "src": "/art/skills-v1/bram-bulwark.webp",
+    "width": 768,
+    "height": 768,
+    "top": 439,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 0.78
+  },
+  "bram:bash": {
+    "src": "/art/skills-v1/bram-bash.webp",
+    "width": 768,
+    "height": 768,
+    "top": 403,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 0.88
+  },
+  "lina:ember": {
+    "src": "/art/skills-v1/lina-ember.webp",
+    "width": 768,
+    "height": 768,
+    "top": 311,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "lina:snipe": {
+    "src": "/art/skills-v1/lina-snipe.webp",
+    "width": 768,
+    "height": 768,
+    "top": 383,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 0.73
+  },
+  "aria:light": {
+    "src": "/art/skills-v1/aria-light.webp",
+    "width": 768,
+    "height": 768,
+    "top": 360,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "aria:sanctuary": {
+    "src": "/art/skills-v1/aria-sanctuary.webp",
+    "width": 768,
+    "height": 768,
+    "top": 191,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "leon:pierce": {
+    "src": "/art/skills-v1/leon-pierce.webp",
+    "width": 768,
+    "height": 768,
+    "top": 403,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 0.88
+  },
+  "leon:charge": {
+    "src": "/art/skills-v1/leon-charge.webp",
+    "width": 768,
+    "height": 768,
+    "top": 385,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 0.93
+  },
+  "sera:shade": {
+    "src": "/art/skills-v1/sera-shade.webp",
+    "width": 768,
+    "height": 768,
+    "top": 439,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 0.78
+  },
+  "sera:opening": {
+    "src": "/art/skills-v1/sera-opening.webp",
+    "width": 768,
+    "height": 768,
+    "top": 382,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 0.94
+  },
+  "noah:chain": {
+    "src": "/art/skills-v1/noah-chain.webp",
+    "width": 768,
+    "height": 768,
+    "top": 341,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "noah:ward": {
+    "src": "/art/skills-v1/noah-ward.webp",
+    "width": 768,
+    "height": 768,
+    "top": 360,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "yuna:moon": {
+    "src": "/art/skills-v1/yuna-moon.webp",
+    "width": 768,
+    "height": 768,
+    "top": 296,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "yuna:purify": {
+    "src": "/art/skills-v1/yuna-purify.webp",
+    "width": 768,
+    "height": 768,
+    "top": 329,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "rakan:crush": {
+    "src": "/art/skills-v1/rakan-crush.webp",
+    "width": 768,
+    "height": 768,
+    "top": 425,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 0.82
+  },
+  "rakan:roar": {
+    "src": "/art/skills-v1/rakan-roar.webp",
+    "width": 768,
+    "height": 768,
+    "top": 360,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "miho:foxfire": {
+    "src": "/art/skills-v1/miho-foxfire.webp",
+    "width": 768,
+    "height": 768,
+    "top": 360,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "miho:illusion": {
+    "src": "/art/skills-v1/miho-illusion.webp",
+    "width": 768,
+    "height": 768,
+    "top": 360,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "teo:rapid": {
+    "src": "/art/skills-v1/teo-rapid.webp",
+    "width": 768,
+    "height": 768,
+    "top": 349,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "teo:breaker": {
+    "src": "/art/skills-v1/teo-breaker.webp",
+    "width": 768,
+    "height": 768,
+    "top": 352,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 0.94
+  },
+  "irene:ice-lance": {
+    "src": "/art/skills-v1/irene-ice-lance.webp",
+    "width": 768,
+    "height": 768,
+    "top": 360,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "irene:frost-wave": {
+    "src": "/art/skills-v1/irene-frost-wave.webp",
+    "width": 768,
+    "height": 768,
+    "top": 360,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "kaz:ambush": {
+    "src": "/art/skills-v1/kaz-ambush.webp",
+    "width": 768,
+    "height": 768,
+    "top": 421,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 0.83
+  },
+  "kaz:vital": {
+    "src": "/art/skills-v1/kaz-vital.webp",
+    "width": 768,
+    "height": 768,
+    "top": 461,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 0.72
+  },
+  "ella:melody": {
+    "src": "/art/skills-v1/ella-melody.webp",
+    "width": 768,
+    "height": 768,
+    "top": 360,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "ella:resonance": {
+    "src": "/art/skills-v1/ella-resonance.webp",
+    "width": 768,
+    "height": 768,
+    "top": 360,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "jin:dragon": {
+    "src": "/art/skills-v1/jin-dragon.webp",
+    "width": 768,
+    "height": 768,
+    "top": 220,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "jin:moonblade": {
+    "src": "/art/skills-v1/jin-moonblade.webp",
+    "width": 768,
+    "height": 768,
+    "top": 425,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 0.82
+  },
+  "luka:knight-charge": {
+    "src": "/art/skills-v1/luka-knight-charge.webp",
+    "width": 768,
+    "height": 768,
+    "top": 414,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 0.85
+  },
+  "luka:radiance": {
+    "src": "/art/skills-v1/luka-radiance.webp",
+    "width": 768,
+    "height": 768,
+    "top": 281,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 1
+  },
+  "baekho:tiger-fist": {
+    "src": "/art/skills-v1/baekho-tiger-fist.webp",
+    "width": 768,
+    "height": 768,
+    "top": 403,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 0.88
+  },
+  "baekho:tiger-roar": {
+    "src": "/art/skills-v1/baekho-tiger-roar.webp",
+    "width": 768,
+    "height": 768,
+    "top": 389,
+    "bottom": 719,
+    "scale": 1.5,
+    "stance": 0.92
+  }
+}

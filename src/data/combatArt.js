@@ -3,10 +3,15 @@ import bossManifest from '../../public/art/bosses-v1/manifest.json' with { type:
 import mapManifest from '../../public/art/map-sprites-v4/manifest.json' with { type: 'json' };
 import combatFrameMetrics from './combatFrameMetrics.json' with { type: 'json' };
 import { getPaintedVisualProfile } from './unitVisuals.js';
+import { getDuelPlan, getWeaponMotion } from './duelChoreography.js';
 
 export function getCombatTiming(scene) {
   const skill = scene.mode === 'skill' || Boolean(scene.outcome?.heal || scene.outcome?.guard);
-  return { skill, lead: skill ? .24 : 0, action: skill ? .76 : 1, impact: skill ? .62 : .5, durationScale: skill ? 1.22 : .84 };
+  return { skill, lead: skill ? .24 : 0, action: skill ? .76 : 1, impact: skill ? .62 : .5, durationScale: skill ? 1.45 : 1 };
+}
+
+export function getCombatChoreography(key,scene){
+  return getDuelPlan(key,scene,getCombatPresentation(key,scene),getWeaponMotion(key,getCombatPresentation(key,{outcome:{hit:true}})));
 }
 
 export function getSkillPalette(effect) {
@@ -77,6 +82,9 @@ export function preloadCombatArt(attackerKey, defenderKey, scene) {
     ...['recover', 'recoil', 'run-a'].map(pose => getCombatMotionSprite(defenderKey, pose)),
     getCombatEffect(effect), getCombatEffect('cast'), getCombatEffect('impact')];
   if (getCombatTiming(scene).skill) paths.push(getPaintedVisualProfile(attackerKey)?.portrait || getCombatSprite(attackerKey));
+  const choreography=getCombatChoreography(attackerKey,scene);
+  if(choreography.skillPose) paths.push(choreography.skillPose.src);
+  if(choreography.effects.some(effect=>['flame','embers','dragon','phoenix'].includes(effect.shape))) paths.push(getCombatEffect('fire'));
   return Promise.all(paths.map(src => {
     if (!loaded.has(src)) {
       const img = new Image();

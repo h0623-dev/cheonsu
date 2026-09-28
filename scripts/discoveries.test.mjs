@@ -16,7 +16,7 @@ import {
 import { applyEquipmentStats, applyEquipmentToParty, getInitialParty, grantExp } from '../src/engine/partyEngine.js';
 import { getMoveTiles, isTerrainBlocked } from '../src/engine/movement.js';
 import {
-  CHARACTER_SKILLS, getUnitSkills, getSkill, withSkill, skillDescription,
+  CHARACTER_SKILLS, getUnitSkills, getSkill, getSkillDisplayName, withSkill, skillDescription,
   getSkillCooldown, applyCooldown, tickCooldowns, applySupportSkill,
 } from '../src/data/skills.js';
 import { normalizeSaveData } from '../src/engine/saveEngine.js';
@@ -50,7 +50,7 @@ const appHelpers = runInNewContext([
   ...['ENEMY_VARIANT_KEYS', 'createRecruitAlly', 'getPromotionTitle', 'promoteAllyUnit'].map(declaration),
   '({ expandStageForLargeBattle, extendMapForPlayableBoard, spaceBattleFormations, createRecruitAlly, promoteAllyUnit })',
 ].join('\n'), {
-  alignMapToArtwork, createBattlefieldTerrain, getBattlefieldPlan, applyEquipmentStats, distributeBattleFormations,
+  alignMapToArtwork, createBattlefieldTerrain, getBattlefieldPlan, applyEquipmentStats, distributeBattleFormations, getSkillDisplayName,
   clone: (value) => JSON.parse(JSON.stringify(value)),
   Math: Object.assign(Object.create(Math), { random: () => { throw new Error('Random map placement'); } }),
 });

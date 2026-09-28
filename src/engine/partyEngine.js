@@ -1,5 +1,6 @@
 import { stages } from "../data/stages.js";
 import { EQUIPMENT } from "../data/equipment.js";
+import { getSkillDisplayName } from '../data/skills.js';
 
 export function clone(data) {
   return JSON.parse(JSON.stringify(data));
@@ -9,6 +10,7 @@ export function clone(data) {
 export function makeAlly(unit) {
   return {
     ...unit,
+    skill: getSkillDisplayName(unit),
     level: unit.level || 1,
     exp: unit.exp || 0,
     baseAtk: unit.baseAtk || unit.atk,

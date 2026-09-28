@@ -1,62 +1,29 @@
-/* Skills add a readable prelude; weapon acting, health and audio share the delayed contact. */
-.painted-combat.is-skill .painted-combat-arena :is(.painted-fighter, .fighter-body, .fighter-frame, .fighter-shadow, .combat-strike, .combat-impact, .combat-cast, .combat-result) {
-  animation-duration: var(--combat-action-duration);
-  animation-delay: var(--combat-lead);
-}
+.painted-combat.duel-choreographed :is(.painted-fighter,.fighter-body,.fighter-frame,.fighter-shadow) { animation: none !important; }
+.duel-choreographed .fighter-ready { opacity: 1; }
+.duel-choreographed .fighter-frame:not(.fighter-ready) { opacity: 0; }
+.duel-choreographed .fighter-body { transform-origin: 50% 94%; }
+.duel-choreographed.is-skill .combat-result { animation-duration: var(--combat-action-duration); animation-delay: var(--combat-lead); }
+.duel-effects { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
+.duel-effect { position: absolute; left: 0; top: 0; opacity: 0; transform-origin: center; will-change: transform,opacity; }
+.duel-effect :is(svg,img) { display: block; width: 100%; height: 100%; object-fit: contain; overflow: visible; }
+.duel-stroke { stroke-dasharray: 500; stroke-dashoffset: 0; }
+.effect-echo { z-index: -1; }
+.effect-echo img { transform: scale(1.5); transform-origin: center bottom; }
 .is-skill .painted-combat-heading { border-bottom: 2px solid var(--skill-color); }
-.skill-stage-shade { position: absolute; inset: 0; background: #091015; z-index: 1; pointer-events: none; animation: skill-stage-shade var(--combat-duration) both; }
-.skill-cut-in { position: absolute; inset: 7% 0 auto; height: 25%; min-height: 54px; max-height: 104px; display: flex; align-items: center; gap: 16px; z-index: 7; padding: 0 8%; background: #152a2e; border-block: 2px solid var(--skill-color); pointer-events: none; animation: skill-cut-in var(--combat-duration) both; }
+.skill-stage-shade { position: absolute; inset: 0; background: #10171d; z-index: 1; pointer-events: none; animation: duel-shade var(--combat-duration) both; }
+.skill-cut-in { position: absolute; inset: 5% 0 auto; height: 24%; min-height: 54px; max-height: 104px; display: flex; align-items: center; gap: 16px; z-index: 7; padding: 0 8%; background: #152a2e; border-block: 2px solid var(--skill-color); pointer-events: none; animation: duel-cut-in var(--combat-duration) both; }
 .skill-cut-in > img { height: 128%; width: 100px; object-fit: contain; object-position: center bottom; align-self: flex-end; }
 .skill-cut-in > div { min-width: 0; }
 .skill-cut-in small { display: block; font-size: 11px; color: var(--skill-color); margin-bottom: 3px; }
 .skill-cut-in strong { display: block; font-size: 24px; line-height: 1.15; overflow-wrap: anywhere; color: #fff4dc; }
-.skill-channel-seal { position: absolute; left: 7%; bottom: 6%; width: 38%; height: 32%; object-fit: contain; z-index: 2; pointer-events: none; animation: skill-channel var(--combat-duration) both; }
-.skill-burst { position: absolute; right: 5%; bottom: 14%; width: 38%; height: 68%; z-index: 4; color: var(--skill-color); pointer-events: none; }
-.skill-element-burst { position: absolute; width: 100%; height: 100%; object-fit: contain; animation: skill-element-impact var(--combat-duration) both; }
-.skill-shockwave { position: absolute; inset: 19% 0; border: 3px solid currentColor; border-radius: 50%; animation: skill-shockwave var(--combat-duration) both; }
-.skill-spark { position: absolute; top: 48%; left: 50%; height: 3px; width: 28%; background: currentColor; transform-origin: 0 50%; animation: skill-sparks var(--combat-duration) both; }
-.element-fire .skill-element-burst { animation-name: skill-fire-impact; }
-.element-ice .skill-element-burst { animation-name: skill-ice-impact; }
-.element-lightning .skill-element-burst { animation-name: skill-lightning-impact; }
-.element-shadow .skill-shockwave, .element-poison .skill-shockwave { animation-name: skill-collapse; }
-.is-support .skill-spark { display: none; }
-.is-support .skill-shockwave { border-width: 2px; animation-name: skill-support-wave; }
-.is-self-support .skill-channel-seal { left: 31%; }
-.is-self-support .skill-burst { right: 31%; }
-.is-skill.motion-melee:not(.is-support) .fighter-attacker { animation-name: skill-advance; }
-.is-skill:not(.is-support):not(.is-miss) .fighter-defender { animation-name: skill-recoil; }
-.is-skill.is-finish:not(.is-support):not(.is-miss) .fighter-defender { animation-name: combat-fall; }
-.is-skill.shake-enabled:not(.is-support):not(.is-miss) .painted-combat-arena { animation: skill-contact-shake var(--combat-duration) both; }
-.combat-contact { position: absolute; right: 22%; bottom: 43%; z-index: 4; width: 6%; aspect-ratio: 1; pointer-events: none; animation: basic-contact var(--combat-duration) both; }
-.combat-contact i { position: absolute; inset: 45% 0; background: #fff3c1; transform: rotate(25deg); }
-.combat-contact i:nth-child(2) { transform: rotate(85deg); }
-.combat-contact i:nth-child(3) { transform: rotate(145deg); }
-@keyframes skill-stage-shade { 0% { opacity: 0; } 9%,55% { opacity: .64; } 62%,69% { opacity: .18; } 90%,100% { opacity: 0; } }
-@keyframes skill-cut-in { 0% { opacity: 0; transform: translateX(-18%); } 7%,20% { opacity: 1; transform: none; } 28%,100% { opacity: 0; transform: translateX(12%); } }
-@keyframes skill-channel { 0%,7% { opacity: 0; transform: scale(.5) rotate(-12deg); } 22%,46% { opacity: .86; transform: scale(1) rotate(12deg); } 57%,100% { opacity: 0; transform: scale(1.2) rotate(25deg); } }
-@keyframes skill-element-impact { 0%,59% { opacity: 0; transform: scale(.55); } 62%,67% { opacity: 1; transform: scale(1.1); } 86%,100% { opacity: 0; transform: scale(1.4); } }
-@keyframes skill-fire-impact { 0%,59% { opacity: 0; transform: translateY(15%) scale(.6); } 62%,67% { opacity: 1; transform: scale(1.2); } 90%,100% { opacity: 0; transform: translateY(-20%) scale(1.3); } }
-@keyframes skill-ice-impact { 0%,54% { opacity: 0; transform: translateY(-65%) scale(.65); } 61% { opacity: .9; transform: translateY(-10%) scale(.95); } 62%,69% { opacity: 1; transform: scale(1.15); } 86%,100% { opacity: 0; transform: translateY(12%) scale(1.3); } }
-@keyframes skill-lightning-impact { 0%,60% { opacity: 0; transform: scale(.6,1.6); } 62%,65% { opacity: 1; transform: scale(1.1,1.25); } 81%,100% { opacity: 0; transform: scale(1.5,.9); } }
-@keyframes skill-shockwave { 0%,61% { opacity: 0; transform: scale(.15); } 62% { opacity: .85; transform: scale(.3); } 81%,100% { opacity: 0; transform: scale(1.8); } }
-@keyframes skill-collapse { 0%,52% { opacity: 0; transform: scale(1.6); } 59% { opacity: .8; transform: scale(1.2); } 65% { opacity: .9; transform: scale(.35); } 84%,100% { opacity: 0; transform: scale(1.6); } }
-@keyframes skill-sparks { 0%,61% { opacity: 0; transform: rotate(var(--spark-angle)) translateX(0) scaleX(.3); } 62%,66% { opacity: .9; transform: rotate(var(--spark-angle)) translateX(32%) scaleX(.8); } 80%,100% { opacity: 0; transform: rotate(var(--spark-angle)) translateX(145%) scaleX(.3); } }
-@keyframes skill-support-wave { 0%,55% { opacity: 0; transform: translateY(40%) scale(.65,.3); } 66% { opacity: .7; transform: translateY(10%) scale(1,.5); } 91%,100% { opacity: 0; transform: translateY(-65%) scale(1.2,.7); } }
-@keyframes skill-advance { 0%,12%,100% { transform: none; } 25% { transform: translateX(35%) translateY(-3%); } 37%,43% { transform: translateX(var(--combat-reach)) translateY(-4%); } 50%,57% { transform: translateX(var(--combat-reach)); } 68% { transform: translateX(var(--combat-reach)) translateY(1%); } 86% { transform: translateX(30%); } }
-@keyframes skill-recoil { 0%,49%,100% { transform: none; } 51%,57% { transform: translateX(9%) rotate(2deg); } 69% { transform: translateX(5%); } 84% { transform: translateX(2%); } }
-@keyframes skill-contact-shake { 0%,61%,69%,100% { transform: none; } 62% { transform: translate(-3px,1px); } 64% { transform: translate(3px,-1px); } 66% { transform: translate(-1px,0); } }
-@keyframes basic-contact { 0%,49% { opacity: 0; transform: scale(.4); } 50%,52% { opacity: 1; transform: scale(1.2); } 59%,100% { opacity: 0; transform: scale(1.5); } }
-@media (max-width: 600px) {
-  .skill-cut-in { gap: 10px; padding: 0 5%; }
-  .skill-cut-in > img { width: 64px; }
-  .skill-cut-in strong { font-size: 18px; }
-}
-@media (max-height: 500px) and (orientation: landscape) {
-  .skill-cut-in { height: 32%; min-height: 48px; }
-  .skill-cut-in > img { width: 68px; }
-  .skill-cut-in strong { font-size: 18px; }
-}
-.motion-off :is(.skill-stage-shade,.skill-cut-in,.skill-channel-seal,.skill-burst,.combat-contact) { display: none; }
-@media (prefers-reduced-motion: reduce) {
-  .painted-combat :is(.skill-stage-shade,.skill-cut-in,.skill-channel-seal,.skill-burst,.combat-contact) { display: none; }
-}
+.is-skill .combat-enemy-intro { animation-name: duel-enemy-label; }
+@keyframes duel-shade { 0% { opacity: 0; } 12%,42% { opacity: .34; } 62%,100% { opacity: 0; } }
+@keyframes duel-cut-in { 0% { opacity: 0; transform: translateX(-16%); } 7%,18% { opacity: 1; transform: none; } 26%,100% { opacity: 0; transform: translateX(10%); } }
+@keyframes duel-enemy-label { 0%,26% { opacity: 0; } 34%,100% { opacity: 1; } }
+.duel-choreographed.duel-motion-disabled :is(.duel-effects,.skill-cut-in,.skill-stage-shade) { display: none; }
+.duel-choreographed.duel-motion-disabled .fighter-frame { opacity: 0 !important; }
+.duel-choreographed.duel-motion-disabled .fighter-ready { opacity: 1 !important; }
+.duel-choreographed.duel-motion-disabled .combat-enemy-intro { animation: none; }
+@media (max-width:600px) { .skill-cut-in { gap:10px; padding-inline:5%; } .skill-cut-in > img { width:64px; } .skill-cut-in strong { font-size:18px; } }
+@media (max-height:500px) and (orientation:landscape) { .skill-cut-in { height:32%; min-height:48px; } .skill-cut-in > img { width:68px; } .skill-cut-in strong { font-size:18px; } }
+@media (prefers-reduced-motion:reduce) { .duel-choreographed :is(.duel-effects,.skill-cut-in,.skill-stage-shade) { display:none; } }

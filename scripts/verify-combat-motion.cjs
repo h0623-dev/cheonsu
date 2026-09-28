@@ -19,7 +19,7 @@ async function main() {
         await page.locator('.painted-combat img').evaluateAll(images => Promise.all(images.map(img => img.decode())));
         const seen = new Set();
         const shots = [];
-        for (const fraction of [0.05, 0.12, 0.18, 0.38, 0.50, 0.67, 0.90]) {
+        for (const fraction of [0.05, 0.12, 0.19, 0.27, 0.38, 0.50, 0.67, 0.76, 0.90, 1]) {
           await page.evaluate(time => document.getAnimations().forEach(animation => { animation.pause(); animation.currentTime = time; }), fraction * 4000);
           const poses = await page.locator('.fighter-attacker .fighter-frame').evaluateAll(images => images.filter(img => +getComputedStyle(img).opacity > .5).map(img => img.dataset.pose));
           assert.equal(poses.length, 1, `${unit}/${kind} at ${fraction}: one body, no ghost limbs`);
@@ -29,7 +29,8 @@ async function main() {
           if ([0.12, 0.38, 0.50, 0.67].includes(fraction)) shots.push(await page.locator('.painted-combat-arena').screenshot());
         }
         const ranged = ['lina', 'irene', 'aria', 'bram'].includes(unit);
-        for (const pose of ['ready', 'windup', 'strike', 'recover', ...(!ranged ? ['run-a', 'run-b'] : [])]) assert.ok(seen.has(pose), `${unit}: visible ${pose}`);
+        const skillPose = ['skill', 'heal', 'guard'].includes(kind) ? 'skill' : 'strike';
+        for (const pose of ['ready', 'windup', skillPose, 'recover', ...(!ranged ? ['run-a', 'run-b'] : [])]) assert.ok(seen.has(pose), `${unit}: visible ${pose}`);
         const bounds = await page.locator('.painted-combat').boundingBox();
         assert.ok(bounds.x >= 0 && bounds.y >= 0 && bounds.x + bounds.width <= viewport.width && bounds.y + bounds.height <= viewport.height);
         const tiles = [];

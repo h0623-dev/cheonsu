@@ -1,6 +1,8 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.146 / Android versionCode 345**
+현재 개발 빌드: **1.99.147 / Android versionCode 346**
+
+1.99.147: 아군 17명의 스킬 전용 자세 34장, 기본·습득 기술 38개 개별 동선/투사체/타격, 일반 공격 11개 무기별 준비/접근/반동/복귀. 궁수의 과거 파이어볼 등 기술명을 무기·역할에 맞게 통일하고 기존 저장의 이름도 보정합니다. 사거리·피해·쿨다운·성장·장비는 보존합니다. [전투 연출 보고서](docs/DUEL_CHOREOGRAPHY_1.99.147.md), [원화 제작 기록](docs/art/skills-v1/README.md).
 
 1.99.146: 아군·적군·보스 41종의 후면 그림과 이동/공격/반격 방향 전환. 대기는 마지막 방향을 유지하고 취소/저장/이어하기에도 방향을 보존합니다. 일반 공격과 스킬의 템포를 분리하고 스킬 초상화 컷인, 시전 준비, 속성 타격과 전용 효과음을 추가했습니다. [방향과 스킬 연출 보고서](docs/FACING_SKILLS_1.99.146.md).
 
@@ -10,8 +12,8 @@
 
 ## 다운로드
 
-- 로컬 최신 산출물: `cheonsu_1.99.146_update_debug.apk`, `cheonsu_development_1.99.146.zip`
-- [1.99.146 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.146)
+- 로컬 최신 산출물: `cheonsu_1.99.147_update_debug.apk`, `cheonsu_development_1.99.147.zip`
+- [1.99.147 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.147)
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)

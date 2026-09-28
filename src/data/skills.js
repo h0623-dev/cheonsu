@@ -10,16 +10,16 @@ export const CHARACTER_SKILLS = {
   lina: [attack('ember', '불꽃 화살', 3, 3, 2, 'fire', { minRange: 2, status: 'burn' }), attack('snipe', '정밀 사격', 6, 4, 3, 'arrow', { minRange: 2, accuracy: 15 })],
   aria: [heal('light', '성빛 치유', 16, 1, 3, 2), heal('sanctuary', '성역의 기도', 9, 3, 2, 3, true)],
   leon: [attack('pierce', '관통 찌르기', 4, 2, 2, 'thrust', { status: 'armorBreak' }), attack('charge', '질풍 돌격', 8, 1, 3, 'thrust')],
-  sera: [attack('shade', '암영 베기', 4, 1, 2, 'shadow', { status: 'bleed' }), attack('opening', '방어 틈새', 6, 1, 3, 'slash', { status: 'armorBreak' })],
+  sera: [attack('shade', '암영 베기', 4, 1, 2, 'shadow', { status: 'bleed' }), attack('opening', '빈틈 가르기', 6, 1, 3, 'slash', { status: 'armorBreak' })],
   noah: [attack('chain', '낙뢰 사슬', 4, 3, 3, 'lightning', { radius: 1 }), guard('ward', '전술 방벽', 3, 1, 2)],
   yuna: [heal('moon', '달빛 회복', 12, 2, 3, 2), heal('purify', '정화의 기도', 8, 3, 2, 3, true)],
   rakan: [attack('crush', '대지 분쇄', 6, 1, 3, 'heavy', { status: 'armorBreak' }), guard('roar', '불굴의 포효', 5, 0, 2)],
   miho: [attack('foxfire', '여우불', 4, 3, 2, 'fire', { status: 'burn' }), attack('illusion', '환영 폭발', 6, 2, 3, 'shadow', { radius: 1 })],
-  teo: [attack('rapid', '속사', 5, 3, 2, 'arrow', { minRange: 2 }), attack('breaker', '관통 화살', 3, 4, 3, 'arrow', { minRange: 2, status: 'armorBreak' })],
+  teo: [attack('rapid', '삼연사', 5, 3, 2, 'arrow', { minRange: 2 }), attack('breaker', '관통 화살', 3, 4, 3, 'arrow', { minRange: 2, status: 'armorBreak' })],
   irene: [attack('ice-lance', '빙결창', 4, 3, 3, 'ice', { status: 'freeze' }), attack('frost-wave', '서리 파동', 3, 2, 2, 'ice', { radius: 1 })],
   kaz: [attack('ambush', '그림자 습격', 5, 1, 2, 'shadow', { status: 'bleed' }), attack('vital', '급소 찌르기', 8, 1, 3, 'thrust', { accuracy: 15, critical: 10 })],
-  ella: [heal('melody', '치유의 선율', 10, 3, 2, 3), attack('resonance', '공명의 화살', 5, 3, 2, 'music')],
-  jin: [attack('dragon', '용검', 6, 1, 3, 'fire', { status: 'burn' }), attack('moonblade', '월광참', 3, 2, 2, 'slash', { radius: 1 })],
+  ella: [heal('melody', '치유의 선율', 10, 3, 2, 3), attack('resonance', '공명 파동', 5, 3, 2, 'music')],
+  jin: [attack('dragon', '용염참', 6, 1, 3, 'fire', { status: 'burn' }), attack('moonblade', '월광참', 3, 2, 2, 'slash', { radius: 1 })],
   luka: [attack('knight-charge', '기사 돌격', 6, 1, 2, 'slash'), guard('radiance', '수호의 빛', 3, 1, 3)],
   baekho: [attack('tiger-fist', '백호권', 6, 1, 2, 'impact', { status: 'armorBreak' }), attack('tiger-roar', '백호 포효', 4, 1, 3, 'heavy', { radius: 1 })],
 };
@@ -42,6 +42,9 @@ export function getUnitSkills(unit) {
   return skills.length === base.length ? base : skills;
 }
 export function getSkill(unit, id) { const skills = getUnitSkills(unit); return skills.find(skill => skill.id === id) || skills[0] || null; }
+export function getSkillDisplayName(unit) {
+  return (!unit?.type || unit.type === 'ally') ? getSkill(unit, unit?.activeSkillId)?.name || unit?.skill || '' : unit.skill || '';
+}
 export function skillDescription(skill, level = 0) {
   if (skill.type === 'heal') return `HP ${skill.power + level * 3} 회복 · 최대 ${skill.targets}명${skill.cleanse ? ' · 상태이상 해제' : ''}`;
   if (skill.type === 'guard') return `방어 +${skill.defense + level} · 받는 피해 -4${skill.radius ? ` · 주변 ${skill.radius}칸 아군` : ' · 자신'}`;

@@ -36,10 +36,10 @@ import { getBattleOutcome, spendAction } from "./engine/battleOutcome.js";
 import { getAudioContext, createMusicPlayer } from "./engine/audioEngine.js";
 import { getMusicTheme } from "./data/musicScore.js";
 import { playCheonsuSfx, stopSoundEffects } from "./engine/soundEffects.js";
-import { getUnitSkills, getSkill, withSkill, getSkillCooldown, applyCooldown, tickCooldowns, applySupportSkill } from "./data/skills.js";
+import { getUnitSkills, getSkill, getSkillDisplayName, skillDescription, withSkill, getSkillCooldown, applyCooldown, tickCooldowns, applySupportSkill } from "./data/skills.js";
 import { BATTLE_SPEED_OPTIONS, getBattleSpeedConfig, scaleBattleTime } from "./engine/battleSpeed.js";
 import { getTurnCameraTarget, getCellScrollTarget } from "./engine/battleCamera.js";
-import { getCombatSprite, preloadCombatArt, getCombatTiming } from "./data/combatArt.js";
+import { getCombatSprite, preloadCombatArt, getCombatTiming, getCombatChoreography } from "./data/combatArt.js";
 import { getBossSpriteKey, getBossSplash } from "./data/bossArt.js";
 import BossSplash from "./components/BossSplash.jsx";
 import { stages } from "./data/stages.js";
@@ -92,7 +92,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.146";
+const SAVE_VERSION = "1.99.147";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -6759,6 +6759,7 @@ function createRecruitAlly(id) {
 
   return applyEquipmentStats({
     ...base,
+    skill: getSkillDisplayName(base),
     x: 0,
     y: 0,
     type: "ally",
@@ -7634,6 +7635,8 @@ function getSkillUpgradeEffectText(unit, nextLevel = getSkillUpgradeLevel(unit))
   if (!unit) return "";
 
   const level = Math.max(0, Math.min(MAX_SKILL_LEVEL, nextLevel));
+  const skill = getSkill(unit, unit.activeSkillId);
+  if (skill) return skillDescription(skill, level);
 
   if (unit.skillType === "heal") {
     return `회복량 +${level * 3} / 대상 ${getHealTargetCount(unit)}명${level >= 4 ? " / 쿨다운 -1" : ""}`;
@@ -12779,11 +12782,8 @@ export default function App() {
           : "공격",
     });
 
-    if (timing.skill) playSfx(outcome?.heal || outcome?.guard ? 'magic' : 'skill-charge');
-    scheduleBattleVisual(() => {
-      playSfx(finish ? 'finish' : sound);
-      if (timing.skill && outcome?.hit && !outcome?.heal && !outcome?.guard) playSfx('skill-hit');
-    }, baseDuration * timing.impact);
+    const choreography=getCombatChoreography(battleInfo.attacker.type === 'ally' ? battleInfo.attacker.id : getEnemySpriteKey(battleInfo.attacker),{...battleInfo,outcome,finish,effectType});
+    for(const cue of choreography.cues) scheduleBattleVisual(()=>playSfx(cue.sound),baseDuration*cue.at);
 
     await waitForMove(durationMs);
 
@@ -13644,7 +13644,7 @@ export default function App() {
     const level = getSkillUpgradeLevel(target);
 
     if (level >= MAX_SKILL_LEVEL) {
-      setCampMessage(`${target.name}의 ${target.skill}은 이미 최대 강화입니다.`);
+      setCampMessage(`${target.name}의 ${getSkillDisplayName(target)}은 이미 최대 강화입니다.`);
       return;
     }
 
@@ -13663,7 +13663,7 @@ export default function App() {
       )
     );
     playSfx("phase");
-    setCampMessage(`${target.name} ${target.skill} +${level + 1} 강화 완료! ${getSkillUpgradeEffectText(target, level + 1)}`);
+    setCampMessage(`${target.name} ${getSkillDisplayName(target)} +${level + 1} 강화 완료! ${getSkillUpgradeEffectText(target, level + 1)}`);
   };
 
   const renderSkillUpgradeModal = () => {
@@ -13686,6 +13686,7 @@ export default function App() {
               const level = getSkillUpgradeLevel(unit);
               const maxed = level >= MAX_SKILL_LEVEL;
               const cost = getSkillUpgradeCost(unit);
+              const skillType = getSkill(unit, unit.activeSkillId)?.type || unit.skillType;
 
               return (
                 <div className={`skill-upgrade-entry ${maxed ? "maxed" : ""}`} key={unit.id}>
@@ -13693,9 +13694,9 @@ export default function App() {
                     <img src={getUnitPortrait(unit)} alt={unit.name} onError={(event) => { event.currentTarget.style.display = "none"; }} />
                     <div>
                       <strong>
-                        {unit.name} · {unit.skill} +{level}
+                        {unit.name} · {getSkillDisplayName(unit)} +{level}
                       </strong>
-                      <span>{getUnitDisplayClass(unit)} · {unit.skillType === "heal" ? "회복" : unit.skillType === "guard" ? "수호" : "공격"} 스킬</span>
+                      <span>{getUnitDisplayClass(unit)} · {skillType === "heal" ? "회복" : skillType === "guard" ? "수호" : "공격"} 스킬</span>
                     </div>
                   </div>
 
@@ -13888,7 +13889,7 @@ export default function App() {
                       {unit.name} Lv.{unit.level} · {getUnitDisplayClass(unit)}
                     </strong>
                     <span>
-                      EXP {unit.exp} · {unit.skill}+{getSkillUpgradeLevel(unit)}
+                      EXP {unit.exp} · {getSkillDisplayName(unit)}+{getSkillUpgradeLevel(unit)}
                     </span>
                   </div>
                 </div>
@@ -16984,7 +16985,7 @@ export default function App() {
                       {locked ? " · 필수" : ""}
                     </strong>
                     <span>
-                      전력 {getDeployUnitPower(unit)} · {unit.skill}+{getSkillUpgradeLevel(unit)} · {getUnitDisplayClass(unit)} · {getCombatClassLabel(getUnitCombatClass(unit))} 타입 · 이동 {getUnitMoveRange(unit)} · {getUnitMoveTrait(unit).name}
+                      전력 {getDeployUnitPower(unit)} · {getSkillDisplayName(unit)}+{getSkillUpgradeLevel(unit)} · {getUnitDisplayClass(unit)} · {getCombatClassLabel(getUnitCombatClass(unit))} 타입 · 이동 {getUnitMoveRange(unit)} · {getUnitMoveTrait(unit).name}
                     </span>
                     <em className={`deploy-role-badge ${getUnitRoleClass(unit)}`}>
                       {role}
@@ -17766,7 +17767,7 @@ export default function App() {
                       />
                       <div>
                         <strong>{ally.name} Lv.{ally.level || "-"}</strong>
-                        <small>{ally.acted ? "행동 완료" : ally.moved ? "공격 가능" : "이동 가능"} · {ally.skill}</small>
+                        <small>{ally.acted ? "행동 완료" : ally.moved ? "공격 가능" : "이동 가능"} · {getSkillDisplayName(ally)}</small>
                         <span className="mobile-ally-hp">
                           <i style={{ width: `${hpRate}%` }} />
                           <b>{ally.hp}/{ally.maxHp}</b>
@@ -18114,7 +18115,7 @@ export default function App() {
 
                   <div className="unit-class">
                     {viewedUnit.type === "ally"
-                      ? `${viewedUnit.skill} · 스킬 ${viewedSkillCooldown > 0 ? `${viewedSkillCooldown}턴` : "가능"} · 이동 ${getUnitMoveRange(viewedUnit)} · ${getUnitMoveTrait(viewedUnit).name} · EXP ${viewedUnit.exp || 0} · 상태 ${getStatusText(viewedUnit.status)}`
+                      ? `${getSkillDisplayName(viewedUnit)} · 스킬 ${viewedSkillCooldown > 0 ? `${viewedSkillCooldown}턴` : "가능"} · 이동 ${getUnitMoveRange(viewedUnit)} · ${getUnitMoveTrait(viewedUnit).name} · EXP ${viewedUnit.exp || 0} · 상태 ${getStatusText(viewedUnit.status)}`
                       : `${viewedUnit.skill || "기본 공격"} · AI ${getInspectUnitRole(viewedUnit)} · 사거리 ${formatAttackRange(viewedUnit)} / 스킬 ${formatAttackRange(viewedUnit, "skill")} · 상태 ${getStatusText(viewedUnit.status)}`}
                   </div>
 

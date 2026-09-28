@@ -1,12 +1,14 @@
 # 천수 개발현황 통파일
 
-마지막 확인일: 2026-09-27
+마지막 확인일: 2026-09-28
 프로젝트 위치: `C:\Users\user\Desktop\cheonsu`
-현재 앱/패키지 버전: `1.99.146` (Android 345)
+현재 앱/패키지 버전: `1.99.147` (Android 346)
 
-GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.146 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.146). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
+GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.147 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.147). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
 
-최신 산출물: `cheonsu_1.99.146_update_debug.apk`, `cheonsu_development_1.99.146.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+최신 산출물: `cheonsu_1.99.147_update_debug.apk`, `cheonsu_development_1.99.147.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+
+1.99.147 변경: 기본 공격 11개 무기별 준비/접근/타격/반동/복귀 개선. 아군 17명의 34개 스킬 전용 전신 자세 신규 제작. 기본 34개·습득 4개 총 38개 기술의 동선과 효과를 각각 분리하고 공통 장판을 제거했습니다. 리나의 불꽃 화살/정밀 사격, 테오의 삼연사/관통 화살, 엘라의 치유의 선율/공명 파동처럼 명칭과 무기를 맞춥니다. 저장의 파이어볼 등 과거 이름은 보정하되 ID·쿨다운·피해·사거리·육성·장비·진행도는 유지합니다. [구현/QA](docs/DUEL_CHOREOGRAPHY_1.99.147.md), [원화 제작 기록](docs/art/skills-v1/README.md).
 
 1.99.146 변경: 전장 아군 17종·일반 적 19종·보스 5종의 후면 그림 41종 추가. 기존 정면과 후면을 좌우 반전해 이동/공격 방향을 표현하며, 대기 시 마지막 방향 유지, 이동 취소 원복, 저장/이어하기를 지원합니다. 8방향 값으로 판단하지만 8각도별 독립 원화를 모두 그린 방식은 아닙니다. 일반 공격은 짧고 빠르게, 스킬은 초상화 컷인과 시전 준비 후 속성 타격·충격파·입자·전용 음향을 표시합니다. 무기별 기존 동작과 사거리/행동 규칙은 유지합니다. [구현/QA](docs/FACING_SKILLS_1.99.146.md), [아트 제작 기록](docs/art/directions-v1/README.md).
 
