@@ -43,7 +43,7 @@ const declaration = (name) => {
   return source.slice(node.start, node.end);
 };
 const start = body.findIndex((node) => declares(node, 'MAX_DEPLOY_COUNT'));
-const end = body.findIndex((node) => declares(node, 'TRAINING_TYPES'));
+const end = body.findIndex((node) => declares(node, 'getLogType'));
 assert.ok(start >= 0 && end > start, 'The actual battlefield builders must be available');
 const appHelpers = runInNewContext([
   ...body.slice(start, end).map((node) => source.slice(node.start, node.end)),

@@ -65,7 +65,7 @@ for (const id of characterIds) {
         assert.equal(calculateHit(actor, defender), calculateHit(plain, defender));
         assert.equal(calculateCrit(actor, defender), calculateCrit(plain, defender));
         const applied = applySkillStatusAfterHit(actor, defender.id, 'skill', [defender]);
-        assert.deepEqual(applied.units[0].status, skill.status ? [{ type: skill.status, turns: 2 }] : []);
+        assert.deepEqual(applied.units[0].status, skill.status ? [{ type: skill.status, turns: 2, sourceId: actor.id }] : []);
       } else if (skill.type === 'heal') {
         const hurt = { ...original, hp: 1, status: [{ type: 'burn', turns: 2 }] };
         const result = applySupportSkill(actor, skill, [hurt]);

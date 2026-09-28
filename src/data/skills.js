@@ -88,9 +88,13 @@ export function tickCooldowns(units) {
     return { ...unit, skillCooldowns, skillCooldown: skillCooldowns[skills[0]?.id] ?? legacyCooldown };
   });
 }
+export function isSelfOnlySupportSkill(skill) {
+  return Boolean(skill && (skill.type === 'guard' ? skill.radius === 0 : skill.type === 'heal' && skill.range === 0));
+}
 export function getSupportSkillCandidates(actor, skill, units) {
   const distance = unit => Math.abs(unit.x - actor.x) + Math.abs(unit.y - actor.y);
-  const candidates = units.filter(unit => unit.type === 'ally' && unit.hp > 0 && distance(unit) <= (skill.type === 'guard' ? skill.radius : skill.range));
+  const candidates = units.filter(unit => unit.type === 'ally' && unit.hp > 0 &&
+    (!isSelfOnlySupportSkill(skill) || unit.id === actor.id) && distance(unit) <= (skill.type === 'guard' ? skill.radius : skill.range));
   if (skill.type === 'guard') return candidates;
   return candidates.filter(unit => unit.hp < unit.maxHp || (skill.cleanse && unit.status?.length));
 }

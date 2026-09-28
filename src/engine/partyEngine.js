@@ -211,25 +211,28 @@ export function mergePartyFromUnits(prevParty, currentUnits) {
 
 
 export function grantExp(units, attackerId, expAmount) {
+  if (!Number.isFinite(expAmount) || expAmount <= 0) return { units, messages: [] };
   let messages = [];
   const updated = units.map((unit) => {
     if (unit.id !== attackerId || unit.type !== "ally") return unit;
-    let nextExp = (unit.exp || 0) + expAmount;
+    const storedExp = Number(unit.exp);
+    let nextExp = (Number.isFinite(storedExp) ? Math.max(0, storedExp) : 0) + expAmount;
     let nextUnit = { ...unit, exp: nextExp };
     messages.push(`${unit.name} EXP +${expAmount}`);
-    if (nextExp >= 100) {
+    while (nextExp >= 100) {
       const oldBaseAtk = nextUnit.baseAtk ?? nextUnit.atk;
       const oldBaseDef = nextUnit.baseDef ?? (nextUnit.def - (nextUnit.skillGuardBoost || 0));
       nextUnit = {
         ...nextUnit,
-        level: (unit.level || 1) + 1,
+        level: (nextUnit.level || 1) + 1,
         exp: nextExp - 100,
-        maxHp: unit.maxHp + 2,
-        hp: Math.min(unit.maxHp + 2, unit.hp + 2),
+        maxHp: nextUnit.maxHp + 2,
+        hp: nextUnit.hp > 0 ? Math.min(nextUnit.maxHp + 2, nextUnit.hp + 2) : 0,
         baseAtk: oldBaseAtk + 1,
         baseDef: oldBaseDef + 1,
       };
       nextUnit = applyEquipmentStats(nextUnit);
+      nextExp = nextUnit.exp;
       messages.push(`${unit.name} 레벨 업! Lv.${nextUnit.level}`);
     }
     return nextUnit;

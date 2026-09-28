@@ -479,8 +479,7 @@ const scenarios = [
     const before = await saveBattle(page);
     const dialog = await openSkills(page);
     await dialog.locator('[data-skill-id="oath"]').click();
-    await page.locator('.support-target-dialog [data-target-id="hero"]').click();
-    await page.locator('.support-target-dialog').getByRole('button', { name: '마법 사용', exact: true }).click();
+    assert.equal(await page.locator('.support-target-dialog').count(), 0, 'Self-only guard casts immediately without a target picker');
     const scene = page.locator('.painted-combat.is-guarding');
     // Read short-lived cutscene state atomically before its normal playback ends.
     const frame = await scene.evaluate(element => {

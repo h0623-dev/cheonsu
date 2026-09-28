@@ -13,6 +13,8 @@ import { recoverCampaignProgress, PROGRESS_RECOVERY_BACKUP } from './engine/prog
 import CombatScene from "./components/CombatScene.jsx";
 import SkillDialog from "./components/SkillDialog.jsx";
 import SupportTargetDialog from './components/SupportTargetDialog.jsx';
+import TrainingDialog from './components/TrainingDialog.jsx';
+import { TRAINING_TYPES, trainParty, grantEnemyDefeatExp, syncBattleExperience } from './engine/growthEngine.js';
 import TownHub from './components/TownHub.jsx';
 import TownFacilityDialog from './components/TownFacilityDialog.jsx';
 import TitleMenu from './components/TitleMenu.jsx';
@@ -36,7 +38,7 @@ import { getBattleOutcome, spendAction } from "./engine/battleOutcome.js";
 import { getAudioContext, createMusicPlayer } from "./engine/audioEngine.js";
 import { getMusicTheme } from "./data/musicScore.js";
 import { playCheonsuSfx, stopSoundEffects } from "./engine/soundEffects.js";
-import { getUnitSkills, getSkill, getSkillDisplayName, skillDescription, withSkill, getSkillCooldown, applyCooldown, tickCooldowns, applySupportSkill } from "./data/skills.js";
+import { getUnitSkills, getSkill, getSkillDisplayName, skillDescription, withSkill, getSkillCooldown, applyCooldown, tickCooldowns, applySupportSkill, isSelfOnlySupportSkill } from "./data/skills.js";
 import { BATTLE_SPEED_OPTIONS, getBattleSpeedConfig, scaleBattleTime } from "./engine/battleSpeed.js";
 import { getTurnCameraTarget, getCellScrollTarget } from "./engine/battleCamera.js";
 import { getCombatSprite, preloadCombatArt, getCombatTiming, getCombatChoreography } from "./data/combatArt.js";
@@ -92,7 +94,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.147";
+const SAVE_VERSION = "1.99.148";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -3405,56 +3407,6 @@ function expandStageForLargeBattle(stage, deployCount = MAX_DEPLOY_COUNT) {
     largeMapSize: `${largeMap[0]?.length || 0}x${largeMap.length || 0}`,
     baseMapSize: `${baseMap[0]?.length || 0}x${baseMap.length || 0}`,
   };
-}
-
-
-const TRAINING_TYPES = [
-  {
-    id: "attack",
-    name: "공격 훈련",
-    exp: 20,
-    stat: "atk",
-    desc: "EXP +20 / 기본 공격 +1",
-  },
-  {
-    id: "defense",
-    name: "방어 훈련",
-    exp: 20,
-    stat: "def",
-    desc: "EXP +20 / 기본 방어 +1",
-  },
-  {
-    id: "focus",
-    name: "집중 훈련",
-    exp: 30,
-    stat: null,
-    desc: "EXP +30",
-  },
-];
-
-function applyTrainingGrowth(unit, trainingType) {
-  if (!trainingType?.stat) return unit;
-
-  const baseAtk = unit.baseAtk ?? unit.atk;
-  const baseDef = unit.baseDef ?? unit.def;
-
-  if (trainingType.stat === "atk") {
-    return applyEquipmentStats({
-      ...unit,
-      baseAtk: baseAtk + 1,
-      baseDef,
-    });
-  }
-
-  if (trainingType.stat === "def") {
-    return applyEquipmentStats({
-      ...unit,
-      baseAtk,
-      baseDef: baseDef + 1,
-    });
-  }
-
-  return unit;
 }
 
 
@@ -8262,6 +8214,8 @@ export default function App() {
   const [skillOpen, setSkillOpen] = useState(false);
   const [promoteOpen, setPromoteOpen] = useState(false);
   const [trainingUsed, setTrainingUsed] = useState(false);
+  const trainingClaimRef = useRef(false);
+  useEffect(() => { trainingClaimRef.current = trainingUsed; }, [trainingUsed]);
   const [dispatchUsed, setDispatchUsed] = useState(false);
   const [supportOpen, setSupportOpen] = useState(false);
   const [supportPoints, setSupportPoints] = useState({
@@ -9724,6 +9678,18 @@ export default function App() {
     }, strong ? 520 : 320);
   };
 
+  const awardEnemyExperience = (currentUnits, killerId, enemy) => {
+    const participants = [...new Set([...deployedIds, ...currentUnits.filter(unit => unit.type === 'ally').map(unit => unit.id)])]
+      .filter(id => party.some(unit => unit.id === id && unit.type === 'ally'));
+    const growth = grantEnemyDefeatExp(currentUnits, killerId, enemy, participants);
+    setParty(previous => syncBattleExperience(previous, growth));
+    for (const reward of growth.rewards) {
+      const recipient = growth.units.find(unit => unit.id === reward.id && unit.hp > 0);
+      if (recipient) pushDamagePopup({ x: recipient.x, y: recipient.y, text: `EXP +${reward.amount}`, kind: 'exp', duration: 1800 });
+    }
+    return growth;
+  };
+
   const triggerUnitActionMotion = (battleInfo, outcome) => {
     if (!settings.effectsOn || !battleInfo?.attacker || !battleInfo?.defender) return;
 
@@ -10386,6 +10352,7 @@ export default function App() {
       battleStage,
       applyDifficultyToUnits(stagedUnits, settings.difficulty, settings.balancePreset)
     );
+    setDeployedIds(battleUnits.filter(unit => unit.type === 'ally').map(unit => unit.id));
     const openingAlly = battleUnits.find((unit) => unit.id === "hero" && unit.type === "ally") ||
       battleUnits.find((unit) => unit.type === "ally");
 
@@ -11924,8 +11891,7 @@ export default function App() {
         );
 
         if (counterKilled && counterActor.type === "ally") {
-          const expAmount = counterTarget.type === "boss" ? 50 : 30;
-          const expResult = grantExp(workingUnits, counterActor.id, expAmount);
+          const expResult = awardEnemyExperience(workingUnits, counterActor.id, counterTarget);
           workingUnits = expResult.units;
           expMessages = [
             ...expResult.messages,
@@ -12166,7 +12132,17 @@ export default function App() {
     }
 
     const statusResult = processTurnStartStatuses(hazardResult.units, "enemy");
-    const terrainResult = processTerrainStartEffects(statusResult.units, "enemy", activeMap);
+    let statusUnits = statusResult.units;
+    const statusExpMessages = [];
+    for (const defeat of statusResult.defeats) {
+      const growth = awardEnemyExperience(statusUnits, defeat.killerId, defeat.enemy);
+      statusUnits = growth.units;
+      if (!growth.rewards.length) continue;
+      statusExpMessages.push(...growth.messages, ...registerLootDrop(defeat.enemy));
+      addBattleStats({ kills: 1 });
+      addUnitBattleStats(defeat.killerId, { kills: 1 });
+    }
+    const terrainResult = processTerrainStartEffects(statusUnits, "enemy", activeMap);
     const phaseResult = triggerBossPhases(terrainResult.units);
     const processedUnits = phaseResult.units;
     const enemiesLeft = processedUnits.filter((u) => u.type !== "ally");
@@ -12190,6 +12166,7 @@ export default function App() {
       ...hazardResult.messages,
       ...phaseResult.messages,
       ...statusResult.messages,
+      ...statusExpMessages,
       ...terrainResult.messages,
       ...p,
     ]);
@@ -12938,8 +12915,7 @@ export default function App() {
         );
 
         if (areaKilled && battle.attacker.type === "ally") {
-          const expAmount = areaTarget.type === "boss" ? 50 : 30;
-          const expResult = grantExp(nextUnits, battle.attacker.id, expAmount);
+          const expResult = awardEnemyExperience(nextUnits, battle.attacker.id, areaTarget);
           nextUnits = expResult.units;
           areaExpMessages = [...areaExpMessages, ...expResult.messages];
           areaLootMessages = [...areaLootMessages, ...registerLootDrop(areaTarget)];
@@ -12952,8 +12928,7 @@ export default function App() {
     let expMessages = [];
     let lootMessages = [];
     if (outcome.hit && defenderDied && battle.attacker.type === "ally") {
-      const expAmount = battle.defender.type === "boss" ? 50 : 30;
-      const expResult = grantExp(nextUnits, battle.attacker.id, expAmount);
+      const expResult = awardEnemyExperience(nextUnits, battle.attacker.id, battle.defender);
       nextUnits = expResult.units;
       expMessages = expResult.messages;
       lootMessages = registerLootDrop(battle.defender);
@@ -13008,8 +12983,7 @@ export default function App() {
         if (counterKilled) {
           attackerDiedFromCounter = true;
           if (counterActor.type === "ally") {
-            const expAmount = counterTarget.type === "boss" ? 50 : 30;
-            const expResult = grantExp(nextUnits, counterActor.id, expAmount);
+            const expResult = awardEnemyExperience(nextUnits, counterActor.id, counterTarget);
             nextUnits = expResult.units;
             counterExpMessages = [
               ...expResult.messages,
@@ -13102,7 +13076,7 @@ export default function App() {
   };
 
   const chooseBattleSkill = async (skillId) => {
-    if (!skillChoiceOpen || !selected || selected.acted || turn !== "ally" || combatBusy || battle || itemOpen || result) return;
+    if (actionResolvingRef.current || !skillChoiceOpen || !selected || selected.acted || turn !== "ally" || combatBusy || battle || itemOpen || result) return;
     const skill = getSkill(selected, skillId);
     if (!skill || getSkillCooldown(selected, skill.id) > 0) return;
     const actor = withSkill(selected, skill.id);
@@ -13115,13 +13089,18 @@ export default function App() {
       setLogs(previous => [`${actor.name}: ${skill.name} 선택.`, ...previous]);
       return;
     }
-    setSupportSkillChoice({ unitId: actor.id, skillId: skill.id });
+    const choice = { unitId: actor.id, skillId: skill.id };
+    if (isSelfOnlySupportSkill(skill)) {
+      await executeSupportSkill([actor.id], choice);
+      return;
+    }
+    setSupportSkillChoice(choice);
   };
 
-  const executeSupportSkill = async (targetIds) => {
-    if (!supportSkillChoice || actionResolvingRef.current || combatBusy || battle || result || turn !== 'ally') return;
-    const source = units.find(unit => unit.id === supportSkillChoice.unitId && unit.hp > 0 && !unit.acted);
-    const skill = getSkill(source, supportSkillChoice.skillId);
+  const executeSupportSkill = async (targetIds, choice = supportSkillChoice) => {
+    if (!choice || actionResolvingRef.current || combatBusy || battle || result || turn !== 'ally') return;
+    const source = units.find(unit => unit.id === choice.unitId && unit.hp > 0 && !unit.acted);
+    const skill = getSkill(source, choice.skillId);
     if (!source || !skill || skill.type === 'attack' || getSkillCooldown(source, skill.id) > 0) return;
     const actor = withSkill(source, skill.id);
     const applied = applySupportSkill(actor, skill, units, targetIds);
@@ -13463,27 +13442,20 @@ export default function App() {
   };
 
 
-  const trainUnit = (unitId, trainingTypeId) => {
-    if (trainingUsed) {
+  const trainAllies = (trainingTypeId) => {
+    if (trainingUsed || trainingClaimRef.current) {
       setCampMessage("이번 캠프에서는 이미 훈련을 진행했습니다.");
       return;
     }
 
     const trainingType = TRAINING_TYPES.find((type) => type.id === trainingTypeId);
-    const target = party.find((u) => u.id === unitId);
-
-    if (!target || !trainingType) return;
-
-    const grownParty = party.map((unit) =>
-      unit.id === unitId ? applyTrainingGrowth(unit, trainingType) : unit
-    );
-
-    const expResult = grantExp(grownParty, unitId, trainingType.exp);
-
-    setParty(applyGearEnhanceToParty(expResult.units, gearEnhance));
+    const training = trainParty(party, trainingTypeId, trainingUsed);
+    if (!training.count) return;
+    trainingClaimRef.current = true;
+    setParty(applyGearEnhanceToParty(training.units, gearEnhance));
     setTrainingUsed(true);
     setCampMessage(
-      `${target.name} ${trainingType.name} 완료. ${trainingType.desc}. ${expResult.messages.join(" / ")}`
+      `동료 ${training.count}명 전체 ${trainingType.name} 완료. ${trainingType.desc}.`
     );
   };
 
@@ -13920,58 +13892,8 @@ export default function App() {
 
   const renderTrainingModal = () => {
     if (!trainingOpen) return null;
-
-    return (
-      <div className="battle-modal">
-        <div className="battle-card equipment-card training-card">
-          <div className="battle-title">훈련</div>
-          <div className="result-sub">
-            캠프당 1회, 동료와 훈련 종류를 선택하세요.
-          </div>
-
-          <div className="training-list advanced-training-list">
-            {party.map((unit) => (
-              <div className="training-entry" key={unit.id}>
-                <div className="training-entry-head">
-                  <strong>
-                    {unit.icon} {unit.name} · Lv.{unit.level} · {getUnitDisplayClass(unit)}
-                  </strong>
-                  <span>
-                    EXP {unit.exp} · {getUnitDisplayClass(unit)} · 공격 {unit.atk} / 방어 {unit.def}
-                  </span>
-                </div>
-
-                <div className="training-type-grid">
-                  {TRAINING_TYPES.map((trainingType) => (
-                    <button
-                      key={trainingType.id}
-                      disabled={trainingUsed}
-                      onClick={() => trainUnit(unit.id, trainingType.id)}
-                    >
-                      <strong>{trainingType.name}</strong>
-                      <small>{trainingType.desc}</small>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {trainingUsed && (
-            <div className="training-used-note">
-              이번 캠프에서는 이미 훈련을 진행했습니다.
-            </div>
-          )}
-
-          <button
-            className="result-btn second"
-            onClick={() => setTrainingOpen(false)}
-          >
-            닫기
-          </button>
-        </div>
-      </div>
-    );
+    return <TrainingDialog party={party} used={trainingUsed} getPortrait={getUnitPortrait}
+      onTrain={trainAllies} onClose={() => setTrainingOpen(false)} />;
   };
 
   const renderSupportModal = () => {

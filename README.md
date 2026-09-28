@@ -1,6 +1,8 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.147 / Android versionCode 346**
+현재 개발 빌드: **1.99.148 / Android versionCode 347**
+
+1.99.148: 보유 동료 전체 훈련, 처치자 100%·다른 출전 동료 각각 30% 경험치, 자신 전용 보호 기술 즉시 시전. 일반 적 30/9, 보스 50/15이며 미출전은 제외하고 쓰러진 출전 동료도 경험치는 보존합니다. [성장 패치](docs/GROWTH_1.99.148.md).
 
 1.99.147: 아군 17명의 스킬 전용 자세 34장, 기본·습득 기술 38개 개별 동선/투사체/타격, 일반 공격 11개 무기별 준비/접근/반동/복귀. 궁수의 과거 파이어볼 등 기술명을 무기·역할에 맞게 통일하고 기존 저장의 이름도 보정합니다. 사거리·피해·쿨다운·성장·장비는 보존합니다. [전투 연출 보고서](docs/DUEL_CHOREOGRAPHY_1.99.147.md), [원화 제작 기록](docs/art/skills-v1/README.md).
 
@@ -12,8 +14,8 @@
 
 ## 다운로드
 
-- 로컬 최신 산출물: `cheonsu_1.99.147_update_debug.apk`, `cheonsu_development_1.99.147.zip`
-- [1.99.147 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.147)
+- 로컬 최신 산출물: `cheonsu_1.99.148_update_debug.apk`, `cheonsu_development_1.99.148.zip`
+- [1.99.148 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.148)
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)

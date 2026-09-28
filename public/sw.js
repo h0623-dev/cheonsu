@@ -1,6 +1,6 @@
 importScripts('/art/directions-v1/precache.js');
 importScripts('/art/skills-v1/precache.js');
-const CACHE_NAME = "cheonsu-v1-99-147";
+const CACHE_NAME = "cheonsu-v1-99-148";
 const FINAL_STAGE_MAPS = Array.from(
   { length: 30 },
   (_, index) => `/maps/concept/stage_${index + 1}_frontier_final.png`

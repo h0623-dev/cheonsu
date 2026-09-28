@@ -17,7 +17,7 @@ export function addOrRefreshStatus(statuses = [], status) {
   const exists = statuses.some((s) => s.type === status.type);
   if (exists) {
     return statuses.map((s) =>
-      s.type === status.type ? { ...s, turns: Math.max(s.turns, status.turns) } : s
+      s.type === status.type ? { ...s, ...status, sourceId: status.sourceId, turns: Math.max(s.turns, status.turns) } : s
     );
   }
   return [...statuses, status];
@@ -70,7 +70,7 @@ export function applySkillStatusAfterHit(attacker, defenderId, mode, units) {
   const nextUnits = units.map((u) => {
     if (u.id !== defenderId) return u;
     applied = true;
-    return { ...u, status: addOrRefreshStatus(u.status || [], status) };
+    return { ...u, status: addOrRefreshStatus(u.status || [], { ...status, sourceId: attacker.id }) };
   });
 
   if (!applied) return { units, messages: [] };
@@ -85,6 +85,7 @@ export function applySkillStatusAfterHit(attacker, defenderId, mode, units) {
 
 export function processTurnStartStatuses(units, side) {
   const messages = [];
+  const defeats = [];
 
   const processed = units
     .map((unit) => {
@@ -99,7 +100,11 @@ export function processTurnStartStatuses(units, side) {
         const info = STATUS_INFO[status.type];
 
         if (status.type === "burn" || status.type === "bleed") {
+          const previousDamage = damage;
           damage += info.damage;
+          if (unit.hp > previousDamage && unit.hp <= damage && status.sourceId) {
+            defeats.push({ enemy: unit, killerId: status.sourceId });
+          }
           messages.push(`${unit.name} ${info.icon}${info.name} 피해 ${info.damage}`);
         }
 
@@ -123,7 +128,7 @@ export function processTurnStartStatuses(units, side) {
     })
     .filter((unit) => unit.hp > 0);
 
-  return { units: processed, messages };
+  return { units: processed, messages, defeats };
 }
 
 

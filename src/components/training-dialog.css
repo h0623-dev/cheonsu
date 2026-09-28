@@ -1,0 +1,49 @@
+.company-training-dialog {
+  --training-top: calc(12px + max(env(safe-area-inset-top, 0px), var(--native-safe-top, 0px)));
+  --training-bottom: calc(12px + max(env(safe-area-inset-bottom, 0px), var(--native-safe-bottom, 0px)));
+  --training-left: calc(12px + max(env(safe-area-inset-left, 0px), var(--native-safe-left, 0px)));
+  --training-right: calc(12px + max(env(safe-area-inset-right, 0px), var(--native-safe-right, 0px)));
+  box-sizing: border-box; width: min(640px, calc(100dvw - var(--training-left) - var(--training-right)));
+  inset: var(--training-top) var(--training-right) var(--training-bottom) var(--training-left);
+  max-height: calc(100dvh - var(--training-top) - var(--training-bottom));
+  margin: auto; padding: 0; overflow: auto; border: 1px solid #798d7d; border-radius: 8px;
+  background: #172c26; color: #f2f2e8; font: inherit; letter-spacing: 0;
+}
+html.native-legacy-insets .company-training-dialog {
+  --training-top: calc(12px + max(env(safe-area-inset-top, 0px), var(--native-safe-top, 42px)));
+}
+.company-training-dialog::backdrop { background: #050d0bc7; }
+.company-training-dialog header, .company-training-status, .company-training-dialog footer {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px;
+}
+.company-training-dialog header { position: sticky; top: 0; background: #172c26; z-index: 1; border-bottom: 1px solid #55685c; }
+.company-training-dialog h2 { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 20px; }
+.company-training-dialog button { min-height: 44px; border: 1px solid #71877d; border-radius: 6px; background: #304a40; color: inherit; font: inherit; cursor: pointer; }
+.company-training-dialog button:disabled { opacity: .5; cursor: default; }
+.company-training-dialog button:not(:disabled):hover { background: #486456; }
+.company-training-dialog button:focus-visible { outline: 2px solid #ecdc9e; outline-offset: 2px; }
+.company-training-dialog .icon-button { display: grid; place-items: center; width: 44px; flex: 0 0 44px; }
+.company-training-status { flex-wrap: wrap; font-size: 13px; color: #c5d4c7; }
+.company-training-status strong { color: #ecdc9e; }
+.company-training-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 0 16px 16px; }
+.company-training-options button { display: flex; align-items: center; gap: 8px; padding: 12px 8px; text-align: left; }
+.company-training-options svg { flex: 0 0 22px; color: #ecdc9e; }
+.company-training-options span { display: grid; gap: 6px; min-width: 0; }
+.company-training-options strong { font-size: 14px; }
+.company-training-options small { font-size: 12px; line-height: 1.5; color: #d2ded7; }
+.company-training-roster { margin: 0; padding: 0 16px; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; }
+.company-training-roster li { display: flex; align-items: center; gap: 10px; padding: 12px 0; border-top: 1px solid #41584c; min-width: 0; }
+.company-training-roster img { width: 48px; height: 56px; object-fit: cover; object-position: top; border-radius: 4px; background: #253d34; }
+.company-training-roster li > div { flex: 1; min-width: 0; display: grid; gap: 3px; }
+.company-training-roster strong { font-size: 15px; }
+.company-training-roster small, .company-training-roster span { font-size: 12px; color: #c1d2c8; }
+.company-training-roster svg { flex-shrink: 0; color: #adcdb0; }
+.company-training-dialog footer { justify-content: flex-end; }
+.company-training-dialog footer button { padding: 8px 24px; }
+@media (max-width: 460px) {
+  .company-training-options { grid-template-columns: 1fr; gap: 6px; }
+  .company-training-options button { padding: 10px 12px; }
+  .company-training-options span { gap: 3px; }
+  .company-training-roster { grid-template-columns: 1fr; }
+}
+.damage-popup.popup-exp { color: #f7df83; font-size: 14px; }
