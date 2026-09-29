@@ -10,7 +10,9 @@ import { directionTo, getFacingArt, getUnitFacing } from './engine/unitFacing.js
 import { useUnitFacings } from './engine/useUnitFacings.js';
 import directionArt from '../public/art/directions-v1/manifest.json';
 import { recoverCampaignProgress, PROGRESS_RECOVERY_BACKUP } from './engine/progressRecovery.js';
-import CombatScene from "./components/CombatScene.jsx";
+import FieldBattleScene from "./components/FieldBattleScene.jsx";
+import { makeFieldBattlePlan } from './engine/fieldBattlePlan.js';
+import { loadFieldAssets } from './engine/fieldBattleAssets.js';
 import SkillDialog from "./components/SkillDialog.jsx";
 import SupportTargetDialog from './components/SupportTargetDialog.jsx';
 import TrainingDialog from './components/TrainingDialog.jsx';
@@ -41,7 +43,7 @@ import { playCheonsuSfx, stopSoundEffects } from "./engine/soundEffects.js";
 import { getUnitSkills, getSkill, getSkillDisplayName, skillDescription, withSkill, getSkillCooldown, applyCooldown, tickCooldowns, applySupportSkill, isSelfOnlySupportSkill } from "./data/skills.js";
 import { BATTLE_SPEED_OPTIONS, getBattleSpeedConfig, scaleBattleTime } from "./engine/battleSpeed.js";
 import { getTurnCameraTarget, getCellScrollTarget } from "./engine/battleCamera.js";
-import { getCombatSprite, preloadCombatArt, getCombatTiming, getCombatChoreography } from "./data/combatArt.js";
+import { getCombatSprite, getCombatTiming, getCombatChoreography } from "./data/combatArt.js";
 import { getBossSpriteKey, getBossSplash } from "./data/bossArt.js";
 import BossSplash from "./components/BossSplash.jsx";
 import { stages } from "./data/stages.js";
@@ -94,7 +96,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.148";
+const SAVE_VERSION = "1.99.149";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -11822,7 +11824,7 @@ export default function App() {
       workingUnits
     );
     const outcome = rollCombat(enemyPreview);
-    await showCombatCutscene(enemyPreview, outcome);
+    await showCombatCutscene(enemyPreview, outcome, workingUnits);
 
     let statusMessages = [];
     let counterMessages = [];
@@ -11868,7 +11870,7 @@ export default function App() {
         );
         const counterOutcome = rollCombat(counterPreview);
         workingUnits = workingUnits.map(unit => unit.id === counterActor.id ? { ...unit, counterUsed: true } : unit);
-        await showCombatCutscene(counterPreview, counterOutcome);
+        await showCombatCutscene(counterPreview, counterOutcome, workingUnits);
         let counterKilled = false;
 
         if (counterOutcome.hit) {
@@ -12704,7 +12706,7 @@ export default function App() {
     }
   };
 
-  const showCombatCutscene = async (battleInfo, outcome) => {
+  const showCombatCutscene = async (battleInfo, outcome, fieldUnits = units, supportTargets = []) => {
     if (!battleInfo?.attacker || !battleInfo?.defender) return;
     faceCombat(battleInfo);
     const effectType = getEffectType(battleInfo, outcome);
@@ -12724,16 +12726,18 @@ export default function App() {
     const finish = outcome?.hit && !outcome?.heal && defenderPostHp <= 0;
     const attackerPostHp = battleInfo.attacker.hp;
     const timing = getCombatTiming({ ...battleInfo, outcome });
-    const baseDuration = (cutsceneConfig.duration + (finish ? 360 : 0)) * timing.durationScale;
+    const baseDuration = (Math.max(cutsceneConfig.duration, timing.skill ? 2600 : 1600) + (finish ? 360 : 0)) * timing.durationScale;
     const durationMs = scaleBattleTime(baseDuration, battleSpeedRef.current);
 
-    await preloadCombatArt(
-      battleInfo.attacker.type === "ally" ? battleInfo.attacker.id : getEnemySpriteKey(battleInfo.attacker),
-      battleInfo.defender.type === "ally" ? battleInfo.defender.id : getEnemySpriteKey(battleInfo.defender),
-      { ...battleInfo, effectType, outcome }
-    );
-
-    setCombatCutscene({
+    const keyFor = unit => unit.type === 'ally' ? unit.id : getEnemySpriteKey(unit);
+    const fieldTargets = supportTargets.length ? supportTargets : [
+      { ...battleInfo.defender, postHp: defenderPostHp },
+      ...(outcome.hit && battleInfo.mode === 'skill' && !outcome.heal && !outcome.guard
+        ? (battleInfo.aoeTargets || []).map(target => fieldUnits.find(unit => unit.id === target.id))
+          .filter(unit => unit && unit.hp > 0 && unit.id !== battleInfo.defender.id)
+          .map(unit => ({ ...unit, postHp: Math.max(0, unit.hp - Math.max(1, Math.floor(calculateDamage(battleInfo.attacker, unit, 'skill') * getSkillAreaDamageRate(battleInfo.attacker)))) })) : []),
+    ];
+    const scene = {
       id: cutsceneId,
       attacker: battleInfo.attacker,
       defender: battleInfo.defender,
@@ -12757,7 +12761,13 @@ export default function App() {
           : battleInfo.mode === "counter"
           ? "반격"
           : "공격",
-    });
+      fieldMap: activeMap,
+      stageId: activeStage.id,
+      fieldUnits: fieldUnits.map(unit => ({ ...unit, artKey: keyFor(unit) })),
+      fieldTargets: fieldTargets.map(unit => ({ ...unit, artKey: keyFor(unit) })),
+    };
+    await loadFieldAssets(makeFieldBattlePlan(scene, keyFor(battleInfo.attacker), keyFor(battleInfo.defender)));
+    setCombatCutscene(scene);
 
     const choreography=getCombatChoreography(battleInfo.attacker.type === 'ally' ? battleInfo.attacker.id : getEnemySpriteKey(battleInfo.attacker),{...battleInfo,outcome,finish,effectType});
     for(const cue of choreography.cues) scheduleBattleVisual(()=>playSfx(cue.sound),baseDuration*cue.at);
@@ -12960,7 +12970,8 @@ export default function App() {
         );
         const counterOutcome = rollCombat(freshCounter);
         nextUnits = nextUnits.map(unit => unit.id === counterActor.id ? { ...unit, counterUsed: true } : unit);
-        triggerCombatVisual(freshCounter, counterOutcome, 260);
+        await showCombatCutscene(freshCounter, counterOutcome, nextUnits);
+        triggerCombatVisual(freshCounter, counterOutcome, 0, false);
         let counterKilled = false;
 
         if (counterOutcome.hit) {
@@ -13113,7 +13124,8 @@ export default function App() {
       const firstAfter = applied.units.find(unit => unit.id === first.id);
       await showCombatCutscene(
         { attacker: actor, defender: first, mode: "skill" },
-        { hit: true, heal: skill.type === "heal", guard: skill.type === "guard", damage: skill.type === "heal" ? firstAfter.hp - first.hp : 0, crit: false }
+        { hit: true, heal: skill.type === "heal", guard: skill.type === "guard", damage: skill.type === "heal" ? firstAfter.hp - first.hp : 0, crit: false },
+        units, applied.targets.map(target => ({ ...target, postHp: applied.units.find(unit => unit.id === target.id).hp }))
       );
       applied.targets.forEach(target => {
         pushVisualEffect({ x: target.x, y: target.y, type: skill.type === "heal" ? "heal" : "guard" });
@@ -14222,7 +14234,7 @@ export default function App() {
         <BossSplash key={bossCutscene.id} scene={bossCutscene} fallbackSrc={getUnitPortrait(bossCutscene.boss)} effectsEnabled={settings.effectsOn} />
       )}
       {combatCutscene && (
-        <CombatScene key={combatCutscene.id} scene={combatCutscene}
+        <FieldBattleScene key={combatCutscene.id} scene={combatCutscene}
           attackerKey={combatCutscene.attacker.type === "ally" ? combatCutscene.attacker.id : getEnemySpriteKey(combatCutscene.attacker)}
           defenderKey={combatCutscene.defender.type === "ally" ? combatCutscene.defender.id : getEnemySpriteKey(combatCutscene.defender)}
           background={getWorldScene(activeStage.id)} effectsEnabled={settings.effectsOn} shakeEnabled={settings.shakeOn} />

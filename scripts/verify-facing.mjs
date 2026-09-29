@@ -34,10 +34,18 @@ try {
     data.selectedStage.units=structuredClone(data.units);
     await restore(data);
     for(const [direction,x,y] of [['up',3,2],['left',2,3],['right',4,3],['down',3,4]]){
+      await page.evaluate(() => {
+        window.facingProbe = null;
+        window.facingObserver?.disconnect();
+        window.facingObserver = new MutationObserver(() => {
+          const img = document.querySelector('.tile-moving-unit img');
+          if (img) window.facingProbe = { direction: img.dataset.facing, src: img.getAttribute('src') };
+        });
+        window.facingObserver.observe(document.body, { subtree: true, childList: true, attributes: true });
+      });
       await page.locator(`.tile[data-map-x="${x}"][data-map-y="${y}"]`).click();
       const moving=await page.waitForFunction(direction=>{
-        const img=document.querySelector('.tile-moving-unit img');
-        return img?.dataset.facing===direction ? {src:img.getAttribute('src')} : false;
+        return window.facingProbe?.direction === direction ? window.facingProbe : false;
       },direction);
       assert.equal((await moving.jsonValue()).src.includes('-back.webp'),direction==='up');
       await moving.dispose();
@@ -74,8 +82,8 @@ try {
       if(mode==='skill') await page.locator('.skill-choice-dialog [data-skill-id="gale"]').click();
       await page.locator('.tile[data-map-x="2"][data-map-y="3"]').click();
       await button(mode==='skill'?'스킬 실행':'공격 실행').click();
-      const scene=page.locator(`.painted-combat[data-presentation="${mode}"]`);
-      const frame=await scene.evaluate(el=>({cutIn:el.querySelector('.skill-cut-in strong')?.textContent,impact:el.dataset.impact,images:[...el.querySelectorAll('img')].every(img=>img.complete&&img.naturalWidth>0)}));
+      const scene=page.locator(`.field-battle-scene[data-presentation="${mode}"][data-ready="true"]`);
+      const frame=await scene.evaluate(el=>({cutIn:el.querySelector('.field-skill-banner strong')?.textContent,impact:el.dataset.impact,images:Number(el.querySelector('canvas').dataset.renderedUnits)>1}));
       assert.equal(frame.impact,mode==='skill'?'0.62':'0.5');assert.ok(frame.images,'real-game combat art preloaded');
       if(mode==='skill')assert.equal(frame.cutIn,'돌풍 베기');else assert.equal(frame.cutIn,undefined);
       assert.equal(await hero.getAttribute('data-facing'),'left');

@@ -4,4 +4,5 @@
 - If an APK build is blocked, state the exact blocker and do not claim delivery is complete.
 - Keep saves backward compatible. Do not discard the user's existing work.
 - User-facing game text and development summaries are in Korean.
+- When the user says "원복" without naming a different target, restore the game behavior/art from version 1.99.148, commit `f556e33e113b7f15b1fc1f515a201beded9a1aeb`. This is the fixed baseline before the requested full-field combat redesign, not the immediately preceding patch. See `docs/ROLLBACK_BASELINE.md`. Preserve current saves and unrelated user work. Deliver rollback as a newly numbered, freshly verified APK and signed OTA; never downgrade the public update pointer or force-reset shared Git history.
 - The user approved h0623-dev/cheonsu as the public automatic patch channel. For compatible game updates, also package and publish the signed OTA using `npm run update:package` and `npm run update:publish` after final APK verification and source push. Do not call delivery complete when the channel is not updated. Never publish `.update-keys/private.pem`; see `docs/AUTO_UPDATE_1.99.136.md`.

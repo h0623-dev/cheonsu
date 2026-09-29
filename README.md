@@ -1,6 +1,8 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.148 / Android versionCode 347**
+현재 개발 빌드: **1.99.149 / Android versionCode 348**
+
+1.99.149: 전체 41종의 전투를 실제 전장 기반 등각 연출로 전환했습니다. 접근·타격·복귀, 기술별 충전/투사체/속성 효과와 주변 유닛을 표시합니다. [전장 전투 개편](docs/FIELD_BATTLE_1.99.149.md). "원복"의 고정 기준은 [1.99.148](docs/ROLLBACK_BASELINE.md)입니다.
 
 1.99.148: 보유 동료 전체 훈련, 처치자 100%·다른 출전 동료 각각 30% 경험치, 자신 전용 보호 기술 즉시 시전. 일반 적 30/9, 보스 50/15이며 미출전은 제외하고 쓰러진 출전 동료도 경험치는 보존합니다. [성장 패치](docs/GROWTH_1.99.148.md).
 
@@ -14,8 +16,8 @@
 
 ## 다운로드
 
-- 로컬 최신 산출물: `cheonsu_1.99.148_update_debug.apk`, `cheonsu_development_1.99.148.zip`
-- [1.99.148 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.148)
+- 로컬 최신 산출물: `cheonsu_1.99.149_update_debug.apk`, `cheonsu_development_1.99.149.zip`
+- [1.99.149 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.149)
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)

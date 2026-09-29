@@ -1,7 +1,7 @@
 {
   "name": "cheonsu",
   "private": true,
-  "version": "1.99.148",
+  "version": "1.99.149",
   "type": "module",
   "engines": {
     "node": ">=24"
@@ -23,6 +23,7 @@
     "android:apk": "node scripts/build-android.mjs",
     "setup": "node scripts/setup.mjs",
     "test": "node --test scripts/*.test.mjs",
+    "test:field": "node scripts/verify-field-combat.mjs",
     "test:ui": "node scripts/verify-combat-patch.cjs && node scripts/verify-combat-motion.cjs && node scripts/verify-battle-controls.cjs",
     "art:combat": "node scripts/prepare-combat-art.cjs",
     "art:motion": "node scripts/prepare-combat-motion.cjs",
