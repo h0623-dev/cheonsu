@@ -85,7 +85,7 @@ async function snapshot(page, test, name) {
     for (const element of [document.documentElement, document.body]) {
       if (element.scrollWidth > innerWidth + 1) problems.push(`${element.tagName}: horizontal page overflow (${element.scrollWidth})`);
     }
-    for (const element of document.querySelectorAll('.cinematic-command-bar, dialog[open], .field-battle-scene')) {
+    for (const element of document.querySelectorAll('.cinematic-command-bar, dialog[open], .painted-combat')) {
       if (!element.getClientRects().length) continue;
       const rect = element.getBoundingClientRect();
       if (rect.left < -1 || rect.right > innerWidth + 1 || rect.top < -1 || rect.bottom > innerHeight + 1) {
@@ -222,33 +222,6 @@ async function campWithoutRewards(page, test, fixture) {
 }
 
 const scenarios = [
-  ['field-counter', async (page, test, { fixture, settings }) => {
-    const data = structuredClone(fixture);
-    const hero = data.units.find(unit => unit.id === 'hero');
-    const foe = data.units.find(unit => unit.type !== 'ally');
-    Object.assign(hero, { hp: 200, maxHp: 200, skl: 999, luk: 0 });
-    Object.assign(foe, { range: 1, minRange: 1, skillRange: 1, skl: 999, luk: 0, atk: 10, counterUsed: false, acted: false });
-    synchronizeStage(data);
-    await restore(page, data, settings);
-    await page.evaluate(() => { Math.random = () => .5; });
-    await selectUnit(page, 'hero');
-    await page.locator('.cmd-attack').click();
-    await page.locator('.battle-target-buttons button').filter({ hasText: foe.name }).click();
-    await page.getByRole('button', { name: '공격 실행', exact: true }).click();
-    const scene = page.locator('.field-battle-scene[data-ready="true"]');
-    await scene.filter({ has: page.getByRole('heading', { name: '일반 공격', exact: true }) }).waitFor();
-    const counter = scene.filter({ has: page.getByRole('heading', { name: '반격', exact: true }) });
-    await counter.waitFor();
-    assert.equal(Number(await counter.locator('canvas').getAttribute('data-rendered-units')), data.units.length);
-    await snapshot(page, test, 'counter');
-    await page.waitForFunction(() => !document.querySelector('.field-battle-scene') && document.querySelector('.cinematic-command-bar .prominent-save')?.disabled === false);
-    const after = await saveBattle(page);
-    assert.equal(after.units.find(unit => unit.id === 'hero').acted, true);
-    assert.ok(after.units.find(unit => unit.id === 'hero').hp < hero.hp);
-    assert.ok(after.units.find(unit => unit.id === foe.id).hp < foe.hp);
-    assert.equal(after.units.find(unit => unit.id === foe.id).counterUsed, true);
-    assert.equal(after.units.find(unit => unit.id === 'lina').acted, false);
-  }],
   ['strict-range-execution', async (page, test, { fixture, settings }) => {
     for (const [steps, enemyRange] of [[1, 2], [2, 1], [2, 2], [3, 2]]) {
       const data = structuredClone(fixture);
@@ -378,7 +351,7 @@ const scenarios = [
     await preview.getByRole('button', { name: '스킬 실행', exact: true }).click();
     await page.waitForFunction(() => {
       const endTurn = document.querySelector('.battle-end-turn-float');
-      return !document.querySelector('.vs-preview-modal, .field-battle-scene') && endTurn && !endTurn.disabled;
+      return !document.querySelector('.vs-preview-modal, .painted-combat-overlay') && endTurn && !endTurn.disabled;
     }, null, { timeout: 20000 });
     await page.waitForFunction(() => !document.querySelector('.combat-effect, .damage-popup, .action-motion'), null, { timeout: 15000 });
     const after = await saveBattle(page);
@@ -409,7 +382,7 @@ const scenarios = [
     await preview.getByRole('button', { name: '공격 실행', exact: true }).click();
     await page.waitForFunction(() => {
       const endTurn = document.querySelector('.battle-end-turn-float');
-      return !document.querySelector('.vs-preview-modal, .field-battle-scene') && endTurn && !endTurn.disabled;
+      return !document.querySelector('.vs-preview-modal, .painted-combat-overlay') && endTurn && !endTurn.disabled;
     }, null, { timeout: 20000 });
     const after = await saveBattle(page);
     const untouched = after.units.find(unit => unit.id === 'hero');
@@ -507,21 +480,25 @@ const scenarios = [
     const dialog = await openSkills(page);
     await dialog.locator('[data-skill-id="oath"]').click();
     assert.equal(await page.locator('.support-target-dialog').count(), 0, 'Self-only guard casts immediately without a target picker');
-    const scene = page.locator('.field-battle-scene.is-support[data-ready="true"]');
+    const scene = page.locator('.painted-combat.is-guarding');
     // Read short-lived cutscene state atomically before its normal playback ends.
     const frame = await scene.evaluate(element => {
-      const canvas = element.querySelector('canvas');
-      return { title: element.querySelector('h2').textContent.trim(), self: element.dataset.self === 'true',
-        actors: Number(canvas.dataset.renderedUnits), health: element.querySelectorAll('.field-health').length,
-        loaded: canvas.width > 0 && canvas.dataset.progress !== undefined };
+      const arena = element.querySelector('.painted-combat-arena');
+      const actor = element.querySelector('.fighter-attacker');
+      const image = element.querySelector('.fighter-action');
+      return { title: element.querySelector('h2').textContent.trim(), self: element.classList.contains('is-self-support'),
+        actors: element.querySelectorAll('.painted-fighter').length, health: element.querySelectorAll('.combat-health').length,
+        centered: Math.abs(actor.offsetLeft + actor.offsetWidth / 2 - arena.clientWidth / 2) <= 2,
+        loaded: image.complete && image.naturalWidth > 0 };
     });
     assert.equal(frame.title, '수호의 맹세');
     assert.ok(frame.self);
-    assert.equal(frame.actors, fixture.units.length, 'Self guard keeps all battlefield units without duplicating the caster');
+    assert.equal(frame.actors, 1, 'Self guard must render one actor');
     assert.equal(frame.health, 1, 'Self guard must render one health display');
+    assert.ok(frame.centered, 'The self-support actor must be centered in the arena');
     assert.ok(frame.loaded);
     await snapshot(page, test, 'scene');
-    await page.locator('.field-battle-scene').waitFor({ state: 'detached', timeout: 20000 });
+    await page.locator('.painted-combat-overlay').waitFor({ state: 'detached', timeout: 20000 });
     const after = await saveBattle(page);
     const hero = after.units.find(unit => unit.id === 'hero');
     const lina = after.units.find(unit => unit.id === 'lina');
@@ -593,15 +570,15 @@ const scenarios = [
       await preview.waitFor();
       assert.match(await preview.locator('.battle-title').innerText(), /정밀 사격/);
       await preview.getByRole('button', { name: '스킬 실행', exact: true }).click();
-      const scene = page.locator('.field-battle-scene[data-ready="true"]').filter({ has: page.getByRole('heading', { name: '정밀 사격', exact: true }) });
+      const scene = page.locator('.painted-combat').filter({ has: page.getByRole('heading', { name: '정밀 사격', exact: true }) });
       const frame = await scene.evaluate(element => ({ missed: element.classList.contains('is-miss'),
-        loaded: Number(element.querySelector('canvas').dataset.renderedUnits) >= 3 }));
+        loaded: [...element.querySelectorAll('.fighter-action')].every(image => image.complete && image.naturalWidth > 0) }));
       const missed = frame.missed;
       assert.ok(frame.loaded);
       await snapshot(page, test, `scene-${attempt}`);
       await page.waitForFunction(() => {
         const endTurn = document.querySelector('.battle-end-turn-float');
-        return !document.querySelector('.field-battle-scene') && endTurn && !endTurn.disabled;
+        return !document.querySelector('.painted-combat-overlay') && endTurn && !endTurn.disabled;
       }, null, { timeout: 20000 });
       const after = await saveBattle(page);
       const lina = after.units.find(unit => unit.id === 'lina');
@@ -661,11 +638,11 @@ const scenarios = [
     // Hit chance is capped at 98%; retry only after a real miss, without patching Math.random or app state.
     for (let attempt = 1; attempt <= 3; attempt++) {
       await page.locator('.battle-end-turn-float').click();
-      await page.locator('.field-battle-scene').waitFor();
+      await page.locator('.painted-combat-overlay').waitFor();
       await page.waitForFunction(() => {
         if (document.querySelector('.defeat-dialog[open]')) return true;
         const button = document.querySelector('.battle-end-turn-float');
-        return !document.querySelector('.field-battle-scene') && button && !button.disabled;
+        return !document.querySelector('.painted-combat-overlay') && button && !button.disabled;
       }, null, { timeout: 20000 });
       if (await page.locator('.defeat-dialog').isVisible()) break;
       const survived = await saveBattle(page);

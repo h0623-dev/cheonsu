@@ -2,11 +2,13 @@
 
 마지막 확인일: 2026-09-29
 프로젝트 위치: `C:\Users\user\Desktop\cheonsu`
-현재 앱/패키지 버전: `1.99.149` (Android 348)
+현재 앱/패키지 버전: `1.99.150` (Android 349)
 
-GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.149 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.149). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
+GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.150 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.150). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
 
-최신 산출물: `cheonsu_1.99.149_update_debug.apk`, `cheonsu_development_1.99.149.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+최신 산출물: `cheonsu_1.99.150_update_debug.apk`, `cheonsu_development_1.99.150.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+
+1.99.150 변경: 사용자 요청 "원복"에 따라 1.99.148의 게임 코드·아트·대결 화면·연출 시간·반격 방식으로 복원했습니다. 1.99.149 전장형 전투는 현재 적용되지 않습니다. 이후 획득한 성장·장비·골드·진행도를 초기화하지 않고 새 버전 APK와 OTA로 되돌립니다. [원복 기록](docs/ROLLBACK_1.99.150.md).
 
 1.99.149 변경: 아군 17종·일반 적 19종·보스 5종 전체의 전투를 현재 맵/배치 기반 등각 화면으로 변경했습니다. 무기별 접근·발디딤·타격·피격·복귀, 기본/습득 기술 38개와 적/보스 기술의 충전·투사체·잔상·속성 효과를 전장 좌표로 표시합니다. 주변 유닛, 실제 광역 대상, 양측 반격에도 적용합니다. 기존 비트맵 자세를 활용하는 Canvas 2D 방식이며 명령용 전장의 기존 시점과 전투 규칙/세이브는 유지합니다. [상세](docs/FIELD_BATTLE_1.99.149.md). "원복"의 고정 기준은 이번 작업 시작 전 [1.99.148](docs/ROLLBACK_BASELINE.md)입니다.
 
