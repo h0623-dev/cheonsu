@@ -1,0 +1,4 @@
+body { margin: 0; color: #26352d; background: #f8faf8; font: 16px/1.8 Arial, sans-serif; }
+main { max-width: 740px; padding: 32px 20px 80px; margin: auto; overflow-wrap: anywhere; }
+h1 { font-size: 28px; } h2 { font-size: 20px; margin-top: 32px; }
+a { color: #246443; } .notice { background: #eaf0ed; border-left: 4px solid #658673; padding: 16px; }

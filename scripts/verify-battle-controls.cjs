@@ -249,9 +249,8 @@ const scenarios = [
         continue;
       }
       await button.click();
-      assert.equal((await page.locator('.compact-battle-stats').innerText()).includes('반격'), enemyRange === 2);
+      assert.equal(await page.locator('.vs-preview-modal').count(), 0);
       await snapshot(page, test, `counter-${enemyRange}`);
-      await page.getByRole('button', { name: '공격 실행', exact: true }).click();
       await page.waitForFunction(() => document.querySelector('.cinematic-command-bar .prominent-save')?.disabled === false);
       const after = await saveBattle(page);
       const actualArcher = after.units.find(unit => unit.id === 'lina');
@@ -346,9 +345,7 @@ const scenarios = [
     assert.equal(await page.locator('.enemy-threat-tile').count(), 0);
     await snapshot(page, test, 'preview');
     await button.click();
-    const preview = page.locator('.vs-preview-modal');
-    assert.match(await preview.innerText(), /광역\s*1명/);
-    await preview.getByRole('button', { name: '스킬 실행', exact: true }).click();
+    assert.equal(await page.locator('.vs-preview-modal').count(), 0);
     await page.waitForFunction(() => {
       const endTurn = document.querySelector('.battle-end-turn-float');
       return !document.querySelector('.vs-preview-modal, .painted-combat-overlay') && endTurn && !endTurn.disabled;
@@ -376,10 +373,7 @@ const scenarios = [
     assert.equal(Math.abs(hero.x - enemy.x) + Math.abs(hero.y - enemy.y), 1, 'An available swordsman is adjacent to the target');
     await page.locator('.cmd-attack').click();
     await page.locator('.battle-target-buttons button').filter({ hasText: enemy.name }).click();
-    const preview = page.locator('.vs-preview-modal');
-    assert.doesNotMatch(await preview.innerText(), /협공/);
-    const damage = Number(await preview.locator('.battle-stats > div').filter({ hasText: /^피해/ }).locator('strong').innerText());
-    await preview.getByRole('button', { name: '공격 실행', exact: true }).click();
+    assert.equal(await page.locator('.vs-preview-modal').count(), 0);
     await page.waitForFunction(() => {
       const endTurn = document.querySelector('.battle-end-turn-float');
       return !document.querySelector('.vs-preview-modal, .painted-combat-overlay') && endTurn && !endTurn.disabled;
@@ -389,7 +383,7 @@ const scenarios = [
     assert.equal(after.turn, 'ally');
     for (const key of ['acted', 'moved', 'supportUsed', 'hp', 'exp']) assert.equal(untouched[key], before.units.find(unit => unit.id === 'hero')[key], `Swordsman's ${key} must not change`);
     assert.equal(after.units.find(unit => unit.id === 'lina').acted, true);
-    assert.equal(enemy.hp - after.units.find(unit => unit.id === enemy.id).hp, damage, 'Only the archer deals damage');
+    assert.equal(enemy.hp - after.units.find(unit => unit.id === enemy.id).hp, after.battleStats.damageDealt - before.battleStats.damageDealt, 'Only the archer deals damage');
     assert.equal(after.battleStats.assists, before.battleStats.assists);
     assert.doesNotMatch(after.logs.slice(0, 4).join(' '), /협공/);
     await snapshot(page, test, 'resolved');
@@ -445,14 +439,20 @@ const scenarios = [
     await page.locator('.cmd-attack').click();
     const target = await verifyTargetFeedback(page, null, fixture.units[2].name);
     await snapshot(page, test, 'target');
-    await target.click();
-    const preview = page.locator('.vs-preview-modal');
-    await preview.waitFor();
-    assert.ok(await preview.getByRole('button', { name: '공격 실행', exact: true }).isEnabled());
-    await preview.getByRole('button', { name: '취소', exact: true }).click();
-    await preview.waitFor({ state: 'detached' });
     await cancelTarget(page);
     await assertNoAction(page, before);
+    await page.locator('.cmd-attack').click();
+    await page.evaluate(() => { Math.random = () => .5; });
+    await target.evaluate(button => { button.click(); button.click(); });
+    assert.equal(await page.locator('.vs-preview-modal').count(), 0);
+    await page.locator('.painted-combat').waitFor();
+    await snapshot(page, test, 'immediate');
+    await page.waitForFunction(() => document.querySelector('.cinematic-command-bar .prominent-save')?.disabled === false);
+    const after = await saveBattle(page);
+    assert.equal(after.units.find(unit => unit.id === 'hero').acted, true);
+    const enemyId = fixture.units[2].id;
+    assert.equal(before.units.find(unit => unit.id === enemyId).hp - after.units.find(unit => unit.id === enemyId).hp, after.battleStats.damageDealt - before.battleStats.damageDealt);
+    assert.equal(after.logs.filter(log => log.startsWith('카일') && log.includes('피해')).length - before.logs.filter(log => log.startsWith('카일') && log.includes('피해')).length, 1, 'double tap executes once');
   }],
   ['primary-skill', async (page, test, { fixture, settings }) => {
     await restore(page, fixture, settings);
@@ -463,15 +463,17 @@ const scenarios = [
     await dialog.waitFor({ state: 'detached' });
     const target = await verifyTargetFeedback(page, '돌풍 베기', fixture.units[2].name);
     await snapshot(page, test, 'target');
-    await target.click();
-    const preview = page.locator('.vs-preview-modal');
-    await preview.waitFor();
-    assert.match(await preview.locator('.battle-title').innerText(), /돌풍 베기/);
-    assert.ok(await preview.getByRole('button', { name: '스킬 실행', exact: true }).isEnabled());
-    await preview.getByRole('button', { name: '취소', exact: true }).click();
-    await preview.waitFor({ state: 'detached' });
     await cancelTarget(page);
     await assertNoAction(page, before);
+    await (await openSkills(page)).locator('[data-skill-id="gale"]').click();
+    await target.click();
+    assert.equal(await page.locator('.vs-preview-modal').count(), 0);
+    await page.locator('.painted-combat[data-presentation="skill"]').waitFor();
+    await snapshot(page, test, 'immediate');
+    await page.waitForFunction(() => document.querySelector('.cinematic-command-bar .prominent-save')?.disabled === false);
+    const after = await saveBattle(page);
+    assert.equal(after.units.find(unit => unit.id === 'hero').acted, true);
+    assert.ok(after.units.find(unit => unit.id === 'hero').skillCooldowns.gale > 0);
   }],
   ['secondary-guard', async (page, test, { fixture, settings }) => {
     await restore(page, fixture, settings);
@@ -566,10 +568,7 @@ const scenarios = [
       await dialog.waitFor({ state: 'detached' });
       const target = await verifyTargetFeedback(page, '정밀 사격', enemy.name);
       await target.click();
-      const preview = page.locator('.vs-preview-modal');
-      await preview.waitFor();
-      assert.match(await preview.locator('.battle-title').innerText(), /정밀 사격/);
-      await preview.getByRole('button', { name: '스킬 실행', exact: true }).click();
+      assert.equal(await page.locator('.vs-preview-modal').count(), 0);
       const scene = page.locator('.painted-combat').filter({ has: page.getByRole('heading', { name: '정밀 사격', exact: true }) });
       const frame = await scene.evaluate(element => ({ missed: element.classList.contains('is-miss'),
         loaded: [...element.querySelectorAll('.fighter-action')].every(image => image.complete && image.naturalWidth > 0) }));

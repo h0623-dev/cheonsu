@@ -22,7 +22,7 @@ export function checkSetup({ android = false } = {}) {
     if (!fs.existsSync(path.join(root, asset))) throw new Error(`Missing bundled asset: ${asset}`);
   }
   const environment = findAndroidEnvironment();
-  if (android && (!environment.sdk || !environment.java)) throw new Error('Android build requires SDK Platform 35 and JAVA_HOME (JDK 21+). See docs/DEVELOPMENT_HANDOFF.md.');
+  if (android && (!environment.sdk || !environment.java)) throw new Error('Android build requires SDK Platform 36 and JAVA_HOME (JDK 21+). See docs/DEVELOPMENT_HANDOFF.md.');
   if (environment.sdk) {
     // Machine-local SDK paths are intentionally excluded from source bundles and Git.
     fs.writeFileSync(path.join(root, 'android/local.properties'), `sdk.dir=${environment.sdk.replaceAll('\\', '/')}\n`);

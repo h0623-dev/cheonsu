@@ -69,7 +69,7 @@ try {
     attack.selectedStage.units=structuredClone(attack.units);
     await restore(attack);
     await page.locator('.cmd-attack').click();await page.locator('.tile[data-map-x="2"][data-map-y="3"]').click();
-    await button('공격 실행').click();
+    assert.equal(await page.locator('.vs-preview-modal').count(),0,'target selection attacks immediately');
     await page.waitForFunction(()=>document.querySelector('.unit[data-unit-id="hero"] > img')?.dataset.facing==='left');
     await page.waitForFunction(()=>!document.querySelector('.battle-control-heading .prominent-save')?.disabled);
     const after=await save();assert.equal(after.units.find(unit=>unit.id==='hero').facing,'left');
@@ -81,7 +81,7 @@ try {
       await page.locator(`.cmd-${mode}`).click();
       if(mode==='skill') await page.locator('.skill-choice-dialog [data-skill-id="gale"]').click();
       await page.locator('.tile[data-map-x="2"][data-map-y="3"]').click();
-      await button(mode==='skill'?'스킬 실행':'공격 실행').click();
+      assert.equal(await page.locator('.vs-preview-modal').count(),0,'no pre-combat confirmation');
       const scene=page.locator(`.painted-combat[data-presentation="${mode}"]`);
       const frame=await scene.evaluate(el=>({cutIn:el.querySelector('.skill-cut-in strong')?.textContent,impact:el.dataset.impact,images:[...el.querySelectorAll('img')].every(img=>img.complete&&img.naturalWidth>0)}));
       assert.equal(frame.impact,mode==='skill'?'0.62':'0.5');assert.ok(frame.images,'real-game combat art preloaded');

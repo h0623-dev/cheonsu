@@ -1,6 +1,8 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.150 / Android versionCode 349**
+현재 개발 빌드: **1.99.151 / Android versionCode 350**
+
+1.99.151: 전투 예측창 없이 대상 선택 즉시 공격/스킬 실행. Google 계정 메뉴와 인증 연동 코드를 준비했으며, 실제 로그인은 Firebase 연결 전이라 비활성 상태입니다. API 36 및 Play AAB 빌드/출시 점검 추가. [연결 및 출시 준비](docs/GOOGLE_PLAY_1.99.151.md).
 
 1.99.150: 사용자 요청으로 **1.99.148 게임 상태에 원복**했습니다. 1.99.149의 전장형 전투를 제거하고 이전 대결 화면·연출·반격 방식을 복원했습니다. 최신 세이브와 성장/장비/진행도는 유지합니다. 설치 호환성을 위해 버전만 올려 새 APK/OTA로 배포합니다. [원복 기록](docs/ROLLBACK_1.99.150.md).
 
@@ -18,13 +20,13 @@
 
 ## 다운로드
 
-- 로컬 최신 산출물: `cheonsu_1.99.150_update_debug.apk`, `cheonsu_development_1.99.150.zip`
-- [1.99.150 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.150)
+- 로컬 최신 산출물: `cheonsu_1.99.151_update_debug.apk`, `cheonsu_development_1.99.151.zip`
+- [1.99.151 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.151)
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)
 
-APK는 디버그 서명의 개발 테스트용입니다. 1.99.136 이상이 설치되어 있으면 이번 플레이 경험 개선도 자동 패치로 받을 수 있습니다. 앱을 삭제하지 말고 기존 앱 위에 설치하세요. 중요한 저장은 설정에서 내보내기를 권장합니다.
+APK는 디버그 서명의 개발 테스트용입니다. 이번에는 네이티브 변경으로 1.99.151 APK 설치가 한 번 필요하며, 이후 호환 패치는 자동 배포합니다. 앱을 삭제하지 말고 기존 앱 위에 설치하세요. Play release는 별도 서명 및 스토어 업데이트를 사용합니다. 실제 Google 로그인과 Play 출시는 아직 준비 중입니다.
 
 1.99.143: 아군 4인의 신규 타이틀 원화, 이어하기 중심 메뉴, 소리/전투/저장/업데이트 설정 분리, 초상화 기반 기사단 화면, 마을 주요 메뉴와 출전 연결. 30장 출전 배경 설명, 첫 전투 대사 보강, 진행도에 따른 이야기 다시보기와 자동 진행. 저장 덮어쓰기 보호와 현재 상태 수동 슬롯 저장. 기획/아트/UX 점검 및 남은 과제: [전체 정비 보고서](docs/PLAYER_EXPERIENCE_1.99.143.md).
 
@@ -78,7 +80,7 @@ npm run build
 npm run android:apk
 ```
 
-APK 빌드는 Android Studio, SDK Platform 35, JDK 21 이상이 추가로 필요합니다. 마지막 명령이 웹 빌드, Capacitor 동기화, Android 빌드를 순서대로 처리합니다.
+APK 빌드는 Android Studio, SDK Platform 36, JDK 21 이상이 추가로 필요합니다. 마지막 명령이 웹 빌드, Capacitor 동기화, Android 빌드를 순서대로 처리합니다.
 
 결과: `android/app/build/outputs/apk/debug/app-debug.apk`
 

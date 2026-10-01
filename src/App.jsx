@@ -41,7 +41,7 @@ import { playCheonsuSfx, stopSoundEffects } from "./engine/soundEffects.js";
 import { getUnitSkills, getSkill, getSkillDisplayName, skillDescription, withSkill, getSkillCooldown, applyCooldown, tickCooldowns, applySupportSkill, isSelfOnlySupportSkill } from "./data/skills.js";
 import { BATTLE_SPEED_OPTIONS, getBattleSpeedConfig, scaleBattleTime } from "./engine/battleSpeed.js";
 import { getTurnCameraTarget, getCellScrollTarget } from "./engine/battleCamera.js";
-import { getCombatSprite, preloadCombatArt, getCombatTiming, getCombatChoreography } from "./data/combatArt.js";
+import { preloadCombatArt, getCombatTiming, getCombatChoreography } from "./data/combatArt.js";
 import { getBossSpriteKey, getBossSplash } from "./data/bossArt.js";
 import BossSplash from "./components/BossSplash.jsx";
 import { stages } from "./data/stages.js";
@@ -94,7 +94,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.150";
+const SAVE_VERSION = "1.99.151";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -11787,11 +11787,11 @@ export default function App() {
     const aoeTargets =
       battleMode === "skill" ? getAreaTargets(attacker, defender, units, activeMap) : [];
 
-    setBattle({
+    void resolveBattle({
       ...preview,
       aoeTargets,
       counter,
-    });
+    }).catch(() => setLogs(previous => ['전투를 시작하지 못했습니다. 잠시 후 다시 시도해 주세요.', ...previous]));
   };
 
   const resolveEnemyAttack = async (enemyUnit, targetUnit, enemyMode, sourceUnits, logPrefix = "") => {
@@ -12767,7 +12767,7 @@ export default function App() {
     setCombatCutscene((current) => (current?.id === cutsceneId ? null : current));
   };
 
-  const resolveBattle = async () => {
+  const resolveBattle = async (battle) => {
     if (!battle || battleResolving || actionResolvingRef.current || turn !== "ally" || result) return;
     const actor = units.find(unit => unit.id === battle.attacker.id);
     if (!actor || actor.acted || actor.hp <= 0) { setBattle(null); return; }
@@ -18201,87 +18201,6 @@ export default function App() {
               )}
             </div>
           </div>
-          {battle && !battleResolving && !combatCutscene && (
-            <div className="battle-modal vs-preview-modal">
-              <div
-                className={`battle-card vs-preview-card compact-vs-preview-card vs-preview-${battle.mode === "skill" ? "skill" : "attack"} vs-motion-${getUnitWeaponMotionKey(battle.attacker, battle, { hit: true, damage: battle.damage })}`}
-              >
-                <div className="battle-title vs-preview-title">
-                  <span>{battle.mode === "skill" ? "SKILL" : "ATTACK"}</span>
-                  <strong>{battle.mode === "skill" ? battle.attacker.skill : "전투 예측"}</strong>
-                </div>
-                <div className="battle-vs">
-                  <span className="vs-preview-speed-lines" />
-                  <span className="vs-preview-impact" />
-                  <span className="vs-preview-slash" />
-                  <span className="vs-preview-spell" />
-                  <div className="vs-preview-clash-copy">
-                    <span>{battle.mode === "skill" ? "SPECIAL CLASH" : "WEAPON CLASH"}</span>
-                    <strong>{battle.damage} DAMAGE</strong>
-                  </div>
-                  <div className="vs-preview-side vs-preview-attacker">
-                    <div className="battle-icon image-battle-icon ally-unit">
-                      <img src={getCombatSprite(battle.attacker.type === "ally" ? battle.attacker.id : getEnemySpriteKey(battle.attacker))} alt={battle.attacker.name} />
-                    </div>
-                    <div className="battle-name">{battle.attacker.name}</div>
-                    <div className="vs-preview-unit-role">{getCombatClassLabel(getUnitCombatClass(battle.attacker))} · {getInspectUnitRole(battle.attacker)}</div>
-                    <div className="vs-preview-hp-line">
-                      <span>HP</span>
-                      <strong>{battle.attacker.hp}/{battle.attacker.maxHp}</strong>
-                    </div>
-                    <div className="vs-preview-hp-bar">
-                      <i style={{ width: `${Math.max(0, Math.min(100, Math.round((battle.attacker.hp / Math.max(1, battle.attacker.maxHp)) * 100)))}%` }} />
-                    </div>
-                  </div>
-                  <div className="vs">VS</div>
-                  <div className="vs-preview-side vs-preview-defender">
-                    <div className="battle-icon image-battle-icon enemy-unit">
-                      <img src={getCombatSprite(battle.defender.type === "ally" ? battle.defender.id : getEnemySpriteKey(battle.defender))} alt={battle.defender.name} />
-                    </div>
-                    <div className="battle-name">{battle.defender.name}</div>
-                    <div className="vs-preview-unit-role">{getCombatClassLabel(getUnitCombatClass(battle.defender))} · {getInspectUnitRole(battle.defender)}</div>
-                    <div className="vs-preview-hp-line">
-                      <span>HP</span>
-                      <strong>{Math.max(0, battle.defender.hp - battle.damage)}/{battle.defender.maxHp}</strong>
-                    </div>
-                    <div className="vs-preview-hp-bar enemy">
-                      <i style={{ width: `${Math.max(0, Math.min(100, Math.round(((battle.defender.hp - battle.damage) / Math.max(1, battle.defender.maxHp)) * 100)))}%` }} />
-                    </div>
-                  </div>
-                </div>
-                <div className="battle-stats compact-battle-stats">
-                  <div>피해 <strong>{battle.damage}</strong></div>
-                  <div>명중 <strong>{battle.hit}%</strong></div>
-                  <div>치명 <strong>{battle.crit}%</strong></div>
-                  <div>
-                    대상 HP <strong>{battle.defender.hp}→{Math.max(0, battle.defender.hp - battle.damage)} / {battle.defender.maxHp}</strong>
-                  </div>
-                  {battle.mode === "skill" && battle.attacker.type === "ally" && (
-                    <div>
-                      쿨다운 <strong>{getSkillCooldownTurns(battle.attacker)}턴</strong>
-                    </div>
-                  )}
-                  {battle.aoeTargets?.length > 0 && (
-                    <div>
-                      광역 <strong>{battle.aoeTargets.length}명</strong>
-                    </div>
-                  )}
-                  <div>
-                    상성 <strong className={`affinity-text affinity-${battle.affinity?.state || "neutral"}`}>
-                      {battle.affinity?.label || "보통"}
-                    </strong>
-                  </div>
-                  {battle.counter && (
-                    <div>반격 <strong>{battle.counter.damage}</strong></div>
-                  )}
-                </div>
-                <div className="battle-buttons">
-                  <button onClick={() => { setBattleResolving(false); setBattle(null); }}>취소</button>
-                  <button disabled={battleResolving || !!combatCutscene} onClick={resolveBattle}>{battle.mode === "skill" ? "스킬 실행" : "공격 실행"}</button>
-                </div>
-              </div>
-            </div>
-          )}
           {skillChoiceOpen && selected && !combatBusy && !battle && !result && (
             <SkillDialog unit={selected} units={units} onSelect={chooseBattleSkill} onClose={() => setSkillChoiceOpen(false)} />
           )}

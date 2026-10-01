@@ -1,12 +1,14 @@
 # 천수 개발현황 통파일
 
-마지막 확인일: 2026-09-29
+마지막 확인일: 2026-10-01
 프로젝트 위치: `C:\Users\user\Desktop\cheonsu`
-현재 앱/패키지 버전: `1.99.150` (Android 349)
+현재 앱/패키지 버전: `1.99.151` (Android 350 / API 36)
 
-GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.150 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.150). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
+GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.151 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.151). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
 
-최신 산출물: `cheonsu_1.99.150_update_debug.apk`, `cheonsu_development_1.99.150.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+최신 산출물: `cheonsu_1.99.151_update_debug.apk`, `cheonsu_development_1.99.151.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+
+1.99.151 변경: 전투 예측 확인창을 제거해 대상 선택 즉시 실행합니다. 계정 메뉴/Google 인증/로그아웃/계정 삭제 코드와 API 36/Play AAB 빌드를 준비했습니다. Firebase 프로젝트 미연결로 로그인은 비활성이고 Play에는 아직 제출하지 않았습니다. 기존 저장은 로컬에 유지하며 클라우드 동기화는 포함하지 않습니다. 이번 네이티브 변경은 APK 재설치(기존 앱 위 업데이트)가 한 번 필요합니다. [출시 준비 및 필요한 정보](docs/GOOGLE_PLAY_1.99.151.md).
 
 1.99.150 변경: 사용자 요청 "원복"에 따라 1.99.148의 게임 코드·아트·대결 화면·연출 시간·반격 방식으로 복원했습니다. 1.99.149 전장형 전투는 현재 적용되지 않습니다. 이후 획득한 성장·장비·골드·진행도를 초기화하지 않고 새 버전 APK와 OTA로 되돌립니다. [원복 기록](docs/ROLLBACK_1.99.150.md).
 

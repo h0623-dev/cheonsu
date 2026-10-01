@@ -1,7 +1,7 @@
 {
   "name": "cheonsu",
   "private": true,
-  "version": "1.99.150",
+  "version": "1.99.151",
   "type": "module",
   "engines": {
     "node": ">=24"
@@ -13,7 +13,7 @@
     "maps:final-variants": "powershell.exe -ExecutionPolicy Bypass -File scripts/generate-stage-final-map-variants.ps1",
     "sprites:enemy-variants": "powershell.exe -ExecutionPolicy Bypass -File scripts/generate-enemy-variants.ps1",
     "preview": "vite preview",
-    "cap:copy": "npm run build && npx cap copy",
+    "cap:copy": "npm run android:sync",
     "cap:sync": "npm run build && npx cap sync",
     "cap:add:android": "npx cap add android",
     "cap:add:ios": "npx cap add ios",
@@ -21,6 +21,9 @@
     "cap:open:ios": "npx cap open ios",
     "android:sync": "npm run build && npx cap sync android",
     "android:apk": "node scripts/build-android.mjs",
+    "android:aab": "node scripts/build-android.mjs --play",
+    "android:aab:check": "node scripts/build-android.mjs --play-check",
+    "release:check": "node scripts/check-play-release.mjs",
     "setup": "node scripts/setup.mjs",
     "test": "node --test scripts/*.test.mjs",
     "test:ui": "node scripts/verify-combat-patch.cjs && node scripts/verify-combat-motion.cjs && node scripts/verify-battle-controls.cjs",
@@ -33,11 +36,16 @@
     "update:publish": "node scripts/publish-update.mjs",
     "android:open": "npx cap open android"
   },
+  "overrides": {
+    "@grpc/grpc-js": "^1.13.6"
+  },
   "dependencies": {
+    "@capacitor-firebase/authentication": "7.5.0",
     "@capacitor/android": "^7.0.0",
     "@capacitor/core": "^7.0.0",
     "@capacitor/ios": "^7.0.0",
     "@capawesome/capacitor-live-update": "7.5.2",
+    "firebase": "11.10.0",
     "lucide-react": "^1.47.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"

@@ -25,6 +25,9 @@ android/local.properties
 .env
 .env.*
 .update-keys/
+.release-keys/
+android/app/google-services.json
+android/signing.properties
 update-release/
 
 # Local generated packages

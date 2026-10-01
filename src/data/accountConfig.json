@@ -1,0 +1,13 @@
+{
+  "enabled": false,
+  "firebase": {
+    "apiKey": "",
+    "authDomain": "",
+    "projectId": "",
+    "appId": ""
+  },
+  "privacyUrl": "",
+  "deletionUrl": "",
+  "supportEmail": "",
+  "operatorName": ""
+}

@@ -1,5 +1,5 @@
 {
-  "minNativeVersion": 335,
-  "fingerprint": "534455ccc4272ded4ababb7f4f6f1862ecb635348b8f46c8cd0b0b93ab748854",
-  "compatibilityReview": "1.99.137: APK 336에서 시스템 바 자동 여백을 활성화했습니다. 네이티브 API와 저장 형식은 동일합니다. APK 335에는 OTA로 CSS 보호 여백을 제공하므로 최소 호환 버전을 335로 유지합니다."
+  "minNativeVersion": 350,
+  "fingerprint": "e4a96c16ff95a60f9cf68440c9bf9fd72d5710729264d2464199f400a559dfc6",
+  "compatibilityReview": "1.99.151: API 36/AGP 8.9.2 및 Firebase 인증 라이브러리, 조건부 네이티브 플러그인 등록과 Play 전용 release 구성을 추가했습니다. 이전 APK에는 설치 안내만 제공하고 OTA는 APK 350 이상에 제한합니다. google-services.json은 미설정 상태이며 추후 설정 시 지문·최소 버전을 다시 검토해야 합니다."
 }

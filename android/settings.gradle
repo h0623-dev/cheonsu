@@ -3,3 +3,8 @@ include ':capacitor-cordova-android-plugins'
 project(':capacitor-cordova-android-plugins').projectDir = new File('./capacitor-cordova-android-plugins/')
 
 apply from: 'capacitor.settings.gradle'
+
+// Conditional registration in MainActivity keeps offline and Play builds independent.
+include ':cheonsu-firebase-auth', ':cheonsu-live-update'
+project(':cheonsu-firebase-auth').projectDir = new File('../node_modules/@capacitor-firebase/authentication/android')
+project(':cheonsu-live-update').projectDir = new File('../node_modules/@capawesome/capacitor-live-update/android')

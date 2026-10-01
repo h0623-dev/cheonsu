@@ -43,7 +43,7 @@ async function attack(page, skillId) {
     await page.locator(`[data-skill-id="${skillId}"]`).click();
   } else await page.locator('.cmd-attack').click();
   await page.locator('.battle-target-buttons button:enabled').first().click();
-  await page.getByRole('button', { name: skillId ? '스킬 실행' : '공격 실행', exact: true }).click();
+  assert.equal(await page.locator('.vs-preview-modal').count(), 0);
   await page.locator('.world-battlefield [data-unit-id="growth-target"]').waitFor({ state: 'detached' });
 }
 function sync(data) { data.selectedStage.units = structuredClone(data.units); return data; }
@@ -142,7 +142,7 @@ try {
     await restore(page, victory);
     await page.locator('.cmd-attack').click();
     await page.locator('.battle-target-buttons button:enabled').first().click();
-    await page.getByRole('button', { name: '공격 실행', exact: true }).click();
+    assert.equal(await page.locator('.vs-preview-modal').count(), 0);
     await page.locator('.victory-dialog .clear-save-ok').waitFor();
     const won = await read(page);
     assert.equal(won.screen, 'camp');

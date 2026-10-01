@@ -2,10 +2,12 @@ import { Download, RefreshCw, CheckCircle, RotateCw } from 'lucide-react';
 import { version } from '../../package.json';
 import { usePatchUpdates } from '../engine/usePatchUpdates.js';
 import '../patch-updates.css';
+import { Capacitor } from '@capacitor/core';
 
 export function PatchSettings() {
   const patch = usePatchUpdates();
   const busy = ['checking', 'downloading'].includes(patch.status);
+  if (Capacitor.isNativePlatform() && !Capacitor.isPluginAvailable('LiveUpdate')) return <section className="patch-settings" aria-label="게임 업데이트"><h2>게임 업데이트</h2><p>현재 버전 v{version}</p><p>이 앱의 업데이트는 Google Play에서 제공됩니다.</p></section>;
   return <section className="settings-danger app-update-card patch-settings" aria-labelledby="patch-heading">
     <h2 id="patch-heading"><Download size={20} aria-hidden="true" /> 게임 업데이트</h2>
     <div className="setting-mini-info"><span>현재 버전</span><strong>v{version}</strong></div>

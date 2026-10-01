@@ -1,0 +1,21 @@
+.account-panel { max-width: 680px; margin-inline: auto; }
+.account-identity { display: flex; align-items: center; gap: 12px; padding: 20px 0; border-bottom: 1px solid #5d7167; margin-bottom: 20px; }
+.account-identity > div { flex: 1; min-width: 0; display: grid; gap: 5px; }
+.account-identity strong, .account-identity span { overflow-wrap: anywhere; }
+.account-identity > div > span, .account-state { font-size: 13px; color: #bacbbd; }
+.account-panel .google-sign-in { background: #fff; color: #202124; border: 1px solid #747775; border-radius: 4px; min-height: 44px; font: 500 15px Arial, sans-serif; display: flex; align-items: center; gap: 12px; padding: 10px 16px; }
+.google-sign-in img { width: 20px; height: 20px; flex: 0 0 20px; object-fit: contain; }
+.account-local-note { display: flex; align-items: flex-start; gap: 8px; color: #cfddd1; line-height: 1.6; margin-top: 20px; }
+.account-local-note svg { flex-shrink: 0; margin-top: 3px; }
+.account-legal { display: flex; flex-wrap: wrap; gap: 16px; padding: 20px 0; border-top: 1px solid #5d7167; }
+.account-legal a { color: #d9e6c4; display: inline-flex; align-items: center; gap: 5px; }
+.account-panel .account-danger, .account-delete-dialog .account-danger { color: #ffd5cf; border-color: #bd786b; }
+.account-delete-dialog { box-sizing: border-box; width: min(440px, calc(100vw - 24px)); max-height: calc(100dvh - 48px); overflow-y: auto; background: #1d302a; color: #f2f5e9; padding: 20px; border: 1px solid #94a68f; border-radius: 8px; }
+.account-delete-dialog::backdrop { background: #000a; }
+.account-delete-dialog header, .account-delete-dialog footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.account-delete-dialog h2 { font-size: 20px; margin: 0; }
+.account-delete-dialog p { line-height: 1.6; }
+.account-delete-dialog button { min-height: 44px; background: #334b40; color: inherit; border: 1px solid #718c7b; border-radius: 4px; padding: 8px 12px; }
+.account-delete-dialog header button { padding: 8px; display: flex; align-items: center; }
+.account-title-entry { min-height: 44px; }
+.player-settings .ux-tabs { overflow-x: auto; flex-wrap: wrap; }

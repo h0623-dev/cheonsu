@@ -1,4 +1,5 @@
 import { LiveUpdate } from '@capawesome/capacitor-live-update';
+import { Capacitor } from '@capacitor/core';
 import { isNativeCapacitorRuntime } from './runtime.js';
 import { createPatchManager } from './liveUpdateEngine.js';
 import trust from '../data/updateTrust.json';
@@ -9,7 +10,7 @@ export function getPatchManager() {
   if (!manager) {
     let storage;
     try { storage = window.localStorage; } catch { storage = { getItem: () => null, setItem: () => {} }; }
-    manager = createPatchManager({ native: isNativeCapacitorRuntime() ? LiveUpdate : null, version, trust, storage });
+    manager = createPatchManager({ native: isNativeCapacitorRuntime() && Capacitor.isPluginAvailable('LiveUpdate') ? LiveUpdate : null, version, trust, storage });
   }
   return manager;
 }

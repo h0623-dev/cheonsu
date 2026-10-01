@@ -2,8 +2,9 @@
 
 ## 현재 상태
 
-- 버전 1.99.150, Android 349, 패키지 com.cheonsu.game.
-- 사용자 요청으로 고정 기준 1.99.148에 원복했습니다. 실제 전투는 다시 `CombatScene`/`useDuelAnimation`/`DuelEffects`를 사용하며 1.99.149 전용 전장 연출과 테스트는 제거했습니다. `src`와 `public`은 버전·캐시 식별자를 제외하고 기준 커밋과 같습니다. [원복 기록](ROLLBACK_1.99.150.md), [고정 원복 기준](ROLLBACK_BASELINE.md).
+- 버전 1.99.151, Android 350, API 36, 패키지 com.cheonsu.game.
+- 전투 예측창 없이 `openBattle`에서 `resolveBattle`로 직접 연결합니다. 타이틀/설정의 계정 메뉴와 Firebase 인증 어댑터를 추가했지만 실제 Firebase 프로젝트는 미연결입니다. 기기 저장은 계정과 분리하여 보존합니다. [Google/Play 연결 준비](GOOGLE_PLAY_1.99.151.md). Play AAB 제출 빌드는 `npm run android:aab`, 미서명 기술 검증은 `npm run android:aab:check`, 누락 점검은 `npm run release:check`입니다.
+- 1.99.150에서 고정 기준 1.99.148에 원복한 뒤 이번 변경을 적용했습니다. 전투는 `CombatScene`/`useDuelAnimation`/`DuelEffects`를 유지합니다. 1.99.149 전장 연출은 제거된 상태입니다. [원복 기록](ROLLBACK_1.99.150.md), [고정 원복 기준](ROLLBACK_BASELINE.md).
 - `growthEngine.js`: 전체 훈련, 처치 경험치 100%/30%, 전투 중 사망 동료의 경험치 보존. `TrainingDialog`는 초상화 명단과 3종 전체 훈련을 표시합니다. `isSelfOnlySupportSkill`인 스킬만 대상 선택 없이 공통 시전 경로를 사용합니다. 화상/출혈 `sourceId`는 이전 저장에 없어도 정상 동작하며 기존 출처 없는 상태에 처치자를 임의 배정하지 않습니다. 상세: [1.99.148 성장 패치](GROWTH_1.99.148.md).
 - 새 전투 동선/자세/효과/음향 큐는 `duelChoreography.js`, 재생·해제는 `useDuelAnimation.js`, 그래픽은 `DuelEffects.jsx`입니다. 34개 스킬 전용 그림은 `public/art/skills-v1`, 원본은 `docs/art/skills-v1`. `getSkillDisplayName`으로 이전 저장과 표시명을 정규화합니다. [1.99.147 전투 연출](DUEL_CHOREOGRAPHY_1.99.147.md).
 - 방향은 `unitFacing.js`/`useUnitFacings.js`에서 관리합니다. 이동/공격/반격 시 갱신하고 대기/저장/복원에 유지합니다. 아군·적군·보스 41종의 후면 그림은 `public/art/directions-v1`, 원본/제작 기록은 `docs/art/directions-v1`입니다. `CombatScene`과 `skill-presentation.css`는 스킬 준비/컷인/속성 타격을 추가하며 `getCombatTiming`으로 체력/음향 시점을 맞춥니다. [1.99.146 구현 및 검증](FACING_SKILLS_1.99.146.md).
@@ -36,7 +37,7 @@
 ## 새 PC 준비
 
 1. Node.js 24 설치. macOS/Linux에서 nvm을 사용하면 `nvm install`과 `nvm use`를 실행합니다.
-2. `cheonsu_development_1.99.150.zip`을 원하는 폴더에 풉니다.
+2. `cheonsu_development_1.99.151.zip`을 원하는 폴더에 풉니다.
 3. 내부 `cheonsu` 폴더에서 `npm ci`, `npm run setup`, `npm run dev`를 실행합니다.
 4. Vite가 출력하는 로컬 주소를 엽니다. 사용 중인 포트가 있으면 다른 포트를 사용합니다.
 
@@ -44,7 +45,7 @@
 
 ## Git으로 PC 간 이동
 
-저장소 원격 주소는 `https://github.com/h0623-dev/cheonsu.git`입니다. 1.99.150 소스는 `main`, 배포 파일은 `v1.99.150` 릴리스, 자동 패치 안내는 `updates` 브랜치에서 관리합니다. 원복 전 1.99.149는 Git 이력과 해당 릴리스에 보존합니다.
+저장소 원격 주소는 `https://github.com/h0623-dev/cheonsu.git`입니다. 1.99.151 소스는 `main`, 배포 파일은 `v1.99.151` 릴리스, 자동 패치 안내는 `updates` 브랜치에서 관리합니다. 원복 전 1.99.149는 Git 이력과 해당 릴리스에 보존합니다.
 
 ```sh
 git clone https://github.com/h0623-dev/cheonsu.git
@@ -60,7 +61,7 @@ APK, node_modules, 빌드 캐시, 개인 SDK 경로, 환경 변수 파일과 서
 
 ## APK 만들기
 
-1. Android Studio와 SDK Platform 35, Build Tools 35.0.0을 설치합니다.
+1. Android Studio와 SDK Platform 36, Build Tools 35.0.0 이상을 설치합니다.
 2. JDK 21 이상을 준비합니다. 일반적인 Android Studio 설치의 내장 JBR 경로는 자동 탐색합니다. 다른 위치면 `JAVA_HOME`을 지정하세요.
 3. SDK 경로가 기본 위치가 아니면 `ANDROID_HOME`을 지정하세요.
 4. `npm run android:apk`를 실행합니다. 로컬 SDK 경로 파일은 자동 생성됩니다.

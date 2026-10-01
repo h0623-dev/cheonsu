@@ -26,7 +26,7 @@ export function webBuildInfo(root) {
 
 export function nativeFingerprint(root) {
   const lock = JSON.parse(fs.readFileSync(path.join(root, 'package-lock.json'), 'utf8'));
-  const nativeDependencies = Object.entries(lock.packages).filter(([name]) => /node_modules\/@(capacitor|capawesome)\//.test(name))
+  const nativeDependencies = Object.entries(lock.packages).filter(([name]) => /node_modules\/@(capacitor|capacitor-firebase|capawesome)\//.test(name))
     .map(([name, value]) => [name, value.version, value.integrity]).sort();
   const files = hashInputs(root, ['capacitor.config.json', 'android/app/src/main/java', 'android/app/src/main/res',
     'android/app/src/main/AndroidManifest.xml', 'android/app/build.gradle', 'android/app/capacitor.build.gradle',
@@ -34,5 +34,7 @@ export function nativeFingerprint(root) {
     'android/gradle/wrapper/gradle-wrapper.properties'], (name, data) => name.endsWith('app/build.gradle')
     ? data.toString().replace(/versionCode\s+\d+/, 'versionCode N').replace(/versionName\s+"[^"]+"/, 'versionName "N"').replaceAll('\r\n', '\n')
     : /\.(json|java|kt|xml|gradle|properties)$/.test(name) ? data.toString().replaceAll('\r\n', '\n') : data);
-  return createHash('sha256').update(JSON.stringify({ files, nativeDependencies })).digest('hex');
+  const firebaseFile = path.join(root, 'android/app/google-services.json');
+  const firebaseConfiguration = fs.existsSync(firebaseFile) ? JSON.parse(fs.readFileSync(firebaseFile, 'utf8')) : null;
+  return createHash('sha256').update(JSON.stringify({ files, nativeDependencies, firebaseConfiguration })).digest('hex');
 }

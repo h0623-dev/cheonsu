@@ -51,7 +51,12 @@ try {
     if ($config.android.adjustMarginsForEdgeToEdge -ne 'auto') { throw 'Android system-bar fitting is disabled.' }
     if ($config.plugins.LiveUpdate.publicKey -ne $trust.publicKey -or $config.plugins.LiveUpdate.readyTimeout -ne 30000 -or !$config.plugins.LiveUpdate.autoBlockRolledBackBundles -or $config.server.url) { throw 'Native OTA trust/rollback/origin configuration mismatch.' }
     $plugins = Read-ZipText $apk 'assets/capacitor.plugins.json'
-    if ($plugins -notmatch 'LiveUpdatePlugin') { throw 'LiveUpdate native plugin missing from APK.' }
+    $dexContainsLiveUpdate = $false
+    foreach ($entry in $apk.Entries | Where-Object { $_.FullName -match '^classes\d*\.dex$' }) {
+        $reader = [IO.StreamReader]::new($entry.Open(), [Text.Encoding]::GetEncoding(28591))
+        try { if ($reader.ReadToEnd().Contains('Lio/capawesome/capacitorjs/plugins/liveupdate/LiveUpdatePlugin;')) { $dexContainsLiveUpdate = $true } } finally { $reader.Dispose() }
+    }
+    if ($plugins -notmatch 'LiveUpdatePlugin' -and !$dexContainsLiveUpdate) { throw 'LiveUpdate native plugin missing from APK.' }
     "PASS APK web files: $apkCount; OTA files: $otaCount; signature, native plugin, rollback and origin"
 } finally { $apk.Dispose(); if ($ota) { $ota.Dispose() } }
 $artifacts = if ($ApkOnly) { @($apkPath) } else { @($apkPath, $otaPath) }
