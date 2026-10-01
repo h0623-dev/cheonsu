@@ -37,6 +37,17 @@ function fixture({ patch = base, stored = {}, overrides = {}, fetcher } = {}) {
 }
 
 test('valid signed metadata is verified without losing Korean notes', async () => assert.deepEqual(await verifyPatchManifest(envelope(), trust), base));
+test('historical channel verification preserves security checks after a native version increase', async () => {
+  const currentTrust = { ...trust, minNativeVersion: 350 };
+  const historicalTrust = { ...currentTrust, minNativeVersion: 1 };
+  await assert.rejects(verifyPatchManifest(envelope(), currentTrust));
+  assert.deepEqual(await verifyPatchManifest(envelope(), historicalTrust), base);
+  await assert.rejects(verifyPatchManifest(envelope({ ...base, minNativeVersion: 0 }), historicalTrust));
+  await assert.rejects(verifyPatchManifest(envelope({ ...base, url: 'https://evil.example/patch.zip' }), historicalTrust));
+  const broken = envelope();
+  broken.payload = Buffer.from(JSON.stringify({ ...base, version: '9.9.9' })).toString('base64');
+  await assert.rejects(verifyPatchManifest(broken, historicalTrust));
+});
 test('tampered manifest is rejected', async () => {
   const broken = envelope(); broken.payload = Buffer.from(JSON.stringify({ ...base, version: '9.9.9' })).toString('base64');
   await assert.rejects(verifyPatchManifest(broken, trust));

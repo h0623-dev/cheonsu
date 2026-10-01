@@ -35,7 +35,8 @@ if (!await api(`/commits/${head}`)) throw new Error('현재 소스 커밋을 Git
 let feed = await api('/contents/latest.json?ref=updates');
 const expectedChannelSha = feed?.sha;
 if (feed) {
-  const previous = await verifyPatchManifest(JSON.parse(Buffer.from(feed.content, 'base64').toString()), trust);
+  // Historical releases may target an older native build; keep signature and origin checks.
+  const previous = await verifyPatchManifest(JSON.parse(Buffer.from(feed.content, 'base64').toString()), { ...trust, minNativeVersion: 1 });
   const { compareVersions } = await import('../src/engine/updateEngine.js');
   if (compareVersions(version, previous.version) < 0) throw new Error('이전 버전으로 배포 채널을 되돌릴 수 없습니다. 새 버전 번호로 복구 패치를 만드세요.');
   if (previous.version === version && previous.sha256 !== manifest.sha256) throw new Error('이미 배포된 버전을 덮어쓸 수 없습니다. 버전을 올리세요.');
