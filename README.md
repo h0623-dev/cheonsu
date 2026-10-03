@@ -1,6 +1,8 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.152 / Android versionCode 351**
+현재 개발 빌드: **1.99.153 / Android versionCode 352**
+
+1.99.153: 30장 이야기·보스·전장 제목의 연결을 정리하고 원정 메뉴의 불필요한 배치 계산을 줄였습니다. 메인/마을은 평화로운 클래식, 전장은 금관·현악·팀파니 중심의 신작 BGM 10곡으로 교체했습니다. 미연결 Google 로그인 표기와 오프라인 캐시를 수정했습니다. [종합 QA 및 출시 개선 계획](docs/QA_IMPROVEMENT_1.99.153.md).
 
 1.99.152: 아군·적군·보스 41종 공격 자세/크기/발 디딤/반동과 무기·속성별 타격 이펙트 개선. 영입/전장 완료 시 컬러, 미수집은 흑백인 캐릭터 도감 41종 추가. 기존 저장·사거리·행동 소모 유지. [전투 및 도감](docs/IMPACT_CODEX_1.99.152.md).
 
@@ -22,8 +24,8 @@
 
 ## 다운로드
 
-- 로컬 최신 산출물: `cheonsu_1.99.152_update_debug.apk`, `cheonsu_development_1.99.152.zip`
-- [1.99.152 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.152)
+- 로컬 최신 산출물: `cheonsu_1.99.153_update_debug.apk`, `cheonsu_development_1.99.153.zip`
+- [1.99.153 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.153)
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)

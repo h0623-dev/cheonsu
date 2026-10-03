@@ -1,0 +1,455 @@
+{
+  "source": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM",
+  "license": "CC BY 3.0",
+  "attribution": "FluidR3 by Frank Wen and contributors; MIDI.js samples rendered by Benjamin Gleitzman",
+  "instruments": {
+    "piano": [
+      {
+        "midi": 36,
+        "file": "piano-36.mp3",
+        "size": 25585,
+        "sha256": "e02c5a80c03871e1889a3bb371d853f92294c1e8538ac06f70df0fd045540207"
+      },
+      {
+        "midi": 43,
+        "file": "piano-43.mp3",
+        "size": 25585,
+        "sha256": "034f90b9f81e5aca0012f1ff73d731308653578a7eb4bee30efca37af5afce77"
+      },
+      {
+        "midi": 48,
+        "file": "piano-48.mp3",
+        "size": 25585,
+        "sha256": "7d0409ea3c40af25c6d3d606f12890f88f896d93c381b6eb8c58497f308b30d3"
+      },
+      {
+        "midi": 55,
+        "file": "piano-55.mp3",
+        "size": 25585,
+        "sha256": "3b75e4dfd657723b3c7a30bca0409dce8013b4083d54e703c8ec513b535cee99"
+      },
+      {
+        "midi": 60,
+        "file": "piano-60.mp3",
+        "size": 25585,
+        "sha256": "b6d32e0d9d0c2e4b88165a2ec27b8787a970f131a03d96d065f28f158640af96"
+      },
+      {
+        "midi": 67,
+        "file": "piano-67.mp3",
+        "size": 25585,
+        "sha256": "37d21e13d5cecc8c0f1645c83bfe82f6032407a3b7de3dde14021c196526664e"
+      },
+      {
+        "midi": 72,
+        "file": "piano-72.mp3",
+        "size": 25585,
+        "sha256": "7a4be6dae323ac5564ad1a617b554fd595e5e0a63f19c3581e3ee94c33ae2e4b"
+      },
+      {
+        "midi": 79,
+        "file": "piano-79.mp3",
+        "size": 19969,
+        "sha256": "2eb949282bc676f3dc96bf5008459b5fff02696e63b70ff799ff08c36bb97058"
+      },
+      {
+        "midi": 84,
+        "file": "piano-84.mp3",
+        "size": 19371,
+        "sha256": "6a0030c071ccd6c9a722455851d65b18cb86cbfe515772a6ded4c747eda339a0"
+      }
+    ],
+    "harp": [
+      {
+        "midi": 36,
+        "file": "harp-36.mp3",
+        "size": 18227,
+        "sha256": "753bf9c9c693a19c7b1a7738766313ddfa37f432a1ea2d0d6165dcd3d7bd058c"
+      },
+      {
+        "midi": 43,
+        "file": "harp-43.mp3",
+        "size": 16745,
+        "sha256": "e5d242bf4cafa50a1950b109df416cc75c5d320dc531bed86cfe4584caf2b1be"
+      },
+      {
+        "midi": 48,
+        "file": "harp-48.mp3",
+        "size": 17239,
+        "sha256": "4e1197ade09a5661b0cabe8b1884787d5098319f1cefbd40697d2d18bf193fc9"
+      },
+      {
+        "midi": 55,
+        "file": "harp-55.mp3",
+        "size": 16927,
+        "sha256": "e96b66c26e91cc7324716fdc4d15ef8a17f1437051de4a6e5c88ace2044c5774"
+      },
+      {
+        "midi": 60,
+        "file": "harp-60.mp3",
+        "size": 16953,
+        "sha256": "c5db4d0d30e9dd5fd8e5c2bb252b626992e3bbed43c4b968ee9973fbe7364a81"
+      },
+      {
+        "midi": 67,
+        "file": "harp-67.mp3",
+        "size": 17369,
+        "sha256": "9570c7a7bdb7d1061e479857475969dc98a4451dc462e8608c7ad4aa173cb065"
+      },
+      {
+        "midi": 72,
+        "file": "harp-72.mp3",
+        "size": 16667,
+        "sha256": "99ca80a144204bf898f358be22185f46244eeb6f418450f6ac4b98eba9a8850e"
+      },
+      {
+        "midi": 79,
+        "file": "harp-79.mp3",
+        "size": 16173,
+        "sha256": "48c54fe5fe66ed1122e7411408e220d6456bcab89d351c105f140f0dd9a0dc8d"
+      },
+      {
+        "midi": 84,
+        "file": "harp-84.mp3",
+        "size": 15133,
+        "sha256": "1a688dc96d1638251f6ef90bea9374914c1fd6c3801326767bd236ad7d99ae1f"
+      }
+    ],
+    "flute": [
+      {
+        "midi": 36,
+        "file": "flute-36.mp3",
+        "size": 25429,
+        "sha256": "646db44d72044c1420a5c3746aa78b9b86b60e8d7b88e326d8f256232e986805"
+      },
+      {
+        "midi": 43,
+        "file": "flute-43.mp3",
+        "size": 25585,
+        "sha256": "6b44772c1bd95cd567cb66bf724a4193cb586c3d1780ee71557bd907ddb09d38"
+      },
+      {
+        "midi": 48,
+        "file": "flute-48.mp3",
+        "size": 25585,
+        "sha256": "15dda29306795d4fd02b8976718bfedf4920a94ea2a63dc409f96a0fa46b5242"
+      },
+      {
+        "midi": 55,
+        "file": "flute-55.mp3",
+        "size": 25585,
+        "sha256": "50a2585374080da4abfe6042d89648f8af4e757083b34a85d1c199e518b9c9c8"
+      },
+      {
+        "midi": 60,
+        "file": "flute-60.mp3",
+        "size": 25585,
+        "sha256": "5cd80bb51e7b11a5bba2a496af78e982dc3f1f216eb13a0c36366142190e35c9"
+      },
+      {
+        "midi": 67,
+        "file": "flute-67.mp3",
+        "size": 25585,
+        "sha256": "fdde4759f6ddd16f455f44296ab834f1ff80915a161782d62e07a1ee8464494f"
+      },
+      {
+        "midi": 72,
+        "file": "flute-72.mp3",
+        "size": 25585,
+        "sha256": "761a2afe76c7445aa53453689797ff7152a4187769328e1e66d1f92ceb914a5d"
+      },
+      {
+        "midi": 79,
+        "file": "flute-79.mp3",
+        "size": 25585,
+        "sha256": "34049ec47d353b581d36b5c52aaa884151f136bc9d135df42c6a96b1c6b7cc59"
+      },
+      {
+        "midi": 84,
+        "file": "flute-84.mp3",
+        "size": 25585,
+        "sha256": "54bfb6782319e9f2c6e8b14843ca0f1a635cfc006ae988ac2aef0fff00f9ad90"
+      }
+    ],
+    "strings": [
+      {
+        "midi": 36,
+        "file": "strings-36.mp3",
+        "size": 25585,
+        "sha256": "bc8dfb98c0b251be3aa31ddfc95c4c192aeccb7d6250583860553607c04c5a62"
+      },
+      {
+        "midi": 43,
+        "file": "strings-43.mp3",
+        "size": 25585,
+        "sha256": "a6b7b80bf367394d3f6adce75301eb402f47d3583dd4b2d64d9bf4e8717cdfc3"
+      },
+      {
+        "midi": 48,
+        "file": "strings-48.mp3",
+        "size": 25585,
+        "sha256": "9e1473b471b22fa129ad63118e378088b45c0cb3767b61b7b21999eb7415f185"
+      },
+      {
+        "midi": 55,
+        "file": "strings-55.mp3",
+        "size": 25585,
+        "sha256": "4b11c0bf78fe9cb494ba5f8adca6406b26cf923628b19b9a9c176bf193404111"
+      },
+      {
+        "midi": 60,
+        "file": "strings-60.mp3",
+        "size": 25585,
+        "sha256": "e2ca8e8308c6ab163508f351617af213923fc59d3d380148f1d0df756db109e3"
+      },
+      {
+        "midi": 67,
+        "file": "strings-67.mp3",
+        "size": 25585,
+        "sha256": "dbff92d84f73b1854c90c5da3f46cc2b5755ff087b708936f18e454fc008086e"
+      },
+      {
+        "midi": 72,
+        "file": "strings-72.mp3",
+        "size": 25585,
+        "sha256": "17af2f3d0956ce6b9faacba437f6b48bc43aa1c0f36a700edb7be92df3149239"
+      },
+      {
+        "midi": 79,
+        "file": "strings-79.mp3",
+        "size": 25585,
+        "sha256": "85f59e0ad151929bb74fff636d803f02e637824b1ce3f9f1a6aced62081cf0ee"
+      },
+      {
+        "midi": 84,
+        "file": "strings-84.mp3",
+        "size": 25585,
+        "sha256": "f89dfd4b7472e7b479a2336b4bc95c2b5904818e39a671424ad2c6f9325d7292"
+      }
+    ],
+    "cello": [
+      {
+        "midi": 36,
+        "file": "cello-36.mp3",
+        "size": 25585,
+        "sha256": "b067cad9857d8fd2651ee6b2661fefd8b7305fae8227f6834f203d81c98c1e1c"
+      },
+      {
+        "midi": 43,
+        "file": "cello-43.mp3",
+        "size": 25585,
+        "sha256": "ae4b363c70220e31c7eb57ac01084188afdc01769aa4d30d5dc05ebc6f33281c"
+      },
+      {
+        "midi": 48,
+        "file": "cello-48.mp3",
+        "size": 25585,
+        "sha256": "945c6f8243bbe13309a5938fb55483fd215bb760e41c77e21c890714c1d9f7ec"
+      },
+      {
+        "midi": 55,
+        "file": "cello-55.mp3",
+        "size": 25585,
+        "sha256": "eebea8825cffc24cce36acb4b146b1acebfb8f399f34e62bcab09794b481eb27"
+      },
+      {
+        "midi": 60,
+        "file": "cello-60.mp3",
+        "size": 25585,
+        "sha256": "0495b262618c14e6b2d37f9457019ffc79d6bcd9b0571f626760aa1a497bb45b"
+      },
+      {
+        "midi": 67,
+        "file": "cello-67.mp3",
+        "size": 25585,
+        "sha256": "adf12378481da7f0bc2cffc78af951251e6192bea707a7920f2f7540c12e5f4c"
+      },
+      {
+        "midi": 72,
+        "file": "cello-72.mp3",
+        "size": 25585,
+        "sha256": "8fb8fa3e1e8a855c0fd1466bec0450bfde80e503907407bda1f7f966d63f9fb2"
+      },
+      {
+        "midi": 79,
+        "file": "cello-79.mp3",
+        "size": 25585,
+        "sha256": "3198a7ca5ffb13f460591844c09f9d8078b797dad9fbff1a2a7ba2ee2ffe0112"
+      },
+      {
+        "midi": 84,
+        "file": "cello-84.mp3",
+        "size": 25585,
+        "sha256": "075b442347699e1a3d8191a367ed248f28979b791734ed830209e5fb1a4ac7e3"
+      }
+    ],
+    "horn": [
+      {
+        "midi": 36,
+        "file": "horn-36.mp3",
+        "size": 25585,
+        "sha256": "3ea59d1d8f3bd4624b68ffbefe82e2ff0cffaf72d069ffa13928ef125a0480ac"
+      },
+      {
+        "midi": 43,
+        "file": "horn-43.mp3",
+        "size": 25585,
+        "sha256": "074d2ff8c308a0896687c39423e98e206d93924789dd18964a6f479b2a387b90"
+      },
+      {
+        "midi": 48,
+        "file": "horn-48.mp3",
+        "size": 25585,
+        "sha256": "575331bb867bffd2171da869eedb8ebec7adda4de3e85bd80bc95a97c0ba01df"
+      },
+      {
+        "midi": 55,
+        "file": "horn-55.mp3",
+        "size": 25585,
+        "sha256": "d4b82e1497080fd97e4c813dcb7d82ca3b87b4dcebcbddc7e2bb8cd0abd0b5d4"
+      },
+      {
+        "midi": 60,
+        "file": "horn-60.mp3",
+        "size": 25585,
+        "sha256": "a5559df4fde8c13626418409d0968dcde6ac4cf34286e1083a0bebbaf02b445d"
+      },
+      {
+        "midi": 67,
+        "file": "horn-67.mp3",
+        "size": 25585,
+        "sha256": "4acb58aa7a021d99ce233bc50efc2c42c7e3ed8ff71b39434efa35ec21f1052c"
+      },
+      {
+        "midi": 72,
+        "file": "horn-72.mp3",
+        "size": 25585,
+        "sha256": "3d7c4361214ea914d15163e8d69144794fe920187862c7a119d110bfb44f0861"
+      },
+      {
+        "midi": 79,
+        "file": "horn-79.mp3",
+        "size": 25585,
+        "sha256": "461d75d28218e03415f7d28faf7d9a514096427023cc3deb102c1e5560103e5a"
+      },
+      {
+        "midi": 84,
+        "file": "horn-84.mp3",
+        "size": 25585,
+        "sha256": "67e3935b82e17a9fefc42a65326c32b697b4095d82af7584c13c199c91a8ad6b"
+      }
+    ],
+    "choir": [
+      {
+        "midi": 36,
+        "file": "choir-36.mp3",
+        "size": 25585,
+        "sha256": "5a7e74ad50e0099756369034846509685278e4f0c0f5bd6630de10e61679da66"
+      },
+      {
+        "midi": 43,
+        "file": "choir-43.mp3",
+        "size": 25585,
+        "sha256": "316ab31f9df0bef384dd6155d1cc223948b99cee6d09cade1933b02518011d36"
+      },
+      {
+        "midi": 48,
+        "file": "choir-48.mp3",
+        "size": 25585,
+        "sha256": "696a1c22a2b91a3206bf6af5c0c2e71972fcaffc5317f7e7b8962a01a054952b"
+      },
+      {
+        "midi": 55,
+        "file": "choir-55.mp3",
+        "size": 25585,
+        "sha256": "103535d5071ee70e50aa51301fecdf99fd1fe3377b97601767ee5bff54dced36"
+      },
+      {
+        "midi": 60,
+        "file": "choir-60.mp3",
+        "size": 25585,
+        "sha256": "9be9ef6a4f78f4de50fa08ec73a63869823a4db80e3b7b28d9b7ebad926e15a4"
+      },
+      {
+        "midi": 67,
+        "file": "choir-67.mp3",
+        "size": 25585,
+        "sha256": "9b140d2b21616ca4089476abde06f14667900178f812d98247e142fc9cb7bb02"
+      },
+      {
+        "midi": 72,
+        "file": "choir-72.mp3",
+        "size": 25585,
+        "sha256": "0cfcbd1818d9e7777d772d6fdf7fe5f7e3e26eebef76f6ca4e1c0bffd70b0e52"
+      },
+      {
+        "midi": 79,
+        "file": "choir-79.mp3",
+        "size": 25585,
+        "sha256": "243960e1a4920aa822124e82aed00bdb8511931093632ba8aa52d5da000684d9"
+      },
+      {
+        "midi": 84,
+        "file": "choir-84.mp3",
+        "size": 25585,
+        "sha256": "4905e22d0ebf66cfdae555501ee7943d9fb605bbc50f77baf29d6fa1a960baa0"
+      }
+    ],
+    "timpani": [
+      {
+        "midi": 36,
+        "file": "timpani-36.mp3",
+        "size": 20619,
+        "sha256": "28baf5c4dba38f8b8821d774bafab716ffa9c8bcc622fa8550af9c7c5f306bf5"
+      },
+      {
+        "midi": 43,
+        "file": "timpani-43.mp3",
+        "size": 20619,
+        "sha256": "298580b01441f009d32614addbc377e1518ede624274c32be380b07bedd13571"
+      },
+      {
+        "midi": 48,
+        "file": "timpani-48.mp3",
+        "size": 19371,
+        "sha256": "b19f1b62bb243e4a497d23f75513b197f5b282059037a0c247daa8bca5efb965"
+      },
+      {
+        "midi": 55,
+        "file": "timpani-55.mp3",
+        "size": 17655,
+        "sha256": "1e6077dcfac9037fe48d87d1c19227ac8f405edc1e11d3f1283fa3cdbd3bf06f"
+      },
+      {
+        "midi": 60,
+        "file": "timpani-60.mp3",
+        "size": 16693,
+        "sha256": "c0f01f601b4fa720d7ba73b9e37c9a06f3d4017afc1cd2a43407e7f462e9aa4f"
+      },
+      {
+        "midi": 67,
+        "file": "timpani-67.mp3",
+        "size": 15679,
+        "sha256": "915859739514325dbe38a3fea282a8ca691e15e2c4747b407cb18a2c38b3c294"
+      },
+      {
+        "midi": 72,
+        "file": "timpani-72.mp3",
+        "size": 15263,
+        "sha256": "f692abff3e23b00fe2f4d81721cbe86ee71539842d896bca5e54add456aae4a0"
+      },
+      {
+        "midi": 79,
+        "file": "timpani-79.mp3",
+        "size": 14743,
+        "sha256": "9807b92bd8c5f12468cc1e88a471f1ec12a3b6ac135f881895e4a988d7447029"
+      },
+      {
+        "midi": 84,
+        "file": "timpani-84.mp3",
+        "size": 14353,
+        "sha256": "0d8654b5ac7ffecb1265d5dad5e52151f3ef4af746360a605f91cb46f9e26977"
+      }
+    ]
+  }
+}

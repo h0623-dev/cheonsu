@@ -6,7 +6,7 @@ import { stages } from '../src/data/stages.js';
 import fs from 'node:fs';
 const currentVersion = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url))).version;
 
-for (const version of ['1.99.148', '1.99.149', '1.99.150', '1.99.151']) test(`${version} save survives update without resetting progress or combat`, () => {
+for (const version of ['1.99.148', '1.99.149', '1.99.150', '1.99.151', '1.99.152']) test(`${version} save survives update without resetting progress or combat`, () => {
   const party = getInitialParty().map((unit, index) => ({ ...unit, level: 3 + index, exp: 73 + index }));
   const stage = structuredClone(stages[0]);
   const units = stage.units.filter(unit => unit.id !== 'bram').map(unit => ({ ...unit,

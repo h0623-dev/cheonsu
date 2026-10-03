@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ArrowLeft, Volume2, Swords, Save, Download, Settings, Play, Upload, RotateCcw, UserRound } from 'lucide-react';
 import AccountPanel from './AccountPanel.jsx';
 import { PatchSettings } from './PatchUpdates.jsx';
+import { MUSIC_TRACKS } from '../data/musicScore.js';
 
 const tabs = [['sound', '소리', Volume2], ['battle', '전투', Swords], ['save', '저장', Save], ['account', '계정', UserRound], ['update', '업데이트', Download]];
 function Toggle({ label, checked, onChange }) {
@@ -26,6 +27,7 @@ export default function PlayerSettings({ initialTab = 'sound', version, settings
         <Toggle label="배경 음악" checked={settings.musicOn} onChange={change('musicOn')} />
         <label className="ux-volume"><span>전체 음량 <output>{settings.sfxVolume}%</output></span><input aria-label="전체 음량" type="range" min="0" max="100" step="5" value={settings.sfxVolume} onChange={event => onSetting('sfxVolume', Number(event.target.value))} /></label>
         <button onClick={() => onSound('confirm')}><Play size={18} />효과음 확인</button>
+        <details className="ux-details"><summary>음악 정보</summary><ul>{Object.entries(MUSIC_TRACKS).map(([id, track]) => <li key={id}>{track.title} · {track.calm ? '실내악' : '전장 관현악'}</li>)}</ul><p className="ux-status">오리지널 작곡·편곡 · FluidR3 악기 음색</p><a href="/audio/orchestra-v1/CREDITS.txt" target="_blank" rel="noopener noreferrer">음원 출처와 라이선스</a></details>
         <details className="ux-details"><summary>효과음 목록</summary><div className="ux-action-grid">{[['slash','검격'],['fire','화염'],['ice','빙결'],['heal','회복'],['boss','보스'],['victory','승리']].map(([id,label]) => <button key={id} onClick={() => onSound(id)}><Play size={15} />{label}</button>)}</div></details>
       </section>}
       {tab === 'battle' && <section aria-label="전투 설정"><h2>전투</h2>

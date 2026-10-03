@@ -1,12 +1,14 @@
 # 천수 개발현황 통파일
 
-마지막 확인일: 2026-10-01
+마지막 확인일: 2026-10-03
 프로젝트 위치: `C:\Users\user\Desktop\cheonsu`
-현재 앱/패키지 버전: `1.99.152` (Android 351 / API 36)
+현재 앱/패키지 버전: `1.99.153` (Android 352 / API 36)
 
-GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.152 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.152). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
+GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.153 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.153). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
 
-최신 산출물: `cheonsu_1.99.152_update_debug.apk`, `cheonsu_development_1.99.152.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+최신 산출물: `cheonsu_1.99.153_update_debug.apk`, `cheonsu_development_1.99.153.zip`. 실제 Android 기기 설치와 OTA 복구, 스피커 청음은 미검증.
+
+1.99.153 변경: 전 장 스토리 연결·장 제목·후반 보스 정체를 통일했습니다. 30장의 가론 모습은 흑야가 훔친 기억의 잔영으로 명시했습니다. 메인/마을의 평화로운 실내악과 웅장한 전장 음악 10곡, 샘플 악기 8종을 적용했습니다. 음악 재시작·캐시 오류와 사용 불가능한 Google 로그인 표기를 수정하고 원정 화면 계산을 줄였습니다. 세이브와 전투 규칙은 보존합니다. [검사 결과와 출시 개선 계획](docs/QA_IMPROVEMENT_1.99.153.md).
 
 1.99.152 변경: 41종 전체의 공격/스킬 준비 자세, 타격 동작과 반동/복귀, 타격 파편·충격파·피격 반응을 개선했습니다. 무기를 들 때 몸이 줄어드는 크기 보정도 수정했습니다. 캐릭터 도감 41종은 수집 시 컬러, 미수집은 흑백이며 검색/필터/상세/영입 조건을 제공합니다. 도감은 기존 파티/클리어 기록을 읽고 저장을 변경하지 않습니다. 1.99.151 APK 이상에 서명 OTA 호환. [상세](docs/IMPACT_CODEX_1.99.152.md).
 

@@ -16,11 +16,10 @@ try {
     const before = await page.evaluate(() => localStorage.getItem('cheonsu_v01_save'));
     await page.reload();
     await page.screenshot({ path: `${out}/${viewport.width}-title.png` });
-    await page.getByRole('button', { name: '계정 · Google 로그인', exact: true }).click();
+    await page.getByRole('button', { name: '게스트 · 기기 저장', exact: true }).click();
     await page.getByRole('heading', { name: '계정', exact: true }).waitFor();
-    assert.equal(await page.getByRole('button', { name: 'Google로 로그인', exact: true }).isDisabled(), true);
-    assert.match(await page.locator('.account-panel').innerText(), /연결 준비 중/);
-    assert.equal(await page.locator('.google-sign-in img').evaluate(el => el.complete && el.naturalWidth > 0), true);
+    assert.equal(await page.getByRole('button', { name: 'Google로 로그인', exact: true }).count(), 0);
+    assert.match(await page.locator('.account-panel').innerText(), /아직 지원하지 않습니다/);
     assert.equal(await page.evaluate(() => localStorage.getItem('cheonsu_v01_save')), before);
     const layout = await page.evaluate(() => {
       const issues = [];

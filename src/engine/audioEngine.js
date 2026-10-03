@@ -1,4 +1,5 @@
-import { musicBeat } from '../data/musicScore.js';
+import { musicBeat, MUSIC_LOOP_STEPS } from '../data/musicScore.js';
+import { prepareOrchestra, playOrchestraNote } from './orchestraSamples.js';
 export { musicBeat } from '../data/musicScore.js';
 
 let context;
@@ -19,6 +20,7 @@ const harmonics = {
   flute: [1,.06,.21,.04,.04], reed: [1,.08,.38,.06,.16,.03,.08],
   strings: [1,.38,.22,.14,.09,.065,.04], horn: [1,.55,.32,.15,.08,.03],
   harp: [1,.35,.17,.08,.03], bell: [1,.03,.32,.04,.15,.03,.08], bass: [1,.17,.04],
+  piano: [1,.42,.22,.12,.055], cello: [1,.36,.14,.08], choir: [1,.1,.25,.08], timpani: [1,.06,.1],
 };
 function waveFor(ctx, instrument) {
   const cache = audioResources(ctx);
@@ -80,36 +82,52 @@ export function playTone(ctx, { freq=440, freqEnd, start=0, duration=.08, type='
 }
 
 export function createMusicPlayer(ctx) {
-  let timer=null, bus=null, compressor=null;
+  let timer=null, bus=null, compressor=null, generation=0, currentKey=null, beat=0, wetNodes=[], volumeTarget=0;
   const voices=new Set();
   const stop=()=>{
+    generation++;
     if(timer!==null) clearInterval(timer);
     timer=null;
-    const oldBus=bus, oldCompressor=compressor;
+    const oldBus=bus, oldCompressor=compressor, oldWet=wetNodes;
     if(oldBus) {
       oldBus.gain.cancelScheduledValues(ctx.currentTime);
       oldBus.gain.setTargetAtTime(.0001,ctx.currentTime,.01);
     }
     for(const voice of voices) { try { voice.stop(ctx.currentTime+.05); } catch { /* Already ended. */ } }
-    voices.clear(); bus=null; compressor=null;
-    if(oldBus) setTimeout(()=>{oldBus.disconnect();oldCompressor?.disconnect();},80);
+    voices.clear(); bus=null; compressor=null; wetNodes=[]; currentKey=null;
+    if(oldBus) setTimeout(()=>{oldBus.disconnect();oldCompressor?.disconnect();oldWet.forEach(node=>node.disconnect());},80);
   };
-  const start=(theme,volume)=>{
+  const start=async(theme,volume)=>{
+    if(!Number.isFinite(volume) || volume<=0 || ctx.state!=='running') { stop(); return; }
+    volumeTarget=Math.min(1,volume);
+    const key = `${theme?.id || theme}:${theme?.variant || 0}`;
+    if(currentKey===key) { if(bus) bus.gain.setTargetAtTime(volumeTarget,ctx.currentTime,.06); return; }
     stop();
-    if(!Number.isFinite(volume) || volume<=0 || ctx.state!=='running') return;
+    const request = generation;
+    currentKey=key;
+    const score = Array.from({length:MUSIC_LOOP_STEPS},(_,i)=>musicBeat(theme,i));
+    await prepareOrchestra(ctx,score.flatMap(frame=>frame.notes));
+    if(request!==generation) return;
+    if(ctx.state!=='running') { currentKey=null; return; }
     bus=ctx.createGain(); bus.gain.setValueAtTime(.0001,ctx.currentTime);
-    bus.gain.exponentialRampToValueAtTime(Math.min(1,volume),ctx.currentTime+.18);
+    bus.gain.exponentialRampToValueAtTime(volumeTarget,ctx.currentTime+.18);
     compressor=ctx.createDynamicsCompressor();
     compressor.threshold.value=-16; compressor.knee.value=10; compressor.ratio.value=3;
     bus.connect(compressor); compressor.connect(ctx.destination);
-    let beat=0, next=ctx.currentTime+.025;
+    // A bounded room return places the sampled ensemble in one acoustic space.
+    const delay=ctx.createDelay(.4), lowpass=ctx.createBiquadFilter(), wet=ctx.createGain();
+    delay.delayTime.value=.17; lowpass.type='lowpass'; lowpass.frequency.value=2600; wet.gain.value=.16;
+    bus.connect(delay); delay.connect(lowpass); lowpass.connect(wet); wet.connect(compressor);
+    wetNodes=[delay,lowpass,wet];
+    beat=0; let next=ctx.currentTime+.025;
     const schedule=()=>{
       if(ctx.state!=='running') return;
       if(next<ctx.currentTime-.3) next=ctx.currentTime+.025;
       while(next<ctx.currentTime+.2) {
-        const frame=musicBeat(theme,beat++);
+        const frame=score[beat++ % MUSIC_LOOP_STEPS];
         for(const note of frame.notes) {
-          const voice=playTone(ctx,{...note,start:next-ctx.currentTime+(note.start||0)},bus);
+          const scheduled={...note,start:next-ctx.currentTime+(note.start||0)};
+          const voice=playOrchestraNote(ctx,scheduled,bus) || playTone(ctx,scheduled,bus);
           if(voice) { voices.add(voice); voice.addEventListener('ended',()=>voices.delete(voice),{once:true}); }
         }
         next+=frame.step;
@@ -117,5 +135,5 @@ export function createMusicPlayer(ctx) {
     };
     schedule(); timer=setInterval(schedule,100);
   };
-  return {start,stop};
+  return {start,stop,getState:()=>({track:currentKey,beat,voices:voices.size,playing:timer!==null})};
 }

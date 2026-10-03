@@ -6,9 +6,17 @@ importScripts('/art/bosses-v1/precache.js');
 importScripts('/art/map-sprites-v4/precache.js');
 importScripts('/art/directions-v1/precache.js');
 importScripts('/art/skills-v1/precache.js');
-const CACHE_VERSION = "cheonsu-v199151-account";
+const CACHE_VERSION = "cheonsu-v199153-orchestra";
 const APP_SHELL_CACHE = `${CACHE_VERSION}-app-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
+
+function cacheResponse(event, response) {
+  if (!response.ok) return;
+  const copy = response.clone();
+  // Storage pressure must not turn a successful request into a game error.
+  event.waitUntil(caches.open(RUNTIME_CACHE)
+    .then(cache => cache.put(event.request, copy)).catch(() => {}));
+}
 
 const FINAL_STAGE_MAPS = Array.from(
   { length: 30 },
@@ -174,6 +182,9 @@ const APP_SHELL_FILES = [
   ...self.COMBAT_ART_FILES,
   ...self.COMBAT_MOTION_FILES,
   ...self.ENEMY_REFRESH_FILES,
+  ...['piano','harp','flute','strings','cello','horn','choir','timpani'].flatMap(id =>
+    [36,43,48,55,60,67,72,79,84].map(midi => `/audio/orchestra-v1/${id}-${midi}.mp3`)),
+  '/audio/orchestra-v1/CREDITS.txt',
 ];
 
 self.addEventListener("install", (event) => {
@@ -188,7 +199,7 @@ self.addEventListener("activate", (event) => {
     caches.keys().then((keys) =>
       Promise.all(
         keys
-          .filter((key) => key !== APP_SHELL_CACHE && key !== RUNTIME_CACHE)
+          .filter((key) => key.startsWith('cheonsu-') && key !== APP_SHELL_CACHE && key !== RUNTIME_CACHE)
           .map((key) => caches.delete(key))
       )
     )
@@ -201,16 +212,13 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
-  const isStaticAsset = /\.(?:js|css|png|jpg|jpeg|svg|webp|gif|woff2?)$/i.test(url.pathname);
+  const isStaticAsset = /\.(?:js|css|png|jpg|jpeg|svg|webp|gif|woff2?|mp3|ogg|wav)$/i.test(url.pathname);
 
   if (event.request.mode === "navigate") {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
-          if (response.ok) {
-            const copy = response.clone();
-            caches.open(RUNTIME_CACHE).then((cache) => cache.put(event.request, copy));
-          }
+          cacheResponse(event, response);
           return response;
         })
         .catch(() => caches.match(event.request).then((cached) => cached || caches.match("/index.html")))
@@ -221,16 +229,12 @@ self.addEventListener("fetch", (event) => {
   if (isStaticAsset) {
     event.respondWith(
       caches.match(event.request).then((cached) => {
-        const fetchAndCache = fetch(event.request)
+        if (cached) return cached;
+        return fetch(event.request)
           .then((response) => {
-            if (response.ok) {
-              const copy = response.clone();
-              caches.open(RUNTIME_CACHE).then((cache) => cache.put(event.request, copy));
-            }
+            cacheResponse(event, response);
             return response;
-          });
-
-        return cached || fetchAndCache;
+          }).catch(() => Response.error());
       })
     );
     return;
@@ -239,12 +243,9 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(
     fetch(event.request)
       .then((response) => {
-        if (response.ok) {
-          const copy = response.clone();
-          caches.open(RUNTIME_CACHE).then((cache) => cache.put(event.request, copy));
-        }
+        cacheResponse(event, response);
         return response;
       })
-      .catch(() => caches.match(event.request))
+      .catch(() => caches.match(event.request).then(cached => cached || Response.error()))
   );
 });

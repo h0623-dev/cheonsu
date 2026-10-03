@@ -66,8 +66,8 @@ test('legacy battle geometry, unit coordinates, actions and discovery progress s
   assert.equal(JSON.stringify(saved),before);
 });
 
-test('nine original soundtracks have distinct four-section arrangements, valid notes and a repeatable loop', () => {
-  assert.equal(Object.keys(MUSIC_TRACKS).length, 9);
+test('ten original soundtracks have distinct four-section arrangements, valid notes and a repeatable loop', () => {
+  assert.equal(Object.keys(MUSIC_TRACKS).length, 10);
   const scores = new Set();
   for (const id of Object.keys(MUSIC_TRACKS)) {
     const bars = Array.from({length:MUSIC_LOOP_STEPS},(_,i)=>musicBeat(id,i));
@@ -80,7 +80,7 @@ test('nine original soundtracks have distinct four-section arrangements, valid n
     }
     scores.add(JSON.stringify(bars));
   }
-  assert.equal(scores.size,9);
+  assert.equal(scores.size,10);
   assert.equal(getMusicTheme('camp').id,'camp');
   assert.equal(getMusicTheme('battle',30).id,'finale');
   for (const plan of BATTLEFIELD_PLANS) assert.ok(MUSIC_TRACKS[getMusicTheme('battle',plan.id).id]);

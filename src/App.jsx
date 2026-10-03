@@ -26,6 +26,7 @@ import { RECRUIT_BY_STAGE } from './data/characterCollection.js';
 import { readMenuCheckpoint, canReplayStory, getNextChapter } from './engine/playerExperience.js';
 import { getCharacterProfile } from './data/characterProfiles.js';
 import { getChapterBrief } from './data/chapterBriefs.js';
+import { getChapterBossName } from './data/chapterIdentity.js';
 import { usePatchLifecycle } from './engine/usePatchUpdates.js';
 import { createStagePreviewReader } from './engine/stagePreviewCache.js';
 import { LiveUpdate } from '@capawesome/capacitor-live-update';
@@ -37,9 +38,8 @@ import { getStoryPortrait } from "./data/storyArt.js";
 import { getUnlockedStageIds, createVictoryCheckpoint, writeProgressSave } from './engine/campaignProgress.js';
 import { distributeBattleFormations, getReinforcementApproaches } from "./engine/formations.js";
 import { getBattleOutcome, spendAction } from "./engine/battleOutcome.js";
-import { getAudioContext, createMusicPlayer } from "./engine/audioEngine.js";
-import { getMusicTheme } from "./data/musicScore.js";
-import { playCheonsuSfx, stopSoundEffects } from "./engine/soundEffects.js";
+import { useGameMusic } from "./engine/useGameMusic.js";
+import { playCheonsuSfx } from "./engine/soundEffects.js";
 import { getUnitSkills, getSkill, getSkillDisplayName, skillDescription, withSkill, getSkillCooldown, applyCooldown, tickCooldowns, applySupportSkill, isSelfOnlySupportSkill } from "./data/skills.js";
 import { BATTLE_SPEED_OPTIONS, getBattleSpeedConfig, scaleBattleTime } from "./engine/battleSpeed.js";
 import { getTurnCameraTarget, getCellScrollTarget } from "./engine/battleCamera.js";
@@ -96,7 +96,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.152";
+const SAVE_VERSION = "1.99.153";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -1914,7 +1914,6 @@ const ACT_ONE_ROUTE_TACTICAL_MAP = [
 
 const ACT_ONE_ROUTE_STAGE_CONFIGS = {
   1: {
-    battleTitle: "1장. 국경 출발점",
     battleObjective: "목표: 성채로 향하는 진군로 확보",
     themeLabel: "국경 출발지",
     themeId: "frontier",
@@ -1924,7 +1923,6 @@ const ACT_ONE_ROUTE_STAGE_CONFIGS = {
     maxEnemies: 5,
   },
   2: {
-    battleTitle: "2장. 국경 초소",
     battleObjective: "목표: 초소 방어선 돌파",
     themeLabel: "협곡 진입로",
     themeId: "canyon",
@@ -1934,7 +1932,6 @@ const ACT_ONE_ROUTE_STAGE_CONFIGS = {
     maxEnemies: 6,
   },
   3: {
-    battleTitle: "3장. 성문 외곽",
     battleObjective: "목표: 외곽 수비대 격파",
     themeLabel: "성문 외곽",
     themeId: "fortress",
@@ -1944,7 +1941,6 @@ const ACT_ONE_ROUTE_STAGE_CONFIGS = {
     maxEnemies: 7,
   },
   4: {
-    battleTitle: "4장. 불타는 숲길",
     battleObjective: "목표: 불길 속 전초선 돌파",
     themeLabel: "불타는 숲길",
     themeId: "burning",
@@ -1954,7 +1950,6 @@ const ACT_ONE_ROUTE_STAGE_CONFIGS = {
     maxEnemies: 7,
   },
   5: {
-    battleTitle: "5장. 무너진 성벽",
     battleObjective: "목표: 성벽 방어선 붕괴",
     themeLabel: "무너진 성벽",
     themeId: "fortress",
@@ -1964,7 +1959,6 @@ const ACT_ONE_ROUTE_STAGE_CONFIGS = {
     maxEnemies: 8,
   },
   6: {
-    battleTitle: "6장. 보스의 성",
     battleObjective: "목표: 성채 보스 격파",
     themeLabel: "보스의 성",
     themeId: "fortress",
@@ -2719,6 +2713,7 @@ function applyStageEnemyIdentity(unit, stage, index = 0) {
   if (unit.type === "boss") {
     return {
       ...unit,
+      name: getChapterBossName(stageId, unit.name),
       aiType: "boss",
       spriteKey: getStageBossSpriteKey(stage, unit),
       stageEnemyRole: "boss",
@@ -2852,7 +2847,7 @@ function spaceBattleFormations(stage, sourceUnits) {
   return distributeBattleFormations(stage, sourceUnits);
 }
 
-function createActOneRouteBattleStage(stage, deployCount = MAX_DEPLOY_COUNT) {
+function createActOneRouteBattleStage(stage, deployCount = MAX_DEPLOY_COUNT, { rosterOnly = false } = {}) {
   const map = createBattlefieldTerrain(stage.id);
   const config = getActOneRouteStageConfig(stage);
   const occupied = new Set();
@@ -2913,11 +2908,10 @@ function createActOneRouteBattleStage(stage, deployCount = MAX_DEPLOY_COUNT) {
 
   return {
     ...stage,
-    title: config.battleTitle || stage.title,
     objective: '적 지휘관 격파',
     terrainRevision: 3,
     map,
-    units: spaceBattleFormations(
+    units: rosterOnly ? [...stageThemedUnits, ...extraEnemies] : spaceBattleFormations(
       { ...stage, map, terrainRevision: 3 },
       [...stageThemedUnits, ...extraEnemies]
     ),
@@ -3311,9 +3305,9 @@ function createLargeExtraEnemy(stage, index, x, y) {
   };
 }
 
-function expandStageForLargeBattle(stage, deployCount = MAX_DEPLOY_COUNT) {
+function expandStageForLargeBattle(stage, deployCount = MAX_DEPLOY_COUNT, options = {}) {
   if (!stage) return stage;
-  if (isActOneRouteStage(stage)) return createActOneRouteBattleStage(stage, deployCount);
+  if (isActOneRouteStage(stage)) return createActOneRouteBattleStage(stage, deployCount, options);
 
   const baseMap = stage.map || [];
   const largeMap = createBattlefieldTerrain(stage.id);
@@ -3384,7 +3378,7 @@ function expandStageForLargeBattle(stage, deployCount = MAX_DEPLOY_COUNT) {
     map: largeMap,
     terrainRevision: 3,
     objective: hasBoss ? '적 지휘관 격파' : '적 전멸',
-    units: spaceBattleFormations(
+    units: options.rosterOnly ? [...stageThemedUnits, ...extraEnemies] : spaceBattleFormations(
       { ...stage, map: largeMap, terrainRevision: 3 },
       [...stageThemedUnits, ...extraEnemies]
     ),
@@ -6220,10 +6214,11 @@ function getMasteryPlannerSummary(stageMastery, clearedStages) {
 
 
 const getStagePreview = createStagePreviewReader(expandStageForLargeBattle);
+const getStageRoster = createStagePreviewReader((stage, count) => expandStageForLargeBattle(stage, count, { rosterOnly: true }));
 let characterEncounters;
 function getCharacterEncounters() {
   if (!characterEncounters) {
-    const current = stages.flatMap(stage => getStagePreview(stage).units.filter(unit => unit.type !== 'ally').map(unit => ({
+    const current = stages.flatMap(stage => getStageRoster(stage).units.filter(unit => unit.type !== 'ally').map(unit => ({
       key: getEnemySpriteKey(unit), stageId: stage.id, name: unit.name,
     })));
     const currentKeys = new Set(current.map(entry => entry.key));
@@ -6238,7 +6233,7 @@ function getCharacterEncounters() {
 function getStageThreatLevel(stage, deployCount = MAX_DEPLOY_COUNT) {
   if (!stage) return { level: "일반", score: 0, className: "threat-normal" };
 
-  const previewStage = getStagePreview(stage, deployCount);
+  const previewStage = getStageRoster(stage, deployCount);
   const enemies = (previewStage.units || []).filter((unit) => unit.type !== "ally");
   const boss = enemies.find((unit) => unit.type === "boss");
   const reinforcementCount = getReinforcementRounds(stage).length;
@@ -6258,7 +6253,7 @@ function getStageThreatLevel(stage, deployCount = MAX_DEPLOY_COUNT) {
 function getStageEnemySummary(stage, deployCount = MAX_DEPLOY_COUNT) {
   if (!stage) return { total: 0, boss: null, ranged: 0, melee: 0, magic: 0 };
 
-  const previewStage = getStagePreview(stage, deployCount);
+  const previewStage = getStageRoster(stage, deployCount);
   const enemies = (previewStage.units || []).filter((unit) => unit.type !== "ally");
   const boss = enemies.find((unit) => unit.type === "boss");
 
@@ -8287,35 +8282,7 @@ export default function App() {
   const [mapZoom, setMapZoom] = useState("large");
   const actionResolvingRef = useRef(false);
   const victorySettledRef = useRef(false);
-  useEffect(() => {
-    let player;
-    let disposed = false;
-    const theme = getMusicTheme(screen, selectedStage?.id);
-    const enabled = settings.soundOn && settings.musicOn && settings.sfxVolume > 0 && !result;
-    const sync = async (gesture = false) => {
-      if (!settings.soundOn || settings.sfxVolume <= 0 || document.hidden) stopSoundEffects();
-      if (!enabled || document.hidden) { player?.stop(); return; }
-      const ctx = getAudioContext();
-      if (!ctx) return;
-      if (gesture && ctx.state === 'suspended') await ctx.resume().catch(() => {});
-      if (disposed || document.hidden || ctx.state !== 'running' || player) return;
-      player = createMusicPlayer(ctx);
-      player.start(theme, settings.sfxVolume / 100);
-    };
-    const unlock = () => { void sync(true); };
-    const visibility = () => { player?.stop(); player = null; void sync(); };
-    window.addEventListener('pointerdown', unlock);
-    window.addEventListener('keydown', unlock);
-    document.addEventListener('visibilitychange', visibility);
-    void sync();
-    return () => {
-      disposed = true;
-      player?.stop();
-      window.removeEventListener('pointerdown', unlock);
-      window.removeEventListener('keydown', unlock);
-      document.removeEventListener('visibilitychange', visibility);
-    };
-  }, [screen, selectedStage?.id, result, settings.soundOn, settings.musicOn, settings.sfxVolume]);
+  useGameMusic({ screen, stageId: selectedStage?.id, result, settings });
   const [mapVisibility, setMapVisibility] = useState("tactical");
   const [battleCompact, setBattleCompact] = useState(true);
   const [mobileBattlePanelOpen, setMobileBattlePanelOpen] = useState(false);
@@ -9341,9 +9308,10 @@ export default function App() {
       window.removeEventListener("error", handleError);
       window.removeEventListener("unhandledrejection", handleRejection);
     };
-  }, []);
+  }, [screen]);
 
 
+  const performAutoBattleTurn = useEffectEvent(() => commandAutoBattleTurn());
   useEffect(() => {
     if (
       autoBattleEnabled &&
@@ -9352,7 +9320,7 @@ export default function App() {
       !battleInputLocked &&
       units.some(isUnitReady)
     ) {
-      const timer = setTimeout(() => commandAutoBattleTurn(), scaleBattleTime(320, battleSpeedRef.current));
+      const timer = setTimeout(() => performAutoBattleTurn(), scaleBattleTime(320, battleSpeedRef.current));
       return () => clearTimeout(timer);
     }
 
@@ -16415,8 +16383,9 @@ export default function App() {
                       const nodeState = getStageNodeClass(stage, clearedStages, playableStageIds);
                       const nodeType = getStageNodeType(stage);
                       const mission = getStageMissionOrder(stage);
-                      const threat = getStageThreatLevel(stage, MAX_DEPLOY_COUNT);
-                      const enemySummary = getStageEnemySummary(stage, MAX_DEPLOY_COUNT);
+                      const discovered = playableStageIds.includes(stage.id);
+                      const threat = discovered ? getStageThreatLevel(stage, MAX_DEPLOY_COUNT) : { level: '미정찰', className: '' };
+                      const enemySummary = discovered ? getStageEnemySummary(stage, MAX_DEPLOY_COUNT) : null;
                       const recruitId = RECRUIT_BY_STAGE[stage.id];
                       const recruitName = recruitId ? getRecruitName(recruitId) : "";
                       const mastery = stageMastery[String(stage.id)];
@@ -16439,7 +16408,7 @@ export default function App() {
                             </em>
                             <small>
                               {nodeState === 'cleared' ? '재도전 · 경험치 | ' : ''}
-                              위험도 {threat.level} · 적 {enemySummary.total}명
+                              {enemySummary ? `위험도 ${threat.level} · 적 ${enemySummary.total}명` : '미정찰 전장'}
                               {recruitName ? ` · 동료 ${recruitName}` : ""}
                               {getStageNote(stageNotes, stage) ? " · 메모 있음" : ""}
                               {getStageTags(stageNoteTags, stage).length ? ` · 태그 ${getStageTags(stageNoteTags, stage).length}` : ""}

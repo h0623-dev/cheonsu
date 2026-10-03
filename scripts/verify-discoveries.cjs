@@ -28,23 +28,32 @@ async function readSave(page) {
 }
 
 async function saveBattle(page) {
-  await page.locator('.cinematic-stage-actions').getByRole('button', { name: '설정', exact: true }).click();
-  await page.locator('.battle-settings-menu').getByRole('button', { name: '저장 진행 저장', exact: true }).click();
-  await page.locator('.battle-settings-menu').waitFor({ state: 'hidden' });
+  await page.locator('.cinematic-command-bar .prominent-save').click();
   return readSave(page);
 }
 
 async function saveCamp(page) {
-  await page.getByRole('button', { name: '관리', exact: true }).click();
-  await page.getByRole('button', { name: '저장', exact: true }).click();
+  await page.locator('.camp-header .prominent-save').click();
   return readSave(page);
+}
+
+async function openCampGrowth(page) {
+  const management = page.locator('.camp-management');
+  if (!await management.evaluate(element => element.open)) await management.locator(':scope > summary').click();
+  await page.getByRole('tab', { name: '성장', exact: true }).click();
+}
+
+async function openBattleJournal(page) {
+  const showInfo = page.getByRole('button', { name: '정보 표시', exact: true });
+  if (await showInfo.isVisible()) await showInfo.click();
+  await page.getByRole('button', { name: '탐색 기록', exact: true }).click();
 }
 
 async function continueSaved(page, screen = 'battle') {
   await page.reload({ waitUntil: 'domcontentloaded' });
   await page.getByRole('button', { name: '이어하기', exact: true }).click();
   if (screen === 'battle') await page.locator('.world-battlefield .unit-visual-hero').waitFor();
-  else await page.getByRole('button', { name: '성장', exact: true }).waitFor();
+  else await page.locator('.town-hub').waitFor();
 }
 
 async function restore(page, fixture) {
@@ -88,6 +97,18 @@ async function assertModal(page, selector) {
 
 async function bootstrap(page, stageId) {
   await page.getByRole('button', { name: '새 게임', exact: true }).click();
+  const confirm = page.getByRole('button', { name: '새 여정 시작', exact: true });
+  if (await confirm.isVisible()) await confirm.click();
+  if (stageId > 1) {
+    await page.locator('.campaign-header .prominent-save').click();
+    await page.evaluate(({ key, id }) => {
+      const data = JSON.parse(localStorage.getItem(key));
+      data.clearedStages = Array.from({ length: id - 1 }, (_, i) => i + 1);
+      localStorage.setItem(key, JSON.stringify(data));
+    }, { key: SAVE_KEY, id: stageId });
+    await page.reload();
+    await page.getByRole('button', { name: '이어하기', exact: true }).click();
+  }
   await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: new RegExp(`^${stageId}장\\.`) }) }).click();
   await page.getByRole('button', { name: '전투 시작', exact: true }).click();
   await page.getByRole('button', { name: '바로 전투', exact: true }).click();
@@ -173,7 +194,7 @@ async function journalClose(page, test) {
   const before = await saveBattle(page);
   for (const method of ['button', 'header', 'escape', 'backdrop']) {
     test.notes.push(`Journal close: ${method}`);
-    await page.getByRole('button', { name: '탐색 기록', exact: true }).click();
+    await openBattleJournal(page);
     const dialog = await assertModal(page, '.discovery-dialog');
     assert.equal(await dialog.locator('.discovery-journal').count(), 1);
     assert.equal(await page.locator('.cmd-skill').isEnabled(), false, 'Journal locks background commands');
@@ -247,7 +268,7 @@ async function verifyNoDuplicate(page, test, seed, after) {
     assert.deepEqual(heroOf(repeated)[field], heroOf(before)[field], `Revisit must not duplicate ${field}`);
   }
   await assertStablePlacement(page, seed, repeated);
-  await page.getByRole('button', { name: '탐색 기록', exact: true }).click();
+  await openBattleJournal(page);
   const journal = await assertModal(page, '.discovery-dialog');
   assert.equal(await journal.locator('article.claimed').filter({ hasText: seed.entry.title }).count(), 1);
   await snapshot(page, test, 'claimed-journal');
@@ -318,10 +339,8 @@ const scenarios = [
     const target = page.locator('.battle-target-buttons button').filter({ has: page.locator('strong').getByText(enemy.name, { exact: true }) });
     assert.ok(await target.isEnabled(), 'The new range-two technique can target an enemy beyond normal sword range');
     await target.click();
-    const preview = page.locator('.vs-preview-modal');
-    await preview.waitFor();
-    assert.ok((await preview.innerText()).includes(technique.name));
-    await preview.getByRole('button', { name: '스킬 실행', exact: true }).click();
+    await page.locator('.painted-combat-overlay').waitFor();
+    assert.equal(await page.locator('.vs-preview-modal').count(), 0, 'Target selection starts combat directly');
     await page.waitForFunction(() => !document.querySelector('.vs-preview-modal, .painted-combat-overlay') && document.querySelector('.battle-end-turn-float')?.disabled === false, null, { timeout: 25000 });
     const used = await saveBattle(page);
     assert.equal(heroOf(used).acted, true);
@@ -369,7 +388,7 @@ const scenarios = [
     partyHeroOf(camp).level = promotion.requiredLevel - 1;
     const promotionRow = () => page.locator('.promotion-entry').filter({ has: page.locator('.promotion-unit-head strong').filter({ hasText: partyHeroOf(camp).name }) });
     const openPromotion = async () => {
-      await page.getByRole('button', { name: '성장', exact: true }).click();
+      await openCampGrowth(page);
       await page.getByRole('button', { name: '전직', exact: true }).click();
       await page.locator('.promotion-card').waitFor();
       await assertModal(page, '.promotion-dialog');
@@ -423,7 +442,7 @@ const scenarios = [
       assert.deepEqual(partyHeroOf(reloaded), hero, 'Reload must not stack stats or remove the secret class');
       assert.deepEqual(reloaded.exploration, after.exploration, 'Consumed relic must not regenerate from claimed history');
     }
-    await page.getByRole('button', { name: '성장', exact: true }).click();
+    await openCampGrowth(page);
     await page.getByRole('button', { name: '탐색 기록', exact: true }).click();
     await assertModal(page, '.discovery-dialog');
     assert.match(await page.locator('.discovery-count').innerText(), /보유 전직 보물 0/);

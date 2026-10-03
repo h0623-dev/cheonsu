@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Play, Plus, BookOpen, Settings, CircleHelp, ArrowRight, X, UserRound } from 'lucide-react';
 import { PatchTitleStatus } from './PatchUpdates.jsx';
+import accountConfig from '../data/accountConfig.json';
+import { accountConfigured } from '../engine/accountEngine.js';
 
 function NewJourneyDialog({ onConfirm, onClose }) {
   const ref = useRef(null);
@@ -24,7 +26,7 @@ export default function TitleMenu({ version, checkpoint, onNew, onContinue, onOp
         {checkpoint.exists && !saved && <button onClick={() => onOpen('settings', 'save')}><BookOpen size={20} />저장 복구</button>}
         <button className={saved ? 'journey-new' : 'journey-new ux-primary'} aria-label="새 게임" onClick={() => checkpoint.exists ? setConfirm(true) : onNew()}><Plus size={21} />새 게임</button>
         <nav aria-label="메인 메뉴"><button onClick={() => onOpen('library')}><BookOpen size={19} />기록실</button><button onClick={() => onOpen('codex')}><BookOpen size={19} />도감</button><button onClick={() => onOpen('settings')}><Settings size={19} />설정</button><button onClick={onHelp} aria-label="도움말" title="도움말"><CircleHelp size={19}/></button></nav>
-        <button className="account-title-entry" onClick={() => onOpen('settings', 'account')}><UserRound size={18}/>계정 · Google 로그인</button>
+        <button className="account-title-entry" onClick={() => onOpen('settings', 'account')}><UserRound size={18}/>{accountConfigured(accountConfig) ? '계정 · Google 로그인' : '게스트 · 기기 저장'}</button>
       </div>
     </div>
     <footer className="journey-title-footer"><span>v{version}</span><PatchTitleStatus /></footer>

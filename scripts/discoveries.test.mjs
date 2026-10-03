@@ -7,6 +7,7 @@ import { stages } from '../src/data/stages.js';
 import { alignMapToArtwork, isPaintedGround } from '../src/data/battlefieldGround.js';
 import { createBattlefieldTerrain } from '../src/data/stageTerrain.js';
 import { getBattlefieldPlan } from '../src/data/battlefieldPlans.js';
+import { getChapterBossName } from '../src/data/chapterIdentity.js';
 import { distributeBattleFormations } from '../src/engine/formations.js';
 import { DISCOVERIES, DISCOVERY_TECHNIQUES, SECRET_PROMOTIONS } from '../src/data/discoveries.js';
 import {
@@ -50,12 +51,34 @@ const appHelpers = runInNewContext([
   ...['ENEMY_VARIANT_KEYS', 'createRecruitAlly', 'getPromotionTitle', 'promoteAllyUnit'].map(declaration),
   '({ expandStageForLargeBattle, extendMapForPlayableBoard, spaceBattleFormations, createRecruitAlly, promoteAllyUnit })',
 ].join('\n'), {
-  alignMapToArtwork, createBattlefieldTerrain, getBattlefieldPlan, applyEquipmentStats, distributeBattleFormations, getSkillDisplayName,
+  alignMapToArtwork, createBattlefieldTerrain, getBattlefieldPlan, applyEquipmentStats, distributeBattleFormations, getSkillDisplayName, getChapterBossName,
   clone: (value) => JSON.parse(JSON.stringify(value)),
   Math: Object.assign(Object.create(Math), { random: () => { throw new Error('Random map placement'); } }),
 });
 
 const initialParty = getInitialParty();
+
+test('lightweight roster previews match actual units and all 30 battle titles match the campaign', () => {
+  const withoutPosition = units => JSON.parse(JSON.stringify(units.map(({ x: _x, y: _y, ...unit }) => unit)));
+  for (const stage of stages) {
+    const roster = appHelpers.expandStageForLargeBattle(stage, 4, { rosterOnly: true });
+    const actual = appHelpers.expandStageForLargeBattle(stage, 4);
+    assert.equal(actual.title, stage.title);
+    assert.deepEqual(withoutPosition(roster.units), withoutPosition(actual.units));
+  }
+});
+
+test('actual final battles distinguish Garon from the memory echo without changing boss statistics', () => {
+  for (const [id, name] of [[28, '흑천 가론'], [30, '흑야의 잔영']]) {
+    const stage = stages.find(stage => stage.id === id);
+    const before = JSON.stringify(stage);
+    const boss = appHelpers.expandStageForLargeBattle(stage, 4).units.find(unit => unit.type === 'boss');
+    const original = stage.units.find(unit => unit.type === 'boss');
+    assert.equal(boss.name, name);
+    for (const key of ['hp', 'atk', 'def', 'range']) assert.equal(boss[key], original[key]);
+    assert.equal(JSON.stringify(stage), before);
+  }
+});
 const partyIds = [
   'hero', 'bram', 'lina', 'aria', 'leon', 'sera', 'noah', 'yuna', 'rakan',
   'miho', 'teo', 'irene', 'kaz', 'ella', 'jin', 'luka', 'baekho',

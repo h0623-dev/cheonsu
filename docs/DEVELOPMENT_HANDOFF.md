@@ -2,7 +2,8 @@
 
 ## 현재 상태
 
-- 버전 1.99.152, Android 351, API 36, 패키지 com.cheonsu.game.
+- 버전 1.99.153, Android 352, API 36, 패키지 com.cheonsu.game.
+- 종합 QA와 출시 잔여 과제: [QA_IMPROVEMENT_1.99.153.md](QA_IMPROVEMENT_1.99.153.md). `chapterIdentity.js`는 새 전투 보스의 이야기상 이름을 정합니다. 기존 전투 저장은 재생성하지 않습니다. 메뉴의 적 명단은 `getStageRoster` 경량 경로를 쓰고 실제 배치만 `getStagePreview`로 계산합니다. BGM은 `musicScore.js`의 10곡, `orchestraSamples.js`의 로컬 샘플과 `useGameMusic.js`의 화면 전환 수명 주기를 사용합니다. 샘플 원본/해시/라이선스는 `public/audio/orchestra-v1`에 있습니다. Firebase 미연결 UI는 게스트·기기 저장으로 표시합니다.
 - `duelPerformance.js`/`DuelImpacts.jsx`로 41종의 준비·타격·복귀와 파편/충격파/피격을 연결했습니다. 프레임별 높이 맞춤 대신 캐릭터별 고정 몸 크기와 발 기준을 사용합니다. `CharacterCodex`는 영입/클리어 기록을 읽어 41종을 컬러/흑백으로 표시합니다. `RECRUIT_BY_STAGE`는 `characterCollection.js`에서 공통 참조합니다. [1.99.152 전투/도감](IMPACT_CODEX_1.99.152.md).
 - 전투 예측창 없이 `openBattle`에서 `resolveBattle`로 직접 연결합니다. 타이틀/설정의 계정 메뉴와 Firebase 인증 어댑터를 추가했지만 실제 Firebase 프로젝트는 미연결입니다. 기기 저장은 계정과 분리하여 보존합니다. [Google/Play 연결 준비](GOOGLE_PLAY_1.99.151.md). Play AAB 제출 빌드는 `npm run android:aab`, 미서명 기술 검증은 `npm run android:aab:check`, 누락 점검은 `npm run release:check`입니다.
 - 1.99.150에서 고정 기준 1.99.148에 원복한 뒤 이번 변경을 적용했습니다. 전투는 `CombatScene`/`useDuelAnimation`/`DuelEffects`를 유지합니다. 1.99.149 전장 연출은 제거된 상태입니다. [원복 기록](ROLLBACK_1.99.150.md), [고정 원복 기준](ROLLBACK_BASELINE.md).
@@ -38,7 +39,7 @@
 ## 새 PC 준비
 
 1. Node.js 24 설치. macOS/Linux에서 nvm을 사용하면 `nvm install`과 `nvm use`를 실행합니다.
-2. `cheonsu_development_1.99.152.zip`을 원하는 폴더에 풉니다.
+2. `cheonsu_development_1.99.153.zip`을 원하는 폴더에 풉니다.
 3. 내부 `cheonsu` 폴더에서 `npm ci`, `npm run setup`, `npm run dev`를 실행합니다.
 4. Vite가 출력하는 로컬 주소를 엽니다. 사용 중인 포트가 있으면 다른 포트를 사용합니다.
 
@@ -46,7 +47,7 @@
 
 ## Git으로 PC 간 이동
 
-저장소 원격 주소는 `https://github.com/h0623-dev/cheonsu.git`입니다. 1.99.152 소스는 `main`, 배포 파일은 `v1.99.152` 릴리스, 자동 패치 안내는 `updates` 브랜치에서 관리합니다. 원복 전 1.99.149는 Git 이력과 해당 릴리스에 보존합니다.
+저장소 원격 주소는 `https://github.com/h0623-dev/cheonsu.git`입니다. 1.99.153 소스는 `main`, 배포 파일은 `v1.99.153` 릴리스, 자동 패치 안내는 `updates` 브랜치에서 관리합니다. 원복 전 1.99.149는 Git 이력과 해당 릴리스에 보존합니다.
 
 ```sh
 git clone https://github.com/h0623-dev/cheonsu.git

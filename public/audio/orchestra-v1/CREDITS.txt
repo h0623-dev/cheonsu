@@ -1,0 +1,15 @@
+천수 관현악 음색 출처
+
+작곡·편곡: 천수 프로젝트의 오리지널 악보(src/data/musicScore.js).
+악기 원본: FluidR3 General MIDI SoundFont, Frank Wen 및 기여자.
+MP3 샘플 렌더링: Benjamin Gleitzman, MIDI.js Soundfonts.
+출처: https://github.com/gleitz/midi-js-soundfonts
+원본: https://github.com/gleitz/midi-js-soundfonts/tree/gh-pages/FluidR3_GM
+악기 샘플 라이선스: Creative Commons Attribution 3.0 Unported (CC BY 3.0)
+라이선스: https://creativecommons.org/licenses/by/3.0/
+
+변경 사항: 8개 악기의 음 9개씩을 추출하여 로컬에 포함했습니다.
+재생 시 피치 조정, 음량·엔벌로프·공간감 처리 및 새로운 악보 편곡에 사용합니다.
+원 제작자가 천수 프로젝트를 보증하거나 후원한다는 뜻은 아닙니다.
+각 파일의 출처 및 SHA-256은 manifest.json에 기록되어 있습니다.
+인물 음성, 기존 상용 게임의 음악 또는 멜로디를 복제하지 않았습니다.

@@ -22,10 +22,10 @@ export default function AccountPanel() {
   const disabled = account.busy || !account.ready;
   return <section className="account-panel" aria-label="계정 관리" aria-busy={account.busy}>
     <h2>계정</h2>
-    <div className="account-identity"><UserRound size={32}/><div><strong>{account.user?.displayName || '게스트'}</strong><span>{account.user?.email || '기기에 저장된 여정'}</span></div><span className="account-state">{account.user ? '로그인됨' : '로그아웃'}</span></div>
-    {!account.user ? <button className="google-sign-in" disabled={disabled || !account.available} onClick={() => accountManager.run('signIn')}><img src="/brand/google-g.png" width="20" height="20" alt=""/>Google로 로그인</button> :
-      <button disabled={disabled} onClick={() => accountManager.run('signOut')}><LogOut size={18}/>로그아웃</button>}
-    {!account.available && <p className="ux-status">Google 로그인 연결 준비 중</p>}
+    <div className="account-identity"><UserRound size={32}/><div><strong>{account.user?.displayName || '게스트'}</strong><span>{account.user?.email || '기기에 저장된 여정'}</span></div><span className="account-state">{account.user ? '로그인됨' : '기기 저장'}</span></div>
+    {!account.user && account.available ? <button className="google-sign-in" disabled={disabled} onClick={() => accountManager.run('signIn')}><img src="/brand/google-g.png" width="20" height="20" alt=""/>Google로 로그인</button> : account.user ?
+      <button disabled={disabled} onClick={() => accountManager.run('signOut')}><LogOut size={18}/>로그아웃</button> : null}
+    {!account.available && <p className="ux-status">Google 로그인은 아직 지원하지 않습니다. 현재는 게스트로 플레이할 수 있습니다.</p>}
     <p className="account-local-note"><ShieldCheck size={18}/><span>플레이 기록은 이 기기에 저장됩니다. 로그인만으로 다른 기기에 동기화되지는 않습니다.</span></p>
     <p className="ux-status" role="status">{account.message}</p>
     <div className="account-legal"><a href={config.privacyUrl || '/legal/privacy.html'} target="_blank" rel="noopener noreferrer">개인정보 처리방침 <ExternalLink size={14}/></a><a href={config.deletionUrl || '/legal/account-deletion.html'} target="_blank" rel="noopener noreferrer">계정 삭제 안내 <ExternalLink size={14}/></a></div>
