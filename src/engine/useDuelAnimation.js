@@ -1,4 +1,5 @@
 import { useLayoutEffect } from 'react';
+import { getImpactParticle } from '../data/duelPerformance.js';
 
 const clamp=value=>Math.max(0,Math.min(1,value));
 export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,finish,selfSupport}){
@@ -12,13 +13,17 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
       const elapsed=animations[0]?.currentTime||0,paused=animations[0]?.playState==='paused';stop();
       root.classList.toggle('duel-motion-disabled',!enabled||media.matches);
       if(!enabled||media.matches)return;
+      const separation = defender ? defender.offsetLeft - attacker.offsetLeft : 0;
+      const spacing = plan.weapon === 'thrust' || plan.weapon === 'whip' ? .65 : .51;
+      root.style.setProperty('--combat-reach', `${Math.max(0, separation - attacker.offsetWidth * spacing)}px`);
       const animate=(element,frames,options={})=>{
         if(!element)return;
         const animation=element.animate([...frames].sort((a,b)=>a.offset-b.offset),{duration,fill:'both',easing:'linear',...options});
         animation.currentTime=elapsed;if(paused)animation.pause();animations.push(animation);
       };
       animate(attacker,plan.actor.map(([offset,x,y])=>({offset,transform:`translateX(calc(var(--combat-reach) * ${x})) translateY(${y}%)`,easing:'cubic-bezier(.3,.65,.4,1)'})));
-      animate(attacker.querySelector('.fighter-body'),plan.actor.map(([offset,,,angle])=>({offset,transform:`rotate(${angle}deg)`,easing:'ease-in-out'})));
+      animate(attacker.querySelector('.fighter-body'),plan.body.map(([offset,angle,sx,sy])=>({offset,transform:`rotate(${angle}deg) scale(${sx},${sy})`,easing:'cubic-bezier(.22,.65,.35,1)'})));
+      animate(attacker.querySelector('.fighter-shadow'),plan.actor.map(([offset,,height])=>({offset,opacity:height < -3 ? .45 : .85,transform:`scale(${height < -3 ? .76 : 1.04},${height < -3 ? .7 : 1})`})));
       for(const image of attacker.querySelectorAll('.fighter-frame')){
         const pose=image.dataset.pose;
         animate(image,[...plan.poses.map(([offset,active])=>({offset,opacity:pose===active?1:0,easing:'steps(1,end)'})),{offset:1,opacity:pose==='ready'?1:0}]);
@@ -31,6 +36,17 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
           recoil=[{offset:0,transform:'none'},...plan.contacts.flatMap(at=>[{offset:at-.008,transform:'none'},{offset:at+.012,transform:`translateX(${plan.skill?7:4}%) rotate(3deg)`},{offset:at+.035,transform:`translateX(${plan.skill?7:4}%) rotate(3deg)`}]),{offset:.87,transform:'none'},{offset:1,transform:'none'}];
         }
         animate(defender,recoil);
+        if(!support&&!miss){
+          const body=[{offset:0,transform:'none'},...plan.contacts.flatMap(at=>[
+            {offset:at-.025,transform:'rotate(-2deg) scale(1.01,.99)'},
+            {offset:at+.008,transform:`rotate(${plan.skill?8:5}deg) scale(.99,.97)`},
+            {offset:at+.03,transform:`rotate(${plan.skill?8:5}deg) scale(.99,.97)`},
+            {offset:at+.065,transform:'rotate(2deg) scale(1.01,.99)'}]),{offset:.89,transform:'none'},{offset:1,transform:'none'}];
+          if(!finish)animate(defender.querySelector('.fighter-body'),body);
+          animate(defender.querySelector('.fighter-poses'),[{offset:0,filter:'brightness(1)'},...plan.contacts.flatMap(at=>[
+            {offset:at-.001,filter:'brightness(1)'},{offset:at+.008,filter:'brightness(1.65) saturate(.5)'},
+            {offset:at+.04,filter:'brightness(1)'}]),{offset:1,filter:'brightness(1)'}]);
+        }
         for(const image of defender.querySelectorAll('.fighter-frame')){
           const pose=image.dataset.pose;
           const active=support?'ready':miss?'evade':'recoil';
@@ -52,6 +68,40 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
       const ground=arena.clientHeight-parseFloat(getComputedStyle(target).bottom);
       const ay=arena.clientHeight-parseFloat(getComputedStyle(attacker).bottom)-attacker.offsetWidth*.37;
       const dy=ground-target.offsetWidth*.37;
+      for(const [index,impact]of plan.impacts.entries()){
+        const hit=root.querySelector(`[data-duel-impact="${index}"]`);
+        hit.style.visibility=miss?'hidden':'';
+        hit.style.left=`${d}px`;hit.style.top=`${dy}px`;
+        hit.style.setProperty('--hit-size',`${Math.min(95,attacker.offsetWidth*.4)*impact.strength}px`);
+        const at=impact.at;
+        animate(hit,[{offset:0,opacity:0},{offset:at,opacity:0},{offset:at+.003,opacity:1},{offset:at+.17,opacity:1},{offset:at+.20,opacity:0},{offset:1,opacity:0}]);
+        animate(hit.querySelector('.hit-core'),[{offset:0,transform:'translate(-50%,-50%) scale(.1)',opacity:0},
+          {offset:at,transform:'translate(-50%,-50%) scale(.1)',opacity:1},{offset:at+.015,transform:'translate(-50%,-50%) scale(1.1)',opacity:1},
+          {offset:at+.08,transform:'translate(-50%,-50%) scale(.65)',opacity:0},{offset:1,opacity:0}]);
+        animate(hit.querySelector('.hit-pressure'),[{offset:0,transform:'translate(-50%,-50%) scale(.2)',opacity:0},
+          {offset:at,transform:'translate(-50%,-50%) scale(.2)',opacity:.8},{offset:at+.12,transform:'translate(-50%,-50%) scale(1.75)',opacity:0},{offset:1,opacity:0}]);
+        for(const [particle,node]of [...hit.querySelectorAll('.hit-particle')].entries()){
+          const p=getImpactParticle(impact,particle),start=at+p.delay;
+          const unit=Math.min(1.5,attacker.offsetWidth/170);
+          const transform=(x,y,scale)=>`translate(${x*unit}px,${y*unit}px) rotate(${p.angle}deg) scale(${scale})`;
+          animate(node,[{offset:0,opacity:0,transform:transform(0,0,.5)},{offset:start,opacity:1,transform:transform(0,0,.5)},
+            {offset:start+.055,opacity:1,transform:transform(p.x*.7,p.y*.7,1)},
+            {offset:p.end,opacity:0,transform:transform(p.x,p.y+p.gravity,.3)},{offset:1,opacity:0}]);
+        }
+        animate(hit.querySelector('.hit-chain'),[{offset:0,opacity:0,transform:'translate(-50%,-100%)'},
+          {offset:at,opacity:0,transform:'translate(-50%,-100%)'},{offset:at+.025,opacity:1,transform:'translate(-50%,-140%)'},
+          {offset:at+.12,opacity:0,transform:'translate(-50%,-180%)'},{offset:1,opacity:0}]);
+      }
+      for(const [index,at]of plan.footfalls.entries()){
+        const dust=root.querySelector(`[data-footfall="${index}"]`);
+        const segment=plan.actor.findIndex(([t])=>t>=at),before=plan.actor[Math.max(0,segment-1)],after=plan.actor[Math.max(0,segment)];
+        const t=after[0]===before[0]?0:(at-before[0])/(after[0]-before[0]);
+        const x=before[1]+(after[1]-before[1])*t;
+        dust.style.left=`${a+x*parseFloat(root.style.getPropertyValue('--combat-reach'))}px`;
+        dust.style.top=`${arena.clientHeight-parseFloat(getComputedStyle(attacker).bottom)}px`;
+        animate(dust,[{offset:0,opacity:0,transform:'scale(.35)'},{offset:at,opacity:0,transform:'scale(.35)'},{offset:at+.004,opacity:.4,transform:'scale(.35)'},
+          {offset:Math.min(.99,at+.085),opacity:0,transform:'translateY(-7px) scale(1.5)'},{offset:1,opacity:0}]);
+      }
       const point=([fraction,y])=>[a+(d-a)*fraction,ay+(dy-ay)*fraction+y*arena.clientHeight];
       for(const [index,effect]of plan.effects.entries()){
         const element=root.querySelector(`[data-duel-effect="${index}"]`);

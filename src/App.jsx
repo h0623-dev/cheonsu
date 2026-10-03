@@ -21,6 +21,8 @@ import TitleMenu from './components/TitleMenu.jsx';
 import PlayerSettings from './components/PlayerSettings.jsx';
 import CompanyRoster from './components/CompanyRoster.jsx';
 import JourneyLibrary from './components/JourneyLibrary.jsx';
+import CharacterCodex from './components/CharacterCodex.jsx';
+import { RECRUIT_BY_STAGE } from './data/characterCollection.js';
 import { readMenuCheckpoint, canReplayStory, getNextChapter } from './engine/playerExperience.js';
 import { getCharacterProfile } from './data/characterProfiles.js';
 import { getChapterBrief } from './data/chapterBriefs.js';
@@ -94,7 +96,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.151";
+const SAVE_VERSION = "1.99.152";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -982,21 +984,6 @@ function getCodexEntries({ party, clearedStages, settings }) {
   ];
 
   return [...partyEntries, ...stageEntries, ...systemEntries];
-}
-
-function getCodexCategories(entries) {
-  return ["전체", ...Array.from(new Set((entries || []).map((entry) => entry.category)))];
-}
-
-function filterCodexEntries(entries, category, query) {
-  const q = String(query || "").trim().toLowerCase();
-
-  return (entries || []).filter((entry) => {
-    const categoryOk = category === "전체" || entry.category === category;
-    const queryOk = !q || `${entry.title} ${entry.subtitle} ${entry.desc} ${entry.category}`.toLowerCase().includes(q);
-
-    return categoryOk && queryOk;
-  });
 }
 
 
@@ -6233,6 +6220,20 @@ function getMasteryPlannerSummary(stageMastery, clearedStages) {
 
 
 const getStagePreview = createStagePreviewReader(expandStageForLargeBattle);
+let characterEncounters;
+function getCharacterEncounters() {
+  if (!characterEncounters) {
+    const current = stages.flatMap(stage => getStagePreview(stage).units.filter(unit => unit.type !== 'ally').map(unit => ({
+      key: getEnemySpriteKey(unit), stageId: stage.id, name: unit.name,
+    })));
+    const currentKeys = new Set(current.map(entry => entry.key));
+    const archived = stages.flatMap(stage => stage.units.filter(unit => unit.type !== 'ally').map(unit => ({
+      key: getEnemySpriteKey(unit), stageId: stage.id, name: unit.name, archived: true,
+    }))).filter(entry => !currentKeys.has(entry.key));
+    characterEncounters = [...current, ...archived];
+  }
+  return characterEncounters;
+}
 
 function getStageThreatLevel(stage, deployCount = MAX_DEPLOY_COUNT) {
   if (!stage) return { level: "일반", score: 0, className: "threat-normal" };
@@ -6670,22 +6671,6 @@ function getDeploySlotKey(slot) {
   return `cheonsu_deploy_preset_slot_${slot}_v1`;
 }
 
-
-const RECRUIT_BY_STAGE = {
-  2: "leon",
-  4: "sera",
-  6: "noah",
-  8: "yuna",
-  10: "rakan",
-  12: "miho",
-  14: "teo",
-  16: "irene",
-  18: "kaz",
-  20: "ella",
-  22: "jin",
-  24: "luka",
-  26: "baekho",
-};
 
 function createRecruitAlly(id) {
   const recruits = {
@@ -8197,8 +8182,6 @@ export default function App() {
   const [campFacility, setCampFacility] = useState(null);
   const [campTab, setCampTab] = useState("party");
   const [tutorialOpen, setTutorialOpen] = useState(false);
-  const [codexCategory, setCodexCategory] = useState("전체");
-  const [codexQuery, setCodexQuery] = useState("");
   const [selectedPlayerTitle, setSelectedPlayerTitle] = useState("rookie");
   const [selectedProfileFrame, setSelectedProfileFrame] = useState("classic");
   const [tutorialGuideId, setTutorialGuideId] = useState("deploy");
@@ -8729,8 +8712,6 @@ export default function App() {
   const browsingParty = sessionStarted ? party : menuCheckpoint.data?.party || party;
   const browsingCleared = sessionStarted ? clearedStages : menuCheckpoint.data?.clearedStages || [];
   const codexEntries = getCodexEntries({ party: browsingParty, clearedStages: browsingCleared, settings });
-  const codexCategories = getCodexCategories(codexEntries);
-  const visibleCodexEntries = filterCodexEntries(codexEntries, codexCategory, codexQuery);
   const unlockedCodexCount = codexEntries.filter((entry) => entry.unlocked).length;
   const profileContext = {
     clearedStages,
@@ -14545,63 +14526,15 @@ export default function App() {
           <div className="profile-actions">
             <button onClick={togglePhotoMode}>포토 모드</button>
             <button onClick={() => setScreen("records")}>기록 보기</button>
-            <button onClick={() => setScreen("codex")}>도감 보기</button>
+            <button onClick={() => openUtility("codex")}>도감 보기</button>
             <button onClick={() => setScreen("analytics")}>플레이테스트</button>
             <button onClick={() => setScreen("campaign")}>월드맵</button>
           </div>
         </div>
       )}
 
-      {screen === "codex" && (
-        <div className="codex-screen">
-          <div className="screen-panel-header">
-            <div>
-              <div className="screen-kicker">Cheonsu Codex</div>
-              <h1>천수 도감</h1>
-              <span className="settings-version-label">해금 {unlockedCodexCount} / {codexEntries.length}</span>
-            </div>
-            <div style={{ display: "flex", gap: "8px" }}>
-              <button className="back-btn photo-toggle-btn" onClick={togglePhotoMode}>포토</button>
-              <button className="back-btn" onClick={closeUtility}>뒤로</button>
-            </div>
-          </div>
-
-          <div className="codex-search-card">
-            <input
-              value={codexQuery}
-              onChange={(event) => setCodexQuery(event.target.value)}
-              placeholder="동료, 스테이지, 시스템을 검색하세요"
-            />
-            <div className="codex-category-row">
-              {codexCategories.map((category) => (
-                <button
-                  key={category}
-                  className={codexCategory === category ? "selected" : ""}
-                  onClick={() => setCodexCategory(category)}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="codex-grid">
-            {visibleCodexEntries.map((entry) => (
-              <div key={entry.id} className={`codex-card ${entry.unlocked ? "unlocked" : "locked"}`}>
-                <div className="codex-icon">{entry.unlocked && entry.portrait ? <img src={entry.portrait} alt="" /> : entry.unlocked ? <BookOpen size={24} /> : '?'}</div>
-                <div>
-                  <span>{entry.category}</span>
-                  <strong>{entry.unlocked ? entry.title : "미해금 항목"}</strong>
-                  <em>{entry.unlocked ? entry.subtitle : "진행을 통해 해금됩니다."}</em>
-                  <p>{entry.unlocked ? entry.desc : "월드맵을 진행하거나 동료를 합류시키면 상세 정보가 열립니다."}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {!visibleCodexEntries.length && <div className="codex-empty">검색 결과가 없습니다.</div>}
-        </div>
-      )}
+      {screen === "codex" && <CharacterCodex party={browsingParty} clearedStages={browsingCleared}
+        encounters={getCharacterEncounters()} records={codexEntries.filter(entry => entry.category !== '동료')} onBack={closeUtility} onPhoto={togglePhotoMode}/>}
 
       {screen === "strategyArchive" && (
         <div className="strategy-archive-screen">
@@ -17162,7 +17095,7 @@ export default function App() {
               <div className="camp-action-grid">
                 <button className="camp-btn" onClick={saveGame}>저장</button>
                 <button className="camp-btn" onClick={() => setScreen("records")}>기록</button>
-                <button className="camp-btn" onClick={() => setScreen("codex")}>도감</button>
+                <button className="camp-btn" onClick={() => openUtility("codex")}>도감</button>
                 <button className="camp-btn" onClick={() => setScreen("profile")}>프로필</button>
                 <button className="camp-btn" onClick={() => setScreen("gallery")}>갤러리</button>
                 <button className="camp-btn" onClick={() => setScreen("hall")}>명예의 전당</button>

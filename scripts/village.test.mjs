@@ -79,12 +79,14 @@ test('all village facilities are connected by walkable consecutive steps', () =>
   assert.deepEqual(getTownPath(TOWN_ENTRANCE, { x: 0, y: 0 }), []);
   assert.deepEqual(getTownPath(TOWN_ENTRANCE, { x: -1, y: 12 }), []);
 });
-test('every combat pose shares a visible-height and foot baseline across allies, enemies and bosses', () => {
+test('combat poses keep a stable body scale and foot baseline without shrinking raised weapons', () => {
   for (const key of combatUnitIds) for (const pose of combatMotionPoses) {
     const frame = metrics[key][pose]; const style = getCombatFrameStyle(key, pose);
     const scale = style['--combat-sprite-scale'];
-    const height = (frame.bottom - frame.top + 1) / frame.height * scale;
+    const reference = metrics[key].recover;
+    const height = (reference.bottom - reference.top + 1) / reference.height * scale;
     assert.ok(Math.abs(height - (key === 'wolf' ? .45 : .703125)) < .00001, `${key}/${pose}`);
+    assert.equal(scale, getCombatFrameStyle(key, 'recover')['--combat-sprite-scale'], `${key}/${pose}: stable body`);
     const foot = .9375 + ((frame.bottom + 1) / frame.height - .9375) * scale + parseFloat(style['--combat-foot-offset']) / 100;
     assert.ok(Math.abs(foot - .9375) < .00001, `${key}/${pose}: baseline`);
   }

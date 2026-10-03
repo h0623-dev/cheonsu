@@ -1,0 +1,72 @@
+.app.world-art-app .codex-screen.character-codex { padding: max(20px,env(safe-area-inset-top),var(--native-safe-top,0px)) max(16px,env(safe-area-inset-right),var(--native-safe-right,0px)) max(28px,env(safe-area-inset-bottom),var(--native-safe-bottom,0px)) max(16px,env(safe-area-inset-left),var(--native-safe-left,0px)) !important; background:#182824 !important; }
+.character-codex { font-family:'Malgun Gothic',system-ui,sans-serif; letter-spacing:0; }
+.character-codex .ux-page-header h1 { font-size:25px; }
+.collection-header-actions { display:flex; gap:6px; flex:none; }
+.app.world-art-app .character-codex .collection-header-actions button { width:44px; height:44px; min-width:44px; padding:0; }
+.collection-tabs { display:flex; gap:8px; border-bottom:1px solid #50645c; padding-bottom:12px; margin-block:20px 0; }
+.app.world-art-app .character-codex .collection-tabs button { flex:1; max-width:160px; background:transparent !important; border-color:transparent !important; }
+.app.world-art-app .character-codex .collection-tabs button[aria-pressed=true] { color:#fff1b8 !important; border-bottom-color:#e0c483 !important; border-radius:0 !important; }
+.collection-progress { display:flex; gap:20px; align-items:center; padding-block:20px; }
+.collection-progress > div { display:grid; gap:2px; flex-shrink:0; }
+.collection-progress strong { font-size:30px; color:#f6f3dd; line-height:1.2; }
+.collection-progress strong small { font-size:16px; color:#a8b8af; }
+.collection-progress span { font-size:12px; color:#bdd0c6; }
+.collection-progress progress { flex:1; width:40px; height:5px; border:0; appearance:none; background:#3c4b44; border-radius:0; accent-color:#d5bf7e; }
+.collection-progress progress::-webkit-progress-bar { background:#3c4b44; }
+.collection-progress progress::-webkit-progress-value { background:#d5bf7e; }
+.collection-filters { display:flex; gap:10px; margin-block:16px 20px; }
+.collection-search { display:flex; align-items:center; gap:8px; flex:1; min-width:0; padding:0 12px; background:#213630; border:1px solid #52695e; border-radius:5px; color:#b8cdc4; }
+.app.world-art-app .character-codex .collection-search input { width:100%; min-width:0; background:transparent !important; border:0 !important; box-shadow:none; color:#f0f4e9; font:inherit; font-size:14px; padding:12px 0; outline-offset:2px; }
+.collection-search input::placeholder { color:#adc0b6; }
+.app.world-art-app .character-codex .collection-search button { flex:none; padding:0; min-height:34px; width:34px; background:none !important; border:0 !important; }
+.collection-filters select { flex:none; max-width:130px; padding:8px; font:inherit; font-size:13px; color:#e8efe8; border:1px solid #52695e; border-radius:5px; background:#263b34; }
+.collection-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px; }
+.app.world-art-app .character-codex button.collection-card { display:block; position:relative; padding:0; overflow:hidden; text-align:left; border:1px solid #5f7566 !important; background:#293d35 !important; border-radius:7px !important; }
+.app.world-art-app .character-codex button.collection-card.uncollected { background:#28312f !important; border-color:#47534e !important; }
+.app.world-art-app .character-codex button.collection-card:hover { border-color:#e4ca89 !important; }
+.collection-number,.collection-mark { position:absolute; top:10px; z-index:1; font-size:12px; color:#e8d59f; }
+.collection-number { left:10px; font-variant-numeric:tabular-nums; }
+.collection-mark { right:10px; display:grid; place-items:center; width:24px; height:24px; background:#182824cc; border-radius:50%; }
+.uncollected :is(.collection-number,.collection-mark) { color:#b0bcb6; }
+.collection-art { height:192px; display:grid; place-items:center; overflow:hidden; background:#30483f; }
+.uncollected .collection-art { background:#313a36; }
+.collection-art img { display:block; width:100%; height:100%; object-fit:contain; }
+.collection-monochrome { filter:grayscale(1) brightness(.72) !important; }
+.collection-caption { display:grid; gap:4px; border-top:1px solid #56685f; padding:11px 12px 12px; min-height:91px; }
+.collection-caption strong { color:#f5f0d7; font-size:17px; line-height:1.3; overflow-wrap:anywhere; }
+.collection-caption small { color:#bed1c5; font-size:11px; }
+.collection-caption > span { color:#e4ce94; font-size:11px; }
+.uncollected .collection-caption > span { color:#a6b5ae; }
+.collection-empty { padding-block:48px; text-align:center; color:#becdc4; }
+.collection-records article { display:flex; align-items:flex-start; gap:16px; padding:20px 0; border-bottom:1px solid #4a6055; }
+.collection-records article > div { min-width:0; }
+.collection-records h2 { font-size:17px; margin:5px 0; color:#ececdb; }
+.collection-records p { margin:8px 0 0; color:#c2d0c6; font-size:14px; line-height:1.6; }
+.character-detail-dialog { --detail-top:max(16px,env(safe-area-inset-top),var(--native-safe-top,0px)); --detail-bottom:max(16px,env(safe-area-inset-bottom),var(--native-safe-bottom,0px)); position:fixed; inset:var(--detail-top) max(12px,var(--native-safe-right,0px)) var(--detail-bottom) max(12px,var(--native-safe-left,0px)); margin:auto; padding:0; width:min(620px,calc(100vw - 32px)); max-width:calc(100vw - 32px - var(--native-safe-left,0px) - var(--native-safe-right,0px)); max-height:calc(100dvh - var(--detail-top) - var(--detail-bottom)); border:1px solid #90a28a; border-radius:8px; color:#f1f2e1; background:#1e3029; box-shadow:0 20px 80px #081810b3; font-family:'Malgun Gothic',system-ui,sans-serif; }
+.character-detail-dialog[open] { display:flex; flex-direction:column; }
+.character-detail-dialog::backdrop { background:#081510bf; }
+.character-detail-dialog :is(header,footer) { display:flex; flex:none; align-items:center; justify-content:space-between; gap:12px; padding:10px 16px; background:#283e33; }
+.character-detail-dialog header { border-bottom:1px solid #5d735f; }
+.character-detail-dialog footer { border-top:1px solid #5d735f; }
+.character-detail-dialog header span { font-size:13px; color:#dacd9c; }
+.character-detail-dialog button { width:44px; height:44px; min-width:44px; padding:0; display:grid; place-items:center; border:1px solid #809785; border-radius:5px; background:#385244; color:#ecf4e9; cursor:pointer; }
+.character-detail-dialog button:disabled { opacity:.3; cursor:default; }
+.character-detail-dialog button:focus-visible { outline:2px solid #f0d38c; outline-offset:2px; }
+.character-detail-scroll { padding:16px 24px 24px; min-height:0; overflow-y:auto; overscroll-behavior:contain; }
+.character-detail-identity { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; gap:12px; }
+.character-detail-identity > img { width:100%; height:245px; object-fit:contain; }
+.character-detail-identity h2 { margin:8px 0; color:#fff0c6; font-size:27px; overflow-wrap:anywhere; }
+.character-detail-identity small { color:#bcd2c3; font-size:13px; }
+.character-detail-identity p { font-size:14px; color:#cbd5c7; }
+.collection-state { display:inline-flex; align-items:center; gap:5px; font-size:12px; color:#dbc894; }
+.collection-condition { border-block:1px solid #506354; padding:12px 0; margin:0; font-size:13px; line-height:1.5; color:#d9d7b8; }
+.character-detail-dialog section { margin-top:20px; }
+.character-detail-dialog h3 { display:flex; align-items:center; gap:7px; font-size:15px; margin:0 0 12px; }
+.character-detail-story p { font-size:14px; line-height:1.8; color:#c8d5ca; white-space:pre-line; margin:8px 0; }
+.character-detail-skills > div { padding:13px 0; border-top:1px solid #455c4d; }
+.character-detail-skills strong { font-size:14px; color:#ecdbac; }
+.character-detail-skills small { margin-left:12px; color:#b7ccbe; font-size:11px; }
+.character-detail-skills p { font-size:13px; color:#c7d3c8; margin:8px 0 0; line-height:1.6; }
+@media(max-width:600px) { .collection-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } .collection-art { height:162px; } .collection-caption { min-height:86px; padding:10px; } .collection-caption strong { font-size:16px; } .collection-tabs { gap:0; } .app.world-art-app .character-codex .collection-tabs button { padding:9px 5px; font-size:13px; } .character-detail-scroll { padding:10px 16px 20px; } .character-detail-identity > img { height:190px; } .character-detail-identity h2 { font-size:23px; } }
+@media(max-width:360px) { .collection-art { height:138px; } .collection-filters { gap:6px; } .collection-filters select { max-width:103px; } .character-detail-identity > img { height:160px; } }
+@media(max-height:500px) and (orientation:landscape) { .character-detail-identity > img { height:160px; } .character-detail-identity { grid-template-columns:160px minmax(0,1fr); } }

@@ -23,7 +23,7 @@ export default function TitleMenu({ version, checkpoint, onNew, onContinue, onOp
         {saved && <button className="journey-resume ux-primary" aria-label="이어하기" onClick={onContinue}><Play size={23} /><span><strong>이어하기</strong><small>{saved.selectedStage?.title || '원정 준비'} · {saved.clearedStages.length}/30장 완료</small></span><ArrowRight size={21} /></button>}
         {checkpoint.exists && !saved && <button onClick={() => onOpen('settings', 'save')}><BookOpen size={20} />저장 복구</button>}
         <button className={saved ? 'journey-new' : 'journey-new ux-primary'} aria-label="새 게임" onClick={() => checkpoint.exists ? setConfirm(true) : onNew()}><Plus size={21} />새 게임</button>
-        <nav aria-label="메인 메뉴"><button onClick={() => onOpen('library')}><BookOpen size={19} />기록실</button><button onClick={() => onOpen('settings')}><Settings size={19} />설정</button><button onClick={onHelp}><CircleHelp size={19} />도움말</button></nav>
+        <nav aria-label="메인 메뉴"><button onClick={() => onOpen('library')}><BookOpen size={19} />기록실</button><button onClick={() => onOpen('codex')}><BookOpen size={19} />도감</button><button onClick={() => onOpen('settings')}><Settings size={19} />설정</button><button onClick={onHelp} aria-label="도움말" title="도움말"><CircleHelp size={19}/></button></nav>
         <button className="account-title-entry" onClick={() => onOpen('settings', 'account')}><UserRound size={18}/>계정 · Google 로그인</button>
       </div>
     </div>

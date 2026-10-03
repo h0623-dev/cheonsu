@@ -4,6 +4,7 @@ import mapManifest from '../../public/art/map-sprites-v4/manifest.json' with { t
 import combatFrameMetrics from './combatFrameMetrics.json' with { type: 'json' };
 import { getPaintedVisualProfile } from './unitVisuals.js';
 import { getDuelPlan, getWeaponMotion } from './duelChoreography.js';
+import { directDuelPerformance } from './duelPerformance.js';
 
 export function getCombatTiming(scene) {
   const skill = scene.mode === 'skill' || Boolean(scene.outcome?.heal || scene.outcome?.guard);
@@ -11,7 +12,9 @@ export function getCombatTiming(scene) {
 }
 
 export function getCombatChoreography(key,scene){
-  return getDuelPlan(key,scene,getCombatPresentation(key,scene),getWeaponMotion(key,getCombatPresentation(key,{outcome:{hit:true}})));
+  const presentation = getCombatPresentation(key, scene);
+  const weapon = getWeaponMotion(key, getCombatPresentation(key, {outcome:{hit:true}}));
+  return directDuelPerformance(getDuelPlan(key, scene, presentation, weapon), weapon, presentation, scene);
 }
 
 export function getSkillPalette(effect) {
@@ -24,7 +27,9 @@ export function getCombatFrameStyle(key, pose) {
   const metrics = combatFrameMetrics[key]?.[pose];
   if (!metrics) return { '--combat-sprite-scale': getCombatScale(key) };
   const visibleFraction = key === 'wolf' ? 0.45 : 0.703125;
-  const scale = visibleFraction * metrics.height / (metrics.bottom - metrics.top + 1);
+  // Frames in each authored row share body scale. A raised weapon must not shrink the actor.
+  const reference = combatFrameMetrics[key].recover;
+  const scale = visibleFraction * reference.height / (reference.bottom - reference.top + 1);
   return { '--combat-sprite-scale': scale, '--combat-foot-offset': `${100 * scale * (0.9375 - (metrics.bottom + 1) / metrics.height)}%` };
 }
 

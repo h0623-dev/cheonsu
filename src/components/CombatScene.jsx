@@ -3,6 +3,7 @@ import { getCombatMotionSprite, getCombatPresentation, getCombatFrameStyle, getC
 import { getPaintedVisualProfile } from '../data/unitVisuals.js';
 import { useDuelAnimation } from '../engine/useDuelAnimation.js';
 import DuelEffects from './DuelEffects.jsx';
+import DuelImpacts from './DuelImpacts.jsx';
 import './skill-presentation.css';
 
 const weaponLabels = { slash: '검', thrust: '창', heavy: '중병기', guard: '방패', quick: '단검', beast: '야수', whip: '채찍', fist: '권격', bow: '활', cannon: '포격', cast: '마법' };
@@ -70,6 +71,7 @@ export default function CombatScene({ scene, attackerKey, defenderKey, backgroun
           </div>
         </>}
         <DuelEffects plan={plan} unitKey={attackerKey}/>
+        <DuelImpacts plan={plan}/>
         {enemy && <aside className={`combat-enemy-intro intro-${enemy.side}`} aria-label={`${enemy.unit.type === 'boss' ? '적장' : '적군'} ${enemy.unit.name}`}>
           <span>{enemy.unit.type === 'boss' ? '적장' : '적군'} · {weaponLabels[getWeaponMotion(enemy.key)]}</span>
           <strong>{enemy.unit.name}</strong>

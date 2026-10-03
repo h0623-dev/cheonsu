@@ -69,6 +69,7 @@
 .journey-resume small { margin-top: 5px; font-size: 12px; font-weight: 500; }
 .journey-title-actions nav { display: flex; gap: 6px; }
 .app .journey-title-actions nav button { flex: 1; background: #1b302be8; padding: 12px 8px; }
+.app .journey-title-actions nav button[aria-label='도움말'] { flex:0 0 44px; padding:8px; }
 .journey-title-footer { min-height: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px 14px; margin-top: 22px; color: #d1ddd7; font-size: 12px; }
 .journey-title .patch-title-status { position: static; width: min(100%, 480px); margin: 0; }
 .journey-confirm { width: min(420px, calc(100% - 32px)); margin: auto; padding: 22px; background: #22322d; color: #edf2e7; border: 1px solid #94ab9e; border-radius: 8px; }
