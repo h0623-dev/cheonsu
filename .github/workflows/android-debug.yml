@@ -60,6 +60,9 @@ jobs:
           OTA_PRIVATE_KEY_PEM: ${{ secrets.OTA_PRIVATE_KEY_PEM }}
         run: node scripts/cloud-signing.mjs
       - run: npm run android:apk
+      - name: Report selected Android signing identity
+        working-directory: android
+        run: ./gradlew :app:signingReport
       - name: Name final APK
         id: version
         run: |

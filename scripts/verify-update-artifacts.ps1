@@ -12,7 +12,10 @@ if (!$env:JAVA_HOME -and $windowsHost) { $env:JAVA_HOME = 'C:/Program Files/Andr
 $signer = if ($windowsHost) { 'apksigner.bat' } else { 'apksigner' }
 $aapt = if ($windowsHost) { 'aapt.exe' } else { 'aapt' }
 $signature = & (Join-Path $buildTools.FullName $signer) verify --verbose --print-certs $apkPath
-if ($LASTEXITCODE -ne 0 -or ($signature -join "`n") -notmatch '1d4b2f3f8e7b30e2b9202121def34d4da6e39b4119bdd93c44a01aebfcd0518f') { throw 'APK signing certificate mismatch.' }
+$signerExitCode = $LASTEXITCODE
+$signature | Where-Object { $_ -match 'certificate SHA-256 digest|Verified using|Verifies' }
+if ($signerExitCode -ne 0) { throw "APK signature verification failed (exit $signerExitCode)." }
+if (($signature -join "`n") -notmatch '1d4b2f3f8e7b30e2b9202121def34d4da6e39b4119bdd93c44a01aebfcd0518f') { throw 'APK signing certificate mismatch.' }
 $badging = & (Join-Path $buildTools.FullName $aapt) dump badging $apkPath
 if ($LASTEXITCODE -ne 0 -or ($badging -join "`n") -notmatch "versionName='$([Regex]::Escape($version))'") { throw 'APK version mismatch.' }
 $badging | Select-Object -First 1

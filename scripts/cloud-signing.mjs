@@ -1,5 +1,4 @@
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 import { createPublicKey, X509Certificate } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
@@ -19,10 +18,7 @@ function main() {
   }
   const directory = path.join(process.env.RUNNER_TEMP, 'cheonsu-signing');
   const keystore = path.join(directory, 'debug.keystore');
-  const nativeKey = path.join(os.homedir(), '.android/debug.keystore');
   if (process.argv.includes('--cleanup')) {
-    // Remove only the symlink owned by this job; never remove a pre-existing key.
-    if (fs.lstatSync(nativeKey, { throwIfNoEntry: false })?.isSymbolicLink() && fs.readlinkSync(nativeKey) === keystore) fs.unlinkSync(nativeKey);
     for (const name of ['debug.keystore', 'private.pem']) fs.rmSync(path.join(directory, name), { force: true });
     return;
   }
@@ -30,7 +26,6 @@ function main() {
   const privateKey = process.env.OTA_PRIVATE_KEY_PEM;
   if (!encoded || !privateKey) throw new Error('Both Android and OTA signing secrets are required.');
   verifyOtaKey(privateKey, JSON.parse(fs.readFileSync(path.join(root, 'src/data/updateTrust.json'))).publicKey);
-  if (fs.lstatSync(nativeKey, { throwIfNoEntry: false })) throw new Error('Refusing to replace an existing runner Android key.');
   fs.mkdirSync(directory, { recursive: true, mode: 0o700 });
   fs.writeFileSync(keystore, Buffer.from(encoded, 'base64'), { mode: 0o600, flag: 'wx' });
   const certificate = execFileSync(path.join(process.env.JAVA_HOME, 'bin/keytool'), [
@@ -40,9 +35,8 @@ function main() {
     throw new Error('Android certificate does not match the installed app.');
   }
   fs.writeFileSync(path.join(directory, 'private.pem'), privateKey, { mode: 0o600, flag: 'wx' });
-  fs.mkdirSync(path.dirname(nativeKey), { recursive: true });
-  fs.symlinkSync(keystore, nativeKey);
-  fs.appendFileSync(process.env.GITHUB_ENV, `CHEONSU_UPDATE_PRIVATE_KEY_PATH=${path.join(directory, 'private.pem')}\n`);
+  // Pin Android's preferences directory so runner defaults cannot choose another debug key.
+  fs.appendFileSync(process.env.GITHUB_ENV, `ANDROID_USER_HOME=${directory}\nCHEONSU_UPDATE_PRIVATE_KEY_PATH=${path.join(directory, 'private.pem')}\n`);
   console.log('Android certificate and OTA public key match. Signing files restored for this job only.');
 }
 
