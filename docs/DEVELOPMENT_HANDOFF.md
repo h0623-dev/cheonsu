@@ -2,7 +2,8 @@
 
 ## 현재 상태
 
-- 버전 1.99.153, Android 352, API 36, 패키지 com.cheonsu.game.
+- 버전 1.99.154, Android 353, API 36, 패키지 com.cheonsu.game.
+- 자기 턴의 행동 완료가 반격까지 차단하던 문제를 수정했습니다. 반격은 행동 소모와 별도로 판정하며, 활은 정확히 2칸에서 가능하고 1칸에서는 불가합니다. 기본 사거리·턴당 1회·기존 저장을 유지합니다. [반격 수정](COUNTER_FIX_1.99.154.md).
 - 종합 QA와 출시 잔여 과제: [QA_IMPROVEMENT_1.99.153.md](QA_IMPROVEMENT_1.99.153.md). `chapterIdentity.js`는 새 전투 보스의 이야기상 이름을 정합니다. 기존 전투 저장은 재생성하지 않습니다. 메뉴의 적 명단은 `getStageRoster` 경량 경로를 쓰고 실제 배치만 `getStagePreview`로 계산합니다. BGM은 `musicScore.js`의 10곡, `orchestraSamples.js`의 로컬 샘플과 `useGameMusic.js`의 화면 전환 수명 주기를 사용합니다. 샘플 원본/해시/라이선스는 `public/audio/orchestra-v1`에 있습니다. Firebase 미연결 UI는 게스트·기기 저장으로 표시합니다.
 - `duelPerformance.js`/`DuelImpacts.jsx`로 41종의 준비·타격·복귀와 파편/충격파/피격을 연결했습니다. 프레임별 높이 맞춤 대신 캐릭터별 고정 몸 크기와 발 기준을 사용합니다. `CharacterCodex`는 영입/클리어 기록을 읽어 41종을 컬러/흑백으로 표시합니다. `RECRUIT_BY_STAGE`는 `characterCollection.js`에서 공통 참조합니다. [1.99.152 전투/도감](IMPACT_CODEX_1.99.152.md).
 - 전투 예측창 없이 `openBattle`에서 `resolveBattle`로 직접 연결합니다. 타이틀/설정의 계정 메뉴와 Firebase 인증 어댑터를 추가했지만 실제 Firebase 프로젝트는 미연결입니다. 기기 저장은 계정과 분리하여 보존합니다. [Google/Play 연결 준비](GOOGLE_PLAY_1.99.151.md). Play AAB 제출 빌드는 `npm run android:aab`, 미서명 기술 검증은 `npm run android:aab:check`, 누락 점검은 `npm run release:check`입니다.

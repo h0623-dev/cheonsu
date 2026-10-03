@@ -2,7 +2,9 @@
 
 마지막 확인일: 2026-10-03
 프로젝트 위치: `C:\Users\user\Desktop\cheonsu`
-현재 앱/패키지 버전: `1.99.153` (Android 352 / API 36)
+현재 앱/패키지 버전: `1.99.154` (Android 353 / API 36)
+
+1.99.154 변경: 자기 턴에 행동을 완료한 캐릭터도 적 턴의 별도 반격 기회를 사용합니다. 활은 정확히 2칸에서 반격하고 1칸에서는 반격하지 않습니다. 기존 저장·기본 사거리·턴당 1회 제한 유지. [검증 기록](docs/COUNTER_FIX_1.99.154.md).
 
 GitHub: [저장소](https://github.com/h0623-dev/cheonsu), [1.99.153 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.153). 자동 패치 안내는 별도 `updates` 브랜치에서 관리합니다. 이전 파일은 Git 이력에 보존합니다.
 

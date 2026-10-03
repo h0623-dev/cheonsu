@@ -271,7 +271,8 @@ export function formatAttackRange(unit, mode = "attack") {
 }
 
 function canUseAttack(unit, mode) {
-  if (!unit || unit.acted || unit.hp <= 0) return false;
+  // Counters have their own per-turn allowance, independent of the spent action.
+  if (!unit || (unit.acted && mode !== "counter") || unit.hp <= 0) return false;
   const skillType = unit.skillSpec?.type ?? unit.skillType;
   if (mode === "skill" && skillType && skillType !== "attack") return false;
   const { min, max } = getAttackRange(unit, mode);
@@ -289,7 +290,7 @@ export function canAttackTarget(unit, target, mode, activeMap) {
 }
 
 export function canCounter(attacker, defender, activeMap) {
-  return !defender?.counterUsed && canAttackTarget(defender, attacker, "attack", activeMap);
+  return !defender?.counterUsed && canAttackTarget(defender, attacker, "counter", activeMap);
 }
 
 export function getAttackTiles(unit, mode, activeMap) {

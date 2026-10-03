@@ -6,7 +6,7 @@ importScripts('/art/bosses-v1/precache.js');
 importScripts('/art/map-sprites-v4/precache.js');
 importScripts('/art/directions-v1/precache.js');
 importScripts('/art/skills-v1/precache.js');
-const CACHE_VERSION = "cheonsu-v199153-orchestra";
+const CACHE_VERSION = "cheonsu-v199154-counter";
 const APP_SHELL_CACHE = `${CACHE_VERSION}-app-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
