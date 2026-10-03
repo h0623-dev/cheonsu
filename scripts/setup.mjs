@@ -4,13 +4,16 @@ import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 
 export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-export function findAndroidEnvironment() {
-  const sdk = [process.env.ANDROID_HOME, process.env.ANDROID_SDK_ROOT,
-    process.env.LOCALAPPDATA && path.join(process.env.LOCALAPPDATA, 'Android/Sdk'),
-    path.join(os.homedir(), 'Library/Android/sdk'), path.join(os.homedir(), 'Android/Sdk')]
-    .find(value => value && fs.existsSync(path.join(value, 'platforms/android-35')));
-  const java = [process.env.JAVA_HOME,
-    process.env.ProgramFiles && path.join(process.env.ProgramFiles, 'Android/Android Studio/jbr'),
+export function findAndroidEnvironment({ env = process.env, home = os.homedir(), projectRoot = root } = {}) {
+  const variables = fs.readFileSync(path.join(projectRoot, 'android/variables.gradle'), 'utf8');
+  const compileSdk = variables.match(/\bcompileSdkVersion\s*=\s*(\d+)/)?.[1];
+  if (!compileSdk) throw new Error('Missing compileSdkVersion in android/variables.gradle.');
+  const sdk = [env.ANDROID_HOME, env.ANDROID_SDK_ROOT,
+    env.LOCALAPPDATA && path.join(env.LOCALAPPDATA, 'Android/Sdk'),
+    path.join(home, 'Library/Android/sdk'), path.join(home, 'Android/Sdk')]
+    .find(value => value && fs.existsSync(path.join(value, `platforms/android-${compileSdk}`)));
+  const java = [env.JAVA_HOME,
+    env.ProgramFiles && path.join(env.ProgramFiles, 'Android/Android Studio/jbr'),
     '/Applications/Android Studio.app/Contents/jbr/Contents/Home', '/opt/android-studio/jbr']
     .find(value => value && fs.existsSync(path.join(value, 'bin', process.platform === 'win32' ? 'java.exe' : 'java')));
   return { sdk, java };

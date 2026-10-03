@@ -29,6 +29,7 @@
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)
+- [Codex Cloud와 GitHub에서 개발하기](docs/CODEX_CLOUD.md)
 
 APK는 디버그 서명의 개발 테스트용입니다. 이번 패치는 1.99.151 APK 이상에 자동 배포할 수 있습니다. 그보다 오래된 앱은 최신 APK를 기존 앱 위에 설치하세요. 앱을 삭제하지 마세요. Play release는 별도 서명 및 스토어 업데이트를 사용합니다. 실제 Google 로그인과 Play 출시는 아직 준비 중입니다.
 

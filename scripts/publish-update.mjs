@@ -5,6 +5,7 @@ import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { verifyPatchManifest } from '../src/engine/liveUpdateEngine.js';
 import { webBuildInfo } from './update-build-info.mjs';
+import { githubToken } from './github-auth.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = file => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
@@ -14,11 +15,7 @@ const envelope = read(`update-release/${version}/latest.json`);
 const manifest = await verifyPatchManifest(envelope, trust);
 if (manifest.version !== version || JSON.stringify(webBuildInfo(root)) !== JSON.stringify(read('dist/ota-build.json'))) throw new Error('최종 빌드와 배포 정보가 다릅니다.');
 if (execFileSync('git', ['status', '--porcelain'], { cwd: root, encoding: 'utf8', windowsHide: true }).trim()) throw new Error('소스 변경 사항을 커밋한 뒤 배포하세요.');
-const credential = execFileSync('git', ['-c', 'credential.interactive=never', 'credential', 'fill'], {
-  input: 'protocol=https\nhost=github.com\n\n', encoding: 'utf8', env: { ...process.env, GIT_TERMINAL_PROMPT: '0' }, windowsHide: true,
-});
-const token = credential.split('\n').find(line => line.startsWith('password='))?.slice(9).trim();
-if (!token) throw new Error('GitHub 로그인 정보가 없습니다.');
+const token = githubToken();
 const headers = { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'User-Agent': 'Cheonsu-Updates', 'X-GitHub-Api-Version': '2022-11-28' };
 async function api(endpoint, method = 'GET', body) {
   const response = await fetch(`https://api.github.com/repos/${trust.repository}${endpoint}`, {
