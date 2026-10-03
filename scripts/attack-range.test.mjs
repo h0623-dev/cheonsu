@@ -38,11 +38,29 @@ test('bows cannot attack or counter adjacent enemies; skill range never extends 
   assert.equal(canCounter(bow, { ...target, x: 8 }, map), false, 'swords cannot counter a two-tile shot');
 });
 
-test('counter availability preserves used/action/death rules and rejects allies and blocked cells', () => {
-  for (const state of [{ counterUsed: true }, { acted: true }, { hp: 0 }]) assert.equal(canCounter({ ...target, x: 8 }, { ...bow, ...state }, map), false);
+test('spent actions do not block counters at the exact basic attack range', () => {
+  for (const type of ['ally', 'enemy', 'boss']) {
+    const defender = { ...bow, type, acted: true, moved: true, counterUsed: false };
+    const attacker = { ...target, type: type === 'ally' ? 'enemy' : 'ally' };
+    const snapshot = structuredClone(defender);
+    assert.equal(canCounter({ ...attacker, x: 8 }, defender, map), true, `${type}: two-tile counter`);
+    assert.equal(canCounter({ ...attacker, x: 7, y: 7 }, defender, map), true, `${type}: diagonal two-tile counter`);
+    assert.equal(canCounter(attacker, defender, map), false, `${type}: no adjacent bow counter`);
+    assert.equal(canCounter({ ...attacker, x: 9 }, defender, map), false, `${type}: no three-tile bow counter`);
+    assert.equal(canAttackTarget(defender, { ...attacker, x: 8 }, 'attack', map), false, 'ordinary attack remains spent');
+    assert.deepEqual(defender, snapshot, 'counter check must preserve action and save state');
+  }
+  assert.equal(canCounter(target, { ...bow, range: 1, acted: true }, map), true, 'spent melee unit can also counter in range');
+});
+
+test('counter availability preserves once-per-turn/death rules and rejects allies and blocked cells', () => {
+  for (const state of [{ counterUsed: true }, { acted: true, counterUsed: true }, { hp: 0 }]) assert.equal(canCounter({ ...target, x: 8 }, { ...bow, ...state }, map), false);
   assert.equal(canCounter({ ...target, x: 8, hp: 0 }, bow, map), false);
   assert.equal(canCounter({ ...target, x: 8, type: 'ally' }, bow, map), false);
   const blocked = structuredClone(map); blocked[6][8] = 'wall';
+  assert.equal(canCounter({ ...target, x: 8 }, { ...bow, acted: true }, blocked), false);
+  assert.equal(canCounter({ ...target, x: 13 }, { ...bow, acted: true }, map), false);
+  assert.equal(canCounter(target, undefined, map), false);
   assert.equal(canAttackTarget(bow, { ...target, x: 8 }, 'attack', blocked), false);
   assert.equal(canAttackTarget(bow, { ...target, x: 13 }, 'attack', map), false);
 });

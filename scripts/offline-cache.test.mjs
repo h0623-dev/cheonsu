@@ -14,7 +14,7 @@ function worker({ cached, offline = false, quota = false } = {}) {
     fetch: async () => { fetches++; if (offline) throw Error('offline'); return new Response('network'); },
     caches: {
       match: async () => cached,
-      keys: async () => ['other-app-cache', 'cheonsu-old', 'cheonsu-v199153-orchestra-app-shell'],
+      keys: async () => ['other-app-cache', 'cheonsu-old', vm.runInContext('APP_SHELL_CACHE', context)],
       delete: async key => { removed.push(key); },
       open: async () => ({ addAll: async files => shell.push(...files), put: async () => { if (quota) throw Error('quota'); } }),
     },
