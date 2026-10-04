@@ -2561,8 +2561,7 @@
       },
       "portrait": "/art/characters-v2/portraits/harpy-scout.webp",
       "dialogue": "/art/characters-v2/dialogue/harpy-scout.webp",
-      "map": "/art/map-sprites-v4/harpy-scout.webp",
-      "visibleFraction": 0.66
+      "map": "/art/map-sprites-v4/harpy-scout.webp"
     },
     "skeleton-warrior": {
       "motion": {

@@ -100,14 +100,15 @@ async function fixtureCases(fixtureBase, base, viewport) {
   await page.clock.pauseAt(time);
   try {
     await page.goto(`${fixtureBase}/tests/fixtures/combat.html`);
-    for (const id of ids) for (const mode of ['attack', 'skill', 'counter', 'recoil']) {
-      const props = duelProps(id, null, 1, { mode: mode === 'recoil' ? 'attack' : mode });
+    for (const id of ids) for (const mode of ['attack', 'skill', 'counter', 'recoil', 'skill-recoil']) {
+      const defending = mode === 'recoil' || mode === 'skill-recoil';
+      const props = duelProps(id, null, 1, { mode: defending ? mode === 'skill-recoil' ? 'skill' : 'attack' : mode });
       props.scene.attacker.type = 'enemy';
       props.scene.attacker.name = MONSTER_ENEMIES[id].name;
       props.defenderKey = 'hero';
       props.scene.defender = { id: 'hero', name: '카일', type: 'ally', hp: 30, maxHp: 50 };
       if (mode === 'counter') props.scene.title = '반격';
-      if (mode === 'recoil') {
+      if (defending) {
         props.attackerKey = 'hero';
         props.defenderKey = id;
         props.scene.defender = { ...props.scene.attacker, hp: 30, maxHp: 50 };
@@ -118,22 +119,23 @@ async function fixtureCases(fixtureBase, base, viewport) {
       await images(page, '.painted-combat img');
       await page.clock.runFor(20);
       await assertFit(page, viewport, `${id}/${mode}`);
-      const side = mode === 'recoil' ? 'defender' : 'attacker';
+      const side = defending ? 'defender' : 'attacker';
       const loaded = await assertNewArt(page, `.fighter-${side} .fighter-frame`, id);
       if (mode === 'skill') await assertNewArt(page, '.skill-cut-in img', id);
       const poses = new Set(), transforms = new Set();
-      const samples = [...new Set([.03, .095, .16, .24, .36, .41, .56, ...plan.releases.map(at => at + .01), ...plan.contacts.map(at => at + .02), .70, .85, .98])].sort((a, b) => a - b);
+      const skillRecoilSamples = mode === 'skill-recoil' ? plan.contacts.map(at => at + .012) : [];
+      const samples = [...new Set([.03, .095, .16, .24, .36, .41, .56, ...plan.releases.map(at => at + .01), ...plan.contacts.map(at => at + .02), ...skillRecoilSamples, .70, .85, .98])].sort((a, b) => a - b);
       for (const fraction of samples) {
         await seekDuel(page, fraction, props.scene.durationMs);
         await assertBodies(page, `${id}/${mode}/${fraction}`);
-        if (fraction === .03 || plan.releases.some(at => Math.abs(fraction - at - .01) < .0001) || plan.contacts.some(at => Math.abs(fraction - at - .02) < .0001)) await assertSilhouettes(page, `${id}/${mode}/${fraction}`);
+        if (fraction === .03 || plan.releases.some(at => Math.abs(fraction - at - .01) < .0001) || plan.contacts.some(at => Math.abs(fraction - at - .02) < .0001) || skillRecoilSamples.includes(fraction)) await assertSilhouettes(page, `${id}/${mode}/${fraction}`);
         const shown = await page.locator(`.fighter-${side} .fighter-frame`).evaluateAll(elements => elements.filter(image => Number(getComputedStyle(image).opacity) > .5).map(image => image.dataset.pose));
         shown.forEach(pose => poses.add(pose));
         transforms.add(await page.locator('.fighter-attacker .fighter-body').evaluate(element => getComputedStyle(element).transform));
       }
       assert.ok(poses.has('ready'), `${id}/${mode}: 대기 자세로 복귀합니다`);
-      assert.ok(mode === 'recoil' ? poses.has('recoil') : poses.has('windup') && poses.has(mode === 'skill' ? 'skill' : 'strike'), `${id}/${mode}: 종족별 동작 그림이 실제 전환됩니다`);
-      if (mode !== 'recoil') assert.ok(transforms.size >= 3, `${id}/${mode}: 준비·타격·회복 신체 모션이 다릅니다`);
+      assert.ok(defending ? poses.has('recoil') : poses.has('windup') && poses.has(mode === 'skill' ? 'skill' : 'strike'), `${id}/${mode}: 종족별 동작 그림이 실제 전환됩니다`);
+      if (!defending) assert.ok(transforms.size >= 3, `${id}/${mode}: 준비·타격·회복 신체 모션이 다릅니다`);
       await seekDuel(page, plan.contacts.at(-1) + .02, props.scene.durationMs);
       const contact = await page.evaluate(() => {
         const scene = document.querySelector('.painted-combat');
@@ -154,9 +156,9 @@ async function fixtureCases(fixtureBase, base, viewport) {
       await page.clock.runFor(props.scene.durationMs * .04 + 1);
       assert.match(await page.locator('.combat-health').last().innerText(), /18 \/ 50/, `${id}/${mode}: 타격 때 HP가 감소합니다`);
       if (mode === 'attack' || mode === 'skill') await page.screenshot({ path: path.join(output, `fixture-${id}-${mode}-${viewport.width}.png`) });
-      results.push({ type: 'production-fixture', viewport, id, mode, loaded, poses: [...poses], contact });
+      results.push({ type: 'production-fixture', viewport, id, mode, loaded, poses: [...poses], sampleFractions: samples, contact });
     }
-    console.log(`PASS 신규 적 6종 생산 모션 ${viewport.width}x${viewport.height}: 공격·스킬·반격·피격 24건`);
+    console.log(`PASS 신규 적 6종 생산 모션 ${viewport.width}x${viewport.height}: 공격·스킬·반격·기본피격·스킬피격 30건`);
   } catch (error) {
     await page.screenshot({ path: path.join(output, `fixture-failure-${viewport.width}.png`) }).catch(() => {});
     throw error;

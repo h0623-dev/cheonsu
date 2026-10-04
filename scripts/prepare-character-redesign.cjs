@@ -139,8 +139,6 @@ async function prepareCharacter(id, manifest, report) {
   const unit = { motion: {}, metrics: {}, portrait: `/art/characters-v2/portraits/${id}.webp`,
     dialogue: `/art/characters-v2/dialogue/${id}.webp` };
   if (monsters.includes(id)) unit.map = `/art/map-sprites-v4/${id}.webp`;
-  // Expanded wings in the recoil pose need a little more room in mobile duels.
-  if (id === 'harpy-scout') unit.visibleFraction = .66;
   for (const [index, pose] of poses.entries()) {
     const relative = `units/${id}-${pose}.webp`;
     unit.motion[pose] = `/art/characters-v2/${relative}`;
