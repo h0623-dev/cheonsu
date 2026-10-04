@@ -12,4 +12,3 @@ BOTTOM RIGHT cell 8 dialogue: large readable waist-up view of the same person, w
 
 Character identity: Noah, a young adult male human tactical scholar mage with short messy black hair, round spectacles, green coat and mantle trimmed with aged gold, white shirt, dark trousers, leather belts and pouches. Carry ONE brown leather-bound spellbook as his focus, no staff or sword. Intelligent quiet analytical expression.
 Weapon-specific instructions: Windup opens book while preparing free casting hand; strike directs free hand forward to right in a scholarly casting gesture.
-

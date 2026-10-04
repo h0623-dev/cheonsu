@@ -12,4 +12,3 @@ BOTTOM RIGHT cell 8 dialogue: large readable waist-up view of the same person, w
 
 Character identity: Rakan, a mature muscular male human heavy warrior with short spiky dark brown hair and dark stubble, broad bare upper arms, rugged brown leather heavy armor with fur shoulders and dark iron trim, red waist sash, dark trousers and boots, ONE large steel battle axe held in both hands when needed. Powerful stocky silhouette and resolute protective face. Not a beast, no horns.
 Weapon-specific instructions: Windup raises the single axe; strike delivers heavy two-handed diagonal axe chop to the right, all axe parts contained.
-

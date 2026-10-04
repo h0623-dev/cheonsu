@@ -12,4 +12,3 @@ BOTTOM RIGHT cell 8 dialogue: large readable waist-up view of the same person, w
 
 Character identity: Sera, a young adult female human rogue with dark violet hair in a high flowing ponytail, dark eyes, dark charcoal leather fitted armor and boots, burgundy-red scarf and short split cape, brown utility belts, TWO steel short daggers one in each hand. Agile confident stern expression. Preserve feminine identity and dual dagger silhouette.
 Weapon-specific instructions: Ordinary windup draws both daggers back; strike sends one dagger forward in a clear diagonal slash while the second guards.
-
