@@ -1,6 +1,8 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.155 / Android versionCode 354**
+현재 개발 빌드: **1.99.156 / Android versionCode 355**
+
+1.99.156: 마을 화면 이탈 후 남은 크기 변경 알림이 제거된 지도를 참조하던 `firstElementChild` 오류를 수정합니다. 저장·진행·수집·전투 규칙과 캐릭터 아트는 유지합니다. [수정·검증](docs/TOWN_CAMERA_FIX_1.99.156.md).
 
 1.99.155: 기존 대기 이미지를 보존하면서 전체 41종의 전투·기술·대화 아트를 새 시안으로 통일합니다. 마을에서는 이동 중 앞뒤 교대 걷기 프레임을 사용하고 정지 시 원래 대기 모습으로 돌아옵니다. [구현·검증](docs/CHARACTER_REDESIGN_1.99.155.md).
 
@@ -29,8 +31,8 @@
 
 ## 다운로드
 
-- 새 버전 산출물: `cheonsu_1.99.155_update_debug.apk`, `cheonsu_development_1.99.155.zip`
-- [1.99.155 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.155)
+- 새 버전 산출물: `cheonsu_1.99.156_update_debug.apk`, `cheonsu_development_1.99.156.zip`
+- [1.99.156 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.156)
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)

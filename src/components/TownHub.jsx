@@ -64,16 +64,21 @@ export default function TownHub({ party, onVisit, paused = false }) {
   }, [route, paused]);
   const centerView = useEffectEvent((smooth = false) => {
     const element = shell.current;
+    if (!element) return;
     const world = element.firstElementChild;
+    if (!world) return;
     element.scrollTo({ left: (position.x + .5) / TOWN_WIDTH * world.clientWidth - element.clientWidth / 2,
       top: (position.y + .5) / TOWN_HEIGHT * world.clientHeight - element.clientHeight / 2,
       behavior: smooth ? 'smooth' : 'instant' });
   });
   useEffect(() => { centerView(walking && !reducedMotion); }, [position, walking, reducedMotion]);
   useEffect(() => {
-    const observer = new ResizeObserver(() => centerView());
-    observer.observe(shell.current);
-    return () => observer.disconnect();
+    const element = shell.current;
+    if (!element) return;
+    let active = true;
+    const observer = new ResizeObserver(() => { if (active) centerView(); });
+    observer.observe(element);
+    return () => { active = false; observer.disconnect(); };
   }, []);
   const travel = (target, destination = null) => {
     if (paused) return;
