@@ -1,5 +1,6 @@
 import { useId } from 'react';
 import { getCombatFrameStyle } from '../data/combatArt.js';
+import weaponAnchors from '../data/skillWeaponAnchors.json' with { type: 'json' };
 import './skill-spectacle.css';
 
 function LightPaint({ id, color, core }) {
@@ -155,10 +156,160 @@ const HERO_BLADE = {
   'skill-b': { grip: [329, 214], tip: [335, 72] },
 };
 
+const WEAPON_KINDS = {
+  sword: 'blade', greatsword: 'blade', katana: 'blade', scimitar: 'blade',
+  lance: 'spear', polearm: 'spear', halberd: 'axe', poleaxe: 'axe', club: 'hammer',
+  wand: 'staff', crystal: 'staff', orb: 'focus', hand: 'focus', book: 'focus',
+  instrument: 'music', lute: 'music', lyre: 'music', gun: 'cannon', talons: 'claw',
+  martial: 'fist', claws: 'claw', dualdagger: 'dagger', crossBow: 'crossbow',
+};
+
+function WeaponPaint({ id, color, core }) {
+  return <defs><linearGradient id={`${id}-energy`} gradientUnits="userSpaceOnUse" x1="0" y1="512" x2="512" y2="0">
+    <stop offset="0" stopColor={color} stopOpacity=".3" />
+    <stop offset=".52" stopColor={core} stopOpacity=".95" />
+    <stop offset="1" stopColor={color} stopOpacity=".7" />
+  </linearGradient></defs>;
+}
+
+function FocusSigil({ theme, point, radius = 23, color, core }) {
+  const [x, y] = point;
+  const r = Math.max(6, Math.min(radius, x - 5, 507 - x, y - 5, 507 - y));
+  const glyph = {
+    lightning: 'M4-19-9-2 3-3-4 19 12 0 1 1Z',
+    ice: 'M0-20 10-2 0 20-10-2ZM0-20V20M-15-9 15 9M-15 9 15-9',
+    fire: 'M-2 20C-20 9-11-2-7-6C-10 7 3 2-1-8C-5-16 4-22 4-22C2-9 18-3 12 9C9 16 4 19-2 20Z',
+    heal: 'M-5-17H5V-5H17V5H5V17H-5V5H-17V-5H-5Z',
+    holy: 'M0-21 5-5 21 0 5 5 0 21-5 5-21 0-5-5Z',
+    guard: 'M0-20 15-13 13 7Q9 17 0 22Q-9 17-13 7L-15-13ZM0-11V12M-8 0H8',
+    music: 'M-7 13V-12L12-17V7M-7-6 12-11M-7 13C-20 8-23 19-13 20C-8 19-6 17-7 13M12 7C0 1-4 13 6 14C11 13 13 11 12 7',
+    shadow: 'M12-19C-12-22-25 4-11 17C-2 25 14 19 19 9C-6 22-15-8 12-19Z',
+    poison: 'M0-20C-6-9-14-2-14 7C-14 24 14 24 14 7C14-2 6-9 0-20ZM-5 4Q-8 13-1 16',
+    wind: 'M-20 2C-5-18 24-12 17 2C12 11-8 12-9 3C-8-3 1-6 7-2M-16 15Q5 26 21 10',
+    earth: 'M0-20 15-7 11 14-8 19-18 3ZM-8-3 5 8 2 17',
+    martial: 'M-17-7-8-14 3-10 11-13 19 1 10 15-8 13-18 5ZM-7-5 1 7M5-6 11 3',
+  }[theme] || 'M0-20 5-5 20 0 5 5 0 20-5 5-20 0-5-5Z';
+  return <g transform={`translate(${x} ${y}) scale(${r / 23})`}>
+    <circle r="24" fill={color} opacity=".12" />
+    <g className="vfx-weapon-orbit" fill="none" stroke={color}>
+      <circle r="24" strokeWidth="1.8" strokeDasharray="27 7 6 7" />
+    </g>
+    <path d={glyph} fill={['ice', 'guard', 'music', 'earth', 'martial', 'wind'].includes(theme) ? 'none' : color} stroke={core} strokeWidth="1.5" strokeLinejoin="round" opacity=".95" />
+    <path d="M0-5 1.5-1.5 5 0 1.5 1.5 0 5-1.5 1.5-5 0-1.5-1.5Z" fill={core} opacity=".9" />
+  </g>;
+}
+
+function WeaponShape({ anchor, kind, visual, id }) {
+  const [x, y] = anchor.grip, [tx, ty] = anchor.tip;
+  const focus = anchor.focus || anchor.tip;
+  const length = Math.max(1, Math.hypot(tx - x, ty - y));
+  const angle = Math.atan2(ty - y, tx - x) * 180 / Math.PI;
+  const energy = `url(#${id}-energy)`;
+  const line = `M${x} ${y}L${tx} ${ty}`;
+  const flow = { className: 'vfx-weapon-flow', fill: 'none', stroke: energy, strokeLinecap: 'round', strokeDasharray: '19 7 5 7' };
+  // Authored curved swords and whips use their original 512-pixel path, not a straight guess.
+  if (anchor.path) return <>
+    <path d={anchor.path} fill="none" stroke={visual.color} strokeWidth={kind === 'whip' ? 7 : 10} strokeLinecap="round" opacity=".35" />
+    <path {...flow} d={anchor.path} strokeWidth={kind === 'whip' ? 3.5 : 4.5} />
+    <path d={anchor.path} fill="none" stroke={visual.core} strokeWidth="1.3" opacity=".7" />
+    <path d={star} transform={`translate(${tx} ${ty}) scale(.55)`} fill={visual.core} />
+    {anchor.secondary && <>
+      <path d={anchor.secondary.path || `M${anchor.secondary.grip.join(' ')}L${anchor.secondary.tip.join(' ')}`} fill="none" stroke={visual.color} strokeWidth="6" strokeLinecap="round" opacity=".35" />
+      <path {...flow} d={anchor.secondary.path || `M${anchor.secondary.grip.join(' ')}L${anchor.secondary.tip.join(' ')}`} strokeWidth="2.8" />
+    </>}
+  </>;
+  if (kind === 'staff' || kind === 'focus') return <>
+    {kind === 'staff' && <path {...flow} d={`M${x} ${y}L${focus[0]} ${focus[1]}`} strokeWidth="3.8" />}
+    {kind === 'focus' && <path {...flow} d={`M${focus[0] - 20} ${focus[1] + 10}Q${focus[0] - 24} ${focus[1] - 24} ${focus[0] + 12} ${focus[1] - 19}`} strokeWidth="3" />}
+    <FocusSigil theme={visual.theme} point={focus} color={visual.color} core={visual.core} />
+    {anchor.secondary && <path d={star} transform={`translate(${anchor.secondary.tip.join(' ')}) scale(1.2)`} fill={visual.core} opacity=".75" />}
+    {anchor.bookCenter && <path d="M0-12 4-4 12 0 4 4 0 12-4 4-12 0-4-4ZM-8-8 8 8M8-8-8 8" transform={`translate(${anchor.bookCenter.join(' ')})`} fill="none" stroke={visual.core} strokeWidth="1.7" opacity=".85" />}
+  </>;
+  if (kind === 'bow' || kind === 'crossbow') {
+    const upper = anchor.bow?.upper, lower = anchor.bow?.lower;
+    const limb = anchor.bow?.path || (upper && lower ? `M${upper[0]} ${upper[1]}Q${x + (x - upper[0]) * .12} ${(upper[1] + y) / 2} ${x} ${y}Q${x + (x - lower[0]) * .12} ${(lower[1] + y) / 2} ${lower[0]} ${lower[1]}` : line);
+    return <>
+      <path {...flow} d={limb} strokeWidth="3.2" />
+      {anchor.bow?.arrowVisible !== false && <>
+        <path {...flow} d={`M${focus[0]} ${focus[1]}L${tx} ${ty}`} strokeWidth="5.2" strokeDasharray="12 4" />
+        <path d={`M${focus[0]} ${focus[1]}L${tx} ${ty}`} fill="none" stroke={visual.core} strokeWidth="1.3" />
+      </>}
+      <path d={star} transform={`translate(${focus.join(' ')}) scale(.95)`} fill={visual.core} />
+      {anchor.bow?.arrowVisible !== false && <path d={star} transform={`translate(${tx} ${ty}) scale(.65)`} fill={visual.color} />}
+    </>;
+  }
+  if (kind === 'shield') return <g transform={`translate(${focus.join(' ')})`} fill="none">
+    <path d="M0-35 27-22 25 12Q20 32 0 42Q-20 32-25 12L-27-22Z" fill={energy} opacity=".22" />
+    <path className="vfx-weapon-flow" d="M0-35 27-22 25 12Q20 32 0 42Q-20 32-25 12L-27-22Z" stroke={visual.core} strokeWidth="2.1" strokeDasharray="16 8" />
+    <path d="M0-20V22M-15-1H15M-20-19-15-9M20-19 15-9M-12 23 0 31 12 23" stroke={visual.color} strokeWidth="2.5" />
+  </g>;
+  if (kind === 'fist' || kind === 'claw') return <g transform={`translate(${focus.join(' ')}) rotate(${angle})`} fill="none" strokeLinecap="round">
+    <path className="vfx-weapon-flow" d="M-23-14Q-6-23 17-11M-25 0Q-4-7 22 2M-20 14Q-4 9 17 16" stroke={energy} strokeWidth={kind === 'claw' ? 4 : 5.5} strokeDasharray="14 7" />
+    <path d="M-18-13Q-4-17 14-10M-20 0Q-3-3 17 2M-15 13Q-2 11 13 15" stroke={visual.core} strokeWidth="1.2" />
+    <path d={star} transform="translate(2 0) scale(.8)" fill={visual.core} />
+    {anchor.secondary && <path d={star} transform={`translate(${(anchor.secondary.tip[0] - focus[0]) * Math.cos(-angle * Math.PI / 180) - (anchor.secondary.tip[1] - focus[1]) * Math.sin(-angle * Math.PI / 180)} ${(anchor.secondary.tip[0] - focus[0]) * Math.sin(-angle * Math.PI / 180) + (anchor.secondary.tip[1] - focus[1]) * Math.cos(-angle * Math.PI / 180)}) scale(.9)`} fill={visual.color} opacity=".7" />}
+  </g>;
+  if (kind === 'music') return <g transform={`translate(${focus.join(' ')})`} fill="none" strokeLinecap="round">
+    <g className="vfx-weapon-orbit" stroke={visual.color}>
+      <ellipse rx="28" ry="20" strokeWidth="2" strokeDasharray="24 6" />
+    </g>
+    <path className="vfx-weapon-flow" d="M-22-5Q0-21 22-5M-24 4Q0-10 24 4M-20 13Q0 0 20 13" stroke={energy} strokeWidth="2.6" strokeDasharray="17 6" />
+    <path d="M9-3V-24L23-29V-10M9-17 23-22M9-3C0-8-7 2 1 5C7 7 12 2 9-3M23-10C13-15 9-4 17-2C24 0 28-6 23-10" fill={visual.core} stroke={visual.core} strokeWidth="1" />
+  </g>;
+  if (kind === 'cannon') return <>
+    <path {...flow} d={line} strokeWidth="4" />
+    <g transform={`translate(${focus.join(' ')}) rotate(${angle})`} fill="none">
+      <ellipse rx="9" ry="19" stroke={visual.color} strokeWidth="3.5" opacity=".85" />
+      <path className="vfx-weapon-flow" d="M-5-14 2-6 12-9 5 0 12 9 2 6-5 14" stroke={visual.core} strokeWidth="2" strokeDasharray="10 5" />
+      <path d="M-2-5 7 0-2 5Z" fill={visual.core} />
+    </g>
+  </>;
+  if (kind === 'axe' || kind === 'hammer') return <>
+    <path {...flow} d={line} strokeWidth="3.7" />
+    <g transform={`translate(${focus.join(' ')}) rotate(${angle})`} fill="none">
+      <path className="vfx-weapon-flow" d={kind === 'axe' ? 'M-11-30Q20-22 22 0Q20 22-11 30M-7-23Q11 0-7 23' : 'M-15-25H12L19-17V17L12 25H-15M-18-13H17M-18 13H17'} stroke={energy} strokeWidth="4.5" strokeDasharray="14 6" />
+      <path d={kind === 'axe' ? 'M-9-23Q16-17 16 0Q16 17-9 23' : 'M-10-20H10L14-14V14L10 20H-10'} stroke={visual.core} strokeWidth="1.2" />
+      <path d={star} transform="scale(.7)" fill={visual.core} />
+    </g>
+  </>;
+  if (kind === 'dagger' && anchor.secondary) return <>
+    <path {...flow} d={line} strokeWidth="6" />
+    <path {...flow} d={`M${anchor.secondary.grip.join(' ')}L${anchor.secondary.tip.join(' ')}`} strokeWidth="5" strokeDasharray="13 7" />
+    <path d={line} fill="none" stroke={visual.core} strokeWidth="1.3" />
+    <path d={`M${anchor.secondary.grip.join(' ')}L${anchor.secondary.tip.join(' ')}`} fill="none" stroke={visual.core} strokeWidth="1.1" />
+  </>;
+  return <g transform={`translate(${x} ${y}) rotate(${angle})`} fill="none" strokeLinecap="round">
+    <path className="vfx-weapon-flow" d={`M5 0Q${length * .35} -12 ${length * .56} 0T${length} 0`} stroke={energy} strokeWidth={kind === 'spear' ? 5 : 7} strokeDasharray="23 7 5 7" />
+    <path className="vfx-weapon-flow" d={`M10 0Q${length * .4} 10 ${length * .63} 0T${length} 0`} stroke={visual.color} strokeWidth="3.2" strokeDasharray="14 9" />
+    <path d={`M8 0H${length}`} stroke={visual.core} strokeWidth="1.35" opacity=".9" />
+    <path d={star} transform={`translate(${length * .83} -11) scale(.5)`} fill={visual.core} />
+  </g>;
+}
+
+function UnitSkillAura({ plan, unitKey }) {
+  const unique = useId().replace(/:/g, '');
+  const visual = plan?.spectacle;
+  if (!visual?.weapon || !weaponAnchors[unitKey]) return null;
+  const skillFrame = plan.skillPose?.src?.includes('skill-b') ? 'skill-b' : 'skill-a';
+  return ['windup', 'strike', 'skill'].map(pose => {
+    const sourcePose = pose === 'skill' ? skillFrame : pose;
+    const anchor = weaponAnchors[unitKey][sourcePose];
+    if (!anchor) return null;
+    const kind = WEAPON_KINDS[anchor.kind] || anchor.kind;
+    const style = pose === 'skill' && plan.skillPose ? { '--combat-sprite-scale': plan.skillPose.scale, '--combat-foot-offset': plan.skillPose.footOffset || '0%' } : getCombatFrameStyle(unitKey, sourcePose);
+    const id = `weapon-${unique}-${pose}`;
+    return <svg key={pose} className="vfx-weapon-aura" viewBox="0 0 512 512" data-vfx-phase="weapon" data-vfx-anchor="weapon" data-pose={pose} data-grip={anchor.grip.join(',')} data-tip={anchor.tip.join(',')} data-focus={anchor.focus?.join(',')} data-vfx-kind={kind} data-kind={kind} data-vfx-unit={unitKey} style={{ ...style, color: visual.color }} aria-hidden="true">
+      <WeaponPaint id={id} color={visual.color} core={visual.core} />
+      <WeaponShape anchor={anchor} kind={kind} visual={visual} id={id} />
+    </svg>;
+  });
+}
+
 export function SwordSkillAura({ plan, unitKey }) {
   const unique = useId().replace(/:/g, '');
   const visual = plan?.spectacle;
-  if (unitKey !== 'hero' || !visual?.sword) return null;
+  if (unitKey !== 'hero') return <UnitSkillAura plan={plan} unitKey={unitKey} />;
+  if (!visual?.sword) return null;
   const skillFrame = plan.skillPose?.src?.includes('skill-b') ? 'skill-b' : 'skill-a';
   const color = visual.sword.kind === 'gold' ? '#eabc59' : '#ff8739';
   const core = visual.sword.kind === 'gold' ? '#fff5c5' : '#fff2ae';
