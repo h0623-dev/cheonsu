@@ -23,7 +23,7 @@
 
 ## 검증 상태와 배포
 
-로컬 기능 검사·기존 회귀 검사·이전 버전 성능 비교를 완료했습니다. APK·서명 OTA 배포는 대기 중입니다. 2026-10-04 로컬의 **1.99.158 생산 빌드**에서 확인한 결과는 다음과 같습니다.
+로컬 기능 검사·기존 회귀 검사·이전 버전 성능 비교와 새 APK·서명 OTA의 공개 다운로드 검증을 완료했습니다. 2026-10-04 로컬의 **1.99.158 생산 빌드**에서 확인한 결과는 다음과 같습니다.
 
 - 구현 담당이 실행한 `npm run lint`, 단위 검사 **441개**, `npm run build` 통과.
 - `node scripts/verify-cloud-smoke.mjs`: 1280×900·390×844·844×390 모두 통과. 타이틀·도감·설정·원정·이미지·넘침·콘솔을 검사하고 수동 저장과 이어하기의 저장 문자열 보존을 확인했습니다.
@@ -39,12 +39,16 @@
 
 새 효과는 계산 비용을 늘립니다. 장면별 5회 중앙값의 구→신 차이는 Script −2.16~+7.87ms, Layout +5.46~+16.15ms, 스타일 재계산 +1.85~+65.94ms입니다. 일부 다중 타격에는 기존과 신규 모두 긴 작업이 있었고 신규의 긴 작업 합계 중앙값은 최대 19ms 증가했습니다. 주인공 여명참과 회복 기술은 양쪽의 긴 작업 합계 중앙값이 0ms였습니다. 이 결과는 첫 다운로드·첫 이미지 디코딩을 제외한 데스크톱 브라우저 비교이며 **실제 Android의 FPS·GPU 성능 검증이 아닙니다**. 반복별 수치와 개별 긴 작업은 `/workspace/work/skill-spectacle-qa/performance-comparison.json`과 `.md`에 보관합니다.
 
-이번 회귀 검사는 Node24, 기존 시스템 Chromium과 공유 캐시 설정을 사용했습니다. 기존 회귀의 로그·화면·JSON 보고서는 `/workspace/work/skill-effects-regression/`, 새 스킬 QA 결과는 `/workspace/work/skill-spectacle-qa/`에 보관합니다. 아래 항목은 아직 **완료 확인 대기**입니다.
+이번 회귀 검사는 Node24, 기존 시스템 Chromium과 공유 캐시 설정을 사용했습니다. 기존 회귀의 로그·화면·JSON 보고서는 `/workspace/work/skill-effects-regression/`, 새 스킬 QA 결과는 `/workspace/work/skill-spectacle-qa/`에 보관합니다. 배포 후 직접 내려받아 확인한 결과는 다음과 같습니다.
 
-- 새 APK의 인증서·게임 버전·Android357·전체 웹 파일·OTA trust, 서명 OTA의 manifest·전체 파일·공개 다운로드, 최종 소스 ZIP 검증
+- 배포 게임 소스 커밋: `fcebdf02843f8d9b414f8f6da0535f11ffd80932`. [최종 소스 Cloud Quality](https://github.com/h0623-dev/cheonsu/actions/runs/37205968469)와 [Android APK and OTA](https://github.com/h0623-dev/cheonsu/actions/runs/37205968466) 성공.
+- 공개 APK는 **1.99.158 / Android357**, 기존 인증서 SHA-256 `1d4b2f3f8e7b30e2b9202121def34d4da6e39b4119bdd93c44a01aebfcd0518f` 일치. Actions `apksigner`의 v1·v2 암호학적 서명 검증을 확인했습니다.
+- APK 웹 파일 **1,874개**(빌드 1,872개와 빈 Cordova 생성 파일 2개), OTA 웹 파일 **1,872개** 모두 최종 검증 빌드와 이름·SHA-256 일치. APK의 OTA 공개키·복구 보호·LiveUpdate 등록·외부 웹 원점 미사용도 확인했습니다.
+- 공개 APK·OTA·소스 ZIP 3개를 실제 다운로드해 GitHub 배포 해시와 대조했습니다. OTA 안내문과 ZIP의 RSA 서명 검증 통과. 공개 채널은 **1.99.158**, 네이티브 호환 범위는 Android350~357입니다.
+- 공개 소스 ZIP은 배포 커밋의 추적 파일 **2,479개**, Capacitor 생성 파일 **8개**, `SOURCE_MANIFEST` 1개, 총 **2,488개** 모두 일치. 누락·불필요한 추가·해시 불일치가 없고 개인키·서명키·환경 비밀을 포함하지 않습니다.
 
 두 GitHub Actions 워크플로에서 새 스킬 효과 검사를 실행하고 `tmp/skill-spectacle-qa/`를 QA 산출물에 포함합니다. APK와 OTA 서명은 최종 `main` 소스를 사용하는 `cheonsu-release` 환경에서만 수행합니다. 서명키를 이 클라우드 작업이나 공개 소스 ZIP에 복사하지 않습니다.
 
-새 산출물은 `cheonsu_1.99.158_update_debug.apk`와 `cheonsu_development_1.99.158.zip`이며 [v1.99.158 공개 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.158)에 제공할 예정입니다. 공개 자동 패치는 기존 `h0623-dev/cheonsu`의 별도 `updates` 채널에 서명 OTA로 배포합니다. 오래된 `main`의 `public/updates/latest.json`을 실제 채널 대신 사용하거나 낮은 버전으로 덮어쓰지 않습니다.
+새 산출물은 `cheonsu_1.99.158_update_debug.apk`와 `cheonsu_development_1.99.158.zip`이며 [v1.99.158 공개 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.158)에 공개했습니다. 공개 자동 패치는 기존 `h0623-dev/cheonsu`의 별도 `updates` 채널에 서명 OTA로 배포합니다. 오래된 `main`의 `public/updates/latest.json`을 실제 채널 대신 사용하거나 낮은 버전으로 덮어쓰지 않습니다.
 
-새 APK·서명 OTA·공개 다운로드 검증이 끝나기 전에는 배포 완료로 보고하지 않습니다. 실제 Android 기기에서 설치·실행·OTA 복구를 확인한 결과는 자동 검사와 구분해 기록합니다.
+새 APK·서명 OTA 배포와 공개 다운로드 검증을 완료했습니다. 실제 Android 기기의 설치·실행·OTA 복구·GPU 성능은 미검증이며 이번 클라우드 검사 결과와 구분합니다. 이 절의 공개 산출물 검증 기록은 배포 후 문서 갱신입니다.
