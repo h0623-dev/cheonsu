@@ -1,0 +1,154 @@
+{
+  "sourcePath": "docs/art/characters-v2/sources/monsters-rear-atlas.png",
+  "sha256": "3181000e5d44d066f93d1a1018ea27e459344e9d373176114fd9fe5508a36b72",
+  "size": [
+    1536,
+    1024
+  ],
+  "units": {
+    "kobold-hunter": {
+      "rearSourceBounds": {
+        "left": 39,
+        "top": 130,
+        "right": 496,
+        "bottom": 502
+      },
+      "front": {
+        "canvas": [
+          417,
+          480
+        ],
+        "visibleHeight": 400,
+        "foot": 447
+      },
+      "rear": {
+        "canvas": [
+          515,
+          480
+        ],
+        "visibleHeight": 399,
+        "foot": 447
+      }
+    },
+    "lizard-spearman": {
+      "rearSourceBounds": {
+        "left": 511,
+        "top": 15,
+        "right": 982,
+        "bottom": 507
+      },
+      "front": {
+        "canvas": [
+          495,
+          480
+        ],
+        "visibleHeight": 400,
+        "foot": 447
+      },
+      "rear": {
+        "canvas": [
+          407,
+          480
+        ],
+        "visibleHeight": 399,
+        "foot": 447
+      }
+    },
+    "horned-ogre": {
+      "rearSourceBounds": {
+        "left": 1069,
+        "top": 11,
+        "right": 1487,
+        "bottom": 510
+      },
+      "front": {
+        "canvas": [
+          384,
+          480
+        ],
+        "visibleHeight": 399,
+        "foot": 447
+      },
+      "rear": {
+        "canvas": [
+          384,
+          480
+        ],
+        "visibleHeight": 399,
+        "foot": 446
+      }
+    },
+    "harpy-scout": {
+      "rearSourceBounds": {
+        "left": 17,
+        "top": 536,
+        "right": 540,
+        "bottom": 978
+      },
+      "front": {
+        "canvas": [
+          495,
+          480
+        ],
+        "visibleHeight": 398,
+        "foot": 447
+      },
+      "rear": {
+        "canvas": [
+          497,
+          480
+        ],
+        "visibleHeight": 399,
+        "foot": 446
+      }
+    },
+    "skeleton-warrior": {
+      "rearSourceBounds": {
+        "left": 563,
+        "top": 502,
+        "right": 987,
+        "bottom": 981
+      },
+      "front": {
+        "canvas": [
+          396,
+          480
+        ],
+        "visibleHeight": 400,
+        "foot": 447
+      },
+      "rear": {
+        "canvas": [
+          384,
+          480
+        ],
+        "visibleHeight": 398,
+        "foot": 446
+      }
+    },
+    "rock-spirit": {
+      "rearSourceBounds": {
+        "left": 1002,
+        "top": 526,
+        "right": 1517,
+        "bottom": 996
+      },
+      "front": {
+        "canvas": [
+          503,
+          480
+        ],
+        "visibleHeight": 400,
+        "foot": 447
+      },
+      "rear": {
+        "canvas": [
+          462,
+          480
+        ],
+        "visibleHeight": 400,
+        "foot": 447
+      }
+    }
+  }
+}

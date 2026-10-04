@@ -8,7 +8,7 @@ import { getUnitCombatClass } from '../src/engine/combat.js';
 import { withSkill } from '../src/data/skills.js';
 import { getCharacterArt } from '../src/data/characterArt.js';
 
-test('all 41 combat characters have transparent anchored frames from their active art catalogue', async () => {
+test('all 47 combat characters have transparent anchored frames from their active art catalogue', async () => {
   const manifest = JSON.parse(await readFile(new URL('../public/art/combat-v2/manifest.json', import.meta.url), 'utf8'));
   const enemies = JSON.parse(await readFile(new URL('../public/art/enemies-v3/manifest.json', import.meta.url), 'utf8'));
   const bosses = JSON.parse(await readFile(new URL('../public/art/bosses-v1/manifest.json', import.meta.url), 'utf8'));

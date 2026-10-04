@@ -2,6 +2,7 @@ import { CHARACTER_SKILLS, getUnitSkills } from './skills.js';
 import { getCharacterProfile } from './characterProfiles.js';
 import { combatUnitIds, getCombatSprite } from './combatArt.js';
 import { getPaintedVisualProfile } from './unitVisuals.js';
+import { MONSTER_ENEMIES } from './monsterEnemies.js';
 
 export const RECRUIT_BY_STAGE = { 2: 'leon', 4: 'sera', 6: 'noah', 8: 'yuna', 10: 'rakan', 12: 'miho', 14: 'teo', 16: 'irene', 18: 'kaz', 20: 'ella', 22: 'jin', 24: 'luka', 26: 'baekho' };
 const names = { hero: '카일', bram: '브람', lina: '리나', aria: '아리아', leon: '레온', sera: '세라', noah: '노아', yuna: '유나', rakan: '라칸', miho: '미호', teo: '테오', irene: '아이린', kaz: '카즈', ella: '엘라', jin: '진', luka: '루카', baekho: '백호' };
@@ -14,6 +15,7 @@ const enemies = {
   frost_mage: ['빙결 술사', '빙결 마도사'], cultist: ['의식 사제', '암흑 술사'], void_knight: ['공허 기사', '심연의 검'], wolf: ['전투 늑대', '야수'],
   boss_commander: ['황금의 지휘관', '적 지휘관'], boss_frost: ['서리의 군주', '빙결 지휘관'], boss_ember: ['잿불의 군주', '화염 지휘관'],
   boss_oracle: ['검은 예언자', '의식 지휘관'], boss_abyss: ['흑천 가론', '옛 천수 기사단장'],
+  ...Object.fromEntries(Object.entries(MONSTER_ENEMIES).map(([id, identity]) => [id, [identity.name, identity.role]])),
 };
 
 // Collection is derived from the existing roster and clear records; opening it never writes a save.

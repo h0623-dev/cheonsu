@@ -4456,6 +4456,688 @@
           "bottom": 479
         }
       }
+    },
+    "kobold-hunter": {
+      "sourcePath": "docs/art/characters-v2/sources/kobold-hunter.png",
+      "sha256": "989bf0037a6ec20292e4b25f81e2a7c6f1f56173c781e1fb088ee2293c3a665f",
+      "size": [
+        1254,
+        1254
+      ],
+      "scale": 1.0765171503957784,
+      "sourceBounds": [
+        {
+          "left": 27,
+          "top": 45,
+          "right": 431,
+          "bottom": 403
+        },
+        {
+          "left": 450,
+          "top": 47,
+          "right": 833,
+          "bottom": 409
+        },
+        {
+          "left": 851,
+          "top": 43,
+          "right": 1242,
+          "bottom": 404
+        },
+        {
+          "left": 20,
+          "top": 471,
+          "right": 446,
+          "bottom": 797
+        },
+        {
+          "left": 451,
+          "top": 435,
+          "right": 822,
+          "bottom": 813
+        },
+        {
+          "left": 865,
+          "top": 465,
+          "right": 1223,
+          "bottom": 812
+        },
+        {
+          "left": 26,
+          "top": 921,
+          "right": 416,
+          "bottom": 1190
+        },
+        {
+          "left": 460,
+          "top": 862,
+          "right": 828,
+          "bottom": 1213
+        },
+        {
+          "left": 849,
+          "top": 828,
+          "right": 1235,
+          "bottom": 1231
+        }
+      ],
+      "corrections": {},
+      "componentAssignments": [],
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 95,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 90,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 91,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 128,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 73,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 105,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 190,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 102,
+          "bottom": 479
+        }
+      }
+    },
+    "skeleton-warrior": {
+      "sourcePath": "docs/art/characters-v2/sources/skeleton-warrior.png",
+      "sha256": "632e9a75d636bb23a60a402e230d493ae3dd996637fe908232699ea7482f885b",
+      "size": [
+        1254,
+        1254
+      ],
+      "scale": 0.952755905511811,
+      "sourceBounds": [
+        {
+          "left": 41,
+          "top": 91,
+          "right": 432,
+          "bottom": 382
+        },
+        {
+          "left": 447,
+          "top": 90,
+          "right": 813,
+          "bottom": 421
+        },
+        {
+          "left": 860,
+          "top": 20,
+          "right": 1225,
+          "bottom": 417
+        },
+        {
+          "left": 6,
+          "top": 506,
+          "right": 513,
+          "bottom": 796
+        },
+        {
+          "left": 492,
+          "top": 446,
+          "right": 826,
+          "bottom": 805
+        },
+        {
+          "left": 887,
+          "top": 488,
+          "right": 1248,
+          "bottom": 816
+        },
+        {
+          "left": 36,
+          "top": 817,
+          "right": 412,
+          "bottom": 1219
+        },
+        {
+          "left": 441,
+          "top": 884,
+          "right": 895,
+          "bottom": 1182
+        },
+        {
+          "left": 876,
+          "top": 866,
+          "right": 1238,
+          "bottom": 1222
+        }
+      ],
+      "corrections": {},
+      "componentAssignments": [],
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 202,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 164,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 203,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 137,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 167,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 96,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 195,
+          "bottom": 479
+        }
+      }
+    },
+    "harpy-scout": {
+      "sourcePath": "docs/art/characters-v2/sources/harpy-scout.png",
+      "sha256": "e1e694d18ba897684486333e8c8bdb46ba156d1bf173982521c75f9b01b9ee58",
+      "size": [
+        1536,
+        1024
+      ],
+      "scale": 0.8880733944954129,
+      "sourceBounds": [
+        {
+          "left": 16,
+          "top": 20,
+          "right": 435,
+          "bottom": 325
+        },
+        {
+          "left": 531,
+          "top": 27,
+          "right": 1008,
+          "bottom": 330
+        },
+        {
+          "left": 1032,
+          "top": 8,
+          "right": 1526,
+          "bottom": 336
+        },
+        {
+          "left": 18,
+          "top": 343,
+          "right": 529,
+          "bottom": 628
+        },
+        {
+          "left": 573,
+          "top": 347,
+          "right": 955,
+          "bottom": 671
+        },
+        {
+          "left": 1029,
+          "top": 333,
+          "right": 1512,
+          "bottom": 671
+        },
+        {
+          "left": 17,
+          "top": 619,
+          "right": 496,
+          "bottom": 1014
+        },
+        {
+          "left": 520,
+          "top": 707,
+          "right": 1064,
+          "bottom": 996
+        },
+        {
+          "left": 1082,
+          "top": 688,
+          "right": 1503,
+          "bottom": 1003
+        }
+      ],
+      "corrections": {},
+      "componentAssignments": [],
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 209,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 210,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 188,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 226,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 192,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 179,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 128,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 222,
+          "bottom": 479
+        }
+      }
+    },
+    "rock-spirit": {
+      "sourcePath": "docs/art/characters-v2/sources/rock-spirit.png",
+      "sha256": "60473d5e6d8941f016127da07302235a79ce5ff0489b46918d9521a5129918ad",
+      "size": [
+        1536,
+        1024
+      ],
+      "scale": 0.9398058252427185,
+      "sourceBounds": [
+        {
+          "left": 91,
+          "top": 14,
+          "right": 476,
+          "bottom": 332
+        },
+        {
+          "left": 595,
+          "top": 16,
+          "right": 960,
+          "bottom": 328
+        },
+        {
+          "left": 1107,
+          "top": 12,
+          "right": 1488,
+          "bottom": 331
+        },
+        {
+          "left": 50,
+          "top": 371,
+          "right": 564,
+          "bottom": 655
+        },
+        {
+          "left": 605,
+          "top": 357,
+          "right": 972,
+          "bottom": 664
+        },
+        {
+          "left": 1094,
+          "top": 364,
+          "right": 1486,
+          "bottom": 662
+        },
+        {
+          "left": 59,
+          "top": 660,
+          "right": 478,
+          "bottom": 1004
+        },
+        {
+          "left": 598,
+          "top": 741,
+          "right": 953,
+          "bottom": 996
+        },
+        {
+          "left": 1039,
+          "top": 717,
+          "right": 1504,
+          "bottom": 1002
+        }
+      ],
+      "corrections": {},
+      "componentAssignments": [],
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 180,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 186,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 180,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 212,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 191,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 199,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 157,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 240,
+          "bottom": 479
+        }
+      }
+    },
+    "lizard-spearman": {
+      "sourcePath": "docs/art/characters-v2/sources/lizard-spearman.png",
+      "sha256": "483c2969636969156c299d1df8961251dd52236cf86ed60c6a70cb5d6b8b4993",
+      "size": [
+        1254,
+        1254
+      ],
+      "scale": 0.9013035381750466,
+      "sourceBounds": [
+        {
+          "left": 18,
+          "top": 104,
+          "right": 448,
+          "bottom": 434
+        },
+        {
+          "left": 430,
+          "top": 104,
+          "right": 849,
+          "bottom": 433
+        },
+        {
+          "left": 850,
+          "top": 111,
+          "right": 1237,
+          "bottom": 438
+        },
+        {
+          "left": 19,
+          "top": 506,
+          "right": 555,
+          "bottom": 809
+        },
+        {
+          "left": 476,
+          "top": 470,
+          "right": 879,
+          "bottom": 812
+        },
+        {
+          "left": 882,
+          "top": 486,
+          "right": 1253,
+          "bottom": 809
+        },
+        {
+          "left": 20,
+          "top": 917,
+          "right": 510,
+          "bottom": 1197
+        },
+        {
+          "left": 463,
+          "top": 824,
+          "right": 824,
+          "bottom": 1205
+        },
+        {
+          "left": 866,
+          "top": 840,
+          "right": 1239,
+          "bottom": 1212
+        }
+      ],
+      "corrections": {
+        "recoil": {
+          "sourcePath": "docs/art/characters-v2/sources/lizard-spearman-recoil-correction.png",
+          "sha256": "dc97ceb2a941265edbf765ece08f26dcfdbe9ef01f101b741c60a0174dd0b907",
+          "sourceBounds": {
+            "left": 34,
+            "top": 237,
+            "right": 1191,
+            "bottom": 1124
+          },
+          "normalization": 0.36486486486486486
+        }
+      },
+      "componentAssignments": [],
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 183,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 183,
+          "bottom": 478
+        },
+        "windup": {
+          "height": 512,
+          "top": 185,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 206,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 171,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 188,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 227,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 136,
+          "bottom": 478
+        }
+      }
+    },
+    "horned-ogre": {
+      "sourcePath": "docs/art/characters-v2/sources/horned-ogre.png",
+      "sha256": "9a23c58662a517d3a4107bf77d2db357cf8258734a6f13800459e0537bed9f11",
+      "size": [
+        1254,
+        1254
+      ],
+      "scale": 0.9402808100579687,
+      "sourceBounds": [
+        {
+          "left": 55,
+          "top": 40,
+          "right": 384,
+          "bottom": 419
+        },
+        {
+          "left": 500,
+          "top": 84,
+          "right": 833,
+          "bottom": 416
+        },
+        {
+          "left": 911,
+          "top": 6,
+          "right": 1226,
+          "bottom": 419
+        },
+        {
+          "left": 16,
+          "top": 505,
+          "right": 504,
+          "bottom": 823
+        },
+        {
+          "left": 489,
+          "top": 448,
+          "right": 820,
+          "bottom": 823
+        },
+        {
+          "left": 898,
+          "top": 437,
+          "right": 1238,
+          "bottom": 824
+        },
+        {
+          "left": 17,
+          "top": 873,
+          "right": 418,
+          "bottom": 1211
+        },
+        {
+          "left": 445,
+          "top": 867,
+          "right": 861,
+          "bottom": 1223
+        },
+        {
+          "left": 863,
+          "top": 837,
+          "right": 1242,
+          "bottom": 1228
+        }
+      ],
+      "corrections": {
+        "windup": {
+          "sourcePath": "docs/art/characters-v2/sources/horned-ogre-windup-correction.png",
+          "sha256": "094a5083c4e1babc839321b1eddc12edf44884245181b30f585fa5939a5a4249",
+          "sourceBounds": {
+            "left": 192,
+            "top": 51,
+            "right": 1178,
+            "bottom": 1234
+          },
+          "normalization": 0.4203747072599532,
+          "bodyAnchor": {
+            "referenceTop": 465,
+            "correctedTop": 381
+          }
+        }
+      },
+      "componentAssignments": [],
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 123,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 167,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 12,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 181,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 126,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 116,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 162,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 145,
+          "bottom": 479
+        }
+      }
     }
   }
 }

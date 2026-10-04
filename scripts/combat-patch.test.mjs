@@ -28,7 +28,7 @@ test('weapon and healing presentation matches character artwork', () => {
   assert.equal(getCombatPresentation('hero', { ...hit, mode: 'skill', effectType: 'fire' }).effect, 'fire');
 });
 test('all combat poses and effects have real alpha and correct dimensions', async () => {
-  assert.equal(combatUnitIds.length, 41);
+  assert.equal(combatUnitIds.length, 47);
   assert.equal(combatEffectIds.length, 16);
   const paths = [...combatUnitIds.flatMap(id => [getCombatSprite(id), getCombatSprite(id, 'action')]), ...combatEffectIds.map(getCombatEffect)];
   for (const asset of paths) {

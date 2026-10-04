@@ -154,6 +154,16 @@
   .combat-health span { font-size: 10px; }
   .combat-result strong { font-size: 30px; }
 }
+@media (max-width: 600px) and (orientation: portrait) {
+  .fighter-defender:is(
+    [data-unit-key="kobold-hunter"],
+    [data-unit-key="lizard-spearman"],
+    [data-unit-key="horned-ogre"],
+    [data-unit-key="harpy-scout"],
+    [data-unit-key="skeleton-warrior"],
+    [data-unit-key="rock-spirit"]
+  ) { right: 6%; }
+}
 @media (max-height: 500px) and (orientation: landscape) {
   .painted-combat-overlay { padding: 6px; }
   .painted-combat-heading { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr); min-height: 0; padding: 7px 16px; }

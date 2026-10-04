@@ -80,7 +80,7 @@ export default function CombatScene({ scene, attackerKey, defenderKey, backgroun
           <div className="fighter-shadow" />
           <FighterPoses unitKey={attackerKey} name={scene.attacker.name} skillPose={plan.skillPose} />
         </div>
-        {!selfSupport && <div className="painted-fighter fighter-defender">
+        {!selfSupport && <div className="painted-fighter fighter-defender" data-unit-key={defenderKey}>
           <div className="fighter-shadow" />
           <FighterPoses unitKey={defenderKey} name={scene.defender.name} defender />
         </div>}

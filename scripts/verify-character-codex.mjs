@@ -60,7 +60,7 @@ try {
     await button('검색 지우기').click();
     await page.getByLabel('수집 상태', { exact: true }).selectOption('all');
     await button('적군').click();
-    assert.equal(await page.locator('.collection-card').count(), 19);
+    assert.equal(await page.locator('.collection-card').count(), 25);
     assert.equal(await page.locator('[data-collected=true]').count(), 0);
     await button('보스').click();
     assert.equal(await page.locator('.collection-card').count(), 5);
@@ -104,14 +104,14 @@ try {
     });
     await page.reload();
     await button('도감').click();
-    for (const [kind, count] of [['동료', 17], ['적군', 19], ['보스', 5]]) {
+    for (const [kind, count] of [['동료', 17], ['적군', 25], ['보스', 5]]) {
       await button(kind).click();
       assert.equal(await page.locator('[data-collected=true]').count(), count, `${kind}: full campaign can complete the catalog`);
       await verifyImages();
     }
     assert.deepEqual(errors, []);
     reports.push({ viewport, passed: true });
-    console.log(`PASS codex ${viewport.width}x${viewport.height}: 41 entries, grayscale/color, details, filters, save, back navigation`);
+    console.log(`PASS codex ${viewport.width}x${viewport.height}: 47 entries, grayscale/color, details, filters, save, back navigation`);
     await page.close();
   }
   await fs.writeFile(`${output}/result.json`, JSON.stringify(reports, null, 2));

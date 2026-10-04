@@ -2334,6 +2334,348 @@
       },
       "portrait": "/art/characters-v2/portraits/boss_abyss.webp",
       "dialogue": "/art/characters-v2/dialogue/boss_abyss.webp"
+    },
+    "kobold-hunter": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/kobold-hunter-run-a.webp",
+        "run-b": "/art/characters-v2/units/kobold-hunter-run-b.webp",
+        "windup": "/art/characters-v2/units/kobold-hunter-windup.webp",
+        "strike": "/art/characters-v2/units/kobold-hunter-strike.webp",
+        "recover": "/art/characters-v2/units/kobold-hunter-recover.webp",
+        "recoil": "/art/characters-v2/units/kobold-hunter-recoil.webp",
+        "skill-a": "/art/characters-v2/units/kobold-hunter-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/kobold-hunter-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 95,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 90,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 91,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 128,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 73,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 105,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 190,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 102,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/kobold-hunter.webp",
+      "dialogue": "/art/characters-v2/dialogue/kobold-hunter.webp",
+      "map": "/art/map-sprites-v4/kobold-hunter.webp"
+    },
+    "lizard-spearman": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/lizard-spearman-run-a.webp",
+        "run-b": "/art/characters-v2/units/lizard-spearman-run-b.webp",
+        "windup": "/art/characters-v2/units/lizard-spearman-windup.webp",
+        "strike": "/art/characters-v2/units/lizard-spearman-strike.webp",
+        "recover": "/art/characters-v2/units/lizard-spearman-recover.webp",
+        "recoil": "/art/characters-v2/units/lizard-spearman-recoil.webp",
+        "skill-a": "/art/characters-v2/units/lizard-spearman-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/lizard-spearman-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 183,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 183,
+          "bottom": 478
+        },
+        "windup": {
+          "height": 512,
+          "top": 185,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 206,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 171,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 188,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 227,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 136,
+          "bottom": 478
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/lizard-spearman.webp",
+      "dialogue": "/art/characters-v2/dialogue/lizard-spearman.webp",
+      "map": "/art/map-sprites-v4/lizard-spearman.webp"
+    },
+    "horned-ogre": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/horned-ogre-run-a.webp",
+        "run-b": "/art/characters-v2/units/horned-ogre-run-b.webp",
+        "windup": "/art/characters-v2/units/horned-ogre-windup.webp",
+        "strike": "/art/characters-v2/units/horned-ogre-strike.webp",
+        "recover": "/art/characters-v2/units/horned-ogre-recover.webp",
+        "recoil": "/art/characters-v2/units/horned-ogre-recoil.webp",
+        "skill-a": "/art/characters-v2/units/horned-ogre-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/horned-ogre-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 123,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 167,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 12,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 181,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 126,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 116,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 162,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 145,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/horned-ogre.webp",
+      "dialogue": "/art/characters-v2/dialogue/horned-ogre.webp",
+      "map": "/art/map-sprites-v4/horned-ogre.webp"
+    },
+    "harpy-scout": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/harpy-scout-run-a.webp",
+        "run-b": "/art/characters-v2/units/harpy-scout-run-b.webp",
+        "windup": "/art/characters-v2/units/harpy-scout-windup.webp",
+        "strike": "/art/characters-v2/units/harpy-scout-strike.webp",
+        "recover": "/art/characters-v2/units/harpy-scout-recover.webp",
+        "recoil": "/art/characters-v2/units/harpy-scout-recoil.webp",
+        "skill-a": "/art/characters-v2/units/harpy-scout-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/harpy-scout-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 209,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 210,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 188,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 226,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 192,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 179,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 128,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 222,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/harpy-scout.webp",
+      "dialogue": "/art/characters-v2/dialogue/harpy-scout.webp",
+      "map": "/art/map-sprites-v4/harpy-scout.webp"
+    },
+    "skeleton-warrior": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/skeleton-warrior-run-a.webp",
+        "run-b": "/art/characters-v2/units/skeleton-warrior-run-b.webp",
+        "windup": "/art/characters-v2/units/skeleton-warrior-windup.webp",
+        "strike": "/art/characters-v2/units/skeleton-warrior-strike.webp",
+        "recover": "/art/characters-v2/units/skeleton-warrior-recover.webp",
+        "recoil": "/art/characters-v2/units/skeleton-warrior-recoil.webp",
+        "skill-a": "/art/characters-v2/units/skeleton-warrior-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/skeleton-warrior-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 202,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 164,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 203,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 137,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 167,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 96,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 195,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/skeleton-warrior.webp",
+      "dialogue": "/art/characters-v2/dialogue/skeleton-warrior.webp",
+      "map": "/art/map-sprites-v4/skeleton-warrior.webp"
+    },
+    "rock-spirit": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/rock-spirit-run-a.webp",
+        "run-b": "/art/characters-v2/units/rock-spirit-run-b.webp",
+        "windup": "/art/characters-v2/units/rock-spirit-windup.webp",
+        "strike": "/art/characters-v2/units/rock-spirit-strike.webp",
+        "recover": "/art/characters-v2/units/rock-spirit-recover.webp",
+        "recoil": "/art/characters-v2/units/rock-spirit-recoil.webp",
+        "skill-a": "/art/characters-v2/units/rock-spirit-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/rock-spirit-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 180,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 186,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 180,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 212,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 191,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 199,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 157,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 240,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/rock-spirit.webp",
+      "dialogue": "/art/characters-v2/dialogue/rock-spirit.webp",
+      "map": "/art/map-sprites-v4/rock-spirit.webp"
     }
   }
 }

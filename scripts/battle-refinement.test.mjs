@@ -59,9 +59,9 @@ test('all 30 new battlefields are connected with six genuinely different layouts
     assert.equal(hashes.size,6);
   }
 });
-test('41 map sprites share visible height and foot anchor, with natural quadruped proportions',async()=>{
+test('47 map sprites share visible height and foot anchor, with natural quadruped proportions',async()=>{
   const manifest=JSON.parse(await readFile(new URL('../public/art/map-sprites-v4/manifest.json',import.meta.url),'utf8'));
-  assert.equal(Object.keys(manifest).length,41);
+  assert.equal(Object.keys(manifest).length,47);
   for(const [id,entry] of Object.entries(manifest)) {
     const asset=getPaintedVisualProfile(id).map;
     const {data,info}=await sharp(new URL(`../public${asset}`,import.meta.url).pathname.replace(/^\/([A-Za-z]:)/,'$1')).ensureAlpha().raw().toBuffer({resolveWithObject:true});

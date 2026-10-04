@@ -1,6 +1,8 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.156 / Android versionCode 355**
+현재 개발 빌드: **1.99.157 / Android versionCode 356**
+
+1.99.157: 승인한 코볼트·도마뱀·오거·하피·해골·바위정령 6종의 대기·전투·타격·기술·대화 그림을 적용합니다. 기존 아군 화풍을 맞추고 일반 적 4종과 정예 적 2종으로 배치하며, 재개 중인 기존 전투와 저장·수집 기록은 보존합니다. [적 다양화와 검증](docs/MONSTER_ENEMIES_1.99.157.md).
 
 1.99.156: 마을 화면 이탈 후 남은 크기 변경 알림이 제거된 지도를 참조하던 `firstElementChild` 오류를 수정합니다. 저장·진행·수집·전투 규칙과 캐릭터 아트는 유지합니다. [수정·검증](docs/TOWN_CAMERA_FIX_1.99.156.md).
 
@@ -31,8 +33,8 @@
 
 ## 다운로드
 
-- 새 버전 산출물: `cheonsu_1.99.156_update_debug.apk`, `cheonsu_development_1.99.156.zip`
-- [1.99.156 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.156)
+- 새 버전 산출물: `cheonsu_1.99.157_update_debug.apk`, `cheonsu_development_1.99.157.zip`
+- [1.99.157 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.157)
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)

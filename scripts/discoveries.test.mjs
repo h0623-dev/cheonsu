@@ -8,6 +8,7 @@ import { alignMapToArtwork, isPaintedGround } from '../src/data/battlefieldGroun
 import { createBattlefieldTerrain } from '../src/data/stageTerrain.js';
 import { getBattlefieldPlan } from '../src/data/battlefieldPlans.js';
 import { getChapterBossName } from '../src/data/chapterIdentity.js';
+import { applyStageMonsterAppearance } from '../src/data/monsterEnemies.js';
 import { distributeBattleFormations } from '../src/engine/formations.js';
 import { DISCOVERIES, DISCOVERY_TECHNIQUES, SECRET_PROMOTIONS } from '../src/data/discoveries.js';
 import {
@@ -51,7 +52,7 @@ const appHelpers = runInNewContext([
   ...['ENEMY_VARIANT_KEYS', 'createRecruitAlly', 'getPromotionTitle', 'promoteAllyUnit'].map(declaration),
   '({ expandStageForLargeBattle, extendMapForPlayableBoard, spaceBattleFormations, createRecruitAlly, promoteAllyUnit })',
 ].join('\n'), {
-  alignMapToArtwork, createBattlefieldTerrain, getBattlefieldPlan, applyEquipmentStats, distributeBattleFormations, getSkillDisplayName, getChapterBossName,
+  alignMapToArtwork, createBattlefieldTerrain, getBattlefieldPlan, applyEquipmentStats, distributeBattleFormations, getSkillDisplayName, getChapterBossName, applyStageMonsterAppearance,
   clone: (value) => JSON.parse(JSON.stringify(value)),
   Math: Object.assign(Object.create(Math), { random: () => { throw new Error('Random map placement'); } }),
 });
