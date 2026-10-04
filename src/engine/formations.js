@@ -5,7 +5,7 @@ const key = ({ x, y }) => `${x},${y}`;
 const distance = (a, b) => Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
 
 // Stay in one connected land mass so a decorative island cannot become a spawn.
-function connectedGround(map) {
+export function connectedGround(map) {
   const seen = new Set();
   let largest = [];
   for (let y = 0; y < map.length; y++) for (let x = 0; x < map[y].length; x++) {

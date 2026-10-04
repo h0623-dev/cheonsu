@@ -29,6 +29,7 @@ jobs:
       - run: node scripts/verify-town-camera.mjs
       - run: node scripts/verify-monster-enemies.mjs
       - run: node scripts/verify-skill-spectacle.mjs
+      - run: node scripts/verify-deployment.mjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
@@ -38,4 +39,5 @@ jobs:
             tmp/town-camera-qa/
             tmp/monster-enemies-qa/
             tmp/skill-spectacle-qa/
+            tmp/deployment-qa/
           retention-days: 14

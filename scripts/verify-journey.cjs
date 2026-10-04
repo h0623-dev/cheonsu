@@ -17,8 +17,10 @@ async function noOverflow(page, selector) {
   assert.deepEqual(errors, [], `Horizontal overflow: ${selector}`);
 }
 async function saveBattle(page) {
-  await page.locator('.cinematic-stage-actions button').filter({hasText:'설정'}).click();
-  await page.locator('.battle-settings-menu button').filter({hasText:'진행 저장'}).click();
+  const save = page.locator('.battle-control-heading .prominent-save');
+  await save.waitFor();
+  await page.waitForFunction(() => !document.querySelector('.battle-control-heading .prominent-save')?.disabled);
+  await save.click();
   return page.evaluate(key => JSON.parse(localStorage.getItem(key)), saveKey);
 }
 async function restoreVictory(page, fixture) {
@@ -31,7 +33,7 @@ async function restoreVictory(page, fixture) {
 }
 async function main() {
   await fs.mkdir(out,{recursive:true});
-  const browser = await chromium.launch({channel:'msedge',headless:true});
+  const browser = await chromium.launch({channel:process.env.CHEONSU_QA_BROWSER || 'msedge',headless:true});
   const report = [];
   try {
     for (const viewport of sizes) {
@@ -48,6 +50,7 @@ async function main() {
       await page.locator('.world-stage-node').first().click();
       await noOverflow(page,'.deployment-screen, .deploy-unit-card, .deployment-actions');
       await shot(page,`deployment-${viewport.width}`);
+      await page.locator('.deployment-management > summary').click();
       await page.locator('.deployment-advanced summary').click();
       assert.ok(await page.getByRole('button',{name:'출전 자동 장착',exact:true}).isVisible());
       await noOverflow(page,'.deployment-advanced');
@@ -58,6 +61,7 @@ async function main() {
       const aria=page.locator('.deploy-unit-card.unit-visual-aria');
       await aria.click(); assert.equal(await aria.getAttribute('aria-pressed'),'false');
       await aria.click(); assert.equal(await aria.getAttribute('aria-pressed'),'true');
+      await page.locator('.deployment-management > summary').click();
       await page.getByRole('button',{name:'전투 시작',exact:true}).click();
       await imageReady(page);
       await noOverflow(page,'.narrative-stage, .narrative-header, .narrative-line, .narrative-dialogue');

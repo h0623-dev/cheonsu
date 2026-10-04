@@ -4,6 +4,7 @@ import { DEFAULT_GEAR_INVENTORY } from "../data/equipment.js";
 import { DEFAULT_SUPPORT_POINTS, DEFAULT_SUPPORT_DIALOGUES_SEEN } from "../data/supports.js";
 import { inMap } from "./movement.js";
 import { normalizeExploration, applyDiscoveryUnlocks } from "./discoveryEngine.js";
+import { sanitizeDeploymentDraft } from './deploymentEngine.js';
 import {
   clone,
   getInitialParty,
@@ -338,6 +339,7 @@ export function normalizeSaveData(raw, saveVersion = "0.12") {
     deployedIds: safeArray(data.deployedIds, []).filter((id) =>
       typeof id === "string"
     ),
+    deploymentDraft: sanitizeDeploymentDraft(data.deploymentDraft, stage.id),
     mode: validModes.includes(data.mode) ? data.mode : "move",
     turn: validTurns.includes(data.turn) ? data.turn : "ally",
     round:

@@ -1,0 +1,125 @@
+.deployment-board {
+  --deployment-cell-width: 54px;
+  --deployment-cell-height: 46px;
+  --deployment-border: #587366;
+  color: #edf4ee;
+  width: 100%;
+  min-width: 0;
+  margin: 12px 0 20px;
+}
+.deployment-board :is(h2, h3, p) { margin: 0; }
+.deployment-board-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.deployment-board-heading > div { min-width: 0; }
+.deployment-board-heading > div > span { color: #b9cec2; font-size: 11px; }
+.deployment-board-heading h2 { display: flex; align-items: center; gap: 7px; font-size: 20px; line-height: 1.6; }
+.deployment-board-count { display: flex; align-items: center; gap: 6px; white-space: nowrap; font-size: 13px; }
+.deployment-board-guide { padding: 5px 0 12px; color: #c9ded2; font-size: 13px; line-height: 1.6; }
+.deployment-board-layout { display: grid; grid-template-columns: minmax(0, 1fr) 244px; gap: 14px; align-items: start; }
+.deployment-board-map-panel, .deployment-board-roster-panel { min-width: 0; }
+.deployment-board-map-caption { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; min-height: 28px; color: #d0ded5; font-size: 11px; }
+.deployment-board-map-caption span { display: flex; align-items: center; gap: 5px; }
+.deployment-board-map-caption i { width: 10px; height: 10px; border-radius: 2px; }
+.deployment-legend-ally { background: #69bbdf; border: 1px solid #bae7f7; }
+.deployment-legend-enemy { background: #c97768; border: 1px solid #e5b3a8; }
+.deployment-board-map-caption small { margin-left: auto; color: #adc3b5; font-size: 11px; }
+.deployment-board-scroll {
+  position: relative; isolation: isolate; width: 100%; height: clamp(250px, 46dvh, 405px);
+  min-width: 0; overflow: auto; overscroll-behavior: contain; touch-action: pan-x pan-y;
+  border: 1px solid var(--deployment-border); border-radius: 5px; background: #293e31;
+  scrollbar-color: #8aa98e #233a2b; scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+.deployment-board-grid {
+  position: relative; display: grid; grid-template-columns: repeat(var(--deployment-cols), var(--deployment-cell-width));
+  grid-auto-rows: var(--deployment-cell-height); width: max-content; min-width: 100%;
+  background: #405d40 var(--deployment-scene) center / 100% 100% no-repeat;
+  padding: 0; user-select: none; -webkit-user-select: none;
+}
+.app.world-art-app .deployment-board .deployment-board-cell {
+  position: relative; display: block; width: var(--deployment-cell-width); height: var(--deployment-cell-height);
+  min-width: var(--deployment-cell-width); min-height: var(--deployment-cell-height); padding: 0; margin: 0;
+  border: 1px solid rgb(213 226 210 / 8%); border-radius: 0; background: transparent;
+  color: #f3faf3; box-shadow: none; opacity: 1; overflow: visible; cursor: default;
+  touch-action: pan-x pan-y; font: inherit; filter: none;
+}
+.deployment-cell-ground { position: absolute; inset: 0; background: var(--ground-image, var(--tile-image)) var(--ground-position, center) / 300% 300%; border-radius: var(--ground-radius, 0); pointer-events: none; }
+.deployment-board-cell.is-outside::after { content: ''; position: absolute; inset: 0; background: rgb(13 25 19 / 28%); pointer-events: none; }
+.deployment-board-cell.is-blocked::after { background: rgb(9 20 16 / 40%); }
+.app.world-art-app .deployment-board .deployment-board-cell.is-valid { border-color: rgb(145 220 249 / 75%); cursor: pointer; }
+.deployment-board-cell.is-valid::after { content: ''; position: absolute; inset: 1px; background: rgb(52 137 187 / 35%); pointer-events: none; }
+.app.world-art-app .deployment-board .deployment-board-cell.is-ally { cursor: pointer; }
+.deployment-cell-mark { position: absolute; z-index: 3; left: 50%; top: 50%; transform: translate(-50%, -50%); color: #bceaf8; font-size: 17px; font-weight: 700; opacity: .8; pointer-events: none; }
+.deployment-cell-warning { position: absolute; z-index: 7; left: 3px; top: 3px; display: grid; place-items: center; width: 13px; height: 13px; border-radius: 50%; background: #f5d182; color: #49311f; font-size: 10px; font-weight: 800; line-height: 1; pointer-events: none; }
+.deployment-cell-prop { position: absolute; left: var(--prop-x, 50%); top: var(--prop-ground, 70%); width: calc(var(--deployment-cell-width) * var(--prop-height, 1)); height: calc(var(--deployment-cell-width) * var(--prop-height, 1)); max-width: none; object-fit: contain; transform: translate(-50%, -100%); z-index: 2; pointer-events: none; opacity: .72; }
+.deployment-cell-prop.is-low { opacity: .5; }
+.deployment-cell-sprite { position: absolute; left: 50%; bottom: 3px; width: 68px; height: 78px; max-width: none; object-fit: contain; object-position: center bottom; transform: translateX(-50%); z-index: 5; pointer-events: none; filter: drop-shadow(0 2px 2px #12271bcc); }
+.deployment-cell-sprite[hidden], .deployment-roster-face img[hidden] { display: none; }
+.deployment-cell-team { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 6; pointer-events: none; min-width: 28px; padding: 1px 3px; border-radius: 3px 3px 0 0; background: #284738e8; color: #e1f0e4; font-size: 9px; line-height: 1.3; text-align: center; }
+.deployment-board-cell.is-enemy .deployment-cell-team { background: #713b35eb; color: #ffe3d8; }
+.app.world-art-app .deployment-board .deployment-board-cell.is-selected { outline: 2px solid #ffdf8c; outline-offset: -2px; z-index: 7; }
+.deployment-cell-selection { position: absolute; top: 2px; right: 2px; color: #ffe9a6; z-index: 8; pointer-events: none; }
+.app.world-art-app .deployment-board .deployment-board-cell:focus-visible { outline: 3px solid #f5f1b1 !important; outline-offset: -3px !important; z-index: 8; }
+.deployment-board-selection { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 0 6px; }
+.deployment-board-selection > div { min-width: 0; display: grid; gap: 4px; }
+.deployment-board-selection strong { font-size: 13px; color: #ecf4df; overflow-wrap: anywhere; }
+.deployment-board-selection span { font-size: 11px; line-height: 1.5; color: #c1d5c6; overflow-wrap: anywhere; }
+.app.world-art-app .deployment-board .deployment-remove-btn { display: flex; justify-content: center; align-items: center; gap: 3px; flex-shrink: 0; min-height: 44px; padding: 6px 8px; border: 1px solid #607a6a; border-radius: 4px; background: #263e31; color: #d8e6dc; font-size: 11px; white-space: nowrap; }
+.deployment-board-terrain { color: #bdd0c2; font-size: 11px; line-height: 1.6; overflow-wrap: anywhere; }
+.deployment-board-terrain > span { display: inline-block; color: #e0e7c7; margin-right: 4px; }
+.deployment-roster-heading { display: flex; justify-content: space-between; align-items: center; min-height: 28px; gap: 10px; }
+.deployment-roster-heading h3 { font-size: 14px; color: #eaf2e7; }
+.deployment-roster-heading > span { font-size: 12px; color: #bed0c3; }
+.deployment-roster-swipe-guide { display: none; font-size: 10px; font-weight: 400; }
+.deployment-board-roster { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; max-height: 405px; overflow-y: auto; overflow-x: hidden; padding: 2px 3px 3px; scrollbar-width: thin; scrollbar-color: #8aa98e #233a2b; }
+.app.world-art-app .deployment-board .deployment-roster-card { position: relative; display: grid; grid-template-columns: 46px minmax(0, 1fr); gap: 8px; align-items: center; width: 100%; min-width: 0; min-height: 79px; padding: 8px; border: 1px solid #536d60; border-radius: 4px; background: #263b30; color: #edf4e8; box-shadow: none; text-align: left; touch-action: manipulation; }
+.app.world-art-app .deployment-board .deployment-roster-card.is-placed { background: #2c4535; border-color: #709f85; }
+.app.world-art-app .deployment-board .deployment-roster-card.is-selected { border-color: #edd59b; background: #3c4b35; box-shadow: inset 0 0 0 1px #edd59b; }
+.deployment-roster-face { position: relative; display: block; width: 46px; height: 54px; overflow: hidden; border-radius: 3px; background: #405a48; }
+.deployment-roster-face > span { position: absolute; inset: 0; display: grid; place-items: center; color: #b9d1bd; font-size: 18px; }
+.deployment-roster-face > img { position: relative; width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
+.deployment-roster-identity { display: grid; gap: 3px; min-width: 0; }
+.deployment-roster-identity > strong { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; color: #eff4e7; font-size: 13px; line-height: 1.3; overflow-wrap: anywhere; }
+.deployment-roster-identity strong > small { color: #e3d19d; font-size: 9px; font-weight: 400; }
+.deployment-roster-identity > span { color: #c2d5c8; font-size: 10px; line-height: 1.4; overflow-wrap: anywhere; }
+.deployment-roster-identity > em { color: #b7ccc0; font-size: 10px; font-style: normal; }
+.deployment-roster-card.is-placed .deployment-roster-identity > em { color: #bbe0c6; }
+.deployment-roster-check { position: absolute; bottom: 6px; right: 6px; color: #f2dfa3; }
+.deployment-board-hint { margin-top: 12px !important; min-height: 20px; color: #e2e8cf; font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
+.deployment-board-swap-guide { margin-top: 3px !important; color: #afc8b9; font-size: 11px; line-height: 1.7; }
+.deployment-board-actions { position: sticky; bottom: 0; z-index: 30; display: grid; grid-template-columns: 1fr 1fr 1.25fr; gap: 7px; padding: 12px 0 max(10px, env(safe-area-inset-bottom)); margin-top: 10px; border-top: 1px solid var(--deployment-border); background: #182c24; }
+.app.world-art-app .deployment-board-actions button { display: flex; justify-content: center; align-items: center; gap: 5px; min-height: 48px; min-width: 0; padding: 8px 5px; border: 1px solid #6c8977; border-radius: 4px; background: #2e4938; color: #ebf1e7; font: inherit; font-size: 12px; line-height: 1.4; }
+.app.world-art-app .deployment-board-actions .deployment-start-btn { background: #b5cda4; border-color: #d6e4c2; color: #1b3024; font-weight: 700; }
+.app.world-art-app .deployment-board button:disabled { cursor: default; }
+.app.world-art-app .deployment-board :is(.deployment-remove-btn, .deployment-board-actions button):disabled { opacity: .5; }
+@media (max-width: 699px) {
+  .deployment-board-layout { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .deployment-board-scroll { height: clamp(250px, 38dvh, 350px); }
+  .deployment-board-roster { display: flex; overflow-x: auto; overflow-y: hidden; max-height: none; gap: 6px; padding-bottom: 6px; }
+  .app.world-art-app .deployment-board .deployment-roster-card { flex: 0 0 166px; width: 166px; }
+  .deployment-roster-swipe-guide { display: inline; }
+  .deployment-board-count { font-size: 12px; }
+  .deployment-board-map-caption small { font-size: 10px; }
+}
+@media (orientation: landscape) and (max-height: 520px) {
+  .deployment-board { margin-top: 0; }
+  .deployment-board-heading > div > span { display: none; }
+  .deployment-board-heading h2 { font-size: 18px; line-height: 1.4; }
+  .deployment-board-guide { padding: 3px 0 6px; font-size: 11px; }
+  .deployment-board-map-caption, .deployment-roster-heading { min-height: 23px; }
+  .deployment-board-layout { grid-template-columns: minmax(0, 1fr) minmax(190px, 31%); gap: 12px; }
+  .deployment-board-scroll { height: clamp(154px, calc(100dvh - 195px), 240px); }
+  .deployment-board-roster { display: grid; grid-template-columns: minmax(0, 1fr); max-height: clamp(154px, calc(100dvh - 195px), 240px); overflow-y: auto; overflow-x: hidden; }
+  .app.world-art-app .deployment-board .deployment-roster-card { width: 100%; }
+  .deployment-roster-swipe-guide { display: none; }
+  .deployment-board-actions { position: static; }
+}
+@media (max-width: 359px) {
+  .deployment-board-heading h2 { font-size: 18px; }
+  .deployment-board-roster { gap: 4px; }
+  .app.world-art-app .deployment-board .deployment-roster-card { grid-template-columns: 36px minmax(0, 1fr); gap: 5px; padding: 6px; }
+  .deployment-roster-face { width: 36px; height: 48px; }
+  .deployment-roster-identity > strong { font-size: 12px; }
+  .deployment-board-actions { gap: 5px; }
+  .deployment-board-actions svg { width: 14px; height: 14px; }
+  .app.world-art-app .deployment-board-actions button { font-size: 11px; }
+}
