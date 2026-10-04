@@ -38,19 +38,32 @@
 
 리나의 실제 활 곡선과 화살 위치를 보정한 **최종 웹 소스 SHA-256 `84eba23cb550ec8e50943f72fd685660a7e8dcace834e791fc9da97cca932f0e`**에서 린트·단위 검사 **441개**·웹 빌드를 다시 통과했습니다. 최종 생산 빌드의 기술 QA도 위와 같은 **648사례**, **3화면**, 오류 **0건**으로 통과했습니다. 실제 활 곡선과 화살 유무까지 검사하며, 준비 자세에는 없는 화살 효과를 표시하지 않습니다. 최종 결과는 `/workspace/work/all-unit-skill-159/skill-qa/result.json`에 보관합니다.
 
-아래 항목은 **최종 결과 확인 대기**입니다.
+같은 최종 해시와 실제 배포 **1.99.158** 소스(`fcebdf02843f8d9b414f8f6da0535f11ffd80932`, 웹 해시 `90ee4adc21f1ab609bdecbf14b9a8847805c542151cba13786b2c476d5d3b47a`)를 생산 번들로 비교했습니다. 궁수·창병·뿔오거·번개술사·백호·공성 포병·쌍단검 암살자·곡검 보스·주인공 9장면, 390×844·844×390, 1·2배속, 버전별 5회씩 **총 360회**입니다. 이미지 디코딩 후 Chromium CPU 4배 감속에서 실제 시계와 연속 RAF로 측정했습니다.
 
-- 브라우저 기능 검사 종료 후 최종 소스의 CPU 성능 비교
-- 최종 `main` 소스의 fresh APK·서명 OTA 배포와 공개 다운로드·전체 웹 파일·네이티브 신뢰·전체 개발 소스 ZIP의 독립 검증
+- 36조건의 안정 구간 프레임 p95 중앙값은 구158·신159 모두 **16.7~16.8ms**입니다. 장면 해제 후 잔존·미취소 애니메이션은 모든 실행에서 0입니다.
+- 새 효과의 비용이 있습니다. 같은 조건의 5회 중앙값 차이는 첫 RAF **−16.4~+39.2ms**, 스크립트 **−6.651~+16.419ms**, 레이아웃 **−8.692~+11.392ms**, 스타일 계산 **−41.071~+81.638ms**입니다. 성능 개선으로 주장하지 않습니다.
+- 초기 150ms를 넘는 긴 작업 시간 증가 6조건의 원시 시작 시각을 검토했습니다. 대부분 초기 표시 작업이 경계를 넘는 구간이며, 150ms 이후 시작한 긴 작업은 전체 구158 5회·신159 6회입니다. 안정 구간의 50ms 초과 프레임은 구158 11개·신159 8개로 기록하되 기기 성능 향상의 근거로 쓰지 않습니다.
+- 9대표 장면의 새 VFX 표본 최대 DOM은 122개, WAA는 18개로 예산을 지킵니다. 전체 68기술의 131개 DOM 최대와 구분합니다. JavaScript 힙 표본·GC 결과는 프로세스·GPU·이미지 메모리를 나타내지 않습니다.
 
-성능 비교·APK·OTA는 완료한 결과로 기록하지 않습니다. 클라우드 Chromium 검사와 실제 Android 설치·실행·OTA 복구·GPU 성능은 구분합니다.
+원본·조건별 5회 중앙값·초기/안정 구간·힙 결과는 `/workspace/work/all-unit-skill-159/performance/performance-comparison.json`, `performance-summary.json`, `performance-comparison.md`에 보관합니다. 실제 Android FPS·GPU·발열 검사 결과가 아닙니다.
+
+**새 APK·서명 OTA·전체 소스 ZIP 배포와 공개 다운로드 독립 검증을 완료했습니다.** 릴리스의 최종 게임 소스는 `e10e9dc3a75f1a938783e0392fd2730db4ce8c79`입니다. [PR Cloud Quality](https://github.com/h0623-dev/cheonsu/actions/runs/37211429714), [main Cloud Quality](https://github.com/h0623-dev/cheonsu/actions/runs/37212319032), [Android APK and OTA](https://github.com/h0623-dev/cheonsu/actions/runs/37212319099)가 모두 성공했습니다.
+
+- 실제 공개 APK·OTA·소스 ZIP 3개를 내려받아 파일 크기와 공개 릴리스 SHA-256이 일치함을 확인했습니다. `v1.99.159` 태그는 위 게임 소스 커밋을 가리킵니다.
+- APK는 **1.99.159 / Android358**이며 내장 웹 파일 **1,874개**가 최종 dist와 일치합니다(빌드 웹 파일 1,872개와 생성된 빈 Cordova 파일 2개). Actions `apksigner`의 **v1/v2 암호학적 서명 검증**과 공개 다운로드 파일의 인증서 DER SHA-256 `1d4b2f3f8e7b30e2b9202121def34d4da6e39b4119bdd93c44a01aebfcd0518f` 일치를 확인했습니다.
+- OTA 웹 파일 **1,872개**, 최종 웹 소스 해시, 안내문 RSA 서명과 실제 다운로드 ZIP RSA 서명 모두 검증했습니다. 공개 채널은 **1.99.159**, 호환 Android 범위는 **350~358**입니다. APK 내장 공개키·네이티브 플러그인·복구 보호·외부 웹 원점 부재도 확인했습니다.
+- 전체 소스 ZIP은 게임 소스 커밋의 **2,481개** 파일과 생성 파일 **8개**, 소스 목록 파일 **1개**, 총 **2,490개**입니다. 파일명·전체 바이트 해시·생성 파일을 대조했으며 누락·추가·불일치 0개입니다.
+
+APK SHA-256은 `9ac6d978d9ff5cabd3386e769431c754ebd547137339ef51d63ecdf5e757acf9`, OTA는 `311bfdeca07d9ff70951a6d60928ddba1c21f65034e1f990d671c2eb3bc0a528`, 소스 ZIP은 `acdc9d400b2a384332cb426b63b4e513b7d73fc9196f0be29ccff4618bdf63a0`입니다. 독립 검증 JSON은 `/workspace/work/release-1.99.159/`, Actions 서명 증거는 `/workspace/work/all-unit-skill-159/android159-actions-proof.json`에 보관합니다. 이 배포 확인 이후 문서 갱신은 게임 소스 해시와 APK·OTA를 변경하지 않습니다.
+
+실제 Android 기기 설치·실행·OTA 복구·GPU·발열은 미검증입니다. 클라우드 Chromium과 공개 산출물 검증 결과를 실기기 검사로 대신하지 않습니다.
 
 ## APK와 서명 OTA
 
-최종 `main` 소스에서 fresh APK와 전체 소스 ZIP을 생성하고 APK 인증서·Android358·웹 버전·전체 웹 파일·OTA 공개키와 복구 보호를 확인합니다. 호환 패치는 같은 최종 소스의 서명 OTA를 기존 승인 채널 `h0623-dev/cheonsu`에 배포하고 실제 공개 다운로드와 전체 파일·서명을 대조해야 완료입니다.
+최종 게임 소스에서 fresh APK와 전체 소스 ZIP을 생성하고 APK 인증서·Android358·웹 버전·전체 웹 파일·OTA 공개키와 복구 보호를 확인했습니다. 같은 소스의 서명 OTA를 기존 승인 채널 `h0623-dev/cheonsu`에 배포하고 실제 공개 다운로드와 전체 파일·서명 대조까지 완료했습니다.
 
 기존 두 GitHub Actions 워크플로에 등록된 스킬 효과 QA를 사용하며 결과는 `tmp/skill-spectacle-qa/` 산출물로 보관합니다. APK·OTA 서명은 `main` 전용 **`cheonsu-release`** 환경의 기존 Secrets로만 수행합니다. 서명키·장기 토큰을 이 클라우드 작업이나 공개 ZIP에 복사·출력하지 않습니다. 네이티브 설정과 서명 신원은 유지하고 버전 값만 올립니다.
 
-새 산출물은 `cheonsu_1.99.159_update_debug.apk`, `cheonsu_development_1.99.159.zip`이며 [v1.99.159 공개 릴리스 위치](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.159)에 제공할 예정입니다. 실제 자동 패치 채널은 별도 `updates` 브랜치입니다. 오래된 `main`의 `public/updates/latest.json`으로 채널을 초기화하거나 공개 포인터를 낮추지 않습니다.
+새 산출물은 [1.99.159 APK](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.159/cheonsu_1.99.159_update_debug.apk), [전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.159/cheonsu_development_1.99.159.zip)이며 [v1.99.159 공개 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.159)에 제공했습니다. 실제 자동 패치 채널은 별도 `updates` 브랜치입니다. 오래된 `main`의 `public/updates/latest.json`은 바꾸지 않았고 공개 포인터를 낮추지 않았습니다.
 
-새 APK·서명 OTA·공개 다운로드 검증 전에는 배포 완료로 보고하지 않습니다. Google 로그인은 Firebase 프로젝트 연결 전이며 Play Store 정식 출시는 완료되지 않았습니다.
+Google 로그인은 Firebase 프로젝트 연결 전이며 Play Store 정식 출시는 완료되지 않았습니다.
