@@ -1,6 +1,8 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.158 / Android versionCode 357**
+현재 개발 빌드: **1.99.159 / Android versionCode 358**
+
+1.99.159: 아군 17종·적군 25종·보스 5종, 전체 47종의 스킬에 무기·마법 집중점을 따라가는 캐릭터별 고유 효과를 확장합니다. 카일의 1.99.158 효과와 기존 스킬 수치·반격·저장·원화·원복 1.99.154 기준은 유지합니다. 초기 빌드의 린트·단위 검사 441개·빌드·기존 회귀와 기술 QA 648사례가 통과했습니다. 독립 검토에서 확인한 리나 활 좌표를 추가 보정하며, 최종 빌드 확정·기술 QA 재검사·성능·새 APK 및 서명 OTA 배포는 대기 중입니다. [전체 캐릭터 스킬 효과와 검증 상태](docs/ALL_UNIT_SKILL_EFFECTS_1.99.159.md).
 
 1.99.158: 카일의 돌풍 베기에 검을 따르는 불꽃 회오리, 여명참에 황금 여명광, 수호의 맹세에 금빛 방벽을 추가합니다. 아군 기본·습득 기술 38종의 계열별 충전·접촉·잔광을 강화하며 기존 타격 시점·스킬 수치·반격·저장·캐릭터 원화는 유지합니다. 로컬 린트·단위 검사 441개·빌드·기존 회귀와 새 스킬 QA 255사례는 통과했습니다. 이전 버전 성능 비교 100회와 새 APK·서명 OTA 배포·공개 다운로드 검증을 완료했습니다. [스킬 효과와 검증 상태](docs/SKILL_EFFECTS_1.99.158.md).
 
@@ -35,8 +37,8 @@
 
 ## 다운로드
 
-- 새 버전 산출물: `cheonsu_1.99.158_update_debug.apk`, `cheonsu_development_1.99.158.zip`
-- [1.99.158 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.158)
+- 새 버전 산출물(배포 검사 완료 후 제공): `cheonsu_1.99.159_update_debug.apk`, `cheonsu_development_1.99.159.zip`
+- [1.99.159 APK 및 전체 개발 소스 ZIP 공개 위치](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.159) — 배포 준비 중
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)

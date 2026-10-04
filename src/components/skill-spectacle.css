@@ -23,7 +23,8 @@
   overflow: visible;
 }
 
-.vfx-blade-aura {
+.vfx-blade-aura,
+.vfx-weapon-aura {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -45,14 +46,20 @@
   transform-origin: 50% 50%;
 }
 
-.duel-motion-disabled :is(.skill-spectacle, .vfx-blade-aura),
-.motion-off :is(.skill-spectacle, .vfx-blade-aura) {
+.vfx-weapon-orbit {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+.duel-motion-disabled :is(.skill-spectacle, .vfx-blade-aura, .vfx-weapon-aura),
+.motion-off :is(.skill-spectacle, .vfx-blade-aura, .vfx-weapon-aura) {
   display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .skill-spectacle,
-  .vfx-blade-aura {
+  .vfx-blade-aura,
+  .vfx-weapon-aura {
     display: none;
   }
 }

@@ -8,7 +8,7 @@ importScripts('/art/directions-v1/precache.js');
 importScripts('/art/skills-v1/precache.js');
 importScripts('/art/characters-v2/precache.js');
 importScripts('/art/village-walk-v2/precache.js');
-const CACHE_VERSION = "cheonsu-v199158-skill-effects";
+const CACHE_VERSION = "cheonsu-v199159-all-unit-skill-effects";
 const APP_SHELL_CACHE = `${CACHE_VERSION}-app-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 

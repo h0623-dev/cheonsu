@@ -32,13 +32,15 @@ export function animateSkillSpectacle(root, plan, { arena, attacker, a, d, dy, g
     ]);
     animate(charge.querySelector('.vfx-spin'), [{ offset: 0, transform: 'rotate(-12deg)' }, { offset: at, transform: 'rotate(-12deg)' }, { offset: until, transform: 'rotate(18deg)' }, { offset: 1, transform: 'rotate(18deg)' }]);
   }
-  if (visual.sword) {
-    const offsets = [...new Set([0, ...plan.poses.map(([at]) => at), visual.sword.at, visual.sword.until, 1])].sort((x, y) => x - y);
+  const weapon = visual.weapon || visual.sword;
+  if (weapon) {
+    const offsets = [...new Set([0, ...plan.poses.map(([at]) => at), weapon.at, weapon.until, 1])].sort((x, y) => x - y);
     for (const aura of root.querySelectorAll('[data-vfx-phase="weapon"]')) {
-      animate(aura, offsets.map(offset => ({ offset, opacity: offset >= visual.sword.at && offset < visual.sword.until && poseAt(plan, offset) === aura.dataset.pose ? 1 : 0, easing: 'steps(1,end)' })));
-      for (const [index, coil] of [...aura.querySelectorAll('.vfx-blade-coil')].entries()) {
-        animate(coil, [{ offset: 0, strokeDashoffset: 0 }, { offset: visual.sword.at, strokeDashoffset: 0 }, { offset: visual.sword.until, strokeDashoffset: index ? 130 : -190 }, { offset: 1, strokeDashoffset: index ? 130 : -190 }]);
+      animate(aura, offsets.map(offset => ({ offset, opacity: offset >= weapon.at && offset < weapon.until && poseAt(plan, offset) === aura.dataset.pose ? 1 : 0, easing: 'steps(1,end)' })));
+      for (const [index, coil] of [...aura.querySelectorAll('.vfx-blade-coil,.vfx-weapon-flow')].entries()) {
+        animate(coil, [{ offset: 0, strokeDashoffset: 0 }, { offset: weapon.at, strokeDashoffset: 0 }, { offset: weapon.until, strokeDashoffset: index ? 130 : -190 }, { offset: 1, strokeDashoffset: index ? 130 : -190 }]);
       }
+      animate(aura.querySelector('.vfx-weapon-orbit'), [{ offset: 0, transform: 'rotate(-12deg)' }, { offset: weapon.at, transform: 'rotate(-12deg)' }, { offset: weapon.until, transform: 'rotate(72deg)' }, { offset: 1, transform: 'rotate(72deg)' }]);
     }
   }
   // Keep the whole contact flourish within the arena, including phones in portrait orientation.
