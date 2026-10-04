@@ -17,6 +17,7 @@ on:
       - 'capacitor.config.json'
       - 'index.html'
       - 'vite.config.js'
+      - 'docs/update-notes.json'
 permissions:
   contents: read
 concurrency:
