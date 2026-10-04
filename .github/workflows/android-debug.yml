@@ -77,6 +77,7 @@ jobs:
       - run: node scripts/verify-cloud-smoke.mjs
       - run: node scripts/verify-town-camera.mjs
       - run: node scripts/verify-monster-enemies.mjs
+      - run: node scripts/verify-skill-spectacle.mjs
       - run: npm run update:package
       - name: Verify APK and signed OTA payloads
         shell: pwsh
@@ -109,4 +110,5 @@ jobs:
             tmp/cloud-qa/
             tmp/town-camera-qa/
             tmp/monster-enemies-qa/
+            tmp/skill-spectacle-qa/
           retention-days: 14
