@@ -6,6 +6,7 @@ import { getPaintedVisualProfile } from './unitVisuals.js';
 import { getDuelPlan, getWeaponMotion } from './duelChoreography.js';
 import { directDuelPerformance } from './duelPerformance.js';
 import { getCharacterArt, getCharacterFrameStyle, getCharacterSkillPose } from './characterArt.js';
+import { getSkillSpectacle } from './skillSpectacle.js';
 
 export function getCombatTiming(scene) {
   const skill = scene.mode === 'skill' || Boolean(scene.outcome?.heal || scene.outcome?.guard);
@@ -17,7 +18,8 @@ export function getCombatChoreography(key,scene){
   const weapon = getWeaponMotion(key, getCombatPresentation(key, {outcome:{hit:true}}));
   const plan = getDuelPlan(key, scene, presentation, weapon);
   const redesignedSkill = plan.skill ? getCharacterSkillPose(key, plan.id.slice(key.length + 1)) : null;
-  return directDuelPerformance(redesignedSkill ? { ...plan, skillPose: redesignedSkill } : plan, weapon, presentation, scene);
+  const performance = directDuelPerformance(redesignedSkill ? { ...plan, skillPose: redesignedSkill } : plan, weapon, presentation, scene);
+  return { ...performance, spectacle: getSkillSpectacle(performance, key, presentation, scene) };
 }
 
 export function getSkillPalette(effect) {

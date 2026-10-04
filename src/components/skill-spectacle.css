@@ -1,0 +1,58 @@
+.skill-spectacle {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.vfx-charge,
+.vfx-burst {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+.vfx-charge svg,
+.vfx-burst svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.vfx-blade-aura {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(var(--combat-foot-offset, 0%)) scale(var(--combat-sprite-scale, 1));
+  transform-origin: 50% 93.75%;
+  overflow: visible;
+}
+
+.vfx-spin {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+.vfx-blade-coil {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+}
+
+.duel-motion-disabled :is(.skill-spectacle, .vfx-blade-aura),
+.motion-off :is(.skill-spectacle, .vfx-blade-aura) {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-spectacle,
+  .vfx-blade-aura {
+    display: none;
+  }
+}

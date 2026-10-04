@@ -4,6 +4,7 @@ import { getPaintedVisualProfile } from '../data/unitVisuals.js';
 import { useDuelAnimation } from '../engine/useDuelAnimation.js';
 import DuelEffects from './DuelEffects.jsx';
 import DuelImpacts from './DuelImpacts.jsx';
+import SkillSpectacle, { SwordSkillAura } from './SkillSpectacle.jsx';
 import './skill-presentation.css';
 
 const weaponLabels = { slash: '검', thrust: '창', heavy: '중병기', guard: '방패', quick: '단검', beast: '야수', whip: '채찍', fist: '권격', bow: '활', cannon: '포격', cast: '마법' };
@@ -18,7 +19,7 @@ function getWeaponMotion(unitKey) {
   return { thrust: 'thrust', heavy: 'heavy', guard: 'guard', shadow: 'quick', claw: 'beast', impact: 'fist' }[weapon.effect] || 'slash';
 }
 
-function FighterPoses({ unitKey, name, defender = false, skillPose }) {
+function FighterPoses({ unitKey, name, defender = false, skillPose, plan }) {
   const poses = defender ? ['ready', 'recoil', 'evade'] : ['ready', 'run-a', 'run-b', 'windup', 'strike', 'recover'];
   return <div className="fighter-body"><div className="fighter-poses">
     {poses.map(pose => <img key={pose} data-pose={pose}
@@ -27,6 +28,7 @@ function FighterPoses({ unitKey, name, defender = false, skillPose }) {
       src={getCombatMotionSprite(unitKey, pose === 'ready' ? 'recover' : pose === 'evade' ? 'run-a' : pose)}
       alt={pose === 'ready' ? name : ''} draggable="false" />)}
     {skillPose&&<img data-pose="skill" className="fighter-frame fighter-skill" src={skillPose.src} alt="" draggable="false" style={{'--combat-sprite-scale':skillPose.scale,'--combat-foot-offset':skillPose.footOffset || '0%'}}/>}
+    {!defender && <SwordSkillAura plan={plan} unitKey={unitKey} />}
   </div></div>;
 }
 
@@ -72,13 +74,14 @@ export default function CombatScene({ scene, attackerKey, defenderKey, backgroun
         </>}
         <DuelEffects plan={plan} unitKey={attackerKey}/>
         <DuelImpacts plan={plan}/>
+        <SkillSpectacle plan={plan} />
         {enemy && <aside className={`combat-enemy-intro intro-${enemy.side}`} aria-label={`${enemy.unit.type === 'boss' ? '적장' : '적군'} ${enemy.unit.name}`}>
           <span>{enemy.unit.type === 'boss' ? '적장' : '적군'} · {weaponLabels[getWeaponMotion(enemy.key)]}</span>
           <strong>{enemy.unit.name}</strong>
         </aside>}
         <div className="painted-fighter fighter-attacker">
           <div className="fighter-shadow" />
-          <FighterPoses unitKey={attackerKey} name={scene.attacker.name} skillPose={plan.skillPose} />
+          <FighterPoses unitKey={attackerKey} name={scene.attacker.name} skillPose={plan.skillPose} plan={plan} />
         </div>
         {!selfSupport && <div className="painted-fighter fighter-defender" data-unit-key={defenderKey}>
           <div className="fighter-shadow" />

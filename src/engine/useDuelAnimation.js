@@ -1,5 +1,6 @@
 import { useLayoutEffect } from 'react';
 import { getImpactParticle } from '../data/duelPerformance.js';
+import { animateSkillSpectacle } from './animateSkillSpectacle.js';
 
 const clamp=value=>Math.max(0,Math.min(1,value));
 export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,finish,selfSupport}){
@@ -7,9 +8,10 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
     const root=ref.current,media=matchMedia('(prefers-reduced-motion: reduce)');
     if(!root)return;
     const arena=root.querySelector('.painted-combat-arena'),attacker=root.querySelector('.fighter-attacker'),defender=root.querySelector('.fighter-defender');
-    let animations=[];
+    let animations=[],active=true;
     const stop=()=>{animations.forEach(animation=>animation.cancel());animations=[];};
     const start=()=>{
+      if(!active)return;
       const elapsed=animations[0]?.currentTime||0,paused=animations[0]?.playState==='paused';stop();
       root.classList.toggle('duel-motion-disabled',!enabled||media.matches);
       if(!enabled||media.matches)return;
@@ -125,11 +127,12 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
           {offset:end,opacity:isTravel?opacity:0,transform:final},{offset:clamp(end+.012),opacity:0,transform:final},{offset:1,opacity:0,transform:final}]);
         for(const stroke of element.querySelectorAll('.duel-stroke'))animate(stroke,[{offset:0,strokeDashoffset:500},{offset:at,strokeDashoffset:500},{offset:mid,strokeDashoffset:0},{offset:1,strokeDashoffset:0}]);
       }
+      animateSkillSpectacle(root,plan,{arena,attacker,a,d,dy,ground,miss},animate);
       if(shake&&!support&&!miss)animate(arena,[{offset:0,transform:'none'},...plan.contacts.flatMap(at=>[{offset:at-.003,transform:'none'},{offset:at+.008,transform:`translateX(-${plan.skill?2:1}px)`},{offset:at+.019,transform:`translateX(${plan.skill?2:1}px)`},{offset:at+.033,transform:'none'}]),{offset:1,transform:'none'}]);
     };
     start();
     const observer=new ResizeObserver(start);observer.observe(arena);
     media.addEventListener('change',start);
-    return()=>{stop();observer.disconnect();media.removeEventListener('change',start);};
+    return()=>{active=false;stop();observer.disconnect();media.removeEventListener('change',start);};
   },[ref,plan,duration,enabled,shake,miss,support,finish,selfSupport]);
 }
