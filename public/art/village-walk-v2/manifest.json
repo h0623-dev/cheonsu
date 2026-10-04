@@ -1,0 +1,718 @@
+{
+  "units": {
+    "hero": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/hero-front-a.webp",
+        "front-b": "/art/village-walk-v2/hero-front-b.webp",
+        "back-a": "/art/village-walk-v2/hero-back-a.webp",
+        "back-b": "/art/village-walk-v2/hero-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 439,
+          "height": 480,
+          "left": 69,
+          "top": 48,
+          "right": 367,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 439,
+          "height": 480,
+          "left": 65,
+          "top": 49,
+          "right": 372,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 439,
+          "height": 480,
+          "left": 24,
+          "top": 49,
+          "right": 414,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 439,
+          "height": 480,
+          "left": 28,
+          "top": 47,
+          "right": 410,
+          "bottom": 447
+        }
+      }
+    },
+    "bram": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/bram-front-a.webp",
+        "front-b": "/art/village-walk-v2/bram-front-b.webp",
+        "back-a": "/art/village-walk-v2/bram-back-a.webp",
+        "back-b": "/art/village-walk-v2/bram-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 39,
+          "top": 48,
+          "right": 344,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 45,
+          "top": 56,
+          "right": 337,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 49,
+          "top": 48,
+          "right": 334,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 44,
+          "top": 51,
+          "right": 338,
+          "bottom": 447
+        }
+      }
+    },
+    "lina": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/lina-front-a.webp",
+        "front-b": "/art/village-walk-v2/lina-front-b.webp",
+        "back-a": "/art/village-walk-v2/lina-back-a.webp",
+        "back-b": "/art/village-walk-v2/lina-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 30,
+          "top": 48,
+          "right": 353,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 27,
+          "top": 55,
+          "right": 356,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 18,
+          "top": 48,
+          "right": 364,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 22,
+          "top": 38,
+          "right": 360,
+          "bottom": 447
+        }
+      }
+    },
+    "aria": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/aria-front-a.webp",
+        "front-b": "/art/village-walk-v2/aria-front-b.webp",
+        "back-a": "/art/village-walk-v2/aria-back-a.webp",
+        "back-b": "/art/village-walk-v2/aria-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 399,
+          "height": 480,
+          "left": 10,
+          "top": 48,
+          "right": 387,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 399,
+          "height": 480,
+          "left": 15,
+          "top": 47,
+          "right": 381,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 399,
+          "height": 480,
+          "left": 13,
+          "top": 48,
+          "right": 385,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 399,
+          "height": 480,
+          "left": 14,
+          "top": 44,
+          "right": 383,
+          "bottom": 447
+        }
+      }
+    },
+    "leon": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/leon-front-a.webp",
+        "front-b": "/art/village-walk-v2/leon-front-b.webp",
+        "back-a": "/art/village-walk-v2/leon-back-a.webp",
+        "back-b": "/art/village-walk-v2/leon-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 425,
+          "height": 480,
+          "left": 34,
+          "top": 48,
+          "right": 391,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 425,
+          "height": 480,
+          "left": 38,
+          "top": 46,
+          "right": 386,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 425,
+          "height": 480,
+          "left": 15,
+          "top": 48,
+          "right": 409,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 425,
+          "height": 480,
+          "left": 10,
+          "top": 51,
+          "right": 413,
+          "bottom": 447
+        }
+      }
+    },
+    "sera": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/sera-front-a.webp",
+        "front-b": "/art/village-walk-v2/sera-front-b.webp",
+        "back-a": "/art/village-walk-v2/sera-back-a.webp",
+        "back-b": "/art/village-walk-v2/sera-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 421,
+          "height": 480,
+          "left": 29,
+          "top": 48,
+          "right": 391,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 421,
+          "height": 480,
+          "left": 32,
+          "top": 46,
+          "right": 387,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 421,
+          "height": 480,
+          "left": 10,
+          "top": 48,
+          "right": 410,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 421,
+          "height": 480,
+          "left": 15,
+          "top": 42,
+          "right": 404,
+          "bottom": 447
+        }
+      }
+    },
+    "noah": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/noah-front-a.webp",
+        "front-b": "/art/village-walk-v2/noah-front-b.webp",
+        "back-a": "/art/village-walk-v2/noah-back-a.webp",
+        "back-b": "/art/village-walk-v2/noah-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 77,
+          "top": 48,
+          "right": 306,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 73,
+          "top": 49,
+          "right": 309,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 59,
+          "top": 48,
+          "right": 323,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 61,
+          "top": 58,
+          "right": 321,
+          "bottom": 447
+        }
+      }
+    },
+    "yuna": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/yuna-front-a.webp",
+        "front-b": "/art/village-walk-v2/yuna-front-b.webp",
+        "back-a": "/art/village-walk-v2/yuna-back-a.webp",
+        "back-b": "/art/village-walk-v2/yuna-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 406,
+          "height": 480,
+          "left": 34,
+          "top": 48,
+          "right": 369,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 406,
+          "height": 480,
+          "left": 25,
+          "top": 51,
+          "right": 380,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 406,
+          "height": 480,
+          "left": 11,
+          "top": 48,
+          "right": 394,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 406,
+          "height": 480,
+          "left": 10,
+          "top": 35,
+          "right": 394,
+          "bottom": 447
+        }
+      }
+    },
+    "rakan": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/rakan-front-a.webp",
+        "front-b": "/art/village-walk-v2/rakan-front-b.webp",
+        "back-a": "/art/village-walk-v2/rakan-back-a.webp",
+        "back-b": "/art/village-walk-v2/rakan-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 44,
+          "top": 48,
+          "right": 339,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 42,
+          "top": 43,
+          "right": 340,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 38,
+          "top": 48,
+          "right": 345,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 26,
+          "top": 54,
+          "right": 356,
+          "bottom": 447
+        }
+      }
+    },
+    "miho": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/miho-front-a.webp",
+        "front-b": "/art/village-walk-v2/miho-front-b.webp",
+        "back-a": "/art/village-walk-v2/miho-back-a.webp",
+        "back-b": "/art/village-walk-v2/miho-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 39,
+          "top": 48,
+          "right": 343,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 39,
+          "top": 43,
+          "right": 343,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 41,
+          "top": 48,
+          "right": 341,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 40,
+          "top": 54,
+          "right": 342,
+          "bottom": 447
+        }
+      }
+    },
+    "teo": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/teo-front-a.webp",
+        "front-b": "/art/village-walk-v2/teo-front-b.webp",
+        "back-a": "/art/village-walk-v2/teo-back-a.webp",
+        "back-b": "/art/village-walk-v2/teo-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 30,
+          "top": 48,
+          "right": 352,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 25,
+          "top": 49,
+          "right": 357,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 32,
+          "top": 48,
+          "right": 351,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 37,
+          "top": 52,
+          "right": 346,
+          "bottom": 447
+        }
+      }
+    },
+    "irene": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/irene-front-a.webp",
+        "front-b": "/art/village-walk-v2/irene-front-b.webp",
+        "back-a": "/art/village-walk-v2/irene-back-a.webp",
+        "back-b": "/art/village-walk-v2/irene-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 48,
+          "right": 372,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 49,
+          "right": 372,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 17,
+          "top": 48,
+          "right": 366,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 17,
+          "top": 46,
+          "right": 366,
+          "bottom": 447
+        }
+      }
+    },
+    "kaz": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/kaz-front-a.webp",
+        "front-b": "/art/village-walk-v2/kaz-front-b.webp",
+        "back-a": "/art/village-walk-v2/kaz-back-a.webp",
+        "back-b": "/art/village-walk-v2/kaz-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 414,
+          "height": 480,
+          "left": 54,
+          "top": 48,
+          "right": 358,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 414,
+          "height": 480,
+          "left": 57,
+          "top": 44,
+          "right": 355,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 414,
+          "height": 480,
+          "left": 11,
+          "top": 48,
+          "right": 402,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 414,
+          "height": 480,
+          "left": 10,
+          "top": 37,
+          "right": 403,
+          "bottom": 447
+        }
+      }
+    },
+    "ella": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/ella-front-a.webp",
+        "front-b": "/art/village-walk-v2/ella-front-b.webp",
+        "back-a": "/art/village-walk-v2/ella-back-a.webp",
+        "back-b": "/art/village-walk-v2/ella-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 41,
+          "top": 48,
+          "right": 341,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 38,
+          "top": 38,
+          "right": 345,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 32,
+          "top": 48,
+          "right": 350,
+          "bottom": 446
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 30,
+          "top": 48,
+          "right": 353,
+          "bottom": 446
+        }
+      }
+    },
+    "jin": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/jin-front-a.webp",
+        "front-b": "/art/village-walk-v2/jin-front-b.webp",
+        "back-a": "/art/village-walk-v2/jin-back-a.webp",
+        "back-b": "/art/village-walk-v2/jin-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 400,
+          "height": 480,
+          "left": 26,
+          "top": 48,
+          "right": 372,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 400,
+          "height": 480,
+          "left": 28,
+          "top": 51,
+          "right": 370,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 400,
+          "height": 480,
+          "left": 11,
+          "top": 48,
+          "right": 388,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 400,
+          "height": 480,
+          "left": 10,
+          "top": 42,
+          "right": 388,
+          "bottom": 447
+        }
+      }
+    },
+    "luka": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/luka-front-a.webp",
+        "front-b": "/art/village-walk-v2/luka-front-b.webp",
+        "back-a": "/art/village-walk-v2/luka-back-a.webp",
+        "back-b": "/art/village-walk-v2/luka-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 26,
+          "top": 48,
+          "right": 356,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 40,
+          "top": 46,
+          "right": 342,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 17,
+          "top": 48,
+          "right": 364,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 24,
+          "top": 49,
+          "right": 358,
+          "bottom": 447
+        }
+      }
+    },
+    "baekho": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/baekho-front-a.webp",
+        "front-b": "/art/village-walk-v2/baekho-front-b.webp",
+        "back-a": "/art/village-walk-v2/baekho-back-a.webp",
+        "back-b": "/art/village-walk-v2/baekho-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 57,
+          "top": 48,
+          "right": 325,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 57,
+          "top": 38,
+          "right": 325,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 57,
+          "top": 49,
+          "right": 325,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 52,
+          "top": 43,
+          "right": 330,
+          "bottom": 447
+        }
+      }
+    }
+  }
+}

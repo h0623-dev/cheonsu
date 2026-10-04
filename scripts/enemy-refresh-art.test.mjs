@@ -6,6 +6,7 @@ import vm from 'node:vm';
 import sharp from 'sharp';
 import { combatUnitIds, combatMotionPoses, getCombatMotionSprite, getCombatSprite } from '../src/data/combatArt.js';
 import { getPaintedVisualProfile } from '../src/data/unitVisuals.js';
+import { getCharacterArt } from '../src/data/characterArt.js';
 
 const manifest = JSON.parse(await readFile(new URL('../public/art/enemies-v3/manifest.json', import.meta.url), 'utf8'));
 const config = JSON.parse(await readFile(new URL('../docs/art/enemies-v3/sources.json', import.meta.url), 'utf8'));
@@ -13,7 +14,7 @@ const report = JSON.parse(await readFile(new URL('../docs/art/enemies-v3/EXTRACT
 const ids = ['raider', 'ranger', 'marauder', 'iron_lancer', 'warlord', 'cultist', 'sniper', 'assassin_elite', 'plague_doctor', 'beast_tamer', 'storm_mage', 'blade_dancer', 'siege_gunner', 'sentinel', 'blackguard', 'pyromancer', 'frost_mage', 'void_knight', 'wolf'];
 const assetFile = asset => new URL(`../public${asset}`, import.meta.url);
 
-test('all 19 enemies route map, portrait, ready and motion to the same refreshed identity', () => {
+test('all 19 enemies retain their archived assets while runtime uses the active identity', () => {
   assert.deepEqual(Object.keys(manifest.units).sort(), [...ids].sort());
   assert.deepEqual(manifest.poses, combatMotionPoses);
   for (const id of ids) {
@@ -21,19 +22,20 @@ test('all 19 enemies route map, portrait, ready and motion to the same refreshed
     assert.equal(unit.map, `/art/enemies-v3/maps/${id}.webp`);
     assert.equal(unit.portrait, `/art/enemies-v3/portraits/${id}.webp`);
     assert.equal(unit.ready, unit.motion.recover);
-    assert.deepEqual(getPaintedVisualProfile(id), { map: `/art/map-sprites-v4/${id}.webp`, battle: unit.ready, portrait: unit.portrait, cutscene: unit.ready });
-    assert.equal(getCombatSprite(id), unit.ready);
-    assert.equal(getCombatSprite(id, 'action'), unit.motion.strike);
-    assert.equal(getCombatMotionSprite(id, 'invalid'), unit.ready);
-    for (const pose of combatMotionPoses) assert.equal(getCombatMotionSprite(id, pose), unit.motion[pose]);
+    const active = getCharacterArt(id);
+    assert.deepEqual(getPaintedVisualProfile(id), { map: `/art/map-sprites-v4/${id}.webp`, battle: active?.motion.recover || unit.ready, portrait: active?.portrait || unit.portrait, cutscene: active?.dialogue || unit.ready });
+    assert.equal(getCombatSprite(id), active?.motion.recover || unit.ready);
+    assert.equal(getCombatSprite(id, 'action'), active?.motion.strike || unit.motion.strike);
+    assert.equal(getCombatMotionSprite(id, 'invalid'), active?.motion.recover || unit.ready);
+    for (const pose of combatMotionPoses) assert.equal(getCombatMotionSprite(id, pose), (active?.motion || unit.motion)[pose]);
   }
   for (const id of combatUnitIds.filter(id => !ids.includes(id) && !id.startsWith('boss_'))) {
-    assert.equal(getCombatSprite(id), `/art/combat-v1/units/${id}-ready.webp`);
-    assert.equal(getCombatMotionSprite(id), `/art/combat-v2/units/${id}-recover.webp`);
+    assert.equal(getCombatSprite(id), getCharacterArt(id)?.motion.recover || `/art/combat-v1/units/${id}-ready.webp`);
+    assert.equal(getCombatMotionSprite(id), getCharacterArt(id)?.motion.recover || `/art/combat-v2/units/${id}-recover.webp`);
     assert.equal(getPaintedVisualProfile(id).map, `/art/map-sprites-v4/${id}.webp`);
   }
-  assert.equal(getCombatMotionSprite('unknown', 'unknown'), '/art/combat-v2/units/raider-recover.webp');
-  assert.equal(getCombatSprite('unknown'), '/art/combat-v1/units/raider-ready.webp');
+  assert.equal(getCombatMotionSprite('unknown', 'unknown'), getCharacterArt('raider')?.motion.recover || '/art/combat-v2/units/raider-recover.webp');
+  assert.equal(getCombatSprite('unknown'), getCharacterArt('raider')?.motion.recover || '/art/combat-v1/units/raider-ready.webp');
   assert.equal(getPaintedVisualProfile('unknown'), null);
 });
 

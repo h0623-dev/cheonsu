@@ -4,7 +4,7 @@
 - If an APK build is blocked, state the exact blocker and do not claim delivery is complete.
 - Keep saves backward compatible. Do not discard the user's existing work.
 - User-facing game text and development summaries are in Korean.
-- When the user says "원복" without naming a different target, restore the game behavior/art from version 1.99.148, commit `f556e33e113b7f15b1fc1f515a201beded9a1aeb`. This is the fixed baseline before the requested full-field combat redesign, not the immediately preceding patch. See `docs/ROLLBACK_BASELINE.md`. Preserve current saves and unrelated user work. Deliver rollback as a newly numbered, freshly verified APK and signed OTA; never downgrade the public update pointer or force-reset shared Git history.
+- 사용자가 다른 대상을 지정하지 않고 "원복"이라고 하면 천수 1.99.154 / Android 353, 소스 커밋 `801234d1c99d0cdc7c11d645e111f64336e80672`의 게임 동작·아트·구성 전체를 복원합니다. 2026-10-03 사용자가 현재 배포 상태를 새 원복 기준으로 지정한 명시적 요청에 따라 변경한 기준이며, 이후 전 캐릭터 리디자인·마을 걷기 모션 작업 전에 고정합니다. 보존 태그는 `codex/rollback-1.99.154`이며, 예전 1.99.148은 역사적 별도 기준으로 보존합니다. 상세 절차와 기준은 `docs/ROLLBACK_BASELINE.md`를 따릅니다. 현재 저장·진행도·수집 데이터와 무관한 사용자 작업을 보존하고, 새로운 상위 버전의 최종 소스로 fresh APK를 제작·검증한 뒤 signed OTA까지 배포합니다. 공개 업데이트 포인터를 낮추거나 공유 Git 이력을 강제 reset/push하지 않습니다.
 - The user approved h0623-dev/cheonsu as the public automatic patch channel. For compatible game updates, also package and publish the signed OTA using `npm run update:package` and `npm run update:publish` after final APK verification and source push. Do not call delivery complete when the channel is not updated. Never publish `.update-keys/private.pem`; see `docs/AUTO_UPDATE_1.99.136.md`.
 
 ## 클라우드 개발

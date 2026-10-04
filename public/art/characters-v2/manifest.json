@@ -1,0 +1,2339 @@
+{
+  "version": 2,
+  "units": {
+    "hero": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/hero-run-a.webp",
+        "run-b": "/art/characters-v2/units/hero-run-b.webp",
+        "windup": "/art/characters-v2/units/hero-windup.webp",
+        "strike": "/art/characters-v2/units/hero-strike.webp",
+        "recover": "/art/characters-v2/units/hero-recover.webp",
+        "recoil": "/art/characters-v2/units/hero-recoil.webp",
+        "skill-a": "/art/characters-v2/units/hero-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/hero-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 156,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 163,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 128,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 190,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 141,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 169,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 200,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 69,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/hero.webp",
+      "dialogue": "/art/characters-v2/dialogue/hero.webp",
+      "skills": {
+        "hero-dawn-slash": {
+          "src": "/art/characters-v2/units/hero-skill-a.webp",
+          "scale": 1.0619469026548674,
+          "footOffset": "0%"
+        }
+      }
+    },
+    "bram": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/bram-run-a.webp",
+        "run-b": "/art/characters-v2/units/bram-run-b.webp",
+        "windup": "/art/characters-v2/units/bram-windup.webp",
+        "strike": "/art/characters-v2/units/bram-strike.webp",
+        "recover": "/art/characters-v2/units/bram-recover.webp",
+        "recoil": "/art/characters-v2/units/bram-recoil.webp",
+        "skill-a": "/art/characters-v2/units/bram-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/bram-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 103,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 74,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 145,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 73,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 109,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 88,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 92,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/bram.webp",
+      "dialogue": "/art/characters-v2/dialogue/bram.webp",
+      "skills": {
+        "bulwark": {
+          "src": "/art/characters-v2/units/bram-skill-b.webp",
+          "scale": 0.8845208845208845,
+          "footOffset": "0%"
+        },
+        "bash": {
+          "src": "/art/characters-v2/units/bram-skill-a.webp",
+          "scale": 0.8845208845208845,
+          "footOffset": "0%"
+        },
+        "bram-oath-wall": {
+          "src": "/art/characters-v2/units/bram-skill-b.webp",
+          "scale": 0.8845208845208845,
+          "footOffset": "0%"
+        }
+      }
+    },
+    "lina": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/lina-run-a.webp",
+        "run-b": "/art/characters-v2/units/lina-run-b.webp",
+        "windup": "/art/characters-v2/units/lina-windup.webp",
+        "strike": "/art/characters-v2/units/lina-strike.webp",
+        "recover": "/art/characters-v2/units/lina-recover.webp",
+        "recoil": "/art/characters-v2/units/lina-recoil.webp",
+        "skill-a": "/art/characters-v2/units/lina-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/lina-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 81,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 83,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 77,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 76,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 73,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 80,
+          "bottom": 478
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 133,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/lina.webp",
+      "dialogue": "/art/characters-v2/dialogue/lina.webp",
+      "skills": {
+        "lina-phoenix-flare": {
+          "src": "/art/characters-v2/units/lina-skill-a.webp",
+          "scale": 0.8845208845208845,
+          "footOffset": "0%"
+        }
+      }
+    },
+    "aria": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/aria-run-a.webp",
+        "run-b": "/art/characters-v2/units/aria-run-b.webp",
+        "windup": "/art/characters-v2/units/aria-windup.webp",
+        "strike": "/art/characters-v2/units/aria-strike.webp",
+        "recover": "/art/characters-v2/units/aria-recover.webp",
+        "recoil": "/art/characters-v2/units/aria-recoil.webp",
+        "skill-a": "/art/characters-v2/units/aria-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/aria-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 81,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 79,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 21,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 86,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 73,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 116,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 66,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 68,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/aria.webp",
+      "dialogue": "/art/characters-v2/dialogue/aria.webp",
+      "skills": {
+        "aria-sanctuary-song": {
+          "src": "/art/characters-v2/units/aria-skill-b.webp",
+          "scale": 0.8845208845208845,
+          "footOffset": "0%"
+        }
+      }
+    },
+    "leon": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/leon-run-a.webp",
+        "run-b": "/art/characters-v2/units/leon-run-b.webp",
+        "windup": "/art/characters-v2/units/leon-windup.webp",
+        "strike": "/art/characters-v2/units/leon-strike.webp",
+        "recover": "/art/characters-v2/units/leon-recover.webp",
+        "recoil": "/art/characters-v2/units/leon-recoil.webp",
+        "skill-a": "/art/characters-v2/units/leon-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/leon-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 172,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 186,
+          "bottom": 478
+        },
+        "windup": {
+          "height": 512,
+          "top": 127,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 212,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 152,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 171,
+          "bottom": 478
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 259,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 230,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/leon.webp",
+      "dialogue": "/art/characters-v2/dialogue/leon.webp"
+    },
+    "sera": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/sera-run-a.webp",
+        "run-b": "/art/characters-v2/units/sera-run-b.webp",
+        "windup": "/art/characters-v2/units/sera-windup.webp",
+        "strike": "/art/characters-v2/units/sera-strike.webp",
+        "recover": "/art/characters-v2/units/sera-recover.webp",
+        "recoil": "/art/characters-v2/units/sera-recoil.webp",
+        "skill-a": "/art/characters-v2/units/sera-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/sera-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 81,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 87,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 98,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 99,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 72,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 111,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 76,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/sera.webp",
+      "dialogue": "/art/characters-v2/dialogue/sera.webp"
+    },
+    "noah": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/noah-run-a.webp",
+        "run-b": "/art/characters-v2/units/noah-run-b.webp",
+        "windup": "/art/characters-v2/units/noah-windup.webp",
+        "strike": "/art/characters-v2/units/noah-strike.webp",
+        "recover": "/art/characters-v2/units/noah-recover.webp",
+        "recoil": "/art/characters-v2/units/noah-recoil.webp",
+        "skill-a": "/art/characters-v2/units/noah-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/noah-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 76,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 77,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 69,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 84,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 73,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 75,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 58,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 57,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/noah.webp",
+      "dialogue": "/art/characters-v2/dialogue/noah.webp"
+    },
+    "yuna": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/yuna-run-a.webp",
+        "run-b": "/art/characters-v2/units/yuna-run-b.webp",
+        "windup": "/art/characters-v2/units/yuna-windup.webp",
+        "strike": "/art/characters-v2/units/yuna-strike.webp",
+        "recover": "/art/characters-v2/units/yuna-recover.webp",
+        "recoil": "/art/characters-v2/units/yuna-recoil.webp",
+        "skill-a": "/art/characters-v2/units/yuna-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/yuna-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 96,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 99,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 12,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 80,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 94,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 78,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 33,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 56,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/yuna.webp",
+      "dialogue": "/art/characters-v2/dialogue/yuna.webp"
+    },
+    "rakan": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/rakan-run-a.webp",
+        "run-b": "/art/characters-v2/units/rakan-run-b.webp",
+        "windup": "/art/characters-v2/units/rakan-windup.webp",
+        "strike": "/art/characters-v2/units/rakan-strike.webp",
+        "recover": "/art/characters-v2/units/rakan-recover.webp",
+        "recoil": "/art/characters-v2/units/rakan-recoil.webp",
+        "skill-a": "/art/characters-v2/units/rakan-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/rakan-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 55,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 68,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 19,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 61,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 72,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 75,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 29,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 71,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/rakan.webp",
+      "dialogue": "/art/characters-v2/dialogue/rakan.webp"
+    },
+    "miho": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/miho-run-a.webp",
+        "run-b": "/art/characters-v2/units/miho-run-b.webp",
+        "windup": "/art/characters-v2/units/miho-windup.webp",
+        "strike": "/art/characters-v2/units/miho-strike.webp",
+        "recover": "/art/characters-v2/units/miho-recover.webp",
+        "recoil": "/art/characters-v2/units/miho-recoil.webp",
+        "skill-a": "/art/characters-v2/units/miho-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/miho-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 86,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 92,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 99,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 77,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 73,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 91,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 85,
+          "bottom": 478
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/miho.webp",
+      "dialogue": "/art/characters-v2/dialogue/miho.webp"
+    },
+    "teo": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/teo-run-a.webp",
+        "run-b": "/art/characters-v2/units/teo-run-b.webp",
+        "windup": "/art/characters-v2/units/teo-windup.webp",
+        "strike": "/art/characters-v2/units/teo-strike.webp",
+        "recover": "/art/characters-v2/units/teo-recover.webp",
+        "recoil": "/art/characters-v2/units/teo-recoil.webp",
+        "skill-a": "/art/characters-v2/units/teo-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/teo-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 74,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 73,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 34,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 30,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 72,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 91,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 31,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 64,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/teo.webp",
+      "dialogue": "/art/characters-v2/dialogue/teo.webp"
+    },
+    "irene": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/irene-run-a.webp",
+        "run-b": "/art/characters-v2/units/irene-run-b.webp",
+        "windup": "/art/characters-v2/units/irene-windup.webp",
+        "strike": "/art/characters-v2/units/irene-strike.webp",
+        "recover": "/art/characters-v2/units/irene-recover.webp",
+        "recoil": "/art/characters-v2/units/irene-recoil.webp",
+        "skill-a": "/art/characters-v2/units/irene-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/irene-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 93,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 26,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 54,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 72,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 74,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 36,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 46,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/irene.webp",
+      "dialogue": "/art/characters-v2/dialogue/irene.webp"
+    },
+    "kaz": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/kaz-run-a.webp",
+        "run-b": "/art/characters-v2/units/kaz-run-b.webp",
+        "windup": "/art/characters-v2/units/kaz-windup.webp",
+        "strike": "/art/characters-v2/units/kaz-strike.webp",
+        "recover": "/art/characters-v2/units/kaz-recover.webp",
+        "recoil": "/art/characters-v2/units/kaz-recoil.webp",
+        "skill-a": "/art/characters-v2/units/kaz-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/kaz-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 85,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 92,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 76,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 107,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 95,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 98,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 175,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 112,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/kaz.webp",
+      "dialogue": "/art/characters-v2/dialogue/kaz.webp"
+    },
+    "ella": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/ella-run-a.webp",
+        "run-b": "/art/characters-v2/units/ella-run-b.webp",
+        "windup": "/art/characters-v2/units/ella-windup.webp",
+        "strike": "/art/characters-v2/units/ella-strike.webp",
+        "recover": "/art/characters-v2/units/ella-recover.webp",
+        "recoil": "/art/characters-v2/units/ella-recoil.webp",
+        "skill-a": "/art/characters-v2/units/ella-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/ella-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 67,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 75,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 59,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 83,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 72,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 91,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 63,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 79,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/ella.webp",
+      "dialogue": "/art/characters-v2/dialogue/ella.webp"
+    },
+    "jin": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/jin-run-a.webp",
+        "run-b": "/art/characters-v2/units/jin-run-b.webp",
+        "windup": "/art/characters-v2/units/jin-windup.webp",
+        "strike": "/art/characters-v2/units/jin-strike.webp",
+        "recover": "/art/characters-v2/units/jin-recover.webp",
+        "recoil": "/art/characters-v2/units/jin-recoil.webp",
+        "skill-a": "/art/characters-v2/units/jin-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/jin-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 98,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 49,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 104,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 95,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 115,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 56,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 111,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/jin.webp",
+      "dialogue": "/art/characters-v2/dialogue/jin.webp"
+    },
+    "luka": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/luka-run-a.webp",
+        "run-b": "/art/characters-v2/units/luka-run-b.webp",
+        "windup": "/art/characters-v2/units/luka-windup.webp",
+        "strike": "/art/characters-v2/units/luka-strike.webp",
+        "recover": "/art/characters-v2/units/luka-recover.webp",
+        "recoil": "/art/characters-v2/units/luka-recoil.webp",
+        "skill-a": "/art/characters-v2/units/luka-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/luka-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 141,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 132,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 80,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 132,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 118,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 127,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 183,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 52,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/luka.webp",
+      "dialogue": "/art/characters-v2/dialogue/luka.webp"
+    },
+    "baekho": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/baekho-run-a.webp",
+        "run-b": "/art/characters-v2/units/baekho-run-b.webp",
+        "windup": "/art/characters-v2/units/baekho-windup.webp",
+        "strike": "/art/characters-v2/units/baekho-strike.webp",
+        "recover": "/art/characters-v2/units/baekho-recover.webp",
+        "recoil": "/art/characters-v2/units/baekho-recoil.webp",
+        "skill-a": "/art/characters-v2/units/baekho-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/baekho-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 69,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 74,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 72,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 75,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 72,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 86,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 97,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 74,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/baekho.webp",
+      "dialogue": "/art/characters-v2/dialogue/baekho.webp"
+    },
+    "raider": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/raider-run-a.webp",
+        "run-b": "/art/characters-v2/units/raider-run-b.webp",
+        "windup": "/art/characters-v2/units/raider-windup.webp",
+        "strike": "/art/characters-v2/units/raider-strike.webp",
+        "recover": "/art/characters-v2/units/raider-recover.webp",
+        "recoil": "/art/characters-v2/units/raider-recoil.webp",
+        "skill-a": "/art/characters-v2/units/raider-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/raider-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 112,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 106,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 18,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 121,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 89,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 118,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 71,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 198,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/raider.webp",
+      "dialogue": "/art/characters-v2/dialogue/raider.webp"
+    },
+    "ranger": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/ranger-run-a.webp",
+        "run-b": "/art/characters-v2/units/ranger-run-b.webp",
+        "windup": "/art/characters-v2/units/ranger-windup.webp",
+        "strike": "/art/characters-v2/units/ranger-strike.webp",
+        "recover": "/art/characters-v2/units/ranger-recover.webp",
+        "recoil": "/art/characters-v2/units/ranger-recoil.webp",
+        "skill-a": "/art/characters-v2/units/ranger-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/ranger-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 111,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 110,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 13,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 50,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 77,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 98,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 137,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 62,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/ranger.webp",
+      "dialogue": "/art/characters-v2/dialogue/ranger.webp"
+    },
+    "sniper": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/sniper-run-a.webp",
+        "run-b": "/art/characters-v2/units/sniper-run-b.webp",
+        "windup": "/art/characters-v2/units/sniper-windup.webp",
+        "strike": "/art/characters-v2/units/sniper-strike.webp",
+        "recover": "/art/characters-v2/units/sniper-recover.webp",
+        "recoil": "/art/characters-v2/units/sniper-recoil.webp",
+        "skill-a": "/art/characters-v2/units/sniper-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/sniper-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 107,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 110,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 61,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 85,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 73,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 86,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 182,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 116,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/sniper.webp",
+      "dialogue": "/art/characters-v2/dialogue/sniper.webp"
+    },
+    "marauder": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/marauder-run-a.webp",
+        "run-b": "/art/characters-v2/units/marauder-run-b.webp",
+        "windup": "/art/characters-v2/units/marauder-windup.webp",
+        "strike": "/art/characters-v2/units/marauder-strike.webp",
+        "recover": "/art/characters-v2/units/marauder-recover.webp",
+        "recoil": "/art/characters-v2/units/marauder-recoil.webp",
+        "skill-a": "/art/characters-v2/units/marauder-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/marauder-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 111,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 128,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 42,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 123,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 116,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 120,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 63,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 181,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/marauder.webp",
+      "dialogue": "/art/characters-v2/dialogue/marauder.webp"
+    },
+    "assassin_elite": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/assassin_elite-run-a.webp",
+        "run-b": "/art/characters-v2/units/assassin_elite-run-b.webp",
+        "windup": "/art/characters-v2/units/assassin_elite-windup.webp",
+        "strike": "/art/characters-v2/units/assassin_elite-strike.webp",
+        "recover": "/art/characters-v2/units/assassin_elite-recover.webp",
+        "recoil": "/art/characters-v2/units/assassin_elite-recoil.webp",
+        "skill-a": "/art/characters-v2/units/assassin_elite-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/assassin_elite-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 106,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 133,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 143,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 99,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 108,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 128,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 79,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 180,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/assassin_elite.webp",
+      "dialogue": "/art/characters-v2/dialogue/assassin_elite.webp"
+    },
+    "iron_lancer": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/iron_lancer-run-a.webp",
+        "run-b": "/art/characters-v2/units/iron_lancer-run-b.webp",
+        "windup": "/art/characters-v2/units/iron_lancer-windup.webp",
+        "strike": "/art/characters-v2/units/iron_lancer-strike.webp",
+        "recover": "/art/characters-v2/units/iron_lancer-recover.webp",
+        "recoil": "/art/characters-v2/units/iron_lancer-recoil.webp",
+        "skill-a": "/art/characters-v2/units/iron_lancer-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/iron_lancer-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 160,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 158,
+          "bottom": 478
+        },
+        "windup": {
+          "height": 512,
+          "top": 116,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 188,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 105,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 153,
+          "bottom": 478
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 131,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 219,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/iron_lancer.webp",
+      "dialogue": "/art/characters-v2/dialogue/iron_lancer.webp"
+    },
+    "plague_doctor": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/plague_doctor-run-a.webp",
+        "run-b": "/art/characters-v2/units/plague_doctor-run-b.webp",
+        "windup": "/art/characters-v2/units/plague_doctor-windup.webp",
+        "strike": "/art/characters-v2/units/plague_doctor-strike.webp",
+        "recover": "/art/characters-v2/units/plague_doctor-recover.webp",
+        "recoil": "/art/characters-v2/units/plague_doctor-recoil.webp",
+        "skill-a": "/art/characters-v2/units/plague_doctor-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/plague_doctor-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 167,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 158,
+          "bottom": 478
+        },
+        "windup": {
+          "height": 512,
+          "top": 75,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 182,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 153,
+          "bottom": 478
+        },
+        "recoil": {
+          "height": 512,
+          "top": 169,
+          "bottom": 478
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 185,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 96,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/plague_doctor.webp",
+      "dialogue": "/art/characters-v2/dialogue/plague_doctor.webp"
+    },
+    "beast_tamer": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/beast_tamer-run-a.webp",
+        "run-b": "/art/characters-v2/units/beast_tamer-run-b.webp",
+        "windup": "/art/characters-v2/units/beast_tamer-windup.webp",
+        "strike": "/art/characters-v2/units/beast_tamer-strike.webp",
+        "recover": "/art/characters-v2/units/beast_tamer-recover.webp",
+        "recoil": "/art/characters-v2/units/beast_tamer-recoil.webp",
+        "skill-a": "/art/characters-v2/units/beast_tamer-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/beast_tamer-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 162,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 160,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 113,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 167,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 158,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 162,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 120,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 154,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/beast_tamer.webp",
+      "dialogue": "/art/characters-v2/dialogue/beast_tamer.webp"
+    },
+    "storm_mage": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/storm_mage-run-a.webp",
+        "run-b": "/art/characters-v2/units/storm_mage-run-b.webp",
+        "windup": "/art/characters-v2/units/storm_mage-windup.webp",
+        "strike": "/art/characters-v2/units/storm_mage-strike.webp",
+        "recover": "/art/characters-v2/units/storm_mage-recover.webp",
+        "recoil": "/art/characters-v2/units/storm_mage-recoil.webp",
+        "skill-a": "/art/characters-v2/units/storm_mage-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/storm_mage-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 122,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 133,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 46,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 141,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 90,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 117,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 129,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 19,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/storm_mage.webp",
+      "dialogue": "/art/characters-v2/dialogue/storm_mage.webp"
+    },
+    "blade_dancer": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/blade_dancer-run-a.webp",
+        "run-b": "/art/characters-v2/units/blade_dancer-run-b.webp",
+        "windup": "/art/characters-v2/units/blade_dancer-windup.webp",
+        "strike": "/art/characters-v2/units/blade_dancer-strike.webp",
+        "recover": "/art/characters-v2/units/blade_dancer-recover.webp",
+        "recoil": "/art/characters-v2/units/blade_dancer-recoil.webp",
+        "skill-a": "/art/characters-v2/units/blade_dancer-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/blade_dancer-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 133,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 144,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 98,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 171,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 157,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 158,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 155,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 213,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/blade_dancer.webp",
+      "dialogue": "/art/characters-v2/dialogue/blade_dancer.webp"
+    },
+    "siege_gunner": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/siege_gunner-run-a.webp",
+        "run-b": "/art/characters-v2/units/siege_gunner-run-b.webp",
+        "windup": "/art/characters-v2/units/siege_gunner-windup.webp",
+        "strike": "/art/characters-v2/units/siege_gunner-strike.webp",
+        "recover": "/art/characters-v2/units/siege_gunner-recover.webp",
+        "recoil": "/art/characters-v2/units/siege_gunner-recoil.webp",
+        "skill-a": "/art/characters-v2/units/siege_gunner-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/siege_gunner-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 79,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 73,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 58,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 75,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 72,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 94,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 167,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 134,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/siege_gunner.webp",
+      "dialogue": "/art/characters-v2/dialogue/siege_gunner.webp"
+    },
+    "sentinel": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/sentinel-run-a.webp",
+        "run-b": "/art/characters-v2/units/sentinel-run-b.webp",
+        "windup": "/art/characters-v2/units/sentinel-windup.webp",
+        "strike": "/art/characters-v2/units/sentinel-strike.webp",
+        "recover": "/art/characters-v2/units/sentinel-recover.webp",
+        "recoil": "/art/characters-v2/units/sentinel-recoil.webp",
+        "skill-a": "/art/characters-v2/units/sentinel-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/sentinel-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 109,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 115,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 63,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 130,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 132,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 122,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 177,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/sentinel.webp",
+      "dialogue": "/art/characters-v2/dialogue/sentinel.webp"
+    },
+    "blackguard": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/blackguard-run-a.webp",
+        "run-b": "/art/characters-v2/units/blackguard-run-b.webp",
+        "windup": "/art/characters-v2/units/blackguard-windup.webp",
+        "strike": "/art/characters-v2/units/blackguard-strike.webp",
+        "recover": "/art/characters-v2/units/blackguard-recover.webp",
+        "recoil": "/art/characters-v2/units/blackguard-recoil.webp",
+        "skill-a": "/art/characters-v2/units/blackguard-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/blackguard-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 130,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 138,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 32,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 172,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 128,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 147,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 177,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 69,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/blackguard.webp",
+      "dialogue": "/art/characters-v2/dialogue/blackguard.webp"
+    },
+    "warlord": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/warlord-run-a.webp",
+        "run-b": "/art/characters-v2/units/warlord-run-b.webp",
+        "windup": "/art/characters-v2/units/warlord-windup.webp",
+        "strike": "/art/characters-v2/units/warlord-strike.webp",
+        "recover": "/art/characters-v2/units/warlord-recover.webp",
+        "recoil": "/art/characters-v2/units/warlord-recoil.webp",
+        "skill-a": "/art/characters-v2/units/warlord-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/warlord-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 154,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 171,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 78,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 188,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 146,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 164,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 211,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 117,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/warlord.webp",
+      "dialogue": "/art/characters-v2/dialogue/warlord.webp"
+    },
+    "pyromancer": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/pyromancer-run-a.webp",
+        "run-b": "/art/characters-v2/units/pyromancer-run-b.webp",
+        "windup": "/art/characters-v2/units/pyromancer-windup.webp",
+        "strike": "/art/characters-v2/units/pyromancer-strike.webp",
+        "recover": "/art/characters-v2/units/pyromancer-recover.webp",
+        "recoil": "/art/characters-v2/units/pyromancer-recoil.webp",
+        "skill-a": "/art/characters-v2/units/pyromancer-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/pyromancer-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 118,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 128,
+          "bottom": 478
+        },
+        "windup": {
+          "height": 512,
+          "top": 65,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 151,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 117,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 126,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 99,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 92,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/pyromancer.webp",
+      "dialogue": "/art/characters-v2/dialogue/pyromancer.webp"
+    },
+    "frost_mage": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/frost_mage-run-a.webp",
+        "run-b": "/art/characters-v2/units/frost_mage-run-b.webp",
+        "windup": "/art/characters-v2/units/frost_mage-windup.webp",
+        "strike": "/art/characters-v2/units/frost_mage-strike.webp",
+        "recover": "/art/characters-v2/units/frost_mage-recover.webp",
+        "recoil": "/art/characters-v2/units/frost_mage-recoil.webp",
+        "skill-a": "/art/characters-v2/units/frost_mage-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/frost_mage-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 158,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 166,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 85,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 182,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 116,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 125,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 199,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 64,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/frost_mage.webp",
+      "dialogue": "/art/characters-v2/dialogue/frost_mage.webp"
+    },
+    "cultist": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/cultist-run-a.webp",
+        "run-b": "/art/characters-v2/units/cultist-run-b.webp",
+        "windup": "/art/characters-v2/units/cultist-windup.webp",
+        "strike": "/art/characters-v2/units/cultist-strike.webp",
+        "recover": "/art/characters-v2/units/cultist-recover.webp",
+        "recoil": "/art/characters-v2/units/cultist-recoil.webp",
+        "skill-a": "/art/characters-v2/units/cultist-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/cultist-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 122,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 158,
+          "bottom": 478
+        },
+        "windup": {
+          "height": 512,
+          "top": 65,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 115,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 86,
+          "bottom": 478
+        },
+        "recoil": {
+          "height": 512,
+          "top": 131,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 113,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 45,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/cultist.webp",
+      "dialogue": "/art/characters-v2/dialogue/cultist.webp"
+    },
+    "void_knight": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/void_knight-run-a.webp",
+        "run-b": "/art/characters-v2/units/void_knight-run-b.webp",
+        "windup": "/art/characters-v2/units/void_knight-windup.webp",
+        "strike": "/art/characters-v2/units/void_knight-strike.webp",
+        "recover": "/art/characters-v2/units/void_knight-recover.webp",
+        "recoil": "/art/characters-v2/units/void_knight-recoil.webp",
+        "skill-a": "/art/characters-v2/units/void_knight-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/void_knight-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 194,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 193,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 114,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 179,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 158,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 181,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 146,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 268,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/void_knight.webp",
+      "dialogue": "/art/characters-v2/dialogue/void_knight.webp"
+    },
+    "wolf": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/wolf-run-a.webp",
+        "run-b": "/art/characters-v2/units/wolf-run-b.webp",
+        "windup": "/art/characters-v2/units/wolf-windup.webp",
+        "strike": "/art/characters-v2/units/wolf-strike.webp",
+        "recover": "/art/characters-v2/units/wolf-recover.webp",
+        "recoil": "/art/characters-v2/units/wolf-recoil.webp",
+        "skill-a": "/art/characters-v2/units/wolf-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/wolf-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 254,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 257,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 297,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 288,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 231,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 201,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 271,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 208,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/wolf.webp",
+      "dialogue": "/art/characters-v2/dialogue/wolf.webp"
+    },
+    "boss_commander": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/boss_commander-run-a.webp",
+        "run-b": "/art/characters-v2/units/boss_commander-run-b.webp",
+        "windup": "/art/characters-v2/units/boss_commander-windup.webp",
+        "strike": "/art/characters-v2/units/boss_commander-strike.webp",
+        "recover": "/art/characters-v2/units/boss_commander-recover.webp",
+        "recoil": "/art/characters-v2/units/boss_commander-recoil.webp",
+        "skill-a": "/art/characters-v2/units/boss_commander-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/boss_commander-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 177,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 167,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 158,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 189,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 167,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 207,
+          "bottom": 478
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 206,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 135,
+          "bottom": 478
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/boss_commander.webp",
+      "dialogue": "/art/characters-v2/dialogue/boss_commander.webp"
+    },
+    "boss_frost": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/boss_frost-run-a.webp",
+        "run-b": "/art/characters-v2/units/boss_frost-run-b.webp",
+        "windup": "/art/characters-v2/units/boss_frost-windup.webp",
+        "strike": "/art/characters-v2/units/boss_frost-strike.webp",
+        "recover": "/art/characters-v2/units/boss_frost-recover.webp",
+        "recoil": "/art/characters-v2/units/boss_frost-recoil.webp",
+        "skill-a": "/art/characters-v2/units/boss_frost-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/boss_frost-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 155,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 155,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 109,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 184,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 121,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 149,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 157,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 74,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/boss_frost.webp",
+      "dialogue": "/art/characters-v2/dialogue/boss_frost.webp"
+    },
+    "boss_ember": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/boss_ember-run-a.webp",
+        "run-b": "/art/characters-v2/units/boss_ember-run-b.webp",
+        "windup": "/art/characters-v2/units/boss_ember-windup.webp",
+        "strike": "/art/characters-v2/units/boss_ember-strike.webp",
+        "recover": "/art/characters-v2/units/boss_ember-recover.webp",
+        "recoil": "/art/characters-v2/units/boss_ember-recoil.webp",
+        "skill-a": "/art/characters-v2/units/boss_ember-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/boss_ember-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 143,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 152,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 92,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 158,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 127,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 173,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 193,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 83,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/boss_ember.webp",
+      "dialogue": "/art/characters-v2/dialogue/boss_ember.webp"
+    },
+    "boss_oracle": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/boss_oracle-run-a.webp",
+        "run-b": "/art/characters-v2/units/boss_oracle-run-b.webp",
+        "windup": "/art/characters-v2/units/boss_oracle-windup.webp",
+        "strike": "/art/characters-v2/units/boss_oracle-strike.webp",
+        "recover": "/art/characters-v2/units/boss_oracle-recover.webp",
+        "recoil": "/art/characters-v2/units/boss_oracle-recoil.webp",
+        "skill-a": "/art/characters-v2/units/boss_oracle-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/boss_oracle-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 88,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 83,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 75,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 90,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 93,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 99,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 91,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 84,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/boss_oracle.webp",
+      "dialogue": "/art/characters-v2/dialogue/boss_oracle.webp"
+    },
+    "boss_abyss": {
+      "motion": {
+        "run-a": "/art/characters-v2/units/boss_abyss-run-a.webp",
+        "run-b": "/art/characters-v2/units/boss_abyss-run-b.webp",
+        "windup": "/art/characters-v2/units/boss_abyss-windup.webp",
+        "strike": "/art/characters-v2/units/boss_abyss-strike.webp",
+        "recover": "/art/characters-v2/units/boss_abyss-recover.webp",
+        "recoil": "/art/characters-v2/units/boss_abyss-recoil.webp",
+        "skill-a": "/art/characters-v2/units/boss_abyss-skill-a.webp",
+        "skill-b": "/art/characters-v2/units/boss_abyss-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 152,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 159,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 74,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 161,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 119,
+          "bottom": 478
+        },
+        "recoil": {
+          "height": 512,
+          "top": 156,
+          "bottom": 478
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 147,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 174,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v2/portraits/boss_abyss.webp",
+      "dialogue": "/art/characters-v2/dialogue/boss_abyss.webp"
+    }
+  }
+}

@@ -37,6 +37,7 @@ cheonsu_*.zip
 .codex-remote-attachments/
 _codex_backups/
 tmp/
+/work/
 
 # Superseded handoff documents and previews; keep local copies only
 /handoff_docs/

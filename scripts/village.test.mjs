@@ -3,10 +3,12 @@ import assert from 'node:assert/strict';
 import { getUnlockedStageIds, createVictoryCheckpoint, writeProgressSave } from '../src/engine/campaignProgress.js';
 import { normalizeSaveData } from '../src/engine/saveEngine.js';
 import { getSkill, getSupportSkillCandidates, applySupportSkill } from '../src/data/skills.js';
-import { TOWN_ENTRANCE, TOWN_FACILITIES, TOWN_MAP, getTownPath } from '../src/engine/townMovement.js';
+import { TOWN_ENTRANCE, TOWN_FACILITIES, TOWN_MAP, TOWN_STEP_MS, getTownPath, advanceTownRoute, stopTownRoute, getTownStepDelay } from '../src/engine/townMovement.js';
 import { combatUnitIds, combatMotionPoses, getCombatFrameStyle } from '../src/data/combatArt.js';
 import metrics from '../src/data/combatFrameMetrics.json' with { type: 'json' };
+import { getCharacterArt } from '../src/data/characterArt.js';
 import { stages } from '../src/data/stages.js';
+import { VILLAGE_WALK_IDS, getVillageWalkFrame, getVillageWalkFrames } from '../src/data/villageWalk.js';
 
 test('stage progression ignores old testing unlocks and preserves cleared-stage evidence', () => {
   assert.deepEqual(getUnlockedStageIds(), [1]);
@@ -81,13 +83,65 @@ test('all village facilities are connected by walkable consecutive steps', () =>
 });
 test('combat poses keep a stable body scale and foot baseline without shrinking raised weapons', () => {
   for (const key of combatUnitIds) for (const pose of combatMotionPoses) {
-    const frame = metrics[key][pose]; const style = getCombatFrameStyle(key, pose);
+    const active = getCharacterArt(key);
+    const catalogue = active?.metrics || metrics[key];
+    const frame = catalogue[pose]; const style = getCombatFrameStyle(key, pose);
     const scale = style['--combat-sprite-scale'];
-    const reference = metrics[key].recover;
+    const reference = catalogue.recover;
     const height = (reference.bottom - reference.top + 1) / reference.height * scale;
-    assert.ok(Math.abs(height - (key === 'wolf' ? .45 : .703125)) < .00001, `${key}/${pose}`);
+    assert.ok(Math.abs(height - (active?.visibleFraction ?? (key === 'wolf' ? .45 : .703125))) < .00001, `${key}/${pose}`);
     assert.equal(scale, getCombatFrameStyle(key, 'recover')['--combat-sprite-scale'], `${key}/${pose}: stable body`);
     const foot = .9375 + ((frame.bottom + 1) / frame.height - .9375) * scale + parseFloat(style['--combat-foot-offset']) / 100;
     assert.ok(Math.abs(foot - .9375) < .00001, `${key}/${pose}: baseline`);
   }
+});
+
+test('town travel finishes each walking step before opening a facility and keeps its direction', () => {
+  const start = { x: 11, y: 11 };
+  const target = TOWN_FACILITIES.find(place => place.id === 'armory');
+  let result = { position: start, route: { path: getTownPath(start, target), destination: target.id } };
+  let clock = 0;
+  while (result.route.path.length) {
+    const previous = result.position;
+    result = advanceTownRoute(result.position, result.route, clock);
+    assert.equal(result.direction, 'left');
+    assert.equal(result.position.x, previous.x - 1);
+    assert.equal(result.arrived, null, 'being at the target coordinate is not arrival until its walk finishes');
+    assert.equal(getTownStepDelay(result.route, clock), TOWN_STEP_MS);
+    clock += TOWN_STEP_MS;
+  }
+  assert.equal(result.position.x, target.x);
+  result = advanceTownRoute(result.position, result.route, clock);
+  assert.equal(result.route, null);
+  assert.equal(result.arrived, 'armory');
+  assert.equal(advanceTownRoute(result.position, result.route, clock).arrived, null, 'arrival only fires once');
+});
+
+test('canceling town travel completes the current step without opening its old destination', () => {
+  const started = advanceTownRoute(TOWN_ENTRANCE, { path: getTownPath(TOWN_ENTRANCE, TOWN_FACILITIES[0]), destination: 'shop' }, 1000);
+  const cancelled = stopTownRoute(started.route);
+  assert.deepEqual(cancelled.path, []);
+  assert.equal(getTownStepDelay(cancelled, 1080), TOWN_STEP_MS - 80, 'canceling does not restart a step timer');
+  assert.equal(getTownStepDelay(cancelled, 2000), 0);
+  const stopped = advanceTownRoute(started.position, cancelled, 1000 + TOWN_STEP_MS);
+  assert.deepEqual(stopped.position, started.position);
+  assert.equal(stopped.route, null);
+  assert.equal(stopped.arrived, null);
+  const vertical = advanceTownRoute(TOWN_ENTRANCE, { path: [{ x: 11, y: 11 }], destination: null }, 0);
+  assert.equal(vertical.direction, 'up');
+  assert.equal(advanceTownRoute(vertical.position, { path: [TOWN_ENTRANCE] }, TOWN_STEP_MS).direction, 'down');
+});
+
+test('town walking frames cover all companions and match front/back facing without replacing idle art', () => {
+  assert.equal(VILLAGE_WALK_IDS.length, 17);
+  for (const id of VILLAGE_WALK_IDS) {
+    assert.equal(new Set(getVillageWalkFrames(id)).size, 4);
+    assert.equal(getVillageWalkFrame(id, 'up-left', 0), getVillageWalkFrame(id, 'up-right', 0));
+    assert.equal(getVillageWalkFrame(id, 'left', 1), getVillageWalkFrame(id, 'down', 1));
+    assert.notEqual(getVillageWalkFrame(id, 'up', 1), getVillageWalkFrame(id, 'down', 1));
+    assert.equal(getVillageWalkFrame(id, 'right', 2), getVillageWalkFrame(id, 'right', 0));
+    assert.match(getVillageWalkFrame(id), /^\/art\/village-walk-v2\//);
+  }
+  assert.equal(getVillageWalkFrame('unknown'), null);
+  assert.deepEqual(getVillageWalkFrames('unknown'), []);
 });

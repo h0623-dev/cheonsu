@@ -55,7 +55,7 @@ async function main() {
       });
       assert.ok(Math.abs(geometry.tileHeight / geometry.tileWidth - 0.82) < 0.001, 'Every stage must use the same orthographic ground projection');
       assert.ok(Math.abs(geometry.originError) < 0.5, 'Tile origin must match artwork origin');
-      assert.ok(geometry.units.every(unit => unit.loaded && unit.src.includes('/art/world-v2/units/')), 'All battle characters must load the new artwork');
+      assert.ok(geometry.units.every(unit => unit.loaded && /^\/art\/(map-sprites-v4|directions-v1)\//.test(unit.src)), 'All battle characters must load the new artwork');
       assert.ok(geometry.units.every(unit => unit.anchorError < 1), 'All feet must share the ground anchor');
       assert.ok(geometry.units.every(unit => unit.height / unit.tileWidth < 1.55), 'Characters must scale with tiles');
       assert.ok(geometry.units.every(unit => !unit.blocked && isPaintedGround(stage, unit.groundX, unit.groundY)), 'Every deployed character must stand on painted ground, including extended boards');
@@ -131,11 +131,11 @@ async function main() {
         await page.reload();
         await page.getByRole('button', { name: '이어하기', exact: true }).click();
         await page.locator('.camp-screen').waitFor();
-        const campImages = await page.locator('.camp-screen img').evaluateAll(async images => {
+        const campImages = await page.locator('.camp-character-row img').evaluateAll(async images => {
           await Promise.all(images.map(img => img.decode()));
           return images.map(img => img.getAttribute('src'));
         });
-        assert.ok(campImages.length && campImages.every(src => src.startsWith('/art/world-v2/')));
+        assert.ok(campImages.length && campImages.every(src => src.startsWith('/art/characters-v2/')));
         const campLayout = await page.locator('.camp-tab-panel').evaluate(panel => ({ listBottom: panel.querySelector('.camp-character-row').getBoundingClientRect().bottom, actionsTop: panel.querySelector('.camp-menu-grid').getBoundingClientRect().top }));
         assert.ok(campLayout.actionsTop >= campLayout.listBottom, 'Camp controls must not cover portraits');
         await page.screenshot({ path: `${out}/camp-${viewport.width}.png` });

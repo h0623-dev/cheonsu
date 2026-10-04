@@ -1,0 +1,1221 @@
+{
+  "units": {
+    "bram": {
+      "sourcePath": "docs/art/village-walk-v2/sources/bram.png",
+      "sha256": "43a4cacd71ab75dabd69faffe2b404256323a546f2b02335a22b2219c1a14f19",
+      "size": [
+        1254,
+        1254
+      ],
+      "scale": 0.7104795737122558,
+      "viewNormalization": 0.9542372881355933,
+      "sourceBounds": [
+        {
+          "left": 140,
+          "top": 41,
+          "right": 569,
+          "bottom": 603
+        },
+        {
+          "left": 711,
+          "top": 37,
+          "right": 1122,
+          "bottom": 588
+        },
+        {
+          "left": 122,
+          "top": 630,
+          "right": 544,
+          "bottom": 1219
+        },
+        {
+          "left": 697,
+          "top": 632,
+          "right": 1133,
+          "bottom": 1216
+        }
+      ],
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 39,
+          "top": 48,
+          "right": 344,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 45,
+          "top": 56,
+          "right": 337,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 49,
+          "top": 48,
+          "right": 334,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 44,
+          "top": 51,
+          "right": 338,
+          "bottom": 447
+        }
+      }
+    },
+    "hero": {
+      "sourcePath": "docs/art/village-walk-v2/sources/hero.png",
+      "sha256": "7708bf1985db0790a57710f61fae31662484a3cfd1e2fe702b55f9328da7a62d",
+      "size": [
+        1261,
+        1247
+      ],
+      "scale": 0.7299270072992701,
+      "viewNormalization": 0.9856115107913669,
+      "sourceBounds": [
+        {
+          "left": 126,
+          "top": 59,
+          "right": 536,
+          "bottom": 606
+        },
+        {
+          "left": 698,
+          "top": 60,
+          "right": 1119,
+          "bottom": 606
+        },
+        {
+          "left": 98,
+          "top": 646,
+          "right": 641,
+          "bottom": 1201
+        },
+        {
+          "left": 697,
+          "top": 646,
+          "right": 1229,
+          "bottom": 1202
+        }
+      ],
+      "metrics": {
+        "front-a": {
+          "width": 439,
+          "height": 480,
+          "left": 69,
+          "top": 48,
+          "right": 367,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 439,
+          "height": 480,
+          "left": 65,
+          "top": 49,
+          "right": 372,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 439,
+          "height": 480,
+          "left": 24,
+          "top": 49,
+          "right": 414,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 439,
+          "height": 480,
+          "left": 28,
+          "top": 47,
+          "right": 410,
+          "bottom": 447
+        }
+      }
+    },
+    "lina": {
+      "sourcePath": "docs/art/village-walk-v2/sources/lina.png",
+      "sha256": "7e0633702290c6690da5ba1d34e074a898a0abc599bc8dbafe40263c88eee8bf",
+      "size": [
+        1278,
+        1230
+      ],
+      "scale": 0.6825938566552902,
+      "viewNormalization": 1.0693430656934306,
+      "sourceBounds": [
+        {
+          "left": 142,
+          "top": 24,
+          "right": 615,
+          "bottom": 609
+        },
+        {
+          "left": 714,
+          "top": 34,
+          "right": 1196,
+          "bottom": 609
+        },
+        {
+          "left": 121,
+          "top": 626,
+          "right": 595,
+          "bottom": 1173
+        },
+        {
+          "left": 694,
+          "top": 625,
+          "right": 1158,
+          "bottom": 1186
+        }
+      ],
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 30,
+          "top": 48,
+          "right": 353,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 27,
+          "top": 55,
+          "right": 356,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 18,
+          "top": 48,
+          "right": 364,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 22,
+          "top": 38,
+          "right": 360,
+          "bottom": 447
+        }
+      }
+    },
+    "aria": {
+      "sourcePath": "docs/art/village-walk-v2/sources/aria.png",
+      "sha256": "dcb8c4e699b76f1aa2c2a84b8e23abde32f65e59b85f61c6dd268c948ddd0c3f",
+      "size": [
+        1254,
+        1254
+      ],
+      "scale": 0.7532956685499058,
+      "viewNormalization": 0.9906716417910447,
+      "sourceBounds": [
+        {
+          "left": 104,
+          "top": 69,
+          "right": 605,
+          "bottom": 599
+        },
+        {
+          "left": 700,
+          "top": 68,
+          "right": 1188,
+          "bottom": 599
+        },
+        {
+          "left": 93,
+          "top": 664,
+          "right": 592,
+          "bottom": 1199
+        },
+        {
+          "left": 709,
+          "top": 666,
+          "right": 1204,
+          "bottom": 1206
+        }
+      ],
+      "metrics": {
+        "front-a": {
+          "width": 399,
+          "height": 480,
+          "left": 10,
+          "top": 48,
+          "right": 387,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 399,
+          "height": 480,
+          "left": 15,
+          "top": 47,
+          "right": 381,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 399,
+          "height": 480,
+          "left": 13,
+          "top": 48,
+          "right": 385,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 399,
+          "height": 480,
+          "left": 14,
+          "top": 44,
+          "right": 383,
+          "bottom": 447
+        }
+      }
+    },
+    "leon": {
+      "sourcePath": "docs/art/village-walk-v2/sources/leon.png",
+      "sha256": "56ef803f9548e58d90295050546bd68ab23b70c21aa0c47309948334363839d5",
+      "size": [
+        1332,
+        1181
+      ],
+      "scale": 0.7504690431519699,
+      "viewNormalization": 1.0269749518304432,
+      "sourceBounds": [
+        {
+          "left": 161,
+          "top": 62,
+          "right": 638,
+          "bottom": 594
+        },
+        {
+          "left": 711,
+          "top": 66,
+          "right": 1175,
+          "bottom": 602
+        },
+        {
+          "left": 138,
+          "top": 609,
+          "right": 652,
+          "bottom": 1127
+        },
+        {
+          "left": 727,
+          "top": 622,
+          "right": 1250,
+          "bottom": 1136
+        }
+      ],
+      "metrics": {
+        "front-a": {
+          "width": 425,
+          "height": 480,
+          "left": 34,
+          "top": 48,
+          "right": 391,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 425,
+          "height": 480,
+          "left": 38,
+          "top": 46,
+          "right": 386,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 425,
+          "height": 480,
+          "left": 15,
+          "top": 48,
+          "right": 409,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 425,
+          "height": 480,
+          "left": 10,
+          "top": 51,
+          "right": 413,
+          "bottom": 447
+        }
+      }
+    },
+    "yuna": {
+      "sourcePath": "docs/art/village-walk-v2/sources/yuna.png",
+      "sha256": "7eeafa55a7223f240293dd119b628f93e2c7d5a502d26de406708d3d4e4c84f7",
+      "size": [
+        1274,
+        1235
+      ],
+      "scale": 0.7692307692307693,
+      "viewNormalization": 1.0236220472440944,
+      "sourceBounds": [
+        {
+          "left": 165,
+          "top": 83,
+          "right": 602,
+          "bottom": 602
+        },
+        {
+          "left": 670,
+          "top": 84,
+          "right": 1133,
+          "bottom": 599
+        },
+        {
+          "left": 136,
+          "top": 643,
+          "right": 623,
+          "bottom": 1150
+        },
+        {
+          "left": 680,
+          "top": 642,
+          "right": 1169,
+          "bottom": 1166
+        }
+      ],
+      "metrics": {
+        "front-a": {
+          "width": 406,
+          "height": 480,
+          "left": 34,
+          "top": 48,
+          "right": 369,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 406,
+          "height": 480,
+          "left": 25,
+          "top": 51,
+          "right": 380,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 406,
+          "height": 480,
+          "left": 11,
+          "top": 48,
+          "right": 394,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 406,
+          "height": 480,
+          "left": 10,
+          "top": 35,
+          "right": 394,
+          "bottom": 447
+        }
+      }
+    },
+    "miho": {
+      "sourcePath": "docs/art/village-walk-v2/sources/miho.png",
+      "sha256": "1d3b5e6bf49a893a63b79b70310957096ed8c6764907319dc61b09874e111115",
+      "size": [
+        1265,
+        1244
+      ],
+      "scale": 0.7246376811594203,
+      "viewNormalization": 1,
+      "sourceBounds": [
+        {
+          "left": 141,
+          "top": 42,
+          "right": 561,
+          "bottom": 593
+        },
+        {
+          "left": 706,
+          "top": 46,
+          "right": 1126,
+          "bottom": 604
+        },
+        {
+          "left": 138,
+          "top": 632,
+          "right": 553,
+          "bottom": 1183
+        },
+        {
+          "left": 713,
+          "top": 636,
+          "right": 1130,
+          "bottom": 1179
+        }
+      ],
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 39,
+          "top": 48,
+          "right": 343,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 39,
+          "top": 43,
+          "right": 343,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 41,
+          "top": 48,
+          "right": 341,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 40,
+          "top": 54,
+          "right": 342,
+          "bottom": 447
+        }
+      }
+    },
+    "teo": {
+      "sourcePath": "docs/art/village-walk-v2/sources/teo.png",
+      "sha256": "84e791d369786b4abc49c781ecdb685fcd6a312496b6a407052115968e0ec2a3",
+      "size": [
+        1254,
+        1254
+      ],
+      "scale": 0.7142857142857143,
+      "viewNormalization": 0.9893992932862191,
+      "sourceBounds": [
+        {
+          "left": 114,
+          "top": 53,
+          "right": 565,
+          "bottom": 612
+        },
+        {
+          "left": 721,
+          "top": 54,
+          "right": 1186,
+          "bottom": 613
+        },
+        {
+          "left": 90,
+          "top": 652,
+          "right": 542,
+          "bottom": 1217
+        },
+        {
+          "left": 691,
+          "top": 655,
+          "right": 1129,
+          "bottom": 1215
+        }
+      ],
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 30,
+          "top": 48,
+          "right": 352,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 25,
+          "top": 49,
+          "right": 357,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 32,
+          "top": 48,
+          "right": 351,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 37,
+          "top": 52,
+          "right": 346,
+          "bottom": 447
+        }
+      }
+    },
+    "sera": {
+      "sourcePath": "docs/art/village-walk-v2/sources/sera.png",
+      "sha256": "f0dd0efdd55e0017621c91da7a0d153a0f92fb495c2d497adc71b82464621063",
+      "size": [
+        1265,
+        1243
+      ],
+      "scale": 0.6932409012131716,
+      "viewNormalization": 1.0377697841726619,
+      "sourceBounds": [
+        {
+          "left": 90,
+          "top": 49,
+          "right": 614,
+          "bottom": 625
+        },
+        {
+          "left": 725,
+          "top": 49,
+          "right": 1238,
+          "bottom": 628
+        },
+        {
+          "left": 78,
+          "top": 645,
+          "right": 634,
+          "bottom": 1200
+        },
+        {
+          "left": 697,
+          "top": 646,
+          "right": 1238,
+          "bottom": 1209
+        }
+      ],
+      "metrics": {
+        "front-a": {
+          "width": 421,
+          "height": 480,
+          "left": 29,
+          "top": 48,
+          "right": 391,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 421,
+          "height": 480,
+          "left": 32,
+          "top": 46,
+          "right": 387,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 421,
+          "height": 480,
+          "left": 10,
+          "top": 48,
+          "right": 410,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 421,
+          "height": 480,
+          "left": 15,
+          "top": 42,
+          "right": 404,
+          "bottom": 447
+        }
+      }
+    },
+    "noah": {
+      "sourcePath": "docs/art/village-walk-v2/sources/noah.png",
+      "sha256": "c8f9f759151c247d0b49a670f9ecb2738aad8d80c7a6c766069f68625985c541",
+      "size": [
+        1254,
+        1254
+      ],
+      "scale": 0.7272727272727273,
+      "viewNormalization": 0.9786476868327402,
+      "sourceBounds": [
+        {
+          "left": 203,
+          "top": 46,
+          "right": 518,
+          "bottom": 595
+        },
+        {
+          "left": 718,
+          "top": 45,
+          "right": 1043,
+          "bottom": 594
+        },
+        {
+          "left": 189,
+          "top": 639,
+          "right": 560,
+          "bottom": 1200
+        },
+        {
+          "left": 712,
+          "top": 639,
+          "right": 1078,
+          "bottom": 1186
+        }
+      ],
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 77,
+          "top": 48,
+          "right": 306,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 73,
+          "top": 49,
+          "right": 309,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 59,
+          "top": 48,
+          "right": 323,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 61,
+          "top": 58,
+          "right": 321,
+          "bottom": 447
+        }
+      }
+    },
+    "luka": {
+      "sourcePath": "docs/art/village-walk-v2/sources/luka.png",
+      "sha256": "e37bd7bf6ecdc75a36af2e6a6a6e923e718a4584f92d93884dca673475cb53ad",
+      "size": [
+        1262,
+        1246
+      ],
+      "scale": 0.7547169811320755,
+      "viewNormalization": 0.9796672828096118,
+      "sourceBounds": [
+        {
+          "left": 110,
+          "top": 76,
+          "right": 548,
+          "bottom": 605
+        },
+        {
+          "left": 734,
+          "top": 74,
+          "right": 1134,
+          "bottom": 605
+        },
+        {
+          "left": 78,
+          "top": 657,
+          "right": 549,
+          "bottom": 1197
+        },
+        {
+          "left": 696,
+          "top": 658,
+          "right": 1148,
+          "bottom": 1197
+        }
+      ],
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 26,
+          "top": 48,
+          "right": 356,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 40,
+          "top": 46,
+          "right": 342,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 17,
+          "top": 48,
+          "right": 364,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 24,
+          "top": 49,
+          "right": 358,
+          "bottom": 447
+        }
+      }
+    },
+    "rakan": {
+      "sourcePath": "docs/art/village-walk-v2/sources/rakan.png",
+      "sha256": "f2d66a8ae24b1e49cf42467f1fcc1b8b5dead2fa96127425a02f0611a33eb555",
+      "size": [
+        1254,
+        1254
+      ],
+      "scale": 0.7067137809187279,
+      "viewNormalization": 0.9708404802744426,
+      "corrections": {
+        "back-a": {
+          "sourcePath": "docs/art/village-walk-v2/sources/rakan-back.png",
+          "sha256": "8f27d3a777a265fc1aef84e2a898401fc9af08196430f02abd56f888b9a16077",
+          "sourceBounds": {
+            "left": 142,
+            "top": 629,
+            "right": 590,
+            "bottom": 1211
+          }
+        },
+        "back-b": {
+          "sourcePath": "docs/art/village-walk-v2/sources/rakan-back.png",
+          "sha256": "8f27d3a777a265fc1aef84e2a898401fc9af08196430f02abd56f888b9a16077",
+          "sourceBounds": {
+            "left": 710,
+            "top": 635,
+            "right": 1192,
+            "bottom": 1208
+          }
+        }
+      },
+      "sourceBounds": [
+        {
+          "left": 134,
+          "top": 32,
+          "right": 553,
+          "bottom": 597
+        },
+        {
+          "left": 696,
+          "top": 32,
+          "right": 1118,
+          "bottom": 604
+        },
+        {
+          "left": 142,
+          "top": 629,
+          "right": 590,
+          "bottom": 1211
+        },
+        {
+          "left": 710,
+          "top": 635,
+          "right": 1192,
+          "bottom": 1208
+        }
+      ],
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 44,
+          "top": 48,
+          "right": 339,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 42,
+          "top": 43,
+          "right": 340,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 38,
+          "top": 48,
+          "right": 345,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 26,
+          "top": 54,
+          "right": 356,
+          "bottom": 447
+        }
+      }
+    },
+    "baekho": {
+      "sourcePath": "docs/art/village-walk-v2/sources/baekho.png",
+      "sha256": "3b3fd775eec41c86ceb13ba3c027ee4fba271faf74ea128fda00893b6f6e1cc9",
+      "size": [
+        1254,
+        1254
+      ],
+      "scale": 0.718132854578097,
+      "viewNormalization": 1.0164233576642336,
+      "corrections": {},
+      "sourceBounds": [
+        {
+          "left": 171,
+          "top": 49,
+          "right": 545,
+          "bottom": 605
+        },
+        {
+          "left": 755,
+          "top": 49,
+          "right": 1128,
+          "bottom": 619
+        },
+        {
+          "left": 167,
+          "top": 648,
+          "right": 535,
+          "bottom": 1195
+        },
+        {
+          "left": 748,
+          "top": 649,
+          "right": 1129,
+          "bottom": 1204
+        }
+      ],
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 57,
+          "top": 48,
+          "right": 325,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 57,
+          "top": 38,
+          "right": 325,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 57,
+          "top": 49,
+          "right": 325,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 52,
+          "top": 43,
+          "right": 330,
+          "bottom": 447
+        }
+      }
+    },
+    "kaz": {
+      "sourcePath": "docs/art/village-walk-v2/sources/kaz.png",
+      "sha256": "ab2ba650a46a1f3730dd7df701714165b097855688285f4dbdf015195b0d48f2",
+      "size": [
+        1254,
+        1254
+      ],
+      "scale": 0.7079646017699115,
+      "viewNormalization": 1.014362657091562,
+      "corrections": {},
+      "sourceBounds": [
+        {
+          "left": 149,
+          "top": 51,
+          "right": 579,
+          "bottom": 615
+        },
+        {
+          "left": 737,
+          "top": 57,
+          "right": 1159,
+          "bottom": 627
+        },
+        {
+          "left": 67,
+          "top": 647,
+          "right": 612,
+          "bottom": 1203
+        },
+        {
+          "left": 659,
+          "top": 648,
+          "right": 1206,
+          "bottom": 1220
+        }
+      ],
+      "metrics": {
+        "front-a": {
+          "width": 414,
+          "height": 480,
+          "left": 54,
+          "top": 48,
+          "right": 358,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 414,
+          "height": 480,
+          "left": 57,
+          "top": 44,
+          "right": 355,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 414,
+          "height": 480,
+          "left": 11,
+          "top": 48,
+          "right": 402,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 414,
+          "height": 480,
+          "left": 10,
+          "top": 37,
+          "right": 403,
+          "bottom": 447
+        }
+      }
+    },
+    "ella": {
+      "sourcePath": "docs/art/village-walk-v2/sources/ella.png",
+      "sha256": "571c08d3a30bcf1fbe05933187a62e89e6423b45aefdbb71585f1e37557042bb",
+      "size": [
+        1254,
+        1254
+      ],
+      "scale": 0.7352941176470589,
+      "viewNormalization": 1.0092764378478665,
+      "corrections": {},
+      "sourceBounds": [
+        {
+          "left": 139,
+          "top": 53,
+          "right": 548,
+          "bottom": 596
+        },
+        {
+          "left": 728,
+          "top": 53,
+          "right": 1146,
+          "bottom": 610
+        },
+        {
+          "left": 137,
+          "top": 663,
+          "right": 566,
+          "bottom": 1201
+        },
+        {
+          "left": 712,
+          "top": 663,
+          "right": 1147,
+          "bottom": 1201
+        }
+      ],
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 41,
+          "top": 48,
+          "right": 341,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 38,
+          "top": 38,
+          "right": 345,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 32,
+          "top": 48,
+          "right": 350,
+          "bottom": 446
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 30,
+          "top": 48,
+          "right": 353,
+          "bottom": 446
+        }
+      }
+    },
+    "jin": {
+      "sourcePath": "docs/art/village-walk-v2/sources/jin.png",
+      "sha256": "c4100f31f9907074734a4a5b3667ca043cdd9ab5ad672ce4c550385f9caf2ad9",
+      "size": [
+        1296,
+        1213
+      ],
+      "scale": 0.690846286701209,
+      "viewNormalization": 1.0394973070017954,
+      "corrections": {},
+      "sourceBounds": [
+        {
+          "left": 122,
+          "top": 29,
+          "right": 624,
+          "bottom": 607
+        },
+        {
+          "left": 712,
+          "top": 30,
+          "right": 1208,
+          "bottom": 603
+        },
+        {
+          "left": 72,
+          "top": 624,
+          "right": 597,
+          "bottom": 1180
+        },
+        {
+          "left": 690,
+          "top": 624,
+          "right": 1217,
+          "bottom": 1188
+        }
+      ],
+      "metrics": {
+        "front-a": {
+          "width": 400,
+          "height": 480,
+          "left": 26,
+          "top": 48,
+          "right": 372,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 400,
+          "height": 480,
+          "left": 28,
+          "top": 51,
+          "right": 370,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 400,
+          "height": 480,
+          "left": 11,
+          "top": 48,
+          "right": 388,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 400,
+          "height": 480,
+          "left": 10,
+          "top": 42,
+          "right": 388,
+          "bottom": 447
+        }
+      }
+    },
+    "irene": {
+      "sourcePath": "docs/art/village-walk-v2/sources/irene.png",
+      "sha256": "97f2550bafd5ff3722684f34dbb7910d27c6b7e63499218c430062d3f13e37e5",
+      "size": [
+        1254,
+        1254
+      ],
+      "scale": 0.7366482504604052,
+      "viewNormalization": 1.0036968576709797,
+      "corrections": {},
+      "sourceBounds": [
+        {
+          "left": 109,
+          "top": 80,
+          "right": 599,
+          "bottom": 622
+        },
+        {
+          "left": 688,
+          "top": 81,
+          "right": 1179,
+          "bottom": 622
+        },
+        {
+          "left": 131,
+          "top": 650,
+          "right": 604,
+          "bottom": 1190
+        },
+        {
+          "left": 697,
+          "top": 647,
+          "right": 1170,
+          "bottom": 1190
+        }
+      ],
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 48,
+          "right": 372,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 49,
+          "right": 372,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 17,
+          "top": 48,
+          "right": 366,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 17,
+          "top": 46,
+          "right": 366,
+          "bottom": 447
+        }
+      }
+    }
+  }
+}

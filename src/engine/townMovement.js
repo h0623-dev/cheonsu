@@ -1,7 +1,9 @@
 import { findMovePath } from './movement.js';
+import { directionTo } from './unitFacing.js';
 
 export const TOWN_WIDTH = 24;
 export const TOWN_HEIGHT = 16;
+export const TOWN_STEP_MS = 220;
 export const TOWN_ENTRANCE = { x: 11, y: 12 };
 export const TOWN_FACILITIES = [
   { id: 'shop', name: '상점', x: 8, y: 5 },
@@ -25,4 +27,24 @@ export function getTownPath(from, to) {
     previous = cell;
   }
   return path;
+}
+
+// A route keeps the in-flight step until its feet have reached the destination tile.
+export function advanceTownRoute(position, route, startedAt) {
+  if (!route?.path.length) return { position, route: null, arrived: route?.destination || null };
+  const [next, ...remaining] = route.path;
+  return {
+    position: next,
+    direction: directionTo(position, next),
+    route: { ...route, path: remaining, startedAt },
+    arrived: null,
+  };
+}
+
+export function stopTownRoute(route) {
+  return route ? { ...route, path: [], destination: null } : null;
+}
+
+export function getTownStepDelay(route, now) {
+  return Math.max(0, TOWN_STEP_MS - Math.max(0, now - route.startedAt));
 }

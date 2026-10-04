@@ -35,11 +35,13 @@
 .world-art-app .town-door { position: absolute; transform: translate(-50%, -100%); margin-top: -7%; min-height: 36px; display: flex; align-items: center; gap: 5px;
   padding: 5px 9px; background: #192e28ed; border: 1px solid #d1dab3; color: #fff; font-size: 13px; white-space: nowrap; box-shadow: 0 3px 8px #0008; z-index: 3;
 }
-.town-walker { position: absolute; width: 7.2%; aspect-ratio: 1; transform: translate(-50%, -88%); transition: left 100ms linear, top 100ms linear; pointer-events: none; z-index: 4; }
+.town-walker { position: absolute; width: 7.2%; aspect-ratio: 1; transform: translate(-50%, -88%); transition: left var(--town-step-duration, 220ms) linear, top var(--town-step-duration, 220ms) linear; pointer-events: none; z-index: 4; }
+.town-walker.is-paused { transition: none; }
 .town-walker::after { content: ''; position: absolute; width: 50%; height: 12%; bottom: 7%; left: 25%; border: 2px solid #bcebc4; border-radius: 50%; background: #173b2760; }
 .town-walker img { width: 100%; height: 100%; object-fit: contain; transform: scaleX(var(--town-facing)); position: relative; z-index: 1; filter: drop-shadow(1px 3px 2px #0007); }
-.town-walker.is-walking img { animation: town-walk 220ms infinite alternate; }
-@keyframes town-walk { from { transform: scaleX(var(--town-facing)) rotate(-3deg) translateY(0); } to { transform: scaleX(var(--town-facing)) rotate(3deg) translateY(-3px); } }
+.town-walker .town-idle-art.has-walk-art { visibility: hidden; }
+.town-walker .town-walk-art, .town-walker .town-preload-art { position: absolute; inset: 0; transform: scaleX(var(--town-walk-facing)); }
+.town-walker .town-preload-art { visibility: hidden; }
 .town-waypoint { position: absolute; width: 18px; height: 12px; transform: translate(-50%, -50%); border: 2px solid #ffeaa2; border-radius: 50%; pointer-events: none; }
 .town-controls { display: flex; align-items: end; gap: 8px; margin-top: 10px; min-height: 65px; }
 .town-controls label { display: grid; gap: 4px; min-width: 0; flex: 1; font-size: 12px; color: #c9d8cb; }
@@ -113,4 +115,7 @@
   .world-art-app .battle-control-heading > span { font-size: 11px; }
   .battle-speed-controls { grid-template-columns: repeat(3, 34px); }
 }
-@media (prefers-reduced-motion: reduce) { .town-walker.is-walking img { animation: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .town-walker .town-walk-art { display: none; }
+  .town-walker .town-idle-art.has-walk-art { visibility: visible; }
+}

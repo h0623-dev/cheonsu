@@ -2,8 +2,14 @@ import manifest from '../../public/art/world-v2/manifest.json' with { type: 'jso
 import enemyManifest from '../../public/art/enemies-v3/manifest.json' with { type: 'json' };
 import bossManifest from '../../public/art/bosses-v1/manifest.json' with { type: 'json' };
 import { getEnemyIllustration } from './enemyIllustrations.js';
+import { getCharacterArt } from './characterArt.js';
 
 export function getPaintedVisualProfile(key) {
+  const redesigned = getCharacterArt(key);
+  if (redesigned) return {
+    map: `/art/map-sprites-v4/${key}.webp`, battle: redesigned.motion.recover,
+    portrait: redesigned.portrait, cutscene: redesigned.dialogue,
+  };
   const boss = bossManifest.units[key];
   if (boss) return { map: boss.map, battle: boss.ready, ...getEnemyIllustration(key) };
   if (Object.hasOwn(enemyManifest.units, key)) {
