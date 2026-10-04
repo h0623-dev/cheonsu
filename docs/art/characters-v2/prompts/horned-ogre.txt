@@ -1,0 +1,21 @@
+Create a production-ready square RGBA TRANSPARENT sprite atlas for Cheonsu tactical fantasy RPG, EXACTLY THREE ROWS BY THREE COLUMNS, nine separate isolated depictions of ONE identical character. Not a poster. Supplied first reference is a three-species approval sheet: select ONLY the species named below, never combine species. Supplied other references are the current game’s approved unified hero/Bram/Lina soft hand-painted classic 1990s/2000s anime tactical RPG art. Match their clean illustrated faces, delicate painted outlines, nuanced warm cloth/leather and brushed metal, coherent fantasy costume, readable natural mature 5 to 5.5-head anatomy. No photorealism, no gritty realism, no 3D, no oversized chibi head.
+
+Canvas square 1536x1536 if possible. Cells are exactly equal thirds. Each cell holds exactly ONE pose well INSIDE the cell, completely surrounded by at least 30px of clear transparent padding. Do not let any spear, tail, arrow, club, limb, or ear enter an adjacent cell. No connecting silhouettes. No labels or gridlines. Eight full-body combat poses face toward RIGHT in three-quarter side view; identical scale, species, anatomy, face, outfit and equipment in every full-body cell. Ninth cell is an expressive waist-up dialogue bust of the SAME character facing slightly right. No cropping of feet, tails, hands or weapons. Hands grip weapons anatomically. The character must be recognizable as the reference species.
+
+Row-major order MUST be:
+TOP LEFT run-a: rightward walking/running stride, left leg forward, right leg back.
+TOP MIDDLE run-b: opposite stride, right leg forward, left leg back.
+TOP RIGHT windup: preparation before attacking, weapon held ready to act.
+MIDDLE LEFT strike: visibly distinct attack apex directed RIGHT.
+MIDDLE CENTER recover: stable alert ready stance after attack.
+MIDDLE RIGHT recoil: believable hit reaction, slightly off balance, keeps own weapon.
+BOTTOM LEFT skill-a: first distinct character-specific special attack body pose.
+BOTTOM MIDDLE skill-b: different second special action/guard body pose.
+BOTTOM RIGHT dialogue: large waist-up portrait, expressive clear face with exact costume identity.
+
+Absolutely no background color, paper texture, scenery, floor, ground shadows, panel lines, captions, numerals, other characters, FX streaks, explosions, beams, hit sparks, motion lines, projectiles leaving cells or particles. TRUE TRANSPARENT RGBA. FX are rendered separately by the game.
+
+CHARACTER IDENTITY AND SPECIFIC POSES:
+Select ONLY the BOTTOM ROW horned ogre from first reference. Huge broad stocky muscular male OGRE with warm beige taupe skin, stout heavy limbs, broad rounded belly and thick chest, massive square jaw, short tusk-like lower teeth, exactly TWO ivory curved horns rising from left/right forehead. Bald or very short dark rough hair at back, small angry amber eyes under heavy brow. Red-brown dark leather diagonal chest harness with bronze buckles, layered tattered burgundy red loincloth over fur/leather kilt and dark modest underlayer, broad brown belt with brass rings, leather wrist and shin wraps, bare broad toes. One huge wooden CLUB made of a heavy cylindrical dark wood head bound with thick iron/bronze bands on a long stout wooden handle. Ogre is heavier and larger than human but refined classic anime painted game style, not photorealistic grotesque, not gritty realism.
+
+Windup raises club behind/above shoulder using both strong hands preparing swing, entire club within cell. Strike drives club downward-forward toward RIGHT with both hands, no floor debris or motion streaks. Recover club supported on shoulder, alert. Recoil flinches defensively maintaining club grip. Skill-a broad horizontal club sweep. Skill-b planted intimidating guard with club across chest. Dialogue waist-up scowling confident ogre face, EXACTLY two horns fully visible, warm expressive game illustration, harness matches combat poses.

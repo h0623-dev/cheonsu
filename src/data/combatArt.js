@@ -47,6 +47,8 @@ const weapons = {
   iron_lancer: 'thrust', plague_doctor: 'poison', beast_tamer: 'claw', storm_mage: 'lightning',
   blade_dancer: 'slash', siege_gunner: 'impact', sentinel: 'guard', blackguard: 'slash',
   warlord: 'heavy', pyromancer: 'fire', frost_mage: 'ice', cultist: 'shadow', void_knight: 'shadow', wolf: 'claw',
+  'kobold-hunter': 'arrow', 'lizard-spearman': 'thrust', 'horned-ogre': 'heavy',
+  'harpy-scout': 'claw', 'skeleton-warrior': 'heavy', 'rock-spirit': 'impact',
 };
 const casters = new Set(['aria', 'noah', 'yuna', 'miho', 'irene', 'ella', 'plague_doctor', 'storm_mage', 'pyromancer', 'frost_mage', 'cultist']);
 export const combatUnitIds = Object.keys(weapons);
@@ -84,7 +86,7 @@ export function getCombatPresentation(key, scene) {
     const skillEffect = scene.attacker?.skillSpec?.effect || scene.effectType;
     if (combatEffectIds.includes(skillEffect)) effect = skillEffect;
   }
-  const style = support || casters.has(key) || ['boss_frost', 'boss_oracle'].includes(key) ? 'cast' : ['lina', 'teo', 'ranger', 'sniper', 'siege_gunner'].includes(key) ? 'ranged' : 'melee';
+  const style = support || casters.has(key) || ['boss_frost', 'boss_oracle'].includes(key) ? 'cast' : ['lina', 'teo', 'ranger', 'sniper', 'siege_gunner', 'kobold-hunter'].includes(key) ? 'ranged' : 'melee';
   return { effect, style, healing, guarding, support, miss: !support && !scene.outcome?.hit };
 }
 

@@ -1,0 +1,21 @@
+Create a production-ready square RGBA TRANSPARENT sprite atlas for Cheonsu tactical fantasy RPG, EXACTLY THREE ROWS BY THREE COLUMNS, nine separate isolated depictions of ONE identical character. Not a poster. Supplied first reference is a three-species approval sheet: select ONLY the species named below, never combine species. Supplied other references are the current game’s approved unified hero/Bram/Lina soft hand-painted classic 1990s/2000s anime tactical RPG art. Match their clean illustrated faces, delicate painted outlines, nuanced warm cloth/leather and brushed metal, coherent fantasy costume, readable natural mature 5 to 5.5-head anatomy. No photorealism, no gritty realism, no 3D, no oversized chibi head.
+
+Canvas square 1536x1536 if possible. Cells are exactly equal thirds. Each cell holds exactly ONE pose well INSIDE the cell, completely surrounded by at least 30px of clear transparent padding. Do not let any spear, tail, arrow, club, limb, or ear enter an adjacent cell. No connecting silhouettes. No labels or gridlines. Eight full-body combat poses face toward RIGHT in three-quarter side view; identical scale, species, anatomy, face, outfit and equipment in every full-body cell. Ninth cell is an expressive waist-up dialogue bust of the SAME character facing slightly right. No cropping of feet, tails, hands or weapons. Hands grip weapons anatomically. The character must be recognizable as the reference species.
+
+Row-major order MUST be:
+TOP LEFT run-a: rightward walking/running stride, left leg forward, right leg back.
+TOP MIDDLE run-b: opposite stride, right leg forward, left leg back.
+TOP RIGHT windup: preparation before attacking, weapon held ready to act.
+MIDDLE LEFT strike: visibly distinct attack apex directed RIGHT.
+MIDDLE CENTER recover: stable alert ready stance after attack.
+MIDDLE RIGHT recoil: believable hit reaction, slightly off balance, keeps own weapon.
+BOTTOM LEFT skill-a: first distinct character-specific special attack body pose.
+BOTTOM MIDDLE skill-b: different second special action/guard body pose.
+BOTTOM RIGHT dialogue: large waist-up portrait, expressive clear face with exact costume identity.
+
+Absolutely no background color, paper texture, scenery, floor, ground shadows, panel lines, captions, numerals, other characters, FX streaks, explosions, beams, hit sparks, motion lines, projectiles leaving cells or particles. TRUE TRANSPARENT RGBA. FX are rendered separately by the game.
+
+CHARACTER IDENTITY AND SPECIFIC POSES:
+Select ONLY the MIDDLE ROW lizard spearman from first reference. Adult athletic anthropomorphic LIZARD soldier, turquoise teal scales, elongated reptilian snout, amber eyes, swept-back spiky mane/frill with orange-gold tips and teal roots, long muscular teal tail with orange ridge/tip. Two arms and two strong reptile-clawed legs. Detailed ivory/off-white armor with antique gold piping: chest plate, asymmetrical shoulder plates, bracers, layered ivory and teal cloth split tabard with gold patterns, leather belt and pouches, fitted teal trousers/armored shin pieces leaving reptile claws visible. Long wooden SPEAR with a silver leaf-shaped steel blade and bronze fitting, exactly one spear. Preserve proud composed reptile face and tail, not human warrior and not dragon wings.
+
+Windup takes spear back horizontally with two hands. Strike lunges and thrusts spear RIGHT at chest height, both hands gripping same shaft, entire spear fits within cell. Recover alert upright spear guard. Recoil hit reaction with tail used for balance. Skill-a low sweeping spear stance with two hands. Skill-b firm defensive spear brace and tail curled naturally. Dialogue bust composed speaking reptile face including orange mane and ivory/gold shoulder armor.

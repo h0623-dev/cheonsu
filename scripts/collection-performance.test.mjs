@@ -6,11 +6,11 @@ import { combatUnitIds, getCombatChoreography } from '../src/data/combatArt.js';
 import { CHARACTER_SKILLS, withSkill } from '../src/data/skills.js';
 import { getImpactParticle } from '../src/data/duelPerformance.js';
 
-test('collection lists all 41 characters; only four starting allies are initially colored', async () => {
+test('collection lists all 47 characters; only four starting allies are initially colored', async () => {
   const entries = getCharacterCollection();
-  assert.equal(entries.length, 41); assert.equal(new Set(entries.map(e => e.id)).size, 41);
+  assert.equal(entries.length, 47); assert.equal(new Set(entries.map(e => e.id)).size, 47);
   assert.equal(entries.filter(e => e.kind === 'ally').length, 17);
-  assert.equal(entries.filter(e => e.kind === 'enemy').length, 19);
+  assert.equal(entries.filter(e => e.kind === 'enemy').length, 25);
   assert.equal(entries.filter(e => e.kind === 'boss').length, 5);
   assert.deepEqual(entries.filter(e => e.unlocked).map(e => e.id), ['hero', 'bram', 'lina', 'aria']);
   for (const entry of entries) await access(`public${entry.art}`);

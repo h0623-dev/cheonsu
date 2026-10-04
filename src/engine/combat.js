@@ -13,7 +13,7 @@ export function getUnitCombatClass(unit) {
   if (ALLY_COMBAT_CLASSES[unit.id]) return ALLY_COMBAT_CLASSES[unit.id];
 
   const id = unit.id || "";
-  const name = unit.name || "";
+  const name = unit.combatIdentityName || unit.name || "";
   const skill = unit.skill || "";
   const text = `${id} ${name} ${skill}`;
 

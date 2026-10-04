@@ -27,6 +27,7 @@ import { readMenuCheckpoint, canReplayStory, getNextChapter } from './engine/pla
 import { getCharacterProfile } from './data/characterProfiles.js';
 import { getChapterBrief } from './data/chapterBriefs.js';
 import { getChapterBossName } from './data/chapterIdentity.js';
+import { applyStageMonsterAppearance, isMonsterArtId } from './data/monsterEnemies.js';
 import { usePatchLifecycle } from './engine/usePatchUpdates.js';
 import { createStagePreviewReader } from './engine/stagePreviewCache.js';
 import { LiveUpdate } from '@capawesome/capacitor-live-update';
@@ -96,7 +97,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.156";
+const SAVE_VERSION = "1.99.157";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -2661,7 +2662,7 @@ function getStageEnemySquadTemplates(stage) {
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
-  });
+  }).map(template => stageSquad.includes(template) ? applyStageMonsterAppearance(template, stage) : template);
 }
 
 function getStageBossSpriteKey(stage, boss) {
@@ -2731,6 +2732,13 @@ function applyStageEnemyIdentity(unit, stage, index = 0) {
     icon: template.icon,
     name: template.name,
     spriteKey: template.spriteKey,
+    artId: template.artId || null,
+    monsterRank: template.monsterRank || null,
+    legacySpriteKey: template.legacySpriteKey || null,
+    legacyName: template.legacyName || null,
+    combatIdentityName: template.combatIdentityName || template.name,
+    ...(template.minRange == null ? {} : { minRange: template.minRange }),
+    ...(template.skillMinRange == null ? {} : { skillMinRange: template.skillMinRange }),
     aiType: template.aiType,
     hp,
     maxHp: hp,
@@ -3287,6 +3295,13 @@ function createLargeExtraEnemy(stage, index, x, y) {
     icon: template.icon,
     name: template.name,
     spriteKey: template.spriteKey,
+    artId: template.artId || null,
+    monsterRank: template.monsterRank || null,
+    legacySpriteKey: template.legacySpriteKey || null,
+    legacyName: template.legacyName || null,
+    combatIdentityName: template.combatIdentityName || template.name,
+    ...(template.minRange == null ? {} : { minRange: template.minRange }),
+    ...(template.skillMinRange == null ? {} : { skillMinRange: template.skillMinRange }),
     aiType: template.aiType,
     hp,
     maxHp: hp,
@@ -3708,6 +3723,7 @@ function getUnitVisualClass(unit) {
 function getEnemySpriteKey(unit) {
   if (!unit || unit.type === "ally") return null;
   if (unit.type === "boss") return getBossSpriteKey(unit);
+  if (isMonsterArtId(unit.artId)) return unit.artId;
   if (ENEMY_VARIANT_KEYS.has(unit.spriteKey)) return unit.spriteKey;
 
   const text = `${unit.id || ""} ${unit.name || ""} ${unit.skill || ""}`;
@@ -6221,11 +6237,15 @@ function getCharacterEncounters() {
     const current = stages.flatMap(stage => getStageRoster(stage).units.filter(unit => unit.type !== 'ally').map(unit => ({
       key: getEnemySpriteKey(unit), stageId: stage.id, name: unit.name,
     })));
+    // Preserve each replaced archetype at its original chapter, even if it still appears later.
+    const previous = stages.flatMap(stage => getStageRoster(stage).units.filter(unit => unit.legacySpriteKey).map(unit => ({
+      key: unit.legacySpriteKey, stageId: stage.id, name: unit.legacyName, archived: true,
+    })));
     const currentKeys = new Set(current.map(entry => entry.key));
     const archived = stages.flatMap(stage => stage.units.filter(unit => unit.type !== 'ally').map(unit => ({
       key: getEnemySpriteKey(unit), stageId: stage.id, name: unit.name, archived: true,
     }))).filter(entry => !currentKeys.has(entry.key));
-    characterEncounters = [...current, ...archived];
+    characterEncounters = [...current, ...previous, ...archived];
   }
   return characterEncounters;
 }
@@ -7483,15 +7503,16 @@ function rollEnemyLoot(enemy, stage, difficultyId = "normal") {
     return addLootGear(loot, bossGear);
   }
 
-  if (String(enemy.name || "").includes("사제") || String(enemy.name || "").includes("마도사")) {
+  const lootName = String(enemy.legacyName || enemy.name || "");
+  if (lootName.includes("사제") || lootName.includes("마도사")) {
     return addLootItem(loot, itemRoll < 0.55 ? "remedy" : "hiPotion", 1);
   }
 
-  if (String(enemy.name || "").includes("궁병") || String(enemy.name || "").includes("저격")) {
+  if (lootName.includes("궁병") || lootName.includes("저격")) {
     return addLootItem(loot, itemRoll < 0.5 ? "powerCharm" : "potion", 1);
   }
 
-  if (String(enemy.name || "").includes("방패") || String(enemy.name || "").includes("수비")) {
+  if (lootName.includes("방패") || lootName.includes("수비")) {
     return addLootItem(loot, itemRoll < 0.5 ? "guardCharm" : "potion", 1);
   }
 

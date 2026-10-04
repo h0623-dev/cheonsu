@@ -408,5 +408,65 @@
     "visibleHeight": 400,
     "foot": 447,
     "combatScale": 1.1429
+  },
+  "kobold-hunter": {
+    "source": "/art/characters-v2/units/kobold-hunter-recover.webp",
+    "canvas": [
+      417,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 0.8845
+  },
+  "lizard-spearman": {
+    "source": "/art/characters-v2/units/lizard-spearman-recover.webp",
+    "canvas": [
+      495,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.165
+  },
+  "horned-ogre": {
+    "source": "/art/characters-v2/units/horned-ogre-recover.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 399,
+    "foot": 447,
+    "combatScale": 1.0169
+  },
+  "harpy-scout": {
+    "source": "/art/characters-v2/units/harpy-scout-recover.webp",
+    "canvas": [
+      495,
+      480
+    ],
+    "visibleHeight": 398,
+    "foot": 447,
+    "combatScale": 1.25
+  },
+  "skeleton-warrior": {
+    "source": "/art/characters-v2/units/skeleton-warrior-recover.webp",
+    "canvas": [
+      396,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.0496
+  },
+  "rock-spirit": {
+    "source": "/art/characters-v2/units/rock-spirit-recover.webp",
+    "canvas": [
+      503,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447,
+    "combatScale": 1.2457
   }
 }

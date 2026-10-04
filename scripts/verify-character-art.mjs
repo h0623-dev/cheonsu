@@ -22,7 +22,7 @@ const errors = [], results = [];
 let server, browser;
 let passed = false;
 await fs.mkdir(output, { recursive: true });
-assert.ok(selectedIds.every(id => getCharacterArt(id)), requestedIds ? 'generate all selected characters before running this QA' : 'generate all 41 characters before running this QA');
+assert.ok(selectedIds.every(id => getCharacterArt(id)), requestedIds ? 'generate all selected characters before running this QA' : 'generate all 47 characters before running this QA');
 
 function watch(page) {
   page.on('pageerror', error => errors.push(error.message));

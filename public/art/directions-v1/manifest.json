@@ -367,5 +367,59 @@
     ],
     "visibleHeight": 400,
     "foot": 447
+  },
+  "kobold-hunter": {
+    "rear": "/art/directions-v1/kobold-hunter-back.webp",
+    "canvas": [
+      515,
+      480
+    ],
+    "visibleHeight": 399,
+    "foot": 447
+  },
+  "lizard-spearman": {
+    "rear": "/art/directions-v1/lizard-spearman-back.webp",
+    "canvas": [
+      407,
+      480
+    ],
+    "visibleHeight": 399,
+    "foot": 447
+  },
+  "horned-ogre": {
+    "rear": "/art/directions-v1/horned-ogre-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 399,
+    "foot": 446
+  },
+  "harpy-scout": {
+    "rear": "/art/directions-v1/harpy-scout-back.webp",
+    "canvas": [
+      497,
+      480
+    ],
+    "visibleHeight": 399,
+    "foot": 446
+  },
+  "skeleton-warrior": {
+    "rear": "/art/directions-v1/skeleton-warrior-back.webp",
+    "canvas": [
+      384,
+      480
+    ],
+    "visibleHeight": 398,
+    "foot": 446
+  },
+  "rock-spirit": {
+    "rear": "/art/directions-v1/rock-spirit-back.webp",
+    "canvas": [
+      462,
+      480
+    ],
+    "visibleHeight": 400,
+    "foot": 447
   }
 }

@@ -43,7 +43,7 @@ test('basic and skill timing differ, contact is synchronized and weapon identity
   assert.equal(getCombatTiming({mode:'counter'}).skill,false);
   for(const key of combatUnitIds) assert.equal(getCombatPresentation(key,{mode:'attack'}).style,getCombatPresentation(key,{mode:'skill',effectType:'fire'}).style);
 });
-test('all 41 generated rear views have transparent margins, consistent feet and production paths', async () => {
+test('all 47 generated rear views have transparent margins, consistent feet and production paths', async () => {
   const manifest=JSON.parse(await fs.readFile('public/art/directions-v1/manifest.json','utf8'));
   assert.deepEqual(Object.keys(manifest).sort(),combatUnitIds.slice().sort());
   let bytes=0;

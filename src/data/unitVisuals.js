@@ -7,7 +7,7 @@ import { getCharacterArt } from './characterArt.js';
 export function getPaintedVisualProfile(key) {
   const redesigned = getCharacterArt(key);
   if (redesigned) return {
-    map: `/art/map-sprites-v4/${key}.webp`, battle: redesigned.motion.recover,
+    map: redesigned.map || `/art/map-sprites-v4/${key}.webp`, battle: redesigned.motion.recover,
     portrait: redesigned.portrait, cutscene: redesigned.dialogue,
   };
   const boss = bossManifest.units[key];

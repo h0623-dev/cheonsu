@@ -102,7 +102,9 @@ export function getWeaponMotion(key,presentation){
 }
 
 const enemySkills={boss_commander:'crush',boss_frost:'frost-wave',boss_ember:'dragon',boss_oracle:'chain',boss_abyss:'illusion',
-  raider:'gale',ranger:'snipe',sniper:'breaker',marauder:'crush',assassin_elite:'ambush',iron_lancer:'pierce',plague_doctor:'illusion',beast_tamer:'shade',storm_mage:'chain',blade_dancer:'shade',siege_gunner:'crush',sentinel:'bash',blackguard:'knight-charge',warlord:'charge',pyromancer:'foxfire',frost_mage:'ice-lance',cultist:'illusion',void_knight:'moonblade',wolf:'ambush'};
+  raider:'gale',ranger:'snipe',sniper:'breaker',marauder:'crush',assassin_elite:'ambush',iron_lancer:'pierce',plague_doctor:'illusion',beast_tamer:'shade',storm_mage:'chain',blade_dancer:'shade',siege_gunner:'crush',sentinel:'bash',blackguard:'knight-charge',warlord:'charge',pyromancer:'foxfire',frost_mage:'ice-lance',cultist:'illusion',void_knight:'moonblade',wolf:'ambush',
+  'kobold-hunter':'snipe','lizard-spearman':'pierce','horned-ogre':'crush',
+  'harpy-scout':'ambush','skeleton-warrior':'crush','rock-spirit':'tiger-fist'};
 
 const basicMotions = {
   slash: [[.10,0,0,0],[.18,.25,-1,1],[.26,.51,0,0],[.34,.76,-1,-1],[.43,.81,0,-3],[.50,1,0,3],[.55,1,0,2],[.67,.9,0,0]],

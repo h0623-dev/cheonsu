@@ -8,7 +8,8 @@ const root = path.resolve(__dirname, '..');
 const bosses = ['boss_commander', 'boss_frost', 'boss_ember', 'boss_oracle', 'boss_abyss'];
 const poses = ['run-a', 'run-b', 'windup', 'strike', 'recover', 'recoil', 'skill-a', 'skill-b'];
 const walking = ['front-a', 'front-b', 'back-a', 'back-b'];
-const ids = [...groups.allies, ...groups.enemies, ...bosses];
+const monsters = ['kobold-hunter', 'lizard-spearman', 'horned-ogre', 'harpy-scout', 'skeleton-warrior', 'rock-spirit'];
+const ids = [...groups.allies, ...groups.enemies, ...bosses, ...monsters];
 const digest = input => crypto.createHash('sha256').update(input).digest('hex');
 const json = value => JSON.stringify(value, null, 2) + '\n';
 
@@ -18,7 +19,7 @@ async function readJson(file, fallback) {
 }
 
 // Extract authored independent silhouettes; do not synthesize or deform poses.
-async function extract(file, rows, columns, componentAssignments = []) {
+async function extract(file, rows, columns, componentAssignments = [], replacedSlots = []) {
   const input = await fs.readFile(file);
   const metadata = await sharp(input).metadata();
   if (!metadata.hasAlpha) throw new Error(`${file}: 투명 원화가 필요합니다.`);
@@ -45,7 +46,7 @@ async function extract(file, rows, columns, componentAssignments = []) {
     // A long blade may extend into a neighbour's empty gutter; it remains one isolated silhouette.
     if (width > info.width / columns * 1.6 || height > info.height / rows * 1.25)
       throw new Error(`${file}: ${slot}번 자세가 이웃 셀과 연결되었습니다.`);
-    if (box.left === 0 || box.right === info.width - 1 || box.top === 0 || box.bottom === info.height - 1)
+    if (!replacedSlots.includes(slot) && (box.left === 0 || box.right === info.width - 1 || box.top === 0 || box.bottom === info.height - 1))
       throw new Error(`${file}: ${slot}번 자세가 원화 가장자리에서 잘렸습니다.`);
     const pixels = Buffer.alloc(width * height * 4);
     for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
@@ -87,15 +88,36 @@ async function normalize(source, file, width, height, foot, scale) {
 
 async function prepareCharacter(id, manifest, report) {
   const sourcePath = `docs/art/characters-v2/sources/${id}.png`;
+  const authoredCorrections = {};
+  for (const [index, pose] of poses.entries()) {
+    const correctionPath = `docs/art/characters-v2/sources/${id}-${pose}-correction.png`;
+    try {
+      const corrected = await extract(path.join(root, correctionPath), 1, 1);
+      authoredCorrections[index] = { corrected, correctionPath };
+    } catch (error) { if (error.code !== 'ENOENT') throw error; }
+  }
   // This authored thrown bottle crosses the gutter into the next grid column.
   // Its exact component signature prevents assigning it to the adjacent pose.
   const componentAssignments = id === 'plague_doctor' ? [{ name: 'thrown-medicine-bottle', slot: 6,
     sourceBounds: { left: 427, top: 920, right: 470, bottom: 969 }, area: 1196 }] : [];
-  const atlas = await extract(path.join(root, sourcePath), 3, 3, componentAssignments);
+  const atlas = await extract(path.join(root, sourcePath), 3, 3, componentAssignments, Object.keys(authoredCorrections).map(Number));
   const directory = path.join(root, 'public/art/characters-v2/units');
   await fs.mkdir(directory, { recursive: true });
   const frames = atlas.sources.slice(0, 8);
   const corrections = {};
+  for (const [index, { corrected, correctionPath }] of Object.entries(authoredCorrections)) {
+    const pose = corrected.sources[0];
+    const bodyAnchor = id === 'horned-ogre' && poses[index] === 'windup'
+      ? { referenceTop: 465, correctedTop: 381 } : null;
+    // The overhead club is taller in the complete correction. Match head-to-foot
+    // body height to recover so raising the weapon does not shrink the ogre.
+    const normalization = bodyAnchor
+      ? (frames[4].box.bottom - bodyAnchor.referenceTop + 1) / (pose.box.bottom - bodyAnchor.correctedTop + 1)
+      : frames[index].height / pose.height;
+    corrections[poses[index]] = { sourcePath: correctionPath, sha256: corrected.sha256,
+      sourceBounds: pose.box, normalization, ...(bodyAnchor ? { bodyAnchor } : {}) };
+    frames[index] = { ...pose, normalization };
+  }
   if (id === 'hero') {
     const correctionPath = 'docs/art/characters-v2/sources/hero-oath.png';
     try {
@@ -116,6 +138,9 @@ async function prepareCharacter(id, manifest, report) {
     ...frames.map(frame => Math.min(468 / (frame.height * (frame.normalization || 1)), 484 / (frame.width * (frame.normalization || 1)))));
   const unit = { motion: {}, metrics: {}, portrait: `/art/characters-v2/portraits/${id}.webp`,
     dialogue: `/art/characters-v2/dialogue/${id}.webp` };
+  if (monsters.includes(id)) unit.map = `/art/map-sprites-v4/${id}.webp`;
+  // Expanded wings in the recoil pose need a little more room in mobile duels.
+  if (id === 'harpy-scout') unit.visibleFraction = .66;
   for (const [index, pose] of poses.entries()) {
     const relative = `units/${id}-${pose}.webp`;
     unit.motion[pose] = `/art/characters-v2/${relative}`;
