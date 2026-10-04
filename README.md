@@ -1,6 +1,8 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.159 / Android versionCode 358**
+현재 개발 빌드: **1.99.160 / Android versionCode 359**
+
+1.99.160: 전투 시작 전에 실제 전장과 보유 캐릭터를 표시하고, 캐릭터 선택 후 허용 칸을 눌러 배치·이동·자리 교환하는 단계를 추가하는 중입니다. 진행 중인 전투의 저장 좌표와 기존 게임 콘텐츠를 보존합니다. 이번 버전의 검사와 새 APK·서명 OTA 배포는 아직 완료되지 않았습니다. [배치와 QA 상태](docs/QA_IMPROVEMENT_1.99.160.md), [빌드 상태](docs/BUILD_1.99.160.md).
 
 1.99.159: 아군 17종·적군 25종·보스 5종, 전체 47종의 스킬에 무기·마법 집중점을 따라가는 캐릭터별 고유 효과를 확장합니다. 카일의 1.99.158 효과와 기존 스킬 수치·반격·저장·원화·원복 1.99.154 기준은 유지합니다. 리나 활 곡선과 장전 여부까지 원화에 맞춰 보정했습니다. 최종 린트·단위 검사 441개·빌드·기술 QA 648사례, 기존 저장·마을·적 회귀와 이전 버전 성능 비교 360회를 확인했습니다. 새 APK·서명 OTA 배포와 공개 다운로드·전체 웹 파일·네이티브 신뢰·전체 개발 소스 ZIP 검증을 완료했습니다. [전체 캐릭터 스킬 효과와 검증 상태](docs/ALL_UNIT_SKILL_EFFECTS_1.99.159.md).
 
@@ -37,8 +39,8 @@
 
 ## 다운로드
 
-- 검증 완료 산출물: `cheonsu_1.99.159_update_debug.apk`, `cheonsu_development_1.99.159.zip`
-- [1.99.159 APK 및 전체 개발 소스 ZIP 공개 위치](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.159) — 배포·공개 다운로드 검증 완료
+- 마지막 검증 완료 산출물: `cheonsu_1.99.159_update_debug.apk`, `cheonsu_development_1.99.159.zip`. 1.99.160 배치 변경은 포함하지 않습니다.
+- [1.99.159 APK 및 전체 개발 소스 ZIP 공개 위치](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.159) — 배포·공개 다운로드 검증 완료. 1.99.160은 빌드·배포 검증 후 안내합니다.
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)

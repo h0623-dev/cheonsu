@@ -6,7 +6,7 @@ const base = process.env.GAME_URL || 'http://127.0.0.1:5176';
 const key = 'cheonsu_v01_save';
 const out = 'tmp/player-experience-qa';
 await fs.mkdir(out, { recursive: true });
-const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const browser = await chromium.launch({ channel: process.env.CHEONSU_QA_BROWSER || 'msedge', headless: true });
 const reports = [];
 try {
   for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }, { width: 320, height: 568 }, { width: 844, height: 390 }, { width: 568, height: 320 }]) {
@@ -37,6 +37,7 @@ try {
       await button('새 게임').click();
       await page.locator('.campaign-header .prominent-save').click();
       await page.locator('.campaign-continue-band').getByRole('button').click();
+      await page.locator('.deployment-management > summary').click();
       await page.locator('.chapter-brief').waitFor();
       await capture('deployment');
       await page.reload();
