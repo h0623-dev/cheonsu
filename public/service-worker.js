@@ -8,7 +8,7 @@ importScripts('/art/directions-v1/precache.js');
 importScripts('/art/skills-v1/precache.js');
 importScripts('/art/characters-v2/precache.js');
 importScripts('/art/village-walk-v2/precache.js');
-const CACHE_VERSION = "cheonsu-v199155-character-walk";
+const CACHE_VERSION = "cheonsu-v199156-town-camera";
 const APP_SHELL_CACHE = `${CACHE_VERSION}-app-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 

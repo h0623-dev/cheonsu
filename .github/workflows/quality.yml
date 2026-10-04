@@ -26,9 +26,12 @@ jobs:
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: node scripts/verify-cloud-smoke.mjs
+      - run: node scripts/verify-town-camera.mjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: cloud-qa-${{ github.run_id }}
-          path: tmp/cloud-qa/
+          path: |
+            tmp/cloud-qa/
+            tmp/town-camera-qa/
           retention-days: 14

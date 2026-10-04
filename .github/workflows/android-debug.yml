@@ -74,6 +74,7 @@ jobs:
         run: ./scripts/verify-update-artifacts.ps1 -ApkOnly
       - run: npx playwright install --with-deps chromium
       - run: node scripts/verify-cloud-smoke.mjs
+      - run: node scripts/verify-town-camera.mjs
       - run: npm run update:package
       - name: Verify APK and signed OTA payloads
         shell: pwsh
@@ -102,5 +103,7 @@ jobs:
         if: always()
         with:
           name: android-qa-${{ github.run_id }}
-          path: tmp/cloud-qa/
+          path: |
+            tmp/cloud-qa/
+            tmp/town-camera-qa/
           retention-days: 14
