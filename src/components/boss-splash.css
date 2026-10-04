@@ -22,7 +22,7 @@
 .boss-splash-stats { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 12px; padding-top: 14px; margin: 17px 0 0; border-top: 1px solid color-mix(in srgb, var(--boss-accent) 45%, transparent); }
 .boss-splash-stats div { min-width: 0; }
 .boss-splash-stats dt { color: #b8c9cc; font-size: 11px; }
-.boss-splash-stats dd { margin: 4px 0 0; font-size: 20px; line-height: 1.2; font-weight: 800; overflow-wrap: anywhere; }
+.boss-splash-stats dd { margin: 4px 0 0; font-size: 20px; line-height: 1.4; font-weight: 800; overflow-wrap: anywhere; }
 .boss-splash-stats small { font-size: 12px; font-weight: 400; color: #bdc9cc; }
 .is-awakened .boss-splash { border-width: 2px; }
 .is-awakened .boss-splash-heading { color: var(--boss-accent); }

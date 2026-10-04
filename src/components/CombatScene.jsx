@@ -26,7 +26,7 @@ function FighterPoses({ unitKey, name, defender = false, skillPose }) {
       style={getCombatFrameStyle(unitKey, pose === 'ready' ? 'recover' : pose === 'evade' ? 'run-a' : pose)}
       src={getCombatMotionSprite(unitKey, pose === 'ready' ? 'recover' : pose === 'evade' ? 'run-a' : pose)}
       alt={pose === 'ready' ? name : ''} draggable="false" />)}
-    {skillPose&&<img data-pose="skill" className="fighter-frame fighter-skill" src={skillPose.src} alt="" draggable="false" style={{'--combat-sprite-scale':skillPose.scale,'--combat-foot-offset':'0%'}}/>}
+    {skillPose&&<img data-pose="skill" className="fighter-frame fighter-skill" src={skillPose.src} alt="" draggable="false" style={{'--combat-sprite-scale':skillPose.scale,'--combat-foot-offset':skillPose.footOffset || '0%'}}/>}
   </div></div>;
 }
 

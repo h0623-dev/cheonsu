@@ -1,8 +1,10 @@
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import { getCharacterArt } from '../src/data/characterArt.js';
+import { getBossSplash } from '../src/data/bossArt.js';
 const base=process.env.GAME_URL || 'http://127.0.0.1:5176';
-const browser=await chromium.launch({channel:'msedge',headless:true});
+const browser=await chromium.launch({headless:true,...(process.env.CHEONSU_QA_BROWSER?{channel:process.env.CHEONSU_QA_BROWSER}:process.platform==='win32'?{channel:'msedge'}:{})});
 const out='tmp/boss-splash-qa';
 await fs.mkdir(out,{recursive:true});
 let count=0;
@@ -16,7 +18,7 @@ try {
       await page.locator('.boss-splash-art').evaluate(img=>img.decode());
       await page.waitForTimeout(250);
       await page.evaluate(()=>document.getAnimations().forEach(animation=>animation.finish()));
-      assert.equal(await page.locator('.boss-splash-art').evaluate(img=>img.naturalWidth),1024);
+      assert.equal(await page.locator('.boss-splash-art').evaluate(img=>img.naturalWidth),getCharacterArt(key)?512:1024);
       assert.equal(await page.locator('.boss-splash-overlay').getAttribute('data-boss-art'),key);
       const issues=await page.evaluate(()=>{
         const errors=[];
@@ -27,7 +29,7 @@ try {
         }
         return errors;
       });
-      assert.deepEqual(issues,[]);
+      assert.deepEqual(issues,[],`${key}/phase=${phase}/${viewport.width}×${viewport.height}: 보스 등장 창이 화면과 텍스트 영역에 맞아야 합니다`);
       assert.match(await page.locator('.boss-splash-stats').innerText(),/300.*400/s);
       if(!phase) await page.screenshot({path:`${out}/${key}-${viewport.width}.png`});
       count++;
@@ -41,7 +43,8 @@ try {
     await page.close();
   }
   const fallbackPage=await browser.newPage({serviceWorkers:'block'});
-  await fallbackPage.route('**/enemy-illustrations-v1/boss_commander.webp',route=>route.fulfill({status:404,body:''}));
+  const fallbackArt=getBossSplash({type:'boss',spriteKey:'boss_commander'}).src;
+  await fallbackPage.route(`**${fallbackArt}`,route=>route.fulfill({status:404,body:''}));
   await fallbackPage.goto(`${base}/tests/fixtures/boss-splash.html`);
   await fallbackPage.waitForFunction(()=>document.querySelector('.boss-splash-art.is-fallback')?.naturalWidth>0);
   await fallbackPage.close();

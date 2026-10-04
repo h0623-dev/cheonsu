@@ -6,6 +6,7 @@ import sharp from 'sharp';
 import { combatUnitIds, combatMotionPoses, getCombatMotionSprite, getCombatPresentation } from '../src/data/combatArt.js';
 import { getUnitCombatClass } from '../src/engine/combat.js';
 import { withSkill } from '../src/data/skills.js';
+import { getCharacterArt } from '../src/data/characterArt.js';
 
 test('all 41 combat characters have transparent anchored frames from their active art catalogue', async () => {
   const manifest = JSON.parse(await readFile(new URL('../public/art/combat-v2/manifest.json', import.meta.url), 'utf8'));
@@ -17,7 +18,7 @@ test('all 41 combat characters have transparent anchored frames from their activ
     const hashes = new Set();
     for (const pose of combatMotionPoses) {
       const asset = getCombatMotionSprite(id, pose);
-      assert.equal((bosses.units[id]?.motion || enemies.units[id]?.motion || manifest.units[id])[pose], asset);
+      assert.equal((getCharacterArt(id)?.motion || bosses.units[id]?.motion || enemies.units[id]?.motion || manifest.units[id])[pose], asset);
       const source = await readFile(new URL(`../public${asset}`, import.meta.url));
       hashes.add(createHash('sha256').update(source).digest('hex'));
       const { data, info } = await sharp(source).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
@@ -30,7 +31,7 @@ test('all 41 combat characters have transparent anchored frames from their activ
       assert.ok(bottom >= 473 && bottom <= 480, `${id}/${pose}: foot anchor ${bottom}`);
     }
     // The new wolf atlas has five authored poses; windup intentionally holds its ready stance.
-    assert.equal(hashes.size, id === 'wolf' ? 5 : 6, `${id}: authored poses must remain distinct`);
+    assert.equal(hashes.size, !getCharacterArt(id) && id === 'wolf' ? 5 : 6, `${id}: authored poses must remain distinct`);
   }
 });
 
@@ -47,7 +48,7 @@ test('chosen skill effect overrides old character skill effects', () => {
   const scene = { mode: 'skill', attacker: { skillSpec: { effect: 'arrow' } }, effectType: 'fire', outcome: { hit: true } };
   assert.equal(getCombatPresentation('lina', scene).effect, 'arrow');
   assert.equal(getCombatPresentation('lina', scene).style, 'ranged');
-  assert.equal(getCombatMotionSprite('unknown', 'unknown'), '/art/combat-v2/units/raider-recover.webp');
+  assert.equal(getCombatMotionSprite('unknown', 'unknown'), getCharacterArt('raider')?.motion.recover || '/art/combat-v2/units/raider-recover.webp');
 });
 
 test('weapon affinities match art and remain stable when switching abilities', () => {

@@ -1,7 +1,10 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.154 / Android versionCode 353**
+현재 개발 빌드: **1.99.155 / Android versionCode 354**
 
+1.99.155: 기존 대기 이미지를 보존하면서 전체 41종의 전투·기술·대화 아트를 새 시안으로 통일합니다. 마을에서는 이동 중 앞뒤 교대 걷기 프레임을 사용하고 정지 시 원래 대기 모습으로 돌아옵니다. [구현·검증](docs/CHARACTER_REDESIGN_1.99.155.md).
+
+현재 기본 "원복" 기준은 사용자 지정 **1.99.154 / 801234d1c99d0cdc7c11d645e111f64336e80672**, 보존 태그 `codex/rollback-1.99.154`입니다. 아래 과거 버전의 1.99.148 원복 표기는 당시 기록입니다. [복원 절차](docs/ROLLBACK_BASELINE.md).
 1.99.154: 자기 턴에 행동을 끝낸 캐릭터의 반격 누락을 수정했습니다. 활은 기본 사거리 2칸에서 반격하고 인접 1칸에서는 반격하지 않습니다. [반격 수정과 검증](docs/COUNTER_FIX_1.99.154.md).
 
 1.99.153: 30장 이야기·보스·전장 제목의 연결을 정리하고 원정 메뉴의 불필요한 배치 계산을 줄였습니다. 메인/마을은 평화로운 클래식, 전장은 금관·현악·팀파니 중심의 신작 BGM 10곡으로 교체했습니다. 미연결 Google 로그인 표기와 오프라인 캐시를 수정했습니다. [종합 QA 및 출시 개선 계획](docs/QA_IMPROVEMENT_1.99.153.md).
@@ -26,8 +29,8 @@
 
 ## 다운로드
 
-- 로컬 최신 산출물: `cheonsu_1.99.154_update_debug.apk`, `cheonsu_development_1.99.154.zip`
-- [1.99.154 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.154)
+- 새 버전 산출물: `cheonsu_1.99.155_update_debug.apk`, `cheonsu_development_1.99.155.zip`
+- [1.99.155 APK 및 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.155)
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)

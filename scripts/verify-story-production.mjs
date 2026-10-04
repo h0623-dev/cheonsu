@@ -1,10 +1,11 @@
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import { getStoryPortrait } from '../src/data/storyArt.js';
 
 const base = process.env.ACTUAL_GAME_URL || 'http://127.0.0.1:5189';
 const key = 'cheonsu_v01_save';
-const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const browser = await chromium.launch({ headless: true, ...(process.env.CHEONSU_QA_BROWSER ? { channel: process.env.CHEONSU_QA_BROWSER } : process.platform === 'win32' ? { channel: 'msedge' } : {}) });
 await fs.mkdir('tmp/story-art-qa', { recursive: true });
 try {
   for (const viewport of [{ width: 390, height: 844 }, { width: 844, height: 390 }]) {
@@ -28,14 +29,14 @@ try {
     await page.getByRole('button', { name: '다음', exact: true }).click();
     const actor = page.locator('.narrative-actor img');
     await actor.evaluate(img => img.decode());
-    assert.match(await actor.getAttribute('src'), /enemy-illustrations-v1\/boss_abyss.webp$/);
+    assert.equal(await actor.getAttribute('src'), getStoryPortrait('흑천 가론'));
     assert.equal(await actor.getAttribute('alt'), '흑천 가론');
     await page.screenshot({ path: `tmp/story-art-qa/production-garon-${viewport.width}.png` });
     await page.getByRole('button', { name: '다음', exact: true }).click();
     await actor.evaluate(img => img.decode());
-    assert.equal(await actor.getAttribute('src'), '/art/world-v2/units/hero.webp');
+    assert.equal(await actor.getAttribute('src'), getStoryPortrait('카일'));
     await page.getByRole('button', { name: '이전 대사', exact: true }).click();
-    assert.match(await actor.getAttribute('src'), /boss_abyss.webp$/);
+    assert.equal(await actor.getAttribute('src'), getStoryPortrait('흑천 가론'));
     assert.equal(await page.evaluate(key => localStorage.getItem(key), key), before, 'dialogue must preserve the existing save');
     await page.getByRole('button', { name: '바로 전투', exact: true }).click();
     await page.locator('.world-battlefield').waitFor();

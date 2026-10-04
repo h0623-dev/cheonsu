@@ -1,49 +1,99 @@
 import { useEffect, useEffectEvent, useRef, useState } from 'react';
 import { ShoppingBag, BedDouble, Shield, Swords, DoorOpen, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, X } from 'lucide-react';
 import { getPaintedVisualProfile } from '../data/unitVisuals.js';
-import { TOWN_WIDTH, TOWN_HEIGHT, TOWN_ENTRANCE, TOWN_FACILITIES, getTownPath } from '../engine/townMovement.js';
+import { getVillageWalkFrame, getVillageWalkFrames } from '../data/villageWalk.js';
+import { getFacingArt } from '../engine/unitFacing.js';
+import { TOWN_WIDTH, TOWN_HEIGHT, TOWN_ENTRANCE, TOWN_FACILITIES, TOWN_STEP_MS, getTownPath, advanceTownRoute, stopTownRoute, getTownStepDelay } from '../engine/townMovement.js';
 
 const facilityIcons = { shop: ShoppingBag, inn: BedDouble, armory: Shield, training: Swords, gate: DoorOpen };
 
-export default function TownHub({ party, onVisit }) {
+export default function TownHub({ party, onVisit, paused = false }) {
   const shell = useRef(null);
+  const walkSprites = useRef(null);
   const [position, setPosition] = useState(TOWN_ENTRANCE);
   const [route, setRoute] = useState(null);
   const [walkerId, setWalkerId] = useState('hero');
   const [facing, setFacing] = useState(1);
+  const [direction, setDirection] = useState('down');
+  const [walkStep, setWalkStep] = useState(0);
+  const [loadedWalker, setLoadedWalker] = useState(null);
+  const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   const walker = party.find(unit => unit.id === walkerId) || party[0];
-  const arrive = useEffectEvent(id => { if (id) onVisit(id); });
+  const visualId = walker?.id;
+  const walking = Boolean(route) && !paused;
+  const idleArt = walker ? getPaintedVisualProfile(walker.id)?.map : null;
+  const walkFrames = getVillageWalkFrames(visualId);
+  const walkArtReady = loadedWalker === visualId;
+  const walkArt = walking && walkArtReady && !reducedMotion ? getVillageWalkFrame(visualId, direction, walkStep) : null;
+  useEffect(() => {
+    if (!visualId) return;
+    let cancelled = false;
+    const frames = [...(walkSprites.current?.querySelectorAll('.town-walk-art, .town-preload-art') || [])];
+    if (!frames.length) return;
+    // Keep the decoded DOM images mounted: changing src every step can briefly blank a cached image.
+    Promise.all(frames.map(image => image.decode()))
+      .then(() => { if (!cancelled) setLoadedWalker(visualId); }).catch(() => {});
+    return () => { cancelled = true; };
+  }, [visualId]);
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = event => setReducedMotion(event.matches);
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
+  useEffect(() => {
+    if (!walking || reducedMotion) return;
+    const timer = setInterval(() => setWalkStep(step => step + 1), TOWN_STEP_MS);
+    return () => clearInterval(timer);
+  }, [walking, reducedMotion]);
+  const continueRoute = useEffectEvent(() => {
+    if (paused) { setRoute(null); return; }
+    const next = advanceTownRoute(position, route, performance.now());
+    if (next.direction) {
+      setDirection(next.direction);
+      if (next.direction === 'left' || next.direction === 'right') setFacing(next.direction === 'left' ? -1 : 1);
+    }
+    setPosition(next.position);
+    setRoute(next.route);
+    if (next.arrived) onVisit(next.arrived);
+  });
   useEffect(() => {
     if (!route) return;
-    const timer = setTimeout(() => {
-      if (!route.path.length) { setRoute(null); arrive(route.destination); return; }
-      const [next, ...remaining] = route.path;
-      if (next.x !== position.x) setFacing(Math.sign(next.x - position.x));
-      setPosition(next);
-      setRoute({ ...route, path: remaining });
-    }, 100);
+    const timer = setTimeout(continueRoute, paused ? 0 : getTownStepDelay(route, performance.now()));
     return () => clearTimeout(timer);
-  }, [route, position.x]);
-  useEffect(() => {
+  }, [route, paused]);
+  const centerView = useEffectEvent((smooth = false) => {
     const element = shell.current;
-    const center = () => {
-      const world = element.firstElementChild;
-      element.scrollTo({ left: (position.x + .5) / TOWN_WIDTH * world.clientWidth - element.clientWidth / 2,
-        top: (position.y + .5) / TOWN_HEIGHT * world.clientHeight - element.clientHeight / 2 });
-    };
-    center();
-    const observer = new ResizeObserver(center);
-    observer.observe(element);
+    const world = element.firstElementChild;
+    element.scrollTo({ left: (position.x + .5) / TOWN_WIDTH * world.clientWidth - element.clientWidth / 2,
+      top: (position.y + .5) / TOWN_HEIGHT * world.clientHeight - element.clientHeight / 2,
+      behavior: smooth ? 'smooth' : 'instant' });
+  });
+  useEffect(() => { centerView(walking && !reducedMotion); }, [position, walking, reducedMotion]);
+  useEffect(() => {
+    const observer = new ResizeObserver(() => centerView());
+    observer.observe(shell.current);
     return () => observer.disconnect();
-  }, [position]);
+  }, []);
   const travel = (target, destination = null) => {
+    if (paused) return;
     const path = getTownPath(position, target);
     if (!path.length) {
-      if (position.x === target.x && position.y === target.y && destination) onVisit(destination);
+      if (position.x === target.x && position.y === target.y) {
+        if (route) setRoute({ ...route, path: [], destination });
+        else if (destination) onVisit(destination);
+      }
       return;
     }
-    setRoute({ path, destination });
+    // Finish the in-flight tile before changing course, so repeated taps cannot speed up travel.
+    if (route) { setRoute({ ...route, path, destination }); return; }
+    const next = advanceTownRoute(position, { path, destination }, performance.now());
+    setDirection(next.direction);
+    if (next.direction === 'left' || next.direction === 'right') setFacing(next.direction === 'left' ? -1 : 1);
+    setPosition(next.position);
+    setRoute(next.route);
   };
+  const cancelTravel = () => setRoute(stopTownRoute);
   const step = (dx, dy) => {
     const target = { x: position.x + dx, y: position.y + dy };
     const path = getTownPath(position, target);
@@ -59,7 +109,7 @@ export default function TownHub({ party, onVisit }) {
     <div className="town-map-shell" ref={shell} tabIndex={0} aria-label="마을 이동 지도" onKeyDown={event => {
       const direction = { ArrowUp: [0, -1], w: [0, -1], ArrowDown: [0, 1], s: [0, 1], ArrowLeft: [-1, 0], a: [-1, 0], ArrowRight: [1, 0], d: [1, 0] }[event.key];
       if (direction) { event.preventDefault(); step(...direction); }
-      if (event.key === 'Escape') setRoute(null);
+      if (event.key === 'Escape') cancelTravel();
     }}>
       <div className="town-world" onClick={event => {
         const rect = event.currentTarget.getBoundingClientRect();
@@ -70,17 +120,18 @@ export default function TownHub({ party, onVisit }) {
           className={`town-door town-door-${place.id}`} style={{ left: `${(place.x + .5) / TOWN_WIDTH * 100}%`, top: `${(place.y + .5) / TOWN_HEIGHT * 100}%` }}
           onClick={event => { event.stopPropagation(); travel(place, place.id); }}><Icon size={16} />{place.name}</button>; })}
         {route?.path.length > 0 && <span className="town-waypoint" style={{ left: `${(route.path.at(-1).x + .5) / TOWN_WIDTH * 100}%`, top: `${(route.path.at(-1).y + .5) / TOWN_HEIGHT * 100}%` }} />}
-        {walker && <div className={`town-walker ${route ? 'is-walking' : ''}`} data-town-x={position.x} data-town-y={position.y}
-          style={{ left: `${(position.x + .5) / TOWN_WIDTH * 100}%`, top: `${(position.y + .5) / TOWN_HEIGHT * 100}%`, '--town-facing': facing }}>
-          <img src={getPaintedVisualProfile(walker.id).map} alt={walker.name} draggable="false" />
+        {walker && <div ref={walkSprites} className={`town-walker ${walking ? 'is-walking' : ''} ${paused ? 'is-paused' : ''}`} data-town-x={position.x} data-town-y={position.y} data-town-direction={direction} data-walk-ready={walkArtReady} data-walk-frame={walkArt ? walkStep % 2 : 'idle'}
+          style={{ left: `${(position.x + .5) / TOWN_WIDTH * 100}%`, top: `${(position.y + .5) / TOWN_HEIGHT * 100}%`, '--town-facing': facing, '--town-walk-facing': getFacingArt(direction).flip, '--town-step-duration': `${TOWN_STEP_MS}ms` }}>
+          <img className={`town-idle-art ${walkArt ? 'has-walk-art' : ''}`} src={idleArt} alt={walker.name} draggable="false" />
+          {walkFrames.map(src => <img key={src} className={src === walkArt ? 'town-walk-art' : 'town-preload-art'} src={src} alt="" aria-hidden="true" draggable="false" />)}
         </div>}
       </div>
     </div>
     <div className="town-controls">
-      <label><span>이동 캐릭터</span><select aria-label="이동 캐릭터" value={walker?.id || ''} onChange={event => setWalkerId(event.target.value)}>{party.map(unit => <option key={unit.id} value={unit.id}>{unit.name}</option>)}</select></label>
+      <label><span>이동 캐릭터</span><select aria-label="이동 캐릭터" value={walker?.id || ''} onChange={event => { cancelTravel(); if (event.target.value !== visualId) setLoadedWalker(null); setWalkerId(event.target.value); }}>{party.map(unit => <option key={unit.id} value={unit.id}>{unit.name}</option>)}</select></label>
       <div className="town-dpad" role="group" aria-label="캐릭터 이동">{[[ArrowLeft, -1, 0, '왼쪽'], [ArrowUp, 0, -1, '위'], [ArrowDown, 0, 1, '아래'], [ArrowRight, 1, 0, '오른쪽']].map(([Icon, dx, dy, label]) =>
         <button key={label} title={label} aria-label={`${label} 이동`} onClick={() => step(dx, dy)}><Icon size={18} /></button>)}</div>
-      {route && <button className="town-cancel" title="이동 취소" aria-label="마을 이동 취소" onClick={() => setRoute(null)}><X size={18} /></button>}
+      {route && <button className="town-cancel" title="이동 취소" aria-label="마을 이동 취소" onClick={cancelTravel}><X size={18} /></button>}
     </div>
     <div className="town-location" role="status">{route ? `${destination?.name || '광장'}으로 이동 중` : '천수 마을 · 광장'}</div>
   </section>;

@@ -1,0 +1,15 @@
+Create ONE square RGBA transparent 3-by-3 character animation atlas: exactly 9 independent drawings in a perfectly regular grid of 3 columns and 3 rows, equal-sized cells, wide transparent gutters and margins. Reference 1 supplies this character's identity, hair, gender, colors, species and weapon; reference 2 supplies the approved new painterly style. Redesign costume details tastefully in that same world while preserving identity. Soft hand-painted 1990s/2000s tactical fantasy RPG anime and gouache, gentle cloth and metal shading, clean detailed expressive face, natural 5 to 5.5-head-tall adult proportions, NOT chibi. SAME character, exact same outfit and anatomy in every cell. Only one person per cell. All combat drawings are full body in a consistent three-quarter side view facing enemies to the RIGHT. Entire hair, hands, feet and weapon contained within its cell. Identical camera and scale for cells 0–7, with a clear gap between boots and the cell edge. Cell 8 is waist-up dialogue portrait. NO background, ground, floor, shadow, frame, panel, text, labels, numbers, rays, explosions, magical particle effects or extra figures. App supplies all effects. Transparent background and transparent gutters.
+Exact row-major layout:
+TOP LEFT cell 0 run-a: advance to the right with left leg forward, natural weapon carrying.
+TOP MIDDLE cell 1 run-b: advance to the right with right leg forward, clearly opposite arms and legs from cell 0.
+TOP RIGHT cell 2 windup: prepare the ordinary attack naturally with the character's own weapon.
+MIDDLE LEFT cell 3 strike: ordinary attack at its action peak directed right.
+MIDDLE MIDDLE cell 4 recover: composed stable combat recovery with weapon controlled.
+MIDDLE RIGHT cell 5 recoil: distinct upper torso leaning back from an impact while feet stay grounded.
+BOTTOM LEFT cell 6 skill-a: shadow SLASH: low agile diagonal dual-dagger sweep directed right.
+BOTTOM MIDDLE cell 7 skill-b: opening CUT: upright precise crossing dagger cut directed right, visibly different pose from low shadow slash, clearly different from cell 6.
+BOTTOM RIGHT cell 8 dialogue: large readable waist-up view of the same person, welcoming expressive face, costume and weapon grip consistent, no weapon obscuring the face.
+
+Character identity: Sera, a young adult female human rogue with dark violet hair in a high flowing ponytail, dark eyes, dark charcoal leather fitted armor and boots, burgundy-red scarf and short split cape, brown utility belts, TWO steel short daggers one in each hand. Agile confident stern expression. Preserve feminine identity and dual dagger silhouette.
+Weapon-specific instructions: Ordinary windup draws both daggers back; strike sends one dagger forward in a clear diagonal slash while the second guards.
+

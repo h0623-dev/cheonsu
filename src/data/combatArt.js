@@ -5,6 +5,7 @@ import combatFrameMetrics from './combatFrameMetrics.json' with { type: 'json' }
 import { getPaintedVisualProfile } from './unitVisuals.js';
 import { getDuelPlan, getWeaponMotion } from './duelChoreography.js';
 import { directDuelPerformance } from './duelPerformance.js';
+import { getCharacterArt, getCharacterFrameStyle, getCharacterSkillPose } from './characterArt.js';
 
 export function getCombatTiming(scene) {
   const skill = scene.mode === 'skill' || Boolean(scene.outcome?.heal || scene.outcome?.guard);
@@ -14,7 +15,9 @@ export function getCombatTiming(scene) {
 export function getCombatChoreography(key,scene){
   const presentation = getCombatPresentation(key, scene);
   const weapon = getWeaponMotion(key, getCombatPresentation(key, {outcome:{hit:true}}));
-  return directDuelPerformance(getDuelPlan(key, scene, presentation, weapon), weapon, presentation, scene);
+  const plan = getDuelPlan(key, scene, presentation, weapon);
+  const redesignedSkill = plan.skill ? getCharacterSkillPose(key, plan.id.slice(key.length + 1)) : null;
+  return directDuelPerformance(redesignedSkill ? { ...plan, skillPose: redesignedSkill } : plan, weapon, presentation, scene);
 }
 
 export function getSkillPalette(effect) {
@@ -24,6 +27,8 @@ export function getSkillPalette(effect) {
 export function getCombatScale(key) { return mapManifest[key]?.combatScale || 1; }
 
 export function getCombatFrameStyle(key, pose) {
+  const redesigned = getCharacterFrameStyle(Object.hasOwn(weapons, key) ? key : 'raider', pose);
+  if (redesigned) return redesigned;
   const metrics = combatFrameMetrics[key]?.[pose];
   if (!metrics) return { '--combat-sprite-scale': getCombatScale(key) };
   const visibleFraction = key === 'wolf' ? 0.45 : 0.703125;
@@ -49,6 +54,8 @@ export const combatMotionPoses = ['run-a', 'run-b', 'windup', 'strike', 'recover
 export const combatEffectIds = ['slash', 'thrust', 'arrow', 'heavy', 'guard', 'fire', 'ice', 'lightning', 'shadow', 'holy', 'heal', 'poison', 'music', 'claw', 'impact', 'cast'];
 
 export function getCombatSprite(key, pose = 'ready') {
+  const redesigned = getCharacterArt(Object.hasOwn(weapons, key) ? key : 'raider');
+  if (redesigned) return redesigned.motion[pose === 'action' ? 'strike' : 'recover'];
   if (bossManifest.units[key]) return pose === 'action' ? bossManifest.units[key].motion.strike : bossManifest.units[key].ready;
   if (Object.hasOwn(enemyManifest.units, key)) {
     const enemy = enemyManifest.units[key];
@@ -60,6 +67,8 @@ export function getCombatEffect(key) {
   return `/art/combat-v1/effects/${combatEffectIds.includes(key) ? key : 'impact'}.webp`;
 }
 export function getCombatMotionSprite(key, pose = 'recover') {
+  const redesigned = getCharacterArt(Object.hasOwn(weapons, key) ? key : 'raider');
+  if (redesigned) return redesigned.motion[combatMotionPoses.includes(pose) ? pose : 'recover'];
   if (bossManifest.units[key]) return bossManifest.units[key].motion[combatMotionPoses.includes(pose) ? pose : 'recover'];
   if (Object.hasOwn(enemyManifest.units, key)) {
     return enemyManifest.units[key].motion[combatMotionPoses.includes(pose) ? pose : 'recover'];

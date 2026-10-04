@@ -4,13 +4,14 @@ import sharp from 'sharp';
 import { readFile } from 'node:fs/promises';
 import { bossCombatIds, getBossSplash, getBossSpriteKey } from '../src/data/bossArt.js';
 import { stages } from '../src/data/stages.js';
+import { getCharacterArt } from '../src/data/characterArt.js';
 
 test('every campaign boss receives the correct entrance illustration without mutating saved units',()=>{
   for(const stage of stages) for(const boss of stage.units.filter(u=>u.type==='boss')) {
     const before=JSON.stringify(boss),art=getBossSplash(boss);
     assert.equal(art.key,getBossSpriteKey(boss));
     assert.ok(bossCombatIds.includes(art.key));
-    assert.match(art.src,/^\/art\/enemy-illustrations-v1\/boss_\w+\.webp$/);
+    assert.equal(art.src, getCharacterArt(art.key)?.splash || getCharacterArt(art.key)?.dialogue || `/art/enemy-illustrations-v1/${art.key}.webp`);
     assert.equal(JSON.stringify(boss),before);
   }
   assert.equal(getBossSplash({type:'boss',name:'도적장'}).key,'boss_commander');
