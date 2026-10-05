@@ -1,5 +1,7 @@
 # Codex Cloud 개발 환경
 
+2026-10-05 KST 최신 사용자 지시에 따라 코드 수정 후 에이전트의 별도 검증은 생략합니다. 새 작업은 먼저 루트 `AGENTS.md`와 [검증 생략 스킬](../.agents/skills/cheonsu-no-post-change-validation/SKILL.md)을 읽습니다. 아래 검사 절차가 있다는 이유로 테스트·린트·스모크·브라우저 QA를 자동 실행하지 않습니다. 요청한 산출물 제작과 기존 자동 Actions는 스킬에 명시한 범위로 구분합니다.
+
 ## 작업 구조
 
 요청 → Codex Cloud에서 `h0623-dev/cheonsu` 수정 → PR 검사 → `main` 반영 → GitHub Actions에서 APK/서명 OTA 제작·검증·배포.
