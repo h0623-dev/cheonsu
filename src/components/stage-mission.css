@@ -1,0 +1,38 @@
+.stage-mission-card { margin: 0 0 14px; padding: 14px; border: 1px solid #657d69; border-radius: 6px; background: #22362b; color: #edf1e3; }
+.stage-mission-card > header { display: flex; align-items: center; gap: 7px; margin-bottom: 10px; color: #e7d5a0; }
+.stage-mission-card h2 { margin: 0; font-size: 16px; }
+.stage-mission-conditions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.stage-mission-conditions > section { min-width: 0; }
+.stage-mission-conditions h3 { display: flex; align-items: center; gap: 6px; margin: 0 0 8px; font-size: 15px; }
+.stage-mission-victory h3 { color: #d3e9b3; }
+.stage-mission-defeat h3 { color: #edbcae; }
+.stage-mission-conditions ul { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.7; overflow-wrap: anywhere; }
+.stage-mission-conditions li + li { margin-top: 4px; }
+.stage-mission-conditions p { margin: 8px 0 0; color: #bccbbd; font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+.stage-mission-dialog { width: min(540px, calc(100% - 24px)); max-height: calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); box-sizing: border-box; margin: auto; padding: 0; overflow: hidden; border: 1px solid #8e9d7c; border-radius: 8px; background: #20332a; color: #f0f2e5; box-shadow: 0 16px 60px #0009; font-family: inherit; letter-spacing: 0; }
+.stage-mission-dialog[open] { display: flex; flex-direction: column; }
+.stage-mission-dialog::backdrop { background: #0e171cbd; }
+.stage-mission-dialog > header { display: flex; align-items: center; gap: 12px; flex-shrink: 0; padding: 18px; border-bottom: 1px solid #566c56; }
+.stage-mission-dialog > header > svg { color: #e7d5a0; flex-shrink: 0; }
+.stage-mission-dialog > header > div { min-width: 0; }
+.stage-mission-dialog small { color: #c5d2bf; font-size: 12px; overflow-wrap: anywhere; }
+.stage-mission-dialog h2 { margin: 4px 0 0; font-size: 22px; }
+.stage-mission-body { min-height: 0; padding: 18px; overflow-y: auto; overscroll-behavior: contain; }
+.stage-mission-dialog > footer { flex-shrink: 0; padding: 12px 18px 18px; border-top: 1px solid #566c56; }
+.stage-mission-dialog button { width: 100%; min-height: 46px; padding: 10px; border: 1px solid #b4c59b; border-radius: 5px; background: #42624a; color: #f5f4df; font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; touch-action: manipulation; }
+.stage-mission-dialog button:focus-visible { outline: 3px solid #ebd899; outline-offset: 2px; }
+.app.world-art-app .battle-control-heading { flex-wrap: wrap; }
+.app.world-art-app .battle-screen.battle-final-concept.battle-board-only .battle-control-heading .battle-mission-button { flex-shrink: 0; min-height: 40px; padding: 5px 8px; font-size: 12px !important; }
+@media (max-width: 540px) {
+  .stage-mission-conditions { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .stage-mission-card { padding: 12px; }
+  .stage-mission-dialog > header { padding: 14px; }
+  .stage-mission-body { padding: 14px; }
+  .stage-mission-dialog > footer { padding: 10px 14px 14px; }
+}
+@media (max-height: 480px) {
+  .stage-mission-dialog > header { padding: 10px 14px; }
+  .stage-mission-dialog h2 { font-size: 18px; }
+  .stage-mission-body { padding: 12px 14px; }
+  .stage-mission-dialog > footer { padding: 8px 14px; }
+}

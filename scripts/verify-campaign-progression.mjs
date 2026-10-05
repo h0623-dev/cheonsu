@@ -27,6 +27,7 @@ async function startBattle(page) {
   if (await override.count()) await override.click();
   const skip = page.getByRole('button', { name: '바로 전투', exact: true });
   if (await skip.count()) await skip.click();
+  await page.locator('.stage-mission-dialog[open]').getByRole('button', { name: '미션 확인', exact: true }).click();
   await waitBattle(page);
 }
 

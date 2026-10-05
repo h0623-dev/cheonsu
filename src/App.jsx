@@ -36,12 +36,14 @@ import DefeatDialog from "./components/DefeatDialog.jsx";
 import VictoryDialog from "./components/VictoryDialog.jsx";
 import StoryScene from "./components/StoryScene.jsx";
 import DeploymentBoard from './components/DeploymentBoard.jsx';
+import { StageMissionCard, StageMissionDialog } from './components/StageMission.jsx';
 import { getStoryPortrait } from "./data/storyArt.js";
 import { getUnlockedStageIds, createVictoryCheckpoint, createDefeatCheckpoint, getCampTrainingAvailability, getCampBattleStageId, writeProgressSave } from './engine/campaignProgress.js';
 import { distributeBattleFormations, getReinforcementApproaches } from "./engine/formations.js";
 import { getDeploymentCells, reconcileDeploymentPlacements, placeDeploymentUnit, validateDeploymentPlacements, applyDeploymentPlacements, sanitizeDeploymentDraft } from './engine/deploymentEngine.js';
 import { getBattleOutcome, spendAction } from "./engine/battleOutcome.js";
 import { withStageEnemyLevel } from "./engine/enemyProgression.js";
+import { getStageMission } from './engine/stageMission.js';
 import { useGameMusic } from "./engine/useGameMusic.js";
 import { playCheonsuSfx } from "./engine/soundEffects.js";
 import { getUnitSkills, getSkill, getSkillDisplayName, skillDescription, withSkill, getSkillCooldown, applyCooldown, tickCooldowns, applySupportSkill, isSelfOnlySupportSkill } from "./data/skills.js";
@@ -100,7 +102,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.161";
+const SAVE_VERSION = "1.99.162";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -8195,6 +8197,7 @@ export default function App() {
   const [storyScene, setStoryScene] = useState(null);
   const [selectedStage, setSelectedStage] = useState(null);
   const [deploymentStage, setDeploymentStage] = useState(null);
+  const [stageMissionOpen, setStageMissionOpen] = useState(false);
   const [deploymentDraft, setDeploymentDraft] = useState({ stageId: null, placements: {} });
   const [selectedDeployUnitId, setSelectedDeployUnitId] = useState(null);
   const [campaignView, setCampaignView] = useState("world");
@@ -8336,6 +8339,7 @@ export default function App() {
   const [mapZoom, setMapZoom] = useState("large");
   const actionResolvingRef = useRef(false);
   const victorySettledRef = useRef(false);
+  const missionIntroRef = useRef(null);
   useGameMusic({ screen, stageId: selectedStage?.id, result, settings });
   const [mapVisibility, setMapVisibility] = useState("tactical");
   const [battleCompact, setBattleCompact] = useState(true);
@@ -8360,7 +8364,7 @@ export default function App() {
   const suppressBattleMapClickRef = useRef(false);
   const [screenShake, setScreenShake] = useState(false);
   const visualTimersRef = useRef(new Set());
-  const combatBusy = Boolean(turnBusy || movingUnit || battleResolving || combatCutscene || bossCutscene || stageBanner?.type === "start");
+  const combatBusy = Boolean(stageMissionOpen || turnBusy || movingUnit || battleResolving || combatCutscene || bossCutscene || stageBanner?.type === "start");
   const battleInputLocked = Boolean(combatBusy || battle || result || itemOpen || skillChoiceOpen || supportSkillChoice || battleSettingsOpen || discoveryReceipt || journalOpen);
 
   useEffect(() => {
@@ -8440,6 +8444,8 @@ export default function App() {
   };
 
   const activeStage = selectedStage || stages[0];
+  const activeStageMission = getStageMission(activeStage);
+  const activeVictoryMissionText = activeStageMission.victoryConditions.map(condition => condition.text).join(' 또는 ');
   const activeMissionOrder = getStageMissionOrder(activeStage);
   const activeBattlefieldTheme = activeStage?.battlefieldTheme
     ? {
@@ -10145,6 +10151,8 @@ export default function App() {
   };
 
   const clearVisuals = () => {
+    setStageMissionOpen(false);
+    missionIntroRef.current = null;
     setCampFacility(null);
     setSupportSkillChoice(null);
     setSkillChoiceOpen(false);
@@ -10413,13 +10421,22 @@ export default function App() {
     ]);
     setLogFilter("all");
     setScreen("battle");
+    missionIntroRef.current = battleStage;
+    setStageMissionOpen(true);
+  };
+
+  const closeStageMission = () => {
+    setStageMissionOpen(false);
+    const battleStage = missionIntroRef.current;
+    missionIntroRef.current = null;
+    if (!battleStage || screen !== 'battle' || result) return;
     showTurnPhaseBanner("ally", 1);
     showStageBanner(
       {
         type: "start",
         label: `STAGE ${battleStage.id}`,
         title: battleStage.title,
-        subtitle: `${battleStage.objective} · ${battleStage.map[0].length}x${battleStage.map.length} 대형 전장`,
+        subtitle: `${battleStage.map[0].length}x${battleStage.map.length} 대형 전장 · 미션을 달성하세요.`,
       },
       1700
     );
@@ -14312,6 +14329,7 @@ export default function App() {
       {(discoveryReceipt || journalOpen) && <DiscoveryDialog receipt={discoveryReceipt} progress={exploration}
         entries={DISCOVERIES.filter(entry => unlockedStages.includes(entry.stageId) || exploration.claimed.includes(entry.id))}
         onClose={() => { setDiscoveryReceipt(null); setJournalOpen(false); }} />}
+      {screen === 'battle' && stageMissionOpen && !result && <StageMissionDialog stage={activeStage} onConfirm={closeStageMission} />}
       <div className="overlay" />
       {phaseBanner && <div className="phase-banner">{phaseBanner}</div>}
       {stageBanner && (
@@ -16616,6 +16634,7 @@ export default function App() {
             </div>
           </div>
 
+          {deploymentSetup && <StageMissionCard stage={deploymentSetup.stage} />}
           {deploymentSetup && <DeploymentBoard
             stage={deploymentSetup.stage}
             units={deploymentPreviewUnits}
@@ -17282,7 +17301,7 @@ export default function App() {
             <div className="battle-title-block">
               <div className="battle-kicker">모바일 전술 SRPG · 천수</div>
               <div className="chapter">{selectedStage?.title}</div>
-              <div className="objective">{selectedStage?.objective}</div>
+              <div className="objective">{activeVictoryMissionText}</div>
             </div>
             <div className="battle-top-actions">
               {!battleCompact && <button className="back-btn photo-toggle-btn" onClick={togglePhotoMode}>포토</button>}
@@ -17291,7 +17310,7 @@ export default function App() {
               <button className="back-btn battle-simple-toggle" onClick={() => setBattleCompact((prev) => !prev)}>
                 {battleCompact ? "상세" : "간단"}
               </button>
-              <button className="back-btn" onClick={() => setScreen("campaign")}>후퇴</button>
+              <button className="back-btn" onClick={() => { clearVisuals(); closeMobileCombatPanels(); setScreen("campaign"); }}>후퇴</button>
             </div>
           </div>
           <div className={`cinematic-stage-hud ${battleHudHidden ? "hud-collapsed" : ""}`}>
@@ -17308,8 +17327,8 @@ export default function App() {
                 <div className="cinematic-stage-card">
                   <strong>{selectedStage?.title}</strong>
                   <span>턴 {round} / {activeRoundLimit}</span>
-                  <em>승리 조건</em>
-                  <b>{activeStage.units.some(unit => unit.type === 'boss' || unit.id === 'boss') ? '적 지휘관 격파' : '적 전멸'}</b>
+                  <em>승리 미션</em>
+                  <b>{activeVictoryMissionText}</b>
                 </div>
                 <div className="cinematic-stage-actions">
                   <button type="button" onClick={cycleMapVisibility}>위험 범위</button>
@@ -17414,6 +17433,7 @@ export default function App() {
                     onClick={() => {
                       const baseStage = stages.find((stage) => stage.id === activeStage.id) || activeStage;
 
+                      clearVisuals();
                       setBattleSettingsOpen(false);
                       setDeploymentStage(baseStage);
                       setSelectedStage(baseStage);
@@ -17430,6 +17450,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => {
+                      clearVisuals();
                       setBattleSettingsOpen(false);
                       setScreen("campaign");
                       playSfx("confirm");
@@ -17442,6 +17463,7 @@ export default function App() {
                     type="button"
                     className="danger"
                     onClick={() => {
+                      clearVisuals();
                       setBattleSettingsOpen(false);
                       setScreen("menu");
                       playSfx("cancel");
@@ -17468,8 +17490,8 @@ export default function App() {
           <div className="battle-objective-panel">
             <div className="objective-main-row">
               <div>
-                <span>승리 조건</span>
-                <strong>{activeMissionOrder.type} · {activeMissionOrder.title}</strong>
+                <span>승리 미션</span>
+                <strong>{activeVictoryMissionText}</strong>
               </div>
               <div>
                 <span>전장 규모</span>
@@ -18183,6 +18205,7 @@ export default function App() {
           <div className={`cinematic-command-bar ${canUndoMove ? "has-undo" : ""}`}>
             <div className="battle-control-heading">
               <span role="status">{combatBusy ? "전투 진행 중" : selected ? `${selected.name} · HP ${selected.hp}/${selected.maxHp}` : "아군 선택"}</span>
+              <button className="battle-mission-button" type="button" disabled={battleInputLocked} onClick={() => { closeMobileCombatPanels(); setStageMissionOpen(true); }}>미션 보기</button>
               <button className="prominent-save" disabled={combatBusy || turn !== 'ally' || Boolean(result) || itemOpen || skillChoiceOpen || Boolean(supportSkillChoice)} onClick={saveGame}><Save size={16} />저장</button>
               <div className="battle-speed-controls" role="group" aria-label="전투 배속">
                 {BATTLE_SPEED_OPTIONS.map(option => (

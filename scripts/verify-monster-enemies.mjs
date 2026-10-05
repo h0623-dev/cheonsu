@@ -238,6 +238,7 @@ async function actualApp(base, viewport) {
       await page.waitForFunction(() => document.querySelector('.final-deploy-card,.narrative-screen,.story-screen,.world-battlefield'));
       if (await page.locator('.final-deploy-card').count()) await button('그래도 출전').click();
       if (await button('바로 전투').count()) await button('바로 전투').click();
+      await page.locator('.stage-mission-dialog[open]').getByRole('button', { name: '미션 확인', exact: true }).click();
       await ready();
       const loaded = await assertMapArt(page, id);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, `${id}: 휴대폰 가로 넘침이 없습니다`);

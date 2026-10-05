@@ -73,6 +73,7 @@ async function startBattle(page) {
   if (await override.count()) await override.click();
   const skip = page.getByRole('button', { name: '바로 전투', exact: true });
   if (await skip.count()) await skip.click();
+  await page.locator('.stage-mission-dialog[open]').getByRole('button', { name: '미션 확인', exact: true }).click();
   await page.locator('.world-battlefield .unit-visual-hero').waitFor();
   await page.waitForFunction(() => !document.querySelector('.battle-control-heading .prominent-save')?.disabled && !document.querySelector('.boss-splash-overlay'));
 }
@@ -355,6 +356,7 @@ async function runViewport(base, viewport) {
       await page.waitForFunction(() => document.querySelector('.story-screen,.narrative-screen'));
       assert.equal(await page.locator('.world-battlefield').count(), 0, '도입 대화가 끝나기 전에 전투를 시작하지 않습니다');
       await button('바로 전투').click();
+      await page.locator('.stage-mission-dialog[open]').getByRole('button', { name: '미션 확인', exact: true }).click();
       await page.locator('.world-battlefield .unit-visual-hero').waitFor();
       await page.waitForFunction(() => !document.querySelector('.battle-control-heading .prominent-save')?.disabled);
       const afterStory = await saveBattle(page);
