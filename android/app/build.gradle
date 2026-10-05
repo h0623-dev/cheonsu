@@ -7,8 +7,8 @@ android {
         applicationId "com.cheonsu.game"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 360
-        versionName "1.99.161"
+        versionCode 361
+        versionName "1.99.162"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.

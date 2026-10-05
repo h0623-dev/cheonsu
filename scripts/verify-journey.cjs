@@ -83,6 +83,7 @@ async function main() {
       await page.keyboard.press('Escape');
       await page.locator('.narrative-history').waitFor({state:'detached'});
       await page.getByRole('button',{name:'바로 전투',exact:true}).click();
+      await page.locator('.stage-mission-dialog[open]').getByRole('button',{name:'미션 확인',exact:true}).click();
       await page.locator('.world-battlefield').waitFor();
       const fixture=await saveBattle(page);
       await shot(page,`battle-${viewport.width}`);

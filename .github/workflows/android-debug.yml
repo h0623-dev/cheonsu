@@ -80,6 +80,7 @@ jobs:
       - run: node scripts/verify-skill-spectacle.mjs
       - run: node scripts/verify-deployment.mjs
       - run: node scripts/verify-campaign-progression.mjs
+      - run: node scripts/verify-stage-missions.mjs
       - run: npm run update:package
       - name: Verify APK and signed OTA payloads
         shell: pwsh
@@ -115,4 +116,5 @@ jobs:
             tmp/skill-spectacle-qa/
             tmp/deployment-qa/
             tmp/campaign-progression-qa/
+            tmp/stage-missions-qa/
           retention-days: 14
