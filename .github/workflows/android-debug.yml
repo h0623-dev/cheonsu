@@ -79,6 +79,7 @@ jobs:
       - run: node scripts/verify-monster-enemies.mjs
       - run: node scripts/verify-skill-spectacle.mjs
       - run: node scripts/verify-deployment.mjs
+      - run: node scripts/verify-campaign-progression.mjs
       - run: npm run update:package
       - name: Verify APK and signed OTA payloads
         shell: pwsh
@@ -113,4 +114,5 @@ jobs:
             tmp/monster-enemies-qa/
             tmp/skill-spectacle-qa/
             tmp/deployment-qa/
+            tmp/campaign-progression-qa/
           retention-days: 14

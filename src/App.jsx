@@ -37,10 +37,11 @@ import VictoryDialog from "./components/VictoryDialog.jsx";
 import StoryScene from "./components/StoryScene.jsx";
 import DeploymentBoard from './components/DeploymentBoard.jsx';
 import { getStoryPortrait } from "./data/storyArt.js";
-import { getUnlockedStageIds, createVictoryCheckpoint, writeProgressSave } from './engine/campaignProgress.js';
+import { getUnlockedStageIds, createVictoryCheckpoint, createDefeatCheckpoint, getCampTrainingAvailability, getCampBattleStageId, writeProgressSave } from './engine/campaignProgress.js';
 import { distributeBattleFormations, getReinforcementApproaches } from "./engine/formations.js";
 import { getDeploymentCells, reconcileDeploymentPlacements, placeDeploymentUnit, validateDeploymentPlacements, applyDeploymentPlacements, sanitizeDeploymentDraft } from './engine/deploymentEngine.js';
 import { getBattleOutcome, spendAction } from "./engine/battleOutcome.js";
+import { withStageEnemyLevel } from "./engine/enemyProgression.js";
 import { useGameMusic } from "./engine/useGameMusic.js";
 import { playCheonsuSfx } from "./engine/soundEffects.js";
 import { getUnitSkills, getSkill, getSkillDisplayName, skillDescription, withSkill, getSkillCooldown, applyCooldown, tickCooldowns, applySupportSkill, isSelfOnlySupportSkill } from "./data/skills.js";
@@ -99,7 +100,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.160";
+const SAVE_VERSION = "1.99.161";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -2761,10 +2762,10 @@ function applyStageEnemyIdentities(units, stage) {
 
   return (units || []).map((unit) => {
     if (!unit || unit.type === "ally") return unit;
-    if (unit.type === "boss") return applyStageEnemyIdentity(unit, stage, enemyIndex);
+    if (unit.type === "boss") return withStageEnemyLevel(applyStageEnemyIdentity(unit, stage, enemyIndex), stage);
     const nextUnit = applyStageEnemyIdentity(unit, stage, enemyIndex);
     enemyIndex += 1;
-    return nextUnit;
+    return withStageEnemyLevel(nextUnit, stage);
   });
 }
 
@@ -3289,7 +3290,7 @@ function createLargeExtraEnemy(stage, index, x, y) {
   const atk = template.atk + Math.floor(power / 4);
   const def = template.def + Math.floor(power / 6);
 
-  return {
+  return withStageEnemyLevel({
     id: `large-extra-${stageId}-${index}`,
     x,
     y,
@@ -3319,7 +3320,7 @@ function createLargeExtraEnemy(stage, index, x, y) {
     acted: false,
     guard: false,
     largeBattleExtra: true,
-  };
+  }, stage);
 }
 
 function expandStageForLargeBattle(stage, deployCount = MAX_DEPLOY_COUNT, options = {}) {
@@ -6276,11 +6277,11 @@ function getStageThreatLevel(stage, deployCount = MAX_DEPLOY_COUNT) {
   return { level: "일반", score, className: "threat-normal" };
 }
 
-function getStageEnemySummary(stage, deployCount = MAX_DEPLOY_COUNT) {
+function getStageEnemySummary(stage, deployCount = MAX_DEPLOY_COUNT, battleUnits = null) {
   if (!stage) return { total: 0, boss: null, ranged: 0, melee: 0, magic: 0 };
 
-  const previewStage = getStageRoster(stage, deployCount);
-  const enemies = (previewStage.units || []).filter((unit) => unit.type !== "ally");
+  const previewUnits = battleUnits || getStageRoster(stage, deployCount).units || [];
+  const enemies = previewUnits.filter((unit) => unit.type !== "ally");
   const boss = enemies.find((unit) => unit.type === "boss");
 
   return {
@@ -7151,7 +7152,7 @@ function createReinforcementUnit(kind, stage, round, index, x, y) {
   const atk = template.atk + Math.floor(power / 3);
   const def = template.def + Math.floor(power / 5);
 
-  return {
+  return withStageEnemyLevel({
     id,
     x,
     y,
@@ -7173,7 +7174,7 @@ function createReinforcementUnit(kind, stage, round, index, x, y) {
     acted: false,
     guard: false,
     isReinforcement: true,
-  };
+  }, stage);
 }
 
 function getReinforcementSpawnPositions(activeMap) {
@@ -8243,6 +8244,8 @@ export default function App() {
   const [skillOpen, setSkillOpen] = useState(false);
   const [promoteOpen, setPromoteOpen] = useState(false);
   const [trainingUsed, setTrainingUsed] = useState(false);
+  const [lastBattleResult, setLastBattleResult] = useState(null);
+  const trainingAvailability = getCampTrainingAvailability({ trainingUsed, lastBattleResult });
   const trainingClaimRef = useRef(false);
   useEffect(() => { trainingClaimRef.current = trainingUsed; }, [trainingUsed]);
   const [dispatchUsed, setDispatchUsed] = useState(false);
@@ -8574,7 +8577,7 @@ export default function App() {
     ? applyDeploymentPlacements(deploymentSetup.units, deploymentPlacements) : [], [deploymentSetup, deploymentPlacements]);
   const deploymentPreviewStage = deploymentSetup?.stage || null;
   const deploymentEnemySummary = deploymentStage
-    ? getStageEnemySummary(deploymentStage, Math.max(1, deployedIds.length || MAX_DEPLOY_COUNT))
+    ? getStageEnemySummary(deploymentStage, Math.max(1, deployedIds.length || MAX_DEPLOY_COUNT), deploymentSetup?.units)
     : null;
   const deploymentThreat = deploymentStage
     ? getStageThreatLevel(deploymentStage, Math.max(1, deployedIds.length || MAX_DEPLOY_COUNT))
@@ -9398,6 +9401,9 @@ export default function App() {
     setSessionStarted(false);
     setParty(getInitialParty());
     setClearedStages([]);
+    setLastBattleResult(null);
+    setTrainingUsed(false);
+    trainingClaimRef.current = false;
     setLastPlayScreen('campaign');
     utilityHistory.current = [];
     playSfx("miss");
@@ -10315,6 +10321,8 @@ export default function App() {
     setSkillOpen(false);
     setPromoteOpen(false);
     setTrainingUsed(false);
+    trainingClaimRef.current = false;
+    setLastBattleResult(null);
     setSupportOpen(false);
     setSupportPoints({
       hero_lina: 0,
@@ -10335,6 +10343,7 @@ export default function App() {
   };
 
   const beginStageBattle = (stage) => {
+    if (!stage || !playableStageIds.includes(stage.id)) return;
     const setup = createDeploymentBattleSetup(stage, party, deployedIds, gearEnhance, clearedStages, settings);
     if (!setup) return;
     const cells = getDeploymentCells(setup.stage, setup.units);
@@ -10351,7 +10360,6 @@ export default function App() {
     setClearReceipt(null);
     setSkillChoiceOpen(false);
     setActiveSkillChoice(null);
-    if (!playableStageIds.includes(stage.id) && !(result === 'defeat' && selectedStage?.id === stage.id)) return;
     playSfx("start");
     setStoryScene(null);
     const battleStage = setup.stage;
@@ -11313,7 +11321,7 @@ export default function App() {
 
 
   const startStage = (stage) => {
-    if (!playableStageIds.includes(stage.id)) return;
+    if (!stage || !playableStageIds.includes(stage.id)) return;
 
     const stageAccessParty = applyGearEnhanceToParty(
       getPartyForStageAccess(party, stage, clearedStages),
@@ -11654,14 +11662,15 @@ export default function App() {
       supportPoints,
       supportDialoguesSeen,
       trainingUsed,
+      lastBattleResult,
       dispatchUsed,
       savedAt: new Date().toISOString(),
     });
 
-  const persistProgress = (data, automatic = false) => {
+  const persistProgress = (data, automatic = false, label = automatic ? '클리어 자동저장' : '저장') => {
     try {
       const { backupOk } = writeProgressSave(localStorage, { ...data, savedAt: new Date().toISOString() });
-      setSaveNotice({ ok: true, text: `${automatic ? '클리어 자동저장' : '저장'} 완료${backupOk ? '' : ' · 백업 공간 부족'}` });
+      setSaveNotice({ ok: true, text: `${label} 완료${backupOk ? '' : ' · 백업 공간 부족'}` });
       if (!automatic) playSfx('save');
       return true;
     } catch {
@@ -11773,6 +11782,8 @@ export default function App() {
       setSupportDialoguesSeen(migratedData.supportDialoguesSeen || {});
       setActiveSupportScene(null);
       setTrainingUsed(migratedData.trainingUsed);
+      trainingClaimRef.current = migratedData.trainingUsed;
+      setLastBattleResult(migratedData.lastBattleResult);
       setDispatchUsed(Boolean(migratedData.dispatchUsed));
       setGold(migratedData.gold);
       setLogs([
@@ -11786,7 +11797,13 @@ export default function App() {
       setBattle(null);
       setBattleResolving(false);
       const restoredOutcome = migratedData.screen === "battle" ? getBattleOutcome(migratedData.selectedStage, restoredUnits) : null;
-      setResult(restoredOutcome || (restoredDefeat ? "defeat" : null));
+      const restoredResult = restoredOutcome || (restoredDefeat ? "defeat" : null);
+      setResult(restoredResult);
+      if (restoredResult === 'defeat') {
+        setLastBattleResult({ stageId: migratedData.selectedStage.id, outcome: 'defeat' });
+        setTrainingUsed(true);
+        trainingClaimRef.current = true;
+      }
       victorySettledRef.current = false;
       setClearReceipt(null);
       actionResolvingRef.current = false;
@@ -11971,7 +11988,7 @@ export default function App() {
     if (!workingUnits.some((u) => u.id === "hero")) {
       playSfx("defeat");
       showDefeatDirecting();
-      setResult("defeat");
+      declareDefeat();
       return { units: workingUnits, attacked: true, defeated: true };
     }
 
@@ -11991,7 +12008,7 @@ export default function App() {
       const freshEnemy = workingUnits.find((u) => u.id === enemy.id);
       if (!freshEnemy) continue;
       const allies = workingUnits.filter((u) => u.type === "ally");
-      if (allies.length === 0) { setUnits(workingUnits); playSfx("defeat"); showDefeatDirecting(); setResult("defeat"); return; }
+      if (allies.length === 0) { setUnits(workingUnits); playSfx("defeat"); showDefeatDirecting(); declareDefeat(); return; }
       const choice = getEnemyAttackChoice(freshEnemy, allies, activeMap);
       if (choice) {
         const attackResult = await resolveEnemyAttack(freshEnemy, choice.target, choice.mode, workingUnits);
@@ -12081,7 +12098,7 @@ export default function App() {
 
     if (!workingUnits.some((u) => u.id === "hero")) {
       setUnits(workingUnits);
-      setResult("defeat");
+      declareDefeat();
       return;
     }
 
@@ -12184,7 +12201,7 @@ export default function App() {
       setLogs((p) => ["적 턴 시작.", ...hazardResult.messages, ...p]);
       playSfx("defeat");
       showDefeatDirecting();
-      setResult("defeat");
+      declareDefeat();
       setTurnBusy(false);
       return;
     }
@@ -12242,7 +12259,7 @@ export default function App() {
       playSfx("defeat");
       showDefeatDirecting();
       setLogs((p) => [`라운드 제한 ${activeRoundLimit}R을 넘겼습니다. 작전 실패.`, ...p]);
-      setResult("defeat");
+      declareDefeat();
       setTurnBusy(false);
       return;
     }
@@ -13090,7 +13107,7 @@ export default function App() {
       setUnits(nextUnits);
       playSfx("defeat");
       showDefeatDirecting();
-      setResult("defeat");
+      declareDefeat();
       return;
     }
 
@@ -13295,6 +13312,7 @@ export default function App() {
   };
 
   const settleStageClear = () => {
+    if (result !== 'victory' || getBattleOutcome(selectedStage, units) !== 'victory') return null;
     if (victorySettledRef.current) return victorySettledRef.current;
     const data = getSaveData();
     const stageId = selectedStage.id;
@@ -13330,6 +13348,9 @@ export default function App() {
     setCareerStats(saved.careerStats); setStageMastery(saved.stageMastery);
     setSupportPoints(saved.supportPoints); setCampMessage(saved.campMessage);
     setBattleLoot(saved.battleLoot);
+    setLastBattleResult(saved.lastBattleResult);
+    setTrainingUsed(saved.trainingUsed);
+    trainingClaimRef.current = saved.trainingUsed;
     persistProgress(saved, true);
     return receipt;
   };
@@ -13339,8 +13360,17 @@ export default function App() {
     if (result === 'victory') settleVictoryOnResult();
   }, [result]);
 
+  const declareDefeat = () => {
+    setResult("defeat");
+    setLastBattleResult({ stageId: selectedStage.id, outcome: 'defeat' });
+    setTrainingUsed(true);
+    trainingClaimRef.current = true;
+  };
+
   const finishGoCamp = (destination = "camp") => {
+    if (result !== 'victory' || getBattleOutcome(selectedStage, units) !== 'victory') return;
     const receipt = victorySettledRef.current || settleStageClear();
+    if (!receipt || receipt.checkpoint.selectedStage.id !== selectedStage.id) return;
     setTurnBusy(false); setAutoBattleEnabled(false);
     setCombatCutscene(null); setBossCutscene(null); setBattleSettingsOpen(false);
     setSkillChoiceOpen(false); setActiveSkillChoice(null); setMoveUndo(null);
@@ -13350,7 +13380,9 @@ export default function App() {
     setShopOpen(destination === "shop"); setEquipmentOpen(false); setForgeOpen(false);
     setTrainingOpen(false); setDispatchOpen(false); setSkillOpen(false); setPromoteOpen(false);
     setSupportOpen(false); setSelectedUnit(null); setMode("move");
-    setTrainingUsed(false); setDispatchUsed(false); setTurn("ally"); setHazards([]);
+    setTrainingUsed(receipt.checkpoint.trainingUsed); trainingClaimRef.current = receipt.checkpoint.trainingUsed;
+    setLastBattleResult(receipt.checkpoint.lastBattleResult);
+    setDispatchUsed(receipt.checkpoint.dispatchUsed); setTurn("ally"); setHazards([]);
     setUnits(receipt.checkpoint.units);
     const nextStage = stages.find(stage => stage.id === selectedStage.id + 1);
     if (destination === "next" && nextStage && receipt.checkpoint.unlockedStages.includes(nextStage.id)) {
@@ -13380,14 +13412,24 @@ export default function App() {
   };
 
   const goCamp = () => {
+    if (result !== 'victory') return;
     openStoryScene(selectedStage, "clear", "camp");
   };
 
   const returnToCampAfterDefeat = (destination = "camp") => {
     if (result !== "defeat") return;
     const recoveredParty = mergePartyFromUnits(party, units).map(unit => ({ ...unit, hp: unit.maxHp, status: [], acted: false, moved: false, guard: false, skillCooldown: 0, skillCooldowns: {} }));
-    setParty(recoveredParty);
-    setUnits(recoveredParty);
+    const { checkpoint } = createDefeatCheckpoint(getSaveData(), { party: recoveredParty });
+    checkpoint.screen = destination === 'campaign' ? 'campaign' : 'camp';
+    checkpoint.battleStats = createDefaultBattleStats();
+    checkpoint.unitBattleStats = createDefaultUnitBattleStats();
+    setParty(checkpoint.party);
+    setUnits(checkpoint.units);
+    setLastBattleResult(checkpoint.lastBattleResult);
+    setTrainingUsed(checkpoint.trainingUsed);
+    trainingClaimRef.current = checkpoint.trainingUsed;
+    victorySettledRef.current = false;
+    setClearReceipt(null);
     setResult(null);
     setBattle(null);
     setBattleResolving(false);
@@ -13408,18 +13450,24 @@ export default function App() {
     setStageRewardClaimed(false);
     setBattleSettingsOpen(false);
     setLastClearSummary(null);
-    setTrainingUsed(false);
-    setDispatchUsed(false);
+    setDispatchUsed(checkpoint.dispatchUsed);
+    setTrainingOpen(false);
+    setDispatchOpen(false);
+    setShopOpen(false);
+    setEquipmentOpen(false);
+    setCampFacility(null);
     setCampTab("party");
-    setCampMessage(`${selectedStage?.title || "전장"}에서 철수했습니다. 부대를 재정비합니다.`);
+    setCampMessage(checkpoint.campMessage);
     closeMobileCombatPanels();
     clearVisuals();
-    setScreen(destination);
+    setScreen(checkpoint.screen);
+    persistProgress(checkpoint, true, '철수 자동저장');
   };
 
   const goNextBattle = () => {
-    const nextStage = stages.find(stage => stage.id === (selectedStage?.id || 0) + 1);
-    if (nextStage && playableStageIds.includes(nextStage.id)) startStage(nextStage);
+    const stageId = getCampBattleStageId({ selectedStageId: selectedStage?.id, clearedStages, lastBattleResult });
+    const nextStage = stages.find(stage => stage.id === stageId);
+    if (nextStage) startStage(nextStage);
     else setScreen("campaign");
   };
 
@@ -13502,6 +13550,10 @@ export default function App() {
 
 
   const trainAllies = (trainingTypeId) => {
+    if (!trainingAvailability.allowed) {
+      setCampMessage(trainingAvailability.reason);
+      return;
+    }
     if (trainingUsed || trainingClaimRef.current) {
       setCampMessage("이번 캠프에서는 이미 훈련을 진행했습니다.");
       return;
@@ -13951,7 +14003,7 @@ export default function App() {
 
   const renderTrainingModal = () => {
     if (!trainingOpen) return null;
-    return <TrainingDialog party={party} used={trainingUsed} getPortrait={getUnitPortrait}
+    return <TrainingDialog party={party} used={trainingUsed} blockedReason={lastBattleResult?.outcome === 'defeat' ? trainingAvailability.reason : null} getPortrait={getUnitPortrait}
       onTrain={trainAllies} onClose={() => setTrainingOpen(false)} />;
   };
 
@@ -14110,7 +14162,7 @@ export default function App() {
     const close = () => { setShopOpen(false); setEquipmentOpen(false); setCampFacility(null); };
     return <TownFacilityDialog key={facility} facility={facility} party={party} getPortrait={getUnitPortrait} initialUnitId={armorySelectedId}
       items={ITEM_DEFS} inventory={inventory} equipment={EQUIPMENT} gearInventory={gearInventory} gold={gold}
-      message={campMessage} onClose={close} onBuyItem={buyItem} onBuyGear={buyGear} onEquip={equipGear} onUnequip={unequipGear}
+      message={campMessage} trainingAvailability={trainingAvailability} onClose={close} onBuyItem={buyItem} onBuyGear={buyGear} onEquip={equipGear} onUnequip={unequipGear}
       onSave={saveGame} saveNotice={saveNotice} onRest={() => {
         setSaveNotice(null);
         setParty(previous => applyGearEnhanceToParty(previous.map(unit => ({ ...unit, hp: unit.maxHp, status: [], guard: false, skillGuardBoost: 0, acted: false, moved: false, skillCooldown: 0, skillCooldowns: {} })), gearEnhance));
@@ -16633,7 +16685,7 @@ export default function App() {
                 <div className="briefing-boss-row">
                   <span>보스</span>
                   <strong>{deploymentEnemySummary.boss.name}</strong>
-                  <em>HP {deploymentEnemySummary.boss.maxHp} · 공격 {deploymentEnemySummary.boss.atk}</em>
+                  <em>Lv.{deploymentEnemySummary.boss.level} · HP {deploymentEnemySummary.boss.maxHp} · 공격 {deploymentEnemySummary.boss.atk}</em>
                 </div>
               )}
 
@@ -17150,11 +17202,12 @@ export default function App() {
           {campTab === "growth" && (
             <div className="camp-tab-panel" role="tabpanel" aria-label="성장">
               <div className="camp-action-grid">
-                <button className="camp-btn" onClick={() => setTrainingOpen(true)}>훈련</button>
+                <button className="camp-btn" disabled={!trainingAvailability.allowed} title={trainingAvailability.reason} onClick={() => setTrainingOpen(true)}>훈련</button>
                 <button className="camp-btn" onClick={() => setSkillOpen(true)}>스킬 강화</button>
                 <button className="camp-btn" onClick={() => setPromoteOpen(true)}>전직</button>
                 <button className="camp-btn" onClick={() => setJournalOpen(true)}><BookOpen size={18} /> 탐색 기록</button>
               </div>
+              {!trainingAvailability.allowed && <p role="status">{trainingAvailability.reason}</p>}
             </div>
           )}
 
@@ -17175,7 +17228,7 @@ export default function App() {
                 <button className="camp-btn" disabled={dailyLoginStatus.claimedToday} onClick={claimDailyLoginReward}>
                   {dailyLoginStatus.claimedToday ? "일일 보상 완료" : "일일 보상"}
                 </button>
-                <button className="camp-btn" onClick={goNextBattle}>다음 전투</button>
+                <button className="camp-btn" onClick={goNextBattle}>{lastBattleResult?.outcome === 'defeat' ? '재도전' : '다음 전투'}</button>
               </div>
               <div className="camp-season-summary">
                 <span>{seasonInfo.icon} {seasonInfo.title}</span>
@@ -17209,7 +17262,7 @@ export default function App() {
           <div className="camp-travel-actions">
             <button className="prominent-save" onClick={saveGame}><Save size={21} />저장</button>
             <button onClick={() => setScreen('campaign')}>원정 지도</button>
-            <button className="camp-next" onClick={goNextBattle}>다음 전투 <ArrowRight size={19} /></button>
+            <button className="camp-next" onClick={goNextBattle}>{lastBattleResult?.outcome === 'defeat' ? '재도전' : '다음 전투'} <ArrowRight size={19} /></button>
           </div>
           </details>
           {renderEquipmentModal()}
@@ -17810,7 +17863,7 @@ export default function App() {
                 <div className="selected-status-head">
                   <strong>
                     {viewedUnit.name}
-                    {viewedUnit.type === "ally" ? ` Lv.${viewedUnit.level || 1}` : ""}
+                    {viewedUnit.type === "ally" || Number.isInteger(viewedUnit.level) ? ` Lv.${viewedUnit.level || 1}` : ""}
                   </strong>
                   <span>{getInspectUnitKind(viewedUnit)} · {getInspectUnitRole(viewedUnit)}</span>
                 </div>
@@ -18050,7 +18103,7 @@ export default function App() {
             <div className="unit-text">
               <div className="unit-name">
                 {viewedUnit
-                  ? `${viewedUnit.name}${viewedUnit.type === "ally" ? ` Lv.${viewedUnit.level || "-"}` : ""}`
+                  ? `${viewedUnit.name}${viewedUnit.type === "ally" || Number.isInteger(viewedUnit.level) ? ` Lv.${viewedUnit.level || 1}` : ""}`
                   : "유닛 선택"}
               </div>
 

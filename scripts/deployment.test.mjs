@@ -1,3 +1,4 @@
+import { withStageEnemyLevel } from '../src/engine/enemyProgression.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -39,7 +40,7 @@ const builders = runInNewContext([
   '({ expandStageForLargeBattle, createRecruitAlly, applyDifficultyToUnits })',
 ].join('\n'), {
   alignMapToArtwork, createBattlefieldTerrain, getBattlefieldPlan, applyEquipmentStats,
-  distributeBattleFormations, getSkillDisplayName, getChapterBossName, applyStageMonsterAppearance,
+  distributeBattleFormations, getSkillDisplayName, getChapterBossName, applyStageMonsterAppearance, withStageEnemyLevel,
   clone: value => JSON.parse(JSON.stringify(value)),
   Math: Object.assign(Object.create(Math), { random: () => { throw new Error('Deployment must be deterministic'); } }),
 });

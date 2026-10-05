@@ -1,6 +1,8 @@
 # 천수 (Cheonsu)
 
-현재 개발 빌드: **1.99.160 / Android versionCode 359**
+현재 개발 빌드: **1.99.161 / Android versionCode 360**
+
+1.99.161: 미션 실패 뒤 훈련을 차단하고 출전 준비를 실패한 장의 재도전으로 연결합니다. 초기1회·정상 승리 후1회의 기존 훈련 규칙과 실제 승리 정산·다음 장 해금을 보호하고 철수 자동 저장·이전 백업·구버전 철수 기록·기존 성장·수집·해금 데이터를 보존합니다. 새 전투의 일반 적1~15·정예2~16·보스3~17 레벨과 정보 표시를 추가하고 기존 적 능력치 및 저장 전투를 유지합니다. 로컬 린트·단위497개·생산 빌드·3화면60항목과 기존 회귀를 통과했습니다. Actions·새 APK·서명 OTA 배포와 공개 다운로드 검증은 아직 완료되지 않았습니다. [작업·QA 상태](docs/QA_IMPROVEMENT_1.99.161.md), [빌드 상태](docs/BUILD_1.99.161.md).
 
 1.99.160: 전투 시작 전에 실제 전장과 보유 캐릭터를 표시하고, 캐릭터 선택 후 허용 칸을 눌러 배치·이동·자리 교환할 수 있습니다. 준비 상태 저장·자동 배치·배치 해제를 지원하며 진행 중인 전투의 저장 좌표와 기존 게임 콘텐츠를 보존합니다. 단위481개·3화면48항목·30장 실제 배치 후 전투 시작과 기존 회귀를 확인했습니다. 새 APK·서명 OTA 배포 및 공개 다운로드·서명·전체 파일 독립 검증을 완료했습니다. [배치와 QA](docs/QA_IMPROVEMENT_1.99.160.md), [빌드·다운로드 검증](docs/BUILD_1.99.160.md).
 
@@ -39,7 +41,7 @@
 
 ## 다운로드
 
-- [1.99.160 새 APK 다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.160/cheonsu_1.99.160_update_debug.apk)
+- [마지막 검증된 1.99.160 APK 다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.160/cheonsu_1.99.160_update_debug.apk) — 진행 중인1.99.161 수정은 포함하지 않습니다.
 - [1.99.160 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.160/cheonsu_development_1.99.160.zip), [공개 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.160) — 새 APK·서명 OTA 배포와 실제 공개 다운로드 검증 완료
 - [자동 패치 이용 및 배포 절차](docs/AUTO_UPDATE_1.99.136.md)
 - [개발 현황 통합 요약](CHEONSU_DEV_SUMMARY_SINGLE_FILE.md)

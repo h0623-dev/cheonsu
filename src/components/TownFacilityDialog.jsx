@@ -7,7 +7,7 @@ const facilities = { shop: ['상점', ShoppingBag], inn: ['여관', BedDouble], 
 const gearPrices = { ironSword: 500, chainArmor: 800 };
 
 export default function TownFacilityDialog({ facility, party, getPortrait, items, inventory, equipment, gearInventory, gold,
-  message, onClose, onBuyItem, onBuyGear, onEquip, onUnequip, onRest, onAction, onSave, saveNotice, initialUnitId }) {
+  message, trainingAvailability, onClose, onBuyItem, onBuyGear, onEquip, onUnequip, onRest, onAction, onSave, saveNotice, initialUnitId }) {
   const ref = useRef(null);
   const [tab, setTab] = useState('items');
   const [title, Icon] = facilities[facility];
@@ -33,7 +33,10 @@ export default function TownFacilityDialog({ facility, party, getPortrait, items
         <div className="town-rest-party">{party.map(member => <div key={member.id}><img src={getPortrait(member)} alt="" /><strong>{member.name}</strong><span>HP {member.hp} / {member.maxHp}</span></div>)}</div>
         <button className="town-primary-action" onClick={onRest}><BedDouble size={19} />모두 휴식 · 무료</button>
       </>}
-      {facility === 'training' && <div className="town-training-actions">{[['training', '훈련'], ['skill', '스킬 강화'], ['promote', '전직'], ['journal', '탐색 기록']].map(([id, label]) => <button key={id} onClick={() => onAction(id)}><Swords size={18} />{label}</button>)}</div>}
+      {facility === 'training' && <>
+        {!trainingAvailability?.allowed && trainingAvailability?.reason && <p role="status">{trainingAvailability.reason}</p>}
+        <div className="town-training-actions">{[['training', '훈련'], ['skill', '스킬 강화'], ['promote', '전직'], ['journal', '탐색 기록']].map(([id, label]) => <button key={id} disabled={id === 'training' && trainingAvailability?.allowed === false} onClick={() => onAction(id)}><Swords size={18} />{label}</button>)}</div>
+      </>}
     </div>
     <footer><span role="status" className={saveNotice?.ok === false ? 'save-failed' : ''}>{saveNotice?.text || message || ''}</span><button className="prominent-save" onClick={onSave}><Save size={18} />저장</button></footer>
   </dialog>, document.body);

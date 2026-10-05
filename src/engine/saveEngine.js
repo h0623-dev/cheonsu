@@ -1,5 +1,5 @@
 import { stages } from "../data/stages.js";
-import { getUnlockedStageIds, normalizeClearedStageIds } from './campaignProgress.js';
+import { getUnlockedStageIds, normalizeClearedStageIds, normalizeLastBattleResult } from './campaignProgress.js';
 import { DEFAULT_GEAR_INVENTORY } from "../data/equipment.js";
 import { DEFAULT_SUPPORT_POINTS, DEFAULT_SUPPORT_DIALOGUES_SEEN } from "../data/supports.js";
 import { inMap } from "./movement.js";
@@ -318,6 +318,11 @@ export function normalizeSaveData(raw, saveVersion = "0.12") {
   const units = normalizeUnits(data.units, stage, party).map((unit) => applyDiscoveryUnlocks(unit, exploration));
   const clearedStages = normalizeClearedStageIds(data.clearedStages);
   const unlockedStages = getUnlockedStageIds(clearedStages);
+  const legacyRetreat = !Object.hasOwn(data, 'lastBattleResult') && ['camp', 'campaign'].includes(data.screen)
+    && data.stageRewardClaimed === false
+    && data.campMessage === `${stage.title || '전장'}에서 철수했습니다. 부대를 재정비합니다.`;
+  const lastBattleResult = normalizeLastBattleResult(data.lastBattleResult)
+    || (legacyRetreat ? { stageId: stage.id, outcome: 'defeat' } : null);
 
   const validScreens = ["promo", "menu", "campaign", "deployment", "battle", "camp", "records", "settings", "pwa", "release", "qa", "analytics", "codex", "profile", "gallery", "hall", "planner", "strategyArchive", "finalRc", "saveHealth", "launch", "postLaunch", "crashLogs", "qaBoard", "qaHistory", "qaChangelog", "qaReleaseNotes", "qaReleaseArchive"];
   const validTurns = ["ally", "enemy"];
@@ -372,7 +377,8 @@ export function normalizeSaveData(raw, saveVersion = "0.12") {
     gearEnhance: normalizeGearEnhance(data.gearEnhance),
     supportPoints: normalizeSupportPoints(data.supportPoints),
     supportDialoguesSeen: normalizeSupportDialoguesSeen(data.supportDialoguesSeen),
-    trainingUsed: Boolean(data.trainingUsed),
+    trainingUsed: lastBattleResult?.outcome === 'defeat' || Boolean(data.trainingUsed),
+    lastBattleResult,
     dispatchUsed: Boolean(data.dispatchUsed),
     gold:
       typeof data.gold === "number" && Number.isFinite(data.gold)
