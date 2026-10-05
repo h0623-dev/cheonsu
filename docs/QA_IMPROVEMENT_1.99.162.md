@@ -13,7 +13,7 @@
 
 ## 최종 로컬 검사와 현재 상태
 
-**로컬 린트·단위505/505·생산 빌드와 최종 브라우저 검사를 통과했습니다.** Node는v24.19.0, 웹 소스 SHA-256은 `5b1bc31525d9c0dbac1f679765e95789b9979e185f815189649743d4889d5efc`입니다. Actions·새 APK·서명 OTA·실제 다운로드 검증은 아직 완료되지 않았습니다. 이전161의 공개 산출물은162의 배포 결과를 대신하지 않습니다.
+**로컬 린트·단위505/505·생산 빌드·브라우저 검사와 새 APK·서명 OTA 배포, 실제 공개 다운로드 독립 검증을 완료했습니다.** Node는v24.19.0, 웹 소스 SHA-256은 `5b1bc31525d9c0dbac1f679765e95789b9979e185f815189649743d4889d5efc`, 배포 게임 소스 커밋은 `0deae37a67fe5ac5e7e49d8fb887f78429d1e5b5`입니다.
 
 | 범위 | 확인할 내용 | 현재 상태 |
 | --- | --- | --- |
@@ -26,12 +26,18 @@
 | 후퇴 경계 | 전투 이탈 뒤 예약된 보스·미션·시작 턴 연출 | 진입278ms 후 이탈하고1.05초 뒤 누수0 확인 |
 | 기존 회귀 | 훈련/진행·적·스킬·마을·수동 배치·저장 | 스모크3화면·마을21회·적132·스킬648·배치48·진행60/실제 패배6회·여정4화면 통과 |
 | 로컬 품질 | 린트·단위·생산 빌드 | 통과. 단위505/505·오류0 |
-| Cloud Quality | 최종 PR와main 게임 소스 | 미실행 |
-| 배포 | 새 APK·서명 OTA·전체 소스 ZIP·공개 다운로드 검증 | 미제작·미검증 |
+| Cloud Quality | 최종 PR와main 게임 소스 | 모두 통과 |
+| 배포 | 새 APK·서명 OTA·전체 소스 ZIP·공개 다운로드 검증 | 통과. APK웹1874개·OTA1872개·소스ZIP2510개 전체 확인 |
 
-신규 미션 검사 `tmp/stage-missions-qa/report.json`은390×844에서30장 전체, 나머지1280×900·320×640·844×390에서각1/13/30장의 총39회 실제 진입을 확인했습니다. 이어하기12회와 실제 구156 저장8건도 검사했습니다. 보고서는 위 최종 소스 해시와 일치하며 통과·JS/HTTP 오류0입니다.
+신규 미션 검사 `tmp/stage-missions-qa/report.json`은390×844에서30장 전체, 나머지1280×900·320×740·844×390에서각1/13/30장의 총39회 실제 진입을 확인했습니다. 이어하기12회와 실제 구156 저장8건도 검사했습니다. 보고서는 위 최종 소스 해시와 일치하며 통과·JS/HTTP 오류0입니다.
 
 독립4화면 검토와 실제 전장1440설정의 결과는 `/workspace/work/mission-162/read-only-review/`, 실행 로그는 `/workspace/work/mission-162/`에 보관합니다. 기존 배치·진행·적·스킬 보고서도 같은 소스 해시로 통과했으며 각각 `tmp/deployment-qa/report.json`, `tmp/campaign-progression-qa/report.json`, `tmp/monster-enemies-qa/result.json`, `tmp/skill-spectacle-qa/result.json`입니다. 여정은1280×900·390×844·320×568·844×390에서 확인했습니다. 새 APK·서명 OTA 상태는 [빌드 기록](BUILD_1.99.162.md)을 따릅니다.
+
+## 공개 배포 확인
+
+2026-10-05 KST 기준 [PR9 Cloud Quality](https://github.com/h0623-dev/cheonsu/actions/runs/37257520237), [main Cloud Quality](https://github.com/h0623-dev/cheonsu/actions/runs/37261449565), [Android APK and OTA](https://github.com/h0623-dev/cheonsu/actions/runs/37261449555)가 모두 성공했습니다. [v1.99.162 공개 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.162)의 태그와 전체 소스 ZIP은 위 최종 게임 커밋에 일치합니다.
+
+공개 APK·OTA·전체 소스 ZIP3개의 실제 다운로드와 크기·SHA-256을 대조했습니다. Actions의 APK v1/v2 서명 검증과 공개 APK의 기존 인증서·버전361·전체 웹 파일·네이티브 OTA 신뢰·복구 보호를 확인했습니다. 공개 OTA 안내는1.99.162, 호환 Android350~361이며 안내문과 다운로드 ZIP의 RSA 서명을 모두 검증했습니다. 독립 검증 JSON3개는 `/workspace/work/release-1.99.162/`에 보관하며 모두 통과·실패0개입니다. 산출물 크기·해시·다운로드 링크는 [빌드 기록](BUILD_1.99.162.md)을 따릅니다.
 
 ## 보존과 한계
 
