@@ -30,6 +30,7 @@ jobs:
       - run: node scripts/verify-monster-enemies.mjs
       - run: node scripts/verify-skill-spectacle.mjs
       - run: node scripts/verify-deployment.mjs
+      - run: node scripts/verify-campaign-progression.mjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
@@ -40,4 +41,5 @@ jobs:
             tmp/monster-enemies-qa/
             tmp/skill-spectacle-qa/
             tmp/deployment-qa/
+            tmp/campaign-progression-qa/
           retention-days: 14
