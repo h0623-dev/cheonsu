@@ -36,7 +36,7 @@
 
 ## 최종 로컬 검사
 
-**로컬 린트·단위497/497·생산 빌드와 최종 브라우저 검사를 통과했습니다.** 검사한 웹 소스 SHA-256은 `37b3219859977657a7cd4eeecdf8f364dc157ddae2b9c133558fcfc59db9f520`입니다. Actions·APK·OTA·공개 다운로드는 아직 완료되지 않았습니다. 이전1.99.160의 공개 산출물은 이번1.99.161의 배포 결과를 대신하지 않습니다.
+**로컬 린트·단위497/497·생산 빌드·브라우저 검사와 새 APK·서명 OTA 배포, 실제 공개 다운로드 독립 검증을 완료했습니다.** 웹 소스 SHA-256은 `37b3219859977657a7cd4eeecdf8f364dc157ddae2b9c133558fcfc59db9f520`이며 배포 게임 소스 커밋은 `bb6899d95276e4bc77e8f8ee3ddad613eaba5113`입니다.
 
 | 범위 | 확인할 내용 | 현재 상태 |
 | --- | --- | --- |
@@ -48,12 +48,18 @@
 | 브라우저 화면 | 1280×900·390×844·844×390에서 해당 조작·오류·버튼·스크롤 확인 | 각20항목·총60항목 통과, 오류0 |
 | 기존 콘텐츠 | 반격·스킬·마을·적 그림·수동 배치·이전 저장 회귀 | 스모크3화면·마을21회·적132·스킬648·배치48항목 통과. 여정4화면·플레이어 경험5화면 통과 |
 | 로컬 기본 검사 | 린트·단위·생산 빌드 | 통과. 단위497/497·오류0 |
-| Cloud Quality | 최종 PR와main 게임 소스 | 미실행 |
-| 최종 산출물 | 새 APK·서명 OTA·전체 소스 ZIP 배포 및 실제 공개 다운로드 확인 | 미제작·미검증 |
+| Cloud Quality | 최종 PR와main 게임 소스 | 모두 통과 |
+| 최종 산출물 | 새 APK·서명 OTA·전체 소스 ZIP 배포 및 실제 공개 다운로드 확인 | 통과. APK웹1874개·OTA1872개·소스ZIP2503개 전체 확인 |
 
 단위497개에는 실패·훈련·정산·구버전 이관9개와 적 레벨7개 신규 검사가 포함됩니다. 로그는 `/workspace/work/campaign-161/`에 보관하며 생산 빌드 해시는 `dist/ota-build.json`과 일치합니다. 이번 흐름 검사 `tmp/campaign-progression-qa/report.json`은3화면 각각20항목, 총60항목과 실제 패배6회를 기록하며 통과·오류0입니다.
 
 배치 회귀 `tmp/deployment-qa/report.json`은3화면48항목과30개 장 모두15명 수동 배치 후 실제 전투 시작을 확인했습니다. 적·스킬 보고서는 `tmp/monster-enemies-qa/result.json`, `tmp/skill-spectacle-qa/result.json`입니다. 위 보고서 모두 같은161 생산 빌드 해시와 일치합니다. 추가 적 생성 검증 `/workspace/work/enemy-balance-161/final-chain-verification.json`은30장×4난이도×4밸런스의480설정에서9648명의 기존 능력치 일치, 기본 생성603명 레벨 누락0, 증원 생성3360회와 실제 배치 증원1472명을 확인했습니다. 새 APK·서명 OTA 상태는 [빌드 및 배포 기록](BUILD_1.99.161.md)을 따릅니다.
+
+## 공개 배포 확인
+
+2026-10-05 KST 기준 [PR8 Cloud Quality](https://github.com/h0623-dev/cheonsu/actions/runs/37252397780), [main Cloud Quality](https://github.com/h0623-dev/cheonsu/actions/runs/37252982906), [Android APK and OTA](https://github.com/h0623-dev/cheonsu/actions/runs/37252982925)가 모두 성공했습니다. [v1.99.161 공개 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.161)의 태그와 전체 소스 ZIP은 위 최종 게임 커밋에 일치합니다.
+
+공개 APK·OTA·전체 소스 ZIP3개의 실제 다운로드와 크기·SHA-256을 대조했습니다. Actions의 APK v1/v2 서명 검증과 공개 APK의 기존 인증서·버전360·전체 웹 파일·네이티브 OTA 신뢰·복구 보호를 확인했습니다. 공개 OTA 안내는1.99.161, 호환 Android350~360이며 안내문과 다운로드 ZIP의 RSA 서명을 모두 검증했습니다. 독립 검증 JSON3개는 `/workspace/work/release-1.99.161/`에 보관하며 모두 통과·실패0개입니다. 산출물 크기·해시·다운로드 링크는 [빌드 기록](BUILD_1.99.161.md)을 따릅니다.
 
 ## 보존과 한계
 

@@ -10,7 +10,7 @@
 
 ## 현재 검증 상태
 
-**최종 생산 빌드의 로컬 기본 검사와 브라우저 검사를 통과했습니다.** 버전 파일과 업데이트 안내는161/360이며 웹 소스 SHA-256은 `37b3219859977657a7cd4eeecdf8f364dc157ddae2b9c133558fcfc59db9f520`입니다. Actions·APK 제작·서명 OTA·공개 다운로드 검증은 아직 완료되지 않았습니다. 이전160의 공개 APK를161의 결과로 제시하지 않습니다.
+**로컬 검사와 Actions, 새 APK·서명 OTA·전체 소스 ZIP 배포 및 공개 다운로드 독립 검증을 완료했습니다.** 버전은 **1.99.161 / Android360**입니다. 최종 게임 소스 커밋은 `bb6899d95276e4bc77e8f8ee3ddad613eaba5113`이며 공개 태그 `v1.99.161`이 같은 커밋을 가리킵니다. 웹 소스 SHA-256은 `37b3219859977657a7cd4eeecdf8f364dc157ddae2b9c133558fcfc59db9f520`입니다.
 
 | 항목 | 상태 | 완료 조건 |
 | --- | --- | --- |
@@ -19,19 +19,35 @@
 | 이번 변경의 생산 빌드 검사 | 통과 | 3화면60항목·실제 패배6회·저장/훈련/재도전/정산/해금·브라우저 오류0 |
 | 적 생성과 수치 | 통과 | 480설정·9648명 능력치 보존, 기본603명 레벨 누락0·증원 생성3360회·실제 증원1472명 |
 | 기존 콘텐츠 회귀 | 통과 | 스모크3화면·마을21회·적132·스킬648·배치48항목/30장·여정4화면·플레이어 경험5화면 |
-| Cloud Quality | 미실행 | 최종 PR와main 게임 소스 검사 성공 |
-| fresh APK | 미제작 | 최종main 게임 소스에서 Android APK and OTA 성공 |
-| APK 독립 확인 | 미검증 | Android360·기존 인증서·전체 웹 파일·OTA 신뢰·복구 보호 확인 |
-| signed OTA | 미제작·미배포 | 같은 최종 소스의 서명 OTA 제작·공개 채널 배포 |
-| 공개 다운로드 | 미검증 | APK·OTA·전체 소스 ZIP 실제 다운로드와 크기·해시·서명·전체 파일 확인 |
+| Cloud Quality | PR·main 통과 | 아래 최종 소스의 Actions 실행 링크 참조 |
+| fresh APK | 제작·배포 완료 | 최종main 게임 소스에서 Android APK and OTA 성공 |
+| APK 독립 확인 | 통과 | Android360·기존 인증서·웹1874개·OTA 신뢰·복구 보호 확인 |
+| signed OTA | 제작·배포·검증 완료 | 웹1872개·안내문과ZIP RSA 서명·공개 채널161 확인 |
+| 공개 다운로드 | 통과 | APK·OTA·소스 ZIP3개 크기·해시 일치, 전체 소스2503개 확인 |
 
 로컬 로그는 `/workspace/work/campaign-161/`에 보관합니다.497개 단위 검사에는 새 실패·훈련·정산·이관 검사9개와 적 레벨 검사7개를 포함합니다. 생산 빌드 해시는 `dist/ota-build.json`으로 확인했습니다. 생산 보고서는 `tmp/campaign-progression-qa/report.json`, `tmp/deployment-qa/report.json`, `tmp/monster-enemies-qa/result.json`, `tmp/skill-spectacle-qa/result.json`이며 모두 위 소스 해시에 일치하고 통과·브라우저 오류0입니다. 적 생성 검증은 `/workspace/work/enemy-balance-161/final-chain-verification.json`에 보관합니다.
 
-배포 검사가 끝나면 게임 소스 커밋, Actions 실행 링크, 산출물 크기·SHA-256과 독립 결과를 기록합니다. 새 APK와 서명 OTA의 배포 검증이 끝나기 전에는 작업 전달을 완료로 안내하지 않습니다.
+## 최종 Actions와 공개 산출물
+
+- [PR8 Cloud Quality](https://github.com/h0623-dev/cheonsu/actions/runs/37252397780), [main Cloud Quality](https://github.com/h0623-dev/cheonsu/actions/runs/37252982906), [Android APK and OTA](https://github.com/h0623-dev/cheonsu/actions/runs/37252982925)가 모두 성공했습니다. 해당 작업은 각각 `111582535226`, `111584243852`, `111584244099`입니다.
+- 공개 릴리스는 **2026-10-05 11:02:10 KST**에 게시되었습니다. APK·OTA·소스 ZIP3개를 직접 내려받아 공개 크기·SHA-256과 대조했고 안내문과 실제 OTA ZIP의 RSA 서명도 검증했습니다. 다운로드 검증 완료 시각은 **11:04:12 KST**입니다.
+- Actions `apksigner`의 APK **v1/v2 암호학적 서명 검증**과 공개 APK의 기존 인증서 DER SHA-256 `1d4b2f3f8e7b30e2b9202121def34d4da6e39b4119bdd93c44a01aebfcd0518f` 일치를 확인했습니다. 인증서 추출과 암호학적 서명 검증을 구분합니다.
+- APK 웹 파일은 **1874개**로 생산 빌드1872개와 생성된 빈 Cordova 파일2개를 포함합니다. 최종 내장 웹 디렉터리와 모든 파일 해시가 일치합니다. OTA의 **1872개** 파일도 최종 dist와 일치하며 두 산출물의 웹 버전·소스 해시는 위 최종 게임 소스와 같습니다.
+- 네이티브 지문은 `e4a96c16ff95a60f9cf68440c9bf9fd72d5710729264d2464199f400a559dfc6`, OTA 공개키 DER SHA-256은 `61688fa31562d4b1b7d44072421c549d40cd39b8fe9875210ab3e132ad3f4fc4`로 기존 신뢰를 유지합니다. APK 안의 LiveUpdate DEX 클래스·MainActivity 등록·복구 보호·외부 웹 원점 부재를 확인했습니다.
+- 실제 공개 OTA 안내는 **1.99.161**, 호환 Android 범위는 **350~360**입니다. 오래된main 안내 파일을 기준으로 채널을 낮추지 않았습니다.
+- 전체 개발 소스 ZIP은 최종 게임 커밋의 추적 파일 **2494개**, 생성 파일 **8개**, 소스 목록 파일 **1개**, 총 **2503개**입니다. 파일명·전체 바이트 해시와 생성 파일을 대조했으며 누락·추가·불일치0개입니다.
+
+| 산출물 | 크기(bytes) | SHA-256 |
+| --- | ---: | --- |
+| [새 APK](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.161/cheonsu_1.99.161_update_debug.apk) | 247889320 | `aff82b1c2a2f5c7627be81916c94ff287397ca2c32e2a014de5c2cd3e04c3549` |
+| [서명 OTA](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.161/cheonsu_1.99.161_ota.zip) | 239944658 | `67b640839d0b7dbcd5689d0d03fba5737c100df7ffef8e9eff5c63a8745c1428` |
+| [전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.161/cheonsu_development_1.99.161.zip) | 561406233 | `395058091e0cbd39df2d561d1f09d2cc3d1b2b04d2df4e3db74a77d9c14d6ce1` |
+
+[v1.99.161 공개 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.161)에 제공합니다. 독립 검증 JSON은 `/workspace/work/release-1.99.161/`의 `download-verification.json`, `web-and-apk-verification.json`, `native-and-source-verification.json`이며 모두 통과·실패0개입니다. Actions 서명 증거는 `/workspace/work/campaign-161/android161-actions-proof.json`입니다. 배포 후 문서 갱신은 위 게임 소스 해시와 공개 APK·OTA·소스 ZIP을 변경하지 않습니다.
 
 ## 배포와 보존 기준
 
-- 예정 산출물은 `cheonsu_1.99.161_update_debug.apk`, `cheonsu_1.99.161_ota.zip`, `cheonsu_development_1.99.161.zip`입니다. 다운로드 링크는 실제 공개 배포 검증 후 안내합니다.
+- 최종 산출물은 `cheonsu_1.99.161_update_debug.apk`, `cheonsu_1.99.161_ota.zip`, `cheonsu_development_1.99.161.zip`이며 위 공개 링크의 파일을 직접 검증했습니다.
 - APK·OTA 서명은main 전용 GitHub Actions **`cheonsu-release`** 환경의 기존 Secrets로만 수행합니다. 서명키와 장기 토큰을 클라우드 작업·소스·ZIP으로 복사하거나 출력하지 않습니다.
 - 실제 공개 OTA 안내는 별도updates 브랜치에 있습니다. main의 오래된 `public/updates/latest.json`을 기준으로 채널을 초기화하거나 낮추지 않습니다.
 - 기존 저장·진행도·수집·장비와 무관한 사용자 작업을 보존합니다. 기본 “원복”은 **1.99.154 / Android353**, 소스 `801234d1c99d0cdc7c11d645e111f64336e80672`, 태그 `codex/rollback-1.99.154`를 유지합니다. [복원 절차](ROLLBACK_BASELINE.md).
