@@ -327,7 +327,7 @@ function UnitSkillAura({ plan, unitKey }) {
     const kind = WEAPON_KINDS[anchor.kind] || anchor.kind;
     const style = pose === 'skill' && plan.skillPose ? { '--combat-sprite-scale': plan.skillPose.scale, '--combat-foot-offset': plan.skillPose.footOffset || '0%' } : getCombatFrameStyle(unitKey, sourcePose);
     const id = `weapon-${unique}-${pose}`;
-    return <svg key={pose} className="vfx-weapon-aura" viewBox="0 0 512 512" data-vfx-phase="weapon" data-vfx-anchor="weapon" data-pose={pose} data-grip={anchor.grip.join(',')} data-tip={anchor.tip.join(',')} data-focus={anchor.focus?.join(',')} data-vfx-kind={kind} data-kind={kind} data-vfx-unit={unitKey} data-anchor-origin={anchor.origin} data-anchor-authored={String(anchor.authored)} data-anchor-reviewed={String(Boolean(anchor.reviewed))} style={{ ...style, color: visual.color }} aria-hidden="true">
+    return <svg key={pose} className="vfx-weapon-aura" viewBox="0 0 512 512" data-vfx-phase="weapon" data-vfx-anchor="weapon" data-pose={pose} data-grip={anchor.grip.join(',')} data-tip={anchor.tip.join(',')} data-focus={anchor.focus?.join(',')} data-vfx-kind={kind} data-kind={anchor.kind} data-vfx-unit={unitKey} data-anchor-origin={anchor.origin} data-anchor-authored={String(anchor.authored)} data-anchor-reviewed={String(Boolean(anchor.reviewed))} style={{ ...style, color: visual.color }} aria-hidden="true">
       <WeaponPaint id={id} color={visual.color} core={visual.core} />
       <WeaponShape anchor={anchor} kind={kind} visual={visual} id={id} />
     </svg>;
