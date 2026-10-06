@@ -66,4 +66,11 @@ try {
     "PASS APK web files: $apkCount; OTA files: $otaCount; signature, native plugin, rollback and origin"
 } finally { $apk.Dispose(); if ($ota) { $ota.Dispose() } }
 $artifacts = if ($ApkOnly) { @($apkPath) } else { @($apkPath, $otaPath) }
-Get-FileHash -Algorithm SHA256 -LiteralPath $artifacts | Select-Object Path, Hash
+$artifactHashes = foreach ($artifact in $artifacts) {
+    [pscustomobject]@{
+        name = [IO.Path]::GetFileName($artifact)
+        size = (Get-Item -LiteralPath $artifact).Length
+        sha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $artifact).Hash.ToLowerInvariant()
+    }
+}
+ConvertTo-Json -InputObject @($artifactHashes) -Compress
