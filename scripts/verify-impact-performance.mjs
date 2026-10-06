@@ -21,7 +21,8 @@ try {
     try {
       for (const unit of ['hero', 'lina', 'teo', 'baekho', 'boss_commander', 'mare', 'harin', 'edan', 'sylvan', 'resonance_judge', 'hero__form0']) {
         const canonical = unit.split('__form')[0], form = ADVANCED_CLASSES[canonical]?.find(value => value.id === unit);
-        const skill = unit === 'hero' ? null : form?.skill || CHARACTER_SKILLS[canonical]?.[0];
+        const skill = unit === 'hero' ? null : form?.skill || CHARACTER_SKILLS[canonical]?.find(skill => skill.type === 'attack');
+        if (skill) assert.equal(skill.type, 'attack', `${unit}: 타격 성능은 실제 공격 기술로 검사합니다`);
         const props = productionDuelProps(unit, skill, 2, { ...(!skill && unit !== 'hero' ? { mode: 'skill' } : {}) });
         const plan = getCombatChoreography(unit, props.scene), duration = props.scene.durationMs;
         await renderDuel(page, props);
@@ -49,7 +50,7 @@ try {
         }
         await page.setViewportSize({ width: viewport.width - 12, height: viewport.height }); await page.clock.runFor(32);
         await assertBodies(page, '화면 크기 변경'); await page.setViewportSize(viewport);
-        results.push({ viewport, unit, weapon: plan.weapon, contacts: plan.contacts.length, particles: plan.impacts.map(impact => impact.count) });
+        results.push({ viewport, unit, skill: skill?.id || null, skillType: skill?.type || null, weapon: plan.weapon, contacts: plan.contacts.length, particles: plan.impacts.map(impact => impact.count) });
       }
       const miss = productionDuelProps('teo', CHARACTER_SKILLS.teo[0], 2, { outcome: { hit: false, damage: 0 }, defenderPostHp: 30 });
       await renderDuel(page, miss); await seekDuel(page, .64, miss.scene.durationMs);
