@@ -1,10 +1,10 @@
 # 천수 (Cheonsu)
 
-**현재 개발 버전: 1.99.164 / Android 363.** 스테이지 진입 → 이야기 컷신 → 실제 전장에서 아군 배치 → 전투 개시 순서로 조정합니다. 작은 준비 화면 대신 확대·이동할 수 있는 전장에 보유 캐릭터와 허용 칸을 표시합니다. 배치 구역은 초기 아군 위치와 후방 중심의 **최대 18칸**, 출전은 기존처럼 **최대 15명**입니다. 칸 클릭·자리 교환·해제·자동 배치·저장과 별도 편성 관리를 지원합니다.
+**현재 개발·공개 버전: 1.99.164 / Android 363.** 스테이지 진입 → 이야기 컷신 → 실제 전장에서 아군 배치 → 전투 개시 순서로 조정합니다. 작은 준비 화면 대신 확대·이동할 수 있는 전장에 보유 캐릭터와 허용 칸을 표시합니다. 배치 구역은 초기 아군 위치와 후방 중심의 **최대 18칸**, 출전은 기존처럼 **최대 15명**입니다. 칸 클릭·자리 교환·해제·자동 배치·저장과 별도 편성 관리를 지원합니다.
 
 기존 진행 중 전투의 좌표·체력·행동과 성장·장비·수집·진행도는 보존합니다. 아직 시작하지 않은 배치 저장에만 새 허용 칸 보정을 적용합니다. 원복 기준은 **1.99.154**를 유지합니다.
 
-**1.99.164 배포 상태: 대기.** 최종 소스 커밋과 새 APK·서명 OTA·소스 ZIP 발행 결과는 [1.99.164 빌드·배포 기록](docs/BUILD_1.99.164.md)에 반영합니다. 사용자 지시에 따라 수정 후 별도 검증은 실행하지 않았습니다. 기존 자동 Actions의 결과는 [1.99.164 변경·검증 구분](docs/QA_IMPROVEMENT_1.99.164.md)에 따로 기록하며, 아래 1.99.163의 검사 결과를 이번 버전의 결과로 사용하지 않습니다.
+**1.99.164 새 APK·서명 OTA·전체 개발 소스 ZIP 배포 완료.** [1.99.164 APK 다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.164/cheonsu_1.99.164_update_debug.apk) · [v1.99.164 공개 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.164). 최종 게임 소스는 `742bca6eacd415251c91e69cb286cf8958dbedd5`이며 [Cloud Quality](https://github.com/h0623-dev/cheonsu/actions/runs/37415891066)와 [Android APK and OTA](https://github.com/h0623-dev/cheonsu/actions/runs/37415891062)는 각각 단위 779/779·필수 브라우저 10개와 전체 실행이 성공했습니다. Android 자동 실행은 APK/OTA 검사·세 공개 파일 다운로드 검사·서명 파일 정리도 완료했습니다. 실제 공개 업데이트 채널은 1.99.164, 호환 Android 범위는 350~363입니다. 자동 로그·공개 메타데이터·파일 링크는 [1.99.164 빌드·배포 기록](docs/BUILD_1.99.164.md)에 기록했습니다. 사용자 지시에 따라 수정 후 별도 검증은 실행하지 않았습니다. 기존 자동 Actions의 결과는 [1.99.164 변경·검증 구분](docs/QA_IMPROVEMENT_1.99.164.md)에 따로 기록하며, 아래 1.99.163의 검사 결과를 이번 버전의 결과로 사용하지 않습니다.
 
 ## 직전 버전 1.99.163 기록
 
@@ -81,7 +81,13 @@
 
 ## 다운로드
 
-1.99.164의 새 APK·서명 OTA·소스 ZIP은 아직 발행 대기입니다. 아래 1.99.163 파일에는 이번 배치 변경이 포함되어 있지 않습니다.
+**최신 1.99.164 / Android 363**
+
+- [1.99.164 APK 다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.164/cheonsu_1.99.164_update_debug.apk)
+- [1.99.164 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.164/cheonsu_development_1.99.164.zip)
+- [1.99.164 서명 OTA](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.164/cheonsu_1.99.164_ota.zip), [v1.99.164 공개 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.164)
+
+기존 자동 Actions의 공개 다운로드 검사까지 완료했습니다. 에이전트의 별도 다운로드·검증은 실행하지 않았습니다. 아래 1.99.163 링크는 이전 버전 기록입니다.
 
 - [직전 1.99.163 APK 다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.163/cheonsu_1.99.163_update_debug.apk)
 - [1.99.163 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.163/cheonsu_development_1.99.163.zip), [공개 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.163) — 새 APK·서명 OTA 배포와 실제 공개 다운로드 검증 완료
@@ -90,7 +96,7 @@
 - [다른 PC에서 작업하기](docs/DEVELOPMENT_HANDOFF.md)
 - [Codex Cloud와 GitHub에서 개발하기](docs/CODEX_CLOUD.md)
 
-APK는 디버그 서명의 개발 테스트용입니다. 직전 1.99.163 패치는 Android versionCode350~362의 호환 APK에 자동 배포되었습니다. 1.99.164의 실제 호환 범위와 발행 결과는 새 빌드 기록에 별도로 기록합니다. 그보다 오래된 앱은 최신 APK를 기존 앱 위에 설치하세요. 앱을 삭제하지 마세요. 실제 Android 기기 설치·OTA 실행과 복구·GPU·발열은 미검증입니다. Play release는 별도 서명 및 스토어 업데이트를 사용합니다. 실제 Google 로그인과 Play 출시는 아직 준비 중입니다.
+APK는 디버그 서명의 개발 테스트용입니다. 1.99.164의 공개 자동 업데이트 안내는 Android versionCode 350~363을 지원합니다. 그보다 오래된 앱은 최신 APK를 기존 앱 위에 설치하세요. 앱을 삭제하지 마세요. 실제 Android 기기 설치·OTA 실행과 복구·GPU·발열은 미검증입니다. Play release는 별도 서명 및 스토어 업데이트를 사용합니다. 실제 Google 로그인과 Play 출시는 아직 준비 중입니다.
 
 1.99.143: 아군 4인의 신규 타이틀 원화, 이어하기 중심 메뉴, 소리/전투/저장/업데이트 설정 분리, 초상화 기반 기사단 화면, 마을 주요 메뉴와 출전 연결. 30장 출전 배경 설명, 첫 전투 대사 보강, 진행도에 따른 이야기 다시보기와 자동 진행. 저장 덮어쓰기 보호와 현재 상태 수동 슬롯 저장. 기획/아트/UX 점검 및 남은 과제: [전체 정비 보고서](docs/PLAYER_EXPERIENCE_1.99.143.md).
 

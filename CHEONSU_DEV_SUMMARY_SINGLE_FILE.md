@@ -4,13 +4,15 @@
 현재 클라우드 프로젝트 위치: `/workspace/cheonsu`
 이전 PC 위치 기록: `C:\Users\user\Desktop\cheonsu`
 
-## 현재 작업: 1.99.164 / Android 363
+## 현재 개발·공개 버전: 1.99.164 / Android 363
 
 전투 진입 → 이야기 컷신 → 실제 전장에서 아군 배치 → 전투 개시로 순서를 바꿉니다. 전장의 확대·이동과 보유 캐릭터 선택·칸 클릭·자리 교환·해제·자동 배치·저장을 지원하며 기존 편성 관리는 별도로 엽니다. 초기 아군 위치와 후방 중심의 최대 18칸만 허용하고 출전 최대 15명은 유지합니다. 적 진영 접근과 회복·강화·위험 지형을 시작 칸으로 선택하는 것은 허용하지 않습니다.
 
 기존 진행 중 전투의 좌표·체력·행동을 보존하고, 아직 시작하지 않은 배치 저장의 구역 밖 위치만 안전한 시작 칸으로 보정합니다. 성장·장비·진행·수집과 원복 기준 1.99.154를 유지합니다.
 
-**배포 상태: 대기.** 1.99.164 최종 소스 커밋·새 APK·서명 OTA·소스 ZIP과 자동 Actions 결과는 아직 확정되지 않았습니다. [빌드·배포 기록](docs/BUILD_1.99.164.md)과 [변경·검증 구분](docs/QA_IMPROVEMENT_1.99.164.md)에 실제 결과를 기록합니다. 사용자 지시에 따라 수정 후 별도 검증은 실행하지 않았습니다. 기존 자동 Actions는 유지하며 에이전트의 직접 검사와 구분합니다.
+**배포 상태: 새 APK·서명 OTA·전체 개발 소스 ZIP 공개 완료.** 최종 게임 소스는 `742bca6eacd415251c91e69cb286cf8958dbedd5`이고 [v1.99.164 공개 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.164)를 2026-10-06 14:25 KST에 발행했습니다. [Cloud Quality](https://github.com/h0623-dev/cheonsu/actions/runs/37415891066)와 [Android APK and OTA](https://github.com/h0623-dev/cheonsu/actions/runs/37415891062)는 각각 단위 779/779·필수 브라우저 10개와 전체 실행이 성공했습니다. Android 자동 실행에서 APK·OTA와 세 공개 파일 다운로드 검사·서명 파일 정리까지 완료했습니다. [공개 업데이트 채널](https://raw.githubusercontent.com/h0623-dev/cheonsu/updates/latest.json)의 실제 메타데이터는 버전 1.99.164 / 번들 `1.99.164-7f4da1ce8199` / Android 350~363입니다. [빌드·배포 기록](docs/BUILD_1.99.164.md)과 [변경·검증 구분](docs/QA_IMPROVEMENT_1.99.164.md)에 자동 실행과 공개 메타데이터의 관찰 결과를 기록했습니다. 사용자 지시에 따라 수정 후 별도 검증은 실행하지 않았습니다. 기존 자동 Actions는 유지하며 에이전트의 직접 검사와 구분합니다.
+
+현재 공개 파일: [1.99.164 APK 다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.164/cheonsu_1.99.164_update_debug.apk), [1.99.164 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.164/cheonsu_development_1.99.164.zip), [1.99.164 서명 OTA](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.164/cheonsu_1.99.164_ota.zip). 크기·SHA-256은 이번 자동 발행 로그를 빌드 기록에 옮겼으며, 에이전트가 별도로 파일을 다운로드하거나 서명을 대조하지 않았습니다. 소스 ZIP은 릴리스 소스의 스냅샷이므로 배포 후 최종 문서 갱신은 포함하지 않습니다.
 
 ## 직전 버전 1.99.163의 보존 기록
 
