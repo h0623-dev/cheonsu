@@ -1,3 +1,5 @@
+import { getNewTerrainPolicy } from '../data/terrainPolicy.js';
+
 export function distance(a, b) {
   return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
 }
@@ -8,7 +10,7 @@ export function inMap(x, y, activeMap) {
 }
 
 
-const BLOCKED_TERRAIN_TYPES = new Set(["block", "wall", "void"]);
+const BLOCKED_TERRAIN_TYPES = new Set(["block", "wall", "void", "deep_water", "deepwater"]);
 
 
 export function isTerrainBlocked(tile) {
@@ -23,6 +25,8 @@ function hasFreezeStatus(unit) {
 
 export function getTerrainBaseMoveCost(tile) {
   if (isTerrainBlocked(tile)) return Number.POSITIVE_INFINITY;
+  const expansion = getNewTerrainPolicy(tile);
+  if (expansion) return expansion.moveCost;
 
   const costs = {
     road: 1,
@@ -100,6 +104,9 @@ export function getUnitMoveTrait(unit) {
 export function getTerrainMoveCost(tile, unit = null) {
   if (isTerrainBlocked(tile)) return Number.POSITIVE_INFINITY;
 
+  if (['water', 'swamp', 'mire'].includes(tile)
+    && (unit?.status || []).some(status => status.type === 'waterStride')) return 1;
+
   const base = getTerrainBaseMoveCost(tile);
   const trait = getUnitMoveTrait(unit);
 
@@ -128,6 +135,8 @@ export function getTerrainMoveCost(tile, unit = null) {
 
 
 export function getTerrainMoveLabel(tile) {
+  const expansion = getNewTerrainPolicy(tile);
+  if (expansion) return expansion.name;
   const labels = {
     road: "길",
     gate: "성문",
@@ -158,7 +167,13 @@ function sortByCost(queue) {
 
 // Keep saved base stats unchanged so the ally bonus never stacks on reload.
 export function getUnitMoveRange(unit) {
-  return unit ? (unit.move || 0) + (unit.type === "ally" ? 1 : 0) : 0;
+  if (!unit) return 0;
+  const base = (unit.move || 0) + (unit.type === 'ally' ? 1 : 0);
+  const slows = (unit.status || []).filter(status => status.type === 'slow');
+  if (!slows.length || base <= 0) return base;
+  const penalty = Math.max(...slows.map(status => Number.isFinite(status.power)
+    ? Math.max(1, Math.floor(status.power)) : 1));
+  return Math.max(1, base - penalty);
 }
 
 export function getMoveTiles(unit, units, activeMap) {

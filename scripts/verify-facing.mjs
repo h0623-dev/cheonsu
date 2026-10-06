@@ -1,11 +1,13 @@
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
+import { qaBrowserOptions } from './qa-browser.mjs';
+import { confirmArtQaDeployment, confirmArtQaMission } from './art-qa-game.mjs';
 import fs from 'node:fs/promises';
 
-const base=process.env.GAME_URL || 'http://127.0.0.1:5176';
+const base=process.env.ACTUAL_GAME_URL || process.env.GAME_URL || 'http://127.0.0.1:5176';
 const out='tmp/facing-qa';
 await fs.mkdir(out,{recursive:true});
-const browser=await chromium.launch({channel:'msedge',headless:true});
+const browser=await chromium.launch(qaBrowserOptions());
 try {
   for(const viewport of [{width:1280,height:900},{width:390,height:844},{width:320,height:568},{width:844,height:390}]) {
     const page=await browser.newPage({viewport,serviceWorkers:'block'});
@@ -24,7 +26,7 @@ try {
     };
     await page.goto(base);await button('새 게임').click();
     await page.locator('.world-stage-node').filter({has:page.locator('strong',{hasText:/^1장\./})}).click();
-    await button('전투 시작').click();await button('바로 전투').click();await hero.waitFor();
+    await button('전투 시작').click();await confirmArtQaDeployment(page);await button('바로 전투').click();await confirmArtQaMission(page);await hero.waitFor();
     const data=await save();
     data.selectedStage.map=Array.from({length:12},()=>Array(12).fill('plain'));
     data.selectedStage.terrainRevision=3;

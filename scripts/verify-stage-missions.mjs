@@ -1,3 +1,4 @@
+import { qaBrowserOptions } from './qa-browser.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -7,6 +8,7 @@ import { preview } from 'vite';
 import { getStageRoundLimit } from '../src/engine/stageRules.js';
 import { getBattleOutcome } from '../src/engine/battleOutcome.js';
 import { webBuildInfo } from './update-build-info.mjs';
+import { stages } from '../src/data/stages.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const output = path.resolve(process.env.CHEONSU_MISSIONS_QA_OUT || path.join(root, 'tmp/stage-missions-qa'));
@@ -132,14 +134,15 @@ async function runViewport(base, viewport) {
     await page.locator('.battle-control-heading .prominent-save').click();
     return saved();
   };
-  const campaign = { ...structuredClone(legacy.shared), ...structuredClone(legacy.cases[0].save), screen: 'campaign', clearedStages: Array.from({ length: 29 }, (_, index) => index + 1), deployedIds: legacy.shared.party.slice(0, 15).map(unit => unit.id) };
+  const campaign = { ...structuredClone(legacy.shared), ...structuredClone(legacy.cases[0].save), screen: 'campaign', clearedStages: stages.slice(0, -1).map(stage => stage.id), deployedIds: legacy.shared.party.slice(0, 15).map(unit => unit.id) };
   try {
     await page.addInitScript(() => {
       localStorage.setItem('cheonsu_auto_patch', 'false');
       localStorage.setItem('cheonsu_settings_v1', JSON.stringify({ soundOn: false, musicOn: false, cutsceneMode: 'off', effectsOn: false, battleSpeed: 'turbo', battleSpeedRevision: 1 }));
     });
     await page.goto(base);
-    const stageIds = viewport.width === 390 ? Array.from({ length: 30 }, (_, index) => index + 1) : [1, 13, 30];
+    const sampleStageIds = [1, 13, stages.at(-1).id];
+    const stageIds = viewport.width === 390 ? stages.map(stage => stage.id) : sampleStageIds;
     for (const stageId of stageIds) {
       await load(campaign);
       await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: new RegExp(`^${stageId}장[.]`) }) }).click();
@@ -166,7 +169,7 @@ async function runViewport(base, viewport) {
       assert.equal(await page.locator(introSelector).count(), 0, '미션 확인 전에 전투·보스 도입 연출을 재생하지 않습니다');
       assert.equal(await page.locator('.battle-control-heading .prominent-save').isDisabled(), true, '미션 모달이 열려 있을 때 전투 저장을 잠급니다');
       assert.equal(await page.locator('.battle-end-turn-float').isDisabled(), true, '미션 확인 전 턴 종료를 잠급니다');
-      if (stageId === 1 || stageId === 30) {
+      if (stageId === 1 || stageId === stages.at(-1).id) {
         await page.waitForTimeout(900);
         assert.equal(await page.locator(introSelector).count(), 0, '시간이 지나도 확인 전에는 도입 연출을 시작하지 않습니다');
         await page.screenshot({ path: path.join(output, `${viewport.width}x${viewport.height}-stage-${stageId}-mission.png`) });
@@ -182,7 +185,7 @@ async function runViewport(base, viewport) {
       assert.ok(battle.units.filter(unit => unit.type === 'ally').every(unit => !unit.acted && !unit.moved && unit.hp === unit.maxHp), '미션 확인은 HP·행동·이동을 소모하지 않습니다');
       result.stagesStarted++;
       report.stageChecks.push({ viewport, stageId, ...canonical, started: true, conditionsMatch: true, victoryOr: true, defeatOr: true, modalContained: true, manualCoordinatesPreserved: true, closeMethod: stageId % 3 === 0 ? 'Escape' : '미션 확인' });
-      if ([1, 13, 30].includes(stageId)) {
+      if (sampleStageIds.includes(stageId)) {
         await reopen(page, dialogContents, `${stageId}장`);
         await page.locator('.world-battlefield .unit[data-unit-id="bram"]').click();
         const selected = await saveBattle();
@@ -204,7 +207,7 @@ async function runViewport(base, viewport) {
       }
       console.log(`PASS 미션 ${viewport.width}x${viewport.height} ${stageId}장: ${canonical.bossNames.join(', ')} / ${canonical.roundLimit}라운드 / 실제 전투 진입`);
     }
-    result.checks.push(`${stageIds.length}개 장에서 최대 15명 수동 배치 후 실제 전투 진입`, '실제 적 대장 이름·라운드 제한·승리 또는/패배 또는 안내 일치', '배치 자동 모달 없음·전투 자동 모달·확인/Escape·모달 명령/저장 잠금', '미션 카드·대화창 가로 넘침 없음·확인 버튼 44px 이상·키보드 포커스 유지', '1·13·30장 수동 재열기와 이어하기 후 유닛·진행도·수집·장비 보존');
+    result.checks.push(`${stageIds.length}개 장에서 최대 15명 수동 배치 후 실제 전투 진입`, '실제 적 대장 이름·라운드 제한·승리 또는/패배 또는 안내 일치', '배치 자동 모달 없음·전투 자동 모달·확인/Escape·모달 명령/저장 잠금', '미션 카드·대화창 가로 넘침 없음·확인 버튼 44px 이상·키보드 포커스 유지', `${sampleStageIds.join('·')}장 수동 재열기와 이어하기 후 유닛·진행도·수집·장비 보존`);
     for (const legacyCase of legacy.cases) {
       const baseline = { ...structuredClone(legacy.shared), ...structuredClone(legacyCase.save) };
       await load(baseline);
@@ -238,11 +241,11 @@ try {
   report.build = JSON.parse(await fs.readFile(path.join(root, 'dist/ota-build.json'), 'utf8'));
   assert.deepEqual(report.build, webBuildInfo(root), '현재 최종 소스와 동일한 생산 빌드로 검사합니다');
   server = await preview({ preview: { host: '127.0.0.1', port: 0, open: false } });
-  browser = await chromium.launch({ headless: true, ...(process.env.CHEONSU_QA_BROWSER ? { channel: process.env.CHEONSU_QA_BROWSER } : {}) });
+  browser = await chromium.launch(qaBrowserOptions());
   for (const viewport of viewports) await runViewport(`http://127.0.0.1:${server.httpServer.address().port}`, viewport);
   assert.deepEqual(report.build, webBuildInfo(root), '검사 중 게임 소스가 변경되지 않았습니다');
   assert.deepEqual(report.build, JSON.parse(await fs.readFile(path.join(root, 'dist/ota-build.json'), 'utf8')), '검사 중 생산 빌드가 변경되지 않았습니다');
-  assert.equal(report.stageChecks.length, 39, '390 세로의 전체 30장과 나머지 세 화면의 1·13·30장을 실제로 시작했습니다');
+  assert.equal(report.stageChecks.length, stages.length + (viewports.length - 1) * 3, '390 세로의 전체 캠페인과 나머지 세 화면의 대표 장을 실제로 시작했습니다');
   report.passed = true;
   console.log(`PASS 스테이지 미션: ${report.stageChecks.length}개 실제 전투 / ${viewports.length}개 화면 / 오류 0 / ${report.build.version}`);
 } catch (error) {

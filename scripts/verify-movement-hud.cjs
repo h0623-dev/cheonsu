@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const { mkdir } = require('node:fs/promises');
 
 (async () => {
-  const browser = await chromium.launch({ channel: 'msedge', headless: true });
+  const browser = await chromium.launch((await import('./qa-browser.mjs')).qaBrowserOptions());
   try {
     await mkdir('tmp/movement-hud-qa', { recursive: true });
     for (const width of [1280, 390, 320]) {
@@ -14,7 +14,7 @@ const { mkdir } = require('node:fs/promises');
       await page.getByRole('button', { name: '새 게임', exact: true }).click();
       await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: /^1장\./ }) }).click();
       await page.getByRole('button', { name: '전투 시작', exact: true }).click();
-      await page.getByRole('button', { name: '바로 전투', exact: true }).click();
+      await page.getByRole('button', { name: '바로 전투', exact: true }).click(); await (await import('./qa-browser.mjs')).confirmStageMission(page);
       await page.locator('.world-battlefield .unit-visual-hero').waitFor();
       const card = page.locator('.cinematic-stage-card');
       const bounds = await card.boundingBox();

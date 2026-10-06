@@ -3,12 +3,15 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import sharp from 'sharp';
 import { getWorldScene, getWorldSceneThumbnail } from '../src/data/worldArt.js';
+import { stages } from '../src/data/stages.js';
+import { STORY_ARCS, getStoryArcIndex } from '../src/data/storyScenes.js';
+import { qaBrowserOptions } from './qa-browser.mjs';
 
-const base = process.env.GAME_URL || 'http://127.0.0.1:5176';
-const fixtures = process.env.FIXTURE_URL || 'http://127.0.0.1:5176';
+const base = process.env.ACTUAL_GAME_URL || process.env.GAME_URL || 'http://127.0.0.1:5176';
+const fixtures = process.env.FIXTURE_URL || process.env.GAME_URL || 'http://127.0.0.1:5176';
 const out = 'tmp/chapter-art-qa';
 await fs.mkdir(out, { recursive: true });
-const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const browser = await chromium.launch(qaBrowserOptions());
 const viewports = [{ width: 1280, height: 900 }, { width: 390, height: 844 }, { width: 320, height: 568 }, { width: 844, height: 390 }, { width: 568, height: 320 }];
 let deployments = 0, combats = 0, previews = 0;
 try {
@@ -25,14 +28,14 @@ try {
     await page.locator('.campaign-header .prominent-save').click();
     await page.evaluate(() => {
       const data = JSON.parse(localStorage.getItem('cheonsu_v01_save'));
-      data.clearedStages = Array.from({ length: 30 }, (_, index) => index + 1);
+      data.clearedStages = Array.from({ length: 50 }, (_, index) => index + 1);
       data.screen = 'campaign';
       localStorage.setItem('cheonsu_v01_save', JSON.stringify(data));
     });
     await page.reload();
     await page.getByRole('button', { name: '이어하기', exact: true }).click();
     const checkpoint = await page.evaluate(() => localStorage.getItem('cheonsu_v01_save'));
-    for (let id = 1; id <= 30; id++) {
+    for (let id = 1; id <= stages.length; id++) {
       const node = page.locator('.world-stage-node').filter({ has: page.locator('strong', { hasText: new RegExp(`^${id}장\\.`) }) });
       await node.scrollIntoViewIfNeeded();
       const thumbnail = node.locator('.chapter-node-preview > img');
@@ -51,18 +54,19 @@ try {
     assert.equal(await page.evaluate(() => localStorage.getItem('cheonsu_v01_save')), checkpoint, 'browsing chapters preserves progress');
     await page.reload();
     await page.getByRole('button', { name: '기록실', exact: true }).click();
-    for (let act = 1; act <= 5; act++) {
+    for (let act = 1; act <= STORY_ARCS.length; act++) {
       await page.getByRole('button', { name: `제${act}막`, exact: true }).click();
-      for (let index = 0; index < 6; index++) {
+      const actStages = stages.filter(stage => getStoryArcIndex(stage.id) === act - 1);
+      for (let index = 0; index < actStages.length; index++) {
         const image = page.locator('.library-chapters article > img').nth(index);
         await image.scrollIntoViewIfNeeded();
         await image.evaluate(img => img.decode());
-        assert.equal(await image.getAttribute('src'), getWorldSceneThumbnail((act - 1) * 6 + index + 1));
+        assert.equal(await image.getAttribute('src'), getWorldSceneThumbnail(actStages[index].id));
         previews++;
       }
     }
     assert.equal(await page.evaluate(() => localStorage.getItem('cheonsu_v01_save')), checkpoint);
-    for (let id = 1; id <= 30; id++) {
+    for (let id = 1; id <= stages.length; id++) {
       await page.goto(`${fixtures}/tests/fixtures/combat.html?stage=${id}`);
       await page.locator('.painted-combat').waitFor();
       await page.locator('.painted-combat img').evaluateAll(async images => { for (const image of images) await image.decode(); });
@@ -83,7 +87,7 @@ try {
       combats++;
     }
     assert.deepEqual(errors, []);
-    console.log(`PASS ${viewport.width}x${viewport.height}: 30장 출전/기록실/전투 배경`);
+    console.log(`PASS ${viewport.width}x${viewport.height}: ${stages.length}장 출전/기록실/전투 배경`);
     await page.close();
   }
   console.log(`PASS ${deployments} deployments, ${previews} library previews, ${combats} combat scenes; progress unchanged`);

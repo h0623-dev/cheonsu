@@ -3,9 +3,11 @@ import assert from 'node:assert/strict';
 import { readFile, access } from 'node:fs/promises';
 import { getWorldBiome, getWorldScene, getWorldTileVisual } from '../src/data/worldArt.js';
 import { getBattlefieldPlan } from '../src/data/battlefieldPlans.js';
+import { NEW_TERRAIN_IDS } from '../src/data/terrainPolicy.js';
+import { stages } from '../src/data/stages.js';
 
 const manifest = JSON.parse(await readFile(new URL('../public/art/world-v2/manifest.json', import.meta.url), 'utf8'));
-const types = ['plain', 'block', 'wall', 'void', 'forest', 'hill', 'fort', 'gate', 'road', 'dark', 'rune', 'trap', 'swamp', 'water', 'ice', 'fire'];
+const types = ['plain', 'block', 'wall', 'void', 'forest', 'hill', 'fort', 'gate', 'road', 'dark', 'rune', 'trap', 'swamp', 'water', 'ice', 'fire', ...NEW_TERRAIN_IDS];
 
 test('Every character and world asset is present in the production folder', async () => {
   assert.equal(Object.keys(manifest.units).length, 36);
@@ -17,7 +19,7 @@ test('Every character and world asset is present in the production folder', asyn
   for (const path of paths) await access(new URL(`../public${path}`, import.meta.url));
 });
 
-for (let stage = 1; stage <= 30; stage++) {
+for (let stage = 1; stage <= stages.length; stage++) {
   test(`Stage ${stage}: all terrain is drawn from actual tile data in the correct biome`, () => {
     const map = Array.from({ length: 4 }, () => [...types]);
     const original = JSON.stringify(map);
@@ -26,7 +28,7 @@ for (let stage = 1; stage <= 30; stage++) {
     for (let y = 0; y < map.length; y++) {
       for (let x = 0; x < map[y].length; x++) {
         const visual = getWorldTileVisual(map, x, y, stage);
-        assert.ok(manifest.terrain.includes(visual.material));
+        assert.ok([...manifest.terrain, ...NEW_TERRAIN_IDS].includes(visual.material));
         if (visual.prop) assert.ok(manifest.props.includes(visual.prop));
         assert.equal(visual.blocked, ['block', 'wall', 'void'].includes(map[y][x]));
         if (visual.blocked) assert.ok(visual.prop, 'Every blocked cell needs a visible obstacle');

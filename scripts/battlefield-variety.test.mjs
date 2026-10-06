@@ -8,14 +8,14 @@ import { getInitialParty } from '../src/engine/partyEngine.js';
 import { MUSIC_TRACKS, MUSIC_LOOP_STEPS, getMusicTheme, musicBeat } from '../src/data/musicScore.js';
 import { SFX_PRESETS } from '../src/engine/soundEffects.js';
 
-test('30 chapter plans vary size, routes, biome and all eight deployment directions', () => {
-  assert.equal(BATTLEFIELD_PLANS.length, 30);
+test('50 chapter plans vary size, routes, biome and all eight deployment directions', () => {
+  assert.equal(BATTLEFIELD_PLANS.length, 50);
   assert.equal(new Set(BATTLEFIELD_PLANS.map(p => p.direction)).size, 8);
   assert.equal(new Set(BATTLEFIELD_PLANS.map(p => p.layout)).size, 10);
   assert.ok(new Set(BATTLEFIELD_PLANS.map(p => `${p.width}x${p.height}`)).size >= 20);
   for (const shape of ['wide', 'tall', 'square']) assert.ok(BATTLEFIELD_PLANS.some(p =>
     shape === 'wide' ? p.width > p.height : shape === 'tall' ? p.height > p.width : p.height === p.width));
-  assert.equal(new Set(BATTLEFIELD_PLANS.map(p => JSON.stringify(createBattlefieldTerrain(p.id)))).size, 30);
+  assert.equal(new Set(BATTLEFIELD_PLANS.map(p => JSON.stringify(createBattlefieldTerrain(p.id)))).size, 50);
 });
 
 for (const plan of BATTLEFIELD_PLANS) test(`Chapter ${plan.id}: actual-sized terrain is connected; both armies follow ${plan.direction} deployment`, () => {

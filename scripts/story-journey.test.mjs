@@ -5,10 +5,11 @@ import { distributeBattleFormations } from '../src/engine/formations.js';
 import { normalizeSaveData } from '../src/engine/saveEngine.js';
 import { stages } from '../src/data/stages.js';
 
-const recruitAt = { 레온: 2, 세라: 4, 노아: 6, 유나: 8, 라칸: 10, 미호: 12, 테오: 14, 아이린: 16, 카즈: 18, 엘라: 20, 진: 22, 루카: 24, 백호: 26 };
-const speakers = new Set(['카일', '브람', '리나', '아리아', '흑천 가론', ...Object.keys(recruitAt)]);
-test('all 30 stages have authored intros and endings, valid cast, and progression-correct recruits', () => {
-  assert.equal(STORY_ARCS.length, 5);
+const recruitAt = { 레온: 2, 세라: 4, 노아: 6, 유나: 8, 라칸: 10, 미호: 12, 테오: 14, 아이린: 16, 카즈: 18, 엘라: 20, 진: 22, 루카: 24, 백호: 26, 마레: 32, 하린: 37, 에단: 42, 실반: 47 };
+const expansionRecruits = new Set(['마레', '하린', '에단', '실반']);
+const speakers = new Set(['카일', '브람', '리나', '아리아', '흑천 가론', '심해 수문장 모르칸', '빙정 여왕 세르카', '공명 집행관 아르켄', '첫 맹세 수호체 아스테르', ...Object.keys(recruitAt)]);
+test('all 50 stages have authored intros and endings, valid cast, and progression-correct recruits', () => {
+  assert.equal(STORY_ARCS.length, 9);
   assert.deepEqual(Object.keys(STORY_SCENES).map(Number), stages.map(stage => stage.id));
   const lines = [];
   for (const stage of stages) for (const type of ['intro', 'clear']) {
@@ -18,7 +19,7 @@ test('all 30 stages have authored intros and endings, valid cast, and progressio
       assert.ok(speakers.has(line.speaker));
       assert.ok(line.text.length >= 10 && line.text.length < 135);
       assert.ok(!/ACT|다음 전투는 더 신중하게|돌파 완료/.test(line.text));
-      if (recruitAt[line.speaker]) assert.ok(stage.id >= recruitAt[line.speaker] + (type === 'intro' ? 1 : 0));
+      if (recruitAt[line.speaker]) assert.ok(stage.id >= recruitAt[line.speaker] + (type === 'intro' && !expansionRecruits.has(line.speaker) ? 1 : 0));
       lines.push(line.text);
     }
   }

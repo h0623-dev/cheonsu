@@ -1,9 +1,10 @@
 import { connectedGround } from './formations.js';
 import { deploymentDepth, getBattlefieldPlan } from '../data/battlefieldPlans.js';
+import { stages } from '../data/stages.js';
+import { isDeploymentTerrainUnsafe } from '../data/terrainPolicy.js';
 
 const MAX_DEPLOY_COUNT = 15;
 const UNSAFE_IDS = new Set(['__proto__', 'prototype', 'constructor']);
-const UNSAFE_TERRAIN = new Set(['fire', 'ice', 'dark', 'rune', 'trap', 'water', 'swamp']);
 const key = ({ x, y }) => `${x},${y}`;
 const distance = (a, b) => Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
 const isRecord = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -24,7 +25,7 @@ export function getDeploymentCells(stage, actualFinalUnits = []) {
   const enemies = actualFinalUnits.filter(unit => unit && unit.type !== 'ally');
   if (enemies.some(unit => !isPoint(unit))) return [];
   const direction = stage.terrainRevision >= 3 ? getBattlefieldPlan(stage.id).direction : 'south';
-  return connectedGround(map).filter(cell => !UNSAFE_TERRAIN.has(map[cell.y][cell.x])
+  return connectedGround(map).filter(cell => !isDeploymentTerrainUnsafe(map[cell.y][cell.x])
     && deploymentDepth(cell.x / Math.max(1, width - 1), cell.y / Math.max(1, height - 1), direction) >= .57
     && enemies.every(enemy => distance(cell, enemy) >= 7))
     .sort((a, b) => a.y - b.y || a.x - b.x).map(point);
@@ -32,7 +33,7 @@ export function getDeploymentCells(stage, actualFinalUnits = []) {
 
 /** Saved drafts are optional and never change live battle units during migration. */
 export function sanitizeDeploymentDraft(raw, stageId) {
-  const targetStageId = Number.isInteger(stageId) && stageId >= 1 && stageId <= 30 ? stageId : null;
+  const targetStageId = Number.isInteger(stageId) && stages.some(stage => stage.id === stageId) ? stageId : null;
   const result = emptyDraft(targetStageId);
   if (!targetStageId || !isRecord(raw) || !Object.hasOwn(raw, 'stageId') || raw.stageId !== targetStageId
     || !Object.hasOwn(raw, 'placements') || !isRecord(raw.placements)) return result;

@@ -1,0 +1,405 @@
+{
+  "version": "1.99.162",
+  "characters": {
+    "hero": [
+      {
+        "id": "gale",
+        "name": "돌풍 베기",
+        "type": "attack",
+        "bonus": 4,
+        "minRange": 1,
+        "range": 1,
+        "cooldown": 2,
+        "effect": "slash",
+        "status": "armorBreak"
+      },
+      {
+        "id": "oath",
+        "name": "수호의 맹세",
+        "type": "guard",
+        "defense": 3,
+        "radius": 0,
+        "range": 0,
+        "cooldown": 3,
+        "effect": "guard"
+      }
+    ],
+    "bram": [
+      {
+        "id": "bulwark",
+        "name": "철벽 수호",
+        "type": "guard",
+        "defense": 4,
+        "radius": 0,
+        "range": 0,
+        "cooldown": 2,
+        "effect": "guard"
+      },
+      {
+        "id": "bash",
+        "name": "방패 강타",
+        "type": "attack",
+        "bonus": 5,
+        "minRange": 1,
+        "range": 1,
+        "cooldown": 3,
+        "effect": "guard",
+        "status": "armorBreak"
+      }
+    ],
+    "lina": [
+      {
+        "id": "ember",
+        "name": "불꽃 화살",
+        "type": "attack",
+        "bonus": 3,
+        "minRange": 2,
+        "range": 3,
+        "cooldown": 2,
+        "effect": "fire",
+        "status": "burn"
+      },
+      {
+        "id": "snipe",
+        "name": "정밀 사격",
+        "type": "attack",
+        "bonus": 6,
+        "minRange": 2,
+        "range": 4,
+        "cooldown": 3,
+        "effect": "arrow",
+        "accuracy": 15
+      }
+    ],
+    "aria": [
+      {
+        "id": "light",
+        "name": "성빛 치유",
+        "type": "heal",
+        "power": 16,
+        "targets": 1,
+        "range": 3,
+        "cooldown": 2,
+        "effect": "heal",
+        "cleanse": false
+      },
+      {
+        "id": "sanctuary",
+        "name": "성역의 기도",
+        "type": "heal",
+        "power": 9,
+        "targets": 3,
+        "range": 2,
+        "cooldown": 3,
+        "effect": "heal",
+        "cleanse": true
+      }
+    ],
+    "leon": [
+      {
+        "id": "pierce",
+        "name": "관통 찌르기",
+        "type": "attack",
+        "bonus": 4,
+        "minRange": 1,
+        "range": 2,
+        "cooldown": 2,
+        "effect": "thrust",
+        "status": "armorBreak"
+      },
+      {
+        "id": "charge",
+        "name": "질풍 돌격",
+        "type": "attack",
+        "bonus": 8,
+        "minRange": 1,
+        "range": 1,
+        "cooldown": 3,
+        "effect": "thrust"
+      }
+    ],
+    "sera": [
+      {
+        "id": "shade",
+        "name": "암영 베기",
+        "type": "attack",
+        "bonus": 4,
+        "minRange": 1,
+        "range": 1,
+        "cooldown": 2,
+        "effect": "shadow",
+        "status": "bleed"
+      },
+      {
+        "id": "opening",
+        "name": "빈틈 가르기",
+        "type": "attack",
+        "bonus": 6,
+        "minRange": 1,
+        "range": 1,
+        "cooldown": 3,
+        "effect": "slash",
+        "status": "armorBreak"
+      }
+    ],
+    "noah": [
+      {
+        "id": "chain",
+        "name": "낙뢰 사슬",
+        "type": "attack",
+        "bonus": 4,
+        "minRange": 1,
+        "range": 3,
+        "cooldown": 3,
+        "effect": "lightning",
+        "radius": 1
+      },
+      {
+        "id": "ward",
+        "name": "전술 방벽",
+        "type": "guard",
+        "defense": 3,
+        "radius": 1,
+        "range": 1,
+        "cooldown": 2,
+        "effect": "guard"
+      }
+    ],
+    "yuna": [
+      {
+        "id": "moon",
+        "name": "달빛 회복",
+        "type": "heal",
+        "power": 12,
+        "targets": 2,
+        "range": 3,
+        "cooldown": 2,
+        "effect": "heal",
+        "cleanse": false
+      },
+      {
+        "id": "purify",
+        "name": "정화의 기도",
+        "type": "heal",
+        "power": 8,
+        "targets": 3,
+        "range": 2,
+        "cooldown": 3,
+        "effect": "heal",
+        "cleanse": true
+      }
+    ],
+    "rakan": [
+      {
+        "id": "crush",
+        "name": "대지 분쇄",
+        "type": "attack",
+        "bonus": 6,
+        "minRange": 1,
+        "range": 1,
+        "cooldown": 3,
+        "effect": "heavy",
+        "status": "armorBreak"
+      },
+      {
+        "id": "roar",
+        "name": "불굴의 포효",
+        "type": "guard",
+        "defense": 5,
+        "radius": 0,
+        "range": 0,
+        "cooldown": 2,
+        "effect": "guard"
+      }
+    ],
+    "miho": [
+      {
+        "id": "foxfire",
+        "name": "여우불",
+        "type": "attack",
+        "bonus": 4,
+        "minRange": 1,
+        "range": 3,
+        "cooldown": 2,
+        "effect": "fire",
+        "status": "burn"
+      },
+      {
+        "id": "illusion",
+        "name": "환영 폭발",
+        "type": "attack",
+        "bonus": 6,
+        "minRange": 1,
+        "range": 2,
+        "cooldown": 3,
+        "effect": "shadow",
+        "radius": 1
+      }
+    ],
+    "teo": [
+      {
+        "id": "rapid",
+        "name": "삼연사",
+        "type": "attack",
+        "bonus": 5,
+        "minRange": 2,
+        "range": 3,
+        "cooldown": 2,
+        "effect": "arrow"
+      },
+      {
+        "id": "breaker",
+        "name": "관통 화살",
+        "type": "attack",
+        "bonus": 3,
+        "minRange": 2,
+        "range": 4,
+        "cooldown": 3,
+        "effect": "arrow",
+        "status": "armorBreak"
+      }
+    ],
+    "irene": [
+      {
+        "id": "ice-lance",
+        "name": "빙결창",
+        "type": "attack",
+        "bonus": 4,
+        "minRange": 1,
+        "range": 3,
+        "cooldown": 3,
+        "effect": "ice",
+        "status": "freeze"
+      },
+      {
+        "id": "frost-wave",
+        "name": "서리 파동",
+        "type": "attack",
+        "bonus": 3,
+        "minRange": 1,
+        "range": 2,
+        "cooldown": 2,
+        "effect": "ice",
+        "radius": 1
+      }
+    ],
+    "kaz": [
+      {
+        "id": "ambush",
+        "name": "그림자 습격",
+        "type": "attack",
+        "bonus": 5,
+        "minRange": 1,
+        "range": 1,
+        "cooldown": 2,
+        "effect": "shadow",
+        "status": "bleed"
+      },
+      {
+        "id": "vital",
+        "name": "급소 찌르기",
+        "type": "attack",
+        "bonus": 8,
+        "minRange": 1,
+        "range": 1,
+        "cooldown": 3,
+        "effect": "thrust",
+        "accuracy": 15,
+        "critical": 10
+      }
+    ],
+    "ella": [
+      {
+        "id": "melody",
+        "name": "치유의 선율",
+        "type": "heal",
+        "power": 10,
+        "targets": 3,
+        "range": 2,
+        "cooldown": 3,
+        "effect": "heal",
+        "cleanse": false
+      },
+      {
+        "id": "resonance",
+        "name": "공명 파동",
+        "type": "attack",
+        "bonus": 5,
+        "minRange": 1,
+        "range": 3,
+        "cooldown": 2,
+        "effect": "music"
+      }
+    ],
+    "jin": [
+      {
+        "id": "dragon",
+        "name": "용염참",
+        "type": "attack",
+        "bonus": 6,
+        "minRange": 1,
+        "range": 1,
+        "cooldown": 3,
+        "effect": "fire",
+        "status": "burn"
+      },
+      {
+        "id": "moonblade",
+        "name": "월광참",
+        "type": "attack",
+        "bonus": 3,
+        "minRange": 1,
+        "range": 2,
+        "cooldown": 2,
+        "effect": "slash",
+        "radius": 1
+      }
+    ],
+    "luka": [
+      {
+        "id": "knight-charge",
+        "name": "기사 돌격",
+        "type": "attack",
+        "bonus": 6,
+        "minRange": 1,
+        "range": 1,
+        "cooldown": 2,
+        "effect": "slash"
+      },
+      {
+        "id": "radiance",
+        "name": "수호의 빛",
+        "type": "guard",
+        "defense": 3,
+        "radius": 1,
+        "range": 1,
+        "cooldown": 3,
+        "effect": "guard"
+      }
+    ],
+    "baekho": [
+      {
+        "id": "tiger-fist",
+        "name": "백호권",
+        "type": "attack",
+        "bonus": 6,
+        "minRange": 1,
+        "range": 1,
+        "cooldown": 2,
+        "effect": "impact",
+        "status": "armorBreak"
+      },
+      {
+        "id": "tiger-roar",
+        "name": "백호 포효",
+        "type": "attack",
+        "bonus": 4,
+        "minRange": 1,
+        "range": 1,
+        "cooldown": 3,
+        "effect": "heavy",
+        "radius": 1
+      }
+    ]
+  }
+}

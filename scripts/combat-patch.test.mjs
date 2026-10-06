@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { getTurnCameraTarget, getCellScrollTarget } from '../src/engine/battleCamera.js';
-import { combatUnitIds, combatEffectIds, getCombatPresentation, getCombatSprite, getCombatEffect } from '../src/data/combatArt.js';
+import { legacyCombatUnitIds, combatEffectIds, getCombatPresentation, getCombatSprite, getCombatEffect } from '../src/data/combatArt.js';
 
 test('turn camera only selects living units on the current side', () => {
   const units = [{ id: 'dead', type: 'enemy', hp: 0 }, { id: 'hero', type: 'ally', hp: 10, acted: true }, { id: 'lina', type: 'ally', hp: 12 }, { id: 'boss', type: 'boss', hp: 80 }];
@@ -28,9 +28,9 @@ test('weapon and healing presentation matches character artwork', () => {
   assert.equal(getCombatPresentation('hero', { ...hit, mode: 'skill', effectType: 'fire' }).effect, 'fire');
 });
 test('all combat poses and effects have real alpha and correct dimensions', async () => {
-  assert.equal(combatUnitIds.length, 47);
+  assert.equal(legacyCombatUnitIds.length, 47);
   assert.equal(combatEffectIds.length, 16);
-  const paths = [...combatUnitIds.flatMap(id => [getCombatSprite(id), getCombatSprite(id, 'action')]), ...combatEffectIds.map(getCombatEffect)];
+  const paths = [...legacyCombatUnitIds.flatMap(id => [getCombatSprite(id), getCombatSprite(id, 'action')]), ...combatEffectIds.map(getCombatEffect)];
   for (const asset of paths) {
     const source = await readFile(new URL(`../public${asset}`, import.meta.url));
     const meta = await sharp(source).metadata();

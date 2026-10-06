@@ -1,13 +1,6 @@
-const clamp = value => Math.max(0, Math.min(1, value));
+import { getDuelPoseAt } from '../data/duelPerformance.js';
 
-function poseAt(plan, at) {
-  let pose = 'ready';
-  for (const [offset, active] of plan.poses) {
-    if (offset > at) break;
-    pose = active;
-  }
-  return pose;
-}
+const clamp = value => Math.max(0, Math.min(1, value));
 
 // Use the duel's animation pool, duration and contact timeline. Decoration cannot deal damage.
 export function animateSkillSpectacle(root, plan, { arena, attacker, a, d, dy, ground, miss }, animate) {
@@ -36,7 +29,7 @@ export function animateSkillSpectacle(root, plan, { arena, attacker, a, d, dy, g
   if (weapon) {
     const offsets = [...new Set([0, ...plan.poses.map(([at]) => at), weapon.at, weapon.until, 1])].sort((x, y) => x - y);
     for (const aura of root.querySelectorAll('[data-vfx-phase="weapon"]')) {
-      animate(aura, offsets.map(offset => ({ offset, opacity: offset >= weapon.at && offset < weapon.until && poseAt(plan, offset) === aura.dataset.pose ? 1 : 0, easing: 'steps(1,end)' })));
+      animate(aura, offsets.map(offset => ({ offset, opacity: offset >= weapon.at && offset < weapon.until && getDuelPoseAt(plan, offset) === aura.dataset.pose ? 1 : 0, easing: 'steps(1,end)' })));
       for (const [index, coil] of [...aura.querySelectorAll('.vfx-blade-coil,.vfx-weapon-flow')].entries()) {
         animate(coil, [{ offset: 0, strokeDashoffset: 0 }, { offset: weapon.at, strokeDashoffset: 0 }, { offset: weapon.until, strokeDashoffset: index ? 130 : -190 }, { offset: 1, strokeDashoffset: index ? 130 : -190 }]);
       }

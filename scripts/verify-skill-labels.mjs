@@ -1,9 +1,10 @@
+import { qaBrowserOptions } from './qa-browser.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import { CHARACTER_SKILLS } from '../src/data/skills.js';
 
-const browser=await chromium.launch({channel:'msedge',headless:true});
+const browser=await chromium.launch(qaBrowserOptions());
 try{
   for(const viewport of [{width:1280,height:900},{width:390,height:844}]){
     const page=await browser.newPage({viewport,serviceWorkers:'block'}),errors=[];
@@ -23,7 +24,7 @@ try{
     await page.getByRole('button',{name:'훈련소으로 이동',exact:true}).click();
     await page.getByRole('button',{name:'스킬 강화',exact:true}).click();
     const card=page.locator('.skill-upgrade-card');await card.waitFor();
-    assert.equal(await card.locator('.skill-upgrade-entry').count(),17);
+    assert.equal(await card.locator('.skill-upgrade-entry').count(),Object.keys(CHARACTER_SKILLS).length);
     for(const [id,skills] of Object.entries(CHARACTER_SKILLS)){
       const row=card.locator('.skill-upgrade-entry').filter({has:page.locator('.skill-upgrade-head strong',{hasText:`${id} ·`})});
       assert.ok((await row.innerText()).includes(skills[0].name));
@@ -32,6 +33,6 @@ try{
     assert.ok(!(await card.innerText()).includes('파이어볼'));
     await fs.mkdir('tmp/skill-labels-qa',{recursive:true});
     await page.screenshot({path:`tmp/skill-labels-qa/upgrade-${viewport.width}.png`});
-    assert.deepEqual(errors,[]);await page.close();console.log(`PASS ${viewport.width}: 17 legacy skill labels, upgrade descriptions and role categories`);
+    assert.deepEqual(errors,[]);await page.close();console.log(`PASS ${viewport.width}: ${Object.keys(CHARACTER_SKILLS).length}명 스킬 문구·강화 설명·역할 분류`);
   }
 }finally{await browser.close();}

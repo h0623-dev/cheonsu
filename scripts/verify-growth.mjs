@@ -1,3 +1,4 @@
+import { qaBrowserOptions, confirmStageMission } from './qa-browser.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -6,7 +7,7 @@ import { CHARACTER_SKILLS } from '../src/data/skills.js';
 const key = 'cheonsu_v01_save';
 const out = 'tmp/growth-qa';
 await fs.mkdir(out, { recursive: true });
-const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const browser = await chromium.launch(qaBrowserOptions());
 const read = page => page.evaluate(key => JSON.parse(localStorage.getItem(key)), key);
 async function restore(page, data) {
   await page.evaluate(({ key, data }) => {
@@ -58,9 +59,10 @@ try {
     await page.getByRole('button', { name: '새 게임', exact: true }).click();
     await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: /^1장\./ }) }).click();
     await page.getByRole('button', { name: '전투 시작', exact: true }).click();
-    await page.getByRole('button', { name: '바로 전투', exact: true }).click();
+    await page.getByRole('button', { name: '바로 전투', exact: true }).click(); await confirmStageMission(page);
     const original = await save(page);
     const camp = structuredClone(original); camp.screen = 'camp'; camp.trainingUsed = false;
+    camp.clearedStages = [1]; camp.lastBattleResult = { stageId: 1, outcome: 'victory' };
     camp.party = Object.keys(CHARACTER_SKILLS).map(id => ({ ...structuredClone(original.party.find(unit => unit.id === id) || original.party[0]), id, name: id, exp: 90, level: 1 }));
     await restore(page, camp);
     const beforeTraining = await save(page, true);
@@ -68,7 +70,7 @@ try {
     await page.getByRole('button', { name: '훈련', exact: true }).click();
     const dialog = page.locator('.company-training-dialog');
     assert.equal(await dialog.evaluate(el => el.matches(':modal')), true);
-    assert.equal(await dialog.locator('[data-training-unit]').count(), 17);
+    assert.equal(await dialog.locator('[data-training-unit]').count(), Object.keys(CHARACTER_SKILLS).length);
     await shot(page, `training-before-${viewport.width}`);
     await page.evaluate(() => document.documentElement.classList.add('native-legacy-insets'));
     await shot(page, `training-legacy-native-${viewport.width}`);
@@ -170,7 +172,7 @@ try {
     await page.getByRole('button', { name: '보조 마법 취소', exact: true }).click();
     assert.equal((await save(page)).units.find(unit => unit.id === 'noah').acted, false);
     assert.deepEqual(errors, []);
-    console.log(`PASS ${viewport.width}x${viewport.height}: 17-party training, duplicate/reload lock, ordinary/AOE/status/boss XP, fallen/bench, autosave, immediate guards and manual ward`);
+    console.log(`PASS ${viewport.width}x${viewport.height}: ${Object.keys(CHARACTER_SKILLS).length}명 훈련·중복 방지·일반/범위/상태/보스 경험치·전사/대기 동료·자동 저장·방어기·보호기`);
     await page.close();
   }
 } finally { await browser.close(); }

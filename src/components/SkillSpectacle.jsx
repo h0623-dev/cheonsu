@@ -1,6 +1,6 @@
 import { useId } from 'react';
 import { getCombatFrameStyle } from '../data/combatArt.js';
-import weaponAnchors from '../data/skillWeaponAnchors.json' with { type: 'json' };
+import { getSkillAuraAnchor } from '../data/skillAuraAnchors.js';
 import './skill-spectacle.css';
 
 function LightPaint({ id, color, core }) {
@@ -103,6 +103,25 @@ function ContactShape({ theme, id, core }) {
     <path d="M100 84 107 119 133 126 107 134 100 166 93 134 66 126 93 119Z" fill={core} />
     {[[43, 86], [155, 80], [165, 153], [31, 141]].map(([x, y], index) => <path key={index} d="M-6-4 4-7 8 2 2 7-7 3Z" transform={`translate(${x} ${y}) rotate(${index * 43})`} fill="currentColor" />)}
   </>;
+  if (theme === 'nature') return <>
+    <circle cx="100" cy="108" r="76" fill={`url(#${id}-core)`} />
+    <g className="vfx-spin" fill="none" stroke={ribbon} strokeLinecap="round">
+      <path d="M29 164C44 115 91 159 100 102S131 72 172 37M52 184C59 143 98 149 109 105S149 111 174 67" strokeWidth="8" />
+      <path d="M30 87C46 65 88 94 103 73S126 42 158 43" strokeWidth="5" />
+    </g>
+    <path d="M98 105C65 100 58 73 76 59C102 65 110 90 98 105M105 82C109 55 137 43 153 55C148 82 123 95 105 82" fill={ribbon} stroke={core} strokeWidth="1.3" />
+    <path d="M69 148Q98 129 126 105" fill="none" stroke={core} strokeWidth="2" />
+    {[[53, 109], [131, 139], [158, 73]].map(([x, y], index) => <path key={index} d={star} transform={`translate(${x} ${y}) scale(.7)`} fill={core} />)}
+  </>;
+  if (theme === 'water') return <>
+    <circle cx="100" cy="104" r="75" fill={`url(#${id}-core)`} />
+    <g className="vfx-spin" fill="none" stroke={ribbon} strokeLinecap="round">
+      <path d="M26 124C79 173 175 119 158 67C140 21 47 31 49 85C50 116 106 127 124 88C101 124 151 133 178 112" strokeWidth="10" />
+      <path d="M30 158C79 130 144 177 170 135M35 53C71 23 120 63 151 42" strokeWidth="5" />
+    </g>
+    <path d="M99 54C91 76 80 89 80 103C80 132 120 132 120 103C120 89 106 75 99 54Z" fill={ribbon} stroke={core} strokeWidth="1.7" />
+    {[[47, 104], [141, 50], [148, 142]].map(([x, y], index) => <ellipse key={index} cx={x} cy={y} rx="5" ry="8" fill={core} opacity=".8" />)}
+  </>;
   if (theme === 'poison') return <>
     <circle cx="100" cy="107" r="78" fill={`url(#${id}-core)`} />
     <g className="vfx-spin" fill={ribbon}>
@@ -185,6 +204,8 @@ function FocusSigil({ theme, point, radius = 23, color, core }) {
     music: 'M-7 13V-12L12-17V7M-7-6 12-11M-7 13C-20 8-23 19-13 20C-8 19-6 17-7 13M12 7C0 1-4 13 6 14C11 13 13 11 12 7',
     shadow: 'M12-19C-12-22-25 4-11 17C-2 25 14 19 19 9C-6 22-15-8 12-19Z',
     poison: 'M0-20C-6-9-14-2-14 7C-14 24 14 24 14 7C14-2 6-9 0-20ZM-5 4Q-8 13-1 16',
+    nature: 'M0 20V-4M0 5C-21 1-21-16-8-18C3-15 6-3 0 5M0-2C20-9 24-22 11-23C1-22-4-12 0-2',
+    water: 'M0-23C-3-13-16-2-16 8C-16 29 16 29 16 8C16-2 3-13 0-23M-7 9Q0 18 7 9',
     wind: 'M-20 2C-5-18 24-12 17 2C12 11-8 12-9 3C-8-3 1-6 7-2M-16 15Q5 26 21 10',
     earth: 'M0-20 15-7 11 14-8 19-18 3ZM-8-3 5 8 2 17',
     martial: 'M-17-7-8-14 3-10 11-13 19 1 10 15-8 13-18 5ZM-7-5 1 7M5-6 11 3',
@@ -207,6 +228,14 @@ function WeaponShape({ anchor, kind, visual, id }) {
   const energy = `url(#${id}-energy)`;
   const line = `M${x} ${y}L${tx} ${ty}`;
   const flow = { className: 'vfx-weapon-flow', fill: 'none', stroke: energy, strokeLinecap: 'round', strokeDasharray: '19 7 5 7' };
+  if (kind === 'blade' && visual.sword) return <g transform={`translate(${x} ${y}) rotate(${angle})`} fill="none" strokeLinecap="round">
+    <path d={`M12 0Q${length * .3} -20 ${length * .6} -13Q${length * .82} -23 ${length + 6} 0Q${length * .8} 15 ${length * .6} 9Q${length * .35} 22 12 0Z`} fill={energy} opacity=".6" />
+    <path className="vfx-blade-coil" d={`M8 1C${length * .2} -23 ${length * .3} 23 ${length * .47} 0S${length * .76} -23 ${length - 3} 0`} stroke={energy} strokeWidth="8" strokeDasharray="22 5 11 3" />
+    <path className="vfx-blade-coil" d={`M16 2C${length * .25} 21 ${length * .4} -21 ${length * .55} 0S${length * .82} 21 ${length + 3} 0`} stroke={visual.core} strokeWidth="3.2" strokeDasharray="13 11" opacity=".9" />
+    <path d={`M18 0H${length - 1}`} stroke={visual.core} strokeWidth="1.5" opacity=".7" />
+    <path d={star} transform={`translate(${length * .32} -18) scale(.45)`} fill={visual.core} />
+    <path d={`M${length * .58} -24q-3 -9 2 -15q5 11 -2 15Z`} fill={visual.color} opacity=".8" />
+  </g>;
   // Authored curved swords and whips use their original 512-pixel path, not a straight guess.
   if (anchor.path) return <>
     <path d={anchor.path} fill="none" stroke={visual.color} strokeWidth={kind === 'whip' ? 7 : 10} strokeLinecap="round" opacity=".35" />
@@ -288,17 +317,17 @@ function WeaponShape({ anchor, kind, visual, id }) {
 
 function UnitSkillAura({ plan, unitKey }) {
   const unique = useId().replace(/:/g, '');
-  const visual = plan?.spectacle;
-  if (!visual?.weapon || !weaponAnchors[unitKey]) return null;
+  const baseVisual = plan?.spectacle;
+  if (!baseVisual?.weapon) return null;
+  const visual = baseVisual.sword ? { ...baseVisual, color: baseVisual.sword.kind === 'gold' ? '#eabc59' : '#ff8739', core: baseVisual.sword.kind === 'gold' ? '#fff5c5' : '#fff2ae' } : baseVisual;
   const skillFrame = plan.skillPose?.src?.includes('skill-b') ? 'skill-b' : 'skill-a';
   return ['windup', 'strike', 'skill'].map(pose => {
     const sourcePose = pose === 'skill' ? skillFrame : pose;
-    const anchor = weaponAnchors[unitKey][sourcePose];
-    if (!anchor) return null;
+    const anchor = getSkillAuraAnchor(unitKey, sourcePose, plan.weapon);
     const kind = WEAPON_KINDS[anchor.kind] || anchor.kind;
     const style = pose === 'skill' && plan.skillPose ? { '--combat-sprite-scale': plan.skillPose.scale, '--combat-foot-offset': plan.skillPose.footOffset || '0%' } : getCombatFrameStyle(unitKey, sourcePose);
     const id = `weapon-${unique}-${pose}`;
-    return <svg key={pose} className="vfx-weapon-aura" viewBox="0 0 512 512" data-vfx-phase="weapon" data-vfx-anchor="weapon" data-pose={pose} data-grip={anchor.grip.join(',')} data-tip={anchor.tip.join(',')} data-focus={anchor.focus?.join(',')} data-vfx-kind={kind} data-kind={kind} data-vfx-unit={unitKey} style={{ ...style, color: visual.color }} aria-hidden="true">
+    return <svg key={pose} className="vfx-weapon-aura" viewBox="0 0 512 512" data-vfx-phase="weapon" data-vfx-anchor="weapon" data-pose={pose} data-grip={anchor.grip.join(',')} data-tip={anchor.tip.join(',')} data-focus={anchor.focus?.join(',')} data-vfx-kind={kind} data-kind={kind} data-vfx-unit={unitKey} data-anchor-origin={anchor.origin} data-anchor-authored={String(anchor.authored)} data-anchor-reviewed={String(Boolean(anchor.reviewed))} style={{ ...style, color: visual.color }} aria-hidden="true">
       <WeaponPaint id={id} color={visual.color} core={visual.core} />
       <WeaponShape anchor={anchor} kind={kind} visual={visual} id={id} />
     </svg>;
@@ -320,7 +349,7 @@ export function SwordSkillAura({ plan, unitKey }) {
     const angle = Math.atan2(anchor.tip[1] - y, anchor.tip[0] - x) * 180 / Math.PI;
     const style = pose === 'skill' && plan.skillPose ? { '--combat-sprite-scale': plan.skillPose.scale, '--combat-foot-offset': plan.skillPose.footOffset || '0%' } : getCombatFrameStyle(unitKey, pose);
     const id = `blade-${unique}-${pose}`;
-    return <svg key={pose} className="vfx-blade-aura" viewBox="0 0 512 512" data-vfx-phase="weapon" data-vfx-anchor="weapon" data-pose={pose} data-grip={anchor.grip.join(',')} data-tip={anchor.tip.join(',')} style={style} aria-hidden="true">
+    return <svg key={pose} className="vfx-blade-aura" viewBox="0 0 512 512" data-vfx-phase="weapon" data-vfx-anchor="weapon" data-pose={pose} data-grip={anchor.grip.join(',')} data-tip={anchor.tip.join(',')} data-kind="blade" data-vfx-kind="blade" data-vfx-unit={unitKey} data-anchor-origin="authored-frame" data-anchor-authored="true" style={style} aria-hidden="true">
       <LightPaint id={id} color={color} core={core} />
       <g transform={`translate(${x} ${y}) rotate(${angle})`} fill="none" strokeLinecap="round">
         <path d={`M12 0Q${length * .3} -20 ${length * .6} -13Q${length * .82} -23 ${length + 6} 0Q${length * .8} 15 ${length * .6} 9Q${length * .35} 22 12 0Z`} fill={`url(#${id}-ribbon)`} opacity=".6" />

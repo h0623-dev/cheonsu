@@ -111,7 +111,7 @@ async function bootstrap(page, stageId) {
   }
   await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: new RegExp(`^${stageId}장\\.`) }) }).click();
   await page.getByRole('button', { name: '전투 시작', exact: true }).click();
-  await page.getByRole('button', { name: '바로 전투', exact: true }).click();
+  await page.getByRole('button', { name: '바로 전투', exact: true }).click(); await (await import('./qa-browser.mjs')).confirmStageMission(page);
   await page.locator('.world-battlefield .unit-visual-hero').waitFor();
   const speed = page.getByRole('button', { name: '전투 3배속', exact: true });
   if (await speed.getAttribute('aria-pressed') !== 'true') await speed.click();
@@ -515,7 +515,7 @@ async function main() {
   const selectedScenarios = scenarios.filter(([name]) => !options.case || options.case === name);
   assert.ok(selectedViewports.length, `Unknown viewport: ${options.viewport}`);
   assert.ok(selectedScenarios.length, `Unknown case: ${options.case}`);
-  const browser = await chromium.launch({ channel: 'msedge', headless: true });
+  const browser = await chromium.launch((await import('./qa-browser.mjs')).qaBrowserOptions());
   try {
     const runs = await Promise.allSettled(selectedViewports.map(async viewport => {
       for (const [name, run] of selectedScenarios) await runCase(browser, name, viewport, run);
@@ -526,7 +526,7 @@ async function main() {
     const failed = results.filter(test => !test.passed).length;
     const passed = failed === 0 && results.length === selectedViewports.length * selectedScenarios.length;
     const report = path.join(out, options.case || options.viewport ? `result-${options.case || 'all'}-${options.viewport || 'all'}.json` : 'result.json');
-    await writeFile(report, JSON.stringify({ passed, base, browser: 'msedge/headless', summary: { passed: results.length - failed, failed, total: results.length }, results }, null, 2));
+    await writeFile(report, JSON.stringify({ passed, base, browser: browser.browserType().name(), headless: true, summary: { passed: results.length - failed, failed, total: results.length }, results }, null, 2));
     console.log(`${passed ? 'PASS' : 'FAIL'} ${results.length - failed}/${results.length}; report ${report}`);
     if (!passed) process.exitCode = 1;
   }

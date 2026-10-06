@@ -1,3 +1,4 @@
+import { qaBrowserOptions, confirmStageMission } from './qa-browser.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -14,7 +15,7 @@ const cases = [
 ];
 const only = process.env.NAV_CASE;
 fs.mkdirSync('tmp/navigation-qa', { recursive: true });
-const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const browser = await chromium.launch(qaBrowserOptions());
 try {
   for (const spec of cases.filter(spec => !only || spec.name === only)) {
     const context = await browser.newContext({ viewport: { width: spec.width, height: spec.height }, serviceWorkers: 'block' });
@@ -36,7 +37,7 @@ try {
       await page.getByRole('button', { name: '새 게임', exact: true }).click();
       await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: /^1장\./ }) }).click();
       await page.getByRole('button', { name: '전투 시작', exact: true }).click();
-      await page.getByRole('button', { name: '바로 전투', exact: true }).click();
+      await page.getByRole('button', { name: '바로 전투', exact: true }).click(); await confirmStageMission(page);
       await page.locator('.unit-visual-hero').waitFor();
       await page.locator('.cinematic-command-bar .prominent-save').click();
       const seed = await page.evaluate(() => JSON.parse(localStorage.getItem('cheonsu_v01_save')));

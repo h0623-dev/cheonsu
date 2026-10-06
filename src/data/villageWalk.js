@@ -1,4 +1,4 @@
-export const VILLAGE_WALK_IDS = ['hero', 'bram', 'lina', 'aria', 'leon', 'sera', 'noah', 'yuna', 'rakan', 'miho', 'teo', 'irene', 'kaz', 'ella', 'jin', 'luka', 'baekho'];
+export const VILLAGE_WALK_IDS = ['hero', 'bram', 'lina', 'aria', 'leon', 'sera', 'noah', 'yuna', 'rakan', 'miho', 'teo', 'irene', 'kaz', 'ella', 'jin', 'luka', 'baekho', 'mare', 'harin', 'edan', 'sylvan'];
 
 export function getVillageWalkFrame(id, direction = 'down', step = 0) {
   if (!VILLAGE_WALK_IDS.includes(id)) return null;

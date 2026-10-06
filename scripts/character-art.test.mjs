@@ -5,7 +5,8 @@ import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import manifest from '../public/art/characters-v2/manifest.json' with { type: 'json' };
 import { getCharacterArt, getCharacterFrameStyle, getCharacterSkillPose } from '../src/data/characterArt.js';
-import { combatUnitIds, combatMotionPoses, getCombatSprite, getCombatMotionSprite, getCombatChoreography, getCombatPresentation } from '../src/data/combatArt.js';
+import { legacyCombatUnitIds, combatMotionPoses, getCombatSprite, getCombatMotionSprite, getCombatChoreography, getCombatPresentation } from '../src/data/combatArt.js';
+import { EXPANSION_ALLY_ART_KEYS } from '../src/data/expansionArtRegistry.js';
 import { CHARACTER_SKILLS } from '../src/data/skills.js';
 import { DISCOVERY_TECHNIQUES } from '../src/data/discoveries.js';
 import { getPaintedVisualProfile } from '../src/data/unitVisuals.js';
@@ -15,6 +16,7 @@ import { getEnemyIllustration } from '../src/data/enemyIllustrations.js';
 import { MONSTER_ENEMIES } from '../src/data/monsterEnemies.js';
 
 const poses = [...combatMotionPoses, 'skill-a', 'skill-b'];
+const combatUnitIds = legacyCombatUnitIds;
 const idleBaseline = JSON.parse(await fs.readFile(new URL('../docs/art/characters-v2/idle-baseline.json', import.meta.url), 'utf8'));
 const assertNewAsset = asset => assert.match(asset, /^\/art\/characters-v2\//, 'active combat/dialogue must use the new artwork');
 const publicFile = asset => new URL(`../public${asset}`, import.meta.url);
@@ -23,7 +25,7 @@ test('82 original idle/rear images and four catalogues retain their baseline aft
   assert.equal(Object.keys(idleBaseline.files).length, 86);
   assert.equal(Object.keys(idleBaseline.files).filter(file => file.endsWith('.webp')).length, 82);
   assert.match(idleBaseline.commit, /^[a-f0-9]{40}$/);
-  const approved = Object.keys(MONSTER_ENEMIES);
+  const approved = Object.keys(MONSTER_ENEMIES).filter(id => legacyCombatUnitIds.includes(id));
   assert.equal(approved.length, 6);
   for (const [file, expected] of Object.entries(idleBaseline.files)) {
     assert.match(file, /^public\/art\/(map-sprites-v4|directions-v1)\//);
@@ -52,9 +54,9 @@ test('82 original idle/rear images and four catalogues retain their baseline aft
 
 test('new character catalogue covers all 17 companions, 25 enemies and 5 bosses', () => {
   assert.deepEqual(Object.keys(manifest.units).sort(), [...combatUnitIds].sort());
-  assert.equal(Object.keys(CHARACTER_SKILLS).length, 17);
+  assert.equal(Object.keys(CHARACTER_SKILLS).filter(id => !EXPANSION_ALLY_ART_KEYS.includes(id)).length, 17);
   assert.equal(combatUnitIds.filter(id => !Object.hasOwn(CHARACTER_SKILLS, id) && !bossCombatIds.includes(id)).length, 25);
-  assert.equal(bossCombatIds.length, 5);
+  assert.equal(bossCombatIds.filter(id => legacyCombatUnitIds.includes(id)).length, 5);
   assert.equal(getCharacterArt('unknown'), null);
   assert.equal(getCharacterArt('__proto__'), null);
   assert.equal(getPaintedVisualProfile('unknown'), null);
@@ -87,6 +89,7 @@ test('all live combat, collection, dialogue and boss selectors use one new ident
     assert.equal(JSON.stringify(art), before, 'art selection never mutates the catalogue');
   }
   for (const [speaker, id] of Object.entries(storySpeakerKeys)) {
+    if (!legacyCombatUnitIds.includes(id)) continue;
     assert.equal(getStoryPortrait(speaker), getCharacterArt(id).dialogue);
   }
   assert.equal(getCombatSprite('unknown'), manifest.units.raider.motion.recover);
@@ -192,7 +195,7 @@ test('guard, shield bash and learned sanctuary aliases keep their authored skill
 });
 
 test('34 character skills, learned techniques and enemy skills never reintroduce previous character designs', () => {
-  const techniques = [...Object.entries(CHARACTER_SKILLS).flatMap(([unit, skills]) => skills.map(skill => [unit, skill])),
+  const techniques = [...Object.entries(CHARACTER_SKILLS).filter(([unit]) => legacyCombatUnitIds.includes(unit)).flatMap(([unit, skills]) => skills.map(skill => [unit, skill])),
     ...Object.values(DISCOVERY_TECHNIQUES).map(skill => [skill.unitId, skill])];
   for (const [id, skill] of techniques) {
     const actor = { id, type: 'ally', activeSkillId: skill.id, skillSpec: skill, learnedTechniques: [skill.id] };

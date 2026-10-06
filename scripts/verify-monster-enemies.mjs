@@ -10,6 +10,8 @@ import { getCombatChoreography } from '../src/data/combatArt.js';
 import { MONSTER_ENEMIES } from '../src/data/monsterEnemies.js';
 import directions from '../public/art/directions-v1/manifest.json' with { type: 'json' };
 import { duelProps, seekDuel, assertBodies, assertFit } from './duel-fixture.mjs';
+import { qaBrowserOptions } from './qa-browser.mjs';
+import { EXPANSION_MONSTER_KEYS } from '../src/data/expansionEnemies.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const output = path.resolve(process.env.CHEONSU_MONSTER_QA_OUT || path.join(root, 'tmp/monster-enemies-qa'));
@@ -209,7 +211,10 @@ async function actualApp(base, viewport) {
     await page.locator('.campaign-header-actions').getByRole('button', { name: '뒤로', exact: true }).click();
     await button('도감').click();
     await button('적군').click();
-    assert.equal(await page.locator('.collection-card').count(), 25, '기존 적군19종과 신규6종을 모두 보존합니다');
+    assert.equal(await page.locator('.collection-card').count(), 37, '기존 적군25종과 확장12종을 모두 보존합니다');
+    for (const id of EXPANSION_MONSTER_KEYS) {
+      assert.equal(await page.locator(`[data-character="${id}"]`).getAttribute('data-collected'), 'false', `${id}: 옛 29장 클리어 기록으로 확장 적을 미리 조사하지 않습니다`);
+    }
     for (const id of ['raider', 'ranger', 'sniper', 'marauder', 'assassin_elite', 'iron_lancer', 'plague_doctor', 'beast_tamer', 'storm_mage', 'blade_dancer', 'siege_gunner', 'sentinel', 'blackguard', 'warlord', 'pyromancer', 'frost_mage', 'cultist', 'void_knight', 'wolf']) {
       assert.equal(await page.locator(`[data-character="${id}"]`).getAttribute('data-collected'), 'true', `${id}: 기존 적 도감 조사 기록을 보존합니다`);
     }
@@ -279,7 +284,7 @@ try {
   }, react()], build: { outDir: fixtureOut, emptyOutDir: true, copyPublicDir: false, rollupOptions: { input: path.join(root, 'tests/fixtures/combat.html') } } });
   fixtureServer = await preview({ root, configFile: false, build: { outDir: fixtureOut }, preview: { host: '127.0.0.1', port: 0, open: false } });
   const fixtureBase = `http://127.0.0.1:${fixtureServer.httpServer.address().port}`;
-  browser = await chromium.launch({ headless: true, ...(process.env.CHEONSU_QA_BROWSER ? { channel: process.env.CHEONSU_QA_BROWSER } : {}) });
+  browser = await chromium.launch(qaBrowserOptions());
   for (const viewport of viewports) {
     await fixtureCases(fixtureBase, base, viewport);
     await actualApp(base, viewport);

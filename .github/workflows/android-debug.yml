@@ -27,7 +27,7 @@ jobs:
   build:
     if: github.repository == 'h0623-dev/cheonsu' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 50
+    timeout-minutes: 90
     environment: cheonsu-release
     permissions:
       contents: write
@@ -81,6 +81,9 @@ jobs:
       - run: node scripts/verify-deployment.mjs
       - run: node scripts/verify-campaign-progression.mjs
       - run: node scripts/verify-stage-missions.mjs
+      - run: node scripts/verify-character-codex.mjs
+      - run: node scripts/verify-expansion-50.mjs
+      - run: node scripts/verify-duel-impact.mjs
       - run: npm run update:package
       - name: Verify APK and signed OTA payloads
         shell: pwsh
@@ -117,4 +120,7 @@ jobs:
             tmp/deployment-qa/
             tmp/campaign-progression-qa/
             tmp/stage-missions-qa/
+            tmp/character-codex-qa/
+            tmp/expansion-50-qa/
+            tmp/duel-impact-qa/
           retention-days: 14

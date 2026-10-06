@@ -1,12 +1,24 @@
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-const base = process.env.GAME_URL || 'http://127.0.0.1:5178';
+import { preview } from 'vite';
+import { fileURLToPath } from 'node:url';
+import { qaBrowserOptions } from './qa-browser.mjs';
+import { webBuildInfo } from './update-build-info.mjs';
+import { stages } from '../src/data/stages.js';
+import { getCharacterCollection } from '../src/data/characterCollection.js';
+const root = fileURLToPath(new URL('..', import.meta.url));
+let server;
+if (!process.env.GAME_URL) server = await preview({ preview: { host: '127.0.0.1', port: 0, open: false } });
+const base = process.env.GAME_URL || `http://127.0.0.1:${server.httpServer.address().port}`;
+const catalog = getCharacterCollection({});
+const totals = Object.fromEntries(['ally', 'enemy', 'boss'].map(kind => [kind, catalog.filter(entry => entry.kind === kind).length]));
 const output = 'tmp/character-codex-qa';
 await fs.mkdir(output, { recursive: true });
-const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const browser = await chromium.launch(qaBrowserOptions());
 const reports = [];
 try {
+  if (server) assert.deepEqual(JSON.parse(await fs.readFile('dist/ota-build.json', 'utf8')), webBuildInfo(root), '최종 소스와 같은 생산 빌드입니다');
   for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }, { width: 320, height: 568 }, { width: 844, height: 390 }, { width: 568, height: 320 }]) {
     const page = await browser.newPage({ viewport, serviceWorkers: 'block', reducedMotion: 'reduce' });
     const errors = [];
@@ -34,7 +46,7 @@ try {
     await page.goto(base);
     await button('도감').click();
     await page.locator('.collection-card').first().waitFor();
-    assert.equal(await page.locator('.collection-card').count(), 17);
+    assert.equal(await page.locator('.collection-card').count(), totals.ally);
     assert.equal(await page.locator('[data-collected=true]').count(), 4);
     await card('hero').locator('img').evaluate(img => img.decode());
     assert.equal(await card('hero').locator('img').evaluate(img => getComputedStyle(img).filter), 'none');
@@ -52,7 +64,7 @@ try {
     await page.keyboard.press('Escape');
     await page.getByRole('dialog').waitFor({ state: 'hidden' });
     await page.getByLabel('수집 상태', { exact: true }).selectOption('locked');
-    assert.equal(await page.locator('.collection-card').count(), 13);
+    assert.equal(await page.locator('.collection-card').count(), totals.ally - 4);
     await page.getByRole('textbox', { name: '도감 검색' }).fill('리나');
     assert.equal(await page.locator('.collection-card').count(), 0);
     await page.getByLabel('수집 상태', { exact: true }).selectOption('owned');
@@ -60,12 +72,12 @@ try {
     await button('검색 지우기').click();
     await page.getByLabel('수집 상태', { exact: true }).selectOption('all');
     await button('적군').click();
-    assert.equal(await page.locator('.collection-card').count(), 25);
+    assert.equal(await page.locator('.collection-card').count(), totals.enemy);
     assert.equal(await page.locator('[data-collected=true]').count(), 0);
     await button('보스').click();
-    assert.equal(await page.locator('.collection-card').count(), 5);
+    assert.equal(await page.locator('.collection-card').count(), totals.boss);
     await button('지역·시스템').click();
-    assert.equal(await page.locator('.collection-records article').count(), 34);
+    assert.equal(await page.locator('.collection-records article').count(), stages.length + 4);
     assert.equal(await save(), null, 'browsing must not create a save');
     await button('뒤로').click();
     await page.locator('.journey-title').waitFor();
@@ -97,22 +109,22 @@ try {
     await button('뒤로').click();
     await page.locator('.journey-library').waitFor();
     assert.equal(await save(), before);
-    await page.evaluate(() => {
+    await page.evaluate(campaignLength => {
       const value = JSON.parse(localStorage.getItem('cheonsu_v01_save'));
-      value.clearedStages = Array.from({ length: 30 }, (_, i) => i + 1);
+      value.clearedStages = Array.from({ length: campaignLength }, (_, i) => i + 1);
       localStorage.setItem('cheonsu_v01_save', JSON.stringify(value));
-    });
+    }, stages.length);
     await page.reload();
     await button('도감').click();
-    for (const [kind, count] of [['동료', 17], ['적군', 25], ['보스', 5]]) {
+    for (const [kind, count] of [['동료', totals.ally], ['적군', totals.enemy], ['보스', totals.boss]]) {
       await button(kind).click();
       assert.equal(await page.locator('[data-collected=true]').count(), count, `${kind}: full campaign can complete the catalog`);
       await verifyImages();
     }
     assert.deepEqual(errors, []);
     reports.push({ viewport, passed: true });
-    console.log(`PASS codex ${viewport.width}x${viewport.height}: 47 entries, grayscale/color, details, filters, save, back navigation`);
+    console.log(`PASS codex ${viewport.width}x${viewport.height}: ${catalog.length} entries, grayscale/color, details, filters, save, back navigation`);
     await page.close();
   }
   await fs.writeFile(`${output}/result.json`, JSON.stringify(reports, null, 2));
-} finally { await browser.close(); }
+} finally { await browser.close(); if (server) await server.close(); }

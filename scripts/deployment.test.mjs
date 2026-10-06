@@ -15,6 +15,9 @@ import { applyEquipmentStats, getInitialParty, mergePartyIntoStage } from '../sr
 import { getSkillDisplayName } from '../src/data/skills.js';
 import { normalizeSaveData } from '../src/engine/saveEngine.js';
 import { processTerrainStartEffects } from '../src/engine/statusEngine.js';
+import { createExpansionRecruit } from '../src/engine/promotionEngine.js';
+import { applyExpansionEnemyIdentity, createExpansionEnemy, createExpansionExtraEnemy, getExpansionEnemyKeys } from '../src/data/expansionEnemies.js';
+import { isDeploymentTerrainUnsafe } from '../src/data/terrainPolicy.js';
 import {
   getDeploymentCells, sanitizeDeploymentDraft, reconcileDeploymentPlacements,
   placeDeploymentUnit, validateDeploymentPlacements, applyDeploymentPlacements,
@@ -41,6 +44,7 @@ const builders = runInNewContext([
 ].join('\n'), {
   alignMapToArtwork, createBattlefieldTerrain, getBattlefieldPlan, applyEquipmentStats,
   distributeBattleFormations, getSkillDisplayName, getChapterBossName, applyStageMonsterAppearance, withStageEnemyLevel,
+  createExpansionRecruit, applyExpansionEnemyIdentity, createExpansionEnemy, createExpansionExtraEnemy, getExpansionEnemyKeys,
   clone: value => JSON.parse(JSON.stringify(value)),
   Math: Object.assign(Object.create(Math), { random: () => { throw new Error('Deployment must be deterministic'); } }),
 });
@@ -78,6 +82,7 @@ for (const chapter of stages) test(`Chapter ${chapter.id}: real 1/4/15-unit batt
     assert.equal(allowed.size, cells.length);
     for (const cell of cells) {
       assert.ok(!['block', 'wall', 'void', 'fire', 'ice', 'dark', 'rune', 'trap', 'water', 'swamp'].includes(stage.map[cell.y][cell.x]));
+      assert.equal(isDeploymentTerrainUnsafe(stage.map[cell.y][cell.x]), false, 'New recovery/magic terrain also stays outside the deployment zone');
       const plan = getBattlefieldPlan(stage.id);
       assert.ok(deploymentDepth(cell.x / (stage.map[0].length - 1), cell.y / (stage.map.length - 1), plan.direction) >= .57);
       assert.ok(units.filter(unit => unit.type !== 'ally')

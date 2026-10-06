@@ -1,9 +1,10 @@
+import { qaBrowserOptions, confirmStageMission } from './qa-browser.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 
 const base = process.env.GAME_URL || 'http://127.0.0.1:5193';
-const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const browser = await chromium.launch(qaBrowserOptions());
 try {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
   await context.addInitScript(() => {
@@ -27,7 +28,7 @@ try {
   await page.getByRole('button', { name: '새 게임', exact: true }).click();
   await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: /^1장\./ }) }).click();
   await page.getByRole('button', { name: '전투 시작', exact: true }).click();
-  await page.getByRole('button', { name: '바로 전투', exact: true }).click();
+  await page.getByRole('button', { name: '바로 전투', exact: true }).click(); await confirmStageMission(page);
   await page.locator('.world-battlefield .unit-visual-hero').waitFor();
   await page.waitForFunction(() => [...document.querySelectorAll('.world-battlefield img')].every(img => img.complete && img.naturalWidth > 0));
   const decoded = await page.evaluate(async paths => {

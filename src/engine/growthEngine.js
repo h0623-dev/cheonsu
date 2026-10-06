@@ -47,6 +47,7 @@ export function syncBattleExperience(party, result) {
     if (!live) return grantExp([unit], unit.id, reward.amount).units[0];
     return applyEquipmentStats({ ...unit, level: live.level, exp: live.exp,
       maxHp: live.maxHp, baseAtk: live.baseAtk, baseDef: live.baseDef,
+      ...(live.advancedMastery !== undefined ? { advancedMastery: Math.max(unit.advancedMastery || 0, live.advancedMastery) } : {}),
       hp: unit.hp > 0 ? Math.min(live.maxHp, unit.hp + Math.max(0, live.maxHp - unit.maxHp)) : 0,
     });
   });

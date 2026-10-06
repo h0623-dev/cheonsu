@@ -1,4 +1,4 @@
-import { getBattlefieldPlan, orientBattlePoint } from './battlefieldPlans.js';
+import { deploymentDepth, getBattlefieldPlan, orientBattlePoint } from './battlefieldPlans.js';
 
 export const TERRAIN_LAYOUTS = ['갈림길', '협곡', '성문', '폐허', '능선', '쌍교', '숲 공터', '섬', '항구', '왕성'];
 const ROUTES = {
@@ -72,5 +72,37 @@ export function createStageTerrain(source, stageId) {
   if (plan.layout==='citadel') { patch(.5,.46,2,2,'rune',true); patch(.5,.25,2,1,'fort',true); }
   patch(.5,.14,1,1,'fort',true);
   const [gx,gy]=point(.5,.14); if(map[gy]?.[gx] && map[gy][gx]!=='block') map[gy][gx]='gate';
+  if (stageId >= 31) {
+    // The first campaign's authored terrain stays byte-for-byte unchanged.
+    // Expansion materials decorate this chapter's route graph; they never
+    // close a route or put healing / resonance tiles in the deployment yard.
+    const tiles = plan.biome === 'coast'
+      ? { road: 'sluice_bridge', forest: 'shell_reef', hill: 'low_rubble', rune: 'cracked_slab' }
+      : plan.biome === 'snow'
+        ? { road: 'packed_snow', hill: 'cracked_slab', rune: 'cracked_slab' }
+        : plan.biome === 'workshop'
+          ? { road: 'power_conduit', forest: 'low_rubble', hill: 'cracked_slab', rune: 'resonance_pad' }
+          : { forest: 'star_moss', hill: 'cracked_slab', rune: 'oath_rune', swamp: 'star_moss' };
+    for (let y = 0; y < map.length; y++) for (let x = 0; x < map[y].length; x++) {
+      const tile = tiles[map[y][x]];
+      const rear = deploymentDepth(x / (width - 1), y / (height - 1), plan.direction) >= .65;
+      if (tile && !(tile === 'star_moss' && rear)) map[y][x] = tile;
+    }
+    if (plan.biome === 'coast') {
+      patch(.25,.5,1,1,'shell_reef',true);
+      patch(.75,.5,1,1,'low_rubble',true);
+    } else if (plan.biome === 'snow') {
+      patch(.5,.5,1,1,'hot_spring',true);
+      patch(.3,.35,1,1,'cracked_slab',true);
+    } else if (plan.biome === 'workshop') {
+      patch(.5,.5,1,1,'resonance_pad',true);
+      patch(.25,.35,1,1,'low_rubble',true);
+      patch(.75,.65,1,1,'cracked_slab',true);
+    } else {
+      patch(.5,.5,1,1,'oath_rune',true);
+      patch(.25,.35,1,1,'star_moss',true);
+      patch(.75,.65,1,1,'low_rubble',true);
+    }
+  }
   return map;
 }

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import sharp from 'sharp';
 import { UNIT_DIRECTIONS, directionTo, getUnitFacing, getFacingArt, withSavedFacings } from '../src/engine/unitFacing.js';
-import { combatUnitIds, getCombatTiming, getCombatPresentation } from '../src/data/combatArt.js';
+import { combatUnitIds, legacyCombatUnitIds, getCombatTiming, getCombatPresentation } from '../src/data/combatArt.js';
 import { normalizeSaveData } from '../src/engine/saveEngine.js';
 import { stages } from '../src/data/stages.js';
 
@@ -45,9 +45,10 @@ test('basic and skill timing differ, contact is synchronized and weapon identity
 });
 test('all 47 generated rear views have transparent margins, consistent feet and production paths', async () => {
   const manifest=JSON.parse(await fs.readFile('public/art/directions-v1/manifest.json','utf8'));
-  assert.deepEqual(Object.keys(manifest).sort(),combatUnitIds.slice().sort());
+  assert.equal(legacyCombatUnitIds.length, 47);
+  assert.deepEqual(Object.keys(manifest).sort(),legacyCombatUnitIds.slice().sort());
   let bytes=0;
-  for(const key of combatUnitIds){
+  for(const key of legacyCombatUnitIds){
     const entry=manifest[key], file=`public${entry.rear}`;
     bytes+=(await fs.stat(file)).size;
     const {data,info}=await sharp(file).ensureAlpha().raw().toBuffer({resolveWithObject:true});

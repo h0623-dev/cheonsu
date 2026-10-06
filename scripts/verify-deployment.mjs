@@ -1,3 +1,4 @@
+import { qaBrowserOptions } from './qa-browser.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -6,6 +7,7 @@ import { chromium } from 'playwright';
 import { preview } from 'vite';
 import { getBattlefieldPlan } from '../src/data/battlefieldPlans.js';
 import { webBuildInfo } from './update-build-info.mjs';
+import { stages } from '../src/data/stages.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const output = path.resolve(process.env.CHEONSU_DEPLOYMENT_QA_OUT || path.join(root, 'tmp/deployment-qa'));
@@ -293,8 +295,8 @@ async function runViewport(base, viewport) {
     result.checks.push(`실제 1.99.156 전투 저장 ${legacy.cases.length}건의 전체 유닛·진행도 보존`);
 
     if (viewport.width === 1280) {
-      const campaign = { ...structuredClone(legacy.shared), ...structuredClone(legacy.cases[0].save), screen: 'campaign', clearedStages: Array.from({ length: 29 }, (_, index) => index + 1), deployedIds: legacy.shared.party.slice(0, 15).map(unit => unit.id) };
-      for (let stageId = 1; stageId <= 30; stageId++) {
+      const campaign = { ...structuredClone(legacy.shared), ...structuredClone(legacy.cases[0].save), screen: 'campaign', clearedStages: stages.slice(0, -1).map(stage => stage.id), deployedIds: legacy.shared.party.slice(0, 15).map(unit => unit.id) };
+      for (const { id: stageId } of stages) {
         await load(campaign);
         await selectStage(page, stageId);
         assert.equal(await page.locator('.deployment-roster-card').count(), 17, `${stageId}장: 보유 캐릭터 17명을 표시합니다`);
@@ -338,10 +340,10 @@ async function runViewport(base, viewport) {
         console.log(`PASS ${stageId}장 전투 시작: 수동 배치 15명 좌표 유지, 적 ${Object.keys(enemiesBefore).length}명 위치 유지, 아군 첫 턴`);
         await fs.writeFile(path.join(output, 'report.json'), JSON.stringify(report, null, 2));
       }
-      assert.equal(new Set(report.stageChecks.map(stage => stage.direction)).size, 8, '30개 장의 모든 진입 방향을 검사합니다');
-      result.checks.push('30개 장·8개 진입 방향·보유17명·최대15명·16번째 차단');
+      assert.equal(new Set(report.stageChecks.map(stage => stage.direction)).size, 8, '전체 캠페인의 모든 진입 방향을 검사합니다');
+      result.checks.push(`${stages.length}개 장·8개 진입 방향·구버전 보유17명·최대15명·16번째 차단`);
       assert.ok(report.stageChecks.every(stage => stage.started && stage.coordinatesPreserved && stage.enemyCoordinatesPreserved && stage.actionsUnspent));
-      result.checks.push('30개 장·15명 실제 전투에서 직접 배치·적 위치·아군 첫 턴·행동 미소모 유지');
+      result.checks.push(`${stages.length}개 장·15명 실제 전투에서 직접 배치·적 위치·아군 첫 턴·행동 미소모 유지`);
 
       await load(pending);
       await board(page);
@@ -404,7 +406,7 @@ try {
   report.build = JSON.parse(await fs.readFile(path.join(root, 'dist/ota-build.json'), 'utf8'));
   assert.deepEqual(report.build, webBuildInfo(root), '현재 최종 소스와 동일한 생산 빌드로 검사합니다');
   server = await preview({ preview: { host: '127.0.0.1', port: 0, open: false } });
-  browser = await chromium.launch({ headless: true, ...(process.env.CHEONSU_QA_BROWSER ? { channel: process.env.CHEONSU_QA_BROWSER } : {}) });
+  browser = await chromium.launch(qaBrowserOptions());
   for (const viewport of viewports) await runViewport(`http://127.0.0.1:${server.httpServer.address().port}`, viewport);
   assert.deepEqual(report.build, webBuildInfo(root), '검사 도중 생산 빌드의 소스가 변경되지 않았습니다');
   report.passed = true;

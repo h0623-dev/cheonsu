@@ -65,7 +65,9 @@ test('malformed stage and missing or invalid levels cannot produce NaN or an unb
   for (const stage of [undefined, null, NaN, Infinity, -5, 0, '30', {}, { id: Infinity }]) {
     assert.equal(getStageEnemyLevel(stage), 1);
   }
-  assert.equal(getStageEnemyLevel(31), 15);
+  assert.equal(getStageEnemyLevel(31), 16);
+  assert.equal(getStageEnemyLevel(50), 25);
+  assert.equal(getStageEnemyLevel(500), 25);
   assert.equal(getStageEnemyLevel({ id: 30.9 }, { type: 'boss' }), 17);
   for (const level of [undefined, null, 0, -1, 1.5, NaN, Infinity, '9']) {
     const result = withStageEnemyLevel({ id: 'boss', type: 'boss', level }, 12);

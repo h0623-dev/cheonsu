@@ -1,10 +1,11 @@
+import { qaBrowserOptions } from './qa-browser.mjs';
 import { chromium } from 'playwright';
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 
 const dir = 'tmp/orchestra-qa';
 await fs.mkdir(dir, { recursive: true });
-const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const browser = await chromium.launch(qaBrowserOptions());
 try {
   const page = await browser.newPage({ serviceWorkers: 'block' });
   await page.goto(process.env.GAME_URL || 'http://127.0.0.1:5178');

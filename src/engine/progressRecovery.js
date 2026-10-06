@@ -1,9 +1,10 @@
 import { getUnlockedStageIds, writeProgressSave } from './campaignProgress.js';
+import { stages } from '../data/stages.js';
 
 export const PROGRESS_RECOVERY_BACKUP = 'cheonsu_v01_progress_recovery_backup';
 
 export function recoverCampaignProgress(storage, completedThrough, source = null) {
-  if (!Number.isInteger(completedThrough) || completedThrough < 0 || completedThrough > 30) throw new Error('완료한 장을 0~30 사이에서 선택해 주세요.');
+  if (!Number.isInteger(completedThrough) || completedThrough < 0 || completedThrough > stages.length) throw new Error(`완료한 장을 0~${stages.length} 사이에서 선택해 주세요.`);
   const raw = source ? JSON.stringify(source) : storage.getItem('cheonsu_v01_save');
   const data = JSON.parse(raw || 'null');
   if (!data || !Array.isArray(data.party) || !data.party.length || !Array.isArray(data.clearedStages)) throw new Error('복구할 저장 데이터를 찾을 수 없습니다.');

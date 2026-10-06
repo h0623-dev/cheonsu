@@ -1,3 +1,5 @@
+import { EXPANSION_MONSTER_IDENTITIES, applyExpansionEnemyIdentity } from './expansionEnemies.js';
+
 // Species art is separate from the saved battle ID and its original combat rules.
 export const MONSTER_ENEMIES = {
   'kobold-hunter': { name: '코볼트 사냥꾼', role: '석궁 사냥꾼', rank: 'normal', firstStage: 4, icon: '🏹' },
@@ -6,6 +8,7 @@ export const MONSTER_ENEMIES = {
   'rock-spirit': { name: '바위정령', role: '정예 바위 수호자', rank: 'elite', firstStage: 10, icon: '🪨' },
   'skeleton-warrior': { name: '해골전사', role: '도끼 전사', rank: 'normal', firstStage: 14, icon: '💀' },
   'harpy-scout': { name: '하피 정찰병', role: '기습 정찰병', rank: 'normal', firstStage: 15, icon: '🪶' },
+  ...EXPANSION_MONSTER_IDENTITIES,
 };
 
 // Replace existing slots; never add combatants, reorder templates or replace story bosses.
@@ -44,6 +47,7 @@ export function isMonsterArtId(key) {
 export function applyStageMonsterAppearance(unit, stage) {
   if (!unit || unit.type === 'ally' || unit.type === 'boss' || unit.id === 'boss') return unit;
   const stageId = typeof stage === 'number' ? stage : stage?.id;
+  if (stageId > 30) return applyExpansionEnemyIdentity(unit, stage);
   const sourceKey = unit.legacySpriteKey || unit.spriteKey || unit.stageEnemyRole;
   const artId = MONSTER_STAGE_ROLES[stageId]?.[sourceKey];
   const identity = MONSTER_ENEMIES[artId];

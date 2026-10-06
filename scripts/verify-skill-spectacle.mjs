@@ -1,3 +1,4 @@
+import { qaBrowserOptions } from './qa-browser.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -10,8 +11,12 @@ import sharp from 'sharp';
 import { parse } from 'espree';
 import { CHARACTER_SKILLS } from '../src/data/skills.js';
 import { DISCOVERY_TECHNIQUES } from '../src/data/discoveries.js';
-import { combatUnitIds, getCombatChoreography, getCombatTiming } from '../src/data/combatArt.js';
+import { combatUnitIds, combatArtKeys, getCombatChoreography, getCombatTiming } from '../src/data/combatArt.js';
 import { getCharacterArt } from '../src/data/characterArt.js';
+import { ADVANCED_CLASSES } from '../src/data/advancedClasses.js';
+import { EXPANSION_ENEMY_TEMPLATES, createExpansionEnemy, isExpansionEnemyKey, resolveExpansionEnemySupport } from '../src/data/expansionEnemies.js';
+import { getSkillAuraAnchor } from '../src/data/skillAuraAnchors.js';
+import { productionDuelProps } from './production-duel-fixture.mjs';
 import { getBossSpriteKey } from '../src/data/bossArt.js';
 import { getChapterBossName } from '../src/data/chapterIdentity.js';
 import { MONSTER_ENEMIES, applyStageMonsterAppearance } from '../src/data/monsterEnemies.js';
@@ -23,17 +28,20 @@ import { duelProps, renderDuel, seekDuel, assertBodies, assertFit } from './duel
 const root = fileURLToPath(new URL('..', import.meta.url));
 const output = path.resolve(process.env.CHEONSU_SKILL_QA_OUT || path.join(root, 'tmp/skill-spectacle-qa'));
 const viewports = [{ width: 1280, height: 900 }, { width: 390, height: 844 }, { width: 844, height: 390 }];
+const requested = process.env.CHEONSU_SKILL_QA_KEYS?.split(',').filter(Boolean);
+if (requested) assert.ok(requested.every(key => combatArtKeys.includes(key)), '실제 등록된 전투 아트만 검사합니다');
+const keys = requested ? [...new Set(requested)] : combatArtKeys;
 const entries = [...Object.entries(CHARACTER_SKILLS).flatMap(([unit, skills]) => skills.map(skill => [unit, skill])),
-  ...Object.values(DISCOVERY_TECHNIQUES).map(skill => [skill.unitId, skill])];
+  ...Object.values(DISCOVERY_TECHNIQUES).map(skill => [skill.unitId, skill]),
+  ...Object.values(ADVANCED_CLASSES).flat().map(form => [form.id, form.skill])].filter(([unit]) => keys.includes(unit));
 const heroSkills = entries.filter(([unit]) => unit === 'hero').map(([, skill]) => skill);
-const enemyIds = combatUnitIds.filter(unit => !Object.hasOwn(CHARACTER_SKILLS, unit));
+const enemyIds = combatUnitIds.filter(unit => !Object.hasOwn(CHARACTER_SKILLS, unit) && keys.includes(unit));
 const limits = { additionalNodes: 150, additionalAnimations: 30 };
 const errors = [], results = [];
 const attachmentPixelsChecked = new Set();
-const report = { passed: false, production: true, skills: entries.length, units: combatUnitIds.length, viewports, limits, errors, results };
+const report = { passed: false, production: true, skills: entries.length, units: keys.length, fullRoster: keys.length === combatArtKeys.length, totalRegisteredKeys: combatArtKeys.length, viewports, limits, errors, results };
 let server, fixtureServer, browser;
 await fs.mkdir(output, { recursive: true });
-const weaponAnchors = JSON.parse(await fs.readFile(path.join(root, 'src/data/skillWeaponAnchors.json'), 'utf8'));
 const enemyScenes = await collectEnemyScenes();
 report.enemyProfiles = enemyIds.map(unit => ({ unit, ...enemyScenes[unit].provenance, actor: enemyScenes[unit].actor }));
 
@@ -51,14 +59,32 @@ async function collectEnemyScenes() {
     assert.ok(node, `${name}: 실제 게임 적 분기를 읽습니다`);
     return source.slice(node.start, node.end);
   };
+  const supportVariables = new Map();
+  const inspectNode = node => {
+    if (!node || typeof node !== 'object') return;
+    if (node.type === 'VariableDeclaration') for (const declaration of node.declarations) {
+      if (['supportType', 'supportActor', 'supportOutcome'].includes(declaration.id?.name)) supportVariables.set(declaration.id.name, source.slice(node.start, node.end));
+    }
+    for (const child of Object.values(node)) {
+      if (Array.isArray(child)) child.forEach(inspectNode);
+      else if (child && typeof child === 'object') inspectNode(child);
+    }
+  };
+  inspectNode(tree);
+  for (const name of ['supportType', 'supportActor', 'supportOutcome']) assert.ok(supportVariables.has(name), `${name}: 실제 App 지원 장면 선언을 읽습니다`);
+  const previewSupport = support => runInNewContext([...supportVariables.values(), '({ actor: supportActor, outcome: supportOutcome })'].join('\n'), { support });
   const actual = runInNewContext([variable('ENEMY_VARIANT_KEYS'), variable('ENEMY_ARCHETYPE_TEMPLATES'), declaration('enemySquadUnit'),
     variable('STAGE_ENEMY_SQUADS'), declaration('getStageBossSpriteKey'), declaration('getEffectType'),
-    '({ squads: STAGE_ENEMY_SQUADS, bossKey: getStageBossSpriteKey, effect: getEffectType })'].join('\n'));
+    '({ squads: STAGE_ENEMY_SQUADS, bossKey: getStageBossSpriteKey, effect: getEffectType })'].join('\n'), { isExpansionEnemyKey });
   const squads = JSON.parse(JSON.stringify(actual.squads));
   const profiles = {};
   for (const unit of enemyIds) {
     let original, stage, sourceLabel;
-    if (unit.startsWith('boss_')) {
+    if (Object.hasOwn(EXPANSION_ENEMY_TEMPLATES, unit)) {
+      stage = EXPANSION_ENEMY_TEMPLATES[unit].firstStage;
+      original = createExpansionEnemy(stage, unit);
+      sourceLabel = 'createExpansionEnemy + 실제 EXPANSION_ENEMY_TEMPLATES';
+    } else if (unit.startsWith('boss_')) {
       for (const candidate of stages) {
         const boss = candidate.units.find(actor => actor.type === 'boss');
         if (!boss) continue;
@@ -83,22 +109,31 @@ async function collectEnemyScenes() {
       sourceLabel = 'App.STAGE_ENEMY_SQUADS / ENEMY_ARCHETYPE_TEMPLATES';
     }
     assert.ok(original, `${unit}: 실제 적·보스 스킬 자료가 있습니다`);
-    const actor = { ...structuredClone(original), id: original.id || `qa-${unit}`, type: unit.startsWith('boss_') ? 'boss' : 'enemy',
+    const actor = { ...structuredClone(original), id: original.id || `qa-${unit}`, type: unit.startsWith('boss_') || EXPANSION_ENEMY_TEMPLATES[unit]?.rank === 'boss' ? 'boss' : 'enemy',
       maxHp: original.maxHp || original.hp, skillType: original.skillType || 'attack', x: 3, y: 3, status: [] };
     const target = { id: 'hero', name: '카일', type: 'ally', hp: 30, maxHp: 50,
       x: actor.x + getAttackRange(actor, 'skill').min, y: actor.y };
     const choice = getEnemyAttackChoice(actor, [target], Array.from({ length: 20 }, () => Array(20).fill('plain')));
     assert.equal(choice?.mode, 'skill', `${unit}: 실제 AI가 이 사거리에서 자신의 공격 스킬을 선택합니다`);
     profiles[unit] = { actor, target, effect: actual.effect, provenance: { stage, source: sourceLabel, aiType: actor.aiType, skill: actor.skill } };
+    if (actor.expansionSupport) {
+      const teammate = createExpansionEnemy(stage, 'crab_guard', { id: `${unit}-support-target`, x: actor.x + 1, y: actor.y });
+      teammate.hp = Math.max(1, teammate.maxHp - 20);
+      const support = resolveExpansionEnemySupport(actor, [actor, teammate], actor.expansionSupport === 'alternatingGuard' ? 2 : 1);
+      assert.ok(support, `${unit}: 실제 엔진이 자신의 지원 기술을 선택합니다`);
+      profiles[unit].support = { ...support, preview: previewSupport(support) };
+    }
   }
   return profiles;
 }
 
-function sceneProps(unit, skill, speed, scenario, mode = 'skill') {
+function sceneProps(unit, skill, speed, scenario, mode = 'skill', phase = 1, supporting = false) {
   const profile = enemyScenes[unit];
-  const props = duelProps(unit, skill, speed, { mode });
+  const props = productionDuelProps(unit, skill, speed, { mode });
   if (profile) {
     props.scene.attacker = structuredClone(profile.actor);
+    const phaseSpec = phase === 2 && EXPANSION_ENEMY_TEMPLATES[unit]?.phaseSkill;
+    if (phaseSpec) props.scene.attacker = { ...props.scene.attacker, bossPhase: 2, skill: phaseSpec.name, skillSpec: structuredClone(phaseSpec) };
     props.scene.defender = structuredClone(profile.target);
     props.scene.attackerPostHp = props.scene.attacker.hp;
     props.defenderKey = 'hero';
@@ -107,9 +142,21 @@ function sceneProps(unit, skill, speed, scenario, mode = 'skill') {
   if (skill?.type === 'guard') { props.scene.outcome.damage = 0; props.scene.defenderPostHp = props.scene.defender.hp; }
   if (scenario === 'miss') { props.scene.outcome = { hit: false, damage: 0 }; props.scene.defenderPostHp = props.scene.defender.hp; }
   if (scenario === 'ally-guard') {
-    props.defenderKey = 'hero';
-    props.scene.defender = { id: 'hero', name: '카일', type: 'ally', hp: 30, maxHp: 50 };
+    const target = props.scene.attacker.id === 'hero' ? 'bram' : 'hero';
+    props.defenderKey = target;
+    props.scene.defender = { id: target, name: target === 'hero' ? '카일' : '브람', type: 'ally', hp: 30, maxHp: 50 };
     props.scene.defenderPostHp = 30;
+  }
+  if (supporting) {
+    const support = profile.support;
+    assert.ok(support, `${unit}: 지원 기술 생산 자료가 있습니다`);
+    props.scene.attacker = structuredClone(support.preview.actor);
+    props.scene.defender = structuredClone(support.target);
+    props.defenderKey = support.target.artId || unit;
+    props.scene.title = support.label;
+    props.scene.outcome = structuredClone(support.preview.outcome);
+    props.scene.attackerPostHp = support.units.find(actor => actor.id === support.actor.id).hp;
+    props.scene.defenderPostHp = support.units.find(actor => actor.id === support.target.id).hp;
   }
   if (profile) props.scene.effectType = profile.effect(props.scene, props.scene.outcome);
   props.scene.durationMs = 1820 * getCombatTiming(props.scene).durationScale / speed;
@@ -203,7 +250,7 @@ function assertTarget(burst, state, label) {
 
 async function attachmentFrames(page, label, unit, plan) {
   const skillPose = Object.entries(getCharacterArt(unit).motion).find(([, source]) => source === plan.skillPose.src)?.[0];
-  const sourceAnchors = Object.fromEntries(['windup', 'strike', 'skill'].map(pose => [pose, weaponAnchors[unit]?.[pose === 'skill' ? skillPose : pose]]));
+  const sourceAnchors = Object.fromEntries(['windup', 'strike', 'skill'].map(pose => [pose, getSkillAuraAnchor(unit, pose === 'skill' ? skillPose : pose, plan.weapon)]));
   const frames = await page.locator('.vfx-blade-aura,.vfx-weapon-aura').evaluateAll((elements, anchors) => elements.map(aura => {
     const frame = aura.parentElement.querySelector(`.fighter-frame[data-pose="${aura.dataset.pose}"]`);
     const style = getComputedStyle(aura), frameStyle = frame && getComputedStyle(frame);
@@ -249,18 +296,21 @@ async function attachmentFrames(page, label, unit, plan) {
         arrowPathPresent: [...aura.querySelectorAll('path')].some(element => element.getAttribute('d') === arrowPath),
         arrowTipPresent: [...aura.querySelectorAll('path')].some(element => element.getAttribute('transform')?.startsWith(`translate(${anchor.tip.join(' ')})`)) };
     }
-    return { pose: aura.dataset.pose, kind: aura.dataset.kind || aura.dataset.vfxKind || (aura.classList.contains('vfx-blade-aura') ? 'blade' : null), attached: aura.parentElement.classList.contains('fighter-poses'),
+    return { pose: aura.dataset.pose, origin: aura.dataset.anchorOrigin, authored: aura.dataset.anchorAuthored === 'true', reviewed: aura.dataset.anchorReviewed === 'true', kind: aura.dataset.kind || aura.dataset.vfxKind || (aura.classList.contains('vfx-blade-aura') ? 'blade' : null), attached: aura.parentElement.classList.contains('fighter-poses'),
       viewBox: aura.getAttribute('viewBox'), width: aura.clientWidth, height: aura.clientHeight,
       frameWidth: frame?.clientWidth, frameHeight: frame?.clientHeight, transform: style.transform, frameTransform: frameStyle?.transform,
       scale: style.getPropertyValue('--combat-sprite-scale'), frameScale: frameStyle?.getPropertyValue('--combat-sprite-scale'),
       footOffset: style.getPropertyValue('--combat-foot-offset'), frameFootOffset: frameStyle?.getPropertyValue('--combat-foot-offset'), points, bowCurve };
   }), sourceAnchors);
   for (const frame of frames) {
-    const anchor = weaponAnchors[unit]?.[frame.pose === 'skill' ? skillPose : frame.pose];
-    assert.ok(anchor, `${label}: 실제 원화 자세 ${frame.pose}의 부착 자료가 있습니다`);
+    const anchor = sourceAnchors[frame.pose];
+    assert.ok(anchor, `${label}: 실제 자세 ${frame.pose}의 부착 자료가 있습니다`);
+    assert.equal(frame.authored, anchor.authored, `${label}: 실측과 프레임 기반 보정을 구분합니다`);
+    assert.equal(frame.reviewed, Boolean(anchor.reviewed), `${label}: 수동 검토한 프레임 좌표를 구분합니다`);
+    assert.equal(frame.origin, anchor.origin, `${label}: 부착 좌표 출처를 보존합니다`);
     assert.equal(frame.kind, anchor.kind, `${label}: 실제 무기 종류를 표시합니다`);
-    assert.deepEqual(frame.points[0].source, anchor.grip, `${label}: 조사한 손잡이 좌표를 사용합니다`);
-    assert.deepEqual(frame.points[1].source, anchor.tip, `${label}: 조사한 무기 끝 좌표를 사용합니다`);
+    assert.deepEqual(frame.points[0].source, anchor.grip, `${label}: 부착 손잡이 좌표를 사용합니다`);
+    assert.deepEqual(frame.points[1].source, anchor.tip, `${label}: 부착 무기 끝 좌표를 사용합니다`);
     assert.ok(frame.attached && ['windup', 'strike', 'skill'].includes(frame.pose), `${label}: 무기 이펙트는 해당 자세의 fighter-poses에 부착됩니다`);
     assert.equal(frame.viewBox.replace(/\s+/g, ' ').trim(), '0 0 512 512', `${label}: 무기와 그림이 같은 512 좌표계를 사용합니다`);
     assert.equal(frame.width, frame.frameWidth, `${label}: 무기 이펙트와 그림 폭이 같습니다`);
@@ -268,13 +318,13 @@ async function attachmentFrames(page, label, unit, plan) {
     assert.equal(frame.transform, frame.frameTransform, `${label}: 무기 이펙트가 그림의 확대·발 위치를 따릅니다`);
     assert.equal(frame.scale, frame.frameScale, `${label}: 확대율 보존`);
     assert.equal(frame.footOffset, frame.frameFootOffset, `${label}: 발 위치 보존`);
-    assert.ok(frame.points.every(point => point.source.length === 2 && point.source.every(value => Number.isFinite(value) && value >= 0 && value <= 512) && point.screen && Number.isFinite(point.screen.x) && Number.isFinite(point.screen.y) && point.onArtwork), `${label}: 실제 원화 위에 유한한 손잡이·무기 끝 좌표가 있습니다`);
+    assert.ok(frame.points.every(point => point.source.length === 2 && point.source.every(value => Number.isFinite(value) && value >= 0 && value <= 512) && point.screen && Number.isFinite(point.screen.x) && Number.isFinite(point.screen.y) && (!(anchor.authored || anchor.reviewed) || point.onArtwork)), `${label}: 유한한 손잡이·무기 끝 좌표 및 기존 실측 원화 부착을 보존합니다`);
     assert.ok(Math.hypot(...frame.points[0].source.map((value, index) => value - frame.points[1].source[index])) > (unit === 'hero' ? 15 : 1), `${label}: 손잡이와 무기 끝이 구분됩니다`);
     if (unit === 'lina') assert.ok(anchor.bow?.path, `${label}: 리나의 실제 활 곡선 자료가 있습니다`);
     if (anchor.bow?.path) {
       assert.equal(frame.bowCurve?.path, anchor.bow.path, `${label}: 실측 활 곡선을 SVG에 표시합니다`);
       assert.ok(Number.isFinite(frame.bowCurve.length) && frame.bowCurve.length > 15, `${label}: 활 곡선은 길이가 있는 선입니다`);
-      assert.ok(frame.bowCurve.samples.length === 9 && frame.bowCurve.samples.every(sample => sample.onArtwork), `${label}: 실제 활 곡선 9개 지점이 512 원화 위에 놓입니다 (${JSON.stringify(frame.bowCurve.samples)})`);
+      assert.ok(frame.bowCurve.samples.length === 9 && frame.bowCurve.samples.every(sample => sample.source.every(Number.isFinite) && (!anchor.authored || sample.onArtwork)), `${label}: 활 곡선 9개 지점의 유한한 좌표와 기존 실측 부착을 보존합니다 (${JSON.stringify(frame.bowCurve.samples)})`);
       assert.deepEqual(frame.bowCurve.focus, anchor.focus, `${label}: 실제 화살 시작 위치 보존`);
       if (anchor.bow.arrowVisible === false) {
         assert.ok(!frame.bowCurve.arrowPathPresent && !frame.bowCurve.arrowTipPresent, `${label}: 화살을 꺼내는 준비 자세에 장전·발사 화살을 만들지 않습니다`);
@@ -318,11 +368,11 @@ async function pixelDifference(page, label, selector = '.skill-spectacle,.vfx-bl
   return changedPixels;
 }
 
-async function sceneCase(page, viewport, unit, skill, speed = 1, scenario = 'hit') {
-  const props = sceneProps(unit, skill, speed, scenario);
+async function sceneCase(page, viewport, unit, skill, speed = 1, scenario = 'hit', phase = 1, supporting = false) {
+  const props = sceneProps(unit, skill, speed, scenario, 'skill', phase, supporting);
   const plan = getCombatChoreography(unit, props.scene), spectacle = plan.spectacle;
   const skillId = skill?.id || plan.id.slice(plan.id.indexOf(':') + 1), skillName = skill?.name || props.scene.title;
-  const label = `${unit}:${skillId}/${scenario}/${speed}/${viewport.width}`;
+  const label = `${unit}:${skillId}/${supporting ? '지원' : `페이즈${phase}`}/${scenario}/${speed}/${viewport.width}`;
   assert.ok(spectacle && plan.skillPose, `${label}: 실제 기술 자세와 신규 연출이 있습니다`);
   assert.equal(spectacle.weapon?.unit, unit, `${label}: 캐릭터의 무기에 속성 효과를 부착합니다`);
   if (skill && skill.type !== 'attack') assert.equal(props.scene.defender.type, 'ally', `${label}: 회복·수호는 아군 대상입니다`);
@@ -337,7 +387,7 @@ async function sceneCase(page, viewport, unit, skill, speed = 1, scenario = 'hit
   const budget = await metrics(page); assertBudget(budget, label);
   const frames = await attachmentFrames(page, label, unit, plan);
   assert.equal(frames.length, 3, `${label}: 준비·일반 타격·기술 무기 부착`);
-  if (unit === 'hero') assert.ok(spectacle.sword, `${label}: 기존 주인공 검 효과 유지`);
+  if (unit === 'hero' || unit.startsWith('hero__form')) assert.ok(spectacle.sword, `${label}: 기존 주인공 검 효과 유지`);
   const chargeAt = (spectacle.charge.at + spectacle.charge.until) / 2;
   const samples = [...new Set([.01, .12, chargeAt, ...plan.poses.filter(([, pose]) => ['windup', 'skill'].includes(pose)).map(([at]) => Math.min(at + .015, .99)),
     ...plan.releases.map(at => at + .01), ...spectacle.bursts.map(burst => burst.at + Math.min(.02, (burst.until - burst.at) * .2)), .98, 1])].sort((a, b) => a - b);
@@ -392,7 +442,7 @@ async function sceneCase(page, viewport, unit, skill, speed = 1, scenario = 'hit
     changedPixels = await pixelDifference(page, label);
   }
   await healthTiming(page, props, plan, label);
-  results.push({ type: 'skill-scene', viewport, unit, skill: skillId, name: skillName, enemy: Boolean(enemyScenes[unit]), scenario, speed, theme: spectacle.theme, budget, frames, phases, changedPixels, attachmentChangedPixels });
+  results.push({ type: 'skill-scene', viewport, unit, skill: skillId, name: skillName, enemy: Boolean(enemyScenes[unit]), phase, supporting, scenario, speed, theme: spectacle.theme, budget, frames, phases, changedPixels, attachmentChangedPixels });
 }
 
 async function basicCase(page, viewport, unit) {
@@ -500,6 +550,8 @@ try {
   server = await preview({ root, preview: { host: '127.0.0.1', port: 0, open: false } });
   const base = `http://127.0.0.1:${server.httpServer.address().port}`;
   report.build = await (await fetch(`${base}/ota-build.json`)).json();
+  const pkg = JSON.parse(await fs.readFile(path.join(root, 'package.json'), 'utf8'));
+  assert.equal(report.build.version, pkg.version, '최종 게임 버전으로 npm run build를 먼저 실행해야 합니다');
   const fixturePath = path.join(root, 'tests/fixtures/combat.jsx');
   const fixtureOut = path.join(output, 'production-fixture');
   await build({ root, configFile: false, logLevel: 'error', plugins: [{
@@ -512,11 +564,11 @@ try {
   }, react()], build: { outDir: fixtureOut, emptyOutDir: true, copyPublicDir: false, rollupOptions: { input: path.join(root, 'tests/fixtures/combat.html') } } });
   fixtureServer = await preview({ root, configFile: false, build: { outDir: fixtureOut }, preview: { host: '127.0.0.1', port: 0, open: false } });
   const fixtureBase = `http://127.0.0.1:${fixtureServer.httpServer.address().port}`;
-  browser = await chromium.launch({ headless: true, ...(process.env.CHEONSU_QA_BROWSER ? { channel: process.env.CHEONSU_QA_BROWSER } : {}) });
+  browser = await chromium.launch(qaBrowserOptions());
   for (const viewport of viewports) {
     const page = await openPage(fixtureBase, base, viewport);
     try {
-      for (const unit of combatUnitIds) await basicCase(page, viewport, unit);
+      for (const unit of keys) await basicCase(page, viewport, unit);
       for (const [unit, skill] of entries) await sceneCase(page, viewport, unit, skill);
       for (const skill of heroSkills) for (const speed of [1, 2, 3]) {
         if (speed !== 1) await sceneCase(page, viewport, 'hero', skill, speed);
@@ -527,11 +579,16 @@ try {
         await sceneCase(page, viewport, unit, null);
         await sceneCase(page, viewport, unit, null, 1, 'miss');
       }
+      for (const unit of enemyIds.filter(unit => EXPANSION_ENEMY_TEMPLATES[unit]?.phaseSkill)) {
+        await sceneCase(page, viewport, unit, null, 1, 'hit', 2);
+        await sceneCase(page, viewport, unit, null, 1, 'miss', 2);
+      }
+      for (const unit of enemyIds.filter(unit => enemyScenes[unit]?.support)) await sceneCase(page, viewport, unit, null, 1, 'hit', 1, true);
       for (const [unit, skill] of entries.filter(([, skill]) => skill.type === 'guard' && skill.radius > 0)) await sceneCase(page, viewport, unit, skill, 1, 'ally-guard');
-      for (const unit of combatUnitIds) assert.ok(attachmentPixelsChecked.has(`${viewport.width}/${unit}`), `${unit}/${viewport.width}: 실제 무기 이펙트 픽셀 검사 완료`);
+      for (const unit of keys) assert.ok(attachmentPixelsChecked.has(`${viewport.width}/${unit}`), `${unit}/${viewport.width}: 실제 무기 이펙트 픽셀 검사 완료`);
       await settingsCases(page, viewport);
       await lifecycleCases(page, viewport);
-      console.log(`PASS 전체 캐릭터 스킬 VFX ${viewport.width}x${viewport.height}: 일반 공격 ${combatUnitIds.length}종, 아군 ${entries.length}기술, 적·보스 ${enemyIds.length}종 명중·빗나감, 실제 무기 부착 ${combatUnitIds.length}종, 주인공3배속·아군 수호·설정4조합·회전해제20회`);
+      console.log(`PASS 전체 캐릭터 스킬 VFX ${viewport.width}x${viewport.height}: 일반 공격 ${keys.length}종, 아군 ${entries.length}기술, 적·보스 ${enemyIds.length}종 명중·빗나감 및 지원 ${enemyIds.filter(unit => enemyScenes[unit]?.support).length}종, 무기 부착 ${keys.length}종, ${heroSkills.length ? '주인공3배속·' : ''}${entries.some(([, skill]) => skill.type === 'guard' && skill.radius > 0) ? '아군 수호·' : ''}설정4조합·회전해제20회`);
     } catch (error) {
       await page.screenshot({ path: path.join(output, `failure-${viewport.width}.png`) }).catch(() => {});
       throw error;

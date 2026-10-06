@@ -134,13 +134,19 @@ export function calculateDamage(attacker, defender, mode = "attack") {
   const skillBonus = mode === "skill" ? attacker.skillBonus || 0 : 0;
   const guardReduce = defender.guard ? 4 : 0;
   const armorBreakPenalty = getStatusDefPenalty(defender);
-  const effectiveDef = Math.max(0, defender.def - armorBreakPenalty);
+  const effectiveDef = Math.max(0, defender.def - armorBreakPenalty + getStatusPower(defender, 'fortify'));
+  const effectiveAtk = Math.max(1, attacker.atk + getStatusPower(attacker, 'inspire') - getStatusPower(attacker, 'attackDown'));
   const affinity = getCombatAffinity(attacker, defender);
 
   return Math.max(
     1,
-    attacker.atk + skillBonus - effectiveDef + 4 - guardReduce + affinity.damageMod
+    effectiveAtk + skillBonus - effectiveDef + 4 - guardReduce + affinity.damageMod
   );
+}
+
+function getStatusPower(unit, type) {
+  return Math.max(0, ...(unit.status || []).filter(status => status.type === type && (status.turns ?? 1) > 0)
+    .map(status => Number.isFinite(status.power) && status.power > 0 ? status.power : 3));
 }
 
 
@@ -156,6 +162,16 @@ export function triggerBossPhases(units) {
       unit.hp <= Math.ceil(unit.maxHp * 0.5);
 
     if (!shouldPhase) return unit;
+
+    if (unit.expansionEnemy) {
+      const skill = unit.phaseSkill || unit.skillSpec;
+      messages.push(`👑 ${unit.name} 2페이즈 진입! ${skill?.name || unit.skill} 패턴이 강화됩니다.`);
+      return {
+        ...unit, phase2: true, atk: unit.atk + 2, def: unit.def + 1,
+        ...(skill ? { skill: skill.name, skillType: skill.type, skillBonus: skill.bonus,
+          skillRange: skill.range, skillMinRange: skill.minRange, skillSpec: skill } : {}),
+      };
+    }
 
     messages.push(
       `👑 ${unit.name} 2페이즈 진입! 어둠의 파동을 사용하기 시작합니다.`

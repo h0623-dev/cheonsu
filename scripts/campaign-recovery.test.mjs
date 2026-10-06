@@ -14,10 +14,10 @@ function storageFor(data = source) {
   const entries = new Map([['cheonsu_v01_save', JSON.stringify(data)]]);
   return { entries, getItem: key => entries.get(key) ?? null, setItem: (key, value) => entries.set(key, value) };
 }
-for (let completed = 0; completed <= 30; completed++) test(`${completed} sequential clears unlock only replays plus the next chapter`, () => {
+for (let completed = 0; completed <= stages.length; completed++) test(`${completed} sequential clears unlock only replays plus the next chapter`, () => {
   const cleared = Object.freeze(all.slice(0, completed));
-  assert.deepEqual(getUnlockedStageIds(cleared), all.slice(0, Math.min(30, completed + 1)));
-  assert.equal(getNextChapter(cleared), completed === 30 ? null : completed + 1);
+  assert.deepEqual(getUnlockedStageIds(cleared), all.slice(0, Math.min(stages.length, completed + 1)));
+  assert.equal(getNextChapter(cleared), completed === stages.length ? null : completed + 1);
 });
 test('late legacy clears keep their replay without granting unplayed stages or story spoilers', () => {
   const cleared = Object.freeze([30, 1, 8, 1, 9, null, '2', -1, 99]);
@@ -54,7 +54,7 @@ test('explicit recovery to one clear preserves all growth/items and original bac
   assert.deepEqual(normalizeSaveData(JSON.parse(storage.getItem('cheonsu_v01_save'))).unlockedStages, [1, 2, 3]);
 });
 test('invalid recovery and backup/primary quota failure leave the original save untouched', () => {
-  for (const stage of [-1, 31, 1.5, '1', NaN]) {
+  for (const stage of [-1, stages.length + 1, 1.5, '1', NaN]) {
     const storage = storageFor();
     assert.throws(() => recoverCampaignProgress(storage, stage));
     assert.equal(storage.entries.size, 1);

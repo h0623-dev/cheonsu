@@ -44,7 +44,7 @@ async function attackBoss(page) {
 }
 async function main() {
   await fs.mkdir(out, { recursive: true });
-  const browser = await chromium.launch({ channel: 'msedge', headless: true });
+  const browser = await chromium.launch((await import('./qa-browser.mjs')).qaBrowserOptions());
   try {
     for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }, { width: 320, height: 568 }, { width: 844, height: 390 }]) {
       const context = await browser.newContext({ viewport, serviceWorkers: 'block' });
@@ -63,7 +63,7 @@ async function main() {
         assert.deepEqual((await read(page)).unlockedStages, [1]);
         await stage(1).click();
         await page.getByRole('button', { name: '전투 시작', exact: true }).click();
-        await page.getByRole('button', { name: '바로 전투', exact: true }).click();
+        await page.getByRole('button', { name: '바로 전투', exact: true }).click(); await (await import('./qa-browser.mjs')).confirmStageMission(page);
         await page.locator('.world-battlefield').waitFor();
         const fixture = await saveBattle(page);
         await screenshot(page, `battle-save-${viewport.width}`);

@@ -33,7 +33,7 @@ async function restoreVictory(page, fixture) {
 }
 async function main() {
   await fs.mkdir(out,{recursive:true});
-  const browser = await chromium.launch({channel:process.env.CHEONSU_QA_BROWSER || 'msedge',headless:true});
+  const browser = await chromium.launch((await import('./qa-browser.mjs')).qaBrowserOptions());
   const report = [];
   try {
     for (const viewport of sizes) {

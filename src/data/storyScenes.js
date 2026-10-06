@@ -5,9 +5,17 @@ const scene = (intro, clear) => ({
 
 export const STORY_ARCS = [
   '꺼지지 않은 봉화', '재 속의 증언', '지워진 이름들', '천수의 진실', '새벽을 돌려줄 사람들',
+  ...EXPANSION_STORY_ARCS,
 ];
 
+export function getStoryArcIndex(stageId) {
+  const id = Math.max(1, Math.floor(Number(stageId) || 1));
+  return id <= 30 ? Math.min(4, Math.floor((id - 1) / 6))
+    : Math.min(STORY_ARCS.length - 1, 5 + Math.floor((id - 31) / 5));
+}
+
 export const STORY_SCENES = {
+  ...EXPANSION_STORY_SCENES,
   1: scene([
     ['카일', '어젯밤까지 저 초소에서 피난민에게 물을 나눠 줬어. 지금은 문을 잠그고 같은 사람들에게 활을 겨누고 있어.'],
     ['카일', '국경의 봉화가 세 번 꺼졌어. 구원 신호가 아니라 누군가 길을 지우고 있는 거야.'],
@@ -314,3 +322,4 @@ export const STORY_SCENES = {
     ['카일', '가자. 우리의 다음 임무는 평범한 하루를 되찾는 거야. 천수 기사단, 귀환한다.'],
   ]),
 };
+import { EXPANSION_STORY_ARCS, EXPANSION_STORY_SCENES } from './expansionStory.js';

@@ -1,3 +1,5 @@
+import { createBattlefieldTerrain } from './stageTerrain.js';
+
 // Walkable ground traced from the frontier illustration, in native image space.
 // Each row describes horizontal clearings at 1/26 of the original image height.
 const CLEARINGS = [
@@ -25,7 +27,15 @@ const CROPS = {
   28: [82, 234, 776, 1204], 29: [0, 0, 809, 1279], 30: [92, 70, 678, 1354],
 };
 
+const EXPANSION_GROUND = new Map();
+
 export function isPaintedGround(stageId, u, v) {
+  if (stageId >= 31) {
+    if (!EXPANSION_GROUND.has(stageId)) EXPANSION_GROUND.set(stageId, createBattlefieldTerrain(stageId));
+    const map = EXPANSION_GROUND.get(stageId);
+    const x = Math.floor(u * map[0].length), y = Math.floor(v * map.length);
+    return map[y]?.[x] != null && !['block', 'wall', 'void'].includes(map[y][x]);
+  }
   const crop = CROPS[stageId] || [0, 0, 941, 1672];
   const mirrored = stageId > 6 && stageId % 2 === 0;
   const x = (crop[0] + (mirrored ? 1 - u : u) * crop[2]) / 941;
@@ -35,6 +45,9 @@ export function isPaintedGround(stageId, u, v) {
 }
 
 export function alignMapToArtwork(map, stageId) {
+  // Expansion chapters use their own authored route geometry, never the old
+  // frontier painting's crop / mirror mask. Existing saved maps stay intact.
+  if (stageId >= 31) return map.map(row => row.slice());
   const height = map.length;
   const width = map[0]?.length || 0;
   if (!width) return map;

@@ -4,6 +4,10 @@ import DiscoveryDialog from "./components/DiscoveryDialog.jsx";
 import PromotionDialog from "./components/PromotionDialog.jsx";
 import { DISCOVERIES } from "./data/discoveries.js";
 import { getStageDiscoveries, getVisibleDiscoveries, normalizeExploration, claimDiscovery, applyDiscoveryUnlocks, getSecretPromotion, canSecretPromote, applySecretPromotion } from "./engine/discoveryEngine.js";
+import { getAdvancedPromotionForms, getAdvancedClass, getAdvancedSealBalance, getAdvancedMastery, canAdvancedPromote, applyAdvancedPromotion, createExpansionRecruit } from './engine/promotionEngine.js';
+import { finalizeExpansionAllySkill } from './engine/expansionAllySkills.js';
+import { createBattleAsyncLifecycle } from './engine/battleAsyncLifecycle.js';
+import './components/advanced-promotion.css';
 import ItemDialog from "./components/ItemDialog.jsx";
 import BattleSettingsDialog from './components/BattleSettingsDialog.jsx';
 import { directionTo, getFacingArt, getUnitFacing } from './engine/unitFacing.js';
@@ -25,9 +29,11 @@ import CharacterCodex from './components/CharacterCodex.jsx';
 import { RECRUIT_BY_STAGE } from './data/characterCollection.js';
 import { readMenuCheckpoint, canReplayStory, getNextChapter } from './engine/playerExperience.js';
 import { getCharacterProfile } from './data/characterProfiles.js';
+import { getGameCharacterArtKey } from './data/expansionArtRegistry.js';
 import { getChapterBrief } from './data/chapterBriefs.js';
 import { getChapterBossName } from './data/chapterIdentity.js';
 import { applyStageMonsterAppearance, isMonsterArtId } from './data/monsterEnemies.js';
+import { applyExpansionEnemyIdentity, createExpansionEnemy, createExpansionExtraEnemy, getExpansionEnemyKeys, isExpansionEnemyKey, resolveExpansionEnemySupport, consumeExpansionEnemyAttackBoost, createExpansionBossHazards } from './data/expansionEnemies.js';
 import { usePatchLifecycle } from './engine/usePatchUpdates.js';
 import { createStagePreviewReader } from './engine/stagePreviewCache.js';
 import { LiveUpdate } from '@capawesome/capacitor-live-update';
@@ -60,6 +66,7 @@ import { STORY_SCENES } from "./data/storyScenes.js";
 import { BATTLE_GROUND_ROW_RATIO, getPaintedVisualProfile } from "./data/unitVisuals.js";
 import { createBattlefieldTerrain } from "./data/stageTerrain.js";
 import { getBattlefieldPlan } from "./data/battlefieldPlans.js";
+import { getNewTerrainPolicy, getNewTerrainCombatModifiers, getTerrainEffectDescription } from './data/terrainPolicy.js';
 import { getWorldBiome, getWorldScene, getWorldSceneThumbnail, getWorldTileVisual, getWorldMapStyle, WORLD_ART_ROOT } from "./data/worldArt.js";
 import {
   clone,
@@ -102,7 +109,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.162";
+const SAVE_VERSION = "1.99.163";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -1210,6 +1217,11 @@ function createBattleTactics(attacker, defender, units, activeMap) {
   const attackerTile = getTileAt(attacker, activeMap);
   const defenderTile = getTileAt(defender, activeMap);
   const attackerClass = getUnitCombatClass(attacker);
+  const expansionTerrain = getNewTerrainCombatModifiers(attackerTile, defenderTile, attackerClass);
+  damageMod += expansionTerrain.damageMod;
+  hitMod += expansionTerrain.hitMod;
+  critMod += expansionTerrain.critMod;
+  labels.push(...expansionTerrain.labels);
 
   if (attackerTile === "hill") {
     hitMod += 6;
@@ -1601,6 +1613,8 @@ function getInspectUnitRole(unit) {
 }
 
 function getInspectTerrainLabel(tile) {
+  const expansion = getNewTerrainPolicy(tile);
+  if (expansion) return expansion.name;
   const labels = {
     plain: "평지",
     road: "길",
@@ -1633,6 +1647,10 @@ const ACTS = [
   { id: 3, title: "ACT 3 · 그림자 전쟁", start: 13, end: 18 },
   { id: 4, title: "ACT 4 · 흑야의 진실", start: 19, end: 24 },
   { id: 5, title: "ACT 5 · 마지막 천수", start: 25, end: 30 },
+  { id: 6, title: "제6막 · 해안 침수 유적", start: 31, end: 35 },
+  { id: 7, title: "제7막 · 백설 고원", start: 36, end: 40 },
+  { id: 8, title: "제8막 · 지하 공명 공방", start: 41, end: 45 },
+  { id: 9, title: "제9막 · 별빛 봉인지", start: 46, end: 50 },
 ];
 
 function getActInfo(stageId) {
@@ -1979,7 +1997,14 @@ function getStageBattlefieldTheme(stage) {
   const stageId = Math.max(1, Math.floor(stage?.id || 1));
   const text = `${stage?.title || ""} ${stage?.desc || ""} ${stage?.objective || ""}`;
 
-  if (stageId === 30 || /마지막|파멸|성소|천공|수호자|끝없는|왕좌/.test(text)) {
+  if (stageId === 30 || stageId === 50) return BATTLEFIELD_THEMES.final;
+  if (stageId >= 31) {
+    if (stageId <= 35) return BATTLEFIELD_THEMES.marsh;
+    if (stageId <= 40) return BATTLEFIELD_THEMES.frozen;
+    if (stageId <= 45) return BATTLEFIELD_THEMES.fortress;
+    return BATTLEFIELD_THEMES.shadow;
+  }
+  if (/마지막|파멸|성소|천공|수호자|끝없는|왕좌/.test(text)) {
     return BATTLEFIELD_THEMES.final;
   }
 
@@ -2658,6 +2683,7 @@ const STAGE_ENEMY_SQUADS = {
 
 function getStageEnemySquadTemplates(stage) {
   const stageId = Math.max(1, Math.floor(stage?.id || 1));
+  if (stageId > 30) return getExpansionEnemyKeys(stage).map(key => createExpansionEnemy(stage, key));
   const stageSquad = STAGE_ENEMY_SQUADS[stageId] || [];
   const themedSquad = getThemedLargeEnemyTemplates(stage);
   const seen = new Set();
@@ -2671,6 +2697,7 @@ function getStageEnemySquadTemplates(stage) {
 }
 
 function getStageBossSpriteKey(stage, boss) {
+  if ((stage?.id || 1) > 30 && isExpansionEnemyKey(boss?.artId || boss?.spriteKey)) return boss.artId || boss.spriteKey;
   if (boss?.spriteKey && ENEMY_VARIANT_KEYS.has(boss.spriteKey)) return boss.spriteKey;
 
   const stageId = Math.max(1, Math.floor(stage?.id || 1));
@@ -2712,6 +2739,7 @@ function getStageBossSpriteKey(stage, boss) {
 
 function applyStageEnemyIdentity(unit, stage, index = 0) {
   if (!unit || unit.type === "ally") return unit;
+  if ((stage?.id || 1) > 30) return applyExpansionEnemyIdentity(unit, stage, index);
 
   const stageId = Math.max(1, Math.floor(stage?.id || 1));
   const power = Math.max(0, stageId - 1);
@@ -3020,6 +3048,7 @@ function createFinalFrontierBattleStage(stage, deployCount = MAX_DEPLOY_COUNT) {
 }
 
 function createBossPatternHazards(units, activeMap, stage, nextRound) {
+  if ((stage?.id || 1) > 30) return createExpansionBossHazards(units, activeMap, nextRound);
   const boss = units.find((unit) => unit.type === "boss" && unit.phase2 && unit.hp > 0);
   if (!boss) return { hazards: [], pattern: null };
 
@@ -3285,6 +3314,7 @@ function scaleEnemyPosition(unit, fromMap, toMap) {
 
 function createLargeExtraEnemy(stage, index, x, y) {
   const stageId = stage?.id || 1;
+  if (stageId > 30) return createExpansionExtraEnemy(stage, index, x, y);
   const power = Math.max(0, stageId - 1);
   const templates = getStageEnemySquadTemplates(stage);
   const template = templates[(stageId + index) % templates.length];
@@ -3711,7 +3741,7 @@ const ALLY_VISUAL_PROFILES = Object.fromEntries(
 
 function getAllyVisualProfile(unit) {
   if (!unit || unit.type !== "ally") return null;
-  return getPaintedVisualProfile(unit.id) || ALLY_VISUAL_PROFILES[unit.id] || null;
+  return getPaintedVisualProfile(getGameCharacterArtKey(unit) || unit.id) || ALLY_VISUAL_PROFILES[unit.id] || null;
 }
 
 function getUnitVisualClass(unit) {
@@ -3727,7 +3757,10 @@ function getUnitVisualClass(unit) {
 
 function getEnemySpriteKey(unit) {
   if (!unit || unit.type === "ally") return null;
+  const authored = getGameCharacterArtKey(unit);
+  if (authored && (unit.expansionEnemy || isExpansionEnemyKey(authored) || unit.artId === authored)) return authored;
   if (unit.type === "boss") return getBossSpriteKey(unit);
+  if (authored) return authored;
   if (isMonsterArtId(unit.artId)) return unit.artId;
   if (ENEMY_VARIANT_KEYS.has(unit.spriteKey)) return unit.spriteKey;
 
@@ -3767,7 +3800,7 @@ function getEnemySpriteKey(unit) {
 function getUnitSprite(unit) {
   if (!unit) return null;
 
-  const painted = getPaintedVisualProfile(unit.type === "ally" ? unit.id : getEnemySpriteKey(unit));
+  const painted = getPaintedVisualProfile(unit.type === "ally" ? getGameCharacterArtKey(unit) || unit.id : getEnemySpriteKey(unit));
   if (painted) return painted.battle;
 
   const allyProfile = getAllyVisualProfile(unit);
@@ -3816,10 +3849,10 @@ function getUnitSprite(unit) {
 function getBattleMapUnitSprite(unit, facing) {
   if (!unit) return null;
 
-  const key = unit.type === 'ally' ? unit.id : getEnemySpriteKey(unit);
+  const key = unit.type === 'ally' ? getGameCharacterArtKey(unit) || unit.id : getEnemySpriteKey(unit);
   if (facing && getFacingArt(facing).rear && directionArt[key]) return directionArt[key].rear;
 
-  const painted = getPaintedVisualProfile(unit.type === "ally" ? unit.id : getEnemySpriteKey(unit));
+  const painted = getPaintedVisualProfile(key);
   if (painted) return painted.map;
 
   const allyProfile = getAllyVisualProfile(unit);
@@ -3883,7 +3916,7 @@ function handleBattleMapUnitImageError(event, unit) {
 function getUnitPortrait(unit) {
   if (!unit) return null;
 
-  const painted = getPaintedVisualProfile(unit.type === "ally" ? unit.id : getEnemySpriteKey(unit));
+  const painted = getPaintedVisualProfile(unit.type === "ally" ? getGameCharacterArtKey(unit) || unit.id : getEnemySpriteKey(unit));
   if (painted) return painted.portrait;
 
   const allyProfile = getAllyVisualProfile(unit);
@@ -3938,7 +3971,7 @@ function getUnitPortrait(unit) {
 function getCutsceneUnitSprite(unit) {
   if (!unit) return null;
 
-  const painted = getPaintedVisualProfile(unit.type === "ally" ? unit.id : getEnemySpriteKey(unit));
+  const painted = getPaintedVisualProfile(unit.type === "ally" ? getGameCharacterArtKey(unit) || unit.id : getEnemySpriteKey(unit));
   if (painted) return painted.cutscene;
 
   const allyProfile = getAllyVisualProfile(unit);
@@ -4005,6 +4038,8 @@ function isFinalConceptStage(stage) {
 }
 
 function getTileImage(tile) {
+  const expansion = getNewTerrainPolicy(tile);
+  if (expansion) return `${WORLD_ART_ROOT}/terrain/${expansion.material}.webp`;
   const images = {
     plain: "/sprites/classic/tiles/plain.png",
     forest: "/sprites/classic/tiles/forest.png",
@@ -4296,8 +4331,8 @@ function getMapEffectType(effectType) {
 }
 
 function getPopupText(outcome) {
-  if (!outcome?.hit) return "MISS";
-  return outcome.crit ? `CRIT ${outcome.damage}` : String(outcome.damage);
+  if (!outcome?.hit) return "회피";
+  return outcome.crit ? `치명타 ${outcome.damage}` : String(outcome.damage);
 }
 
 function getPopupKind(outcome) {
@@ -4406,7 +4441,7 @@ const RELEASE_NOTES = [
   {
     title: "성장",
     items: [
-      "동료 합류와 30스테이지 캠페인",
+      "동료 합류와 50스테이지 캠페인",
       "스킬 강화, 전직, 파견, 훈련",
       "캐릭터별 패시브와 MVP 기록",
       "전투 통계와 누적 전적",
@@ -5322,6 +5357,10 @@ function getWorldRegionInfo(stageId) {
     3: { name: "무너진 요새", icon: "🏰", image: "/ui/stage-select/act-3.png", tone: "region-fort", desc: "옛 왕국의 성벽과 보스가 버티는 전장" },
     4: { name: "빙결 계곡", icon: "❄️", image: "/ui/stage-select/act-4.png", tone: "region-ice", desc: "빙결과 저주가 흐르는 북부 협곡" },
     5: { name: "흑야 왕좌", icon: "🌑", image: "/ui/stage-select/act-5.png", tone: "region-dark", desc: "붉은 달 아래 최종 결전으로 향하는 땅" },
+    6: { name: "해안 침수 유적", icon: "🌊", tone: "region-border", desc: "귀환 뒤 닫힌 수문을 열고 주민들의 물길을 되찾는 해안" },
+    7: { name: "백설 고원", icon: "♨️", tone: "region-ice", desc: "치유샘의 온기를 나누고 겨울을 함께 건너는 고원" },
+    8: { name: "지하 공명 공방", icon: "🔔", tone: "region-fort", desc: "지워진 작업자의 이름과 공동 권한을 되찾는 지하 공방" },
+    9: { name: "별빛 봉인지", icon: "✨", tone: "region-dark", desc: "네 지역의 새 맹세를 전하고 함께 귀환하는 외곽 봉인지" },
   };
   return { act, ...(regionThemes[act?.id] || regionThemes[1]), image: getWorldScene(stageId) };
 }
@@ -5333,6 +5372,11 @@ function getStageNodeClass(stage, clearedStages, unlockedStages) {
 }
 
 function getStageNodeType(stage) {
+  if (stage.id >= 31) {
+    if ([35, 40, 45, 50].includes(stage.id)) return "boss";
+    if (RECRUIT_BY_STAGE[stage.id]) return "recruit";
+    return getReinforcementRounds(stage).length > 0 ? "danger" : "normal";
+  }
   if (stage.id % 6 === 0) return "boss";
   if (stage.id % 2 === 0) return "recruit";
   if (getReinforcementRounds(stage).length > 0) return "danger";
@@ -5342,7 +5386,7 @@ function getStageNodeType(stage) {
 
 function getStageMissionOrder(stage) {
   const id = stage?.id || 1;
-  const boss = id % 6 === 0;
+  const boss = id >= 31 ? [35, 40, 45, 50].includes(id) : id % 6 === 0;
 
   if (boss) {
     return {
@@ -6696,7 +6740,9 @@ function getDeploySlotKey(slot) {
 }
 
 
-function createRecruitAlly(id) {
+function createRecruitAlly(id, referenceParty = []) {
+  const expansionRecruit = createExpansionRecruit(id, referenceParty);
+  if (expansionRecruit) return { ...expansionRecruit, skill: getSkillDisplayName(expansionRecruit), x: 0, y: 0 };
   const recruits = {
     aria: { id: "aria", icon: "🕊️", name: "아리아", hp: 20, maxHp: 20, atk: 6, def: 4, move: 3, range: 1, skill: "성빛 치유", skillType: "heal", skillBonus: 0, skillRange: 3 },
     leon: { id: "leon", icon: "🏹", name: "레온", hp: 22, maxHp: 22, atk: 8, def: 4, move: 3, range: 2, skill: "관통 사격", skillType: "attack", skillBonus: 3, skillRange: 3 },
@@ -7029,9 +7075,7 @@ function isUnitReady(unit) {
 
 
 
-function waitForMove(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+
 
 
 function getReinforcementRounds(stage) {
@@ -7054,6 +7098,10 @@ function createReinforcementUnit(kind, stage, round, index, x, y) {
   const stageId = stage?.id || 1;
   const power = Math.max(0, stageId - 4);
   const id = `reinforce-${stageId}-${round}-${index}`;
+  if (stageId > 30) {
+    const keys = getExpansionEnemyKeys(stage);
+    return createExpansionEnemy(stage, keys[(stageId + round + index) % keys.length], { id, x, y, isReinforcement: true });
+  }
 
   const templates = {
     raider: {
@@ -7268,6 +7316,10 @@ function getPromotionTitle(unit) {
     jin: "용검성",
     luka: "천리안",
     baekho: "백호장군",
+    mare: "청해창수",
+    harin: "호흡선사",
+    edan: "공방기장",
+    sylvan: "녹음현자",
   };
 
   return titles[unit?.id] || "상급 병과";
@@ -7308,6 +7360,8 @@ function promoteAllyUnit(unit) {
 
 function getUnitDisplayClass(unit) {
   if (!unit) return "";
+  const advanced = getAdvancedClass(unit);
+  if (advanced) return advanced.name;
   return unit.promoted ? unit.classTitle || getPromotionTitle(unit) : getCharacterProfile(unit.id).role;
 }
 
@@ -7944,7 +7998,7 @@ const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, un
         data-map-y={y}
         onPointerEnter={() => { if (targetSelectionActive) setRangePreviewTargetId(unit?.type !== "ally" ? unit?.id || null : null); }}
         onPointerLeave={() => setRangePreviewTargetId(null)}
-        title={getInspectTerrainLabel(tile)}
+        title={`${getInspectTerrainLabel(tile)}${getTerrainEffectDescription(tile) ? ` · ${getTerrainEffectDescription(tile)}` : ''}`}
         style={terrainVisual.style}
         >
         <span className={`world-ground ground-${terrainVisual.material}`} aria-hidden="true" />
@@ -8207,6 +8261,9 @@ export default function App() {
   const [deploySort, setDeploySort] = useState("default");
   const [deploymentHint, setDeploymentHint] = useState("균형 편성을 추천합니다.");
   const [party, setParty] = useState(getInitialParty());
+  const [advancedPreviewByUnit, setAdvancedPreviewByUnit] = useState({});
+  const advancedPromotionBusyRef = useRef(false);
+  useEffect(() => { advancedPromotionBusyRef.current = false; }, [party]);
   const [exploration, setExploration] = useState(() => normalizeExploration());
   const [discoveryReceipt, setDiscoveryReceipt] = useState(null);
   const [journalOpen, setJournalOpen] = useState(false);
@@ -8364,12 +8421,16 @@ export default function App() {
   const suppressBattleMapClickRef = useRef(false);
   const [screenShake, setScreenShake] = useState(false);
   const visualTimersRef = useRef(new Set());
+  const battleAsyncRef = useRef(null);
+  if (battleAsyncRef.current == null) battleAsyncRef.current = createBattleAsyncLifecycle();
   const combatBusy = Boolean(stageMissionOpen || turnBusy || movingUnit || battleResolving || combatCutscene || bossCutscene || stageBanner?.type === "start");
   const battleInputLocked = Boolean(combatBusy || battle || result || itemOpen || skillChoiceOpen || supportSkillChoice || battleSettingsOpen || discoveryReceipt || journalOpen);
 
   useEffect(() => {
     const timers = visualTimersRef.current;
+    const lifecycle = battleAsyncRef.current;
     return () => {
+      lifecycle.cancelAll();
       timers.forEach(timer => window.clearTimeout(timer));
       cancelAnimationFrame(battleMapPanFrameRef.current);
     };
@@ -8784,9 +8845,10 @@ export default function App() {
 
   // Callers pass base milliseconds; stored durations and movement configs are already scaled.
   const scheduleBattleVisual = (callback, duration) => {
+    const epoch = battleAsyncRef.current.capture();
     const timer = window.setTimeout(() => {
       visualTimersRef.current.delete(timer);
-      callback();
+      if (battleAsyncRef.current.current(epoch)) callback();
     }, scaleBattleTime(duration, battleSpeedRef.current));
     visualTimersRef.current.add(timer);
     return timer;
@@ -9881,10 +9943,11 @@ export default function App() {
 
 
   const animateUnitMove = async (unit, toX, toY, duration = 260, frame = 0) => {
-    if (!unit) return;
+    if (!unit) return false;
+    const epoch = battleAsyncRef.current.capture();
 
     if (unit.x === toX && unit.y === toY) {
-      return;
+      return true;
     }
 
     const direction = directionTo(unit, { x: toX, y: toY });
@@ -9902,29 +9965,32 @@ export default function App() {
     });
 
     // Start the timer after React has mounted and painted the moving sprite.
-    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-    await waitForMove(duration);
+    if (!await battleAsyncRef.current.paint(epoch)) return false;
+    return battleAsyncRef.current.wait(duration, epoch);
   };
 
   const animateUnitMovePath = async (unit, path) => {
-    if (!unit || !path || path.length === 0) return;
+    if (!unit || !path || path.length === 0) return unit || false;
+    const epoch = battleAsyncRef.current.capture();
 
     playSfx("step");
 
     let current = { ...unit };
 
     for (let index = 0; index < path.length; index += 1) {
+      if (!battleAsyncRef.current.current(epoch)) return false;
       const step = path[index];
       const speed = battleSpeedRef.current;
       const stepDuration = unit.type === "ally" ? speed.allyStepMs : speed.enemyStepMs;
 
-      await animateUnitMove(
+      const moved = await animateUnitMove(
         current,
         step.x,
         step.y,
         Math.max(scaleBattleTime(135, speed), stepDuration),
         index
       );
+      if (!moved || !battleAsyncRef.current.current(epoch)) return false;
 
       current = {
         ...current,
@@ -9932,7 +9998,7 @@ export default function App() {
         y: step.y,
       };
 
-      await waitForMove(battleSpeedRef.current.stepGapMs);
+      if (!await battleAsyncRef.current.wait(battleSpeedRef.current.stepGapMs, epoch)) return false;
     }
 
     return current;
@@ -9965,15 +10031,17 @@ export default function App() {
     setTurnBusy(true);
     closeMobileCombatPanels();
 
+    const epoch = battleAsyncRef.current.capture();
     try {
       const stayingInPlace = movingAlly.x === x && movingAlly.y === y;
       const movePath = stayingInPlace ? [] : findMovePath(movingAlly, x, y, units, activeMap);
 
       if (!stayingInPlace) {
-        await animateUnitMovePath(
+        const moved = await animateUnitMovePath(
           movingAlly,
           movePath.length ? movePath : [{ x, y }]
         );
+        if (!moved || !battleAsyncRef.current.current(epoch)) return;
       }
 
       let movedUnits = units.map(unit => unit.id === movingAlly.id ? { ...unit, x, y, moved: true } : unit);
@@ -10019,8 +10087,10 @@ export default function App() {
         ...prev,
       ]);
     } finally {
-      setMovingUnit(null);
-      setTurnBusy(false);
+      if (battleAsyncRef.current.current(epoch)) {
+        setMovingUnit(null);
+        setTurnBusy(false);
+      }
     }
   };
 
@@ -10151,6 +10221,10 @@ export default function App() {
   };
 
   const clearVisuals = () => {
+    battleAsyncRef.current.cancelAll();
+    actionResolvingRef.current = false;
+    setBattleResolving(false);
+    setTurnBusy(false);
     setStageMissionOpen(false);
     missionIntroRef.current = null;
     setCampFacility(null);
@@ -11914,34 +11988,29 @@ export default function App() {
       workingUnits
     );
     const outcome = rollCombat(enemyPreview);
-    await showCombatCutscene(enemyPreview, outcome);
-
     let statusMessages = [];
     let counterMessages = [];
     let expMessages = [];
+    const played = await showCombatCutscene(enemyPreview, outcome, () => {
+      if (outcome.hit) {
+        addBattleStats({ damageTaken: outcome.damage });
+        addUnitBattleStats(target.id, { damageTaken: outcome.damage });
+        workingUnits = workingUnits
+          .map((u) => u.id === target.id ? { ...u, hp: Math.max(0, u.hp - outcome.damage) } : u)
+          .filter((u) => u.hp > 0);
+        if (workingUnits.some((u) => u.id === target.id)) {
+          const statusResult = applySkillStatusAfterHit(attacker, target.id, enemyMode, workingUnits);
+          workingUnits = statusResult.units;
+          statusMessages = statusResult.messages;
+        }
+      }
+      workingUnits = consumeExpansionEnemyAttackBoost(workingUnits, attacker.id);
+      workingUnits = spendAction(workingUnits, attacker.id);
+      setUnits(workingUnits);
+    });
+    if (played === false) return { units: workingUnits, attacked: false, defeated: false, cancelled: true };
 
     if (outcome.hit) {
-      addBattleStats({ damageTaken: outcome.damage });
-      addUnitBattleStats(target.id, { damageTaken: outcome.damage });
-      workingUnits = workingUnits
-        .map((u) =>
-          u.id === target.id ? { ...u, hp: Math.max(0, u.hp - outcome.damage) } : u
-        )
-        .filter((u) => u.hp > 0);
-
-      const targetStillAlive = workingUnits.some((u) => u.id === target.id);
-
-      if (targetStillAlive) {
-        const statusResult = applySkillStatusAfterHit(
-          attacker,
-          target.id,
-          enemyMode,
-          workingUnits
-        );
-        workingUnits = statusResult.units;
-        statusMessages = statusResult.messages;
-      }
-
       const counterActor = workingUnits.find((u) => u.id === target.id);
       const counterTarget = workingUnits.find((u) => u.id === attacker.id);
 
@@ -11959,37 +12028,36 @@ export default function App() {
           createBattleTactics(counterActor, counterTarget, workingUnits, activeMap)
         );
         const counterOutcome = rollCombat(counterPreview);
-        workingUnits = workingUnits.map(unit => unit.id === counterActor.id ? { ...unit, counterUsed: true } : unit);
-        await showCombatCutscene(counterPreview, counterOutcome);
         let counterKilled = false;
-
-        if (counterOutcome.hit) {
-          addBattleStats({ counters: 1, damageDealt: counterOutcome.damage });
-          addUnitBattleStats(counterActor.id, { counters: 1, damageDealt: counterOutcome.damage });
-          workingUnits = workingUnits
-            .map((u) => {
-              if (u.id === counterTarget.id) {
-                const hp = Math.max(0, u.hp - counterOutcome.damage);
-                if (hp === 0) counterKilled = true;
-                return { ...u, hp };
-              }
-              return u;
-            })
-            .filter((u) => u.hp > 0);
-        }
+        const counterPlayed = await showCombatCutscene(counterPreview, counterOutcome, () => {
+          workingUnits = workingUnits.map(unit => unit.id === counterActor.id ? { ...unit, counterUsed: true } : unit);
+          if (counterOutcome.hit) {
+            addBattleStats({ counters: 1, damageDealt: counterOutcome.damage });
+            addUnitBattleStats(counterActor.id, { counters: 1, damageDealt: counterOutcome.damage });
+            workingUnits = workingUnits
+              .map((u) => {
+                if (u.id === counterTarget.id) {
+                  const hp = Math.max(0, u.hp - counterOutcome.damage);
+                  if (hp === 0) counterKilled = true;
+                  return { ...u, hp };
+                }
+                return u;
+              })
+              .filter((u) => u.hp > 0);
+          }
+          if (counterKilled && counterActor.type === "ally") {
+            const expResult = awardEnemyExperience(workingUnits, counterActor.id, counterTarget);
+            workingUnits = expResult.units;
+            expMessages = [...expResult.messages, ...registerLootDrop(counterTarget)];
+          }
+          setUnits(workingUnits);
+        });
+        if (counterPlayed === false) return { units: workingUnits, attacked: true, defeated: false, cancelled: true };
 
         counterMessages.push(
           makeAttackLog(counterActor, counterTarget, "counter", counterOutcome, "↩ ")
         );
 
-        if (counterKilled && counterActor.type === "ally") {
-          const expResult = awardEnemyExperience(workingUnits, counterActor.id, counterTarget);
-          workingUnits = expResult.units;
-          expMessages = [
-            ...expResult.messages,
-            ...registerLootDrop(counterTarget),
-          ];
-        }
       }
     }
 
@@ -12013,9 +12081,29 @@ export default function App() {
   };
 
   const executeEnemyTurn = async (startUnits) => {
+    const epoch = battleAsyncRef.current.capture();
     let workingUnits = [...startUnits];
     const enemies = workingUnits.filter((u) => u.type !== "ally");
+    const tryEnemySupport = async (candidate) => {
+      const support = resolveExpansionEnemySupport(candidate, workingUnits, round);
+      if (!support) return false;
+      const supportType = support.healing ? "heal" : "guard";
+      const supportActor = { ...support.actor, skill: support.label, skillType: supportType,
+        skillSpec: { id: `${support.actor.artId}-support`, name: support.label, type: supportType,
+          effect: support.healing ? "heal" : support.status?.type === "inspire" ? "music" : "guard",
+          power: support.healing || support.status?.power || 0, range: support.healing ? 2 : 1 } };
+      const supportOutcome = { hit: true, crit: false, damage: support.healing,
+        heal: support.healing > 0, guard: !support.healing };
+      const played = await showCombatCutscene({ attacker: supportActor, defender: support.target, mode: "skill" }, supportOutcome, () => {
+        workingUnits = support.units;
+        setUnits(workingUnits);
+      });
+      if (played === false) return "cancelled";
+      setLogs(previous => [...support.messages, ...previous]);
+      return true;
+    };
     for (const enemy of enemies) {
+      if (!battleAsyncRef.current.current(epoch)) return;
       if (getBattleOutcome(selectedStage, workingUnits) === "victory") {
         const summary = calculateClearSummary(selectedStage, round, workingUnits);
         setUnits(workingUnits); setParty(prev => mergePartyFromUnits(prev, workingUnits));
@@ -12026,11 +12114,15 @@ export default function App() {
       if (!freshEnemy) continue;
       const allies = workingUnits.filter((u) => u.type === "ally");
       if (allies.length === 0) { setUnits(workingUnits); playSfx("defeat"); showDefeatDirecting(); declareDefeat(); return; }
+      const supported = await tryEnemySupport(freshEnemy);
+      if (!battleAsyncRef.current.current(epoch)) return;
+      if (supported === "cancelled") return;
+      if (supported) continue;
       const choice = getEnemyAttackChoice(freshEnemy, allies, activeMap);
       if (choice) {
         const attackResult = await resolveEnemyAttack(freshEnemy, choice.target, choice.mode, workingUnits);
         workingUnits = attackResult.units;
-        if (attackResult.defeated) {
+        if (attackResult.defeated || attackResult.cancelled) {
           return;
         }
         continue;
@@ -12050,10 +12142,11 @@ export default function App() {
 
         scrollBattleMapToCell(freshEnemy.x, freshEnemy.y, "smooth");
 
-        await animateUnitMovePath(
+        const moved = await animateUnitMovePath(
           freshEnemy,
           enemyPath.length ? enemyPath : [{ x: movedEnemy.x, y: movedEnemy.y }]
         );
+        if (!moved || !battleAsyncRef.current.current(epoch)) return;
 
         scrollBattleMapToCell(movedEnemy.x, movedEnemy.y, "smooth");
       }
@@ -12063,6 +12156,10 @@ export default function App() {
       if (didMove) setMovingUnit(null);
 
       const movedFreshEnemy = workingUnits.find((u) => u.id === freshEnemy.id);
+      const supportedAfterMove = await tryEnemySupport(movedFreshEnemy);
+      if (!battleAsyncRef.current.current(epoch)) return;
+      if (supportedAfterMove === "cancelled") return;
+      if (supportedAfterMove) continue;
       const postMoveAllies = workingUnits.filter((u) => u.type === "ally");
       const postMoveChoice = movedFreshEnemy
         ? getEnemyAttackChoice(movedFreshEnemy, postMoveAllies, activeMap)
@@ -12070,7 +12167,7 @@ export default function App() {
 
       if (postMoveChoice) {
         if (didMove) {
-          await waitForMove(scaleBattleTime(220, battleSpeedRef.current));
+          if (!await battleAsyncRef.current.wait(scaleBattleTime(220, battleSpeedRef.current), epoch)) return;
         }
 
         const attackResult = await resolveEnemyAttack(
@@ -12081,7 +12178,7 @@ export default function App() {
           didMove ? "이동 후 " : ""
         );
         workingUnits = attackResult.units;
-        if (attackResult.defeated) {
+        if (attackResult.defeated || attackResult.cancelled) {
           return;
         }
         continue;
@@ -12281,7 +12378,14 @@ export default function App() {
       return;
     }
 
-    setTimeout(() => executeEnemyTurn(processedUnits), battleSpeedRef.current.enemyDelayMs);
+    const epoch = battleAsyncRef.current.capture();
+    void battleAsyncRef.current.wait(battleSpeedRef.current.enemyDelayMs, epoch).then(ready => {
+      if (ready) return executeEnemyTurn(processedUnits);
+    }).catch(() => {
+      if (!battleAsyncRef.current.current(epoch)) return;
+      setTurnBusy(false);
+      setLogs(previous => ["적 행동을 처리하지 못했습니다. 저장을 보존하고 메뉴에서 다시 진입해 주세요.", ...previous]);
+    });
   };
 
   const selectNextReadyAlly = (preferredRole = null) => {
@@ -12614,11 +12718,13 @@ export default function App() {
     const movePath = findMovePath(actor, bestTile.x, bestTile.y, units, activeMap);
 
     setTurnBusy(true);
+    const epoch = battleAsyncRef.current.capture();
     (async () => {
-      await animateUnitMovePath(
+      const moved = await animateUnitMovePath(
         actor,
         movePath.length ? movePath : [{ x: bestTile.x, y: bestTile.y }]
       );
+      if (!moved || !battleAsyncRef.current.current(epoch)) return;
 
       setUnits((prev) =>
         prev.map((unit) =>
@@ -12742,10 +12848,12 @@ export default function App() {
     const movePath = findMovePath(actor, bestTile.x, bestTile.y, units, activeMap);
     setTurnBusy(true);
 
-    await animateUnitMovePath(
+    const epoch = battleAsyncRef.current.capture();
+    const moved = await animateUnitMovePath(
       actor,
       movePath.length ? movePath : [{ x: bestTile.x, y: bestTile.y }]
     );
+    if (!moved || !battleAsyncRef.current.current(epoch)) return;
 
     const movedUnits = units.map((unit) =>
       unit.id === actor.id
@@ -12796,67 +12904,82 @@ export default function App() {
     }
   };
 
-  const showCombatCutscene = async (battleInfo, outcome) => {
-    if (!battleInfo?.attacker || !battleInfo?.defender) return;
-    faceCombat(battleInfo);
+  const showCombatCutscene = async (battleInfo, outcome, onImpact) => {
+    if (!battleInfo?.attacker || !battleInfo?.defender) return false;
+    const lifecycle = battleAsyncRef.current;
+    const epoch = lifecycle.capture();
+    const attackerKey = battleInfo.attacker.type === "ally"
+      ? getGameCharacterArtKey(battleInfo.attacker) || battleInfo.attacker.id : getEnemySpriteKey(battleInfo.attacker);
+    const defenderKey = battleInfo.defender.type === "ally"
+      ? getGameCharacterArtKey(battleInfo.defender) || battleInfo.defender.id : getEnemySpriteKey(battleInfo.defender);
     const effectType = getEffectType(battleInfo, outcome);
-    const sound = outcome?.crit ? 'crit' : outcome?.hit || outcome?.heal || outcome?.guard ? effectType : 'miss';
+    const sound = outcome?.crit ? "crit" : outcome?.hit || outcome?.heal || outcome?.guard ? effectType : "miss";
+    faceCombat(battleInfo);
     if (settings.cutsceneMode === "off" || !settings.effectsOn) {
+      if (!lifecycle.current(epoch)) return false;
       playSfx(sound);
-      return;
+      triggerCombatVisual(battleInfo, outcome, 0, false);
+      onImpact?.();
+      return lifecycle.current(epoch);
     }
-
     const cutsceneId = `${Date.now()}-${Math.random()}`;
-    const motionKey = getUnitWeaponMotionKey(battleInfo.attacker, battleInfo, outcome);
     const defenderPostHp = outcome?.heal
       ? Math.min(battleInfo.defender.maxHp || battleInfo.defender.hp, battleInfo.defender.hp + (outcome.damage || 0))
-      : outcome?.hit
-      ? Math.max(0, battleInfo.defender.hp - (outcome.damage || 0))
-      : battleInfo.defender.hp;
-    const finish = outcome?.hit && !outcome?.heal && defenderPostHp <= 0;
-    const attackerPostHp = battleInfo.attacker.hp;
+      : outcome?.hit && !outcome?.guard ? Math.max(0, battleInfo.defender.hp - (outcome.damage || 0)) : battleInfo.defender.hp;
+    const finish = Boolean(outcome?.hit && !outcome?.heal && !outcome?.guard && defenderPostHp <= 0);
     const timing = getCombatTiming({ ...battleInfo, outcome });
     const baseDuration = (cutsceneConfig.duration + (finish ? 360 : 0)) * timing.durationScale;
     const durationMs = scaleBattleTime(baseDuration, battleSpeedRef.current);
-
-    await preloadCombatArt(
-      battleInfo.attacker.type === "ally" ? battleInfo.attacker.id : getEnemySpriteKey(battleInfo.attacker),
-      battleInfo.defender.type === "ally" ? battleInfo.defender.id : getEnemySpriteKey(battleInfo.defender),
-      { ...battleInfo, effectType, outcome }
-    );
-
-    setCombatCutscene({
-      id: cutsceneId,
-      attacker: battleInfo.attacker,
-      defender: battleInfo.defender,
-      attackerPostHp,
-      defenderPostHp,
-      mode: battleInfo.mode,
-      effectType,
-      effectLabel: finish ? getCutsceneEffectLabel("finish") : getCutsceneEffectLabel(effectType),
-      effectIcon: finish ? getCutsceneEffectIcon("finish") : getCutsceneEffectIcon(effectType),
-      motionKey,
-      durationMs,
-      finish,
-      outcome,
-      title:
-        outcome?.guard ? battleInfo.attacker.skill : outcome?.heal
-          ? "회복"
-          : finish
-          ? "FINISH"
-          : battleInfo.mode === "skill"
-          ? battleInfo.attacker.skill
-          : battleInfo.mode === "counter"
-          ? "반격"
-          : "공격",
+    // Decode local packaged images before mounting; a failed decode cannot block the turn forever.
+    const ready = await new Promise(resolve => {
+      let settled = false, timeout;
+      const finish = value => {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timeout);
+        remove();
+        resolve(value && lifecycle.current(epoch));
+      };
+      const remove = lifecycle.register(() => finish(false));
+      timeout = window.setTimeout(() => finish(true), 2500);
+      Promise.resolve().then(() => preloadCombatArt(attackerKey, defenderKey, { ...battleInfo, effectType, outcome }))
+        .then(() => finish(true), () => finish(true));
     });
-
-    const choreography=getCombatChoreography(battleInfo.attacker.type === 'ally' ? battleInfo.attacker.id : getEnemySpriteKey(battleInfo.attacker),{...battleInfo,outcome,finish,effectType});
-    for(const cue of choreography.cues) scheduleBattleVisual(()=>playSfx(cue.sound),baseDuration*cue.at);
-
-    await waitForMove(durationMs);
-
-    setCombatCutscene((current) => (current?.id === cutsceneId ? null : current));
+    if (!ready || !lifecycle.current(epoch)) return false;
+    return new Promise(resolve => {
+      let impacted = false, settled = false, watchdog;
+      const contact = () => {
+        if (settled || impacted || !lifecycle.current(epoch)) return;
+        impacted = true;
+        triggerCombatVisual(battleInfo, outcome, 0, false);
+        onImpact?.();
+      };
+      const settle = success => {
+        if (settled) return;
+        if (success && lifecycle.current(epoch)) contact();
+        if (settled) return;
+        const completed = success && lifecycle.current(epoch);
+        settled = true;
+        window.clearTimeout(watchdog);
+        remove();
+        if (completed) setCombatCutscene(current => current?.id === cutsceneId ? null : current);
+        resolve(completed);
+      };
+      const remove = lifecycle.register(() => settle(false));
+      setCombatCutscene({
+        id: cutsceneId, attacker: battleInfo.attacker, defender: battleInfo.defender,
+        attackerPostHp: battleInfo.attacker.hp, defenderPostHp, mode: battleInfo.mode, effectType,
+        effectLabel: finish ? getCutsceneEffectLabel("finish") : getCutsceneEffectLabel(effectType),
+        effectIcon: finish ? getCutsceneEffectIcon("finish") : getCutsceneEffectIcon(effectType),
+        motionKey: getUnitWeaponMotionKey(battleInfo.attacker, battleInfo, outcome), durationMs, finish, outcome,
+        onImpact: contact, onComplete: () => settle(true),
+        title: outcome?.guard ? battleInfo.attacker.skill : outcome?.heal ? "회복" : finish ? "결정타"
+          : battleInfo.mode === "skill" ? battleInfo.attacker.skill : battleInfo.mode === "counter" ? "반격" : "공격",
+      });
+      const choreography = getCombatChoreography(attackerKey, { ...battleInfo, outcome, finish, effectType });
+      for (const cue of choreography.cues) scheduleBattleVisual(() => playSfx(cue.sound), baseDuration * cue.at);
+      watchdog = window.setTimeout(() => settle(true), durationMs + 250);
+    });
   };
 
   const resolveBattle = async (battle) => {
@@ -12870,6 +12993,7 @@ export default function App() {
       setLogs(previous => ["사거리가 맞지 않아 공격을 취소했습니다.", ...previous]);
       return;
     }
+    const epoch = battleAsyncRef.current.capture();
     actionResolvingRef.current = true;
     try {
 
@@ -12878,8 +13002,9 @@ export default function App() {
     setMoveUndo(null);
 
     const outcome = rollCombat(battle);
-    await showCombatCutscene(battle, outcome);
-    triggerCombatVisual(battle, outcome, 0, false);
+    let defenderDied = false, nextUnits = units;
+    let statusMessages = [], areaMessages = [], areaExpMessages = [], areaLootMessages = [], expMessages = [], lootMessages = [];
+    const played = await showCombatCutscene(battle, outcome, () => {
 
     if (outcome.hit) {
       addBattleStats({
@@ -12900,9 +13025,8 @@ export default function App() {
       }
     }
 
-    let defenderDied = false;
 
-    let nextUnits = spendAction(units, battle.attacker.id)
+    nextUnits = spendAction(units, battle.attacker.id)
       .map((u) => {
         if (u.id === battle.defender.id && outcome.hit) {
           const hp = Math.max(0, u.hp - outcome.damage);
@@ -12923,7 +13047,7 @@ export default function App() {
       pushDamagePopup({
         x: battle.defender.x,
         y: battle.defender.y,
-        text: "KO",
+        text: "격파",
         kind: "crit",
         duration: 1000,
       });
@@ -12939,7 +13063,6 @@ export default function App() {
       );
     }
 
-    let statusMessages = [];
     if (outcome.hit && !defenderDied) {
       const statusResult = applySkillStatusAfterHit(
         battle.attacker,
@@ -12951,9 +13074,6 @@ export default function App() {
       statusMessages = statusResult.messages;
     }
 
-    let areaMessages = [];
-    let areaExpMessages = [];
-    let areaLootMessages = [];
 
     if (
       outcome.hit &&
@@ -13017,8 +13137,6 @@ export default function App() {
       }
     }
 
-    let expMessages = [];
-    let lootMessages = [];
     if (outcome.hit && defenderDied && battle.attacker.type === "ally") {
       const expResult = awardEnemyExperience(nextUnits, battle.attacker.id, battle.defender);
       nextUnits = expResult.units;
@@ -13029,11 +13147,21 @@ export default function App() {
     }
 
 
+    if (battle.mode === "skill" && battle.attacker.type === "ally") {
+      const special = finalizeExpansionAllySkill(nextUnits, battle.attacker.id, battle.defender.id,
+        getSkill(battle.attacker, battle.attacker.activeSkillId), activeMap, { hit: outcome.hit });
+      nextUnits = special.units;
+      statusMessages.push(...special.messages);
+    }
+    setUnits(nextUnits);
+    });
+    if (!played || !battleAsyncRef.current.current(epoch)) return;
+
     let counterMessages = [];
     let counterExpMessages = [];
     let attackerDiedFromCounter = false;
 
-    if (outcome.hit && !defenderDied && battle.counter) {
+    if (outcome.hit && !defenderDied) {
       const counterActor = nextUnits.find((u) => u.id === battle.defender.id);
       const counterTarget = nextUnits.find((u) => u.id === battle.attacker.id);
 
@@ -13051,11 +13179,17 @@ export default function App() {
           createBattleTactics(counterActor, counterTarget, nextUnits, activeMap)
         );
         const counterOutcome = rollCombat(freshCounter);
-        nextUnits = nextUnits.map(unit => unit.id === counterActor.id ? { ...unit, counterUsed: true } : unit);
-        triggerCombatVisual(freshCounter, counterOutcome, 260);
         let counterKilled = false;
-
+        const counterPlayed = await showCombatCutscene(freshCounter, counterOutcome, () => {
+        nextUnits = nextUnits.map(unit => unit.id === counterActor.id ? { ...unit, counterUsed: true } : unit);
         if (counterOutcome.hit) {
+          addBattleStats({
+            counters: counterActor.type === "ally" ? 1 : 0,
+            damageDealt: counterActor.type === "ally" ? counterOutcome.damage : 0,
+            damageTaken: counterTarget.type === "ally" ? counterOutcome.damage : 0,
+          });
+          if (counterActor.type === "ally") addUnitBattleStats(counterActor.id, { counters: 1, damageDealt: counterOutcome.damage });
+          if (counterTarget.type === "ally") addUnitBattleStats(counterTarget.id, { damageTaken: counterOutcome.damage });
           nextUnits = nextUnits
             .map((u) => {
               if (u.id === counterTarget.id) {
@@ -13067,6 +13201,11 @@ export default function App() {
             })
             .filter((u) => u.hp > 0);
         }
+
+        if (counterActor.type !== "ally") nextUnits = consumeExpansionEnemyAttackBoost(nextUnits, counterActor.id);
+        setUnits(nextUnits);
+        });
+        if (!counterPlayed || !battleAsyncRef.current.current(epoch)) return;
 
         counterMessages.push(
           makeAttackLog(counterActor, counterTarget, "counter", counterOutcome, "↩ ")
@@ -13148,8 +13287,10 @@ export default function App() {
 
     markActed(battle.attacker.id, nextUnits);
     } finally {
-      actionResolvingRef.current = false;
-      setBattleResolving(false);
+      if (battleAsyncRef.current.current(epoch)) {
+        actionResolvingRef.current = false;
+        setBattleResolving(false);
+      }
     }
   };
 
@@ -13190,35 +13331,45 @@ export default function App() {
   };
 
   const executeSupportSkill = async (targetIds, choice = supportSkillChoice) => {
-    if (!choice || actionResolvingRef.current || combatBusy || battle || result || turn !== 'ally') return;
+    if (!choice || actionResolvingRef.current || combatBusy || battle || result || turn !== "ally") return;
     const source = units.find(unit => unit.id === choice.unitId && unit.hp > 0 && !unit.acted);
     const skill = getSkill(source, choice.skillId);
-    if (!source || !skill || skill.type === 'attack' || getSkillCooldown(source, skill.id) > 0) return;
+    if (!source || !skill || skill.type === "attack" || getSkillCooldown(source, skill.id) > 0) return;
     const actor = withSkill(source, skill.id);
     const applied = applySupportSkill(actor, skill, units, targetIds);
     if (!applied.targets.length) return;
+    const epoch = battleAsyncRef.current.capture();
     actionResolvingRef.current = true;
     setSupportSkillChoice(null);
     setBattleResolving(true);
     try {
-      const first = applied.targets[0];
-      const firstAfter = applied.units.find(unit => unit.id === first.id);
-      await showCombatCutscene(
+      const first = applied.targets[0], firstAfter = applied.units.find(unit => unit.id === first.id);
+      let nextUnits = units, specialMessages = [];
+      const played = await showCombatCutscene(
         { attacker: actor, defender: first, mode: "skill" },
-        { hit: true, heal: skill.type === "heal", guard: skill.type === "guard", damage: skill.type === "heal" ? firstAfter.hp - first.hp : 0, crit: false }
+        { hit: true, heal: skill.type === "heal", guard: skill.type === "guard", damage: skill.type === "heal" ? firstAfter.hp - first.hp : 0, crit: false },
+        () => {
+          const special = finalizeExpansionAllySkill(applied.units, actor.id, first.id, skill, activeMap,
+            { targetIds: applied.targets.map(target => target.id) });
+          specialMessages = special.messages;
+          nextUnits = spendAction(applySkillCooldown(special.units, actor.id, skill.cooldown, skill.id), actor.id);
+          setUnits(nextUnits);
+          applied.targets.forEach(target => {
+            pushVisualEffect({ x: target.x, y: target.y, type: skill.type === "heal" ? "heal" : "guard" });
+            pushDamagePopup({ x: target.x, y: target.y, text: skill.type === "heal" ? `+${applied.units.find(unit => unit.id === target.id).hp - target.hp}` : "수호", kind: skill.type === "heal" ? "heal" : "guard" });
+          });
+          addBattleStats({ skillsUsed: 1, healingDone: applied.healing });
+          addUnitBattleStats(actor.id, { skillsUsed: 1, healingDone: applied.healing });
+        }
       );
-      applied.targets.forEach(target => {
-        pushVisualEffect({ x: target.x, y: target.y, type: skill.type === "heal" ? "heal" : "guard" });
-        pushDamagePopup({ x: target.x, y: target.y, text: skill.type === "heal" ? `+${applied.units.find(unit => unit.id === target.id).hp - target.hp}` : "수호", kind: skill.type === "heal" ? "heal" : "guard" });
-      });
-      addBattleStats({ skillsUsed: 1, healingDone: applied.healing });
-      addUnitBattleStats(actor.id, { skillsUsed: 1, healingDone: applied.healing });
-      const cooldownUnits = applySkillCooldown(applied.units, actor.id, skill.cooldown, skill.id);
-      setLogs(previous => [`${actor.name}: ${skill.name} → ${applied.targets.map(unit => unit.name).join(", ")}`, ...previous]);
-      markActed(actor.id, cooldownUnits);
+      if (!played || !battleAsyncRef.current.current(epoch)) return;
+      setLogs(previous => [`${actor.name}: ${skill.name} → ${applied.targets.map(unit => unit.name).join(", ")}`, ...specialMessages, ...previous]);
+      markActed(actor.id, nextUnits);
     } finally {
-      actionResolvingRef.current = false;
-      setBattleResolving(false);
+      if (battleAsyncRef.current.current(epoch)) {
+        actionResolvingRef.current = false;
+        setBattleResolving(false);
+      }
     }
   };
 
@@ -13336,7 +13487,7 @@ export default function App() {
     const replay = clearedStages.includes(stageId) || stageRewardClaimed;
     const summary = lastClearSummary || calculateClearSummary(selectedStage, round, units);
     const recruitId = !replay ? RECRUIT_BY_STAGE[stageId] : null;
-    const recruit = recruitId ? createRecruitAlly(recruitId) : null;
+    const recruit = recruitId ? createRecruitAlly(recruitId, party) : null;
     let nextParty = mergePartyFromUnits(party, units);
     if (recruit && !nextParty.some(unit => unit.id === recruit.id)) nextParty = [...nextParty, recruit];
     nextParty = applyGearEnhanceToParty(nextParty.map(unit => ({
@@ -13841,6 +13992,19 @@ export default function App() {
     playSfx("confirm");
   };
 
+  const promoteAdvancedUnit = (unitId, formId) => {
+    if (advancedPromotionBusyRef.current) return;
+    const target = party.find(unit => unit.id === unitId);
+    const context = { party, clearedStages, gold, mastery: getAdvancedMastery(target, unitBattleStats[unitId]) };
+    const promotion = applyAdvancedPromotion(target, formId, context);
+    if (!promotion.ok) { setCampMessage(promotion.message); return; }
+    advancedPromotionBusyRef.current = true;
+    setParty(previous => previous.map(unit => unit.id === unitId ? promotion.unit : unit));
+    if (promotion.goldCost) setGold(previous => Math.max(0, previous - promotion.goldCost));
+    setCampMessage(promotion.message);
+    playSfx('confirm');
+  };
+
   const renderPromotionModal = () => {
     if (!promoteOpen) return null;
 
@@ -13851,6 +14015,11 @@ export default function App() {
           <div className="result-sub">
             Lv.3 이상 동료를 상급 병과로 전직시킬 수 있습니다.
           </div>
+          <div className="advanced-promotion-summary" data-advanced-seals={getAdvancedSealBalance(party, clearedStages).available}>
+            <strong>최상위 전직 · 보유 전직인장 {getAdvancedSealBalance(party, clearedStages).available}개</strong>
+            <span>31장 클리어 · 기존 상급 전직 · 스킬 사용 3회. 인장: 31장 첫 승리 3개, 이후 장 첫 승리마다 1개.</span>
+            <span>최초 전직은 인장 1개, 첫 분기 변경은 무료, 이후 변경은 300G. 성장·장비·비전 기술을 유지합니다.</span>
+          </div>
 
           <div className="promotion-list">
             {party.map((unit) => {
@@ -13858,6 +14027,9 @@ export default function App() {
               const cost = getPromotionCost(unit);
               const secret = getSecretPromotion(unit, exploration);
               const secretCheck = canSecretPromote(unit, exploration);
+              const advancedForms = getAdvancedPromotionForms(unit);
+              const mastery = getAdvancedMastery(unit, unitBattleStats[unit.id]);
+              const previewId = advancedPreviewByUnit[unit.id];
 
               return (
                 <div
@@ -13903,6 +14075,28 @@ export default function App() {
                     </div>
                     <button disabled={!secretCheck.ok} onClick={() => promoteSecretUnit(unit.id)}>비전 전직</button>
                   </div>}
+                  {advancedForms.length > 0 && <section className="advanced-promotion" data-advanced-unit={unit.id}>
+                    <div className="advanced-promotion-heading"><strong>최상위 전직 선택</strong><span>스킬 숙련 {mastery}/3</span></div>
+                    <div className="advanced-promotion-forms">
+                      {advancedForms.map(form => {
+                        const advancedCheck = canAdvancedPromote(unit, form.id, { party, clearedStages, gold, mastery });
+                        const current = unit.advancedClass === form.id;
+                        const opened = previewId === form.id;
+                        const previewArt = getPaintedVisualProfile(form.id)?.battle || getUnitPortrait(unit);
+                        return <article key={form.id} data-advanced-form={form.id} className={`advanced-promotion-form ${current ? 'current' : ''} ${opened ? 'previewing' : ''}`}>
+                          <img src={previewArt} alt={`${unit.name} ${form.name} 전투 모습`} loading="lazy" onError={event => { event.currentTarget.style.display = 'none'; }} />
+                          <strong>{form.name}{current ? ' · 선택 중' : ''}</strong>
+                          <span>{form.role}</span>
+                          <p>{skillDescription(form.skill, unit.skillLevel || 0)}</p>
+                          <small>특성: HP +{form.bonuses.hp} · 공격 +{form.bonuses.atk} · 방어 +{form.bonuses.def}{form.bonuses.move ? ` · 이동 +${form.bonuses.move}` : ''}</small>
+                          <button className="advanced-preview-button" data-advanced-preview={form.id} onClick={() => setAdvancedPreviewByUnit(previous => ({ ...previous, [unit.id]: opened ? null : form.id }))}>{opened ? '설명 접기' : '외형·역할 상세 보기'}</button>
+                          {opened && <div className="advanced-form-details"><p>{form.appearance}</p><p>대가·약점: {form.drawback}</p><p>새 기술: {form.skill.name}. 기존 기술은 유지됩니다.</p></div>}
+                          <small className="advanced-promotion-reason">{advancedCheck.reason}</small>
+                          <button data-advanced-select={form.id} disabled={!advancedCheck.ok} onClick={() => promoteAdvancedUnit(unit.id, form.id)}>{current ? '현재 전직' : unit.advancedClass ? '이 분기로 변경' : '이 전직 선택'}</button>
+                        </article>;
+                      })}
+                    </div>
+                  </section>}
                 </div>
               );
             })}
@@ -14352,8 +14546,9 @@ export default function App() {
       )}
       {combatCutscene && (
         <CombatScene key={combatCutscene.id} scene={combatCutscene}
-          attackerKey={combatCutscene.attacker.type === "ally" ? combatCutscene.attacker.id : getEnemySpriteKey(combatCutscene.attacker)}
-          defenderKey={combatCutscene.defender.type === "ally" ? combatCutscene.defender.id : getEnemySpriteKey(combatCutscene.defender)}
+          onImpact={combatCutscene.onImpact} onComplete={combatCutscene.onComplete}
+          attackerKey={combatCutscene.attacker.type === "ally" ? getGameCharacterArtKey(combatCutscene.attacker) || combatCutscene.attacker.id : getEnemySpriteKey(combatCutscene.attacker)}
+          defenderKey={combatCutscene.defender.type === "ally" ? getGameCharacterArtKey(combatCutscene.defender) || combatCutscene.defender.id : getEnemySpriteKey(combatCutscene.defender)}
           background={getWorldScene(activeStage.id)} effectsEnabled={settings.effectsOn} shakeEnabled={settings.shakeOn} />
       )}
 
@@ -14408,7 +14603,7 @@ export default function App() {
       {screen === "story" && storyScene && (
         <StoryScene key={`${storyScene.stage.id}-${storyScene.type}`} scene={storyScene}
           background={getWorldScene(storyScene.stage.id)}
-          portrait={getStoryPortrait(storyScene.lines[storyScene.index].speaker)}
+          portrait={getStoryPortrait(storyScene.lines[storyScene.index].speaker, storyScene.portraitParty || party)}
           onNext={nextStoryLine}
           onPrevious={() => setStoryScene(prev => ({ ...prev, index: Math.max(0, prev.index - 1) }))}
           onSkip={skipStoryScene} />
@@ -16250,7 +16445,7 @@ export default function App() {
             <div>
               <strong>붉은 하늘 아래, 마지막 수호가 시작된다</strong>
               <span>
-                30스테이지 캠페인, 15인 대규모 전투, 사이드뷰 컷씬, 보스 패턴,
+                50스테이지 캠페인, 15인 대규모 전투, 사이드뷰 컷씬, 보스 패턴,
                 캠프 성장, 자동 전투까지 포함한 출시 후보 버전입니다.
               </span>
             </div>
@@ -16372,7 +16567,7 @@ export default function App() {
         sessionActive={sessionStarted} checkpoint={menuCheckpoint.data} onContinue={continueGame}
         onReplay={(stage, type) => {
           if (!canReplayStory(stage.id, type, browsingCleared)) return;
-          setStoryScene({ stage, type, lines: STORY_SCENES[stage.id][type], index: 0, onComplete: 'library' });
+          setStoryScene({ stage, type, lines: STORY_SCENES[stage.id][type], index: 0, onComplete: 'library', portraitParty: browsingParty });
           setScreen('story');
         }} />}
 
@@ -16432,7 +16627,7 @@ export default function App() {
               <div className="stage-map-atlas-head">
                 <div>
                   <span>전술 지도첩</span>
-                  <strong>1~30장 전투 맵 미리보기</strong>
+                  <strong>1~50장 전투 맵 미리보기</strong>
                 </div>
                 <b>{stageMapAtlas.length}개</b>
               </div>
@@ -16467,7 +16662,7 @@ export default function App() {
                     >
                       <div className="stage-map-card-head">
                         <div>
-                          <span>제{Math.ceil(stage.id / 6)}막 · {mission.type}</span>
+                          <span>제{getActInfo(stage.id).id}막 · {mission.type}</span>
                           <strong>{stage.id}장. {stage.title.replace(/^\d+장\.\s*/, "")}</strong>
                           <small>{mission.title}</small>
                         </div>
@@ -18153,6 +18348,9 @@ export default function App() {
                       ? `${getSkillDisplayName(viewedUnit)} · 스킬 ${viewedSkillCooldown > 0 ? `${viewedSkillCooldown}턴` : "가능"} · 이동 ${getUnitMoveRange(viewedUnit)} · ${getUnitMoveTrait(viewedUnit).name} · EXP ${viewedUnit.exp || 0} · 상태 ${getStatusText(viewedUnit.status)}`
                       : `${viewedUnit.skill || "기본 공격"} · AI ${getInspectUnitRole(viewedUnit)} · 사거리 ${formatAttackRange(viewedUnit)} / 스킬 ${formatAttackRange(viewedUnit, "skill")} · 상태 ${getStatusText(viewedUnit.status)}`}
                   </div>
+                  {viewedUnit.type !== "ally" && viewedUnit.supportSkillName && (
+                    <div className="unit-class enemy-support-description"><strong>{viewedUnit.supportSkillName}</strong> · {viewedUnit.supportSkillDescription}</div>
+                  )}
 
                   <div className="hp-bar">
                     <div
@@ -18172,6 +18370,9 @@ export default function App() {
                     <div><span>지형</span><strong>{getInspectTerrainLabel(viewedTerrain)}</strong></div>
                     <div><span>좌표</span><strong>{viewedUnit.x + 1},{viewedUnit.y + 1}</strong></div>
                   </div>
+                  {getTerrainEffectDescription(viewedTerrain) && (
+                    <div className="unit-class terrain-effect-description">지형 효과 · {getTerrainEffectDescription(viewedTerrain)}</div>
+                  )}
                 </>
               ) : (
                 <div className="unit-class">아군 또는 적을 눌러 정보를 확인하세요.</div>

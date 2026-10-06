@@ -16,6 +16,7 @@ import { getStageRoundLimit } from '../src/engine/stageRules.js';
 import { getStageMission } from '../src/engine/stageMission.js';
 import { normalizeSaveData } from '../src/engine/saveEngine.js';
 import { getInitialParty } from '../src/engine/partyEngine.js';
+import { applyExpansionEnemyIdentity, createExpansionEnemy, createExpansionExtraEnemy, getExpansionEnemyKeys } from '../src/data/expansionEnemies.js';
 
 const hero = { id: 'hero', type: 'ally', name: '카일', hp: 20 };
 const boss = { id: 'boss', type: 'boss', name: '적 지휘관', hp: 20 };
@@ -34,6 +35,7 @@ const builders = runInNewContext([
 ].join('\n'), {
   alignMapToArtwork, createBattlefieldTerrain, getBattlefieldPlan, getChapterBossName,
   applyStageMonsterAppearance, distributeBattleFormations, withStageEnemyLevel,
+  applyExpansionEnemyIdentity, createExpansionEnemy, createExpansionExtraEnemy, getExpansionEnemyKeys,
   clone: value => JSON.parse(JSON.stringify(value)),
   Math: Object.assign(Object.create(Math), { random: () => { throw new Error('Mission briefing must be deterministic'); } }),
 });
@@ -118,7 +120,7 @@ test('mission deadlines use the existing enemy-count and map-size bonuses with t
   assert.equal(getStageMission(huge).roundLimit, 30);
 });
 
-test('all thirty actual expanded battlefields retain their true commander names and current formation-based deadlines', () => {
+test('all actual expanded battlefields retain their true commander names and current formation-based deadlines', () => {
   for (const original of stages) for (const count of [4, 15]) {
     const active = JSON.parse(JSON.stringify(builders.expandStageForLargeBattle(original, count)));
     const before = JSON.stringify(active);

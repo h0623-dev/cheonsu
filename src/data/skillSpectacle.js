@@ -1,3 +1,6 @@
+import { EXPANSION_ALLY_ART_KEYS } from './expansionArtRegistry.js';
+import { getExpansionBaseKey } from './skillAuraAnchors.js';
+
 // Decoration only: these themes never replace a skill's combat effect or timeline.
 const THEME_PALETTES = {
   fire: { color: '#ff853d', core: '#fff2bc' },
@@ -12,6 +15,8 @@ const THEME_PALETTES = {
   music: { color: '#eca4d2', core: '#fff1fb' },
   martial: { color: '#efcd8f', core: '#fff6d4' },
   poison: { color: '#a3ce74', core: '#edffbf' },
+  nature: { color: '#84c78c', core: '#efffd5' },
+  water: { color: '#81d8dd', core: '#eafffb' },
 };
 
 const profile = (theme, power, color, core) => ({ theme, power, color, core });
@@ -54,17 +59,25 @@ const SKILL_PROFILES = {
   radiance: profile('guard', 1.12, '#e3d893', '#fffbdc'),
   'tiger-fist': profile('martial', 1.14),
   'tiger-roar': profile('martial', 1.18, '#edc488', '#fff3ce'),
+  'tide-thrust': profile('water', 1.1),
+  'water-cover': profile('guard', 1.06, '#91d9db', '#eafff6'),
+  'warm-touch': profile('heal', 1.06, '#e2bdad', '#fff1df'),
+  'linked-fist': profile('martial', 1.12, '#e6b6ab', '#fff0df'),
+  'breaker-hammer': profile('earth', 1.14, '#dbb56c', '#fff1c1'),
+  'folding-barrier': profile('guard', 1.08, '#d1bc7f', '#fff3d1'),
+  'root-snare': profile('nature', 1.1),
+  'green-breath': profile('heal', 1.08, '#a4d797', '#f5ffdf'),
 };
 
 const ALLY_KEYS = new Set([
   'hero', 'bram', 'lina', 'aria', 'leon', 'sera', 'noah', 'yuna', 'rakan',
-  'miho', 'teo', 'irene', 'kaz', 'ella', 'jin', 'luka', 'baekho',
+  'miho', 'teo', 'irene', 'kaz', 'ella', 'jin', 'luka', 'baekho', ...EXPANSION_ALLY_ART_KEYS,
 ]);
 const EFFECT_THEMES = {
   fire: 'fire', ice: 'ice', lightning: 'lightning', shadow: 'shadow', holy: 'holy',
   heal: 'heal', guard: 'guard', poison: 'poison', music: 'music',
   slash: 'wind', thrust: 'wind', arrow: 'wind', heavy: 'earth',
-  impact: 'martial', claw: 'martial', cast: 'holy',
+  impact: 'martial', claw: 'martial', cast: 'holy', nature: 'nature', water: 'water',
 };
 
 // Unit accents decorate the existing element; a different skill element keeps its own palette.
@@ -99,16 +112,33 @@ const UNIT_ACCENTS = {
   boss_ember: profile('fire', 1.16, '#ff7545', '#fff0b0'),
   boss_oracle: profile('holy', 1.16, '#fff0b1', '#ffffee'),
   boss_abyss: profile('shadow', 1.16, '#c19afb', '#f5e9ff'),
+  crab_guard: profile('martial', 1.08, '#dfc394', '#fff2cc'),
+  eel_archer: profile('wind', 1.06, '#a8d6cf', '#effff2'),
+  spore_colony: profile('poison', 1.06, '#c3db91', '#f6ffdc'),
+  mist_ram: profile('martial', 1.1, '#cbd9eb', '#f3faff'),
+  crystal_insect: profile('martial', 1.06, '#b8ddec', '#effcff'),
+  spring_salamander: profile('fire', 1.1, '#ffab7b', '#fff2cc'),
+  gold_puppet: profile('wind', 1.08, '#ddbe79', '#fff3cf'),
+  bell_keeper: profile('music', 1.08, '#d6b2d4', '#fff2fa'),
+  scroll_spirit: profile('holy', 1.08, '#dac895', '#fff7df'),
+  eclipse_cat: profile('shadow', 1.1, '#afa6d9', '#eee9ff'),
+  ink_vine: profile('poison', 1.08, '#b2cb7f', '#efffd0'),
+  hollow_armor: profile('guard', 1.1, '#bac8d2', '#f4f8ff'),
+  tide_keeper: profile('wind', 1.16, '#8fcbd8', '#eaffff'),
+  frost_queen: profile('ice', 1.16, '#9ae4f1', '#f0ffff'),
+  resonance_judge: profile('music', 1.16, '#d3b3e1', '#fff2ff'),
+  oath_guardian: profile('holy', 1.18, '#e9d6a6', '#fffce7'),
 };
 
 export function getSkillSpectacle(plan, key, presentation, scene) {
   if (!plan?.skill) return null;
   const skillId = String(plan.id).slice(String(plan.id).indexOf(':') + 1);
-  const authored = ALLY_KEYS.has(key) ? SKILL_PROFILES[skillId] : null;
+  const canonical = getExpansionBaseKey(key);
+  const authored = ALLY_KEYS.has(canonical) ? SKILL_PROFILES[skillId] : null;
   const theme = presentation.healing ? 'heal' : presentation.guarding ? 'guard'
     : authored?.theme || EFFECT_THEMES[presentation.effect] || 'martial';
   const palette = THEME_PALETTES[theme];
-  const unit = UNIT_ACCENTS[key];
+  const unit = UNIT_ACCENTS[canonical];
   const accent = unit?.theme === theme ? unit : null;
   const firstRelease = plan.releases?.[0] ?? .45;
   const lastContact = plan.contacts.at(-1) ?? plan.impact;
@@ -121,7 +151,7 @@ export function getSkillSpectacle(plan, key, presentation, scene) {
     support: presentation.support,
     heal: presentation.healing,
     guard: presentation.guarding,
-    sword: key === 'hero' ? { kind: presentation.support ? 'gold' : 'fire', at: .24, until: lastContact + .16 } : null,
+    sword: canonical === 'hero' ? { kind: presentation.support ? 'gold' : 'fire', at: .24, until: lastContact + .16 } : null,
     weapon: { unit: key, at: .24, until: lastContact + .16 },
     charge: { at: .23, until: Math.min(firstRelease + .015, .60) },
     bursts: plan.contacts.map(at => ({ at, until: Math.min(.94, at + .23), kind: theme })),

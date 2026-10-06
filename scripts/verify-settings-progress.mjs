@@ -1,13 +1,15 @@
+import { qaBrowserOptions, confirmStageMission } from './qa-browser.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import { stages } from '../src/data/stages.js';
 
 const base = process.env.GAME_URL || 'http://127.0.0.1:5176';
 const key = 'cheonsu_v01_save', backupKey = 'cheonsu_v01_progress_recovery_backup';
-const all = Array.from({ length: 30 }, (_, index) => index + 1);
+const all = stages.map(stage => stage.id);
 const out = 'tmp/settings-progress-qa';
 await fs.mkdir(out, { recursive: true });
-const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const browser = await chromium.launch(qaBrowserOptions());
 const cases = [
   { width: 360, height: 740, native: 335 }, { width: 412, height: 915, native: 335 },
   { width: 320, height: 568, native: 335 }, { width: 740, height: 360, native: 335 },
@@ -53,7 +55,7 @@ try {
     await page.locator('.campaign-header .prominent-save').click();
     const campaign = JSON.parse(await readRaw());
     await page.locator('.world-stage-node').filter({ has: page.locator('strong', { hasText: /^1장\./ }) }).click();
-    await button('전투 시작').click(); await button('바로 전투').click();
+    await button('전투 시작').click(); await button('바로 전투').click(); await confirmStageMission(page);
     await page.locator('.world-battlefield').waitFor();
     await page.locator('.battle-control-heading .prominent-save').click();
     const battle = { ...JSON.parse(await readRaw()), clearedStages: [1], unlockedStages: all };
@@ -89,7 +91,8 @@ try {
     await button('이어하기').click(); await page.locator('.world-battlefield').waitFor();
     await open(); await dialog.getByRole('button', { name: '월드맵 스테이지 선택', exact: true }).click();
     await assertStages([1, 2]);
-    for (const [cleared, expected] of [[[1, 30], [1, 2, 30]], [[], [1]], [all, all], [[1], [1, 2]]]) {
+    const originalCampaign = all.slice(0, 30);
+    for (const [cleared, expected] of [[[1, 30], [1, 2, 30]], [[], [1]], [originalCampaign, all.slice(0, 31)], [all, all], [[1], [1, 2]]]) {
       await restore({ ...campaign, clearedStages: cleared, unlockedStages: all });
       await assertStages(expected);
       await page.locator('.campaign-header .prominent-save').click();
@@ -98,7 +101,7 @@ try {
     await restore({ ...campaign, screen: 'deployment', selectedStage: campaign.selectedStage, clearedStages: [] });
     await page.locator('.deployment-screen').waitFor();
     await button('전투 시작').click(); await page.locator('.narrative-stage').waitFor();
-    await button('바로 전투').click(); await page.locator('.world-battlefield').waitFor();
+    await button('바로 전투').click(); await confirmStageMission(page); await page.locator('.world-battlefield').waitFor();
     const inflated = { ...campaign, clearedStages: all, unlockedStages: all, gold: 812 };
     await restore(inflated); await assertStages(all);
     await page.reload(); await button('설정').click(); await button('저장').click();

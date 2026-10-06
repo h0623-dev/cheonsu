@@ -16,11 +16,12 @@ import manifest from '../public/art/skills-v1/manifest.json' with {type:'json'};
 const allSkills=[...Object.entries(CHARACTER_SKILLS).flatMap(([unit,skills])=>skills.map(skill=>[unit,skill])),...Object.values(DISCOVERY_TECHNIQUES).map(skill=>[skill.unitId,skill])];
 const sceneFor=(unit,skill)=>({mode:skill?'skill':'attack',attacker:skill?withSkill({id:unit,type:'ally',learnedTechniques:[skill.id]},skill.id):{id:unit},outcome:{hit:true,heal:skill?.type==='heal',guard:skill?.type==='guard'}});
 
-test('34 skills and 4 learned techniques have unique choreography, actor paths and effects',()=>{
-  assert.equal(allSkills.length,38);
+test('전체 기본 기술과 비전 기술의 고유 동작·포즈·이펙트를 유지한다',()=>{
+  const expected = Object.values(CHARACTER_SKILLS).reduce((sum, skills) => sum + skills.length, 0) + Object.keys(DISCOVERY_TECHNIQUES).length;
+  assert.equal(allSkills.length,expected);
   const plans=allSkills.map(([unit,skill])=>getCombatChoreography(unit,sceneFor(unit,skill)));
-  assert.equal(Object.keys(SKILL_DIRECTIONS).length,38);
-  for(const property of ['motion','actor','effects'])assert.equal(new Set(plans.map(plan=>JSON.stringify(plan[property]))).size,38,property);
+  assert.equal(Object.keys(SKILL_DIRECTIONS).length,expected);
+  for(const property of ['motion','actor','effects'])assert.equal(new Set(plans.map(plan=>JSON.stringify(plan[property]))).size,expected,property);
   for(const [index,plan]of plans.entries()){
     assert.equal(plan.name,allSkills[index][1].name);
     assert.ok(plan.skillPose?.src);

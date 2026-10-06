@@ -4,7 +4,7 @@ import { readFile, access } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import vm from 'node:vm';
 import sharp from 'sharp';
-import { combatUnitIds, combatMotionPoses, getCombatMotionSprite, getCombatSprite } from '../src/data/combatArt.js';
+import { legacyCombatUnitIds, combatMotionPoses, getCombatMotionSprite, getCombatSprite } from '../src/data/combatArt.js';
 import { getPaintedVisualProfile } from '../src/data/unitVisuals.js';
 import { getCharacterArt } from '../src/data/characterArt.js';
 
@@ -29,7 +29,7 @@ test('all 19 enemies retain their archived assets while runtime uses the active 
     assert.equal(getCombatMotionSprite(id, 'invalid'), active?.motion.recover || unit.ready);
     for (const pose of combatMotionPoses) assert.equal(getCombatMotionSprite(id, pose), (active?.motion || unit.motion)[pose]);
   }
-  for (const id of combatUnitIds.filter(id => !ids.includes(id) && !id.startsWith('boss_'))) {
+  for (const id of legacyCombatUnitIds.filter(id => !ids.includes(id) && !id.startsWith('boss_'))) {
     assert.equal(getCombatSprite(id), getCharacterArt(id)?.motion.recover || `/art/combat-v1/units/${id}-ready.webp`);
     assert.equal(getCombatMotionSprite(id), getCharacterArt(id)?.motion.recover || `/art/combat-v2/units/${id}-recover.webp`);
     assert.equal(getPaintedVisualProfile(id).map, `/art/map-sprites-v4/${id}.webp`);

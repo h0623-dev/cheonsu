@@ -133,7 +133,7 @@ test('canceling town travel completes the current step without opening its old d
 });
 
 test('town walking frames cover all companions and match front/back facing without replacing idle art', () => {
-  assert.equal(VILLAGE_WALK_IDS.length, 17);
+  assert.equal(VILLAGE_WALK_IDS.length, 21);
   for (const id of VILLAGE_WALK_IDS) {
     assert.equal(new Set(getVillageWalkFrames(id)).size, 4);
     assert.equal(getVillageWalkFrame(id, 'up-left', 0), getVillageWalkFrame(id, 'up-right', 0));

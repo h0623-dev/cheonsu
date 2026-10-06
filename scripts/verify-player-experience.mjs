@@ -1,3 +1,4 @@
+import { qaBrowserOptions } from './qa-browser.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -6,7 +7,7 @@ const base = process.env.GAME_URL || 'http://127.0.0.1:5176';
 const key = 'cheonsu_v01_save';
 const out = 'tmp/player-experience-qa';
 await fs.mkdir(out, { recursive: true });
-const browser = await chromium.launch({ channel: process.env.CHEONSU_QA_BROWSER || 'msedge', headless: true });
+const browser = await chromium.launch(qaBrowserOptions());
 const reports = [];
 try {
   for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }, { width: 320, height: 568 }, { width: 844, height: 390 }, { width: 568, height: 320 }]) {

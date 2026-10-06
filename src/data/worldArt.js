@@ -1,6 +1,7 @@
 import { getBattlefieldPlan } from './battlefieldPlans.js';
+import { getNewTerrainPolicy } from './terrainPolicy.js';
 export const WORLD_ART_ROOT = '/art/world-v2';
-export const WORLD_BIOMES = ['frontier', 'forest', 'fortress', 'snow', 'citadel'];
+export const WORLD_BIOMES = ['frontier', 'forest', 'fortress', 'snow', 'citadel', 'coast', 'workshop', 'starlight'];
 
 export function getWorldBiome(stageId = 1) {
   return getBattlefieldPlan(stageId).biome;
@@ -14,7 +15,7 @@ export function getWorldSceneThumbnail(stageId = 1) {
   return getWorldScene(stageId).replace('.webp', '-thumb.webp');
 }
 
-const BASE_GROUND = { frontier: 'grass', forest: 'forest', fortress: 'stone', snow: 'snow', citadel: 'dark' };
+const BASE_GROUND = { frontier: 'grass', forest: 'forest', fortress: 'stone', snow: 'snow', citadel: 'dark', coast: 'paving', workshop: 'stone', starlight: 'paving' };
 const MATERIAL = { plain: 'grass', forest: 'forest', hill: 'rock', fort: 'stone', gate: 'paving', road: 'road', dark: 'dark', rune: 'rune', trap: 'trap', swamp: 'swamp', water: 'water', ice: 'ice', fire: 'fire' };
 const BLOCK_PROPS = {
   frontier: ['oak', 'pine', 'rocks', 'maple'],
@@ -22,10 +23,15 @@ const BLOCK_PROPS = {
   fortress: ['wall', 'pillar', 'rocks', 'wall'],
   snow: ['snow-pine', 'ice-crystal', 'snow-pine', 'rocks'],
   citadel: ['dead-tree', 'crystal', 'wall', 'rocks'],
+  coast: ['rocks', 'pillar', 'rocks', 'crates'],
+  workshop: ['wall', 'pillar', 'crates', 'wall'],
+  starlight: ['rocks', 'crystal', 'monument', 'pillar'],
 };
 const PROP_HEIGHT = { oak: 2.05, pine: 2.15, 'snow-pine': 2.15, 'dead-tree': 1.95, maple: 1.7, wall: 1.1, rocks: 0.92, pillar: 1.5, crystal: 1.2, 'ice-crystal': 1.2, shrub: 0.42, monument: 0.6, crates: 0.52, brazier: 0.55, arch: 1.6, palisade: 1.1 };
 
 function materialFor(tile, biome) {
+  const expansion = getNewTerrainPolicy(tile);
+  if (expansion) return expansion.material;
   if (tile === 'plain') return BASE_GROUND[biome];
   if (['plain', 'block', 'wall', 'void'].includes(tile)) return BASE_GROUND[biome];
   if (tile === 'forest' && biome === 'snow') return 'snow';
@@ -38,6 +44,7 @@ export function getWorldTileVisual(map, x, y, stageId) {
   const tile = map[y][x];
   const biome = getWorldBiome(stageId);
   const material = materialFor(tile, biome);
+  const expansion = getNewTerrainPolicy(tile);
   let seed = Math.imul(x + 11, 374761393) + Math.imul(y + 7, 668265263) + stageId * 19;
   seed = Math.imul(seed ^ (seed >>> 13), 1274126177);
   seed = (seed ^ (seed >>> 16)) >>> 0;
@@ -55,6 +62,7 @@ export function getWorldTileVisual(map, x, y, stageId) {
   else if (tile === 'forest' || (tile === 'plain' && seed % 19 === 0)) prop = 'shrub';
   else if (tile === 'fort') prop = 'crates';
   else if (tile === 'gate') prop = 'monument';
+  else if (expansion?.prop) prop = expansion.prop;
   // Shared material edges meet squarely; only exposed edges receive a soft corner.
   const same = (dx, dy) => map[y + dy]?.[x + dx] != null && materialFor(map[y + dy][x + dx], biome) === material;
   const corners = [[-1, 0, 0, -1], [1, 0, 0, -1], [1, 0, 0, 1], [-1, 0, 0, 1]]
@@ -64,7 +72,8 @@ export function getWorldTileVisual(map, x, y, stageId) {
     style: {
       '--ground-image': `url("${WORLD_ART_ROOT}/terrain/${material}.webp")`,
       '--ground-radius': corners,
-      '--ground-position': `${(x % 3) * 50}% ${(y % 3) * 50}%`,
+      '--ground-position': expansion ? 'center' : `${(x % 3) * 50}% ${(y % 3) * 50}%`,
+      '--ground-size': expansion ? '100% 100%' : '300% 300%',
       '--blend-left': same(-1, 0) ? '0px' : '9px',
       '--blend-right': same(1, 0) ? '0px' : '9px',
       '--blend-top': same(0, -1) ? '0px' : '7px',

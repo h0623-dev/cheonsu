@@ -1,0 +1,17 @@
+/* A short, local contact accent leaves the characters and battlefield readable. */
+.duel-impact-ink { position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; background: radial-gradient(ellipse at var(--duel-contact-x, 70%) var(--duel-contact-y, 53%), rgb(255 243 200 / 30%) 0, transparent 19%, rgb(5 15 21 / 28%) 86%); }
+.duel-action-lines { position: absolute; inset: 17% 0 13%; z-index: 1; pointer-events: none; opacity: 0; overflow: hidden; }
+.duel-action-lines i { position: absolute; top: calc(var(--line-row) * 10%); left: 4%; width: var(--line-span); height: 1px; background: linear-gradient(90deg, transparent, rgb(246 240 221 / 45%), transparent); transform-origin: right center; }
+.duel-action-lines i:nth-child(2n) { left: auto; right: 5%; height: 2px; opacity: .6; }
+.duel-action-echo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; pointer-events: none; transform-origin: 50% 93.75%; filter: saturate(.25); }
+.duel-choreographed .combat-result { animation: none; opacity: 0; }
+.duel-choreographed .combat-result strong { font-family: system-ui, sans-serif; font-weight: 900; }
+.duel-choreographed.is-critical .combat-result { color: #ffe5a5; }
+.duel-choreographed .combat-health-track i { transition-duration: min(180ms, calc(var(--combat-duration) * .07)); }
+.duel-choreographed:is(.duel-motion-disabled,.motion-off) :is(.duel-impact-ink,.duel-action-lines,.duel-action-echo) { display: none; }
+.duel-choreographed:is(.duel-motion-disabled,.motion-off)[data-contact-state="resolved"] .combat-result { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .duel-impact-ink,.duel-action-lines,.duel-action-echo { display: none; }
+  .duel-choreographed .combat-health-track i { transition: none; }
+  .duel-choreographed[data-contact-state="resolved"] .combat-result { opacity: 1; transform: none; }
+}

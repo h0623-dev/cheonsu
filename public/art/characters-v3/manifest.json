@@ -1,0 +1,3767 @@
+{
+  "units": {
+    "eel_archer": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/eel_archer-run-a.webp",
+        "run-b": "/art/characters-v3/units/eel_archer-run-b.webp",
+        "windup": "/art/characters-v3/units/eel_archer-windup.webp",
+        "strike": "/art/characters-v3/units/eel_archer-strike.webp",
+        "recover": "/art/characters-v3/units/eel_archer-recover.webp",
+        "recoil": "/art/characters-v3/units/eel_archer-recoil.webp",
+        "skill-a": "/art/characters-v3/units/eel_archer-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/eel_archer-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 172,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 176,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 166,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 165,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 174,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 184,
+          "bottom": 478
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 165,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 168,
+          "bottom": 478
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/eel_archer.webp",
+      "dialogue": "/art/characters-v3/dialogue/eel_archer.webp",
+      "map": "/art/characters-v3/map/eel_archer.webp"
+    },
+    "spore_colony": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/spore_colony-run-a.webp",
+        "run-b": "/art/characters-v3/units/spore_colony-run-b.webp",
+        "windup": "/art/characters-v3/units/spore_colony-windup.webp",
+        "strike": "/art/characters-v3/units/spore_colony-strike.webp",
+        "recover": "/art/characters-v3/units/spore_colony-recover.webp",
+        "recoil": "/art/characters-v3/units/spore_colony-recoil.webp",
+        "skill-a": "/art/characters-v3/units/spore_colony-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/spore_colony-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 176,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 186,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 188,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 193,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 193,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 226,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 171,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 179,
+          "bottom": 478
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/spore_colony.webp",
+      "dialogue": "/art/characters-v3/dialogue/spore_colony.webp",
+      "map": "/art/characters-v3/map/spore_colony.webp"
+    },
+    "mist_ram": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/mist_ram-run-a.webp",
+        "run-b": "/art/characters-v3/units/mist_ram-run-b.webp",
+        "windup": "/art/characters-v3/units/mist_ram-windup.webp",
+        "strike": "/art/characters-v3/units/mist_ram-strike.webp",
+        "recover": "/art/characters-v3/units/mist_ram-recover.webp",
+        "recoil": "/art/characters-v3/units/mist_ram-recoil.webp",
+        "skill-a": "/art/characters-v3/units/mist_ram-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/mist_ram-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 209,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 218,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 218,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 245,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 195,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 218,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 161,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 219,
+          "bottom": 478
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/mist_ram.webp",
+      "dialogue": "/art/characters-v3/dialogue/mist_ram.webp",
+      "map": "/art/characters-v3/map/mist_ram.webp"
+    },
+    "crystal_insect": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/crystal_insect-run-a.webp",
+        "run-b": "/art/characters-v3/units/crystal_insect-run-b.webp",
+        "windup": "/art/characters-v3/units/crystal_insect-windup.webp",
+        "strike": "/art/characters-v3/units/crystal_insect-strike.webp",
+        "recover": "/art/characters-v3/units/crystal_insect-recover.webp",
+        "recoil": "/art/characters-v3/units/crystal_insect-recoil.webp",
+        "skill-a": "/art/characters-v3/units/crystal_insect-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/crystal_insect-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 211,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 213,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 178,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 218,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 219,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 218,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 201,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 198,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/crystal_insect.webp",
+      "dialogue": "/art/characters-v3/dialogue/crystal_insect.webp",
+      "map": "/art/characters-v3/map/crystal_insect.webp"
+    },
+    "spring_salamander": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/spring_salamander-run-a.webp",
+        "run-b": "/art/characters-v3/units/spring_salamander-run-b.webp",
+        "windup": "/art/characters-v3/units/spring_salamander-windup.webp",
+        "strike": "/art/characters-v3/units/spring_salamander-strike.webp",
+        "recover": "/art/characters-v3/units/spring_salamander-recover.webp",
+        "recoil": "/art/characters-v3/units/spring_salamander-recoil.webp",
+        "skill-a": "/art/characters-v3/units/spring_salamander-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/spring_salamander-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 269,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 275,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 265,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 308,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 273,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 276,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 212,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 280,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/spring_salamander.webp",
+      "dialogue": "/art/characters-v3/dialogue/spring_salamander.webp",
+      "map": "/art/characters-v3/map/spring_salamander.webp"
+    },
+    "crab_guard": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/crab_guard-run-a.webp",
+        "run-b": "/art/characters-v3/units/crab_guard-run-b.webp",
+        "windup": "/art/characters-v3/units/crab_guard-windup.webp",
+        "strike": "/art/characters-v3/units/crab_guard-strike.webp",
+        "recover": "/art/characters-v3/units/crab_guard-recover.webp",
+        "recoil": "/art/characters-v3/units/crab_guard-recoil.webp",
+        "skill-a": "/art/characters-v3/units/crab_guard-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/crab_guard-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 235,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 233,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 233,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 253,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 251,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 261,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 196,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 200,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/crab_guard.webp",
+      "dialogue": "/art/characters-v3/dialogue/crab_guard.webp",
+      "map": "/art/characters-v3/map/crab_guard.webp"
+    },
+    "gold_puppet": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/gold_puppet-run-a.webp",
+        "run-b": "/art/characters-v3/units/gold_puppet-run-b.webp",
+        "windup": "/art/characters-v3/units/gold_puppet-windup.webp",
+        "strike": "/art/characters-v3/units/gold_puppet-strike.webp",
+        "recover": "/art/characters-v3/units/gold_puppet-recover.webp",
+        "recoil": "/art/characters-v3/units/gold_puppet-recoil.webp",
+        "skill-a": "/art/characters-v3/units/gold_puppet-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/gold_puppet-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 153,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 158,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 153,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 164,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 162,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 177,
+          "bottom": 478
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 161,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 182,
+          "bottom": 478
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/gold_puppet.webp",
+      "dialogue": "/art/characters-v3/dialogue/gold_puppet.webp",
+      "map": "/art/characters-v3/map/gold_puppet.webp"
+    },
+    "bell_keeper": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/bell_keeper-run-a.webp",
+        "run-b": "/art/characters-v3/units/bell_keeper-run-b.webp",
+        "windup": "/art/characters-v3/units/bell_keeper-windup.webp",
+        "strike": "/art/characters-v3/units/bell_keeper-strike.webp",
+        "recover": "/art/characters-v3/units/bell_keeper-recover.webp",
+        "recoil": "/art/characters-v3/units/bell_keeper-recoil.webp",
+        "skill-a": "/art/characters-v3/units/bell_keeper-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/bell_keeper-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 172,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 165,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 154,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 177,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 144,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 192,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 122,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 143,
+          "bottom": 478
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/bell_keeper.webp",
+      "dialogue": "/art/characters-v3/dialogue/bell_keeper.webp",
+      "map": "/art/characters-v3/map/bell_keeper.webp"
+    },
+    "scroll_spirit": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/scroll_spirit-run-a.webp",
+        "run-b": "/art/characters-v3/units/scroll_spirit-run-b.webp",
+        "windup": "/art/characters-v3/units/scroll_spirit-windup.webp",
+        "strike": "/art/characters-v3/units/scroll_spirit-strike.webp",
+        "recover": "/art/characters-v3/units/scroll_spirit-recover.webp",
+        "recoil": "/art/characters-v3/units/scroll_spirit-recoil.webp",
+        "skill-a": "/art/characters-v3/units/scroll_spirit-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/scroll_spirit-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 223,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 225,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 230,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 248,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 249,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 271,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 199,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 202,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/scroll_spirit.webp",
+      "dialogue": "/art/characters-v3/dialogue/scroll_spirit.webp",
+      "map": "/art/characters-v3/map/scroll_spirit.webp"
+    },
+    "eclipse_cat": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/eclipse_cat-run-a.webp",
+        "run-b": "/art/characters-v3/units/eclipse_cat-run-b.webp",
+        "windup": "/art/characters-v3/units/eclipse_cat-windup.webp",
+        "strike": "/art/characters-v3/units/eclipse_cat-strike.webp",
+        "recover": "/art/characters-v3/units/eclipse_cat-recover.webp",
+        "recoil": "/art/characters-v3/units/eclipse_cat-recoil.webp",
+        "skill-a": "/art/characters-v3/units/eclipse_cat-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/eclipse_cat-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 212,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 235,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 206,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 238,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 193,
+          "bottom": 478
+        },
+        "recoil": {
+          "height": 512,
+          "top": 242,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 175,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 230,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/eclipse_cat.webp",
+      "dialogue": "/art/characters-v3/dialogue/eclipse_cat.webp",
+      "map": "/art/characters-v3/map/eclipse_cat.webp"
+    },
+    "ink_vine": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/ink_vine-run-a.webp",
+        "run-b": "/art/characters-v3/units/ink_vine-run-b.webp",
+        "windup": "/art/characters-v3/units/ink_vine-windup.webp",
+        "strike": "/art/characters-v3/units/ink_vine-strike.webp",
+        "recover": "/art/characters-v3/units/ink_vine-recover.webp",
+        "recoil": "/art/characters-v3/units/ink_vine-recoil.webp",
+        "skill-a": "/art/characters-v3/units/ink_vine-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/ink_vine-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 269,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 276,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 248,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 296,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 273,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 294,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 247,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 256,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/ink_vine.webp",
+      "dialogue": "/art/characters-v3/dialogue/ink_vine.webp",
+      "map": "/art/characters-v3/map/ink_vine.webp"
+    },
+    "hollow_armor": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/hollow_armor-run-a.webp",
+        "run-b": "/art/characters-v3/units/hollow_armor-run-b.webp",
+        "windup": "/art/characters-v3/units/hollow_armor-windup.webp",
+        "strike": "/art/characters-v3/units/hollow_armor-strike.webp",
+        "recover": "/art/characters-v3/units/hollow_armor-recover.webp",
+        "recoil": "/art/characters-v3/units/hollow_armor-recoil.webp",
+        "skill-a": "/art/characters-v3/units/hollow_armor-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/hollow_armor-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 165,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 164,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 146,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 202,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 187,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 209,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 179,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 191,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/hollow_armor.webp",
+      "dialogue": "/art/characters-v3/dialogue/hollow_armor.webp",
+      "map": "/art/characters-v3/map/hollow_armor.webp"
+    },
+    "tide_keeper": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/tide_keeper-run-a.webp",
+        "run-b": "/art/characters-v3/units/tide_keeper-run-b.webp",
+        "windup": "/art/characters-v3/units/tide_keeper-windup.webp",
+        "strike": "/art/characters-v3/units/tide_keeper-strike.webp",
+        "recover": "/art/characters-v3/units/tide_keeper-recover.webp",
+        "recoil": "/art/characters-v3/units/tide_keeper-recoil.webp",
+        "skill-a": "/art/characters-v3/units/tide_keeper-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/tide_keeper-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 239,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 251,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 223,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 281,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 237,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 287,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 205,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 258,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/tide_keeper.webp",
+      "dialogue": "/art/characters-v3/dialogue/tide_keeper.webp",
+      "map": "/art/characters-v3/map/tide_keeper.webp"
+    },
+    "frost_queen": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/frost_queen-run-a.webp",
+        "run-b": "/art/characters-v3/units/frost_queen-run-b.webp",
+        "windup": "/art/characters-v3/units/frost_queen-windup.webp",
+        "strike": "/art/characters-v3/units/frost_queen-strike.webp",
+        "recover": "/art/characters-v3/units/frost_queen-recover.webp",
+        "recoil": "/art/characters-v3/units/frost_queen-recoil.webp",
+        "skill-a": "/art/characters-v3/units/frost_queen-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/frost_queen-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 223,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 224,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 214,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 222,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 196,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 242,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 204,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 230,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/frost_queen.webp",
+      "dialogue": "/art/characters-v3/dialogue/frost_queen.webp",
+      "map": "/art/characters-v3/map/frost_queen.webp"
+    },
+    "resonance_judge": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/resonance_judge-run-a.webp",
+        "run-b": "/art/characters-v3/units/resonance_judge-run-b.webp",
+        "windup": "/art/characters-v3/units/resonance_judge-windup.webp",
+        "strike": "/art/characters-v3/units/resonance_judge-strike.webp",
+        "recover": "/art/characters-v3/units/resonance_judge-recover.webp",
+        "recoil": "/art/characters-v3/units/resonance_judge-recoil.webp",
+        "skill-a": "/art/characters-v3/units/resonance_judge-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/resonance_judge-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 247,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 243,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 219,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 263,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 237,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 250,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 197,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 245,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/resonance_judge.webp",
+      "dialogue": "/art/characters-v3/dialogue/resonance_judge.webp",
+      "map": "/art/characters-v3/map/resonance_judge.webp"
+    },
+    "oath_guardian": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/oath_guardian-run-a.webp",
+        "run-b": "/art/characters-v3/units/oath_guardian-run-b.webp",
+        "windup": "/art/characters-v3/units/oath_guardian-windup.webp",
+        "strike": "/art/characters-v3/units/oath_guardian-strike.webp",
+        "recover": "/art/characters-v3/units/oath_guardian-recover.webp",
+        "recoil": "/art/characters-v3/units/oath_guardian-recoil.webp",
+        "skill-a": "/art/characters-v3/units/oath_guardian-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/oath_guardian-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 104,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 103,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 93,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 117,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 107,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 104,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 44,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 69,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/oath_guardian.webp",
+      "dialogue": "/art/characters-v3/dialogue/oath_guardian.webp",
+      "map": "/art/characters-v3/map/oath_guardian.webp"
+    },
+    "harin": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/harin-run-a.webp",
+        "run-b": "/art/characters-v3/units/harin-run-b.webp",
+        "windup": "/art/characters-v3/units/harin-windup.webp",
+        "strike": "/art/characters-v3/units/harin-strike.webp",
+        "recover": "/art/characters-v3/units/harin-recover.webp",
+        "recoil": "/art/characters-v3/units/harin-recoil.webp",
+        "skill-a": "/art/characters-v3/units/harin-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/harin-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 77,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 107,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 105,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 119,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 140,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 51,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 88,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/harin.webp",
+      "dialogue": "/art/characters-v3/dialogue/harin.webp",
+      "map": "/art/characters-v3/map/harin.webp"
+    },
+    "edan": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/edan-run-a.webp",
+        "run-b": "/art/characters-v3/units/edan-run-b.webp",
+        "windup": "/art/characters-v3/units/edan-windup.webp",
+        "strike": "/art/characters-v3/units/edan-strike.webp",
+        "recover": "/art/characters-v3/units/edan-recover.webp",
+        "recoil": "/art/characters-v3/units/edan-recoil.webp",
+        "skill-a": "/art/characters-v3/units/edan-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/edan-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 171,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 167,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 147,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 209,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 191,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 215,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 184,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 203,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/edan.webp",
+      "dialogue": "/art/characters-v3/dialogue/edan.webp",
+      "map": "/art/characters-v3/map/edan.webp"
+    },
+    "silvan": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/silvan-run-a.webp",
+        "run-b": "/art/characters-v3/units/silvan-run-b.webp",
+        "windup": "/art/characters-v3/units/silvan-windup.webp",
+        "strike": "/art/characters-v3/units/silvan-strike.webp",
+        "recover": "/art/characters-v3/units/silvan-recover.webp",
+        "recoil": "/art/characters-v3/units/silvan-recoil.webp",
+        "skill-a": "/art/characters-v3/units/silvan-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/silvan-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 211,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 202,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 196,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 225,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 202,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 232,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 192,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 199,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/silvan.webp",
+      "dialogue": "/art/characters-v3/dialogue/silvan.webp",
+      "map": "/art/characters-v3/map/silvan.webp"
+    },
+    "mare": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/mare-run-a.webp",
+        "run-b": "/art/characters-v3/units/mare-run-b.webp",
+        "windup": "/art/characters-v3/units/mare-windup.webp",
+        "strike": "/art/characters-v3/units/mare-strike.webp",
+        "recover": "/art/characters-v3/units/mare-recover.webp",
+        "recoil": "/art/characters-v3/units/mare-recoil.webp",
+        "skill-a": "/art/characters-v3/units/mare-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/mare-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 224,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 219,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 169,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 257,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 223,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 256,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 195,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 227,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/mare.webp",
+      "dialogue": "/art/characters-v3/dialogue/mare.webp",
+      "map": "/art/characters-v3/map/mare.webp"
+    },
+    "mare__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/mare__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/mare__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/mare__form0-windup.webp",
+        "strike": "/art/characters-v3/units/mare__form0-strike.webp",
+        "recover": "/art/characters-v3/units/mare__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/mare__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/mare__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/mare__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 242,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 236,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 182,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 259,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 230,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 265,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 196,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 229,
+          "bottom": 478
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/mare__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/mare__form0.webp",
+      "map": "/art/characters-v3/map/mare.webp"
+    },
+    "mare__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/mare__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/mare__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/mare__form1-windup.webp",
+        "strike": "/art/characters-v3/units/mare__form1-strike.webp",
+        "recover": "/art/characters-v3/units/mare__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/mare__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/mare__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/mare__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 209,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 208,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 176,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 257,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 232,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 256,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 178,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 223,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/mare__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/mare__form1.webp",
+      "map": "/art/characters-v3/map/mare.webp"
+    },
+    "harin__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/harin__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/harin__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/harin__form1-windup.webp",
+        "strike": "/art/characters-v3/units/harin__form1-strike.webp",
+        "recover": "/art/characters-v3/units/harin__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/harin__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/harin__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/harin__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 77,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 99,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 102,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 114,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 137,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 51,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 85,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/harin__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/harin__form1.webp",
+      "map": "/art/characters-v3/map/harin.webp"
+    },
+    "edan__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/edan__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/edan__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/edan__form1-windup.webp",
+        "strike": "/art/characters-v3/units/edan__form1-strike.webp",
+        "recover": "/art/characters-v3/units/edan__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/edan__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/edan__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/edan__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 178,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 181,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 159,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 214,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 196,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 205,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 207,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 222,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/edan__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/edan__form1.webp",
+      "map": "/art/characters-v3/map/edan.webp"
+    },
+    "silvan__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/silvan__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/silvan__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/silvan__form0-windup.webp",
+        "strike": "/art/characters-v3/units/silvan__form0-strike.webp",
+        "recover": "/art/characters-v3/units/silvan__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/silvan__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/silvan__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/silvan__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 217,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 206,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 193,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 228,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 210,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 238,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 188,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 203,
+          "bottom": 478
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/silvan__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/silvan__form0.webp",
+      "map": "/art/characters-v3/map/silvan.webp"
+    },
+    "silvan__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/silvan__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/silvan__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/silvan__form1-windup.webp",
+        "strike": "/art/characters-v3/units/silvan__form1-strike.webp",
+        "recover": "/art/characters-v3/units/silvan__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/silvan__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/silvan__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/silvan__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 218,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 212,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 230,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 235,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 204,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 231,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 203,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 203,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/silvan__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/silvan__form1.webp",
+      "map": "/art/characters-v3/map/silvan.webp"
+    },
+    "harin__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/harin__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/harin__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/harin__form0-windup.webp",
+        "strike": "/art/characters-v3/units/harin__form0-strike.webp",
+        "recover": "/art/characters-v3/units/harin__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/harin__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/harin__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/harin__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 56,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 69,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 93,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 102,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 118,
+          "bottom": 478
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 57,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 95,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/harin__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/harin__form0.webp",
+      "map": "/art/characters-v3/map/harin.webp"
+    },
+    "edan__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/edan__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/edan__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/edan__form0-windup.webp",
+        "strike": "/art/characters-v3/units/edan__form0-strike.webp",
+        "recover": "/art/characters-v3/units/edan__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/edan__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/edan__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/edan__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 166,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 161,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 117,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 212,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 193,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 219,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 180,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 206,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/edan__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/edan__form0.webp",
+      "map": "/art/characters-v3/map/edan.webp"
+    },
+    "yuna__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/yuna__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/yuna__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/yuna__form0-windup.webp",
+        "strike": "/art/characters-v3/units/yuna__form0-strike.webp",
+        "recover": "/art/characters-v3/units/yuna__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/yuna__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/yuna__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/yuna__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 120,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 125,
+          "bottom": 478
+        },
+        "windup": {
+          "height": 512,
+          "top": 25,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 122,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 115,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 124,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 82,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 112,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/yuna__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/yuna__form0.webp",
+      "map": "/art/map-sprites-v4/yuna.webp"
+    },
+    "yuna__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/yuna__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/yuna__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/yuna__form1-windup.webp",
+        "strike": "/art/characters-v3/units/yuna__form1-strike.webp",
+        "recover": "/art/characters-v3/units/yuna__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/yuna__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/yuna__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/yuna__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 120,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 124,
+          "bottom": 478
+        },
+        "windup": {
+          "height": 512,
+          "top": 25,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 114,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 116,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 122,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 85,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 86,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/yuna__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/yuna__form1.webp",
+      "map": "/art/map-sprites-v4/yuna.webp"
+    },
+    "rakan__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/rakan__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/rakan__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/rakan__form0-windup.webp",
+        "strike": "/art/characters-v3/units/rakan__form0-strike.webp",
+        "recover": "/art/characters-v3/units/rakan__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/rakan__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/rakan__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/rakan__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 99,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 107,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 30,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 104,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 92,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 65,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 110,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/rakan__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/rakan__form0.webp",
+      "map": "/art/map-sprites-v4/rakan.webp"
+    },
+    "rakan__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/rakan__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/rakan__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/rakan__form1-windup.webp",
+        "strike": "/art/characters-v3/units/rakan__form1-strike.webp",
+        "recover": "/art/characters-v3/units/rakan__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/rakan__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/rakan__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/rakan__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 98,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 104,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 30,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 110,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 89,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 60,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 102,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/rakan__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/rakan__form1.webp",
+      "map": "/art/map-sprites-v4/rakan.webp"
+    },
+    "hero__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/hero__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/hero__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/hero__form0-windup.webp",
+        "strike": "/art/characters-v3/units/hero__form0-strike.webp",
+        "recover": "/art/characters-v3/units/hero__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/hero__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/hero__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/hero__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 221,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 232,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 222,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 215,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 201,
+          "bottom": 477
+        },
+        "recoil": {
+          "height": 512,
+          "top": 230,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 178,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 206,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/hero__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/hero__form0.webp",
+      "map": "/art/map-sprites-v4/hero.webp"
+    },
+    "sera__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/sera__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/sera__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/sera__form0-windup.webp",
+        "strike": "/art/characters-v3/units/sera__form0-strike.webp",
+        "recover": "/art/characters-v3/units/sera__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/sera__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/sera__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/sera__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 163,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 158,
+          "bottom": 478
+        },
+        "windup": {
+          "height": 512,
+          "top": 187,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 193,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 129,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 158,
+          "bottom": 478
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 183,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 164,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/sera__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/sera__form0.webp",
+      "map": "/art/map-sprites-v4/sera.webp"
+    },
+    "hero__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/hero__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/hero__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/hero__form1-windup.webp",
+        "strike": "/art/characters-v3/units/hero__form1-strike.webp",
+        "recover": "/art/characters-v3/units/hero__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/hero__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/hero__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/hero__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 129,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 132,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 105,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 175,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 132,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 141,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 114,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 80,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/hero__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/hero__form1.webp",
+      "map": "/art/map-sprites-v4/hero.webp"
+    },
+    "bram__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/bram__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/bram__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/bram__form0-windup.webp",
+        "strike": "/art/characters-v3/units/bram__form0-strike.webp",
+        "recover": "/art/characters-v3/units/bram__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/bram__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/bram__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/bram__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 126,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 147,
+          "bottom": 478
+        },
+        "windup": {
+          "height": 512,
+          "top": 121,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 150,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 125,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 122,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 128,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/bram__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/bram__form0.webp",
+      "map": "/art/map-sprites-v4/bram.webp",
+      "sourceCorrections": {
+        "strike": {
+          "sourcePath": "docs/art/characters-v3/sources/bram__form0-strike-correction.png",
+          "sha256": "79310075bf237cd4f8b68b4b34dd364f5cfe367382a34f61e055cee20f567254",
+          "sourceBounds": {
+            "left": 75,
+            "top": 76,
+            "right": 1383,
+            "bottom": 1056
+          },
+          "normalization": 0.36187563710499493,
+          "targetHeight": 355
+        }
+      }
+    },
+    "bram__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/bram__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/bram__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/bram__form1-windup.webp",
+        "strike": "/art/characters-v3/units/bram__form1-strike.webp",
+        "recover": "/art/characters-v3/units/bram__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/bram__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/bram__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/bram__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 133,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 136,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 122,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 175,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 131,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 148,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 138,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 124,
+          "bottom": 478
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/bram__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/bram__form1.webp",
+      "map": "/art/map-sprites-v4/bram.webp"
+    },
+    "aria__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/aria__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/aria__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/aria__form0-windup.webp",
+        "strike": "/art/characters-v3/units/aria__form0-strike.webp",
+        "recover": "/art/characters-v3/units/aria__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/aria__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/aria__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/aria__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 188,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 185,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 179,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 191,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 171,
+          "bottom": 478
+        },
+        "recoil": {
+          "height": 512,
+          "top": 174,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 170,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 152,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/aria__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/aria__form0.webp",
+      "map": "/art/map-sprites-v4/aria.webp"
+    },
+    "leon__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/leon__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/leon__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/leon__form0-windup.webp",
+        "strike": "/art/characters-v3/units/leon__form0-strike.webp",
+        "recover": "/art/characters-v3/units/leon__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/leon__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/leon__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/leon__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 279,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 226,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 279,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 291,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 217,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 243,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 266,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 273,
+          "bottom": 478
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/leon__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/leon__form0.webp",
+      "map": "/art/map-sprites-v4/leon.webp"
+    },
+    "aria__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/aria__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/aria__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/aria__form1-windup.webp",
+        "strike": "/art/characters-v3/units/aria__form1-strike.webp",
+        "recover": "/art/characters-v3/units/aria__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/aria__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/aria__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/aria__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 229,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 224,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 225,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 224,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 227,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 227,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 213,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 224,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/aria__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/aria__form1.webp",
+      "map": "/art/map-sprites-v4/aria.webp"
+    },
+    "sera__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/sera__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/sera__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/sera__form1-windup.webp",
+        "strike": "/art/characters-v3/units/sera__form1-strike.webp",
+        "recover": "/art/characters-v3/units/sera__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/sera__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/sera__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/sera__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 149,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 135,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 153,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 154,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 122,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 154,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 200,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 156,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/sera__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/sera__form1.webp",
+      "map": "/art/map-sprites-v4/sera.webp"
+    },
+    "leon__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/leon__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/leon__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/leon__form1-windup.webp",
+        "strike": "/art/characters-v3/units/leon__form1-strike.webp",
+        "recover": "/art/characters-v3/units/leon__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/leon__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/leon__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/leon__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 253,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 222,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 290,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 300,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 235,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 273,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 260,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 256,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/leon__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/leon__form1.webp",
+      "map": "/art/map-sprites-v4/leon.webp"
+    },
+    "lina__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/lina__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/lina__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/lina__form1-windup.webp",
+        "strike": "/art/characters-v3/units/lina__form1-strike.webp",
+        "recover": "/art/characters-v3/units/lina__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/lina__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/lina__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/lina__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 108,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 113,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 116,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 80,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 101,
+          "bottom": 478
+        },
+        "recoil": {
+          "height": 512,
+          "top": 117,
+          "bottom": 478
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 124,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 118,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/lina__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/lina__form1.webp",
+      "map": "/art/map-sprites-v4/lina.webp",
+      "sourceCorrections": {
+        "windup": {
+          "sourcePath": "docs/art/characters-v3/sources/lina__form1-windup-correction.png",
+          "sha256": "8b9ea4194cbd22c71cdabc19edc6fe74d84d4c442933df086e48a8ca2ea7887f",
+          "sourceBounds": {
+            "left": 76,
+            "top": 32,
+            "right": 1239,
+            "bottom": 1205
+          },
+          "normalization": 0.3492333901192504
+        }
+      }
+    },
+    "lina__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/lina__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/lina__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/lina__form0-windup.webp",
+        "strike": "/art/characters-v3/units/lina__form0-strike.webp",
+        "recover": "/art/characters-v3/units/lina__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/lina__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/lina__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/lina__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 102,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 99,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 88,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 148,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 140,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/lina__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/lina__form0.webp",
+      "map": "/art/map-sprites-v4/lina.webp",
+      "sourceCorrections": {
+        "recover": {
+          "sourcePath": "docs/art/characters-v3/sources/lina__form0-recover-correction.png",
+          "sha256": "f5ab94f1fabf718b13ec9da163fe102de7d21361140edee3a88fc67382b3d73f",
+          "sourceBounds": {
+            "left": 146,
+            "top": 55,
+            "right": 1156,
+            "bottom": 1198
+          },
+          "normalization": 0.32517482517482516,
+          "targetHeight": 372
+        },
+        "skill-b": {
+          "sourcePath": "docs/art/characters-v3/sources/lina__form0-skill-b-correction.png",
+          "sha256": "12f241adafa40b291759f79d49f1226537defb5003d695a7be540552b58dd485",
+          "sourceBounds": {
+            "left": 41,
+            "top": 73,
+            "right": 1248,
+            "bottom": 1168
+          },
+          "normalization": 0.33941605839416056,
+          "targetHeight": 372
+        }
+      }
+    },
+    "noah__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/noah__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/noah__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/noah__form0-windup.webp",
+        "strike": "/art/characters-v3/units/noah__form0-strike.webp",
+        "recover": "/art/characters-v3/units/noah__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/noah__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/noah__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/noah__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 102,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 104,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 96,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 109,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 85,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 85,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/noah__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/noah__form0.webp",
+      "map": "/art/map-sprites-v4/noah.webp"
+    },
+    "noah__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/noah__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/noah__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/noah__form1-windup.webp",
+        "strike": "/art/characters-v3/units/noah__form1-strike.webp",
+        "recover": "/art/characters-v3/units/noah__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/noah__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/noah__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/noah__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 97,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 98,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 89,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 107,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 478
+        },
+        "recoil": {
+          "height": 512,
+          "top": 97,
+          "bottom": 478
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 87,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 94,
+          "bottom": 478
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/noah__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/noah__form1.webp",
+      "map": "/art/map-sprites-v4/noah.webp"
+    },
+    "jin__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/jin__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/jin__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/jin__form0-windup.webp",
+        "strike": "/art/characters-v3/units/jin__form0-strike.webp",
+        "recover": "/art/characters-v3/units/jin__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/jin__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/jin__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/jin__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 115,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 128,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 49,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 140,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 131,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 134,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 64,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 112,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/jin__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/jin__form0.webp",
+      "map": "/art/map-sprites-v4/jin.webp"
+    },
+    "jin__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/jin__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/jin__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/jin__form1-windup.webp",
+        "strike": "/art/characters-v3/units/jin__form1-strike.webp",
+        "recover": "/art/characters-v3/units/jin__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/jin__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/jin__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/jin__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 117,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 120,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 71,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 122,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 106,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 131,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 65,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 124,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/jin__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/jin__form1.webp",
+      "map": "/art/map-sprites-v4/jin.webp"
+    },
+    "miho__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/miho__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/miho__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/miho__form0-windup.webp",
+        "strike": "/art/characters-v3/units/miho__form0-strike.webp",
+        "recover": "/art/characters-v3/units/miho__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/miho__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/miho__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/miho__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 86,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 94,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 92,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 98,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 101,
+          "bottom": 478
+        },
+        "recoil": {
+          "height": 512,
+          "top": 115,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 97,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 111,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/miho__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/miho__form0.webp",
+      "map": "/art/map-sprites-v4/miho.webp",
+      "sourceCorrections": {
+        "run-b": {
+          "sourcePath": "docs/art/characters-v3/sources/miho__form0-run-b-correction.png",
+          "sha256": "e2852f78c613677999172b19fec523e9d9069219423388101f53ad1e3d068e79",
+          "sourceBounds": {
+            "left": 64,
+            "top": 64,
+            "right": 893,
+            "bottom": 867
+          },
+          "normalization": 0.48756218905472637,
+          "targetHeight": 392
+        }
+      }
+    },
+    "miho__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/miho__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/miho__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/miho__form1-windup.webp",
+        "strike": "/art/characters-v3/units/miho__form1-strike.webp",
+        "recover": "/art/characters-v3/units/miho__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/miho__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/miho__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/miho__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 104,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 109,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 102,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 134,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 98,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 106,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/miho__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/miho__form1.webp",
+      "map": "/art/map-sprites-v4/miho.webp",
+      "sourceCorrections": {
+        "run-b": {
+          "sourcePath": "docs/art/characters-v3/sources/miho__form1-run-b-correction.png",
+          "sha256": "c73a69392f886641c99486c6c155741db9dcd4756611a5f5cf1b3d302c820f2c",
+          "sourceBounds": {
+            "left": 64,
+            "top": 64,
+            "right": 875,
+            "bottom": 866
+          },
+          "normalization": 0.48194271481942713,
+          "targetHeight": 387
+        }
+      }
+    },
+    "teo__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/teo__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/teo__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/teo__form0-windup.webp",
+        "strike": "/art/characters-v3/units/teo__form0-strike.webp",
+        "recover": "/art/characters-v3/units/teo__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/teo__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/teo__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/teo__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 99,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 97,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 53,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 57,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 102,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 96,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 56,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 92,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/teo__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/teo__form0.webp",
+      "map": "/art/map-sprites-v4/teo.webp",
+      "sourceCorrections": {
+        "run-b": {
+          "sourcePath": "docs/art/characters-v3/sources/teo__form0-run-b-correction.png",
+          "sha256": "b75c695c2946154b2e18e0acbe36fcedfb8891b15aba1feee17bccac913f09f7",
+          "sourceBounds": {
+            "left": 64,
+            "top": 64,
+            "right": 851,
+            "bottom": 777
+          },
+          "normalization": 0.5070028011204482,
+          "targetHeight": 362
+        },
+        "strike": {
+          "sourcePath": "docs/art/characters-v3/sources/teo__form0-strike-correction.png",
+          "sha256": "03d75dde174b178cb9db9a411d60d88846e8a1435994bc193327e642965c9bcd",
+          "sourceBounds": {
+            "left": 282,
+            "top": 16,
+            "right": 1283,
+            "bottom": 987
+          },
+          "normalization": 0.411522633744856,
+          "targetHeight": 400
+        }
+      }
+    },
+    "teo__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/teo__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/teo__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/teo__form1-windup.webp",
+        "strike": "/art/characters-v3/units/teo__form1-strike.webp",
+        "recover": "/art/characters-v3/units/teo__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/teo__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/teo__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/teo__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 88,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 102,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 59,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 69,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 108,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 89,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 103,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/teo__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/teo__form1.webp",
+      "map": "/art/map-sprites-v4/teo.webp",
+      "sourceCorrections": {
+        "run-b": {
+          "sourcePath": "docs/art/characters-v3/sources/teo__form1-run-b-correction.png",
+          "sha256": "949a73bcb5543a922303de37f9684f98cc3879aef5fbaeea174a2b33c922016c",
+          "sourceBounds": {
+            "left": 64,
+            "top": 64,
+            "right": 861,
+            "bottom": 780
+          },
+          "normalization": 0.5132496513249651,
+          "targetHeight": 368
+        }
+      }
+    },
+    "irene__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/irene__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/irene__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/irene__form0-windup.webp",
+        "strike": "/art/characters-v3/units/irene__form0-strike.webp",
+        "recover": "/art/characters-v3/units/irene__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/irene__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/irene__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/irene__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 107,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 103,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 31,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 56,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 93,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 57,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 80,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/irene__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/irene__form0.webp",
+      "map": "/art/map-sprites-v4/irene.webp",
+      "sourceCorrections": {
+        "run-b": {
+          "sourcePath": "docs/art/characters-v3/sources/irene__form0-run-b-correction.png",
+          "sha256": "adbfee119d8e87b93dcbc9ad74c60b438f8ccfcbb140d2e6841fb994485ea46a",
+          "sourceBounds": {
+            "left": 64,
+            "top": 64,
+            "right": 796,
+            "bottom": 796
+          },
+          "normalization": 0.4843110504774898,
+          "targetHeight": 355
+        }
+      }
+    },
+    "irene__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/irene__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/irene__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/irene__form1-windup.webp",
+        "strike": "/art/characters-v3/units/irene__form1-strike.webp",
+        "recover": "/art/characters-v3/units/irene__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/irene__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/irene__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/irene__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 112,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 110,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 30,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 57,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 102,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 106,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 53,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 68,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/irene__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/irene__form1.webp",
+      "map": "/art/map-sprites-v4/irene.webp",
+      "sourceCorrections": {
+        "run-b": {
+          "sourcePath": "docs/art/characters-v3/sources/irene__form1-run-b-correction.png",
+          "sha256": "f22fb7be36a540ddb4296420a093b13e03b6cc63fea33ba55c956d1a11c0c1ba",
+          "sourceBounds": {
+            "left": 64,
+            "top": 64,
+            "right": 788,
+            "bottom": 791
+          },
+          "normalization": 0.4807692307692308,
+          "targetHeight": 350
+        }
+      }
+    },
+    "kaz__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/kaz__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/kaz__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/kaz__form0-windup.webp",
+        "strike": "/art/characters-v3/units/kaz__form0-strike.webp",
+        "recover": "/art/characters-v3/units/kaz__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/kaz__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/kaz__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/kaz__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 102,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 127,
+          "bottom": 478
+        },
+        "windup": {
+          "height": 512,
+          "top": 95,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 126,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 122,
+          "bottom": 478
+        },
+        "recoil": {
+          "height": 512,
+          "top": 129,
+          "bottom": 478
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 208,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 125,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/kaz__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/kaz__form0.webp",
+      "map": "/art/map-sprites-v4/kaz.webp"
+    },
+    "kaz__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/kaz__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/kaz__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/kaz__form1-windup.webp",
+        "strike": "/art/characters-v3/units/kaz__form1-strike.webp",
+        "recover": "/art/characters-v3/units/kaz__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/kaz__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/kaz__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/kaz__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 113,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 133,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 92,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 128,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 124,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 128,
+          "bottom": 478
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 207,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 136,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/kaz__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/kaz__form1.webp",
+      "map": "/art/map-sprites-v4/kaz.webp"
+    },
+    "ella__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/ella__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/ella__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/ella__form0-windup.webp",
+        "strike": "/art/characters-v3/units/ella__form0-strike.webp",
+        "recover": "/art/characters-v3/units/ella__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/ella__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/ella__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/ella__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 80,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 85,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 81,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 108,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 117,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 93,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 92,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/ella__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/ella__form0.webp",
+      "map": "/art/map-sprites-v4/ella.webp",
+      "sourceCorrections": {
+        "run-b": {
+          "sourcePath": "docs/art/characters-v3/sources/ella__form0-run-b-correction.png",
+          "sha256": "79d7ec2067bedba88922a433b32b711316b9dadd608ce1365fa2fc4db7099cdd",
+          "sourceBounds": {
+            "left": 64,
+            "top": 64,
+            "right": 823,
+            "bottom": 842
+          },
+          "normalization": 0.4878048780487805,
+          "targetHeight": 380
+        },
+        "skill-a": {
+          "sourcePath": "docs/art/characters-v3/sources/ella__form0-skill-a-correction.png",
+          "sha256": "e32067f6c4d88bdcd4b8a3544acca0f12d9eba8d0c7daf7ba13b199adc853adc",
+          "sourceBounds": {
+            "left": 64,
+            "top": 64,
+            "right": 709,
+            "bottom": 883
+          },
+          "normalization": 0.4548780487804878,
+          "targetHeight": 373
+        }
+      }
+    },
+    "ella__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/ella__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/ella__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/ella__form1-windup.webp",
+        "strike": "/art/characters-v3/units/ella__form1-strike.webp",
+        "recover": "/art/characters-v3/units/ella__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/ella__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/ella__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/ella__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 88,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 105,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 82,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 107,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 114,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 89,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 88,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/ella__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/ella__form1.webp",
+      "map": "/art/map-sprites-v4/ella.webp",
+      "sourceCorrections": {
+        "run-b": {
+          "sourcePath": "docs/art/characters-v3/sources/ella__form1-run-b-correction.png",
+          "sha256": "9b7e4dd25401dc91ae534f9e73a36cf1e10f58c68c19c00acb45edd9aad3cb11",
+          "sourceBounds": {
+            "left": 64,
+            "top": 64,
+            "right": 788,
+            "bottom": 832
+          },
+          "normalization": 0.46293888166449937,
+          "targetHeight": 356
+        },
+        "skill-a": {
+          "sourcePath": "docs/art/characters-v3/sources/ella__form1-skill-a-correction.png",
+          "sha256": "610bb8b932c9031a13c450115816aec91dce36d29c260128c44e3d533475149d",
+          "sourceBounds": {
+            "left": 64,
+            "top": 64,
+            "right": 692,
+            "bottom": 882
+          },
+          "normalization": 0.452991452991453,
+          "targetHeight": 371
+        }
+      }
+    },
+    "luka__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/luka__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/luka__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/luka__form0-windup.webp",
+        "strike": "/art/characters-v3/units/luka__form0-strike.webp",
+        "recover": "/art/characters-v3/units/luka__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/luka__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/luka__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/luka__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 122,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 119,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 52,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 139,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 125,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 131,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 181,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 37,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/luka__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/luka__form0.webp",
+      "map": "/art/map-sprites-v4/luka.webp"
+    },
+    "luka__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/luka__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/luka__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/luka__form1-windup.webp",
+        "strike": "/art/characters-v3/units/luka__form1-strike.webp",
+        "recover": "/art/characters-v3/units/luka__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/luka__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/luka__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/luka__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 145,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 138,
+          "bottom": 478
+        },
+        "windup": {
+          "height": 512,
+          "top": 73,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 139,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 124,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 127,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 181,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 50,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/luka__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/luka__form1.webp",
+      "map": "/art/map-sprites-v4/luka.webp"
+    },
+    "baekho__form0": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/baekho__form0-run-a.webp",
+        "run-b": "/art/characters-v3/units/baekho__form0-run-b.webp",
+        "windup": "/art/characters-v3/units/baekho__form0-windup.webp",
+        "strike": "/art/characters-v3/units/baekho__form0-strike.webp",
+        "recover": "/art/characters-v3/units/baekho__form0-recover.webp",
+        "recoil": "/art/characters-v3/units/baekho__form0-recoil.webp",
+        "skill-a": "/art/characters-v3/units/baekho__form0-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/baekho__form0-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 81,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 77,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 94,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 107,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 478
+        },
+        "recoil": {
+          "height": 512,
+          "top": 118,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 149,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 111,
+          "bottom": 478
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/baekho__form0.webp",
+      "dialogue": "/art/characters-v3/dialogue/baekho__form0.webp",
+      "map": "/art/map-sprites-v4/baekho.webp",
+      "sourceCorrections": {
+        "run-b": {
+          "sourcePath": "docs/art/characters-v3/sources/baekho__form0-run-b-correction.png",
+          "sha256": "8ee691cc069f3f6a2378a766bba377d2ea3c4ff8dd650f85f8eae5434685e2a1",
+          "sourceBounds": {
+            "left": 64,
+            "top": 64,
+            "right": 756,
+            "bottom": 877
+          },
+          "normalization": 0.5356265356265356,
+          "targetHeight": 436
+        }
+      }
+    },
+    "baekho__form1": {
+      "motion": {
+        "run-a": "/art/characters-v3/units/baekho__form1-run-a.webp",
+        "run-b": "/art/characters-v3/units/baekho__form1-run-b.webp",
+        "windup": "/art/characters-v3/units/baekho__form1-windup.webp",
+        "strike": "/art/characters-v3/units/baekho__form1-strike.webp",
+        "recover": "/art/characters-v3/units/baekho__form1-recover.webp",
+        "recoil": "/art/characters-v3/units/baekho__form1-recoil.webp",
+        "skill-a": "/art/characters-v3/units/baekho__form1-skill-a.webp",
+        "skill-b": "/art/characters-v3/units/baekho__form1-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 92,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 96,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 88,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 106,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 118,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 120,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 114,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/characters-v3/portraits/baekho__form1.webp",
+      "dialogue": "/art/characters-v3/dialogue/baekho__form1.webp",
+      "map": "/art/map-sprites-v4/baekho.webp",
+      "sourceCorrections": {
+        "run-b": {
+          "sourcePath": "docs/art/characters-v3/sources/baekho__form1-run-b-correction.png",
+          "sha256": "381aace6ea93d2b87f611a84c404b65404f9b3cadd5595880b7590c9ac0653f1",
+          "sourceBounds": {
+            "left": 64,
+            "top": 64,
+            "right": 741,
+            "bottom": 878
+          },
+          "normalization": 0.49693251533742333,
+          "targetHeight": 405
+        }
+      }
+    }
+  }
+}

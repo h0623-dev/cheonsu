@@ -1,4 +1,5 @@
 import { getUnlockedStageIds } from './campaignProgress.js';
+import { stages } from '../data/stages.js';
 
 export function readMenuCheckpoint(storage) {
   try {
@@ -11,7 +12,7 @@ export function readMenuCheckpoint(storage) {
 }
 
 export function canReplayStory(stageId, type, cleared = []) {
-  if (!Number.isInteger(stageId) || stageId < 1 || stageId > 30) return false;
+  if (!Number.isInteger(stageId) || !stages.some(stage => stage.id === stageId)) return false;
   if (type === 'intro') return getUnlockedStageIds(cleared).includes(stageId);
   return type === 'clear' && cleared.includes(stageId);
 }
