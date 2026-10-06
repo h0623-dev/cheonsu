@@ -2,7 +2,7 @@
 
 작성일: 2026-10-06 KST. 게임 버전은 **1.99.165**, Android versionCode는 **364**입니다.
 
-이번 변경의 **최종 소스 반영과 기존 자동 Actions의 제작·배포 결과를 기다리는 상태**입니다. 새 APK·서명 OTA·전체 개발 소스 ZIP이 공개되기 전까지 배포 완료로 기록하지 않습니다. 직전 공개 버전은 1.99.164 / Android 363이며, 그 APK·OTA에는 이번 변경이 포함되지 않습니다.
+**1.99.165 새 APK·서명 OTA·전체 개발 소스 ZIP 공개 배포를 완료했습니다.** 최종 게임 소스는 `3f02227a1c6cf4a45d0b3372205d193f82e31e67`입니다. 해당 소스의 [Cloud Quality](https://github.com/h0623-dev/cheonsu/actions/runs/37458214794)와 [Android APK and OTA](https://github.com/h0623-dev/cheonsu/actions/runs/37458214830)는 모두 전체 성공했으며 각각 단위 784/784와 기존 브라우저 검사 10개가 통과했습니다. 공개 릴리스는 **2026-10-06 21:21:06 KST**에 발행했고 Android 자동 실행은 21:21:19 KST에 완료했습니다. 직전 공개 버전은 1.99.164 / Android 363이며, 그 APK·OTA에는 이번 변경이 포함되지 않습니다.
 
 ## 변경 내용
 
@@ -18,25 +18,49 @@
 
 | 항목 | 1.99.165 상태 |
 | --- | --- |
-| 최종 릴리스 소스 커밋 | 소스 반영 대기 |
-| Cloud Quality 자동 실행 | 이번 소스의 자동 실행 결과 대기 |
-| Android APK and OTA 자동 실행 | 이번 소스의 자동 실행·제작·배포 결과 대기 |
-| 새 APK | 공개 대기, 예정 파일 `cheonsu_1.99.165_update_debug.apk` |
-| 서명 OTA | 공개 대기, 예정 파일 `cheonsu_1.99.165_ota.zip` |
-| 전체 개발 소스 ZIP | 공개 대기, 예정 파일 `cheonsu_development_1.99.165.zip` |
-| 공개 릴리스 | `v1.99.165` 공개 결과 대기 |
-| 실제 공개 업데이트 채널 | [별도 updates 브랜치](https://raw.githubusercontent.com/h0623-dev/cheonsu/updates/latest.json)의 이번 발행 결과 대기 |
-| APK 인증서·버전·전체 웹 파일·OTA 신뢰 | 기존 자동 배포 절차의 결과 대기 |
-| 공개 산출물 다운로드 검사 | 기존 자동 발행 단계의 결과 대기 |
+| 최종 릴리스 소스 커밋 | `3f02227a1c6cf4a45d0b3372205d193f82e31e67` |
+| Cloud Quality 자동 실행 | [실행 37458214794](https://github.com/h0623-dev/cheonsu/actions/runs/37458214794) · [작업 112250954682](https://github.com/h0623-dev/cheonsu/actions/runs/37458214794/job/112250954682), 전체 성공·단위 784/784·브라우저 10개 통과, 2026-10-06 21:14:31 KST 완료 |
+| Android APK and OTA 자동 실행 | [실행 37458214830](https://github.com/h0623-dev/cheonsu/actions/runs/37458214830) · [작업 112252208355](https://github.com/h0623-dev/cheonsu/actions/runs/37458214830/job/112252208355), 전체 성공·단위 784/784·브라우저 10개·APK/OTA·공개 다운로드 검사 통과, 2026-10-06 21:21:19 KST 완료 |
+| 새 APK | [1.99.165 APK 다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.165/cheonsu_1.99.165_update_debug.apk) 공개 완료 |
+| 서명 OTA | [1.99.165 서명 OTA](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.165/cheonsu_1.99.165_ota.zip) 공개 완료 |
+| 전체 개발 소스 ZIP | [1.99.165 전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.165/cheonsu_development_1.99.165.zip) 공개 완료 |
+| 공개 릴리스 | [v1.99.165](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.165), 2026-10-06 21:21:06 KST 공개 |
+| 실제 공개 업데이트 채널 | [별도 updates 브랜치](https://raw.githubusercontent.com/h0623-dev/cheonsu/updates/latest.json): 1.99.165 / `1.99.165-b37f1a2bce9c` / Android 350~364 |
+| APK 인증서·버전·전체 웹 파일·OTA 신뢰 | 자동 검사 통과, APK·OTA의 웹 파일 각각 2,622개와 서명·네이티브 플러그인·복구·원본 주소 보호 확인 |
+| 공개 산출물 다운로드 검사 | 기존 자동 발행 단계에서 APK·OTA·소스 ZIP 3개 모두 다운로드·SHA-256 검사 통과 |
 
 서명과 배포는 `main`에 허용된 기존 GitHub Actions의 `cheonsu-release` 환경에서 수행합니다. Android·OTA 개인키를 Codex Cloud나 소스·ZIP에 복사하지 않습니다. 실제 자동 업데이트 채널은 별도 `updates` 브랜치의 `latest.json`이며, `main`에 남은 과거 파일로 채널을 초기화하거나 낮추지 않습니다.
 
 과거 산출물·검사·해시와 이번 결과를 구분합니다. [1.99.164 빌드 기록](BUILD_1.99.164.md)의 공개 상태와 자동 검사 수치는 당시 기록으로 보존하며 이번 1.99.165 결과로 재사용하지 않습니다.
 
+## 첫 자동 실행의 실패와 수정
+
+첫 소스 `d70c016035e682830fb3bbf96b2334afc93a27f6`의 [Cloud Quality 확장 50장 검사](https://github.com/h0623-dev/cheonsu/actions/runs/37456009495/job/112243676145)에서 일반 공격의 반격 로그를 확인하는 단계가 실패했습니다. 런타임 상태가 `skillType: null`로 스킬을 비활성화했는데 AI가 남아 있는 `skillSpec`을 우선하여 스킬을 선택한 회귀였습니다. 최종 소스는 런타임 `skillType`을 우선하도록 수정하고 이 상황의 자동 회귀 사례를 추가했습니다. 기존 검사를 삭제하거나 우회하지 않았습니다. 후속 Cloud Quality와 Android 자동 실행은 확장 50장 검사를 포함해 모두 전체 성공했습니다.
+
+## Cloud Quality 자동 실행 결과
+
+2026-10-06 21:14:31 KST에 완료한 자동 실행의 로그에서 린트·빌드·단위 784개(통과 784, 실패 0)와 기존 브라우저 검사 10개가 모두 성공한 것을 확인했습니다. 브라우저 검사 범위에는 3개 화면의 기본 실행, 3개 화면·50장 배치, 실제 패배 6회, 4개 화면·실제 전투 미션 59회, 확장 전투 진입 35회·전직 72건·승리 후 합류 16건·실제 AI 반격 16건이 포함됩니다. 타격 연출은 109종을 각각 1280×900·390×844·320×740·844×390의 4개 화면에서 검사했습니다. 세부 수치를 중복 합산한 별도 전체 검사 수로 제시하지 않습니다.
+
+위 내용은 기존 자동 실행의 완료 로그를 읽은 결과입니다. 에이전트의 직접 QA나 Android 기기 실측 결과가 아닙니다. Android 자동 실행과 공개 산출물 상태는 위 표에서 별도로 구분합니다.
+
+## 공개 산출물 기록
+
+| 산출물 | 공개 URL | 크기(bytes) | SHA-256 |
+| --- | --- | --- | --- |
+| 새 APK | [cheonsu_1.99.165_update_debug.apk](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.165/cheonsu_1.99.165_update_debug.apk) | 289045399 | `76e15ffa4568751b45e7e9df218f94df43a24c7842f360d8cd7bdee2a9cace30` |
+| 서명 OTA | [cheonsu_1.99.165_ota.zip](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.165/cheonsu_1.99.165_ota.zip) | 280940253 | `b37f1a2bce9caab9126f3412f97aea1f21b23088d65b667a2eb7aaaf415d926a` |
+| 전체 개발 소스 ZIP | [cheonsu_development_1.99.165.zip](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.165/cheonsu_development_1.99.165.zip) | 831152136 | `750cc1f4ea59a38fac5370dc91fdf4dd101e8cf9c7c1d680ba82b0216814199f` |
+
+위 크기·SHA-256·주소는 공개 릴리스 메타데이터에서 읽은 값입니다. 자동 발행 로그에는 세 파일을 내려받아 SHA-256을 확인한 `검증 완료` 기록과 21:21:08 KST의 배포·채널 갱신 완료가 남아 있습니다. 에이전트가 아티팩트를 별도로 다운로드해 대조한 결과가 아닙니다.
+
+자동 APK 검사에서 확인한 기존 인증서 SHA-256은 `1d4b2f3f8e7b30e2b9202121def34d4da6e39b4119bdd93c44a01aebfcd0518f`입니다. APK·OTA의 전체 웹 파일 각 2,622개와 서명·네이티브 플러그인·복구·원본 주소 보호 검사가 성공했습니다. 실제 공개 채널 메타데이터는 버전 1.99.165, 번들 `1.99.165-b37f1a2bce9c`, 호환 Android versionCode 350~364입니다. 에이전트는 공개 JSON과 완료 로그를 읽었으며 별도 서명 검증이나 아티팩트 대조를 실행하지 않았습니다.
+
+공개 릴리스의 발행 소스는 `3f02227a1c6cf4a45d0b3372205d193f82e31e67`입니다. 소스 ZIP은 이 최종 게임 소스의 스냅샷이므로 배포 후 기록한 문서 갱신은 포함하지 않습니다.
+
 ## 직접 실행과 자동 Actions 구분
 
 **사용자 지시에 따라 수정 후 별도 검증은 실행하지 않았습니다.** [검증 생략 스킬](../.agents/skills/cheonsu-no-post-change-validation/SKILL.md)에 따라 에이전트가 린트·테스트·브라우저 QA·검증용 빌드·APK/OTA 재다운로드 대조를 직접 실행하거나 별도 검증 CI를 수동 시작하지 않습니다.
 
-기존 자동 Actions의 검사·서명·배포 보호 설정은 유지합니다. 자동 실행 결과가 나오면 작업 상태와 로그를 읽은 근거를 기록하며, 에이전트가 별도 검사한 것으로 표현하지 않습니다. 현재 대기 중인 검사를 통과했다고 기록하지 않습니다.
+기존 자동 Actions의 검사·서명·배포 보호 설정을 유지했습니다. 이번 자동 실행의 완료 상태와 로그, 공개 릴리스·업데이트 채널의 JSON 메타데이터를 읽어 결과를 기록했으며 에이전트가 별도 검사한 것으로 표현하지 않습니다.
 
 실제 Android 기기 설치·터치·OTA 적용·기기 성능은 이번 작업에서 확인하지 않았습니다. Firebase 연결·Google 로그인·Google Play 정식 출시는 여전히 미완료입니다. 변경 범위는 [1.99.165 변경·검증 구분](QA_IMPROVEMENT_1.99.165.md)에 기록합니다.
