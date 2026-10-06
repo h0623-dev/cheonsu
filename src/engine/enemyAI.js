@@ -99,7 +99,9 @@ export function getEnemyAttackChoice(enemy, allies, activeMap) {
 }
 
 function getEnemyAttackModes(enemy) {
-  return (enemy?.skillSpec?.type ?? enemy?.skillType) === "attack"
+  // skillType is the runtime enable flag; a retained skill specification must
+  // not reactivate a disabled skill or extend the enemy's pursuit range.
+  return enemy?.skillType === "attack"
     ? ["skill", "attack"] : ["attack"];
 }
 

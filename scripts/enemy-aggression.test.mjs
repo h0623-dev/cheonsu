@@ -8,6 +8,18 @@ const soldier = { id: 'enemy', type: 'enemy', aiType: 'aggressive', x: 2, y: 4,
   hp: 30, maxHp: 30, atk: 10, def: 5, move: 1, range: 1, acted: false, moved: false };
 const hero = { id: 'hero', type: 'ally', x: 4, y: 4, hp: 50, maxHp: 50, def: 10 };
 
+test('스킬 사용이 꺼진 적은 남아 있는 스킬 정보 대신 일반 공격 사거리까지 전진한다', () => {
+  const map = makeMap();
+  const target = { ...hero, x: 4, y: 2 };
+  const enemy = { ...soldier, x: 1, y: 2, skillType: null, skillRange: 3,
+    skillSpec: { type: 'attack', range: 3, minRange: 1 } };
+  assert.equal(getEnemyAttackChoice(enemy, [target], map), null);
+  const moved = moveEnemyToward(enemy, [target], [enemy, target], map);
+  assert.ok(distance(moved, target) < distance(enemy, target));
+  const adjacent = { ...enemy, x: 3 };
+  assert.equal(getEnemyAttackChoice(adjacent, [target], map)?.mode, 'attack');
+});
+
 test('적은 벽 앞에서 왕복하지 않고 멀어지는 방향이라도 열린 공격 경로를 따라 전진한다', () => {
   const map = makeMap();
   for (let y = 1; y < map.length; y++) map[y][3] = 'wall';
