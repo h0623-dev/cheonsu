@@ -1,3 +1,4 @@
+import { saveBattle as clickBattleSave } from './qa-battle-tools.mjs';
 import { qaBrowserOptions, confirmStageMission } from './qa-browser.mjs';
 import { chromium } from 'playwright';
 import { spawn } from 'node:child_process';
@@ -58,7 +59,7 @@ try {
     await page.locator('.unit-visual-hero').waitFor();
     await page.waitForTimeout(1200);
   });
-  await page.locator('.cinematic-command-bar .prominent-save').click();
+  await clickBattleSave(page);
   await page.waitForTimeout(1000);
   for (let i = 0; i < 3; i++) {
     await measure(`commands-${i}`, async () => {

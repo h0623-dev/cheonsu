@@ -1,3 +1,4 @@
+import { saveBattle as clickBattleSave } from './qa-battle-tools.mjs';
 import { qaBrowserOptions } from './qa-browser.mjs';
 import { leaveDeployment, startDeploymentBattle, waitForDeployment } from './qa-deployment-flow.mjs';
 import assert from 'node:assert/strict';
@@ -137,7 +138,7 @@ async function runViewport(base, viewport) {
   const saved = () => page.evaluate(key => JSON.parse(localStorage.getItem(key)), saveKey);
   const rawSave = () => page.evaluate(key => localStorage.getItem(key), saveKey);
   const saveCamp = async () => { await page.locator('.camp-header .prominent-save').click(); return saved(); };
-  const saveBattle = async () => { await page.locator('.battle-control-heading .prominent-save').click(); return saved(); };
+  const saveBattle = async () => { await clickBattleSave(page); return saved(); };
   const load = async data => {
     await page.evaluate(({ key, data }) => localStorage.setItem(key, JSON.stringify(data)), { key: saveKey, data });
     await page.reload();

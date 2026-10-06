@@ -19,6 +19,7 @@ import SkillDialog from "./components/SkillDialog.jsx";
 import SupportTargetDialog from './components/SupportTargetDialog.jsx';
 import TrainingDialog from './components/TrainingDialog.jsx';
 import { TRAINING_TYPES, trainParty, grantEnemyDefeatExp, syncBattleExperience } from './engine/growthEngine.js';
+import { getExperienceReward } from './engine/experienceEngine.js';
 import TownHub from './components/TownHub.jsx';
 import TownFacilityDialog from './components/TownFacilityDialog.jsx';
 import TitleMenu from './components/TitleMenu.jsx';
@@ -85,7 +86,7 @@ import {
 } from "./engine/supportEngine.js";
 import { normalizeSaveData } from "./engine/saveEngine.js";
 import { getMoveTiles, getAttackTiles, getTilesInRadius, findMovePath, getUnitMoveTrait, getUnitMoveRange, canAttackTarget, canCounter, formatAttackRange } from "./engine/movement.js";
-import { getEnemyAttackChoice, moveEnemyToward, getAITypeLabel } from "./engine/enemyAI.js";
+import { getEnemyAttackChoice, moveEnemyToward, getAITypeLabel, getEnemyTurnOrder } from "./engine/enemyAI.js";
 import { getStageRoundLimit } from "./engine/stageRules.js";
 import {
   getStatusText,
@@ -109,7 +110,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.164";
+const SAVE_VERSION = "1.99.165";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -4421,7 +4422,7 @@ function estimateKillCount(logs) {
 
   return logs.filter((log) => {
     const text = String(log || "");
-    return text.includes("EXP +30") || text.includes("EXP +50");
+    return /\bEXP \+(?:30|50|48|80)(?!\d)/.test(text);
   }).length;
 }
 
@@ -5120,7 +5121,7 @@ function createDefaultSettings() {
 
 function getNextBattleSpeedId(currentId) {
   const ids = BATTLE_SPEED_OPTIONS.map((option) => option.id);
-  const index = ids.indexOf(currentId);
+  const index = ids.indexOf(getBattleSpeedConfig(currentId).id);
   return ids[(index + 1 + ids.length) % ids.length];
 }
 
@@ -7711,34 +7712,34 @@ const DISPATCH_TYPES = [
   {
     id: "scout",
     name: "정찰 파견",
-    exp: 25,
+    exp: getExperienceReward(25),
     gold: 140,
     potion: 0,
-    desc: "EXP +25 / 140G",
+    desc: `EXP +${getExperienceReward(25)} / 140G`,
   },
   {
     id: "training",
     name: "수련 파견",
-    exp: 45,
+    exp: getExperienceReward(45),
     gold: 0,
     potion: 0,
-    desc: "EXP +45",
+    desc: `EXP +${getExperienceReward(45)}`,
   },
   {
     id: "supply",
     name: "보급 파견",
-    exp: 20,
+    exp: getExperienceReward(20),
     gold: 240,
     potion: 1,
-    desc: "EXP +20 / 240G / 회복약 +1",
+    desc: `EXP +${getExperienceReward(20)} / 240G / 회복약 +1`,
   },
   {
     id: "relic",
     name: "유적 조사",
-    exp: 30,
+    exp: getExperienceReward(30),
     gold: 90,
     potion: 0,
-    desc: "EXP +30 / 90G / 낮은 확률로 장비 획득",
+    desc: `EXP +${getExperienceReward(30)} / 90G / 낮은 확률로 장비 획득`,
   },
 ];
 
@@ -8443,6 +8444,7 @@ export default function App() {
   if (battleAsyncRef.current == null) battleAsyncRef.current = createBattleAsyncLifecycle();
   const combatBusy = Boolean(stageMissionOpen || turnBusy || movingUnit || battleResolving || combatCutscene || bossCutscene || stageBanner?.type === "start");
   const battleInputLocked = Boolean(combatBusy || battle || result || itemOpen || skillChoiceOpen || supportSkillChoice || battleSettingsOpen || discoveryReceipt || journalOpen);
+  const battleSaveReady = turn === "ally" && !combatBusy && !battle && !result && !itemOpen && !skillChoiceOpen && !supportSkillChoice;
 
   useEffect(() => {
     const timers = visualTimersRef.current;
@@ -12183,7 +12185,7 @@ export default function App() {
   const executeEnemyTurn = async (startUnits) => {
     const epoch = battleAsyncRef.current.capture();
     let workingUnits = [...startUnits];
-    const enemies = workingUnits.filter((u) => u.type !== "ally");
+    const enemies = getEnemyTurnOrder(workingUnits, activeMap);
     const tryEnemySupport = async (candidate) => {
       const support = resolveExpansionEnemySupport(candidate, workingUnits, round);
       if (!support) return false;
@@ -12214,10 +12216,6 @@ export default function App() {
       if (!freshEnemy) continue;
       const allies = workingUnits.filter((u) => u.type === "ally");
       if (allies.length === 0) { setUnits(workingUnits); playSfx("defeat"); showDefeatDirecting(); declareDefeat(); return; }
-      const supported = await tryEnemySupport(freshEnemy);
-      if (!battleAsyncRef.current.current(epoch)) return;
-      if (supported === "cancelled") return;
-      if (supported) continue;
       const choice = getEnemyAttackChoice(freshEnemy, allies, activeMap);
       if (choice) {
         const attackResult = await resolveEnemyAttack(freshEnemy, choice.target, choice.mode, workingUnits);
@@ -12256,10 +12254,6 @@ export default function App() {
       if (didMove) setMovingUnit(null);
 
       const movedFreshEnemy = workingUnits.find((u) => u.id === freshEnemy.id);
-      const supportedAfterMove = await tryEnemySupport(movedFreshEnemy);
-      if (!battleAsyncRef.current.current(epoch)) return;
-      if (supportedAfterMove === "cancelled") return;
-      if (supportedAfterMove) continue;
       const postMoveAllies = workingUnits.filter((u) => u.type === "ally");
       const postMoveChoice = movedFreshEnemy
         ? getEnemyAttackChoice(movedFreshEnemy, postMoveAllies, activeMap)
@@ -12283,6 +12277,11 @@ export default function App() {
         }
         continue;
       }
+
+      const supportedAfterMove = await tryEnemySupport(movedFreshEnemy);
+      if (!battleAsyncRef.current.current(epoch)) return;
+      if (supportedAfterMove === "cancelled") return;
+      if (supportedAfterMove) continue;
 
       setLogs((p) => [
         didMove
@@ -17616,7 +17615,7 @@ export default function App() {
       )}
 
       {screen === "battle" && (
-        <div className={`battle-screen battle-final-concept battle-board-only ${isFinalConceptStage(activeStage) ? "final-illustrated-battle" : ""} ${showPostMoveCommandMenu ? "has-post-move-menu" : ""} ${targetSelectionActive ? "has-target-selection" : ""} ${battleHudHidden ? "battle-hud-hidden" : ""} ${battleCompact ? "battle-compact-mode battle-simple-mode" : "battle-detail-mode"}`} aria-busy={combatBusy}>
+        <div className={`battle-screen battle-final-concept battle-board-only ${isFinalConceptStage(activeStage) ? "final-illustrated-battle" : ""} ${showPostMoveCommandMenu ? "has-post-move-menu" : ""} ${targetSelectionActive ? "has-target-selection" : ""} ${battleHudHidden ? "battle-hud-hidden" : ""} ${battleCompact ? "battle-compact-mode battle-simple-mode" : "battle-detail-mode"}`} aria-busy={combatBusy} data-save-ready={battleSaveReady}>
           <div className="battle-top">
             <div className="battle-title-block">
               <div className="battle-kicker">모바일 전술 SRPG · 천수</div>
@@ -17650,9 +17649,15 @@ export default function App() {
                   <em>승리 미션</em>
                   <b>{activeVictoryMissionText}</b>
                 </div>
-                <div className="cinematic-stage-actions">
+                <div className="cinematic-stage-actions battle-information-tools" role="group" aria-label="전투 정보 도구">
+                  <button className="battle-mission-button" type="button" disabled={battleInputLocked} onClick={() => { closeMobileCombatPanels(); setStageMissionOpen(true); }}>미션 보기</button>
+                  <button className="prominent-save" type="button" disabled={!battleSaveReady} onClick={saveGame}><Save size={16} aria-hidden="true" />저장</button>
+                  <button className="battle-speed-cycle" type="button" data-battle-speed={battleSpeedConfig.id}
+                    aria-label={`전투 속도 ${battleSpeedConfig.multiplier}배, 누르면 ${getBattleSpeedConfig(getNextBattleSpeedId(settings.battleSpeed)).multiplier}배`}
+                    title="누를 때마다 1배 → 2배 → 3배로 변경" onClick={cycleBattleSpeed}>
+                    <span>전투 속도</span><strong aria-live="polite" aria-atomic="true">{battleSpeedConfig.multiplier}배</strong>
+                  </button>
                   <button type="button" onClick={cycleMapVisibility}>위험 범위</button>
-                  <button type="button" onClick={() => setBattleHudHidden(true)}>정보 숨김</button>
                   <button type="button" title="탐색 기록" aria-label="탐색 기록" disabled={battleInputLocked} onClick={() => setJournalOpen(true)}><BookOpen size={18} /></button>
                   <button
                     type="button"
@@ -17663,6 +17668,7 @@ export default function App() {
                   >
                     설정
                   </button>
+                  <button className="battle-information-hide" type="button" onClick={() => setBattleHudHidden(true)}>정보 숨김</button>
                 </div>
               </>
             )}
@@ -18525,15 +18531,6 @@ export default function App() {
           <div className={`cinematic-command-bar ${canUndoMove ? "has-undo" : ""}`}>
             <div className="battle-control-heading">
               <span role="status">{combatBusy ? "전투 진행 중" : selected ? `${selected.name} · HP ${selected.hp}/${selected.maxHp}` : "아군 선택"}</span>
-              <button className="battle-mission-button" type="button" disabled={battleInputLocked} onClick={() => { closeMobileCombatPanels(); setStageMissionOpen(true); }}>미션 보기</button>
-              <button className="prominent-save" disabled={combatBusy || turn !== 'ally' || Boolean(result) || itemOpen || skillChoiceOpen || Boolean(supportSkillChoice)} onClick={saveGame}><Save size={16} />저장</button>
-              <div className="battle-speed-controls" role="group" aria-label="전투 배속">
-                {BATTLE_SPEED_OPTIONS.map(option => (
-                  <button key={option.id} type="button" aria-label={`전투 ${option.multiplier}배속`}
-                    aria-pressed={battleSpeedConfig.id === option.id}
-                    onClick={() => updateSetting("battleSpeed", option.id)}>{option.multiplier}x</button>
-                ))}
-              </div>
             </div>
             {targetSelectionActive && (
               <section className="battle-command-feedback" aria-label="선택한 전투 명령">

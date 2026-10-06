@@ -1,3 +1,4 @@
+import { saveBattle as clickBattleSave } from './qa-battle-tools.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -177,7 +178,7 @@ async function actualApp(base, viewport) {
   const saved = () => page.evaluate(key => JSON.parse(localStorage.getItem(key)), saveKey);
   const ready = async () => {
     await page.locator('.world-battlefield .unit-visual-hero').waitFor();
-    await page.waitForFunction(() => !document.querySelector('.battle-control-heading .prominent-save')?.disabled && !document.querySelector('.boss-splash-overlay'));
+    await page.waitForFunction(() => document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true' && !document.querySelector('.boss-splash-overlay'), null, { timeout: 120000 });
   };
   const load = async data => {
     await page.evaluate(({ key, data }) => localStorage.setItem(key, JSON.stringify(data)), { key: saveKey, data });
@@ -195,7 +196,7 @@ async function actualApp(base, viewport) {
       await load(baseline);
       await ready();
       assert.deepEqual(await saved(), baseline, `${testCase.stage}: 이어하기는 기존 저장에 쓰지 않습니다`);
-      await page.locator('.battle-control-heading .prominent-save').click();
+      await clickBattleSave(page);
       const resumed = await saved();
       assert.deepEqual(resumed.units, baseline.units, `${testCase.stage}: 기존 전투 units의 모든 필드·전투 규칙·외형을 보존합니다`);
       assert.deepEqual(resumed.selectedStage.units, baseline.selectedStage.units, `${testCase.stage}: 저장한 전장 적 구성 전체를 보존합니다`);
@@ -245,7 +246,7 @@ async function actualApp(base, viewport) {
       await ready();
       const loaded = await assertMapArt(page, id);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, `${id}: 휴대폰 가로 넘침이 없습니다`);
-      await page.locator('.battle-control-heading .prominent-save').click();
+      await clickBattleSave(page);
       const battle = await saved();
       const enemy = battle.units.find(unit => unit.artId === id);
       assert.ok(enemy && enemy.type === 'enemy' && enemy.name.includes(MONSTER_ENEMIES[id].name), `${stage}장 실제 전투에 ${id}가 연결됩니다`);

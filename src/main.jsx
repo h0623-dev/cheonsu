@@ -12,6 +12,7 @@ import './village-ui.css'
 import './armory-ui.css'
 import './native-insets.css'
 import './player-experience.css'
+import './battle-information-tools.css'
 import App from './App.jsx'
 import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 

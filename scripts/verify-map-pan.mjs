@@ -1,3 +1,4 @@
+import { saveBattle as clickBattleSave } from './qa-battle-tools.mjs';
 import { qaBrowserOptions, confirmStageMission } from './qa-browser.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
@@ -28,8 +29,7 @@ try {
     await page.getByRole('button', { name: '정보 표시', exact: true }).click();
     await page.getByRole('button', { name: '전장 확대', exact: true }).click();
     await page.getByRole('button', { name: '정보 숨김', exact: true }).click();
-    const save = page.locator('.cinematic-command-bar .prominent-save');
-    await save.click();
+    await clickBattleSave(page);
     const unitsBefore = await page.evaluate(() => JSON.parse(localStorage.getItem('cheonsu_v01_save')).units);
     await page.waitForTimeout(1000);
     const shell = page.locator('.battle-map-scroll-shell');
@@ -44,7 +44,7 @@ try {
     await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
     await page.waitForTimeout(900);
     assert.ok(await shell.evaluate(element => element.scrollTop) > 80, 'Native touch scroll must move the map');
-    await save.click();
+    await clickBattleSave(page);
     const afterTouch = await page.evaluate(() => JSON.parse(localStorage.getItem('cheonsu_v01_save')).units);
     assert.deepEqual(afterTouch, unitsBefore, 'Touch scrolling/cancellation must never move or act a unit');
     const beforeMouse = await shell.evaluate(element => element.scrollTop);
@@ -52,7 +52,7 @@ try {
     await page.mouse.move(230, 470, { steps: 30 }); await page.mouse.up();
     await page.waitForTimeout(250);
     assert.ok(await shell.evaluate(element => element.scrollTop) < beforeMouse - 60, 'Desktop dragging still works');
-    await save.click();
+    await clickBattleSave(page);
     assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('cheonsu_v01_save')).units), unitsBefore);
     await page.screenshot({ path: `tmp/performance-qa/touch-pan-${code}.png` });
     assert.deepEqual(errors, []);

@@ -1,4 +1,5 @@
 import { qaBrowserOptions, confirmStageMission } from './qa-browser.mjs';
+import { saveBattle } from './qa-battle-tools.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -19,7 +20,8 @@ async function restore(page, data) {
   await page.locator(data.screen === 'camp' ? '.town-hub' : '.world-battlefield').waitFor();
 }
 async function save(page, camp = false) {
-  await page.locator(camp ? '.camp-header .prominent-save' : '.battle-control-heading .prominent-save').click();
+  if (camp) await page.locator('.camp-header .prominent-save').click();
+  else await saveBattle(page);
   return read(page);
 }
 async function shot(page, name) {
@@ -89,7 +91,7 @@ try {
     const trained = await save(page, true);
     for (const before of beforeTraining.party) {
       const after = trained.party.find(unit => unit.id === before.id);
-      assert.equal(experience(after) - experience(before), 20);
+      assert.equal(experience(after) - experience(before), 32);
       assert.equal(after.baseAtk - before.baseAtk, 2, `${before.id}: training + level growth`);
     }
     await restore(page, trained);
@@ -111,12 +113,12 @@ try {
     await restore(page, fixture);
     await attack(page);
     const killed = await save(page);
-    assert.deepEqual(killed.party.map(unit => unit.exp), [30, 9, 9, 0], 'killer, live share, fallen share, bench');
+    assert.deepEqual(killed.party.map(unit => unit.exp), [48, 14, 14, 0], 'killer, live share, fallen share, bench');
     assert.ok(!killed.units.some(unit => unit.id === 'lina'), 'fallen ally is not respawned');
     await shot(page, `kill-${viewport.width}`);
     await restore(page, killed);
     const loaded = await save(page);
-    assert.deepEqual(loaded.party.map(unit => unit.exp), [30, 9, 9, 0]);
+    assert.deepEqual(loaded.party.map(unit => unit.exp), [48, 14, 14, 0]);
     assert.ok(!loaded.units.some(unit => unit.id === 'lina'));
 
     const reveal = page.getByRole('button', { name: '정보 표시', exact: true });
@@ -126,7 +128,7 @@ try {
     aoe.units.push(noah, { ...target, id: 'growth-splash', x: 5, y: 7 }); sync(aoe);
     await restore(page, aoe); await attack(page, 'chain');
     const areaSave = await save(page);
-    assert.deepEqual(areaSave.party.map(unit => unit.exp), [18, 18, 18, 0, 60], 'two enemy kills distribute twice, not twice per victim');
+    assert.deepEqual(areaSave.party.map(unit => unit.exp), [28, 28, 28, 0, 96], 'two enemy kills distribute twice, not twice per victim');
 
     const burn = structuredClone(fixture);
     burn.units.find(unit => unit.id === target.id).status = [{ type: 'burn', turns: 2, sourceId: 'lina' }]; sync(burn);
@@ -135,7 +137,7 @@ try {
     await page.getByRole('button', { name: /턴 종료/ }).click();
     await page.locator('.world-battlefield [data-unit-id="growth-target"]').waitFor({ state: 'detached' });
     const burned = await save(page);
-    assert.deepEqual(burned.party.map(unit => unit.exp), [9, 9, 30, 0], 'fallen caster retains burn-kill credit');
+    assert.deepEqual(burned.party.map(unit => unit.exp), [14, 14, 48, 0], 'fallen caster retains burn-kill credit');
 
     const victory = structuredClone(fixture);
     Object.assign(victory.units.find(unit => unit.id === target.id), { x: 10, y: 2, hp: 9999 });
@@ -147,7 +149,7 @@ try {
     await page.locator('.victory-dialog .clear-save-ok').waitFor();
     const won = await read(page);
     assert.equal(won.screen, 'camp');
-    assert.deepEqual(won.party.map(unit => unit.exp), [50, 15, 15, 0], 'boss shares survive victory autosave');
+    assert.deepEqual(won.party.map(unit => unit.exp), [80, 24, 24, 0], 'boss shares survive victory autosave');
 
     for (const [id, skillId, boost, cooldown] of [['bram', 'bulwark', 4, 2], ['rakan', 'roar', 5, 2]]) {
       const self = structuredClone(fixture);

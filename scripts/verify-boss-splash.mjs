@@ -1,3 +1,4 @@
+import { saveBattle as clickBattleSave } from './qa-battle-tools.mjs';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import { qaBrowserOptions } from './qa-browser.mjs';
@@ -72,7 +73,7 @@ try {
   await page.screenshot({path:`${out}/actual-game.png`});
   await page.clock.runFor(2500);
   assert.equal(await page.locator('.boss-splash-overlay').count(),0);
-  await page.locator('.cinematic-command-bar .prominent-save').click();
+  await clickBattleSave(page);
   const save=await page.evaluate(()=>JSON.parse(localStorage.getItem('cheonsu_v01_save')));
   assert.ok(save.units.some(u=>u.type==='boss'));
   assert.ok(save.units.filter(u=>u.type==='ally').every(u=>!u.acted));

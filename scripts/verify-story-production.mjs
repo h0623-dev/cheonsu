@@ -1,3 +1,4 @@
+import { saveBattle as clickBattleSave } from './qa-battle-tools.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import { qaBrowserOptions } from './qa-browser.mjs';
@@ -159,8 +160,8 @@ async function legacyRegression(viewport) {
     await page.getByRole('button', { name: '바로 전투', exact: true }).click();
     await confirmArtQaMission(page);
     await page.locator('.world-battlefield').waitFor();
-    await page.waitForFunction(() => document.querySelector('.cinematic-command-bar .prominent-save')?.disabled === false && !document.querySelector('.boss-splash-overlay'));
-    await page.locator('.cinematic-command-bar .prominent-save').click();
+    await page.waitForFunction(() => document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true' && !document.querySelector('.boss-splash-overlay'), null, { timeout: 120000 });
+    await clickBattleSave(page);
     const after = await page.evaluate(key => JSON.parse(localStorage.getItem(key)), key);
     assert.equal(after.selectedStage.id, 3);
     assert.deepEqual(after.clearedStages, [1, 2]);

@@ -1,3 +1,4 @@
+const clickBattleSave = async page => (await import('./qa-battle-tools.mjs')).saveBattle(page);
 const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
 const { mkdir, writeFile } = require('node:fs/promises');
@@ -28,7 +29,7 @@ async function readSave(page) {
 }
 
 async function saveBattle(page) {
-  await page.locator('.cinematic-command-bar .prominent-save').click();
+  await clickBattleSave(page);
   return readSave(page);
 }
 
@@ -113,8 +114,7 @@ async function bootstrap(page, stageId) {
   await page.getByRole('button', { name: '전투 시작', exact: true }).click();
   await page.getByRole('button', { name: '바로 전투', exact: true }).click(); await (await import('./qa-browser.mjs')).confirmStageMission(page);
   await page.locator('.world-battlefield .unit-visual-hero').waitFor();
-  const speed = page.getByRole('button', { name: '전투 3배속', exact: true });
-  if (await speed.getAttribute('aria-pressed') !== 'true') await speed.click();
+  await (await import('./qa-battle-tools.mjs')).setBattleSpeed(page, 'turbo');
   const fixture = await saveBattle(page);
   assert.equal(fixture.selectedStage.id, stageId, 'Fixture must originate from the actual requested stage');
   assert.deepEqual(fixture.exploration, emptyExploration(), 'New games start without discoveries');

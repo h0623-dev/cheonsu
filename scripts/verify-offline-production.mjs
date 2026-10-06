@@ -1,3 +1,4 @@
+import { saveBattle as clickBattleSave } from './qa-battle-tools.mjs';
 import { qaBrowserOptions, confirmStageMission } from './qa-browser.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
@@ -41,7 +42,7 @@ try {
     }
     return paths.length;
   }, samples);
-  await page.locator('.cinematic-command-bar .prominent-save').click();
+  await clickBattleSave(page);
   await page.reload();
   await page.getByRole('button', { name: '이어하기', exact: true }).click();
   await page.locator('.world-battlefield .unit-visual-hero').waitFor();

@@ -136,7 +136,7 @@ async function bootstrap(page) {
   await page.getByRole('button', { name: '전투 시작', exact: true }).click();
   await page.getByRole('button', { name: '바로 전투', exact: true }).click(); await (await import('./qa-browser.mjs')).confirmStageMission(page);
   await page.locator('.world-battlefield .unit-visual-hero').waitFor();
-  await page.waitForFunction(() => document.querySelector('.cinematic-command-bar .prominent-save')?.disabled === false);
+  await page.waitForFunction(() => document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true', null, { timeout: 120000 });
   const fixture = await saveBattle(page);
   assert.equal(fixture.selectedStage.id, 11, 'Fixtures originate from stage 11 started through the UI');
   const hero = fixture.units.find(unit => unit.id === 'hero');
@@ -251,7 +251,7 @@ const scenarios = [
       await button.click();
       assert.equal(await page.locator('.vs-preview-modal').count(), 0);
       await snapshot(page, test, `counter-${enemyRange}`);
-      await page.waitForFunction(() => document.querySelector('.cinematic-command-bar .prominent-save')?.disabled === false);
+      await page.waitForFunction(() => document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true', null, { timeout: 120000 });
       const after = await saveBattle(page);
       const actualArcher = after.units.find(unit => unit.id === 'lina');
       assert.equal(actualArcher.acted, true);
@@ -266,7 +266,7 @@ const scenarios = [
     await restore(page, data, { ...settings, cutsceneMode: 'off', battleSpeed: 'turbo' });
     const before = await saveBattle(page);
     await page.locator('.battle-end-turn-float').click();
-    await page.waitForFunction(() => document.querySelector('.cinematic-command-bar .prominent-save')?.disabled === false);
+    await page.waitForFunction(() => document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true', null, { timeout: 120000 });
     const after = await saveBattle(page);
     assert.equal(after.round, before.round + 1);
     assert.equal(after.units.find(unit => unit.id === 'hero').hp, before.units.find(unit => unit.id === 'hero').hp, 'immobile adjacent archer cannot attack');
@@ -389,24 +389,27 @@ const scenarios = [
     await snapshot(page, test, 'resolved');
   }],
   ['quick-speed', async (page, test, { fixture, settings }) => {
+    const { ensureBattleInformationOpen, setBattleSpeed } = await import('./qa-battle-tools.mjs');
     await restore(page, fixture, settings);
     const before = await saveBattle(page);
-    const controls = page.getByRole('group', { name: '전투 배속', exact: true });
-    assert.equal(await controls.getByRole('button').count(), 3);
-    for (const [speed, id] of [[1, 'normal'], [2, 'fast'], [3, 'turbo']]) {
-      const button = controls.getByRole('button', { name: `전투 ${speed}배속`, exact: true });
+    await ensureBattleInformationOpen(page);
+    const button = page.locator('.battle-information-tools .battle-speed-cycle');
+    assert.equal(await button.count(), 1, '우측 상단에는 전투 속도 순환 버튼 하나만 표시합니다');
+    await setBattleSpeed(page, 'normal');
+    for (const [speed, id, next] of [[2, 'fast', 3], [3, 'turbo', 1], [1, 'normal', 2]]) {
       await button.click();
       await page.waitForFunction(({ key, value }) => JSON.parse(localStorage.getItem(key))?.battleSpeed === value, { key: SETTINGS_KEY, value: id });
-      assert.equal(await button.getAttribute('aria-pressed'), 'true');
-      assert.equal(await controls.locator('[aria-pressed="true"]').count(), 1);
+      assert.equal(await button.getAttribute('data-battle-speed'), id);
+      assert.equal(await button.getAttribute('aria-label'), `전투 속도 ${speed}배, 누르면 ${next}배`);
       assert.equal(await page.locator('.world-art-app').evaluate(element => getComputedStyle(element).getPropertyValue('--battle-speed').trim()), String(speed));
       await snapshot(page, test, `${speed}x`);
     }
+    await setBattleSpeed(page, 'turbo');
     await assertNoAction(page, before);
     await page.reload({ waitUntil: 'domcontentloaded' });
     await page.getByRole('button', { name: '이어하기', exact: true }).click();
-    await controls.waitFor();
-    assert.equal(await controls.getByRole('button', { name: '전투 3배속', exact: true }).getAttribute('aria-pressed'), 'true', 'Quick speed must survive reload');
+    await ensureBattleInformationOpen(page);
+    assert.equal(await button.getAttribute('data-battle-speed'), 'turbo', 'Quick speed must survive reload');
   }],
   ['picker-cancel', async (page, test, { fixture, settings }) => {
     await restore(page, fixture, settings);
@@ -447,7 +450,7 @@ const scenarios = [
     assert.equal(await page.locator('.vs-preview-modal').count(), 0);
     await page.locator('.painted-combat').waitFor();
     await snapshot(page, test, 'immediate');
-    await page.waitForFunction(() => document.querySelector('.cinematic-command-bar .prominent-save')?.disabled === false);
+    await page.waitForFunction(() => document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true', null, { timeout: 120000 });
     const after = await saveBattle(page);
     assert.equal(after.units.find(unit => unit.id === 'hero').acted, true);
     const enemyId = fixture.units[2].id;
@@ -470,7 +473,7 @@ const scenarios = [
     assert.equal(await page.locator('.vs-preview-modal').count(), 0);
     await page.locator('.painted-combat[data-presentation="skill"]').waitFor();
     await snapshot(page, test, 'immediate');
-    await page.waitForFunction(() => document.querySelector('.cinematic-command-bar .prominent-save')?.disabled === false);
+    await page.waitForFunction(() => document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true', null, { timeout: 120000 });
     const after = await saveBattle(page);
     assert.equal(after.units.find(unit => unit.id === 'hero').acted, true);
     assert.ok(after.units.find(unit => unit.id === 'hero').skillCooldowns.gale > 0);

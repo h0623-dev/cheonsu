@@ -1,3 +1,4 @@
+import { saveBattle as clickBattleSave } from './qa-battle-tools.mjs';
 import { qaBrowserOptions, confirmStageMission } from './qa-browser.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
@@ -39,7 +40,7 @@ try {
       await page.getByRole('button', { name: '전투 시작', exact: true }).click();
       await page.getByRole('button', { name: '바로 전투', exact: true }).click(); await confirmStageMission(page);
       await page.locator('.unit-visual-hero').waitFor();
-      await page.locator('.cinematic-command-bar .prominent-save').click();
+      await clickBattleSave(page);
       const seed = await page.evaluate(() => JSON.parse(localStorage.getItem('cheonsu_v01_save')));
       const original = seed.units.find(unit => unit.id === 'hero');
       assert.ok(original);
@@ -106,11 +107,11 @@ try {
       await assertButtons('after dialog cancellation');
       await bar.locator('.cmd-undo').click();
       await bar.locator('.cmd-undo').waitFor({ state: 'detached' });
-      await bar.locator('.prominent-save').click();
+      await clickBattleSave(page);
       const undone = await page.evaluate(() => JSON.parse(localStorage.getItem('cheonsu_v01_save')).units.find(unit => unit.id === 'hero'));
       assert.deepEqual([undone.x, undone.y, undone.acted, undone.moved], [original.x, original.y, false, false]);
       await move(); await bar.locator('.cmd-wait').click();
-      await bar.locator('.prominent-save').click();
+      await clickBattleSave(page);
       const waited = await page.evaluate(() => JSON.parse(localStorage.getItem('cheonsu_v01_save')).units.find(unit => unit.id === 'hero'));
       assert.equal(waited.acted, true);
       assert.deepEqual(errors, []);

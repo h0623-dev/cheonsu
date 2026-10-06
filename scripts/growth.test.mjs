@@ -36,13 +36,13 @@ test('training stacks level-up growth with training growth, without reviving a f
   const party = roster().map(unit => ({ ...unit, exp: 95, hp: 0 }));
   const result = trainParty(party, 'attack');
   for (let i = 0; i < party.length; i++) {
-    assert.equal(result.units[i].level, 2); assert.equal(result.units[i].exp, 15);
+    assert.equal(result.units[i].level, 2); assert.equal(result.units[i].exp, 27);
     assert.equal(result.units[i].baseAtk, party[i].baseAtk + 2);
     assert.equal(result.units[i].baseDef, party[i].baseDef + 1);
     assert.equal(result.units[i].hp, 0);
   }
 });
-for (const [type, full, shared] of [['enemy', 30, 9], ['boss', 50, 15]]) test(`${type}: killer 100%, each deployed ally 30%, bench zero`, () => {
+for (const [type, full, shared] of [['enemy', 48, 14], ['boss', 80, 24]]) test(`${type}: killer and deployed shares receive 60% more XP once, bench zero`, () => {
   const party = roster();
   const deployed = ['hero', 'bram', 'lina', 'lina'];
   const result = grantEnemyDefeatExp(party.slice(0, 3), 'hero', { ...enemy, type }, deployed);
@@ -61,12 +61,12 @@ test('fallen deployed allies receive shares without respawning; save/reload reta
   units = result.units;
   result = grantEnemyDefeatExp(units, 'bram', enemy, deployed);
   updated = syncBattleExperience(updated, result);
-  assert.deepEqual(updated.map(unit => unit.exp), [39, 39, 18, 0]);
+  assert.deepEqual(updated.map(unit => unit.exp), [62, 62, 28, 0]);
   assert.deepEqual(result.units.map(unit => unit.id), ['hero', 'bram']);
   const save = normalizeSaveData({ party: updated, units: result.units, deployedIds: deployed, screen: 'battle', selectedStage: stages[0] });
-  assert.equal(save.party.find(unit => unit.id === 'lina').exp, 18);
+  assert.equal(save.party.find(unit => unit.id === 'lina').exp, 28);
   assert.ok(!save.units.some(unit => unit.id === 'lina'));
-  assert.deepEqual(mergePartyFromUnits(updated, result.units).map(unit => unit.exp), [39, 39, 18, 0]);
+  assert.deepEqual(mergePartyFromUnits(updated, result.units).map(unit => unit.exp), [62, 62, 28, 0]);
 });
 test('AOE/counter sequences preserve live XP and support simultaneous level-ups', () => {
   let party = roster().map(unit => ({ ...unit, exp: 95 }));
@@ -75,7 +75,7 @@ test('AOE/counter sequences preserve live XP and support simultaneous level-ups'
     const result = grantEnemyDefeatExp(units, 'hero', enemy, party.map(unit => unit.id));
     units = result.units; party = syncBattleExperience(party, result);
   }
-  assert.deepEqual(party.map(unit => [unit.level, unit.exp]), [[3, 15], [2, 31], [2, 31], [2, 31]]);
+  assert.deepEqual(party.map(unit => [unit.level, unit.exp]), [[3, 87], [2, 51], [2, 51], [2, 51]]);
   assert.deepEqual(units.map(unit => [unit.level, unit.exp]), party.map(unit => [unit.level, unit.exp]));
 });
 test('old in-progress saves use live growth, not stale party growth', () => {
@@ -83,7 +83,7 @@ test('old in-progress saves use live growth, not stale party growth', () => {
   units[0].exp = 80;
   const result = grantEnemyDefeatExp(units, 'hero', enemy, party.map(unit => unit.id));
   const updated = syncBattleExperience(party, result);
-  assert.equal(updated[0].level, 2); assert.equal(updated[0].exp, 10);
+  assert.equal(updated[0].level, 2); assert.equal(updated[0].exp, 28);
 });
 test('non-ally kills and non-enemy victims cannot grant XP', () => {
   const units = roster(), ids = units.map(unit => unit.id);
@@ -115,7 +115,7 @@ test('burn/bleed finishing blows keep the applying character as killer', () => {
   assert.equal(tick.units.length, 0);
   assert.equal(tick.defeats[0].killerId, 'lina');
   const result = grantEnemyDefeatExp(roster(), tick.defeats[0].killerId, target, roster().map(unit => unit.id));
-  assert.deepEqual(result.units.map(unit => unit.exp), [9, 9, 30, 9]);
+  assert.deepEqual(result.units.map(unit => unit.exp), [14, 14, 48, 14]);
   assert.equal(processTurnStartStatuses(tick.units, 'enemy').defeats.length, 0);
 });
 test('terrain refresh removes stale skill attribution and legacy statuses remain compatible', () => {

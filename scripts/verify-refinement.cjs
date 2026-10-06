@@ -43,7 +43,8 @@ async function main() {
       await page.addInitScript(()=>{let seed=0; Math.random=()=>.1+(seed++%1000)*.00001;});
       const fixture=await bootstrap(page);
       console.log(`viewport ${viewport.width}: bootstrapped`);
-      assert.equal(await page.getByRole('button',{name:'전투 2배속',exact:true}).getAttribute('aria-pressed'),'true');
+      await (await import('./qa-battle-tools.mjs')).ensureBattleInformationOpen(page);
+      assert.equal(await page.locator('.battle-information-tools .battle-speed-cycle').getAttribute('data-battle-speed'),'fast');
       assert.ok(await page.locator('.battle-map-scroll-shell').evaluate(el=>el.classList.contains('map-zoom-large')));
       await screenshot(page,`map-${viewport.width}`);
       const hero=fixture.units.find(u=>u.id==='hero');

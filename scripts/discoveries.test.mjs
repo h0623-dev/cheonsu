@@ -98,7 +98,7 @@ test('eight authored discoveries advance training, four unique techniques, and t
   assert.equal(DISCOVERIES.length, 8);
   assert.deepEqual(DISCOVERIES.map((entry) => entry.stageId), [1, 2, 3, 4, 5, 6, 8, 10]);
   assert.equal(new Set(DISCOVERIES.map((entry) => entry.id)).size, 8);
-  assert.deepEqual(DISCOVERIES.filter((entry) => entry.kind === 'training').map((entry) => entry.reward.xp), [35, 60]);
+  assert.deepEqual(DISCOVERIES.filter((entry) => entry.kind === 'training').map((entry) => entry.reward.xp), [56, 96]);
   assert.deepEqual(DISCOVERIES.filter((entry) => entry.kind === 'technique').map((entry) => entry.reward.unitId),
     ['hero', 'lina', 'aria', 'bram']);
   for (const entry of DISCOVERIES) {
@@ -198,8 +198,8 @@ test('returned reward metadata cannot change later placement or claim rewards', 
   const map = [['plain', 'plain']];
   const [entry] = getStageDiscoveries(1, map, units);
   entry.reward.xp = 9999;
-  assert.equal(getStageDiscoveries(1, map, units)[0].reward.xp, 35);
-  assert.equal(claimDiscovery(null, entry, { ...units[0], x: entry.x }).reward.xp, 35);
+  assert.equal(getStageDiscoveries(1, map, units)[0].reward.xp, 56);
+  assert.equal(claimDiscovery(null, entry, { ...units[0], x: entry.x }).reward.xp, 56);
 });
 
 test('living-ally proximity reveals within Manhattan 2 and hides claimed entries without moving them', () => {
@@ -258,11 +258,11 @@ test('all 17 allies can claim training; XP is granted once through the existing 
   for (const id of partyIds) {
     const unit = freeze(ally(id, { x: 0, y: 0, exp: 80 }));
     const result = claimDiscovery(freeze(normalizeExploration(null)), freeze(entryAt(1)), unit);
-    assert.equal(result.reward.xp, 35);
+    assert.equal(result.reward.xp, 56);
     assert.deepEqual(result.unit, unit, 'Claiming must not duplicate XP or growth');
     const grown = grantExp([result.unit], id, result.reward.xp).units[0];
     assert.equal(grown.level, 2);
-    assert.equal(grown.exp, 15);
+    assert.equal(grown.exp, 36);
     assert.equal(grown.baseAtk, unit.baseAtk + 1);
     const replay = claimDiscovery(JSON.parse(JSON.stringify(result.progress)), entryAt(1), grown);
     assert.equal(replay.reward, null);
@@ -455,7 +455,7 @@ test('all discovery titles, hints, technique names, promotion names, and result 
   assert.equal(DISCOVERY_TECHNIQUES['hero-dawn-slash'].name, '여명참');
   assert.equal(SECRET_PROMOTIONS.hero.classTitle, '여명검사');
   assert.equal(SECRET_PROMOTIONS.bram.classTitle, '서약수호자');
-  assert.equal(claimDiscovery(null, entryAt(1), unit).message, '초소지기의 가르침: 경험치 +35.');
+  assert.equal(claimDiscovery(null, entryAt(1), unit).message, '초소지기의 가르침: 경험치 +56.');
   const rejections = [
     [null, unit, null, '발견 정보를 확인할 수 없습니다.'],
     [entryAt(1), unit, { claimed: [entryAt(1).id] }, '이미 조사를 마친 발견입니다.'],

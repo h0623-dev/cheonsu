@@ -1,3 +1,4 @@
+import { ensureBattleInformationOpen, saveBattle as clickBattleSave } from './qa-battle-tools.mjs';
 import { qaBrowserOptions } from './qa-browser.mjs';
 import { readyDeployment, startDeploymentBattle, waitForDeployment } from './qa-deployment-flow.mjs';
 import assert from 'node:assert/strict';
@@ -75,7 +76,7 @@ async function geometry(page, container, { modal = false } = {}) {
 
 async function readyBattle(page) {
   await page.locator('.world-battlefield .unit-visual-hero').waitFor();
-  await page.waitForFunction(selector => !document.querySelector(selector) && !document.querySelector('.battle-control-heading .prominent-save')?.disabled, introSelector);
+  await page.waitForFunction(selector => !document.querySelector(selector) && document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true', introSelector, { timeout: 120000 });
 }
 
 async function beginBattle(page) {
@@ -92,8 +93,10 @@ async function confirm(page, escape = false) {
 }
 
 async function reopen(page, expected, label) {
-  const button = page.locator('.battle-control-heading').getByRole('button', { name: '미션 보기', exact: true });
-  assert.equal(await button.isVisible(), true, '전투 HUD를 접은 상태에서도 미션 보기 버튼이 보입니다');
+  const wasHidden = await ensureBattleInformationOpen(page);
+  const button = page.locator('.battle-information-tools .battle-mission-button');
+  assert.equal(await button.isVisible(), true, '정보 표시를 펼치면 우측 상단에 미션 보기 버튼이 보입니다');
+  assert.equal(await page.locator('.battle-control-heading .battle-mission-button').count(), 0, '하단 명령 영역에는 미션 보기 버튼을 중복 표시하지 않습니다');
   await page.evaluate(selector => {
     window.__missionIntroEvents = [];
     window.__missionIntroObserver?.disconnect();
@@ -110,6 +113,7 @@ async function reopen(page, expected, label) {
   await confirm(page, true);
   await page.waitForTimeout(1050);
   assert.deepEqual(await page.evaluate(() => { window.__missionIntroObserver.disconnect(); return window.__missionIntroEvents; }), [], `${label}: 수동으로 미션을 확인할 때 도입 연출을 반복하지 않습니다`);
+  if (wasHidden) await page.getByRole('button', { name: '정보 숨김', exact: true }).click();
 }
 
 async function runViewport(base, viewport) {
@@ -128,7 +132,7 @@ async function runViewport(base, viewport) {
     await page.getByRole('button', { name: '이어하기', exact: true }).click();
   };
   const saveBattle = async () => {
-    await page.locator('.battle-control-heading .prominent-save').click();
+    await clickBattleSave(page);
     return saved();
   };
   const campaign = { ...structuredClone(legacy.shared), ...structuredClone(legacy.cases[0].save), screen: 'campaign', clearedStages: stages.slice(0, -1).map(stage => stage.id), deployedIds: legacy.shared.party.slice(0, 15).map(unit => unit.id) };
@@ -212,7 +216,8 @@ async function runViewport(base, viewport) {
       await readyBattle(page);
       assert.equal(await openDialog(page).count(), 0, '실제 구버전 전투 저장도 자동 미션 없이 이어집니다');
       assert.deepEqual(await saved(), baseline, '구버전 저장은 이어하기에서 변경하지 않습니다');
-      await page.locator('.battle-control-heading').getByRole('button', { name: '미션 보기', exact: true }).click();
+      await ensureBattleInformationOpen(page);
+      await page.locator('.battle-information-tools .battle-mission-button').click();
       await openDialog(page).waitFor();
       verifyConditions(await contents(openDialog(page)), baseline.selectedStage, baseline.units);
       await confirm(page, true);

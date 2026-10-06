@@ -1,3 +1,4 @@
+const clickBattleSave = async page => (await import('./qa-battle-tools.mjs')).saveBattle(page);
 const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
@@ -31,8 +32,7 @@ async function screenshot(page, name) {
   assert.deepEqual(issues, [], name);
 }
 async function saveBattle(page) {
-  const save = page.locator('.battle-control-heading .prominent-save');
-  await save.click();
+  await clickBattleSave(page);
   return read(page);
 }
 async function attackBoss(page) {

@@ -1,3 +1,4 @@
+import { saveBattle as clickBattleSave } from './qa-battle-tools.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -92,11 +93,11 @@ async function actualGame(base, viewport) {
     await button('바로 전투').click();
     await confirmArtQaMission(page);
     await page.locator('.world-battlefield .unit-visual-hero').waitFor();
-    await page.waitForFunction(() => !document.querySelector('.battle-control-heading .prominent-save')?.disabled && !document.querySelector('.boss-splash-overlay'));
+    await page.waitForFunction(() => document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true' && !document.querySelector('.boss-splash-overlay'), null, { timeout: 120000 });
     const mapImages = await activeImages(page, '.world-battlefield .unit > img');
     assert.ok(mapImages.length);
     assert.ok(mapImages.every(image => image.loaded && /^\/art\/(map-sprites-v4|directions-v1)\//.test(image.src)), 'existing idle/back artwork stays active');
-    await page.locator('.battle-control-heading .prominent-save').click();
+    await clickBattleSave(page);
     const baseline = await page.evaluate(key => JSON.parse(localStorage.getItem(key)), saveKey);
     for (const [id, mode] of [['hero', 'attack'], ['hero', 'skill'], ['bram', 'attack'], ['lina', 'attack'], ['lina', 'skill']].filter(([id]) => selectedIds.includes(id))) {
       const fixture = structuredClone(baseline);
@@ -134,8 +135,8 @@ async function actualGame(base, viewport) {
       }, mode === 'skill' ? .46 : id === 'lina' ? .38 : .505);
       await page.screenshot({ path: path.join(output, `actual-${id}-${mode}-${viewport.width}.png`) });
       results.push({ viewport, type: 'actual-combat', id, mode, images });
-      await page.waitForFunction(() => !document.querySelector('.battle-control-heading .prominent-save')?.disabled && !document.querySelector('.painted-combat'));
-      await page.locator('.battle-control-heading .prominent-save').click();
+      await page.waitForFunction(() => document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true' && !document.querySelector('.painted-combat'), null, { timeout: 120000 });
+      await clickBattleSave(page);
       const completed = await page.evaluate(key => JSON.parse(localStorage.getItem(key)), saveKey);
       assert.deepEqual(completed.clearedStages, baseline.clearedStages);
       assert.equal(completed.gold, baseline.gold);

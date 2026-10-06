@@ -1,3 +1,4 @@
+import { saveBattle as clickBattleSave } from './qa-battle-tools.mjs';
 import { qaBrowserOptions } from './qa-browser.mjs';
 import { startDeploymentBattle, waitForDeployment } from './qa-deployment-flow.mjs';
 import assert from 'node:assert/strict';
@@ -78,7 +79,7 @@ async function startBattle(page) {
 }
 
 async function saveBattle(page) {
-  await page.locator('.battle-control-heading .prominent-save').click();
+  await clickBattleSave(page);
   return page.evaluate(key => JSON.parse(localStorage.getItem(key)), saveKey);
 }
 
@@ -250,7 +251,7 @@ async function runViewport(base, viewport) {
     ongoing.deploymentDraft = { stageId: started.selectedStage.id, placements: Object.fromEntries(initialIds.map(id => [id, { x: 127, y: 127 }])) };
     await load(ongoing);
     await page.locator('.world-battlefield .unit-visual-hero').waitFor();
-    await page.waitForFunction(() => !document.querySelector('.battle-control-heading .prominent-save')?.disabled);
+    await page.waitForFunction(() => document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true', null, { timeout: 120000 });
     assert.deepEqual(await saved(), ongoing, '진행 중 전투 이어하기는 기존 저장을 변경하지 않습니다');
     const resumed = await saveBattle(page);
     assert.deepEqual(resumed.units, ongoing.units, '배치 초안이 있어도 기존 전투 좌표·HP·상태·장비·행동 정보를 유지합니다');
@@ -287,7 +288,7 @@ async function runViewport(base, viewport) {
       const baseline = { ...structuredClone(legacy.shared), ...structuredClone(legacyCase.save) };
       await load(baseline);
       await page.locator('.world-battlefield .unit-visual-hero').waitFor();
-      await page.waitForFunction(() => !document.querySelector('.battle-control-heading .prominent-save')?.disabled && !document.querySelector('.boss-splash-overlay'));
+      await page.waitForFunction(() => document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true' && !document.querySelector('.boss-splash-overlay'), null, { timeout: 120000 });
       assert.deepEqual(await saved(), baseline, '기존 1.99.156 전투 저장 이어하기는 읽기만 합니다');
       const reSaved = await saveBattle(page);
       assert.deepEqual(reSaved.units, baseline.units, '기존 전투의 유닛 전체 필드를 보존합니다');

@@ -1,0 +1,85 @@
+/* 정보 표시로 여는 우측 상단 도구. 하단에는 캐릭터 상태와 전투 명령만 둡니다. */
+.app.world-art-app .battle-screen.battle-final-concept.battle-board-only .cinematic-stage-hud:not(.hud-collapsed) {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 180px !important;
+  align-items: start;
+  gap: 8px;
+  top: calc(10px + max(env(safe-area-inset-top, 0px), var(--native-safe-top, 0px))) !important;
+  left: calc(10px + max(env(safe-area-inset-left, 0px), var(--native-safe-left, 0px))) !important;
+  right: calc(10px + max(env(safe-area-inset-right, 0px), var(--native-safe-right, 0px))) !important;
+}
+.app.world-art-app .battle-screen.battle-final-concept.battle-board-only .cinematic-stage-hud:not(.hud-collapsed) .cinematic-stage-card {
+  min-width: 0;
+  width: min(100%, 210px);
+  max-height: 148px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  pointer-events: auto;
+}
+.app.world-art-app .battle-screen.battle-final-concept.battle-board-only .cinematic-stage-actions.battle-information-tools {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  grid-auto-rows: 44px;
+  width: 180px;
+  min-width: 0;
+  justify-self: end;
+  gap: 4px;
+  pointer-events: auto;
+}
+.app.world-art-app .battle-screen.battle-final-concept.battle-board-only .battle-information-tools > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 0 !important;
+  width: 100%;
+  height: 44px !important;
+  min-height: 44px;
+  padding: 4px !important;
+  font-size: 11px !important;
+  line-height: 1.25;
+  white-space: nowrap !important;
+  touch-action: manipulation;
+}
+.app.world-art-app .battle-screen.battle-final-concept.battle-board-only .battle-information-tools > button:disabled {
+  opacity: .45;
+  cursor: default;
+}
+.battle-information-tools > button svg { flex-shrink: 0; }
+.app.world-art-app .battle-screen.battle-final-concept.battle-board-only .battle-information-tools .battle-speed-cycle {
+  flex-direction: column;
+  gap: 1px;
+  border-color: #dedaa2 !important;
+  background: #415a46 !important;
+}
+.battle-information-tools .battle-speed-cycle > span { font-size: 9px; color: #e0e9d6; }
+.battle-information-tools .battle-speed-cycle > strong { font-size: 16px; color: #fff5cb; line-height: 1.1; }
+.battle-information-tools .battle-information-hide { grid-column: 1 / -1; }
+.app.world-art-app .battle-screen.battle-final-concept.battle-board-only:not(.battle-hud-hidden) .battle-end-turn-float {
+  top: calc(166px + max(env(safe-area-inset-top, 0px), var(--native-safe-top, 0px))) !important;
+}
+.app.world-art-app .battle-screen.battle-final-concept.battle-board-only:not(.battle-hud-hidden) .battle-zoom-controls {
+  top: calc(230px + max(env(safe-area-inset-top, 0px), var(--native-safe-top, 0px))) !important;
+}
+.app.world-art-app .battle-screen.battle-final-concept.battle-board-only .battle-control-heading {
+  min-height: 24px;
+}
+@media (orientation: landscape) and (max-height: 520px) {
+  .app.world-art-app .battle-screen.battle-final-concept.battle-board-only .cinematic-stage-hud:not(.hud-collapsed) {
+    grid-template-columns: minmax(0, 1fr) min(300px, 55%) !important;
+  }
+  .app.world-art-app .battle-screen.battle-final-concept.battle-board-only .cinematic-stage-hud:not(.hud-collapsed) .cinematic-stage-card {
+    max-height: 92px;
+  }
+  .app.world-art-app .battle-screen.battle-final-concept.battle-board-only .cinematic-stage-actions.battle-information-tools {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    width: 100%;
+  }
+  .battle-information-tools .battle-information-hide { grid-column: auto; }
+  .app.world-art-app .battle-screen.battle-final-concept.battle-board-only:not(.battle-hud-hidden) .battle-end-turn-float {
+    top: calc(112px + max(env(safe-area-inset-top, 0px), var(--native-safe-top, 0px))) !important;
+  }
+  .app.world-art-app .battle-screen.battle-final-concept.battle-board-only:not(.battle-hud-hidden) .battle-zoom-controls {
+    top: calc(176px + max(env(safe-area-inset-top, 0px), var(--native-safe-top, 0px))) !important;
+  }
+}

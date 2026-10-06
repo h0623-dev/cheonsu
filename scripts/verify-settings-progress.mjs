@@ -1,3 +1,4 @@
+import { saveBattle as clickBattleSave } from './qa-battle-tools.mjs';
 import { qaBrowserOptions, confirmStageMission } from './qa-browser.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
@@ -57,7 +58,7 @@ try {
     await page.locator('.world-stage-node').filter({ has: page.locator('strong', { hasText: /^1장\./ }) }).click();
     await button('전투 시작').click(); await button('바로 전투').click(); await confirmStageMission(page);
     await page.locator('.world-battlefield').waitFor();
-    await page.locator('.battle-control-heading .prominent-save').click();
+    await clickBattleSave(page);
     const battle = { ...JSON.parse(await readRaw()), clearedStages: [1], unlockedStages: all };
     await restore(battle); await page.locator('.world-battlefield').waitFor();
     const before = await readRaw();

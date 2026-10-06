@@ -1,3 +1,5 @@
+import { getExperienceReward } from '../engine/experienceEngine.js';
+
 // These IDs are save-data keys shared with learnedTechniques and the skill UI.
 export const DISCOVERY_TECHNIQUES = Object.freeze({
   'hero-dawn-slash': Object.freeze({
@@ -36,7 +38,7 @@ export const DISCOVERIES = Object.freeze([
     id: 'border-training-stone', stageId: 1, kind: 'training',
     title: '초소지기의 가르침',
     hint: '집결지 너머의 오래된 수련석에 선명한 검흔이 남아 있다.',
-    reward: { xp: 35 }, placement: { depth: 0.2, side: 0.25 },
+    reward: { xp: getExperienceReward(35) }, placement: { depth: 0.2, side: 0.25 },
   },
   {
     id: 'canyon-dawn-inscription', stageId: 2, kind: 'technique',
@@ -77,7 +79,7 @@ export const DISCOVERIES = Object.freeze([
     id: 'frontier-veteran-journal', stageId: 8, kind: 'training',
     title: '노병의 마지막 수련',
     hint: '버려진 쉼터의 전투 일지에는 끝내 마치지 못한 마지막 수련이 적혀 있다.',
-    reward: { xp: 60 }, placement: { depth: 0.5, side: 0.75 },
+    reward: { xp: getExperienceReward(60) }, placement: { depth: 0.5, side: 0.75 },
   },
   {
     id: 'citadel-oathwarden-relic', stageId: 10, kind: 'relic',

@@ -1,3 +1,4 @@
+import { saveBattle as clickBattleSave } from './qa-battle-tools.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -40,7 +41,7 @@ try {
       await page.locator('.world-battlefield').waitFor();
       assert.ok(await page.getByRole('button',{name:'정보 표시',exact:true}).isVisible());
       assert.equal(await page.locator('.battle-zoom-controls').count(),0);
-      await page.locator('.cinematic-command-bar .prominent-save').click();
+      await clickBattleSave(page);
       const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('cheonsu_v01_save')));
       assert.equal(saved.selectedStage.id,plan.id);
       assert.equal(saved.selectedStage.terrainRevision,3);
@@ -59,7 +60,7 @@ try {
       if(width!==1280 || [1,2,5,6,11,18,30].includes(plan.id)) await page.screenshot({path:`tmp/sound-map-qa/stage-${plan.id}-${width}.png`});
       // Exercise both axes, including the opposite corner, without moving units.
       await page.locator('.battle-map-scroll-shell').evaluate(el=>{el.scrollLeft=el.scrollWidth;el.scrollTop=0;});
-      await page.locator('.cinematic-command-bar .prominent-save').click();
+      await clickBattleSave(page);
       assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('cheonsu_v01_save')).units),saved.units);
       results.push({id:plan.id,width,map:`${plan.width}x${plan.height}`,direction:plan.direction,...layout});
       console.log(`PASS chapter ${plan.id} at ${width}: ${plan.width}x${plan.height}, ${plan.direction}, hidden HUD, artwork, camera, save`);

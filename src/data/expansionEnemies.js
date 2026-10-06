@@ -61,7 +61,7 @@ export const EXPANSION_ENEMY_TEMPLATES = {
   resonance_judge: template('공명집행관 아르켄', 45, '🔔', '공방 지역 보스', 'boss', 'boss', 2, 2,
     attack('공명 판결', 7, 2, 'music', 'attackDown'), { hpOffset: 6, atkOffset: 0, defOffset: 2 },
     { combatIdentityName: '긴 창 공명집행관', expansionSupport: 'alternatingGuard', supportSkillName: '공명 방어',
-      supportSkillDescription: '짝수 라운드는 자신 방어 +3(2페이즈 +5) · 홀수 라운드는 공격',
+      supportSkillDescription: '짝수 라운드에 공격할 대상이 없으면 자신 방어 +3(2페이즈 +5)',
       phaseSkill: attack('공명 재집행', 9, 2, 'music', 'armorBreak'), hazardLabel: '공명 진동' }),
   oath_guardian: template('첫맹세수호체 아스테르', 50, '✦', '확장 캠페인 최종 보스', 'boss', 'boss', 3, 1,
     attack('맹세의 원', 8, 2, 'holy', 'armorBreak'), { hpOffset: 10, atkOffset: 1, defOffset: 1 },

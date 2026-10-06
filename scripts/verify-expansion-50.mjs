@@ -1,3 +1,4 @@
+import { ensureBattleInformationOpen, saveBattle as clickBattleSave } from './qa-battle-tools.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -52,7 +53,7 @@ async function ensureLayout(page, label) {
 async function readyBattle(page) {
   await page.locator('.world-battlefield .unit-visual-hero').waitFor();
   await page.waitForFunction(() => !document.querySelector('.stage-mission-dialog[open],.boss-splash-overlay,.stage-directing-banner.stage-banner-start')
-    && !document.querySelector('.battle-control-heading .prominent-save')?.disabled);
+    && document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true', null, { timeout: 120000 });
 }
 
 async function actualUnitArt(page, id, artId = id) {
@@ -85,7 +86,7 @@ async function runViewport(base, viewport) {
   const button = name => page.getByRole('button', { name, exact: true });
   const saved = () => page.evaluate(key => JSON.parse(localStorage.getItem(key)), saveKey);
   const rawSaved = () => page.evaluate(key => localStorage.getItem(key), saveKey);
-  const saveBattle = async () => { await page.locator('.battle-control-heading .prominent-save').click(); return saved(); };
+  const saveBattle = async () => { await clickBattleSave(page); return saved(); };
   const saveCamp = async () => { await page.locator('.camp-header .prominent-save').click(); return saved(); };
   const load = async (data, completedCount) => {
     await page.evaluate(({ key, data }) => localStorage.setItem(key, JSON.stringify(data)), { key: saveKey, data });
@@ -146,7 +147,8 @@ async function runViewport(base, viewport) {
       assert.ok(enemies.every(enemy => enemy.hp === enemy.maxHp && enemy.maxHp > 0 && enemy.atk > 0 && enemy.def >= 0));
       const terrain = [...new Set(battle.selectedStage.map.flat().filter(tile => Object.hasOwn(NEW_TERRAIN_POLICIES, tile)))];
       assert.ok(terrain.length > 0, '실제 새 전장에 신규 지형이 있습니다');
-      await page.locator('.battle-control-heading').getByRole('button', { name: '미션 보기', exact: true }).click();
+      await ensureBattleInformationOpen(page);
+      await page.locator('.battle-information-tools .battle-mission-button').click();
       const mission = page.locator('.stage-mission-dialog[open]');
       assert.deepEqual(await mission.locator('.stage-mission-victory li').allTextContents(), getStageMission(battle.selectedStage).victoryConditions.map(condition => condition.text));
       assert.deepEqual(await mission.locator('.stage-mission-defeat li').allTextContents(), getStageMission(battle.selectedStage).defeatConditions.map(condition => condition.text));

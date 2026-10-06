@@ -1,3 +1,4 @@
+import { saveBattle as clickBattleSave } from './qa-battle-tools.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import { qaBrowserOptions } from './qa-browser.mjs';
@@ -19,7 +20,7 @@ try {
     const errors=[];page.on('pageerror',error=>errors.push(error.message));
     const button=name=>page.getByRole('button',{name,exact:true});
     const hero=page.locator('.world-battlefield .unit[data-unit-id="hero"] > img');
-    const save=async()=>{await page.locator('.battle-control-heading .prominent-save').click();return page.evaluate(()=>JSON.parse(localStorage.getItem('cheonsu_v01_save')));};
+    const save=async()=>{await clickBattleSave(page);return page.evaluate(()=>JSON.parse(localStorage.getItem('cheonsu_v01_save')));};
     const restore=async data=>{
       await page.evaluate(data=>localStorage.setItem('cheonsu_v01_save',JSON.stringify(data)),data);
       await page.reload();await button('이어하기').click();await hero.waitFor();
@@ -73,7 +74,7 @@ try {
     await page.locator('.cmd-attack').click();await page.locator('.tile[data-map-x="2"][data-map-y="3"]').click();
     assert.equal(await page.locator('.vs-preview-modal').count(),0,'target selection attacks immediately');
     await page.waitForFunction(()=>document.querySelector('.unit[data-unit-id="hero"] > img')?.dataset.facing==='left');
-    await page.waitForFunction(()=>!document.querySelector('.battle-control-heading .prominent-save')?.disabled);
+    await page.waitForFunction(()=>document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true', null, { timeout: 120000 });
     const after=await save();assert.equal(after.units.find(unit=>unit.id==='hero').facing,'left');
     assert.equal(after.units.find(unit=>unit.id===foe.id).facing,'right','defender/counter faces attacker');
     await restore(after);assert.equal(await hero.getAttribute('data-facing'),'left');
@@ -90,7 +91,7 @@ try {
       if(mode==='skill')assert.equal(frame.cutIn,'돌풍 베기');else assert.equal(frame.cutIn,undefined);
       assert.equal(await hero.getAttribute('data-facing'),'left');
       await page.screenshot({path:`${out}/${viewport.width}-real-${mode}.png`});
-      await page.waitForFunction(()=>!document.querySelector('.battle-control-heading .prominent-save')?.disabled);
+      await page.waitForFunction(()=>document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true', null, { timeout: 120000 });
       const completed=await save();assert.equal(completed.units.find(unit=>unit.id==='hero').acted,true);
       if(mode==='skill')assert.ok(completed.units.find(unit=>unit.id==='hero').skillCooldowns.gale>0);
     }

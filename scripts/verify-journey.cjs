@@ -1,3 +1,4 @@
+const clickBattleSave = async page => (await import('./qa-battle-tools.mjs')).saveBattle(page);
 const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
@@ -17,10 +18,7 @@ async function noOverflow(page, selector) {
   assert.deepEqual(errors, [], `Horizontal overflow: ${selector}`);
 }
 async function saveBattle(page) {
-  const save = page.locator('.battle-control-heading .prominent-save');
-  await save.waitFor();
-  await page.waitForFunction(() => !document.querySelector('.battle-control-heading .prominent-save')?.disabled);
-  await save.click();
+  await clickBattleSave(page);
   return page.evaluate(key => JSON.parse(localStorage.getItem(key)), saveKey);
 }
 async function restoreVictory(page, fixture) {

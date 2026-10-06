@@ -1,10 +1,14 @@
 import { applyEquipmentStats, grantExp } from './partyEngine.js';
+import { getExperienceReward } from './experienceEngine.js';
 
 export const TRAINING_TYPES = [
-  { id: 'attack', name: '공격 훈련', exp: 20, stat: 'atk', desc: 'EXP +20 · 기본 공격 +1' },
-  { id: 'defense', name: '방어 훈련', exp: 20, stat: 'def', desc: 'EXP +20 · 기본 방어 +1' },
-  { id: 'focus', name: '집중 훈련', exp: 30, stat: null, desc: 'EXP +30' },
-];
+  { id: 'attack', name: '공격 훈련', exp: 20, stat: 'atk', statDescription: '기본 공격 +1' },
+  { id: 'defense', name: '방어 훈련', exp: 20, stat: 'def', statDescription: '기본 방어 +1' },
+  { id: 'focus', name: '집중 훈련', exp: 30, stat: null },
+].map(({ statDescription, ...training }) => {
+  const exp = getExperienceReward(training.exp);
+  return { ...training, exp, desc: `EXP +${exp}${statDescription ? ` · ${statDescription}` : ''}` };
+});
 
 export function trainParty(party, trainingId, used = false) {
   const training = TRAINING_TYPES.find(type => type.id === trainingId);
@@ -27,7 +31,7 @@ export function grantEnemyDefeatExp(units, killerId, enemy, deployedIds) {
   const ids = [...new Set(deployedIds)];
   if (!enemy || enemy.type === 'ally' || !ids.includes(killerId)) return { units, rewards: [], messages: [] };
   const total = enemy.type === 'boss' ? 50 : 30;
-  const rewards = ids.map(id => ({ id, amount: id === killerId ? total : Math.floor(total * 0.3) }));
+  const rewards = ids.map(id => ({ id, amount: getExperienceReward(id === killerId ? total : Math.floor(total * 0.3)) }));
   let updated = units;
   const messages = [];
   for (const reward of rewards) {

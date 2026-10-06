@@ -1,3 +1,4 @@
+const clickBattleSave = async page => (await import('./qa-battle-tools.mjs')).saveBattle(page);
 const { chromium } = require('playwright');
 const { mkdir, writeFile } = require('node:fs/promises');
 const assert = require('node:assert/strict');
@@ -44,7 +45,7 @@ async function main() {
       await page.getByRole('button', { name: '바로 전투', exact: true }).click();
       await confirmArtQaMission(page);
       await page.locator('.grounded-battlefield .unit-visual-hero').waitFor();
-      await page.waitForFunction(() => !document.querySelector('.boss-splash-overlay,.stage-directing-banner.stage-banner-start') && document.querySelector('.battle-control-heading .prominent-save')?.disabled === false);
+      await page.waitForFunction(() => !document.querySelector('.boss-splash-overlay,.stage-directing-banner.stage-banner-start') && document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true', null, { timeout: 120000 });
       await page.locator('.grounded-battlefield img').evaluateAll(images => Promise.all(images.map(img => img.decode())));
       const focusHero = () => page.locator('.battle-map-scroll-shell').evaluate(shell => {
         const hero = shell.querySelector('.unit-visual-hero');
@@ -169,7 +170,7 @@ async function main() {
       const bodyOverflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1);
       assert.equal(bodyOverflow, false, 'Page must not overflow horizontally');
       if (stage === 1) {
-        await page.locator('.battle-control-heading .prominent-save').click();
+        await clickBattleSave(page);
         const save = await page.evaluate(() => Object.entries(localStorage).map(([key, value]) => {
           try { return { key, data: JSON.parse(value) }; } catch { return null; }
         }).find(entry => entry?.data?.screen === 'battle' && entry.data.units?.length));

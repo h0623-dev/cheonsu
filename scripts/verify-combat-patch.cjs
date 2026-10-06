@@ -1,3 +1,4 @@
+const clickBattleSave = async page => (await import('./qa-battle-tools.mjs')).saveBattle(page);
 const { chromium } = require('playwright');
 const { mkdir, writeFile } = require('node:fs/promises');
 const assert = require('node:assert/strict');
@@ -10,7 +11,7 @@ async function snapshot(page, name) {
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, `${name}: no page overflow`);
 }
 async function save(page) {
-  await page.locator('.battle-control-heading .prominent-save').click();
+  await clickBattleSave(page);
   return page.evaluate(() => Object.entries(localStorage).map(([key, value]) => {
     try { return { key, data: JSON.parse(value) }; } catch { return null; }
   }).find(entry => entry?.key === 'cheonsu_v01_save'));
