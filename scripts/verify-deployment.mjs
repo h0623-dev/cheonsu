@@ -299,21 +299,21 @@ async function runViewport(base, viewport) {
       for (const { id: stageId } of stages) {
         await load(campaign);
         await selectStage(page, stageId);
-        assert.equal(await page.locator('.deployment-roster-card').count(), 17, `${stageId}장: 보유 캐릭터 17명을 표시합니다`);
+        assert.equal(await page.locator('.deployment-roster-card').count(), 21, `${stageId}장: 기존 17명과 확장 영입 4명을 표시합니다`);
         const assigned = await placements(page);
         assert.equal(Object.keys(assigned).length, 15, `${stageId}장: 최대 15명만 배치됩니다`);
         assert.ok(Object.hasOwn(assigned, 'hero'), `${stageId}장: 주인공을 배치합니다`);
         const valid = await page.locator('.deployment-board-cell[data-deployment-valid="true"]').count();
         assert.ok(valid >= 15, `${stageId}장: 15명 이상 놓을 안전한 배치 칸이 있습니다`);
         assert.equal(new Set(Object.values(assigned).map(point => `${point.x},${point.y}`)).size, 15, `${stageId}장: 배치 칸이 겹치지 않습니다`);
-        assert.ok(await page.locator('.deployment-roster-card[data-placed="false"]').count() === 2);
+        assert.equal(await page.locator('.deployment-roster-card[data-placed="false"]').count(), 6);
         const unplaced = await page.locator('.deployment-roster-card[data-placed="false"]').first().getAttribute('data-character-id');
         await card(page, unplaced).click();
         await cell(page, await emptyCell(page)).click();
         assert.deepEqual(await placements(page), assigned, `${stageId}장: 16번째 인물을 추가할 수 없습니다`);
         assert.equal(await button('전투 시작').isEnabled(), true);
         const direction = getBattlefieldPlan(stageId).direction;
-        const stageCheck = { stageId, direction, owned: 17, placed: 15, validCells: valid, unique: true, limitProtected: true, started: false, coordinatesPreserved: false, enemyCoordinatesPreserved: false };
+        const stageCheck = { stageId, direction, owned: 21, placed: 15, validCells: valid, unique: true, limitProtected: true, started: false, coordinatesPreserved: false, enemyCoordinatesPreserved: false };
         report.stageChecks.push(stageCheck);
         const enemiesBefore = await page.locator('.deployment-board-cell.is-enemy').evaluateAll(elements => Object.fromEntries(elements.map(element => [element.dataset.deploymentUnit, { x: Number(element.dataset.deploymentX), y: Number(element.dataset.deploymentY) }])));
         await card(page, 'hero').click();
@@ -341,7 +341,7 @@ async function runViewport(base, viewport) {
         await fs.writeFile(path.join(output, 'report.json'), JSON.stringify(report, null, 2));
       }
       assert.equal(new Set(report.stageChecks.map(stage => stage.direction)).size, 8, '전체 캠페인의 모든 진입 방향을 검사합니다');
-      result.checks.push(`${stages.length}개 장·8개 진입 방향·구버전 보유17명·최대15명·16번째 차단`);
+      result.checks.push(`${stages.length}개 장·8개 진입 방향·구버전 보유17명과 확장 영입4명·최대15명·16번째 차단`);
       assert.ok(report.stageChecks.every(stage => stage.started && stage.coordinatesPreserved && stage.enemyCoordinatesPreserved && stage.actionsUnspent));
       result.checks.push(`${stages.length}개 장·15명 실제 전투에서 직접 배치·적 위치·아군 첫 턴·행동 미소모 유지`);
 

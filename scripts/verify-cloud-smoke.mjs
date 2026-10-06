@@ -38,7 +38,7 @@ try {
       await screenshot('title');
       await button('도감').click();
       await page.locator('.collection-card').first().waitFor();
-      assert.equal(await page.locator('.collection-card').count(), 17);
+      assert.equal(await page.locator('.collection-card').count(), 21);
       assert.equal(await page.locator('[data-collected=true]').count(), 4);
       await page.locator('[data-character="hero"]').click();
       await page.getByRole('dialog').waitFor();

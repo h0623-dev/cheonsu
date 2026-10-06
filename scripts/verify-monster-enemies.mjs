@@ -126,7 +126,7 @@ async function fixtureCases(fixtureBase, base, viewport) {
       if (mode === 'skill') await assertNewArt(page, '.skill-cut-in img', id);
       const poses = new Set(), transforms = new Set();
       const skillRecoilSamples = mode === 'skill-recoil' ? plan.contacts.map(at => at + .012) : [];
-      const samples = [...new Set([.03, .095, .16, .24, .36, .41, .56, ...plan.releases.map(at => at + .01), ...plan.contacts.map(at => at + .02), ...skillRecoilSamples, .70, .85, .98])].sort((a, b) => a - b);
+      const samples = [...new Set([.03, .095, .16, .24, .36, .41, .56, ...plan.poses.slice(0, -1).map(([at], index) => (at + plan.poses[index + 1][0]) / 2), ...plan.releases.map(at => at + .01), ...plan.contacts.map(at => at + .02), ...skillRecoilSamples, .70, .85, .98])].sort((a, b) => a - b);
       for (const fraction of samples) {
         await seekDuel(page, fraction, props.scene.durationMs);
         await assertBodies(page, `${id}/${mode}/${fraction}`);

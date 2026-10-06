@@ -94,9 +94,7 @@ try {
     }
     await restore(page, trained);
     await page.getByRole('button', { name: '훈련소으로 이동', exact: true }).click();
-    await page.getByRole('button', { name: '훈련', exact: true }).click();
-    assert.equal(await page.locator('[data-training-id]:disabled').count(), 3);
-    await page.getByRole('button', { name: '훈련 닫기', exact: true }).click();
+    assert.equal(await page.getByRole('button', { name: '훈련', exact: true }).isDisabled(), true, '저장 재로드 후에도 이번 캠프의 훈련 재사용을 차단합니다');
     assert.deepEqual((await save(page, true)).party, trained.party);
 
     const fixture = structuredClone(original);

@@ -1,7 +1,7 @@
 .painted-combat.duel-choreographed :is(.painted-fighter,.fighter-body,.fighter-frame,.fighter-shadow) { animation: none !important; }
 .duel-choreographed .fighter-ready { opacity: 1; }
 .duel-choreographed .fighter-frame:not(.fighter-ready) { opacity: 0; }
-.duel-choreographed .fighter-body { transform-origin: 50% 94%; }
+.painted-combat.duel-choreographed .painted-fighter .fighter-body { transform-origin: 50% 94%; }
 .duel-choreographed.is-skill .combat-result { animation-duration: var(--combat-action-duration); animation-delay: var(--combat-lead); }
 .duel-effects { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
 .duel-effect { position: absolute; left: 0; top: 0; opacity: 0; transform-origin: center; will-change: transform,opacity; }

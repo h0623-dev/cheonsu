@@ -166,7 +166,7 @@ async function runViewport(base, viewport) {
       await readyBattle(page);
       assert.deepEqual(await saved(), beforeResume);
       const afterResume = await saveBattle();
-      assert.deepEqual(afterResume.units, beforeResume.units, '신규 전투 저장 HP/좌표/행동/전직/적 스탯을 재보정하지 않습니다');
+      assert.deepEqual(afterResume.units, beforeResume.units.map(unit => ({ ...unit, status: unit.status ?? [] })), '신규 전투 저장 HP/좌표/행동/전직/적 스탯을 재보정하지 않습니다');
       report.stageChecks.push({ viewport, id, allies: allies.length, owned: 21, enemies: enemies.length, terrains: terrain,
         bosses: enemies.filter(enemy => enemy.type === 'boss').map(enemy => enemy.name), realBattleEntry: true, missionMatches: true, resumePreserved: true });
       result.stagesStarted++;

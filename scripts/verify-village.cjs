@@ -38,7 +38,7 @@ async function saveBattle(page) {
 async function attackBoss(page) {
   await page.locator('.cinematic-command-bar .cmd-attack').click();
   await page.locator('.battle-target-buttons button:enabled').first().click();
-  await page.getByRole('button', { name: '공격 실행', exact: true }).click();
+  // Selecting a target executes the attack; victory save readiness follows contact and settlement.
   await page.locator('.victory-dialog .clear-save-ok').waitFor();
   return read(page);
 }
