@@ -1,0 +1,181 @@
+/* Only web/main.jsx imports this file. Android styles and native insets are unchanged. */
+html.cheonsu-web {
+  --native-safe-top: 0px;
+  --native-safe-bottom: 0px;
+  --native-safe-left: 0px;
+  --native-safe-right: 0px;
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html.cheonsu-web,
+html.cheonsu-web body,
+html.cheonsu-web #root {
+  width: 100%;
+  height: 100%;
+  height: 100svh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+html.cheonsu-web body {
+  background: #182b27;
+  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+}
+
+html.cheonsu-web input,
+html.cheonsu-web select,
+html.cheonsu-web textarea {
+  font-size: max(16px, 1em);
+}
+
+html.cheonsu-web .journey-title {
+  padding-top: max(32px, env(safe-area-inset-top));
+  padding-right: max(6%, env(safe-area-inset-right));
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+  padding-left: max(6%, env(safe-area-inset-left));
+}
+
+.web-welcome {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: max(24px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(28px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
+  background: #192d29;
+  color: #f3f3e6;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+.web-welcome-art {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 36% center;
+}
+
+.web-welcome::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(90deg, #10241e30 12%, #13251fa6 52%, #11231ff5 100%);
+}
+
+.web-welcome-card {
+  width: min(100%, 470px);
+  min-height: 0;
+  margin: 2vh 2vw 0 auto;
+  padding: 26px;
+  border: 1px solid #a4b49660;
+  border-radius: 16px;
+  background: #1c302bec;
+  box-shadow: 0 16px 60px #07151066;
+}
+
+.web-welcome-eyebrow {
+  color: #d1dabf;
+  font-size: 13px;
+  letter-spacing: .12em;
+}
+
+.web-welcome h1 {
+  margin: 3px 0;
+  font: 700 68px/1.15 'Batang', 'Songti SC', serif;
+  color: #fff5d5;
+}
+
+.web-welcome-subtitle {
+  color: #e3d3aa;
+  font-size: 15px;
+}
+
+.web-welcome-intro {
+  margin: 20px 0;
+  font-size: 16px;
+}
+
+.web-welcome button {
+  min-height: 48px;
+  border: 1px solid #9cb29a;
+  border-radius: 7px;
+  background: #345547;
+  color: #f4f5e8;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  padding: 12px 16px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.web-welcome .web-start-button {
+  width: 100%;
+  border-color: #e3d3a1;
+  background: #dcc58f;
+  color: #21342a;
+  font-size: 19px;
+}
+
+.web-welcome :is(button, summary):focus-visible {
+  outline: 3px solid #f4e4a5;
+  outline-offset: 3px;
+}
+
+.web-start-notice {
+  padding: 14px;
+  border: 1px solid #bfaa7a;
+  border-radius: 7px;
+  background: #564129;
+  font-size: 14px;
+}
+
+.web-start-notice button { margin-top: 12px; }
+.web-offline-notice { margin-top: 12px; color: #f1d497; font-size: 14px; }
+
+.web-install-guide {
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid #81978366;
+}
+
+.web-install-guide summary {
+  min-height: 44px;
+  padding: 10px 0;
+  color: #ebdfbd;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.web-install-guide ol { margin: 8px 0 12px; padding-left: 22px; font-size: 14px; }
+.web-install-guide li + li { margin-top: 7px; }
+.web-install-guide p { font-size: 12px; color: #c3d0c5; }
+.web-installed-note { margin-top: 18px; font-size: 13px; color: #c3d6b4; }
+.web-play-notes { margin-top: 20px; font-size: 12px; color: #bfcfc2; }
+.web-play-notes p + p { margin-top: 12px; }
+.web-play-notes strong { color: #dde5d3; font-size: 13px; }
+
+@media (max-width: 600px) {
+  .web-welcome { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+  .web-welcome-card { margin: 0 auto; padding: 22px; background: #1b302be8; }
+  .web-welcome-art { object-position: 38% center; }
+  .web-welcome::before { background: linear-gradient(#13251f66, #13251fc9); }
+}
+
+@media (orientation: landscape) and (max-height: 520px) {
+  .web-welcome-card { margin: 0 0 0 auto; }
+  .web-welcome h1 { font-size: 54px; }
+}

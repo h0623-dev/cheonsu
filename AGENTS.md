@@ -17,6 +17,8 @@
 
 ## 클라우드 개발
 
+- 아이폰 Safari 지원은 [웹 실행 안내](docs/SAFARI_WEB.md)의 독립 `web/` 빌드·호스팅을 사용합니다. 2026-10-06 KST 사용자가 Android APK에 영향이 없어야 한다고 명시했습니다. 웹 전용 변경에서는 기존 `src/`, `public/`, Android 버전·APK·서명 OTA 채널을 변경하거나 새 Android 배포를 시작하지 않습니다. 웹 산출물은 `tmp/safari-dist`이며 기존 Android `dist`와 분리합니다.
+
 - 저장소는 `h0623-dev/cheonsu`, 기준 브랜치는 `main`입니다. 상세 설정은 `docs/CODEX_CLOUD.md`를 읽으세요.
 - 작업 시작 시 `npm ci`, `npm run setup`을 실행합니다. 검증은 `npm run lint`, `npm test`, `npm run build`, `node scripts/verify-cloud-smoke.mjs`입니다. Chromium이 없으면 `npx playwright install --with-deps chromium`을 실행합니다.
 - PC의 파일, 실행 중 서버, 로그인 세션, 서명키가 클라우드에 있다고 가정하지 마세요. APK/OTA 서명키를 클라우드 작업이나 Git 소스에 복사하지 마세요. 서명은 GitHub Actions의 `cheonsu-release` 환경에서만 실행합니다.
