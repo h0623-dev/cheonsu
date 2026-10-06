@@ -4,6 +4,21 @@ const assert = require('node:assert/strict');
 const sharp = require('sharp');
 const out = 'tmp/motion-qa';
 
+async function setMotionPreference(page, reducedMotion) {
+  await page.emulateMedia({ reducedMotion });
+  const disabled = reducedMotion === 'reduce';
+  for (let attempt = 0; attempt < 25; attempt++) {
+    await page.clock.runFor(32);
+    const ready = await page.locator('.painted-combat').evaluate((el, expected) =>
+      matchMedia('(prefers-reduced-motion: reduce)').matches === expected &&
+      el.classList.contains('duel-motion-disabled') === expected, disabled);
+    if (ready) return;
+    // Native media change dispatch is independent of the paused page clock.
+    await page.waitForTimeout(20);
+  }
+  assert.fail(`reducedMotion=${reducedMotion}: media change handler did not settle`);
+}
+
 async function main() {
   const { qaBrowserOptions } = await import('./qa-browser.mjs');
   const { createProductionDuelFixture, productionDuelProps } = await import('./production-duel-fixture.mjs');
@@ -50,10 +65,10 @@ async function main() {
           }
           const tiles = await Promise.all(shots.map(shot => sharp(shot).resize(520, 240, { fit: 'contain', background: '#152720' }).png().toBuffer()));
           await sharp({ create: { width: 1040, height: 480, channels: 4, background: '#152720' } }).composite(tiles.map((input, i) => ({ input, left: i % 2 * 520, top: Math.floor(i / 2) * 240 }))).png().toFile(`${out}/${unit}-${kind}-${viewport.width}.png`);
-          await page.emulateMedia({ reducedMotion: 'reduce' }); await page.clock.runFor(32);
+          await setMotionPreference(page, 'reduce');
           assert.equal(await page.locator('.fighter-attacker').evaluate(el => el.getAnimations().length), 0);
           assert.equal(await page.locator('.fighter-attacker .fighter-ready').evaluate(el => +getComputedStyle(el).opacity), 1);
-          await page.emulateMedia({ reducedMotion: 'no-preference' }); await page.clock.runFor(32);
+          await setMotionPreference(page, 'no-preference');
           results.push({ viewport, unit, kind, poses: [...seen], weapon: plan.weapon });
         }
         console.log(`PASS 전투 모션 ${viewport.width}x${viewport.height}: ${cases.length}종, 실제 포즈·무기·화면 맞춤·동작 최소화`);
