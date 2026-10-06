@@ -1,3 +1,4 @@
+import { qaBrowserOptions } from './qa-browser.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
@@ -14,7 +15,7 @@ if (development) await server.listen();
 const report = { source: development ? 'development' : 'production', passed: false, results: [] };
 let browser;
 try {
-  browser = await chromium.launch({ headless: true, ...(process.env.CHEONSU_QA_BROWSER ? { channel: process.env.CHEONSU_QA_BROWSER } : {}) });
+  browser = await chromium.launch(qaBrowserOptions());
   for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }, { width: 844, height: 390 }]) {
     const context = await browser.newContext({ viewport, serviceWorkers: 'block', reducedMotion: 'reduce' });
     const page = await context.newPage();

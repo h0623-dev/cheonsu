@@ -7,6 +7,7 @@ import { getDuelPlan, getWeaponMotion } from './duelChoreography.js';
 import { directDuelPerformance } from './duelPerformance.js';
 import { getCharacterArt, getCharacterFrameStyle, getCharacterSkillPose } from './characterArt.js';
 import { getSkillSpectacle } from './skillSpectacle.js';
+import { EXPANSION_BASE_ART_KEYS, ADVANCED_CLASS_ART_KEYS, LEGACY_CHARACTER_ART_KEYS, getExpansionArtIdentity, isKnownCharacterArtKey } from './expansionArtRegistry.js';
 
 export function getCombatTiming(scene) {
   const skill = scene.mode === 'skill' || Boolean(scene.outcome?.heal || scene.outcome?.guard);
@@ -17,19 +18,19 @@ export function getCombatChoreography(key,scene){
   const presentation = getCombatPresentation(key, scene);
   const weapon = getWeaponMotion(key, getCombatPresentation(key, {outcome:{hit:true}}));
   const plan = getDuelPlan(key, scene, presentation, weapon);
-  const redesignedSkill = plan.skill ? getCharacterSkillPose(key, plan.id.slice(key.length + 1)) : null;
+  const redesignedSkill = plan.skill ? getCharacterSkillPose(key, scene.attacker?.activeSkillId || scene.attacker?.skillSpec?.id || plan.id.slice(key.length + 1)) : null;
   const performance = directDuelPerformance(redesignedSkill ? { ...plan, skillPose: redesignedSkill } : plan, weapon, presentation, scene);
   return { ...performance, spectacle: getSkillSpectacle(performance, key, presentation, scene) };
 }
 
 export function getSkillPalette(effect) {
-  return { fire: '#ff9a57', ice: '#9ceaff', lightning: '#ffe77e', shadow: '#c4a0ee', holy: '#fff0a0', heal: '#9ce6a6', guard: '#86dfe7', poison: '#badd73', music: '#f7b7dd', arrow: '#bfe2a1' }[effect] || '#f4d18c';
+  return { fire: '#ff9a57', ice: '#9ceaff', lightning: '#ffe77e', shadow: '#c4a0ee', holy: '#fff0a0', heal: '#9ce6a6', guard: '#86dfe7', poison: '#badd73', music: '#f7b7dd', arrow: '#bfe2a1', nature: '#b8d8a2', water: '#a9e3dc' }[effect] || '#f4d18c';
 }
 
 export function getCombatScale(key) { return mapManifest[key]?.combatScale || 1; }
 
 export function getCombatFrameStyle(key, pose) {
-  const redesigned = getCharacterFrameStyle(Object.hasOwn(weapons, key) ? key : 'raider', pose);
+  const redesigned = getCharacterFrameStyle(isKnownCharacterArtKey(key) ? key : 'raider', pose);
   if (redesigned) return redesigned;
   const metrics = combatFrameMetrics[key]?.[pose];
   if (!metrics) return { '--combat-sprite-scale': getCombatScale(key) };
@@ -53,12 +54,14 @@ const weapons = {
   'harpy-scout': 'claw', 'skeleton-warrior': 'heavy', 'rock-spirit': 'impact',
 };
 const casters = new Set(['aria', 'noah', 'yuna', 'miho', 'irene', 'ella', 'plague_doctor', 'storm_mage', 'pyromancer', 'frost_mage', 'cultist']);
-export const combatUnitIds = Object.keys(weapons);
+export const legacyCombatUnitIds = LEGACY_CHARACTER_ART_KEYS;
+export const combatUnitIds = [...legacyCombatUnitIds, ...EXPANSION_BASE_ART_KEYS];
+export const combatArtKeys = [...combatUnitIds, ...ADVANCED_CLASS_ART_KEYS];
 export const combatMotionPoses = ['run-a', 'run-b', 'windup', 'strike', 'recover', 'recoil'];
 export const combatEffectIds = ['slash', 'thrust', 'arrow', 'heavy', 'guard', 'fire', 'ice', 'lightning', 'shadow', 'holy', 'heal', 'poison', 'music', 'claw', 'impact', 'cast'];
 
 export function getCombatSprite(key, pose = 'ready') {
-  const redesigned = getCharacterArt(Object.hasOwn(weapons, key) ? key : 'raider');
+  const redesigned = getCharacterArt(isKnownCharacterArtKey(key) ? key : 'raider');
   if (redesigned) return redesigned.motion[pose === 'action' ? 'strike' : 'recover'];
   if (bossManifest.units[key]) return pose === 'action' ? bossManifest.units[key].motion.strike : bossManifest.units[key].ready;
   if (Object.hasOwn(enemyManifest.units, key)) {
@@ -68,10 +71,11 @@ export function getCombatSprite(key, pose = 'ready') {
   return `/art/combat-v1/units/${Object.hasOwn(weapons, key) ? key : 'raider'}-${pose === 'action' ? 'action' : 'ready'}.webp`;
 }
 export function getCombatEffect(key) {
-  return `/art/combat-v1/effects/${combatEffectIds.includes(key) ? key : 'impact'}.webp`;
+  const assetKey = key === 'nature' ? 'heal' : key === 'water' ? 'guard' : key;
+  return `/art/combat-v1/effects/${combatEffectIds.includes(assetKey) ? assetKey : 'impact'}.webp`;
 }
 export function getCombatMotionSprite(key, pose = 'recover') {
-  const redesigned = getCharacterArt(Object.hasOwn(weapons, key) ? key : 'raider');
+  const redesigned = getCharacterArt(isKnownCharacterArtKey(key) ? key : 'raider');
   if (redesigned) return redesigned.motion[combatMotionPoses.includes(pose) ? pose : 'recover'];
   if (bossManifest.units[key]) return bossManifest.units[key].motion[combatMotionPoses.includes(pose) ? pose : 'recover'];
   if (Object.hasOwn(enemyManifest.units, key)) {
@@ -83,13 +87,16 @@ export function getCombatPresentation(key, scene) {
   const healing = Boolean(scene.outcome?.heal);
   const guarding = Boolean(scene.outcome?.guard);
   const support = healing || guarding;
-  let effect = healing ? 'heal' : guarding ? 'guard' : weapons[key] || 'slash';
+  const expansion = getExpansionArtIdentity(key);
+  const canonical = expansion?.baseId || key;
+  let effect = healing ? 'heal' : guarding ? 'guard' : expansion?.effect || weapons[canonical] || 'slash';
   if (!support && scene.mode === 'skill') {
     const skillEffect = scene.attacker?.skillSpec?.effect || scene.effectType;
-    if (combatEffectIds.includes(skillEffect)) effect = skillEffect;
+    if (combatEffectIds.includes(skillEffect) || ['nature', 'water'].includes(skillEffect)) effect = skillEffect;
   }
-  const style = support || casters.has(key) || ['boss_frost', 'boss_oracle'].includes(key) ? 'cast' : ['lina', 'teo', 'ranger', 'sniper', 'siege_gunner', 'kobold-hunter'].includes(key) ? 'ranged' : 'melee';
-  return { effect, style, healing, guarding, support, miss: !support && !scene.outcome?.hit };
+  const style = support || expansion?.caster || casters.has(canonical) || ['boss_frost', 'boss_oracle'].includes(canonical) ? 'cast'
+    : expansion?.ranged || ['lina', 'teo', 'ranger', 'sniper', 'siege_gunner', 'kobold-hunter'].includes(canonical) ? 'ranged' : 'melee';
+  return { effect, style, ...(expansion ? { weapon: support ? 'cast' : expansion.weapon } : {}), healing, guarding, support, miss: !support && !scene.outcome?.hit };
 }
 
 const loaded = new Map();

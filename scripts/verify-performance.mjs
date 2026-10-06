@@ -1,3 +1,4 @@
+import { qaBrowserOptions, confirmStageMission } from './qa-browser.mjs';
 import { chromium } from 'playwright';
 import { spawn } from 'node:child_process';
 import fs from 'node:fs/promises';
@@ -17,7 +18,7 @@ try {
       await new Promise(resolve => setTimeout(resolve, 250));
     }
   }
-  browser = await chromium.launch({ channel: 'msedge', headless: true });
+  browser = await chromium.launch(qaBrowserOptions());
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, serviceWorkers: 'block' });
   await context.addInitScript(() => {
     localStorage.setItem('cheonsu_auto_patch', 'false');
@@ -53,7 +54,7 @@ try {
   await measure('deployment', () => page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: /^1장\./ }) }).click());
   await measure('story', () => page.getByRole('button', { name: '전투 시작', exact: true }).click());
   await measure('battle-entry', async () => {
-    await page.getByRole('button', { name: '바로 전투', exact: true }).click();
+    await page.getByRole('button', { name: '바로 전투', exact: true }).click(); await confirmStageMission(page);
     await page.locator('.unit-visual-hero').waitFor();
     await page.waitForTimeout(1200);
   });

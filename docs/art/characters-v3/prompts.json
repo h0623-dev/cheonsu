@@ -1,0 +1,646 @@
+{
+  "version": "1.99.163",
+  "note": "사용자 검토 후 제작한 캐릭터 정체성 기준. 공격·스킬의 옛 미구현 제안은 제외했습니다. 실제 구현은 src/data/skills.js 및 expansionEnemies.js, 최종 이미지와 교정 원본은 manifest와 sources를 따릅니다.",
+  "layout": {
+    "columns": 3,
+    "rows": 3,
+    "order": [
+      "run-a",
+      "run-b",
+      "windup",
+      "strike",
+      "recover",
+      "recoil",
+      "skill-a",
+      "skill-b",
+      "dialogue"
+    ],
+    "alpha": true,
+    "motionOutput": "512×512",
+    "dialogueOutput": "512×640",
+    "portraitOutput": "300×300",
+    "footBaseline": 480
+  },
+  "characters": [
+    {
+      "id": "crab_guard",
+      "name": "갈대등 갑각병",
+      "appearance": "두발 보행 갑각 생물. 넓고 둥근 등껍질의 낮은 갈대 묶음, 큰 집게 하나와 작은 집게 하나, 짧은 관절 다리, 작고 둥근 눈. 회청 껍질·청록 등·상아 집게. 사람 어깨 높이의 넓은 실루엣으로 바위정령·오거와 구분.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "monster"
+    },
+    {
+      "id": "eel_archer",
+      "name": "비늘가시 사수",
+      "appearance": "유연한 장어형 얼굴의 작은 물고기 사람. 접힌 등지느러미, 넓은 짧은 발, 짧게 굽은 꼬리. 매끈한 해청 피부·상아 배·산호색 지느러미, 조개 장식의 짧은 활. 도마뱀 창병의 창/비늘 체형과 구분. 현재 검토 이미지가 다소 도마뱀형으로 보일 수 있어 최종 제작에서 장어 등지느러미·매끈한 피부·길어진 몸의 차이를 더 분명히 할 예정인 미적용 시안.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "monster"
+    },
+    {
+      "id": "spore_colony",
+      "name": "포자등 균사체",
+      "appearance": "위가 넓고 아래가 좁은 버섯 보행체. 낮고 둥근 큰 갓, 작은 눈 둘, 뿌리 발 두 개, 균사 팔 둘, 등 포자 주머니. 상아/세이지 줄기·탁한 자주/청록 갓·회백 촉수. 사람 머리나 무기를 붙이지 않음.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "monster"
+    },
+    {
+      "id": "mist_ram",
+      "name": "눈안개 뿔양",
+      "appearance": "큰 어깨·낮은 엉덩이·짧은 굵은 네 다리의 양. 옆으로 휘는 청옥 뿔 둘. 흰회 모피·청회 다리·상아 코. 낮은 목/굽/뿔로 기존 늑대와 구분.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "monster"
+    },
+    {
+      "id": "crystal_insect",
+      "name": "빙정날개 벌레",
+      "appearance": "가는 긴 몸과 정확히 여섯 관절 다리, 큰 유리 날개 한 쌍, 짧은 더듬이. 청백 날개·옅은 푸른 몸·청록 눈. 하피처럼 인간 얼굴/팔을 섞지 않으며 실사 곤충의 과한 털/마디를 피함.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "monster"
+    },
+    {
+      "id": "spring_salamander",
+      "name": "온천 도롱뇽",
+      "appearance": "낮고 통통한 몸, 정확히 네 발, 둥근 양서류 머리, 두꺼운 짧은 꼬리. 등에 낮은 가마형 열주머니 셋. 회청 피부·상아 배·탁한 살구색 가마/꼬리 끝. 이족 도마뱀 창병과 구분.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "monster"
+    },
+    {
+      "id": "gold_puppet",
+      "name": "금실 인형병",
+      "appearance": "도자기 가면 머리, 천 관절 팔/다리, 허리 태엽과 금실 연결부, 짧은 검. 눈은 얇은 푸른 수평 표식. 상아 도자기·세이지 천·탁한 황동·진홍 매듭. 해골/흑기사 외형 재활용 아님.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "monster"
+    },
+    {
+      "id": "bell_keeper",
+      "name": "가면 종지기",
+      "appearance": "키 크고 가는 관리 인형. 둥근 도자기 가면, 갈라진 긴 외투, 휴대종과 짧은 추. 회보라 외투·상아 가면·황동 종·청록 목끈. 천/도자기 관절을 드러내 인간 사제와 구분.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "monster"
+    },
+    {
+      "id": "scroll_spirit",
+      "name": "접힌서고 정령",
+      "appearance": "접힌 두루마리 몸, 넓은 책장 날개 둘, 중앙의 청록 봉인 표식. 인간 얼굴/새 부리 없이 종이 접힘으로 방향 표현. 상아 종이·회청 가장자리·청록 인장·갈색 끈. 하피/깃털 새와 다른 각진 실루엣.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "monster"
+    },
+    {
+      "id": "eclipse_cat",
+      "name": "월식 사냥고양이",
+      "appearance": "낮고 둥근 몸, 정확히 네 발, 큰 고양이 귀, 긴 굽은 꼬리. 회보라 모피·상아 목털·청록 눈·작은 원형 이마 표식. 어깨가 사람 허리보다 낮고 늑대보다 둥글어 구별.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "monster"
+    },
+    {
+      "id": "ink_vine",
+      "name": "잉크덩굴 포식자",
+      "appearance": "큰 닫힌 잎입, 말린 덩굴 둘, 움직이는 뿌리 발 넷. 세이지 몸·먹청 줄기·자주 잎 안쪽·상아 꽃받침. 실사 이빨/점액/선혈 대신 겹친 잎 톱니. 고정 식물처럼 보이되 발을 들어 이동.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "monster"
+    },
+    {
+      "id": "hollow_armor",
+      "name": "빈갑옷 운반자",
+      "appearance": "속 빈 상아 갑옷, 굵은 장화, 틈의 청록 연결석, 머리 없는 목 위의 떠 있는 작은 투구. 짧은 의장봉과 독립된 둥근 방패. 빈 목 공간/도자기 판금으로 기존 인간 흑기사와 구분.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "monster"
+    },
+    {
+      "id": "tide_keeper",
+      "name": "모르칸",
+      "appearance": "청록/청동의 수문 관리 자동 수호체. 두 팔·두 다리, 조개 형태 견갑, 길고 읽기 쉬운 수문 열쇠창. 사람형 관리 수호체 실루엣으로 일반 갑각병의 큰 집게/등껍질과 구분. 해안 장식은 절제하며 아군과 같은 부드러운 재질 표현.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/boss_abyss.webp"
+      ],
+      "kind": "boss"
+    },
+    {
+      "id": "frost_queen",
+      "name": "세르카",
+      "appearance": "성인 여성의 감정을 읽을 수 있는 얼굴, 백은색 긴 머리, 빙정 왕관, 청백 긴 드레스, 빙정 지팡이. 자연스러운 5.5등신. 공작석 장식 대신 투명하고 얇은 수정 장식을 써 차분한 고원 수호자로 표현. 기존 빙결 마녀와 얼굴/드레스 절개/지팡이 실루엣을 구분하는 미적용 시안.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/boss_abyss.webp"
+      ],
+      "kind": "boss"
+    },
+    {
+      "id": "resonance_judge",
+      "name": "아르켄",
+      "appearance": "남청 도자기와 황동 마스크의 자동 집행관. 성인 5.5등신, 관절의 금실, 등 뒤 소리굽쇠 고리, 손에 긴 소리굽쇠 장창. 휴대종 없음. 단정한 판금/길쭉한 창/등 고리로 일반 가면 종지기와 기존 흑기사를 구분.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/boss_abyss.webp"
+      ],
+      "kind": "boss"
+    },
+    {
+      "id": "oath_guardian",
+      "name": "아스테르",
+      "appearance": "중성적인 성인 얼굴과 차분하고 슬픈 눈, 백은색 긴 머리, 상아 망토, 먹색 갑주, 흑은 의식검, 몸 뒤에 떠 있는 서약판 여섯 장. 자연스러운 5.5등신. 상아/먹색의 명확한 대비와 글자판 형태로 가론의 자주 그림자 갑옷과 구분. 카일 얼굴 복제 아님.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/boss_abyss.webp"
+      ],
+      "kind": "boss"
+    },
+    {
+      "id": "mare",
+      "name": "마레",
+      "appearance": "남청색 단발, 청록 방수망토·상아색 경갑·짙은 남색 짧은 분할치마와 부츠. 무기는 초승달형 긴 창 하나, 허리에 구조용 밧줄. 현재 아군과 같은 5~5.5등신 성인 수작업 애니메이션·과슈 화풍.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "ally"
+    },
+    {
+      "id": "harin",
+      "name": "하린",
+      "appearance": "검은 머리 높은묶음, 상아색·주홍 수련복과 짧은 겉옷, 발이 잘 보이는 좁은 바지와 수련화. 양손 붕대와 작은 청동 호완만 사용. 무기·동물 귀 없음.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "ally"
+    },
+    {
+      "id": "edan",
+      "name": "에단",
+      "appearance": "중년의 짧은 적갈 머리와 수염, 황토색 작업 코트·짙은 남색 내피·가죽 앞치마와 황동 도구 허리띠. 짧은 공병 망치와 접이식 장치 방패. 무거운 포·현대 장총 없음.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "ally"
+    },
+    {
+      "id": "silvan",
+      "name": "실반",
+      "appearance": "은백 장발 반묶음의 성인 남성, 이끼녹색 로브·갈색 가죽 띠·상아색 잎무늬 어깨천. 뿌리 모양으로 갈라진 목제 지팡이 끝에 작은 초록 보석. 사람 귀와 차분한 눈.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp",
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "ally"
+    },
+    {
+      "id": "hero__form0",
+      "baseId": "hero",
+      "name": "카일 · 여명룡기사",
+      "appearance": "밤색 머리와 청록 반망토·남색 분할 코트를 유지한다. 상아색 비대칭 판금에 청동 여명문양, 검은 한 자루. 검날을 따라 주홍 불꽃이 나선으로 감긴다.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "hero__form1",
+      "baseId": "hero",
+      "name": "카일 · 천수맹약기사",
+      "appearance": "동일한 밤색 머리·청록 망토. 은백 흉갑에 푸른 서약문양, 길어진 남색 분할 코트. 한 자루 장검을 곧게 세운 자세이며 방패는 새로 들지 않는다.",
+      "refs": [
+        "public/art/characters-v2/dialogue/hero.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "bram__form0",
+      "baseId": "bram",
+      "name": "브람 · 철성수호장",
+      "appearance": "중년의 회갈색 머리와 갈색 수염, 상아색 금테 중갑·녹색 참나무 망토 유지. 두꺼운 카이트 방패와 단검, 커진 무릎·어깨 판금.",
+      "refs": [
+        "public/art/characters-v2/dialogue/bram.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "bram__form1",
+      "baseId": "bram",
+      "name": "브람 · 서약성기사",
+      "appearance": "같은 수염과 녹색 망토. 상아·은빛 갑주에 금색 봉인띠, 참나무문양 카이트 방패와 기존 단검. 방패 가장자리에 부드러운 금빛 서약문자.",
+      "refs": [
+        "public/art/characters-v2/dialogue/bram.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "lina__form0",
+      "baseId": "lina",
+      "name": "리나 · 홍련명궁",
+      "appearance": "구리빛 붉은 땋은 포니테일·청동 잎 클립 고정. 올리브 조끼·상아 블라우스·녹색 망토에 주홍 잎 자수. 잎형 리커브 활 끝에 작은 불사조 깃 장식.",
+      "refs": [
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "lina__form1",
+      "baseId": "lina",
+      "name": "리나 · 봉화인도자",
+      "appearance": "동일한 붉은 머리와 잎 클립·녹색 망토. 밝은 상아 외투, 허리의 작은 봉화등. 청동 잎형 리커브 활을 유지하며 지팡이로 바꾸지 않는다.",
+      "refs": [
+        "public/art/characters-v2/dialogue/lina.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "aria__form0",
+      "baseId": "aria",
+      "name": "아리아 · 성역대사제",
+      "appearance": "상아백색 긴 머리·푸른 눈과 흰 로브·청록 스톨 유지. 금동 자수와 기도띠, 둥근 청동 태양 머리에 파란 보석이 있는 기존 목제 지팡이를 장식.",
+      "refs": [
+        "public/art/characters-v2/dialogue/aria.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "aria__form1",
+      "baseId": "aria",
+      "name": "아리아 · 백광심판관",
+      "appearance": "같은 백발·푸른 눈·흰청록 배색. 얇은 은백 의식 견갑과 긴 분할 성의. 동일한 태양 지팡이 중심에 푸른 광륜; 차분한 시전 자세.",
+      "refs": [
+        "public/art/characters-v2/dialogue/aria.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "leon__form0",
+      "baseId": "leon",
+      "name": "레온 · 유성창기사",
+      "appearance": "짧은 금발·푸른 회색 눈 유지. 은빛 판금에 버건디 망토·목도리, 유성 꼬리 같은 가벼운 허리천. 긴 강철 창만 사용하며 활로 바꾸지 않는다.",
+      "refs": [
+        "public/art/characters-v2/dialogue/leon.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "leon__form1",
+      "baseId": "leon",
+      "name": "레온 · 철진창수",
+      "appearance": "동일한 금발과 붉은 망토. 은색 팔·무릎 판금 강화, 창날 아래 작은 버건디 전령 깃발. 긴 창을 비스듬히 세운 낮은 자세.",
+      "refs": [
+        "public/art/characters-v2/dialogue/leon.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "sera__form0",
+      "baseId": "sera",
+      "name": "세라 · 월영추적자",
+      "appearance": "짙은 보랏빛 긴 포니테일·흑회색 가죽 갑옷·버건디 목도리 유지. 허리의 은색 추적 표식과 짧게 갈라진 망토. 두 단검을 유지.",
+      "refs": [
+        "public/art/characters-v2/dialogue/sera.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "sera__form1",
+      "baseId": "sera",
+      "name": "세라 · 묵화교란자",
+      "appearance": "같은 머리와 얼굴·버건디 포인트. 연회색 안감의 짧은 망토, 허리의 작은 연막통. 기존 양손 단검; 보랏빛 얇은 연무.",
+      "refs": [
+        "public/art/characters-v2/dialogue/sera.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "noah__form0",
+      "baseId": "noah",
+      "name": "노아 · 뇌문대현자",
+      "appearance": "검은 짧은 머리·둥근 안경·녹색 금테 코트 유지. 청동 책 모서리에 푸른 룬, 펼친 갈색 마법서 위 번개 문장. 지팡이를 새로 들지 않는다.",
+      "refs": [
+        "public/art/characters-v2/dialogue/noah.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "noah__form1",
+      "baseId": "noah",
+      "name": "노아 · 천수전략관",
+      "appearance": "같은 안경과 녹색 코트. 어깨에 청동 지휘 인장, 허리 지도통. 마법서 위에 낮은 금빛 격자 도식만 펼친다.",
+      "refs": [
+        "public/art/characters-v2/dialogue/noah.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "yuna__form0",
+      "baseId": "yuna",
+      "name": "유나 · 월령대무녀",
+      "appearance": "긴 검은 머리와 분홍 꽃 장식·흰 장밋빛 로브 유지. 머리 뒤 가는 초승달 머리띠, 지팡이의 분홍 원석 둘레에 겹친 청동 고리.",
+      "refs": [
+        "public/art/characters-v2/dialogue/yuna.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "yuna__form1",
+      "baseId": "yuna",
+      "name": "유나 · 달등수호자",
+      "appearance": "같은 검은 머리·꽃 장식. 흰 연분홍 의상에 작은 달등이 달린 허리띠, 기존 분홍 원석 목제 지팡이. 부드러운 은분홍 보호빛.",
+      "refs": [
+        "public/art/characters-v2/dialogue/yuna.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "rakan__form0",
+      "baseId": "rakan",
+      "name": "라칸 · 대지쇄성자",
+      "appearance": "짙은 갈색 짧은 머리·수염과 굵은 맨팔 고정. 털 어깨의 갈색 가죽 중갑·붉은 허리띠에 검은 철판 보강. 양손 전투 도끼 끝에 황토빛 파편.",
+      "refs": [
+        "public/art/characters-v2/dialogue/rakan.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "rakan__form1",
+      "baseId": "rakan",
+      "name": "라칸 · 불굴전쟁수호자",
+      "appearance": "동일한 근육·맨팔·갈색 중갑. 더 두꺼운 모피 어깨와 붉은 수호끈, 기존 큰 도끼를 가슴 앞에 낮게 들고 단단한 발 자세.",
+      "refs": [
+        "public/art/characters-v2/dialogue/rakan.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "miho__form0",
+      "baseId": "miho",
+      "name": "미호 · 화연환술사",
+      "appearance": "짙은 자주검은 긴 머리·여우 귀·한 개의 부드러운 꼬리를 유지. 흰 홍매화 자수 소매와 붉은 리본, 녹금 띠. 빈 두 손 사이 꽃잎형 주홍 여우불.",
+      "refs": [
+        "public/art/characters-v2/dialogue/miho.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "miho__form1",
+      "baseId": "miho",
+      "name": "미호 · 몽영길잡이",
+      "appearance": "같은 여우 귀·꼬리·머리. 흰 로브에 보랏빛 안감, 붉은 매듭과 녹금 띠 유지. 손바닥 위 작은 여우 형상의 흐린 환영.",
+      "refs": [
+        "public/art/characters-v2/dialogue/miho.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "teo__form0",
+      "baseId": "teo",
+      "name": "테오 · 천공관통사수",
+      "appearance": "짧은 적갈색 머리·녹색 망토·흰 셔츠와 갈색 가죽 경갑 유지. 가는 청동 조준 고리와 강화 시위를 붙인 목제 리커브 활. 총·석궁으로 바꾸지 않는다.",
+      "refs": [
+        "public/art/characters-v2/dialogue/teo.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "teo__form1",
+      "baseId": "teo",
+      "name": "테오 · 풍문추격사수",
+      "appearance": "같은 적갈 머리·녹색 망토. 무릎이 보이는 짧은 바지와 가벼운 부츠, 허리에 작은 풍향 띠. 기존 목제 활·화살통.",
+      "refs": [
+        "public/art/characters-v2/dialogue/teo.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "irene__form0",
+      "baseId": "irene",
+      "name": "아이린 · 극광빙결현자",
+      "appearance": "상아백색 긴 머리·푸른 눈·파란 머리장식 유지. 흰파란 겹 로브와 극광빛 얇은 자수 망토, 높고 투명한 푸른 얼음 결정 지팡이.",
+      "refs": [
+        "public/art/characters-v2/dialogue/irene.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "irene__form1",
+      "baseId": "irene",
+      "name": "아이린 · 서리성곽술사",
+      "appearance": "같은 백발·푸른 머리장식. 흰청색 의상에 각진 얼음 문양 어깨장식, 동일한 얼음 결정 지팡이. 발 주위 낮은 서리 원.",
+      "refs": [
+        "public/art/characters-v2/dialogue/irene.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "kaz__form0",
+      "baseId": "kaz",
+      "name": "카즈 · 흑섬잠행자",
+      "appearance": "검은 짧은 높은묶음·짧은 수염 유지. 회보라 경갑과 짙은 보라 목도리·갈색 벨트, 두 개의 작은 강철 단검에 은색 급소 각인.",
+      "refs": [
+        "public/art/characters-v2/dialogue/kaz.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "kaz__form1",
+      "baseId": "kaz",
+      "name": "카즈 · 무음역습자",
+      "appearance": "동일한 남성 얼굴·보라색 배색. 짧고 몸에 붙는 망토와 얇은 팔 보호대, 두 단검을 역수로 가깝게 든 낮은 자세.",
+      "refs": [
+        "public/art/characters-v2/dialogue/kaz.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "ella__form0",
+      "baseId": "ella",
+      "name": "엘라 · 별울림악성",
+      "appearance": "적갈색 웨이브 머리·청록 리본·녹색 금꽃 자수 망토 유지. 흰 드레스 위 가는 청동 별띠, 작은 목제 류트에 자개 별무늬. 지팡이로 바꾸지 않는다.",
+      "refs": [
+        "public/art/characters-v2/dialogue/ella.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "ella__form1",
+      "baseId": "ella",
+      "name": "엘라 · 천문공명사",
+      "appearance": "같은 리본·적갈 머리. 짙은 녹색 보디스와 금빛 별자리 자수, 동일한 배 모양 목제 류트. 현에서 푸른금색 원형 음파.",
+      "refs": [
+        "public/art/characters-v2/dialogue/ella.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "jin__form0",
+      "baseId": "jin",
+      "name": "진 · 적룡검황",
+      "appearance": "검은 긴 높은묶음·동양식 흰 로브·버건디 목도리와 허리띠 유지. 검집에 작은 적룡 문양, 한 자루 약간 휜 장검. 검끝에서 얇은 붉은 용염.",
+      "refs": [
+        "public/art/characters-v2/dialogue/jin.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "jin__form1",
+      "baseId": "jin",
+      "name": "진 · 월백검선",
+      "appearance": "같은 검은 포니테일·흰 로브·붉은 허리띠. 은회색 얇은 의식 자수와 흰 검집끈, 동일한 휜 장검. 차갑고 얇은 월광 호.",
+      "refs": [
+        "public/art/characters-v2/dialogue/jin.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "luka__form0",
+      "baseId": "luka",
+      "name": "루카 · 새벽선봉장",
+      "appearance": "짧은 금발·푸른 눈·은빛 판금·흰 금테 타바드·녹색 짧은 망토 유지. 가벼운 은색 무릎 갑주와 작은 새벽 깃 장식. 한 자루 강철 장검만 사용.",
+      "refs": [
+        "public/art/characters-v2/dialogue/luka.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "luka__form1",
+      "baseId": "luka",
+      "name": "루카 · 성소전위수호자",
+      "appearance": "같은 금발·은색 판금·흰 타바드. 녹색 망토에 금색 성소 인장, 장검을 세워 한손으로 수호 문장을 펼침. 방패·활을 새로 들지 않는다.",
+      "refs": [
+        "public/art/characters-v2/dialogue/luka.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "baekho__form0",
+      "baseId": "baekho",
+      "name": "백호 · 백호권성",
+      "appearance": "은백색 상투·흰 수염·성숙한 근육형 인간 유지. 민소매 흰녹색 수련복·붉은 허리띠, 두꺼운 손목 붕대에 청동 호완. 맨손 권법이며 호랑이 몸으로 변하지 않음.",
+      "refs": [
+        "public/art/characters-v2/dialogue/baekho.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "baekho__form1",
+      "baseId": "baekho",
+      "name": "백호 · 금강문지기",
+      "appearance": "같은 상투·흰수염·흰녹 수련복. 녹색 수호 매듭과 두꺼운 발목 보호대, 한손을 편 굳은 권법 자세. 무기는 새로 장비하지 않음.",
+      "refs": [
+        "public/art/characters-v2/dialogue/baekho.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "mare__form0",
+      "baseId": "mare",
+      "name": "마레 · 청해폭풍창",
+      "appearance": "같은 남청 단발·청록 망토. 초승달 창날에 청동 파도 문양, 어깨에 소형 해수 결정. 나선 물결이 창끝을 따른다.",
+      "refs": [
+        "public/art/characters-v3/dialogue/mare.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "mare__form1",
+      "baseId": "mare",
+      "name": "마레 · 조류수호기사",
+      "appearance": "같은 단발·초승달 창. 상아청록 갑주에 해안 수호띠, 구조 밧줄과 작은 부력낭을 허리에 배치. 창을 곧게 세운 안정된 자세.",
+      "refs": [
+        "public/art/characters-v3/dialogue/mare.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "harin__form0",
+      "baseId": "harin",
+      "name": "하린 · 홍련연무사",
+      "appearance": "같은 검은 높은묶음·상아 주홍 수련복. 주홍 허리끈을 길게, 청동 호완에 붉은 호흡 문양. 양손에 작은 따뜻한 기운만 맺힘.",
+      "refs": [
+        "public/art/characters-v3/dialogue/harin.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "harin__form1",
+      "baseId": "harin",
+      "name": "하린 · 온맥수호사",
+      "appearance": "같은 얼굴·상투형 묶음. 상아색 긴 앞자락과 주홍 어깨천, 청동 호완과 약초 주머니. 한손은 편 치료 자세, 다른 손은 권법 가드.",
+      "refs": [
+        "public/art/characters-v3/dialogue/harin.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "edan__form0",
+      "baseId": "edan",
+      "name": "에단 · 공명파쇄장인",
+      "appearance": "같은 적갈 수염·남색 작업복. 황동 진동고리를 붙인 망치, 고글은 이마 위. 접이식 방패에 작고 읽기 쉬운 푸른 공명 결정.",
+      "refs": [
+        "public/art/characters-v3/dialogue/edan.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "edan__form1",
+      "baseId": "edan",
+      "name": "에단 · 성채기공사",
+      "appearance": "동일한 머리·수염. 황토 작업 코트 위 분할 철판, 접이식 장치 방패를 더 넓게 펼친 형태. 망치와 허리 도구는 유지.",
+      "refs": [
+        "public/art/characters-v3/dialogue/edan.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "silvan__form0",
+      "baseId": "silvan",
+      "name": "실반 · 고목룬현자",
+      "appearance": "같은 은백 반묶음·이끼녹 로브. 목제 지팡이에 얇은 상아 룬띠와 초록 결정, 어깨천에 오래된 나이테 자수. 낮은 뿌리 룬이 손끝에서 보임.",
+      "refs": [
+        "public/art/characters-v3/dialogue/silvan.webp"
+      ],
+      "kind": "advanced"
+    },
+    {
+      "id": "silvan__form1",
+      "baseId": "silvan",
+      "name": "실반 · 새싹생명지기",
+      "appearance": "같은 얼굴과 장발. 밝은 이끼녹색 로브에 상아 잎자수, 기존 뿌리 지팡이에서 작은 새싹. 발목과 손목의 얇은 생태학자 표식.",
+      "refs": [
+        "public/art/characters-v3/dialogue/silvan.webp"
+      ],
+      "kind": "advanced"
+    }
+  ]
+}

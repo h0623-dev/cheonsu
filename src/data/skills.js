@@ -1,8 +1,9 @@
 import { DISCOVERY_TECHNIQUES, SECRET_PROMOTIONS } from './discoveries.js';
+import { getAdvancedClassDefinition } from './advancedClasses.js';
 
 const attack = (id, name, bonus, range, cooldown, effect, extra = {}) => ({ id, name, type: 'attack', bonus, minRange: 1, range, cooldown, effect, ...extra });
-const heal = (id, name, power, targets, range, cooldown, cleanse = false) => ({ id, name, type: 'heal', power, targets, range, cooldown, effect: 'heal', cleanse });
-const guard = (id, name, defense, radius, cooldown) => ({ id, name, type: 'guard', defense, radius, range: radius, cooldown, effect: 'guard' });
+const heal = (id, name, power, targets, range, cooldown, cleanse = false, extra = {}) => ({ id, name, type: 'heal', power, targets, range, cooldown, effect: 'heal', cleanse, ...extra });
+const guard = (id, name, defense, radius, cooldown, extra = {}) => ({ id, name, type: 'guard', defense, radius, range: radius, cooldown, effect: 'guard', ...extra });
 
 export const CHARACTER_SKILLS = {
   hero: [attack('gale', '돌풍 베기', 4, 1, 2, 'slash', { status: 'armorBreak' }), guard('oath', '수호의 맹세', 3, 0, 3)],
@@ -22,6 +23,10 @@ export const CHARACTER_SKILLS = {
   jin: [attack('dragon', '용염참', 6, 1, 3, 'fire', { status: 'burn' }), attack('moonblade', '월광참', 3, 2, 2, 'slash', { radius: 1 })],
   luka: [attack('knight-charge', '기사 돌격', 6, 1, 2, 'slash'), guard('radiance', '수호의 빛', 3, 1, 3)],
   baekho: [attack('tiger-fist', '백호권', 6, 1, 2, 'impact', { status: 'armorBreak' }), attack('tiger-roar', '백호 포효', 4, 1, 3, 'heavy', { radius: 1 })],
+  mare: [attack('tide-thrust', '해류 찌르기', 4, 2, 2, 'thrust', { special: { push: true } }), guard('water-cover', '물길 엄호', 3, 1, 3, { special: { waterStride: true } })],
+  harin: [heal('warm-touch', '온맥수', 12, 1, 1, 2, true), attack('linked-fist', '연환권', 5, 1, 2, 'impact')],
+  edan: [attack('breaker-hammer', '파쇄 망치', 5, 1, 2, 'heavy', { status: 'armorBreak' }), guard('folding-barrier', '접이식 방벽 전개', 4, 2, 3)],
+  sylvan: [attack('root-snare', '뿌리 얽기', 4, 3, 3, 'nature', { special: { slow: true } }), heal('green-breath', '녹음 숨결', 10, 2, 3, 2, false, { special: { regen: 4 } })],
 };
 const statusNames = { burn: '화상', bleed: '출혈', freeze: '빙결', armorBreak: '방어 약화' };
 export function getUnitSkills(unit) {
@@ -31,6 +36,9 @@ export function getUnitSkills(unit) {
   const promotion = Object.hasOwn(SECRET_PROMOTIONS, unit.id) ? SECRET_PROMOTIONS[unit.id] : null;
   const ids = [...learned, ...(promotion && unit.secretClass === promotion.secretClass ? [promotion.techniqueId] : [])];
   const skills = [...base];
+  const advanced = getAdvancedClassDefinition(unit);
+  if (advanced) skills.push(advanced.skill.special?.chargeBonus && unit.moved
+    ? { ...advanced.skill, bonus: advanced.skill.bonus + advanced.skill.special.chargeBonus } : advanced.skill);
   const seen = new Set(base.map((skill) => skill.id));
   for (const id of ids) {
     if (typeof id !== 'string' || seen.has(id) || !Object.hasOwn(DISCOVERY_TECHNIQUES, id)) continue;
@@ -46,9 +54,11 @@ export function getSkillDisplayName(unit) {
   return (!unit?.type || unit.type === 'ally') ? getSkill(unit, unit?.activeSkillId)?.name || unit?.skill || '' : unit.skill || '';
 }
 export function skillDescription(skill, level = 0) {
-  if (skill.type === 'heal') return `HP ${skill.power + level * 3} 회복 · 최대 ${skill.targets}명${skill.cleanse ? ' · 상태이상 해제' : ''}`;
-  if (skill.type === 'guard') return `방어 +${skill.defense + level} · 받는 피해 -4${skill.radius ? ` · 주변 ${skill.radius}칸 아군` : ' · 자신'}`;
-  return `공격 +${skill.bonus + level * 2}${skill.radius ? ` · 주변 ${skill.radius}칸 60% 피해` : ''}${skill.status ? ` · ${statusNames[skill.status]} 2턴` : ''}${skill.accuracy ? ` · 명중 +${skill.accuracy}` : ''}${skill.critical ? ` · 치명 +${skill.critical}` : ''}`;
+  const special = skill.special || {};
+  const extras = `${special.push ? ' · 안전한 빈칸으로 1칸 밀기(보스 제외)' : ''}${special.slow ? ' · 대상 이동 -1(다음 자기 턴)' : ''}${special.slowAura ? ` · 주변 ${special.slowAura}칸 적 이동 -1` : ''}${special.regen ? ` · 다음 턴 HP ${special.regen} 추가 회복` : ''}${special.waterStride ? ' · 다음 자기 턴 얕은 물/늪 이동 비용 1' : ''}${special.cleanseGuard ? ' · 상태이상 해제' : ''}${special.selfHeal ? ` · 명중 시 자신 HP ${special.selfHeal} 회복` : ''}${special.healNearby ? ` · 명중 시 인접 아군 1명 HP ${special.healNearby} 회복` : ''}${special.chargeBonus ? ` · 이동 후 공격 +${special.chargeBonus}` : ''}`;
+  if (skill.type === 'heal') return `HP ${skill.power + level * 3} 회복 · 최대 ${skill.targets}명${skill.cleanse ? ' · 상태이상 해제' : ''}${extras}`;
+  if (skill.type === 'guard') return `방어 +${skill.defense + level} · 받는 피해 -4${skill.radius ? ` · 주변 ${skill.radius}칸 아군` : ' · 자신'}${extras}`;
+  return `공격 +${skill.bonus + level * 2}${skill.radius ? ` · 주변 ${skill.radius}칸 60% 피해` : ''}${skill.status ? ` · ${statusNames[skill.status]} 2턴` : ''}${skill.accuracy ? ` · 명중 +${skill.accuracy}` : ''}${skill.critical ? ` · 치명 +${skill.critical}` : ''}${extras}`;
 }
 
 function normalizeCooldown(value) {
@@ -75,7 +85,8 @@ export function applyCooldown(units, unitId, skillId, turns) {
     if (!skills.length) return { ...unit, skillCooldown: normalizeCooldown(turns) };
     const skillCooldowns = Object.fromEntries(skills.map(skill => [skill.id, getSkillCooldown(unit, skill.id)]));
     skillCooldowns[getSkill(unit, skillId).id] = normalizeCooldown(turns);
-    return { ...unit, skillCooldowns, skillCooldown: skillCooldowns[skills[0].id] ?? 0 };
+    const usedValidSkill = unit.type === 'ally' && skills.some(skill => skill.id === skillId) && normalizeCooldown(turns) > 0;
+    return { ...unit, ...(usedValidSkill ? { advancedMastery: Math.min(3, Math.max(0, Number(unit.advancedMastery) || 0) + 1) } : {}), skillCooldowns, skillCooldown: skillCooldowns[skills[0].id] ?? 0 };
   });
 }
 export function tickCooldowns(units) {

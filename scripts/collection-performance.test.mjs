@@ -5,13 +5,14 @@ import { getCharacterCollection, filterCharacterCollection, RECRUIT_BY_STAGE } f
 import { combatUnitIds, getCombatChoreography } from '../src/data/combatArt.js';
 import { CHARACTER_SKILLS, withSkill } from '../src/data/skills.js';
 import { getImpactParticle } from '../src/data/duelPerformance.js';
+const bossIds = new Set(getCharacterCollection().filter(entry => entry.kind === 'boss').map(entry => entry.id));
 
-test('collection lists all 47 characters; only four starting allies are initially colored', async () => {
+test('collection lists 21 allies, 37 enemies and 9 bosses; only four starting allies are initially colored', async () => {
   const entries = getCharacterCollection();
-  assert.equal(entries.length, 47); assert.equal(new Set(entries.map(e => e.id)).size, 47);
-  assert.equal(entries.filter(e => e.kind === 'ally').length, 17);
-  assert.equal(entries.filter(e => e.kind === 'enemy').length, 25);
-  assert.equal(entries.filter(e => e.kind === 'boss').length, 5);
+  assert.equal(entries.length, 67); assert.equal(new Set(entries.map(e => e.id)).size, 67);
+  assert.equal(entries.filter(e => e.kind === 'ally').length, 21);
+  assert.equal(entries.filter(e => e.kind === 'enemy').length, 37);
+  assert.equal(entries.filter(e => e.kind === 'boss').length, 9);
   assert.deepEqual(entries.filter(e => e.unlocked).map(e => e.id), ['hero', 'bram', 'lina', 'aria']);
   for (const entry of entries) await access(`public${entry.art}`);
 });
@@ -22,7 +23,7 @@ test('collection uses actual ownership or exact recruit clear evidence, not the 
   for (const id of ['sera', 'noah', 'baekho']) assert.equal(entries.find(e => e.id === id).unlocked, false);
   assert.equal(entries.find(e => e.id === 'miho').level, 9);
   assert.deepEqual(state, before);
-  assert.equal(Object.keys(RECRUIT_BY_STAGE).length, 13);
+  assert.equal(Object.keys(RECRUIT_BY_STAGE).length, 17);
 });
 test('enemy and boss records are colored only after a stage containing that identity is cleared', () => {
   const entries = getCharacterCollection({ clearedStages: [1], encounters: [{ key: 'sentinel', stageId: 1, name: '국경 방패병' }, { key: 'boss_commander', stageId: 1, name: '초소장' }, { key: 'boss_abyss', stageId: 3, name: '흑천 가론' }] });
@@ -34,14 +35,14 @@ test('enemy and boss records are colored only after a stage containing that iden
 });
 test('collection filters compose without hiding the uncollected catalog or changing source data', () => {
   const entries = getCharacterCollection();
-  assert.equal(filterCharacterCollection(entries, { kind: 'ally', state: 'locked' }).length, 13);
+  assert.equal(filterCharacterCollection(entries, { kind: 'ally', state: 'locked' }).length, 17);
   assert.equal(filterCharacterCollection(entries, { kind: 'ally', state: 'owned', query: ' 리나 ' })[0].id, 'lina');
   assert.equal(filterCharacterCollection(entries, { kind: 'enemy', state: 'owned' }).length, 0);
   assert.equal(filterCharacterCollection(entries, { kind: 'all', query: '없는이름' }).length, 0);
 });
 test('all allies, enemies and bosses have release-linked physical poses and bounded impact particles', () => {
   for (const id of combatUnitIds) for (const mode of ['attack', 'skill']) {
-    const scene = { mode, attacker: { id, type: CHARACTER_SKILLS[id] ? 'ally' : id.startsWith('boss') ? 'boss' : 'enemy' }, outcome: { hit: true } };
+    const scene = { mode, attacker: { id, type: CHARACTER_SKILLS[id] ? 'ally' : bossIds.has(id) ? 'boss' : 'enemy' }, outcome: { hit: true } };
     const plan = getCombatChoreography(id, scene);
     assert.ok(plan.body.length >= 8, id);
     assert.equal(plan.impacts.length, plan.contacts.length);

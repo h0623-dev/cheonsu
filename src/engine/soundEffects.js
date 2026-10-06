@@ -23,6 +23,8 @@ export const SFX_PRESETS = {
   music: [...notes([523,659,784,988,1046],.085,'harp',.03)],
   shadow: [air(.38,.032,680),tone(260,.36,.03,0,'reed',{freqEnd:65}),tone(98,.4,.025,.1,'bass')],
   poison: [air(.24,.02,850),...notes([330,311,247],.075,'reed',.025)],
+  water: [air(.28,.021,1600),tone(330,.28,.016,.015,'flute',{freqEnd:494}),...notes([659,784,988],.065,'harp',.018)],
+  nature: [air(.3,.018,2300),tone(294,.4,.02,0,'flute',{freqEnd:392}),...notes([392,494,587],.085,'harp',.018)],
   guard: [tone(180,.32,.038,0,'horn'),...notes([740,1109],.045,'bell',.027)],
   crit: [air(.18,.04,3200),tone(125,.28,.062,0,'drum',{freqEnd:40}),...notes([784,1175],.065,'bell',.024)],
   miss: [air(.18,.016,2400),tone(480,.16,.008,0,'flute',{freqEnd:240})],

@@ -2,9 +2,11 @@ import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import { BATTLEFIELD_PLANS } from '../src/data/battlefieldPlans.js';
+import { qaBrowserOptions } from './qa-browser.mjs';
+import { confirmArtQaDeployment, confirmArtQaMission } from './art-qa-game.mjs';
 
-const url=process.env.GAME_URL || 'http://127.0.0.1:5176';
-const browser=await chromium.launch({channel:'msedge',headless:true});
+const url=process.env.ACTUAL_GAME_URL || process.env.GAME_URL || 'http://127.0.0.1:5176';
+const browser=await chromium.launch(qaBrowserOptions());
 await fs.mkdir('tmp/sound-map-qa',{recursive:true});
 const results=[];
 try {
@@ -22,17 +24,19 @@ try {
     await page.locator('.campaign-header .prominent-save').click();
     const campaign=await page.evaluate(()=>{
       const data=JSON.parse(localStorage.getItem('cheonsu_v01_save'));
-      data.clearedStages=Array.from({length:29},(_,i)=>i+1);
+      data.clearedStages=Array.from({length:49},(_,i)=>i+1);
       return data;
     });
-    const plans=width===1280?BATTLEFIELD_PLANS:BATTLEFIELD_PLANS.filter(p=>[1,2,5,6,11,18,30].includes(p.id));
+    const plans=width===1280?BATTLEFIELD_PLANS:BATTLEFIELD_PLANS.filter(p=>[1,2,5,6,11,18,30,31,35,40,45,50].includes(p.id));
     for(const plan of plans) {
       await page.evaluate(data=>localStorage.setItem('cheonsu_v01_save',JSON.stringify(data)),campaign);
       await page.reload();
       await page.getByRole('button',{name:'이어하기',exact:true}).click();
       await page.locator('.campaign-stage-select button').filter({has:page.locator('strong').filter({hasText:new RegExp(`^${plan.id}장\\.`)})}).click();
       await page.getByRole('button',{name:'전투 시작',exact:true}).click();
+      await confirmArtQaDeployment(page);
       await page.getByRole('button',{name:'바로 전투',exact:true}).click();
+      await confirmArtQaMission(page);
       await page.locator('.world-battlefield').waitFor();
       assert.ok(await page.getByRole('button',{name:'정보 표시',exact:true}).isVisible());
       assert.equal(await page.locator('.battle-zoom-controls').count(),0);

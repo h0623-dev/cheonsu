@@ -162,7 +162,7 @@
     position: absolute;
     inset: -0.25px;
     border-radius: var(--ground-radius);
-    background: var(--ground-image) var(--ground-position) / 300% 300%;
+    background: var(--ground-image) var(--ground-position) / var(--ground-size, 300% 300%);
     mask-image: linear-gradient(to right, transparent, #000 var(--blend-left), #000 calc(100% - var(--blend-right)), transparent), linear-gradient(to bottom, transparent, #000 var(--blend-top), #000 calc(100% - var(--blend-bottom)), transparent);
     mask-composite: intersect;
     pointer-events: none;

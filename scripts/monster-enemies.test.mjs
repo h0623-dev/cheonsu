@@ -3,13 +3,16 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
 import { MONSTER_ENEMIES, MONSTER_STAGE_ROLES, applyStageMonsterAppearance, isMonsterArtId } from '../src/data/monsterEnemies.js';
-import { stages } from '../src/data/stages.js';
+import { stages as campaignStages } from '../src/data/stages.js';
+import { EXPANSION_MONSTER_KEYS, EXPANSION_BOSS_KEYS } from '../src/data/expansionEnemies.js';
 import { getUnitCombatClass, calculateDamage } from '../src/engine/combat.js';
 import { getAttackRange, canAttackTarget, canCounter } from '../src/engine/movement.js';
 import { getEnemyAttackChoice } from '../src/engine/enemyAI.js';
 import { normalizeSaveData } from '../src/engine/saveEngine.js';
 import { getInitialParty } from '../src/engine/partyEngine.js';
 import { getCharacterCollection } from '../src/data/characterCollection.js';
+
+const stages = campaignStages.filter(stage => stage.id <= 30);
 
 const app = await readFile(new URL('../src/App.jsx', import.meta.url), 'utf8');
 const squadSource = app.slice(app.indexOf('const ENEMY_ARCHETYPE_TEMPLATES ='), app.indexOf('function getStageBossSpriteKey'));
@@ -42,7 +45,7 @@ test('actual chapter squad slots introduce each species at the approved first ch
     'kobold-hunter': 4, 'lizard-spearman': 8, 'horned-ogre': 9,
     'rock-spirit': 10, 'skeleton-warrior': 14, 'harpy-scout': 15,
   });
-  for (const [id, identity] of Object.entries(MONSTER_ENEMIES)) assert.equal(first[id], identity.firstStage);
+  for (const [id, identity] of Object.entries(MONSTER_ENEMIES).filter(([, entry]) => entry.firstStage <= 30)) assert.equal(first[id], identity.firstStage);
   for (const id of [1, 2, 3]) assert.deepEqual(current.getStageEnemySquadTemplates({ id }), previous.getStageEnemySquadTemplates({ id }));
 });
 
@@ -68,7 +71,7 @@ test('new species preserve the original slot stats, IDs, AI, range and story bos
     if (original.type === 'boss') assert.deepEqual(after, before);
     if (after.artId) assert.equal(after.type, 'enemy');
   }
-  assert.equal(Object.values(MONSTER_ENEMIES).filter(identity => identity.rank === 'elite').length, 2);
+  assert.equal(Object.values(MONSTER_ENEMIES).filter(identity => identity.firstStage <= 30 && identity.rank === 'elite').length, 2);
   assert.equal(MONSTER_ENEMIES['horned-ogre'].rank, 'elite');
   assert.equal(MONSTER_ENEMIES['rock-spirit'].rank, 'elite');
 });
@@ -124,8 +127,8 @@ test('new appearances and original chapter records coexist in the 47-character c
   ];
   const snapshot = structuredClone(encounters);
   const entries = getCharacterCollection({ clearedStages: [4], encounters });
-  assert.equal(entries.length, 47);
-  assert.equal(entries.filter(entry => entry.kind === 'enemy').length, 25);
+  assert.equal(entries.filter(entry => !EXPANSION_MONSTER_KEYS.includes(entry.id) && entry.kind === 'enemy').length, 25);
+  assert.equal(entries.filter(entry => !EXPANSION_BOSS_KEYS.includes(entry.id) && entry.kind === 'boss').length, 5);
   assert.equal(entries.find(entry => entry.id === 'kobold-hunter').unlocked, true);
   assert.equal(entries.find(entry => entry.id === 'storm_mage').unlocked, true);
   assert.match(entries.find(entry => entry.id === 'storm_mage').bio, /옛 전장 · 4장 · 검은 번개술사/);

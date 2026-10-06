@@ -42,7 +42,7 @@
   color: #f3faf3; box-shadow: none; opacity: 1; overflow: visible; cursor: default;
   touch-action: pan-x pan-y; font: inherit; filter: none;
 }
-.deployment-cell-ground { position: absolute; inset: 0; background: var(--ground-image, var(--tile-image)) var(--ground-position, center) / 300% 300%; border-radius: var(--ground-radius, 0); pointer-events: none; }
+.deployment-cell-ground { position: absolute; inset: 0; background: var(--ground-image, var(--tile-image)) var(--ground-position, center) / var(--ground-size, 300% 300%); border-radius: var(--ground-radius, 0); pointer-events: none; }
 .deployment-board-cell.is-outside::after { content: ''; position: absolute; inset: 0; background: rgb(13 25 19 / 28%); pointer-events: none; }
 .deployment-board-cell.is-blocked::after { background: rgb(9 20 16 / 40%); }
 .app.world-art-app .deployment-board .deployment-board-cell.is-valid { border-color: rgb(145 220 249 / 75%); cursor: pointer; }

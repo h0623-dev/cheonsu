@@ -49,6 +49,14 @@ export const SKILL_DIRECTIONS = {
   'lina-phoenix-flare': {motion:'phoenix-release', pose:'ember', effects:[arrow(.40,.62,'#ffb66e',{bend:-.3,variant:'flame'}),fx('phoenix',.54,.86,{color:'#ffd084',size:1.7}),fx('embers',.62,.94,{color:'#ffbc7a'})]},
   'aria-sanctuary-song': {motion:'sanctuary-hymn', pose:'sanctuary', effects:[fx('feathers',.32,.88,{color:'#f4f6df',size:1.5}),fx('notes',.40,.93,{from:[0,0],to:[1,-.06],color:'#daf4ca'}),ray(.60,'#fbffe2')]},
   'bram-oath-wall': {motion:'oath-rampart', pose:'bulwark', effects:[ward(.35,'#f1d89d',{size:1.2}),fx('plates',.51,.92,{from:[-.25,0],to:[.2,0],color:'#dbe5d9',size:1.65}),ray(.62,'#f2e3bd',{from:[0,0],to:[0,0],size:.7})]},
+  'tide-thrust': { motion: 'tide-step', effects: [fx('wind', .37, .63, { from: [.28,.08], to: [.93,.08], color: '#9edcd8' }), fx('lance', .54, .68, { from: [.64,0], to: [1.12,0], color: '#e0fff0', size: 1.3 }), spark(.62,'#aef7e3')] },
+  'water-cover': { motion: 'tide-cover', effects: [fx('wind', .31, .63, { from: [0,.12], to: [.2,.11], color: '#8bdcd0', size: 1.2 }), ward(.56,'#b8eee7',{ variant: 'hex' })] },
+  'warm-touch': { motion: 'warm-palm', effects: [fx('motes', .35, .65, { from: [0,-.04], to: [1,0], color: '#f1c790', size: .8 }), ray(.61,'#ffedc4',{ size: .78 })] },
+  'linked-fist': { motion: 'linked-palms', contacts: [.48,.55,.62], effects: [spark(.48,'#edd8b1',{ size: .44 }), spark(.55,'#f2deb8',{ size: .62 }), fx('fist',.58,.77,{ from:[.68,0],to:[1.09,0],color:'#fff1d3',size:.85 })] },
+  'breaker-hammer': { motion: 'hammer-drop', effects: [cut(.55,72,'#e6b77f',{ size: 1.25 }), fx('cracks',.62,.90,{ from:[1,.17],to:[1,.17],color:'#d6b787',size:1.24 }), fx('debris',.62,.86,{color:'#e0c496',size:.9})] },
+  'folding-barrier': { motion: 'unfold-rampart', effects: [fx('plates',.37,.85,{from:[0,.12],to:[.12,0],color:'#9bcac7',size:1.25}),ward(.58,'#d1eee1',{size:1.36,variant:'crest'})] },
+  'root-snare': { motion: 'root-channel', effects: [fx('runes',.34,.65,{from:[0,.05],to:[.18,0],color:'#9abe79',size:.7}),fx('vines',.55,.88,{color:'#b6d496',size:1.15}),spark(.62,'#dbebc0',{size:.48})] },
+  'green-breath': { motion: 'grove-breath', effects: [fx('petals',.34,.85,{from:[0,0],to:[1,-.04],color:'#b7df97',size:1.12}),ray(.60,'#e0f4c0',{size:.74})] },
 };
 
 // Offsets use a fraction of the melee reach, height in body percent and a restrained lean.
@@ -91,13 +99,23 @@ const motions={
   'phoenix-release': [[.21,0,0,-1],[.36,0,-2,-4],[.42,.04,-3,1],[.54,-.02,0,-1],[.71,0,0,0]],
   'sanctuary-hymn': [[.21,0,0,0],[.36,0,-2,-1],[.50,.01,-4,1],[.65,0,-3,0],[.79,0,0,0]],
   'oath-rampart': [[.22,0,0,0],[.40,-.04,0,-2],[.55,.015,0,1],[.70,.015,0,1],[.81,0,0,0]],
+  'tide-step': [[.23,.08,0,-1],[.38,.52,-2,-2],[.53,.77,0,-2],[.62,1.09,0,3],[.72,.91,0,0]],
+  'tide-cover': [[.23,0,0,-1],[.40,-.025,0,-2],[.58,.045,-1,1],[.72,.02,0,1]],
+  'warm-palm': [[.23,0,0,-1],[.39,.02,0,-2],[.54,.065,-1,1],[.68,.045,0,0],[.77,0,0,0]],
+  'linked-palms': [[.22,.08,0,0],[.39,.84,0,-2],[.48,1.05,0,2],[.52,.91,0,-2],[.55,1.06,0,2],[.59,.91,0,-2],[.62,1.11,0,3],[.73,.98,0,0]],
+  'hammer-drop': [[.23,.08,0,0],[.40,.68,-3,-2],[.53,.89,-7,-4],[.62,1.03,0,4],[.73,.96,0,1]],
+  'unfold-rampart': [[.23,0,0,0],[.40,-.045,1,-2],[.56,.035,0,1],[.70,.025,0,1],[.80,0,0,0]],
+  'root-channel': [[.23,0,0,-1],[.40,-.03,-1,-2],[.55,.04,-2,1],[.64,.065,-1,2],[.78,0,0,0]],
+  'grove-breath': [[.23,0,0,0],[.38,-.015,-2,-1],[.54,.025,-3,1],[.68,.015,-1,0],[.79,0,0,0]],
 };
 
 export function getWeaponMotion(key,presentation){
+  const canonicalKey = String(key).split('__form')[0];
+  if (Object.hasOwn(basicMotions, presentation.weapon)) return presentation.weapon;
   if(presentation.style==='cast')return 'cast';
-  if(presentation.style==='ranged')return key==='siege_gunner'?'cannon':'bow';
-  if(key==='void_knight'||key==='boss_abyss')return 'slash';
-  if(key==='beast_tamer')return 'whip';
+  if(presentation.style==='ranged')return canonicalKey==='siege_gunner'?'cannon':'bow';
+  if(canonicalKey==='void_knight'||canonicalKey==='boss_abyss')return 'slash';
+  if(canonicalKey==='beast_tamer')return 'whip';
   return {thrust:'thrust',heavy:'heavy',guard:'guard',shadow:'quick',claw:'beast',impact:'fist'}[presentation.effect]||'slash';
 }
 
@@ -120,16 +138,33 @@ const basicMotions = {
   cast: [[.19,0,0,-1],[.28,0,-1,-2],[.34,.015,-2,-1],[.43,.035,-1,2],[.50,.02,0,1],[.64,0,0,0]],
 };
 
+const directionColors = { fire:'#ffc07c',ice:'#b4ecff',lightning:'#c9f2ff',shadow:'#d5bce8',holy:'#fff1bd',music:'#f5c5df',poison:'#bad889',nature:'#b8d8a2',water:'#a9e3dc' };
+function derivedSkillDirection(spec, weapon, presentation) {
+  const templateId = presentation.healing ? 'sanctuary' : presentation.guarding ? 'ward'
+    : weapon === 'bow' ? (spec.effect === 'fire' ? 'ember' : 'breaker')
+    : weapon === 'cast' ? ({ice:'frost-wave',lightning:'chain',music:'resonance',nature:'root-snare',shadow:'illusion',poison:'root-snare',holy:'purify'}[spec.effect] || 'foxfire')
+    : {thrust:'pierce',heavy:'crush',guard:'bash',quick:'ambush',beast:'ambush',whip:'shade',fist:'tiger-fist'}[weapon] || (spec.effect === 'fire' ? 'dragon' : 'moonblade');
+  const template = SKILL_DIRECTIONS[templateId];
+  // Preserve weapon acting; modest per-technique variations distinguish class skills.
+  const seed = [...spec.id].reduce((sum, letter) => sum + letter.charCodeAt(0), 0);
+  const variant = (seed % 7 - 3) * .008;
+  const color = directionColors[spec.effect];
+  return { ...template, motion: `technique-${spec.id}`, actor: motions[template.motion].map(([at,x,y,lean]) => [at,x ? x * (1 + variant) : x,y + (at < .6 ? variant * 30 : 0),lean]), effects: template.effects.map(effect => ({ ...effect, ...(color ? { color } : {}), size: effect.size * (1 + Math.abs(variant)) })) };
+}
+
 export function getDuelPlan(key,scene,presentation,weapon){
   const skill=scene.mode==='skill'||presentation.support;
-  const spec=scene.attacker?.type==='ally'||(!scene.attacker?.type&&getSkill({id:key})) ? getSkill({...scene.attacker,id:key},scene.attacker?.activeSkillId||scene.attacker?.skillSpec?.id) : null;
+  const canonicalKey = scene.attacker?.id && scene.attacker?.type === 'ally' ? scene.attacker.id : String(key).split('__form')[0];
+  const ally = scene.attacker?.type==='ally'||(!scene.attacker?.type&&getSkill({id:canonicalKey}));
+  const rawSpec=ally ? getSkill({...scene.attacker,id:canonicalKey},scene.attacker?.activeSkillId||scene.attacker?.skillSpec?.id) : scene.attacker?.skillSpec || null;
+  const spec = rawSpec ? { ...rawSpec, id: rawSpec.id || `${canonicalKey}-skill` } : null;
   const skillId=spec?.id||enemySkills[key];
-  const direction=skill ? SKILL_DIRECTIONS[skillId] : null;
+  const direction=skill ? SKILL_DIRECTIONS[skillId] || (spec?.id ? derivedSkillDirection(spec, weapon, presentation) : null) : null;
   const impact=skill ? .62 : .5;
   const contacts=direction?.contacts||[impact];
   const motion=direction?.motion||`basic-${weapon}`;
   const basicPath=basicMotions[weapon]||basicMotions.slash;
-  const points=direction ? key==='siege_gunner' ? motions['piercing-draw'] : motions[motion] : basicPath;
+  const points=direction ? key==='siege_gunner' ? motions['piercing-draw'] : direction.actor || motions[motion] : basicPath;
   const moving=presentation.style==='melee'&&!presentation.support&&points.some(([,x])=>x>.35);
   const retreat=moving?[[.77,.72,-1,0],[.84,.45,0,0],[.90,.2,-1,0]]:[[.88,0,0,0]];
   const actor=[[0,0,0,0],...points,...retreat,[.96,0,0,0],[1,0,0,0]];

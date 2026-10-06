@@ -1,6 +1,6 @@
 import { useEffect, useEffectEvent, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, BookOpen, SkipForward, X, Play, Pause } from 'lucide-react';
-import { STORY_ARCS } from '../data/storyScenes.js';
+import { STORY_ARCS, getStoryArcIndex } from '../data/storyScenes.js';
 import { getCharacterProfile } from '../data/characterProfiles.js';
 import { storySpeakerKeys } from '../data/storyArt.js';
 import { getStoryReadDelay } from '../engine/playerExperience.js';
@@ -35,7 +35,7 @@ export default function StoryScene({ scene, background, portrait, onNext, onPrev
       }}>
       <img className="narrative-background" src={background} alt="" />
       <header className="narrative-header">
-        <div><small>{STORY_ARCS[Math.floor((scene.stage.id - 1) / 6)]} · {scene.type === 'intro' ? '전투 전' : '전투 후'}</small>
+        <div><small>{STORY_ARCS[getStoryArcIndex(scene.stage.id)]} · {scene.type === 'intro' ? '전투 전' : '전투 후'}</small>
           <h1>{scene.stage.title}</h1></div>
         <button className="narrative-skip" onClick={onSkip}><SkipForward size={17} />{scene.onComplete === 'library' ? '기록실로' : scene.onComplete === 'battle' ? '바로 전투' : '건너뛰기'}</button>
       </header>

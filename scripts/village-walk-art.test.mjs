@@ -5,8 +5,8 @@ import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { VILLAGE_WALK_IDS, getVillageWalkFrames } from '../src/data/villageWalk.js';
 
-test('all 17 village companions have four authored transparent walking images at the existing foot anchor', async () => {
-  assert.equal(VILLAGE_WALK_IDS.length, 17);
+test('all 21 village companions have four authored transparent walking images at the existing foot anchor', async () => {
+  assert.equal(VILLAGE_WALK_IDS.length, 21);
   const paths = new Set();
   for (const id of VILLAGE_WALK_IDS) {
     const frames = getVillageWalkFrames(id);
@@ -47,5 +47,5 @@ test('all 17 village companions have four authored transparent walking images at
       assert.ok(changed > 150, `${id}: feet actually change during the ${a ? 'rear' : 'front'} stride`);
     }
   }
-  assert.equal(paths.size, 68);
+  assert.equal(paths.size, 84);
 });

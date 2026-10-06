@@ -1,3 +1,4 @@
+import { qaBrowserOptions } from './qa-browser.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -5,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 import { preview } from 'vite';
 import { webBuildInfo } from './update-build-info.mjs';
+import { stages } from '../src/data/stages.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const output = path.resolve(process.env.CHEONSU_PROGRESSION_QA_OUT || path.join(root, 'tmp/campaign-progression-qa'));
@@ -310,14 +312,14 @@ async function runViewport(base, viewport) {
     result.checks.push('승리 재플레이의 기존 훈련 리셋·중복 보상 방지');
 
     // Ignore forged unlockedStages and preserve old out-of-order clear records.
-    const forged = { ...structuredClone(afterFirstLoss), screen: 'deployment', selectedStage: { id: 2 }, currentStageId: 2, unlockedStages: Array.from({ length: 30 }, (_, index) => index + 1) };
+    const forged = { ...structuredClone(afterFirstLoss), screen: 'deployment', selectedStage: { id: 2 }, currentStageId: 2, unlockedStages: stages.map(stage => stage.id) };
     await load(forged);
     await page.locator('.campaign-stage-select').waitFor();
     assert.equal(await stageEnabled(page, 1), true);
     assert.equal(await stageEnabled(page, 2), false);
     assert.equal(await page.locator('.deployment-board-grid').count(), 0, '잠긴 전장 배치 저장은 원정 지도로 복구합니다');
     result.checks.push('잘못된 해금 목록·잠긴 전장 저장의 경계 보호');
-    const outOfOrder = { ...structuredClone(afterFirstLoss), screen: 'campaign', clearedStages: [1, 3], unlockedStages: Array.from({ length: 30 }, (_, index) => index + 1) };
+    const outOfOrder = { ...structuredClone(afterFirstLoss), screen: 'campaign', clearedStages: [1, 3], unlockedStages: stages.map(stage => stage.id) };
     await load(outOfOrder);
     await page.locator('.campaign-stage-select').waitFor();
     assert.equal(await stageEnabled(page, 1), true);
@@ -343,14 +345,14 @@ async function runViewport(base, viewport) {
     await page.locator('.town-hub').waitFor();
     await recommendedPreparation(page, 3);
     result.checks.push('이전 장 재플레이 후에도 첫 미클리어 장으로 출전 안내');
-    const allCleared = { ...structuredClone(victorious), clearedStages: Array.from({ length: 30 }, (_, index) => index + 1), lastBattleResult: { stageId: 30, outcome: 'victory' } };
+    const allCleared = { ...structuredClone(victorious), clearedStages: stages.map(stage => stage.id), lastBattleResult: { stageId: stages.at(-1).id, outcome: 'victory' } };
     await load(allCleared);
     await page.locator('.town-hub').waitFor();
     await page.locator('.town-player-nav').getByRole('button', { name: '출전 준비', exact: true }).click();
     await page.locator('.campaign-stage-select').waitFor();
     assert.equal(await page.locator('.deployment-board-grid').count(), 0, '모든 장 클리어 후 존재하지 않는 다음 장으로 진입하지 않습니다');
-    assert.equal(await stageEnabled(page, 30), true);
-    result.checks.push('30장 완료 경계와 재플레이 접근 유지');
+    assert.equal(await stageEnabled(page, stages.at(-1).id), true);
+    result.checks.push(`${stages.length}장 완료 경계와 재플레이 접근 유지`);
     await capture('all-cleared-boundary');
 
     assert.deepEqual(report.errors, [], '브라우저 오류와 리소스 실패가 없습니다');
@@ -371,7 +373,7 @@ try {
   report.build = JSON.parse(await fs.readFile(path.join(root, 'dist/ota-build.json'), 'utf8'));
   assert.deepEqual(report.build, webBuildInfo(root), '현재 최종 소스와 같은 생산 빌드로 검사합니다');
   server = await preview({ preview: { host: '127.0.0.1', port: 0, open: false } });
-  browser = await chromium.launch({ headless: true, ...(process.env.CHEONSU_QA_BROWSER ? { channel: process.env.CHEONSU_QA_BROWSER } : {}) });
+  browser = await chromium.launch(qaBrowserOptions());
   for (const viewport of viewports) await runViewport(`http://127.0.0.1:${server.httpServer.address().port}`, viewport);
   assert.deepEqual(report.build, webBuildInfo(root), '검사 도중 생산 빌드 소스가 바뀌지 않았습니다');
   report.passed = true;

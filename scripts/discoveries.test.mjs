@@ -23,6 +23,8 @@ import {
   getSkillCooldown, applyCooldown, tickCooldowns, applySupportSkill,
 } from '../src/data/skills.js';
 import { normalizeSaveData } from '../src/engine/saveEngine.js';
+import { createExpansionRecruit } from '../src/engine/promotionEngine.js';
+import { applyExpansionEnemyIdentity, createExpansionEnemy, createExpansionExtraEnemy, getExpansionEnemyKeys } from '../src/data/expansionEnemies.js';
 
 function freeze(value) {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -54,13 +56,14 @@ const appHelpers = runInNewContext([
   '({ expandStageForLargeBattle, extendMapForPlayableBoard, spaceBattleFormations, createRecruitAlly, promoteAllyUnit })',
 ].join('\n'), {
   alignMapToArtwork, createBattlefieldTerrain, getBattlefieldPlan, applyEquipmentStats, distributeBattleFormations, getSkillDisplayName, getChapterBossName, applyStageMonsterAppearance, withStageEnemyLevel,
+  createExpansionRecruit, applyExpansionEnemyIdentity, createExpansionEnemy, createExpansionExtraEnemy, getExpansionEnemyKeys,
   clone: (value) => JSON.parse(JSON.stringify(value)),
   Math: Object.assign(Object.create(Math), { random: () => { throw new Error('Random map placement'); } }),
 });
 
 const initialParty = getInitialParty();
 
-test('lightweight roster previews match actual units and all 30 battle titles match the campaign', () => {
+test('lightweight roster previews match actual units and all actual battle titles match the campaign', () => {
   const withoutPosition = units => JSON.parse(JSON.stringify(units.map(({ x: _x, y: _y, ...unit }) => unit)));
   for (const stage of stages) {
     const roster = appHelpers.expandStageForLargeBattle(stage, 4, { rosterOnly: true });

@@ -4,11 +4,12 @@ import fs from 'node:fs/promises';
 import { STORY_SCENES } from '../src/data/storyScenes.js';
 import { getStoryPortrait } from '../src/data/storyArt.js';
 import { getWorldScene } from '../src/data/worldArt.js';
+import { qaBrowserOptions } from './qa-browser.mjs';
 
-const base = process.env.GAME_URL || 'http://127.0.0.1:5176';
+const base = process.env.FIXTURE_URL || process.env.GAME_URL || 'http://127.0.0.1:5176';
 const out = 'tmp/story-art-qa';
 await fs.mkdir(out, { recursive: true });
-const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const browser = await chromium.launch(qaBrowserOptions());
 let count = 0;
 try {
   for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }, { width: 320, height: 568 }, { width: 844, height: 390 }, { width: 568, height: 320 }]) {

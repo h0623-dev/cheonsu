@@ -1,9 +1,10 @@
+import { qaBrowserOptions, confirmStageMission } from './qa-browser.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 
 const url = process.env.GAME_URL || 'http://127.0.0.1:5176';
-const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const browser = await chromium.launch(qaBrowserOptions());
 await fs.mkdir('tmp/performance-qa', { recursive: true });
 try {
   for (const code of [335, 337]) {
@@ -22,7 +23,7 @@ try {
     await page.getByRole('button', { name: '새 게임', exact: true }).click();
     await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: /^1장\./ }) }).click();
     await page.getByRole('button', { name: '전투 시작', exact: true }).click();
-    await page.getByRole('button', { name: '바로 전투', exact: true }).click();
+    await page.getByRole('button', { name: '바로 전투', exact: true }).click(); await confirmStageMission(page);
     // Chapter 1 is now compact: enlarge once so there is enough vertical travel to test inertia.
     await page.getByRole('button', { name: '정보 표시', exact: true }).click();
     await page.getByRole('button', { name: '전장 확대', exact: true }).click();

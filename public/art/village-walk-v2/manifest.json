@@ -713,6 +713,182 @@
           "bottom": 447
         }
       }
+    },
+    "mare": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/mare-front-a.webp",
+        "front-b": "/art/village-walk-v2/mare-front-b.webp",
+        "back-a": "/art/village-walk-v2/mare-back-a.webp",
+        "back-b": "/art/village-walk-v2/mare-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 32,
+          "top": 49,
+          "right": 350,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 45,
+          "top": 51,
+          "right": 337,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 34,
+          "top": 48,
+          "right": 348,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 37,
+          "top": 49,
+          "right": 345,
+          "bottom": 447
+        }
+      },
+      "source": "docs/art/village-walk-v2/sources/mare.png",
+      "sourceSha256": "f9990455212bd0e4ca94414dfb0c9e10ce7df26933f8711c36394a27b2fa2dad"
+    },
+    "harin": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/harin-front-a.webp",
+        "front-b": "/art/village-walk-v2/harin-front-b.webp",
+        "back-a": "/art/village-walk-v2/harin-back-a.webp",
+        "back-b": "/art/village-walk-v2/harin-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 76,
+          "top": 48,
+          "right": 306,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 75,
+          "top": 47,
+          "right": 307,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 67,
+          "top": 49,
+          "right": 315,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 70,
+          "top": 64,
+          "right": 312,
+          "bottom": 447
+        }
+      },
+      "source": "docs/art/village-walk-v2/sources/harin.png",
+      "sourceSha256": "c48d27e1e48ccfa340d8ee20e648604adabe857d870043e5c1353919937e3282"
+    },
+    "edan": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/edan-front-a.webp",
+        "front-b": "/art/village-walk-v2/edan-front-b.webp",
+        "back-a": "/art/village-walk-v2/edan-back-a.webp",
+        "back-b": "/art/village-walk-v2/edan-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 41,
+          "top": 48,
+          "right": 341,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 39,
+          "top": 41,
+          "right": 343,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 17,
+          "top": 48,
+          "right": 365,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 21,
+          "top": 48,
+          "right": 362,
+          "bottom": 447
+        }
+      },
+      "source": "docs/art/village-walk-v2/sources/edan.png",
+      "sourceSha256": "efc12a651f79113bb1237c2e2149d7f1a2caec348ccccefe4eee25688b9fcf23"
+    },
+    "sylvan": {
+      "frames": {
+        "front-a": "/art/village-walk-v2/sylvan-front-a.webp",
+        "front-b": "/art/village-walk-v2/sylvan-front-b.webp",
+        "back-a": "/art/village-walk-v2/sylvan-back-a.webp",
+        "back-b": "/art/village-walk-v2/sylvan-back-b.webp"
+      },
+      "metrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 20,
+          "top": 49,
+          "right": 363,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 26,
+          "top": 46,
+          "right": 356,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 46,
+          "top": 48,
+          "right": 337,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 30,
+          "top": 44,
+          "right": 352,
+          "bottom": 447
+        }
+      },
+      "source": "docs/art/village-walk-v2/sources/sylvan.png",
+      "sourceSha256": "6d33fdb512629168580f2cfbd6b6945f9bfc09d01589a62dfa169cdc89c341b2"
     }
   }
 }

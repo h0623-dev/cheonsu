@@ -17,7 +17,7 @@ const assert = require('node:assert/strict');
       await new Promise(resolve => setTimeout(resolve, 250));
     }
     assert.ok(ready, 'Production preview started');
-    browser = await chromium.launch({ channel: 'msedge', headless: true });
+    browser = await chromium.launch((await import('./qa-browser.mjs')).qaBrowserOptions());
     const page = await browser.newPage({ viewport: { width: 390, height: 844 }, serviceWorkers: 'block' });
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
@@ -35,7 +35,7 @@ const assert = require('node:assert/strict');
     await page.getByRole('button', { name: '전투 시작', exact: true }).click();
     await page.locator('.narrative-actor img').evaluate(image => image.decode());
     assert.ok(await page.locator('.narrative-line').innerText());
-    await page.getByRole('button', { name: '바로 전투', exact: true }).click();
+    await page.getByRole('button', { name: '바로 전투', exact: true }).click(); await (await import('./qa-browser.mjs')).confirmStageMission(page);
     await page.locator('.world-battlefield .unit-visual-hero').waitFor();
     const enemies = page.locator('.world-battlefield .unit img[src*="/art/map-sprites-v4/"]');
     assert.ok(await enemies.count() > 0);

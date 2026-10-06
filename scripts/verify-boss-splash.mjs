@@ -1,10 +1,13 @@
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
+import { qaBrowserOptions } from './qa-browser.mjs';
+import { confirmArtQaDeployment, confirmArtQaMission } from './art-qa-game.mjs';
 import fs from 'node:fs/promises';
 import { getCharacterArt } from '../src/data/characterArt.js';
 import { getBossSplash } from '../src/data/bossArt.js';
-const base=process.env.GAME_URL || 'http://127.0.0.1:5176';
-const browser=await chromium.launch({headless:true,...(process.env.CHEONSU_QA_BROWSER?{channel:process.env.CHEONSU_QA_BROWSER}:process.platform==='win32'?{channel:'msedge'}:{})});
+import { EXPANSION_BOSS_KEYS, EXPANSION_ENEMY_TEMPLATES } from '../src/data/expansionEnemies.js';
+const base=process.env.FIXTURE_URL || process.env.GAME_URL || 'http://127.0.0.1:5176';
+const browser=await chromium.launch(qaBrowserOptions());
 const out='tmp/boss-splash-qa';
 await fs.mkdir(out,{recursive:true});
 let count=0;
@@ -13,8 +16,8 @@ try {
     const page=await browser.newPage({viewport,serviceWorkers:'block'});
     const errors=[];page.on('pageerror',e=>errors.push(e.message));
     await page.goto(`${base}/tests/fixtures/boss-splash.html`);
-    for(const key of ['boss_commander','boss_frost','boss_ember','boss_oracle','boss_abyss']) for(const phase of [false,true]) {
-      await page.evaluate(data=>window.renderBossSplash(data),{key,phase,name:key==='boss_abyss'?'심연의 군주 가론':'정예 지휘관'});
+    for(const key of ['boss_commander','boss_frost','boss_ember','boss_oracle','boss_abyss',...EXPANSION_BOSS_KEYS]) for(const phase of [false,true]) {
+      await page.evaluate(data=>window.renderBossSplash(data),{key,phase,name:EXPANSION_ENEMY_TEMPLATES[key]?.name || (key==='boss_abyss'?'심연의 군주 가론':'정예 지휘관')});
       await page.locator('.boss-splash-art').evaluate(img=>img.decode());
       await page.waitForTimeout(250);
       await page.evaluate(()=>document.getAnimations().forEach(animation=>animation.finish()));
@@ -49,14 +52,17 @@ try {
   await fallbackPage.waitForFunction(()=>document.querySelector('.boss-splash-art.is-fallback')?.naturalWidth>0);
   await fallbackPage.close();
   const page=await browser.newPage({viewport:{width:390,height:844},serviceWorkers:'block'});
+  const time=new Date('2026-09-28T00:00:00Z');
+  await page.clock.install({time});
+  await page.clock.pauseAt(new Date(time.getTime()+60000));
   await page.addInitScript(()=>localStorage.setItem('cheonsu_settings_v1',JSON.stringify({soundOn:false,musicOn:false,cutsceneMode:'off'})));
   await page.goto(process.env.ACTUAL_GAME_URL || base);
   await page.getByRole('button',{name:'새 게임',exact:true}).click();
   await page.locator('.campaign-stage-select button').filter({has:page.locator('strong').filter({hasText:/^1장\./})}).click();
   await page.getByRole('button',{name:'전투 시작',exact:true}).click();
-  await page.clock.install();
-  await page.clock.pauseAt(new Date());
+  await confirmArtQaDeployment(page);
   await page.getByRole('button',{name:'바로 전투',exact:true}).click();
+  await confirmArtQaMission(page);
   await page.clock.runFor(1000);
   await page.locator('.boss-splash-art').evaluate(img=>img.decode());
   assert.equal(await page.locator('.boss-splash-overlay').count(),1);

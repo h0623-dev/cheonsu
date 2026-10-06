@@ -10,8 +10,7 @@ async function snapshot(page, name) {
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, `${name}: no page overflow`);
 }
 async function save(page) {
-  await page.locator('.cinematic-stage-actions button').filter({ hasText: '설정' }).click();
-  await page.locator('.battle-settings-menu button').filter({ hasText: '진행 저장' }).click();
+  await page.locator('.battle-control-heading .prominent-save').click();
   return page.evaluate(() => Object.entries(localStorage).map(([key, value]) => {
     try { return { key, data: JSON.parse(value) }; } catch { return null; }
   }).find(entry => entry?.key === 'cheonsu_v01_save'));
@@ -24,7 +23,7 @@ async function restore(page, fixture) {
 }
 async function main() {
   await mkdir(out, { recursive: true });
-  const browser = await chromium.launch({ ...(process.platform === 'win32' ? { channel: 'msedge' } : {}), headless: true });
+  const browser = await chromium.launch((await import('./qa-browser.mjs')).qaBrowserOptions());
   const errors = [];
   try {
     for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }, { width: 320, height: 568 }]) {
@@ -52,7 +51,7 @@ async function main() {
       await page.getByRole('button', { name: '이어하기', exact: true }).click();
       await page.locator('.campaign-stage-select button').filter({ hasText: /^11장\./ }).click();
       await page.getByRole('button', { name: '전투 시작', exact: true }).click();
-      await page.getByRole('button', { name: '바로 전투', exact: true }).click();
+      await page.getByRole('button', { name: '바로 전투', exact: true }).click(); await (await import('./qa-browser.mjs')).confirmStageMission(page);
       await page.locator('.world-battlefield .unit-visual-hero').waitFor();
       await page.locator('.world-battlefield .unit-visual-hero').click();
       const before = await save(page);
@@ -80,7 +79,12 @@ async function main() {
       fixture.data.selectedUnit = 'hero';
       fixture.data.hazards = [];
       await restore(page, fixture);
+      const info = page.getByRole('button', { name: '정보 표시', exact: true });
+      if (await info.isVisible()) await info.click();
       await page.getByRole('button', { name: '전장 확대', exact: true }).click();
+      const cameraZoom = await page.locator('.battle-map-scroll-shell').evaluate(element => [...element.classList].find(name => name.startsWith('map-zoom-')));
+      const hideInfo = page.getByRole('button', { name: '정보 숨김', exact: true });
+      if (await hideInfo.isVisible()) await hideInfo.click();
       await page.emulateMedia({ reducedMotion: 'reduce' });
       await page.evaluate(() => {
         window.turnCameraFrames = [];
@@ -99,7 +103,7 @@ async function main() {
       await page.waitForFunction(({ x, y }) => window.turnCameraFrames.some(frame => frame.x === x && frame.y === y), hero);
       const frames = await page.evaluate(() => window.turnCameraFrames);
       assert.ok(Math.max(...frames.map(frame => frame.top)) - Math.min(...frames.map(frame => frame.top)) > 20 || Math.max(...frames.map(frame => frame.left)) - Math.min(...frames.map(frame => frame.left)) > 20, 'Camera must actually scroll between teams');
-      assert.ok(await page.locator('.map-zoom-normal').count(), 'Auto camera preserves zoom');
+      assert.ok(await page.locator(`.${cameraZoom}`).count(), '자동 카메라는 사용자가 선택한 확대 수준을 보존합니다');
       await snapshot(page, `ally-turn-${viewport.width}`);
       if (viewport.width === 390) {
         const combatFixture = structuredClone(fixture);
@@ -116,7 +120,7 @@ async function main() {
         await page.locator('.world-battlefield .unit-visual-hero').click();
         await page.locator('.cmd-attack').click();
         await page.locator(`.world-battlefield .tile[data-map-x="${foe.x}"][data-map-y="${foe.y}"] .unit`).click();
-        await page.getByRole('button', { name: '공격 실행', exact: true }).click();
+        assert.equal(await page.locator('.vs-preview-modal').count(), 0, '적을 선택하면 바로 공격합니다');
         await page.locator('.painted-combat').waitFor();
         assert.ok(await page.locator('.painted-combat .fighter-action').evaluate(img => img.complete && img.naturalWidth === 512));
         await snapshot(page, 'live-combat-mobile');

@@ -155,6 +155,10 @@
   .combat-result strong { font-size: 30px; }
 }
 @media (max-width: 600px) and (orientation: portrait) {
+  /* 동료 지원 시 확대된 창과 준비 동작도 화면 안에 들어오도록 두 배우에 여백을 둡니다. */
+  .duel-choreographed.is-support:not(.is-self-support) .painted-fighter { width: 36%; }
+  .duel-choreographed.is-support:not(.is-self-support) .fighter-attacker { left: 8%; }
+  .duel-choreographed.is-support:not(.is-self-support) .fighter-defender { right: 8%; }
   .fighter-defender:is(
     [data-unit-key="kobold-hunter"],
     [data-unit-key="lizard-spearman"],

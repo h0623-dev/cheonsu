@@ -1,4 +1,6 @@
-export const stages = [
+import { createExpansionStages } from './campaignExpansion.js';
+
+const ORIGINAL_STAGES = [
 {
     id: 1,
     title: "1장. 국경 초소",
@@ -841,3 +843,5 @@ export const stages = [
     ],
   }
 ];
+
+export const stages = [...ORIGINAL_STAGES, ...createExpansionStages(ORIGINAL_STAGES)];

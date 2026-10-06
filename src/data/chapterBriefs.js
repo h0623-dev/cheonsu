@@ -32,6 +32,8 @@ const entries = [
 ];
 
 export function getChapterBrief(stageId) {
+  if (EXPANSION_CHAPTER_BRIEFS[stageId]) return { ...EXPANSION_CHAPTER_BRIEFS[stageId] };
   const entry = entries[stageId - 1];
   return entry ? { title: entry[0], text: entry[1] } : null;
 }
+import { EXPANSION_CHAPTER_BRIEFS } from './campaignExpansion.js';

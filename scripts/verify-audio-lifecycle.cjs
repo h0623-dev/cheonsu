@@ -2,7 +2,7 @@ const {chromium}=require('playwright');
 const assert=require('node:assert/strict');
 const fs=require('node:fs/promises');
 (async()=>{
-  const browser=await chromium.launch({channel:'msedge',headless:true});
+  const browser=await chromium.launch((await import('./qa-browser.mjs')).qaBrowserOptions());
   try {
     const page=await browser.newPage({viewport:{width:390,height:844},serviceWorkers:'block'});
     const errors=[]; page.on('pageerror',error=>errors.push(error.message));
@@ -19,7 +19,7 @@ const fs=require('node:fs/promises');
     await page.getByRole('button',{name:'새 게임',exact:true}).click();
     await page.locator('.campaign-stage-select button').filter({has:page.locator('strong').filter({hasText:/^1장\./})}).click();
     await page.getByRole('button',{name:'전투 시작',exact:true}).click();
-    await page.getByRole('button',{name:'바로 전투',exact:true}).click();
+    await page.getByRole('button',{name:'바로 전투',exact:true}).click(); await (await import('./qa-browser.mjs')).confirmStageMission(page);
     await page.locator('.world-battlefield').waitFor();
     await page.waitForTimeout(2500);
     const count=()=>page.evaluate(()=>({...window.audioTest}));

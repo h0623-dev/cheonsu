@@ -1,0 +1,129 @@
+{
+  "source": "docs/art/world-v2/sources/terrain-expansion.png",
+  "sha256": "6a3536e71cbda22e74dd05c7273954a85ad451ee2d259831724907b36a49be7a",
+  "columns": 2,
+  "rows": 5,
+  "note": "생성 도구로 직접 제작한 2열 5행 지형 원화를 자른 결과. 기존 지형 원본과 파일은 보존합니다.",
+  "exports": [
+    {
+      "id": "shell_reef",
+      "file": "public/art/world-v2/terrain/shell_reef.webp",
+      "crop": {
+        "left": 0,
+        "top": 0,
+        "width": 627,
+        "height": 251
+      },
+      "width": 512,
+      "height": 512
+    },
+    {
+      "id": "sluice_bridge",
+      "file": "public/art/world-v2/terrain/sluice_bridge.webp",
+      "crop": {
+        "left": 627,
+        "top": 0,
+        "width": 627,
+        "height": 251
+      },
+      "width": 512,
+      "height": 512
+    },
+    {
+      "id": "packed_snow",
+      "file": "public/art/world-v2/terrain/packed_snow.webp",
+      "crop": {
+        "left": 0,
+        "top": 251,
+        "width": 627,
+        "height": 251
+      },
+      "width": 512,
+      "height": 512
+    },
+    {
+      "id": "hot_spring",
+      "file": "public/art/world-v2/terrain/hot_spring.webp",
+      "crop": {
+        "left": 627,
+        "top": 251,
+        "width": 627,
+        "height": 251
+      },
+      "width": 512,
+      "height": 512
+    },
+    {
+      "id": "power_conduit",
+      "file": "public/art/world-v2/terrain/power_conduit.webp",
+      "crop": {
+        "left": 0,
+        "top": 502,
+        "width": 627,
+        "height": 250
+      },
+      "width": 512,
+      "height": 512
+    },
+    {
+      "id": "resonance_pad",
+      "file": "public/art/world-v2/terrain/resonance_pad.webp",
+      "crop": {
+        "left": 627,
+        "top": 502,
+        "width": 627,
+        "height": 250
+      },
+      "width": 512,
+      "height": 512
+    },
+    {
+      "id": "star_moss",
+      "file": "public/art/world-v2/terrain/star_moss.webp",
+      "crop": {
+        "left": 0,
+        "top": 752,
+        "width": 627,
+        "height": 251
+      },
+      "width": 512,
+      "height": 512
+    },
+    {
+      "id": "oath_rune",
+      "file": "public/art/world-v2/terrain/oath_rune.webp",
+      "crop": {
+        "left": 627,
+        "top": 752,
+        "width": 627,
+        "height": 251
+      },
+      "width": 512,
+      "height": 512
+    },
+    {
+      "id": "cracked_slab",
+      "file": "public/art/world-v2/terrain/cracked_slab.webp",
+      "crop": {
+        "left": 0,
+        "top": 1003,
+        "width": 627,
+        "height": 251
+      },
+      "width": 512,
+      "height": 512
+    },
+    {
+      "id": "low_rubble",
+      "file": "public/art/world-v2/terrain/low_rubble.webp",
+      "crop": {
+        "left": 627,
+        "top": 1003,
+        "width": 627,
+        "height": 251
+      },
+      "width": 512,
+      "height": 512
+    }
+  ]
+}

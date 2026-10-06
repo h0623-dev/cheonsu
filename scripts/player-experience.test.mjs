@@ -8,6 +8,8 @@ import { STORY_SCENES } from '../src/data/storyScenes.js';
 import { storySpeakerKeys } from '../src/data/storyArt.js';
 import { normalizeSaveData } from '../src/engine/saveEngine.js';
 import { getInitialParty } from '../src/engine/partyEngine.js';
+import { stages } from '../src/data/stages.js';
+import { EXPANSION_ENEMY_TEMPLATES } from '../src/data/expansionEnemies.js';
 
 test('menu handles missing, corrupt, invalid and older checkpoints without writing', () => {
   const read = value => readMenuCheckpoint({ getItem: () => value, setItem: () => { throw new Error('must not write'); } });
@@ -29,15 +31,19 @@ test('story replays gate spoilers without changing campaign progress', () => {
   assert.deepEqual(cleared, [1, 2]);
   assert.equal(getNextChapter([]), 1);
   assert.equal(getNextChapter(cleared), 3);
-  assert.equal(getNextChapter(Array.from({ length: 30 }, (_, i) => i + 1)), null);
+  assert.equal(getNextChapter(Array.from({ length: 30 }, (_, i) => i + 1)), 31);
+  assert.equal(getNextChapter(stages.map(stage => stage.id)), null);
 });
-test('all current characters, speakers and 30 chapters have authored context', () => {
+test('all current characters, speakers and fifty chapters have authored context', () => {
   for (const id of Object.keys(CHARACTER_SKILLS)) assert.ok(CHARACTER_PROFILES[id]?.bio && CHARACTER_PROFILES[id]?.role, id);
-  for (const story of Object.values(STORY_SCENES)) for (const line of [...story.intro, ...story.clear]) assert.ok(CHARACTER_PROFILES[storySpeakerKeys[line.speaker]], line.speaker);
-  const briefs = Array.from({ length: 30 }, (_, index) => getChapterBrief(index + 1));
+  for (const story of Object.values(STORY_SCENES)) for (const line of [...story.intro, ...story.clear]) {
+    const key = storySpeakerKeys[line.speaker];
+    assert.ok(CHARACTER_PROFILES[key] || EXPANSION_ENEMY_TEMPLATES[key], line.speaker);
+  }
+  const briefs = stages.map(stage => getChapterBrief(stage.id));
   assert.ok(briefs.every(brief => brief.title && brief.text.length > 25));
-  assert.equal(new Set(briefs.map(brief => brief.text)).size, 30);
-  assert.equal(getChapterBrief(31), null);
+  assert.equal(new Set(briefs.map(brief => brief.text)).size, stages.length);
+  assert.equal(getChapterBrief(stages.length + 1), null);
   assert.match(CHARACTER_PROFILES.lina.role, /궁수/);
 });
 test('automatic dialogue leaves reading time and has an upper bound', () => {

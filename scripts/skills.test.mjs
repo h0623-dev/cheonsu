@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import legacySkills from './fixtures/legacy-skills-1.99.162.json' with { type: 'json' };
 import {
   CHARACTER_SKILLS, getUnitSkills, getSkill, skillDescription, withSkill,
   getSkillCooldown, applyCooldown, tickCooldowns, getSupportSkillTargets, applySupportSkill,
@@ -12,17 +13,22 @@ import {
 } from '../src/engine/partyEngine.js';
 import { BATTLE_SPEED_OPTIONS, getBattleSpeedConfig, scaleBattleTime } from '../src/engine/battleSpeed.js';
 
-const characterIds = [
+const legacyCharacterIds = [
   'hero', 'bram', 'lina', 'aria', 'leon', 'sera', 'noah', 'yuna', 'rakan',
   'miho', 'teo', 'irene', 'kaz', 'ella', 'jin', 'luka', 'baekho',
 ];
+const newCharacterIds = ['mare', 'harin', 'edan', 'sylvan'];
+const characterIds = [...legacyCharacterIds, ...newCharacterIds];
 const ally = (id, extra = {}) => ({
   id, name: id, type: 'ally', x: 2, y: 2, hp: 40, maxHp: 40,
   atk: 20, def: 5, skl: 6, spd: 3, luk: 4, skillLevel: 0, status: [], ...extra,
 });
 
-test('all 17 characters have two distinct skills with valid descriptions', () => {
+test('all 21 characters have two distinct skills with valid descriptions while preserving the original 34 skill definitions', () => {
   assert.deepEqual(Object.keys(CHARACTER_SKILLS).sort(), [...characterIds].sort());
+  assert.equal(Object.values(legacySkills.characters).flat().length, 34);
+  assert.deepEqual(Object.fromEntries(legacyCharacterIds.map(id => [id, CHARACTER_SKILLS[id]])), legacySkills.characters,
+    '기존 17명의 스킬 ID·한국어 명칭·보너스·사거리·쿨다운·상태 효과를 모두 보존합니다');
   const ids = new Set();
   for (const id of characterIds) {
     const skills = getUnitSkills({ id });
@@ -37,7 +43,11 @@ test('all 17 characters have two distinct skills with valid descriptions', () =>
       assert.doesNotMatch(skillDescription(skill), /NaN|undefined/);
     }
   }
-  assert.equal(ids.size, 34);
+  assert.equal(ids.size, 42);
+  assert.deepEqual(Object.fromEntries(newCharacterIds.map(id => [id, CHARACTER_SKILLS[id].map(skill => skill.name)])), {
+    mare: ['해류 찌르기', '물길 엄호'], harin: ['온맥수', '연환권'],
+    edan: ['파쇄 망치', '접이식 방벽 전개'], sylvan: ['뿌리 얽기', '녹음 숨결'],
+  });
   assert.deepEqual(getUnitSkills(null), []);
   assert.equal(getSkill({ id: 'unknown' }), null);
   assert.equal(withSkill(null), null);

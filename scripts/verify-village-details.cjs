@@ -6,7 +6,10 @@ const key = 'cheonsu_v01_save';
 const read = page => page.evaluate(key => JSON.parse(localStorage.getItem(key)), key);
 
 async function main() {
-  const browser = await chromium.launch({ channel: 'msedge', headless: true });
+  const { stages } = await import('../src/data/stages.js');
+  const { mergePartyIntoStage } = await import('../src/engine/partyEngine.js');
+  await fs.mkdir('tmp/village-qa', { recursive: true });
+  const browser = await chromium.launch((await import('./qa-browser.mjs')).qaBrowserOptions());
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, serviceWorkers: 'block' });
   page.setDefaultTimeout(12000);
   page.on('dialog', dialog => dialog.dismiss());
@@ -48,13 +51,9 @@ async function main() {
     assert.ok((await read(page)).party.every(unit => unit.hp === unit.maxHp));
     await facility.getByRole('button', { name: '시설 닫기', exact: true }).click();
 
-    const victory = await page.evaluate(async seed => {
-      const { stages } = await import('/src/data/stages.js');
-      const { mergePartyIntoStage } = await import('/src/engine/partyEngine.js');
-      const stage = stages[0];
-      return { ...seed, selectedStage: stage, screen: 'battle', selectedUnit: null, mode: 'move', turn: 'ally',
-        clearedStages: [], stageRewardClaimed: false, units: mergePartyIntoStage(stage, seed.party).filter(unit => unit.type === 'ally') };
-    }, seed);
+    const stage = stages[0];
+    const victory = { ...seed, selectedStage: stage, screen: 'battle', selectedUnit: null, mode: 'move', turn: 'ally',
+      clearedStages: [], stageRewardClaimed: false, units: mergePartyIntoStage(stage, seed.party).filter(unit => unit.type === 'ally') };
     await page.evaluate(({ key, data }) => localStorage.setItem(key, JSON.stringify(data)), { key, data: victory });
     await page.addInitScript(() => {
       const write = Storage.prototype.setItem;

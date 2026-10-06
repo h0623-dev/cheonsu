@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
-import { combatUnitIds, combatMotionPoses, getCombatMotionSprite, getCombatPresentation } from '../src/data/combatArt.js';
+import { legacyCombatUnitIds, combatMotionPoses, getCombatMotionSprite, getCombatPresentation } from '../src/data/combatArt.js';
 import { getUnitCombatClass } from '../src/engine/combat.js';
 import { withSkill } from '../src/data/skills.js';
 import { getCharacterArt } from '../src/data/characterArt.js';
@@ -14,7 +14,8 @@ test('all 47 combat characters have transparent anchored frames from their activ
   const bosses = JSON.parse(await readFile(new URL('../public/art/bosses-v1/manifest.json', import.meta.url), 'utf8'));
   assert.equal(Object.keys(manifest.units).length, 36);
   assert.equal(combatMotionPoses.length, 6);
-  for (const id of combatUnitIds) {
+  assert.equal(legacyCombatUnitIds.length, 47);
+  for (const id of legacyCombatUnitIds) {
     const hashes = new Set();
     for (const pose of combatMotionPoses) {
       const asset = getCombatMotionSprite(id, pose);

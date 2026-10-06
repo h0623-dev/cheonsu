@@ -19,7 +19,7 @@ async function readJson(file, fallback) {
 }
 
 // Extract authored independent silhouettes; do not synthesize or deform poses.
-async function extract(file, rows, columns, componentAssignments = [], replacedSlots = []) {
+async function extract(file, rows, columns, componentAssignments = [], replacedSlots = [], replacementSources = {}) {
   const input = await fs.readFile(file);
   const metadata = await sharp(input).metadata();
   if (!metadata.hasAlpha) throw new Error(`${file}: 투명 원화가 필요합니다.`);
@@ -38,6 +38,23 @@ async function extract(file, rows, columns, componentAssignments = [], replacedS
   const sources = [];
   for (let slot = 0; slot < rows * columns; slot++) {
     const parts = regions.filter(region => region.slot === slot && region.area >= 4);
+    if (Object.hasOwn(replacementSources, slot)) {
+      const replacement = replacementSources[slot];
+      if (!replacement || !Buffer.isBuffer(replacement.pixels) || replacement.width < 1 || replacement.height < 1
+        || replacement.pixels.length !== replacement.width * replacement.height * 4)
+        throw new Error(`${file}: ${slot}번의 실제 교정 원화 픽셀 데이터가 유효하지 않습니다.`);
+      let originalFrameHeight = null;
+      if (parts.some(region => region.area > 1000)) {
+        const oldWidth = Math.max(...parts.map(p => p.right)) - Math.min(...parts.map(p => p.left)) + 1;
+        const oldHeight = Math.max(...parts.map(p => p.bottom)) - Math.min(...parts.map(p => p.top)) + 1;
+        if (oldWidth <= info.width / columns * 1.6 && oldHeight <= info.height / rows * 1.25)
+          originalFrameHeight = oldHeight;
+      }
+      // The caller already extracts this authored full pose strictly as 1×1.
+      // Missing/merged atlas silhouettes never become blank placeholder sprites.
+      sources.push({ ...replacement, originalFrameHeight });
+      continue;
+    }
     if (!parts.some(region => region.area > 1000)) throw new Error(`${file}: ${slot}번 자세 누락`);
     const box = { left: Math.min(...parts.map(p => p.left)), top: Math.min(...parts.map(p => p.top)),
       right: Math.max(...parts.map(p => p.right)), bottom: Math.max(...parts.map(p => p.bottom)) };

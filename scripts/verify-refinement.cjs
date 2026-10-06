@@ -27,14 +27,14 @@ async function bootstrap(page,stage=1) {
   await page.getByRole('button',{name:'새 게임',exact:true}).click();
   await page.locator('.campaign-stage-select button').filter({has:page.locator('strong').filter({hasText:new RegExp(`^${stage}장\\.`)})}).click();
   await page.getByRole('button',{name:'전투 시작',exact:true}).click();
-  await page.getByRole('button',{name:'바로 전투',exact:true}).click();
+  await page.getByRole('button',{name:'바로 전투',exact:true}).click(); await (await import('./qa-browser.mjs')).confirmStageMission(page);
   await page.locator('.world-battlefield').waitFor();
   await page.locator('.boss-cutscene').waitFor({state:'hidden'}).catch(()=>{});
   return save(page);
 }
 async function main() {
   await fs.mkdir(out,{recursive:true});
-  const browser=await chromium.launch({channel:'msedge',headless:true});
+  const browser=await chromium.launch((await import('./qa-browser.mjs')).qaBrowserOptions());
   try {
     for(const viewport of (process.argv.includes('--audio') ? [] : [{width:1280,height:900},{width:390,height:844},{width:320,height:568}])) {
       const context=await browser.newContext({viewport,serviceWorkers:'block'});
@@ -90,7 +90,7 @@ async function main() {
         if(destination==='next') {
           await page.locator('.deployment-simple-screen').waitFor();
           await page.getByRole('button',{name:'전투 시작',exact:true}).click();
-          await page.getByRole('button',{name:'바로 전투',exact:true}).click();
+          await page.getByRole('button',{name:'바로 전투',exact:true}).click(); await (await import('./qa-browser.mjs')).confirmStageMission(page);
           const next=await save(page);
           assert.equal(next.selectedStage.id,2);
           assert.ok(next.clearedStages.includes(1));

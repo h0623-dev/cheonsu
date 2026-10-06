@@ -1,0 +1,6260 @@
+{
+  "description": "신규 62종의 실제 512px 원화를 직접 검토한 자세별 무기·공격 기관 부착 좌표. 원화 SHA와 가려진 손 등의 관찰 한계를 기록하며 수동 근삿값을 정밀 실측으로 표시하지 않는다. 기존 47종의 실측 좌표를 우선 보존한다.",
+  "units": {
+    "mare": {
+      "windup": {
+        "kind": "spear",
+        "grip": [
+          313,
+          263
+        ],
+        "tip": [
+          113,
+          181
+        ],
+        "focus": [
+          113,
+          181
+        ],
+        "framePath": "public/art/characters-v3/units/mare-windup.webp",
+        "frameSha256": "217d75aea7039ef145218f8be5a476362fe10892f159a93cb5b38aaa8cf5a732",
+        "reviewMethod": "기존 신규 아군 4명의 실제 프레임 수동 검토 좌표를 보존하고 이번 최종 원화 SHA와 연결. 새 재측정으로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "spear",
+        "grip": [
+          292,
+          335
+        ],
+        "tip": [
+          491,
+          300
+        ],
+        "focus": [
+          491,
+          300
+        ],
+        "framePath": "public/art/characters-v3/units/mare-strike.webp",
+        "frameSha256": "3cd63208ba301e85b82f68f02ff1e3d8bb454b4c8a4968445b2baf0979b75eb7",
+        "reviewMethod": "기존 신규 아군 4명의 실제 프레임 수동 검토 좌표를 보존하고 이번 최종 원화 SHA와 연결. 새 재측정으로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "spear",
+        "grip": [
+          307,
+          388
+        ],
+        "tip": [
+          420,
+          200
+        ],
+        "focus": [
+          420,
+          200
+        ],
+        "framePath": "public/art/characters-v3/units/mare-skill-a.webp",
+        "frameSha256": "b83701f43aa3611a1ff04ed935bdf441f8e62e8c2a6d31e29cdeb5cb515d1b44",
+        "reviewMethod": "기존 신규 아군 4명의 실제 프레임 수동 검토 좌표를 보존하고 이번 최종 원화 SHA와 연결. 새 재측정으로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "spear",
+        "grip": [
+          202,
+          350
+        ],
+        "tip": [
+          72,
+          415
+        ],
+        "focus": [
+          72,
+          415
+        ],
+        "framePath": "public/art/characters-v3/units/mare-skill-b.webp",
+        "frameSha256": "56a1c8966eff90c377c0f76e75b86f3dc26c4baa7cf663f967cd381b821450c2",
+        "reviewMethod": "기존 신규 아군 4명의 실제 프레임 수동 검토 좌표를 보존하고 이번 최종 원화 SHA와 연결. 새 재측정으로 표시하지 않음."
+      }
+    },
+    "harin": {
+      "windup": {
+        "kind": "fist",
+        "grip": [
+          367,
+          264
+        ],
+        "tip": [
+          379,
+          233
+        ],
+        "focus": [
+          379,
+          233
+        ],
+        "framePath": "public/art/characters-v3/units/harin-windup.webp",
+        "frameSha256": "e947048459d025640c2b80cad21ab185632c6f56c9547ea43813b2a10aaf179d",
+        "reviewMethod": "기존 신규 아군 4명의 실제 프레임 수동 검토 좌표를 보존하고 이번 최종 원화 SHA와 연결. 새 재측정으로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "fist",
+        "grip": [
+          419,
+          228
+        ],
+        "tip": [
+          452,
+          222
+        ],
+        "focus": [
+          452,
+          222
+        ],
+        "framePath": "public/art/characters-v3/units/harin-strike.webp",
+        "frameSha256": "cd015e01b59146152929cc6adfa63469ecb30ddeb87dd3b8027e7dd0a81a3024",
+        "reviewMethod": "기존 신규 아군 4명의 실제 프레임 수동 검토 좌표를 보존하고 이번 최종 원화 SHA와 연결. 새 재측정으로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "fist",
+        "grip": [
+          303,
+          196
+        ],
+        "tip": [
+          338,
+          175
+        ],
+        "focus": [
+          338,
+          175
+        ],
+        "framePath": "public/art/characters-v3/units/harin-skill-a.webp",
+        "frameSha256": "8a6489ea90025d92f66f25862dde88ad9fcb08f61dfd704b2781d0932f9fe485",
+        "reviewMethod": "기존 신규 아군 4명의 실제 프레임 수동 검토 좌표를 보존하고 이번 최종 원화 SHA와 연결. 새 재측정으로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "fist",
+        "grip": [
+          406,
+          215
+        ],
+        "tip": [
+          427,
+          164
+        ],
+        "focus": [
+          427,
+          164
+        ],
+        "framePath": "public/art/characters-v3/units/harin-skill-b.webp",
+        "frameSha256": "a4a231ed7b04e45792cd76d4c89943c57355a1524d697feeb8873c7e5bb7eb31",
+        "reviewMethod": "기존 신규 아군 4명의 실제 프레임 수동 검토 좌표를 보존하고 이번 최종 원화 SHA와 연결. 새 재측정으로 표시하지 않음."
+      }
+    },
+    "edan": {
+      "windup": {
+        "kind": "hammer",
+        "grip": [
+          264,
+          188
+        ],
+        "tip": [
+          184,
+          166
+        ],
+        "focus": [
+          184,
+          177
+        ],
+        "framePath": "public/art/characters-v3/units/edan-windup.webp",
+        "frameSha256": "64ffd65e796617d9b1523735439fc7af9176d6ff82881670bde20f546bd39b5f",
+        "reviewMethod": "기존 신규 아군 4명의 실제 프레임 수동 검토 좌표를 보존하고 이번 최종 원화 SHA와 연결. 새 재측정으로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "hammer",
+        "grip": [
+          383,
+          266
+        ],
+        "tip": [
+          487,
+          251
+        ],
+        "focus": [
+          466,
+          255
+        ],
+        "framePath": "public/art/characters-v3/units/edan-strike.webp",
+        "frameSha256": "aa19ed0ddaac0c04787a4d97f7e0b0bf867428d7e75f086891a101ebf605a948",
+        "reviewMethod": "기존 신규 아군 4명의 실제 프레임 수동 검토 좌표를 보존하고 이번 최종 원화 SHA와 연결. 새 재측정으로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "hammer",
+        "grip": [
+          237,
+          311
+        ],
+        "tip": [
+          209,
+          226
+        ],
+        "focus": [
+          206,
+          243
+        ],
+        "framePath": "public/art/characters-v3/units/edan-skill-a.webp",
+        "frameSha256": "b86d51f154b8b3ae1684e3ea722a801c2f4cd3e77120c8067f0a24e5ed327879",
+        "reviewMethod": "기존 신규 아군 4명의 실제 프레임 수동 검토 좌표를 보존하고 이번 최종 원화 SHA와 연결. 새 재측정으로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "shield",
+        "grip": [
+          352,
+          292
+        ],
+        "tip": [
+          442,
+          314
+        ],
+        "focus": [
+          408,
+          380
+        ],
+        "framePath": "public/art/characters-v3/units/edan-skill-b.webp",
+        "frameSha256": "ab0cd24de503dd63b85c5fb41099bbfabd357f24ea6918f230145ab4b0c66eb7",
+        "reviewMethod": "기존 신규 아군 4명의 실제 프레임 수동 검토 좌표를 보존하고 이번 최종 원화 SHA와 연결. 새 재측정으로 표시하지 않음."
+      }
+    },
+    "sylvan": {
+      "windup": {
+        "kind": "staff",
+        "grip": [
+          263,
+          244
+        ],
+        "tip": [
+          354,
+          207
+        ],
+        "focus": [
+          343,
+          218
+        ],
+        "framePath": "public/art/characters-v3/units/silvan-windup.webp",
+        "frameSha256": "db2167c003a38894b56470621b9fb8659771c1ed389e1253261fcb5605432636",
+        "reviewMethod": "기존 신규 아군 4명의 실제 프레임 수동 검토 좌표를 보존하고 이번 최종 원화 SHA와 연결. 새 재측정으로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "staff",
+        "grip": [
+          357,
+          293
+        ],
+        "tip": [
+          487,
+          269
+        ],
+        "focus": [
+          464,
+          282
+        ],
+        "framePath": "public/art/characters-v3/units/silvan-strike.webp",
+        "frameSha256": "c6b06c899523871cfe2ae78a37a0a9dbf9985eb2377ef822fd318b78b31d1a78",
+        "reviewMethod": "기존 신규 아군 4명의 실제 프레임 수동 검토 좌표를 보존하고 이번 최종 원화 SHA와 연결. 새 재측정으로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "staff",
+        "grip": [
+          164,
+          304
+        ],
+        "tip": [
+          148,
+          202
+        ],
+        "focus": [
+          141,
+          227
+        ],
+        "framePath": "public/art/characters-v3/units/silvan-skill-a.webp",
+        "frameSha256": "bbd2632d85400cfaa8327a5fc3f60c8cecf381021a8374446a5b29a6949298eb",
+        "reviewMethod": "기존 신규 아군 4명의 실제 프레임 수동 검토 좌표를 보존하고 이번 최종 원화 SHA와 연결. 새 재측정으로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "staff",
+        "grip": [
+          202,
+          322
+        ],
+        "tip": [
+          152,
+          232
+        ],
+        "focus": [
+          168,
+          255
+        ],
+        "framePath": "public/art/characters-v3/units/silvan-skill-b.webp",
+        "frameSha256": "00c137f0550a508e8ca011bd6497eab9f99af855e889879ccb3367c5ac205ce9",
+        "reviewMethod": "기존 신규 아군 4명의 실제 프레임 수동 검토 좌표를 보존하고 이번 최종 원화 SHA와 연결. 새 재측정으로 표시하지 않음."
+      }
+    },
+    "hero__form0": {
+      "windup": {
+        "kind": "blade",
+        "grip": [
+          157,
+          253
+        ],
+        "tip": [
+          357,
+          356
+        ],
+        "focus": [
+          357,
+          356
+        ],
+        "framePath": "public/art/characters-v3/units/hero__form0-windup.webp",
+        "frameSha256": "9045e6afa3727425aac900b2b45a5ebfb5892cca9a8288686efc1f91bdc04364",
+        "reviewNote": "grip은 실제 장갑/손의 손잡이 위치, tip/focus는 원화 칼끝 안쪽 픽셀.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewProvenance": "2026-10-06 최종 512x512 런타임 WEBP를 직접 확대/격자 대조한 수동 접점. 원화 SHA를 자세마다 고정."
+      },
+      "strike": {
+        "kind": "blade",
+        "grip": [
+          251,
+          306
+        ],
+        "tip": [
+          440,
+          269
+        ],
+        "focus": [
+          440,
+          269
+        ],
+        "framePath": "public/art/characters-v3/units/hero__form0-strike.webp",
+        "frameSha256": "9830e322eed88dc987d613ce8d8705580e76c763f56df698fdb74c197df6e2c3",
+        "reviewNote": "grip은 실제 장갑/손의 손잡이 위치, tip/focus는 원화 칼끝 안쪽 픽셀.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewProvenance": "2026-10-06 최종 512x512 런타임 WEBP를 직접 확대/격자 대조한 수동 접점. 원화 SHA를 자세마다 고정."
+      },
+      "skill-a": {
+        "kind": "blade",
+        "grip": [
+          245,
+          203
+        ],
+        "tip": [
+          82,
+          310
+        ],
+        "focus": [
+          82,
+          310
+        ],
+        "framePath": "public/art/characters-v3/units/hero__form0-skill-a.webp",
+        "frameSha256": "25c7e9fc4377a884733af6f7022309059180fd4eee06f9e121dc8b1fce8e8991",
+        "reviewNote": "grip은 실제 장갑/손의 손잡이 위치, tip/focus는 원화 칼끝 안쪽 픽셀.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewProvenance": "2026-10-06 최종 512x512 런타임 WEBP를 직접 확대/격자 대조한 수동 접점. 원화 SHA를 자세마다 고정."
+      },
+      "skill-b": {
+        "kind": "blade",
+        "grip": [
+          307,
+          351
+        ],
+        "tip": [
+          460,
+          404
+        ],
+        "focus": [
+          460,
+          404
+        ],
+        "framePath": "public/art/characters-v3/units/hero__form0-skill-b.webp",
+        "frameSha256": "9c2437086a5cb67650bb1f04bdf85c575a6891d2e78c1e19fc991b366129348b",
+        "reviewNote": "grip은 실제 장갑/손의 손잡이 위치, tip/focus는 원화 칼끝 안쪽 픽셀.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewProvenance": "2026-10-06 최종 512x512 런타임 WEBP를 직접 확대/격자 대조한 수동 접점. 원화 SHA를 자세마다 고정."
+      }
+    },
+    "hero__form1": {
+      "windup": {
+        "kind": "blade",
+        "grip": [
+          337,
+          186
+        ],
+        "tip": [
+          143,
+          108
+        ],
+        "focus": [
+          143,
+          108
+        ],
+        "framePath": "public/art/characters-v3/units/hero__form1-windup.webp",
+        "frameSha256": "312fdb99e653a677583d8d9bd521fe6e3e4265f790f8848e203ae98f6829048f",
+        "reviewNote": "grip은 실제 장갑/손의 손잡이 위치, tip/focus는 원화 칼끝 안쪽 픽셀.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewProvenance": "2026-10-06 최종 512x512 런타임 WEBP를 직접 확대/격자 대조한 수동 접점. 원화 SHA를 자세마다 고정."
+      },
+      "strike": {
+        "kind": "blade",
+        "grip": [
+          309,
+          268
+        ],
+        "tip": [
+          489,
+          276
+        ],
+        "focus": [
+          489,
+          276
+        ],
+        "framePath": "public/art/characters-v3/units/hero__form1-strike.webp",
+        "frameSha256": "85809a2bd28c6a8ddcc11f2fdbb612f33c667f20d34cf1d5acb03ff6ea5db059",
+        "reviewNote": "grip은 실제 장갑/손의 손잡이 위치, tip/focus는 원화 칼끝 안쪽 픽셀.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewProvenance": "2026-10-06 최종 512x512 런타임 WEBP를 직접 확대/격자 대조한 수동 접점. 원화 SHA를 자세마다 고정."
+      },
+      "skill-a": {
+        "kind": "blade",
+        "grip": [
+          250,
+          297
+        ],
+        "tip": [
+          425,
+          413
+        ],
+        "focus": [
+          425,
+          413
+        ],
+        "framePath": "public/art/characters-v3/units/hero__form1-skill-a.webp",
+        "frameSha256": "4c314f5b06411e58bdc3e10c22ca53a342ddec17a5bd553c511f5c34fdcaa6bb",
+        "reviewNote": "grip은 실제 장갑/손의 손잡이 위치, tip/focus는 원화 칼끝 안쪽 픽셀.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewProvenance": "2026-10-06 최종 512x512 런타임 WEBP를 직접 확대/격자 대조한 수동 접점. 원화 SHA를 자세마다 고정."
+      },
+      "skill-b": {
+        "kind": "blade",
+        "grip": [
+          246,
+          239
+        ],
+        "tip": [
+          245,
+          85
+        ],
+        "focus": [
+          245,
+          85
+        ],
+        "framePath": "public/art/characters-v3/units/hero__form1-skill-b.webp",
+        "frameSha256": "bf6178ca3a0306673bacea2a53a86db8b65b89c6151fd7866436f346a59183a4",
+        "reviewNote": "grip은 실제 장갑/손의 손잡이 위치, tip/focus는 원화 칼끝 안쪽 픽셀.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewProvenance": "2026-10-06 최종 512x512 런타임 WEBP를 직접 확대/격자 대조한 수동 접점. 원화 SHA를 자세마다 고정."
+      }
+    },
+    "bram__form0": {
+      "windup": {
+        "kind": "blade",
+        "grip": [
+          225,
+          152
+        ],
+        "tip": [
+          345,
+          122
+        ],
+        "focus": [
+          345,
+          122
+        ],
+        "framePath": "public/art/characters-v3/units/bram__form0-windup.webp",
+        "frameSha256": "d3279a10a9e752f9937bb23ac640dd8609f1b426fbef04cdc591178b4f029b36",
+        "reviewNote": "grip은 실제 장갑/손의 손잡이 위치, tip/focus는 원화 칼끝 안쪽 픽셀.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewProvenance": "2026-10-06 최종 512x512 런타임 WEBP를 직접 확대/격자 대조한 수동 접점. 원화 SHA를 자세마다 고정."
+      },
+      "strike": {
+        "kind": "blade",
+        "grip": [
+          283,
+          254
+        ],
+        "tip": [
+          473,
+          246
+        ],
+        "focus": [
+          473,
+          246
+        ],
+        "framePath": "public/art/characters-v3/units/bram__form0-strike.webp",
+        "frameSha256": "5930d695cce0de0a6224cea60c7613b3ab3b484a6069bdeb9150ca842a081274",
+        "reviewNote": "grip은 실제 장갑/손의 손잡이 위치, tip/focus는 원화 칼끝 안쪽 픽셀.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewProvenance": "2026-10-06 최종 512x512 런타임 WEBP를 직접 확대/격자 대조한 수동 접점. 원화 SHA를 자세마다 고정."
+      },
+      "skill-a": {
+        "kind": "shield",
+        "grip": [
+          344,
+          276
+        ],
+        "tip": [
+          361,
+          180
+        ],
+        "focus": [
+          378,
+          293
+        ],
+        "framePath": "public/art/characters-v3/units/bram__form0-skill-a.webp",
+        "frameSha256": "d2b443717a46456f2f98db7bdbf0b655ac01d2a1f9d50612b7f93026e0a72109",
+        "reviewNote": "손잡이가 방패 뒤에 가려져 보이는 팔/방패 안쪽 접점을 grip으로 지정. tip은 실제 방패 윗테두리, focus는 방패 문양 중심.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewProvenance": "2026-10-06 최종 512x512 런타임 WEBP를 직접 확대/격자 대조한 수동 접점. 원화 SHA를 자세마다 고정."
+      },
+      "skill-b": {
+        "kind": "shield",
+        "grip": [
+          327,
+          227
+        ],
+        "tip": [
+          344,
+          242
+        ],
+        "focus": [
+          340,
+          349
+        ],
+        "framePath": "public/art/characters-v3/units/bram__form0-skill-b.webp",
+        "frameSha256": "1998d09d33b8fd9da5c037f720fec6794dfed5766ece8f505b2b0eda47a85952",
+        "reviewNote": "위쪽에 겹친 양손의 실제 손 위치를 grip으로 지정. tip은 방패 윗테두리, focus는 방패 문양 중심.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewProvenance": "2026-10-06 최종 512x512 런타임 WEBP를 직접 확대/격자 대조한 수동 접점. 원화 SHA를 자세마다 고정."
+      }
+    },
+    "bram__form1": {
+      "windup": {
+        "kind": "blade",
+        "grip": [
+          153,
+          166
+        ],
+        "tip": [
+          296,
+          124
+        ],
+        "focus": [
+          296,
+          124
+        ],
+        "framePath": "public/art/characters-v3/units/bram__form1-windup.webp",
+        "frameSha256": "baebdbec0c482a9e5aba8a32e0dae542e9051f97589191cf25620cae0b7658f7",
+        "reviewNote": "grip은 실제 장갑/손의 손잡이 위치, tip/focus는 원화 칼끝 안쪽 픽셀.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewProvenance": "2026-10-06 최종 512x512 런타임 WEBP를 직접 확대/격자 대조한 수동 접점. 원화 SHA를 자세마다 고정."
+      },
+      "strike": {
+        "kind": "blade",
+        "grip": [
+          336,
+          279
+        ],
+        "tip": [
+          490,
+          296
+        ],
+        "focus": [
+          490,
+          296
+        ],
+        "framePath": "public/art/characters-v3/units/bram__form1-strike.webp",
+        "frameSha256": "a822073dc80208d30f74558b5ac8c6c67cda505b4f3a9f45aac1be917ab8f922",
+        "reviewNote": "grip은 실제 장갑/손의 손잡이 위치, tip/focus는 원화 칼끝 안쪽 픽셀.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewProvenance": "2026-10-06 최종 512x512 런타임 WEBP를 직접 확대/격자 대조한 수동 접점. 원화 SHA를 자세마다 고정."
+      },
+      "skill-a": {
+        "kind": "shield",
+        "grip": [
+          350,
+          231
+        ],
+        "tip": [
+          335,
+          158
+        ],
+        "focus": [
+          376,
+          233
+        ],
+        "framePath": "public/art/characters-v3/units/bram__form1-skill-a.webp",
+        "frameSha256": "c6748065a756ab7a38e3fd77dcaefabaec82198672df35911408294e61f0da4c",
+        "reviewNote": "손잡이가 방패 뒤에 가려져 보이는 팔/방패 안쪽 접점을 grip으로 지정. tip은 실제 방패 윗테두리, focus는 방패 문양 중심.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewProvenance": "2026-10-06 최종 512x512 런타임 WEBP를 직접 확대/격자 대조한 수동 접점. 원화 SHA를 자세마다 고정."
+      },
+      "skill-b": {
+        "kind": "shield",
+        "grip": [
+          374,
+          213
+        ],
+        "tip": [
+          398,
+          133
+        ],
+        "focus": [
+          417,
+          235
+        ],
+        "framePath": "public/art/characters-v3/units/bram__form1-skill-b.webp",
+        "frameSha256": "3d650050196bc31c847b79ed4ddd6ae310f62082599326fa1855f53bfbeb9601",
+        "reviewNote": "방패 뒤쪽 손은 가려짐. 보이는 왼팔과 방패 안쪽 접점을 grip으로 지정. tip은 실제 윗테두리, focus는 방패 중심.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewProvenance": "2026-10-06 최종 512x512 런타임 WEBP를 직접 확대/격자 대조한 수동 접점. 원화 SHA를 자세마다 고정."
+      }
+    },
+    "mare__form0": {
+      "windup": {
+        "kind": "spear",
+        "grip": [
+          310,
+          261
+        ],
+        "tip": [
+          108,
+          198
+        ],
+        "focus": [
+          108,
+          198
+        ],
+        "provenance": "앞쪽 오른손이 잡은 남청색 봉 중심과 머리 뒤 왼쪽 굽은 창날의 끝을 관찰.",
+        "framePath": "public/art/characters-v3/units/mare__form0-windup.webp",
+        "frameSha256": "e8b64b99bb216dcb40bce3be3379e1faec93429ce2d44958b084125636f924f2",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "mare__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "spear",
+        "grip": [
+          300,
+          331
+        ],
+        "tip": [
+          493,
+          277
+        ],
+        "focus": [
+          493,
+          277
+        ],
+        "provenance": "전방 손의 봉 접점과 오른쪽으로 솟은 곡창 끝을 관찰.",
+        "framePath": "public/art/characters-v3/units/mare__form0-strike.webp",
+        "frameSha256": "e542e1c97ae75745068e56c6c6645176516c49d033c3faaafd287bdfc822be43",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "mare__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "spear",
+        "grip": [
+          319,
+          343
+        ],
+        "tip": [
+          447,
+          198
+        ],
+        "focus": [
+          447,
+          198
+        ],
+        "gripVisibility": "shaft-only-hand-occluded",
+        "needsArtReview": true,
+        "provenance": "오른쪽 대각 창날과 몸 가까운 노출된 창봉을 직접 관찰. 창을 잡는 손은 보이지 않아 grip은 손 좌표가 아닌 노출 봉 부착 시작점이며 숨은 손 위치를 추정하지 않음.",
+        "framePath": "public/art/characters-v3/units/mare__form0-skill-a.webp",
+        "frameSha256": "683fc8da00db41071f13bbc6baaf60976e6864ec8c9691ca7b40fb8db2fbe5b9",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "mare__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "spear",
+        "grip": [
+          184,
+          350
+        ],
+        "tip": [
+          40,
+          399
+        ],
+        "focus": [
+          40,
+          399
+        ],
+        "provenance": "뒤쪽 손의 봉 접점과 왼쪽 아래 곡창 끝을 관찰; 전방 펼친 손이 창끝이 아님.",
+        "framePath": "public/art/characters-v3/units/mare__form0-skill-b.webp",
+        "frameSha256": "8114faae5d0a32f64fae38f81aa3881e572daf128be8e0012067f59d99c5553f",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "mare__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "mare__form1": {
+      "windup": {
+        "kind": "spear",
+        "grip": [
+          317,
+          263
+        ],
+        "tip": [
+          115,
+          194
+        ],
+        "focus": [
+          115,
+          194
+        ],
+        "provenance": "앞쪽 오른손 봉 접점과 머리 뒤 왼쪽 곡창 끝을 관찰.",
+        "framePath": "public/art/characters-v3/units/mare__form1-windup.webp",
+        "frameSha256": "c901e1e05a5c992f67af591e6dcff85358502391b8ba02be1413a0e4ef629816",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "mare__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "spear",
+        "grip": [
+          300,
+          334
+        ],
+        "tip": [
+          493,
+          289
+        ],
+        "focus": [
+          493,
+          289
+        ],
+        "provenance": "전방 손의 봉 접점과 오른쪽 곡창 끝을 관찰.",
+        "framePath": "public/art/characters-v3/units/mare__form1-strike.webp",
+        "frameSha256": "072a2ed4f1e8df213594fb8c5e82b694c5ecd6fbc709efc36a69d5abc18dcc27",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "mare__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "spear",
+        "grip": [
+          324,
+          346
+        ],
+        "tip": [
+          427,
+          178
+        ],
+        "focus": [
+          427,
+          178
+        ],
+        "gripVisibility": "shaft-only-hand-occluded",
+        "needsArtReview": true,
+        "provenance": "몸 가까운 노출 창봉과 오른쪽 위 곡창 끝을 직접 관찰. 창을 잡는 손은 보이지 않아 grip은 노출 봉의 부착 시작점이며 손 좌표로 단정하지 않음.",
+        "framePath": "public/art/characters-v3/units/mare__form1-skill-a.webp",
+        "frameSha256": "fd8c22ea43e66a00c2f098766655e4081242198307bc60a6e3c15b34a4e81fdf",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "mare__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "spear",
+        "grip": [
+          198,
+          342
+        ],
+        "tip": [
+          30,
+          393
+        ],
+        "focus": [
+          30,
+          393
+        ],
+        "provenance": "뒤쪽 손의 봉 접점과 왼쪽 아래 곡창 끝을 관찰.",
+        "framePath": "public/art/characters-v3/units/mare__form1-skill-b.webp",
+        "frameSha256": "31f1096e9f1ab2b232a5c8839cd425e1652e6b5ebe540f97cf6aaffbbc16b080",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "mare__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "harin__form0": {
+      "windup": {
+        "kind": "fist",
+        "grip": [
+          379,
+          253
+        ],
+        "tip": [
+          411,
+          234
+        ],
+        "focus": [
+          402,
+          242
+        ],
+        "secondary": {
+          "grip": [
+            195,
+            183
+          ],
+          "tip": [
+            221,
+            162
+          ]
+        },
+        "provenance": "앞쪽 주먹의 손목·바깥 주먹마디와 머리 뒤 보조 주먹을 관찰.",
+        "framePath": "public/art/characters-v3/units/harin__form0-windup.webp",
+        "frameSha256": "027f666c46c489a2687a98d8233a787f4ea1e0daffd4b15640ff1bc0fb6ecc5f",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "harin__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "fist",
+        "grip": [
+          436,
+          231
+        ],
+        "tip": [
+          468,
+          232
+        ],
+        "focus": [
+          459,
+          232
+        ],
+        "secondary": {
+          "grip": [
+            176,
+            245
+          ],
+          "tip": [
+            207,
+            241
+          ]
+        },
+        "provenance": "오른쪽으로 뻗은 주먹의 손목·마디를 관찰.",
+        "framePath": "public/art/characters-v3/units/harin__form0-strike.webp",
+        "frameSha256": "0e77d3d7e9ff45bb7bc8ad2a8c46b2729306f9b48a2bc55474e516c6705f262f",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "harin__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "fist",
+        "grip": [
+          305,
+          241
+        ],
+        "tip": [
+          323,
+          175
+        ],
+        "focus": [
+          324,
+          211
+        ],
+        "secondary": {
+          "grip": [
+            339,
+            244
+          ],
+          "tip": [
+            330,
+            180
+          ]
+        },
+        "provenance": "합장한 양손의 손목과 모은 손가락 끝을 관찰; focus는 합장 손바닥의 접점.",
+        "framePath": "public/art/characters-v3/units/harin__form0-skill-a.webp",
+        "frameSha256": "c34945633a9b5a4bcc2430fb67da38db6c6685502de2602187a99119d9fe6d79",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "harin__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "fist",
+        "grip": [
+          444,
+          236
+        ],
+        "tip": [
+          462,
+          182
+        ],
+        "focus": [
+          453,
+          218
+        ],
+        "secondary": {
+          "grip": [
+            192,
+            265
+          ],
+          "tip": [
+            229,
+            235
+          ]
+        },
+        "provenance": "전방 세운 손바닥의 손목·손가락 끝·손바닥 중심과 몸 가까운 보조 손을 관찰.",
+        "framePath": "public/art/characters-v3/units/harin__form0-skill-b.webp",
+        "frameSha256": "c7dab904cd6f035af6356eb06166927da84b873948467f4fe1a9f41edcf2858f",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "harin__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "harin__form1": {
+      "windup": {
+        "kind": "fist",
+        "grip": [
+          368,
+          261
+        ],
+        "tip": [
+          388,
+          226
+        ],
+        "focus": [
+          387,
+          252
+        ],
+        "secondary": {
+          "grip": [
+            165,
+            208
+          ],
+          "tip": [
+            194,
+            188
+          ]
+        },
+        "provenance": "전방 펼친 손바닥과 후방 준비 주먹의 실제 위치를 관찰.",
+        "framePath": "public/art/characters-v3/units/harin__form1-windup.webp",
+        "frameSha256": "7413063adf88e88a2cd2b116758f31b58a5576c137536b80844dfd37199006ce",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "harin__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "fist",
+        "grip": [
+          434,
+          224
+        ],
+        "tip": [
+          458,
+          185
+        ],
+        "focus": [
+          452,
+          214
+        ],
+        "secondary": {
+          "grip": [
+            175,
+            254
+          ],
+          "tip": [
+            205,
+            237
+          ]
+        },
+        "provenance": "전방 팔 끝은 주먹이 아닌 펼친 손바닥; 손목·손가락 끝·손바닥 중심을 관찰.",
+        "framePath": "public/art/characters-v3/units/harin__form1-strike.webp",
+        "frameSha256": "5595805d122ba33c559d75901feb11ce5459d85b6b9c5d69e9ed5b4fc522efb8",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "harin__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "fist",
+        "grip": [
+          304,
+          210
+        ],
+        "tip": [
+          324,
+          155
+        ],
+        "focus": [
+          326,
+          185
+        ],
+        "secondary": {
+          "grip": [
+            336,
+            216
+          ],
+          "tip": [
+            330,
+            160
+          ]
+        },
+        "provenance": "합장한 양손의 손목·손가락 끝·손바닥 접점을 관찰.",
+        "framePath": "public/art/characters-v3/units/harin__form1-skill-a.webp",
+        "frameSha256": "31e4181013f2f7805cbc896edcee6679fe7180b678efddabd1548642aeda5e95",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "harin__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "fist",
+        "grip": [
+          410,
+          215
+        ],
+        "tip": [
+          427,
+          164
+        ],
+        "focus": [
+          430,
+          198
+        ],
+        "secondary": {
+          "grip": [
+            193,
+            240
+          ],
+          "tip": [
+            227,
+            217
+          ]
+        },
+        "provenance": "전방 세운 손바닥과 몸 가까운 보조 손바닥을 관찰.",
+        "framePath": "public/art/characters-v3/units/harin__form1-skill-b.webp",
+        "frameSha256": "f2461a823d28d8ab83681456c53fe85aab417fa0db38b8267093577f27b65df2",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "harin__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "edan__form0": {
+      "windup": {
+        "kind": "hammer",
+        "grip": [
+          231,
+          165
+        ],
+        "tip": [
+          131,
+          158
+        ],
+        "focus": [
+          180,
+          157
+        ],
+        "provenance": "머리 위 장갑의 망치 손잡이 접점·왼쪽 망치 외곽·푸른 중심석을 관찰.",
+        "framePath": "public/art/characters-v3/units/edan__form0-windup.webp",
+        "frameSha256": "c3eef789c2c23f97b33657e5eb6df629a889d70f8bb3e7e9756acc8ff9036b70",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "edan__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "hammer",
+        "grip": [
+          369,
+          278
+        ],
+        "tip": [
+          493,
+          263
+        ],
+        "focus": [
+          462,
+          262
+        ],
+        "provenance": "전방 장갑의 손잡이 접점·오른쪽 망치 외곽·푸른 중심석을 관찰.",
+        "framePath": "public/art/characters-v3/units/edan__form0-strike.webp",
+        "frameSha256": "0e71d225b585c9416bde720255ccf8ca295d8589a996705f85e148217af21cf5",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "edan__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "hammer",
+        "grip": [
+          230,
+          319
+        ],
+        "tip": [
+          155,
+          224
+        ],
+        "focus": [
+          194,
+          240
+        ],
+        "provenance": "두 손 중 몸에 가까운 아래쪽 손의 손잡이 접점과 왼쪽 위 망치 외곽·푸른 중심석을 관찰.",
+        "framePath": "public/art/characters-v3/units/edan__form0-skill-a.webp",
+        "frameSha256": "0c9ee10db0b07104725b566fde7bcb770a5b398cca68b644fd62ad3ecc866b55",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "edan__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "shield",
+        "grip": [
+          387,
+          280
+        ],
+        "tip": [
+          461,
+          369
+        ],
+        "focus": [
+          426,
+          365
+        ],
+        "provenance": "방패 위를 잡은 손 접점과 방패 전방 테두리·파란 방패 보석을 관찰. 아래에 든 망치가 아니라 방패에 효과를 부착.",
+        "framePath": "public/art/characters-v3/units/edan__form0-skill-b.webp",
+        "frameSha256": "2a1dbb655730ea062b007cf8f841eafcb1104a995fe1c2c1e29f0c3b17c562d0",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "edan__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "edan__form1": {
+      "windup": {
+        "kind": "hammer",
+        "grip": [
+          224,
+          202
+        ],
+        "tip": [
+          132,
+          195
+        ],
+        "focus": [
+          162,
+          194
+        ],
+        "provenance": "머리 위 손의 손잡이 접점·사각 망치 왼쪽 외곽·전면 금속 판을 관찰.",
+        "framePath": "public/art/characters-v3/units/edan__form1-windup.webp",
+        "frameSha256": "7c6ef45c7d568ef5caf009bc0b60bf335de9211ee4ab94f21343128e976c6e38",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "edan__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "hammer",
+        "grip": [
+          378,
+          271
+        ],
+        "tip": [
+          492,
+          262
+        ],
+        "focus": [
+          451,
+          261
+        ],
+        "provenance": "전방 손 접점·오른쪽 사각 망치 외곽·전면 금속 판을 관찰.",
+        "framePath": "public/art/characters-v3/units/edan__form1-strike.webp",
+        "frameSha256": "3de7e7a3d852acd449339291354a94154380f32ec68c760b2287b9ae77537927",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "edan__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "hammer",
+        "grip": [
+          235,
+          336
+        ],
+        "tip": [
+          172,
+          264
+        ],
+        "focus": [
+          197,
+          265
+        ],
+        "provenance": "두 손 중 아래 손의 접점·사각 망치 왼쪽 외곽·전면 금속 판을 관찰.",
+        "framePath": "public/art/characters-v3/units/edan__form1-skill-a.webp",
+        "frameSha256": "1c49866ad5b465a0eadf6e9c43b72a8494c6d38bced15692e237ae87a001fe1a",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "edan__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "shield",
+        "grip": [
+          380,
+          302
+        ],
+        "tip": [
+          465,
+          387
+        ],
+        "focus": [
+          410,
+          387
+        ],
+        "provenance": "방패 상단을 잡는 손 접점·방패의 전방 테두리·둥근 중앙 금속 문양을 관찰.",
+        "framePath": "public/art/characters-v3/units/edan__form1-skill-b.webp",
+        "frameSha256": "8a6419433d7340790ae99d9c9e77fb72c2eb99875050a85270abfe84872a1105",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "edan__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "sylvan__form0": {
+      "windup": {
+        "kind": "staff",
+        "grip": [
+          235,
+          237
+        ],
+        "tip": [
+          346,
+          213
+        ],
+        "focus": [
+          315,
+          219
+        ],
+        "provenance": "머리 위 지팡이의 장갑 접점·오른쪽 나뭇가지 끝·초록 중심석을 관찰.",
+        "framePath": "public/art/characters-v3/units/silvan__form0-windup.webp",
+        "frameSha256": "6e43c36c3843da8fb05cd621fecf8bd78a655280404dc174f5600252f2bc01c8",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "silvan__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "staff",
+        "grip": [
+          346,
+          296
+        ],
+        "tip": [
+          492,
+          283
+        ],
+        "focus": [
+          460,
+          285
+        ],
+        "provenance": "뻗은 팔의 지팡이 접점·오른쪽 가지 끝·초록 중심석을 관찰.",
+        "framePath": "public/art/characters-v3/units/silvan__form0-strike.webp",
+        "frameSha256": "0cbde4b5df78194074346ba0c0390c7f16f4dbbca2539e23f1bd2ebc9b4af097",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "silvan__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "staff",
+        "grip": [
+          165,
+          304
+        ],
+        "tip": [
+          146,
+          190
+        ],
+        "focus": [
+          147,
+          225
+        ],
+        "provenance": "왼쪽에 세운 지팡이의 손 접점·상단 목재 가지 끝·초록 중심석을 관찰.",
+        "framePath": "public/art/characters-v3/units/silvan__form0-skill-a.webp",
+        "frameSha256": "5743ddbdf4ea98f4922c7d12d8153339557a1df71c46520d47e8f1ea52387cfb",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "silvan__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "staff",
+        "grip": [
+          188,
+          317
+        ],
+        "tip": [
+          133,
+          214
+        ],
+        "focus": [
+          155,
+          249
+        ],
+        "provenance": "왼쪽 대각 지팡이의 손 접점·상단 가지 끝·초록 중심석을 관찰.",
+        "framePath": "public/art/characters-v3/units/silvan__form0-skill-b.webp",
+        "frameSha256": "f2ca28355ea3c5c56aec1c137d96799afac8cc8de57c20200bee0e46c418408e",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "silvan__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "sylvan__form1": {
+      "windup": {
+        "kind": "staff",
+        "grip": [
+          243,
+          264
+        ],
+        "tip": [
+          336,
+          254
+        ],
+        "focus": [
+          310,
+          258
+        ],
+        "provenance": "머리 뒤 지팡이의 손 접점·오른쪽 가지 끝·초록 중심석을 관찰.",
+        "framePath": "public/art/characters-v3/units/silvan__form1-windup.webp",
+        "frameSha256": "9c112b93115b03ba20310f78c276aa83493438eda4d06f47ea2ca53e28268b26",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "silvan__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "staff",
+        "grip": [
+          342,
+          298
+        ],
+        "tip": [
+          491,
+          282
+        ],
+        "focus": [
+          461,
+          289
+        ],
+        "provenance": "뻗은 팔의 지팡이 접점·오른쪽 가지 끝·초록 중심석을 관찰.",
+        "framePath": "public/art/characters-v3/units/silvan__form1-strike.webp",
+        "frameSha256": "64523fc2b714cf97b3d72cf8564dcc80ace2804a0a463c01cbbc94a361c7b206",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "silvan__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "staff",
+        "grip": [
+          174,
+          305
+        ],
+        "tip": [
+          133,
+          214
+        ],
+        "focus": [
+          145,
+          238
+        ],
+        "provenance": "왼쪽에 세운 지팡이의 손 접점·목재 가지의 바깥끝·초록 중심석을 관찰; 잎 장식과 중심석을 구분.",
+        "framePath": "public/art/characters-v3/units/silvan__form1-skill-a.webp",
+        "frameSha256": "40f2b2e10dc836a70fcc9b27f7d73282bf357b8c8e87f63d9962556eada3ba98",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "silvan__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "staff",
+        "grip": [
+          179,
+          312
+        ],
+        "tip": [
+          123,
+          222
+        ],
+        "focus": [
+          139,
+          249
+        ],
+        "provenance": "왼쪽 대각 지팡이의 손 접점·목재 바깥 가지끝·초록 중심석을 관찰.",
+        "framePath": "public/art/characters-v3/units/silvan__form1-skill-b.webp",
+        "frameSha256": "b81a6d52e85663552642f81b1d6d7d6251144b3d63618f3b68acd1cdc732cf69",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "silvan__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "miho__form0": {
+      "windup": {
+        "kind": "focus",
+        "grip": [
+          304,
+          302
+        ],
+        "tip": [
+          271,
+          316
+        ],
+        "focus": [
+          287,
+          307
+        ],
+        "secondary": {
+          "grip": [
+            248,
+            300
+          ],
+          "tip": [
+            274,
+            317
+          ]
+        },
+        "provenance": "허리에 모은 빈 두손의 손목·손끝·손바닥 접점을 관찰.",
+        "framePath": "public/art/characters-v3/units/miho__form0-windup.webp",
+        "frameSha256": "6ef3d5afad59ed69a8c9651807a40cc28232b52f551f9d3bf332760a549bc659",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "miho__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "focus",
+        "grip": [
+          417,
+          214
+        ],
+        "tip": [
+          456,
+          197
+        ],
+        "focus": [
+          443,
+          207
+        ],
+        "provenance": "앞으로 뻗은 빈손의 손목·가장 전방 손끝·손바닥 중심을 관찰.",
+        "framePath": "public/art/characters-v3/units/miho__form0-strike.webp",
+        "frameSha256": "42c301d334de0f00d752cef9e42b995f86d9dcfe4f0da1a8554d3ab62c98f797",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "miho__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "focus",
+        "grip": [
+          393,
+          188
+        ],
+        "tip": [
+          430,
+          145
+        ],
+        "focus": [
+          415,
+          174
+        ],
+        "provenance": "위로 든 빈손의 손목·펴진 검지 끝·손바닥 중심을 관찰.",
+        "framePath": "public/art/characters-v3/units/miho__form0-skill-a.webp",
+        "frameSha256": "880b2b1ac712333909d793716f1e1889825ee796a378ed769b7410e8a5d7f239",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "miho__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "focus",
+        "grip": [
+          397,
+          210
+        ],
+        "tip": [
+          456,
+          176
+        ],
+        "focus": [
+          436,
+          189
+        ],
+        "secondary": {
+          "grip": [
+            151,
+            277
+          ],
+          "tip": [
+            99,
+            268
+          ]
+        },
+        "provenance": "전방 펼친 손의 손목·검지 끝·손바닥과 반대쪽 펼친 손을 관찰.",
+        "framePath": "public/art/characters-v3/units/miho__form0-skill-b.webp",
+        "frameSha256": "272087c830959a2bda3b4ed688c1a32ee7400ed1e25d28d72e5eff3ede300e05",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "miho__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "miho__form1": {
+      "windup": {
+        "kind": "focus",
+        "grip": [
+          322,
+          316
+        ],
+        "tip": [
+          282,
+          330
+        ],
+        "focus": [
+          304,
+          321
+        ],
+        "secondary": {
+          "grip": [
+            271,
+            307
+          ],
+          "tip": [
+            298,
+            315
+          ]
+        },
+        "provenance": "허리에 모은 빈 두손의 손목·손끝·손바닥 접점을 관찰.",
+        "framePath": "public/art/characters-v3/units/miho__form1-windup.webp",
+        "frameSha256": "15d560462a19b27e689e90e71a7e44e6bbef8167efc6c47ff3b25f132e07c83e",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "miho__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "focus",
+        "grip": [
+          398,
+          213
+        ],
+        "tip": [
+          442,
+          191
+        ],
+        "focus": [
+          424,
+          201
+        ],
+        "provenance": "전방 빈손의 손목·손끝·손바닥을 관찰.",
+        "framePath": "public/art/characters-v3/units/miho__form1-strike.webp",
+        "frameSha256": "5303a6d57eae014d318d95d11d8a1cd93ae79f576737cd6721ea2479fa821953",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "miho__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "focus",
+        "grip": [
+          384,
+          204
+        ],
+        "tip": [
+          427,
+          159
+        ],
+        "focus": [
+          412,
+          187
+        ],
+        "provenance": "위로 든 빈손의 손목·검지 끝·손바닥 중심을 관찰.",
+        "framePath": "public/art/characters-v3/units/miho__form1-skill-a.webp",
+        "frameSha256": "5df6e59af32f4fc91ab20dad0542877be838957948a4a0e93f4d497748c0c52e",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "miho__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "focus",
+        "grip": [
+          398,
+          211
+        ],
+        "tip": [
+          443,
+          177
+        ],
+        "focus": [
+          425,
+          191
+        ],
+        "secondary": {
+          "grip": [
+            179,
+            270
+          ],
+          "tip": [
+            121,
+            256
+          ]
+        },
+        "provenance": "전방 손의 손목·손끝·손바닥과 반대쪽 펼친 손을 관찰.",
+        "framePath": "public/art/characters-v3/units/miho__form1-skill-b.webp",
+        "frameSha256": "dbcaa47acbdb5bf68e65a8aa14b231b3aaf0199c06eb6484ef24651b683e2238",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "miho__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "teo__form0": {
+      "windup": {
+        "kind": "bow",
+        "grip": [
+          395,
+          235
+        ],
+        "tip": [
+          439,
+          212
+        ],
+        "focus": [
+          395,
+          210
+        ],
+        "bow": {
+          "upper": [
+            338,
+            55
+          ],
+          "lower": [
+            338,
+            373
+          ],
+          "arrowVisible": true
+        },
+        "provenance": "활 잡은 손의 중앙·보이는 화살 끝과 화살 출구·위아래 목제 활 끝을 실제 프레임에서 관찰.",
+        "framePath": "public/art/characters-v3/units/teo__form0-windup.webp",
+        "frameSha256": "f3507b09ede9fe1c619a22826cbcf3ab08148be00277448827d2e6dbe19a4b99",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "teo__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "bow",
+        "grip": [
+          456,
+          213
+        ],
+        "tip": [
+          470,
+          181
+        ],
+        "focus": [
+          451,
+          201
+        ],
+        "bow": {
+          "upper": [
+            385,
+            65
+          ],
+          "lower": [
+            421,
+            340
+          ],
+          "arrowVisible": false
+        },
+        "tipLandmark": "bronze-sight-ring",
+        "provenance": "실제 그림에는 발사 후 화살이 없고 손가락과 시위가 풀림. grip은 활 잡은 손, tip은 보이는 청동 조준 고리 끝, focus는 활 손잡이 위 출구, bow 양끝은 실제 목제 활 끝을 관찰.",
+        "framePath": "public/art/characters-v3/units/teo__form0-strike.webp",
+        "frameSha256": "22e037fba5cd94cdfa30cb5f964bfb0cfc3e9b7754a221e26435b21a50cf421f",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "teo__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "bow",
+        "grip": [
+          397,
+          223
+        ],
+        "tip": [
+          452,
+          194
+        ],
+        "focus": [
+          399,
+          197
+        ],
+        "bow": {
+          "upper": [
+            314,
+            64
+          ],
+          "lower": [
+            323,
+            338
+          ],
+          "arrowVisible": true
+        },
+        "provenance": "활 잡은 손·실제 화살 끝·화살이 활과 만나는 곳·위아래 목제 활 끝을 관찰.",
+        "framePath": "public/art/characters-v3/units/teo__form0-skill-a.webp",
+        "frameSha256": "c6a316cb09648faca08f1cdcb6e57b94be34e59d6ae16eb2ae2a08285b68d682",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "teo__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "bow",
+        "grip": [
+          442,
+          250
+        ],
+        "tip": [
+          486,
+          231
+        ],
+        "focus": [
+          443,
+          235
+        ],
+        "bow": {
+          "upper": [
+            353,
+            102
+          ],
+          "lower": [
+            381,
+            376
+          ],
+          "arrowVisible": true
+        },
+        "provenance": "낮은 전방 런지의 활 잡은 손·화살 끝·화살 출구·위아래 목제 활 끝을 관찰.",
+        "framePath": "public/art/characters-v3/units/teo__form0-skill-b.webp",
+        "frameSha256": "333f10dfdbf0cfb0415680b094cbc23c5c1617becd389408f16258e55dcb82d4",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "teo__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "teo__form1": {
+      "windup": {
+        "kind": "bow",
+        "grip": [
+          416,
+          236
+        ],
+        "tip": [
+          456,
+          214
+        ],
+        "focus": [
+          416,
+          213
+        ],
+        "bow": {
+          "upper": [
+            359,
+            61
+          ],
+          "lower": [
+            383,
+            360
+          ],
+          "arrowVisible": true
+        },
+        "provenance": "활 잡은 손·보이는 화살 끝과 화살 출구·위아래 목제 활 끝을 관찰.",
+        "framePath": "public/art/characters-v3/units/teo__form1-windup.webp",
+        "frameSha256": "3f2c5c4752ebd38dd682889f9e96b562f3041c619361174e3a39ef63f5c4da0c",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "teo__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "bow",
+        "grip": [
+          402,
+          212
+        ],
+        "tip": [
+          456,
+          191
+        ],
+        "focus": [
+          403,
+          194
+        ],
+        "bow": {
+          "upper": [
+            314,
+            74
+          ],
+          "lower": [
+            366,
+            336
+          ],
+          "arrowVisible": true
+        },
+        "provenance": "발사 손은 펼쳐졌지만 화살이 원화에 남아 있음. 활 손·실제 화살 끝·출구와 목제 활 양끝을 관찰.",
+        "framePath": "public/art/characters-v3/units/teo__form1-strike.webp",
+        "frameSha256": "bd038299586e4c8013a94ec7deb175c8956af63784160c7f2d570671c99c93cb",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "teo__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "bow",
+        "grip": [
+          401,
+          222
+        ],
+        "tip": [
+          444,
+          205
+        ],
+        "focus": [
+          399,
+          207
+        ],
+        "bow": {
+          "upper": [
+            315,
+            94
+          ],
+          "lower": [
+            346,
+            341
+          ],
+          "arrowVisible": true
+        },
+        "provenance": "서서 당긴 활의 손 접점·보이는 화살 끝과 출구·목제 활 양끝을 관찰.",
+        "framePath": "public/art/characters-v3/units/teo__form1-skill-a.webp",
+        "frameSha256": "f9a3c33a18bb10a58a6bb802fc88f7e0a5a06e150edb97d36a3431383b37b80b",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "teo__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "bow",
+        "grip": [
+          431,
+          255
+        ],
+        "tip": [
+          473,
+          234
+        ],
+        "focus": [
+          431,
+          240
+        ],
+        "bow": {
+          "upper": [
+            337,
+            108
+          ],
+          "lower": [
+            381,
+            367
+          ],
+          "arrowVisible": true
+        },
+        "provenance": "깊은 런지의 활 손·화살 끝과 출구·위아래 목제 활 끝을 관찰.",
+        "framePath": "public/art/characters-v3/units/teo__form1-skill-b.webp",
+        "frameSha256": "134ff61a9b85b32bf392b00eaf73206953c6855bcf1e2276ce02abd3ee6d8195",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "teo__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "irene__form0": {
+      "windup": {
+        "kind": "staff",
+        "grip": [
+          258,
+          118
+        ],
+        "tip": [
+          360,
+          32
+        ],
+        "focus": [
+          324,
+          61
+        ],
+        "provenance": "머리 위 얼음 지팡이의 위쪽 손 접점·결정 꼭짓점·푸른 결정 중심을 관찰.",
+        "framePath": "public/art/characters-v3/units/irene__form0-windup.webp",
+        "frameSha256": "93e4bc23876ec304ac2e67d76a395b370d0908f0e947af83b895083889e71272",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "irene__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "staff",
+        "grip": [
+          206,
+          207
+        ],
+        "tip": [
+          175,
+          60
+        ],
+        "focus": [
+          184,
+          98
+        ],
+        "provenance": "왼쪽 세운 지팡이의 손 접점·얼음 꼭짓점·푸른 결정 중심을 관찰; 전방 펼친 빈손과 지팡이를 구분.",
+        "framePath": "public/art/characters-v3/units/irene__form0-strike.webp",
+        "frameSha256": "42768fe3c1551edd7b571fe0be5dcb4de3f9e52f8cd1fc91cf7625c4ca1f95bc",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "irene__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "staff",
+        "grip": [
+          164,
+          163
+        ],
+        "tip": [
+          261,
+          59
+        ],
+        "focus": [
+          234,
+          95
+        ],
+        "provenance": "왼쪽 위 대각 지팡이의 손 접점·얼음 꼭짓점·결정 중심을 관찰.",
+        "framePath": "public/art/characters-v3/units/irene__form0-skill-a.webp",
+        "frameSha256": "97f2ccdba68d9b47e5670fbcbefdf1985814491572385310cbca7c20b0c19581",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "irene__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "staff",
+        "grip": [
+          182,
+          218
+        ],
+        "tip": [
+          179,
+          81
+        ],
+        "focus": [
+          181,
+          119
+        ],
+        "provenance": "몸 왼쪽 수직 지팡이의 손 접점·얼음 꼭짓점·결정 중심을 관찰.",
+        "framePath": "public/art/characters-v3/units/irene__form0-skill-b.webp",
+        "frameSha256": "f808ed01a91bcabb1e6cb1d77455064b6847d2287b7f82342310d70d69d598a2",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "irene__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "irene__form1": {
+      "windup": {
+        "kind": "staff",
+        "grip": [
+          255,
+          116
+        ],
+        "tip": [
+          365,
+          31
+        ],
+        "focus": [
+          329,
+          60
+        ],
+        "provenance": "머리 위 지팡이의 위쪽 손 접점·얼음 꼭짓점·결정 중심을 관찰.",
+        "framePath": "public/art/characters-v3/units/irene__form1-windup.webp",
+        "frameSha256": "90002ca1e91fa4c1990f2c44a673f031a75580f9cabbf5d627206e11e511618c",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "irene__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "staff",
+        "grip": [
+          210,
+          207
+        ],
+        "tip": [
+          175,
+          57
+        ],
+        "focus": [
+          184,
+          92
+        ],
+        "provenance": "몸 왼쪽 수직 지팡이의 손 접점·얼음 꼭짓점·결정 중심을 관찰.",
+        "framePath": "public/art/characters-v3/units/irene__form1-strike.webp",
+        "frameSha256": "ebfb6cba68278cedb3432495e3e09efccecc8601a4856fa89aac5c5b0703bc4d",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "irene__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "staff",
+        "grip": [
+          164,
+          162
+        ],
+        "tip": [
+          271,
+          55
+        ],
+        "focus": [
+          241,
+          89
+        ],
+        "provenance": "왼쪽 위 대각 지팡이의 손 접점·얼음 꼭짓점·결정 중심을 관찰.",
+        "framePath": "public/art/characters-v3/units/irene__form1-skill-a.webp",
+        "frameSha256": "5f43d16dae16aca421be4d445b23db3b3182101894a4da9e15a2ac746ced5b4a",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "irene__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "staff",
+        "grip": [
+          171,
+          211
+        ],
+        "tip": [
+          162,
+          70
+        ],
+        "focus": [
+          165,
+          113
+        ],
+        "provenance": "몸 왼쪽 수직 지팡이의 손 접점·얼음 꼭짓점·결정 중심을 관찰.",
+        "framePath": "public/art/characters-v3/units/irene__form1-skill-b.webp",
+        "frameSha256": "45ca1d7a455d5d2038b65228ed979b7e9cede95df9ec2d40da9f41d52fa70976",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "irene__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "ella__form0": {
+      "windup": {
+        "kind": "music",
+        "grip": [
+          377,
+          265
+        ],
+        "tip": [
+          422,
+          233
+        ],
+        "focus": [
+          300,
+          300
+        ],
+        "provenance": "류트 목을 짚는 손·끝 튜닝 헤드·몸통 울림구멍의 실제 중심을 관찰.",
+        "framePath": "public/art/characters-v3/units/ella__form0-windup.webp",
+        "frameSha256": "d7525faa7534f4f19a5a5c79fdebe6b0e4e658155816f4c77f53db92c64fd53e",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "ella__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "music",
+        "grip": [
+          385,
+          260
+        ],
+        "tip": [
+          431,
+          231
+        ],
+        "focus": [
+          285,
+          291
+        ],
+        "provenance": "류트 목의 손 접점·튜닝 헤드 끝·울림구멍/현 중앙을 관찰.",
+        "framePath": "public/art/characters-v3/units/ella__form0-strike.webp",
+        "frameSha256": "966ef7b9c5284673a98983950f8bfcfe9a5777480899d6658c459a33ca2708a0",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "ella__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "music",
+        "grip": [
+          350,
+          213
+        ],
+        "tip": [
+          387,
+          187
+        ],
+        "focus": [
+          288,
+          248
+        ],
+        "provenance": "최종 교정된 회복 연주 원화의 류트 목 손·튜닝 헤드 끝·울림구멍을 관찰.",
+        "framePath": "public/art/characters-v3/units/ella__form0-skill-a.webp",
+        "frameSha256": "06edd821b47583f6c9e7e16b2d393881ec3223ce9eae0266f56b64671451fac5",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "ella__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "music",
+        "grip": [
+          383,
+          236
+        ],
+        "tip": [
+          431,
+          207
+        ],
+        "focus": [
+          298,
+          281
+        ],
+        "provenance": "강한 연주 자세의 류트 목 손·튜닝 헤드 끝·울림구멍/현 중앙을 관찰.",
+        "framePath": "public/art/characters-v3/units/ella__form0-skill-b.webp",
+        "frameSha256": "4157ff876f37f675a6f288f378a2f5c556ac33ae806c735d502b5868f09e0d96",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "ella__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "ella__form1": {
+      "windup": {
+        "kind": "music",
+        "grip": [
+          368,
+          267
+        ],
+        "tip": [
+          411,
+          236
+        ],
+        "focus": [
+          294,
+          302
+        ],
+        "provenance": "류트 목 손·튜닝 헤드 끝·몸통 울림구멍을 관찰.",
+        "framePath": "public/art/characters-v3/units/ella__form1-windup.webp",
+        "frameSha256": "0eed748053b11ea2edf9fc06589c2184b6246a8b206fa43f176c8db5858a05f5",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "ella__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "music",
+        "grip": [
+          383,
+          266
+        ],
+        "tip": [
+          431,
+          247
+        ],
+        "focus": [
+          276,
+          283
+        ],
+        "provenance": "가로로 든 류트 목의 손·튜닝 헤드 끝·울림구멍을 관찰.",
+        "framePath": "public/art/characters-v3/units/ella__form1-strike.webp",
+        "frameSha256": "526451361a7bc34d65c62901e0a40c0ad1cd380826f80eeccb967be394868dbc",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "ella__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "music",
+        "grip": [
+          344,
+          215
+        ],
+        "tip": [
+          381,
+          187
+        ],
+        "focus": [
+          281,
+          247
+        ],
+        "provenance": "최종 교정된 회복 연주 원화의 류트 목 손·튜닝 헤드 끝·울림구멍을 관찰.",
+        "framePath": "public/art/characters-v3/units/ella__form1-skill-a.webp",
+        "frameSha256": "d27e985bdfc765e60bf611acf14b018691157241fc9b7a86d8ec402a0e5513fb",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "ella__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "music",
+        "grip": [
+          374,
+          247
+        ],
+        "tip": [
+          426,
+          221
+        ],
+        "focus": [
+          294,
+          273
+        ],
+        "provenance": "강한 연주 자세의 류트 목 손·튜닝 헤드 끝·울림구멍/현 중앙을 관찰.",
+        "framePath": "public/art/characters-v3/units/ella__form1-skill-b.webp",
+        "frameSha256": "ba11a5a696deab198e383c008d220533bcf6ec411d63d2b8ee1565d410f590e9",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "ella__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "baekho__form0": {
+      "windup": {
+        "kind": "fist",
+        "grip": [
+          387,
+          328
+        ],
+        "tip": [
+          422,
+          346
+        ],
+        "focus": [
+          406,
+          345
+        ],
+        "secondary": {
+          "grip": [
+            170,
+            130
+          ],
+          "tip": [
+            210,
+            103
+          ]
+        },
+        "provenance": "아래쪽 전방 주먹의 손목·마디·주먹 중심과 머리 뒤 든 보조 주먹을 관찰.",
+        "framePath": "public/art/characters-v3/units/baekho__form0-windup.webp",
+        "frameSha256": "ede886a29579d3bce2adfdba3f1f0e333a102a34eb9d5bf3e22337d1ee615591",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "baekho__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "fist",
+        "grip": [
+          429,
+          222
+        ],
+        "tip": [
+          463,
+          224
+        ],
+        "focus": [
+          451,
+          227
+        ],
+        "secondary": {
+          "grip": [
+            162,
+            253
+          ],
+          "tip": [
+            198,
+            234
+          ]
+        },
+        "provenance": "오른쪽 직선 펀치의 손목·마디·주먹 중심과 몸 가까운 보조 주먹을 관찰.",
+        "framePath": "public/art/characters-v3/units/baekho__form0-strike.webp",
+        "frameSha256": "530b0ea16fb722becaf1edca36d403aa742c3eaf7db7ad6eeecf7ee1d3bd0af0",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "baekho__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "fist",
+        "grip": [
+          267,
+          443
+        ],
+        "tip": [
+          275,
+          478
+        ],
+        "focus": [
+          272,
+          471
+        ],
+        "secondary": {
+          "grip": [
+            346,
+            351
+          ],
+          "tip": [
+            317,
+            367
+          ]
+        },
+        "provenance": "이 폼은 전방 펀치가 아니라 바닥 내려치기. 바닥 주먹의 손목·아래 마디·실제 타격 중심과 몸 가까운 보조 주먹을 관찰.",
+        "framePath": "public/art/characters-v3/units/baekho__form0-skill-a.webp",
+        "frameSha256": "90c23c8dcb51371199dba148d9058f10396724a4969112b4237c51eae505965c",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "baekho__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "fist",
+        "grip": [
+          429,
+          230
+        ],
+        "tip": [
+          456,
+          161
+        ],
+        "focus": [
+          447,
+          209
+        ],
+        "secondary": {
+          "grip": [
+            151,
+            254
+          ],
+          "tip": [
+            200,
+            214
+          ]
+        },
+        "provenance": "전방 세운 손바닥의 손목·위 손가락 끝·손바닥 중심과 몸 가까운 펼친 보조 손을 관찰.",
+        "framePath": "public/art/characters-v3/units/baekho__form0-skill-b.webp",
+        "frameSha256": "905c47607fde595d398d7fe3bf0b54e3fdb5f081996111dd29a7dd3bf99efe1c",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "baekho__form0",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "baekho__form1": {
+      "windup": {
+        "kind": "fist",
+        "grip": [
+          381,
+          310
+        ],
+        "tip": [
+          418,
+          324
+        ],
+        "focus": [
+          401,
+          320
+        ],
+        "secondary": {
+          "grip": [
+            175,
+            142
+          ],
+          "tip": [
+            214,
+            121
+          ]
+        },
+        "provenance": "전방 준비 주먹의 손목·마디·중심과 머리 뒤 주먹을 관찰.",
+        "framePath": "public/art/characters-v3/units/baekho__form1-windup.webp",
+        "frameSha256": "8c216c486e96ce32f756547caf2fb3eb39dcde12f659f25a6552beb1d18e57bc",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "baekho__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "fist",
+        "grip": [
+          445,
+          214
+        ],
+        "tip": [
+          481,
+          215
+        ],
+        "focus": [
+          465,
+          218
+        ],
+        "secondary": {
+          "grip": [
+            164,
+            271
+          ],
+          "tip": [
+            196,
+            247
+          ]
+        },
+        "provenance": "오른쪽 직선 펀치의 손목·마디·중심과 몸 가까운 보조 주먹을 관찰.",
+        "framePath": "public/art/characters-v3/units/baekho__form1-strike.webp",
+        "frameSha256": "ca9cdd33e18bfcf531825c6d9bc228fc0c9ae8bee76d09337fb5af03efc6cd69",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "baekho__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "fist",
+        "grip": [
+          403,
+          260
+        ],
+        "tip": [
+          432,
+          200
+        ],
+        "focus": [
+          426,
+          245
+        ],
+        "secondary": {
+          "grip": [
+            164,
+            276
+          ],
+          "tip": [
+            207,
+            238
+          ]
+        },
+        "provenance": "전방 열린 손바닥의 손목·높이 든 손가락 끝·손바닥 중심과 후방 보조 손바닥을 관찰.",
+        "framePath": "public/art/characters-v3/units/baekho__form1-skill-a.webp",
+        "frameSha256": "0a0f46420f435789a2ac26bd62011825702b22f33327f948667ad1de2fd3a19c",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "baekho__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "fist",
+        "grip": [
+          420,
+          262
+        ],
+        "tip": [
+          442,
+          195
+        ],
+        "focus": [
+          441,
+          238
+        ],
+        "secondary": {
+          "grip": [
+            169,
+            274
+          ],
+          "tip": [
+            197,
+            226
+          ]
+        },
+        "provenance": "전방 수직 손바닥의 손목·손가락 끝·손바닥 중심과 몸 가까운 보조 손을 관찰.",
+        "framePath": "public/art/characters-v3/units/baekho__form1-skill-b.webp",
+        "frameSha256": "a3460697b6adc1b926a3e8ee8578d42c61147d7862b3d14d50c66c8696dbb1dd",
+        "size": [
+          512,
+          512
+        ],
+        "assetId": "baekho__form1",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "lina__form0": {
+      "windup": {
+        "kind": "bow",
+        "grip": [
+          409,
+          246
+        ],
+        "tip": [
+          451,
+          236
+        ],
+        "focus": [
+          210,
+          221
+        ],
+        "bow": {
+          "upper": [
+            371,
+            102
+          ],
+          "lower": [
+            362,
+            372
+          ],
+          "arrowVisible": true
+        },
+        "confidence": "medium",
+        "notes": "실제 활 손잡이·화살 nock/촉·활 양끝을 64px 좌표망 원화에서 직접 확인. 좌표는 수동 근삿값.",
+        "framePath": "public/art/characters-v3/units/lina__form0-windup.webp",
+        "frameSha256": "616ea2445e0223f792b8b63e4a88557b862a46f08296a278b30333870a812514",
+        "frameSize": [
+          512,
+          512
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "bow",
+        "grip": [
+          431,
+          229
+        ],
+        "tip": [
+          471,
+          218
+        ],
+        "focus": [
+          208,
+          234
+        ],
+        "bow": {
+          "upper": [
+            389,
+            90
+          ],
+          "lower": [
+            424,
+            377
+          ],
+          "arrowVisible": true
+        },
+        "confidence": "medium",
+        "notes": "실제 활 손잡이·화살 nock/촉·활 양끝을 64px 좌표망 원화에서 직접 확인. 좌표는 수동 근삿값.",
+        "framePath": "public/art/characters-v3/units/lina__form0-strike.webp",
+        "frameSha256": "d99de37eb37d4a5091ff56dba85162efd36ada3392c857c432b57a876af8fe4b",
+        "frameSize": [
+          512,
+          512
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "bow",
+        "grip": [
+          425,
+          270
+        ],
+        "tip": [
+          461,
+          245
+        ],
+        "focus": [
+          252,
+          298
+        ],
+        "bow": {
+          "upper": [
+            371,
+            142
+          ],
+          "lower": [
+            425,
+            408
+          ],
+          "arrowVisible": true
+        },
+        "confidence": "medium",
+        "notes": "실제 활 손잡이·화살 nock/촉·활 양끝을 64px 좌표망 원화에서 직접 확인. 좌표는 수동 근삿값.",
+        "framePath": "public/art/characters-v3/units/lina__form0-skill-a.webp",
+        "frameSha256": "ae11511535cb00f998a554f9bf2e42b1aa4743c7b04d1fc179bd89f1bb6a43ac",
+        "frameSize": [
+          512,
+          512
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "bow",
+        "grip": [
+          432,
+          246
+        ],
+        "tip": [
+          462,
+          232
+        ],
+        "focus": [
+          237,
+          241
+        ],
+        "bow": {
+          "upper": [
+            399,
+            102
+          ],
+          "lower": [
+            410,
+            390
+          ],
+          "arrowVisible": true
+        },
+        "confidence": "medium",
+        "notes": "실제 활 손잡이·화살 nock/촉·활 양끝을 64px 좌표망 원화에서 직접 확인. 좌표는 수동 근삿값.",
+        "framePath": "public/art/characters-v3/units/lina__form0-skill-b.webp",
+        "frameSha256": "52cf10acf4539d9147c2abfd08cd67562831ac9cd4482fa0050dbe29a9a76656",
+        "frameSize": [
+          512,
+          512
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "lina__form1": {
+      "windup": {
+        "kind": "bow",
+        "grip": [
+          410,
+          244
+        ],
+        "tip": [
+          434,
+          230
+        ],
+        "focus": [
+          247,
+          236
+        ],
+        "bow": {
+          "upper": [
+            357,
+            116
+          ],
+          "lower": [
+            376,
+            374
+          ],
+          "arrowVisible": true
+        },
+        "confidence": "medium",
+        "notes": "실제 활 손잡이·화살 nock/촉·활 양끝을 64px 좌표망 원화에서 직접 확인. 좌표는 수동 근삿값.",
+        "framePath": "public/art/characters-v3/units/lina__form1-windup.webp",
+        "frameSha256": "bb7659362fd0d92892e95af435f6d8030eb23a0a44bec64c14f6c619b494145c",
+        "frameSize": [
+          512,
+          512
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "bow",
+        "grip": [
+          431,
+          203
+        ],
+        "tip": [
+          362,
+          83
+        ],
+        "focus": [
+          431,
+          203
+        ],
+        "bow": {
+          "upper": [
+            362,
+            83
+          ],
+          "lower": [
+            388,
+            342
+          ],
+          "arrowVisible": false
+        },
+        "confidence": "low",
+        "notes": "활시위를 놓은 자세로 뒤쪽 손이 펼쳐져 있고 전체 화살축이 원화에 보이지 않음. bow grip 주변 작은 돌출 장식/촉은 불명확하므로 arrowVisible=false. grip/focus는 실제 활 손잡이, tip는 실제 활 위끝. 활 양끝을 개별512px 프레임에서 재확인.",
+        "framePath": "public/art/characters-v3/units/lina__form1-strike.webp",
+        "frameSha256": "1e7962b665322f4258115f182f4c87711e8503dce1f1026a460e5c837c52292a",
+        "frameSize": [
+          512,
+          512
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "bow",
+        "grip": [
+          390,
+          207
+        ],
+        "tip": [
+          416,
+          188
+        ],
+        "focus": [
+          279,
+          240
+        ],
+        "bow": {
+          "upper": [
+            420,
+            128
+          ],
+          "lower": [
+            353,
+            318
+          ],
+          "arrowVisible": true
+        },
+        "confidence": "medium",
+        "notes": "실제 활 손잡이·화살 nock/촉·활 양끝을 64px 좌표망 원화에서 직접 확인. 좌표는 수동 근삿값.",
+        "framePath": "public/art/characters-v3/units/lina__form1-skill-a.webp",
+        "frameSha256": "127cfb9cbc86c0521a4d19245b39b2bd683177aef66eeaa2362ce52e15a54856",
+        "frameSize": [
+          512,
+          512
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "bow",
+        "grip": [
+          389,
+          221
+        ],
+        "tip": [
+          390,
+          419
+        ],
+        "focus": [
+          385,
+          287
+        ],
+        "bow": {
+          "upper": [
+            374,
+            146
+          ],
+          "lower": [
+            390,
+            419
+          ],
+          "arrowVisible": false
+        },
+        "confidence": "low",
+        "notes": "화살 없음. 펼친 오른손이 활 위쪽 가장자리에 겹치며 통상 손잡이 중앙을 잡지 않는다. grip는 실제 손/활 겹침 지점, focus는 활 중앙. 자세 자체의 손잡이 관계가 불명확하여 추정 좌표.",
+        "framePath": "public/art/characters-v3/units/lina__form1-skill-b.webp",
+        "frameSha256": "f1930c6beb7b38c692bf51196b74920a4dbc575b657146cc098187a47e681917",
+        "frameSize": [
+          512,
+          512
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "aria__form0": {
+      "windup": {
+        "kind": "staff",
+        "grip": [
+          205,
+          253
+        ],
+        "tip": [
+          146,
+          207
+        ],
+        "focus": [
+          146,
+          207
+        ],
+        "confidence": "medium",
+        "notes": "그림 속 지팡이를 잡은 손과 실제 푸른 보석 중심을 직접 확인. tip/focus는 지팡이 보석 중심이며 수동 근삿값.",
+        "framePath": "public/art/characters-v3/units/aria__form0-windup.webp",
+        "frameSha256": "8b208efaca0a7519839e2e51166f7612bc5052e751c457cff6a10e774becf36b",
+        "frameSize": [
+          512,
+          512
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "staff",
+        "grip": [
+          339,
+          255
+        ],
+        "tip": [
+          451,
+          228
+        ],
+        "focus": [
+          451,
+          228
+        ],
+        "confidence": "medium",
+        "notes": "그림 속 지팡이를 잡은 손과 실제 푸른 보석 중심을 직접 확인. tip/focus는 지팡이 보석 중심이며 수동 근삿값.",
+        "framePath": "public/art/characters-v3/units/aria__form0-strike.webp",
+        "frameSha256": "c8dc05da5d29e0c2a8d0c945d394c9b9539aa5e3ab07c8683d83b91211eeaabd",
+        "frameSize": [
+          512,
+          512
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "staff",
+        "grip": [
+          201,
+          304
+        ],
+        "tip": [
+          196,
+          212
+        ],
+        "focus": [
+          196,
+          212
+        ],
+        "confidence": "medium",
+        "notes": "그림 속 지팡이를 잡은 손과 실제 푸른 보석 중심을 직접 확인. tip/focus는 지팡이 보석 중심이며 수동 근삿값.",
+        "framePath": "public/art/characters-v3/units/aria__form0-skill-a.webp",
+        "frameSha256": "06f691728207e8c83a17d0d62d2e58433a490d7a672ccc1b68fc2a2ad7963536",
+        "frameSize": [
+          512,
+          512
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "staff",
+        "grip": [
+          192,
+          229
+        ],
+        "tip": [
+          327,
+          181
+        ],
+        "focus": [
+          327,
+          181
+        ],
+        "confidence": "medium",
+        "notes": "그림 속 지팡이를 잡은 손과 실제 푸른 보석 중심을 직접 확인. tip/focus는 지팡이 보석 중심이며 수동 근삿값.",
+        "framePath": "public/art/characters-v3/units/aria__form0-skill-b.webp",
+        "frameSha256": "6583f7ac3ef24a58e0b4054e43f1cf537e7b546556c686ffacfe33180a2fcb47",
+        "frameSize": [
+          512,
+          512
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "aria__form1": {
+      "windup": {
+        "kind": "staff",
+        "grip": [
+          229,
+          281
+        ],
+        "tip": [
+          142,
+          254
+        ],
+        "focus": [
+          142,
+          254
+        ],
+        "confidence": "medium",
+        "notes": "그림 속 지팡이를 잡은 손과 실제 푸른 보석 중심을 직접 확인. tip/focus는 지팡이 보석 중심이며 수동 근삿값.",
+        "framePath": "public/art/characters-v3/units/aria__form1-windup.webp",
+        "frameSha256": "9fe2fa906fd12b4ff8b3e25b168a227ead78bfbf99a501af089b6b71898340a7",
+        "frameSize": [
+          512,
+          512
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "strike": {
+        "kind": "staff",
+        "grip": [
+          321,
+          285
+        ],
+        "tip": [
+          457,
+          249
+        ],
+        "focus": [
+          457,
+          249
+        ],
+        "confidence": "medium",
+        "notes": "그림 속 지팡이를 잡은 손과 실제 푸른 보석 중심을 직접 확인. tip/focus는 지팡이 보석 중심이며 수동 근삿값.",
+        "framePath": "public/art/characters-v3/units/aria__form1-strike.webp",
+        "frameSha256": "44dc1e6fb8eadae67c6547ae71ba0d27b6c496a319ad72c0e2d283d6e4e00355",
+        "frameSize": [
+          512,
+          512
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-a": {
+        "kind": "staff",
+        "grip": [
+          333,
+          259
+        ],
+        "tip": [
+          393,
+          238
+        ],
+        "focus": [
+          393,
+          238
+        ],
+        "confidence": "medium",
+        "notes": "그림 속 지팡이를 잡은 손과 실제 푸른 보석 중심을 직접 확인. tip/focus는 지팡이 보석 중심이며 수동 근삿값.",
+        "framePath": "public/art/characters-v3/units/aria__form1-skill-a.webp",
+        "frameSha256": "9b5db042380162fab47f0ebe7a7505263fe5a9697e4a395c187b21364561495b",
+        "frameSize": [
+          512,
+          512
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      },
+      "skill-b": {
+        "kind": "staff",
+        "grip": [
+          171,
+          311
+        ],
+        "tip": [
+          163,
+          247
+        ],
+        "focus": [
+          163,
+          247
+        ],
+        "confidence": "medium",
+        "notes": "그림 속 지팡이를 잡은 손과 실제 푸른 보석 중심을 직접 확인. tip/focus는 지팡이 보석 중심이며 수동 근삿값.",
+        "framePath": "public/art/characters-v3/units/aria__form1-skill-b.webp",
+        "frameSha256": "5f58500accd42f9fcae45652d05fff310f4d50428983e540f6c42009352b83e0",
+        "frameSize": [
+          512,
+          512
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음."
+      }
+    },
+    "leon__form0": {
+      "windup": {
+        "kind": "spear",
+        "grip": [
+          158,
+          327
+        ],
+        "tip": [
+          414,
+          285
+        ],
+        "focus": [
+          414,
+          285
+        ],
+        "confidence": "medium",
+        "notes": "실제 창자루를 잡은 전방 손과 날 끝을 원화 좌표망에서 직접 확인. focus는 실제 창촉 끝. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/leon__form0-windup.webp",
+        "frameSha256": "fae42e5e8fa28f9258f7e212cdf95591cd4d36e5cc57f4e46fc005b12829e1f2",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "strike": {
+        "kind": "spear",
+        "grip": [
+          335,
+          345
+        ],
+        "tip": [
+          492,
+          341
+        ],
+        "focus": [
+          492,
+          341
+        ],
+        "confidence": "medium",
+        "notes": "실제 창자루를 잡은 전방 손과 날 끝을 원화 좌표망에서 직접 확인. focus는 실제 창촉 끝. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/leon__form0-strike.webp",
+        "frameSha256": "a015a08a4cf8e98cf83ba909b62542aaa1ee72315747c5a528107bb26f39b2a1",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-a": {
+        "kind": "spear",
+        "grip": [
+          302,
+          335
+        ],
+        "tip": [
+          456,
+          267
+        ],
+        "focus": [
+          456,
+          267
+        ],
+        "confidence": "medium",
+        "notes": "실제 창자루를 잡은 전방 손과 날 끝을 원화 좌표망에서 직접 확인. focus는 실제 창촉 끝. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/leon__form0-skill-a.webp",
+        "frameSha256": "eca9fda56db2f5857dd43d0e9ea2a64a05140ca7a5efa06e7733e21cd66475eb",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-b": {
+        "kind": "spear",
+        "grip": [
+          267,
+          395
+        ],
+        "tip": [
+          428,
+          478
+        ],
+        "focus": [
+          428,
+          478
+        ],
+        "confidence": "medium",
+        "notes": "실제 창자루를 잡은 전방 손과 날 끝을 원화 좌표망에서 직접 확인. focus는 실제 창촉 끝. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/leon__form0-skill-b.webp",
+        "frameSha256": "a393560c060c8424251e87c552b26d66b59afccfed9e6c0d785d0aa9cfd8185c",
+        "frameSize": [
+          512,
+          512
+        ]
+      }
+    },
+    "leon__form1": {
+      "windup": {
+        "kind": "spear",
+        "grip": [
+          160,
+          329
+        ],
+        "tip": [
+          427,
+          320
+        ],
+        "focus": [
+          427,
+          320
+        ],
+        "confidence": "medium",
+        "notes": "실제 창자루를 잡은 전방 손과 날 끝을 원화 좌표망에서 직접 확인. focus는 실제 창촉 끝. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/leon__form1-windup.webp",
+        "frameSha256": "90f2aa0ea699b27fe17bcbc01282e2de82598d9cf10ded783ced8d572567ea97",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "strike": {
+        "kind": "spear",
+        "grip": [
+          298,
+          351
+        ],
+        "tip": [
+          491,
+          349
+        ],
+        "focus": [
+          491,
+          349
+        ],
+        "confidence": "medium",
+        "notes": "실제 창자루를 잡은 전방 손과 날 끝을 원화 좌표망에서 직접 확인. focus는 실제 창촉 끝. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/leon__form1-strike.webp",
+        "frameSha256": "061f4af9b48ba40a7638ad9dd2b84f9704812dcab0536a6ae21e2b6c01974307",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-a": {
+        "kind": "spear",
+        "grip": [
+          312,
+          326
+        ],
+        "tip": [
+          452,
+          261
+        ],
+        "focus": [
+          452,
+          261
+        ],
+        "confidence": "medium",
+        "notes": "실제 창자루를 잡은 전방 손과 날 끝을 원화 좌표망에서 직접 확인. focus는 실제 창촉 끝. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/leon__form1-skill-a.webp",
+        "frameSha256": "333885e84094e28e6733d127a8d0e9273e37b09733c140a6931dc11188b681ca",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-b": {
+        "kind": "spear",
+        "grip": [
+          265,
+          369
+        ],
+        "tip": [
+          412,
+          443
+        ],
+        "focus": [
+          412,
+          443
+        ],
+        "confidence": "medium",
+        "notes": "실제 창자루를 잡은 전방 손과 날 끝을 원화 좌표망에서 직접 확인. focus는 실제 창촉 끝. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/leon__form1-skill-b.webp",
+        "frameSha256": "022948a644660209a0303d8b77a16d80f497cd6168be05284e227d9f636dcef8",
+        "frameSize": [
+          512,
+          512
+        ]
+      }
+    },
+    "sera__form0": {
+      "windup": {
+        "kind": "dagger",
+        "grip": [
+          350,
+          349
+        ],
+        "tip": [
+          405,
+          321
+        ],
+        "focus": [
+          405,
+          321
+        ],
+        "secondary": {
+          "grip": [
+            264,
+            202
+          ],
+          "tip": [
+            181,
+            208
+          ]
+        },
+        "confidence": "medium",
+        "notes": "두 손의 실제 단검을 각각 직접 확인. primary는 해당 자세의 전방/주동작 단검, secondary는 반대 손 단검. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/sera__form0-windup.webp",
+        "frameSha256": "a98955a1021b0d9304e4359ad11ce15b32bb3f1beceb2698f64fa524f3f8d41e",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "strike": {
+        "kind": "dagger",
+        "grip": [
+          396,
+          275
+        ],
+        "tip": [
+          493,
+          276
+        ],
+        "focus": [
+          493,
+          276
+        ],
+        "secondary": {
+          "grip": [
+            338,
+            339
+          ],
+          "tip": [
+            423,
+            371
+          ]
+        },
+        "confidence": "medium",
+        "notes": "두 손의 실제 단검을 각각 직접 확인. primary는 해당 자세의 전방/주동작 단검, secondary는 반대 손 단검. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/sera__form0-strike.webp",
+        "frameSha256": "dbd4b8c4d3110f7d2e43fb6a82cdf5f460431f6bbbdf4841cc932d939810b06b",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-a": {
+        "kind": "dagger",
+        "grip": [
+          347,
+          395
+        ],
+        "tip": [
+          438,
+          413
+        ],
+        "focus": [
+          438,
+          413
+        ],
+        "secondary": {
+          "grip": [
+            166,
+            200
+          ],
+          "tip": [
+            94,
+            252
+          ]
+        },
+        "confidence": "medium",
+        "notes": "두 손의 실제 단검을 각각 직접 확인. primary는 해당 자세의 전방/주동작 단검, secondary는 반대 손 단검. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/sera__form0-skill-a.webp",
+        "frameSha256": "2a353badd611c4b3eff72b860d63823e7d4830c6371541e1c34dea899084a885",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-b": {
+        "kind": "dagger",
+        "grip": [
+          388,
+          341
+        ],
+        "tip": [
+          448,
+          391
+        ],
+        "focus": [
+          448,
+          391
+        ],
+        "secondary": {
+          "grip": [
+            145,
+            205
+          ],
+          "tip": [
+            63,
+            241
+          ]
+        },
+        "confidence": "medium",
+        "notes": "두 손의 실제 단검을 각각 직접 확인. primary는 해당 자세의 전방/주동작 단검, secondary는 반대 손 단검. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/sera__form0-skill-b.webp",
+        "frameSha256": "8dcc60445a8e82bb6c95ff8364cb102ceffd43392c057723139a201dab2a0361",
+        "frameSize": [
+          512,
+          512
+        ]
+      }
+    },
+    "sera__form1": {
+      "windup": {
+        "kind": "dagger",
+        "grip": [
+          318,
+          301
+        ],
+        "tip": [
+          378,
+          368
+        ],
+        "focus": [
+          378,
+          368
+        ],
+        "secondary": {
+          "grip": [
+            196,
+            189
+          ],
+          "tip": [
+            271,
+            154
+          ]
+        },
+        "confidence": "medium",
+        "notes": "두 손의 실제 단검을 각각 직접 확인. primary는 해당 자세의 전방/주동작 단검, secondary는 반대 손 단검. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/sera__form1-windup.webp",
+        "frameSha256": "624ff8b55eeb43bad8960539eda9fd210ebef6fc0762c1515c631462e6d0c8b9",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "strike": {
+        "kind": "dagger",
+        "grip": [
+          403,
+          268
+        ],
+        "tip": [
+          493,
+          261
+        ],
+        "focus": [
+          493,
+          261
+        ],
+        "secondary": {
+          "grip": [
+            112,
+            205
+          ],
+          "tip": [
+            66,
+            155
+          ]
+        },
+        "confidence": "medium",
+        "notes": "두 손의 실제 단검을 각각 직접 확인. primary는 해당 자세의 전방/주동작 단검, secondary는 반대 손 단검. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/sera__form1-strike.webp",
+        "frameSha256": "9fbd10cf310a823bea62a8d8a79ffac07667cf79182df0c0803c8d193f99e3d3",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-a": {
+        "kind": "dagger",
+        "grip": [
+          191,
+          384
+        ],
+        "tip": [
+          123,
+          368
+        ],
+        "focus": [
+          123,
+          368
+        ],
+        "secondary": {
+          "grip": [
+            389,
+            302
+          ],
+          "tip": [
+            480,
+            301
+          ]
+        },
+        "confidence": "medium",
+        "notes": "두 손의 실제 단검을 각각 직접 확인. primary는 해당 자세의 전방/주동작 단검, secondary는 반대 손 단검. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/sera__form1-skill-a.webp",
+        "frameSha256": "32e04e75bbcc439577ae8933036e1e7bb14f18d3852bed741715e828d9888c10",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-b": {
+        "kind": "dagger",
+        "grip": [
+          389,
+          263
+        ],
+        "tip": [
+          454,
+          249
+        ],
+        "focus": [
+          454,
+          249
+        ],
+        "secondary": {
+          "grip": [
+            166,
+            308
+          ],
+          "tip": [
+            243,
+            294
+          ]
+        },
+        "confidence": "medium",
+        "notes": "두 손의 실제 단검을 각각 직접 확인. primary는 해당 자세의 전방/주동작 단검, secondary는 반대 손 단검. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/sera__form1-skill-b.webp",
+        "frameSha256": "2bdb2141ed97f17a307f7c6e9aa0d1c83c5641985e2d9bf8f18904318bcb4c8a",
+        "frameSize": [
+          512,
+          512
+        ]
+      }
+    },
+    "noah__form0": {
+      "windup": {
+        "kind": "book",
+        "grip": [
+          348,
+          274
+        ],
+        "tip": [
+          350,
+          240
+        ],
+        "focus": [
+          350,
+          240
+        ],
+        "bookCenter": [
+          350,
+          240
+        ],
+        "confidence": "medium",
+        "notes": "책을 받치는 실제 손과 책 표지/펼친 페이지 중심을 직접 확인. tip/focus는 책 중심, 자동 caster 프로필을 사용하지 않음. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/noah__form0-windup.webp",
+        "frameSha256": "19e84b26f583c26b3f8fa4e2d1cee41696543263b1e8eccef52069ba150bb729",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "strike": {
+        "kind": "book",
+        "grip": [
+          177,
+          269
+        ],
+        "tip": [
+          184,
+          236
+        ],
+        "focus": [
+          184,
+          236
+        ],
+        "bookCenter": [
+          184,
+          236
+        ],
+        "confidence": "medium",
+        "notes": "책을 받치는 실제 손과 책 표지/펼친 페이지 중심을 직접 확인. tip/focus는 책 중심, 자동 caster 프로필을 사용하지 않음. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/noah__form0-strike.webp",
+        "frameSha256": "661c5df8d677cdefef8b5ae45cdc2ca3e180da501d8bf3dd8fee8ba8f068a9c0",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-a": {
+        "kind": "book",
+        "grip": [
+          231,
+          266
+        ],
+        "tip": [
+          246,
+          235
+        ],
+        "focus": [
+          246,
+          235
+        ],
+        "bookCenter": [
+          246,
+          235
+        ],
+        "confidence": "medium",
+        "notes": "책을 받치는 실제 손과 책 표지/펼친 페이지 중심을 직접 확인. tip/focus는 책 중심, 자동 caster 프로필을 사용하지 않음. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/noah__form0-skill-a.webp",
+        "frameSha256": "fc04f8465d92fa1736a898bd16bf5feee44b780fc6942fc6718cacfb99926816",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-b": {
+        "kind": "book",
+        "grip": [
+          209,
+          253
+        ],
+        "tip": [
+          210,
+          222
+        ],
+        "focus": [
+          210,
+          222
+        ],
+        "bookCenter": [
+          210,
+          222
+        ],
+        "confidence": "medium",
+        "notes": "책을 받치는 실제 손과 책 표지/펼친 페이지 중심을 직접 확인. tip/focus는 책 중심, 자동 caster 프로필을 사용하지 않음. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/noah__form0-skill-b.webp",
+        "frameSha256": "ad6d18b1ef36e9dbbada677cdfc7158feb8afa5ef0ceb6b6a57dd0f6bc15ca52",
+        "frameSize": [
+          512,
+          512
+        ]
+      }
+    },
+    "noah__form1": {
+      "windup": {
+        "kind": "book",
+        "grip": [
+          351,
+          264
+        ],
+        "tip": [
+          341,
+          232
+        ],
+        "focus": [
+          341,
+          232
+        ],
+        "bookCenter": [
+          341,
+          232
+        ],
+        "confidence": "medium",
+        "notes": "책을 받치는 실제 손과 책 표지/펼친 페이지 중심을 직접 확인. tip/focus는 책 중심, 자동 caster 프로필을 사용하지 않음. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/noah__form1-windup.webp",
+        "frameSha256": "896accafa67dac589547961d930169a44a0453cf844c0b2e6f921485f43116db",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "strike": {
+        "kind": "book",
+        "grip": [
+          177,
+          274
+        ],
+        "tip": [
+          187,
+          250
+        ],
+        "focus": [
+          187,
+          250
+        ],
+        "bookCenter": [
+          187,
+          250
+        ],
+        "confidence": "medium",
+        "notes": "책을 받치는 실제 손과 책 표지/펼친 페이지 중심을 직접 확인. tip/focus는 책 중심, 자동 caster 프로필을 사용하지 않음. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/noah__form1-strike.webp",
+        "frameSha256": "9a407aa1af65c19f781ae2b846214b259c7de92cd18cdaefe95829fc930aceea",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-a": {
+        "kind": "book",
+        "grip": [
+          234,
+          270
+        ],
+        "tip": [
+          243,
+          237
+        ],
+        "focus": [
+          243,
+          237
+        ],
+        "bookCenter": [
+          243,
+          237
+        ],
+        "confidence": "medium",
+        "notes": "책을 받치는 실제 손과 책 표지/펼친 페이지 중심을 직접 확인. tip/focus는 책 중심, 자동 caster 프로필을 사용하지 않음. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/noah__form1-skill-a.webp",
+        "frameSha256": "74ad52ce8955d32b97cc089fc5a9a56a291544e5ae7f0070d7aad624e20d2c89",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-b": {
+        "kind": "book",
+        "grip": [
+          261,
+          249
+        ],
+        "tip": [
+          253,
+          235
+        ],
+        "focus": [
+          253,
+          235
+        ],
+        "bookCenter": [
+          253,
+          235
+        ],
+        "confidence": "medium",
+        "notes": "책을 받치는 실제 손과 책 표지/펼친 페이지 중심을 직접 확인. tip/focus는 책 중심, 자동 caster 프로필을 사용하지 않음. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/noah__form1-skill-b.webp",
+        "frameSha256": "621282ab8e802e431f0bfacb5867ab6e2cd0c33bca920bc3c2bdfb57df77a037",
+        "frameSize": [
+          512,
+          512
+        ]
+      }
+    },
+    "yuna__form0": {
+      "windup": {
+        "kind": "staff",
+        "grip": [
+          222,
+          149
+        ],
+        "tip": [
+          168,
+          68
+        ],
+        "focus": [
+          168,
+          68
+        ],
+        "confidence": "medium",
+        "notes": "실제 지팡이를 잡은 손과 분홍 보석 중심을 직접 확인. tip/focus는 지팡이 보석 중심. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/yuna__form0-windup.webp",
+        "frameSha256": "f38b7fbb8b283fa4c5139903d10b0d4453b2dcce392d49552efb02ebf3734a36",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "strike": {
+        "kind": "staff",
+        "grip": [
+          208,
+          226
+        ],
+        "tip": [
+          141,
+          168
+        ],
+        "focus": [
+          141,
+          168
+        ],
+        "confidence": "medium",
+        "notes": "실제 지팡이를 잡은 손과 분홍 보석 중심을 직접 확인. tip/focus는 지팡이 보석 중심. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/yuna__form0-strike.webp",
+        "frameSha256": "7204c290cf7eecb235241f3b2a6e18405bddad9ab8e10441429710b7438cda1b",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-a": {
+        "kind": "staff",
+        "grip": [
+          174,
+          220
+        ],
+        "tip": [
+          159,
+          137
+        ],
+        "focus": [
+          159,
+          137
+        ],
+        "confidence": "medium",
+        "notes": "실제 지팡이를 잡은 손과 분홍 보석 중심을 직접 확인. tip/focus는 지팡이 보석 중심. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/yuna__form0-skill-a.webp",
+        "frameSha256": "019b8d76b3ed02badfed265ef16dfa69a76069ce4607e98ee93cf5811b091c9a",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-b": {
+        "kind": "staff",
+        "grip": [
+          295,
+          228
+        ],
+        "tip": [
+          268,
+          447
+        ],
+        "focus": [
+          292,
+          237
+        ],
+        "confidence": "low",
+        "notes": "기도 자세에서 보석 머리는 원화에 보이지 않는다. grip는 합장한 실제 손, tip는 보이는 지팡이 아래끝, focus는 손과 자루의 접점. 숨겨진 보석 위치를 추정하지 않음.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/yuna__form0-skill-b.webp",
+        "frameSha256": "40e23e3e39421341ea5c4f7420fdcdba618568763c18ed0ddedf8b4bc3ec3638",
+        "frameSize": [
+          512,
+          512
+        ]
+      }
+    },
+    "yuna__form1": {
+      "windup": {
+        "kind": "staff",
+        "grip": [
+          223,
+          136
+        ],
+        "tip": [
+          169,
+          61
+        ],
+        "focus": [
+          169,
+          61
+        ],
+        "confidence": "medium",
+        "notes": "실제 지팡이를 잡은 손과 분홍 보석 중심을 직접 확인. tip/focus는 지팡이 보석 중심. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/yuna__form1-windup.webp",
+        "frameSha256": "3079857952650f4837ff71fc2ecbd17b88e623183aeb9169275a28cd765f1412",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "strike": {
+        "kind": "staff",
+        "grip": [
+          173,
+          207
+        ],
+        "tip": [
+          106,
+          148
+        ],
+        "focus": [
+          106,
+          148
+        ],
+        "confidence": "medium",
+        "notes": "실제 지팡이를 잡은 손과 분홍 보석 중심을 직접 확인. tip/focus는 지팡이 보석 중심. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/yuna__form1-strike.webp",
+        "frameSha256": "1a686f8342a46e27209d752af127d0bc399631de9270a568ef020b0c8702e042",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-a": {
+        "kind": "staff",
+        "grip": [
+          184,
+          212
+        ],
+        "tip": [
+          166,
+          122
+        ],
+        "focus": [
+          166,
+          122
+        ],
+        "confidence": "medium",
+        "notes": "실제 지팡이를 잡은 손과 분홍 보석 중심을 직접 확인. tip/focus는 지팡이 보석 중심. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/yuna__form1-skill-a.webp",
+        "frameSha256": "d5de3c711c3ff849138299afc854a006770d26ed7267f55cd5779474be8c52e0",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-b": {
+        "kind": "staff",
+        "grip": [
+          291,
+          218
+        ],
+        "tip": [
+          332,
+          122
+        ],
+        "focus": [
+          332,
+          122
+        ],
+        "confidence": "medium",
+        "notes": "실제 지팡이를 잡은 손과 분홍 보석 중심을 직접 확인. tip/focus는 지팡이 보석 중심. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/yuna__form1-skill-b.webp",
+        "frameSha256": "39c330d024761c2206ff88010eec0b9e1533211e5d7ba3b550bdb8413464766a",
+        "frameSize": [
+          512,
+          512
+        ]
+      }
+    },
+    "rakan__form0": {
+      "windup": {
+        "kind": "axe",
+        "grip": [
+          216,
+          53
+        ],
+        "tip": [
+          78,
+          141
+        ],
+        "focus": [
+          137,
+          91
+        ],
+        "confidence": "medium",
+        "notes": "실제 원화의 무기는 전투도끼. 두 손 중 자루를 직접 잡은 손, 도끼날 끝과 넓은 날 중심을 각각 직접 확인. focus는 도끼 머리 중심. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/rakan__form0-windup.webp",
+        "frameSha256": "04bded10e3ea491b0d70f8011b5aab50a6c05d6087d8f6f3c46c7e31707e4f3a",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "strike": {
+        "kind": "axe",
+        "grip": [
+          300,
+          309
+        ],
+        "tip": [
+          458,
+          478
+        ],
+        "focus": [
+          430,
+          399
+        ],
+        "confidence": "medium",
+        "notes": "실제 원화의 무기는 전투도끼. 두 손 중 자루를 직접 잡은 손, 도끼날 끝과 넓은 날 중심을 각각 직접 확인. focus는 도끼 머리 중심. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/rakan__form0-strike.webp",
+        "frameSha256": "db490dd2e4bcc4d9610d2cb72abb7788475258b45dfe8d2bfacad92bd02f3d1f",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-a": {
+        "kind": "axe",
+        "grip": [
+          196,
+          87
+        ],
+        "tip": [
+          64,
+          179
+        ],
+        "focus": [
+          117,
+          124
+        ],
+        "confidence": "medium",
+        "notes": "실제 원화의 무기는 전투도끼. 두 손 중 자루를 직접 잡은 손, 도끼날 끝과 넓은 날 중심을 각각 직접 확인. focus는 도끼 머리 중심. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/rakan__form0-skill-a.webp",
+        "frameSha256": "caa022ac6b0797c88abc5e6fd401a082b6e9e3104c62360350556ce9cc235907",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-b": {
+        "kind": "axe",
+        "grip": [
+          127,
+          282
+        ],
+        "tip": [
+          64,
+          458
+        ],
+        "focus": [
+          77,
+          389
+        ],
+        "confidence": "medium",
+        "notes": "실제 원화의 무기는 전투도끼. 두 손 중 자루를 직접 잡은 손, 도끼날 끝과 넓은 날 중심을 각각 직접 확인. focus는 도끼 머리 중심. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/rakan__form0-skill-b.webp",
+        "frameSha256": "18fa06cf72acec41cf5cfc7396fd7f5263c94fb322f259e59970a563edd3f018",
+        "frameSize": [
+          512,
+          512
+        ]
+      }
+    },
+    "rakan__form1": {
+      "windup": {
+        "kind": "axe",
+        "grip": [
+          215,
+          49
+        ],
+        "tip": [
+          69,
+          139
+        ],
+        "focus": [
+          134,
+          95
+        ],
+        "confidence": "medium",
+        "notes": "실제 원화의 무기는 전투도끼. 두 손 중 자루를 직접 잡은 손, 도끼날 끝과 넓은 날 중심을 각각 직접 확인. focus는 도끼 머리 중심. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/rakan__form1-windup.webp",
+        "frameSha256": "8284559710f61982d75041b85039a854885e4d6aa14f8fb6a92e12d4439f27e5",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "strike": {
+        "kind": "axe",
+        "grip": [
+          300,
+          311
+        ],
+        "tip": [
+          460,
+          475
+        ],
+        "focus": [
+          423,
+          400
+        ],
+        "confidence": "medium",
+        "notes": "실제 원화의 무기는 전투도끼. 두 손 중 자루를 직접 잡은 손, 도끼날 끝과 넓은 날 중심을 각각 직접 확인. focus는 도끼 머리 중심. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/rakan__form1-strike.webp",
+        "frameSha256": "c9a1301d8c9df7b5b9ef5395d610ab5ea72c9a1cef4858cc8f4af64ac402bee2",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-a": {
+        "kind": "axe",
+        "grip": [
+          190,
+          84
+        ],
+        "tip": [
+          64,
+          170
+        ],
+        "focus": [
+          116,
+          117
+        ],
+        "confidence": "medium",
+        "notes": "실제 원화의 무기는 전투도끼. 두 손 중 자루를 직접 잡은 손, 도끼날 끝과 넓은 날 중심을 각각 직접 확인. focus는 도끼 머리 중심. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/rakan__form1-skill-a.webp",
+        "frameSha256": "0becd3295c16a63084319ccfbb94e18d87b94f9fa9058cbfd6007efa24ce37ae",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-b": {
+        "kind": "axe",
+        "grip": [
+          123,
+          284
+        ],
+        "tip": [
+          53,
+          450
+        ],
+        "focus": [
+          82,
+          390
+        ],
+        "confidence": "medium",
+        "notes": "실제 원화의 무기는 전투도끼. 두 손 중 자루를 직접 잡은 손, 도끼날 끝과 넓은 날 중심을 각각 직접 확인. focus는 도끼 머리 중심. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/rakan__form1-skill-b.webp",
+        "frameSha256": "b4386c297e36846c8ab3993762e15ed05ac395d0f83cde3a8bde535ea3b9432e",
+        "frameSize": [
+          512,
+          512
+        ]
+      }
+    },
+    "kaz__form0": {
+      "windup": {
+        "kind": "dagger",
+        "grip": [
+          327,
+          274
+        ],
+        "tip": [
+          416,
+          328
+        ],
+        "focus": [
+          416,
+          328
+        ],
+        "secondary": {
+          "grip": [
+            239,
+            114
+          ],
+          "tip": [
+            329,
+            128
+          ]
+        },
+        "confidence": "medium",
+        "notes": "실제 양손 단검을 각각 직접 확인. primary는 전방 단검, secondary는 반대 손 단검. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/kaz__form0-windup.webp",
+        "frameSha256": "6e8393cab05672ca4f94aecf6e1c98e1d3eee89597807661146e9c5e14e5a157",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "strike": {
+        "kind": "dagger",
+        "grip": [
+          370,
+          235
+        ],
+        "tip": [
+          475,
+          231
+        ],
+        "focus": [
+          475,
+          231
+        ],
+        "secondary": {
+          "grip": [
+            292,
+            293
+          ],
+          "tip": [
+            363,
+            294
+          ]
+        },
+        "confidence": "medium",
+        "notes": "실제 양손 단검을 각각 직접 확인. primary는 전방 단검, secondary는 반대 손 단검. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/kaz__form0-strike.webp",
+        "frameSha256": "70062b3bab81013777b5a1f99d706de65586d088203b77252bf02326a964ff08",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-a": {
+        "kind": "dagger",
+        "grip": [
+          428,
+          318
+        ],
+        "tip": [
+          493,
+          324
+        ],
+        "focus": [
+          493,
+          324
+        ],
+        "secondary": {
+          "grip": [
+            226,
+            336
+          ],
+          "tip": [
+            297,
+            363
+          ]
+        },
+        "confidence": "medium",
+        "notes": "실제 양손 단검을 각각 직접 확인. primary는 전방 단검, secondary는 반대 손 단검. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/kaz__form0-skill-a.webp",
+        "frameSha256": "8c143eaae84d02ebd12c8b9acf8464d7e5f97ca3791b47b76e1510b526c528e0",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-b": {
+        "kind": "dagger",
+        "grip": [
+          369,
+          228
+        ],
+        "tip": [
+          460,
+          226
+        ],
+        "focus": [
+          460,
+          226
+        ],
+        "secondary": {
+          "grip": [
+            170,
+            282
+          ],
+          "tip": [
+            242,
+            302
+          ]
+        },
+        "confidence": "medium",
+        "notes": "실제 양손 단검을 각각 직접 확인. primary는 전방 단검, secondary는 반대 손 단검. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/kaz__form0-skill-b.webp",
+        "frameSha256": "07468785c6e3ad70957ace4868c0fd191b8ea41c435adb51c4df320ce8e535d7",
+        "frameSize": [
+          512,
+          512
+        ]
+      }
+    },
+    "kaz__form1": {
+      "windup": {
+        "kind": "dagger",
+        "grip": [
+          316,
+          289
+        ],
+        "tip": [
+          384,
+          344
+        ],
+        "focus": [
+          384,
+          344
+        ],
+        "secondary": {
+          "grip": [
+            258,
+            109
+          ],
+          "tip": [
+            345,
+            136
+          ]
+        },
+        "confidence": "medium",
+        "notes": "실제 양손 단검을 각각 직접 확인. primary는 전방 단검, secondary는 반대 손 단검. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/kaz__form1-windup.webp",
+        "frameSha256": "6929098eb77b54346f48468ca2a106062fe2e3563777618ecb793f700cea1eab",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "strike": {
+        "kind": "dagger",
+        "grip": [
+          367,
+          235
+        ],
+        "tip": [
+          469,
+          232
+        ],
+        "focus": [
+          469,
+          232
+        ],
+        "secondary": {
+          "grip": [
+            299,
+            288
+          ],
+          "tip": [
+            370,
+            290
+          ]
+        },
+        "confidence": "medium",
+        "notes": "실제 양손 단검을 각각 직접 확인. primary는 전방 단검, secondary는 반대 손 단검. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/kaz__form1-strike.webp",
+        "frameSha256": "ca2efb87bbace231102a1f6711662435c620ebe24b1fd1ad5312176d3191212c",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-a": {
+        "kind": "dagger",
+        "grip": [
+          434,
+          329
+        ],
+        "tip": [
+          493,
+          330
+        ],
+        "focus": [
+          493,
+          330
+        ],
+        "secondary": {
+          "grip": [
+            224,
+            353
+          ],
+          "tip": [
+            298,
+            373
+          ]
+        },
+        "confidence": "medium",
+        "notes": "실제 양손 단검을 각각 직접 확인. primary는 전방 단검, secondary는 반대 손 단검. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/kaz__form1-skill-a.webp",
+        "frameSha256": "257437f1c6a38505b940dc0b3dd89fdfa772e6e2929745a52b28548672b8c4c6",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-b": {
+        "kind": "dagger",
+        "grip": [
+          365,
+          239
+        ],
+        "tip": [
+          453,
+          237
+        ],
+        "focus": [
+          453,
+          237
+        ],
+        "secondary": {
+          "grip": [
+            176,
+            274
+          ],
+          "tip": [
+            255,
+            299
+          ]
+        },
+        "confidence": "medium",
+        "notes": "실제 양손 단검을 각각 직접 확인. primary는 전방 단검, secondary는 반대 손 단검. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/kaz__form1-skill-b.webp",
+        "frameSha256": "e9f92262e95eaaefc88859fcc588a11e687c5cf0b846af01ea882ebf4a25c65b",
+        "frameSize": [
+          512,
+          512
+        ]
+      }
+    },
+    "jin__form0": {
+      "windup": {
+        "kind": "blade",
+        "grip": [
+          344,
+          162
+        ],
+        "tip": [
+          108,
+          66
+        ],
+        "focus": [
+          108,
+          66
+        ],
+        "path": "M344 162L316 147Q212 88 108 66",
+        "confidence": "medium",
+        "notes": "최종 원화의 실제 곡도 손잡이·금속 날 끝을 직접 확인. form0의 바깥 불꽃 끝을 금속 tip으로 혼동하지 않음. path는 실제 날 중심선을 따른 수동 근사 곡선.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/jin__form0-windup.webp",
+        "frameSha256": "8ba3219ca923493222b5461578d9f4f8632daab7ee6f1d10374902f72af937e8",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "strike": {
+        "kind": "blade",
+        "grip": [
+          264,
+          291
+        ],
+        "tip": [
+          475,
+          386
+        ],
+        "focus": [
+          475,
+          386
+        ],
+        "path": "M264 291L280 304Q377 366 475 386",
+        "confidence": "medium",
+        "notes": "최종 원화의 실제 곡도 손잡이·금속 날 끝을 직접 확인. form0의 바깥 불꽃 끝을 금속 tip으로 혼동하지 않음. path는 실제 날 중심선을 따른 수동 근사 곡선.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/jin__form0-strike.webp",
+        "frameSha256": "14dc428132e5d7b01ef23a98e8f20998cb1797da1415a9cca7d22a762a37aa75",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-a": {
+        "kind": "blade",
+        "grip": [
+          301,
+          167
+        ],
+        "tip": [
+          412,
+          68
+        ],
+        "focus": [
+          412,
+          68
+        ],
+        "path": "M301 167L311 145Q362 108 412 68",
+        "confidence": "medium",
+        "notes": "최종 원화의 실제 곡도 손잡이·금속 날 끝을 직접 확인. form0의 바깥 불꽃 끝을 금속 tip으로 혼동하지 않음. path는 실제 날 중심선을 따른 수동 근사 곡선.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/jin__form0-skill-a.webp",
+        "frameSha256": "a0853d44ce83ac2871a7b580a44ea8d26ae95052921d4a1b2a4f8b48ad81aef5",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-b": {
+        "kind": "blade",
+        "grip": [
+          277,
+          286
+        ],
+        "tip": [
+          490,
+          297
+        ],
+        "focus": [
+          490,
+          297
+        ],
+        "path": "M277 286L299 294Q415 321 490 297",
+        "confidence": "medium",
+        "notes": "최종 원화의 실제 곡도 손잡이·금속 날 끝을 직접 확인. form0의 바깥 불꽃 끝을 금속 tip으로 혼동하지 않음. path는 실제 날 중심선을 따른 수동 근사 곡선.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/jin__form0-skill-b.webp",
+        "frameSha256": "9deb2dc661ee20ce37c59f5ed5e617271022e26668ea0707b907b8dbf0c1a69a",
+        "frameSize": [
+          512,
+          512
+        ]
+      }
+    },
+    "jin__form1": {
+      "windup": {
+        "kind": "blade",
+        "grip": [
+          350,
+          170
+        ],
+        "tip": [
+          130,
+          73
+        ],
+        "focus": [
+          130,
+          73
+        ],
+        "path": "M350 170L331 156Q227 97 130 73",
+        "confidence": "medium",
+        "notes": "최종 원화의 실제 곡도 손잡이·금속 날 끝을 직접 확인. form0의 바깥 불꽃 끝을 금속 tip으로 혼동하지 않음. path는 실제 날 중심선을 따른 수동 근사 곡선.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/jin__form1-windup.webp",
+        "frameSha256": "3a6d3a42314e66a9160d714f74e7bb61fb6da567768b57ded909013af1347e05",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "strike": {
+        "kind": "blade",
+        "grip": [
+          297,
+          294
+        ],
+        "tip": [
+          483,
+          391
+        ],
+        "focus": [
+          483,
+          391
+        ],
+        "path": "M297 294L318 304Q408 366 483 391",
+        "confidence": "medium",
+        "notes": "최종 원화의 실제 곡도 손잡이·금속 날 끝을 직접 확인. form0의 바깥 불꽃 끝을 금속 tip으로 혼동하지 않음. path는 실제 날 중심선을 따른 수동 근사 곡선.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/jin__form1-strike.webp",
+        "frameSha256": "86e13248ebc8863277e7210db3671e2008bcbac40239d5ac7c8d3360f1f84d0c",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-a": {
+        "kind": "blade",
+        "grip": [
+          302,
+          171
+        ],
+        "tip": [
+          445,
+          67
+        ],
+        "focus": [
+          445,
+          67
+        ],
+        "path": "M302 171L320 151Q404 102 445 67",
+        "confidence": "medium",
+        "notes": "최종 원화의 실제 곡도 손잡이·금속 날 끝을 직접 확인. form0의 바깥 불꽃 끝을 금속 tip으로 혼동하지 않음. path는 실제 날 중심선을 따른 수동 근사 곡선.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/jin__form1-skill-a.webp",
+        "frameSha256": "9667068703e7355c204ea7adadc72e582d8f3f88a6f48c71bd3c26036285aaac",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-b": {
+        "kind": "blade",
+        "grip": [
+          278,
+          295
+        ],
+        "tip": [
+          493,
+          334
+        ],
+        "focus": [
+          493,
+          334
+        ],
+        "path": "M278 295L306 307Q423 337 493 334",
+        "confidence": "medium",
+        "notes": "최종 원화의 실제 곡도 손잡이·금속 날 끝을 직접 확인. form0의 바깥 불꽃 끝을 금속 tip으로 혼동하지 않음. path는 실제 날 중심선을 따른 수동 근사 곡선.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/jin__form1-skill-b.webp",
+        "frameSha256": "7cf89275a5e81d89e52b5ea21a617abc07f20e4f7078f9f96860ffc9dea5ba15",
+        "frameSize": [
+          512,
+          512
+        ]
+      }
+    },
+    "luka__form0": {
+      "windup": {
+        "kind": "blade",
+        "grip": [
+          345,
+          146
+        ],
+        "tip": [
+          139,
+          53
+        ],
+        "focus": [
+          139,
+          53
+        ],
+        "confidence": "medium",
+        "notes": "실제 검을 잡은 손과 금속 검끝을 직접 확인. focus는 실제 검끝. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/luka__form0-windup.webp",
+        "frameSha256": "b5bc58a2431a21e3d1d80bb2b9429a72fd21539908247f249753bd71d4a8d03a",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "strike": {
+        "kind": "blade",
+        "grip": [
+          282,
+          288
+        ],
+        "tip": [
+          489,
+          404
+        ],
+        "focus": [
+          489,
+          404
+        ],
+        "confidence": "medium",
+        "notes": "실제 검을 잡은 손과 금속 검끝을 직접 확인. focus는 실제 검끝. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/luka__form0-strike.webp",
+        "frameSha256": "652eb215ca365a558aed4ae68d6027e468b418dd36cbee4dfe5ea75a227d93b3",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-a": {
+        "kind": "blade",
+        "grip": [
+          268,
+          298
+        ],
+        "tip": [
+          493,
+          311
+        ],
+        "focus": [
+          493,
+          311
+        ],
+        "confidence": "medium",
+        "notes": "실제 검을 잡은 손과 금속 검끝을 직접 확인. focus는 실제 검끝. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/luka__form0-skill-a.webp",
+        "frameSha256": "3a311ee51952f481bb66ee68255d9f41978dc39cb2ad99e28ec868afec8ca6e1",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-b": {
+        "kind": "blade",
+        "grip": [
+          197,
+          234
+        ],
+        "tip": [
+          181,
+          37
+        ],
+        "focus": [
+          181,
+          37
+        ],
+        "confidence": "medium",
+        "notes": "실제 검을 잡은 손과 금속 검끝을 직접 확인. focus는 실제 검끝. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/luka__form0-skill-b.webp",
+        "frameSha256": "98a4b2afb0225100919313ae8138aa428cec2a7fbe4b1c5f21b854ff6e9382f3",
+        "frameSize": [
+          512,
+          512
+        ]
+      }
+    },
+    "luka__form1": {
+      "windup": {
+        "kind": "blade",
+        "grip": [
+          345,
+          163
+        ],
+        "tip": [
+          124,
+          73
+        ],
+        "focus": [
+          124,
+          73
+        ],
+        "confidence": "medium",
+        "notes": "실제 검을 잡은 손과 금속 검끝을 직접 확인. focus는 실제 검끝. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/luka__form1-windup.webp",
+        "frameSha256": "768396c9a7625a6ef03880b17ceb013efcd291ffe4ae5b7912250e68066292a7",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "strike": {
+        "kind": "blade",
+        "grip": [
+          291,
+          288
+        ],
+        "tip": [
+          475,
+          406
+        ],
+        "focus": [
+          475,
+          406
+        ],
+        "confidence": "medium",
+        "notes": "실제 검을 잡은 손과 금속 검끝을 직접 확인. focus는 실제 검끝. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/luka__form1-strike.webp",
+        "frameSha256": "5da2dea0ec28c589d0830c53da253dcb71ad6037db9fb88c3191a20303fb2208",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-a": {
+        "kind": "blade",
+        "grip": [
+          267,
+          303
+        ],
+        "tip": [
+          493,
+          311
+        ],
+        "focus": [
+          493,
+          311
+        ],
+        "confidence": "medium",
+        "notes": "실제 검을 잡은 손과 금속 검끝을 직접 확인. focus는 실제 검끝. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/luka__form1-skill-a.webp",
+        "frameSha256": "fcc495d633430faa00632f0eaaa117c6aeaaef0f30d43764364574d0fef424c2",
+        "frameSize": [
+          512,
+          512
+        ]
+      },
+      "skill-b": {
+        "kind": "blade",
+        "grip": [
+          216,
+          245
+        ],
+        "tip": [
+          213,
+          51
+        ],
+        "focus": [
+          213,
+          51
+        ],
+        "confidence": "medium",
+        "notes": "실제 검을 잡은 손과 금속 검끝을 직접 확인. focus는 실제 검끝. 수동 근삿값.",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/luka__form1-skill-b.webp",
+        "frameSha256": "14a9da2c6ff407bf0f93f2ae86d4cfd19cfe2e8fc108f26d73051e35ec9f56ee",
+        "frameSize": [
+          512,
+          512
+        ]
+      }
+    },
+    "crab_guard": {
+      "windup": {
+        "kind": "claw",
+        "grip": [
+          287,
+          341
+        ],
+        "tip": [
+          403,
+          252
+        ],
+        "focus": [
+          315,
+          291
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/crab_guard-windup.webp",
+        "frameSha256": "3a9082d06d640d04f2a72e55b5df564b1ac523f9001ddbc9fd6ed704e1ab4255"
+      },
+      "strike": {
+        "kind": "claw",
+        "grip": [
+          312,
+          354
+        ],
+        "tip": [
+          486,
+          330
+        ],
+        "focus": [
+          403,
+          329
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/crab_guard-strike.webp",
+        "frameSha256": "057940b549dfad985f2a54dc8c43cc8b18b57de16c00c464d1a09b83c9b18c64"
+      },
+      "skill-a": {
+        "kind": "claw",
+        "grip": [
+          376,
+          337
+        ],
+        "tip": [
+          373,
+          216
+        ],
+        "focus": [
+          403,
+          280
+        ],
+        "secondary": {
+          "grip": [
+            150,
+            341
+          ],
+          "tip": [
+            143,
+            206
+          ]
+        },
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/crab_guard-skill-a.webp",
+        "frameSha256": "10570a9af712af81c73c2584e7092041e3c0d28dfd7b1db73a7ad4c50abca863"
+      },
+      "skill-b": {
+        "kind": "claw",
+        "grip": [
+          195,
+          354
+        ],
+        "tip": [
+          70,
+          350
+        ],
+        "focus": [
+          124,
+          333
+        ],
+        "secondary": {
+          "grip": [
+            366,
+            350
+          ],
+          "tip": [
+            445,
+            389
+          ]
+        },
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/crab_guard-skill-b.webp",
+        "frameSha256": "9b9caba1a22f7b68ecfaeed6224d32bd639c69ea3287ebe12fdc242c838d3c91"
+      }
+    },
+    "eel_archer": {
+      "windup": {
+        "kind": "bow",
+        "grip": [
+          395,
+          314
+        ],
+        "tip": [
+          449,
+          306
+        ],
+        "focus": [
+          407,
+          305
+        ],
+        "bow": {
+          "upper": [
+            343,
+            178
+          ],
+          "lower": [
+            317,
+            399
+          ],
+          "arrowVisible": true
+        },
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/eel_archer-windup.webp",
+        "frameSha256": "5cde3886657f18c9b50973796a90a8cfca481b7c7352784af062931494601e9e"
+      },
+      "strike": {
+        "kind": "bow",
+        "grip": [
+          407,
+          290
+        ],
+        "tip": [
+          485,
+          266
+        ],
+        "focus": [
+          410,
+          275
+        ],
+        "bow": {
+          "upper": [
+            319,
+            171
+          ],
+          "lower": [
+            352,
+            391
+          ],
+          "arrowVisible": true
+        },
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/eel_archer-strike.webp",
+        "frameSha256": "e1578303f52bbf1d1bab2a0126c55f237d56c1c01b60d44a70f4fbd201ed7219"
+      },
+      "skill-a": {
+        "kind": "bow",
+        "grip": [
+          363,
+          227
+        ],
+        "tip": [
+          386,
+          176
+        ],
+        "focus": [
+          351,
+          220
+        ],
+        "bow": {
+          "upper": [
+            270,
+            173
+          ],
+          "lower": [
+            368,
+            327
+          ],
+          "arrowVisible": true
+        },
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/eel_archer-skill-a.webp",
+        "frameSha256": "de676026245e974c78ba3fcacf3e1e0632bf59d8d8efd8d5aa522029f3cd1b40"
+      },
+      "skill-b": {
+        "kind": "bow",
+        "grip": [
+          418,
+          344
+        ],
+        "tip": [
+          465,
+          180
+        ],
+        "focus": [
+          419,
+          345
+        ],
+        "bow": {
+          "upper": [
+            466,
+            179
+          ],
+          "lower": [
+            386,
+            366
+          ],
+          "arrowVisible": false
+        },
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/eel_archer-skill-b.webp",
+        "frameSha256": "5e9469fb32dad3b295a7ebf8cd7a45187bd32e472a1629db4ebee4bd87a96564"
+      }
+    },
+    "spore_colony": {
+      "windup": {
+        "kind": "focus",
+        "grip": [
+          211,
+          329
+        ],
+        "tip": [
+          163,
+          222
+        ],
+        "focus": [
+          153,
+          263
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/spore_colony-windup.webp",
+        "frameSha256": "23ae696e5b3d4e8e0fac0dfd2bdaa9bcf16e178a2ead392f2f2bc83d2115d706"
+      },
+      "strike": {
+        "kind": "focus",
+        "grip": [
+          276,
+          342
+        ],
+        "tip": [
+          486,
+          308
+        ],
+        "focus": [
+          435,
+          296
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/spore_colony-strike.webp",
+        "frameSha256": "e17aa165b3031bbbdb3ac5c0e70dd20e20c875b653010801d78fd105d17ca7ed"
+      },
+      "skill-a": {
+        "kind": "focus",
+        "grip": [
+          235,
+          354
+        ],
+        "tip": [
+          350,
+          310
+        ],
+        "focus": [
+          300,
+          341
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/spore_colony-skill-a.webp",
+        "frameSha256": "ba485d0f3a8b6d0ce35df595b579a446dcba26ee66ba61e113e6c7b76df55df1"
+      },
+      "skill-b": {
+        "kind": "focus",
+        "grip": [
+          270,
+          325
+        ],
+        "tip": [
+          451,
+          291
+        ],
+        "focus": [
+          404,
+          271
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/spore_colony-skill-b.webp",
+        "frameSha256": "01617e38f5d856b0eb702ed304b07e9f034d96fa3e780898b923cbbf7b341d98"
+      }
+    },
+    "mist_ram": {
+      "windup": {
+        "kind": "focus",
+        "grip": [
+          370,
+          369
+        ],
+        "tip": [
+          310,
+          358
+        ],
+        "focus": [
+          338,
+          320
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/mist_ram-windup.webp",
+        "frameSha256": "89250203bd5c3ba4501209e5ca0850638cf95bffa57e88e147cccd60a764da08"
+      },
+      "strike": {
+        "kind": "focus",
+        "grip": [
+          431,
+          340
+        ],
+        "tip": [
+          382,
+          345
+        ],
+        "focus": [
+          450,
+          351
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/mist_ram-strike.webp",
+        "frameSha256": "fa70b85457dbfbeeb01947331254d395870943ea55276ea96aee6dddb47fd555"
+      },
+      "skill-a": {
+        "kind": "focus",
+        "grip": [
+          299,
+          248
+        ],
+        "tip": [
+          341,
+          178
+        ],
+        "focus": [
+          339,
+          199
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/mist_ram-skill-a.webp",
+        "frameSha256": "04449ed29bbeccb544af6ddca3bae93348570217655f3d001834bd9c2ad8690d"
+      },
+      "skill-b": {
+        "kind": "focus",
+        "grip": [
+          396,
+          314
+        ],
+        "tip": [
+          331,
+          310
+        ],
+        "focus": [
+          351,
+          271
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/mist_ram-skill-b.webp",
+        "frameSha256": "3930b30226a6ab251134c4cca26e4267c3d1b4b1c1a7a68f5be4b401f71957d0"
+      }
+    },
+    "crystal_insect": {
+      "windup": {
+        "kind": "claw",
+        "grip": [
+          316,
+          407
+        ],
+        "tip": [
+          333,
+          467
+        ],
+        "focus": [
+          341,
+          438
+        ],
+        "secondary": {
+          "grip": [
+            384,
+            418
+          ],
+          "tip": [
+            399,
+            456
+          ]
+        },
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/crystal_insect-windup.webp",
+        "frameSha256": "98cd83ab4f08b10e3c474b518cc302ec82f94cea8852244c3ee90d6abc07697c"
+      },
+      "strike": {
+        "kind": "claw",
+        "grip": [
+          360,
+          396
+        ],
+        "tip": [
+          489,
+          456
+        ],
+        "focus": [
+          443,
+          413
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/crystal_insect-strike.webp",
+        "frameSha256": "f115902100b90a51c5760935289137bed636d97b7969e38c5be7628ffa474d03"
+      },
+      "skill-a": {
+        "kind": "claw",
+        "grip": [
+          397,
+          216
+        ],
+        "tip": [
+          443,
+          267
+        ],
+        "focus": [
+          424,
+          239
+        ],
+        "secondary": {
+          "grip": [
+            403,
+            293
+          ],
+          "tip": [
+            440,
+            363
+          ]
+        },
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/crystal_insect-skill-a.webp",
+        "frameSha256": "348b3834cf218941de0cfa2ce5c236ea0f1fb3414edd33dad729767adb7f2890"
+      },
+      "skill-b": {
+        "kind": "claw",
+        "grip": [
+          387,
+          354
+        ],
+        "tip": [
+          474,
+          427
+        ],
+        "focus": [
+          444,
+          382
+        ],
+        "secondary": {
+          "grip": [
+            276,
+            399
+          ],
+          "tip": [
+            206,
+            452
+          ]
+        },
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/crystal_insect-skill-b.webp",
+        "frameSha256": "8bd7989761851c6af953b77adc4db8c559f1ca82ce43bf74405634c299401b71"
+      }
+    },
+    "spring_salamander": {
+      "windup": {
+        "kind": "focus",
+        "grip": [
+          348,
+          375
+        ],
+        "tip": [
+          421,
+          320
+        ],
+        "focus": [
+          400,
+          341
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/spring_salamander-windup.webp",
+        "frameSha256": "ef77f4ca2ccf803c5b90428e23d29c66c7c4c6c5dadcb61dd8e7d4168ea556cc"
+      },
+      "strike": {
+        "kind": "focus",
+        "grip": [
+          438,
+          398
+        ],
+        "tip": [
+          486,
+          337
+        ],
+        "focus": [
+          466,
+          372
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/spring_salamander-strike.webp",
+        "frameSha256": "f36c38ebcc8b89a1d48462737deef68881bb31f6c29b1c31dcb744de7eedf5a9"
+      },
+      "skill-a": {
+        "kind": "focus",
+        "grip": [
+          272,
+          311
+        ],
+        "tip": [
+          266,
+          277
+        ],
+        "focus": [
+          260,
+          282
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/spring_salamander-skill-a.webp",
+        "frameSha256": "15b99255023ebc4e8de4e59c5b66f03f90f3dea80f3cbfd453b0581b1b1f111f"
+      },
+      "skill-b": {
+        "kind": "focus",
+        "grip": [
+          397,
+          376
+        ],
+        "tip": [
+          449,
+          318
+        ],
+        "focus": [
+          426,
+          356
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/spring_salamander-skill-b.webp",
+        "frameSha256": "078143db049421935c7646422e448ed1672bc6daf6594ac249789ac480e75f2b"
+      }
+    },
+    "gold_puppet": {
+      "windup": {
+        "kind": "blade",
+        "grip": [
+          231,
+          178
+        ],
+        "tip": [
+          123,
+          162
+        ],
+        "focus": [
+          151,
+          166
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/gold_puppet-windup.webp",
+        "frameSha256": "2efd2ca91953e2ea7b9b6d1cdb5d13ab853456566a2a42a239f9af3c4dbdace3"
+      },
+      "strike": {
+        "kind": "blade",
+        "grip": [
+          352,
+          256
+        ],
+        "tip": [
+          483,
+          235
+        ],
+        "focus": [
+          430,
+          244
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/gold_puppet-strike.webp",
+        "frameSha256": "e9fb37e39946f09200ebd43dda490efe815112b44442eafa39a52ddc394b6f86"
+      },
+      "skill-a": {
+        "kind": "focus",
+        "grip": [
+          348,
+          270
+        ],
+        "tip": [
+          339,
+          279
+        ],
+        "focus": [
+          348,
+          270
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/gold_puppet-skill-a.webp",
+        "frameSha256": "0c3210905a1d5f9e8b5e3ab532edbaa10cb958ca38a7de3f8af5b00608e7c837"
+      },
+      "skill-b": {
+        "kind": "blade",
+        "grip": [
+          160,
+          244
+        ],
+        "tip": [
+          66,
+          281
+        ],
+        "focus": [
+          109,
+          266
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/gold_puppet-skill-b.webp",
+        "frameSha256": "2edf32f114b10f7d05ffd8dbd02c2f23283d7f413635c78602925cc8869b8c67"
+      }
+    },
+    "bell_keeper": {
+      "windup": {
+        "kind": "music",
+        "grip": [
+          265,
+          165
+        ],
+        "tip": [
+          189,
+          215
+        ],
+        "focus": [
+          204,
+          209
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/bell_keeper-windup.webp",
+        "frameSha256": "efe9670992b70c632c4ce74b915ffd02efa881e69037144075866652d529ba97"
+      },
+      "strike": {
+        "kind": "music",
+        "grip": [
+          371,
+          234
+        ],
+        "tip": [
+          467,
+          235
+        ],
+        "focus": [
+          441,
+          228
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/bell_keeper-strike.webp",
+        "frameSha256": "b44e408fdc55750b5ac8e71ecadf20d3caf18ef89587438ff66456b4519041c2"
+      },
+      "skill-a": {
+        "kind": "music",
+        "grip": [
+          279,
+          275
+        ],
+        "tip": [
+          337,
+          285
+        ],
+        "focus": [
+          321,
+          282
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/bell_keeper-skill-a.webp",
+        "frameSha256": "eeb6e9630f08a23cfd01af3e87b69c7d85b3ed72312e4ea7b9291a67c858cf9b"
+      },
+      "skill-b": {
+        "kind": "music",
+        "grip": [
+          388,
+          204
+        ],
+        "tip": [
+          460,
+          214
+        ],
+        "focus": [
+          435,
+          208
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/bell_keeper-skill-b.webp",
+        "frameSha256": "0e1f3bc131b1e86ad41f4eaf5f4a852ac2b025919e9edc8862f373977a2c9016"
+      }
+    },
+    "scroll_spirit": {
+      "windup": {
+        "kind": "focus",
+        "grip": [
+          298,
+          278
+        ],
+        "tip": [
+          386,
+          297
+        ],
+        "focus": [
+          338,
+          252
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/scroll_spirit-windup.webp",
+        "frameSha256": "a8c5820e16b3a5c822820df27d19dd46a11030199a8fccd5de168bd5cbf55afb"
+      },
+      "strike": {
+        "kind": "focus",
+        "grip": [
+          324,
+          365
+        ],
+        "tip": [
+          484,
+          337
+        ],
+        "focus": [
+          423,
+          351
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/scroll_spirit-strike.webp",
+        "frameSha256": "dbab3ba2a49f8fb4315bf255b5792ab48bfd9beafb880fae38dbde2a8c48d1c4"
+      },
+      "skill-a": {
+        "kind": "focus",
+        "grip": [
+          315,
+          297
+        ],
+        "tip": [
+          374,
+          352
+        ],
+        "focus": [
+          353,
+          347
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/scroll_spirit-skill-a.webp",
+        "frameSha256": "5d9edb3540ae0278c9e96d505d10050d606e23f245d784942313f85d88006ceb"
+      },
+      "skill-b": {
+        "kind": "focus",
+        "grip": [
+          233,
+          324
+        ],
+        "tip": [
+          83,
+          288
+        ],
+        "focus": [
+          128,
+          318
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/scroll_spirit-skill-b.webp",
+        "frameSha256": "8ea560a3023f538aff5d51161189870154b83eaf01c2467b5aebde5b3809e650"
+      }
+    },
+    "eclipse_cat": {
+      "windup": {
+        "kind": "claw",
+        "grip": [
+          278,
+          438
+        ],
+        "tip": [
+          255,
+          471
+        ],
+        "focus": [
+          261,
+          460
+        ],
+        "secondary": {
+          "grip": [
+            412,
+            446
+          ],
+          "tip": [
+            446,
+            455
+          ]
+        },
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/eclipse_cat-windup.webp",
+        "frameSha256": "6e4a3dedc0913795e609ee32dbd7a6155c8e004d288e8eaf6687873507a33b12"
+      },
+      "strike": {
+        "kind": "claw",
+        "grip": [
+          417,
+          425
+        ],
+        "tip": [
+          473,
+          438
+        ],
+        "focus": [
+          449,
+          437
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/eclipse_cat-strike.webp",
+        "frameSha256": "3389b1f12825b96f0a14d908fe4238cc56fa531caa577aeb5ab567dc3d91601d"
+      },
+      "skill-a": {
+        "kind": "claw",
+        "grip": [
+          369,
+          365
+        ],
+        "tip": [
+          414,
+          351
+        ],
+        "focus": [
+          397,
+          352
+        ],
+        "secondary": {
+          "grip": [
+            322,
+            405
+          ],
+          "tip": [
+            341,
+            439
+          ]
+        },
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/eclipse_cat-skill-a.webp",
+        "frameSha256": "7c0ee538e50e6bfe5636959981dc47c15165414c3814731a604a0afa75399ca9"
+      },
+      "skill-b": {
+        "kind": "claw",
+        "grip": [
+          390,
+          432
+        ],
+        "tip": [
+          443,
+          460
+        ],
+        "focus": [
+          418,
+          451
+        ],
+        "secondary": {
+          "grip": [
+            444,
+            395
+          ],
+          "tip": [
+            486,
+            408
+          ]
+        },
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/eclipse_cat-skill-b.webp",
+        "frameSha256": "ef77f21fad4de28fdb96498869b50638c7c43c15632ebf95c20e20470e4eae2b"
+      }
+    },
+    "ink_vine": {
+      "windup": {
+        "kind": "whip",
+        "grip": [
+          191,
+          349
+        ],
+        "tip": [
+          373,
+          368
+        ],
+        "focus": [
+          350,
+          327
+        ],
+        "path": "M191 349 C167 327 163 291 188 269 C234 236 280 261 323 295 C350 318 363 342 373 368",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/ink_vine-windup.webp",
+        "frameSha256": "34323515f473d3effa5b2d615c8ccb4118b0a538d0b2c41126dff7574b8e8d08"
+      },
+      "strike": {
+        "kind": "whip",
+        "grip": [
+          273,
+          383
+        ],
+        "tip": [
+          486,
+          355
+        ],
+        "focus": [
+          447,
+          370
+        ],
+        "path": "M273 383 C309 414 325 399 341 380 C364 360 396 371 414 369 C444 359 466 367 486 355",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/ink_vine-strike.webp",
+        "frameSha256": "049bdf543d4e544242711ef99940f4d626d413fae395075943cd4f335d98966c"
+      },
+      "skill-a": {
+        "kind": "whip",
+        "grip": [
+          293,
+          380
+        ],
+        "tip": [
+          390,
+          306
+        ],
+        "focus": [
+          407,
+          349
+        ],
+        "path": "M293 380 C320 374 365 405 388 383 C417 365 409 340 397 326 L390 306",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/ink_vine-skill-a.webp",
+        "frameSha256": "1608b132d967e3509fc79ad44ad534f54618f02346e4408f09ba7c23b7d57a42"
+      },
+      "skill-b": {
+        "kind": "whip",
+        "grip": [
+          263,
+          337
+        ],
+        "tip": [
+          372,
+          428
+        ],
+        "focus": [
+          412,
+          376
+        ],
+        "path": "M263 337 C286 305 328 279 361 301 C402 310 429 355 422 393 C413 413 392 424 372 428",
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/ink_vine-skill-b.webp",
+        "frameSha256": "e1a8381ba6915fb149fd207a3a9f803a0456db2a8df6bf1b3ebee21016570699"
+      }
+    },
+    "hollow_armor": {
+      "windup": {
+        "kind": "hammer",
+        "grip": [
+          162,
+          191
+        ],
+        "tip": [
+          222,
+          155
+        ],
+        "focus": [
+          207,
+          168
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/hollow_armor-windup.webp",
+        "frameSha256": "0c57bbf80cc9b704a1d871f8eee72ef3ebd30054a7bf7f7fceaab135a17e981f"
+      },
+      "strike": {
+        "kind": "hammer",
+        "grip": [
+          378,
+          284
+        ],
+        "tip": [
+          486,
+          272
+        ],
+        "focus": [
+          467,
+          270
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/hollow_armor-strike.webp",
+        "frameSha256": "dd1d8857eff43e94e845f09852aec5e991febebbef0793bcf8e19c60b2af6664"
+      },
+      "skill-a": {
+        "kind": "hammer",
+        "grip": [
+          296,
+          293
+        ],
+        "tip": [
+          300,
+          240
+        ],
+        "focus": [
+          297,
+          254
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/hollow_armor-skill-a.webp",
+        "frameSha256": "9a72742ef1d3fb11696bb0c3f1a517345792883562b015b9adf8b4790b714702"
+      },
+      "skill-b": {
+        "kind": "hammer",
+        "grip": [
+          350,
+          251
+        ],
+        "tip": [
+          435,
+          243
+        ],
+        "focus": [
+          419,
+          243
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/hollow_armor-skill-b.webp",
+        "frameSha256": "afb79e8e61da632686381652432c372e00c3556fc6362a1327371d2bbb1e6fdb"
+      }
+    },
+    "tide_keeper": {
+      "windup": {
+        "kind": "spear",
+        "grip": [
+          172,
+          276
+        ],
+        "tip": [
+          389,
+          234
+        ],
+        "focus": [
+          363,
+          241
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/tide_keeper-windup.webp",
+        "frameSha256": "5c67dab5cf28881de99ed3585f16eb0dc588722f0427b664dc0d5cc530442496"
+      },
+      "strike": {
+        "kind": "spear",
+        "grip": [
+          273,
+          337
+        ],
+        "tip": [
+          486,
+          325
+        ],
+        "focus": [
+          452,
+          329
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/tide_keeper-strike.webp",
+        "frameSha256": "286f264a038b90111f5da0e1b4f9338a92a577e472e3bbf4a9f73f380d7cde5d"
+      },
+      "skill-a": {
+        "kind": "spear",
+        "grip": [
+          182,
+          329
+        ],
+        "tip": [
+          171,
+          211
+        ],
+        "focus": [
+          172,
+          252
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/tide_keeper-skill-a.webp",
+        "frameSha256": "f55afb605ef63632cca49808cd64e7734734db5f291a85178e296220e9b3fc83"
+      },
+      "skill-b": {
+        "kind": "spear",
+        "grip": [
+          264,
+          337
+        ],
+        "tip": [
+          446,
+          335
+        ],
+        "focus": [
+          415,
+          337
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/tide_keeper-skill-b.webp",
+        "frameSha256": "fba3ad860568b52750a08421866c9dde795b7a05a94333109adb488e2b2c2873"
+      }
+    },
+    "frost_queen": {
+      "windup": {
+        "kind": "staff",
+        "grip": [
+          224,
+          237
+        ],
+        "tip": [
+          417,
+          321
+        ],
+        "focus": [
+          374,
+          306
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/frost_queen-windup.webp",
+        "frameSha256": "4aa0d2ae0330a5551e128078a57f083c7a9617ed463c5b55f3815d3614124d88"
+      },
+      "strike": {
+        "kind": "staff",
+        "grip": [
+          305,
+          285
+        ],
+        "tip": [
+          486,
+          276
+        ],
+        "focus": [
+          441,
+          282
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/frost_queen-strike.webp",
+        "frameSha256": "17217033b1fcd66671d5e3551966df9d544cb4173fc6a12230491cc919f4818f"
+      },
+      "skill-a": {
+        "kind": "staff",
+        "grip": [
+          212,
+          347
+        ],
+        "tip": [
+          181,
+          214
+        ],
+        "focus": [
+          191,
+          244
+        ],
+        "secondary": {
+          "grip": [
+            355,
+            242
+          ],
+          "tip": [
+            377,
+            225
+          ]
+        },
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/frost_queen-skill-a.webp",
+        "frameSha256": "01f0f5bb7e8e39e42fb2046fc376166719329404c0a1c42d86cb2bf9ecb99021"
+      },
+      "skill-b": {
+        "kind": "staff",
+        "grip": [
+          307,
+          284
+        ],
+        "tip": [
+          447,
+          252
+        ],
+        "focus": [
+          404,
+          267
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/frost_queen-skill-b.webp",
+        "frameSha256": "6ad0e7b874fdeb378a3e66a2ce5362c1d52a76e35e93dff95fff60fd6d5a3d9e"
+      }
+    },
+    "resonance_judge": {
+      "windup": {
+        "kind": "music",
+        "grip": [
+          205,
+          246
+        ],
+        "tip": [
+          408,
+          310
+        ],
+        "focus": [
+          317,
+          284
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/resonance_judge-windup.webp",
+        "frameSha256": "33b60d416a902c101e7a6c8fcbc76efe9850e898014ede1b0f63cae434c2d134"
+      },
+      "strike": {
+        "kind": "music",
+        "grip": [
+          267,
+          335
+        ],
+        "tip": [
+          486,
+          324
+        ],
+        "focus": [
+          357,
+          331
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/resonance_judge-strike.webp",
+        "frameSha256": "017e5a1555ca403b69df26c531f7e308add1cf75109b3ba4acf0e51630d52bbe"
+      },
+      "skill-a": {
+        "kind": "music",
+        "grip": [
+          213,
+          328
+        ],
+        "tip": [
+          212,
+          205
+        ],
+        "focus": [
+          204,
+          277
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/resonance_judge-skill-a.webp",
+        "frameSha256": "378951432deb5f7b15e5f5ced6abf93772552fe1bd2a1422a8dfa12fee2340e2"
+      },
+      "skill-b": {
+        "kind": "music",
+        "grip": [
+          203,
+          337
+        ],
+        "tip": [
+          430,
+          414
+        ],
+        "focus": [
+          336,
+          379
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/resonance_judge-skill-b.webp",
+        "frameSha256": "ce9e1b1891ebb41fe04631b3beaf7e7683c863dd3c0246a3aa2a8102daf9cf13"
+      }
+    },
+    "oath_guardian": {
+      "windup": {
+        "kind": "blade",
+        "grip": [
+          247,
+          138
+        ],
+        "tip": [
+          428,
+          228
+        ],
+        "focus": [
+          370,
+          200
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/oath_guardian-windup.webp",
+        "frameSha256": "8b63ebc84708fb7238fd938e8d91578d2f772ceb2955c23283c452d9fa06de57"
+      },
+      "strike": {
+        "kind": "blade",
+        "grip": [
+          289,
+          244
+        ],
+        "tip": [
+          485,
+          251
+        ],
+        "focus": [
+          421,
+          247
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/oath_guardian-strike.webp",
+        "frameSha256": "80fbaf242d9bd468764fb1bd61febe3dd088a551ae0c27ee7e4b606ba92c9c67"
+      },
+      "skill-a": {
+        "kind": "blade",
+        "grip": [
+          166,
+          277
+        ],
+        "tip": [
+          68,
+          430
+        ],
+        "focus": [
+          112,
+          363
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/oath_guardian-skill-a.webp",
+        "frameSha256": "ba2517cca4a46d7385345bdcb5909ed1b2e0fd69a501670f14e1897f1d56af17"
+      },
+      "skill-b": {
+        "kind": "blade",
+        "grip": [
+          326,
+          232
+        ],
+        "tip": [
+          460,
+          268
+        ],
+        "focus": [
+          417,
+          255
+        ],
+        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "framePath": "public/art/characters-v3/units/oath_guardian-skill-b.webp",
+        "frameSha256": "d4b8faf54dcd48bae246a7d160a01bd6e792e5de26f2b2d427e8daeba2ba97e3"
+      }
+    }
+  },
+  "coordinateSpace": [
+    512,
+    512
+  ]
+}

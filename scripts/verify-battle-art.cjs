@@ -3,29 +3,48 @@ const { mkdir, writeFile } = require('node:fs/promises');
 const assert = require('node:assert/strict');
 
 async function main() {
-  const { isPaintedGround } = await import('../src/data/battlefieldGround.js');
+  const { createBattlefieldTerrain } = await import('../src/data/stageTerrain.js');
+  const { getWorldTileVisual } = await import('../src/data/worldArt.js');
+  const { qaBrowserOptions } = await import('./qa-browser.mjs');
+  const { confirmArtQaDeployment, confirmArtQaMission } = await import('./art-qa-game.mjs');
   const stage = Number(process.argv[2] || 1);
   const out = 'tmp/world-art-qa';
   await mkdir(out, { recursive: true });
-  const browser = await chromium.launch({ ...(process.platform === 'win32' ? { channel: 'msedge' } : {}), headless: true });
+  const browser = await chromium.launch(qaBrowserOptions());
   const failures = [];
   try {
     for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }]) {
-      const page = await browser.newPage({ viewport });
+      const page = await browser.newPage({ viewport, serviceWorkers: 'block' });
       page.setDefaultTimeout(15000);
       page.on('pageerror', error => failures.push(error.message));
       page.on('dialog', dialog => dialog.accept());
-      await page.goto(process.env.GAME_URL || 'http://127.0.0.1:5176');
+      await page.addInitScript(() => {
+        localStorage.setItem('cheonsu_auto_patch', 'false');
+        localStorage.setItem('cheonsu_settings_v1', JSON.stringify({ soundOn: false, musicOn: false, cutsceneMode: 'off' }));
+      });
+      await page.goto(process.env.ACTUAL_GAME_URL || process.env.GAME_URL || 'http://127.0.0.1:5176');
       await page.screenshot({ path: `${out}/menu-${viewport.width}.png` });
       await page.getByRole('button', { name: '새 게임', exact: true }).click();
-      await page.locator('.campaign-stage-select button').filter({ hasText: new RegExp(`^${stage}${stage}장\\.`) }).click();
+      if (stage > 1) {
+        await page.locator('.campaign-header .prominent-save').click();
+        await page.evaluate(stage => {
+          const data = JSON.parse(localStorage.getItem('cheonsu_v01_save'));
+          data.clearedStages = Array.from({ length: stage - 1 }, (_, index) => index + 1);
+          localStorage.setItem('cheonsu_v01_save', JSON.stringify(data));
+        }, stage);
+        await page.reload();
+        await page.getByRole('button', { name: '이어하기', exact: true }).click();
+      }
+      await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: new RegExp(`^${stage}장\\.`) }) }).click();
       await page.screenshot({ path: `${out}/campaign-${stage}-${viewport.width}.png` });
       await page.getByRole('button', { name: '전투 시작', exact: true }).click();
-      await page.locator('.story-screen img').evaluateAll(images => Promise.all(images.map(img => img.decode())));
-      await page.waitForFunction(() => Number(getComputedStyle(document.querySelector('.story-character-stage img')).opacity) > 0.99);
+      await confirmArtQaDeployment(page);
+      await page.locator('.narrative-screen img').evaluateAll(images => Promise.all(images.map(img => img.decode())));
       await page.screenshot({ path: `${out}/story-${stage}-${viewport.width}.png`, animations: 'disabled' });
       await page.getByRole('button', { name: '바로 전투', exact: true }).click();
+      await confirmArtQaMission(page);
       await page.locator('.grounded-battlefield .unit-visual-hero').waitFor();
+      await page.waitForFunction(() => !document.querySelector('.boss-splash-overlay,.stage-directing-banner.stage-banner-start') && document.querySelector('.battle-control-heading .prominent-save')?.disabled === false);
       await page.locator('.grounded-battlefield img').evaluateAll(images => Promise.all(images.map(img => img.decode())));
       const focusHero = () => page.locator('.battle-map-scroll-shell').evaluate(shell => {
         const hero = shell.querySelector('.unit-visual-hero');
@@ -44,6 +63,7 @@ async function main() {
           const image = img.getBoundingClientRect();
           return {
             name: img.alt, src: img.getAttribute('src'), loaded: img.complete && img.naturalWidth > 0,
+            x: +unit.closest('.tile').dataset.mapX, y: +unit.closest('.tile').dataset.mapY,
             groundX: (+unit.closest('.tile').dataset.mapX + 0.5) / Number(map.style.getPropertyValue('--map-cols')),
             groundY: (+unit.closest('.tile').dataset.mapY + 0.7) / Number(map.style.getPropertyValue('--map-rows')),
             blocked: unit.closest('.tile').classList.contains('terrain-block'),
@@ -53,12 +73,49 @@ async function main() {
         });
         return { width: rect.width, height: rect.height, originError: tile.top - rect.top, tileHeight: tile.height, tileWidth: tile.width, units };
       });
+      // The current battlefield paints each logical tile with its own surface.
+      // The old portrait illustration's crop mask does not describe this board.
+      const terrain = createBattlefieldTerrain(stage);
+      const surfaces = await page.locator('.grounded-battlefield .tile').evaluateAll(async cells => {
+        const decoded = new Map();
+        const decode = src => {
+          if (!decoded.has(src)) decoded.set(src, (async () => {
+            const image = new Image();
+            image.src = src;
+            await image.decode();
+            return image.complete && image.naturalWidth > 0 && image.naturalHeight > 0;
+          })());
+          return decoded.get(src);
+        };
+        return Promise.all(cells.map(async cell => {
+          const ground = cell.querySelector('.world-ground');
+          const style = ground && getComputedStyle(ground);
+          const src = style?.backgroundImage.match(/^url\(["']?(.*?)["']?\)$/)?.[1];
+          const box = ground?.getBoundingClientRect();
+          return {
+            x: +cell.dataset.mapX, y: +cell.dataset.mapY, classes: [...cell.classList],
+            src: src ? new URL(src, location.href).pathname : null,
+            visible: !!box && box.width > 0 && box.height > 0 && style.display !== 'none' && style.visibility !== 'hidden' && Number(style.opacity) > 0,
+            decoded: src ? await decode(src) : false,
+          };
+        }));
+      });
+      await writeFile(`${out}/initial-geometry-${stage}-${viewport.width}.json`, JSON.stringify({ geometry, surfaces }, null, 2));
+      assert.equal(surfaces.length, terrain.length * terrain[0].length, 'Every logical tile must have a painted surface');
+      for (const surface of surfaces) {
+        const logicalTerrain = terrain[surface.y]?.[surface.x];
+        assert.ok(surface.classes.includes(`terrain-${logicalTerrain}`), `Tile ${surface.x},${surface.y} must match logical terrain ${logicalTerrain}`);
+        const expected = getWorldTileVisual(terrain, surface.x, surface.y, stage);
+        assert.equal(surface.src, `/art/world-v2/terrain/${expected.material}.webp`, `Tile ${surface.x},${surface.y} must paint its terrain material`);
+        assert.ok(surface.visible && surface.decoded, `Tile ${surface.x},${surface.y} must display a decoded painted surface`);
+      }
       assert.ok(Math.abs(geometry.tileHeight / geometry.tileWidth - 0.82) < 0.001, 'Every stage must use the same orthographic ground projection');
       assert.ok(Math.abs(geometry.originError) < 0.5, 'Tile origin must match artwork origin');
-      assert.ok(geometry.units.every(unit => unit.loaded && /^\/art\/(map-sprites-v4|directions-v1)\//.test(unit.src)), 'All battle characters must load the new artwork');
+      assert.ok(geometry.units.every(unit => unit.loaded && /^\/art\/(map-sprites-v4|directions-v1|characters-v3\/map)\//.test(unit.src)), '기존 대기와 신규 지도 원화가 모두 실제로 로드됩니다');
       assert.ok(geometry.units.every(unit => unit.anchorError < 1), 'All feet must share the ground anchor');
       assert.ok(geometry.units.every(unit => unit.height / unit.tileWidth < 1.55), 'Characters must scale with tiles');
-      assert.ok(geometry.units.every(unit => !unit.blocked && isPaintedGround(stage, unit.groundX, unit.groundY)), 'Every deployed character must stand on painted ground, including extended boards');
+      assert.ok(geometry.units.every(unit => !unit.blocked && terrain[unit.y]?.[unit.x] != null
+        && !['block', 'wall', 'void'].includes(terrain[unit.y][unit.x])), 'Every deployed character must stand on an unblocked logical tile with a decoded painted surface');
 
       if (!(await page.locator('.grounded-battlefield .unit-visual-hero.selected-unit').count())) {
         await page.locator('.grounded-battlefield .unit-visual-hero').click();
@@ -95,15 +152,16 @@ async function main() {
       await page.locator('.tile-moving-unit').waitFor({ state: 'detached' });
       await page.locator(`.tile[data-map-x="${destination.x}"][data-map-y="${destination.y}"] .unit-visual-hero`).waitFor();
       await page.screenshot({ path: `${out}/moved-${stage}-${viewport.width}.png` });
-      await page.getByRole('button', { name: '전장 확대', exact: true }).click();
-      await page.locator('.map-zoom-normal').waitFor();
+      // 현행 전장은 타일 배율을 고정한다. 제거된 확대 UI 대신 카메라 이동 후 정렬을 확인한다.
+      assert.equal(await page.locator('.battle-zoom-controls').count(), 0);
+      await page.locator('.battle-map-scroll-shell').evaluate(shell => { shell.scrollLeft = shell.scrollWidth; shell.scrollTop = shell.scrollHeight; });
       await focusHero();
       const zoom = await page.locator('.grounded-battlefield .unit-visual-hero').evaluate(unit => {
         const cell = unit.closest('.tile').getBoundingClientRect();
         const img = unit.querySelector('img').getBoundingClientRect();
         return { scale: img.height / cell.width, anchorError: Math.abs(img.bottom - img.height * 32 / 480 - cell.top - cell.height * 0.7) };
       });
-      assert.ok(zoom.scale < 1.55 && zoom.anchorError < 1, 'Zoom must preserve scale and foot alignment');
+      assert.ok(zoom.scale < 1.55 && zoom.anchorError < 1, '카메라 이동 후 타일 배율과 발 정렬을 유지합니다');
       await page.emulateMedia({ reducedMotion: 'reduce' });
       const idleAnimation = await page.locator('.grounded-battlefield .unit-visual-hero img').evaluate(img => getComputedStyle(img).animationName);
       assert.equal(idleAnimation, 'none', 'Reduced-motion preference must disable breathing');
@@ -111,8 +169,7 @@ async function main() {
       const bodyOverflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1);
       assert.equal(bodyOverflow, false, 'Page must not overflow horizontally');
       if (stage === 1) {
-        await page.locator('.cinematic-stage-actions button').filter({ hasText: '설정' }).click();
-        await page.locator('.battle-settings-menu button').filter({ hasText: '진행 저장' }).click();
+        await page.locator('.battle-control-heading .prominent-save').click();
         const save = await page.evaluate(() => Object.entries(localStorage).map(([key, value]) => {
           try { return { key, data: JSON.parse(value) }; } catch { return null; }
         }).find(entry => entry?.data?.screen === 'battle' && entry.data.units?.length));
@@ -131,12 +188,15 @@ async function main() {
         await page.reload();
         await page.getByRole('button', { name: '이어하기', exact: true }).click();
         await page.locator('.camp-screen').waitFor();
+        const management = page.locator('.camp-management');
+        if (!(await management.evaluate(element => element.open))) await page.locator('.camp-management > summary').click();
+        await page.getByRole('tab', { name: '동료', exact: true }).click();
         const campImages = await page.locator('.camp-character-row img').evaluateAll(async images => {
           await Promise.all(images.map(img => img.decode()));
           return images.map(img => img.getAttribute('src'));
         });
-        assert.ok(campImages.length && campImages.every(src => src.startsWith('/art/characters-v2/')));
-        const campLayout = await page.locator('.camp-tab-panel').evaluate(panel => ({ listBottom: panel.querySelector('.camp-character-row').getBoundingClientRect().bottom, actionsTop: panel.querySelector('.camp-menu-grid').getBoundingClientRect().top }));
+        assert.ok(campImages.length && campImages.every(src => /^\/art\/characters-v[23]\//.test(src)));
+        const campLayout = await page.locator('.camp-tab-panel[aria-label="동료"]').evaluate(panel => ({ listBottom: panel.querySelector('.camp-character-row').getBoundingClientRect().bottom, actionsTop: panel.querySelector('.camp-menu-grid').getBoundingClientRect().top }));
         assert.ok(campLayout.actionsTop >= campLayout.listBottom, 'Camp controls must not cover portraits');
         await page.screenshot({ path: `${out}/camp-${viewport.width}.png` });
       }

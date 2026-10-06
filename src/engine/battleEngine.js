@@ -1,4 +1,5 @@
-import { STATUS_INFO } from "../data/gameData";
+import { STATUS_INFO } from "../data/gameData.js";
+import { canCounter, getAttackRange } from "./movement.js";
 
 export function distance(a, b) {
   return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
@@ -96,12 +97,17 @@ export function getTargetInRange(enemy, allies, mode, activeMap) {
   return sortedAllies.find((ally) => tiles.some((tile) => tile.x === ally.x && tile.y === ally.y));
 }
 
-export function canCounterattack(defender, attacker) {
+export function canCounterattack(defender, attacker, activeMap = null) {
   if (!defender || !attacker) return false;
   if ((defender.hp || 0) <= 0 || (attacker.hp || 0) <= 0) return false;
-  const range = defender.range || 1;
+  if (activeMap) return canCounter(attacker, defender, activeMap);
+  if (defender.counterUsed) return false;
+  if (defender.type && attacker.type
+    && (defender.type === 'ally') === (attacker.type === 'ally')) return false;
+  const { min, max } = getAttackRange(defender, 'counter');
+  if (!Number.isInteger(min) || !Number.isInteger(max) || min < 1 || max < min) return false;
   const d = distance(defender, attacker);
-  return d >= 1 && d <= range;
+  return d >= min && d <= max;
 }
 
 export function moveEnemyToward(enemy, allies, units, activeMap) {

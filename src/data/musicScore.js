@@ -19,6 +19,12 @@ export function getMusicTheme(screen, stageId = 1) {
   if (screen === 'camp') return { id: 'camp', variant: 0 };
   if (['campaign', 'deploy', 'deployment'].includes(screen)) return { id: 'world', variant: 0 };
   if (screen !== 'battle') return null;
+  if (stageId >= 31 && stageId <= 50) {
+    const biomeThemes = { coast: 'frontier', snow: 'snow', workshop: 'fortress', starlight: 'citadel' };
+    const id = stageId === 50 ? 'finale' : [35, 40, 45].includes(stageId) ? 'boss'
+      : biomeThemes[getBattlefieldPlan(stageId).biome];
+    return { id, variant: (stageId - 1) % 3 };
+  }
   return { id: stageId === 30 ? 'finale' : stageId % 6 === 0 ? 'boss' : getBattlefieldPlan(stageId).biome, variant: (stageId - 1) % 3 };
 }
 const hz = midi => 440 * 2 ** ((midi - 69) / 12);

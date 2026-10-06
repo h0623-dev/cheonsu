@@ -1,3 +1,4 @@
+import { qaBrowserOptions } from './qa-browser.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
@@ -10,7 +11,7 @@ const server = await preview({ preview: { host: '127.0.0.1', port: 0, open: fals
 let browser;
 const results = [];
 try {
-  browser = await chromium.launch({ headless: true, ...(process.env.CHEONSU_QA_BROWSER ? { channel: process.env.CHEONSU_QA_BROWSER } : {}) });
+  browser = await chromium.launch(qaBrowserOptions());
   const address = server.httpServer.address();
   for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }, { width: 844, height: 390 }]) {
     const context = await browser.newContext({ viewport, serviceWorkers: 'block', reducedMotion: 'reduce' });
@@ -37,7 +38,7 @@ try {
       await screenshot('title');
       await button('도감').click();
       await page.locator('.collection-card').first().waitFor();
-      assert.equal(await page.locator('.collection-card').count(), 17);
+      assert.equal(await page.locator('.collection-card').count(), 21);
       assert.equal(await page.locator('[data-collected=true]').count(), 4);
       await page.locator('[data-character="hero"]').click();
       await page.getByRole('dialog').waitFor();

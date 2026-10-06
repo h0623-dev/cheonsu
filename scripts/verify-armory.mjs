@@ -1,3 +1,4 @@
+import { qaBrowserOptions } from './qa-browser.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -5,6 +6,8 @@ import { stages } from '../src/data/stages.js';
 import { makeAlly, applyEquipmentStats } from '../src/engine/partyEngine.js';
 import { EQUIPMENT } from '../src/data/equipment.js';
 import { CHARACTER_SKILLS } from '../src/data/skills.js';
+import { NEW_ALLY_TEMPLATES } from '../src/data/advancedClasses.js';
+import { createExpansionRecruit } from '../src/engine/promotionEngine.js';
 
 const url = process.env.GAME_URL || 'http://127.0.0.1:5176';
 const key = 'cheonsu_v01_save';
@@ -13,7 +16,7 @@ const cases = [
   { width: 1280, height: 900 }, { width: 390, height: 844 }, { width: 320, height: 568 },
   { width: 844, height: 390 }, { width: 416, height: 658, native: 335 },
 ];
-const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const browser = await chromium.launch(qaBrowserOptions());
 const reports = [];
 await mkdir(out, { recursive: true });
 try {
@@ -43,7 +46,8 @@ try {
       const seed = await read();
       const members = new Map(stages.flatMap(stage => stage.units).filter(unit => unit.type === 'ally').map(unit => [unit.id, unit]));
       const names = { sera: '세라', noah: '노아', yuna: '유나', rakan: '라칸', miho: '미호', teo: '테오', irene: '이레네', kaz: '카즈', ella: '엘라', jin: '진', luka: '루카', baekho: '백호' };
-      for (const id of Object.keys(CHARACTER_SKILLS)) if (!members.has(id)) members.set(id, { ...members.get('hero'), id, name: names[id] });
+      for (const id of Object.keys(CHARACTER_SKILLS)) if (!members.has(id)) members.set(id,
+        NEW_ALLY_TEMPLATES[id] ? createExpansionRecruit(id, seed.party) : { ...members.get('hero'), id, name: names[id] });
       seed.party = [...members.values()].map(unit => applyEquipmentStats(makeAlly({ ...unit, gearEnhance: { ironSword: 2, chainArmor: 1 }, equipment: { weapon: null, armor: null } })));
       seed.screen = 'camp'; seed.gold = 10000; seed.gearInventory = Object.keys(EQUIPMENT);
       seed.gearEnhance = { ironSword: 2, chainArmor: 1 };

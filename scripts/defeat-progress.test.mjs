@@ -102,7 +102,7 @@ test('successful settlement preserves the existing one-training allowance for fi
 });
 
 test('all thirty failed current chapters recommend retry without unlocking their successor', () => {
-  for (let id = 1; id <= 30; id++) {
+  for (const { id } of stages) {
     const clearedStages = Array.from({ length: id - 1 }, (_, index) => index + 1);
     const context = { selectedStageId: id, clearedStages, lastBattleResult: { stageId: id, outcome: 'defeat' } };
     assert.equal(getCampBattleStageId(context), id);
@@ -150,7 +150,7 @@ test('only exact legacy camp retreat evidence migrates to defeat without rewriti
 });
 
 test('new result sanitation rejects malformed and inherited records while old normal training saves remain compatible', () => {
-  for (const raw of [null, [], {}, { stageId: 0, outcome: 'defeat' }, { stageId: 31, outcome: 'defeat' },
+  for (const raw of [null, [], {}, { stageId: 0, outcome: 'defeat' }, { stageId: stages.length + 1, outcome: 'defeat' },
     { stageId: '1', outcome: 'defeat' }, { stageId: 1, outcome: 'won' }, Object.create({ stageId: 1, outcome: 'defeat' })]) {
     assert.equal(normalizeLastBattleResult(raw), null);
   }
@@ -161,7 +161,7 @@ test('new result sanitation rejects malformed and inherited records while old no
   const saved = normalizeSaveData({ ...defaultSave, lastBattleResult: { stageId: 1, outcome: 'defeat' }, trainingUsed: false }, '1.99.161');
   assert.equal(saved.trainingUsed, true);
   assert.deepEqual(normalizeSaveData(copy(saved), '1.99.161').lastBattleResult, saved.lastBattleResult);
-  assert.throws(() => createDefeatCheckpoint({ selectedStage: { id: 31 } }), /전장을 확인/);
+  assert.throws(() => createDefeatCheckpoint({ selectedStage: { id: stages.length + 1 } }), /전장을 확인/);
 });
 
 test('old defeat-to-campaign saves remain training locked when continuing into town', () => {

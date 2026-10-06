@@ -3,6 +3,7 @@ import { Play, Plus, BookOpen, Settings, CircleHelp, ArrowRight, X, UserRound } 
 import { PatchTitleStatus } from './PatchUpdates.jsx';
 import accountConfig from '../data/accountConfig.json';
 import { accountConfigured } from '../engine/accountEngine.js';
+import { stages } from '../data/stages.js';
 
 function NewJourneyDialog({ onConfirm, onClose }) {
   const ref = useRef(null);
@@ -22,7 +23,7 @@ export default function TitleMenu({ version, checkpoint, onNew, onContinue, onOp
     <div className="journey-title-content">
       <div className="journey-title-name"><p>천수 기사단의 여정</p><h1>천수</h1><span>꺼지지 않은 봉화</span></div>
       <div className="journey-title-actions">
-        {saved && <button className="journey-resume ux-primary" aria-label="이어하기" onClick={onContinue}><Play size={23} /><span><strong>이어하기</strong><small>{saved.selectedStage?.title || '원정 준비'} · {saved.clearedStages.length}/30장 완료</small></span><ArrowRight size={21} /></button>}
+        {saved && <button className="journey-resume ux-primary" aria-label="이어하기" onClick={onContinue}><Play size={23} /><span><strong>이어하기</strong><small>{saved.selectedStage?.title || '원정 준비'} · {saved.clearedStages.length}/{stages.length}장 완료</small></span><ArrowRight size={21} /></button>}
         {checkpoint.exists && !saved && <button onClick={() => onOpen('settings', 'save')}><BookOpen size={20} />저장 복구</button>}
         <button className={saved ? 'journey-new' : 'journey-new ux-primary'} aria-label="새 게임" onClick={() => checkpoint.exists ? setConfirm(true) : onNew()}><Plus size={21} />새 게임</button>
         <nav aria-label="메인 메뉴"><button onClick={() => onOpen('library')}><BookOpen size={19} />기록실</button><button onClick={() => onOpen('codex')}><BookOpen size={19} />도감</button><button onClick={() => onOpen('settings')}><Settings size={19} />설정</button><button onClick={onHelp} aria-label="도움말" title="도움말"><CircleHelp size={19}/></button></nav>

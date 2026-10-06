@@ -134,7 +134,7 @@ async function bootstrap(page) {
   await page.getByRole('button', { name: '이어하기', exact: true }).click();
   await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: /^11장\./ }) }).click();
   await page.getByRole('button', { name: '전투 시작', exact: true }).click();
-  await page.getByRole('button', { name: '바로 전투', exact: true }).click();
+  await page.getByRole('button', { name: '바로 전투', exact: true }).click(); await (await import('./qa-browser.mjs')).confirmStageMission(page);
   await page.locator('.world-battlefield .unit-visual-hero').waitFor();
   await page.waitForFunction(() => document.querySelector('.cinematic-command-bar .prominent-save')?.disabled === false);
   const fixture = await saveBattle(page);
@@ -709,7 +709,7 @@ async function main() {
     assert.ok(selectedViewports.length, `Unknown viewport: ${options.viewport}`);
     assert.ok(selectedScenarios.length, `Unknown case: ${options.case}`);
     if (options.case || options.viewport) reportName = `result-${options.case || 'all'}-${options.viewport || 'all'}.json`;
-    browser = await chromium.launch({ ...(process.platform === 'win32' ? { channel: 'msedge' } : {}), headless: true });
+    browser = await chromium.launch((await import('./qa-browser.mjs')).qaBrowserOptions());
     const seed = await runCase(browser, 'fixture-bootstrap', viewports[0], bootstrap);
     if (!seed) throw new Error('UI fixture bootstrap failed; inspect fixture-bootstrap diagnostics.');
     for (const viewport of selectedViewports) {
@@ -723,7 +723,7 @@ async function main() {
     const failed = results.filter(test => !test.passed).length;
     const passed = !fatalError && failed === 0 && results.length === 1 + selectedViewports.length * selectedScenarios.length;
     await writeFile(path.join(out, reportName), JSON.stringify({
-      passed, base, browser: process.platform === 'win32' ? 'chromium/msedge' : 'chromium', viewports: selectedViewports, cases: selectedScenarios.map(([name]) => name), fatalError,
+      passed, base, browser: browser?.browserType().name() || 'chromium', headless: true, viewports: selectedViewports, cases: selectedScenarios.map(([name]) => name), fatalError,
       summary: { passed: results.length - failed, failed, total: results.length }, results,
     }, null, 2));
     console.log(`${passed ? 'PASS' : 'FAIL'}: ${results.length - failed}/${results.length} cases; report ${path.join(out, reportName)}`);

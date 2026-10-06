@@ -4,10 +4,14 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 import { createServer } from 'vite';
-import { combatUnitIds, getCombatChoreography } from '../src/data/combatArt.js';
-import { CHARACTER_SKILLS } from '../src/data/skills.js';
+import { combatArtKeys, getCombatChoreography } from '../src/data/combatArt.js';
+import { CHARACTER_SKILLS, getUnitSkills, withSkill } from '../src/data/skills.js';
 import { getCharacterArt } from '../src/data/characterArt.js';
 import { storySpeakerKeys } from '../src/data/storyArt.js';
+import { getExpansionArtIdentity } from '../src/data/expansionArtRegistry.js';
+import { EXPANSION_ENEMY_TEMPLATES } from '../src/data/expansionEnemies.js';
+import { qaBrowserOptions } from './qa-browser.mjs';
+import { confirmArtQaDeployment, confirmArtQaMission } from './art-qa-game.mjs';
 import { openDuelFixture, duelProps, renderDuel, seekDuel, assertBodies, assertFit } from './duel-fixture.mjs';
 
 const output = path.resolve(process.env.CHEONSU_ART_QA_OUT || '../work/character-art-qa');
@@ -15,14 +19,14 @@ const viewports = [{ width: 1280, height: 900 }, { width: 390, height: 844 }, { 
 const showcase = new Set(['hero', 'bram', 'lina', 'aria', 'blackguard', 'boss_abyss']);
 const saveKey = 'cheonsu_v01_save';
 const requestedIds = process.env.CHEONSU_QA_ART_IDS?.split(',').map(id => id.trim()).filter(Boolean);
-const selectedIds = requestedIds ? [...new Set(requestedIds)] : combatUnitIds;
-const partial = selectedIds.length < combatUnitIds.length;
-assert.ok(selectedIds.length && selectedIds.every(id => combatUnitIds.includes(id)), 'CHEONSU_QA_ART_IDS must contain known character IDs');
+const selectedIds = requestedIds ? [...new Set(requestedIds)] : combatArtKeys;
+const partial = selectedIds.length < combatArtKeys.length;
+assert.ok(selectedIds.length && selectedIds.every(id => combatArtKeys.includes(id)), 'CHEONSU_QA_ART_IDS must contain known character IDs');
 const errors = [], results = [];
 let server, browser;
 let passed = false;
 await fs.mkdir(output, { recursive: true });
-assert.ok(selectedIds.every(id => getCharacterArt(id)), requestedIds ? 'generate all selected characters before running this QA' : 'generate all 47 characters before running this QA');
+assert.ok(selectedIds.every(id => getCharacterArt(id)), '검사 대상 기존47·신규20·최상위42종 원화를 먼저 생성해야 합니다');
 
 function watch(page) {
   page.on('pageerror', error => errors.push(error.message));
@@ -43,7 +47,7 @@ function assertNewImages(images, label) {
   assert.ok(images.length, `${label}: images exist`);
   for (const image of images) {
     assert.ok(image.loaded, `${label}: decoded ${image.src}`);
-    assert.match(image.src, /^\/art\/characters-v2\//, `${label}: no previous character art`);
+    assert.match(image.src, /^\/art\/characters-v[23]\//, `${label}: 활성 원화 버전`);
   }
 }
 
@@ -72,6 +76,7 @@ async function actualGame(base, viewport) {
     const storyStage = partial ? 2 : 3;
     await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: new RegExp(`^${storyStage}장[.]`) }) }).click();
     await button('전투 시작').click();
+    await confirmArtQaDeployment(page);
     const beforeStory = await page.evaluate(key => localStorage.getItem(key), saveKey);
     for (let index = 0; index < 3; index++) {
       const images = await activeImages(page, '.narrative-actor img');
@@ -85,6 +90,7 @@ async function actualGame(base, viewport) {
     }
     assert.equal(await page.evaluate(key => localStorage.getItem(key), saveKey), beforeStory, 'viewing new dialogue preserves save data');
     await button('바로 전투').click();
+    await confirmArtQaMission(page);
     await page.locator('.world-battlefield .unit-visual-hero').waitFor();
     await page.waitForFunction(() => !document.querySelector('.battle-control-heading .prominent-save')?.disabled && !document.querySelector('.boss-splash-overlay'));
     const mapImages = await activeImages(page, '.world-battlefield .unit > img');
@@ -141,24 +147,46 @@ async function actualGame(base, viewport) {
 
 try {
   const root = fileURLToPath(new URL('..', import.meta.url));
-  server = await createServer({ root, logLevel: 'error', server: { host: '127.0.0.1', port: 0, open: false } });
-  await server.listen();
-  const address = server.httpServer.address();
-  const base = `http://127.0.0.1:${address.port}`;
+  let base = process.env.FIXTURE_URL || process.env.GAME_URL;
+  if (!base) {
+    server = await createServer({ root, logLevel: 'error', server: { host: '127.0.0.1', port: 0, open: false } });
+    await server.listen();
+    const address = server.httpServer.address();
+    base = `http://127.0.0.1:${address.port}`;
+  }
   process.env.GAME_URL = base;
-  browser = await chromium.launch({ headless: true, ...(process.env.CHEONSU_QA_BROWSER ? { channel: process.env.CHEONSU_QA_BROWSER } : {}) });
+  browser = await chromium.launch(qaBrowserOptions());
   for (const viewport of viewports) {
     const page = await openDuelFixture(browser, viewport, errors);
     for (const id of selectedIds) {
-      const skills = CHARACTER_SKILLS[id];
+      const identity = getExpansionArtIdentity(id);
+      const canonical = identity?.baseId || id;
+      const formId = id.includes('__form') ? id : null;
+      const enemyProfile = EXPANSION_ENEMY_TEMPLATES[id];
+      const skills = Object.hasOwn(CHARACTER_SKILLS, canonical)
+        ? getUnitSkills({ id: canonical, type: 'ally', ...(formId ? { advancedClass: formId } : {}) })
+        : enemyProfile ? [enemyProfile.skillSpec, enemyProfile.phaseSkill].filter(Boolean) : null;
       const cases = [{ skill: null, mode: 'attack' }, ...(skills
         ? skills.map(skill => ({ skill, mode: 'skill' })) : [{ skill: null, mode: 'skill' }])];
       for (const { skill, mode } of cases) {
-        const props = duelProps(id, skill, 1, { mode });
-        if (!Object.hasOwn(CHARACTER_SKILLS, id)) props.scene.attacker.type = id.startsWith('boss_') ? 'boss' : 'enemy';
+        const props = duelProps(canonical, skill, 1, { mode });
+        props.attackerKey = id;
+        if (formId) {
+          props.scene.attacker = skill ? withSkill({ ...props.scene.attacker, advancedClass: formId }, skill.id)
+            : { ...props.scene.attacker, advancedClass: formId };
+          if (skill?.type === 'guard') props.defenderKey = id;
+        }
+        if (!Object.hasOwn(CHARACTER_SKILLS, canonical)) props.scene.attacker = {
+          ...props.scene.attacker, type: id.startsWith('boss_') || enemyProfile?.rank === 'boss' ? 'boss' : 'enemy',
+          ...(skill ? { skillSpec: skill, skill: skill.name } : {}),
+        };
         const plan = getCombatChoreography(id, props.scene);
         await renderDuel(page, props);
         const images = await activeImages(page, '.fighter-frame, .skill-cut-in img');
+        const actorImages = await activeImages(page, '.fighter-attacker .fighter-frame, .skill-cut-in img');
+        const actorArt = getCharacterArt(id);
+        const ownedAssets = new Set([...Object.values(actorArt.motion), actorArt.portrait]);
+        assert.ok(actorImages.length && actorImages.every(image => ownedAssets.has(image.src)), `${id}: 자기 캐릭터·선택 분기 원화를 표시합니다`);
         if (partial) assertNewImages(await activeImages(page, '.fighter-attacker .fighter-frame, .skill-cut-in img'), `${id}/${props.scene.mode}`);
         else assertNewImages(images, `${id}/${props.scene.mode}`);
         await assertFit(page, viewport, id);
@@ -174,7 +202,7 @@ try {
       }
     }
     await page.close();
-    await actualGame(base, viewport);
+    await actualGame(process.env.ACTUAL_GAME_URL || base, viewport);
     console.log(`PASS ${selectedIds.length}종 전투 아트 ${viewport.width}×${viewport.height}${partial ? ' (부분 검사)' : ''}`);
   }
   assert.deepEqual(errors, []);
@@ -183,7 +211,7 @@ try {
   errors.push(`QA assertion: ${error.message}`);
   throw error;
 } finally {
-  await fs.writeFile(path.join(output, 'result.json'), JSON.stringify({ passed, partial, selectedIds,
+  await fs.writeFile(path.join(output, 'result.json'), JSON.stringify({ passed, partial, selectedIds, actualGameSource: process.env.ACTUAL_GAME_URL ? 'production' : 'development',
     cases: results.length, errors, results }, null, 2));
   await browser?.close();
   await server?.close();

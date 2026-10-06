@@ -10,7 +10,8 @@ export async function openDuelFixture(browser, viewport, errors) {
   await page.routeWebSocket('**', () => {});
   const time = new Date('2026-09-28T00:00:00Z');
   await page.clock.install({time});
-  await page.clock.pauseAt(time);
+  // Freeze the blank page ahead of install-time IPC latency, before mounting any scene.
+  await page.clock.pauseAt(new Date(time.getTime() + 60_000));
   await page.route('**/tests/fixtures/combat.jsx*', async route => {
     const response = await route.fetch(), source = await response.text();
     const index = source.indexOf('createRoot(document.getElementById(');

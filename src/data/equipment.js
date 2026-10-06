@@ -30,7 +30,7 @@ export const EQUIPMENT = {
     id: "leatherArmor",
     name: "가죽 갑옷",
     slot: "armor",
-    allowed: ["hero", "bram", "lina", "aria", "leon", "sera", "noah", "yuna", "rakan", "miho", "teo", "irene", "kaz", "ella", "jin", "luka", "baekho"],
+    allowed: ["hero", "bram", "lina", "aria", "leon", "sera", "noah", "yuna", "rakan", "miho", "teo", "irene", "kaz", "ella", "jin", "luka", "baekho", "mare", "harin", "edan", "sylvan"],
     atk: 0,
     def: 1,
     desc: "방어 +1",
@@ -48,7 +48,7 @@ export const EQUIPMENT = {
     id: "mageRobe",
     name: "마법 로브",
     slot: "armor",
-    allowed: ["lina", "aria", "noah", "yuna", "irene", "ella"],
+    allowed: ["lina", "aria", "noah", "yuna", "irene", "ella", "harin", "sylvan"],
     atk: 0,
     def: 1,
     desc: "마법 계열 방어 +1",
@@ -79,6 +79,27 @@ export const EQUIPMENT = {
     atk: 2,
     def: 0,
     desc: "세라 전용 공격 +2",
+  },
+  mareSpear: {
+    id: "mareSpear", name: "해류창", slot: "weapon", allowed: ["mare"],
+    atk: 2, def: 0, desc: "마레 전용 공격 +2 · 32장 첫 클리어 보상",
+  },
+  harinBracers: {
+    id: "harinBracers", name: "청동 호완", slot: "weapon", allowed: ["harin"],
+    atk: 1, def: 1, desc: "하린 전용 공격 +1 / 방어 +1 · 37장 첫 클리어 보상",
+  },
+  edanHammer: {
+    id: "edanHammer", name: "공방 망치", slot: "weapon", allowed: ["edan"],
+    atk: 1, def: 2, desc: "에단 전용 공격 +1 / 방어 +2 · 42장 첫 클리어 보상",
+  },
+  sylvanStaff: {
+    id: "sylvanStaff", name: "뿌리 지팡이", slot: "weapon", allowed: ["sylvan"],
+    atk: 2, def: 0, desc: "실반 전용 공격 +2 · 47장 첫 클리어 보상",
+  },
+  oathCommemorative: {
+    id: "oathCommemorative", name: "귀환의 맹세", slot: "armor",
+    allowed: ["hero", "bram", "lina", "aria", "leon", "sera", "noah", "yuna", "rakan", "miho", "teo", "irene", "kaz", "ella", "jin", "luka", "baekho", "mare", "harin", "edan", "sylvan"],
+    atk: 1, def: 2, desc: "공격 +1 / 방어 +2 · 50장 첫 클리어 기념 방어구",
   },
 };
 

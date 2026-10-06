@@ -31,17 +31,18 @@ for (const stage of stages) {
     }
   });
 }
-test('All 30 chapters have separate prompts, art and previews within the total budget', () => {
-  assert.equal(stages.length, 30);
-  assert.equal(prompts.chapters.length, 30);
+test('All 50 chapters have separate prompts, art and previews within the total budget', () => {
+  assert.equal(stages.length, 50);
+  assert.equal(prompts.chapters.length, 50);
   assert.deepEqual(prompts.chapters.map(chapter => chapter.id), stages.map(stage => stage.id));
-  assert.equal(new Set(prompts.chapters.map(chapter => chapter.prompt)).size, 30);
-  assert.equal(fullHashes.size, 30);
-  assert.equal(thumbHashes.size, 30);
-  assert.ok(totalBytes < 18 * 1024 * 1024);
+  assert.equal(new Set(prompts.chapters.map(chapter => chapter.prompt)).size, 50);
+  assert.equal(fullHashes.size, 50);
+  assert.equal(thumbHashes.size, 50);
+  // 50장의 실제 합계는 약 20.44 MiB이며 개별 이미지 제한은 그대로 유지합니다.
+  assert.ok(totalBytes < 24 * 1024 * 1024);
 });
 test('Legacy and invalid stage references select a valid chapter without altering saves', () => {
   for (const id of [undefined, null, '', 'invalid', -8, 0]) assert.equal(getWorldScene(id), getWorldScene(1));
   assert.equal(getWorldScene('21'), getWorldScene(21));
-  assert.equal(getWorldScene(100), getWorldScene(30));
+  assert.equal(getWorldScene(100), getWorldScene(50));
 });
