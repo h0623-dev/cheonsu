@@ -1,4 +1,5 @@
 import { qaBrowserOptions } from './qa-browser.mjs';
+import { startDeploymentBattle, waitForDeployment } from './qa-deployment-flow.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -28,8 +29,7 @@ function watch(page, viewport) {
 }
 
 async function board(page) {
-  await page.locator('.deployment-board-grid').waitFor();
-  await page.waitForFunction(() => document.querySelectorAll('.deployment-roster-card').length > 0);
+  await waitForDeployment(page);
 }
 
 async function layout(page, label) {
@@ -40,7 +40,7 @@ async function layout(page, label) {
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 2), `${label}: 페이지가 가로 화면을 넘지 않습니다`);
   const targets = await page.locator('.deployment-board-cell').evaluateAll(elements => elements.map(element => ({ width: element.offsetWidth, height: element.offsetHeight })));
   assert.ok(targets.length && targets.every(target => target.width >= 44 && target.height >= 44), `${label}: 지도 칸은 최소 44px 터치 영역입니다`);
-  const start = page.getByRole('button', { name: '전투 시작', exact: true });
+  const start = page.locator('.deployment-start-btn');
   assert.equal(await start.count(), 1, `${label}: 전투 시작 버튼은 하나입니다`);
   assert.equal(await start.isEnabled(), true, `${label}: 유효한 편성은 시작할 수 있습니다`);
 }
@@ -55,10 +55,14 @@ async function placements(page) {
 const cell = (page, point) => page.locator(`.deployment-board-cell[data-deployment-x="${point.x}"][data-deployment-y="${point.y}"]`);
 const card = (page, id) => page.locator(`.deployment-roster-card[data-character-id="${id}"]`);
 
-async function emptyCell(page, excluded = []) {
+async function emptyCell(page, excluded = [], allowOccupied = false) {
   const points = await page.locator('.deployment-board-cell[data-deployment-valid="true"][data-deployment-unit=""]').evaluateAll(elements => elements.map(element => ({ x: Number(element.dataset.deploymentX), y: Number(element.dataset.deploymentY) })));
-  const point = points.find(point => !excluded.some(other => other.x === point.x && other.y === point.y));
-  assert.ok(point, '실제로 표시된 배치 구역에 빈칸이 있습니다');
+  let point = points.find(point => !excluded.some(other => other.x === point.x && other.y === point.y));
+  if (!point && allowOccupied) {
+    const occupied = await page.locator('.deployment-board-cell[data-deployment-valid="true"]').evaluateAll(elements => elements.map(element => ({ x: Number(element.dataset.deploymentX), y: Number(element.dataset.deploymentY) })));
+    point = occupied.find(candidate => !excluded.some(other => other.x === candidate.x && other.y === candidate.y));
+  }
+  assert.ok(point, allowOccupied ? '제한된 배치 구역에서 이동 또는 아군 교환할 칸이 있습니다' : '실제로 표시된 배치 구역에 빈칸이 있습니다');
   return point;
 }
 
@@ -69,15 +73,8 @@ async function selectStage(page, stageId) {
 }
 
 async function startBattle(page) {
-  await page.getByRole('button', { name: '전투 시작', exact: true }).click();
-  await page.waitForFunction(() => document.querySelector('.final-deploy-card,.narrative-screen,.story-screen,.world-battlefield'));
-  const override = page.getByRole('button', { name: '그래도 출전', exact: true });
-  if (await override.count()) await override.click();
-  const skip = page.getByRole('button', { name: '바로 전투', exact: true });
-  if (await skip.count()) await skip.click();
-  await page.locator('.stage-mission-dialog[open]').getByRole('button', { name: '미션 확인', exact: true }).click();
-  await page.locator('.world-battlefield .unit-visual-hero').waitFor();
-  await page.waitForFunction(() => !document.querySelector('.battle-control-heading .prominent-save')?.disabled && !document.querySelector('.boss-splash-overlay'));
+  await startDeploymentBattle(page);
+  assert.equal(await page.locator('.story-screen,.narrative-screen,.stage-mission-dialog[open]').count(), 0, '배치 확정 후에는 이미 본 도입 대화·미션을 반복하지 않습니다');
 }
 
 async function saveBattle(page) {
@@ -88,8 +85,8 @@ async function saveBattle(page) {
 async function nativePan(page, viewport) {
   if (viewport.width === 1280) return null;
   const before = await placements(page);
-  await page.locator('.deployment-board-scroll').scrollIntoViewIfNeeded();
-  const shell = await page.locator('.deployment-board-scroll').evaluate(element => {
+  await page.locator('.battle-deploy-viewport').scrollIntoViewIfNeeded();
+  const shell = await page.locator('.battle-deploy-viewport').evaluate(element => {
     const rect = element.getBoundingClientRect();
     return { x: rect.x, y: rect.y, width: rect.width, height: rect.height, left: element.scrollLeft, top: element.scrollTop, maxX: element.scrollWidth - element.clientWidth, maxY: element.scrollHeight - element.clientHeight, touchAction: getComputedStyle(element).touchAction };
   });
@@ -110,7 +107,7 @@ async function nativePan(page, viewport) {
     await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
     await page.waitForTimeout(350);
   } finally { await session.detach(); }
-  const after = await page.locator('.deployment-board-scroll').evaluate(element => ({ left: element.scrollLeft, top: element.scrollTop }));
+  const after = await page.locator('.battle-deploy-viewport').evaluate(element => ({ left: element.scrollLeft, top: element.scrollTop }));
   assert.ok(Math.abs(after[axis === 'x' ? 'left' : 'top'] - coordinate) > 20, '실제 휴대폰 터치 동작으로 지도가 움직입니다');
   assert.deepEqual(await placements(page), before, '지도 터치 스크롤은 캐릭터를 잘못 배치하지 않습니다');
   return { axis, before: { left: shell.left, top: shell.top }, after };
@@ -118,13 +115,14 @@ async function nativePan(page, viewport) {
 
 async function cameraCentered(page) {
   await page.waitForFunction(() => {
-    const shell = document.querySelector('.deployment-board-scroll');
+    const shell = document.querySelector('.battle-deploy-viewport');
     const selected = document.querySelector('.deployment-roster-card[aria-pressed="true"]');
     const id = selected?.dataset.characterId || 'hero';
     const target = [...document.querySelectorAll('.deployment-board-cell')].find(element => element.dataset.deploymentUnit === id);
     if (!shell || !target) return false;
-    const left = Math.max(0, Math.min(target.offsetLeft + target.offsetWidth / 2 - shell.clientWidth / 2, shell.scrollWidth - shell.clientWidth));
-    const top = Math.max(0, Math.min(target.offsetTop + target.offsetHeight / 2 - shell.clientHeight / 2, shell.scrollHeight - shell.clientHeight));
+    const bounds = target.getBoundingClientRect(), viewport = shell.getBoundingClientRect();
+    const left = Math.max(0, Math.min(shell.scrollLeft + bounds.left + bounds.width / 2 - viewport.left - shell.clientLeft - shell.clientWidth / 2, shell.scrollWidth - shell.clientWidth));
+    const top = Math.max(0, Math.min(shell.scrollTop + bounds.top + bounds.height / 2 - viewport.top - shell.clientTop - shell.clientHeight / 2, shell.scrollHeight - shell.clientHeight));
     return Math.abs(shell.scrollLeft - left) <= 2 && Math.abs(shell.scrollTop - top) <= 2;
   });
 }
@@ -148,6 +146,7 @@ async function runViewport(base, viewport) {
     await button('배치 저장').click();
     const data = await saved();
     assert.equal(data.screen, 'deployment', '배치 저장은 진행 중 전투 저장으로 기록하지 않습니다');
+    assert.equal(data.deploymentIntroSeen, true, '도입 대화를 마친 배치는 이어하기에서 컷신을 반복하지 않습니다');
     assert.equal(data.deploymentDraft?.stageId, data.selectedStage.id);
     assert.deepEqual(data.deploymentDraft.placements, await placements(page), '배치 저장에 지도에서 선택한 모든 좌표가 기록됩니다');
     return data;
@@ -182,7 +181,7 @@ async function runViewport(base, viewport) {
     assert.deepEqual(swapped.bram, priorSwap.lina);
     assert.deepEqual(swapped.lina, priorSwap.bram, '배치된 아군끼리는 겹치지 않고 자리 교환합니다');
     await card(page, 'lina').click();
-    await button('배치 해제').click();
+    await page.locator('.battle-deploy-selection button').click();
     assert.equal(await card(page, 'lina').getAttribute('data-placed'), 'false');
     const removed = await placements(page);
     assert.equal(Object.keys(removed).length, 3);
@@ -192,7 +191,7 @@ async function runViewport(base, viewport) {
     await cell(page, readd).click();
     assert.deepEqual((await placements(page)).lina, readd, '해제한 보유 캐릭터를 빈칸에 다시 배치합니다');
     await card(page, 'hero').click();
-    assert.equal(await button('배치 해제').isDisabled(), true, '주인공은 출전 해제할 수 없습니다');
+    assert.equal(await page.locator('.battle-deploy-selection button').isDisabled(), true, '주인공은 출전 해제할 수 없습니다');
     // 선택 변경의 requestAnimationFrame 카메라 이동이 자동 스크롤과 경합하지 않게 한다.
     await cameraCentered(page);
     const beforeBlocked = await placements(page);
@@ -307,20 +306,22 @@ async function runViewport(base, viewport) {
         assert.equal(Object.keys(assigned).length, 15, `${stageId}장: 최대 15명만 배치됩니다`);
         assert.ok(Object.hasOwn(assigned, 'hero'), `${stageId}장: 주인공을 배치합니다`);
         const valid = await page.locator('.deployment-board-cell[data-deployment-valid="true"]').count();
-        assert.ok(valid >= 15, `${stageId}장: 15명 이상 놓을 안전한 배치 칸이 있습니다`);
+        assert.ok(valid >= 15 && valid <= 18, `${stageId}장: 최대 18개 지정 칸 안에서 15명을 배치합니다`);
         assert.equal(new Set(Object.values(assigned).map(point => `${point.x},${point.y}`)).size, 15, `${stageId}장: 배치 칸이 겹치지 않습니다`);
         assert.equal(await page.locator('.deployment-roster-card[data-placed="false"]').count(), 6);
         const unplaced = await page.locator('.deployment-roster-card[data-placed="false"]').first().getAttribute('data-character-id');
         await card(page, unplaced).click();
-        await cell(page, await emptyCell(page)).click();
+        await cell(page, await emptyCell(page, [], true)).click();
         assert.deepEqual(await placements(page), assigned, `${stageId}장: 16번째 인물을 추가할 수 없습니다`);
-        assert.equal(await button('전투 시작').isEnabled(), true);
+        assert.equal(await page.locator('.deployment-start-btn').isEnabled(), true);
         const direction = getBattlefieldPlan(stageId).direction;
         const stageCheck = { stageId, direction, owned: 21, placed: 15, validCells: valid, unique: true, limitProtected: true, started: false, coordinatesPreserved: false, enemyCoordinatesPreserved: false };
         report.stageChecks.push(stageCheck);
-        const enemiesBefore = await page.locator('.deployment-board-cell.is-enemy').evaluateAll(elements => Object.fromEntries(elements.map(element => [element.dataset.deploymentUnit, { x: Number(element.dataset.deploymentX), y: Number(element.dataset.deploymentY) }])));
+        const enemiesBefore = await page.locator('.deployment-board-cell[data-deployment-unit]').evaluateAll(elements => Object.fromEntries(elements.filter(element => element.dataset.deploymentUnit
+          && !document.querySelector(`.deployment-roster-card[data-character-id="${CSS.escape(element.dataset.deploymentUnit)}"]`))
+          .map(element => [element.dataset.deploymentUnit, { x: Number(element.dataset.deploymentX), y: Number(element.dataset.deploymentY) }])));
         await card(page, 'hero').click();
-        const manualDestination = await emptyCell(page);
+        const manualDestination = await emptyCell(page, [assigned.hero], true);
         await cell(page, manualDestination).click();
         const manuallyAssigned = await placements(page);
         assert.deepEqual(manuallyAssigned.hero, manualDestination, `${stageId}장: 주인공을 안전한 빈칸에 직접 이동합니다`);
@@ -354,16 +355,12 @@ async function runViewport(base, viewport) {
         const settings = JSON.parse(localStorage.getItem(key));
         localStorage.setItem(key, JSON.stringify({ ...settings, cutsceneMode: 'full' }));
       }, settingsKey);
-      await page.reload();
-      await button('이어하기').click();
+      await load({ ...structuredClone(pending), deploymentIntroSeen: false });
+      await page.locator('.story-screen,.narrative-screen').waitFor();
+      assert.equal(await page.locator('.deployment-board-grid,.battle-control-heading').count(), 0, '처음 보는 도입 대화가 끝난 뒤에 실제 전장의 배치를 엽니다');
       await board(page);
-      await button('전투 시작').click();
-      await page.waitForFunction(() => document.querySelector('.story-screen,.narrative-screen'));
-      assert.equal(await page.locator('.world-battlefield').count(), 0, '도입 대화가 끝나기 전에 전투를 시작하지 않습니다');
-      await button('바로 전투').click();
-      await page.locator('.stage-mission-dialog[open]').getByRole('button', { name: '미션 확인', exact: true }).click();
-      await page.locator('.world-battlefield .unit-visual-hero').waitFor();
-      await page.waitForFunction(() => !document.querySelector('.battle-control-heading .prominent-save')?.disabled);
+      assert.deepEqual(await placements(page), finalCoordinates, '구버전 배치 저장도 도입 대화 뒤 기존 유효한 좌표를 유지합니다');
+      await startBattle(page);
       const afterStory = await saveBattle(page);
       assert.deepEqual(Object.fromEntries(afterStory.units.filter(unit => unit.type === 'ally').map(unit => [unit.id, { x: unit.x, y: unit.y }])), finalCoordinates, '도입 대화 후에도 배치 좌표를 유지합니다');
       await page.evaluate(key => {
@@ -376,18 +373,17 @@ async function runViewport(base, viewport) {
       await page.locator('.defeat-dialog[open]').waitFor();
       await button('재도전').click();
       await board(page);
-      assert.equal(await page.locator('.world-battlefield').count(), 0, '패배 후 재도전은 곧바로 전투를 시작하지 않고 배치 화면을 엽니다');
+      assert.equal(await page.locator('.battle-deployment-scene .world-battlefield').count(), 1, '패배 후 재도전은 컷신 뒤 실제 전장에서 배치합니다');
+      assert.equal(await page.locator('.battle-control-heading').count(), 0, '배치 확정 전에는 전투 명령을 열지 않습니다');
       assert.ok(Object.hasOwn(await placements(page), 'hero'));
       const victorious = structuredClone(started);
       victorious.units = victorious.units.filter(unit => unit.type === 'ally');
       await load(victorious);
       await page.locator('.victory-dialog[open]').waitFor();
       await button('다음 스테이지').click();
-      await page.waitForFunction(() => document.querySelector('.deployment-board-grid,.story-screen,.narrative-screen'));
-      // The existing chapter-clear dialogue may precede the next preparation screen.
-      if (await page.locator('.story-screen,.narrative-screen').count()) await button('건너뛰기').click();
       await board(page);
-      assert.equal(await page.locator('.world-battlefield').count(), 0, '승리 후 다음 장도 배치 단계를 엽니다');
+      assert.equal(await page.locator('.battle-deployment-scene .world-battlefield').count(), 1, '승리 후 다음 장도 도입 대화 뒤 실제 전장에서 배치합니다');
+      assert.equal(await page.locator('.battle-control-heading').count(), 0, '다음 장 배치를 확정하기 전에는 전투를 진행하지 않습니다');
       const nextPreparation = await saveDeployment();
       assert.equal(nextPreparation.deploymentDraft.stageId, 2, '다음 장에서는 이전 장의 배치 초안을 사용하지 않습니다');
       result.checks.push('도입 대화 후 배치 유지', '패배 재도전 시 배치 단계 진입', '승리 후 다음 장 배치 단계 진입');

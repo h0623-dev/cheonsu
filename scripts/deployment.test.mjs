@@ -79,6 +79,7 @@ for (const chapter of stages) test(`Chapter ${chapter.id}: real 1/4/15-unit batt
     const before = JSON.stringify({ stage, units, placements });
     const allowed = new Set(cells.map(cellKey));
     assert.ok(cells.length >= 15, 'Each actual chapter supports the full deployment limit');
+    assert.ok(cells.length <= 18, 'Only the limited formation slots and at most three spare slots are opened');
     assert.equal(allowed.size, cells.length);
     for (const cell of cells) {
       assert.ok(!['block', 'wall', 'void', 'fire', 'ice', 'dark', 'rune', 'trap', 'water', 'swamp'].includes(stage.map[cell.y][cell.x]));
@@ -97,7 +98,7 @@ for (const chapter of stages) test(`Chapter ${chapter.id}: real 1/4/15-unit batt
     const effects = processTerrainStartEffects(prepared, 'ally', stage.map);
     assert.deepEqual(effects.units, prepared, 'No starting ally receives terrain damage, bleed or freeze');
     const unused = cells.find(cell => !Object.values(placements).some(value => cellKey(value) === cellKey(cell)));
-    const moved = placeDeploymentUnit(placements, 'hero', unused, cells, ids);
+    const moved = placeDeploymentUnit(placements, 'hero', unused || placements.bram, cells, ids);
     assert.equal(moved.ok, true);
     assert.equal(validateDeploymentPlacements(stage, units, ids, moved.placements, cells).ok, true);
     const started = applyDeploymentPlacements(units, moved.placements);
@@ -140,7 +141,8 @@ test('legacy terrain revision keeps south deployment instead of changing its his
   const stage = { id: 2, terrainRevision: 2, map: Array.from({ length: 14 }, () => Array(14).fill('plain')) };
   const cells = getDeploymentCells(stage, []);
   assert.ok(cells.length > 0 && cells.every(cell => cell.y / 13 >= .57));
-  assert.ok(cells.some(cell => cell.x / 13 > .8), 'West-facing modern plan does not rewrite legacy south geometry');
+  assert.deepEqual(cells, getDeploymentCells({ ...stage, id: 1, terrainRevision: 3 }, []),
+    'Legacy south deployment uses the limited south formation instead of the modern west-facing chapter plan');
 });
 
 test('manual placement, swapping, adding and removal reconcile without shifting unrelated allies', () => {

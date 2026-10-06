@@ -11,6 +11,7 @@ import { MONSTER_ENEMIES } from '../src/data/monsterEnemies.js';
 import directions from '../public/art/directions-v1/manifest.json' with { type: 'json' };
 import { duelProps, seekDuel, assertBodies, assertFit } from './duel-fixture.mjs';
 import { qaBrowserOptions } from './qa-browser.mjs';
+import { startDeploymentBattle, waitForDeployment } from './qa-deployment-flow.mjs';
 import { EXPANSION_MONSTER_KEYS } from '../src/data/expansionEnemies.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -239,11 +240,8 @@ async function actualApp(base, viewport) {
       await load(campaign);
       const stage = MONSTER_ENEMIES[id].firstStage;
       await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: new RegExp(`^${stage}장[.]`) }) }).click();
-      await button('전투 시작').click();
-      await page.waitForFunction(() => document.querySelector('.final-deploy-card,.narrative-screen,.story-screen,.world-battlefield'));
-      if (await page.locator('.final-deploy-card').count()) await button('그래도 출전').click();
-      if (await button('바로 전투').count()) await button('바로 전투').click();
-      await page.locator('.stage-mission-dialog[open]').getByRole('button', { name: '미션 확인', exact: true }).click();
+      await waitForDeployment(page);
+      await startDeploymentBattle(page);
       await ready();
       const loaded = await assertMapArt(page, id);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, `${id}: 휴대폰 가로 넘침이 없습니다`);

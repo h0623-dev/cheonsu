@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 import { preview } from 'vite';
 import { qaBrowserOptions } from './qa-browser.mjs';
+import { startDeploymentBattle, waitForDeployment } from './qa-deployment-flow.mjs';
 import { webBuildInfo } from './update-build-info.mjs';
 import { stages } from '../src/data/stages.js';
 import { RECRUIT_BY_STAGE, getCharacterCollection } from '../src/data/characterCollection.js';
@@ -62,15 +63,7 @@ async function actualUnitArt(page, id, artId = id) {
 }
 
 async function beginBattle(page) {
-  await page.getByRole('button', { name: '전투 시작', exact: true }).click();
-  await page.waitForFunction(() => document.querySelector('.final-deploy-card,.story-screen,.narrative-screen,.world-battlefield'));
-  const override = page.getByRole('button', { name: '그래도 출전', exact: true });
-  if (await override.count()) await override.click();
-  await page.waitForFunction(() => document.querySelector('.story-screen,.narrative-screen,.stage-mission-dialog[open],.world-battlefield'));
-  const skip = page.getByRole('button', { name: '바로 전투', exact: true });
-  if (await skip.count()) await skip.click();
-  await page.locator('.stage-mission-dialog[open]').getByRole('button', { name: '미션 확인', exact: true }).click();
-  await readyBattle(page);
+  await startDeploymentBattle(page);
 }
 
 async function openPromotion(page) {
@@ -102,7 +95,7 @@ async function runViewport(base, viewport) {
   };
   const selectStage = async id => {
     await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: new RegExp(`^${id}장[.]`) }) }).click();
-    await page.locator('.deployment-board-grid').waitFor();
+    await waitForDeployment(page);
   };
   const source = { ...structuredClone(legacy.shared), ...structuredClone(legacy.cases[0].save),
     screen: 'campaign', clearedStages: sequential(49), party: structuredClone(fullParty),

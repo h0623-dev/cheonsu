@@ -1,4 +1,5 @@
 import { qaBrowserOptions } from './qa-browser.mjs';
+import { readyDeployment, startDeploymentBattle, waitForDeployment } from './qa-deployment-flow.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -78,20 +79,16 @@ async function readyBattle(page) {
 }
 
 async function beginBattle(page) {
-  await page.getByRole('button', { name: '전투 시작', exact: true }).click();
-  await page.waitForFunction(() => document.querySelector('.final-deploy-card,.story-screen,.narrative-screen,.world-battlefield'));
-  const override = page.getByRole('button', { name: '그래도 출전', exact: true });
-  if (await override.count()) await override.click();
-  const skip = page.getByRole('button', { name: '바로 전투', exact: true });
-  if (await skip.count()) await skip.click();
-  await openDialog(page).waitFor();
+  await startDeploymentBattle(page);
+  assert.equal(await openDialog(page).count(), 0, '배치 확정 뒤에는 시작 미션을 다시 열지 않습니다');
 }
 
 async function confirm(page, escape = false) {
   if (escape) await page.keyboard.press('Escape');
   else await openDialog(page).getByRole('button', { name: '미션 확인', exact: true }).click();
   await openDialog(page).waitFor({ state: 'detached' });
-  await readyBattle(page);
+  if (await page.locator('.battle-deployment-scene').count()) await readyDeployment(page);
+  else await readyBattle(page);
 }
 
 async function reopen(page, expected, label) {
@@ -146,35 +143,36 @@ async function runViewport(base, viewport) {
     for (const stageId of stageIds) {
       await load(campaign);
       await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: new RegExp(`^${stageId}장[.]`) }) }).click();
-      await page.locator('.deployment-board-grid').waitFor();
-      const missionCard = page.locator(`.stage-mission-card[data-mission-context="deployment"][data-mission-stage="${stageId}"]`);
-      await missionCard.waitFor();
-      assert.equal(await openDialog(page).count(), 0, '배치 단계에서는 미션 카드만 표시하고 자동 모달을 열지 않습니다');
-      assert.equal(await page.locator('.deployment-roster-card[data-placed="true"]').count(), 15);
-      const cardContents = await contents(missionCard);
-      await geometry(page, missionCard);
-      const unchangedCampaign = await rawSave();
-      await page.locator('.deployment-roster-card[data-character-id="hero"]').click();
-      const destination = page.locator('.deployment-board-cell[data-deployment-valid="true"][data-deployment-unit=""]').first();
-      const point = await destination.evaluate(element => ({ x: Number(element.dataset.deploymentX), y: Number(element.dataset.deploymentY) }));
-      await destination.click();
-      assert.equal(await page.locator(`.deployment-board-cell[data-deployment-x="${point.x}"][data-deployment-y="${point.y}"]`).getAttribute('data-deployment-unit'), 'hero', '미션 카드가 수동 배치를 막지 않습니다');
-      assert.equal(await rawSave(), unchangedCampaign, '미션 보기와 수동 배치는 기존 저장을 자동 변경하지 않습니다');
-      await beginBattle(page);
+      await waitForDeployment(page, { confirmMission: false });
       const dialog = openDialog(page);
+      await dialog.waitFor();
       assert.equal(await dialog.getAttribute('data-mission-stage'), String(stageId));
+      assert.equal(await page.locator('.battle-deployment-scene .world-battlefield').count(), 1, '도입 대화 뒤 실제 전장에서 미션과 배치를 안내합니다');
+      assert.equal(await page.locator('.deployment-roster-card[data-placed="true"]').count(), 15);
       const dialogContents = await contents(dialog);
-      assert.deepEqual(dialogContents, cardContents, '배치 카드와 실제 전투 진입 미션이 같습니다');
+      const unchangedCampaign = await rawSave();
       await geometry(page, dialog, { modal: true });
       assert.equal(await page.locator(introSelector).count(), 0, '미션 확인 전에 전투·보스 도입 연출을 재생하지 않습니다');
-      assert.equal(await page.locator('.battle-control-heading .prominent-save').isDisabled(), true, '미션 모달이 열려 있을 때 전투 저장을 잠급니다');
-      assert.equal(await page.locator('.battle-end-turn-float').isDisabled(), true, '미션 확인 전 턴 종료를 잠급니다');
+      assert.equal(await page.locator('.deployment-start-btn').isDisabled(), true, '미션 모달이 열려 있을 때 배치 확정을 잠급니다');
+      assert.equal(await page.locator('.deployment-roster-card:enabled').count(), 0, '미션 확인 전에는 아군 배치를 변경하지 못합니다');
+      assert.equal(await page.locator('.battle-end-turn-float').count(), 0, '배치가 끝나기 전에는 전투 턴 명령을 표시하지 않습니다');
       if (stageId === 1 || stageId === stages.at(-1).id) {
         await page.waitForTimeout(900);
         assert.equal(await page.locator(introSelector).count(), 0, '시간이 지나도 확인 전에는 도입 연출을 시작하지 않습니다');
         await page.screenshot({ path: path.join(output, `${viewport.width}x${viewport.height}-stage-${stageId}-mission.png`) });
       }
       await confirm(page, stageId % 3 === 0);
+      await page.locator('.deployment-roster-card[data-character-id="hero"]').click();
+      const destination = page.locator('.deployment-board-cell[data-deployment-valid="true"][data-deployment-unit=""],.deployment-board-cell[data-deployment-valid="true"][data-deployment-unit="bram"]').first();
+      const point = await destination.evaluate(element => ({ x: Number(element.dataset.deploymentX), y: Number(element.dataset.deploymentY) }));
+      await destination.click();
+      assert.equal(await page.locator(`.deployment-board-cell[data-deployment-x="${point.x}"][data-deployment-y="${point.y}"]`).getAttribute('data-deployment-unit'), 'hero', '미션을 확인한 뒤 실제 전장에서 수동 배치할 수 있습니다');
+      assert.equal(await rawSave(), unchangedCampaign, '미션 보기와 수동 배치는 기존 저장을 자동 변경하지 않습니다');
+      await page.locator('.battle-deploy-header').getByRole('button', { name: '미션', exact: true }).click();
+      await openDialog(page).waitFor();
+      assert.deepEqual(await contents(openDialog(page)), dialogContents, '수동 배치 중 다시 보는 미션은 최초 안내와 같습니다');
+      await confirm(page);
+      await beginBattle(page);
       const battle = await saveBattle();
       assert.equal(battle.selectedStage.id, stageId);
       const canonical = verifyConditions(dialogContents, battle.selectedStage, battle.units);
@@ -207,7 +205,7 @@ async function runViewport(base, viewport) {
       }
       console.log(`PASS 미션 ${viewport.width}x${viewport.height} ${stageId}장: ${canonical.bossNames.join(', ')} / ${canonical.roundLimit}라운드 / 실제 전투 진입`);
     }
-    result.checks.push(`${stageIds.length}개 장에서 최대 15명 수동 배치 후 실제 전투 진입`, '실제 적 대장 이름·라운드 제한·승리 또는/패배 또는 안내 일치', '배치 자동 모달 없음·전투 자동 모달·확인/Escape·모달 명령/저장 잠금', '미션 카드·대화창 가로 넘침 없음·확인 버튼 44px 이상·키보드 포커스 유지', `${sampleStageIds.join('·')}장 수동 재열기와 이어하기 후 유닛·진행도·수집·장비 보존`);
+    result.checks.push(`${stageIds.length}개 장에서 최대 15명 수동 배치 후 실제 전투 진입`, '실제 적 대장 이름·라운드 제한·승리 또는/패배 또는 안내 일치', '도입 대화 후 실제전장 미션·확인/Escape·배치 잠금·배치 확정 뒤 미션 반복 없음', '미션 대화창 가로 넘침 없음·확인 버튼 44px 이상·키보드 포커스 유지', `${sampleStageIds.join('·')}장 수동 재열기와 이어하기 후 유닛·진행도·수집·장비 보존`);
     for (const legacyCase of legacy.cases) {
       const baseline = { ...structuredClone(legacy.shared), ...structuredClone(legacyCase.save) };
       await load(baseline);

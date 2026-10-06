@@ -1,4 +1,5 @@
 import { qaBrowserOptions } from './qa-browser.mjs';
+import { leaveDeployment, startDeploymentBattle, waitForDeployment } from './qa-deployment-flow.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -17,28 +18,16 @@ const report = { production: true, passed: false, results: [], errors: [] };
 let server, browser;
 await fs.mkdir(output, { recursive: true });
 
-async function waitBattle(page) {
-  await page.locator('.world-battlefield .unit-visual-hero').waitFor();
-  await page.waitForFunction(() => !document.querySelector('.battle-control-heading .prominent-save')?.disabled && !document.querySelector('.boss-splash-overlay'));
-}
-
 async function startBattle(page) {
-  await page.getByRole('button', { name: '전투 시작', exact: true }).click();
-  await page.waitForFunction(() => document.querySelector('.final-deploy-card,.story-screen,.narrative-screen,.world-battlefield'));
-  const override = page.getByRole('button', { name: '그래도 출전', exact: true });
-  if (await override.count()) await override.click();
-  const skip = page.getByRole('button', { name: '바로 전투', exact: true });
-  if (await skip.count()) await skip.click();
-  await page.locator('.stage-mission-dialog[open]').getByRole('button', { name: '미션 확인', exact: true }).click();
-  await waitBattle(page);
+  await startDeploymentBattle(page);
 }
 
 async function selectStage(page, stageId) {
   const stage = page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: new RegExp(`^${stageId}장[.]`) }) });
   assert.equal(await stage.isEnabled(), true, `${stageId}장은 실제로 해금되어 있습니다`);
   await stage.click();
-  await page.locator('.deployment-board-grid').waitFor();
-  assert.match(await page.locator('.deployment-screen h1').innerText(), new RegExp(`^${stageId}장[.]`));
+  await waitForDeployment(page);
+  assert.match(await page.locator('.deployment-screen h1').innerText(), new RegExp(`^${stageId}장(?:[.]| ·)`));
 }
 
 async function stageEnabled(page, stageId) {
@@ -91,16 +80,16 @@ async function trainOnce(page, saveCamp) {
 }
 
 async function recommendedPreparation(page, stageId) {
-  await page.locator('.town-player-nav').getByRole('button', { name: '출전 준비', exact: true }).click();
-  await page.locator('.deployment-board-grid').waitFor();
-  assert.match(await page.locator('.deployment-screen h1').innerText(), new RegExp(`^${stageId}장[.]`), '마을의 출전 준비가 올바른 전장으로 안내합니다');
+  await page.locator('.town-player-nav').getByRole('button', { name: /^(전투 진입|출전 준비)$/ }).click();
+  await waitForDeployment(page);
+  assert.match(await page.locator('.deployment-screen h1').innerText(), new RegExp(`^${stageId}장(?:[.]| ·)`), '마을에서 컷신을 거쳐 올바른 전장의 배치로 안내합니다');
 }
 
 async function makeSolo(page) {
   const ids = await page.locator('.deployment-roster-card[data-placed="true"]').evaluateAll(elements => elements.map(element => element.dataset.characterId));
   for (const id of ids.filter(id => id !== 'hero')) {
     await page.locator(`.deployment-roster-card[data-character-id="${id}"]`).click();
-    await page.getByRole('button', { name: '배치 해제', exact: true }).click();
+    await page.locator('.battle-deploy-selection button').click();
   }
   assert.equal(await page.locator('.deployment-roster-card[data-placed="true"]').count(), 1);
 }
@@ -209,7 +198,7 @@ async function runViewport(base, viewport) {
     assert.equal(await page.locator('.deployment-roster-card[data-character-id="hero"]').getAttribute('data-placed'), 'true');
     result.checks.push('저장 복원 후 훈련 차단·사용 상태 보존', '실패 후 출전 준비는 실패 장 재도전');
 
-    await page.locator('.screen-panel-header').getByRole('button', { name: '뒤로', exact: true }).click();
+    await leaveDeployment(page);
     assert.equal(await stageEnabled(page, 2), false, '1장 실패로 2장을 해금하지 않습니다');
     await selectStage(page, 1);
     await makeSolo(page);
@@ -335,7 +324,7 @@ async function runViewport(base, viewport) {
     await page.locator('.town-hub').waitFor();
     await assertTrainingBlocked(page, '이미 클리어한 장 재도전 실패');
     await recommendedPreparation(page, 1);
-    await page.locator('.screen-panel-header').getByRole('button', { name: '뒤로', exact: true }).click();
+    await leaveDeployment(page);
     assert.equal(await stageEnabled(page, 2), true, '이전 승리로 해금한 다른 장은 실패 후에도 명시 선택할 수 있습니다');
     await selectStage(page, 2);
     result.checks.push('실패 장 재도전 우선과 이미 해금한 다른 장의 명시 선택 유지');
@@ -348,7 +337,7 @@ async function runViewport(base, viewport) {
     const allCleared = { ...structuredClone(victorious), clearedStages: stages.map(stage => stage.id), lastBattleResult: { stageId: stages.at(-1).id, outcome: 'victory' } };
     await load(allCleared);
     await page.locator('.town-hub').waitFor();
-    await page.locator('.town-player-nav').getByRole('button', { name: '출전 준비', exact: true }).click();
+    await page.locator('.town-player-nav').getByRole('button', { name: /^(전투 진입|출전 준비)$/ }).click();
     await page.locator('.campaign-stage-select').waitFor();
     assert.equal(await page.locator('.deployment-board-grid').count(), 0, '모든 장 클리어 후 존재하지 않는 다음 장으로 진입하지 않습니다');
     assert.equal(await stageEnabled(page, stages.at(-1).id), true);

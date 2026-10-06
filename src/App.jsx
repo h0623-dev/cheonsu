@@ -41,7 +41,7 @@ import { installNativeInsets } from './engine/nativeInsets.js';
 import DefeatDialog from "./components/DefeatDialog.jsx";
 import VictoryDialog from "./components/VictoryDialog.jsx";
 import StoryScene from "./components/StoryScene.jsx";
-import DeploymentBoard from './components/DeploymentBoard.jsx';
+import BattleDeploymentScene from './components/BattleDeploymentScene.jsx';
 import { StageMissionCard, StageMissionDialog } from './components/StageMission.jsx';
 import { getStoryPortrait } from "./data/storyArt.js";
 import { getUnlockedStageIds, createVictoryCheckpoint, createDefeatCheckpoint, getCampTrainingAvailability, getCampBattleStageId, writeProgressSave } from './engine/campaignProgress.js';
@@ -109,7 +109,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.163";
+const SAVE_VERSION = "1.99.164";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -7930,7 +7930,8 @@ function useSkillAreaPreview(selected, rangeTarget, mode, showAttackRange, activ
     ? getTilesInRadius(rangeTarget, getSkillAreaRadius(selected), activeMap) : [], [showAttackRange, mode, rangeTarget, selected, activeMap]);
 }
 
-const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, units, facings, moveTiles, attackTiles, skillAreaTiles, turn, mode, selectedUnit, inspectedUnitId, showAttackRange, skillChoiceOpen, enemyThreatTileKeys, hazards, cameraFocus, visualEffects, damagePopups, movingUnit, actionMotion, visibleDiscoveries, targetSelectionActive, setRangePreviewTargetId }) {
+const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, units, facings, moveTiles, attackTiles, skillAreaTiles, turn, mode, selectedUnit, inspectedUnitId, showAttackRange, skillChoiceOpen, enemyThreatTileKeys, hazards, cameraFocus, visualEffects, damagePopups, movingUnit, actionMotion, visibleDiscoveries, targetSelectionActive, setRangePreviewTargetId, deploymentCells = null }) {
+  const deploymentKeys = useMemo(() => deploymentCells && new Set(deploymentCells.map(cell => `${cell.x},${cell.y}`)), [deploymentCells]);
   const terrain = useMemo(() => activeMap.map((row, y) => row.map((tile, x) => {
     const visual = getWorldTileVisual(activeMap, x, y, stageId);
     return { ...visual, style: { ...getTerrainVisualStyle(tile, x, y), ...visual.style } };
@@ -7938,6 +7939,8 @@ const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, un
   return activeMap.flatMap((row, y) =>
   row.map((tile, x) => {
     const unit = units.find((u) => u.x === x && u.y === y);
+    const deploymentValid = deploymentKeys?.has(`${x},${y}`);
+    const deploymentSelected = Boolean(deploymentKeys && unit?.id === selectedUnit);
     const facing = getUnitFacing(unit, units, facings);
     const unitActionMotion = unit && actionMotion?.attackerId === unit.id ? actionMotion : null;
     const tileBlocked = isBlockedBattleTile(tile);
@@ -7989,6 +7992,9 @@ const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, un
       getTerrainVariantClassName(x, y),
       getTerrainEdgeClassNames(activeMap, x, y, tile),
       movable ? "movable-tile-cell" : "",
+      deploymentKeys ? 'deployment-board-cell' : '',
+      deploymentKeys ? (deploymentValid ? 'deployment-valid-tile' : 'deployment-outside-tile') : '',
+      deploymentSelected ? 'deployment-selected-tile' : '',
     ].filter(Boolean).join(" ");
     return (
       <div
@@ -7996,12 +8002,22 @@ const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, un
         key={`${x}-${y}`}
         data-map-x={x}
         data-map-y={y}
+        data-deployment-x={deploymentKeys ? x : undefined}
+        data-deployment-y={deploymentKeys ? y : undefined}
+        data-deployment-valid={deploymentKeys ? Boolean(deploymentValid) : undefined}
+        data-deployment-unit={deploymentKeys ? unit?.id || '' : undefined}
+        role={deploymentKeys ? 'button' : undefined}
+        tabIndex={deploymentKeys ? (deploymentValid ? 0 : -1) : undefined}
+        aria-disabled={deploymentKeys ? !deploymentValid : undefined}
+        aria-pressed={deploymentKeys ? deploymentSelected : undefined}
+        aria-label={deploymentKeys ? `${x + 1}, ${y + 1} · ${deploymentValid ? '배치 가능' : '배치 구역 밖'}${unit ? ` · ${unit.name}` : ''}` : undefined}
         onPointerEnter={() => { if (targetSelectionActive) setRangePreviewTargetId(unit?.type !== "ally" ? unit?.id || null : null); }}
         onPointerLeave={() => setRangePreviewTargetId(null)}
         title={`${getInspectTerrainLabel(tile)}${getTerrainEffectDescription(tile) ? ` · ${getTerrainEffectDescription(tile)}` : ''}`}
         style={terrainVisual.style}
         >
         <span className={`world-ground ground-${terrainVisual.material}`} aria-hidden="true" />
+        {deploymentValid && <span className="deployment-slot-marker" aria-hidden="true">{unit ? '' : '＋'}</span>}
         {terrainVisual.prop && <img className={`world-prop ${terrainVisual.blocked ? 'blocking-prop' : 'low-prop'}`} src={`${WORLD_ART_ROOT}/props/${terrainVisual.prop}.webp`} alt="" aria-hidden="true" draggable="false" />}
         {discovery && <span className={`discovery-marker discovery-${discovery.kind}`} data-discovery-id={discovery.id} title={discovery.title}>
           <img src={`/art/world-v2/props/${discovery.kind === 'relic' ? 'crystal' : discovery.kind === 'technique' ? 'monument' : 'crates'}.webp`} alt={discovery.title} draggable="false" />
@@ -8251,6 +8267,8 @@ export default function App() {
   const [storyScene, setStoryScene] = useState(null);
   const [selectedStage, setSelectedStage] = useState(null);
   const [deploymentStage, setDeploymentStage] = useState(null);
+  const [deploymentIntroSeen, setDeploymentIntroSeen] = useState(false);
+  const [deploymentManagementOpen, setDeploymentManagementOpen] = useState(false);
   const [stageMissionOpen, setStageMissionOpen] = useState(false);
   const [deploymentDraft, setDeploymentDraft] = useState({ stageId: null, placements: {} });
   const [selectedDeployUnitId, setSelectedDeployUnitId] = useState(null);
@@ -8504,7 +8522,21 @@ export default function App() {
     playSfx("confirm");
   };
 
-  const activeStage = selectedStage || stages[0];
+  const deploymentSetup = useMemo(() => deploymentStage && (screen === 'deployment' || lastPlayScreen === 'deployment')
+    ? createDeploymentBattleSetup(deploymentStage, party, deployedIds, gearEnhance, clearedStages, settings)
+    : null, [deploymentStage, screen, lastPlayScreen, party, deployedIds, gearEnhance, clearedStages, settings]);
+  const deploymentCells = useMemo(() => deploymentSetup
+    ? getDeploymentCells(deploymentSetup.stage, deploymentSetup.units) : [], [deploymentSetup]);
+  const deploymentPlacements = useMemo(() => deploymentSetup
+    ? reconcileDeploymentPlacements(deploymentDraft, deploymentSetup.stage, deploymentSetup.units, deploymentSetup.ids, deploymentCells)
+    : {}, [deploymentDraft, deploymentSetup, deploymentCells]);
+  const deploymentValidation = deploymentSetup
+    ? validateDeploymentPlacements(deploymentSetup.stage, deploymentSetup.units, deploymentSetup.ids, deploymentPlacements, deploymentCells)
+    : { ok: false, reason: '전장을 선택해 주세요.' };
+  const deploymentPreviewUnits = useMemo(() => deploymentSetup
+    ? applyDeploymentPlacements(deploymentSetup.units, deploymentPlacements) : [], [deploymentSetup, deploymentPlacements]);
+
+  const activeStage = (screen === 'deployment' && deploymentSetup?.stage) || selectedStage || stages[0];
   const activeStageMission = getStageMission(activeStage);
   const activeVictoryMissionText = activeStageMission.victoryConditions.map(condition => condition.text).join(' 또는 ');
   const activeMissionOrder = getStageMissionOrder(activeStage);
@@ -8629,19 +8661,6 @@ export default function App() {
 
 
 
-  const deploymentSetup = useMemo(() => deploymentStage && (screen === 'deployment' || lastPlayScreen === 'deployment')
-    ? createDeploymentBattleSetup(deploymentStage, party, deployedIds, gearEnhance, clearedStages, settings)
-    : null, [deploymentStage, screen, lastPlayScreen, party, deployedIds, gearEnhance, clearedStages, settings]);
-  const deploymentCells = useMemo(() => deploymentSetup
-    ? getDeploymentCells(deploymentSetup.stage, deploymentSetup.units) : [], [deploymentSetup]);
-  const deploymentPlacements = useMemo(() => deploymentSetup
-    ? reconcileDeploymentPlacements(deploymentDraft, deploymentSetup.stage, deploymentSetup.units, deploymentSetup.ids, deploymentCells)
-    : {}, [deploymentDraft, deploymentSetup, deploymentCells]);
-  const deploymentValidation = deploymentSetup
-    ? validateDeploymentPlacements(deploymentSetup.stage, deploymentSetup.units, deploymentSetup.ids, deploymentPlacements, deploymentCells)
-    : { ok: false, reason: '전장을 선택해 주세요.' };
-  const deploymentPreviewUnits = useMemo(() => deploymentSetup
-    ? applyDeploymentPlacements(deploymentSetup.units, deploymentPlacements) : [], [deploymentSetup, deploymentPlacements]);
   const deploymentPreviewStage = deploymentSetup?.stage || null;
   const deploymentEnemySummary = deploymentStage
     ? getStageEnemySummary(deploymentStage, Math.max(1, deployedIds.length || MAX_DEPLOY_COUNT), deploymentSetup?.units)
@@ -10336,6 +10355,8 @@ export default function App() {
     const freshParty = getInitialParty();
     setSelectedStage(null);
     setDeploymentStage(null);
+    setDeploymentIntroSeen(false);
+    setDeploymentManagementOpen(false);
     setDeploymentDraft({ stageId: null, placements: {} });
     setSelectedDeployUnitId(null);
     setFinalDeployCheckOpen(false);
@@ -10495,22 +10516,21 @@ export default function App() {
     ]);
     setLogFilter("all");
     setScreen("battle");
-    missionIntroRef.current = battleStage;
-    setStageMissionOpen(true);
+    showTurnPhaseBanner("ally", 1);
   };
 
   const closeStageMission = () => {
     setStageMissionOpen(false);
     const battleStage = missionIntroRef.current;
     missionIntroRef.current = null;
-    if (!battleStage || screen !== 'battle' || result) return;
-    showTurnPhaseBanner("ally", 1);
+    if (!battleStage || !['battle', 'deployment'].includes(screen) || result) return;
+    if (screen === 'battle') showTurnPhaseBanner("ally", 1);
     showStageBanner(
       {
         type: "start",
         label: `STAGE ${battleStage.id}`,
         title: battleStage.title,
-        subtitle: `${battleStage.map[0].length}x${battleStage.map.length} 대형 전장 · 미션을 달성하세요.`,
+        subtitle: screen === 'deployment' ? "표시된 시작 칸에 동료를 배치하세요." : "미션을 달성하세요.",
       },
       1700
     );
@@ -10523,10 +10543,32 @@ export default function App() {
     }
   };
 
+  const beginStageDeployment = (stage) => {
+    if (!stage || !playableStageIds.includes(stage.id)) return;
+    clearVisuals();
+    closeMobileCombatPanels();
+    setStoryScene(null);
+    setDeploymentStage(stages.find(candidate => candidate.id === stage.id) || stage);
+    setSelectedStage(stage);
+    setDeploymentIntroSeen(true);
+    setDeploymentManagementOpen(false);
+    setSelectedDeployUnitId(null);
+    setResult(null);
+    setBattle(null);
+    setBattleResolving(false);
+    setTurnBusy(false);
+    setAutoBattleEnabled(false);
+    setBattleSettingsOpen(false);
+    setScreen('deployment');
+    missionIntroRef.current = stage;
+    setStageMissionOpen(true);
+  };
+
   const openStoryScene = (stage, type, onComplete) => {
     const lines = STORY_SCENES[stage?.id]?.[type] || [];
 
     if (!lines.length) {
+      if (onComplete === "deployment") beginStageDeployment(stage);
       if (onComplete === "battle") {
         beginStageBattle(stage);
       }
@@ -11114,7 +11156,13 @@ export default function App() {
     setDeploymentStage(targetStage);
     if (deploymentDraft.stageId !== targetStage.id) setDeploymentDraft({ stageId: targetStage.id, placements: {} });
     setSelectedDeployUnitId(null);
-    setScreen("deployment");
+    clearVisuals();
+    setResult(null);
+    setBattle(null);
+    setDeploymentIntroSeen(false);
+    setDeploymentManagementOpen(false);
+    setLastPlayScreen("deployment");
+    openStoryScene(targetStage, "intro", "deployment");
 
     setStageNoteTags((prev) => ({
       ...normalizeStageNoteTags(prev),
@@ -11440,17 +11488,28 @@ export default function App() {
     setDeploymentDraft({ stageId: stage.id, placements: {} });
     setSelectedDeployUnitId(null);
     setDeploymentHint('보유 캐릭터를 고른 뒤 파란 배치 칸을 눌러 위치를 정하세요.');
-    setScreen("deployment");
+    clearVisuals();
+    closeMobileCombatPanels();
+    setResult(null);
+    setBattle(null);
+    setTurnBusy(false);
+    setAutoBattleEnabled(false);
+    setBattleSettingsOpen(false);
+    setDeploymentIntroSeen(false);
+    setDeploymentManagementOpen(false);
+    setLastPlayScreen("deployment");
+    openStoryScene(stage, "intro", "deployment");
   };
 
   const selectDeploymentUnit = (id) => {
+    if (combatBusy) return;
     if (!deploymentSetup?.roster.some(unit => unit.id === id && unit.type === 'ally')) return;
     setSelectedDeployUnitId(id);
     setDeploymentHint('파란 칸을 누르면 배치됩니다. 이미 배치된 동료끼리는 자리를 바꿀 수 있습니다.');
   };
 
   const placeSelectedDeploymentUnit = (cell) => {
-    if (!deploymentSetup) return;
+    if (combatBusy || !deploymentSetup) return;
     if (!selectedDeployUnitId) {
       const occupant = Object.entries(deploymentPlacements).find(([, position]) => position.x === cell.x && position.y === cell.y);
       if (occupant) selectDeploymentUnit(occupant[0]);
@@ -11472,6 +11531,7 @@ export default function App() {
   };
 
   const removeDeploymentUnit = (id) => {
+    if (combatBusy) return;
     if (id === 'hero') {
       setDeploymentHint('카일은 주인공이므로 반드시 출전합니다.');
       return;
@@ -11484,9 +11544,22 @@ export default function App() {
   };
 
   const resetDeploymentPositions = () => {
-    if (!deploymentStage) return;
+    if (combatBusy || !deploymentStage) return;
     setDeploymentDraft({ stageId: deploymentStage.id, placements: {} });
     setDeploymentHint('출전 캐릭터를 안전한 시작 위치에 자동 배치했습니다.');
+  };
+
+  const handleDeploymentMapPress = (event) => {
+    if (combatBusy) return;
+    const tile = event.target.closest('[data-map-x][data-map-y]');
+    if (!tile) return;
+    const cell = { x: Number(tile.dataset.mapX), y: Number(tile.dataset.mapY) };
+    const ally = deploymentPreviewUnits.find(unit => unit.type === 'ally' && unit.x === cell.x && unit.y === cell.y);
+    if (ally && (!selectedDeployUnitId || selectedDeployUnitId === ally.id)) {
+      selectDeploymentUnit(ally.id);
+      return;
+    }
+    placeSelectedDeploymentUnit(cell);
   };
 
   const toggleDeployUnit = (unitId) => {
@@ -11613,7 +11686,7 @@ export default function App() {
   };
 
   const applyOneClickPreparation = () => {
-    if (!deploymentStage || !playableStageIds.includes(deploymentStage.id)) return;
+    if (combatBusy || !deploymentStage || !playableStageIds.includes(deploymentStage.id)) return;
 
     const filledIds = getAutoFillDeploymentIds(party, deployedIds, MAX_DEPLOY_COUNT);
     const purchasePlan = getRecommendedSupplyPurchasePlan(deploymentStage, inventory, gold);
@@ -11647,9 +11720,14 @@ export default function App() {
       return;
     }
     setDeploymentDraft({ stageId: deploymentStage.id, placements: deploymentPlacements });
-    localStorage.setItem("cheonsu_last_deploy_v1", JSON.stringify(deploymentSetup.ids));
+    try {
+      localStorage.setItem("cheonsu_last_deploy_v1", JSON.stringify(deploymentSetup.ids));
+    } catch {
+      setSaveNotice({ ok: false, text: '최근 편성 저장 공간이 부족합니다. 현재 배치로 전투를 시작합니다.' });
+    }
     setFinalDeployCheckOpen(false);
-    openStoryScene(deploymentStage, "intro", "battle");
+    setDeploymentManagementOpen(false);
+    beginStageBattle(deploymentStage);
   };
 
   const startDeploymentAfterFinalCheck = () => {
@@ -11669,6 +11747,11 @@ export default function App() {
 
     if (action === 'library') {
       setScreen('library');
+      return;
+    }
+
+    if (action === "deployment") {
+      beginStageDeployment(stage);
       return;
     }
 
@@ -11708,10 +11791,11 @@ export default function App() {
       version: SAVE_VERSION,
       exploration,
       screen: ['campaign', 'deployment', 'camp', 'battle'].includes(screen) ? screen : lastPlayScreen,
-      selectedStage,
-      currentStageId: selectedStage?.id || null,
+      selectedStage: deploymentSetup?.stage || selectedStage,
+      currentStageId: deploymentSetup?.stage.id || selectedStage?.id || null,
       party,
-      units: saveFacings(units),
+      units: saveFacings(deploymentSetup ? deploymentPreviewUnits : units),
+      deploymentIntroSeen: Boolean(deploymentSetup && deploymentIntroSeen),
       selectedUnit,
       deployedIds,
       deploymentDraft: deploymentSetup && (screen === 'deployment' || lastPlayScreen === 'deployment')
@@ -11831,6 +11915,8 @@ export default function App() {
       setDeploymentStage(migratedData.screen === 'deployment'
         ? stages.find(stage => stage.id === migratedData.selectedStage.id) || migratedData.selectedStage : null);
       setDeploymentDraft(migratedData.deploymentDraft);
+      setDeploymentIntroSeen(migratedData.deploymentIntroSeen);
+      setDeploymentManagementOpen(false);
       setSelectedDeployUnitId(null);
       setGearEnhance(restoredGearEnhance);
       setDeployedIds(restoredDeployedIds.length ? restoredDeployedIds : availableDeployIds.slice(0, MAX_DEPLOY_COUNT));
@@ -11919,7 +12005,21 @@ export default function App() {
       setSessionStarted(true);
       utilityHistory.current = [];
       setLastPlayScreen(['battle', 'camp', 'campaign', 'deployment'].includes(migratedData.screen) ? migratedData.screen : 'campaign');
-      setScreen(migratedData.screen);
+      if (migratedData.screen === 'deployment' && !migratedData.deploymentIntroSeen) {
+        const stage = migratedData.selectedStage;
+        const lines = STORY_SCENES[stage.id]?.intro || [];
+        if (lines.length) {
+          setStoryScene({ stage, type: 'intro', lines, index: 0, onComplete: 'deployment' });
+          setScreen('story');
+        } else {
+          setDeploymentIntroSeen(true);
+          setScreen('deployment');
+          missionIntroRef.current = stage;
+          setStageMissionOpen(true);
+        }
+      } else {
+        setScreen(migratedData.screen);
+      }
     } catch (error) {
       console.error("Save load failed:", error);
       alert("저장 데이터를 불러오지 못했습니다. 새 게임으로 다시 시작해 주세요.");
@@ -13556,7 +13656,9 @@ export default function App() {
     if (destination === "next" && nextStage && receipt.checkpoint.unlockedStages.includes(nextStage.id)) {
       setDeploymentStage(nextStage); setSelectedStage(nextStage);
       setDeploymentDraft({ stageId: nextStage.id, placements: {} }); setSelectedDeployUnitId(null);
-      setDeploymentHint(`${nextStage.title} 배치 가능 칸에 동료의 위치를 정하세요.`); setScreen("deployment");
+      setDeploymentHint(`${nextStage.title} 지정된 시작 칸에 동료의 위치를 정하세요.`);
+      setDeploymentIntroSeen(false); setDeploymentManagementOpen(false); setLastPlayScreen('deployment');
+      openStoryScene(nextStage, 'intro', 'deployment');
     } else {
       setScreen("camp");
     }
@@ -14523,7 +14625,7 @@ export default function App() {
       {(discoveryReceipt || journalOpen) && <DiscoveryDialog receipt={discoveryReceipt} progress={exploration}
         entries={DISCOVERIES.filter(entry => unlockedStages.includes(entry.stageId) || exploration.claimed.includes(entry.id))}
         onClose={() => { setDiscoveryReceipt(null); setJournalOpen(false); }} />}
-      {screen === 'battle' && stageMissionOpen && !result && <StageMissionDialog stage={activeStage} onConfirm={closeStageMission} />}
+      {['battle', 'deployment'].includes(screen) && stageMissionOpen && !result && <StageMissionDialog stage={activeStage} onConfirm={closeStageMission} />}
       <div className="overlay" />
       {phaseBanner && <div className="phase-banner">{phaseBanner}</div>}
       {stageBanner && (
@@ -16812,48 +16914,71 @@ export default function App() {
         </div>
       )}
 
-      {screen === "deployment" && (
+      {screen === 'deployment' && !deploymentManagementOpen && deploymentSetup && (
+        <BattleDeploymentScene
+          stage={deploymentSetup.stage} roster={deploymentSetup.roster}
+          placedIds={deploymentSetup.ids} placements={deploymentPlacements}
+          selectedId={selectedDeployUnitId} onSelect={selectDeploymentUnit}
+          onRemove={removeDeploymentUnit} onAutoPlace={resetDeploymentPositions}
+          onStart={confirmDeployment} onSave={saveGame}
+          onExit={() => { clearVisuals(); setScreen('campaign'); }}
+          onMission={() => setStageMissionOpen(true)}
+          onManage={() => setDeploymentManagementOpen(true)}
+          ready={deploymentValidation.ok} busy={combatBusy}
+          maxCount={MAX_DEPLOY_COUNT} validCellCount={deploymentCells.length}
+          hint={deploymentHint} getPortrait={getUnitPortrait} getRole={getUnitDisplayRole}
+        >
+          <div
+            className={`battle-map deployment-board-grid expanded-map large-map classic-pixel-map grounded-battlefield world-battlefield biome-${getWorldBiome(deploymentSetup.stage.id)} ${isFinalConceptStage(deploymentSetup.stage) ? 'final-illustrated-map' : ''}`}
+            onClick={handleDeploymentMapPress}
+            onKeyDown={event => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                handleDeploymentMapPress(event);
+              }
+            }}
+            style={{
+              gridTemplateColumns: `repeat(${deploymentSetup.stage.map[0].length}, var(--battle-tile-size, minmax(0, 1fr)))`,
+              '--map-cols': deploymentSetup.stage.map[0].length,
+              '--map-rows': deploymentSetup.stage.map.length,
+              '--map-art-aspect': deploymentSetup.stage.map[0].length / (deploymentSetup.stage.map.length * BATTLE_GROUND_ROW_RATIO),
+              ...getWorldMapStyle(deploymentSetup.stage.id),
+              '--classic-map-image': `url(${getClassicBattleMapArt(deploymentSetup.stage)})`,
+            }}
+          >
+            <BattlefieldTiles
+              activeMap={deploymentSetup.stage.map} stageId={deploymentSetup.stage.id}
+              units={deploymentPreviewUnits} facings={facings} deploymentCells={deploymentCells}
+              moveTiles={[]} attackTiles={[]} skillAreaTiles={[]}
+              turn="deployment" mode="deploy" selectedUnit={selectedDeployUnitId} inspectedUnitId={null}
+              showAttackRange={false} skillChoiceOpen={false} enemyThreatTileKeys={new Set()}
+              hazards={[]} cameraFocus={null} visualEffects={[]} damagePopups={[]}
+              movingUnit={null} actionMotion={null} visibleDiscoveries={[]}
+              targetSelectionActive={false} setRangePreviewTargetId={setRangePreviewTargetId}
+            />
+          </div>
+        </BattleDeploymentScene>
+      )}
+
+      {screen === "deployment" && deploymentManagementOpen && (
         <div className="deployment-screen deployment-simple-screen">
           <div className="screen-panel-header">
             <div>
-              <div className="screen-kicker">전투 전 배치</div>
+              <div className="screen-kicker">편성 관리</div>
               <h1>{deploymentStage?.title || selectedStage?.title}</h1>
             </div>
             <div style={{ display: "flex", gap: "8px" }}>
               <button className="back-btn" onClick={() => openTutorial("deploy")}>
                 도움말
               </button>
-              <button className="back-btn" onClick={() => setScreen("campaign")}>
-                뒤로
+              <button className="back-btn" onClick={() => setDeploymentManagementOpen(false)}>
+                전장 배치로
               </button>
             </div>
           </div>
 
           {deploymentSetup && <StageMissionCard stage={deploymentSetup.stage} />}
-          {deploymentSetup && <DeploymentBoard
-            stage={deploymentSetup.stage}
-            units={deploymentPreviewUnits}
-            roster={deploymentSetup.roster}
-            placedIds={deploymentSetup.ids}
-            placements={deploymentPlacements}
-            validCells={deploymentCells}
-            selectedId={selectedDeployUnitId}
-            onSelect={selectDeploymentUnit}
-            onPlace={placeSelectedDeploymentUnit}
-            onRemove={removeDeploymentUnit}
-            onAutoPlace={resetDeploymentPositions}
-            onStart={confirmDeployment}
-            onSave={saveGame}
-            ready={deploymentValidation.ok}
-            maxCount={MAX_DEPLOY_COUNT}
-            hint={deploymentHint}
-            getPortrait={getUnitPortrait}
-            getSprite={getBattleMapUnitSprite}
-            getTerrainStyle={getTerrainVisualStyle}
-            getRole={getUnitDisplayRole}
-          />}
-
-          <details className="deployment-management">
+          <details className="deployment-management" open>
           <summary>전장 정보와 편성 관리</summary>
           {deploymentStage && <section className="chapter-brief"><img src={getWorldScene(deploymentStage.id)} alt={`${deploymentStage.title} 전경`} width="1536" height="1024"/><div><small>이번 여정</small><h2>{getChapterBrief(deploymentStage.id)?.title}</h2><p>{getChapterBrief(deploymentStage.id)?.text}</p></div></section>}
 
@@ -17630,13 +17755,7 @@ export default function App() {
 
                       clearVisuals();
                       setBattleSettingsOpen(false);
-                      setDeploymentStage(baseStage);
-                      setSelectedStage(baseStage);
-                      setDeploymentDraft({ stageId: baseStage.id, placements: {} });
-                      setSelectedDeployUnitId(null);
-                      setDeploymentHint('보유 캐릭터를 선택하고 파란 배치 칸을 눌러 위치를 정하세요.');
-                      setScreen("deployment");
-                      playSfx("confirm");
+                      startStage(baseStage);
                     }}
                   >
                     <span>대기실</span>

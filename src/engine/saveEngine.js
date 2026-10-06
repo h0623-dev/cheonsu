@@ -345,6 +345,7 @@ export function normalizeSaveData(raw, saveVersion = "0.12") {
       typeof id === "string"
     ),
     deploymentDraft: sanitizeDeploymentDraft(data.deploymentDraft, stage.id),
+    deploymentIntroSeen: data.screen === 'deployment' && data.deploymentIntroSeen === true,
     mode: validModes.includes(data.mode) ? data.mode : "move",
     turn: validTurns.includes(data.turn) ? data.turn : "ally",
     round:

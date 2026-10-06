@@ -1,9 +1,10 @@
 import { connectedGround } from './formations.js';
-import { deploymentDepth, getBattlefieldPlan } from '../data/battlefieldPlans.js';
+import { deploymentDepth, getBattlefieldPlan, orientBattlePoint } from '../data/battlefieldPlans.js';
 import { stages } from '../data/stages.js';
 import { isDeploymentTerrainUnsafe } from '../data/terrainPolicy.js';
 
 const MAX_DEPLOY_COUNT = 15;
+const DEPLOYMENT_SPARE_CELLS = 3;
 const UNSAFE_IDS = new Set(['__proto__', 'prototype', 'constructor']);
 const key = ({ x, y }) => `${x},${y}`;
 const distance = (a, b) => Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
@@ -15,7 +16,7 @@ const isPoint = value => isRecord(value) && Object.hasOwn(value, 'x') && Object.
 const point = ({ x, y }) => ({ x, y });
 const emptyDraft = stageId => ({ stageId, placements: {} });
 
-/** Reuse the same connected ground, rear band and seven-cell separation as formations. */
+/** Keep a few marked starting positions instead of opening the entire allied rear. */
 export function getDeploymentCells(stage, actualFinalUnits = []) {
   const map = stage?.map;
   if (!Array.isArray(map) || !map.length || !Array.isArray(map[0]) || !map[0].length) return [];
@@ -25,10 +26,48 @@ export function getDeploymentCells(stage, actualFinalUnits = []) {
   const enemies = actualFinalUnits.filter(unit => unit && unit.type !== 'ally');
   if (enemies.some(unit => !isPoint(unit))) return [];
   const direction = stage.terrainRevision >= 3 ? getBattlefieldPlan(stage.id).direction : 'south';
-  return connectedGround(map).filter(cell => !isDeploymentTerrainUnsafe(map[cell.y][cell.x])
-    && deploymentDepth(cell.x / Math.max(1, width - 1), cell.y / Math.max(1, height - 1), direction) >= .57
-    && enemies.every(enemy => distance(cell, enemy) >= 7))
-    .sort((a, b) => a.y - b.y || a.x - b.x).map(point);
+  const depth = cell => deploymentDepth(cell.x / Math.max(1, width - 1), cell.y / Math.max(1, height - 1), direction);
+  const safeCells = connectedGround(map).filter(cell => !isDeploymentTerrainUnsafe(map[cell.y][cell.x])
+    && depth(cell) >= .57 && enemies.every(enemy => distance(cell, enemy) >= 7));
+  if (!safeCells.length) return [];
+
+  // These must be the generated formation positions, never the mutable manual draft.
+  // Preserve its front/rear spacing and offer only three nearby alternatives for a full party.
+  const allowed = new Set(safeCells.map(key));
+  const automatic = actualFinalUnits.filter(unit => unit?.type === 'ally' && isPoint(unit)
+    && unit.x < width && unit.y < height).slice(0, MAX_DEPLOY_COUNT);
+  const [u, v] = orientBattlePoint(.5, .8, direction);
+  const anchors = automatic.length ? automatic : [{ x: u * Math.max(1, width - 1), y: v * Math.max(1, height - 1) }];
+  const center = anchors.reduce((sum, cell) => ({ x: sum.x + cell.x / anchors.length, y: sum.y + cell.y / anchors.length }), { x: 0, y: 0 });
+  const selected = [], occupied = new Set();
+  const add = cell => {
+    if (!allowed.has(key(cell)) || occupied.has(key(cell))) return;
+    selected.push(point(cell));
+    occupied.add(key(cell));
+  };
+  automatic.forEach(add);
+  const frontDepth = selected.length ? Math.min(...selected.map(depth)) : Math.max(.57, depth(center));
+  const formationDistance = cell => Math.min(...anchors.map(anchor => distance(cell, anchor)));
+  const nearby = [...safeCells].sort((a, b) => formationDistance(a) - formationDistance(b)
+    || distance(a, center) - distance(b, center) || depth(b) - depth(a) || a.y - b.y || a.x - b.x);
+  const cellLimit = MAX_DEPLOY_COUNT + DEPLOYMENT_SPARE_CELLS;
+  for (const cell of nearby) {
+    if (selected.length >= cellLimit) break;
+    if (depth(cell) + Number.EPSILON >= frontDepth) add(cell);
+  }
+
+  // A narrow coast or a small legacy board may have fewer than fifteen rear cells.
+  // Repair only the missing capacity, advancing as little as possible within the
+  // same safe land mass and original seven-cell enemy separation; never widen the zone.
+  if (selected.length < MAX_DEPLOY_COUNT) {
+    const reserve = [...nearby].sort((a, b) => Math.max(0, frontDepth - depth(a)) - Math.max(0, frontDepth - depth(b))
+      || formationDistance(a) - formationDistance(b) || distance(a, center) - distance(b, center) || a.y - b.y || a.x - b.x);
+    for (const cell of reserve) {
+      if (selected.length >= MAX_DEPLOY_COUNT) break;
+      add(cell);
+    }
+  }
+  return selected.sort((a, b) => a.y - b.y || a.x - b.x);
 }
 
 /** Saved drafts are optional and never change live battle units during migration. */
