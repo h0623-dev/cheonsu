@@ -188,7 +188,8 @@ async function openPage(fixtureBase, base, viewport) {
   });
   const time = new Date('2026-10-04T00:00:00Z');
   await page.clock.install({ time });
-  await page.clock.pauseAt(time);
+  // Freeze the blank page ahead of install-time IPC latency, before mounting any scene.
+  await page.clock.pauseAt(new Date(time.getTime() + 60_000));
   await page.goto(`${fixtureBase}/tests/fixtures/combat.html`);
   return page;
 }

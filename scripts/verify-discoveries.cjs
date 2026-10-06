@@ -91,7 +91,7 @@ async function assertModal(page, selector) {
   const dialog = page.locator(selector);
   await dialog.waitFor();
   assert.equal(await dialog.evaluate(element => element.matches(':modal')), true, `${selector} must use the native top layer`);
-  await dialog.locator('img').evaluateAll(images => Promise.all(images.map(image => image.decode())));
+  await dialog.locator('img').evaluateAll(images => Promise.all(images.map(image => { image.loading = 'eager'; return image.decode(); })));
   return dialog;
 }
 

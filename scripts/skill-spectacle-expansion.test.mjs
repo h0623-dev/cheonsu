@@ -7,6 +7,10 @@ import { EXPANSION_ENEMY_TEMPLATES } from '../src/data/expansionEnemies.js';
 import { getSkillAuraAnchor, getExpansionBaseKey } from '../src/data/skillAuraAnchors.js';
 import { SFX_PRESETS } from '../src/engine/soundEffects.js';
 import authored from '../src/data/skillWeaponAnchors.json' with { type: 'json' };
+import reviewed from '../src/data/reviewedSkillWeaponAnchors.json' with { type: 'json' };
+import { EXPANSION_BASE_ART_KEYS, ADVANCED_CLASS_ART_KEYS, getExpansionArtIdentity } from '../src/data/expansionArtRegistry.js';
+import fs from 'node:fs';
+import { createHash } from 'node:crypto';
 
 const allyScene = (id, skill, advancedClass) => ({ mode: 'skill', attacker: withSkill({ id, type: 'ally', ...(advancedClass ? { advancedClass } : {}), learnedTechniques: [skill.id] }, skill.id), outcome: { hit: true, heal: skill.type === 'heal', guard: skill.type === 'guard' } });
 
@@ -34,6 +38,25 @@ test('109개 실제 아트 ID의 준비·타격·기술 무기 이펙트에 유�
     }
   }
   assert.deepEqual(getSkillAuraAnchor('silvan', 'strike'), getSkillAuraAnchor('sylvan', 'strike'));
+});
+
+test('새 62종의 무기 부착점을 실제 검토 원화와 연결하고 원화 교체 시 재검토를 요구한다', () => {
+  const keys = [...EXPANSION_BASE_ART_KEYS, ...ADVANCED_CLASS_ART_KEYS];
+  assert.equal(keys.length, 62);
+  for (const key of keys) for (const pose of ['windup', 'strike', 'skill-a', 'skill-b']) {
+    const identity = getExpansionArtIdentity(key);
+    const frame = reviewed.units[key]?.[pose] || reviewed.units[identity.assetId]?.[pose];
+    assert.ok(frame, `${key}/${pose}: 기본 모습에서 방향을 상속하지 않는 검토 좌표`);
+    assert.equal(frame.framePath, `public/art/characters-v3/units/${identity.assetId}-${pose}.webp`);
+    assert.ok(frame.reviewMethod, `${key}/${pose}: 검토 방법 기록`);
+    const bytes = fs.readFileSync(new URL(`../${frame.framePath}`, import.meta.url));
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), frame.frameSha256, `${key}/${pose}: 검토한 원화 보존`);
+    const anchor = getSkillAuraAnchor(key, pose);
+    assert.equal(anchor.origin, 'reviewed-frame');
+    assert.equal(anchor.authored, false);
+    assert.equal(anchor.reviewed, true);
+    assert.deepEqual(getSkillAuraAnchor(identity.assetId, pose), anchor, `${key}/${pose}: 자산 별칭에도 같은 실제 좌표`);
+  }
 });
 
 test('새 자연·물 장식은 실제 스킬 효과를 바꾸지 않고 고유 색과 음향을 사용한다', () => {

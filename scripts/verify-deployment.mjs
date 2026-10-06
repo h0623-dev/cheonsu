@@ -193,9 +193,12 @@ async function runViewport(base, viewport) {
     assert.deepEqual((await placements(page)).lina, readd, '해제한 보유 캐릭터를 빈칸에 다시 배치합니다');
     await card(page, 'hero').click();
     assert.equal(await button('배치 해제').isDisabled(), true, '주인공은 출전 해제할 수 없습니다');
+    // 선택 변경의 requestAnimationFrame 카메라 이동이 자동 스크롤과 경합하지 않게 한다.
+    await cameraCentered(page);
     const beforeBlocked = await placements(page);
     const invalid = page.locator('.deployment-board-cell[data-deployment-valid="false"][data-deployment-unit=""]').first();
     assert.equal(await invalid.isDisabled(), true, '배치 구역 밖과 막힌 칸은 클릭할 수 없습니다');
+    await invalid.scrollIntoViewIfNeeded();
     await invalid.click({ force: true });
     assert.deepEqual(await placements(page), beforeBlocked);
     result.checks.push('아군 자리 교환', '해제·재배치와 점유 칸 보호', '주인공 출전 유지', '배치 불가 칸 입력 차단');

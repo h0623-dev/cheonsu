@@ -52,14 +52,15 @@ try {
   await fallbackPage.waitForFunction(()=>document.querySelector('.boss-splash-art.is-fallback')?.naturalWidth>0);
   await fallbackPage.close();
   const page=await browser.newPage({viewport:{width:390,height:844},serviceWorkers:'block'});
+  const time=new Date('2026-09-28T00:00:00Z');
+  await page.clock.install({time});
+  await page.clock.pauseAt(new Date(time.getTime()+60000));
   await page.addInitScript(()=>localStorage.setItem('cheonsu_settings_v1',JSON.stringify({soundOn:false,musicOn:false,cutsceneMode:'off'})));
   await page.goto(process.env.ACTUAL_GAME_URL || base);
   await page.getByRole('button',{name:'새 게임',exact:true}).click();
   await page.locator('.campaign-stage-select button').filter({has:page.locator('strong').filter({hasText:/^1장\./})}).click();
   await page.getByRole('button',{name:'전투 시작',exact:true}).click();
   await confirmArtQaDeployment(page);
-  await page.clock.install();
-  await page.clock.pauseAt(new Date());
   await page.getByRole('button',{name:'바로 전투',exact:true}).click();
   await confirmArtQaMission(page);
   await page.clock.runFor(1000);

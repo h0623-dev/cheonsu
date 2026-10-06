@@ -99,7 +99,7 @@ async function fixtureCases(fixtureBase, base, viewport) {
   });
   const time = new Date('2026-10-04T00:00:00Z');
   await page.clock.install({ time });
-  await page.clock.pauseAt(time);
+  await page.clock.pauseAt(new Date(time.getTime() + 60_000));
   try {
     await page.goto(`${fixtureBase}/tests/fixtures/combat.html`);
     for (const id of ids) for (const mode of ['attack', 'skill', 'counter', 'recoil', 'skill-recoil']) {

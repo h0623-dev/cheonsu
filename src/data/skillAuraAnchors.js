@@ -29,15 +29,16 @@ function inheritedAnchor(anchor, reference, target) {
   return result;
 }
 
-// New art has frame bounds but no independently measured hand/weapon landmarks yet.
-// Keep the measured legacy landmarks; fit inherited or weapon profiles to each new frame.
+// Keep the measured legacy landmarks first. New frames use their own manually
+// reviewed visible weapon/contact points; hidden handles remain documented as such.
+// Fit a base or weapon profile only when no frame-specific review exists.
 export function getSkillAuraAnchor(key, pose = 'strike', weapon) {
   const identity = getExpansionArtIdentity(key), canonical = identity?.baseId || key;
   const explicit = authoredAnchors[key] || authoredAnchors[identity?.assetId];
   const direct = explicit?.[pose] || explicit?.strike || (key === 'hero' ? HERO_BLADE[pose] || HERO_BLADE.strike : null);
   if (direct) return { ...direct, authored: true, reviewed: false, origin: 'authored-frame' };
-  const inspected = reviewedAnchors.units[key] || reviewedAnchors.units[identity?.assetId] || reviewedAnchors.units[canonical];
-  const reviewed = identity?.key === canonical ? inspected?.[pose] : null;
+  const inspected = reviewedAnchors.units[identity?.key] || reviewedAnchors.units[key] || reviewedAnchors.units[identity?.assetId];
+  const reviewed = inspected?.[pose];
   if (reviewed) return { ...reviewed, authored: false, reviewed: true, origin: 'reviewed-frame' };
   const source = (authoredAnchors[canonical] || reviewedAnchors.units[canonical] || (canonical === 'hero' ? HERO_BLADE : null));
   const base = source?.[pose] || source?.strike;
