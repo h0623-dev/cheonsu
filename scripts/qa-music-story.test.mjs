@@ -23,7 +23,8 @@ test('all 72 bundled instrument samples have matching provenance hashes and boun
   const root = new URL('../public/audio/orchestra-v1/', import.meta.url);
   const manifest = JSON.parse(fs.readFileSync(new URL('manifest.json', root)));
   let count = 0, size = 0;
-  assert.equal(manifest.license, 'CC BY 3.0');
+  assert.equal(manifest.license, 'CC BY 3.0 US');
+  assert.equal(manifest.licenseUrl, 'https://creativecommons.org/licenses/by/3.0/us/');
   for (const samples of Object.values(manifest.instruments)) for (const sample of samples) {
     const bytes = fs.readFileSync(new URL(sample.file, root));
     assert.equal(bytes.length, sample.size);
