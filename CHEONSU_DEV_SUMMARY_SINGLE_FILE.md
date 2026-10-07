@@ -4,7 +4,9 @@
 
 설정에 **권리 안내**를 추가하고 npm 런타임 의존성 96개의 원문 고지, 실제 웹 번들 고지, Android 네이티브 고지와 음악·로고의 출처를 배포물에 포함합니다. 사용하지 않는 구형 메뉴·참조·개발 템플릿 이미지 25개를 제거하고 생성 아트의 원본·기록을 보존합니다. 현재 게임 그림·음악·전투 규칙·저장·진행·수집과 고정 원복 기준 1.99.165 + Safari는 유지합니다.
 
-**현재 상태: 구현 반영, 새 APK·서명 OTA·Safari 배포 준비 중.** 아래 1.99.166 산출물과 자동 결과는 이전 버전 기록입니다. 이번 릴리스의 제작·공개 상태는 [1.99.167 배포 기록](docs/BUILD_1.99.167.md)에 구분해 기록합니다.
+**공개 완료: 1.99.167 / Android 366.** 최종 소스 `7f1e8ee3fa93ab33db57abcaec4cde6a4f6d0a68`의 [APK 다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.167/cheonsu_1.99.167_update_debug.apk) · [서명 OTA와 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.167) · [아이폰 Safari](https://cheonsu-safari-production.up.railway.app). 2026-10-07 **16:18:25 KST**에 GitHub 릴리스를 공개했고 실제 자동 업데이트 채널도 **1.99.167 / Android 350~366 / `1.99.167-23c8a8340fdc`**로 갱신됐습니다.
+
+최종 소스의 [Cloud Quality](https://github.com/h0623-dev/cheonsu/actions/runs/37581891272)와 [Android APK and OTA](https://github.com/h0623-dev/cheonsu/actions/runs/37581891654)는 모두 전체 성공했습니다. 기존 자동 Actions의 단위 792개·브라우저 검사 10개·APK/서명 OTA 절차의 결과이며 에이전트의 직접 검사가 아닙니다. Safari도 같은 소스로 **15:38:40 KST** 배포 성공·서비스 온라인이 보고됐습니다. 상세 기록은 [1.99.167 배포 기록](docs/BUILD_1.99.167.md)에 남깁니다. 아래 1.99.166 결과는 이전 이력입니다.
 
 [제작물과 외부 자료의 권리 안내](RIGHTS.md) · [아트 출처 기록](docs/legal/ASSET_PROVENANCE.md) · [출시 권리 검토 범위](docs/legal/RELEASE_RIGHTS_SCOPE.md). 라이선스 정리를 모든 저작권·상표의 법률상 보증이나 Play Store 정식 출시 완료로 표시하지 않습니다.
 
