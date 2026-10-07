@@ -4,11 +4,14 @@ import { createHash } from 'node:crypto';
 import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { generateThirdPartyNotices } from '../scripts/generate-third-party-notices.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const output = path.join(root, 'tmp/safari-dist');
 const pkg = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
 const webRevision = 'safari-1';
+
+await generateThirdPartyNotices();
 
 // An independent entry and output: the Android build, public files and OTA stay intact.
 await build({
@@ -18,7 +21,7 @@ await build({
   publicDir: path.join(root, 'public'),
   plugins: [react()],
   resolve: { dedupe: ['react', 'react-dom'] },
-  build: { outDir: output, emptyOutDir: true, target: 'safari16.4' },
+  build: { outDir: output, emptyOutDir: true, target: 'safari16.4', license: { fileName: 'legal/bundled-web-notices.md' } },
 });
 
 const manifest = JSON.parse(await readFile(path.join(root, 'public/manifest.webmanifest'), 'utf8'));

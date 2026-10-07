@@ -9,6 +9,7 @@ export default defineConfig({
     this.emitFile({ type: 'asset', fileName: 'ota-build.json', source: JSON.stringify(webBuildInfo(fileURLToPath(new URL('.', import.meta.url)))) });
   } }],
   resolve: { dedupe: ['react', 'react-dom'] },
+  build: { license: { fileName: 'legal/bundled-web-notices.md' } },
   // Ignore extracted project copies and Android's generated HTML when scanning dependencies.
   optimizeDeps: { entries: ['index.html', 'tests/fixtures/*.html'] },
   server: { watch: { ignored: ['**/tmp/**', '**/android/**'] } },

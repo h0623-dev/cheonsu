@@ -9,5 +9,12 @@
     "boss_ember": "boss_ember.webp",
     "boss_oracle": "boss_oracle.webp",
     "boss_abyss": "boss_abyss.webp"
+  },
+  "provenance": {
+    "recordedOn": "2026-10-07",
+    "document": "docs/art/boss-presence-v1/README.md",
+    "sourceRecords": "docs/art/boss-presence-v1/PROVENANCE.json",
+    "sourceDirectory": "docs/art/boss-presence-v1/sources",
+    "note": "생성 원본 PNG와 출력 ID를 소스 문서에 보존합니다. 당시 프롬프트 원문·정확한 생성일시는 미복구이며 제작 요약과 구분합니다. 권리 비침해 보증은 아닙니다."
   }
 }

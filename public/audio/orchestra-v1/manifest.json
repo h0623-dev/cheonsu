@@ -1,7 +1,38 @@
 {
   "source": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM",
-  "license": "CC BY 3.0",
+  "sourceRevision": null,
+  "retrievedAt": null,
+  "acquisitionNote": "기존 MP3의 최초 취득 커밋·시각은 기록되지 않았습니다. 이번 변경은 출처·허락 고지 정리이며 MP3를 다시 받거나 바꾸지 않았습니다.",
+  "license": "CC BY 3.0 US",
+  "licenseUrl": "https://creativecommons.org/licenses/by/3.0/us/",
+  "licenseText": "/legal/music/CC-BY-3.0-US.html",
   "attribution": "FluidR3 by Frank Wen and contributors; MIDI.js samples rendered by Benjamin Gleitzman",
+  "credits": "/audio/orchestra-v1/CREDITS.txt",
+  "creditPage": "/legal/music/index.html",
+  "sourceDocumentation": "/legal/music/sources.json",
+  "licenseLayers": {
+    "originalSoundFont": {
+      "license": "MIT",
+      "copyright": "Copyright (c) 2000-2002, 2008 Frank Wen <getfrank@gmail.com>",
+      "licenseText": "/legal/music/FLUIDR3-COPYING.txt"
+    },
+    "renderedMp3Samples": {
+      "license": "CC BY 3.0 US",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/us/",
+      "licenseText": "/legal/music/CC-BY-3.0-US.html"
+    },
+    "upstreamSoftware": {
+      "license": "MIT",
+      "copyright": "Copyright (C) 2012 Benjamin Gleitzman (gleitz@mit.edu)",
+      "licenseText": "/legal/music/MIDI-JS-SOUNDFONTS-LICENSE.txt",
+      "scope": "상류 저장소 소프트웨어의 허락이며 MP3 샘플의 허락 표기를 대신하지 않습니다."
+    }
+  },
+  "licenseReview": {
+    "reviewedOn": "2026-10-07",
+    "documentationRevision": "044fab8e1456bfafc5776e86dfd6bb8697149aef",
+    "note": "이번 상류 문서 보존 기준이며 기존 MP3의 최초 취득 버전으로 주장하지 않습니다."
+  },
   "instruments": {
     "piano": [
       {

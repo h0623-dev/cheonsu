@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "description": "네이티브 의존성 고지의 보충 원문. 실제 APK 구성 요소 목록은 생산 빌드가 생성합니다.",
+  "documents": [
+    {
+      "file": "licenses/Apache-2.0.txt",
+      "title": "Apache License 2.0 원문",
+      "source": "https://raw.githubusercontent.com/apache/cordova-android/10.1.1/LICENSE",
+      "scope": "Apache 2.0을 선언한 구성 요소의 공통 전문. 구성 요소별 권리자·NOTICE는 각 배포 파일과 함께 수집합니다.",
+      "retrievedOn": "2026-10-07 KST",
+      "sha256": "1ac158e9a3b9f2d200d4d3bbb1d4b4cc33dadd118fbd6694f244a3266bcd3dff"
+    },
+    {
+      "file": "licenses/ANDROID-SDK-LICENSE.txt",
+      "title": "Android SDK License 원문 보관본",
+      "source": "https://dl.google.com/android/repository/repository2-3.xml",
+      "scope": "공식 SDK 저장소 XML의 android-sdk-license 원문. 원문 날짜 January 16, 2019. Maven POM의 현행 이용조건 링크 https://developer.android.com/studio/terms.html 도 그대로 남깁니다. SDK 전체를 오픈소스로 표시하지 않습니다.",
+      "retrievedOn": "2026-10-07 KST",
+      "sha256": "efa8d9576e4816922a4676b8b9f8040f05fa22e371fbac5042c4551b08d5a43e"
+    },
+    {
+      "file": "licenses/cordova-NOTICE.txt",
+      "title": "Apache Cordova 10.1.1 NOTICE",
+      "source": "https://raw.githubusercontent.com/apache/cordova-android/10.1.1/NOTICE",
+      "scope": "org.apache.cordova:framework:10.1.1의 상위 프로젝트 NOTICE.",
+      "retrievedOn": "2026-10-07 KST",
+      "sha256": "e94707080ab2781d5ba4ceac999f31db2539d2477783287969c52580b9fa84b0"
+    },
+    {
+      "file": "licenses/okhttp-LICENSE.txt",
+      "title": "OkHttp 4.12.0 LICENSE",
+      "source": "https://raw.githubusercontent.com/square/okhttp/parent-4.12.0/LICENSE.txt",
+      "scope": "com.squareup.okhttp3:okhttp:4.12.0의 상위 프로젝트 라이선스.",
+      "retrievedOn": "2026-10-07 KST",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "file": "licenses/kotlin-LICENSE.txt",
+      "title": "Kotlin 1.9.25 LICENSE",
+      "source": "https://raw.githubusercontent.com/JetBrains/kotlin/v1.9.25/license/LICENSE.txt",
+      "scope": "Kotlin 상위 프로젝트 라이선스. 실제 포함된 모듈·버전은 generated/dependencies.json에 별도 기록합니다.",
+      "retrievedOn": "2026-10-07 KST",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "file": "licenses/kotlin-NOTICE.txt",
+      "title": "Kotlin 1.9.25 상위 배포 NOTICE",
+      "source": "https://raw.githubusercontent.com/JetBrains/kotlin/v1.9.25/license/NOTICE.txt",
+      "scope": "상위 Kotlin 배포가 제공하는 NOTICE의 보관본이며 Kotlin Compiler 전체가 게임에 들어간다는 의미가 아닙니다.",
+      "retrievedOn": "2026-10-07 KST",
+      "sha256": "ea7099352103ade6a6918bc7efb00f8bcd43db0e76b2da2e83237c0bc0ff1b19"
+    },
+    {
+      "file": "licenses/zip4j-LICENSE.txt",
+      "title": "Zip4j 2.11.5 LICENSE",
+      "source": "https://raw.githubusercontent.com/srikanth-lingala/zip4j/v2.11.5/LICENSE",
+      "scope": "net.lingala.zip4j:zip4j:2.11.5의 상위 프로젝트 라이선스.",
+      "retrievedOn": "2026-10-07 KST",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "file": "licenses/public-suffix-MPL-2.0.txt",
+      "title": "Public Suffix List MPL 2.0 원문",
+      "source": "https://raw.githubusercontent.com/publicsuffix/list/master/LICENSE",
+      "scope": "OkHttp의 publicsuffix NOTICE가 참조하는 목록의 MPL 2.0 전문. 해당 목록의 원문 출처: https://publicsuffix.org/list/ 및 https://github.com/publicsuffix/list .",
+      "retrievedOn": "2026-10-07 KST",
+      "sha256": "66a3107d5ad6a058aab753eaac2047ccb2ed0e39465dd0fe5844da3e300d5172"
+    }
+  ]
+}

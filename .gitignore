@@ -30,6 +30,9 @@ android/app/google-services.json
 android/signing.properties
 update-release/
 
+# 실제 APK 생산 시 생성하며 APK·OTA·소스 ZIP에는 함께 포함하는 원문 고지
+/public/legal/android/generated/
+
 # Local generated packages
 cheonsu_*.zip
 

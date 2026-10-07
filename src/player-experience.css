@@ -22,7 +22,7 @@
 .ux-page-header > div { min-width: 0; }
 .app .ux-screen h2 { font-size: 22px; margin: 20px 0; }
 .app .ux-screen h3 { font-size: 16px; display: flex; align-items: center; gap: 8px; }
-.app .ux-tabs { display: flex; gap: 4px; margin-bottom: 24px; padding-bottom: 8px; border-bottom: 1px solid #445851; }
+.app .ux-tabs { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 24px; padding-bottom: 8px; border-bottom: 1px solid #445851; }
 .app .ux-tabs button { flex: 1; border: 0; background: transparent; padding: 12px 8px; }
 .app .ux-tabs button[aria-pressed='true'] { color: #e7d19f; background: #2d3b37; box-shadow: inset 0 -2px #ddc18c; }
 .app .ux-settings-body { max-width: 760px; }

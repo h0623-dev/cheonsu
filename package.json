@@ -1,7 +1,7 @@
 {
   "name": "cheonsu",
   "private": true,
-  "version": "1.99.166",
+  "version": "1.99.167",
   "type": "module",
   "engines": {
     "node": ">=24"
@@ -34,7 +34,8 @@
     "package:source": "node scripts/package-source.mjs",
     "update:package": "node scripts/package-update.mjs",
     "update:publish": "node scripts/publish-update.mjs",
-    "android:open": "npx cap open android"
+    "android:open": "npx cap open android",
+    "prebuild": "node scripts/generate-third-party-notices.mjs"
   },
   "overrides": {
     "@grpc/grpc-js": "^1.13.6"

@@ -1,0 +1,57 @@
+{
+  "reviewedOn": "2026-10-07",
+  "reviewTimezone": "Asia/Seoul",
+  "title": "천수 관현악 음색의 원본·변환본 출처",
+  "sampleCount": 72,
+  "instrumentCount": 8,
+  "notesPerInstrument": 9,
+  "originalSoundFont": {
+    "title": "Fluid (R3) SoundFont",
+    "author": "Frank Wen and contributors",
+    "copyright": "Copyright (c) 2000-2002, 2008 Frank Wen <getfrank@gmail.com>",
+    "license": "MIT",
+    "licenseText": "/legal/music/FLUIDR3-COPYING.txt",
+    "authorReadme": "/legal/music/FLUIDR3-README.txt",
+    "licenseSource": "https://sources.debian.org/src/fluid-soundfont/3.1-6/COPYING/",
+    "readmeSource": "https://sources.debian.org/src/fluid-soundfont/3.1-5.2/README/",
+    "scope": "MP3 음색의 바탕인 FluidR3 원본 SoundFont의 저작권·허락문과 기여자 명단을 보존합니다."
+  },
+  "sampleDistribution": {
+    "title": "MIDI.js Soundfonts · FluidR3_GM MP3 samples",
+    "renderer": "Benjamin Gleitzman",
+    "repository": "https://github.com/gleitz/midi-js-soundfonts",
+    "documentationRevision": "044fab8e1456bfafc5776e86dfd6bb8697149aef",
+    "documentationSource": "https://github.com/gleitz/midi-js-soundfonts/blob/044fab8e1456bfafc5776e86dfd6bb8697149aef/README.md",
+    "documentationCopy": "/legal/music/MIDI-JS-SOUNDFONTS-README.md",
+    "license": "CC BY 3.0 US",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/us/",
+    "legalCodeUrl": "https://creativecommons.org/licenses/by/3.0/us/legalcode",
+    "licenseText": "/legal/music/CC-BY-3.0-US.html",
+    "scope": "사용 중인 FluidR3_GM MP3 배포본에 대해 상류 README가 표시하는 허락. 별도 Musyng Kite·FatBoy 음색은 포함하지 않습니다."
+  },
+  "repositorySoftware": {
+    "copyright": "Copyright (C) 2012 Benjamin Gleitzman (gleitz@mit.edu)",
+    "license": "MIT",
+    "licenseText": "/legal/music/MIDI-JS-SOUNDFONTS-LICENSE.txt",
+    "source": "https://github.com/gleitz/midi-js-soundfonts/blob/044fab8e1456bfafc5776e86dfd6bb8697149aef/LICENSE.txt",
+    "scope": "상류 저장소 소프트웨어의 허락문. MP3 샘플의 CC BY 3.0 US 표기 대신 사용하지 않습니다. 다운로드 wrapper는 실행하지 않고 데이터만 추출합니다."
+  },
+  "legalCodeSource": {
+    "repository": "https://github.com/creativecommons/cc-legal-tools-data",
+    "revision": "a0dac18d1a773b4cdb7d8dd5d9bf4efab7901030",
+    "url": "https://github.com/creativecommons/cc-legal-tools-data/blob/a0dac18d1a773b4cdb7d8dd5d9bf4efab7901030/docs/licenses/by/3.0/us/legalcode.en.html",
+    "formatting": "영문 법률 본문·고지·목록 구조를 보존하고 사이트 메뉴·이미지·스크립트·외부 스타일을 제외한 로컬 읽기 화면으로 제공합니다."
+  },
+  "changes": [
+    "상류 MP3 wrapper에서 8개 악기의 각 9개 음을 추출하여 악기-음번호 이름의 MP3 72개로 저장했습니다.",
+    "추출 스크립트는 재인코딩하지 않습니다. 재생 시 피치·음량·엔벌로프·공간감을 처리하고 천수의 코드 악보에 사용합니다.",
+    "이번 고지 정리에서는 기존 MP3·코드 악보·재생 동작을 변경하지 않았습니다."
+  ],
+  "historicalAcquisition": {
+    "source": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM",
+    "sourceRevision": null,
+    "retrievedAt": null,
+    "note": "기존 72개 파일의 최초 상류 커밋·취득 시각은 기록되지 않았습니다. 위 커밋은 이번 출처 문서 보존 기준이며 과거 MP3 취득 버전이나 새 다운로드를 뜻하지 않습니다."
+  },
+  "endorsement": "원저작자·렌더링 기여자·Creative Commons는 천수 프로젝트를 보증하거나 후원하지 않습니다."
+}

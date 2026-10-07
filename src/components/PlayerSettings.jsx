@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { ArrowLeft, Volume2, Swords, Save, Download, Settings, Play, Upload, RotateCcw, UserRound } from 'lucide-react';
+import { ArrowLeft, Volume2, Swords, Save, Download, Settings, Play, Upload, RotateCcw, UserRound, BookOpen } from 'lucide-react';
 import AccountPanel from './AccountPanel.jsx';
+import LegalNotices from './LegalNotices.jsx';
 import { PatchSettings } from './PatchUpdates.jsx';
 import { MUSIC_TRACKS } from '../data/musicScore.js';
 
-const tabs = [['sound', '소리', Volume2], ['battle', '전투', Swords], ['save', '저장', Save], ['account', '계정', UserRound], ['update', '업데이트', Download]];
+const tabs = [['sound', '소리', Volume2], ['battle', '전투', Swords], ['save', '저장', Save], ['account', '계정', UserRound], ['update', '업데이트', Download], ['legal', '권리 안내', BookOpen]];
 function Toggle({ label, checked, onChange }) {
   return <label className="ux-setting-row"><span>{label}</span><input role="switch" type="checkbox" aria-label={label} checked={Boolean(checked)} onChange={event => onChange(event.target.checked)} /></label>;
 }
@@ -22,6 +23,7 @@ export default function PlayerSettings({ initialTab = 'sound', version, settings
     <nav className="ux-tabs" aria-label="설정 분류">{tabs.map(([id, title, Icon]) => <button key={id} aria-pressed={tab === id} onClick={() => setTab(id)}><Icon size={18} />{title}</button>)}</nav>
     <div className="ux-settings-body">
       {tab === 'account' && <AccountPanel/>}
+      {tab === 'legal' && <LegalNotices/>}
       {tab === 'sound' && <section aria-label="소리 설정">
         <h2>소리</h2><Toggle label="사운드" checked={settings.soundOn} onChange={change('soundOn')} />
         <Toggle label="배경 음악" checked={settings.musicOn} onChange={change('musicOn')} />

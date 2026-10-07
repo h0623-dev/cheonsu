@@ -112,7 +112,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.166";
+const SAVE_VERSION = "1.99.167";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -993,7 +993,7 @@ function getCodexEntries({ party, clearedStages, settings }) {
   });
 
   const systemEntries = [
-    { id: "sys-battle", category: "시스템", title: "전투 컷씬", subtitle: "용의기사풍 사이드뷰 연출", desc: "공격, 스킬, 반격, 회복, FINISH 연출이 표시됩니다.", unlocked: true, icon: "⚔️" },
+    { id: "sys-battle", category: "시스템", title: "전투 컷씬", subtitle: "측면 전투 연출", desc: "공격, 스킬, 반격, 회복, FINISH 연출이 표시됩니다.", unlocked: true, icon: "⚔️" },
     { id: "sys-auto", category: "시스템", title: "자동 전투 전략", subtitle: getAutoBattleModeConfig(settings?.autoBattleMode).label, desc: "안전, 공격, 보스 집중, 파밍 모드로 자동 전투 판단을 변경할 수 있습니다.", unlocked: true, icon: "🤖" },
     { id: "sys-boss", category: "시스템", title: "보스 패턴", subtitle: "2페이즈 장판", desc: "십자 파동, 암흑 직선, 흑성 낙뢰, 붕괴 장판 등 보스 패턴이 등장합니다.", unlocked: true, icon: "☠️" },
     { id: "sys-growth", category: "시스템", title: "캠프 성장", subtitle: "훈련 / 스킬 / 전직 / 장비", desc: "캠프에서 동료 성장과 장비, 보급, 파견을 관리할 수 있습니다.", unlocked: true, icon: "🏕️" },
@@ -4435,7 +4435,7 @@ const RELEASE_NOTES = [
     title: "전투",
     items: [
       "15인 출전과 12x12 대규모 전장",
-      "용의기사풍 사이드뷰 전투 컷씬",
+      "측면 전투 컷씬",
       "속성별 스킬 이펙트, FINISH, 회복, 협공, 반격 컷씬",
       "보스 등장/2페이즈 컷씬과 4종 보스 패턴",
       "자동 전투 전략: 안전/공격/보스 집중/파밍",

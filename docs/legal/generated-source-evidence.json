@@ -1,0 +1,349 @@
+{
+  "schemaVersion": 1,
+  "recordedOn": "2026-10-07",
+  "timezone": "Asia/Seoul",
+  "purpose": "사용자가 요청한 저작권 출처 조사에서 이미 확보한 생성 원본 연결 결과를 영구 보존합니다.",
+  "evidenceScope": "생성 원본과 저장소 원본의 파일·픽셀 일치 결과이며 저작권 비침해 또는 독점 권리의 보증이 아닙니다.",
+  "comparisonPerformedBeforeThisChange": true,
+  "postChangeComparisonPerformed": false,
+  "counts": {
+    "cloudGeneratedPngFiles": 56,
+    "repositoryArtPngSources": 257,
+    "legacyFilesCompared": 120,
+    "matchedRepositorySources": 36
+  },
+  "originalAuditMethod": "기존 저작권 출처 조사에서 파일 SHA-256 및 RGBA 픽셀 해시를 대조했습니다. 이 문서 작성 후 대조를 다시 실행하지 않았습니다.",
+  "sourceOrigin": "Codex 작업공간의 generated_images/에 보존된 이미지 생성 도구 출력",
+  "records": [
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-31.png",
+      "generationOutputFilename": "exec-6a5135f7-0f3d-4a91-9617-a0f804034aef.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-32.png",
+      "generationOutputFilename": "exec-a2a0f3c2-b17e-4681-a0ce-3f6acf2e5aa0.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-33.png",
+      "generationOutputFilename": "exec-352b7aca-aaa5-4149-8940-3b04c1899b2c.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-34.png",
+      "generationOutputFilename": "exec-821e600f-d9dd-4331-9e15-acfbf8ce36e6.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-35.png",
+      "generationOutputFilename": "exec-94dc0b62-05e6-45c7-be9d-5d51c81a4368.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-36.png",
+      "generationOutputFilename": "exec-d2892898-b86c-4479-a033-27598ba8b291.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-37.png",
+      "generationOutputFilename": "exec-3eabe0fd-4f70-447d-aeab-f081a902c1aa.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-38.png",
+      "generationOutputFilename": "exec-231e2ba5-71bd-46e8-b89d-32d4361fac8f.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-39.png",
+      "generationOutputFilename": "exec-a645cd25-7298-4292-beb2-6e32ebfabaa2.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-40.png",
+      "generationOutputFilename": "exec-0269b4af-9443-480d-989a-5c3acd1cf237.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-41.png",
+      "generationOutputFilename": "exec-3483a546-e7f0-424d-8267-19c36823dbd2.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-42.png",
+      "generationOutputFilename": "exec-564b4352-94fe-4425-843e-3e5057db9698.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-43.png",
+      "generationOutputFilename": "exec-ad232aa0-88c8-46e7-bcf5-2dc7c71d5b92.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-44.png",
+      "generationOutputFilename": "exec-9b6e8645-a6a6-4cb3-a475-be1e9d703089.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-45.png",
+      "generationOutputFilename": "exec-d8ed34ef-fab5-409f-8d12-c56f1476174f.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-46.png",
+      "generationOutputFilename": "exec-fb80267f-eed6-4354-9108-824f57b5e181.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-47.png",
+      "generationOutputFilename": "exec-94aa6962-c3e0-422e-9873-186e6115913b.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-48.png",
+      "generationOutputFilename": "exec-311bc2b4-8f6b-45b9-b98d-2822d933feb4.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-49.png",
+      "generationOutputFilename": "exec-983b2222-70e1-434c-b07b-eebab5f000cc.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/chapters-v1/chapter-50.png",
+      "generationOutputFilename": "exec-1cf381a7-e482-4ff3-b84c-56b2bf374cfd.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/characters-v3/sources/baekho__form0.png",
+      "generationOutputFilename": "exec-a3785bcd-8f2e-412f-9e4b-85a2677fd086.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/characters-v3/sources/baekho__form1.png",
+      "generationOutputFilename": "exec-96b14841-6715-4f58-8daf-dd38071be5a4.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/characters-v3/sources/ella__form0.png",
+      "generationOutputFilename": "exec-b984115b-6244-41ad-a39b-08f6a5bedac9.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/characters-v3/sources/ella__form1.png",
+      "generationOutputFilename": "exec-7e9697cf-acac-4e8b-9e9a-5b68b92f954f.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/characters-v3/sources/irene__form0.png",
+      "generationOutputFilename": "exec-5e96fba4-0eda-4f62-8c9c-ac4edeef8a57.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/characters-v3/sources/irene__form1.png",
+      "generationOutputFilename": "exec-c59327a2-fb85-4a98-ab29-d677ef8bdd33.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/characters-v3/sources/kaz__form0.png",
+      "generationOutputFilename": "exec-fb0d45f1-5302-4ca1-920a-d071644612a3.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/characters-v3/sources/kaz__form1.png",
+      "generationOutputFilename": "exec-33886d5a-bc19-42e9-a347-e97ca849632c.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/characters-v3/sources/luka__form0.png",
+      "generationOutputFilename": "exec-2dbd17c0-c380-45da-8da7-9af624eda762.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/characters-v3/sources/luka__form1.png",
+      "generationOutputFilename": "exec-b1b89df0-8fc4-49b1-8355-83bd472a4b84.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/characters-v3/sources/miho__form0.png",
+      "generationOutputFilename": "exec-5a3de940-5e3c-40ad-b7b5-fe8863662f43.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/characters-v3/sources/miho__form1.png",
+      "generationOutputFilename": "exec-28aab9a9-48b4-4401-8ee3-4498755039de.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/characters-v3/sources/teo__form0-strike-correction.png",
+      "generationOutputFilename": "exec-c3147cfb-27d4-41d9-a111-406dcdb1add0.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/characters-v3/sources/teo__form0.png",
+      "generationOutputFilename": "exec-ec1f37af-d66c-4dd9-bc82-2096e029adcf.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/characters-v3/sources/teo__form1.png",
+      "generationOutputFilename": "exec-493ad321-c987-4dc1-9526-4ecbd77a0494.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    },
+    {
+      "repositorySource": "docs/art/world-v2/sources/terrain-expansion.png",
+      "generationOutputFilename": "exec-7eb1df7b-83b7-4c56-b935-5b0e5fc1d98c.png",
+      "byteIdentical": true,
+      "rgbaPixelsIdentical": true,
+      "exactGenerationTimestamp": null,
+      "exactPromptRecoveredByThisAudit": false,
+      "evidence": "2026-10-07 KST에 수행한 기존 저작권 출처 조사 결과"
+    }
+  ],
+  "legacyQualification": {
+    "userStatement": "사용자는 천수의 자료를 모두 Codex가 만들어 주었다고 설명했습니다.",
+    "observation": "초기 이미지군 120개는 현재 클라우드 생성 원본 56개와 완전 일치하지 않았습니다. 초기 PC의 생성 원본·실행 문맥이 현재 클라우드에 모두 이어져 있지는 않습니다.",
+    "doesNotEstablish": "완전 일치 파일이 없다는 사실만으로 외부 원화 반입이나 무단 복제를 입증하지 않습니다.",
+    "knownThirdPartyTemplate": "초기 조사 범위의 src/assets/hero.png 등 Vite 템플릿 자산은 별도 교차 조사에서 공식 vitejs/vite 원본과 동일한 정상 외부 템플릿 자산으로 식별했습니다. Codex가 프로젝트를 만들었다는 설명과 직접 그린 원본이라는 설명은 구분합니다."
+  }
+}

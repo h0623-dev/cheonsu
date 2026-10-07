@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "versionIntroduced": "1.99.166",
+  "recordedOn": "2026-10-07",
+  "timezone": "Asia/Seoul",
+  "tool": "built-in image_gen",
+  "exactModelVersion": null,
+  "evidence": "보스 연출 제작 작업의 생성 도구 실행 인수인계와 실제 generated_images PNG 원본을 보존했습니다. 법적 권리 보증서는 아닙니다.",
+  "originalPromptStatus": "이번 기록 보완에서 당시 제출한 프롬프트 원문 전체를 복구하지 못했습니다. README의 제작 설명은 기존 기록을 정리한 요약이며 실제 원문 프롬프트가 아닙니다.",
+  "referenceStatus": "기존 천수 보스·아군 아트의 정체성과 화풍을 참조한 것으로 제작 기록에 명시되어 있습니다. 각 호출의 정확한 referenced_image_paths 목록은 복구되지 않아 추측하여 적지 않았습니다.",
+  "generationTimestampStatus": "초 단위 생성 시각 및 개별 원화의 정확한 생성일시는 복구하지 않았습니다. recordedOn은 보존 문서를 작성한 날짜입니다.",
+  "preservation": "원본 PNG를 이 폴더 sources/에 그대로 복사했습니다. 화면용 WebP는 기존 public/art/boss-presence-v1 파일을 유지합니다.",
+  "postChangeValidationPerformed": false,
+  "entries": [
+    {
+      "id": "boss_commander",
+      "generationOutputFilename": "exec-f72f8a74-e43b-445c-a272-1fa69ea1dfb8.png",
+      "sourceFile": "sources/boss_commander.png",
+      "gameAsset": "public/art/boss-presence-v1/boss_commander.webp",
+      "exactGenerationTimestamp": null,
+      "submittedPrompt": null,
+      "referencedImagePaths": null,
+      "recordedGameExport": "원본 알파를 보존한 WebP, 품질 90. 기존 제작 기록을 인용하며 이번 작업에서 재인코딩하지 않았습니다."
+    },
+    {
+      "id": "boss_frost",
+      "generationOutputFilename": "exec-3a7d9975-8f06-43c9-8151-6a8ad21e1012.png",
+      "sourceFile": "sources/boss_frost.png",
+      "gameAsset": "public/art/boss-presence-v1/boss_frost.webp",
+      "exactGenerationTimestamp": null,
+      "submittedPrompt": null,
+      "referencedImagePaths": null,
+      "recordedGameExport": "원본 알파를 보존한 WebP, 품질 90. 기존 제작 기록을 인용하며 이번 작업에서 재인코딩하지 않았습니다."
+    },
+    {
+      "id": "boss_ember",
+      "generationOutputFilename": "exec-c7ea34e9-dae6-4dab-951a-29f99ba5d9a3.png",
+      "sourceFile": "sources/boss_ember.png",
+      "gameAsset": "public/art/boss-presence-v1/boss_ember.webp",
+      "exactGenerationTimestamp": null,
+      "submittedPrompt": null,
+      "referencedImagePaths": null,
+      "recordedGameExport": "원본 알파를 보존한 WebP, 품질 90. 기존 제작 기록을 인용하며 이번 작업에서 재인코딩하지 않았습니다."
+    },
+    {
+      "id": "boss_oracle",
+      "generationOutputFilename": "exec-1977f557-3817-4d94-af24-b2d4df4ae341.png",
+      "sourceFile": "sources/boss_oracle.png",
+      "gameAsset": "public/art/boss-presence-v1/boss_oracle.webp",
+      "exactGenerationTimestamp": null,
+      "submittedPrompt": null,
+      "referencedImagePaths": null,
+      "recordedGameExport": "원본 알파를 보존한 WebP, 품질 90. 기존 제작 기록을 인용하며 이번 작업에서 재인코딩하지 않았습니다."
+    },
+    {
+      "id": "boss_abyss",
+      "generationOutputFilename": "exec-a4dca782-a153-4dc4-9661-d50926c386d4.png",
+      "sourceFile": "sources/boss_abyss.png",
+      "gameAsset": "public/art/boss-presence-v1/boss_abyss.webp",
+      "exactGenerationTimestamp": null,
+      "submittedPrompt": null,
+      "referencedImagePaths": null,
+      "recordedGameExport": "원본 알파를 보존한 WebP, 품질 90. 기존 제작 기록을 인용하며 이번 작업에서 재인코딩하지 않았습니다."
+    }
+  ]
+}

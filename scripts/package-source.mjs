@@ -7,7 +7,7 @@ import { ZipArchive } from 'archiver';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const pkg = JSON.parse(await fsp.readFile(path.join(root, 'package.json'), 'utf8'));
 const target = path.join(root, `cheonsu_development_${pkg.version}.zip`);
-const allowed = ['src', 'public', 'android', 'docs', 'scripts', 'tests', '.github', '.agents/skills/cheonsu-no-post-change-validation', '.gitignore', '.nvmrc', 'package.json', 'package-lock.json', 'index.html', 'vite.config.js', 'eslint.config.js', 'capacitor.config.json', 'README.md', 'CHEONSU_DEV_SUMMARY_SINGLE_FILE.md'];
+const allowed = ['src', 'public', 'android', 'web', 'docs', 'scripts', 'tests', '.github', '.agents/skills/cheonsu-no-post-change-validation', '.gitignore', '.nvmrc', 'package.json', 'package-lock.json', 'index.html', 'vite.config.js', 'eslint.config.js', 'capacitor.config.json', 'README.md', 'RIGHTS.md', 'CHEONSU_DEV_SUMMARY_SINGLE_FILE.md'];
 const excludedNames = new Set(['node_modules', 'build', '.gradle', '.git', '.idea', 'local.properties', 'captures', 'release', 'google-services.json', 'signing.properties']);
 const files = [];
 async function collect(relative) {

@@ -1,0 +1,365 @@
+{
+  "schemaVersion": 1,
+  "packages": {
+    "@firebase/ai": {
+      "version": "1.4.1",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/analytics": {
+      "version": "0.10.17",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/analytics-compat": {
+      "version": "0.2.23",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/analytics-types": {
+      "version": "0.8.3",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/app": {
+      "version": "0.13.2",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/app-check": {
+      "version": "0.10.1",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/app-check-compat": {
+      "version": "0.3.26",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/app-check-interop-types": {
+      "version": "0.3.3",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/app-check-types": {
+      "version": "0.5.3",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/app-compat": {
+      "version": "0.4.2",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/app-types": {
+      "version": "0.9.3",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/auth": {
+      "version": "1.10.8",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/auth-compat": {
+      "version": "0.5.28",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/auth-interop-types": {
+      "version": "0.2.4",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/auth-types": {
+      "version": "0.13.0",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/component": {
+      "version": "0.6.18",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/data-connect": {
+      "version": "0.3.10",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/database": {
+      "version": "1.0.20",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/database-compat": {
+      "version": "2.0.11",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/database-types": {
+      "version": "1.0.15",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/firestore": {
+      "version": "4.8.0",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/firestore-compat": {
+      "version": "0.3.53",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/firestore-types": {
+      "version": "3.0.3",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/functions": {
+      "version": "0.12.9",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/functions-compat": {
+      "version": "0.3.26",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/functions-types": {
+      "version": "0.6.3",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/installations": {
+      "version": "0.6.18",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/installations-compat": {
+      "version": "0.2.18",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/installations-types": {
+      "version": "0.5.3",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/logger": {
+      "version": "0.4.4",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/messaging": {
+      "version": "0.12.22",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/messaging-compat": {
+      "version": "0.2.22",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/messaging-interop-types": {
+      "version": "0.2.3",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/performance": {
+      "version": "0.7.7",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/performance-compat": {
+      "version": "0.2.20",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/performance-types": {
+      "version": "0.2.3",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/remote-config": {
+      "version": "0.6.5",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/remote-config-compat": {
+      "version": "0.2.18",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/remote-config-types": {
+      "version": "0.4.0",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/storage": {
+      "version": "0.13.14",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/storage-compat": {
+      "version": "0.3.24",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/storage-types": {
+      "version": "0.8.3",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/util": {
+      "version": "1.12.1",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "@firebase/webchannel-wrapper": {
+      "version": "1.0.3",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    },
+    "firebase": {
+      "version": "11.10.0",
+      "file": "upstream/firebase-11.10.0-LICENSE.txt",
+      "source": "https://github.com/firebase/firebase-js-sdk/blob/3c759f0c0c5e5e164a51d8b9c89655d54047bed0/LICENSE",
+      "sourceCommit": "3c759f0c0c5e5e164a51d8b9c89655d54047bed0",
+      "releaseTag": "firebase@11.10.0",
+      "note": "npm 배포본에 없는 공통 LICENSE 전문을 동일 Firebase 11.10.0 릴리스의 공식 저장소에서 보존합니다. 패키지별 저작권 문구는 npm 원본 소스의 고지 블록을 함께 수록합니다."
+    }
+  }
+}

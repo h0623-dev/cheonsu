@@ -1,15 +1,44 @@
-천수 관현악 음색 출처
+천수 관현악 음색 출처와 이용허락
+고지 정리일: 2026-10-07 KST
 
-작곡·편곡: 천수 프로젝트의 오리지널 악보(src/data/musicScore.js).
-악기 원본: FluidR3 General MIDI SoundFont, Frank Wen 및 기여자.
-MP3 샘플 렌더링: Benjamin Gleitzman, MIDI.js Soundfonts.
+천수는 프로젝트에서 작성한 코드 악보(src/data/musicScore.js)를 아래 악기 샘플로 연주합니다.
+샘플을 천수가 직접 녹음하거나 생성한 음원으로 표시하지 않습니다.
+
+1. 바탕이 된 원본 SoundFont
+작품: Fluid (R3) SoundFont
+원저작자: Frank Wen 및 기여자
+Copyright (c) 2000-2002, 2008 Frank Wen <getfrank@gmail.com>
+이용허락: MIT
+원본의 저작권·허락문 전문: /legal/music/FLUIDR3-COPYING.txt
+원저작자 설명·기여자 명단: /legal/music/FLUIDR3-README.txt
+원문: https://sources.debian.org/src/fluid-soundfont/3.1-6/COPYING/
+
+2. 게임에 포함한 MP3 배포본
+작품: MIDI.js Soundfonts · FluidR3_GM MP3 samples
+MP3 렌더링: Benjamin Gleitzman
 출처: https://github.com/gleitz/midi-js-soundfonts
-원본: https://github.com/gleitz/midi-js-soundfonts/tree/gh-pages/FluidR3_GM
-악기 샘플 라이선스: Creative Commons Attribution 3.0 Unported (CC BY 3.0)
-라이선스: https://creativecommons.org/licenses/by/3.0/
+상류 README의 Fluid Soundfont 이용허락: Creative Commons Attribution 3.0 United States (CC BY 3.0 US)
+허락 링크: https://creativecommons.org/licenses/by/3.0/us/
+법률 원문: https://creativecommons.org/licenses/by/3.0/us/legalcode
+앱에 포함한 영문 전문: /legal/music/CC-BY-3.0-US.html
+상류 문서: https://github.com/gleitz/midi-js-soundfonts/blob/044fab8e1456bfafc5776e86dfd6bb8697149aef/README.md
 
-변경 사항: 8개 악기의 음 9개씩을 추출하여 로컬에 포함했습니다.
-재생 시 피치 조정, 음량·엔벌로프·공간감 처리 및 새로운 악보 편곡에 사용합니다.
-원 제작자가 천수 프로젝트를 보증하거나 후원한다는 뜻은 아닙니다.
-각 파일의 출처 및 SHA-256은 manifest.json에 기록되어 있습니다.
-인물 음성, 기존 상용 게임의 음악 또는 멜로디를 복제하지 않았습니다.
+3. 상류 저장소 소프트웨어
+Copyright (C) 2012 Benjamin Gleitzman (gleitz@mit.edu)
+소프트웨어 MIT 전문: /legal/music/MIDI-JS-SOUNDFONTS-LICENSE.txt
+이 MIT 표기를 MP3 샘플의 CC BY 3.0 US 허락 대신 사용하지 않습니다.
+
+사용과 변경
+피아노·하프·플루트·현악 합주·첼로·호른·합창·팀파니 각 9개 음, 총 72개를 추출하여 로컬에 포함했습니다.
+추출 스크립트는 상류 wrapper를 실행하거나 음원을 재인코딩하지 않고 base64 MP3 데이터를 저장합니다.
+재생 시 피치 조정, 음량·엔벌로프·공간감 처리 및 천수의 코드 악보 편곡에 사용합니다.
+이번 고지 정리에서 MP3 파일·악보·재생 동작은 변경하지 않았습니다.
+합창 악기(choir_aahs) 샘플을 포함하지만 별도 캐릭터 대사·성우 녹음 자료를 사용한 것은 아닙니다.
+
+샘플 허락은 해당 외부 자료에 적용됩니다. 천수의 다른 코드·그림·이야기의 이용허락을 바꾸지 않습니다.
+원저작자·렌더링 기여자·Creative Commons가 천수를 보증하거나 후원한다는 뜻은 아닙니다.
+
+음악 상세 안내: /legal/music/index.html
+원본·변환본 출처와 문서 버전: /legal/music/sources.json
+각 파일 목록과 기존 크기·해시 기록: /audio/orchestra-v1/manifest.json
+위 고정 커밋은 이번 상류 문서 보존 기준입니다. 기존 MP3 최초 취득 커밋·시각은 기록되지 않았으며 이를 새로 취득한 것으로 표시하지 않습니다.

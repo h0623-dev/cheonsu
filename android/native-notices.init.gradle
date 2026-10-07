@@ -1,0 +1,186 @@
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+import org.gradle.api.artifacts.component.ModuleComponentIdentifier
+import org.gradle.api.artifacts.result.ResolvedArtifactResult
+import org.gradle.maven.MavenModule
+import org.gradle.maven.MavenPomArtifact
+import java.nio.charset.StandardCharsets
+import java.util.zip.ZipInputStream
+import javax.xml.parsers.DocumentBuilderFactory
+
+// Production packaging only: invoked explicitly by scripts/build-android.mjs.
+// An init script keeps the installed app's native dependency/trust fingerprint unchanged.
+gradle.projectsEvaluated {
+    def app = gradle.rootProject.findProject(':app')
+    if (app == null) throw new GradleException('Android 앱 모듈을 찾을 수 없습니다.')
+    app.tasks.register('generateCheonsuNativeNotices') {
+        group = 'distribution'
+        description = '실제 Android runtime 의존성의 원문 고지를 배포 자료로 만듭니다.'
+        doLast {
+            def variant = app.findProperty('cheonsuNoticeVariant') ?: 'debug'
+            if (!(variant in ['debug', 'release'])) throw new GradleException('지원하지 않는 고지 빌드 종류입니다.')
+            def configuration = app.configurations.getByName("${variant}RuntimeClasspath")
+            def artifacts = configuration.incoming.artifactView {
+                componentFilter { it instanceof ModuleComponentIdentifier }
+            }.artifacts.artifacts.toList().sort { it.id.componentIdentifier.displayName }
+            if (artifacts.isEmpty()) throw new GradleException('Android runtime 의존성 고지를 비워 둘 수 없습니다.')
+
+            def repositoryRoot = gradle.rootProject.projectDir.parentFile
+            def legalRoot = new File(repositoryRoot, 'public/legal/android')
+            def outputRoot = new File(legalRoot, 'generated')
+            outputRoot.mkdirs()
+            def registry = new JsonSlurper().parse(new File(legalRoot, 'sources.json'))
+            def sections = new LinkedHashMap<String, Map>()
+            def addText = { String title, String origin, String text ->
+                if (!text?.trim()) throw new GradleException("빈 고지 원문: ${origin}")
+                def key = origin + '\n' + text
+                if (!sections.containsKey(key)) sections[key] = [title: title, origin: origin, text: text]
+            }
+            registry.documents.each { document ->
+                addText(document.title as String, document.source as String,
+                    new File(legalRoot, document.file as String).getText('UTF-8'))
+            }
+
+            // Collect original notice files, including those nested in AAR classes.jar.
+            // Google Play/Firebase supply third_party_licenses.json byte offsets alongside
+            // third_party_licenses.txt. Preserve both originals; never replace them with a label.
+            Closure collectArchive
+            collectArchive = { byte[] archive, String origin, int depth, boolean sourceArchive ->
+                if (depth > 2) return
+                new ZipInputStream(new ByteArrayInputStream(archive)).withCloseable { zip ->
+                    def entry
+                    while ((entry = zip.nextEntry) != null) {
+                        if (entry.directory) continue
+                        def name = entry.name
+                        def base = name.tokenize('/').last()
+                        def notice = base ==~ /(?i)(license|licence|notice|copying|copyright|third[_-]party[_-]licenses?)([._-].*)?/
+                        def inLicenseDirectory = name ==~ /(?i).*\/(licenses?|legal)\/[^\/]+\.(txt|md|html|json)/
+                        def nestedJar = name == 'classes.jar' || name ==~ /libs\/[^\/]+\.jar/
+                        def sourceFile = sourceArchive && name ==~ /.*\.(java|kt|kts|c|h|cpp)$/
+                        if (!(notice || inLicenseDirectory || nestedJar || sourceFile)) continue
+                        def data = zip.readAllBytes()
+                        if (nestedJar) {
+                            collectArchive(data, origin + '!/' + name, depth + 1, false)
+                        } else if (notice || inLicenseDirectory) {
+                            addText(name, origin + '!/' + name, new String(data, StandardCharsets.UTF_8))
+                        } else {
+                            // Keep copyright/license headers from published sources without
+                            // redistributing the source implementation or inventing a holder.
+                            def source = new String(data, StandardCharsets.UTF_8)
+                            def header = source =~ /(?s)\A\s*(\/\*.*?\*\/)/
+                            if (header.find() && header.group(1) =~ /(?i)copyright|licensed under|permission is hereby granted/) {
+                                def text = header.group(1)
+                                def key = 'source-header\n' + text
+                                if (!sections.containsKey(key)) sections[key] = [title: '원본 소스의 권리 고지', origin: origin + '!/' + name, text: text]
+                            }
+                        }
+                    }
+                }
+            }
+
+            def factory = DocumentBuilderFactory.newInstance()
+            factory.setFeature('http://apache.org/xml/features/disallow-doctype-decl', true)
+            factory.setFeature('http://xml.org/sax/features/external-general-entities', false)
+            factory.setFeature('http://xml.org/sax/features/external-parameter-entities', false)
+            def directChildren = { node, String name ->
+                def children = []
+                for (int i = 0; i < node.childNodes.length; i++) {
+                    def child = node.childNodes.item(i)
+                    if (child.nodeType == org.w3c.dom.Node.ELEMENT_NODE && child.nodeName == name) children << child
+                }
+                children
+            }
+            def childText = { node, String name -> directChildren(node, name).find()?.textContent?.trim() ?: '' }
+            def pomCache = [:]
+            Closure resolvePom
+            resolvePom = { String group, String module, String version ->
+                def gav = "${group}:${module}:${version}".toString()
+                if (pomCache.containsKey(gav)) return pomCache[gav]
+                def result = app.dependencies.createArtifactResolutionQuery()
+                    .forModule(group, module, version)
+                    .withArtifacts(MavenModule, MavenPomArtifact).execute()
+                def files = result.resolvedComponents.collectMany { it.getArtifacts(MavenPomArtifact) }
+                    .findAll { it instanceof ResolvedArtifactResult }
+                if (files.isEmpty()) throw new GradleException("POM 고지를 가져오지 못했습니다: ${gav}")
+                def file = files.first().file
+                def document = factory.newDocumentBuilder().parse(file).documentElement
+                pomCache[gav] = [document: document, file: file]
+                pomCache[gav]
+            }
+            Closure pomLicenses
+            pomLicenses = { node, int depth ->
+                if (depth > 10) throw new GradleException('POM 상속 고지의 깊이가 올바르지 않습니다.')
+                def list = directChildren(node, 'licenses').collectMany { directChildren(it, 'license') }
+                    .collect { [name: childText(it, 'name'), url: childText(it, 'url'), comments: childText(it, 'comments')] }
+                if (!list.isEmpty()) return list
+                def parent = directChildren(node, 'parent').find()
+                if (!parent) return []
+                def inherited = resolvePom(childText(parent, 'groupId'), childText(parent, 'artifactId'), childText(parent, 'version'))
+                pomLicenses(inherited.document, depth + 1)
+            }
+            def downloaded = [:]
+            def licenseDocument = { license ->
+                def url = license.url as String
+                def name = license.name as String
+                if ((url + ' ' + name).toLowerCase().contains('apache') && (url + ' ' + name).contains('2')) return 'licenses/Apache-2.0.txt'
+                if (name == 'Android Software Development Kit License' || url.contains('developer.android.com/studio/terms')) return 'licenses/ANDROID-SDK-LICENSE.txt'
+                if (!url || !(url ==~ /https?:\/\/.+/)) throw new GradleException("라이선스 전문 출처가 없습니다: ${name} ${url}")
+                // An uncommon upstream license is retained in full, rather than silently omitted.
+                // Use ordinary TLS/proxy rules; no credential, trust or permission bypass.
+                if (!downloaded.containsKey(url)) {
+                    def connection = new URI(url.replaceFirst('^http:', 'https:')).toURL().openConnection()
+                    connection.connectTimeout = 20000
+                    connection.readTimeout = 20000
+                    connection.setRequestProperty('User-Agent', 'Cheonsu-Production-License-Packager/1.0')
+                    def text = connection.inputStream.withCloseable { it.getText('UTF-8') }
+                    addText(name, url, text)
+                    downloaded[url] = true
+                }
+                'NOTICES.txt 내 원문: ' + url
+            }
+
+            def dependencies = []
+            artifacts.each { artifact ->
+                def id = artifact.id.componentIdentifier
+                def gav = "${id.group}:${id.module}:${id.version}".toString()
+                def pom = resolvePom(id.group, id.module, id.version)
+                def licenses = pomLicenses(pom.document, 0)
+                if (licenses.isEmpty()) throw new GradleException("POM에 라이선스가 없습니다: ${gav}")
+                licenses.each { it.document = licenseDocument(it) }
+                addText('Maven POM 원문 — ' + gav, gav + '.pom', pom.file.getText('UTF-8'))
+                collectArchive(artifact.file.bytes, gav + ':' + artifact.file.name, 0, false)
+                // Closed Google SDKs can omit sources; their embedded third-party licenses
+                // are collected above. Record source availability explicitly in the inventory.
+                def sourceDependency = app.dependencies.create("${gav}:sources@jar")
+                def sourceConfiguration = app.configurations.detachedConfiguration(sourceDependency)
+                sourceConfiguration.transitive = false
+                def sourceView = sourceConfiguration.incoming.artifactView { lenient = true }.artifacts
+                def sourceFiles = sourceView.artifactFiles.files
+                sourceFiles.sort { it.name }.each { source -> collectArchive(source.bytes, gav + ':' + source.name, 0, true) }
+                dependencies << [coordinate: gav, name: childText(pom.document, 'name') ?: gav,
+                    homepage: childText(pom.document, 'url'), licenses: licenses,
+                    sourceArtifactStatus: sourceFiles.isEmpty() ? 'not-resolved' : 'resolved']
+            }
+            pomCache.each { gav, pom -> addText('Maven POM 원문 — ' + gav, gav + '.pom', pom.file.getText('UTF-8')) }
+            def inventory = [schema: 1, variant: variant, scope: '실제 APK 제작 시 선택된 외부 Maven runtime 의존성',
+                localProjects: ['Capacitor와 Capawesome 로컬 모듈의 원문은 웹·앱 공통 npm 고지에 포함됩니다.'],
+                sourceArtifactNote: 'not-resolved는 공개 sources JAR를 확보하지 못했다는 뜻입니다. 소스 자체가 존재하지 않는다는 판정이 아닙니다. POM과 배포 AAR/JAR의 고지는 별도로 수집합니다.',
+                source: 'Gradle runtimeClasspath, Maven POM, 배포 AAR/JAR와 공개 sources JAR',
+                dependencies: dependencies, additionalDocuments: registry.documents]
+            def text = new StringBuilder('천수 Android 외부 구성 요소 고지\n\n')
+            text.append('이 자료는 APK 제작에 실제 사용된 Maven runtime 의존성에서 생성했습니다. Google SDK 자체 이용조건과 그 안에 포함된 오픈소스 고지는 서로 구분됩니다. 원문의 권리자·라이선스·NOTICE와 Google 내장 고지를 보존합니다.\n')
+            text.append('Capacitor와 Capawesome 로컬 모듈은 공통 JavaScript·앱 고지를 함께 참고하세요.\n\n')
+            dependencies.each { dependency ->
+                text.append(dependency.coordinate).append('\n')
+                dependency.licenses.each { license -> text.append('  ').append(license.name).append(' — ').append(license.url).append('\n') }
+            }
+            sections.values().each { section ->
+                text.append('\n\n============================================================\n')
+                    .append(section.title).append('\n출처: ').append(section.origin).append('\n\n').append(section.text).append('\n')
+            }
+            new File(outputRoot, 'dependencies.json').setText(JsonOutput.prettyPrint(JsonOutput.toJson(inventory)) + '\n', 'UTF-8')
+            new File(outputRoot, 'NOTICES.txt').setText(text.toString(), 'UTF-8')
+            logger.lifecycle("Android 고지 자료 제작: ${dependencies.size()}개 Maven 구성 요소, ${sections.size()}개 원문")
+        }
+    }
+}

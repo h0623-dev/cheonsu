@@ -3,7 +3,7 @@ importScripts('/art/skills-v1/precache.js');
 importScripts('/art/characters-v2/precache.js');
 importScripts('/art/characters-v3/precache.js');
 importScripts('/art/village-walk-v2/precache.js');
-const CACHE_NAME = "cheonsu-v1-99-166";
+const CACHE_NAME = "cheonsu-v1-99-167";
 const FINAL_STAGE_MAPS = Array.from(
   { length: 30 },
   (_, index) => `/maps/concept/stage_${index + 1}_frontier_final.png`
@@ -42,7 +42,6 @@ const CORE_ASSETS = [
   "/icons/maskable-512.png",
   "/promo/cheonsu_promo_main.png",
   "/updates/latest.json",
-  "/ui/cheonsu_main_menu_art.png",
   "/maps/stage_1.jpg",
   "/maps/stage_2.jpg",
   "/maps/stage_3.jpg",
