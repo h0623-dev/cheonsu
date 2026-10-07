@@ -6,7 +6,9 @@
 
 기존 최종 턴 제한에 **1.5배를 적용하고 소수점은 올림**합니다. 적 수와 전장 크기 보정을 먼저 계산하므로 기존 14턴은 21턴, 19턴은 29턴, 최대 30턴은 45턴이 됩니다. 확대된 제한 초과 시의 패배는 유지합니다. 기존 저장·진행·수집과 고정 원복 기준 1.99.165 + Safari는 보존합니다.
 
-새 APK·서명 OTA·Safari 제작 및 배포를 진행 중입니다. 아직 1.99.168 공개 완료나 자동 검사 통과로 표시하지 않습니다. [빌드 기록](docs/BUILD_1.99.168.md) · [변경과 검사 범위](docs/QA_IMPROVEMENT_1.99.168.md).
+**공개 완료: 1.99.168 / Android 367.** 최종 소스 `c2f32bdd0db705d8a3a3a260f52f31604e8967ce`의 [새 APK 다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.168/cheonsu_1.99.168_update_debug.apk) · [서명 OTA·소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.168) · [아이폰 Safari](https://cheonsu-safari-production.up.railway.app). GitHub 릴리스는 2026-10-07 **17:51:21 KST** 공개됐으며 실제 OTA 채널은 **1.99.168 / Android 350~367 / `1.99.168-179a7a74571a`**입니다.
+
+최종 소스의 기존 자동 [Cloud Quality](https://github.com/h0623-dev/cheonsu/actions/runs/37591255332)와 [Android APK and OTA](https://github.com/h0623-dev/cheonsu/actions/runs/37591255350)는 각각 17:49:02 / 17:51:35 KST에 전체 성공했습니다. 각 실행의 단위 **795개**와 필수 브라우저 검사 **10개**, Android의 APK·서명 OTA 제작과 공개 절차가 통과했습니다. Safari도 같은 소스로 17:06:58 KST 배포 성공·서비스 온라인입니다. [빌드 기록](docs/BUILD_1.99.168.md) · [변경과 검사 범위](docs/QA_IMPROVEMENT_1.99.168.md).
 
 사용자 지시에 따라 수정 후 별도 검증은 실행하지 않았습니다. 기존 자동 Actions는 유지하며 아래 1.99.167 결과는 이전 공개 이력입니다.
 
