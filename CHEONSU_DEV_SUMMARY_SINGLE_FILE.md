@@ -1,12 +1,16 @@
 # 천수 개발현황 통파일
 
-## 현재 개발: 1.99.166 / Android 365 · 전체 50장 보스 연출 개선
+## 현재 공개: 1.99.166 / Android 365 · 전체 50장 보스 연출 개선
 
 2026-10-07 KST 사용자 요청에 따라 기존 개발 상태를 먼저 새 원복 기준으로 보존하고, 전체 50개 스테이지의 보스 등장·각성 연출을 개선합니다. 장별 고유 부제·대사와 실제 기술·사거리·각성·위험 안내를 표시하고, 얼굴 확대 카드에서 **전신과 전장 배경이 함께 보이는 등장 장면**으로 바꿉니다. 지휘관·빙결·불꽃·예언자·심연 계열의 새 등장 전신 5개를 추가하며 31~50장의 기존 종족·지역 보스 정체성은 유지합니다.
 
 모든 보스의 발밑 문양·보스 표식과 정보창의 체력·각성 문턱을 표시하고 저음·상승 화음을 더합니다. 휴대폰 세로·가로에 맞춘 구성, 배속과 분리한 등장 4.2초·각성 3.4초, **전장으로** 버튼으로 닫기 후 전투 재개를 반영합니다. 적 수치·맵·미션·저장 데이터와 기존 진행·성장·수집은 유지합니다. [공식 자료 조사와 설계](docs/BOSS_RESEARCH_1.99.166.md) · [변경·검증 구분](docs/QA_IMPROVEMENT_1.99.166.md).
 
-**배포 상태: Safari 1.99.166 공개 완료, Android 첫 자동 실행은 발행 전 중단되어 수정 소스의 새 자동 실행을 준비 중입니다.** 현재 공개 웹과 첫 게임 소스는 `5b9b8564bb7ac6da7d883717c58465dbb4bbc57c`입니다. [천수 Safari](https://cheonsu-safari-production.up.railway.app)의 배포 `d29654f7-45c1-4383-b9e5-fcef27c431d0`는 2026-10-07 10:14:42 KST에 `SUCCESS`로 완료했고 서비스는 온라인입니다. 웹 서비스는 이 소스를 고정하며 아이폰 실기기 플레이는 직접 확인하지 않았습니다. [Cloud Quality 37555037910](https://github.com/h0623-dev/cheonsu/actions/runs/37555037910/job/112579192974)는 2026-10-07 10:45:49 KST 전체 성공으로 완료됐고 자동 로그의 단위 **792/792·실패 0·필수 브라우저 검사 10개**가 모두 통과했습니다. [Android APK and OTA 37555037857](https://github.com/h0623-dev/cheonsu/actions/runs/37555037857/job/112579192925)는 10:47:56 KST 마지막 타격 연출 검사에서 로컬 서버 자산 중계의 `route.fetch: read ECONNRESET`으로 실패했습니다. APK 제작·자동 APK 검사·앞선 브라우저 9개는 통과했지만 릴리스는 발행되지 않았습니다. 해당 중계에 제한적 재시도와 종료 전 대기를 추가했고 새 소스의 자동 실행을 준비합니다. 위 Cloud Quality 통과는 첫 `5b9b8564bb7ac6da7d883717c58465dbb4bbc57c` 소스의 결과이며 수정 후 결과로 재사용하지 않습니다. 아래 1.99.165 파일·자동 결과는 이전 기록이며 이번 변경의 완료 증거가 아닙니다. [1.99.166 빌드·배포 기록](docs/BUILD_1.99.166.md).
+**배포 상태: 새 APK·서명 OTA·전체 개발 소스 ZIP과 Safari 웹 공개 완료.** 최종 Android 릴리스 소스는 `cf661b8d1de8b166a56a125327643eb8ba4579a0`이며 [v1.99.166 공개 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.166)를 **2026-10-07 11:39:02 KST**에 발행했습니다. [1.99.166 APK 다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.166/cheonsu_1.99.166_update_debug.apk) · [서명 OTA](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.166/cheonsu_1.99.166_ota.zip) · [전체 개발 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.166/cheonsu_development_1.99.166.zip). 실제 공개 업데이트 채널은 **1.99.166 / 번들 `1.99.166-155b608592d0` / Android 350~365**입니다.
+
+최종 소스의 [Cloud Quality 37559439252](https://github.com/h0623-dev/cheonsu/actions/runs/37559439252/job/112593223934)는 11:35:56 KST, [Android APK and OTA 37559439221](https://github.com/h0623-dev/cheonsu/actions/runs/37559439221/job/112593144620)는 11:39:15 KST에 전체 성공했습니다. 각 자동 완료 로그의 단위 **792/792·실패 0·필수 브라우저 10개**가 통과했고, Android 자동 실행은 APK·OTA 웹 파일 각 2,628개·서명·네이티브 플러그인·복구·원본 주소 보호를 확인했습니다. 발행 스크립트는 제작 파일과 GitHub 자산의 SHA-256·크기를 대조하고 **공개 APK·OTA 다운로드 주소 접근(HEAD)을 자동 확인**한 후 공개 업데이트 포인터를 갱신했습니다. 에이전트가 공개 파일을 별도로 재다운로드·대조한 결과가 아닙니다.
+
+[천수 Safari](https://cheonsu-safari-production.up.railway.app)는 첫 게임 소스 `5b9b8564bb7ac6da7d883717c58465dbb4bbc57c`를 고정한 배포 `d29654f7-45c1-4383-b9e5-fcef27c431d0`로 2026-10-07 10:14:42 KST에 `SUCCESS`로 완료했고 서비스는 온라인입니다. 아이폰 실기기 플레이는 직접 확인하지 않았습니다. 첫 Android 실행의 로컬 자산 중계 `ECONNRESET` 실패는 제한적 재시도·종료 전 대기로 보완했으며, 위 최종 소스의 성공과 구분해 이력을 남겼습니다. 소스 ZIP에는 발행 후 작성한 최종 배포 문서가 포함되지 않습니다. 아래 1.99.165 파일·자동 결과는 이전 기록입니다. [1.99.166 빌드·배포 기록](docs/BUILD_1.99.166.md).
 
 새 기본 **원복**은 **1.99.165 / Android 364 + Safari 지원**이며, 전체 기준 커밋 `5d0f52175792dcaf464fd870db3f6e7c313d9314`를 [`codex/rollback-1.99.165-safari`](https://github.com/h0623-dev/cheonsu/tree/codex/rollback-1.99.165-safari)에 고정했습니다. 현재 저장·진행·수집을 보존하며 이전 1.99.154·1.99.148 기록도 남깁니다. [원복 기준과 절차](docs/ROLLBACK_BASELINE.md).
 

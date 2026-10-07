@@ -2,7 +2,7 @@
 
 작성일: 2026-10-07 KST. 게임 버전은 **1.99.166**, Android versionCode는 **365**입니다.
 
-**현재 상태: Safari 웹 1.99.166 배포는 완료됐지만 Android 첫 자동 실행이 릴리스 발행 전에 실패했습니다. 자산 중계의 일시적 연결 초기화 처리를 보완했으며 새 최종 소스와 후속 자동 실행은 준비 중입니다.** 현재 공개 웹과 첫 게임 소스는 `5b9b8564bb7ac6da7d883717c58465dbb4bbc57c`입니다. 첫 Cloud Quality 통과와 이후 수정 소스의 결과를 구분하며 새 APK·OTA 공개 완료로 표시하지 않습니다. 직전 공개 게임은 1.99.165 / Android 364이며 기존 APK·OTA에는 이번 보스 연출 개선이 포함되지 않습니다.
+**새 APK·서명 OTA·전체 개발 소스 ZIP과 Safari 웹 공개 완료.** 최종 Android 릴리스 소스는 `cf661b8d1de8b166a56a125327643eb8ba4579a0`입니다. [v1.99.166 공개 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.166)를 **2026-10-07 11:39:02 KST**에 발행했습니다. 최종 소스의 Cloud Quality와 Android APK and OTA는 모두 전체 성공으로 완료됐으며, 공개 업데이트 채널은 1.99.166 / Android 350~365입니다. Safari 웹은 첫 게임 소스 `5b9b8564bb7ac6da7d883717c58465dbb4bbc57c`를 고정한 독립 배포로 완료했습니다. 자동 실행 로그·공개 메타데이터를 읽은 사실과 에이전트 직접 검사를 구분합니다.
 
 ## 변경 내용
 
@@ -22,25 +22,46 @@
 
 사용자의 2026-10-07 KST 명시적 요청에 따라 개선 전 전체 상태를 새 원복 기준으로 고정했습니다. 기준은 **1.99.165 / Android 364 + Safari 웹 지원**, 전체 소스 `5d0f52175792dcaf464fd870db3f6e7c313d9314`, 고정 보존 브랜치는 [`codex/rollback-1.99.165-safari`](https://github.com/h0623-dev/cheonsu/tree/codex/rollback-1.99.165-safari)입니다. 원복 시 현재 저장을 지우거나 과거 APK로 다운그레이드하지 않습니다. 이전 1.99.154·1.99.148의 커밋과 태그도 역사적 기준으로 보존합니다. [원복 기준과 절차](ROLLBACK_BASELINE.md).
 
-## 산출물 상태
+## 공개 산출물과 업데이트 채널
 
-| 항목 | 1.99.166 현재 상태 |
+| 항목 | 최종 공개 상태 |
 | --- | --- |
-| 최종 릴리스 소스 커밋 | 중계 오류 수정 소스 반영 후 기록 예정; 첫 소스와 현재 웹은 `5b9b8564bb7ac6da7d883717c58465dbb4bbc57c` |
-| Cloud Quality 자동 실행 | 첫 소스 `5b9b8564bb7ac6da7d883717c58465dbb4bbc57c`의 [Cloud Quality 37555037910](https://github.com/h0623-dev/cheonsu/actions/runs/37555037910/job/112579192974)는 2026-10-07 10:45:49 KST 전체 성공·단위 792/792·필수 브라우저 10개 통과; 수정 소스 후속 실행 대기 |
-| Android APK and OTA 자동 실행 | 첫 [Android APK and OTA 37555037857](https://github.com/h0623-dev/cheonsu/actions/runs/37555037857/job/112579192925), 2026-10-07 10:47:56 KST 실패·발행 전 중단; 수정 소스 후속 실행 대기 |
-| 새 APK | 첫 실행의 APK 제작·자동 검사는 성공했으나 미공개; 수정 소스의 새 APK 제작·공개 대기 |
-| 서명 OTA | `cheonsu_1.99.166_ota.zip` 제작·공개 대기 |
-| 전체 개발 소스 ZIP | `cheonsu_development_1.99.166.zip` 제작·공개 대기 |
-| 공개 릴리스 | `v1.99.166` 공개 대기 |
-| 실제 공개 업데이트 채널 | 이번 버전 발행 후 별도 `updates/latest.json`의 공개 메타데이터 기록 예정 |
-| APK·OTA 자동 검사 | 첫 실행 APK 검사는 성공, OTA 제작·검사·발행 전 중단; 수정 소스 후속 결과 대기 |
-| 공개 파일 자동 다운로드 검사 | 이번 자동 발행 결과 대기 |
+| 게임 / Android | 1.99.166 / versionCode 365 |
+| 최종 릴리스 소스 커밋 | `cf661b8d1de8b166a56a125327643eb8ba4579a0` |
+| 공개 릴리스 | [v1.99.166](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.166), `draft=false`, 2026-10-07 11:39:02 KST 발행 |
+| Cloud Quality | [실행 37559439252 / 작업 112593223934](https://github.com/h0623-dev/cheonsu/actions/runs/37559439252/job/112593223934), 2026-10-07 11:35:56 KST `completed / success` |
+| Android APK and OTA | [실행 37559439221 / 작업 112593144620](https://github.com/h0623-dev/cheonsu/actions/runs/37559439221/job/112593144620), 2026-10-07 11:39:15 KST `completed / success` |
+| 공개 업데이트 채널 | [별도 updates 브랜치의 latest.json](https://raw.githubusercontent.com/h0623-dev/cheonsu/updates/latest.json), 버전 1.99.166 |
+| OTA 번들 / 지원 범위 | `1.99.166-155b608592d0` / Android 350~365 |
+| OTA 안내 생성 시각 | 2026-10-07 11:37:45.375 KST (`releasedAt`); 릴리스 발행 시각과 구분 |
 | Safari 웹 | [천수 Safari](https://cheonsu-safari-production.up.railway.app), 배포 `d29654f7-45c1-4383-b9e5-fcef27c431d0` · 2026-10-07 10:14:42 KST `SUCCESS` · 서비스 온라인 |
 
-서명과 배포는 `main`에 허용된 기존 GitHub Actions의 `cheonsu-release` 환경에서 수행합니다. Android·OTA 개인키를 Codex Cloud나 공개 소스·ZIP에 복사하지 않습니다. 실제 자동 업데이트 채널은 별도 `updates` 브랜치의 `latest.json`이며, `main`에 남은 과거 파일로 채널을 초기화하거나 낮추지 않습니다. 이전 1.99.165의 자동 통과 수치·해시·다운로드 링크를 이번 변경의 결과로 재사용하지 않습니다.
+| 공개 산출물 | 다운로드 | 크기(bytes) | SHA-256 |
+| --- | --- | ---: | --- |
+| Android APK 1.99.166 / 365 | [cheonsu_1.99.166_update_debug.apk](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.166/cheonsu_1.99.166_update_debug.apk) | 291056414 | `46ae5decf3132cf562a05857d530414e84e6b9253c13a824ac9765e639f94915` |
+| 서명 OTA | [cheonsu_1.99.166_ota.zip](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.166/cheonsu_1.99.166_ota.zip) | 282946883 | `155b608592d0b5449428e7ed9b6417c84ee7ce436c6d79a241dd361d0ff31858` |
+| 전체 개발 소스 ZIP | [cheonsu_development_1.99.166.zip](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.166/cheonsu_development_1.99.166.zip) | 833194930 | `ec2e22acf09bd972452d1c124db5eb299f1b79523575f3d7ccf4a7aeda6e7abb` |
 
-Safari 웹은 [독립 실행 구성](SAFARI_WEB.md)의 `web/` 제작·Railway 호스팅을 유지합니다. Android APK·OTA 발행과 웹 배포 상태를 각각 기록하며 한쪽이 끝났다는 이유로 양쪽 배포를 완료했다고 보고하지 않습니다. 기존 Safari 저장과 동일한 공개 주소를 보존하고 새 배포에 맞는 웹 캐시 개정을 사용합니다.
+세 자산의 공개 상태는 모두 `uploaded`입니다. 표의 크기·SHA-256은 최종 자동 발행 로그와 공개 GitHub 메타데이터에서 읽은 값입니다. 에이전트가 아티팩트를 별도로 다운로드하거나 해시·서명을 재대조한 결과가 아닙니다. 소스 ZIP은 릴리스 소스의 스냅샷이며 발행 후 갱신한 최종 문서까지 포함하지 않습니다.
+
+기존 발행 스크립트 `publish-update.mjs`는 제작 파일의 SHA-256·크기와 GitHub 자산의 digest·크기를 대조합니다. **공개 APK·OTA 다운로드 주소 접근(HEAD)을 자동 확인**한 뒤 `updates/latest.json` 포인터를 갱신합니다. 이 절차를 전체 공개 파일의 재다운로드 검사로 표현하지 않습니다. 실제 공개 채널에서 읽은 OTA 버전·번들·지원 Android 범위·크기를 위에 기록했습니다.
+
+서명과 배포는 `main`에 허용된 기존 GitHub Actions의 `cheonsu-release` 환경에서 수행했습니다. Android·OTA 개인키를 Codex Cloud나 공개 소스·ZIP에 복사하지 않습니다. 실제 자동 업데이트 채널은 별도 `updates` 브랜치의 `latest.json`이며 `main`에 남은 과거 파일로 채널을 초기화하거나 낮추지 않습니다. 이전 버전의 APK·수치·해시를 이번 결과로 재사용하지 않습니다.
+
+## 최종 소스의 자동 실행 완료 로그
+
+최종 소스 `cf661b8d1de8b166a56a125327643eb8ba4579a0`의 [Cloud Quality 37559439252](https://github.com/h0623-dev/cheonsu/actions/runs/37559439252/job/112593223934)와 [Android APK and OTA 37559439221](https://github.com/h0623-dev/cheonsu/actions/runs/37559439221/job/112593144620)는 모두 `completed / success`입니다. 각 실행의 완료 로그에서 **792 tests / 792 pass / 0 fail**과 필수 브라우저 검사 10개의 성공을 읽었습니다. 첫 `5b9b856` 소스의 결과를 최종 결과로 재사용하지 않았습니다.
+
+| 자동 검사 | 최종 소스의 두 완료 로그에서 읽은 주요 범위 |
+| --- | --- |
+| 캠페인 진행 | 3개 화면, 실제 패배 6회, 오류 0 |
+| 스테이지 미션 | 4개 화면, 실제 전투 59회, 오류 0 |
+| 50장 확장 | 4개 화면, 전투 진입 35회·전직 72건·승리 합류 16건·실제 AI 반격 16건, 오류 0 |
+| 타격 연출 | 4개 화면에서 각각 109종의 일반 공격·스킬과 접촉·반격·회피·회복·수호·결정타·취소·회전 통과 |
+
+위 세부 범위를 별도의 전체 검사 수처럼 중복 합산하지 않습니다. Android 완료 로그에는 APK와 OTA의 웹 파일 **각 2,628개** 검사 및 서명·네이티브 플러그인·복구·원본 주소 보호의 `PASS`가 기록됐고 서명·발행 단계까지 성공했습니다. 자동 발행의 공개 주소 확인은 위에 적은 HEAD 접근 범위입니다.
+
+이는 기존 자동 Actions의 완료 로그를 읽은 결과로, 에이전트가 직접 실행한 검사나 실제 Android·iPhone 설치·플레이 확인을 뜻하지 않습니다.
 
 ## 첫 소스의 완료한 Cloud Quality 자동 실행
 
@@ -61,7 +82,7 @@ Safari 웹은 [독립 실행 구성](SAFARI_WEB.md)의 `web/` 제작·Railway �
 
 실제 오류는 `scripts/verify-duel-impact.mjs`의 자산 중계 `route.fetch`에서 발생한 **`read ECONNRESET`**입니다. 로컬 production 서버의 `/art/characters-v2/units/siege_gunner-strike.webp` 요청이 연결 초기화로 중단됐으며 스크립트 35줄의 중계 경로에서 보고됐습니다. 게임 전투 단언이 실패한 기록과 구분합니다. 개인 서명 파일 정리 단계는 자동으로 완료됐고 APK·OTA·소스 ZIP의 공개 릴리스는 발행되지 않았습니다.
 
-해당 스크립트 한 파일의 중계 요청에 **`maxRetries: 2`**를 추가하고 브라우저를 닫기 전에 진행 중인 중계 요청을 기다리도록 보완했습니다. 재시도 횟수를 제한하며 기존 검사 기준과 HTTP 404·500 오류 처리도 유지합니다. 검사를 삭제하거나 게임 단언을 완화하지 않습니다. 수정 소스를 새 커밋으로 반영한 뒤 기존 자동 Actions가 새 APK를 제작·배포하도록 진행하며 후속 소스와 실행 결과는 아직 미정입니다. 직접 검사나 수동 검증 CI는 실행하지 않았습니다.
+해당 스크립트 한 파일의 중계 요청에 **`maxRetries: 2`**를 추가하고 브라우저를 닫기 전에 진행 중인 중계 요청을 기다리도록 보완했습니다. 재시도 횟수를 제한하며 기존 검사 기준과 HTTP 404·500 오류 처리도 유지합니다. 검사를 삭제하거나 게임 단언을 완화하지 않습니다. 중계 수정 커밋 `67a43ba`와 최종 각성 안내를 포함한 `cf661b8d1de8b166a56a125327643eb8ba4579a0`를 릴리스 대상으로 반영했습니다. 위에 기록한 후속 Cloud Quality와 Android APK and OTA는 전체 성공했고 새 APK·서명 OTA·소스 ZIP을 공개했습니다. 첫 실패를 완료 결과에 포함하지 않습니다. 직접 검사나 수동 검증 CI는 실행하지 않았습니다.
 
 ## Safari 웹 배포와 경로 조건 수정
 
@@ -75,6 +96,6 @@ Safari 웹은 [독립 실행 구성](SAFARI_WEB.md)의 `web/` 제작·Railway �
 
 **사용자 지시에 따라 수정 후 별도 검증은 실행하지 않았습니다.** [검증 생략 스킬](../.agents/skills/cheonsu-no-post-change-validation/SKILL.md)에 따라 에이전트가 린트·테스트·브라우저 QA·검증용 빌드·APK/OTA 재다운로드 대조를 직접 실행하거나 수동 검사 CI를 시작하지 않습니다. 요청한 산출물을 제작하기 위한 필수 빌드·패키징·서명·배포는 계속 수행합니다.
 
-기존 자동 Actions와 서명·배포 보호 설정을 유지합니다. 완료한 Cloud Quality 로그에서 읽은 결과는 위에 직접 검사와 구분해 기록했습니다. Android 첫 실행의 실패와 수정은 별도로 기록했으며 후속 소스의 자동 실행·공개 산출물은 확정 뒤 추가합니다. 실제 Android·iPhone 설치·터치·저장·오디오·성능을 직접 확인한 것으로 표현하지 않습니다. Firebase 연결·Google 로그인·Play Store 정식 출시는 이 변경에 포함되지 않습니다.
+기존 자동 Actions와 서명·배포 보호 설정을 유지합니다. 완료한 Cloud Quality 로그에서 읽은 결과는 위에 직접 검사와 구분해 기록했습니다. Android 첫 실행의 실패와 수정, 최종 소스의 후속 성공·공개 산출물을 구분해 기록했습니다. 실제 Android·iPhone 설치·터치·저장·오디오·성능을 직접 확인한 것으로 표현하지 않습니다. Firebase 연결·Google 로그인·Play Store 정식 출시는 이 변경에 포함되지 않습니다.
 
 구현과 확인 범위는 [1.99.166 변경·검증 구분](QA_IMPROVEMENT_1.99.166.md)에 기록합니다.

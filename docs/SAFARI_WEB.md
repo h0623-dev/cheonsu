@@ -12,7 +12,7 @@
 | --- | --- |
 | 게임 버전 | 1.99.166 |
 | 웹 실행부 개정 | safari-1 |
-| Android 대상 버전 코드 | 365, 첫 자동 실행은 발행 전 실패·수정 소스 후속 실행 준비 중; 웹 배포와 구분 |
+| Android 대상 버전 코드 | 365, 최종 소스 `cf661b8d1de8b166a56a125327643eb8ba4579a0`의 APK·서명 OTA 공개 완료; 웹 고정 소스와 구분 |
 | 웹 호스팅 | Railway `cheonsu-web` 프로젝트 / `production` 환경 / `cheonsu-safari` 서비스 |
 | 현재 호스팅 상태 | 최종 웹 배포 `SUCCESS`, 서비스 온라인 |
 | 공개 HTTPS 주소 | [천수 Safari](https://cheonsu-safari-production.up.railway.app) |
@@ -114,7 +114,13 @@ Railway에 적용한 서비스 설정은 다음과 같습니다.
 
 사용자의 검증 생략 지시에 따라 에이전트가 수정 후 테스트, 린트, 스모크 검사, 브라우저·화면 QA, 아이폰 실기기 검사 또는 아티팩트 대조를 직접 실행하지 않습니다. 제작이나 배포가 성공하더라도 아이폰 실기기 동작까지 확인했다는 의미는 아닙니다.
 
-기존 GitHub Actions가 소스 반영 후 자동 실행한 결과는 에이전트의 직접 검사와 구분합니다. 현재 게임·웹 소스 `5b9b8564bb7ac6da7d883717c58465dbb4bbc57c`의 [Cloud Quality 37555037910](https://github.com/h0623-dev/cheonsu/actions/runs/37555037910/job/112579192974)는 2026-10-07 10:45:49 KST 전체 성공으로 완료됐습니다. 완료 로그의 단위 792/792·실패 0과 필수 브라우저 검사 10개가 모두 통과했습니다. 첫 [Android APK and OTA 37555037857](https://github.com/h0623-dev/cheonsu/actions/runs/37555037857/job/112579192925)는 2026-10-07 10:47:56 KST 마지막 타격 연출 검사에서 `route.fetch: read ECONNRESET`으로 실패했습니다. APK 제작·자동 검사와 앞선 브라우저 9개는 성공했지만 APK·OTA·소스 ZIP은 공개되지 않았습니다. 중계에 제한적인 재시도와 종료 전 대기를 보완했으며 새 소스와 후속 자동 실행은 준비 중입니다. 현재 Safari 성공 배포는 계속 `5b9b8564bb7ac6da7d883717c58465dbb4bbc57c`를 사용합니다. 이 첫 Cloud Quality 결과를 후속 수정 소스의 결과로 재사용하지 않습니다. Safari 호스팅 성공과 별개로 Android 공개 완료 여부도 구분합니다.
+현재 웹 고정 소스 `5b9b8564bb7ac6da7d883717c58465dbb4bbc57c`의 [Cloud Quality 37555037910](https://github.com/h0623-dev/cheonsu/actions/runs/37555037910/job/112579192974)는 2026-10-07 10:45:49 KST 전체 성공·단위 792/792·필수 브라우저 10개 통과로 완료됐습니다. 첫 [Android APK and OTA 37555037857](https://github.com/h0623-dev/cheonsu/actions/runs/37555037857/job/112579192925)는 10:47:56 KST 마지막 타격 연출 검사에서 자산 중계의 `route.fetch: read ECONNRESET`으로 실패해 당시 릴리스가 발행되지 않았습니다.
+
+중계의 제한적 재시도·종료 전 대기와 최종 각성 안내를 포함한 **최종 Android 릴리스 소스 `cf661b8d1de8b166a56a125327643eb8ba4579a0`**의 [Cloud Quality 37559439252](https://github.com/h0623-dev/cheonsu/actions/runs/37559439252/job/112593223934)는 **11:35:56 KST**, [Android APK and OTA 37559439221](https://github.com/h0623-dev/cheonsu/actions/runs/37559439221/job/112593144620)는 **11:39:15 KST**에 전체 성공했습니다. 각 최종 자동 로그의 단위 792/792·필수 브라우저 10개가 통과했고 Android 자동 실행에서 APK·OTA 웹 파일 각 2,628개·서명·네이티브 플러그인·복구·원본 주소 보호도 통과했습니다. 첫 소스의 결과를 최종 결과로 재사용하지 않았습니다.
+
+[v1.99.166 공개 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.166)는 **2026-10-07 11:39:02 KST**에 새 APK·서명 OTA·소스 ZIP을 발행했습니다. 기존 발행 스크립트는 제작 파일과 GitHub 자산 SHA-256·크기를 대조하고 **공개 APK·OTA 다운로드 주소 접근(HEAD)을 자동 확인**한 후 공개 채널을 갱신했습니다. 실제 공개 채널은 1.99.166 / 번들 `1.99.166-155b608592d0` / Android 350~365입니다. 공개 파일을 에이전트가 재다운로드·대조한 결과가 아닙니다.
+
+Safari 성공 배포는 계속 `5b9b8564bb7ac6da7d883717c58465dbb4bbc57c`를 사용합니다. Android 최종 릴리스 커밋과 Safari 고정 배포 커밋을 구분하며, Android 후속 검사 스크립트·발행 안내·문서 변경으로 웹 버전이 자동 교체되지 않습니다. 공개 파일과 자동 실행의 상세 내용은 [1.99.166 빌드·배포 기록](BUILD_1.99.166.md)을 따릅니다.
 
 ## 이전 Safari 지원 당시 자동 실행 기록
 
