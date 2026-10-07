@@ -32,7 +32,9 @@ async function openPage(fixtureBase, base, viewport) {
   page.on('pageerror', error => errors.push({ message: error.message, stack: error.stack }));
   page.on('response', response => { if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`); });
   await page.route('**/art/**', async route => {
-    const response = await route.fetch({ url: route.request().url().replace(fixtureBase, base) });
+    // 실제 산출물 중계 중 ECONNRESET만 최대 두 번 재시도합니다.
+    // HTTP 오류 응답·손상된 이미지·전투 단언은 기존대로 실패해야 합니다.
+    const response = await route.fetch({ url: route.request().url().replace(fixtureBase, base), maxRetries: 2 });
     await route.fulfill({ response });
   });
   const time = new Date('2026-10-05T00:00:00Z');
@@ -176,7 +178,11 @@ try {
       await cancellationAndSettings(page, viewport);
       console.log(`PASS 타격 연출 ${viewport.width}x${viewport.height}: ${keys.length}종 일반/스킬, 접촉·반격·회피·회복·수호·결정타·취소·회전`);
     } catch (error) { await page.screenshot({ path: path.join(output, `failure-${viewport.width}.png`) }).catch(() => {}); throw error; }
-    finally { await page.close(); }
+    finally {
+      // 마지막 장면의 이미지 중계가 페이지 종료와 경합하지 않게 합니다.
+      try { await page.unrouteAll({ behavior: 'wait' }); }
+      finally { await page.close(); }
+    }
   }
   assert.deepEqual(errors, []);
   report.passed = true;
