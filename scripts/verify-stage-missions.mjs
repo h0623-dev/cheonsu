@@ -37,16 +37,22 @@ function verifyConditions(actual, stage, units) {
   const bosses = (stage.units || []).filter(unit => unit.type === 'boss' || (unit.id === 'boss' && unit.type !== 'ally'));
   const names = bosses.map(unit => unit.name.trim());
   const leaderText = names.length === 1 ? `적 대장 「${names[0]}」 섬멸` : `적 대장 전원 섬멸(${names.map(name => `「${name}」`).join(', ')})`;
-  const hero = (stage.units || []).find(unit => unit.id === 'hero');
   assert.deepEqual(actual.victory, names.length ? [leaderText, '모든 적 섬멸'] : ['모든 적 섬멸'], '미션에는 이 전장의 실제 적 대장 이름을 표시합니다');
-  assert.deepEqual(actual.defeat, [`주인공 ${hero?.name || '카일'} 사망`, '아군 전멸', `${getStageRoundLimit(stage)}라운드의 아군 턴 종료까지 승리하지 못함`], '미션의 패배 조건과 제한 라운드가 실제 전장 규칙과 일치합니다');
+  assert.deepEqual(actual.defeat, ['아군 전멸', `${getStageRoundLimit(stage)}라운드의 아군 턴 종료까지 승리하지 못함`], '미션은 카일 사망을 제외하고 아군 전멸과 확대된 제한 라운드를 안내합니다');
   assert.equal(actual.victoryJoin, names.length ? '위 조건 중 하나를 달성하면 승리합니다.' : '위 조건을 달성하면 승리합니다.');
   assert.equal(actual.defeatJoin, '위 조건 중 하나라도 발생하면 패배합니다.');
   if (units) {
     const leaderIds = new Set(bosses.map(unit => unit.id));
     assert.equal(getBattleOutcome(stage, units.filter(unit => !leaderIds.has(unit.id))), 'victory', '적 대장 섬멸은 일반 적 생존과 별개로 승리합니다');
     assert.equal(getBattleOutcome(stage, units.filter(unit => unit.type === 'ally')), 'victory', '적 전멸도 독립적인 승리 조건입니다');
-    assert.equal(getBattleOutcome(stage, units.filter(unit => unit.id !== 'hero')), 'defeat', '주인공 사망은 패배 조건입니다');
+    const otherAllies = units.filter(unit => unit.type === 'ally' && unit.id !== 'hero' && unit.hp > 0);
+    assert.ok(otherAllies.length, '카일 없이 싸울 수 있는 생존 아군이 있습니다');
+    const withoutHero = [...otherAllies, ...(stage.units || []).filter(unit => unit.type !== 'ally')];
+    assert.equal(getBattleOutcome(stage, withoutHero), null, '카일이 쓰러져도 다른 아군이 생존하면 전투를 계속합니다');
+    assert.equal(getBattleOutcome(stage, withoutHero.filter(unit => !leaderIds.has(unit.id))), names.length ? 'victory' : null, '카일 없이 생존 아군이 적 대장을 처치해도 승리합니다');
+    assert.equal(getBattleOutcome(stage, otherAllies), 'victory', '카일 없이 남은 아군이 모든 적을 처치해도 승리합니다');
+    assert.equal(getBattleOutcome(stage, units.filter(unit => unit.type !== 'ally')), 'defeat', '전장에 생존 아군이 없을 때 패배합니다');
+    assert.equal(getBattleOutcome(stage, units.map(unit => unit.type === 'ally' ? { ...unit, hp: 0 } : unit)), 'defeat', 'HP가 0인 아군 데이터가 남아 있어도 전멸로 판정합니다');
   }
   return { bossNames: names, roundLimit: getStageRoundLimit(stage) };
 }

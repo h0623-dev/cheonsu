@@ -61,5 +61,7 @@ export function getStageRoundLimit(stageOrId) {
   if (mapMax >= 14) limit += 1;
   if (mapMax >= 16) limit += 1;
 
-  return Math.min(30, limit);
+  // 기존 장별·전장 규모 보정과 상한을 확정한 뒤 한 번만 1.5배로 늘립니다.
+  // 저장된 전장도 같은 계산을 사용하므로 진행 라운드나 저장 데이터는 바꾸지 않습니다.
+  return Math.ceil(Math.min(30, limit) * 1.5);
 }

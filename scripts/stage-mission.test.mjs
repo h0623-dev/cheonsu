@@ -52,7 +52,7 @@ test('single-leader briefing states alternative victory paths matching the actua
   assert.equal(getBattleOutcome(stage, [hero, guard]), 'victory');
   assert.equal(getBattleOutcome(stage, [hero]), 'victory');
   assert.equal(getBattleOutcome(stage, [hero, boss]), null);
-  assert.equal(getBattleOutcome(stage, [guard]), 'defeat', 'Hero death takes priority over killing the commander');
+  assert.equal(getBattleOutcome(stage, [guard]), 'defeat', 'Allied annihilation takes priority over killing the commander');
 });
 
 test('no-leader stages require every living enemy, including spawned reinforcements, to be removed', () => {
@@ -90,9 +90,8 @@ test('defeat briefing uses OR and includes the exact final allied-turn round dea
   assert.equal(mission.roundLimit, getStageRoundLimit(stage));
   assert.equal(mission.defeatJoin, '또는');
   assert.deepEqual(mission.defeatConditions, [
-    { id: 'hero', text: '주인공 카일 사망' },
     { id: 'allies', text: '아군 전멸' },
-    { id: 'round-limit', text: '16라운드의 아군 턴 종료까지 승리하지 못함' },
+    { id: 'round-limit', text: '24라운드의 아군 턴 종료까지 승리하지 못함' },
   ]);
   assert.equal(getBattleOutcome(stage, []), 'defeat');
   assert.equal(getBattleOutcome(stage, [{ ...hero, hp: 0 }, guard]), 'defeat');
@@ -106,18 +105,28 @@ test('defeat briefing uses OR and includes the exact final allied-turn round dea
   assert.ok(source.includes('(migratedData.round >= restoredRoundLimit && restoredAllyTurnEnded)'), 'Resume preserves that same allied-turn deadline');
 });
 
-test('mission deadlines use the existing enemy-count and map-size bonuses with the thirty-round cap', () => {
-  for (const [enemies, bonus] of [[11, 0], [12, 1], [15, 1], [16, 2], [19, 2], [20, 3]]) {
+test('mission deadlines extend the full existing enemy-count and map-size allowance by half, rounding up to at most forty-five rounds', () => {
+  for (const [enemies, expected] of [[11, 21], [12, 23], [15, 23], [16, 24], [19, 24], [20, 26]]) {
     const stage = { id: 1, units: [hero, ...Array.from({ length: enemies }, (_, id) => ({ ...guard, id: `guard-${id}` }))] };
-    assert.equal(getStageMission(stage).roundLimit, 14 + bonus);
+    assert.equal(getStageMission(stage).roundLimit, expected);
   }
-  for (const [size, bonus] of [[13, 0], [14, 1], [15, 1], [16, 2], [32, 2]]) {
+  for (const [size, expected] of [[13, 21], [14, 23], [15, 23], [16, 24], [32, 24]]) {
     const stage = { id: 1, units: [hero, guard], map: Array.from({ length: size }, () => Array(10).fill('plain')) };
-    assert.equal(getStageMission(stage).roundLimit, 14 + bonus);
+    assert.equal(getStageMission(stage).roundLimit, expected);
   }
   const huge = { id: 31, units: Array.from({ length: 26 }, (_, id) => ({ ...guard, id: `guard-${id}` })),
     map: Array.from({ length: 32 }, () => Array(32).fill('plain')) };
-  assert.equal(getStageMission(huge).roundLimit, 30);
+  assert.equal(getStageMission(huge).roundLimit, 45);
+  assert.equal(getStageRoundLimit(huge), 45, 'Reading the deadline repeatedly never compounds the extension');
+});
+
+test('the extra half applies across all fifty chapter base deadlines', () => {
+  const chapterGroups = [[1, 3, 21], [4, 6, 24], [7, 12, 27], [13, 18, 30], [19, 24, 33], [25, 30, 36], [31, 50, 39]];
+  for (const [firstChapter, lastChapter, expected] of chapterGroups) {
+    for (let chapter = firstChapter; chapter <= lastChapter; chapter++) {
+      assert.equal(getStageRoundLimit(chapter), expected, `Chapter ${chapter}`);
+    }
+  }
 });
 
 test('all actual expanded battlefields retain their true commander names and current formation-based deadlines', () => {
@@ -130,9 +139,13 @@ test('all actual expanded battlefields retain their true commander names and cur
     assert.equal(mission.roundLimit, getStageRoundLimit(active));
     assert.ok(mission.victoryConditions[0].text.includes(leaders[0].name));
     assert.ok(mission.defeatConditions.some(condition => condition.text.startsWith(`${getStageRoundLimit(active)}라운드`)));
+    assert.deepEqual(mission.defeatConditions.map(condition => condition.id), ['allies', 'round-limit']);
     const protagonist = active.units.find(unit => unit.id === 'hero');
+    const survivingAlly = { ...protagonist, id: 'surviving-ally', name: '생존 아군' };
     const survivors = active.units.filter(unit => unit.type === 'enemy');
     assert.equal(getBattleOutcome(active, [protagonist, ...survivors]), 'victory');
+    assert.equal(getBattleOutcome(active, [survivingAlly, ...leaders, ...survivors]), null);
+    assert.equal(getBattleOutcome(active, [survivingAlly, ...survivors]), 'victory');
     assert.equal(getBattleOutcome(active, survivors), 'defeat');
     assert.equal(JSON.stringify(active), before);
   }
@@ -154,5 +167,24 @@ test('saved battles keep their old commander identities, geometry and live state
   assert.equal(mission.roundLimit, getStageRoundLimit(savedStage));
   assert.equal(getBattleOutcome(restored.selectedStage, restored.units), 'victory');
   assert.equal(JSON.stringify(restored), before);
-  assert.equal(getStageMission(null).defeatConditions[0].text, '주인공 카일 사망');
+  assert.equal(getStageMission(null).defeatConditions[0].text, '아군 전멸');
+});
+
+test('a saved battle past its former deadline keeps its live allies, progress and current round after Kyle falls', () => {
+  const party = getInitialParty();
+  const savedStage = { ...stages[0], units: [party[0], party[1], boss, guard],
+    map: Array.from({ length: 10 }, () => Array(10).fill('plain')) };
+  const data = { screen: 'battle', selectedStage: savedStage, party,
+    units: [{ ...party[0], hp: 0 }, { ...party[1], hp: 3, acted: true, moved: true }, boss, guard],
+    turn: 'ally', round: 15, clearedStages: [1], exploration: { claimed: ['kept'] } };
+  const restored = normalizeSaveData(data, '1.99.167');
+  const before = JSON.stringify(restored);
+  assert.equal(getBattleOutcome(restored.selectedStage, restored.units), null);
+  assert.equal(getStageMission(restored.selectedStage).roundLimit, 21);
+  assert.equal(restored.round, 15);
+  assert.equal(restored.units.find(unit => unit.id === party[1].id).hp, 3);
+  assert.equal(restored.units.find(unit => unit.id === party[1].id).acted, true);
+  assert.deepEqual(restored.clearedStages, [1]);
+  assert.deepEqual(restored.exploration.claimed, ['kept']);
+  assert.equal(JSON.stringify(restored), before);
 });

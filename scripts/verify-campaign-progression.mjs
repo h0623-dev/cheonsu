@@ -9,6 +9,7 @@ import { chromium } from 'playwright';
 import { preview } from 'vite';
 import { webBuildInfo } from './update-build-info.mjs';
 import { stages } from '../src/data/stages.js';
+import { getStageRoundLimit } from '../src/engine/stageRules.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const output = path.resolve(process.env.CHEONSU_PROGRESSION_QA_OUT || path.join(root, 'tmp/campaign-progression-qa'));
@@ -100,10 +101,11 @@ async function actualDefeat(page, saveBattle, result, label) {
   let lastBattle;
   // Use the production turn command and enemy AI throughout. No save, HP, outcome,
   // or React state is injected to produce this defeat.
-  for (let commands = 0; commands < 32; commands++) {
+  const commandLimit = getStageRoundLimit((await saveBattle()).selectedStage) + 1;
+  for (let commands = 0; commands < commandLimit; commands++) {
     await page.waitForFunction(() => document.querySelector('.defeat-dialog[open],.victory-dialog[open]') || document.querySelector('.battle-end-turn-float:not(:disabled)'));
     if (await page.locator('.defeat-dialog[open]').count()) break;
-    assert.equal(await page.locator('.victory-dialog[open]').count(), 0, `${label}: 주인공 단독 대기로 실패 경로를 검사합니다`);
+    assert.equal(await page.locator('.victory-dialog[open]').count(), 0, `${label}: 아군 1명만 출전한 부대의 전멸 또는 제한 라운드 실패 경로를 검사합니다`);
     lastBattle = await saveBattle();
     turns.push({ round: lastBattle.round, heroHp: lastBattle.units.find(unit => unit.id === 'hero')?.hp, enemyCount: lastBattle.units.filter(unit => unit.type !== 'ally').length });
     await page.locator('.battle-end-turn-float').click();
@@ -216,7 +218,7 @@ async function runViewport(base, viewport) {
     // An old live defeat save had no lastBattleResult field. Its real unit outcome
     // must remain authoritative even if an imported marker falsely says victory.
     const oldDefeat = structuredClone(firstBattle);
-    oldDefeat.units = oldDefeat.units.filter(unit => unit.id !== 'hero');
+    oldDefeat.units = oldDefeat.units.filter(unit => unit.type !== 'ally');
     oldDefeat.trainingUsed = false;
     // The long-standing save reader fills absent support dialogue arrays. Supply
     // their explicit shape and nonempty user data to check preservation separately

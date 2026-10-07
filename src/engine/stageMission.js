@@ -7,8 +7,6 @@ export function getStageMission(stage) {
   const bosses = units.filter(unit => unit && (unit.type === 'boss' || (unit.id === 'boss' && unit.type !== 'ally')));
   const bossNames = bosses.map(unit => typeof unit.name === 'string' && unit.name.trim()
     ? unit.name.trim() : '이름 없는 적 대장');
-  const hero = units.find(unit => unit?.id === 'hero');
-  const heroName = typeof hero?.name === 'string' && hero.name.trim() ? hero.name.trim() : '카일';
   const roundLimit = getStageRoundLimit(stage);
   const victoryConditions = [];
   if (bossNames.length) {
@@ -22,7 +20,6 @@ export function getStageMission(stage) {
   return {
     bossNames, roundLimit, victoryConditions,
     defeatConditions: [
-      { id: 'hero', text: `주인공 ${heroName} 사망` },
       { id: 'allies', text: '아군 전멸' },
       { id: 'round-limit', text: `${roundLimit}라운드의 아군 턴 종료까지 승리하지 못함` },
     ],

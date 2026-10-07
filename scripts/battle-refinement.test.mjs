@@ -12,13 +12,24 @@ import { getPaintedVisualProfile } from '../src/data/unitVisuals.js';
 import { playTone, musicBeat } from '../src/engine/audioEngine.js';
 
 const hero={id:'hero',type:'ally',hp:20}, boss={id:'boss',type:'boss',hp:20}, enemy={id:'guard',type:'enemy',hp:20};
-test('boss death wins with living regular enemies; hero loss takes priority; no-boss stages require elimination',()=>{
+test('boss death wins with living regular enemies; allied annihilation takes priority; no-boss stages require elimination',()=>{
   assert.equal(getBattleOutcome({units:[hero,boss,enemy]},[hero,enemy]),'victory');
   assert.equal(getBattleOutcome({units:[hero,boss,enemy]},[enemy]),'defeat');
   assert.equal(getBattleOutcome({units:[hero,boss]},[hero,boss]),null);
   assert.equal(getBattleOutcome({units:[hero,enemy]},[hero,enemy]),null);
   assert.equal(getBattleOutcome({units:[hero,enemy]},[hero]),'victory');
   assert.equal(getBattleOutcome({units:[hero,boss,{...boss,id:'boss2'}]},[hero,{...boss,id:'boss2'}]),null);
+});
+test('Kyle falling leaves surviving allies in battle and able to win; simultaneous annihilation still loses',()=>{
+  const ally={id:'lina',type:'ally',hp:5}, fallenHero={...hero,hp:0};
+  const stage={units:[hero,ally,boss,enemy]};
+  assert.equal(getBattleOutcome(stage,[fallenHero,ally,boss,enemy]),null);
+  assert.equal(getBattleOutcome(stage,[ally,boss,enemy]),null,'An omitted fallen Kyle does not end a saved battle');
+  assert.equal(getBattleOutcome(stage,[fallenHero,ally,enemy]),'victory');
+  assert.equal(getBattleOutcome({units:[hero,ally,enemy]},[fallenHero,ally,enemy]),null);
+  assert.equal(getBattleOutcome({units:[hero,ally,enemy]},[fallenHero,ally]),'victory');
+  assert.equal(getBattleOutcome(stage,[fallenHero,{...ally,hp:0},{...boss,hp:0},{...enemy,hp:0}]),'defeat');
+  assert.equal(getBattleOutcome(stage,[]),'defeat');
 });
 test('action flags survive XP growth, saving and defeated roster migration',()=>{
   const party=getInitialParty(), stage=stages[0];

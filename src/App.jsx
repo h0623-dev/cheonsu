@@ -112,7 +112,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.167";
+const SAVE_VERSION = "1.99.168";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -10299,13 +10299,13 @@ export default function App() {
     );
   };
 
-  const showDefeatDirecting = () => {
+  const showDefeatDirecting = (reason = "아군이 전멸했습니다.") => {
     showStageBanner(
       {
         type: "defeat",
         label: "DEFEAT",
         title: selectedStage?.title || "전투 실패",
-        subtitle: "카일이 쓰러졌습니다.",
+        subtitle: reason,
       },
       1600
     );
@@ -11889,15 +11889,13 @@ export default function App() {
     try {
       const savedData = JSON.parse(raw);
       const migratedData = normalizeSaveData(savedData, SAVE_VERSION);
-      const savedHeroDefeated = savedData.screen === "battle" && Array.isArray(savedData.units) &&
-        !savedData.units.some(unit => unit?.id === "hero" && unit.hp > 0);
-      // Migration can backfill a fallen hero from the stage's starting roster.
-      const restoredUnits = migratedData.units.filter(unit => !savedHeroDefeated || unit.id !== "hero");
+      // 저장된 생존 명단을 유지하며 카일이 없어도 다른 아군으로 전투를 이어갑니다.
+      const restoredUnits = migratedData.units;
       const restoredRoundLimit = getStageRoundLimit(migratedData.selectedStage);
       const restoredAllyTurnEnded = migratedData.turn === "enemy" ||
         restoredUnits.filter(unit => unit.type === "ally" && unit.hp > 0).every(unit => unit.acted);
       const restoredDefeat = migratedData.screen === "battle" && (
-        !restoredUnits.some(unit => unit.id === "hero" && unit.hp > 0) ||
+        !restoredUnits.some(unit => unit.type === "ally" && unit.hp > 0) ||
         (restoredUnits.some(unit => unit.type !== "ally" && unit.hp > 0) && (
           migratedData.round > restoredRoundLimit ||
           (migratedData.round >= restoredRoundLimit && restoredAllyTurnEnded)
@@ -12180,7 +12178,7 @@ export default function App() {
       ...p,
     ]);
 
-    if (!workingUnits.some((u) => u.id === "hero")) {
+    if (getBattleOutcome(selectedStage, workingUnits) === "defeat") {
       playSfx("defeat");
       showDefeatDirecting();
       declareDefeat();
@@ -12222,7 +12220,7 @@ export default function App() {
       }
       const freshEnemy = workingUnits.find((u) => u.id === enemy.id);
       if (!freshEnemy) continue;
-      const allies = workingUnits.filter((u) => u.type === "ally");
+      const allies = workingUnits.filter((u) => u.type === "ally" && u.hp > 0);
       if (allies.length === 0) { setUnits(workingUnits); playSfx("defeat"); showDefeatDirecting(); declareDefeat(); return; }
       const choice = getEnemyAttackChoice(freshEnemy, allies, activeMap);
       if (choice) {
@@ -12262,7 +12260,7 @@ export default function App() {
       if (didMove) setMovingUnit(null);
 
       const movedFreshEnemy = workingUnits.find((u) => u.id === freshEnemy.id);
-      const postMoveAllies = workingUnits.filter((u) => u.type === "ally");
+      const postMoveAllies = workingUnits.filter((u) => u.type === "ally" && u.hp > 0);
       const postMoveChoice = movedFreshEnemy
         ? getEnemyAttackChoice(movedFreshEnemy, postMoveAllies, activeMap)
         : null;
@@ -12317,8 +12315,10 @@ export default function App() {
       setLogs((p) => [...allyStartMessages, ...p]);
     }
 
-    if (!workingUnits.some((u) => u.id === "hero")) {
+    if (getBattleOutcome(selectedStage, workingUnits) === "defeat") {
       setUnits(workingUnits);
+      playSfx("defeat");
+      showDefeatDirecting();
       declareDefeat();
       return;
     }
@@ -12417,7 +12417,7 @@ export default function App() {
     const hazardResult = resolveHazards(nextUnits, hazards);
     setHazards([]);
 
-    if (!hazardResult.units.some((u) => u.id === "hero")) {
+    if (getBattleOutcome(selectedStage, hazardResult.units) === "defeat") {
       setUnits(hazardResult.units);
       setLogs((p) => ["적 턴 시작.", ...hazardResult.messages, ...p]);
       playSfx("defeat");
@@ -12473,7 +12473,7 @@ export default function App() {
 
     if (round >= activeRoundLimit) {
       playSfx("defeat");
-      showDefeatDirecting();
+      showDefeatDirecting("작전 제한 턴을 초과했습니다.");
       setLogs((p) => [`라운드 제한 ${activeRoundLimit}R을 넘겼습니다. 작전 실패.`, ...p]);
       declareDefeat();
       setTurnBusy(false);
@@ -13330,7 +13330,7 @@ export default function App() {
     const phaseResult = triggerBossPhases(nextUnits);
     nextUnits = phaseResult.units;
 
-    if (phaseResult.messages.length > 0 && nextUnits.some(unit => unit.id === "hero" && unit.hp > 0)) {
+    if (phaseResult.messages.length > 0 && nextUnits.some(unit => unit.type === "ally" && unit.hp > 0)) {
       const phaseBoss = nextUnits.find(unit => unit.type === "boss" && unit.phase2 && unit.hp > 0);
       if (phaseBoss && getBattleOutcome(selectedStage, nextUnits) !== "victory") {
         setUnits(nextUnits);
@@ -13360,10 +13360,9 @@ export default function App() {
     setBattleResolving(false);
 
     const enemiesLeft = nextUnits.filter((u) => u.type !== "ally");
-    const heroAlive = nextUnits.some((u) => u.id === "hero");
     const attackerAlive = nextUnits.some((u) => u.id === battle.attacker.id);
 
-    if (!heroAlive) {
+    if (getBattleOutcome(selectedStage, nextUnits) === "defeat") {
       setUnits(nextUnits);
       playSfx("defeat");
       showDefeatDirecting();
@@ -18665,7 +18664,7 @@ export default function App() {
           )}
           {result === "defeat" && (
             <DefeatDialog stageTitle={selectedStage?.title}
-              reason={units.some(unit => unit.id === "hero" && unit.hp > 0) ? "작전 제한 턴을 초과했습니다." : "카일이 쓰러졌습니다."}
+              reason={units.some(unit => unit.type === "ally" && unit.hp > 0) ? "작전 제한 턴을 초과했습니다." : "아군이 전멸했습니다."}
               onRetry={() => startStage(stages.find(stage => stage.id === selectedStage.id) || selectedStage)}
               onCamp={() => returnToCampAfterDefeat()}
               onCampaign={() => returnToCampAfterDefeat("campaign")} />

@@ -1,4 +1,4 @@
-import { saveBattle as clickBattleSave } from './qa-battle-tools.mjs';
+import { ensureBattleInformationOpen, saveBattle as clickBattleSave } from './qa-battle-tools.mjs';
 import { qaBrowserOptions } from './qa-browser.mjs';
 import { startDeploymentBattle, waitForDeployment } from './qa-deployment-flow.mjs';
 import assert from 'node:assert/strict';
@@ -10,6 +10,7 @@ import { preview } from 'vite';
 import { getBattlefieldPlan } from '../src/data/battlefieldPlans.js';
 import { webBuildInfo } from './update-build-info.mjs';
 import { stages } from '../src/data/stages.js';
+import { getStageRoundLimit } from '../src/engine/stageRules.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const output = path.resolve(process.env.CHEONSU_DEPLOYMENT_QA_OUT || path.join(root, 'tmp/deployment-qa'));
@@ -259,6 +260,66 @@ async function runViewport(base, viewport) {
     assert.equal(resumed.turn, ongoing.turn);
     result.checks.push('진행 중 전투의 좌표·HP·상태·장비·턴·행동 정보 보존');
 
+    // 이전 저장이 쓰러진 카일을 삭제하거나 HP 0으로 남겨 둔 두 형태를 보존합니다.
+    // 다른 아군의 실제 대기·적 턴 처리를 거쳐 전투가 계속되는지도 확인합니다.
+    for (const representation of ['removed', 'zero-hp']) {
+      const fallenHero = structuredClone(started);
+      fallenHero.supportDialoguesSeen = { hero_lina: [], hero_bram: [], lina_bram: [] };
+      fallenHero.units = fallenHero.units.flatMap(unit => unit.id === 'hero'
+        ? representation === 'removed' ? [] : [{ ...unit, hp: 0 }]
+        : [{ ...unit, status: unit.status || [] }]);
+      fallenHero.selectedUnit = 'hero';
+      await load(fallenHero);
+      await page.locator('.world-battlefield .unit[data-unit-id="bram"]').waitFor();
+      await page.waitForFunction(() => document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true', null, { timeout: 120000 });
+      assert.equal(await page.locator('.defeat-dialog[open],.victory-dialog[open]').count(), 0, `${representation}: 카일만 쓰러진 전투는 결과 대화창을 열지 않습니다`);
+      assert.deepEqual(await saved(), fallenHero, '카일이 쓰러진 저장을 이어하기만 해도 저장 데이터를 덮어쓰지 않습니다');
+      const restored = await saveBattle(page);
+      assert.equal(restored.units.some(unit => unit.id === 'hero' && unit.hp > 0), false, '이어하기가 쓰러진 카일을 자동 부활시키지 않습니다');
+      assert.deepEqual(restored.units.filter(unit => unit.id !== 'hero'), fallenHero.units.filter(unit => unit.id !== 'hero'), '나머지 아군과 적의 HP·좌표·행동 상태를 보존합니다');
+      for (const field of ['party', 'gold', 'inventory', 'clearedStages', 'gearInventory', 'gearEnhance', 'supportPoints', 'supportDialoguesSeen']) assert.deepEqual(restored[field], fallenHero[field], `카일이 쓰러진 저장의 ${field} 보존`);
+      await page.locator('.world-battlefield .unit[data-unit-id="bram"]').click();
+      await page.locator('.cinematic-command-bar .cmd-wait').click();
+      const waited = await saveBattle(page);
+      assert.equal(waited.units.find(unit => unit.id === 'bram').acted, true, '카일 없이 남은 아군의 대기 명령을 처리합니다');
+      assert.equal(await page.locator('.defeat-dialog[open]').count(), 0, '카일 없이 아군이 행동해도 조기 패배하지 않습니다');
+      if (representation === 'removed') {
+        await ensureBattleInformationOpen(page);
+        await page.locator('.battle-end-turn-float').click();
+        await page.locator('.cinematic-stage-card').getByText(`턴 ${fallenHero.round + 1} / ${getStageRoundLimit(fallenHero.selectedStage)}`, { exact: true }).waitFor({ timeout: 120000 });
+        const afterEnemyTurn = await saveBattle(page);
+        assert.equal(afterEnemyTurn.turn, 'ally', '카일 없이 실제 적 AI 행동을 마친 뒤 다음 아군 턴을 시작합니다');
+        assert.equal(afterEnemyTurn.round, fallenHero.round + 1);
+        assert.ok(afterEnemyTurn.units.some(unit => unit.type === 'ally' && unit.id !== 'hero' && unit.hp > 0));
+        assert.equal(afterEnemyTurn.units.some(unit => unit.id === 'hero' && unit.hp > 0), false);
+        assert.equal(await page.locator('.defeat-dialog[open]').count(), 0);
+      }
+    }
+    result.checks.push('카일 사망 저장 두 형태의 진행도·유닛 보존', '카일 없이 남은 아군의 실제 대기·적 AI 처리·다음 아군 턴 진입');
+
+    const extendedRoundLimit = getStageRoundLimit(started.selectedStage);
+    const formerRoundLimit = Math.floor(extendedRoundLimit / 1.5);
+    for (const battleRound of [formerRoundLimit + 1, extendedRoundLimit]) {
+      const extendedBattle = structuredClone(started);
+      extendedBattle.round = battleRound;
+      extendedBattle.turn = 'ally';
+      extendedBattle.units = extendedBattle.units.map(unit => ({ ...unit, status: unit.status || [], acted: false }));
+      await load(extendedBattle);
+      await page.locator('.world-battlefield .unit[data-unit-id="hero"]').waitFor();
+      const resumedRound = await saveBattle(page);
+      assert.equal(resumedRound.round, battleRound);
+      assert.equal(await page.locator('.defeat-dialog[open]').count(), 0, `${battleRound}라운드: 확대된 제한 안의 아군 턴을 이어할 수 있습니다`);
+      assert.deepEqual(resumedRound.units, extendedBattle.units, '라운드 제한 확대가 기존 유닛 정보를 변경하지 않습니다');
+      await ensureBattleInformationOpen(page);
+      assert.equal(await page.locator('.cinematic-stage-card > span').innerText(), `턴 ${battleRound} / ${extendedRoundLimit}`, '정보창에 확대된 제한을 표시합니다');
+      if (battleRound === extendedRoundLimit) {
+        await page.locator('.battle-end-turn-float').click();
+        await page.locator('.defeat-dialog[open]').waitFor();
+        assert.equal(await page.locator('.victory-dialog[open]').count(), 0, '최종 허용 아군 턴까지 목표를 달성하지 못하면 시간 초과로 패배합니다');
+      }
+    }
+    result.checks.push('기존 제한 이후·새 제한 마지막 아군 턴 이어하기 허용', '새 제한의 아군 턴 종료 시 시간 초과 패배');
+
     const tampered = structuredClone(freshCampaign);
     tampered.screen = 'deployment';
     tampered.selectedStage = freshCampaign.selectedStage || { id: 1 };
@@ -369,7 +430,7 @@ async function runViewport(base, viewport) {
         localStorage.setItem(key, JSON.stringify({ ...settings, cutsceneMode: 'off' }));
       }, settingsKey);
       const defeated = structuredClone(started);
-      defeated.units = defeated.units.filter(unit => unit.id !== 'hero');
+      defeated.units = defeated.units.filter(unit => unit.type !== 'ally');
       await load(defeated);
       await page.locator('.defeat-dialog[open]').waitFor();
       await button('재도전').click();

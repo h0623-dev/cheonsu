@@ -95,7 +95,9 @@ for (const stage of expansion) test(`Expansion ${stage.id}: 15 allies deploy saf
   assert.equal(getBattleOutcome(stage, deployed), null);
   assert.equal(getBattleOutcome(stage, deployed.filter(unit => unit.id !== boss.id)), 'victory');
   assert.equal(getBattleOutcome(stage, deployed.filter(unit => unit.type === 'ally')), 'victory');
-  assert.equal(getBattleOutcome(stage, deployed.filter(unit => unit.id !== 'hero' && unit.id !== boss.id)), 'defeat');
+  assert.equal(getBattleOutcome(stage, deployed.filter(unit => unit.id !== 'hero')), null);
+  assert.equal(getBattleOutcome(stage, deployed.filter(unit => unit.id !== 'hero' && unit.id !== boss.id)), 'victory');
+  assert.equal(getBattleOutcome(stage, deployed.filter(unit => unit.type !== 'ally')), 'defeat');
   assert.equal(JSON.stringify(stage), initial, 'Building and deploying never mutates authored chapter data');
 });
 
