@@ -3,7 +3,7 @@ importScripts('/art/skills-v1/precache.js');
 importScripts('/art/characters-v2/precache.js');
 importScripts('/art/characters-v3/precache.js');
 importScripts('/art/village-walk-v2/precache.js');
-const CACHE_NAME = "cheonsu-v1-99-165";
+const CACHE_NAME = "cheonsu-v1-99-166";
 const FINAL_STAGE_MAPS = Array.from(
   { length: 30 },
   (_, index) => `/maps/concept/stage_${index + 1}_frontier_final.png`

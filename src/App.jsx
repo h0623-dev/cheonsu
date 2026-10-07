@@ -59,6 +59,8 @@ import { getTurnCameraTarget, getCellScrollTarget } from "./engine/battleCamera.
 import { preloadCombatArt, getCombatTiming, getCombatChoreography } from "./data/combatArt.js";
 import { getBossSpriteKey, getBossSplash } from "./data/bossArt.js";
 import BossSplash from "./components/BossSplash.jsx";
+import { getBossPresentation } from "./data/bossPresentation.js";
+import "./components/boss-presence.css";
 import { stages } from "./data/stages.js";
 import { EQUIPMENT } from "./data/equipment.js";
 import { STATUS_INFO } from "./data/statuses.js";
@@ -110,7 +112,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.165";
+const SAVE_VERSION = "1.99.166";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -7963,7 +7965,9 @@ const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, un
       ? (unit.type === "boss" ? 0.94 : 0.84) + unitDepth * (unit.type === "boss" ? 0.22 : 0.24)
       : 1;
     const unitShadowAlpha = unit ? 0.38 + unitDepth * 0.26 : 0.55;
+    const bossPresence = unit?.type === "boss" ? getBossPresentation(stageId, unit) : null;
     const unitFreeMotionStyle = unit ? {
+      "--boss-accent": bossPresence?.accent,
       "--unit-idle-delay": `${-(unitSeed % 1300)}ms`,
       "--unit-idle-up": `${-(2 + (unitSeed % 3))}px`,
       "--unit-idle-down": `${unitSeed % 2}px`,
@@ -8132,6 +8136,7 @@ const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, un
                 "--action-duration": `${unitActionMotion.duration}ms`,
               } : unitFreeMotionStyle}
             >
+              {unit.type === "boss" && <span className="boss-presence-seal" aria-hidden="true" />}
               {unitActionMotion && (
                 <>
                   <span className={`unit-action-burst burst-${unitActionMotion.motionKey || "sword"}`} />
@@ -8141,7 +8146,7 @@ const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, un
               <img src={getBattleMapUnitSprite(unit, facing)} data-facing={facing} style={{ '--facing-flip': getFacingArt(facing).flip }} alt={unit.name} onError={(event) => handleBattleMapUnitImageError(event, unit)} />
               <span className="unit-emoji-fallback">{unit.icon}</span>
               <span className={`unit-map-marker ${unit.type === "ally" ? "unit-map-ally" : unit.type === "boss" ? "unit-map-boss" : "unit-map-enemy"}`}>
-                {unit.type === "ally" ? "A" : unit.type === "boss" ? "B" : "E"}
+                {unit.type === "ally" ? "A" : unit.type === "boss" ? "보스" : "E"}
               </span>
             </div>
             <div className={`map-hp-strip ${unit.type === "ally" ? "hp-ally" : unit.type === "boss" ? "hp-boss" : "hp-enemy"} ${movingOverlayClassName}`}>
@@ -8298,6 +8303,7 @@ export default function App() {
   const [battleResolving, setBattleResolving] = useState(false);
   const [combatCutscene, setCombatCutscene] = useState(null);
   const [bossCutscene, setBossCutscene] = useState(null);
+  const bossCutsceneDoneRef = useRef(null);
   const [result, setResult] = useState(null);
   const [itemOpen, setItemOpen] = useState(false);
   const [skillChoiceOpen, setSkillChoiceOpen] = useState(false);
@@ -8560,6 +8566,7 @@ export default function App() {
   const enemiesAlive = units.filter((unit) => unit.type !== "ally" && unit.hp > 0);
   const alliesAlive = units.filter((unit) => unit.type === "ally" && unit.hp > 0);
   const activeBoss = enemiesAlive.find((unit) => unit.type === "boss");
+  const activeBossPresentation = activeBoss ? getBossPresentation(activeStage, activeBoss) : null;
   const bossHpRate =
     activeBoss && activeBoss.maxHp
       ? Math.max(0, Math.min(100, (activeBoss.hp / activeBoss.maxHp) * 100))
@@ -8865,12 +8872,12 @@ export default function App() {
   }, [settings.battleSpeed]);
 
   // Callers pass base milliseconds; stored durations and movement configs are already scaled.
-  const scheduleBattleVisual = (callback, duration) => {
+  const scheduleBattleVisual = (callback, duration, unscaled = false) => {
     const epoch = battleAsyncRef.current.capture();
     const timer = window.setTimeout(() => {
       visualTimersRef.current.delete(timer);
       if (battleAsyncRef.current.current(epoch)) callback();
-    }, scaleBattleTime(duration, battleSpeedRef.current));
+    }, unscaled ? duration : scaleBattleTime(duration, battleSpeedRef.current));
     visualTimersRef.current.add(timer);
     return timer;
   };
@@ -10243,6 +10250,7 @@ export default function App() {
 
   const clearVisuals = () => {
     battleAsyncRef.current.cancelAll();
+    bossCutsceneDoneRef.current?.finish();
     actionResolvingRef.current = false;
     setBattleResolving(false);
     setTurnBusy(false);
@@ -10303,29 +10311,29 @@ export default function App() {
     );
   };
 
-  const showBossCutscene = (boss, type = "intro", duration = 1850) => {
-    if (!boss) return;
-
+  const showBossCutscene = (boss, type = "intro", duration = 4200, stage = activeStage) => {
+    if (!boss) return Promise.resolve();
+    bossCutsceneDoneRef.current?.finish();
     const id = `${Date.now()}-${Math.random()}`;
     const isPhase = type === "phase2";
-
-    setBossCutscene({
-      id,
-      boss,
-      type,
-      label: isPhase ? "PHASE 2" : "BOSS",
+    const presentation = getBossPresentation(stage, boss);
+    setStageBanner(null);
+    setTurnPhaseBanner(null);
+    setBossCutscene({ id, boss, type, stage, presentation,
       title: isPhase ? `${boss.name} 각성` : `${boss.name} 등장`,
-      subtitle: isPhase
-        ? `${boss.skill || "어둠의 파동"}이 전장을 뒤덮습니다.`
-        : "강력한 적장이 전장에 모습을 드러냈습니다.",
-    });
-
+      subtitle: isPhase ? presentation.phase.threat : presentation.threat });
     playSfx(isPhase ? "phase" : "boss");
-    triggerScreenShake(true);
-
-    scheduleBattleVisual(() => {
-      setBossCutscene((current) => (current?.id === id ? null : current));
-    }, duration);
+    // Text remains readable at every battle speed; dismissal resumes play early.
+    return new Promise(resolve => {
+      const finish = () => {
+        if (bossCutsceneDoneRef.current?.id !== id) return;
+        bossCutsceneDoneRef.current = null;
+        setBossCutscene(current => current?.id === id ? null : current);
+        resolve();
+      };
+      bossCutsceneDoneRef.current = { id, finish };
+      scheduleBattleVisual(finish, duration, true);
+    });
   };
 
   const showTurnPhaseBanner = (side, nextRound = round) => {
@@ -10540,8 +10548,8 @@ export default function App() {
     const bossUnit = battleStage.units.find((unit) => unit.type === "boss");
     if (bossUnit) {
       const splash = new Image();
-      splash.src = getBossSplash(bossUnit).src;
-      scheduleBattleVisual(() => showBossCutscene(bossUnit, "intro", 1850), 720);
+      splash.src = getBossSplash(bossUnit, battleStage).bodySrc;
+      scheduleBattleVisual(() => showBossCutscene(bossUnit, "intro", 4200, battleStage), 720);
     }
   };
 
@@ -12435,15 +12443,10 @@ export default function App() {
     const processedUnits = phaseResult.units;
     const enemiesLeft = processedUnits.filter((u) => u.type !== "ally");
 
+    let bossEntranceFinished = Promise.resolve();
     if (phaseResult.messages.length > 0) {
       const phaseBoss = phaseResult.units.find((unit) => unit.type === "boss" && unit.phase2 && unit.hp > 0);
-      setPhaseBanner("보스 2페이즈");
-      playSfx("phase");
-      triggerScreenShake(true);
-      if (phaseBoss) {
-        showBossCutscene(phaseBoss, "phase2", 1900);
-      }
-      scheduleBattleVisual(() => setPhaseBanner(null), 1400);
+      if (phaseBoss) bossEntranceFinished = showBossCutscene(phaseBoss, "phase2", 3400);
     }
 
     setUnits(processedUnits);
@@ -12478,7 +12481,7 @@ export default function App() {
     }
 
     const epoch = battleAsyncRef.current.capture();
-    void battleAsyncRef.current.wait(battleSpeedRef.current.enemyDelayMs, epoch).then(ready => {
+    void bossEntranceFinished.then(() => battleAsyncRef.current.wait(battleSpeedRef.current.enemyDelayMs, epoch)).then(ready => {
       if (ready) return executeEnemyTurn(processedUnits);
     }).catch(() => {
       if (!battleAsyncRef.current.current(epoch)) return;
@@ -13327,11 +13330,13 @@ export default function App() {
     const phaseResult = triggerBossPhases(nextUnits);
     nextUnits = phaseResult.units;
 
-    if (phaseResult.messages.length > 0) {
-      setPhaseBanner("보스 2페이즈");
-      playSfx("phase");
-      triggerScreenShake(true);
-      scheduleBattleVisual(() => setPhaseBanner(null), 1400);
+    if (phaseResult.messages.length > 0 && nextUnits.some(unit => unit.id === "hero" && unit.hp > 0)) {
+      const phaseBoss = nextUnits.find(unit => unit.type === "boss" && unit.phase2 && unit.hp > 0);
+      if (phaseBoss && getBattleOutcome(selectedStage, nextUnits) !== "victory") {
+        setUnits(nextUnits);
+        await showBossCutscene(phaseBoss, "phase2", 3400);
+        if (!battleAsyncRef.current.current(epoch)) return;
+      }
     }
 
     setLogs((p) => [
@@ -14643,7 +14648,8 @@ export default function App() {
       )}
       {turnBusy && <div className="turn-busy-banner">{turn === "enemy" ? "적 행동 중..." : "이동 처리 중..."}</div>}
       {bossCutscene && (
-        <BossSplash key={bossCutscene.id} scene={bossCutscene} fallbackSrc={getUnitPortrait(bossCutscene.boss)} effectsEnabled={settings.effectsOn} />
+        <BossSplash key={bossCutscene.id} scene={bossCutscene} fallbackSrc={getUnitPortrait(bossCutscene.boss)} effectsEnabled={settings.effectsOn}
+          onDismiss={() => { if (bossCutsceneDoneRef.current?.id === bossCutscene.id) bossCutsceneDoneRef.current.finish(); }} />
       )}
       {combatCutscene && (
         <CombatScene key={combatCutscene.id} scene={combatCutscene}
@@ -17839,7 +17845,8 @@ export default function App() {
             </div>
 
             {activeBoss && (
-              <div className={`boss-tracker ${activeBoss.phase2 ? "phase2" : ""}`}>
+              <div className={`boss-tracker boss-presence-tracker ${activeBoss.phase2 ? "phase2" : ""}`} style={{ "--boss-accent": activeBossPresentation.accent }}>
+                <p className="boss-presence-title">{activeBossPresentation.epithet}</p>
                 <div className="boss-tracker-head">
                   <span>{activeBoss.phase2 ? "2페이즈 보스" : "보스"}</span>
                   <strong>{activeBoss.name}</strong>
@@ -17847,7 +17854,10 @@ export default function App() {
                 </div>
                 <div className="boss-tracker-bar">
                   <i style={{ width: `${bossHpRate}%` }} />
+                  {!activeBoss.phase2 && <span className="boss-phase-threshold" title="체력 절반 이하에서 각성" />}
                 </div>
+                <p className="boss-presence-threat">{activeBoss.phase2 ? activeBossPresentation.phase.threat : activeBossPresentation.threat}</p>
+                {activeBossPresentation.hazard && <p className="boss-presence-hazard">{activeBossPresentation.hazard}</p>}
               </div>
             )}
 

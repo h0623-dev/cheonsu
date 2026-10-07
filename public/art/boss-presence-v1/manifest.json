@@ -1,0 +1,13 @@
+{
+  "version": "1.99.166",
+  "purpose": "보스 등장·각성 장면용 전신 일러스트. 기존 전투 모션과 대기 외형은 유지합니다.",
+  "creation": "기존 천수 캐릭터 및 아군 그림체를 참조해 이미지 생성 도구로 신규 제작했습니다. 다른 게임의 원화·로고·캐릭터를 사용하지 않았습니다.",
+  "format": "투명 알파를 보존한 WebP, 품질 90",
+  "entries": {
+    "boss_commander": "boss_commander.webp",
+    "boss_frost": "boss_frost.webp",
+    "boss_ember": "boss_ember.webp",
+    "boss_oracle": "boss_oracle.webp",
+    "boss_abyss": "boss_abyss.webp"
+  }
+}

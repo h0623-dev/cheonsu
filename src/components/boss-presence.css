@@ -1,0 +1,38 @@
+.boss-presence-seal {
+  position: absolute;
+  left: 17%;
+  bottom: 1%;
+  width: 66%;
+  height: 22%;
+  pointer-events: none;
+  border: 2px solid var(--boss-accent, #e7c98b);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, transparent 42%, color-mix(in srgb, var(--boss-accent, #e7c98b) 35%, transparent));
+  box-shadow: 0 0 9px color-mix(in srgb, var(--boss-accent, #e7c98b) 40%, transparent);
+}
+.boss-presence-seal::after {
+  content: '';
+  position: absolute;
+  inset: 20% 10%;
+  border: 1px solid var(--boss-accent, #e7c98b);
+  border-radius: 50%;
+  opacity: .65;
+}
+.sprite-unit .unit-map-boss {
+  width: auto;
+  min-width: 24px;
+  padding-inline: 4px;
+  border-color: var(--boss-accent, #e7c98b);
+  background: #211c26;
+  color: var(--boss-accent, #e7c98b);
+  font-size: 9px;
+}
+.phase2-unit .boss-presence-seal { border-width: 3px; box-shadow: 0 0 12px var(--boss-accent, #e7c98b); }
+.boss-presence-tracker.boss-tracker { border-color: var(--boss-accent); background: linear-gradient(115deg, #211d25, #101c21); }
+.boss-presence-title { margin: 0 0 5px; color: var(--boss-accent); font-size: 11px; font-weight: 800; }
+.boss-presence-tracker .boss-tracker-bar { position: relative; }
+.boss-presence-tracker .boss-tracker-bar i { background: linear-gradient(90deg, #9e4c53, var(--boss-accent)); }
+.boss-phase-threshold { position: absolute; left: 50%; inset-block: 0; width: 1px; background: #fff9; }
+.boss-presence-threat, .boss-presence-hazard { margin: 7px 0 0; font-size: 11px; line-height: 1.5; overflow-wrap: anywhere; }
+.boss-presence-threat { color: #e5ddd4; }
+.boss-presence-hazard { color: #cabfa7; }

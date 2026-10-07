@@ -1,50 +1,331 @@
 .boss-splash-overlay {
-  position: fixed; inset: 0; z-index: 220;
-  display: grid; place-items: center;
+  position: fixed;
+  inset: 0;
+  z-index: 220;
+  display: grid;
+  place-items: center;
   padding: max(12px, env(safe-area-inset-top), var(--native-safe-top, 0px)) max(12px, env(safe-area-inset-right), var(--native-safe-right, 0px)) max(12px, env(safe-area-inset-bottom), var(--native-safe-bottom, 0px)) max(12px, env(safe-area-inset-left), var(--native-safe-left, 0px));
-  background: rgb(5 10 13 / 86%); pointer-events: auto;
-  animation: boss-splash-reveal 240ms ease-out both;
+  background: rgb(3 7 10 / 93%);
+  color: #f6f0df;
+  pointer-events: auto;
+  outline: none;
+  animation: boss-splash-reveal 300ms ease-out both;
 }
 .boss-splash {
-  position: relative; width: min(560px, 100%); height: 100%; max-height: 820px;
-  min-height: 0; overflow: hidden; border: 1px solid var(--boss-accent);
-  border-radius: 6px; background: #11181d; isolation: isolate;
+  position: relative;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  width: min(1120px, 100%);
+  height: min(660px, 100%);
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  isolation: isolate;
+  border-block: 1px solid color-mix(in srgb, var(--boss-accent) 65%, transparent);
+  background: #081014;
+  box-shadow: 0 24px 90px #0008;
 }
-.boss-splash-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; animation: boss-splash-portrait 1800ms ease-out both; }
-.boss-splash-art.is-fallback { object-fit: contain; }
-.boss-splash-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(6 12 17 / 40%), transparent 16%, transparent 49%, rgb(6 12 17 / 85%) 78%, #060c11); }
-.boss-splash-heading { position: absolute; top: 18px; left: 16px; right: 16px; display: flex; align-items: center; justify-content: flex-start; gap: 8px; color: #fff7e6; font-size: 12px; font-weight: 800; letter-spacing: 0; text-shadow: 0 1px 4px #000; }
-.boss-splash-heading span { width: 18px; height: 1px; background: var(--boss-accent); }
-.boss-splash-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; color: #f7f7f3; }
-.boss-splash-kicker { margin: 0 0 7px; color: var(--boss-accent); font-size: 12px; font-weight: 700; }
-.boss-splash-caption h2 { margin: 0; font-size: 32px; line-height: 1.2; letter-spacing: 0; overflow-wrap: anywhere; color: #fffaf0; text-shadow: 0 2px 8px #060c11; }
-.boss-splash-description { margin: 10px 0 0; font-size: 13px; line-height: 1.5; color: #d7dfe1; overflow-wrap: anywhere; }
-.boss-splash-stats { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 12px; padding-top: 14px; margin: 17px 0 0; border-top: 1px solid color-mix(in srgb, var(--boss-accent) 45%, transparent); }
-.boss-splash-stats div { min-width: 0; }
-.boss-splash-stats dt { color: #b8c9cc; font-size: 11px; }
-.boss-splash-stats dd { margin: 4px 0 0; font-size: 20px; line-height: 1.4; font-weight: 800; overflow-wrap: anywhere; }
-.boss-splash-stats small { font-size: 12px; font-weight: 400; color: #bdc9cc; }
-.is-awakened .boss-splash { border-width: 2px; }
-.is-awakened .boss-splash-heading { color: var(--boss-accent); }
+.boss-splash::before, .boss-splash::after {
+  content: '';
+  position: absolute;
+  z-index: 3;
+  inset-inline: 0;
+  height: 7px;
+  background: #030708;
+  pointer-events: none;
+}
+.boss-splash::before { top: 0; }
+.boss-splash::after { bottom: 0; }
+.boss-splash-backdrop {
+  position: absolute;
+  z-index: -3;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  opacity: .54;
+  animation: boss-splash-establish 3.2s ease-out both;
+}
+.boss-splash-shade {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgb(4 11 15 / 24%) 14%, rgb(4 10 14 / 69%) 51%, rgb(4 10 14 / 96%) 95%), linear-gradient(180deg, #050b11 0%, transparent 22%, transparent 60%, #04090e 100%);
+}
+.boss-splash-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-width: 0;
+  padding: 30px 36px 12px;
+  text-shadow: 0 2px 5px #000;
+}
+.boss-splash-rank {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  color: var(--boss-accent);
+}
+.boss-splash-rank > span {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  transform: rotate(45deg);
+  border: 1px solid var(--boss-accent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--boss-accent) 35%, transparent);
+}
+.boss-splash-stage {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-width: 0;
+  margin: 0;
+  color: #d6dce0;
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.boss-splash-stage span:first-child { flex-shrink: 0; color: #aab7bb; }
+.boss-splash-scene {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-width: 0;
+  min-height: 0;
+}
+.boss-splash-figure { position: relative; display: grid; grid-template-rows: minmax(0, 1fr) auto; min-width: 0; min-height: 0; overflow: hidden; isolation: isolate; }
+.boss-splash-body {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  isolation: isolate;
+  animation: boss-splash-arrival 760ms cubic-bezier(.16, .7, .25, 1) both;
+}
+.boss-splash-atmosphere {
+  margin: 0;
+  padding: 4px 28px 12px;
+  color: #b6c6cbd6;
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  text-shadow: 0 2px 5px #000;
+}
+.boss-splash-art {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 10px 6px;
+  object-fit: contain;
+  object-position: 50% 100%;
+  filter: drop-shadow(0 14px 12px #0009);
+  transform-origin: center bottom;
+  transform: translateY(var(--boss-body-offset, 0%)) scale(var(--boss-body-scale, 1));
+}
+.boss-splash-art.is-fallback { padding: 18px; }
+.boss-splash-backlight {
+  position: absolute;
+  inset: 4% 4% 9%;
+  z-index: -1;
+  background: radial-gradient(ellipse at 50% 65%, color-mix(in srgb, var(--boss-accent) 25%, transparent), transparent 68%);
+}
+.boss-splash-ground {
+  position: absolute;
+  z-index: -1;
+  bottom: 4%;
+  left: 12%;
+  width: 76%;
+  height: 14%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #05090dcc 5%, color-mix(in srgb, var(--boss-accent) 23%, transparent) 42%, transparent 72%);
+  border-bottom: 1px solid color-mix(in srgb, var(--boss-accent) 24%, transparent);
+}
+.boss-splash-sigil { position: absolute; inset: 0; display: grid; place-items: center; color: var(--boss-accent); font-size: 80px; opacity: .5; }
+.boss-splash-motes { position: absolute; inset: 0; pointer-events: none; }
+.boss-splash-motes i {
+  position: absolute;
+  left: 18%;
+  bottom: 19%;
+  width: 2px;
+  height: 2px;
+  background: var(--boss-accent);
+  opacity: .55;
+  animation: boss-splash-drift 3.2s ease-out both;
+}
+.boss-splash-motes i:nth-child(2) { left: 79%; bottom: 38%; animation-delay: 120ms; }
+.boss-splash-motes i:nth-child(3) { left: 27%; bottom: 71%; animation-delay: 200ms; }
+.boss-splash-motes i:nth-child(4) { left: 86%; bottom: 17%; animation-delay: 80ms; }
+.boss-splash-motes i:nth-child(5) { left: 63%; bottom: 81%; animation-delay: 300ms; }
+.boss-splash-caption {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  min-height: 0;
+  padding: 22px 44px 24px 16px;
+  color: #f7f3e8;
+}
+.boss-splash-kicker {
+  margin: 0 0 12px;
+  color: var(--boss-accent);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.boss-splash-caption h2 {
+  margin: 0;
+  color: #fff8e8;
+  font-size: clamp(32px, 4.5vw, 54px);
+  font-weight: 900;
+  line-height: 1.14;
+  letter-spacing: -.035em;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  text-shadow: 0 3px 14px #000b;
+}
+.boss-splash-rule { position: relative; width: 70px; height: 1px; margin: 22px 0; background: var(--boss-accent); }
+.boss-splash-rule span { position: absolute; right: 0; top: -2px; width: 5px; height: 5px; transform: rotate(45deg); background: var(--boss-accent); }
+.boss-splash-quote {
+  margin: 0;
+  color: #ebe9df;
+  font-size: clamp(14px, 1.5vw, 18px);
+  font-weight: 500;
+  line-height: 1.75;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.boss-splash-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid #bccacf26;
+}
+.boss-splash-warning-mark {
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+  margin-top: 2px;
+  border: 1px solid color-mix(in srgb, var(--boss-accent) 65%, transparent);
+  color: var(--boss-accent);
+  font-size: 11px;
+  font-weight: 900;
+}
+.boss-splash-warning-label { margin: 0 0 4px; color: var(--boss-accent); font-size: 10px; font-weight: 700; letter-spacing: .04em; }
+.boss-splash-description { margin: 0; color: #c6d1d5; font-size: 12px; line-height: 1.65; word-break: keep-all; overflow-wrap: anywhere; }
+.boss-splash-footer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-width: 0;
+  padding: 12px 36px 22px;
+  border-top: 1px solid #bdced41a;
+  background: #04090e99;
+}
+.boss-splash-stats { margin: 0; }
+.boss-splash-stats > div { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.boss-splash-stats dt { color: #a6b5bc; font-size: 11px; }
+.boss-splash-stats dd { margin: 0; color: #ece9df; font-size: 13px; font-variant-numeric: tabular-nums; }
+.boss-splash-stats dd > span { color: #98a9b2; font-size: 11px; }
+.boss-splash .boss-splash-dismiss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-width: 134px;
+  min-height: 44px;
+  margin: 0;
+  padding: 10px 16px;
+  border: 1px solid color-mix(in srgb, var(--boss-accent) 70%, transparent);
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--boss-accent) 12%, #081014);
+  color: #fff6df;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.4;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.boss-splash .boss-splash-dismiss span { color: var(--boss-accent); font-size: 18px; }
+.boss-splash .boss-splash-dismiss:focus-visible { outline: 2px solid #fff8e6; outline-offset: 3px; }
+.boss-splash .boss-splash-dismiss:active { background: color-mix(in srgb, var(--boss-accent) 27%, #081014); }
+.boss-splash-overlay.is-awakened .boss-splash { border-block-width: 2px; }
+.boss-splash-overlay.is-awakened .boss-splash-backlight { background: radial-gradient(ellipse at 50% 65%, color-mix(in srgb, var(--boss-accent) 37%, transparent), transparent 69%); }
 @keyframes boss-splash-reveal { from { opacity: 0; } to { opacity: 1; } }
-@keyframes boss-splash-portrait { from { transform: scale(1.045); } to { transform: scale(1); } }
-.boss-splash-overlay.is-still, .is-still .boss-splash-art { animation: none; }
-@media (max-width: 380px), (max-height: 620px) {
-  .boss-splash-caption { padding: 16px; }
-  .boss-splash-caption h2 { font-size: 26px; }
-  .boss-splash-description { font-size: 12px; margin-top: 6px; }
-  .boss-splash-stats { margin-top: 10px; padding-top: 10px; }
+@keyframes boss-splash-arrival { from { opacity: 0; transform: translateX(-14px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes boss-splash-establish { from { transform: scale(1.04); } to { transform: scale(1); } }
+@keyframes boss-splash-drift { from { transform: translateY(20px); opacity: 0; } 35% { opacity: .55; } to { transform: translateY(-16px); opacity: .2; } }
+.boss-splash-overlay.is-still, .boss-splash-overlay.is-still * { animation: none; }
+
+@media (max-width: 600px) and (orientation: portrait) {
+  .boss-splash { height: min(750px, 100%); }
+  .boss-splash-heading { align-items: flex-start; gap: 12px; padding: 22px 18px 6px; }
+  .boss-splash-rank { gap: 7px; font-size: 10px; line-height: 1.5; }
+  .boss-splash-stage { flex-direction: column; align-items: flex-end; gap: 1px; max-width: 53%; font-size: 10px; }
+  .boss-splash-scene { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(120px, 1fr) auto; }
+  .boss-splash-shade { background: linear-gradient(180deg, #050b11 0%, rgb(4 11 15 / 18%) 19%, rgb(4 11 15 / 30%) 43%, #050c13 66%, #04090e 100%); }
+  .boss-splash-backdrop { background-position: 42% 30%; opacity: .6; }
+  .boss-splash-figure { margin: 0 16px; }
+  .boss-splash-atmosphere { display: none; }
+  .boss-splash-art { padding: 0 10px; object-position: 50% 100%; }
+  .boss-splash-caption { justify-content: flex-start; padding: 4px 22px 20px; }
+  .boss-splash-kicker { margin-bottom: 6px; font-size: 12px; }
+  .boss-splash-caption h2 { font-size: clamp(27px, 8vw, 38px); }
+  .boss-splash-rule { width: 44px; margin: 14px 0; }
+  .boss-splash-quote { font-size: 13px; line-height: 1.65; }
+  .boss-splash-warning { gap: 9px; margin-top: 15px; padding-top: 12px; }
+  .boss-splash-description { font-size: 11px; line-height: 1.6; }
+  .boss-splash-footer { gap: 8px; padding: 10px 18px 17px; }
+  .boss-splash .boss-splash-dismiss { min-width: 122px; gap: 15px; }
+}
+@media (max-width: 360px) and (orientation: portrait), (max-height: 680px) and (orientation: portrait) {
+  .boss-splash-heading { padding: 18px 14px 4px; }
+  .boss-splash-caption { padding: 2px 17px 13px; }
+  .boss-splash-kicker { font-size: 11px; }
+  .boss-splash-caption h2 { font-size: 27px; }
+  .boss-splash-rule { margin: 10px 0; }
+  .boss-splash-quote { font-size: 12px; line-height: 1.5; }
+  .boss-splash-warning { margin-top: 11px; padding-top: 9px; }
+  .boss-splash-footer { padding-inline: 14px; }
+  .boss-splash-stats > div { gap: 5px; }
 }
 @media (orientation: landscape) and (max-height: 520px) {
-  .boss-splash { width: min(760px, 100%); }
-  .boss-splash-art { object-fit: contain; object-position: 20% 50%; }
-  .boss-splash-shade { background: linear-gradient(90deg, transparent 25%, rgb(6 12 17 / 70%) 58%, #060c11); }
-  .boss-splash-heading { justify-content: flex-end; top: 14px; }
-  .boss-splash-caption { left: 43%; top: 50%; bottom: auto; transform: translateY(-40%); padding: 14px; }
-  .boss-splash-caption h2 { font-size: 24px; }
-  .boss-splash-kicker { font-size: 11px; }
-  .boss-splash-description { font-size: 11px; }
-  .boss-splash-stats { gap: 7px; }
-  .boss-splash-stats dd { font-size: 17px; }
+  .boss-splash-overlay { padding-block: max(8px, env(safe-area-inset-top), var(--native-safe-top, 0px)) max(8px, env(safe-area-inset-bottom), var(--native-safe-bottom, 0px)); }
+  .boss-splash { height: 100%; width: min(1120px, 100%); }
+  .boss-splash-heading { padding: 17px 22px 5px; gap: 12px; }
+  .boss-splash-rank, .boss-splash-stage { font-size: 10px; }
+  .boss-splash-scene { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
+  .boss-splash-atmosphere { display: none; }
+  .boss-splash-art { padding: 0 6px; object-position: 50% 100%; }
+  .boss-splash-caption { padding: 8px 26px 10px 10px; }
+  .boss-splash-kicker { margin-bottom: 5px; font-size: 11px; }
+  .boss-splash-caption h2 { font-size: clamp(24px, 4vw, 34px); }
+  .boss-splash-rule { width: 44px; margin: 10px 0; }
+  .boss-splash-quote { font-size: 12px; line-height: 1.5; }
+  .boss-splash-warning { margin-top: 11px; padding-top: 9px; }
+  .boss-splash-warning-label { font-size: 9px; margin-bottom: 2px; }
+  .boss-splash-description { font-size: 11px; line-height: 1.5; }
+  .boss-splash-footer { padding: 5px 22px 12px; }
+  .boss-splash .boss-splash-dismiss { min-width: 122px; padding-block: 8px; }
 }
-@media (prefers-reduced-motion: reduce) { .boss-splash-overlay, .boss-splash-art { animation: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .boss-splash-overlay, .boss-splash-overlay * { animation: none; }
+}

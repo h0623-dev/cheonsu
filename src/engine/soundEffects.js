@@ -29,8 +29,34 @@ export const SFX_PRESETS = {
   crit: [air(.18,.04,3200),tone(125,.28,.062,0,'drum',{freqEnd:40}),...notes([784,1175],.065,'bell',.024)],
   miss: [air(.18,.016,2400),tone(480,.16,.008,0,'flute',{freqEnd:240})],
   hazard: [tone(65,.55,.043,0,'bass'),air(.38,.027,950),tone(78,.3,.028,.18,'drum',{freqEnd:38})],
-  phase: [tone(98,.8,.03,0,'strings'),tone(116.5,.8,.02,0,'strings'),...notes([196,233,294,392],.12,'horn',.026)],
-  boss: [tone(73.4,1.1,.032,0,'strings'),...notes([146.8,174.6,220,293.7],.16,'horn',.035),tone(95,.35,.055,.55,'drum',{freqEnd:34})],
+  // Low impact, rising chord and quiet, finite echoes. These are original
+  // synthesized cues; the delayed notes need no feedback loop or sample fetch.
+  phase: [
+    tone(112,.38,.038,0,'drum',{freqEnd:44}), air(.26,.009,820),
+    tone(98,1.25,.015,.035,'strings',{pan:-.16}),
+    tone(146.8,1.2,.011,.07,'choir',{pan:.16}),
+    tone(196,.58,.017,.15,'horn',{pan:-.12}),
+    tone(233.1,.61,.014,.28,'horn'),
+    tone(293.7,.63,.013,.41,'horn',{pan:.12}),
+    tone(392,.6,.01,.54,'horn'),
+    tone(98,.36,.021,.56,'drum',{freqEnd:49}),
+    tone(196,.82,.006,.82,'choir',{pan:.2}),
+    tone(293.7,.75,.004,.96,'strings',{pan:-.2}),
+    tone(392,.67,.003,1.1,'bell'),
+  ],
+  boss: [
+    tone(92,.4,.037,0,'drum',{freqEnd:38}), air(.3,.008,680),
+    tone(73.4,1.38,.014,.025,'strings',{pan:-.16}),
+    tone(110,1.3,.01,.065,'choir',{pan:.16}),
+    tone(146.8,.65,.016,.17,'horn',{pan:-.14}),
+    tone(174.6,.67,.013,.33,'horn'),
+    tone(220,.69,.012,.49,'horn',{pan:.14}),
+    tone(293.7,.62,.009,.65,'horn'),
+    tone(82.4,.38,.02,.66,'drum',{freqEnd:41.2}),
+    tone(146.8,.9,.006,.92,'choir',{pan:.2}),
+    tone(220,.8,.004,1.05,'strings',{pan:-.2}),
+    tone(293.7,.68,.003,1.2,'bell'),
+  ],
   finish: [air(.22,.03,1500),tone(125,.36,.055,0,'drum',{freqEnd:30}),...notes([392,587,784],.09,'horn',.026)],
   confirm: notes([659,988],.05,'harp',.028),
   menu: [tone(784,.1,.024,0,'harp')],
@@ -46,9 +72,11 @@ export const SFX_PRESETS = {
 };
 let stepNumber=0;
 const active=new Set();
+let bossCue=null;
 export function stopSoundEffects() {
   for(const voice of active) { try {voice.stop();} catch { /* Already ended. */ } }
   active.clear();
+  bossCue=null;
 }
 export function playCheonsuSfx(type, enabled=true, volume=1) {
   if(typeof document!=='undefined' && document.hidden) return;
@@ -58,9 +86,32 @@ export function playCheonsuSfx(type, enabled=true, volume=1) {
   if(ctx.state==='suspended') ctx.resume().catch(()=>{});
   const safeVolume=Math.max(0,Math.min(1,Number(volume)));
   const sequence=SFX_PRESETS[type] || SFX_PRESETS.confirm;
+  const isBossCue=type==='boss' || type==='phase';
+  let cueVoices=null;
+  if(isBossCue) {
+    // A repeated scene notification must not stack an entire chord. A phase
+    // transition replaces the previous reveal, while other battle SFX continue.
+    if(bossCue?.context===ctx && bossCue.type===type && bossCue.voices.size) return;
+    if(bossCue) {
+      for(const voice of bossCue.voices) {
+        try { voice.stop(); } catch { /* Already ended. */ }
+        active.delete(voice);
+      }
+      bossCue.voices.clear();
+    }
+    cueVoices=new Set();
+    bossCue={context:ctx,type,voices:cueVoices};
+  }
   const footVariation=type==='step' ? (++stepNumber%3-1)*45 : 0;
   for(const note of sequence) {
     const voice=playTone(ctx,{...note,detune:footVariation,gain:note.gain*safeVolume});
-    if(voice) {active.add(voice);voice.addEventListener('ended',()=>active.delete(voice),{once:true});}
+    if(voice) {
+      active.add(voice);
+      cueVoices?.add(voice);
+      voice.addEventListener('ended',()=>{
+        active.delete(voice);
+        cueVoices?.delete(voice);
+      },{once:true});
+    }
   }
 }
