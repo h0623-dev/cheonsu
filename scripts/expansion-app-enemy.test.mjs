@@ -12,7 +12,7 @@ import { applySkillStatusAfterHit } from '../src/engine/statusEngine.js';
 import { calculateDamage, calculateHit, calculateCrit, getCombatAffinity, getUnitCombatClass } from '../src/engine/combat.js';
 import { NEW_TERRAIN_IDS, getNewTerrainPolicy, getNewTerrainCombatModifiers } from '../src/data/terrainPolicy.js';
 import { isMonsterArtId } from '../src/data/monsterEnemies.js';
-import { spendAction } from '../src/engine/battleOutcome.js';
+import { getBattleOutcome, spendAction } from '../src/engine/battleOutcome.js';
 import { stages } from '../src/data/stages.js';
 
 const app = await readFile(new URL('../src/App.jsx', import.meta.url), 'utf8');
@@ -110,6 +110,7 @@ function createAttackHarness(units, playback) {
   const api = vm.runInNewContext(`${attackSource}\nresolveEnemyAttack`, {
     activeMap: map, canAttackTarget, canCounter, calculateDamage, calculateHit, calculateCrit, getCombatAffinity,
     consumeExpansionEnemyAttackBoost, spendAction, applySkillStatusAfterHit,
+    getBattleOutcome, selectedStage: { units },
     scrollBattleMapToCell: () => {}, applyPassiveToPreview: value => value, applyBattleTactics: value => value,
     createBattleTactics: () => ({}), rollCombat: () => ({ hit: true, crit: false, damage: 9 }),
     showCombatCutscene: (...args) => playback(...args, () => observed),
