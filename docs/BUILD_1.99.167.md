@@ -20,7 +20,17 @@
 
 ## 제작·공개 기록
 
-최종 소스와 새 산출물 링크, 기존 자동 Actions의 결과 및 Safari 호스팅 상태는 완료 후 이 절에 기록합니다. 현재 APK/OTA/웹 공개 완료를 주장하지 않습니다.
+첫 구현 소스는 `f96e8708db15a9d4259572310fe78e27e2df2eec`입니다. 첫 자동 Cloud Quality [37581049535](https://github.com/h0623-dev/cheonsu/actions/runs/37581049535)와 Android [37581049493](https://github.com/h0623-dev/cheonsu/actions/runs/37581049493)는 기존 음악 테스트의 과거 고지 문자열 때문에 단위 단계에서 실패했습니다. 실제 고지 `CC BY 3.0 US`와 과거 기대값 `CC BY 3.0`의 불일치이며 음원 파일이나 재생 실패로 보고된 것은 아닙니다. 단위 결과는 792개 중 791개 성공·1개 실패였고 APK 제작은 시작되지 않았습니다.
+
+공식 상류 고지에 맞춰 해당 기대값과 US 라이선스 링크를 갱신했습니다. 음원 72개의 원본 해시·용량·개수·음정 검사 기준은 유지합니다. 후속 소스는 `4a933ee4b46b1d814bb77c037518630d05d982eb`, 자동 Cloud Quality [37581307671](https://github.com/h0623-dev/cheonsu/actions/runs/37581307671), Android [37581307721](https://github.com/h0623-dev/cheonsu/actions/runs/37581307721)입니다. 완료 전 APK·OTA 공개를 주장하지 않습니다.
+
+Safari의 첫 구현 소스 배포 `4675e95f-34b5-4feb-a8c8-586dbe2f2be7`는 2026-10-07 15:23:46 KST에 `SUCCESS`로 완료됐고 서비스 온라인·실행 인스턴스 1개가 보고됐습니다. 주소는 https://cheonsu-safari-production.up.railway.app 입니다. 이는 호스팅 운영 상태를 읽은 결과이며 아이폰 실기기 실행 검사 결과가 아닙니다.
+
+## Android 고지 수집기의 빈 상류 목록 처리
+
+두 번째 Android 자동 실행 [37581307721 / 작업 112661372495](https://github.com/h0623-dev/cheonsu/actions/runs/37581307721/job/112661372495)는 음악 고지 단위 단계를 통과하고 실제 APK 생산에 진입했습니다. 네이티브 초기화 후 2026-10-07 15:27:04 KST, Firebase `firebase-appcheck-interop:17.0.0`의 빈 `third_party_licenses.txt`를 수집기가 오류로 처리해 중단됐습니다. 해당 SDK의 공식 배포본은 제3자 목록 JSON이 `{}`이고 텍스트는 0바이트인 정상 형태입니다.
+
+필수 POM·라이선스 전문이 없는 경우의 차단은 유지하면서 실제 배포 원문이 빈 제3자 목록은 그 경로와 상태를 기록하도록 수집기를 보완합니다. 빈 파일에 저작권 문구를 임의로 만들어 넣거나 고지 원문이 있는 것처럼 표시하지 않습니다. 이 실패는 APK 제작 전 단계의 생산 오류로, 공개 APK·OTA가 완성됐다는 뜻이 아닙니다.
 
 ## 검사와 법적 판단 범위
 

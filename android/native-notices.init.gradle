@@ -31,6 +31,8 @@ gradle.projectsEvaluated {
             outputRoot.mkdirs()
             def registry = new JsonSlurper().parse(new File(legalRoot, 'sources.json'))
             def sections = new LinkedHashMap<String, Map>()
+            def emptyOriginalNoticeFiles = []
+            def googleBundledLicenseLists = []
             def addText = { String title, String origin, String text ->
                 if (!text?.trim()) throw new GradleException("빈 고지 원문: ${origin}")
                 def key = origin + '\n' + text
@@ -47,6 +49,7 @@ gradle.projectsEvaluated {
             Closure collectArchive
             collectArchive = { byte[] archive, String origin, int depth, boolean sourceArchive ->
                 if (depth > 2) return
+                def googleFiles = [:]
                 new ZipInputStream(new ByteArrayInputStream(archive)).withCloseable { zip ->
                     def entry
                     while ((entry = zip.nextEntry) != null) {
@@ -62,7 +65,16 @@ gradle.projectsEvaluated {
                         if (nestedJar) {
                             collectArchive(data, origin + '!/' + name, depth + 1, false)
                         } else if (notice || inLicenseDirectory) {
-                            addText(name, origin + '!/' + name, new String(data, StandardCharsets.UTF_8))
+                            if (name in ['third_party_licenses.json', 'third_party_licenses.txt']) googleFiles[name] = data
+                            def originalText = new String(data, StandardCharsets.UTF_8)
+                            if (originalText.trim()) {
+                                addText(name, origin + '!/' + name, originalText)
+                            } else {
+                                // Some official SDKs publish {} plus a zero-byte license list.
+                                // Preserve that fact and the original bytes' text, not invented terms.
+                                emptyOriginalNoticeFiles << [origin: origin + '!/' + name,
+                                    byteLength: data.length, originalText: originalText]
+                            }
                         } else {
                             // Keep copyright/license headers from published sources without
                             // redistributing the source implementation or inventing a holder.
@@ -75,6 +87,21 @@ gradle.projectsEvaluated {
                             }
                         }
                     }
+                }
+                if (!googleFiles.isEmpty()) {
+                    if (!googleFiles.containsKey('third_party_licenses.json') || !googleFiles.containsKey('third_party_licenses.txt')) {
+                        throw new GradleException("Google 내장 고지의 파일 쌍이 불완전합니다: ${origin}")
+                    }
+                    def index = new JsonSlurper().parseText(new String(googleFiles['third_party_licenses.json'], StandardCharsets.UTF_8))
+                    if (!(index instanceof Map)) throw new GradleException("Google 내장 고지 목록 형식이 올바르지 않습니다: ${origin}")
+                    def byteLength = googleFiles['third_party_licenses.txt'].length
+                    index.each { name, range ->
+                        if (!(range instanceof Map) || !(range.start instanceof Number) || !(range.length instanceof Number)
+                            || range.start < 0 || range.length < 0 || range.start + range.length > byteLength) {
+                            throw new GradleException("Google 내장 고지 원문 범위가 올바르지 않습니다: ${origin} / ${name}")
+                        }
+                    }
+                    googleBundledLicenseLists << [origin: origin, entries: index.size(), byteLength: byteLength]
                 }
             }
 
@@ -166,13 +193,20 @@ gradle.projectsEvaluated {
                 localProjects: ['Capacitor와 Capawesome 로컬 모듈의 원문은 웹·앱 공통 npm 고지에 포함됩니다.'],
                 sourceArtifactNote: 'not-resolved는 공개 sources JAR를 확보하지 못했다는 뜻입니다. 소스 자체가 존재하지 않는다는 판정이 아닙니다. POM과 배포 AAR/JAR의 고지는 별도로 수집합니다.',
                 source: 'Gradle runtimeClasspath, Maven POM, 배포 AAR/JAR와 공개 sources JAR',
-                dependencies: dependencies, additionalDocuments: registry.documents]
+                dependencies: dependencies, additionalDocuments: registry.documents,
+                emptyOriginalNoticeFiles: emptyOriginalNoticeFiles,
+                googleBundledLicenseLists: googleBundledLicenseLists]
             def text = new StringBuilder('천수 Android 외부 구성 요소 고지\n\n')
             text.append('이 자료는 APK 제작에 실제 사용된 Maven runtime 의존성에서 생성했습니다. Google SDK 자체 이용조건과 그 안에 포함된 오픈소스 고지는 서로 구분됩니다. 원문의 권리자·라이선스·NOTICE와 Google 내장 고지를 보존합니다.\n')
             text.append('Capacitor와 Capawesome 로컬 모듈은 공통 JavaScript·앱 고지를 함께 참고하세요.\n\n')
             dependencies.each { dependency ->
                 text.append(dependency.coordinate).append('\n')
                 dependency.licenses.each { license -> text.append('  ').append(license.name).append(' — ').append(license.url).append('\n') }
+            }
+            if (!emptyOriginalNoticeFiles.isEmpty()) {
+                text.append('\n배포 원본이 빈 고지 파일인 항목\n')
+                text.append('아래 파일은 제공자가 빈 원문으로 배포했습니다. Google 고지 목록은 JSON의 항목 수와 원문 바이트 범위를 함께 확인하여 기록합니다.\n')
+                emptyOriginalNoticeFiles.each { entry -> text.append(entry.origin).append(' — ').append(entry.byteLength).append('바이트\n') }
             }
             sections.values().each { section ->
                 text.append('\n\n============================================================\n')
