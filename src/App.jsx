@@ -11895,7 +11895,7 @@ export default function App() {
       const restoredAllyTurnEnded = migratedData.turn === "enemy" ||
         restoredUnits.filter(unit => unit.type === "ally" && unit.hp > 0).every(unit => unit.acted);
       const restoredDefeat = migratedData.screen === "battle" && (
-        !restoredUnits.some(unit => unit.type === "ally" && unit.hp > 0) ||
+        getBattleOutcome(migratedData.selectedStage, restoredUnits) === "defeat" ||
         (restoredUnits.some(unit => unit.type !== "ally" && unit.hp > 0) && (
           migratedData.round > restoredRoundLimit ||
           (migratedData.round >= restoredRoundLimit && restoredAllyTurnEnded)
