@@ -18,6 +18,7 @@ on:
       - 'index.html'
       - 'vite.config.js'
       - 'docs/update-notes.json'
+      - 'scripts/build-android.mjs'
 permissions:
   contents: read
 concurrency:
