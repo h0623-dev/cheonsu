@@ -17,6 +17,7 @@ import { getStageEnemyLevel } from '../src/engine/enemyProgression.js';
 import { EXPANSION_MONSTER_KEYS, EXPANSION_BOSS_KEYS, createExpansionEnemy } from '../src/data/expansionEnemies.js';
 import { NEW_TERRAIN_POLICIES, isDeploymentTerrainUnsafe } from '../src/data/terrainPolicy.js';
 import { getCharacterArt } from '../src/data/characterArt.js';
+import { getFacingArt, isUnitDirection } from '../src/engine/unitFacing.js';
 import { isTerrainBlocked } from '../src/engine/movement.js';
 import { STORY_SCENES, getStoryArcIndex } from '../src/data/storyScenes.js';
 import { storySpeakerKeys } from '../src/data/storyArt.js';
@@ -57,11 +58,18 @@ async function readyBattle(page) {
     && document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true', null, { timeout: 120000 });
 }
 
-async function actualUnitArt(page, id, artId = id) {
+async function actualUnitArt(page, id, artId, savedFacing) {
+  assert.ok(isUnitDirection(savedFacing), `${id}: 실제 전투 저장에 유효한 방향이 있습니다`);
+  const art = getCharacterArt(artId);
+  const expected = getFacingArt(savedFacing).rear && art.rear ? art.rear : art.map;
   const images = page.locator(`.world-battlefield .unit[data-unit-id="${id}"] img`);
   await images.evaluateAll(async elements => { await Promise.all(elements.map(image => image.decode())); });
-  const sources = await images.evaluateAll(elements => elements.map(image => ({ src: image.getAttribute('src'), width: image.naturalWidth })));
-  assert.ok(sources.length && sources.every(image => image.width > 0 && image.src === getCharacterArt(artId).map), `${id}: ${artId}에 연결된 실제 지도 스프라이트를 표시합니다`);
+  const sources = await images.evaluateAll(elements => elements.map(image => ({ src: image.getAttribute('src'), width: image.naturalWidth, facing: image.getAttribute('data-facing') })));
+  assert.ok(sources.length && sources.every(image => image.width > 0), `${id}: 실제 지도 원화를 불러옵니다`);
+  for (const image of sources) {
+    assert.equal(image.facing, savedFacing, `${id}: 지도 방향이 실제 전투 저장과 일치합니다`);
+    assert.equal(image.src, expected, `${id}: ${artId}/${savedFacing}에 맞는 정면·후면 원화를 표시합니다`);
+  }
 }
 
 async function beginBattle(page) {
@@ -142,7 +150,7 @@ async function runViewport(base, viewport) {
       assert.deepEqual(Object.fromEntries(allies.map(unit => [unit.id, { x: unit.x, y: unit.y }])), manual);
       for (const newId of newIds) {
         assert.ok(allies.some(unit => unit.id === newId), `${newId}를 실제 새 전장에 출전시킵니다`);
-        await actualUnitArt(page, newId);
+        await actualUnitArt(page, newId, newId, allies.find(unit => unit.id === newId).facing);
       }
       assert.ok(enemies.length && enemies.every(enemy => enemy.expansionEnemy && enemy.expansionStatsStage === id && enemy.level === getStageEnemyLevel(id, enemy)), '초기·추가 적 전체가 새 종/해당 장 레벨 곡선을 사용합니다');
       assert.ok(enemies.every(enemy => enemy.hp === enemy.maxHp && enemy.maxHp > 0 && enemy.atk > 0 && enemy.def >= 0));
@@ -277,7 +285,7 @@ async function runViewport(base, viewport) {
     for (const id of ['hero', ...newIds]) {
       const unit = advancedBattle.units.find(ally => ally.id === id);
       assert.ok(unit?.advancedClass);
-      await actualUnitArt(page, id, unit.advancedClass);
+      await actualUnitArt(page, id, unit.advancedClass, unit.facing);
       await page.locator(`.world-battlefield .unit[data-unit-id="${id}"]`).click();
       await page.locator('.cmd-skill').click();
       const skillDialog = page.locator('.skill-choice-dialog[open]');
