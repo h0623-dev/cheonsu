@@ -20,6 +20,7 @@ import { getCharacterArt } from '../src/data/characterArt.js';
 import { isTerrainBlocked } from '../src/engine/movement.js';
 import { STORY_SCENES, getStoryArcIndex } from '../src/data/storyScenes.js';
 import { storySpeakerKeys } from '../src/data/storyArt.js';
+import { withLegacyAccessorySlot } from './qa-legacy-equipment.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const output = path.resolve(process.env.CHEONSU_EXPANSION_QA_OUT || path.join(root, 'tmp/expansion-50-qa'));
@@ -237,7 +238,7 @@ async function runViewport(base, viewport) {
       assert.equal(unit.advancedClass, id === 'hero' ? heroA.id : ADVANCED_CLASSES[id][1].id);
       const form = ADVANCED_CLASSES[id].find(entry => entry.id === unit.advancedClass);
       assertPromotionStats(promoted, id, form);
-      assert.deepEqual(unit.equipment, promotionSource.party.find(unit => unit.id === id).equipment);
+      assert.deepEqual(unit.equipment, withLegacyAccessorySlot(promotionSource.party).find(unit => unit.id === id).equipment, '구버전 아군의 빈 장신구 칸만 추가하며 전직 전 장비를 보존합니다');
     }
     assert.deepEqual(promoted.inventory, promotionSource.inventory, '전직인장은 기존 소모품 저장을 바꾸지 않습니다');
     assert.equal(getAdvancedSealBalance(promoted.party, promoted.clearedStages).spent, promotedIds.length);
@@ -372,7 +373,7 @@ async function runViewport(base, viewport) {
       assert.ok(contact, '신규 전장에 지형 위험 없는 반격 검사 좌표가 있습니다');
       const lina = combat.units.find(unit => unit.id === 'lina');
       Object.assign(lina, contact, { hp: 100, maxHp: 100, baseHP: 100, atk: 20, baseAtk: 20, def: 1, baseDef: 1,
-        equipment: { weapon: null, armor: null }, range: 2, minRange: 2, status: [], acted: false, moved: false, guard: false,
+        equipment: { weapon: null, armor: null, accessory: null }, range: 2, minRange: 2, status: [], acted: false, moved: false, guard: false,
         skillGuardBoost: 0, itemGuardBoost: 0 });
       const occupied = new Set([`${contact.x},${contact.y}`, `${contact.x + distance},${contact.y}`]);
       const distant = [];

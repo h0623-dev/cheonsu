@@ -11,6 +11,7 @@ import { getBattlefieldPlan } from '../src/data/battlefieldPlans.js';
 import { webBuildInfo } from './update-build-info.mjs';
 import { stages } from '../src/data/stages.js';
 import { getStageRoundLimit } from '../src/engine/stageRules.js';
+import { withLegacyAccessorySlot } from './qa-legacy-equipment.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const output = path.resolve(process.env.CHEONSU_DEPLOYMENT_QA_OUT || path.join(root, 'tmp/deployment-qa'));
@@ -352,9 +353,10 @@ async function runViewport(base, viewport) {
       await page.waitForFunction(() => document.querySelector('.battle-screen:not(.deployment-screen)')?.dataset.saveReady === 'true' && !document.querySelector('.boss-splash-overlay'), null, { timeout: 120000 });
       assert.deepEqual(await saved(), baseline, '기존 1.99.156 전투 저장 이어하기는 읽기만 합니다');
       const reSaved = await saveBattle(page);
-      assert.deepEqual(reSaved.units, baseline.units, '기존 전투의 유닛 전체 필드를 보존합니다');
+      assert.deepEqual(reSaved.units, withLegacyAccessorySlot(baseline.units), '아군의 빈 장신구 칸만 추가하고 기존 전투의 유닛 전체 필드를 보존합니다');
       assert.deepEqual(reSaved.selectedStage.units, baseline.selectedStage.units, '기존 저장 전장의 적 전체 구성을 보존합니다');
-      for (const field of ['party', 'gold', 'inventory', 'clearedStages', 'gearInventory', 'gearEnhance', 'supportPoints', 'supportDialoguesSeen', 'exploration', 'stageNotes', 'stageMastery', 'claimedAchievements', 'claimedMasteryRewards', 'snapshotGallery']) assert.deepEqual(reSaved[field], baseline[field], `기존 저장 ${field} 보존`);
+      assert.deepEqual(reSaved.party, withLegacyAccessorySlot(baseline.party), '아군의 빈 장신구 칸을 제외한 기존 보유 동료 전체 데이터를 보존합니다');
+      for (const field of ['gold', 'inventory', 'clearedStages', 'gearInventory', 'gearEnhance', 'supportPoints', 'supportDialoguesSeen', 'exploration', 'stageNotes', 'stageMastery', 'claimedAchievements', 'claimedMasteryRewards', 'snapshotGallery']) assert.deepEqual(reSaved[field], baseline[field], `기존 저장 ${field} 보존`);
     }
     result.checks.push(`실제 1.99.156 전투 저장 ${legacy.cases.length}건의 전체 유닛·진행도 보존`);
 
