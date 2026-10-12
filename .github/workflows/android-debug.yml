@@ -19,6 +19,7 @@ on:
       - 'vite.config.js'
       - 'docs/update-notes.json'
       - 'scripts/build-android.mjs'
+      - 'scripts/verify-skill-spectacle.mjs'
 permissions:
   contents: read
 concurrency:

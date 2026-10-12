@@ -181,7 +181,9 @@ async function openPage(fixtureBase, base, viewport) {
   const page = await browser.newPage({ viewport, serviceWorkers: 'block' });
   watch(page);
   await page.route('**/art/**', async route => {
-    const response = await route.fetch({ url: route.request().url().replace(fixtureBase, base) });
+    // 실제 산출물 중계 중 ECONNRESET만 최대 두 번 재시도합니다.
+    // HTTP 오류·누락 원화·무기 부착 단언은 기존대로 실패합니다.
+    const response = await route.fetch({ url: route.request().url().replace(fixtureBase, base), maxRetries: 2 });
     await route.fulfill({ response });
   });
   await page.addInitScript(() => {
@@ -600,7 +602,11 @@ try {
     } catch (error) {
       await page.screenshot({ path: path.join(output, `failure-${viewport.width}.png`) }).catch(() => {});
       throw error;
-    } finally { await page.close(); }
+    } finally {
+      // 마지막 장면의 이미지 중계가 페이지 종료와 경합하지 않게 합니다.
+      try { await page.unrouteAll({ behavior: 'wait' }); }
+      finally { await page.close(); }
+    }
     await fs.writeFile(path.join(output, 'result.json'), JSON.stringify(report, null, 2));
   }
   assert.deepEqual(errors, [], '신규 스킬 VFX에서 페이지 오류·누락 아트가 없습니다');
