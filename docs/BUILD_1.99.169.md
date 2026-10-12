@@ -1,6 +1,8 @@
 # 천수 1.99.169 · 맵 겹침 수정과 지형 움직임
 
-2026-10-11 KST · Android versionCode 368
+2026-10-11~12 KST · Android versionCode 368
+
+**새 APK·서명 OTA·개발 소스 ZIP·Safari 공개 완료.** GitHub 릴리스 공개 시각은 2026-10-12 **10:20:42 KST**입니다.
 
 ## 원인과 변경
 
@@ -24,4 +26,42 @@
 
 새 맵 정합성 검사를 기존 Cloud 및 Android 워크플로에 추가했습니다. 기존 Cloud 전체 검사 시간이 약 44분이었으므로 추가 맵 검사 시간을 확보하도록 제한을 45분에서 60분으로 늘렸습니다. 기존 검사·서명·배포 보호는 유지합니다.
 
-현재 새 APK·서명 OTA·개발 소스 ZIP·Safari 공개 절차를 준비 중입니다. 완료 시 최종 소스·자동 실행 결과·공개 파일·채널 정보를 기록합니다. 서명키는 기존 GitHub Actions cheonsu-release 환경에 유지합니다.
+2026-10-12 KST 최종 소스 `54617154fb7d37904327f2d6d7386877a2f422b5`를 main에 반영했습니다. 새 APK·서명 OTA·개발 소스 ZIP과 동일 게임 소스의 Safari 공개를 완료했습니다. 자동 실행 및 공개 결과는 아래와 같습니다. 서명키는 기존 GitHub Actions cheonsu-release 환경에 유지합니다.
+
+
+## Safari 공개 결과
+
+최종 게임 소스 `54617154fb7d37904327f2d6d7386877a2f422b5`를 사용한 배포 `6eebac04-6223-47c9-a724-7e19c8db88bc`가 **2026-10-12 09:31:10 KST** `SUCCESS`로 완료됐습니다. 서비스 온라인·실행 인스턴스 1개이며 [기존 Safari 주소](https://cheonsu-safari-production.up.railway.app)와 저장 위치를 유지합니다. `watchPatterns=[]`와 커밋 고정을 유지해 문서 반영으로 게임 버전을 다시 교체하지 않습니다.
+
+웹 산출물은 Android dist와 분리해 제작했습니다. 실제 iPhone/WebKit 기기 검사가 아니라 동일 웹 산출물의 Chromium 검사와 Railway의 배포·온라인 상태 확인 결과입니다.
+
+
+기능 검사와 별개로 기존 Capacitor Android 7.6.5의 네이티브 보안 경고와 제작 도구 경고가 남아 있습니다. 현 게임의 공격자 링크 입력 경로는 확인하지 못했으나 보안 수정 완료로 판단하지 않습니다. 수정에는 새 APK의 네이티브 의존성 갱신이 필요합니다. [미해결 경고와 조사 근거](QA_IMPROVEMENT_1.99.169.md#별도-미해결-의존성-보안-경고)를 따릅니다.
+
+
+## 최종 자동 실행 및 공개 결과
+
+| 항목 | 결과 |
+| --- | --- |
+| 최종 게임 소스 | `54617154fb7d37904327f2d6d7386877a2f422b5` |
+| Cloud Quality | [38188129464 / 작업 114614832385](https://github.com/h0623-dev/cheonsu/actions/runs/38188129464/job/114614832385) · 전체 성공 · 2026-10-12 10:10:10 KST 최종 갱신 |
+| Android APK and OTA | [38188129486 / 작업 114614832593](https://github.com/h0623-dev/cheonsu/actions/runs/38188129486/job/114614832593) · 전체 성공 · 2026-10-12 10:20:59 KST 최종 갱신 |
+| 두 실행의 단위 검사 | 각각 803/803 · 실패 0 |
+| 두 실행의 브라우저 검사 | 각각 11/11 · 새 지도 검사 포함 |
+| APK | `com.cheonsu.game` / 1.99.169 / versionCode 368 · 기존 인증서 일치 및 v1/v2 서명 성공 |
+| APK·OTA 검사 | 웹 파일 각각 2,726개 전체 해시 대조, 네이티브 플러그인·OTA trust·서명·복구·원본 주소 보호 성공 |
+| 공개 릴리스 | [v1.99.169](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.169) · draft=false · 2026-10-12 10:20:42 KST 발행 |
+| 실제 OTA 채널 | [updates 브랜치 latest.json](https://raw.githubusercontent.com/h0623-dev/cheonsu/updates/latest.json) · 1.99.169 |
+| OTA 번들 / 네이티브 지원 | `1.99.169-def3b133356d` / Android 350~368 |
+| OTA 메타데이터 제작 | 2026-10-12 10:18:56.066 KST · 공개 발행 시각과 구분 |
+
+| 공개 파일 | 크기(bytes) | GitHub SHA-256 |
+| --- | ---: | --- |
+| [cheonsu_1.99.169_ota.zip](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.169/cheonsu_1.99.169_ota.zip) | 278916452 | `def3b133356d62c1cfca2055159f6a420d6c74a3ef341e74f937bb17b45e906b` |
+| [cheonsu_1.99.169_update_debug.apk](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.169/cheonsu_1.99.169_update_debug.apk) | 287689424 | `50ecff07630e48da19ceb918e05c0141676ff90cda1aae184b3c442cc43d946a` |
+| [cheonsu_development_1.99.169.zip](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.169/cheonsu_development_1.99.169.zip) | 842404716 | `1aa6837a8af1e61b979e5400cd67fbd1fdb0a6c20c76e0580944753dca4e42ec` |
+
+
+세 파일 모두 공개 메타데이터의 `uploaded` 상태를 확인했습니다. 기존 자동 발행 스크립트는 제작 파일과 GitHub 자산의 SHA-256·크기를 비교하고 APK·OTA 공개 주소의 HEAD 접근을 확인한 뒤 채널을 갱신했습니다. 에이전트가 공개 파일 전체를 재다운로드해 대조한 결과로 표현하지 않습니다. 자동 실행의 인증서·웹 파일·OTA 서명 검증과 직접 브라우저 검사, 실제 공개 메타데이터 확인을 구분합니다.
+
+APK와 서명 OTA는 최종 게임 소스로 새로 제작했습니다. 서명키는 기존 GitHub Actions cheonsu-release 환경에 유지했고 자동 정리도 성공했습니다. main의 오래된 public/updates/latest.json으로 공개 채널을 초기화하거나 낮추지 않았습니다. 소스 ZIP은 릴리스 제작 시점의 게임 소스와 생성 고지를 포함하며, 발행 뒤 갱신한 이 최종 배포 문서까지 포함된 스냅샷은 아닙니다.
