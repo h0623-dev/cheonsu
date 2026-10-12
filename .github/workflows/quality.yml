@@ -12,7 +12,7 @@ concurrency:
 jobs:
   quality:
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -26,6 +26,7 @@ jobs:
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: node scripts/verify-cloud-smoke.mjs
+      - run: node scripts/verify-map-atmosphere.mjs
       - run: node scripts/verify-town-camera.mjs
       - run: node scripts/verify-monster-enemies.mjs
       - run: node scripts/verify-skill-spectacle.mjs
@@ -41,6 +42,7 @@ jobs:
           name: cloud-qa-${{ github.run_id }}
           path: |
             tmp/cloud-qa/
+            tmp/map-atmosphere-qa/
             tmp/town-camera-qa/
             tmp/monster-enemies-qa/
             tmp/skill-spectacle-qa/

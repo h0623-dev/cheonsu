@@ -1,3 +1,4 @@
+import BattleMapAtmosphere from "./components/BattleMapAtmosphere.jsx";
 import { memo, useCallback, useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 import { X, Swords, Sparkles, BookOpen, ArrowRight, Save, ShoppingBag, Check, Users, Shield, Backpack, Settings, Undo2 } from "lucide-react";
 import DiscoveryDialog from "./components/DiscoveryDialog.jsx";
@@ -112,7 +113,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.168";
+const SAVE_VERSION = "1.99.169";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -8099,6 +8100,7 @@ const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, un
               data-facing={movingUnit.direction}
               style={{ '--facing-flip': getFacingArt(movingUnit.direction).flip }}
               alt={movingUnit.unit.name}
+              draggable={false}
               onError={(event) => handleBattleMapUnitImageError(event, movingUnit.unit)}
             />
             <span className="moving-unit-fallback">{movingUnit.unit.icon}</span>
@@ -8114,8 +8116,6 @@ const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, un
           <>
             <div
               className={`unit sprite-unit ${unit.type === "ally" ? "ally-unit" : unit.type === "enemy" ? "enemy-unit" : "boss-unit"} ${getUnitVisualClass(unit)} ${!unitActionMotion ? "free-motion-unit" : ""} ${turn === "ally" && unit.type === "ally" && isUnitReady(unit) ? "ready-motion-unit" : ""} ${unit.maxHp && unit.hp / unit.maxHp <= 0.35 ? "wounded-motion-unit" : ""} ${isMovingUnit ? "moving-hidden moving-source-shadow" : ""} ${inspectedUnitId === unit.id ? "inspected-unit" : ""} ${selectedUnit === unit.id ? "selected-unit" : ""} ${unit.phase2 ? "phase2-unit" : ""} ${unit.acted ? "acted-unit" : ""} ${unit.hitFlash ? "hit-flash-unit" : ""} ${unitActionMotion ? `action-motion action-${unitActionMotion.type} action-dir-${unitActionMotion.direction}` : ""}`}
-              onPointerDown={(event) => event.stopPropagation()}
-              onPointerUp={(event) => event.stopPropagation()}
               data-unit-id={unit.id}
               style={unitActionMotion ? {
                 ...unitFreeMotionStyle,
@@ -8143,7 +8143,7 @@ const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, un
                   <span className={`unit-action-weapon weapon-${unitActionMotion.motionKey || "sword"} weapon-dir-${unitActionMotion.direction || "right"}`} />
                 </>
               )}
-              <img src={getBattleMapUnitSprite(unit, facing)} data-facing={facing} style={{ '--facing-flip': getFacingArt(facing).flip }} alt={unit.name} onError={(event) => handleBattleMapUnitImageError(event, unit)} />
+              <img src={getBattleMapUnitSprite(unit, facing)} data-facing={facing} style={{ '--facing-flip': getFacingArt(facing).flip }} alt={unit.name} draggable={false} onError={(event) => handleBattleMapUnitImageError(event, unit)} />
               <span className="unit-emoji-fallback">{unit.icon}</span>
               <span className={`unit-map-marker ${unit.type === "ally" ? "unit-map-ally" : unit.type === "boss" ? "unit-map-boss" : "unit-map-enemy"}`}>
                 {unit.type === "ally" ? "A" : unit.type === "boss" ? "보스" : "E"}
@@ -8893,10 +8893,14 @@ export default function App() {
 
   const setBattleMapZoomPreservingView = (nextZoom) => {
     const shell = battleMapShellRef.current;
-    const centerRatio = shell
+    const mapElement = shell?.querySelector(".battle-map");
+    const metrics = mapElement ? getBattleMapGridMetrics(mapElement) : null;
+    const shellRect = shell?.getBoundingClientRect();
+    // 장식 돌출부나 명령창 여백이 아닌 실제 지형에서 보고 있던 위치를 유지합니다.
+    const centerRatio = metrics && shellRect
       ? {
-          x: shell.scrollWidth > 0 ? (shell.scrollLeft + shell.clientWidth / 2) / shell.scrollWidth : 0.5,
-          y: shell.scrollHeight > 0 ? (shell.scrollTop + shell.clientHeight / 2) / shell.scrollHeight : 0.5,
+          x: Math.max(0, Math.min(1, (shellRect.left + shell.clientLeft + shell.clientWidth / 2 - metrics.contentLeft) / metrics.gridWidth)),
+          y: Math.max(0, Math.min(1, (shellRect.top + shell.clientTop + shell.clientHeight / 2 - metrics.contentTop) / metrics.gridHeight)),
         }
       : { x: 0.5, y: 0.5 };
 
@@ -8904,13 +8908,19 @@ export default function App() {
 
     window.setTimeout(() => {
       const nextShell = battleMapShellRef.current;
+      const nextMap = nextShell?.querySelector(".battle-map");
 
-      if (!nextShell) return;
+      if (!nextShell || !nextMap) return;
+
+      const nextMetrics = getBattleMapGridMetrics(nextMap);
+      const nextShellRect = nextShell.getBoundingClientRect();
+      const mapLeft = nextMetrics.contentLeft - nextShellRect.left - nextShell.clientLeft + nextShell.scrollLeft;
+      const mapTop = nextMetrics.contentTop - nextShellRect.top - nextShell.clientTop + nextShell.scrollTop;
 
       nextShell.scrollTo({
-        left: Math.max(0, nextShell.scrollWidth * centerRatio.x - nextShell.clientWidth / 2),
-        top: Math.max(0, nextShell.scrollHeight * centerRatio.y - nextShell.clientHeight / 2),
-        behavior: "auto",
+        left: Math.max(0, mapLeft + nextMetrics.gridWidth * centerRatio.x - nextShell.clientWidth / 2),
+        top: Math.max(0, mapTop + nextMetrics.gridHeight * centerRatio.y - nextShell.clientHeight / 2),
+        behavior: "instant",
       });
     }, 60);
   };
@@ -8983,18 +8993,19 @@ export default function App() {
     const paddingRight = parseFloat(styles.paddingRight) || 0;
     const paddingTop = parseFloat(styles.paddingTop) || 0;
     const paddingBottom = parseFloat(styles.paddingBottom) || 0;
+    const borderLeft = parseFloat(styles.borderLeftWidth) || 0;
+    const borderRight = parseFloat(styles.borderRightWidth) || 0;
+    const borderTop = parseFloat(styles.borderTopWidth) || 0;
+    const borderBottom = parseFloat(styles.borderBottomWidth) || 0;
     const rect = mapElement.getBoundingClientRect();
 
     return {
       rect,
-      paddingLeft,
-      paddingRight,
-      paddingTop,
-      paddingBottom,
-      gridScrollWidth: Math.max(1, mapElement.scrollWidth - paddingLeft - paddingRight),
-      gridScrollHeight: Math.max(1, mapElement.scrollHeight - paddingTop - paddingBottom),
-      gridRectWidth: Math.max(1, rect.width - paddingLeft - paddingRight),
-      gridRectHeight: Math.max(1, rect.height - paddingTop - paddingBottom),
+      contentLeft: rect.left + borderLeft + paddingLeft,
+      contentTop: rect.top + borderTop + paddingTop,
+      // 나무와 유닛의 overflow는 칸 크기에 포함하지 않습니다.
+      gridWidth: Math.max(1, rect.width - borderLeft - borderRight - paddingLeft - paddingRight),
+      gridHeight: Math.max(1, rect.height - borderTop - borderBottom - paddingTop - paddingBottom),
     };
   };
 
@@ -9010,13 +9021,13 @@ export default function App() {
     const cols = activeMap[0].length;
     const rows = activeMap.length;
     const metrics = getBattleMapGridMetrics(mapElement);
-    const cellWidth = metrics.gridScrollWidth / cols;
-    const cellHeight = metrics.gridScrollHeight / rows;
+    const cellWidth = metrics.gridWidth / cols;
+    const cellHeight = metrics.gridHeight / rows;
     const shellRect = shell.getBoundingClientRect();
     const commandRect = shell.closest('.battle-screen')?.querySelector('.cinematic-command-bar')?.getBoundingClientRect();
     const target = getCellScrollTarget({
-      mapLeft: metrics.rect.left - shellRect.left + shell.scrollLeft + metrics.paddingLeft,
-      mapTop: metrics.rect.top - shellRect.top + shell.scrollTop + metrics.paddingTop,
+      mapLeft: metrics.contentLeft - shellRect.left - shell.clientLeft + shell.scrollLeft,
+      mapTop: metrics.contentTop - shellRect.top - shell.clientTop + shell.scrollTop,
       cellWidth, cellHeight, x, y,
       viewportWidth: shell.clientWidth, viewportHeight: shell.clientHeight,
       topInset: shell.clientWidth < 700 ? 142 : 100,
@@ -9069,23 +9080,23 @@ export default function App() {
 
     if (rect.width <= 0 || rect.height <= 0) return null;
 
-    const localX = event.clientX - rect.left - metrics.paddingLeft;
-    const localY = event.clientY - rect.top - metrics.paddingTop;
+    const localX = event.clientX - metrics.contentLeft;
+    const localY = event.clientY - metrics.contentTop;
 
-    if (event.clientX < rect.left || event.clientY < rect.top || event.clientX > rect.right || event.clientY > rect.bottom) {
+    if (localX < 0 || localY < 0 || localX >= metrics.gridWidth || localY >= metrics.gridHeight) {
       return null;
     }
 
-    const clampedX = Math.min(metrics.gridRectWidth - 0.01, Math.max(0, localX));
-    const clampedY = Math.min(metrics.gridRectHeight - 0.01, Math.max(0, localY));
+    const clampedX = Math.min(metrics.gridWidth - 0.01, Math.max(0, localX));
+    const clampedY = Math.min(metrics.gridHeight - 0.01, Math.max(0, localY));
 
     const x = Math.min(
       activeMap[0].length - 1,
-      Math.max(0, Math.floor((clampedX / metrics.gridRectWidth) * activeMap[0].length))
+      Math.max(0, Math.floor((clampedX / metrics.gridWidth) * activeMap[0].length))
     );
     const y = Math.min(
       activeMap.length - 1,
-      Math.max(0, Math.floor((clampedY / metrics.gridRectHeight) * activeMap.length))
+      Math.max(0, Math.floor((clampedY / metrics.gridHeight) * activeMap.length))
     );
 
     return { x, y };
@@ -9110,6 +9121,10 @@ export default function App() {
     const shell = battleMapShellRef.current;
 
     if (!shell) return;
+
+    // 마우스의 기본 텍스트 선택·이미지 끌기가 지도를 자동 스크롤하지 않게 합니다.
+    // 터치는 브라우저의 기본 관성 스크롤을 그대로 사용합니다.
+    if (event.pointerType !== "touch") event.preventDefault();
 
     resetBattleMapPan();
     battleMapPanRef.current = {
@@ -9168,7 +9183,8 @@ export default function App() {
       window.setTimeout(() => {
         suppressBattleMapClickRef.current = false;
       }, 120);
-    } else {
+    } else if (!event.target.closest('[data-unit-id]')) {
+      // 유닛을 짧게 누르면 기존 유닛 선택 클릭을 사용합니다.
       const tile = getBattleMapTileFromPointerEvent(event);
 
       if (tile && handleBattleTilePress(tile.x, tile.y, "pointer")) {
@@ -16950,6 +16966,7 @@ export default function App() {
               '--classic-map-image': `url(${getClassicBattleMapArt(deploymentSetup.stage)})`,
             }}
           >
+            <BattleMapAtmosphere map={deploymentSetup.stage.map} stageId={deploymentSetup.stage.id} effectsEnabled={settings.effectsOn} />
             <BattlefieldTiles
               activeMap={deploymentSetup.stage.map} stageId={deploymentSetup.stage.id}
               units={deploymentPreviewUnits} facings={facings} deploymentCells={deploymentCells}
@@ -18301,12 +18318,12 @@ export default function App() {
             style={{
               "--map-cols": activeMap[0].length,
               "--map-rows": activeMap.length,
-              "--classic-map-image": `url(${getClassicBattleMapArt(activeStage)})`,
             }}
-            onPointerDown={handleBattleMapPointerDown}
+            onPointerDownCapture={handleBattleMapPointerDown}
             onPointerMove={handleBattleMapPointerMove}
-            onPointerUp={handleBattleMapPointerEnd}
-            onPointerCancel={handleBattleMapPointerEnd}
+            onPointerUpCapture={handleBattleMapPointerEnd}
+            onPointerCancelCapture={handleBattleMapPointerEnd}
+            onDragStart={event => event.preventDefault()}
           >
           <div
             className={`battle-map expanded-map large-map classic-pixel-map grounded-battlefield world-battlefield biome-${getWorldBiome(activeStage.id)} ${isFinalConceptStage(activeStage) ? "final-illustrated-map" : ""}`}
@@ -18332,6 +18349,7 @@ export default function App() {
               "--classic-map-image": `url(${getClassicBattleMapArt(activeStage)})`,
             }}
           >
+            <BattleMapAtmosphere map={activeMap} stageId={activeStage.id} effectsEnabled={settings.effectsOn} />
             {movingUnit && (
               <div
                 className="moving-unit-layer"
@@ -18375,6 +18393,7 @@ export default function App() {
                     data-facing={movingUnit.direction}
                     style={{ '--facing-flip': getFacingArt(movingUnit.direction).flip }}
                     alt={movingUnit.unit.name}
+                    draggable={false}
                     onError={(event) => handleBattleMapUnitImageError(event, movingUnit.unit)}
                   />
                   <span className="moving-unit-fallback">{movingUnit.unit.icon}</span>

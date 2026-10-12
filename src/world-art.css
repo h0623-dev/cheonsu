@@ -130,12 +130,16 @@
   --battle-tile-size: clamp(50px, calc(((min(100dvw, 1120px) - 10px) / var(--map-cols)) + 22px), 86px) !important;
 }
 .world-art-app .battle-screen.battle-final-concept.battle-board-only .battle-map-scroll-shell {
-  background: #506847 var(--classic-map-image) center / cover no-repeat !important;
+  /* 전장 밖 여백에 별도의 장면을 그리면 드래그 중 두 지도가 갈라져 보입니다. */
+  background: #25382f !important;
   border: 0 !important;
   box-shadow: none !important;
   filter: none !important;
   padding-top: 72px !important;
+  user-select: none;
+  -webkit-user-select: none;
 }
+.world-art-app .battle-map-scroll-shell img { -webkit-user-drag: none; }
 .world-art-app .battle-screen.battle-final-concept.battle-board-only .battle-map-scroll-shell::before,
 .world-art-app .battle-screen.battle-final-concept.battle-board-only .battle-map-scroll-shell::after { display: none !important; }
 
@@ -143,6 +147,8 @@
   background: var(--world-ground) 0 0 / calc(var(--battle-tile-size) * 3) calc(var(--battle-row-size) * 3) repeat !important;
   border-radius: 0 !important;
   margin-top: 0 !important;
+  /* 작은 전장은 가운데에, 화면보다 큰 전장은 시작 칸부터 스크롤합니다. */
+  margin-inline: auto !important;
   box-shadow: none !important;
 
   & > .tile {

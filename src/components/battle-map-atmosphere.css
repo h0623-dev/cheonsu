@@ -1,0 +1,61 @@
+.battle-map-atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  contain: layout paint;
+  pointer-events: none;
+  user-select: none;
+}
+
+.battle-map-atmosphere * { pointer-events: none; }
+
+.battle-map-grass {
+  position: absolute;
+  width: calc(var(--battle-tile-size, 48px) * .46);
+  height: calc(var(--battle-row-size, 48px) * .48);
+  max-width: 32px;
+  max-height: 26px;
+  margin-top: calc(var(--battle-row-size, 48px) * -.44);
+  overflow: visible;
+  opacity: .76;
+  transform-origin: 50% 100%;
+  animation: battle-map-grass-sway var(--ambient-duration) ease-in-out var(--ambient-delay) infinite alternate;
+}
+.battle-map-grass .grass-shadow { fill: #617d42; }
+.battle-map-grass .grass-light { fill: #9fac62; }
+.battle-map-grass .grass-vein { fill: none; stroke: #cad088; stroke-width: .6; opacity: .55; }
+.battle-map-grass.grass-variant-1 { opacity: .64; }
+.battle-map-grass.grass-variant-2 .grass-light { fill: #87984f; }
+.battle-map-atmosphere[data-biome='forest'] .grass-shadow { fill: #466847; }
+.battle-map-atmosphere[data-biome='forest'] .grass-light { fill: #849d67; }
+
+.battle-map-cloud-shadow {
+  position: absolute;
+  width: 49%;
+  height: 22%;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 35% 57%, rgb(32 51 65 / 10%), transparent 63%),
+    radial-gradient(ellipse at 64% 43%, rgb(32 51 65 / 9%), transparent 60%);
+  animation: battle-map-cloud-drift var(--ambient-duration) ease-in-out var(--ambient-delay) infinite alternate;
+}
+.battle-map-atmosphere[data-biome='snow'] .battle-map-cloud-shadow { opacity: .64; }
+
+.battle-map-atmosphere[data-paused='true'] :is(.battle-map-grass, .battle-map-cloud-shadow) {
+  animation-play-state: paused;
+}
+
+@keyframes battle-map-grass-sway {
+  from { transform: rotate(-4deg) skewX(-3deg); }
+  to { transform: rotate(5deg) skewX(4deg); }
+}
+@keyframes battle-map-cloud-drift {
+  from { transform: translate(-12%, -5%); }
+  to { transform: translate(20%, 12%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .battle-map-atmosphere { display: none; }
+  .battle-map-atmosphere * { animation: none !important; }
+}

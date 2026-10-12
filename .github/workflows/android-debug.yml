@@ -75,6 +75,7 @@ jobs:
         run: ./scripts/verify-update-artifacts.ps1 -ApkOnly
       - run: npx playwright install --with-deps chromium
       - run: node scripts/verify-cloud-smoke.mjs
+      - run: node scripts/verify-map-atmosphere.mjs
       - run: node scripts/verify-town-camera.mjs
       - run: node scripts/verify-monster-enemies.mjs
       - run: node scripts/verify-skill-spectacle.mjs
@@ -114,6 +115,7 @@ jobs:
           name: android-qa-${{ github.run_id }}
           path: |
             tmp/cloud-qa/
+            tmp/map-atmosphere-qa/
             tmp/town-camera-qa/
             tmp/monster-enemies-qa/
             tmp/skill-spectacle-qa/
