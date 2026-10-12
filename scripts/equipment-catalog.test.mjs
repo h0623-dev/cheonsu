@@ -95,6 +95,25 @@ test('장신구 포함 세 슬롯의 강화 효과는 한 번만 적용하고 �
   assert.deepEqual(source, before);
 });
 
+test('기본치가 없는 새 유닛의 첫 장비 착용은 세 슬롯 효과를 더하고 임시 방어를 기본치와 분리한다', () => {
+  const fresh = { ...hero(), def: 8, skillGuardBoost: 3,
+    equipment: { weapon: 'ironSword', armor: 'leatherArmor', accessory: 'copperAccessory2' },
+    gearEnhance: { ironSword: 2, leatherArmor: 1, copperAccessory2: 1 } };
+  delete fresh.baseAtk;
+  delete fresh.baseDef;
+  const equipped = applyEquipmentStats(fresh);
+  assert.equal(equipped.baseAtk, 8);
+  assert.equal(equipped.baseDef, 5);
+  assert.equal(equipped.atk, 13);
+  assert.equal(equipped.def, 12);
+  assert.equal(equipped.skillGuardBoost, 3);
+  assert.deepEqual(applyEquipmentStats(equipped), equipped);
+  const removed = applyEquipmentStats({ ...equipped, equipment: { weapon: null, armor: null, accessory: null } });
+  assert.equal(removed.atk, 8);
+  assert.equal(removed.def, 8);
+  assert.equal(removed.baseDef, 5);
+});
+
 test('0 기본 능력치를 보존하고 잘못된 슬롯이나 옛 미등록 장비는 추가 효과를 만들지 않는다', () => {
   const raw = { ...hero(), baseAtk: 0, baseDef: 0, equipment: { weapon: 'ironSword', armor: 'leatherArmor', accessory: 'copperAccessory2' } };
   const unit = applyEquipmentStats(makeAlly(raw));

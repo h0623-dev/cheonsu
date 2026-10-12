@@ -29,7 +29,7 @@ export function getEquipmentBonus(unit) {
   }, { atk: 0, def: 0 });
 }
 
-function getBaseEquipmentStats(unit) {
+function recoverExistingEquipmentBaseStats(unit) {
   const bonus = getEquipmentBonus(unit);
   const guard = Number.isFinite(unit.skillGuardBoost) ? unit.skillGuardBoost : 0;
   // Pre-base-stat saves already store the displayed, equipped values in atk/def.
@@ -43,7 +43,7 @@ function getBaseEquipmentStats(unit) {
 export function makeAlly(unit) {
   return {
     ...unit,
-    ...getBaseEquipmentStats(unit),
+    ...recoverExistingEquipmentBaseStats(unit),
     skill: getSkillDisplayName(unit),
     level: unit.level || 1,
     exp: unit.exp || 0,
@@ -56,9 +56,12 @@ export function makeAlly(unit) {
 
 export function applyEquipmentStats(unit) {
   if (unit.type !== "ally") return unit;
-  const { baseAtk, baseDef } = getBaseEquipmentStats(unit);
   const bonus = getEquipmentBonus(unit);
   const skillGuardBoost = Number.isFinite(unit.skillGuardBoost) ? unit.skillGuardBoost : 0;
+  // Runtime callers can attach gear to a fresh unit that has never been equipped.
+  // Its atk/def are bare stats; legacy equipped totals are recovered by makeAlly/save loading.
+  const baseAtk = Number.isFinite(unit.baseAtk) ? unit.baseAtk : (Number.isFinite(unit.atk) ? unit.atk : 0);
+  const baseDef = Number.isFinite(unit.baseDef) ? unit.baseDef : (Number.isFinite(unit.def) ? unit.def : 0) - skillGuardBoost;
   return {
     ...unit,
     equipment: normalizeEquipmentSlots(unit.equipment),
@@ -213,7 +216,8 @@ export function grantExp(units, attackerId, expAmount) {
     if (unit.id !== attackerId || unit.type !== "ally") return unit;
     const storedExp = Number(unit.exp);
     let nextExp = (Number.isFinite(storedExp) ? Math.max(0, storedExp) : 0) + expAmount;
-    let nextUnit = applyEquipmentStats({ ...unit, exp: nextExp });
+    // Experience comes from an existing unit, so old equipped saves need their base recovered first.
+    let nextUnit = applyEquipmentStats({ ...unit, ...recoverExistingEquipmentBaseStats(unit), exp: nextExp });
     messages.push(`${unit.name} EXP +${expAmount}`);
     while (nextExp >= 100) {
       const oldBaseAtk = nextUnit.baseAtk ?? nextUnit.atk;
