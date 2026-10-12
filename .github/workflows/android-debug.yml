@@ -20,6 +20,7 @@ on:
       - 'docs/update-notes.json'
       - 'scripts/build-android.mjs'
       - 'scripts/verify-skill-spectacle.mjs'
+      - 'scripts/verify-expansion-50.mjs'
 permissions:
   contents: read
 concurrency:

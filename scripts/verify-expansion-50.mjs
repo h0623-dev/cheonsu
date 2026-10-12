@@ -196,7 +196,11 @@ async function runViewport(base, viewport) {
     };
     for (const id of promotedIds) for (const form of ADVANCED_CLASSES[id]) {
       await page.locator(`button[data-promotion-unit="${id}"]`).click();
-      const art = page.locator(`[data-advanced-form="${form.id}"] > img`);
+      // 전후 비교에서 현재 모습과 전직 후 모습이 같을 수도 있으므로
+      // 형태 키로 두 그림을 함께 고르지 않고 두 번째(전직 후) 그림을 고릅니다.
+      const afterAppearance = page.locator(`[data-advanced-form="${form.id}"] .promotion-appearance-comparison > figure`).nth(1);
+      assert.equal(await afterAppearance.getAttribute('data-promotion-appearance'), form.id, `${form.name}: 전직 후 미리보기의 형태 키를 보존합니다`);
+      const art = afterAppearance.locator('img');
       assert.equal(await art.getAttribute('src'), getCharacterArt(form.id).motion.recover, `${form.name}: 폼별 실제 전투 원화를 사용합니다`);
       const choice = page.locator(`button[data-advanced-select="${form.id}"]`);
       assert.equal(await choice.isEnabled(), true, `${form.name} 실제 선택이 가능합니다`);
