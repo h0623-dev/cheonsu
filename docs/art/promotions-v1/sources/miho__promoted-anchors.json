@@ -1,0 +1,6 @@
+{
+  "windup": { "kind": "focus", "grip": [166, 211], "tip": [177, 152], "focus": [173, 177], "measured": true },
+  "strike": { "kind": "focus", "grip": [397, 263], "tip": [438, 237], "focus": [420, 251], "measured": true },
+  "skill-a": { "kind": "focus", "grip": [301, 267], "tip": [305, 225], "focus": [303, 246], "measured": true, "note": "부적 대신 합장한 양손에 집중하는 자세이므로 손끝과 손바닥을 기준으로 지정했습니다." },
+  "skill-b": { "kind": "focus", "grip": [390, 189], "tip": [424, 157], "focus": [419, 178], "secondary": { "grip": [143, 273], "tip": [114, 256] }, "measured": true }
+}

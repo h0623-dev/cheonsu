@@ -1,0 +1,78 @@
+{
+  "windup": {
+    "kind": "blade",
+    "grip": [
+      177,
+      146
+    ],
+    "tip": [
+      350,
+      78
+    ],
+    "focus": [
+      350,
+      78
+    ],
+    "measured": false,
+    "framePath": "public/art/promotions-v1/units/bram__oathwarden-windup.webp",
+    "frameSha256": "25fb47bfb1afce5eca274f37025ee7f6a9d06c03da981a7c174c5de12799a3ff",
+    "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+  },
+  "strike": {
+    "kind": "blade",
+    "grip": [
+      306,
+      228
+    ],
+    "tip": [
+      474,
+      193
+    ],
+    "focus": [
+      474,
+      193
+    ],
+    "measured": false,
+    "framePath": "public/art/promotions-v1/units/bram__oathwarden-strike.webp",
+    "frameSha256": "18c5eb48f2937808d2653a6dc07c3aae1a0a8c219691cb26b5ae81cb3065d978",
+    "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+  },
+  "skill-a": {
+    "kind": "shield",
+    "grip": [
+      384,
+      265
+    ],
+    "tip": [
+      437,
+      285
+    ],
+    "focus": [
+      437,
+      285
+    ],
+    "measured": false,
+    "framePath": "public/art/promotions-v1/units/bram__oathwarden-skill-a.webp",
+    "frameSha256": "a581c9fb7513db2af6ca136afb45c5ec7f68d92a0f831cddb325933010fd8ee3",
+    "reviewMethod": "최종 512px 원화에서 방패를 받치는 손과 방패 전면 중심을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+  },
+  "skill-b": {
+    "kind": "shield",
+    "grip": [
+      361,
+      317
+    ],
+    "tip": [
+      405,
+      328
+    ],
+    "focus": [
+      405,
+      328
+    ],
+    "measured": false,
+    "framePath": "public/art/promotions-v1/units/bram__oathwarden-skill-b.webp",
+    "frameSha256": "eeff2d577192c27c4c95d4710f2457f00bf61a9423430d2ae925e78e28f4489c",
+    "reviewMethod": "최종 512px 원화에서 방패를 받치는 손과 방패 전면 중심을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+  }
+}

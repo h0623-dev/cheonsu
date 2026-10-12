@@ -10,6 +10,7 @@ export function getPaintedVisualProfile(key) {
   if (redesigned) return {
     map: redesigned.map || `/art/map-sprites-v4/${key}.webp`, battle: redesigned.motion.recover,
     portrait: redesigned.portrait, cutscene: redesigned.dialogue,
+    ...(redesigned.rear ? { rear: redesigned.rear } : {}),
   };
   if (isExpansionEnemyKey(key)) return {
     map: `/art/characters-v3/map/${key}.webp`, battle: `/art/characters-v3/units/${key}-recover.webp`,

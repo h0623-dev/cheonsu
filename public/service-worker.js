@@ -7,8 +7,9 @@ importScripts('/art/map-sprites-v4/precache.js');
 importScripts('/art/directions-v1/precache.js');
 importScripts('/art/skills-v1/precache.js');
 importScripts('/art/characters-v2/precache.js');
+importScripts('/art/promotions-v1/precache.js');
 importScripts('/art/village-walk-v2/precache.js');
-const CACHE_VERSION = "cheonsu-v199162-mission-guide";
+const CACHE_VERSION = "cheonsu-v199171-promotion-appearance";
 const APP_SHELL_CACHE = `${CACHE_VERSION}-app-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -71,6 +72,7 @@ const APP_SHELL_FILES = [
   ...self.DIRECTION_ART_FILES,
   ...self.SKILL_ART_FILES,
   ...self.CHARACTER_ART_FILES,
+  ...self.PROMOTION_ART_FILES,
   ...self.VILLAGE_WALK_ART_FILES,
   "/",
   "/index.html",

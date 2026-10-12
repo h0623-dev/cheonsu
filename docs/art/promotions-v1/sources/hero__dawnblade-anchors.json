@@ -1,0 +1,78 @@
+{
+  "windup": {
+    "kind": "blade",
+    "grip": [
+      331,
+      182
+    ],
+    "tip": [
+      179,
+      72
+    ],
+    "focus": [
+      179,
+      72
+    ],
+    "measured": false,
+    "framePath": "public/art/promotions-v1/units/hero__dawnblade-windup.webp",
+    "frameSha256": "a22f40e8ec235b1cbe8ce5cfd2ee167d587b3fd4e0d321b3c386c49c2334ac56",
+    "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+  },
+  "strike": {
+    "kind": "blade",
+    "grip": [
+      288,
+      268
+    ],
+    "tip": [
+      450,
+      259
+    ],
+    "focus": [
+      450,
+      259
+    ],
+    "measured": false,
+    "framePath": "public/art/promotions-v1/units/hero__dawnblade-strike.webp",
+    "frameSha256": "6d731ce7ab4e552b81f60b970d79badf2063073c4eba6848260af4f63b20d6b0",
+    "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+  },
+  "skill-a": {
+    "kind": "blade",
+    "grip": [
+      315,
+      247
+    ],
+    "tip": [
+      490,
+      236
+    ],
+    "focus": [
+      490,
+      236
+    ],
+    "measured": false,
+    "framePath": "public/art/promotions-v1/units/hero__dawnblade-skill-a.webp",
+    "frameSha256": "490e07566af21d6eb0da7a8481951c1d5b045a584243bbe3dec244653ba4ff30",
+    "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+  },
+  "skill-b": {
+    "kind": "blade",
+    "grip": [
+      287,
+      241
+    ],
+    "tip": [
+      284,
+      62
+    ],
+    "focus": [
+      284,
+      62
+    ],
+    "measured": false,
+    "framePath": "public/art/promotions-v1/units/hero__dawnblade-skill-b.webp",
+    "frameSha256": "793da1a0d243717c898730bd692ede529d85a0a526d77492d722fb258a35c070",
+    "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+  }
+}

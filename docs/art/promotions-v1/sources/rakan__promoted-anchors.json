@@ -1,0 +1,6 @@
+{
+  "windup": { "kind": "axe", "grip": [249, 48], "tip": [82, 140], "focus": [133, 94], "measured": true },
+  "strike": { "kind": "axe", "grip": [314, 311], "tip": [418, 476], "focus": [400, 406], "measured": true },
+  "skill-a": { "kind": "axe", "grip": [187, 310], "tip": [414, 477], "focus": [394, 402], "fistCenter": [395, 269], "measured": true },
+  "skill-b": { "kind": "axe", "grip": [343, 292], "tip": [450, 433], "focus": [439, 366], "measured": true }
+}

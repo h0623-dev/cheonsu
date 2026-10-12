@@ -1,0 +1,6 @@
+{
+  "windup": { "kind": "focus", "grip": [328, 274], "tip": [331, 243], "focus": [331, 243], "bookCenter": [331, 243], "measured": true },
+  "strike": { "kind": "focus", "grip": [398, 226], "tip": [430, 204], "focus": [430, 213], "bookCenter": [333, 287], "measured": true },
+  "skill-a": { "kind": "focus", "grip": [326, 255], "tip": [330, 225], "focus": [330, 225], "bookCenter": [330, 225], "measured": true },
+  "skill-b": { "kind": "focus", "grip": [386, 218], "tip": [427, 198], "focus": [418, 213], "bookCenter": [311, 274], "measured": true }
+}

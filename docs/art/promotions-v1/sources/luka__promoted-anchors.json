@@ -1,0 +1,78 @@
+{
+  "windup": {
+    "kind": "blade",
+    "grip": [
+      319,
+      199
+    ],
+    "tip": [
+      151,
+      130
+    ],
+    "focus": [
+      151,
+      130
+    ],
+    "measured": false,
+    "framePath": "public/art/promotions-v1/units/luka__promoted-windup.webp",
+    "frameSha256": "dd685d481896f631883e51ab04356d1a6cacf463f5fd235bcb2f810ecf84d32f",
+    "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+  },
+  "strike": {
+    "kind": "blade",
+    "grip": [
+      294,
+      278
+    ],
+    "tip": [
+      429,
+      246
+    ],
+    "focus": [
+      429,
+      246
+    ],
+    "measured": false,
+    "framePath": "public/art/promotions-v1/units/luka__promoted-strike.webp",
+    "frameSha256": "0959284bf0e2cdf3154d69b09ac2572d32d47b41696189d7e7878f20b543b5cc",
+    "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+  },
+  "skill-a": {
+    "kind": "blade",
+    "grip": [
+      337,
+      298
+    ],
+    "tip": [
+      486,
+      273
+    ],
+    "focus": [
+      486,
+      273
+    ],
+    "measured": false,
+    "framePath": "public/art/promotions-v1/units/luka__promoted-skill-a.webp",
+    "frameSha256": "7640b9e02c7b0e45c4ba9860d19600109f149ffbd5c5c69402ef756de1b57f8e",
+    "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+  },
+  "skill-b": {
+    "kind": "blade",
+    "grip": [
+      177,
+      278
+    ],
+    "tip": [
+      201,
+      124
+    ],
+    "focus": [
+      201,
+      124
+    ],
+    "measured": false,
+    "framePath": "public/art/promotions-v1/units/luka__promoted-skill-b.webp",
+    "frameSha256": "1a9b030417c3029e0f3927198f65d49287b514b89b4689ef05ef698b708a4b46",
+    "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+  }
+}

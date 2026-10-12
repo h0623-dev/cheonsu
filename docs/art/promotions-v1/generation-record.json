@@ -1,0 +1,617 @@
+{
+  "version": "1.99.171",
+  "generator": "image_gen.imagegen",
+  "description": "기존 천수 캐릭터 원화를 참조하여 신규 전직 복장과 지도·보행 자세를 제작한 생성 및 편집 이력입니다.",
+  "sourceDirectory": "docs/art/promotions-v1/sources",
+  "extractionReport": "docs/art/promotions-v1/extraction-report.json",
+  "sourcePolicy": "생성 PNG 원본은 작업 디렉터리에 보존하며, 저장소에는 고품질 투명 WebP 원화와 원본 파일명·SHA-256을 보존합니다.",
+  "promptPolicy": "제작 프롬프트 원문은 생성 당시 표현을 보존합니다. 원화 제작용 기술 기록이며 게임 표시 문구가 아닙니다.",
+  "directGameValidation": false,
+  "groups": {
+    "ordinary_a": {
+      "recordFile": "art-a.json",
+      "record": {
+        "description": "일반전직 아트 A그룹7명, image_gen 참조편집, 원본 아트 보존",
+        "tool": "image_gen__imagegen",
+        "transparentBackground": true,
+        "requestedSize": "2048x2048",
+        "layout": "4x4",
+        "cellOrder": [
+          "run-a",
+          "run-b",
+          "windup",
+          "strike",
+          "recover",
+          "recoil",
+          "skill-a",
+          "skill-b",
+          "dialogue-bust",
+          "map-front-idle",
+          "map-back-idle",
+          "map-front-walk-a",
+          "map-front-walk-b",
+          "map-back-walk-a",
+          "map-back-walk-b",
+          "portrait"
+        ],
+        "directGameValidation": false,
+        "records": [
+          {
+            "id": "bram",
+            "form": "promoted",
+            "key": "bram__promoted",
+            "source": "/workspace/cheonsu/docs/art/characters-v2/sources/bram.png",
+            "output": "/workspace/work/promotion171/bram__promoted.png",
+            "generatedSource": "/workspace/generated_images/exec-12a4860a-e9af-4164-a876-873ded2b9562.png",
+            "prompt": "Modify the referenced original Korean tactical fantasy RPG character into the PROMOTED class described below. Preserve the EXACT character identity: gender, face, hairstyle and hair color, age, main weapon role, and the original hand-painted watercolor/anime game sprite style. Make a genuinely new promoted clothing silhouette, accessories and gear, NOT a color filter. Create one production transparent PNG sprite atlas, square 2048x2048, exactly 4 columns x4 rows, sixteen independent isolated characters on transparent alpha, NO text, numbers, grid, scenery, ground shadows, glows or particles. Each character fits completely INSIDE its equal 512x512 cell with 15% transparent margin on all sides; all weapons, hair, cloak and feet must fit. No overlapping neighboring cells. Keep scale modest enough for raised weapons. Row-major exact cells: 0 running A side three-quarter facing right, 1 running B side facing right, 2 attack windup facing right, 3 decisive attack strike facing right; 4 recovery ready stance facing right, 5 hit recoil facing right, 6 skill preparation facing right, 7 skill release facing right; 8 dialogue waist-up bust facing slightly right, 9 map front idle 4-head-tall full body, 10 map rear idle 4-head-tall full body, 11 map front walking A 4-head tall; 12 map front walking B, 13 map rear walking A, 14 map rear walking B, 15 closeup face portrait including hair. Map walking must visibly alternate leg and arm position and keep exact same promoted outfit front and back. All eight combat poses use identical promoted outfit and character proportions. Cell8/15 can be larger busts with ample transparent surrounding margin. No cropping anywhere. Promoted design: Bram, mature broad muscular brown-haired bearded male shield knight. Homeland guardian knight: dark aged-bronze heavy shield armor, oversized angular pauldrons, clean white heraldic tabard with original geometric national crest, short deep red cape, monumental rectangular bronze tower shield with white heraldic inset, sturdy silver broadsword. Brown beard/hair and stern kind face exactly as reference. Clearly a more formidable heavy defender than original green knight.",
+            "repairs": [
+              {
+                "prompt": "Repair this exact transparent4x4spriteatlas. Preserve character, face, armor, cloak, colors and all16poses. Critical repair: TOP ROW THIRD CELL raised sword has been cropped by topcanvas edge. REDRAW that complete pose30% smaller and center it lower INSIDE its cell so the entire sword including its tip is visible with generous empty alpha spaceabove. Also complete the rightmost sword tip in top row fourthcell if needed. All16sprites remain isolated on transparentbackground. Same brownbeardedman whiteheraldic tabard bronzearmor redcape. Never crop feet orweapons. Keep exact order and style. Output transparent squarePNG.",
+                "generatedOutputHint": "Generated images are saved to /workspace/generated_images as /workspace/generated_images/exec-12a4860a-e9af-4164-a876-873ded2b9562.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+              }
+            ]
+          },
+          {
+            "id": "lina",
+            "form": "promoted",
+            "key": "lina__promoted",
+            "source": "/workspace/cheonsu/docs/art/characters-v2/sources/lina.png",
+            "output": "/workspace/work/promotion171/lina__promoted.png",
+            "generatedSource": "/workspace/generated_images/exec-bfc1e94e-63ad-45f1-aeed-3d9c3698c75b.png",
+            "prompt": "Modify the referenced original Korean tactical fantasy RPG character into the PROMOTED class described below. Preserve the EXACT character identity: gender, face, hairstyle and hair color, age, main weapon role, and the original hand-painted watercolor/anime game sprite style. Make a genuinely new promoted clothing silhouette, accessories and gear, NOT a color filter. Create one production transparent PNG sprite atlas, square 2048x2048, exactly 4 columns x4 rows, sixteen independent isolated characters on transparent alpha, NO text, numbers, grid, scenery, ground shadows, glows or particles. Each character fits completely INSIDE its equal 512x512 cell with 15% transparent margin on all sides; all weapons, hair, cloak and feet must fit. No overlapping neighboring cells. Keep scale modest enough for raised weapons. Row-major exact cells: 0 running A side three-quarter facing right, 1 running B side facing right, 2 attack windup facing right, 3 decisive attack strike facing right; 4 recovery ready stance facing right, 5 hit recoil facing right, 6 skill preparation facing right, 7 skill release facing right; 8 dialogue waist-up bust facing slightly right, 9 map front idle 4-head-tall full body, 10 map rear idle 4-head-tall full body, 11 map front walking A 4-head tall; 12 map front walking B, 13 map rear walking A, 14 map rear walking B, 15 closeup face portrait including hair. Map walking must visibly alternate leg and arm position and keep exact same promoted outfit front and back. All eight combat poses use identical promoted outfit and character proportions. Cell8/15 can be larger busts with ample transparent surrounding margin. No cropping anywhere. Promoted design: Lina, red-haired young woman archer, long wavy red high ponytail preserved. Crimson master archer with black fitted light armor, layered short crimson shoulder cape with sculpted red feather ornaments, full white blouse sleeves, practical fitted leggings and tall boots, original fantasy phoenix-feather recurved bow (solid carved decorative bow, NO actual fire). Her hair/face remains unmistakably same as source. Every combat stance must show her holding her bow, shooting animation drawn bow or raised aimed bow skill. Increase transparent spacing, every sprite occupies only CENTER 65 percent of its cell. Nothing touches outer canvas border or cell borders.",
+            "repairs": []
+          },
+          {
+            "id": "aria",
+            "form": "promoted",
+            "key": "aria__promoted",
+            "source": "/workspace/cheonsu/docs/art/characters-v2/sources/aria.png",
+            "output": "/workspace/work/promotion171/aria__promoted.png",
+            "generatedSource": "/workspace/generated_images/exec-2c5cd639-12a5-4e86-b14c-578710e731a4.png",
+            "prompt": "Modify the referenced original Korean tactical fantasy RPG character into the PROMOTED class described below. Preserve the EXACT character identity: gender, face, hairstyle and hair color, age, main weapon role, and the original hand-painted watercolor/anime game sprite style. Make a genuinely new promoted clothing silhouette, accessories and gear, NOT a color filter. Create one production transparent PNG sprite atlas, square 2048x2048, exactly 4 columns x4 rows, sixteen independent isolated characters on transparent alpha, NO text, numbers, grid, scenery, ground shadows, glows or particles. Each character fits completely INSIDE its equal 512x512 cell with 15% transparent margin on all sides; all weapons, hair, cloak and feet must fit. No overlapping neighboring cells. Keep scale modest enough for raised weapons. Row-major exact cells: 0 running A side three-quarter facing right, 1 running B side facing right, 2 attack windup facing right, 3 decisive attack strike facing right; 4 recovery ready stance facing right, 5 hit recoil facing right, 6 skill preparation facing right, 7 skill release facing right; 8 dialogue waist-up bust facing slightly right, 9 map front idle 4-head-tall full body, 10 map rear idle 4-head-tall full body, 11 map front walking A 4-head tall; 12 map front walking B, 13 map rear walking A, 14 map rear walking B, 15 closeup face portrait including hair. Map walking must visibly alternate leg and arm position and keep exact same promoted outfit front and back. All eight combat poses use identical promoted outfit and character proportions. Cell8/15 can be larger busts with ample transparent surrounding margin. No cropping anywhere. Promoted design: Aria, gentle long ivory-white wavy haired blue-eyed female healer. Promoted sacred priestess: elegant substantial full-length white and gold layered ceremonial vestments, white capelet, gold embroidered broad hems, refined structural halo-shaped HIGH COLLAR ornament behind neck (solid jewelry not light effect), fitted modest high neckline, completely covered torso and legs, gold gemstone healing staff with a white/gold ornamental top. Preserve her youthful gentle face and long white hair. Bold new white-gold silhouette, no blue-green beginner cloak. IMPORTANT: layout has WIDE transparent gutters and a full transparent frame. Each tiny complete character fits in central60% of each cell, never filling whole cell. Arms and staffs held compactly. 4 columns4rows sixteen images.",
+            "repairs": []
+          },
+          {
+            "id": "leon",
+            "form": "promoted",
+            "key": "leon__promoted",
+            "source": "/workspace/cheonsu/docs/art/characters-v2/sources/leon.png",
+            "output": "/workspace/work/promotion171/leon__promoted.png",
+            "generatedSource": "/workspace/generated_images/exec-2b010259-a0ef-4062-9b6b-0fc07cab9c57.png",
+            "prompt": "Modify the referenced original Korean tactical fantasy RPG character into the PROMOTED class described below. Preserve the EXACT character identity: gender, face, hairstyle and hair color, age, main weapon role, and the original hand-painted watercolor/anime game sprite style. Make a genuinely new promoted clothing silhouette, accessories and gear, NOT a color filter. Create one production transparent PNG sprite atlas, square 2048x2048, exactly 4 columns x4 rows, sixteen independent isolated characters on transparent alpha, NO text, numbers, grid, scenery, ground shadows, glows or particles. Each character fits completely INSIDE its equal 512x512 cell with 15% transparent margin on all sides; all weapons, hair, cloak and feet must fit. No overlapping neighboring cells. Keep scale modest enough for raised weapons. Row-major exact cells: 0 running A side three-quarter facing right, 1 running B side facing right, 2 attack windup facing right, 3 decisive attack strike facing right; 4 recovery ready stance facing right, 5 hit recoil facing right, 6 skill preparation facing right, 7 skill release facing right; 8 dialogue waist-up bust facing slightly right, 9 map front idle 4-head-tall full body, 10 map rear idle 4-head-tall full body, 11 map front walking A 4-head tall; 12 map front walking B, 13 map rear walking A, 14 map rear walking B, 15 closeup face portrait including hair. Map walking must visibly alternate leg and arm position and keep exact same promoted outfit front and back. All eight combat poses use identical promoted outfit and character proportions. Cell8/15 can be larger busts with ample transparent surrounding margin. No cropping anywhere. Promoted design: Leon, young blond short-haired male blue-eyed spear knight. Promoted Gale Spear Knight: bright white-silver articulated full plate armor, distinct swept wing-shaped silver pauldrons, long emerald-green split cape with two narrow trailing tails, white surcoat and small emerald jewelry, slim elegant long spear with polished blue steel spearhead. Keep blonde male face and spear weapon, NO swords. New armor silhouette must be noticeably taller and more ornate than original rounded plain armor. For attack/skill the spear must fit ENTIRELY within its cell, use foreshortening and diagonals rather than wide horizontal extension. WIDE EMPTY TRANSPARENT GUTTERS between all16 sprites; keep all sprites SMALL at center eachcell with25% transparent margin. No sprite or weapon touches another sprite or atlas edge.",
+            "repairs": []
+          },
+          {
+            "id": "sera",
+            "form": "promoted",
+            "key": "sera__promoted",
+            "source": "/workspace/cheonsu/docs/art/characters-v2/sources/sera.png",
+            "output": "/workspace/work/promotion171/sera__promoted.png",
+            "generatedSource": "/workspace/generated_images/exec-aa30fbfe-f4a5-4133-9e5c-03ed6ef5bc79.png",
+            "prompt": "Modify the referenced original Korean tactical fantasy RPG character into the PROMOTED class described below. Preserve the EXACT character identity: gender, face, hairstyle and hair color, age, main weapon role, and the original hand-painted watercolor/anime game sprite style. Make a genuinely new promoted clothing silhouette, accessories and gear, NOT a color filter. Create one production transparent PNG sprite atlas, square 2048x2048, exactly 4 columns x4 rows, sixteen independent isolated characters on transparent alpha, NO text, numbers, grid, scenery, ground shadows, glows or particles. Each character fits completely INSIDE its equal 512x512 cell with 15% transparent margin on all sides; all weapons, hair, cloak and feet must fit. No overlapping neighboring cells. Keep scale modest enough for raised weapons. Row-major exact cells: 0 running A side three-quarter facing right, 1 running B side facing right, 2 attack windup facing right, 3 decisive attack strike facing right; 4 recovery ready stance facing right, 5 hit recoil facing right, 6 skill preparation facing right, 7 skill release facing right; 8 dialogue waist-up bust facing slightly right, 9 map front idle 4-head-tall full body, 10 map rear idle 4-head-tall full body, 11 map front walking A 4-head tall; 12 map front walking B, 13 map rear walking A, 14 map rear walking B, 15 closeup face portrait including hair. Map walking must visibly alternate leg and arm position and keep exact same promoted outfit front and back. All eight combat poses use identical promoted outfit and character proportions. Cell8/15 can be larger busts with ample transparent surrounding margin. No cropping anywhere. Promoted design: Sera, confident purple-dark haired female agile twin dagger fighter with long high ponytail. Promoted shadow agent: entirely new asymmetrical black leather armor with one pronounced layered shoulder plate, deep-plum short cloak with HOOD DOWN behind neck, crisscrossed broad layered waist belts and small practical pouches, split hip tassets, dark fitted trousers, knee-high black armored boots, twin distinctive double-edged short swords. Retain feminine face, existing dark purple high ponytail, uncovered face and uncovered hair. Cloak silhouette shorter and asymmetrical rather than original long red scarf. Outfit stays same every pose. All16figures have separate isolated silhouettes and complete weapon tips, reserve lots of empty transparent margin at canvas perimeter.",
+            "repairs": []
+          },
+          {
+            "id": "noah",
+            "form": "promoted",
+            "key": "noah__promoted",
+            "source": "/workspace/cheonsu/docs/art/characters-v2/sources/noah.png",
+            "output": "/workspace/work/promotion171/noah__promoted.png",
+            "generatedSource": "/workspace/generated_images/exec-1ff4cf21-5893-458a-b137-32f9beccbd34.png",
+            "prompt": "Modify the referenced original Korean tactical fantasy RPG character into the PROMOTED class described below. Preserve the EXACT character identity: gender, face, hairstyle and hair color, age, main weapon role, and the original hand-painted watercolor/anime game sprite style. Make a genuinely new promoted clothing silhouette, accessories and gear, NOT a color filter. Create one production transparent PNG sprite atlas, square 2048x2048, exactly 4 columns x4 rows, sixteen independent isolated characters on transparent alpha, NO text, numbers, grid, scenery, ground shadows, glows or particles. Each character fits completely INSIDE its equal 512x512 cell with 15% transparent margin on all sides; all weapons, hair, cloak and feet must fit. No overlapping neighboring cells. Keep scale modest enough for raised weapons. Row-major exact cells: 0 running A side three-quarter facing right, 1 running B side facing right, 2 attack windup facing right, 3 decisive attack strike facing right; 4 recovery ready stance facing right, 5 hit recoil facing right, 6 skill preparation facing right, 7 skill release facing right; 8 dialogue waist-up bust facing slightly right, 9 map front idle 4-head-tall full body, 10 map rear idle 4-head-tall full body, 11 map front walking A 4-head tall; 12 map front walking B, 13 map rear walking A, 14 map rear walking B, 15 closeup face portrait including hair. Map walking must visibly alternate leg and arm position and keep exact same promoted outfit front and back. All eight combat poses use identical promoted outfit and character proportions. Cell8/15 can be larger busts with ample transparent surrounding margin. No cropping anywhere. Promoted design: Noah, young black tousled short-haired male tactician with circular glasses and intelligent gentle face. Promoted grand strategist: sharply tailored NAVY BLUE long military tactical coat with long split coattails, high upright gold-embroidered collar, one prominent decorated shoulder epaulette and gold chain, ivory waistcoat, navy trousers, tall dark boots, leather belt and scroll case. Keep exact round glasses, black hair and male face. His weapon IS HIS THICK LEATHERBOUND SPELLBOOK, not sword or staff. Book cover has original abstract geometric metal corners. Casting poses hold book open and gesture with other hand. No magical effects. New uniform silhouette is structured scholarly officer, quite different from old soft green robe. Compact isolated complete poses, generous gutters, every figure centered in its allotted 4x4cell.",
+            "repairs": [
+              {
+                "prompt": "Repair this exact transparent4x4spriteatlas keeping exact character/navycoat/glasses/blackhair/book/poses inallothercells. TWO CRITICAL REPAIRS: TOP ROW THIRD CELL currently lacks HEAD! Redraw as complete fullbody blackhaired roundglasses male with his head and face plainly visible, raised gesturing hand next to head, openbookinotherhand, bothlegsandboots. SECOND ROW THIRD CELL is incorrectly a croppedbust; redraw it as complete fullbody navycoattactician fromheadtobothboots readingbook, same male andglasses. Each repairedfiguremustfitsafelyinsideitscellwithtransparentmargin, nooverlap. Cell8 and15 remain bust portraits asintentional. Preserve all16cellsexactorder. Noeffects/background/text. TransparentPNG.",
+                "generatedOutputHint": "Generated images are saved to /workspace/generated_images as /workspace/generated_images/exec-d3f1d2b4-7094-4037-8cf7-b585b8d3b007.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+              }
+            ],
+            "retry": {
+              "prompt": "Modify the referenced original Korean tactical fantasy RPG character into the PROMOTED class described below. Preserve the EXACT character identity: gender, face, hairstyle and hair color, age, main weapon role, and the original hand-painted watercolor/anime game sprite style. Make a genuinely new promoted clothing silhouette, accessories and gear, NOT a color filter. Create one production transparent PNG sprite atlas, square 2048x2048, exactly 4 columns x4 rows, sixteen independent isolated characters on transparent alpha, NO text, numbers, grid, scenery, ground shadows, glows or particles. Each character fits completely INSIDE its equal 512x512 cell with 15% transparent margin on all sides; all weapons, hair, cloak and feet must fit. No overlapping neighboring cells. Keep scale modest enough for raised weapons. Row-major exact cells: 0 running A side three-quarter facing right, 1 running B side facing right, 2 attack windup facing right, 3 decisive attack strike facing right; 4 recovery ready stance facing right, 5 hit recoil facing right, 6 skill preparation facing right, 7 skill release facing right; 8 dialogue waist-up bust facing slightly right, 9 map front idle 4-head-tall full body, 10 map rear idle 4-head-tall full body, 11 map front walking A 4-head tall; 12 map front walking B, 13 map rear walking A, 14 map rear walking B, 15 closeup face portrait including hair. Map walking must visibly alternate leg and arm position and keep exact same promoted outfit front and back. All eight combat poses use identical promoted outfit and character proportions. Cell8/15 can be larger busts with ample transparent surrounding margin. No cropping anywhere. Promoted design: Noah, black short tousled haired young man wearing ROUND GLASSES; his face and hair MUST appear in EVERY figure including casting! Promoted military strategist: navy long tactical officer coat, ivory vest, high gold collar, ONE gold shoulder epaulette, gold chain, darkblue trousers and highbrown boots, thick brown goldcornered spellbook. Redesign outfit completely from original greenrobe while keeping original Noah face and glasses. His weapon is book. All combat poses FULL BODY with head, neck, torso, arms, hands, legs and two boots visible. Pose2 windup: hold book OPEN at chest, OTHER HAND AT WAIST, look to right with visibleface. Pose6 skillready: feetapart, bookopenat chest, otherhand bentnearwaist, fullbody BOTH FEET visible. Pose3/7 magicrelease: leanforward with hand pointingright AT CHEST LEVEL, nevercoverface. NO hand above head. Combatfigures14etc never become headless or cropped. Transparentwidegutters. No particles.",
+              "generatedOutputHint": "Generated images are saved to /workspace/generated_images as /workspace/generated_images/exec-1ff4cf21-5893-458a-b137-32f9beccbd34.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+            }
+          },
+          {
+            "id": "yuna",
+            "form": "promoted",
+            "key": "yuna__promoted",
+            "source": "/workspace/cheonsu/docs/art/characters-v2/sources/yuna.png",
+            "output": "/workspace/work/promotion171/yuna__promoted.png",
+            "generatedSource": "/workspace/generated_images/exec-6b0b5551-da72-491f-9ff9-d2fa3c139183.png",
+            "prompt": "Modify the referenced original Korean tactical fantasy RPG character into the PROMOTED class described below. Preserve the EXACT character identity: gender, face, hairstyle and hair color, age, main weapon role, and the original hand-painted watercolor/anime game sprite style. Make a genuinely new promoted clothing silhouette, accessories and gear, NOT a color filter. Create one production transparent PNG sprite atlas, square 2048x2048, exactly 4 columns x4 rows, sixteen independent isolated characters on transparent alpha, NO text, numbers, grid, scenery, ground shadows, glows or particles. Each character fits completely INSIDE its equal 512x512 cell with 15% transparent margin on all sides; all weapons, hair, cloak and feet must fit. No overlapping neighboring cells. Keep scale modest enough for raised weapons. Row-major exact cells: 0 running A side three-quarter facing right, 1 running B side facing right, 2 attack windup facing right, 3 decisive attack strike facing right; 4 recovery ready stance facing right, 5 hit recoil facing right, 6 skill preparation facing right, 7 skill release facing right; 8 dialogue waist-up bust facing slightly right, 9 map front idle 4-head-tall full body, 10 map rear idle 4-head-tall full body, 11 map front walking A 4-head tall; 12 map front walking B, 13 map rear walking A, 14 map rear walking B, 15 closeup face portrait including hair. Map walking must visibly alternate leg and arm position and keep exact same promoted outfit front and back. All eight combat poses use identical promoted outfit and character proportions. Cell8/15 can be larger busts with ample transparent surrounding margin. No cropping anywhere. Promoted design: Yuna, gentle young woman with very long flowing BLACK hair and warm brown eyes. Promoted Moonlight Priestess: elegant modest full-length layered violet and lilac robes with broad overlapping sleeves, silver embroidered crescent borders, silver sash and small silver bells hanging from waist, refined silver crescent hair ornament with small white flower accents, long SILVER crescent-topped staff holding pink moonstone. New structured tiered flowing ceremonial silhouette, lavender/violet/silver palette replaces old pink-white robe. Preserve original friendly face, black flowing hair, healer role. Fully clothed with high wrap neckline. Every pose including strike/skill shows a COMPLETE body from top of head to both boots, never accidentally a bust except designated cells8 and15. Compact staff poses fit well insidecanvas. Wide transparent separation.",
+            "repairs": [
+              {
+                "prompt": "Repair this exact transparent4x4spriteatlas. Preserve everycharacter/pose/outfit/face/palette. TOP ROW THIRD CELL her raisedstafftop is cropped bycanvas topedge. Redraw that COMPLETE POSE25%smaller and lower it insideitscell, so entirestafftopandheadandbothboots arevisible with WIDE transparent space abovestaff andaroundfigure. Longblackhaired gentlewoman, violet layered priestessrobe, crescentheadornament and silverpinkmoonstonestaff. Nootherchanges. All16cells sameorder, transparentbackground, nogridortext.",
+                "generatedOutputHint": "Generated images are saved to /workspace/generated_images as /workspace/generated_images/exec-6b0b5551-da72-491f-9ff9-d2fa3c139183.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "ordinary_b": {
+      "recordFile": "art-b.json",
+      "record": [
+        {
+          "id": "rakan",
+          "key": "rakan__promoted",
+          "source": "/workspace/generated_images/exec-11e6179f-b9cf-437f-8541-4f600d1b83d4.png",
+          "output": "/workspace/work/promotion171/rakan__promoted.png",
+          "reference": "docs/art/characters-v2/sources/rakan.png",
+          "prompt": "Edit the attached existing original character sprite sheet into a NEW ORDINARY PROMOTION costume for this SAME character. Keep exactly the original face, gender, hair colour/style, age impression, body identity and original warm detailed hand-painted anime tactical-RPG linework. Preserve original weapon category. This must visibly change physical garments, armor structure, shoulder silhouette and equipment, not merely recolour. Deliver one square 2048x2048 transparent PNG sprite atlas, EXACTLY 4 equal columns x 4 equal rows, 16 cells, ordered left to right top to bottom. Absolutely no text, labels, grid lines, borders, frame lines, floor, scenery, shadows on a floor, particles, magic effects, decorative background, or contact between silhouettes. Each cell has a centered isolated individual cutout with 15 percent empty transparent margin on every side. Fit WHOLE figure and whole weapon, head, hair, cape, toes within its own cell; no clipping, crossing or overlaps. At positions 0-7 draw fullbody battle proportions (same proportions as reference) facing right: 0 running A, 1 running B opposite legs, 2 attack windup, 3 attack strike, 4 attack recovery/guard stance, 5 hit recoil, 6 skill anticipation pose, 7 skill release pose. Position8 is a separate talking waist-up bust in promoted costume. Position9 map/town idle FRONT 3/4 fullbody with 4-head-tall proportions, position10 matching BACK 3/4 fullbody, position11 front walk A, position12 front walk B, position13 back walk A, position14 back walk B (positions9-14 consistently 4-head-tall). Position15 separate head-and-shoulders portrait in promoted costume. All16 images must be the same new promoted outfit, consistent details. Physical leg positions MUST differ in paired walks. This atlas is production sprite artwork for an existing game, with crisp precise edges and true alpha transparency. NEW PROMOTION DESIGN: Rakan / Wild King. Same strongly muscular tan-skinned adult man, spiky short dark hair, short dark beard, large two-handed steel battle axe. A dramatically larger beast-fur mantle over both broad shoulders, reinforced crimson and black articulated plate chest harness leaving muscular arms visible, thick engraved metal girdle with hanging armor plates, dark split trousers, massive metal forearm guards and greaves, ragged deep red rear waist sash. The axe is upgraded with a dark broad crescent steel head and bronze tooth-shaped inlay; never change to a sword. Rugged chieftain silhouette, ornate but grounded, no helmet hides his face. Show the new armor in every sprite."
+        },
+        {
+          "id": "miho",
+          "key": "miho__promoted",
+          "source": "/workspace/generated_images/exec-8034ca75-d4b8-4f1b-8523-720646fe317a.png",
+          "output": "/workspace/work/promotion171/miho__promoted.png",
+          "reference": "docs/art/characters-v2/sources/miho.png",
+          "prompt": "Edit the attached existing original character sprite sheet into a NEW ORDINARY PROMOTION costume for this SAME character. Keep exactly the original face, gender, hair colour/style, age impression, body identity and original warm detailed hand-painted anime tactical-RPG linework. Preserve original weapon category. This must visibly change physical garments, armor structure, shoulder silhouette and equipment, not merely recolour. Deliver one square 2048x2048 transparent PNG sprite atlas, EXACTLY 4 equal columns x 4 equal rows, 16 cells, ordered left to right top to bottom. Absolutely no text, labels, grid lines, borders, frame lines, floor, scenery, shadows on a floor, particles, magic effects, decorative background, or contact between silhouettes. Each cell has a centered isolated individual cutout with 15 percent empty transparent margin on every side. Fit WHOLE figure and whole weapon, head, hair, cape, toes within its own cell; no clipping, crossing or overlaps. At positions 0-7 draw fullbody battle proportions (same proportions as reference) facing right: 0 running A, 1 running B opposite legs, 2 attack windup, 3 attack strike, 4 attack recovery/guard stance, 5 hit recoil, 6 skill anticipation pose, 7 skill release pose. Position8 is a separate talking waist-up bust in promoted costume. Position9 map/town idle FRONT 3/4 fullbody with 4-head-tall proportions, position10 matching BACK 3/4 fullbody, position11 front walk A, position12 front walk B, position13 back walk A, position14 back walk B (positions9-14 consistently 4-head-tall). Position15 separate head-and-shoulders portrait in promoted costume. All16 images must be the same new promoted outfit, consistent details. Physical leg positions MUST differ in paired walks. This atlas is production sprite artwork for an existing game, with crisp precise edges and true alpha transparency. NEW PROMOTION DESIGN: Miho / Illusion Taoist. Same female fox-girl with long charcoal-black hair, two furry dark fox ears, fluffy dark fox tail, reddish brown eyes and gentle youthful face; preserve ears and tail. A new layered jade-green and violet ceremonial Taoist robe with wide long sleeves, overlapping short outer jacket and flowing divided robe skirt, gold fasteners, multiple knotted paper-talisman cords at a broad ornate sash, small calabash gourd at belt, jade-flower hairpin. Charm-casting hands remain her weapon; small paper charms may be held but NO floating effects. New shoulder shape and waist equipment clearly distinct from the original plain white-red robe. Black boots fully visible in fullbody poses. SIZE RULE OVERRIDES REFERENCE: each figure is SMALL within its 512x512 cell, its maximum bounding box only 340x340, leaving at least 85px on ALL four edges. Each row and column is separated by VERY WIDE EMPTY TRANSPARENT GUTTERS. Exactly four columns, four rows; the first eight body poses occupy rows1-2, bust/map/map/walk in row3, walk/walk/walk/portrait in row4."
+        },
+        {
+          "id": "teo",
+          "key": "teo__promoted",
+          "source": "/workspace/generated_images/exec-a9fcceb0-17cc-4901-8bd6-b9c5204d71f4.png",
+          "output": "/workspace/work/promotion171/teo__promoted.png",
+          "reference": "docs/art/characters-v2/sources/teo.png",
+          "prompt": "Edit the attached existing original character sprite sheet into a NEW ORDINARY PROMOTION costume for this SAME character. Keep exactly the original face, gender, hair colour/style, age impression, body identity and original warm detailed hand-painted anime tactical-RPG linework. Preserve original weapon category. This must visibly change physical garments, armor structure, shoulder silhouette and equipment, not merely recolour. Deliver one square 2048x2048 transparent PNG sprite atlas, EXACTLY 4 equal columns x 4 equal rows, 16 cells, ordered left to right top to bottom. Absolutely no text, labels, grid lines, borders, frame lines, floor, scenery, shadows on a floor, particles, magic effects, decorative background, or contact between silhouettes. Each cell has a centered isolated individual cutout with 15 percent empty transparent margin on every side. Fit WHOLE figure and whole weapon, head, hair, cape, toes within its own cell; no clipping, crossing or overlaps. At positions 0-7 draw fullbody battle proportions (same proportions as reference) facing right: 0 running A, 1 running B opposite legs, 2 attack windup, 3 attack strike, 4 attack recovery/guard stance, 5 hit recoil, 6 skill anticipation pose, 7 skill release pose. Position8 is a separate talking waist-up bust in promoted costume. Position9 map/town idle FRONT 3/4 fullbody with 4-head-tall proportions, position10 matching BACK 3/4 fullbody, position11 front walk A, position12 front walk B, position13 back walk A, position14 back walk B (positions9-14 consistently 4-head-tall). Position15 separate head-and-shoulders portrait in promoted costume. All16 images must be the same new promoted outfit, consistent details. Physical leg positions MUST differ in paired walks. This atlas is production sprite artwork for an existing game, with crisp precise edges and true alpha transparency. NEW PROMOTION DESIGN: Teo / Precision Master Archer. Same young male archer with tousled light chestnut-brown hair and cheerful gentle face; preserve youth and facial identity. New dark teal knee-length fitted archer's coat with split tails, a short crisp WHITE shoulder cape and silver clasp, strong silver metal forearm guards, leather chest harness, black shorts and tall reinforced brown boots, silver-trimmed quiver. Elegant physically plausible longbow with silver precision fittings and thin string, always keep the bow fully inside the cell; no giant magic bow. Archery windup draws bow, strike releases arrow, skill poses use a deeper aim and release. The new long coat/white cape silhouette must differ unmistakably from the old simple green cloak. SIZE RULE OVERRIDES REFERENCE: each figure is SMALL within its 512x512 cell, its maximum bounding box only 340x340, leaving at least 85px on ALL four edges. Each row and column is separated by VERY WIDE EMPTY TRANSPARENT GUTTERS. Exactly four columns, four rows; the first eight body poses occupy rows1-2, bust/map/map/walk in row3, walk/walk/walk/portrait in row4."
+        },
+        {
+          "id": "irene",
+          "key": "irene__promoted",
+          "source": "/workspace/generated_images/exec-aee7e8ec-e0db-4f80-b121-9978a51aa875.png",
+          "output": "/workspace/work/promotion171/irene__promoted.png",
+          "reference": "docs/art/characters-v2/sources/irene.png",
+          "prompt": "Edit the attached existing original character sprite sheet into a NEW ORDINARY PROMOTION costume for this SAME character. Keep exactly the original face, gender, hair colour/style, age impression, body identity and original warm detailed hand-painted anime tactical-RPG linework. Preserve original weapon category. This must visibly change physical garments, armor structure, shoulder silhouette and equipment, not merely recolour. Deliver one square 2048x2048 transparent PNG sprite atlas, EXACTLY 4 equal columns x 4 equal rows, 16 cells, ordered left to right top to bottom. Absolutely no text, labels, grid lines, borders, frame lines, floor, scenery, shadows on a floor, particles, magic effects, decorative background, or contact between silhouettes. Each cell has a centered isolated individual cutout with 15 percent empty transparent margin on every side. Fit WHOLE figure and whole weapon, head, hair, cape, toes within its own cell; no clipping, crossing or overlaps. At positions 0-7 draw fullbody battle proportions (same proportions as reference) facing right: 0 running A, 1 running B opposite legs, 2 attack windup, 3 attack strike, 4 attack recovery/guard stance, 5 hit recoil, 6 skill anticipation pose, 7 skill release pose. Position8 is a separate talking waist-up bust in promoted costume. Position9 map/town idle FRONT 3/4 fullbody with 4-head-tall proportions, position10 matching BACK 3/4 fullbody, position11 front walk A, position12 front walk B, position13 back walk A, position14 back walk B (positions9-14 consistently 4-head-tall). Position15 separate head-and-shoulders portrait in promoted costume. All16 images must be the same new promoted outfit, consistent details. Physical leg positions MUST differ in paired walks. This atlas is production sprite artwork for an existing game, with crisp precise edges and true alpha transparency. NEW PROMOTION DESIGN: Irene / Ice Sage. Same youthful female mage with long wavy silver-white hair, clear blue eyes, blue small side hair ribbon and gentle face. New imposing navy layered ceremonial robe, structured white fur collar fully around shoulders, silver branch-shaped shoulder ornaments, overlapping ice-crystal blue skirt panels with silver edging, fitted waist belt, dark leggings and boots. Distinctly upgraded snow crystal staff: branching silver setting enclosing a large angular light blue crystal, not a spear. Hairstyle/face remain unchanged; no hood or crown covers her head. The new fur neckline, layered skirt and silver branches create a clearly more mature sage silhouette. SIZE RULE OVERRIDES REFERENCE: each figure is SMALL within its 512x512 cell, its maximum bounding box only 340x340, leaving at least 85px on ALL four edges. Each row and column is separated by VERY WIDE EMPTY TRANSPARENT GUTTERS. Exactly four columns, four rows; the first eight body poses occupy rows1-2, bust/map/map/walk in row3, walk/walk/walk/portrait in row4."
+        },
+        {
+          "id": "kaz",
+          "key": "kaz__promoted",
+          "source": "/workspace/generated_images/exec-7e4402ee-2254-4c2a-bf6a-90331e198788.png",
+          "output": "/workspace/work/promotion171/kaz__promoted.png",
+          "reference": "docs/art/characters-v2/sources/kaz.png",
+          "prompt": "Edit the attached existing original character sprite sheet into a NEW ORDINARY PROMOTION costume for this SAME character. Keep exactly the original face, gender, hair colour/style, age impression, body identity and original warm detailed hand-painted anime tactical-RPG linework. Preserve original weapon category. This must visibly change physical garments, armor structure, shoulder silhouette and equipment, not merely recolour. Deliver one square 2048x2048 transparent PNG sprite atlas, EXACTLY 4 equal columns x 4 equal rows, 16 cells, ordered left to right top to bottom. Absolutely no text, labels, grid lines, borders, frame lines, floor, scenery, shadows on a floor, particles, magic effects, decorative background, or contact between silhouettes. Each cell has a centered isolated individual cutout with 15 percent empty transparent margin on every side. Fit WHOLE figure and whole weapon, head, hair, cape, toes within its own cell; no clipping, crossing or overlaps. At positions 0-7 draw fullbody battle proportions (same proportions as reference) facing right: 0 running A, 1 running B opposite legs, 2 attack windup, 3 attack strike, 4 attack recovery/guard stance, 5 hit recoil, 6 skill anticipation pose, 7 skill release pose. Position8 is a separate talking waist-up bust in promoted costume. Position9 map/town idle FRONT 3/4 fullbody with 4-head-tall proportions, position10 matching BACK 3/4 fullbody, position11 front walk A, position12 front walk B, position13 back walk A, position14 back walk B (positions9-14 consistently 4-head-tall). Position15 separate head-and-shoulders portrait in promoted costume. All16 images must be the same new promoted outfit, consistent details. Physical leg positions MUST differ in paired walks. This atlas is production sprite artwork for an existing game, with crisp precise edges and true alpha transparency. NEW PROMOTION DESIGN: Kaz / Flash Ninja. Same adult male ninja with charcoal-black ponytail, narrow expressive face, small chin stubble and original TWO short daggers. New black and deep plum light segmented armor, short WHITE shoulder cloth tied asymmetrically with no high collar, fitted dark battle vest, multiple compact dagger scabbards at broad utility waist belt, strong metal forearm guards and articulated metal shin plates over black trousers. Back silhouette shows new white cloth and scabbards, not the old long dark scarf. Keep ponytail and face fully exposed. Nimble assassin stature, twin bright steel short blades, no giant swords. SIZE RULE OVERRIDES REFERENCE: each figure is SMALL within its 512x512 cell, its maximum bounding box only 340x340, leaving at least 85px on ALL four edges. Each row and column is separated by VERY WIDE EMPTY TRANSPARENT GUTTERS. Exactly four columns, four rows; the first eight body poses occupy rows1-2, bust/map/map/walk in row3, walk/walk/walk/portrait in row4."
+        },
+        {
+          "id": "ella",
+          "key": "ella__promoted",
+          "source": "/workspace/generated_images/exec-421e45af-f7ef-4e50-819f-17a20a6252de.png",
+          "output": "/workspace/work/promotion171/ella__promoted.png",
+          "reference": "docs/art/characters-v2/sources/ella.png",
+          "prompt": "Edit the attached existing original character sprite sheet into a NEW ORDINARY PROMOTION costume for this SAME character. Keep exactly the original face, gender, hair colour/style, age impression, body identity and original warm detailed hand-painted anime tactical-RPG linework. Preserve original weapon category. This must visibly change physical garments, armor structure, shoulder silhouette and equipment, not merely recolour. Deliver one square 2048x2048 transparent PNG sprite atlas, EXACTLY 4 equal columns x 4 equal rows, 16 cells, ordered left to right top to bottom. Absolutely no text, labels, grid lines, borders, frame lines, floor, scenery, shadows on a floor, particles, magic effects, decorative background, or contact between silhouettes. Each cell has a centered isolated individual cutout with 15 percent empty transparent margin on every side. Fit WHOLE figure and whole weapon, head, hair, cape, toes within its own cell; no clipping, crossing or overlaps. At positions 0-7 draw fullbody battle proportions (same proportions as reference) facing right: 0 running A, 1 running B opposite legs, 2 attack windup, 3 attack strike, 4 attack recovery/guard stance, 5 hit recoil, 6 skill anticipation pose, 7 skill release pose. Position8 is a separate talking waist-up bust in promoted costume. Position9 map/town idle FRONT 3/4 fullbody with 4-head-tall proportions, position10 matching BACK 3/4 fullbody, position11 front walk A, position12 front walk B, position13 back walk A, position14 back walk B (positions9-14 consistently 4-head-tall). Position15 separate head-and-shoulders portrait in promoted costume. All16 images must be the same new promoted outfit, consistent details. Physical leg positions MUST differ in paired walks. This atlas is production sprite artwork for an existing game, with crisp precise edges and true alpha transparency. NEW PROMOTION DESIGN: Ella / Starlight Bard. Same female bard with long flowing copper-auburn hair, large dark green side bow, gentle brown eyes and cheerful face. NEW white-and-violet star-embroidered performance overcoat with gold-thread shoulder epaulettes, asymmetric flowing split coat tails over tiered lilac-and-white skirt, fitted dark violet bodice, subtle pearl brooch, tall brown boots. Retain recognisable hair bow as violet-green fabric. Her SAME category lute/mandolin is upgraded with elegant silver and gold metal rim fittings and a star-shaped soundhole; still a small wooden plucked string instrument, not a harp/staff. Poses 2-7 must vary between raised strumming hand, strong strum, recovery, recoil, gathering notes and expressive full strum; no particles. New layered skirt and stage overcoat noticeably differ from the old green plain bard dress. SIZE RULE OVERRIDES REFERENCE: each figure is SMALL within its 512x512 cell, its maximum bounding box only 340x340, leaving at least 85px on ALL four edges. Each row and column is separated by VERY WIDE EMPTY TRANSPARENT GUTTERS. Exactly four columns, four rows; the first eight body poses occupy rows1-2, bust/map/map/walk in row3, walk/walk/walk/portrait in row4."
+        },
+        {
+          "id": "jin",
+          "key": "jin__promoted",
+          "source": "/workspace/generated_images/exec-a4a60b73-f8fb-4cb7-bd67-762fe7ef757a.png",
+          "output": "/workspace/work/promotion171/jin__promoted.png",
+          "reference": "docs/art/characters-v2/sources/jin.png",
+          "prompt": "Edit the attached existing original character sprite sheet into a NEW ORDINARY PROMOTION costume for this SAME character. Keep exactly the original face, gender, hair colour/style, age impression, body identity and original warm detailed hand-painted anime tactical-RPG linework. Preserve original weapon category. This must visibly change physical garments, armor structure, shoulder silhouette and equipment, not merely recolour. Deliver one square 2048x2048 transparent PNG sprite atlas, EXACTLY 4 equal columns x 4 equal rows, 16 cells, ordered left to right top to bottom. Absolutely no text, labels, grid lines, borders, frame lines, floor, scenery, shadows on a floor, particles, magic effects, decorative background, or contact between silhouettes. Each cell has a centered isolated individual cutout with 15 percent empty transparent margin on every side. Fit WHOLE figure and whole weapon, head, hair, cape, toes within its own cell; no clipping, crossing or overlaps. At positions 0-7 draw fullbody battle proportions (same proportions as reference) facing right: 0 running A, 1 running B opposite legs, 2 attack windup, 3 attack strike, 4 attack recovery/guard stance, 5 hit recoil, 6 skill anticipation pose, 7 skill release pose. Position8 is a separate talking waist-up bust in promoted costume. Position9 map/town idle FRONT 3/4 fullbody with 4-head-tall proportions, position10 matching BACK 3/4 fullbody, position11 front walk A, position12 front walk B, position13 back walk A, position14 back walk B (positions9-14 consistently 4-head-tall). Position15 separate head-and-shoulders portrait in promoted costume. All16 images must be the same new promoted outfit, consistent details. Physical leg positions MUST differ in paired walks. This atlas is production sprite artwork for an existing game, with crisp precise edges and true alpha transparency. NEW PROMOTION DESIGN: Jin / Dragon Sword Saint. Same young adult male swordsman with long charcoal-black high ponytail, youthful smooth face, no beard, confident eyes. New crimson and gold scale armor across chest and shoulders, dark fitted inner sleeves, separate loose BLACK divided hakama trousers, long flowing red waist ribbons and short red scarf, metal forearm guards and shin armor. Original single katana-type sword with upgraded dragon-head handguard and bronze-gold decorated scabbard; maintain grounded proportions, no giant blade. Ponytail, face and masculine appearance must remain exactly recognisable. The red/gold segmented armor and black hakama strongly differ from his old white loose robe. No helmet, no mask. SIZE RULE OVERRIDES REFERENCE: each figure is SMALL within its 512x512 cell, its maximum bounding box only 340x340, leaving at least 85px on ALL four edges. Each row and column is separated by VERY WIDE EMPTY TRANSPARENT GUTTERS. Exactly four columns, four rows; the first eight body poses occupy rows1-2, bust/map/map/walk in row3, walk/walk/walk/portrait in row4.",
+          "originalGenerated": "/workspace/generated_images/exec-d1246708-f494-436d-83bd-4f2e37361b9e.png",
+          "revisionPrompt": "Edit this completed promoted Jin sprite sheet ONLY to fix sprite production spacing and complete the sword tips. Keep EXACTLY its red/gold scale armor design, masculine face, black ponytail, all16 poses and cell assignment. Transparent background must stay transparent. Output a square PNG, EXACTLY 4 equal columns and4equal rows. For each of16cells, shrink the entire existing silhouette (body AND sword AND scarf together) by30% then recenter it inside that cell. Leave broad empty alpha gutters between every sprite. Reconstruct the full pointed katana tip in the top right cell where the current blade touches the right canvas edge. Every katana should be completely visible with at least60pixels clear space beyond the tip in the final1024image. Nothing whatsoever may touch canvas edges or neighboring cells. Do NOT enlarge figures to fill empty space. Maintain the same painted detail at smaller size. No labels, no frames, no backgrounds or shadows."
+        }
+      ]
+    },
+    "advanced_map_a": {
+      "recordFile": "maps-a.json",
+      "record": {
+        "version": "1.99.171",
+        "generator": "image_gen",
+        "columns": 4,
+        "rows": 3,
+        "cellOrder": [
+          "form0-front",
+          "form0-back",
+          "form0-walk-front-a",
+          "form0-walk-front-b",
+          "form0-walk-back-a",
+          "form0-walk-back-b",
+          "form1-front",
+          "form1-back",
+          "form1-walk-front-a",
+          "form1-walk-front-b",
+          "form1-walk-back-a",
+          "form1-walk-back-b"
+        ],
+        "characters": [
+          {
+            "baseId": "hero",
+            "path": "/workspace/work/promotion171/hero__advanced-map.png",
+            "source": "/workspace/generated_images/exec-1386776a-78e9-4e88-aeb6-11216d262c1d.png",
+            "prompt": "Create a production-ready transparent PNG sprite atlas for a Korean hand-painted fantasy tactical RPG. Use both attached source artworks as exact character/costume reference: source1 is advanced form0, source2 is advanced form1. Preserve this character's gender, face, hair style and colour, costume construction, armour, cape, weapons and palette exactly from the corresponding source; only translate to the same refined painted 4-head-tall overworld miniature proportions. This is game art, no scene, no title or text, no grid lines, no ground, no shadow, no effects. Exactly TWELVE isolated full-body sprites in a mathematically uniform 4-column by 3-row atlas, landscape 2048x1536 canvas. Each cell has at least 15% transparent clear padding on all four sides. Never clip a weapon, cape, hair or feet. All sprites equal perceived height and feet align consistently in cells. Front means 3/4 front facing right; back means 3/4 back facing right, real rear anatomy with back of hair, rear armour and cape visible, NOT a mirrored front. Exact reading-order cells from top-left to bottom-right:\nrow1: form0 FRONT idle, form0 BACK idle, form0 FRONT walk left-leg-forward, form0 FRONT walk right-leg-forward.\nrow2: form0 BACK walk left-leg-forward, form0 BACK walk right-leg-forward, form1 FRONT idle, form1 BACK idle.\nrow3: form1 FRONT walk left-leg-forward, form1 FRONT walk right-leg-forward, form1 BACK walk left-leg-forward, form1 BACK walk right-leg-forward.\nWalk poses must show true alternating legs and counter-swinging arms, restrained armour/cape motion. Idle weapons held naturally safe at side or across torso. Every sprite readable at tiny mobile display. Accurate identity and costume consistency is essential. Transparent alpha background only."
+          },
+          {
+            "baseId": "bram",
+            "path": "/workspace/work/promotion171/bram__advanced-map.png",
+            "source": "/workspace/generated_images/exec-0f7b7503-4f6f-483d-b4f0-2aad87d28c9d.png",
+            "prompt": "Create a production-ready transparent PNG sprite atlas for a Korean hand-painted fantasy tactical RPG. Use both attached source artworks as exact character/costume reference: source1 is advanced form0, source2 is advanced form1. Preserve this character's gender, face, hair style and colour, costume construction, armour, cape, weapons and palette exactly from the corresponding source; only translate to the same refined painted 4-head-tall overworld miniature proportions. This is game art, no scene, no title or text, no grid lines, no ground, no shadow, no effects. Exactly TWELVE isolated full-body sprites in a mathematically uniform 4-column by 3-row atlas, landscape 2048x1536 canvas. Each cell has at least 15% transparent clear padding on all four sides. Never clip a weapon, cape, hair or feet. All sprites equal perceived height and feet align consistently in cells. Front means 3/4 front facing right; back means 3/4 back facing right, real rear anatomy with back of hair, rear armour and cape visible, NOT a mirrored front. Exact reading-order cells from top-left to bottom-right:\nrow1: form0 FRONT idle, form0 BACK idle, form0 FRONT walk left-leg-forward, form0 FRONT walk right-leg-forward.\nrow2: form0 BACK walk left-leg-forward, form0 BACK walk right-leg-forward, form1 FRONT idle, form1 BACK idle.\nrow3: form1 FRONT walk left-leg-forward, form1 FRONT walk right-leg-forward, form1 BACK walk left-leg-forward, form1 BACK walk right-leg-forward.\nWalk poses must show true alternating legs and counter-swinging arms, restrained armour/cape motion. Idle weapons held naturally safe at side or across torso. Every sprite readable at tiny mobile display. Accurate identity and costume consistency is essential. Transparent alpha background only."
+          },
+          {
+            "baseId": "lina",
+            "path": "/workspace/work/promotion171/lina__advanced-map.png",
+            "source": "/workspace/generated_images/exec-66335b87-85ea-4128-9a7a-2717c20ea045.png",
+            "prompt": "Create a production-ready transparent PNG sprite atlas for a Korean hand-painted fantasy tactical RPG. Use both attached source artworks as exact character/costume reference: source1 is advanced form0, source2 is advanced form1. Preserve this character's gender, face, hair style and colour, costume construction, armour, cape, weapons and palette exactly from the corresponding source; only translate to the same refined painted 4-head-tall overworld miniature proportions. This is game art, no scene, no title or text, no grid lines, no ground, no shadow, no effects. Exactly TWELVE isolated full-body sprites in a mathematically uniform 4-column by 3-row atlas, landscape 2048x1536 canvas. Each cell has at least 15% transparent clear padding on all four sides. Never clip a weapon, cape, hair or feet. All sprites equal perceived height and feet align consistently in cells. Front means 3/4 front facing right; back means 3/4 back facing right, real rear anatomy with back of hair, rear armour and cape visible, NOT a mirrored front. Exact reading-order cells from top-left to bottom-right:\nrow1: form0 FRONT idle, form0 BACK idle, form0 FRONT walk left-leg-forward, form0 FRONT walk right-leg-forward.\nrow2: form0 BACK walk left-leg-forward, form0 BACK walk right-leg-forward, form1 FRONT idle, form1 BACK idle.\nrow3: form1 FRONT walk left-leg-forward, form1 FRONT walk right-leg-forward, form1 BACK walk left-leg-forward, form1 BACK walk right-leg-forward.\nWalk poses must show true alternating legs and counter-swinging arms, restrained armour/cape motion. Idle weapons held naturally safe at side or across torso. Every sprite readable at tiny mobile display. Accurate identity and costume consistency is essential. Transparent alpha background only."
+          },
+          {
+            "baseId": "aria",
+            "path": "/workspace/work/promotion171/aria__advanced-map.png",
+            "source": "/workspace/generated_images/exec-da743e28-3f47-4c96-aa5e-600a3e57e32d.png",
+            "prompt": "Create a production-ready transparent PNG sprite atlas for a Korean hand-painted fantasy tactical RPG. Use both attached source artworks as exact character/costume reference: source1 is advanced form0, source2 is advanced form1. Preserve this character's gender, face, hair style and colour, costume construction, armour, cape, weapons and palette exactly from the corresponding source; only translate to the same refined painted 4-head-tall overworld miniature proportions. This is game art, no scene, no title or text, no grid lines, no ground, no shadow, no effects. Exactly TWELVE isolated full-body sprites in a mathematically uniform 4-column by 3-row atlas, landscape 2048x1536 canvas. Each cell has at least 15% transparent clear padding on all four sides. Never clip a weapon, cape, hair or feet. All sprites equal perceived height and feet align consistently in cells. Front means 3/4 front facing right; back means 3/4 back facing right, real rear anatomy with back of hair, rear armour and cape visible, NOT a mirrored front. Exact reading-order cells from top-left to bottom-right:\nrow1: form0 FRONT idle, form0 BACK idle, form0 FRONT walk left-leg-forward, form0 FRONT walk right-leg-forward.\nrow2: form0 BACK walk left-leg-forward, form0 BACK walk right-leg-forward, form1 FRONT idle, form1 BACK idle.\nrow3: form1 FRONT walk left-leg-forward, form1 FRONT walk right-leg-forward, form1 BACK walk left-leg-forward, form1 BACK walk right-leg-forward.\nWalk poses must show true alternating legs and counter-swinging arms, restrained armour/cape motion. Idle weapons held naturally safe at side or across torso. Every sprite readable at tiny mobile display. Accurate identity and costume consistency is essential. Transparent alpha background only.\nAria: young silver-white long-haired female healer, blue eyes, ornate cream and teal robes, golden sun-frame staff with blue orb; form1 also has silver shoulder armour and dark boots."
+          },
+          {
+            "baseId": "leon",
+            "path": "/workspace/work/promotion171/leon__advanced-map.png",
+            "source": "/workspace/generated_images/exec-4505ca04-e82d-48cc-b1cb-3780d243d8fb.png",
+            "prompt": "Create a production-ready transparent PNG sprite atlas for a Korean hand-painted fantasy tactical RPG. Use both attached source artworks as exact character/costume reference: source1 is advanced form0, source2 is advanced form1. Preserve this character's gender, face, hair style and colour, costume construction, armour, cape, weapons and palette exactly from the corresponding source; only translate to the same refined painted 4-head-tall overworld miniature proportions. This is game art, no scene, no title or text, no grid lines, no ground, no shadow, no effects. Exactly TWELVE isolated full-body sprites in a mathematically uniform 4-column by 3-row atlas, landscape 2048x1536 canvas. Each cell has at least 15% transparent clear padding on all four sides. Never clip a weapon, cape, hair or feet. All sprites equal perceived height and feet align consistently in cells. Front means 3/4 front facing right; back means 3/4 back facing right, real rear anatomy with back of hair, rear armour and cape visible, NOT a mirrored front. Exact reading-order cells from top-left to bottom-right:\nrow1: form0 FRONT idle, form0 BACK idle, form0 FRONT walk left-leg-forward, form0 FRONT walk right-leg-forward.\nrow2: form0 BACK walk left-leg-forward, form0 BACK walk right-leg-forward, form1 FRONT idle, form1 BACK idle.\nrow3: form1 FRONT walk left-leg-forward, form1 FRONT walk right-leg-forward, form1 BACK walk left-leg-forward, form1 BACK walk right-leg-forward.\nWalk poses must show true alternating legs and counter-swinging arms, restrained armour/cape motion. Idle weapons held naturally safe at side or across torso. Every sprite readable at tiny mobile display. Accurate identity and costume consistency is essential. Transparent alpha background only.\nLeon: youthful blond male lancer with short tousled hair, silver plate armour and red scarf/cape, long dark-shaft steel-tipped spear. Hold spear near vertical to fit wholly inside its cell. Every spear tip must remain visible."
+          },
+          {
+            "baseId": "sera",
+            "path": "/workspace/work/promotion171/sera__advanced-map.png",
+            "source": "/workspace/generated_images/exec-b4efde9f-f112-496a-940b-dbc31d2e759d.png",
+            "prompt": "Create a production-ready transparent PNG sprite atlas for a Korean hand-painted fantasy tactical RPG. Use both attached source artworks as exact character/costume reference: source1 is advanced form0, source2 is advanced form1. Preserve this character's gender, face, hair style and colour, costume construction, armour, cape, weapons and palette exactly from the corresponding source; only translate to the same refined painted 4-head-tall overworld miniature proportions. This is game art, no scene, no title or text, no grid lines, no ground, no shadow, no effects. Exactly TWELVE isolated full-body sprites in a mathematically uniform 4-column by 3-row atlas, landscape 2048x1536 canvas. Each cell has at least 15% transparent clear padding on all four sides. Never clip a weapon, cape, hair or feet. All sprites equal perceived height and feet align consistently in cells. Front means 3/4 front facing right; back means 3/4 back facing right, real rear anatomy with back of hair, rear armour and cape visible, NOT a mirrored front. Exact reading-order cells from top-left to bottom-right:\nrow1: form0 FRONT idle, form0 BACK idle, form0 FRONT walk left-leg-forward, form0 FRONT walk right-leg-forward.\nrow2: form0 BACK walk left-leg-forward, form0 BACK walk right-leg-forward, form1 FRONT idle, form1 BACK idle.\nrow3: form1 FRONT walk left-leg-forward, form1 FRONT walk right-leg-forward, form1 BACK walk left-leg-forward, form1 BACK walk right-leg-forward.\nWalk poses must show true alternating legs and counter-swinging arms, restrained armour/cape motion. Idle weapons held naturally safe at side or across torso. Every sprite readable at tiny mobile display. Accurate identity and costume consistency is essential. Transparent alpha background only.\nSera: young purple-black long-ponytail female rogue, sleeveless fitted dark leather armour, brown belts and bracers, dark fitted trousers and boots, crimson scarf and short cloak, two silver daggers. Match each reference's belt/armour details exactly."
+          },
+          {
+            "baseId": "noah",
+            "path": "/workspace/work/promotion171/noah__advanced-map.png",
+            "source": "/workspace/generated_images/exec-3dcc7a30-6dbe-43af-9b82-7561b7a1dd0d.png",
+            "prompt": "Create a production-ready transparent PNG sprite atlas for a Korean hand-painted fantasy tactical RPG. Use both attached source artworks as exact character/costume reference: source1 is advanced form0, source2 is advanced form1. Preserve this character's gender, face, hair style and colour, costume construction, armour, cape, weapons and palette exactly from the corresponding source; only translate to the same refined painted 4-head-tall overworld miniature proportions. This is game art, no scene, no title or text, no grid lines, no ground, no shadow, no effects. Exactly TWELVE isolated full-body sprites in a mathematically uniform 4-column by 3-row atlas, landscape 2048x1536 canvas. Each cell has at least 15% transparent clear padding on all four sides. Never clip a weapon, cape, hair or feet. All sprites equal perceived height and feet align consistently in cells. Front means 3/4 front facing right; back means 3/4 back facing right, real rear anatomy with back of hair, rear armour and cape visible, NOT a mirrored front. Exact reading-order cells from top-left to bottom-right:\nrow1: form0 FRONT idle, form0 BACK idle, form0 FRONT walk left-leg-forward, form0 FRONT walk right-leg-forward.\nrow2: form0 BACK walk left-leg-forward, form0 BACK walk right-leg-forward, form1 FRONT idle, form1 BACK idle.\nrow3: form1 FRONT walk left-leg-forward, form1 FRONT walk right-leg-forward, form1 BACK walk left-leg-forward, form1 BACK walk right-leg-forward.\nWalk poses must show true alternating legs and counter-swinging arms, restrained armour/cape motion. Idle weapons held naturally safe at side or across torso. Every sprite readable at tiny mobile display. Accurate identity and costume consistency is essential. Transparent alpha background only.\nNoah: young tousled short dark-haired male scholar mage with round glasses, white shirt/tie under green gold-embroidered long coat, wide dark trousers and brown boots, carries brown blue-gem magic book. Match embroidery and coat detail differences in the two references."
+          },
+          {
+            "baseId": "yuna",
+            "path": "/workspace/work/promotion171/yuna__advanced-map.png",
+            "source": "/workspace/generated_images/exec-41179a84-d01a-4358-980d-9c79b0983587.png",
+            "prompt": "Create a production-ready transparent PNG sprite atlas for a Korean hand-painted fantasy tactical RPG. Use both attached source artworks as exact character/costume reference: source1 is advanced form0, source2 is advanced form1. Preserve this character's gender, face, hair style and colour, costume construction, armour, cape, weapons and palette exactly from the corresponding source; only translate to the same refined painted 4-head-tall overworld miniature proportions. This is game art, no scene, no title or text, no grid lines, no ground, no shadow, no effects. Exactly TWELVE isolated full-body sprites in a mathematically uniform 4-column by 3-row atlas, landscape 2048x1536 canvas. Each cell has at least 15% transparent clear padding on all four sides. Never clip a weapon, cape, hair or feet. All sprites equal perceived height and feet align consistently in cells. Front means 3/4 front facing right; back means 3/4 back facing right, real rear anatomy with back of hair, rear armour and cape visible, NOT a mirrored front. Exact reading-order cells from top-left to bottom-right:\nrow1: form0 FRONT idle, form0 BACK idle, form0 FRONT walk left-leg-forward, form0 FRONT walk right-leg-forward.\nrow2: form0 BACK walk left-leg-forward, form0 BACK walk right-leg-forward, form1 FRONT idle, form1 BACK idle.\nrow3: form1 FRONT walk left-leg-forward, form1 FRONT walk right-leg-forward, form1 BACK walk left-leg-forward, form1 BACK walk right-leg-forward.\nWalk poses must show true alternating legs and counter-swinging arms, restrained armour/cape motion. Idle weapons held naturally safe at side or across torso. Every sprite readable at tiny mobile display. Accurate identity and costume consistency is essential. Transparent alpha background only.\nYuna: young East Asian female, very long black hair with pink cherry blossom hair ornament, cream pink flowing priestess robes embroidered flowers, pink boots, ornate golden staff with pink orb and pink streamers. Form0 crescent moon crown with gold chains, form1 no crescent crown and has round gold orb pendant at belt. Preserve both clear differences."
+          },
+          {
+            "baseId": "rakan",
+            "path": "/workspace/work/promotion171/rakan__advanced-map.png",
+            "source": "/workspace/generated_images/exec-0bb104ac-6ee1-4a26-bb82-6167955bb985.png",
+            "prompt": "Create a production-ready transparent PNG sprite atlas for a Korean hand-painted fantasy tactical RPG. Use both attached source artworks as exact character/costume reference: source1 is advanced form0, source2 is advanced form1. Preserve this character's gender, face, hair style and colour, costume construction, armour, cape, weapons and palette exactly from the corresponding source; only translate to the same refined painted 4-head-tall overworld miniature proportions. This is game art, no scene, no title or text, no grid lines, no ground, no shadow, no effects. Exactly TWELVE isolated full-body sprites in a mathematically uniform 4-column by 3-row atlas, landscape 2048x1536 canvas. Each cell has at least 15% transparent clear padding on all four sides. Never clip a weapon, cape, hair or feet. All sprites equal perceived height and feet align consistently in cells. Front means 3/4 front facing right; back means 3/4 back facing right, real rear anatomy with back of hair, rear armour and cape visible, NOT a mirrored front. Exact reading-order cells from top-left to bottom-right:\nrow1: form0 FRONT idle, form0 BACK idle, form0 FRONT walk left-leg-forward, form0 FRONT walk right-leg-forward.\nrow2: form0 BACK walk left-leg-forward, form0 BACK walk right-leg-forward, form1 FRONT idle, form1 BACK idle.\nrow3: form1 FRONT walk left-leg-forward, form1 FRONT walk right-leg-forward, form1 BACK walk left-leg-forward, form1 BACK walk right-leg-forward.\nWalk poses must show true alternating legs and counter-swinging arms, restrained armour/cape motion. Idle weapons held naturally safe at side or across torso. Every sprite readable at tiny mobile display. Accurate identity and costume consistency is essential. Transparent alpha background only.\nRakan: muscular adult dark-haired bearded male warrior, exposed muscular upper arms, dark brown leather and fur-lined barbarian armour, red waist sash, heavy boots and bracers, large battleaxe. Form0 axe gold-edged with spikes; form1 broad silver-edged dark iron axe and more substantial fur shoulder mantle. Weapons wholly inside each cell."
+          },
+          {
+            "baseId": "miho",
+            "path": "/workspace/work/promotion171/miho__advanced-map.png",
+            "source": "/workspace/generated_images/exec-edc489d2-d8a2-4754-b7ea-4de208a7c0f8.png",
+            "prompt": "Create a production-ready transparent PNG sprite atlas for a Korean hand-painted fantasy tactical RPG. Use both attached source artworks as exact character/costume reference: source1 is advanced form0, source2 is advanced form1. Preserve this character's gender, face, hair style and colour, costume construction, armour, cape, weapons and palette exactly from the corresponding source; only translate to the same refined painted 4-head-tall overworld miniature proportions. This is game art, no scene, no title or text, no grid lines, no ground, no shadow, no effects. Exactly TWELVE isolated full-body sprites in a mathematically uniform 4-column by 3-row atlas, landscape 2048x1536 canvas. Each cell has at least 15% transparent clear padding on all four sides. Never clip a weapon, cape, hair or feet. All sprites equal perceived height and feet align consistently in cells. Front means 3/4 front facing right; back means 3/4 back facing right, real rear anatomy with back of hair, rear armour and cape visible, NOT a mirrored front. Exact reading-order cells from top-left to bottom-right:\nrow1: form0 FRONT idle, form0 BACK idle, form0 FRONT walk left-leg-forward, form0 FRONT walk right-leg-forward.\nrow2: form0 BACK walk left-leg-forward, form0 BACK walk right-leg-forward, form1 FRONT idle, form1 BACK idle.\nrow3: form1 FRONT walk left-leg-forward, form1 FRONT walk right-leg-forward, form1 BACK walk left-leg-forward, form1 BACK walk right-leg-forward.\nWalk poses must show true alternating legs and counter-swinging arms, restrained armour/cape motion. Idle weapons held naturally safe at side or across torso. Every sprite readable at tiny mobile display. Accurate identity and costume consistency is essential. Transparent alpha background only.\nMiho: young female fox spirit mage, long dark charcoal hair, large dark fox ears with pink-white innerfur, one visible large fluffy dark tail. Cream robe with crimson lining and obi, floral embroidery, brown boots. Form0 red flower pattern and red inner skirt; form1 purple flowers with purple inner skirt. Preserve both distinct costume variants, and big tail from rear and front."
+          },
+          {
+            "baseId": "teo",
+            "path": "/workspace/work/promotion171/teo__advanced-map.png",
+            "source": "/workspace/generated_images/exec-4c253192-83e7-4df4-9424-fadd1b04f38d.png",
+            "prompt": "Create a production-ready transparent PNG sprite atlas for a Korean hand-painted fantasy tactical RPG. Use both attached source artworks as exact character/costume reference: source1 is advanced form0, source2 is advanced form1. Preserve this character's gender, face, hair style and colour, costume construction, armour, cape, weapons and palette exactly from the corresponding source; only translate to the same refined painted 4-head-tall overworld miniature proportions. This is game art, no scene, no title or text, no grid lines, no ground, no shadow, no effects. Exactly TWELVE isolated full-body sprites in a mathematically uniform 4-column by 3-row atlas, landscape 2048x1536 canvas. Each cell has at least 15% transparent clear padding on all four sides. Never clip a weapon, cape, hair or feet. All sprites equal perceived height and feet align consistently in cells. Front means 3/4 front facing right; back means 3/4 back facing right, real rear anatomy with back of hair, rear armour and cape visible, NOT a mirrored front. Exact reading-order cells from top-left to bottom-right:\nrow1: form0 FRONT idle, form0 BACK idle, form0 FRONT walk left-leg-forward, form0 FRONT walk right-leg-forward.\nrow2: form0 BACK walk left-leg-forward, form0 BACK walk right-leg-forward, form1 FRONT idle, form1 BACK idle.\nrow3: form1 FRONT walk left-leg-forward, form1 FRONT walk right-leg-forward, form1 BACK walk left-leg-forward, form1 BACK walk right-leg-forward.\nWalk poses must show true alternating legs and counter-swinging arms, restrained armour/cape motion. Idle weapons held naturally safe at side or across torso. Every sprite readable at tiny mobile display. Accurate identity and costume consistency is essential. Transparent alpha background only.\nTeo: youthful teenage male archer, tousled orange-brown short hair, green hooded cloak, cream short-sleeved shirt, brown leather vest/bracers, dark brown shorts with visible knees, tall brown boots, curved wooden bow, arrow quiver. Form0 simpler green cape/belt, form1 gold botanical hem decoration and hanging gold-trimmed waist panels. Keep boy identity and both distinct outfit variants."
+          }
+        ]
+      }
+    },
+    "advanced_map_b": {
+      "recordFile": "maps-b.json",
+      "record": [
+        {
+          "id": "irene",
+          "sourcePath": "/workspace/generated_images/exec-c547acb1-7bed-4d78-b1c3-fea36645e6d6.png",
+          "path": "/workspace/work/promotion171/irene__advanced-map.png",
+          "rows": 3,
+          "columns": 4,
+          "transparent": true,
+          "cellOrder": [
+            "form0/front/idle",
+            "form0/back/idle",
+            "form0/front/walkA",
+            "form0/front/walkB",
+            "form0/back/walkA",
+            "form0/back/walkB",
+            "form1/front/idle",
+            "form1/back/idle",
+            "form1/front/walkA",
+            "form1/front/walkB",
+            "form1/back/walkA",
+            "form1/back/walkB"
+          ],
+          "prompt": "Create a production-ready transparent sprite atlas for the Cheonsu tactical RPG. Use the two reference images as the exact same character's advanced promotion form 0 and advanced promotion form 1. Keep the references' hand-painted Korean/Japanese 1990s fantasy tactical RPG art language: crisp delicate dark outlines, warm muted colors, softly painted shading. Same face, skin tone, hair, age, gender, clothing colors, and weapons as the corresponding reference. Adapt to charming FOUR-HEAD-TALL map sprites, clearly readable at small size, not realistic tall battle portraits. Each reference form needs six unique frames.\n\nCanvas ideally 2048 x 1536, landscape 4:3. TRANSPARENT ALPHA background, no painted checkerboard. EXACTLY 12 separate full-body characters in EXACTLY FOUR COLUMNS and THREE ROWS of equal cells. Each character is vertically aligned, centered, and fits inside its own cell with at least 15% transparent margin on all sides. All heads and feet must be fully visible. All long weapons fit inside the cell. No overlaps. No text, no numbering, no grid lines, no scenery, no ground shadow, no magical effects, no particles. Each sprite has the same scale and floor alignment.\n\nMANDATORY CELL ORDER, left to right, top to bottom:\nrow 1: form0 front idle, form0 back idle, form0 front walk A, form0 front walk B.\nrow 2: form0 back walk A, form0 back walk B, form1 front idle, form1 back idle.\nrow 3: form1 front walk A, form1 front walk B, form1 back walk A, form1 back walk B.\nFront views face three-quarter toward the RIGHT of the picture, with face and chest visible. Back views face three-quarter away toward the RIGHT, showing back of head and back of cape/clothing, with no forward-facing face. Back view is a true rear three-quarter drawing, not a horizontally mirrored front view.\nIdle = feet close together, natural standing pose holding the signature weapon. Walk A = left leg clearly strides forward, right leg behind; walk B = right leg clearly strides forward, left leg behind, alternating hands/cape and ponytail sway. Draw anatomically consistent actual alternating feet, never copy-paste the same stance. Keep weapons carried naturally, do not swing an attack.\nForm 0 belongs only in cells 0-5. Form 1 belongs only in cells 6-11. Make branch clothing differences readable while closely retaining the corresponding reference outfit.\nCHARACTER-SPECIFIC DETAILS: Irene: young pale woman, long flowing silver hair tied with a blue flower and blue eyes, icy pale blue and white layered cloak dress, black undersleeves, brown boots, dark staff topped with a large angular blue ice crystal. Form0 angular long snowflake-embroidered front panel and longer pale cloak; form1 layered silver-blue shoulder cape and denser silver filigree. Do not change her ice staff into a spear."
+        },
+        {
+          "id": "kaz",
+          "sourcePath": "/workspace/generated_images/exec-f764e0f8-4871-4133-bdff-9942a7fbbac1.png",
+          "path": "/workspace/work/promotion171/kaz__advanced-map.png",
+          "rows": 3,
+          "columns": 4,
+          "transparent": true,
+          "cellOrder": [
+            "form0/front/idle",
+            "form0/back/idle",
+            "form0/front/walkA",
+            "form0/front/walkB",
+            "form0/back/walkA",
+            "form0/back/walkB",
+            "form1/front/idle",
+            "form1/back/idle",
+            "form1/front/walkA",
+            "form1/front/walkB",
+            "form1/back/walkA",
+            "form1/back/walkB"
+          ],
+          "prompt": "Create a production-ready transparent sprite atlas for the Cheonsu tactical RPG. Use the two reference images as the exact same character's advanced promotion form 0 and advanced promotion form 1. Keep the references' hand-painted Korean/Japanese 1990s fantasy tactical RPG art language: crisp delicate dark outlines, warm muted colors, softly painted shading. Same face, skin tone, hair, age, gender, clothing colors, and weapons as the corresponding reference. Adapt to charming FOUR-HEAD-TALL map sprites, clearly readable at small size, not realistic tall battle portraits. Each reference form needs six unique frames.\n\nCanvas ideally 2048 x 1536, landscape 4:3. TRANSPARENT ALPHA background, no painted checkerboard. EXACTLY 12 separate full-body characters in EXACTLY FOUR COLUMNS and THREE ROWS of equal cells. Each character is vertically aligned, centered, and fits inside its own cell with at least 15% transparent margin on all sides. All heads and feet must be fully visible. All long weapons fit inside the cell. No overlaps. No text, no numbering, no grid lines, no scenery, no ground shadow, no magical effects, no particles. Each sprite has the same scale and floor alignment.\n\nMANDATORY CELL ORDER, left to right, top to bottom:\nrow 1: form0 front idle, form0 back idle, form0 front walk A, form0 front walk B.\nrow 2: form0 back walk A, form0 back walk B, form1 front idle, form1 back idle.\nrow 3: form1 front walk A, form1 front walk B, form1 back walk A, form1 back walk B.\nFront views face three-quarter toward the RIGHT of the picture, with face and chest visible. Back views face three-quarter away toward the RIGHT, showing back of head and back of cape/clothing, with no forward-facing face. Back view is a true rear three-quarter drawing, not a horizontally mirrored front view.\nIdle = feet close together, natural standing pose holding the signature weapon. Walk A = left leg clearly strides forward, right leg behind; walk B = right leg clearly strides forward, left leg behind, alternating hands/cape and ponytail sway. Draw anatomically consistent actual alternating feet, never copy-paste the same stance. Keep weapons carried naturally, do not swing an attack.\nForm 0 belongs only in cells 0-5. Form 1 belongs only in cells 6-11. Make branch clothing differences readable while closely retaining the corresponding reference outfit.\nCHARACTER-SPECIFIC DETAILS: Kaz: young adult male rogue, black high ponytail, purple scarf and weathered purple-grey tunic over brown leather armor, brown gloves and boots, two short silver daggers. Form0 long asymmetric violet scarf and grey shoulder armor, form1 compact layered grey-violet shoulder mantle and split reinforced coat panels, preserve agile rogue identity."
+        },
+        {
+          "id": "ella",
+          "sourcePath": "/workspace/generated_images/exec-9c83f2fe-cfa5-420b-8b3a-c711edb203fd.png",
+          "path": "/workspace/work/promotion171/ella__advanced-map.png",
+          "rows": 3,
+          "columns": 4,
+          "transparent": true,
+          "cellOrder": [
+            "form0/front/idle",
+            "form0/back/idle",
+            "form0/front/walkA",
+            "form0/front/walkB",
+            "form0/back/walkA",
+            "form0/back/walkB",
+            "form1/front/idle",
+            "form1/back/idle",
+            "form1/front/walkA",
+            "form1/front/walkB",
+            "form1/back/walkA",
+            "form1/back/walkB"
+          ],
+          "prompt": "Create a production-ready transparent sprite atlas for the Cheonsu tactical RPG. Use the two reference images as the exact same character's advanced promotion form 0 and advanced promotion form 1. Keep the references' hand-painted Korean/Japanese 1990s fantasy tactical RPG art language: crisp delicate dark outlines, warm muted colors, softly painted shading. Same face, skin tone, hair, age, gender, clothing colors, and weapons as the corresponding reference. Adapt to charming FOUR-HEAD-TALL map sprites, clearly readable at small size, not realistic tall battle portraits. Each reference form needs six unique frames.\n\nCanvas ideally 2048 x 1536, landscape 4:3. TRANSPARENT ALPHA background, no painted checkerboard. EXACTLY 12 separate full-body characters in EXACTLY FOUR COLUMNS and THREE ROWS of equal cells. Each character is vertically aligned, centered, and fits inside its own cell with at least 15% transparent margin on all sides. All heads and feet must be fully visible. All long weapons fit inside the cell. No overlaps. No text, no numbering, no grid lines, no scenery, no ground shadow, no magical effects, no particles. Each sprite has the same scale and floor alignment.\n\nMANDATORY CELL ORDER, left to right, top to bottom:\nrow 1: form0 front idle, form0 back idle, form0 front walk A, form0 front walk B.\nrow 2: form0 back walk A, form0 back walk B, form1 front idle, form1 back idle.\nrow 3: form1 front walk A, form1 front walk B, form1 back walk A, form1 back walk B.\nFront views face three-quarter toward the RIGHT of the picture, with face and chest visible. Back views face three-quarter away toward the RIGHT, showing back of head and back of cape/clothing, with no forward-facing face. Back view is a true rear three-quarter drawing, not a horizontally mirrored front view.\nIdle = feet close together, natural standing pose holding the signature weapon. Walk A = left leg clearly strides forward, right leg behind; walk B = right leg clearly strides forward, left leg behind, alternating hands/cape and ponytail sway. Draw anatomically consistent actual alternating feet, never copy-paste the same stance. Keep weapons carried naturally, do not swing an attack.\nForm 0 belongs only in cells 0-5. Form 1 belongs only in cells 6-11. Make branch clothing differences readable while closely retaining the corresponding reference outfit.\nCHARACTER-SPECIFIC DETAILS: Ella: young woman, long curly copper-red hair with a large dark green ribbon, green cloak and dress with gold stars over white ruffled blouse and skirt, brown lace-up boots, small wooden mandolin/lute carried at chest. Form0 large simple stars and white knee-length inner skirt, form1 ornate gold constellations, layered flowing scalloped green overskirt and white ruffles."
+        },
+        {
+          "id": "jin",
+          "sourcePath": "/workspace/generated_images/exec-acb4d9f4-0d8c-40d9-b9da-65d96314bca4.png",
+          "path": "/workspace/work/promotion171/jin__advanced-map.png",
+          "rows": 3,
+          "columns": 4,
+          "transparent": true,
+          "cellOrder": [
+            "form0/front/idle",
+            "form0/back/idle",
+            "form0/front/walkA",
+            "form0/front/walkB",
+            "form0/back/walkA",
+            "form0/back/walkB",
+            "form1/front/idle",
+            "form1/back/idle",
+            "form1/front/walkA",
+            "form1/front/walkB",
+            "form1/back/walkA",
+            "form1/back/walkB"
+          ],
+          "prompt": "Create a production-ready transparent sprite atlas for the Cheonsu tactical RPG. Use the two reference images as the exact same character's advanced promotion form 0 and advanced promotion form 1. Keep the references' hand-painted Korean/Japanese 1990s fantasy tactical RPG art language: crisp delicate dark outlines, warm muted colors, softly painted shading. Same face, skin tone, hair, age, gender, clothing colors, and weapons as the corresponding reference. Adapt to charming FOUR-HEAD-TALL map sprites, clearly readable at small size, not realistic tall battle portraits. Each reference form needs six unique frames.\n\nCanvas ideally 2048 x 1536, landscape 4:3. TRANSPARENT ALPHA background, no painted checkerboard. EXACTLY 12 separate full-body characters in EXACTLY FOUR COLUMNS and THREE ROWS of equal cells. Each character is vertically aligned, centered, and fits inside its own cell with at least 15% transparent margin on all sides. All heads and feet must be fully visible. All long weapons fit inside the cell. No overlaps. No text, no numbering, no grid lines, no scenery, no ground shadow, no magical effects, no particles. Each sprite has the same scale and floor alignment.\n\nMANDATORY CELL ORDER, left to right, top to bottom:\nrow 1: form0 front idle, form0 back idle, form0 front walk A, form0 front walk B.\nrow 2: form0 back walk A, form0 back walk B, form1 front idle, form1 back idle.\nrow 3: form1 front walk A, form1 front walk B, form1 back walk A, form1 back walk B.\nFront views face three-quarter toward the RIGHT of the picture, with face and chest visible. Back views face three-quarter away toward the RIGHT, showing back of head and back of cape/clothing, with no forward-facing face. Back view is a true rear three-quarter drawing, not a horizontally mirrored front view.\nIdle = feet close together, natural standing pose holding the signature weapon. Walk A = left leg clearly strides forward, right leg behind; walk B = right leg clearly strides forward, left leg behind, alternating hands/cape and ponytail sway. Draw anatomically consistent actual alternating feet, never copy-paste the same stance. Keep weapons carried naturally, do not swing an attack.\nForm 0 belongs only in cells 0-5. Form 1 belongs only in cells 6-11. Make branch clothing differences readable while closely retaining the corresponding reference outfit.\nCHARACTER-SPECIFIC DETAILS: Jin: young adult East Asian male swordsman, black high ponytail, long red scarf, ivory kimono-like short coat over dark clothes, brown boots and wrist guards, curved katana in sheath/held safely down. Form0 plainer cream coat, red scarf and subtle warm-red blade, form1 silver embroidery on white coat and longer crossed white coat panels. NO FIRE or magical glow despite reference0."
+        },
+        {
+          "id": "luka",
+          "sourcePath": "/workspace/generated_images/exec-06132f16-d38d-4d8f-8047-cd021b9789aa.png",
+          "path": "/workspace/work/promotion171/luka__advanced-map.png",
+          "rows": 3,
+          "columns": 4,
+          "transparent": true,
+          "cellOrder": [
+            "form0/front/idle",
+            "form0/back/idle",
+            "form0/front/walkA",
+            "form0/front/walkB",
+            "form0/back/walkA",
+            "form0/back/walkB",
+            "form1/front/idle",
+            "form1/back/idle",
+            "form1/front/walkA",
+            "form1/front/walkB",
+            "form1/back/walkA",
+            "form1/back/walkB"
+          ],
+          "prompt": "Create a production-ready transparent sprite atlas for the Cheonsu tactical RPG. Use the two reference images as the exact same character's advanced promotion form 0 and advanced promotion form 1. Keep the references' hand-painted Korean/Japanese 1990s fantasy tactical RPG art language: crisp delicate dark outlines, warm muted colors, softly painted shading. Same face, skin tone, hair, age, gender, clothing colors, and weapons as the corresponding reference. Adapt to charming FOUR-HEAD-TALL map sprites, clearly readable at small size, not realistic tall battle portraits. Each reference form needs six unique frames.\n\nCanvas ideally 2048 x 1536, landscape 4:3. TRANSPARENT ALPHA background, no painted checkerboard. EXACTLY 12 separate full-body characters in EXACTLY FOUR COLUMNS and THREE ROWS of equal cells. Each character is vertically aligned, centered, and fits inside its own cell with at least 15% transparent margin on all sides. All heads and feet must be fully visible. All long weapons fit inside the cell. No overlaps. No text, no numbering, no grid lines, no scenery, no ground shadow, no magical effects, no particles. Each sprite has the same scale and floor alignment.\n\nMANDATORY CELL ORDER, left to right, top to bottom:\nrow 1: form0 front idle, form0 back idle, form0 front walk A, form0 front walk B.\nrow 2: form0 back walk A, form0 back walk B, form1 front idle, form1 back idle.\nrow 3: form1 front walk A, form1 front walk B, form1 back walk A, form1 back walk B.\nFront views face three-quarter toward the RIGHT of the picture, with face and chest visible. Back views face three-quarter away toward the RIGHT, showing back of head and back of cape/clothing, with no forward-facing face. Back view is a true rear three-quarter drawing, not a horizontally mirrored front view.\nIdle = feet close together, natural standing pose holding the signature weapon. Walk A = left leg clearly strides forward, right leg behind; walk B = right leg clearly strides forward, left leg behind, alternating hands/cape and ponytail sway. Draw anatomically consistent actual alternating feet, never copy-paste the same stance. Keep weapons carried naturally, do not swing an attack.\nForm 0 belongs only in cells 0-5. Form 1 belongs only in cells 6-11. Make branch clothing differences readable while closely retaining the corresponding reference outfit.\nCHARACTER-SPECIFIC DETAILS: Luka: young blond male knight, short tousled gold hair, green cape, shining silver plate vambraces and greaves, dark underclothes, gold accents, slender silver longsword. Form0 ivory white long tabard with gold emblem, form1 emerald tabard with gold sunburst and green mantle with matching sun emblem."
+        },
+        {
+          "id": "baekho",
+          "sourcePath": "/workspace/generated_images/exec-311eca09-c7f2-4152-a8eb-c989305ae193.png",
+          "path": "/workspace/work/promotion171/baekho__advanced-map.png",
+          "rows": 3,
+          "columns": 4,
+          "transparent": true,
+          "cellOrder": [
+            "form0/front/idle",
+            "form0/back/idle",
+            "form0/front/walkA",
+            "form0/front/walkB",
+            "form0/back/walkA",
+            "form0/back/walkB",
+            "form1/front/idle",
+            "form1/back/idle",
+            "form1/front/walkA",
+            "form1/front/walkB",
+            "form1/back/walkA",
+            "form1/back/walkB"
+          ],
+          "prompt": "Create a production-ready transparent sprite atlas for the Cheonsu tactical RPG. Use the two reference images as the exact same character's advanced promotion form 0 and advanced promotion form 1. Keep the references' hand-painted Korean/Japanese 1990s fantasy tactical RPG art language: crisp delicate dark outlines, warm muted colors, softly painted shading. Same face, skin tone, hair, age, gender, clothing colors, and weapons as the corresponding reference. Adapt to charming FOUR-HEAD-TALL map sprites, clearly readable at small size, not realistic tall battle portraits. Each reference form needs six unique frames.\n\nCanvas ideally 2048 x 1536, landscape 4:3. TRANSPARENT ALPHA background, no painted checkerboard. EXACTLY 12 separate full-body characters in EXACTLY FOUR COLUMNS and THREE ROWS of equal cells. Each character is vertically aligned, centered, and fits inside its own cell with at least 15% transparent margin on all sides. All heads and feet must be fully visible. All long weapons fit inside the cell. No overlaps. No text, no numbering, no grid lines, no scenery, no ground shadow, no magical effects, no particles. Each sprite has the same scale and floor alignment.\n\nMANDATORY CELL ORDER, left to right, top to bottom:\nrow 1: form0 front idle, form0 back idle, form0 front walk A, form0 front walk B.\nrow 2: form0 back walk A, form0 back walk B, form1 front idle, form1 back idle.\nrow 3: form1 front walk A, form1 front walk B, form1 back walk A, form1 back walk B.\nFront views face three-quarter toward the RIGHT of the picture, with face and chest visible. Back views face three-quarter away toward the RIGHT, showing back of head and back of cape/clothing, with no forward-facing face. Back view is a true rear three-quarter drawing, not a horizontally mirrored front view.\nIdle = feet close together, natural standing pose holding the signature weapon. Walk A = left leg clearly strides forward, right leg behind; walk B = right leg clearly strides forward, left leg behind, alternating hands/cape and ponytail sway. Draw anatomically consistent actual alternating feet, never copy-paste the same stance. Keep weapons carried naturally, do not swing an attack.\nForm 0 belongs only in cells 0-5. Form 1 belongs only in cells 6-11. Make branch clothing differences readable while closely retaining the corresponding reference outfit.\nCHARACTER-SPECIFIC DETAILS: Baekho: stern older muscular male martial artist, long silver-white high ponytail and short silver beard, olive green and ivory sleeveless martial robe, brown pants and boots, wrapped fists. Form0 large dark wooden prayer beads at waist and red cloth sash; form1 green knotted rope sash and green beaded ankle wraps, retaining the red ribbon accent. Bare powerful arms, no sword or staff."
+        },
+        {
+          "id": "mare",
+          "sourcePath": "/workspace/generated_images/exec-bf25e7cf-493e-4cf2-a4fd-37c8945feff3.png",
+          "path": "/workspace/work/promotion171/mare__advanced-map.png",
+          "rows": 3,
+          "columns": 4,
+          "transparent": true,
+          "cellOrder": [
+            "form0/front/idle",
+            "form0/back/idle",
+            "form0/front/walkA",
+            "form0/front/walkB",
+            "form0/back/walkA",
+            "form0/back/walkB",
+            "form1/front/idle",
+            "form1/back/idle",
+            "form1/front/walkA",
+            "form1/front/walkB",
+            "form1/back/walkA",
+            "form1/back/walkB"
+          ],
+          "prompt": "Create a production-ready transparent sprite atlas for the Cheonsu tactical RPG. Use the two reference images as the exact same character's advanced promotion form 0 and advanced promotion form 1. Keep the references' hand-painted Korean/Japanese 1990s fantasy tactical RPG art language: crisp delicate dark outlines, warm muted colors, softly painted shading. Same face, skin tone, hair, age, gender, clothing colors, and weapons as the corresponding reference. Adapt to charming FOUR-HEAD-TALL map sprites, clearly readable at small size, not realistic tall battle portraits. Each reference form needs six unique frames.\n\nCanvas ideally 2048 x 1536, landscape 4:3. TRANSPARENT ALPHA background, no painted checkerboard. EXACTLY 12 separate full-body characters in EXACTLY FOUR COLUMNS and THREE ROWS of equal cells. Each character is vertically aligned, centered, and fits inside its own cell with at least 15% transparent margin on all sides. All heads and feet must be fully visible. All long weapons fit inside the cell. No overlaps. No text, no numbering, no grid lines, no scenery, no ground shadow, no magical effects, no particles. Each sprite has the same scale and floor alignment.\n\nMANDATORY CELL ORDER, left to right, top to bottom:\nrow 1: form0 front idle, form0 back idle, form0 front walk A, form0 front walk B.\nrow 2: form0 back walk A, form0 back walk B, form1 front idle, form1 back idle.\nrow 3: form1 front walk A, form1 front walk B, form1 back walk A, form1 back walk B.\nFront views face three-quarter toward the RIGHT of the picture, with face and chest visible. Back views face three-quarter away toward the RIGHT, showing back of head and back of cape/clothing, with no forward-facing face. Back view is a true rear three-quarter drawing, not a horizontally mirrored front view.\nIdle = feet close together, natural standing pose holding the signature weapon. Walk A = left leg clearly strides forward, right leg behind; walk B = right leg clearly strides forward, left leg behind, alternating hands/cape and ponytail sway. Draw anatomically consistent actual alternating feet, never copy-paste the same stance. Keep weapons carried naturally, do not swing an attack.\nForm 0 belongs only in cells 0-5. Form 1 belongs only in cells 6-11. Make branch clothing differences readable while closely retaining the corresponding reference outfit.\nCHARACTER-SPECIFIC DETAILS: Mare: youthful female sea lancer, short dark-blue hair, teal blue cape, ivory and bronze armor, blue gem accents, blue/teal crescent glaive carried diagonally close to body so full blade fits. Form0 blue feather/crystal left shoulder ornament, bronze boots and compact teal cloth; form1 more full ivory plate armor, ivory boots with gold trim, layered teal cape and gold cord at waist."
+        },
+        {
+          "id": "harin",
+          "sourcePath": "/workspace/generated_images/exec-8f23b889-9ac1-4c20-ad08-b430b172b1f8.png",
+          "path": "/workspace/work/promotion171/harin__advanced-map.png",
+          "rows": 3,
+          "columns": 4,
+          "transparent": true,
+          "cellOrder": [
+            "form0/front/idle",
+            "form0/back/idle",
+            "form0/front/walkA",
+            "form0/front/walkB",
+            "form0/back/walkA",
+            "form0/back/walkB",
+            "form1/front/idle",
+            "form1/back/idle",
+            "form1/front/walkA",
+            "form1/front/walkB",
+            "form1/back/walkA",
+            "form1/back/walkB"
+          ],
+          "prompt": "Create a production-ready transparent sprite atlas for the Cheonsu tactical RPG. Use the two reference images as the exact same character's advanced promotion form 0 and advanced promotion form 1. Keep the references' hand-painted Korean/Japanese 1990s fantasy tactical RPG art language: crisp delicate dark outlines, warm muted colors, softly painted shading. Same face, skin tone, hair, age, gender, clothing colors, and weapons as the corresponding reference. Adapt to charming FOUR-HEAD-TALL map sprites, clearly readable at small size, not realistic tall battle portraits. Each reference form needs six unique frames.\n\nCanvas ideally 2048 x 1536, landscape 4:3. TRANSPARENT ALPHA background, no painted checkerboard. EXACTLY 12 separate full-body characters in EXACTLY FOUR COLUMNS and THREE ROWS of equal cells. Each character is vertically aligned, centered, and fits inside its own cell with at least 15% transparent margin on all sides. All heads and feet must be fully visible. All long weapons fit inside the cell. No overlaps. No text, no numbering, no grid lines, no scenery, no ground shadow, no magical effects, no particles. Each sprite has the same scale and floor alignment.\n\nMANDATORY CELL ORDER, left to right, top to bottom:\nrow 1: form0 front idle, form0 back idle, form0 front walk A, form0 front walk B.\nrow 2: form0 back walk A, form0 back walk B, form1 front idle, form1 back idle.\nrow 3: form1 front walk A, form1 front walk B, form1 back walk A, form1 back walk B.\nFront views face three-quarter toward the RIGHT of the picture, with face and chest visible. Back views face three-quarter away toward the RIGHT, showing back of head and back of cape/clothing, with no forward-facing face. Back view is a true rear three-quarter drawing, not a horizontally mirrored front view.\nIdle = feet close together, natural standing pose holding the signature weapon. Walk A = left leg clearly strides forward, right leg behind; walk B = right leg clearly strides forward, left leg behind, alternating hands/cape and ponytail sway. Draw anatomically consistent actual alternating feet, never copy-paste the same stance. Keep weapons carried naturally, do not swing an attack.\nForm 0 belongs only in cells 0-5. Form 1 belongs only in cells 6-11. Make branch clothing differences readable while closely retaining the corresponding reference outfit.\nCHARACTER-SPECIFIC DETAILS: Harin: young female martial artist, long dark brown high ponytail tied with red ribbons and a gold flower, ivory wide pants, red and gold martial vest and sash, gold bronze bracers, bare fists. Form0 sleeveless ivory top with red scarf/waistcoat, fitted bronze boots and red ankle bows; form1 short red bolero sleeves, more ornate ivory-gold long front panel, black low martial shoes and red ankle ties."
+        },
+        {
+          "id": "edan",
+          "sourceId": "edan",
+          "sourcePath": "/workspace/generated_images/exec-7ea322b5-83c0-464b-bf1f-076aaa5d99b9.png",
+          "path": "/workspace/work/promotion171/edan__advanced-map.png",
+          "rows": 3,
+          "columns": 4,
+          "transparent": true,
+          "cellOrder": [
+            "form0/front/idle",
+            "form0/back/idle",
+            "form0/front/walkA",
+            "form0/front/walkB",
+            "form0/back/walkA",
+            "form0/back/walkB",
+            "form1/front/idle",
+            "form1/back/idle",
+            "form1/front/walkA",
+            "form1/front/walkB",
+            "form1/back/walkA",
+            "form1/back/walkB"
+          ],
+          "prompt": "Create a production-ready transparent sprite atlas for the Cheonsu tactical RPG. Use the two reference images as the exact same character's advanced promotion form 0 and advanced promotion form 1. Keep the references' hand-painted Korean/Japanese 1990s fantasy tactical RPG art language: crisp delicate dark outlines, warm muted colors, softly painted shading. Same face, skin tone, hair, age, gender, clothing colors, and weapons as the corresponding reference. Adapt to charming FOUR-HEAD-TALL map sprites, clearly readable at small size, not realistic tall battle portraits. Each reference form needs six unique frames.\n\nCanvas ideally 2048 x 1536, landscape 4:3. TRANSPARENT ALPHA background, no painted checkerboard. EXACTLY 12 separate full-body characters in EXACTLY FOUR COLUMNS and THREE ROWS of equal cells. Each character is vertically aligned, centered, and fits inside its own cell with at least 15% transparent margin on all sides. All heads and feet must be fully visible. All long weapons fit inside the cell. No overlaps. No text, no numbering, no grid lines, no scenery, no ground shadow, no magical effects, no particles. Each sprite has the same scale and floor alignment.\n\nMANDATORY CELL ORDER, left to right, top to bottom:\nrow 1: form0 front idle, form0 back idle, form0 front walk A, form0 front walk B.\nrow 2: form0 back walk A, form0 back walk B, form1 front idle, form1 back idle.\nrow 3: form1 front walk A, form1 front walk B, form1 back walk A, form1 back walk B.\nFront views face three-quarter toward the RIGHT of the picture, with face and chest visible. Back views face three-quarter away toward the RIGHT, showing back of head and back of cape/clothing, with no forward-facing face. Back view is a true rear three-quarter drawing, not a horizontally mirrored front view.\nIdle = feet close together, natural standing pose holding the signature weapon. Walk A = left leg clearly strides forward, right leg behind; walk B = right leg clearly strides forward, left leg behind, alternating hands/cape and ponytail sway. Draw anatomically consistent actual alternating feet, never copy-paste the same stance. Keep weapons carried naturally, do not swing an attack.\nForm 0 belongs only in cells 0-5. Form 1 belongs only in cells 6-11. Make branch clothing differences readable while closely retaining the corresponding reference outfit.\nCHARACTER-SPECIFIC DETAILS: Edan: red-haired young adult male engineer, tousled copper-red hair and brass goggles, short red facial hair, blue scarf, brown work boots and leather gear. Form0 navy blue shirt, blue crystal brass compact hammer and blue gem rectangular shield, leather apron. Form1 mustard/tan coat with reinforced grey breastplate, grey industrial heavy hammer and a larger metal rectangular shield. No additional weapons, no sci-fi lasers."
+        },
+        {
+          "id": "sylvan",
+          "sourceId": "silvan",
+          "sourcePath": "/workspace/generated_images/exec-10ed03bf-4f90-42cf-b85a-80f7c4f98c4c.png",
+          "path": "/workspace/work/promotion171/sylvan__advanced-map.png",
+          "rows": 3,
+          "columns": 4,
+          "transparent": true,
+          "cellOrder": [
+            "form0/front/idle",
+            "form0/back/idle",
+            "form0/front/walkA",
+            "form0/front/walkB",
+            "form0/back/walkA",
+            "form0/back/walkB",
+            "form1/front/idle",
+            "form1/back/idle",
+            "form1/front/walkA",
+            "form1/front/walkB",
+            "form1/back/walkA",
+            "form1/back/walkB"
+          ],
+          "prompt": "Create a production-ready transparent sprite atlas for the Cheonsu tactical RPG. Use the two reference images as the exact same character's advanced promotion form 0 and advanced promotion form 1. Keep the references' hand-painted Korean/Japanese 1990s fantasy tactical RPG art language: crisp delicate dark outlines, warm muted colors, softly painted shading. Same face, skin tone, hair, age, gender, clothing colors, and weapons as the corresponding reference. Adapt to charming FOUR-HEAD-TALL map sprites, clearly readable at small size, not realistic tall battle portraits. Each reference form needs six unique frames.\n\nCanvas ideally 2048 x 1536, landscape 4:3. TRANSPARENT ALPHA background, no painted checkerboard. EXACTLY 12 separate full-body characters in EXACTLY FOUR COLUMNS and THREE ROWS of equal cells. Each character is vertically aligned, centered, and fits inside its own cell with at least 15% transparent margin on all sides. All heads and feet must be fully visible. All long weapons fit inside the cell. No overlaps. No text, no numbering, no grid lines, no scenery, no ground shadow, no magical effects, no particles. Each sprite has the same scale and floor alignment.\n\nMANDATORY CELL ORDER, left to right, top to bottom:\nrow 1: form0 front idle, form0 back idle, form0 front walk A, form0 front walk B.\nrow 2: form0 back walk A, form0 back walk B, form1 front idle, form1 back idle.\nrow 3: form1 front walk A, form1 front walk B, form1 back walk A, form1 back walk B.\nFront views face three-quarter toward the RIGHT of the picture, with face and chest visible. Back views face three-quarter away toward the RIGHT, showing back of head and back of cape/clothing, with no forward-facing face. Back view is a true rear three-quarter drawing, not a horizontally mirrored front view.\nIdle = feet close together, natural standing pose holding the signature weapon. Walk A = left leg clearly strides forward, right leg behind; walk B = right leg clearly strides forward, left leg behind, alternating hands/cape and ponytail sway. Draw anatomically consistent actual alternating feet, never copy-paste the same stance. Keep weapons carried naturally, do not swing an attack.\nForm 0 belongs only in cells 0-5. Form 1 belongs only in cells 6-11. Make branch clothing differences readable while closely retaining the corresponding reference outfit.\nCHARACTER-SPECIFIC DETAILS: Sylvan: slender young adult male elf druid, long silver-white hair tied with green leaves, pointed elf ears, forest-green cloak, cream layered robes with golden leaf embroidery, brown boots, wood branch staff with green crystal. Form0 darker green tall-collared cloak and narrow angular leaf-shaped crystal; form1 lighter green short rounded mantle with large leaf embroidery and a rounder green orb among living leaves, leafy ankle ornaments."
+        }
+      ]
+    },
+    "additional_promotions": {
+      "recordFile": "connections-art-provenance.json",
+      "record": [
+        {
+          "key": "luka__promoted",
+          "generator": "image_gen.imagegen",
+          "reference": "docs/art/characters-v2/sources/luka.png",
+          "initialGeneratedFile": "/workspace/generated_images/exec-070c8001-364e-4128-bc7a-7169b9de106e.png",
+          "finalGeneratedFile": "/workspace/generated_images/exec-cfeabced-500d-45b6-b9a8-ba4d043b9211.png",
+          "atlas": "/workspace/work/promotion171/luka__promoted.png",
+          "layout": "4x4 row-major: run-a,run-b,windup,strike,recover,recoil,skill-a,skill-b,dialogue,map,rear,front-a,front-b,back-a,back-b,portrait",
+          "authoringNote": "기존 캐릭터 얼굴을 참조해 전직 복장을 신규 생성하고, 완전한 무기와 실루엣을 유지하도록 imagegen으로 셀 여백을 확장함. 원본 파일 보존."
+        },
+        {
+          "key": "baekho__promoted",
+          "generator": "image_gen.imagegen",
+          "reference": "docs/art/characters-v2/sources/baekho.png",
+          "initialGeneratedFile": "/workspace/generated_images/exec-5cc3f31a-9391-4cf2-b67c-ba7262e61562.png",
+          "finalGeneratedFile": "/workspace/generated_images/exec-82f9ea11-c99f-4cbe-bc37-768e94a81453.png",
+          "atlas": "/workspace/work/promotion171/baekho__promoted.png",
+          "layout": "4x4 row-major: run-a,run-b,windup,strike,recover,recoil,skill-a,skill-b,dialogue,map,rear,front-a,front-b,back-a,back-b,portrait",
+          "authoringNote": "기존 캐릭터 얼굴을 참조해 전직 복장을 신규 생성하고, 완전한 무기와 실루엣을 유지하도록 imagegen으로 셀 여백을 확장함. 원본 파일 보존."
+        },
+        {
+          "key": "hero__dawnblade",
+          "generator": "image_gen.imagegen",
+          "reference": "docs/art/characters-v2/sources/hero.png",
+          "initialGeneratedFile": "/workspace/generated_images/exec-00da0b44-7f5c-4a87-8dc0-0c479e2e4b1b.png",
+          "finalGeneratedFile": "/workspace/generated_images/exec-78fbc898-6669-47af-b843-723f751160d7.png",
+          "atlas": "/workspace/work/promotion171/hero__dawnblade.png",
+          "layout": "4x4 row-major: run-a,run-b,windup,strike,recover,recoil,skill-a,skill-b,dialogue,map,rear,front-a,front-b,back-a,back-b,portrait",
+          "authoringNote": "기존 캐릭터 얼굴을 참조해 전직 복장을 신규 생성하고, 완전한 무기와 실루엣을 유지하도록 imagegen으로 셀 여백을 확장함. 원본 파일 보존."
+        },
+        {
+          "key": "bram__oathwarden",
+          "generator": "image_gen.imagegen",
+          "reference": "docs/art/characters-v2/sources/bram.png",
+          "initialGeneratedFile": "/workspace/generated_images/exec-95be37c4-9b57-45b8-be61-0cf440477fd8.png",
+          "finalGeneratedFile": "/workspace/generated_images/exec-ce41d97d-2dc2-40e7-8096-63b0d1dbf3a3.png",
+          "atlas": "/workspace/work/promotion171/bram__oathwarden.png",
+          "layout": "4x4 row-major: run-a,run-b,windup,strike,recover,recoil,skill-a,skill-b,dialogue,map,rear,front-a,front-b,back-a,back-b,portrait",
+          "authoringNote": "기존 캐릭터 얼굴을 참조해 전직 복장을 신규 생성하고, 완전한 무기와 실루엣을 유지하도록 imagegen으로 셀 여백을 확장함. 원본 파일 보존."
+        }
+      ]
+    },
+    "root_promotions": {
+      "recordFile": "root.json",
+      "record": {
+        "기록": "루트 담당 생성 이력. 아래 설명은 실제 생성 지시의 한국어 요약이며 프롬프트 전문 인용이 아니다.",
+        "도구": "image_gen.imagegen",
+        "공통": "기존 천수 원화를 입력으로 얼굴·머리·성별·무기 역할을 보존. 투명 배경. 4열×4행 16셀: run-a,run-b,windup,strike,recover,recoil,skill-a,skill-b,dialogue,map,rear,front-a,front-b,back-a,back-b,portrait. 전신과 무기끝을 모두 포함하고 텍스트·배경·그림자·입자 없이 생성.",
+        "원화": [
+          {
+            "key": "hero__promoted",
+            "reference": "docs/art/characters-v2/sources/hero.png",
+            "generated_png": "/workspace/generated_images/exec-c3fc90f3-a0a7-494d-92ad-220e9aeff371.png",
+            "지시요약": "아이보리 은갑주·금테두리·청색 망토·흰 자수 타바드. 첫 생성본의 윗검 잘림을 이미지 생성 편집으로 교정.",
+            "related_generated_png": [
+              "/workspace/generated_images/exec-a6a11b46-f45f-419f-82e3-a19553e11a64.png"
+            ]
+          },
+          {
+            "key": "mare__promoted",
+            "reference": "docs/art/characters-v3/sources/mare.png",
+            "generated_png": "/workspace/generated_images/exec-f5b2a8c2-6460-45e7-841d-2dff1c5d3b23.png",
+            "지시요약": "해군식 백은 갑옷·남청 망토·청록 타바드·황동 밧줄 장식·초승달 창. windup은 완전한 단일 포즈 원화로 교정.",
+            "related_generated_png": [
+              "/workspace/generated_images/exec-de30bdc2-99f4-4ac6-bbf0-217ea93aed08.png"
+            ]
+          },
+          {
+            "key": "harin__promoted",
+            "reference": "docs/art/characters-v3/sources/harin.png",
+            "generated_png": "/workspace/generated_images/exec-6f48d482-b3fe-48c8-ab6b-e670d81a0c3f.png",
+            "지시요약": "비취 아이보리 긴 무술 외투·청동 완갑·붉은 허리띠·치유 부적·맨손.",
+            "related_generated_png": []
+          },
+          {
+            "key": "edan__promoted",
+            "reference": "docs/art/characters-v3/sources/edan.png",
+            "generated_png": "/workspace/generated_images/exec-bebaedb7-773a-4381-9205-da879345c498.png",
+            "지시요약": "진홍 가죽 앞치마·청동 톱니 어깨갑·푸른 공방 외투·망치와 장방형 방패·머리에 고글.",
+            "related_generated_png": []
+          },
+          {
+            "key": "sylvan__promoted",
+            "reference": "docs/art/characters-v3/sources/silvan.png",
+            "generated_png": "/workspace/generated_images/exec-fa54aa9f-ed8b-4132-a3be-8ae6dc264c72.png",
+            "지시요약": "아이보리 나무껍질 자수 법의·에메랄드 잎 망토·금빛 목깃·가지 관·초록 보석 지팡이.",
+            "related_generated_png": []
+          }
+        ]
+      }
+    }
+  }
+}

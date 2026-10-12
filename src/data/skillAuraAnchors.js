@@ -29,11 +29,19 @@ function inheritedAnchor(anchor, reference, target) {
   return result;
 }
 
-// Keep the measured legacy landmarks first. New frames use their own manually
-// reviewed visible weapon/contact points; hidden handles remain documented as such.
-// Fit a base or weapon profile only when no frame-specific review exists.
+// A new costume can supply only the poses measured on its own final frame.
+// Estimates remain visibly distinct from measured or manually reviewed landmarks.
+// Missing poses retain the legacy/base-profile fallback instead of borrowing a
+// different pose's newly measured coordinates.
 export function getSkillAuraAnchor(key, pose = 'strike', weapon) {
   const identity = getExpansionArtIdentity(key), canonical = identity?.baseId || key;
+  const art = getCharacterArt(key);
+  const frame = art?.anchors?.[pose];
+  if (frame) {
+    const { measured = false, ...anchor } = frame;
+    return { ...anchor, authored: measured === true, reviewed: false,
+      origin: measured === true ? 'authored-frame' : 'frame-profile' };
+  }
   const explicit = authoredAnchors[key] || authoredAnchors[identity?.assetId];
   const direct = explicit?.[pose] || explicit?.strike || (key === 'hero' ? HERO_BLADE[pose] || HERO_BLADE.strike : null);
   if (direct) return { ...direct, authored: true, reviewed: false, origin: 'authored-frame' };
@@ -42,7 +50,7 @@ export function getSkillAuraAnchor(key, pose = 'strike', weapon) {
   if (reviewed) return { ...reviewed, authored: false, reviewed: true, origin: 'reviewed-frame' };
   const source = (authoredAnchors[canonical] || reviewedAnchors.units[canonical] || (canonical === 'hero' ? HERO_BLADE : null));
   const base = source?.[pose] || source?.strike;
-  const art = getCharacterArt(key), metrics = art?.metrics?.[pose] || art?.metrics?.strike;
+  const metrics = art?.metrics?.[pose] || art?.metrics?.strike;
   if (base && identity?.key !== canonical) return inheritedAnchor(base, getCharacterArt(canonical)?.metrics?.[pose], metrics);
   const motion = weapon || identity?.weapon || 'slash';
   const kind = canonical === 'bell_keeper' ? 'music' : canonical === 'sylvan' ? 'staff' : kinds[motion] || 'blade';

@@ -2,6 +2,7 @@ import { CHARACTER_SKILLS, getUnitSkills } from './skills.js';
 import { getCharacterProfile } from './characterProfiles.js';
 import { combatUnitIds, getCombatSprite } from './combatArt.js';
 import { getPaintedVisualProfile } from './unitVisuals.js';
+import { getGameCharacterArtKey } from './expansionArtRegistry.js';
 import { MONSTER_ENEMIES } from './monsterEnemies.js';
 import { EXPANSION_BOSS_KEYS, EXPANSION_ENEMY_TEMPLATES, EXPANSION_MONSTER_KEYS } from './expansionEnemies.js';
 
@@ -34,9 +35,11 @@ export function getCharacterCollection({ party = [], clearedStages = [], encount
     const unlocked = ally ? Boolean(unit || (joinStage ? cleared.has(joinStage) : true)) : recorded.length > 0;
     const kind = ally ? 'ally' : id.startsWith('boss_') || EXPANSION_BOSS_KEYS.includes(id) ? 'boss' : 'enemy';
     const firstStage = sightings.length ? Math.min(...sightings.map(entry => entry.stageId)) : null;
+    const visualKey = ally && unit ? getGameCharacterArtKey(unit) || id : id;
     return { id, number: index + 1, kind, name: ally ? names[id] : enemies[id][0],
       role: ally ? profile.role : enemies[id][1], title: ally ? profile.title : '',
-      unlocked, art: getCombatSprite(id), portrait: getPaintedVisualProfile(id)?.portrait,
+      unlocked, art: getCombatSprite(visualKey), portrait: getPaintedVisualProfile(visualKey)?.portrait,
+      appearance: ally ? unit?.advancedClass ? '최상위 전직 모습' : unit?.secretClass ? '비전 전직 모습' : unit?.promoted ? '상급 전직 모습' : '기본 모습' : null,
       condition: ally ? joinStage ? `${joinStage}장 클리어 후 합류` : '처음부터 함께하는 동료' : firstStage ? sightings.every(entry => entry.archived) ? `${firstStage}장 클리어 시 옛 전장 기록 복원` : `${firstStage}장부터 등장 · 등장 전장 클리어 시 기록` : '전장 조사 기록',
       bio: unlocked ? ally ? profile.bio : recorded.map(entry => `${entry.archived ? '옛 전장 · ' : ''}${entry.stageId}장 · ${entry.name}`).filter((line, i, all) => all.indexOf(line) === i).slice(0, 5).join('\n') : '',
       bond: unlocked && ally ? profile.bond : '',

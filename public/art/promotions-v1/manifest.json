@@ -1,0 +1,5871 @@
+{
+  "units": {
+    "aria__form0": {
+      "map": "/art/promotions-v1/map/aria__form0.webp",
+      "rear": "/art/promotions-v1/map/aria__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/aria__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/aria__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/aria__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/aria__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 49,
+          "top": 40,
+          "right": 205,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 47,
+          "top": 40,
+          "right": 208,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 75,
+          "right": 373,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 16,
+          "top": 70,
+          "right": 367,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 54,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 35,
+          "top": 61,
+          "right": 348,
+          "bottom": 447
+        }
+      }
+    },
+    "aria__form1": {
+      "map": "/art/promotions-v1/map/aria__form1.webp",
+      "rear": "/art/promotions-v1/map/aria__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/aria__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/aria__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/aria__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/aria__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 50,
+          "top": 40,
+          "right": 204,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 46,
+          "top": 40,
+          "right": 208,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 51,
+          "right": 372,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 16,
+          "top": 54,
+          "right": 366,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 12,
+          "top": 49,
+          "right": 372,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 23,
+          "top": 48,
+          "right": 362,
+          "bottom": 447
+        }
+      }
+    },
+    "aria__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/aria__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/aria__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/aria__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/aria__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/aria__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/aria__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/aria__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/aria__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 143,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 142,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 59,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 115,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 142,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 66,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 57,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/aria__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/aria__promoted.webp",
+      "map": "/art/promotions-v1/map/aria__promoted.webp",
+      "rear": "/art/promotions-v1/map/aria__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/aria__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/aria__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/aria__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/aria__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "focus",
+          "grip": [
+            351,
+            178
+          ],
+          "tip": [
+            271,
+            93
+          ],
+          "focus": [
+            271,
+            93
+          ],
+          "measured": true
+        },
+        "strike": {
+          "kind": "focus",
+          "grip": [
+            313,
+            235
+          ],
+          "tip": [
+            422,
+            176
+          ],
+          "focus": [
+            422,
+            176
+          ],
+          "measured": true
+        },
+        "skill-a": {
+          "kind": "focus",
+          "grip": [
+            309,
+            302
+          ],
+          "tip": [
+            310,
+            125
+          ],
+          "focus": [
+            310,
+            125
+          ],
+          "measured": true
+        },
+        "skill-b": {
+          "kind": "focus",
+          "grip": [
+            330,
+            204
+          ],
+          "tip": [
+            426,
+            119
+          ],
+          "focus": [
+            426,
+            119
+          ],
+          "measured": true
+        }
+      }
+    },
+    "baekho__form0": {
+      "map": "/art/promotions-v1/map/baekho__form0.webp",
+      "rear": "/art/promotions-v1/map/baekho__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/baekho__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/baekho__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/baekho__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/baekho__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 67,
+          "top": 40,
+          "right": 187,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 66,
+          "top": 40,
+          "right": 189,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 56,
+          "top": 49,
+          "right": 328,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 55,
+          "top": 47,
+          "right": 327,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 48,
+          "top": 49,
+          "right": 335,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 67,
+          "top": 51,
+          "right": 316,
+          "bottom": 447
+        }
+      }
+    },
+    "baekho__form1": {
+      "map": "/art/promotions-v1/map/baekho__form1.webp",
+      "rear": "/art/promotions-v1/map/baekho__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/baekho__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/baekho__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/baekho__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/baekho__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 62,
+          "top": 40,
+          "right": 193,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 64,
+          "top": 40,
+          "right": 191,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 44,
+          "top": 48,
+          "right": 339,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 50,
+          "top": 53,
+          "right": 333,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 45,
+          "top": 48,
+          "right": 337,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 67,
+          "top": 53,
+          "right": 316,
+          "bottom": 447
+        }
+      }
+    },
+    "baekho__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/baekho__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/baekho__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/baekho__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/baekho__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/baekho__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/baekho__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/baekho__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/baekho__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 136,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 135,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 127,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 137,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 117,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 114,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 97,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/baekho__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/baekho__promoted.webp",
+      "map": "/art/promotions-v1/map/baekho__promoted.webp",
+      "rear": "/art/promotions-v1/map/baekho__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/baekho__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/baekho__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/baekho__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/baekho__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "fist",
+          "grip": [
+            211,
+            229
+          ],
+          "tip": [
+            239,
+            213
+          ],
+          "focus": [
+            229,
+            218
+          ],
+          "secondary": {
+            "grip": [
+              334,
+              324
+            ],
+            "tip": [
+              306,
+              328
+            ]
+          },
+          "measured": false,
+          "framePath": "public/art/promotions-v1/units/baekho__promoted-windup.webp",
+          "frameSha256": "4bbf8db87f80e264206765a7548fcee049734a91795e94100dabcf16b6e3130b",
+          "reviewMethod": "최종 512px 원화에서 손목과 주먹·손바닥의 위치를 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+        },
+        "strike": {
+          "kind": "fist",
+          "grip": [
+            407,
+            258
+          ],
+          "tip": [
+            439,
+            258
+          ],
+          "focus": [
+            432,
+            258
+          ],
+          "measured": false,
+          "framePath": "public/art/promotions-v1/units/baekho__promoted-strike.webp",
+          "frameSha256": "7f85a1966824907f10e168add4450a3932d9a19a25e91989d48f76491ef84f77",
+          "reviewMethod": "최종 512px 원화에서 손목과 주먹·손바닥의 위치를 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+        },
+        "skill-a": {
+          "kind": "fist",
+          "grip": [
+            398,
+            259
+          ],
+          "tip": [
+            417,
+            194
+          ],
+          "focus": [
+            417,
+            239
+          ],
+          "secondary": {
+            "grip": [
+              430,
+              264
+            ],
+            "tip": [
+              453,
+              222
+            ]
+          },
+          "measured": false,
+          "framePath": "public/art/promotions-v1/units/baekho__promoted-skill-a.webp",
+          "frameSha256": "3aa3cc4e35ef5615eb7d42657f3205be11d7f9d364af62ebb36c344253070c31",
+          "reviewMethod": "최종 512px 원화에서 손목과 주먹·손바닥의 위치를 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+        },
+        "skill-b": {
+          "kind": "fist",
+          "grip": [
+            174,
+            291
+          ],
+          "tip": [
+            195,
+            300
+          ],
+          "focus": [
+            192,
+            290
+          ],
+          "secondary": {
+            "grip": [
+              366,
+              294
+            ],
+            "tip": [
+              389,
+              272
+            ]
+          },
+          "measured": false,
+          "framePath": "public/art/promotions-v1/units/baekho__promoted-skill-b.webp",
+          "frameSha256": "7e3abd202002466a76217ef24cef6b7edaeec871753d773d73d595f328446c5d",
+          "reviewMethod": "최종 512px 원화에서 손목과 주먹·손바닥의 위치를 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+        }
+      }
+    },
+    "bram__form0": {
+      "map": "/art/promotions-v1/map/bram__form0.webp",
+      "rear": "/art/promotions-v1/map/bram__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/bram__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/bram__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/bram__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/bram__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 28,
+          "top": 40,
+          "right": 226,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 24,
+          "top": 40,
+          "right": 230,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 16,
+          "top": 62,
+          "right": 366,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 60,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 85,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 14,
+          "top": 81,
+          "right": 370,
+          "bottom": 447
+        }
+      }
+    },
+    "bram__form1": {
+      "map": "/art/promotions-v1/map/bram__form1.webp",
+      "rear": "/art/promotions-v1/map/bram__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/bram__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/bram__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/bram__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/bram__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 37,
+          "top": 40,
+          "right": 217,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 34,
+          "top": 40,
+          "right": 221,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 48,
+          "right": 371,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 51,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 89,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 15,
+          "top": 88,
+          "right": 367,
+          "bottom": 447
+        }
+      }
+    },
+    "bram__oathwarden": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/bram__oathwarden-run-a.webp",
+        "run-b": "/art/promotions-v1/units/bram__oathwarden-run-b.webp",
+        "windup": "/art/promotions-v1/units/bram__oathwarden-windup.webp",
+        "strike": "/art/promotions-v1/units/bram__oathwarden-strike.webp",
+        "recover": "/art/promotions-v1/units/bram__oathwarden-recover.webp",
+        "recoil": "/art/promotions-v1/units/bram__oathwarden-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/bram__oathwarden-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/bram__oathwarden-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 118,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 129,
+          "bottom": 478
+        },
+        "windup": {
+          "height": 512,
+          "top": 80,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 145,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 102,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 118,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 149,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 161,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/bram__oathwarden.webp",
+      "dialogue": "/art/promotions-v1/dialogue/bram__oathwarden.webp",
+      "map": "/art/promotions-v1/map/bram__oathwarden.webp",
+      "rear": "/art/promotions-v1/map/bram__oathwarden-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/bram__oathwarden-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/bram__oathwarden-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/bram__oathwarden-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/bram__oathwarden-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "blade",
+          "grip": [
+            177,
+            146
+          ],
+          "tip": [
+            350,
+            78
+          ],
+          "focus": [
+            350,
+            78
+          ],
+          "measured": false,
+          "framePath": "public/art/promotions-v1/units/bram__oathwarden-windup.webp",
+          "frameSha256": "25fb47bfb1afce5eca274f37025ee7f6a9d06c03da981a7c174c5de12799a3ff",
+          "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+        },
+        "strike": {
+          "kind": "blade",
+          "grip": [
+            306,
+            228
+          ],
+          "tip": [
+            474,
+            193
+          ],
+          "focus": [
+            474,
+            193
+          ],
+          "measured": false,
+          "framePath": "public/art/promotions-v1/units/bram__oathwarden-strike.webp",
+          "frameSha256": "18c5eb48f2937808d2653a6dc07c3aae1a0a8c219691cb26b5ae81cb3065d978",
+          "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+        },
+        "skill-a": {
+          "kind": "shield",
+          "grip": [
+            384,
+            265
+          ],
+          "tip": [
+            437,
+            285
+          ],
+          "focus": [
+            437,
+            285
+          ],
+          "measured": false,
+          "framePath": "public/art/promotions-v1/units/bram__oathwarden-skill-a.webp",
+          "frameSha256": "a581c9fb7513db2af6ca136afb45c5ec7f68d92a0f831cddb325933010fd8ee3",
+          "reviewMethod": "최종 512px 원화에서 방패를 받치는 손과 방패 전면 중심을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+        },
+        "skill-b": {
+          "kind": "shield",
+          "grip": [
+            361,
+            317
+          ],
+          "tip": [
+            405,
+            328
+          ],
+          "focus": [
+            405,
+            328
+          ],
+          "measured": false,
+          "framePath": "public/art/promotions-v1/units/bram__oathwarden-skill-b.webp",
+          "frameSha256": "eeff2d577192c27c4c95d4710f2457f00bf61a9423430d2ae925e78e28f4489c",
+          "reviewMethod": "최종 512px 원화에서 방패를 받치는 손과 방패 전면 중심을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+        }
+      }
+    },
+    "bram__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/bram__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/bram__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/bram__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/bram__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/bram__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/bram__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/bram__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/bram__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 58,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 54,
+          "bottom": 478
+        },
+        "windup": {
+          "height": 512,
+          "top": 103,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 109,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 102,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 72,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 78,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/bram__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/bram__promoted.webp",
+      "map": "/art/promotions-v1/map/bram__promoted.webp",
+      "rear": "/art/promotions-v1/map/bram__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/bram__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/bram__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/bram__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/bram__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "blade",
+          "grip": [
+            213,
+            178
+          ],
+          "tip": [
+            348,
+            106
+          ],
+          "measured": true
+        },
+        "strike": {
+          "kind": "blade",
+          "grip": [
+            224,
+            246
+          ],
+          "tip": [
+            477,
+            160
+          ],
+          "measured": true
+        },
+        "skill-a": {
+          "kind": "blade",
+          "grip": [
+            307,
+            203
+          ],
+          "tip": [
+            307,
+            472
+          ],
+          "measured": true
+        },
+        "skill-b": {
+          "kind": "shield",
+          "grip": [
+            374,
+            213
+          ],
+          "tip": [
+            417,
+            79
+          ],
+          "focus": [
+            438,
+            241
+          ],
+          "measured": true,
+          "note": "손은 방패 뒤에 가려져 있으므로 grip은 보이는 팔목과 방패의 접점을 사용한다."
+        }
+      }
+    },
+    "edan__form0": {
+      "map": "/art/promotions-v1/map/edan__form0.webp",
+      "rear": "/art/promotions-v1/map/edan__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/edan__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/edan__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/edan__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/edan__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 43,
+          "top": 40,
+          "right": 212,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 44,
+          "top": 40,
+          "right": 211,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 76,
+          "right": 373,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 39,
+          "top": 77,
+          "right": 344,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 22,
+          "top": 48,
+          "right": 361,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 29,
+          "top": 50,
+          "right": 355,
+          "bottom": 447
+        }
+      }
+    },
+    "edan__form1": {
+      "map": "/art/promotions-v1/map/edan__form1.webp",
+      "rear": "/art/promotions-v1/map/edan__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/edan__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/edan__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/edan__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/edan__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 24,
+          "top": 40,
+          "right": 230,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 43,
+          "top": 40,
+          "right": 212,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 89,
+          "right": 373,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 27,
+          "top": 94,
+          "right": 356,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 49,
+          "right": 371,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 18,
+          "top": 46,
+          "right": 364,
+          "bottom": 447
+        }
+      }
+    },
+    "edan__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/edan__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/edan__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/edan__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/edan__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/edan__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/edan__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/edan__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/edan__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 151,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 132,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 66,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 161,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 115,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 181,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 141,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/edan__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/edan__promoted.webp",
+      "map": "/art/promotions-v1/map/edan__promoted.webp",
+      "rear": "/art/promotions-v1/map/edan__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/edan__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/edan__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/edan__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/edan__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "hammer",
+          "grip": [
+            260,
+            135
+          ],
+          "tip": [
+            198,
+            108
+          ],
+          "focus": [
+            198,
+            108
+          ],
+          "measured": true
+        },
+        "strike": {
+          "kind": "hammer",
+          "grip": [
+            325,
+            282
+          ],
+          "tip": [
+            403,
+            285
+          ],
+          "focus": [
+            403,
+            285
+          ],
+          "measured": true
+        },
+        "skill-a": {
+          "kind": "hammer",
+          "grip": [
+            120,
+            307
+          ],
+          "tip": [
+            136,
+            377
+          ],
+          "focus": [
+            136,
+            377
+          ],
+          "measured": true
+        },
+        "skill-b": {
+          "kind": "hammer",
+          "grip": [
+            340,
+            272
+          ],
+          "tip": [
+            393,
+            273
+          ],
+          "focus": [
+            393,
+            273
+          ],
+          "measured": true
+        }
+      }
+    },
+    "ella__form0": {
+      "map": "/art/promotions-v1/map/ella__form0.webp",
+      "rear": "/art/promotions-v1/map/ella__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/ella__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/ella__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/ella__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/ella__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 51,
+          "top": 40,
+          "right": 203,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 58,
+          "top": 40,
+          "right": 196,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 25,
+          "top": 48,
+          "right": 357,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 22,
+          "top": 54,
+          "right": 361,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 34,
+          "top": 48,
+          "right": 348,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 39,
+          "top": 47,
+          "right": 343,
+          "bottom": 446
+        }
+      }
+    },
+    "ella__form1": {
+      "map": "/art/promotions-v1/map/ella__form1.webp",
+      "rear": "/art/promotions-v1/map/ella__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/ella__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/ella__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/ella__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/ella__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 39,
+          "top": 40,
+          "right": 215,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 47,
+          "top": 40,
+          "right": 208,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 14,
+          "top": 55,
+          "right": 369,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 63,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 25,
+          "top": 48,
+          "right": 358,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 41,
+          "top": 56,
+          "right": 342,
+          "bottom": 447
+        }
+      }
+    },
+    "ella__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/ella__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/ella__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/ella__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/ella__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/ella__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/ella__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/ella__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/ella__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 110,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 127,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 79,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 132,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 144,
+          "bottom": 478
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 110,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 98,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/ella__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/ella__promoted.webp",
+      "map": "/art/promotions-v1/map/ella__promoted.webp",
+      "rear": "/art/promotions-v1/map/ella__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/ella__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/ella__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/ella__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/ella__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "music",
+          "grip": [
+            359,
+            283
+          ],
+          "tip": [
+            401,
+            252
+          ],
+          "focus": [
+            291,
+            309
+          ],
+          "measured": true
+        },
+        "strike": {
+          "kind": "music",
+          "grip": [
+            398,
+            275
+          ],
+          "tip": [
+            435,
+            245
+          ],
+          "focus": [
+            325,
+            298
+          ],
+          "measured": true
+        },
+        "skill-a": {
+          "kind": "music",
+          "grip": [
+            343,
+            279
+          ],
+          "tip": [
+            379,
+            257
+          ],
+          "focus": [
+            319,
+            277
+          ],
+          "measured": true,
+          "note": "악기 몸통이 팔과 의상에 가려져 있어 실제로 보이는 현을 짚는 손 부위에 집중점을 지정했습니다."
+        },
+        "skill-b": {
+          "kind": "music",
+          "grip": [
+            351,
+            188
+          ],
+          "tip": [
+            368,
+            148
+          ],
+          "focus": [
+            300,
+            243
+          ],
+          "measured": true
+        }
+      }
+    },
+    "harin__form0": {
+      "map": "/art/promotions-v1/map/harin__form0.webp",
+      "rear": "/art/promotions-v1/map/harin__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/harin__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/harin__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/harin__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/harin__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 59,
+          "top": 40,
+          "right": 195,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 65,
+          "top": 40,
+          "right": 189,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 60,
+          "top": 48,
+          "right": 323,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 51,
+          "top": 49,
+          "right": 331,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 48,
+          "top": 49,
+          "right": 335,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 49,
+          "top": 44,
+          "right": 334,
+          "bottom": 447
+        }
+      }
+    },
+    "harin__form1": {
+      "map": "/art/promotions-v1/map/harin__form1.webp",
+      "rear": "/art/promotions-v1/map/harin__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/harin__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/harin__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/harin__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/harin__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 48,
+          "top": 40,
+          "right": 207,
+          "bottom": 238
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 56,
+          "top": 40,
+          "right": 199,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 25,
+          "top": 49,
+          "right": 357,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 49,
+          "top": 50,
+          "right": 334,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 15,
+          "top": 48,
+          "right": 368,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 42,
+          "top": 41,
+          "right": 341,
+          "bottom": 447
+        }
+      }
+    },
+    "harin__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/harin__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/harin__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/harin__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/harin__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/harin__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/harin__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/harin__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/harin__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 108,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 127,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 138,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 157,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 140,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 116,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 136,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/harin__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/harin__promoted.webp",
+      "map": "/art/promotions-v1/map/harin__promoted.webp",
+      "rear": "/art/promotions-v1/map/harin__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/harin__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/harin__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/harin__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/harin__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "fist",
+          "grip": [
+            347,
+            289
+          ],
+          "tip": [
+            344,
+            267
+          ],
+          "focus": [
+            344,
+            267
+          ],
+          "secondary": {
+            "grip": [
+              180,
+              270
+            ],
+            "tip": [
+              155,
+              281
+            ]
+          },
+          "measured": true
+        },
+        "strike": {
+          "kind": "fist",
+          "grip": [
+            387,
+            270
+          ],
+          "tip": [
+            407,
+            268
+          ],
+          "focus": [
+            407,
+            268
+          ],
+          "secondary": {
+            "grip": [
+              181,
+              286
+            ],
+            "tip": [
+              202,
+              273
+            ]
+          },
+          "measured": true
+        },
+        "skill-a": {
+          "kind": "fist",
+          "grip": [
+            306,
+            278
+          ],
+          "tip": [
+            319,
+            248
+          ],
+          "focus": [
+            319,
+            263
+          ],
+          "secondary": {
+            "grip": [
+              330,
+              283
+            ],
+            "tip": [
+              324,
+              251
+            ]
+          },
+          "measured": true
+        },
+        "skill-b": {
+          "kind": "fist",
+          "grip": [
+            405,
+            259
+          ],
+          "tip": [
+            429,
+            219
+          ],
+          "focus": [
+            425,
+            245
+          ],
+          "secondary": {
+            "grip": [
+              172,
+              287
+            ],
+            "tip": [
+              148,
+              294
+            ]
+          },
+          "measured": true
+        }
+      }
+    },
+    "hero__dawnblade": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/hero__dawnblade-run-a.webp",
+        "run-b": "/art/promotions-v1/units/hero__dawnblade-run-b.webp",
+        "windup": "/art/promotions-v1/units/hero__dawnblade-windup.webp",
+        "strike": "/art/promotions-v1/units/hero__dawnblade-strike.webp",
+        "recover": "/art/promotions-v1/units/hero__dawnblade-recover.webp",
+        "recoil": "/art/promotions-v1/units/hero__dawnblade-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/hero__dawnblade-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/hero__dawnblade-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 148,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 150,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 69,
+          "bottom": 478
+        },
+        "strike": {
+          "height": 512,
+          "top": 180,
+          "bottom": 478
+        },
+        "recover": {
+          "height": 512,
+          "top": 105,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 132,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 160,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 64,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/hero__dawnblade.webp",
+      "dialogue": "/art/promotions-v1/dialogue/hero__dawnblade.webp",
+      "map": "/art/promotions-v1/map/hero__dawnblade.webp",
+      "rear": "/art/promotions-v1/map/hero__dawnblade-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/hero__dawnblade-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/hero__dawnblade-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/hero__dawnblade-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/hero__dawnblade-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "blade",
+          "grip": [
+            331,
+            182
+          ],
+          "tip": [
+            179,
+            72
+          ],
+          "focus": [
+            179,
+            72
+          ],
+          "measured": false,
+          "framePath": "public/art/promotions-v1/units/hero__dawnblade-windup.webp",
+          "frameSha256": "a22f40e8ec235b1cbe8ce5cfd2ee167d587b3fd4e0d321b3c386c49c2334ac56",
+          "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+        },
+        "strike": {
+          "kind": "blade",
+          "grip": [
+            288,
+            268
+          ],
+          "tip": [
+            450,
+            259
+          ],
+          "focus": [
+            450,
+            259
+          ],
+          "measured": false,
+          "framePath": "public/art/promotions-v1/units/hero__dawnblade-strike.webp",
+          "frameSha256": "6d731ce7ab4e552b81f60b970d79badf2063073c4eba6848260af4f63b20d6b0",
+          "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+        },
+        "skill-a": {
+          "kind": "blade",
+          "grip": [
+            315,
+            247
+          ],
+          "tip": [
+            490,
+            236
+          ],
+          "focus": [
+            490,
+            236
+          ],
+          "measured": false,
+          "framePath": "public/art/promotions-v1/units/hero__dawnblade-skill-a.webp",
+          "frameSha256": "490e07566af21d6eb0da7a8481951c1d5b045a584243bbe3dec244653ba4ff30",
+          "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+        },
+        "skill-b": {
+          "kind": "blade",
+          "grip": [
+            287,
+            241
+          ],
+          "tip": [
+            284,
+            62
+          ],
+          "focus": [
+            284,
+            62
+          ],
+          "measured": false,
+          "framePath": "public/art/promotions-v1/units/hero__dawnblade-skill-b.webp",
+          "frameSha256": "793da1a0d243717c898730bd692ede529d85a0a526d77492d722fb258a35c070",
+          "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+        }
+      }
+    },
+    "hero__form0": {
+      "map": "/art/promotions-v1/map/hero__form0.webp",
+      "rear": "/art/promotions-v1/map/hero__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/hero__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/hero__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/hero__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/hero__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 21,
+          "top": 40,
+          "right": 233,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 36,
+          "top": 40,
+          "right": 218,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 95,
+          "right": 373,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 12,
+          "top": 103,
+          "right": 371,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 110,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 28,
+          "top": 110,
+          "right": 354,
+          "bottom": 447
+        }
+      }
+    },
+    "hero__form1": {
+      "map": "/art/promotions-v1/map/hero__form1.webp",
+      "rear": "/art/promotions-v1/map/hero__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/hero__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/hero__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/hero__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/hero__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 20,
+          "top": 40,
+          "right": 234,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 40,
+          "top": 40,
+          "right": 214,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 17,
+          "top": 49,
+          "right": 365,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 23,
+          "top": 57,
+          "right": 361,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 90,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 27,
+          "top": 94,
+          "right": 356,
+          "bottom": 447
+        }
+      }
+    },
+    "hero__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/hero__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/hero__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/hero__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/hero__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/hero__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/hero__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/hero__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/hero__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 173,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 177,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 111,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 164,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 111,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 148,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 208,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 114,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/hero__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/hero__promoted.webp",
+      "map": "/art/promotions-v1/map/hero__promoted.webp",
+      "rear": "/art/promotions-v1/map/hero__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/hero__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/hero__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/hero__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/hero__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "blade",
+          "grip": [
+            298,
+            178
+          ],
+          "tip": [
+            188,
+            113
+          ],
+          "measured": true
+        },
+        "strike": {
+          "kind": "blade",
+          "grip": [
+            379,
+            261
+          ],
+          "tip": [
+            123,
+            166
+          ],
+          "measured": true
+        },
+        "skill-a": {
+          "kind": "blade",
+          "grip": [
+            336,
+            302
+          ],
+          "tip": [
+            489,
+            313
+          ],
+          "measured": true
+        },
+        "skill-b": {
+          "kind": "blade",
+          "grip": [
+            289,
+            259
+          ],
+          "tip": [
+            318,
+            116
+          ],
+          "measured": true
+        }
+      }
+    },
+    "irene__form0": {
+      "map": "/art/promotions-v1/map/irene__form0.webp",
+      "rear": "/art/promotions-v1/map/irene__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/irene__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/irene__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/irene__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/irene__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 45,
+          "top": 40,
+          "right": 210,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 52,
+          "top": 40,
+          "right": 203,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 48,
+          "right": 372,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 30,
+          "top": 48,
+          "right": 353,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 53,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 20,
+          "top": 49,
+          "right": 362,
+          "bottom": 447
+        }
+      }
+    },
+    "irene__form1": {
+      "map": "/art/promotions-v1/map/irene__form1.webp",
+      "rear": "/art/promotions-v1/map/irene__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/irene__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/irene__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/irene__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/irene__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 40,
+          "top": 40,
+          "right": 214,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 43,
+          "top": 40,
+          "right": 212,
+          "bottom": 238
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 75,
+          "right": 373,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 22,
+          "top": 76,
+          "right": 361,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 14,
+          "top": 69,
+          "right": 369,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 61,
+          "right": 373,
+          "bottom": 447
+        }
+      }
+    },
+    "irene__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/irene__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/irene__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/irene__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/irene__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/irene__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/irene__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/irene__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/irene__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 154,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 158,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 87,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 186,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 102,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 141,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/irene__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/irene__promoted.webp",
+      "map": "/art/promotions-v1/map/irene__promoted.webp",
+      "rear": "/art/promotions-v1/map/irene__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/irene__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/irene__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/irene__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/irene__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "focus",
+          "grip": [
+            287,
+            170
+          ],
+          "tip": [
+            387,
+            87
+          ],
+          "focus": [
+            366,
+            120
+          ],
+          "measured": true
+        },
+        "strike": {
+          "kind": "focus",
+          "grip": [
+            325,
+            282
+          ],
+          "tip": [
+            452,
+            223
+          ],
+          "focus": [
+            425,
+            244
+          ],
+          "measured": true
+        },
+        "skill-a": {
+          "kind": "focus",
+          "grip": [
+            210,
+            255
+          ],
+          "tip": [
+            194,
+            105
+          ],
+          "focus": [
+            198,
+            139
+          ],
+          "secondary": {
+            "grip": [
+              413,
+              234
+            ],
+            "tip": [
+              437,
+              215
+            ]
+          },
+          "measured": true
+        },
+        "skill-b": {
+          "kind": "focus",
+          "grip": [
+            348,
+            193
+          ],
+          "tip": [
+            426,
+            102
+          ],
+          "focus": [
+            410,
+            129
+          ],
+          "measured": true
+        }
+      }
+    },
+    "jin__form0": {
+      "map": "/art/promotions-v1/map/jin__form0.webp",
+      "rear": "/art/promotions-v1/map/jin__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/jin__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/jin__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/jin__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/jin__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 50,
+          "top": 40,
+          "right": 204,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 52,
+          "top": 40,
+          "right": 203,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 53,
+          "top": 48,
+          "right": 330,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 33,
+          "top": 46,
+          "right": 350,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 56,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 56,
+          "right": 372,
+          "bottom": 447
+        }
+      }
+    },
+    "jin__form1": {
+      "map": "/art/promotions-v1/map/jin__form1.webp",
+      "rear": "/art/promotions-v1/map/jin__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/jin__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/jin__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/jin__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/jin__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 51,
+          "top": 40,
+          "right": 204,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 54,
+          "top": 40,
+          "right": 200,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 30,
+          "top": 48,
+          "right": 353,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 12,
+          "top": 49,
+          "right": 370,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 71,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 14,
+          "top": 72,
+          "right": 370,
+          "bottom": 447
+        }
+      }
+    },
+    "jin__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/jin__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/jin__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/jin__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/jin__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/jin__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/jin__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/jin__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/jin__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 128,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 126,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 70,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 146,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 98,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 138,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 115,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/jin__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/jin__promoted.webp",
+      "map": "/art/promotions-v1/map/jin__promoted.webp",
+      "rear": "/art/promotions-v1/map/jin__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/jin__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/jin__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/jin__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/jin__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "blade",
+          "grip": [
+            352,
+            179
+          ],
+          "tip": [
+            139,
+            72
+          ],
+          "focus": [
+            139,
+            72
+          ],
+          "measured": true
+        },
+        "strike": {
+          "kind": "blade",
+          "grip": [
+            305,
+            294
+          ],
+          "tip": [
+            489,
+            347
+          ],
+          "focus": [
+            489,
+            347
+          ],
+          "measured": true
+        },
+        "skill-a": {
+          "kind": "focus",
+          "grip": [
+            424,
+            285
+          ],
+          "tip": [
+            445,
+            276
+          ],
+          "focus": [
+            445,
+            276
+          ],
+          "measured": true,
+          "note": "칼날이 보이지 않고 손을 앞으로 펼친 준비 자세입니다. 실제 보이는 손과 손가락 끝을 사용했으며 칼날 위치는 추정하지 않았습니다."
+        },
+        "skill-b": {
+          "kind": "blade",
+          "grip": [
+            310,
+            264
+          ],
+          "tip": [
+            487,
+            335
+          ],
+          "focus": [
+            487,
+            335
+          ],
+          "measured": true
+        }
+      }
+    },
+    "kaz__form0": {
+      "map": "/art/promotions-v1/map/kaz__form0.webp",
+      "rear": "/art/promotions-v1/map/kaz__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/kaz__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/kaz__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/kaz__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/kaz__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 43,
+          "top": 40,
+          "right": 212,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 46,
+          "top": 40,
+          "right": 209,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 48,
+          "right": 372,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 13,
+          "top": 41,
+          "right": 370,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 50,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 18,
+          "top": 48,
+          "right": 365,
+          "bottom": 447
+        }
+      }
+    },
+    "kaz__form1": {
+      "map": "/art/promotions-v1/map/kaz__form1.webp",
+      "rear": "/art/promotions-v1/map/kaz__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/kaz__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/kaz__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/kaz__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/kaz__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 50,
+          "top": 40,
+          "right": 205,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 45,
+          "top": 40,
+          "right": 210,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 12,
+          "top": 66,
+          "right": 373,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 13,
+          "top": 65,
+          "right": 369,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 61,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 25,
+          "top": 63,
+          "right": 357,
+          "bottom": 447
+        }
+      }
+    },
+    "kaz__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/kaz__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/kaz__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/kaz__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/kaz__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/kaz__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/kaz__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/kaz__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/kaz__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 91,
+          "bottom": 478
+        },
+        "run-b": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 48,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 123,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 102,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 74,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 68,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 127,
+          "bottom": 478
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/kaz__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/kaz__promoted.webp",
+      "map": "/art/promotions-v1/map/kaz__promoted.webp",
+      "rear": "/art/promotions-v1/map/kaz__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/kaz__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/kaz__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/kaz__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/kaz__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "dagger",
+          "grip": [
+            278,
+            67
+          ],
+          "tip": [
+            374,
+            102
+          ],
+          "focus": [
+            374,
+            102
+          ],
+          "secondary": {
+            "grip": [
+              345,
+              285
+            ],
+            "tip": [
+              418,
+              346
+            ]
+          },
+          "measured": true
+        },
+        "strike": {
+          "kind": "dagger",
+          "grip": [
+            350,
+            255
+          ],
+          "tip": [
+            451,
+            266
+          ],
+          "focus": [
+            451,
+            266
+          ],
+          "measured": true,
+          "note": "앞으로 뻗은 손에 실제로 보이는 단검을 기준으로 지정했습니다."
+        },
+        "skill-a": {
+          "kind": "dagger",
+          "grip": [
+            271,
+            196
+          ],
+          "tip": [
+            369,
+            225
+          ],
+          "focus": [
+            369,
+            225
+          ],
+          "secondary": {
+            "grip": [
+              380,
+              340
+            ],
+            "tip": [
+              422,
+              414
+            ]
+          },
+          "measured": true
+        },
+        "skill-b": {
+          "kind": "dagger",
+          "grip": [
+            383,
+            249
+          ],
+          "tip": [
+            480,
+            246
+          ],
+          "focus": [
+            480,
+            246
+          ],
+          "measured": true
+        }
+      }
+    },
+    "leon__form0": {
+      "map": "/art/promotions-v1/map/leon__form0.webp",
+      "rear": "/art/promotions-v1/map/leon__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/leon__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/leon__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/leon__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/leon__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 65,
+          "top": 40,
+          "right": 189,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 68,
+          "top": 40,
+          "right": 187,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 66,
+          "top": 48,
+          "right": 317,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 64,
+          "top": 51,
+          "right": 319,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 63,
+          "top": 48,
+          "right": 321,
+          "bottom": 446
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 65,
+          "top": 57,
+          "right": 319,
+          "bottom": 447
+        }
+      }
+    },
+    "leon__form1": {
+      "map": "/art/promotions-v1/map/leon__form1.webp",
+      "rear": "/art/promotions-v1/map/leon__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/leon__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/leon__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/leon__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/leon__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 55,
+          "top": 40,
+          "right": 199,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 60,
+          "top": 40,
+          "right": 195,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 53,
+          "top": 48,
+          "right": 329,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 58,
+          "top": 51,
+          "right": 325,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 42,
+          "top": 49,
+          "right": 340,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 42,
+          "top": 47,
+          "right": 340,
+          "bottom": 447
+        }
+      }
+    },
+    "leon__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/leon__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/leon__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/leon__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/leon__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/leon__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/leon__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/leon__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/leon__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 155,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 173,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 24,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 208,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 162,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 161,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 90,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 186,
+          "bottom": 478
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/leon__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/leon__promoted.webp",
+      "map": "/art/promotions-v1/map/leon__promoted.webp",
+      "rear": "/art/promotions-v1/map/leon__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/leon__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/leon__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/leon__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/leon__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "spear",
+          "grip": [
+            282,
+            134
+          ],
+          "tip": [
+            90,
+            28
+          ],
+          "measured": true
+        },
+        "strike": {
+          "kind": "spear",
+          "grip": [
+            351,
+            340
+          ],
+          "tip": [
+            466,
+            418
+          ],
+          "measured": true
+        },
+        "skill-a": {
+          "kind": "spear",
+          "grip": [
+            335,
+            276
+          ],
+          "tip": [
+            334,
+            92
+          ],
+          "measured": true
+        },
+        "skill-b": {
+          "kind": "spear",
+          "grip": [
+            326,
+            282
+          ],
+          "tip": [
+            469,
+            237
+          ],
+          "measured": true
+        }
+      }
+    },
+    "lina__form0": {
+      "map": "/art/promotions-v1/map/lina__form0.webp",
+      "rear": "/art/promotions-v1/map/lina__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/lina__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/lina__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/lina__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/lina__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 29,
+          "top": 40,
+          "right": 225,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 55,
+          "top": 40,
+          "right": 200,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 16,
+          "top": 48,
+          "right": 368,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 16,
+          "top": 48,
+          "right": 366,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 33,
+          "top": 48,
+          "right": 349,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 25,
+          "top": 50,
+          "right": 358,
+          "bottom": 447
+        }
+      }
+    },
+    "lina__form1": {
+      "map": "/art/promotions-v1/map/lina__form1.webp",
+      "rear": "/art/promotions-v1/map/lina__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/lina__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/lina__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/lina__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/lina__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 42,
+          "top": 40,
+          "right": 213,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 56,
+          "top": 40,
+          "right": 199,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 21,
+          "top": 48,
+          "right": 363,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 35,
+          "top": 55,
+          "right": 347,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 34,
+          "top": 49,
+          "right": 349,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 33,
+          "top": 49,
+          "right": 351,
+          "bottom": 447
+        }
+      }
+    },
+    "lina__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/lina__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/lina__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/lina__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/lina__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/lina__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/lina__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/lina__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/lina__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 120,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 127,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 109,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 126,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 127,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 91,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/lina__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/lina__promoted.webp",
+      "map": "/art/promotions-v1/map/lina__promoted.webp",
+      "rear": "/art/promotions-v1/map/lina__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/lina__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/lina__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/lina__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/lina__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "bow",
+          "grip": [
+            385,
+            247
+          ],
+          "tip": [
+            407,
+            238
+          ],
+          "focus": [
+            386,
+            240
+          ],
+          "measured": true,
+          "bow": {
+            "upper": [
+              344,
+              110
+            ],
+            "lower": [
+              345,
+              380
+            ],
+            "path": "M344 110 C329 133 372 145 385 172 C401 199 385 225 385 247 C397 269 397 301 377 326 C359 343 339 357 345 380",
+            "arrowVisible": true
+          }
+        },
+        "strike": {
+          "kind": "bow",
+          "grip": [
+            403,
+            273
+          ],
+          "tip": [
+            429,
+            263
+          ],
+          "focus": [
+            403,
+            263
+          ],
+          "measured": true,
+          "bow": {
+            "upper": [
+              356,
+              126
+            ],
+            "lower": [
+              347,
+              389
+            ],
+            "path": "M356 126 C343 147 382 162 397 187 C414 210 408 246 403 273 C412 298 409 327 388 349 C369 364 350 372 347 389",
+            "arrowVisible": true
+          }
+        },
+        "skill-a": {
+          "kind": "bow",
+          "grip": [
+            390,
+            180
+          ],
+          "tip": [
+            334,
+            94
+          ],
+          "focus": [
+            390,
+            180
+          ],
+          "measured": true,
+          "bow": {
+            "upper": [
+              334,
+              94
+            ],
+            "lower": [
+              381,
+              323
+            ],
+            "path": "M334 94 C321 115 348 127 369 143 C385 154 398 160 390 180 C399 195 413 219 414 246 C417 274 397 300 381 323",
+            "arrowVisible": false
+          }
+        },
+        "skill-b": {
+          "kind": "bow",
+          "grip": [
+            414,
+            237
+          ],
+          "tip": [
+            435,
+            222
+          ],
+          "focus": [
+            414,
+            222
+          ],
+          "measured": true,
+          "bow": {
+            "upper": [
+              372,
+              103
+            ],
+            "lower": [
+              365,
+              365
+            ],
+            "path": "M372 103 C359 124 390 137 405 159 C424 184 417 211 414 237 C422 263 416 292 401 315 C384 335 366 343 365 365",
+            "arrowVisible": true
+          }
+        }
+      }
+    },
+    "luka__form0": {
+      "map": "/art/promotions-v1/map/luka__form0.webp",
+      "rear": "/art/promotions-v1/map/luka__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/luka__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/luka__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/luka__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/luka__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 34,
+          "top": 40,
+          "right": 221,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 31,
+          "top": 41,
+          "right": 224,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 65,
+          "right": 373,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 68,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 77,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 77,
+          "right": 372,
+          "bottom": 447
+        }
+      }
+    },
+    "luka__form1": {
+      "map": "/art/promotions-v1/map/luka__form1.webp",
+      "rear": "/art/promotions-v1/map/luka__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/luka__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/luka__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/luka__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/luka__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 29,
+          "top": 40,
+          "right": 225,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 33,
+          "top": 40,
+          "right": 222,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 81,
+          "right": 373,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 20,
+          "top": 84,
+          "right": 363,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 91,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 22,
+          "top": 93,
+          "right": 362,
+          "bottom": 447
+        }
+      }
+    },
+    "luka__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/luka__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/luka__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/luka__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/luka__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/luka__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/luka__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/luka__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/luka__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 171,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 174,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 127,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 187,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 139,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 177,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 203,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 118,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/luka__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/luka__promoted.webp",
+      "map": "/art/promotions-v1/map/luka__promoted.webp",
+      "rear": "/art/promotions-v1/map/luka__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/luka__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/luka__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/luka__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/luka__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "blade",
+          "grip": [
+            319,
+            199
+          ],
+          "tip": [
+            151,
+            130
+          ],
+          "focus": [
+            151,
+            130
+          ],
+          "measured": false,
+          "framePath": "public/art/promotions-v1/units/luka__promoted-windup.webp",
+          "frameSha256": "dd685d481896f631883e51ab04356d1a6cacf463f5fd235bcb2f810ecf84d32f",
+          "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+        },
+        "strike": {
+          "kind": "blade",
+          "grip": [
+            294,
+            278
+          ],
+          "tip": [
+            429,
+            246
+          ],
+          "focus": [
+            429,
+            246
+          ],
+          "measured": false,
+          "framePath": "public/art/promotions-v1/units/luka__promoted-strike.webp",
+          "frameSha256": "0959284bf0e2cdf3154d69b09ac2572d32d47b41696189d7e7878f20b543b5cc",
+          "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+        },
+        "skill-a": {
+          "kind": "blade",
+          "grip": [
+            337,
+            298
+          ],
+          "tip": [
+            486,
+            273
+          ],
+          "focus": [
+            486,
+            273
+          ],
+          "measured": false,
+          "framePath": "public/art/promotions-v1/units/luka__promoted-skill-a.webp",
+          "frameSha256": "7640b9e02c7b0e45c4ba9860d19600109f149ffbd5c5c69402ef756de1b57f8e",
+          "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+        },
+        "skill-b": {
+          "kind": "blade",
+          "grip": [
+            177,
+            278
+          ],
+          "tip": [
+            201,
+            124
+          ],
+          "focus": [
+            201,
+            124
+          ],
+          "measured": false,
+          "framePath": "public/art/promotions-v1/units/luka__promoted-skill-b.webp",
+          "frameSha256": "1a9b030417c3029e0f3927198f65d49287b514b89b4689ef05ef698b708a4b46",
+          "reviewMethod": "최종 512px 원화에서 검을 쥔 손 중심과 검날 끝을 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+        }
+      }
+    },
+    "mare__form0": {
+      "map": "/art/promotions-v1/map/mare__form0.webp",
+      "rear": "/art/promotions-v1/map/mare__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/mare__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/mare__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/mare__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/mare__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 24,
+          "top": 40,
+          "right": 231,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 28,
+          "top": 40,
+          "right": 226,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 119,
+          "right": 373,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 30,
+          "top": 118,
+          "right": 352,
+          "bottom": 446
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 69,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 13,
+          "top": 69,
+          "right": 370,
+          "bottom": 447
+        }
+      }
+    },
+    "mare__form1": {
+      "map": "/art/promotions-v1/map/mare__form1.webp",
+      "rear": "/art/promotions-v1/map/mare__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/mare__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/mare__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/mare__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/mare__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 19,
+          "top": 40,
+          "right": 235,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 37,
+          "top": 40,
+          "right": 217,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 127,
+          "right": 372,
+          "bottom": 446
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 21,
+          "top": 124,
+          "right": 361,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 61,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 13,
+          "top": 61,
+          "right": 369,
+          "bottom": 447
+        }
+      }
+    },
+    "mare__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/mare__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/mare__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/mare__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/mare__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/mare__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/mare__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/mare__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/mare__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 157,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 165,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 53,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 186,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 102,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 125,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 111,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 110,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/mare__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/mare__promoted.webp",
+      "map": "/art/promotions-v1/map/mare__promoted.webp",
+      "rear": "/art/promotions-v1/map/mare__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/mare__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/mare__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/mare__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/mare__promoted-back-b.webp"
+      },
+      "sourceCorrections": {
+        "windup": {
+          "sourcePath": "docs/art/promotions-v1/sources/mare__promoted-windup-correction.webp",
+          "sha256": "910b527c30434682800584905e8889b9ad4654b287c4493ea20c13a93e8f0a57",
+          "sourceBounds": {
+            "left": 207,
+            "top": 148,
+            "right": 1123,
+            "bottom": 1092
+          },
+          "normalization": 0.364021164021164,
+          "targetHeight": 344
+        }
+      },
+      "anchors": {
+        "windup": {
+          "kind": "spear",
+          "grip": [
+            240,
+            121
+          ],
+          "tip": [
+            83,
+            86
+          ],
+          "focus": [
+            83,
+            86
+          ],
+          "measured": true
+        },
+        "strike": {
+          "kind": "spear",
+          "grip": [
+            311,
+            289
+          ],
+          "tip": [
+            456,
+            263
+          ],
+          "focus": [
+            456,
+            263
+          ],
+          "measured": true
+        },
+        "skill-a": {
+          "kind": "spear",
+          "grip": [
+            369,
+            266
+          ],
+          "tip": [
+            407,
+            114
+          ],
+          "focus": [
+            407,
+            114
+          ],
+          "measured": true
+        },
+        "skill-b": {
+          "kind": "spear",
+          "grip": [
+            377,
+            274
+          ],
+          "tip": [
+            406,
+            113
+          ],
+          "focus": [
+            406,
+            113
+          ],
+          "measured": true
+        }
+      }
+    },
+    "miho__form0": {
+      "map": "/art/promotions-v1/map/miho__form0.webp",
+      "rear": "/art/promotions-v1/map/miho__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/miho__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/miho__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/miho__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/miho__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 47,
+          "top": 40,
+          "right": 207,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 49,
+          "top": 40,
+          "right": 206,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 26,
+          "top": 48,
+          "right": 358,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 27,
+          "top": 52,
+          "right": 356,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 17,
+          "top": 48,
+          "right": 365,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 41,
+          "top": 47,
+          "right": 342,
+          "bottom": 447
+        }
+      }
+    },
+    "miho__form1": {
+      "map": "/art/promotions-v1/map/miho__form1.webp",
+      "rear": "/art/promotions-v1/map/miho__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/miho__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/miho__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/miho__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/miho__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 42,
+          "top": 40,
+          "right": 212,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 43,
+          "top": 40,
+          "right": 212,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 22,
+          "top": 48,
+          "right": 362,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 28,
+          "top": 47,
+          "right": 354,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 15,
+          "top": 48,
+          "right": 367,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 18,
+          "top": 48,
+          "right": 364,
+          "bottom": 447
+        }
+      }
+    },
+    "miho__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/miho__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/miho__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/miho__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/miho__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/miho__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/miho__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/miho__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/miho__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 91,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 101,
+          "bottom": 478
+        },
+        "windup": {
+          "height": 512,
+          "top": 110,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 119,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 115,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 78,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 103,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/miho__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/miho__promoted.webp",
+      "map": "/art/promotions-v1/map/miho__promoted.webp",
+      "rear": "/art/promotions-v1/map/miho__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/miho__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/miho__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/miho__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/miho__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "focus",
+          "grip": [
+            166,
+            211
+          ],
+          "tip": [
+            177,
+            152
+          ],
+          "focus": [
+            173,
+            177
+          ],
+          "measured": true
+        },
+        "strike": {
+          "kind": "focus",
+          "grip": [
+            397,
+            263
+          ],
+          "tip": [
+            438,
+            237
+          ],
+          "focus": [
+            420,
+            251
+          ],
+          "measured": true
+        },
+        "skill-a": {
+          "kind": "focus",
+          "grip": [
+            301,
+            267
+          ],
+          "tip": [
+            305,
+            225
+          ],
+          "focus": [
+            303,
+            246
+          ],
+          "measured": true,
+          "note": "부적 대신 합장한 양손에 집중하는 자세이므로 손끝과 손바닥을 기준으로 지정했습니다."
+        },
+        "skill-b": {
+          "kind": "focus",
+          "grip": [
+            390,
+            189
+          ],
+          "tip": [
+            424,
+            157
+          ],
+          "focus": [
+            419,
+            178
+          ],
+          "secondary": {
+            "grip": [
+              143,
+              273
+            ],
+            "tip": [
+              114,
+              256
+            ]
+          },
+          "measured": true
+        }
+      }
+    },
+    "noah__form0": {
+      "map": "/art/promotions-v1/map/noah__form0.webp",
+      "rear": "/art/promotions-v1/map/noah__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/noah__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/noah__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/noah__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/noah__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 68,
+          "top": 40,
+          "right": 187,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 69,
+          "top": 40,
+          "right": 186,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 56,
+          "top": 48,
+          "right": 326,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 66,
+          "top": 52,
+          "right": 317,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 65,
+          "top": 48,
+          "right": 318,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 65,
+          "top": 42,
+          "right": 318,
+          "bottom": 447
+        }
+      }
+    },
+    "noah__form1": {
+      "map": "/art/promotions-v1/map/noah__form1.webp",
+      "rear": "/art/promotions-v1/map/noah__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/noah__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/noah__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/noah__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/noah__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 65,
+          "top": 40,
+          "right": 190,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 65,
+          "top": 40,
+          "right": 189,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 33,
+          "top": 48,
+          "right": 351,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 40,
+          "top": 50,
+          "right": 341,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 63,
+          "top": 49,
+          "right": 321,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 49,
+          "top": 53,
+          "right": 334,
+          "bottom": 447
+        }
+      }
+    },
+    "noah__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/noah__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/noah__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/noah__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/noah__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/noah__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/noah__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/noah__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/noah__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 108,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 110,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 118,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 135,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 107,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 110,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 125,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/noah__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/noah__promoted.webp",
+      "map": "/art/promotions-v1/map/noah__promoted.webp",
+      "rear": "/art/promotions-v1/map/noah__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/noah__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/noah__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/noah__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/noah__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "focus",
+          "grip": [
+            328,
+            274
+          ],
+          "tip": [
+            331,
+            243
+          ],
+          "focus": [
+            331,
+            243
+          ],
+          "bookCenter": [
+            331,
+            243
+          ],
+          "measured": true
+        },
+        "strike": {
+          "kind": "focus",
+          "grip": [
+            398,
+            226
+          ],
+          "tip": [
+            430,
+            204
+          ],
+          "focus": [
+            430,
+            213
+          ],
+          "bookCenter": [
+            333,
+            287
+          ],
+          "measured": true
+        },
+        "skill-a": {
+          "kind": "focus",
+          "grip": [
+            326,
+            255
+          ],
+          "tip": [
+            330,
+            225
+          ],
+          "focus": [
+            330,
+            225
+          ],
+          "bookCenter": [
+            330,
+            225
+          ],
+          "measured": true
+        },
+        "skill-b": {
+          "kind": "focus",
+          "grip": [
+            386,
+            218
+          ],
+          "tip": [
+            427,
+            198
+          ],
+          "focus": [
+            418,
+            213
+          ],
+          "bookCenter": [
+            311,
+            274
+          ],
+          "measured": true
+        }
+      }
+    },
+    "rakan__form0": {
+      "map": "/art/promotions-v1/map/rakan__form0.webp",
+      "rear": "/art/promotions-v1/map/rakan__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/rakan__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/rakan__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/rakan__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/rakan__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 29,
+          "top": 40,
+          "right": 226,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 42,
+          "top": 40,
+          "right": 213,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 76,
+          "right": 373,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 31,
+          "top": 75,
+          "right": 352,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 66,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 28,
+          "top": 64,
+          "right": 355,
+          "bottom": 447
+        }
+      }
+    },
+    "rakan__form1": {
+      "map": "/art/promotions-v1/map/rakan__form1.webp",
+      "rear": "/art/promotions-v1/map/rakan__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/rakan__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/rakan__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/rakan__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/rakan__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 27,
+          "top": 40,
+          "right": 228,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 41,
+          "top": 41,
+          "right": 214,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 77,
+          "right": 373,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 19,
+          "top": 74,
+          "right": 363,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 18,
+          "top": 49,
+          "right": 364,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 23,
+          "top": 49,
+          "right": 361,
+          "bottom": 447
+        }
+      }
+    },
+    "rakan__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/rakan__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/rakan__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/rakan__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/rakan__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/rakan__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/rakan__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/rakan__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/rakan__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 90,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 96,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 26,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 114,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 106,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 98,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 105,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/rakan__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/rakan__promoted.webp",
+      "map": "/art/promotions-v1/map/rakan__promoted.webp",
+      "rear": "/art/promotions-v1/map/rakan__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/rakan__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/rakan__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/rakan__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/rakan__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "axe",
+          "grip": [
+            249,
+            48
+          ],
+          "tip": [
+            82,
+            140
+          ],
+          "focus": [
+            133,
+            94
+          ],
+          "measured": true
+        },
+        "strike": {
+          "kind": "axe",
+          "grip": [
+            314,
+            311
+          ],
+          "tip": [
+            418,
+            476
+          ],
+          "focus": [
+            400,
+            406
+          ],
+          "measured": true
+        },
+        "skill-a": {
+          "kind": "axe",
+          "grip": [
+            187,
+            310
+          ],
+          "tip": [
+            414,
+            477
+          ],
+          "focus": [
+            394,
+            402
+          ],
+          "fistCenter": [
+            395,
+            269
+          ],
+          "measured": true
+        },
+        "skill-b": {
+          "kind": "axe",
+          "grip": [
+            343,
+            292
+          ],
+          "tip": [
+            450,
+            433
+          ],
+          "focus": [
+            439,
+            366
+          ],
+          "measured": true
+        }
+      }
+    },
+    "sera__form0": {
+      "map": "/art/promotions-v1/map/sera__form0.webp",
+      "rear": "/art/promotions-v1/map/sera__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/sera__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/sera__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/sera__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/sera__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 47,
+          "top": 40,
+          "right": 208,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 52,
+          "top": 40,
+          "right": 202,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 36,
+          "top": 49,
+          "right": 346,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 45,
+          "top": 48,
+          "right": 338,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 42,
+          "top": 48,
+          "right": 342,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 45,
+          "top": 52,
+          "right": 338,
+          "bottom": 447
+        }
+      }
+    },
+    "sera__form1": {
+      "map": "/art/promotions-v1/map/sera__form1.webp",
+      "rear": "/art/promotions-v1/map/sera__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/sera__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/sera__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/sera__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/sera__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 48,
+          "top": 40,
+          "right": 206,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 50,
+          "top": 40,
+          "right": 205,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 27,
+          "top": 48,
+          "right": 355,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 27,
+          "top": 50,
+          "right": 356,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 34,
+          "top": 48,
+          "right": 348,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 35,
+          "top": 55,
+          "right": 349,
+          "bottom": 447
+        }
+      }
+    },
+    "sera__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/sera__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/sera__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/sera__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/sera__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/sera__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/sera__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/sera__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/sera__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 96,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 120,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 127,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 113,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 116,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 138,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/sera__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/sera__promoted.webp",
+      "map": "/art/promotions-v1/map/sera__promoted.webp",
+      "rear": "/art/promotions-v1/map/sera__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/sera__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/sera__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/sera__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/sera__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "dagger",
+          "grip": [
+            251,
+            124
+          ],
+          "tip": [
+            152,
+            114
+          ],
+          "secondary": {
+            "grip": [
+              385,
+              339
+            ],
+            "tip": [
+              439,
+              400
+            ]
+          },
+          "measured": true
+        },
+        "strike": {
+          "kind": "dagger",
+          "grip": [
+            349,
+            317
+          ],
+          "tip": [
+            437,
+            366
+          ],
+          "secondary": {
+            "grip": [
+              159,
+              239
+            ],
+            "tip": [
+              76,
+              255
+            ]
+          },
+          "measured": true
+        },
+        "skill-a": {
+          "kind": "dagger",
+          "grip": [
+            347,
+            255
+          ],
+          "tip": [
+            419,
+            179
+          ],
+          "secondary": {
+            "grip": [
+              344,
+              322
+            ],
+            "tip": [
+              414,
+              382
+            ]
+          },
+          "measured": true
+        },
+        "skill-b": {
+          "kind": "dagger",
+          "grip": [
+            384,
+            354
+          ],
+          "tip": [
+            441,
+            433
+          ],
+          "secondary": {
+            "grip": [
+              389,
+              251
+            ],
+            "tip": [
+              440,
+              316
+            ]
+          },
+          "measured": true
+        }
+      }
+    },
+    "sylvan__form0": {
+      "map": "/art/promotions-v1/map/sylvan__form0.webp",
+      "rear": "/art/promotions-v1/map/sylvan__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/sylvan__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/sylvan__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/sylvan__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/sylvan__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 34,
+          "top": 40,
+          "right": 221,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 42,
+          "top": 40,
+          "right": 212,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 99,
+          "right": 373,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 20,
+          "top": 97,
+          "right": 362,
+          "bottom": 446
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 83,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 15,
+          "top": 84,
+          "right": 369,
+          "bottom": 447
+        }
+      }
+    },
+    "sylvan__form1": {
+      "map": "/art/promotions-v1/map/sylvan__form1.webp",
+      "rear": "/art/promotions-v1/map/sylvan__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/sylvan__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/sylvan__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/sylvan__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/sylvan__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 26,
+          "top": 40,
+          "right": 229,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 33,
+          "top": 40,
+          "right": 222,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 105,
+          "right": 373,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 22,
+          "top": 106,
+          "right": 362,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 89,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 18,
+          "top": 89,
+          "right": 364,
+          "bottom": 447
+        }
+      }
+    },
+    "sylvan__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/sylvan__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/sylvan__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/sylvan__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/sylvan__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/sylvan__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/sylvan__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/sylvan__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/sylvan__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 148,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 159,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 93,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 194,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 101,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 149,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 96,
+          "bottom": 478
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 109,
+          "bottom": 478
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/sylvan__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/sylvan__promoted.webp",
+      "map": "/art/promotions-v1/map/sylvan__promoted.webp",
+      "rear": "/art/promotions-v1/map/sylvan__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/sylvan__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/sylvan__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/sylvan__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/sylvan__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "staff",
+          "grip": [
+            222,
+            159
+          ],
+          "tip": [
+            352,
+            132
+          ],
+          "focus": [
+            352,
+            132
+          ],
+          "measured": true
+        },
+        "strike": {
+          "kind": "staff",
+          "grip": [
+            310,
+            278
+          ],
+          "tip": [
+            419,
+            245
+          ],
+          "focus": [
+            419,
+            245
+          ],
+          "measured": true
+        },
+        "skill-a": {
+          "kind": "staff",
+          "grip": [
+            302,
+            242
+          ],
+          "tip": [
+            344,
+            142
+          ],
+          "focus": [
+            344,
+            142
+          ],
+          "measured": true
+        },
+        "skill-b": {
+          "kind": "staff",
+          "grip": [
+            166,
+            270
+          ],
+          "tip": [
+            141,
+            166
+          ],
+          "focus": [
+            141,
+            166
+          ],
+          "measured": true
+        }
+      }
+    },
+    "teo__form0": {
+      "map": "/art/promotions-v1/map/teo__form0.webp",
+      "rear": "/art/promotions-v1/map/teo__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/teo__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/teo__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/teo__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/teo__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 50,
+          "top": 41,
+          "right": 205,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 39,
+          "top": 40,
+          "right": 216,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 20,
+          "top": 50,
+          "right": 362,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 24,
+          "top": 52,
+          "right": 358,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 13,
+          "top": 48,
+          "right": 369,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 19,
+          "top": 47,
+          "right": 363,
+          "bottom": 447
+        }
+      }
+    },
+    "teo__form1": {
+      "map": "/art/promotions-v1/map/teo__form1.webp",
+      "rear": "/art/promotions-v1/map/teo__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/teo__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/teo__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/teo__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/teo__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 44,
+          "top": 40,
+          "right": 210,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 40,
+          "top": 40,
+          "right": 215,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 26,
+          "top": 49,
+          "right": 357,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 22,
+          "top": 50,
+          "right": 361,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 12,
+          "top": 48,
+          "right": 371,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 24,
+          "top": 48,
+          "right": 360,
+          "bottom": 447
+        }
+      }
+    },
+    "teo__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/teo__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/teo__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/teo__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/teo__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/teo__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/teo__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/teo__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/teo__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 119,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 133,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 98,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 84,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 136,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 93,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 85,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/teo__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/teo__promoted.webp",
+      "map": "/art/promotions-v1/map/teo__promoted.webp",
+      "rear": "/art/promotions-v1/map/teo__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/teo__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/teo__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/teo__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/teo__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "bow",
+          "grip": [
+            409,
+            263
+          ],
+          "tip": [
+            419,
+            247
+          ],
+          "focus": [
+            408,
+            247
+          ],
+          "measured": true,
+          "bow": {
+            "upper": [
+              354,
+              101
+            ],
+            "lower": [
+              366,
+              393
+            ],
+            "path": "M354 101 C337 122 368 142 387 166 C404 187 408 220 409 263 C412 298 405 325 388 350 C374 367 360 378 366 393",
+            "arrowVisible": true
+          }
+        },
+        "strike": {
+          "kind": "bow",
+          "grip": [
+            386,
+            264
+          ],
+          "tip": [
+            419,
+            247
+          ],
+          "focus": [
+            386,
+            247
+          ],
+          "measured": true,
+          "bow": {
+            "upper": [
+              332,
+              87
+            ],
+            "lower": [
+              386,
+              432
+            ],
+            "path": "M332 87 C312 112 345 133 365 160 C383 188 383 224 386 264 C387 303 374 342 353 366 C333 388 372 398 386 432",
+            "arrowVisible": true
+          }
+        },
+        "skill-a": {
+          "kind": "bow",
+          "grip": [
+            388,
+            257
+          ],
+          "tip": [
+            440,
+            241
+          ],
+          "focus": [
+            387,
+            241
+          ],
+          "measured": true,
+          "bow": {
+            "upper": [
+              323,
+              93
+            ],
+            "lower": [
+              400,
+              414
+            ],
+            "path": "M323 93 C306 111 343 133 361 156 C383 181 387 219 388 257 C387 291 379 325 357 350 C337 375 384 388 400 414",
+            "arrowVisible": true
+          }
+        },
+        "skill-b": {
+          "kind": "bow",
+          "grip": [
+            396,
+            245
+          ],
+          "tip": [
+            431,
+            226
+          ],
+          "focus": [
+            396,
+            228
+          ],
+          "measured": true,
+          "bow": {
+            "upper": [
+              337,
+              89
+            ],
+            "lower": [
+              354,
+              378
+            ],
+            "path": "M337 89 C319 110 355 133 375 157 C394 179 399 211 396 245 C398 277 387 310 369 334 C355 350 347 366 354 378",
+            "arrowVisible": true
+          }
+        }
+      }
+    },
+    "yuna__form0": {
+      "map": "/art/promotions-v1/map/yuna__form0.webp",
+      "rear": "/art/promotions-v1/map/yuna__form0-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/yuna__form0-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/yuna__form0-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/yuna__form0-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/yuna__form0-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 37,
+          "top": 40,
+          "right": 217,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 39,
+          "top": 40,
+          "right": 216,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 14,
+          "top": 48,
+          "right": 368,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 14,
+          "top": 43,
+          "right": 368,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 61,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 11,
+          "top": 56,
+          "right": 372,
+          "bottom": 447
+        }
+      }
+    },
+    "yuna__form1": {
+      "map": "/art/promotions-v1/map/yuna__form1.webp",
+      "rear": "/art/promotions-v1/map/yuna__form1-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/yuna__form1-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/yuna__form1-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/yuna__form1-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/yuna__form1-back-b.webp"
+      },
+      "mapMetrics": {
+        "map": {
+          "width": 256,
+          "height": 256,
+          "left": 31,
+          "top": 40,
+          "right": 224,
+          "bottom": 239
+        },
+        "rear": {
+          "width": 256,
+          "height": 256,
+          "left": 35,
+          "top": 40,
+          "right": 219,
+          "bottom": 239
+        }
+      },
+      "walkMetrics": {
+        "front-a": {
+          "width": 384,
+          "height": 480,
+          "left": 16,
+          "top": 74,
+          "right": 367,
+          "bottom": 447
+        },
+        "front-b": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 78,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-a": {
+          "width": 384,
+          "height": 480,
+          "left": 10,
+          "top": 82,
+          "right": 373,
+          "bottom": 447
+        },
+        "back-b": {
+          "width": 384,
+          "height": 480,
+          "left": 15,
+          "top": 81,
+          "right": 368,
+          "bottom": 447
+        }
+      }
+    },
+    "yuna__promoted": {
+      "motion": {
+        "run-a": "/art/promotions-v1/units/yuna__promoted-run-a.webp",
+        "run-b": "/art/promotions-v1/units/yuna__promoted-run-b.webp",
+        "windup": "/art/promotions-v1/units/yuna__promoted-windup.webp",
+        "strike": "/art/promotions-v1/units/yuna__promoted-strike.webp",
+        "recover": "/art/promotions-v1/units/yuna__promoted-recover.webp",
+        "recoil": "/art/promotions-v1/units/yuna__promoted-recoil.webp",
+        "skill-a": "/art/promotions-v1/units/yuna__promoted-skill-a.webp",
+        "skill-b": "/art/promotions-v1/units/yuna__promoted-skill-b.webp"
+      },
+      "metrics": {
+        "run-a": {
+          "height": 512,
+          "top": 119,
+          "bottom": 479
+        },
+        "run-b": {
+          "height": 512,
+          "top": 121,
+          "bottom": 479
+        },
+        "windup": {
+          "height": 512,
+          "top": 90,
+          "bottom": 479
+        },
+        "strike": {
+          "height": 512,
+          "top": 113,
+          "bottom": 479
+        },
+        "recover": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        },
+        "recoil": {
+          "height": 512,
+          "top": 144,
+          "bottom": 479
+        },
+        "skill-a": {
+          "height": 512,
+          "top": 91,
+          "bottom": 479
+        },
+        "skill-b": {
+          "height": 512,
+          "top": 100,
+          "bottom": 479
+        }
+      },
+      "portrait": "/art/promotions-v1/portraits/yuna__promoted.webp",
+      "dialogue": "/art/promotions-v1/dialogue/yuna__promoted.webp",
+      "map": "/art/promotions-v1/map/yuna__promoted.webp",
+      "rear": "/art/promotions-v1/map/yuna__promoted-back.webp",
+      "walk": {
+        "front-a": "/art/promotions-v1/walk/yuna__promoted-front-a.webp",
+        "front-b": "/art/promotions-v1/walk/yuna__promoted-front-b.webp",
+        "back-a": "/art/promotions-v1/walk/yuna__promoted-back-a.webp",
+        "back-b": "/art/promotions-v1/walk/yuna__promoted-back-b.webp"
+      },
+      "anchors": {
+        "windup": {
+          "kind": "focus",
+          "grip": [
+            311,
+            185
+          ],
+          "tip": [
+            244,
+            117
+          ],
+          "focus": [
+            244,
+            117
+          ],
+          "measured": true
+        },
+        "strike": {
+          "kind": "focus",
+          "grip": [
+            317,
+            210
+          ],
+          "tip": [
+            411,
+            156
+          ],
+          "focus": [
+            411,
+            156
+          ],
+          "measured": true
+        },
+        "skill-a": {
+          "kind": "focus",
+          "grip": [
+            300,
+            236
+          ],
+          "tip": [
+            310,
+            129
+          ],
+          "focus": [
+            310,
+            129
+          ],
+          "measured": true
+        },
+        "skill-b": {
+          "kind": "focus",
+          "grip": [
+            174,
+            226
+          ],
+          "tip": [
+            145,
+            135
+          ],
+          "focus": [
+            145,
+            135
+          ],
+          "measured": true
+        }
+      }
+    }
+  }
+}

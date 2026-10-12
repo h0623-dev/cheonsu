@@ -1,0 +1,6 @@
+{
+  "windup": { "kind": "blade", "grip": [298, 178], "tip": [188, 113], "measured": true },
+  "strike": { "kind": "blade", "grip": [379, 261], "tip": [123, 166], "measured": true },
+  "skill-a": { "kind": "blade", "grip": [336, 302], "tip": [489, 313], "measured": true },
+  "skill-b": { "kind": "blade", "grip": [289, 259], "tip": [318, 116], "measured": true }
+}

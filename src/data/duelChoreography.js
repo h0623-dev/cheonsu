@@ -1,4 +1,5 @@
 import { getSkill } from './skills.js';
+import { getExpansionArtIdentity } from './expansionArtRegistry.js';
 import skillArt from '../../public/art/skills-v1/manifest.json' with { type: 'json' };
 
 // One timeline drives the actor, projectiles, contact, health and audio. Extra strikes are visual only.
@@ -110,7 +111,7 @@ const motions={
 };
 
 export function getWeaponMotion(key,presentation){
-  const canonicalKey = String(key).split('__form')[0];
+  const canonicalKey = getExpansionArtIdentity(key)?.baseId || key;
   if (Object.hasOwn(basicMotions, presentation.weapon)) return presentation.weapon;
   if(presentation.style==='cast')return 'cast';
   if(presentation.style==='ranged')return canonicalKey==='siege_gunner'?'cannon':'bow';
@@ -154,7 +155,7 @@ function derivedSkillDirection(spec, weapon, presentation) {
 
 export function getDuelPlan(key,scene,presentation,weapon){
   const skill=scene.mode==='skill'||presentation.support;
-  const canonicalKey = scene.attacker?.id && scene.attacker?.type === 'ally' ? scene.attacker.id : String(key).split('__form')[0];
+  const canonicalKey = scene.attacker?.id && scene.attacker?.type === 'ally' ? scene.attacker.id : getExpansionArtIdentity(key)?.baseId || key;
   const ally = scene.attacker?.type==='ally'||(!scene.attacker?.type&&getSkill({id:canonicalKey}));
   const rawSpec=ally ? getSkill({...scene.attacker,id:canonicalKey},scene.attacker?.activeSkillId||scene.attacker?.skillSpec?.id) : scene.attacker?.skillSpec || null;
   const spec = rawSpec ? { ...rawSpec, id: rawSpec.id || `${canonicalKey}-skill` } : null;

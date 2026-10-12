@@ -5,7 +5,8 @@ import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 import react from '@vitejs/plugin-react';
 import { build, preview } from 'vite';
-import { combatUnitIds, getCombatChoreography } from '../src/data/combatArt.js';
+import { combatArtKeys, getCombatChoreography } from '../src/data/combatArt.js';
+import { getExpansionArtIdentity } from '../src/data/expansionArtRegistry.js';
 import { CHARACTER_SKILLS } from '../src/data/skills.js';
 import { ADVANCED_CLASSES } from '../src/data/advancedClasses.js';
 import { getDuelWeaponAnchor } from '../src/data/duelContactGeometry.js';
@@ -22,7 +23,7 @@ let server, fixtureServer, browser;
 await fs.mkdir(output, { recursive: true });
 
 function propsFor(key, mode = 'attack', extra = {}) {
-  const canonical = key.split('__form')[0], form = ADVANCED_CLASSES[canonical]?.find(value => value.id === key);
+  const canonical = getExpansionArtIdentity(key)?.baseId || key, form = ADVANCED_CLASSES[canonical]?.find(value => value.id === key);
   const spec = form?.skill || CHARACTER_SKILLS[canonical]?.[0];
   return productionDuelProps(key, mode === 'skill' ? spec : null, 2, { ...extra, mode });
 }
@@ -165,7 +166,7 @@ try {
   fixtureServer = await preview({ root, configFile: false, build: { outDir: fixtureOut }, preview: { host: '127.0.0.1', port: 0, open: false } });
   const fixtureBase = `http://127.0.0.1:${fixtureServer.httpServer.address().port}`;
   browser = await chromium.launch(qaBrowserOptions());
-  const allKeys = [...new Set([...combatUnitIds, ...Object.values(ADVANCED_CLASSES).flat().map(form => form.id)])];
+  const allKeys = [...new Set(combatArtKeys)];
   const requested = process.env.CHEONSU_DUEL_QA_KEYS?.split(',').filter(Boolean);
   if (requested) assert.ok(requested.every(key => allKeys.includes(key)), '검사 대상은 실제 등록된 전투 아트여야 합니다');
   const keys = requested ? [...new Set(requested)] : allKeys;

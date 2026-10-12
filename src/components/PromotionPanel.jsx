@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { DISCOVERIES, DISCOVERY_TECHNIQUES } from '../data/discoveries.js';
 import { getSkill, skillDescription } from '../data/skills.js';
 import { getPaintedVisualProfile } from '../data/unitVisuals.js';
+import { getGameCharacterArtKey } from '../data/expansionArtRegistry.js';
 import { canPromoteUnit, getOrdinaryPromotionPreview, getPromotionCost, getPromotionTitle } from '../engine/ordinaryPromotion.js';
 import { canSecretPromote, getSecretPromotion, getSecretPromotionPreview } from '../engine/discoveryEngine.js';
 import {
@@ -12,6 +13,21 @@ import {
 import './advanced-promotion.css';
 
 const statLabels = [['hp', '최대 HP'], ['atk', '공격'], ['def', '방어'], ['move', '이동']];
+const appearanceViews = [['map', '대기'], ['battle', '전투'], ['cutscene', '대화']];
+
+function PromotionAppearance({ before, after, beforeLabel = '현재 모습', afterLabel, view }) {
+  const viewLabel = appearanceViews.find(([key]) => key === view)?.[1] || '전투';
+  return <div className="promotion-appearance-comparison" aria-label={`${afterLabel} ${viewLabel} 외형 비교`}>
+    {[[before, beforeLabel], [after, afterLabel]].map(([member, label], index) => {
+      const key = getGameCharacterArtKey(member) || member.id;
+      const art = getPaintedVisualProfile(key);
+      return <figure key={index} data-promotion-appearance={key}>
+        <img src={art?.[view] || art?.battle} alt={`${member.name} · ${label} · ${viewLabel} 모습`} loading="lazy" />
+        <figcaption>{label}</figcaption>
+      </figure>;
+    })}
+  </div>;
+}
 
 function skillReachText(skill) {
   const maximum = skill.range ?? skill.radius ?? 0;
@@ -45,6 +61,7 @@ export default function PromotionPanel({
 }) {
   const [selectedUnitId, setSelectedUnitId] = useState(party[0]?.id);
   const [previewId, setPreviewId] = useState(null);
+  const [appearanceView, setAppearanceView] = useState('battle');
   const detailsRef = useRef(null);
   const unit = party.find(candidate => candidate.id === selectedUnitId) || party[0];
   const seals = getAdvancedSealBalance(party, clearedStages);
@@ -68,7 +85,7 @@ export default function PromotionPanel({
       <div className="battle-title">전직</div>
       <strong>{gold.toLocaleString()}G · 전직인장 {seals.available}개</strong>
     </header>
-    <p className="result-sub">동료를 선택하고 능력치와 기술을 비교하세요. 장비·장비 강화·성장·습득 기술은 유지됩니다.</p>
+    <p className="result-sub">동료를 선택하고 전직할 모습·능력치·기술을 비교하세요. 장비·장비 강화·성장·습득 기술은 유지됩니다.</p>
 
     <div className="promotion-unit-picker" role="group" aria-label="전직할 동료 선택">
       {party.map(member => <button key={member.id} type="button" data-promotion-unit={member.id}
@@ -86,9 +103,16 @@ export default function PromotionPanel({
           <img src={getPortrait(unit)} alt={unit.name} />
           <div><strong>{unit.name} Lv.{unit.level || 1}</strong><span>현재 병과 · {getDisplayClass(unit)}</span></div>
         </div>
+        <div className="promotion-appearance-views" role="group" aria-label="전직 외형 보기">
+          {appearanceViews.map(([key, label]) => <button key={key} type="button" aria-pressed={appearanceView === key} onClick={() => setAppearanceView(key)}>{label} 모습</button>)}
+        </div>
 
         <section className="promotion-route" aria-label="상급 전직">
           <div className="promotion-route-heading"><h3>상급 전직 · {getPromotionTitle(unit)}</h3><span>{unit.promoted ? '완료' : '첫 전직'}</span></div>
+          <PromotionAppearance before={{ ...unit, promoted: false, secretClass: null, advancedClass: null }}
+            after={{ ...unit, promoted: true, secretClass: null, advancedClass: null }}
+            beforeLabel="기본 모습" afterLabel={getPromotionTitle(unit)} view={appearanceView} />
+          {unit.promoted && <p className="promotion-preserve-note">기본·상급 전직 단계의 외형 비교입니다. 현재 전직은 유지됩니다.</p>}
           <p>Lv.3부터 선택할 수 있습니다. 최대 HP +5 · 공격 +2 · 방어 +2 · 공격 기술 위력 +1.</p>
           <PromotionStats preview={getOrdinaryPromotionPreview(unit)} label="상급 전직" />
           <div className="promotion-footer">
@@ -99,6 +123,10 @@ export default function PromotionPanel({
 
         {secret && <section className="promotion-route promotion-secret-route" aria-label="비전 전직">
           <div className="promotion-route-heading"><h3>비전 전직 · {secret.classTitle}</h3><span>{unit.secretClass ? '완료' : '유물 전직'}</span></div>
+          <PromotionAppearance before={unit.secretClass && !unit.advancedClass ? { ...unit, secretClass: null } : unit}
+            after={{ ...unit, promoted: true, secretClass: secret.secretClass }}
+            beforeLabel={unit.secretClass && !unit.advancedClass ? '상급 전직 모습' : '현재 모습'}
+            afterLabel={unit.advancedClass ? '최상위 외형 유지' : secret.classTitle} view={appearanceView} />
           <div className="promotion-requirements">
             <Requirement met={unit.level >= secret.requiredLevel}>Lv.{secret.requiredLevel} 이상</Requirement>
             <Requirement met={secret.hasRelic || Boolean(unit.secretClass)}>{unit.secretClass ? '유물 사용 완료' : '전용 유물 보유'}</Requirement>
@@ -107,7 +135,7 @@ export default function PromotionPanel({
           {secretSkill && <p><strong>전용 기술 · {secretSkill.name}</strong><br />{skillDescription(secretSkill, unit.skillLevel || 0)}<br />{skillReachText(secretSkill)}</p>}
           <PromotionStats preview={getSecretPromotionPreview(unit, exploration)} label="비전 전직" />
           {!unit.promoted && <p className="promotion-preserve-note">바로 비전 전직하면 상급 전직의 능력치 보정도 함께 적용됩니다.</p>}
-          {unit.advancedClass && <p className="promotion-preserve-note">현재 최상위 전직 분기를 유지하면서 비전 능력치와 기술을 추가합니다.</p>}
+          {unit.advancedClass && <p className="promotion-preserve-note">현재 최상위 전직 분기와 외형을 유지하면서 비전 능력치와 기술을 추가합니다.</p>}
           <div className="promotion-footer">
             <span>{unit.secretClass ? '전용 기술과 능력치가 적용되어 있습니다.' : `유물 1개 사용 · 골드 무료. ${secretCheck.reason}`}</span>
             <button type="button" data-secret-promote={unit.id} disabled={!secretCheck.ok} onClick={() => onSecretPromote(unit.id)}>{unit.secretClass ? '전직 완료' : '비전 전직'}</button>
@@ -131,10 +159,10 @@ export default function PromotionPanel({
               const check = canAdvancedPromote(unit, form.id, { party, clearedStages, gold, mastery });
               const current = unit.advancedClass === form.id;
               const opened = previewId === form.id;
-              const art = getPaintedVisualProfile(form.id)?.battle || getPortrait(unit);
               const nextSkill = getSkill({ ...unit, promoted: true, advancedClass: form.id }, form.skill.id) || form.skill;
               return <article key={form.id} data-advanced-form={form.id} className={`advanced-promotion-form ${current ? 'current' : ''} ${opened ? 'previewing' : ''}`}>
-                <img src={art} alt={`${unit.name} ${form.name} 전투 모습`} loading="lazy" />
+                <PromotionAppearance before={unit} after={{ ...unit, promoted: true, advancedClass: form.id }}
+                  afterLabel={form.name} view={appearanceView} />
                 <strong>{form.name}{current ? ' · 선택 중' : ''}</strong>
                 <span className="advanced-form-role">{form.role}</span>
                 <p><b>{form.skill.name}</b><br />{skillDescription(nextSkill, unit.skillLevel || 0)}<br />{skillReachText(nextSkill)}</p>

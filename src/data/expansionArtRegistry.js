@@ -1,5 +1,7 @@
 import legacyManifest from '../../public/art/characters-v2/manifest.json' with { type: 'json' };
+import promotionManifest from '../../public/art/promotions-v1/manifest.json' with { type: 'json' };
 import { ADVANCED_CLASSES } from './advancedClasses.js';
+import { SECRET_PROMOTIONS } from './discoveries.js';
 
 const baseProfiles = {
   hero: ['slash', 'slash'], bram: ['guard', 'guard'], lina: ['arrow', 'bow'], aria: ['holy', 'cast'],
@@ -20,25 +22,34 @@ export const EXPANSION_ENEMY_ART_KEYS = Object.freeze(['crab_guard', 'eel_archer
   'tide_keeper', 'frost_queen', 'resonance_judge', 'oath_guardian']);
 export const EXPANSION_BASE_ART_KEYS = Object.freeze([...EXPANSION_ALLY_ART_KEYS, ...EXPANSION_ENEMY_ART_KEYS]);
 export const ADVANCED_CLASS_ART_KEYS = Object.freeze(Object.values(ADVANCED_CLASSES).flatMap(forms => forms.map(form => form.id)));
+export const ORDINARY_PROMOTION_ART_KEYS = Object.freeze(Object.keys(ADVANCED_CLASSES).map(id => `${id}__promoted`));
+export const SECRET_PROMOTION_ART_KEYS = Object.freeze(Object.values(SECRET_PROMOTIONS).map(form => `${form.unitId}__${form.secretClass}`));
+export const PROMOTION_ART_KEYS = Object.freeze([...ORDINARY_PROMOTION_ART_KEYS, ...SECRET_PROMOTION_ART_KEYS]);
 export const LEGACY_CHARACTER_ART_KEYS = Object.freeze(Object.keys(legacyManifest.units));
 
 // 최초 이미지 제작 계획의 silvan 철자를 저장·전투의 canonical sylvan과 연결한다.
 function canonicalize(key) {
-  return typeof key === 'string' ? key === 'silvan' ? 'sylvan' : key.replace(/^silvan__form([01])$/, 'sylvan__form$1') : null;
+  return typeof key === 'string' ? key.replace(/^silvan(?=__|$)/, 'sylvan') : null;
 }
 
 function makeIdentity(key, baseId) {
   const [effect, weapon] = baseProfiles[baseId];
-  const assetId = key.replace(/^sylvan(?=__form[01]$|$)/, 'silvan');
+  const assetId = key.replace(/^sylvan(?=__|$)/, 'silvan');
   const baseAssetId = baseId === 'sylvan' ? 'silvan' : baseId;
-  const map = EXPANSION_ALLY_ART_KEYS.includes(baseId) || EXPANSION_ENEMY_ART_KEYS.includes(baseId)
+  const baseMap = EXPANSION_ALLY_ART_KEYS.includes(baseId) || EXPANSION_ENEMY_ART_KEYS.includes(baseId)
     ? `/art/characters-v3/map/${baseAssetId}.webp` : `/art/map-sprites-v4/${baseId}.webp`;
+  const map = promotionManifest.units[key]?.map || baseMap;
   return Object.freeze({ key, baseId, assetId, effect, weapon, caster: weapon === 'cast', ranged: weapon === 'bow', map });
 }
 
 const identities = Object.fromEntries([
   ...EXPANSION_BASE_ART_KEYS.map(key => [key, makeIdentity(key, key)]),
   ...Object.entries(ADVANCED_CLASSES).flatMap(([baseId, forms]) => forms.map(form => [form.id, makeIdentity(form.id, baseId)])),
+  ...Object.keys(ADVANCED_CLASSES).map(baseId => [`${baseId}__promoted`, makeIdentity(`${baseId}__promoted`, baseId)]),
+  ...Object.values(SECRET_PROMOTIONS).map(form => {
+    const key = `${form.unitId}__${form.secretClass}`;
+    return [key, makeIdentity(key, form.unitId)];
+  }),
 ]);
 export const EXPANSION_ART_REGISTRY = Object.freeze(identities);
 
@@ -54,9 +65,14 @@ export function isKnownCharacterArtKey(key) {
 export function getGameCharacterArtKey(unit) {
   if (!unit) return null;
   if (unit.type === 'ally') {
-    const forms = Object.hasOwn(ADVANCED_CLASSES, unit.id) ? ADVANCED_CLASSES[unit.id] : [];
-    if (forms.some(form => form.id === unit.advancedClass)) return unit.advancedClass;
-    return isKnownCharacterArtKey(unit.id) ? canonicalize(unit.id) : null;
+    const baseId = canonicalize(unit.id);
+    const forms = Object.hasOwn(ADVANCED_CLASSES, baseId) ? ADVANCED_CLASSES[baseId] : [];
+    const advancedClass = canonicalize(unit.advancedClass);
+    if (forms.some(form => form.id === advancedClass)) return advancedClass;
+    const secret = Object.hasOwn(SECRET_PROMOTIONS, baseId) ? SECRET_PROMOTIONS[baseId] : null;
+    if (secret && unit.secretClass === secret.secretClass) return `${baseId}__${secret.secretClass}`;
+    if (unit.promoted && forms.length) return `${baseId}__promoted`;
+    return isKnownCharacterArtKey(baseId) ? baseId : null;
   }
   for (const key of [unit.artId, unit.spriteKey, unit.id]) if (isKnownCharacterArtKey(key)) return canonicalize(key);
   return null;

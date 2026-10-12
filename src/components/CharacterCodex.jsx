@@ -11,8 +11,8 @@ function CharacterDetail({ entry, onClose, onPrevious, onNext }) {
     <header><span>No. {String(entry.number).padStart(2, '0')} · {entry.status}</span><button autoFocus title="닫기" aria-label="캐릭터 정보 닫기" onClick={onClose}><X size={22}/></button></header>
     <div className="character-detail-scroll">
       <div className="character-detail-identity">
-        <img className={entry.unlocked ? '' : 'collection-monochrome'} src={entry.art} alt={entry.name}/>
-        <div><small>{entry.role}</small><h2 id="character-detail-title">{entry.name}</h2><p>{entry.title}</p><span className="collection-state">{entry.unlocked ? <Check size={15}/> : <Lock size={15}/>} {entry.status}</span></div>
+        <img className={entry.unlocked ? '' : 'collection-monochrome'} src={entry.art} alt={`${entry.name}${entry.appearance ? ` · ${entry.appearance}` : ''}`}/>
+        <div><small>{entry.role}</small><h2 id="character-detail-title">{entry.name}</h2><p>{entry.title}</p>{entry.appearance && <p>{entry.appearance}</p>}<span className="collection-state">{entry.unlocked ? <Check size={15}/> : <Lock size={15}/>} {entry.status}</span></div>
       </div>
       <p className="collection-condition">{entry.condition}</p>
       {entry.unlocked && <>
@@ -45,7 +45,7 @@ export default function CharacterCodex({ party, clearedStages, encounters, recor
       {visible.map(item => <button key={item.id} data-character={item.id} data-collected={item.unlocked} className={`collection-card ${item.unlocked ? 'collected' : 'uncollected'}`} aria-label={`${item.name} · ${item.status}`} onClick={() => setSelected(item.id)}>
         <span className="collection-number">{String(item.number).padStart(2, '0')}</span><span className="collection-mark" aria-hidden="true">{item.unlocked ? <Check size={16}/> : <Lock size={15}/>}</span>
         <div className="collection-art"><img src={item.art} className={item.unlocked ? '' : 'collection-monochrome'} alt="" loading="lazy" decoding="async" width="512" height="512"/></div>
-        <div className="collection-caption"><small>{item.role}</small><strong>{item.name}</strong><span>{item.status}</span></div>
+        <div className="collection-caption"><small>{item.role}</small><strong>{item.name}</strong><span>{item.status}{item.appearance ? ` · ${item.appearance}` : ''}</span></div>
       </button>)}
     </div>}
     {(kind === 'records' ? !recordList.length : !visible.length) && <p className="collection-empty">조건에 맞는 기록이 없습니다.</p>}

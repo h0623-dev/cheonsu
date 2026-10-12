@@ -115,7 +115,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.170";
+const SAVE_VERSION = "1.99.171";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -975,7 +975,7 @@ function getCodexEntries({ party, clearedStages, settings }) {
     title: unit.name,
     subtitle: `${getUnitDisplayClass(unit)} · ${getUnitPassiveDef(unit).name}`,
     desc: `${getCharacterProfile(unit.id).bio} ${getUnitSkills(unit).map(skill => skill.name).join(' · ')}`,
-    portrait: getPaintedVisualProfile(unit.id)?.portrait,
+    portrait: getPaintedVisualProfile(getGameCharacterArtKey(unit) || unit.id)?.portrait,
     unlocked: true,
     icon: unit.icon || "👤",
   }));
@@ -3856,9 +3856,10 @@ function getBattleMapUnitSprite(unit, facing) {
   if (!unit) return null;
 
   const key = unit.type === 'ally' ? getGameCharacterArtKey(unit) || unit.id : getEnemySpriteKey(unit);
+  const painted = getPaintedVisualProfile(key);
+  if (facing && getFacingArt(facing).rear && painted?.rear) return painted.rear;
   if (facing && getFacingArt(facing).rear && directionArt[key]) return directionArt[key].rear;
 
-  const painted = getPaintedVisualProfile(key);
   if (painted) return painted.map;
 
   const allyProfile = getAllyVisualProfile(unit);

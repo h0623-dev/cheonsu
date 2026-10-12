@@ -1,17 +1,21 @@
 import manifest from '../../public/art/characters-v2/manifest.json' with { type: 'json' };
 import expansionManifest from '../../public/art/characters-v3/manifest.json' with { type: 'json' };
+import promotionManifest from '../../public/art/promotions-v1/manifest.json' with { type: 'json' };
 import { CHARACTER_SKILLS } from './skills.js';
 import { getAdvancedClassDefinition } from './advancedClasses.js';
 import { getExpansionArtIdentity } from './expansionArtRegistry.js';
 
 const expansionEntries = new Map();
 
-// This catalogue changes combat and dialogue only; map and directional sprites stay separate.
+// 전직 외형은 기존 성장 정보에서 선택하며, 새 지도·보행 원화와 전투 원화를 함께 묶는다.
+// 최상위 전직은 기존 전투/대화 원화를 보존하고 지도·후면·보행만 덧붙일 수 있다.
 export function getCharacterArt(key) {
   const identity = getExpansionArtIdentity(key);
-  if (identity && Object.hasOwn(expansionManifest.units, identity.assetId)) {
+  const expansion = identity && Object.hasOwn(expansionManifest.units, identity.assetId) ? expansionManifest.units[identity.assetId] : null;
+  const promotion = identity && Object.hasOwn(promotionManifest.units, identity.key) ? promotionManifest.units[identity.key] : null;
+  if (expansion || promotion) {
     if (!expansionEntries.has(identity.key)) expansionEntries.set(identity.key, {
-      ...expansionManifest.units[identity.assetId], map: identity.map,
+      ...expansion, ...promotion, map: promotion?.map || identity.map,
     });
     return expansionEntries.get(identity.key);
   }

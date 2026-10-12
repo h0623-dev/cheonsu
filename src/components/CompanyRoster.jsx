@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { ArrowLeft, Shield, Swords, Heart, Footprints, Crosshair, Sparkles, BookOpen } from 'lucide-react';
 import { getCharacterProfile } from '../data/characterProfiles.js';
 import { getPaintedVisualProfile } from '../data/unitVisuals.js';
+import { getGameCharacterArtKey } from '../data/expansionArtRegistry.js';
+import { getAdvancedClassDefinition } from '../data/advancedClasses.js';
+import { getPromotionTitle } from '../engine/ordinaryPromotion.js';
 import { getUnitSkills, skillDescription } from '../data/skills.js';
 import { applyEquipmentStats } from '../engine/partyEngine.js';
 import { formatAttackRange, getUnitMoveRange } from '../engine/movement.js';
@@ -12,13 +15,15 @@ export default function CompanyRoster({ party, onBack, onManage, canManage }) {
   const member = party.find(unit => unit.id === selectedId) || party[0];
   if (!member) return <main className="ux-screen"><h1>기사단</h1><button onClick={onBack}>뒤로</button></main>;
   const unit = applyEquipmentStats(member), profile = getCharacterProfile(unit.id);
+  const visual = getPaintedVisualProfile(getGameCharacterArtKey(unit) || unit.id);
+  const classTitle = getAdvancedClassDefinition(unit)?.name || (unit.promoted ? unit.secretClass ? unit.classTitle || getPromotionTitle(unit) : getPromotionTitle(unit) : profile.role);
   return <main className="company-roster ux-screen">
     <header className="ux-page-header"><div><small>함께 걷는 {party.length}명</small><h1>기사단</h1></div><button onClick={onBack}><ArrowLeft size={19} />뒤로</button></header>
-    <nav className="company-roster-list" aria-label="기사단 동료">{party.map(ally => <button key={ally.id} aria-label={`${ally.name} 선택`} aria-pressed={unit.id === ally.id} onClick={() => setSelectedId(ally.id)}><img src={getPaintedVisualProfile(ally.id)?.portrait} alt="" /><strong>{ally.name}</strong><small>Lv.{ally.level || 1}</small></button>)}</nav>
+    <nav className="company-roster-list" aria-label="기사단 동료">{party.map(ally => <button key={ally.id} aria-label={`${ally.name} 선택`} aria-pressed={unit.id === ally.id} onClick={() => setSelectedId(ally.id)}><img src={getPaintedVisualProfile(getGameCharacterArtKey(ally) || ally.id)?.portrait} alt="" /><strong>{ally.name}</strong><small>Lv.{ally.level || 1}</small></button>)}</nav>
     <div className="company-dossier">
       <section className="company-identity" aria-label={`${unit.name} 소개`}>
-        <img className="company-character" src={getPaintedVisualProfile(unit.id)?.cutscene} alt={unit.name} />
-        <div><small>{profile.role} · Lv.{unit.level || 1}</small><h2>{unit.name}</h2><p>{profile.title}</p></div>
+        <img className="company-character" src={visual?.cutscene} alt={`${unit.name} · ${classTitle} 모습`} />
+        <div><small>{classTitle} · Lv.{unit.level || 1}</small><h2>{unit.name}</h2><p>{profile.title}</p></div>
       </section>
       <div className="company-details">
         <dl className="company-stats">{[[Heart,'체력',`${unit.hp}/${unit.maxHp}`],[Swords,'공격',unit.atk],[Shield,'방어',unit.def],[Footprints,'이동',`${getUnitMoveRange(unit)}칸`],[Crosshair,'사거리',`${formatAttackRange(unit)}칸`]].map(([Icon,label,value]) => <div key={label}><dt><Icon size={15}/>{label}</dt><dd>{value}</dd></div>)}</dl>

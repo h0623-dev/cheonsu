@@ -9,8 +9,9 @@ import react from '@vitejs/plugin-react';
 import { build, preview } from 'vite';
 import sharp from 'sharp';
 import { parse } from 'espree';
-import { CHARACTER_SKILLS } from '../src/data/skills.js';
-import { DISCOVERY_TECHNIQUES } from '../src/data/discoveries.js';
+import { CHARACTER_SKILLS, getUnitSkills } from '../src/data/skills.js';
+import { DISCOVERY_TECHNIQUES, SECRET_PROMOTIONS } from '../src/data/discoveries.js';
+import { PROMOTION_ART_KEYS, getExpansionArtIdentity } from '../src/data/expansionArtRegistry.js';
 import { combatUnitIds, combatArtKeys, getCombatChoreography, getCombatTiming } from '../src/data/combatArt.js';
 import { getCharacterArt } from '../src/data/characterArt.js';
 import { ADVANCED_CLASSES } from '../src/data/advancedClasses.js';
@@ -33,6 +34,12 @@ if (requested) assert.ok(requested.every(key => combatArtKeys.includes(key)), '�
 const keys = requested ? [...new Set(requested)] : combatArtKeys;
 const entries = [...Object.entries(CHARACTER_SKILLS).flatMap(([unit, skills]) => skills.map(skill => [unit, skill])),
   ...Object.values(DISCOVERY_TECHNIQUES).map(skill => [skill.unitId, skill]),
+  ...PROMOTION_ART_KEYS.flatMap(key => {
+    const id = getExpansionArtIdentity(key).baseId, secret = SECRET_PROMOTIONS[id];
+    const unit = { id, type: 'ally', promoted: true,
+      ...(secret && key === `${id}__${secret.secretClass}` ? { secretClass: secret.secretClass } : {}) };
+    return getUnitSkills(unit).map(skill => [key, skill]);
+  }),
   ...Object.values(ADVANCED_CLASSES).flat().map(form => [form.id, form.skill])].filter(([unit]) => keys.includes(unit));
 const heroSkills = entries.filter(([unit]) => unit === 'hero').map(([, skill]) => skill);
 const enemyIds = combatUnitIds.filter(unit => !Object.hasOwn(CHARACTER_SKILLS, unit) && keys.includes(unit));
@@ -388,7 +395,7 @@ async function sceneCase(page, viewport, unit, skill, speed = 1, scenario = 'hit
   const budget = await metrics(page); assertBudget(budget, label);
   const frames = await attachmentFrames(page, label, unit, plan);
   assert.equal(frames.length, 3, `${label}: 준비·일반 타격·기술 무기 부착`);
-  if (unit === 'hero' || unit.startsWith('hero__form')) assert.ok(spectacle.sword, `${label}: 기존 주인공 검 효과 유지`);
+  if ((getExpansionArtIdentity(unit)?.baseId || unit) === 'hero') assert.ok(spectacle.sword, `${label}: 기존 주인공 검 효과 유지`);
   const chargeAt = (spectacle.charge.at + spectacle.charge.until) / 2;
   const samples = [...new Set([.01, .12, chargeAt, ...plan.poses.filter(([, pose]) => ['windup', 'skill'].includes(pose)).map(([at]) => Math.min(at + .015, .99)),
     ...plan.releases.map(at => at + .01), ...spectacle.bursts.map(burst => burst.at + Math.min(.02, (burst.until - burst.at) * .2)), .98, 1])].sort((a, b) => a - b);

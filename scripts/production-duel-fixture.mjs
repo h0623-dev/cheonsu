@@ -5,6 +5,8 @@ import { fileURLToPath } from 'node:url';
 import react from '@vitejs/plugin-react';
 import { build, preview } from 'vite';
 import { ADVANCED_CLASSES } from '../src/data/advancedClasses.js';
+import { SECRET_PROMOTIONS } from '../src/data/discoveries.js';
+import { getExpansionArtIdentity } from '../src/data/expansionArtRegistry.js';
 import { EXPANSION_ENEMY_TEMPLATES } from '../src/data/expansionEnemies.js';
 import { CHARACTER_SKILLS, withSkill } from '../src/data/skills.js';
 import { getCombatTiming } from '../src/data/combatArt.js';
@@ -14,15 +16,21 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const bossKeys = new Set(['tide_keeper', 'frost_queen', 'resonance_judge', 'oath_guardian']);
 
 export function productionDuelProps(key, skill = null, speed = 2, extra = {}) {
-  const canonical = key.split('__form')[0];
+  const canonical = getExpansionArtIdentity(key)?.baseId || key;
   const form = ADVANCED_CLASSES[canonical]?.find(value => value.id === key);
   const props = duelProps(canonical, skill, speed, extra);
   props.attackerKey = key;
   props.scene.attacker.type = Object.hasOwn(CHARACTER_SKILLS, canonical) ? 'ally' : key.startsWith('boss_') || bossKeys.has(key) ? 'boss' : 'enemy';
+  const secret = SECRET_PROMOTIONS[canonical];
+  if (props.scene.attacker.type === 'ally' && canonical !== key) {
+    props.scene.attacker.promoted = true;
+    if (secret && key === `${canonical}__${secret.secretClass}`) props.scene.attacker.secretClass = secret.secretClass;
+  }
   if (form) {
     props.scene.attacker.advancedClass = form.id;
-    if (skill) props.scene.attacker = withSkill(props.scene.attacker, skill.id);
   }
+  if (skill) props.scene.attacker = withSkill(props.scene.attacker, skill.id);
+  if (props.scene.outcome?.guard && props.scene.defender.id === canonical) props.defenderKey = key;
   if (props.scene.mode === 'skill' && EXPANSION_ENEMY_TEMPLATES[key]) {
     props.scene.attacker = { ...props.scene.attacker, skill: EXPANSION_ENEMY_TEMPLATES[key].skill, skillSpec: EXPANSION_ENEMY_TEMPLATES[key].skillSpec };
   }

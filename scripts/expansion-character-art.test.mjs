@@ -19,13 +19,13 @@ const allNewKeys = [...EXPANSION_BASE_ART_KEYS, ...ADVANCED_CLASS_ART_KEYS];
 const poses = ['run-a', 'run-b', 'windup', 'strike', 'recover', 'recoil', 'skill-a', 'skill-b'];
 const file = asset => new URL(`../public${asset}`, import.meta.url);
 
-test('기존 47종과 신규 20종을 보존하고 42폼을 적군 도감 개체로 중복 등록하지 않는다', () => {
+test('기존 47종과 신규 20종을 보존하고 전직 외형을 적군 도감 개체로 중복 등록하지 않는다', () => {
   assert.equal(Object.keys(legacyManifest.units).length, 47);
   assert.equal(EXPANSION_BASE_ART_KEYS.length, 20);
   assert.equal(ADVANCED_CLASS_ART_KEYS.length, 42);
   assert.equal(combatUnitIds.length, 67);
-  assert.equal(combatArtKeys.length, 109);
-  assert.equal(new Set(combatArtKeys).size, 109);
+  assert.equal(combatArtKeys.length, 132);
+  assert.equal(new Set(combatArtKeys).size, 132);
   assert.equal(combatUnitIds.some(id => id.includes('__form')), false);
   assert.equal(EXPANSION_MONSTER_KEYS.length, 12);
   assert.equal(Object.keys(MONSTER_ENEMIES).length, 18);
@@ -93,14 +93,17 @@ test('62종 신규 원화의 실제 496프레임에 투명도·서로 다른 동
   assert.equal(checked, 496);
 });
 
-test('기존 동료 대기 이미지와 새 동료 기본 대기는 상위 분기를 선택해도 유지된다', () => {
+test('최상위 전직의 대기 원화는 기본 모습 대신 선택한 분기의 원화를 사용한다', () => {
   for (const key of ADVANCED_CLASS_ART_KEYS) {
     const identity = getExpansionArtIdentity(key);
-    const expected = EXPANSION_ALLY_ART_KEYS.includes(identity.baseId)
+    const previousBaseMap = EXPANSION_ALLY_ART_KEYS.includes(identity.baseId)
       ? `/art/characters-v3/map/${identity.baseId === 'sylvan' ? 'silvan' : identity.baseId}.webp`
       : `/art/map-sprites-v4/${identity.baseId}.webp`;
+    const expected = `/art/promotions-v1/map/${identity.key}.webp`;
     assert.equal(getCharacterArt(key).map, expected);
     assert.equal(getPaintedVisualProfile(key).map, expected);
+    assert.notEqual(expected, previousBaseMap);
+    assert.equal(getCharacterArt(identity.baseId)?.map || previousBaseMap, previousBaseMap);
   }
 });
 

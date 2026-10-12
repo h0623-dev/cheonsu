@@ -24,8 +24,8 @@ test('기존 실측 무기 좌표와 활·채찍 경로를 그대로 보존한�
   assert.deepEqual(authored, saved);
 });
 
-test('109개 실제 아트 ID의 준비·타격·기술 무기 이펙트에 유한한 좌표를 제공한다', () => {
-  assert.equal(combatArtKeys.length, 109);
+test('132개 실제 아트 ID의 준비·타격·기술 무기 이펙트에 유한한 좌표를 제공한다', () => {
+  assert.equal(combatArtKeys.length, 132);
   for (const key of combatArtKeys) for (const pose of ['windup', 'strike', 'skill-a', 'skill-b']) {
     const anchor = getSkillAuraAnchor(key, pose);
     for (const point of [anchor.grip, anchor.tip, ...(anchor.focus ? [anchor.focus] : [])]) {

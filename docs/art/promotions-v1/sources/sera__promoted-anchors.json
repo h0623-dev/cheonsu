@@ -1,0 +1,6 @@
+{
+  "windup": { "kind": "dagger", "grip": [251, 124], "tip": [152, 114], "secondary": { "grip": [385, 339], "tip": [439, 400] }, "measured": true },
+  "strike": { "kind": "dagger", "grip": [349, 317], "tip": [437, 366], "secondary": { "grip": [159, 239], "tip": [76, 255] }, "measured": true },
+  "skill-a": { "kind": "dagger", "grip": [347, 255], "tip": [419, 179], "secondary": { "grip": [344, 322], "tip": [414, 382] }, "measured": true },
+  "skill-b": { "kind": "dagger", "grip": [384, 354], "tip": [441, 433], "secondary": { "grip": [389, 251], "tip": [440, 316] }, "measured": true }
+}

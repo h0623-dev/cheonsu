@@ -107,10 +107,10 @@ test('신규 적의 ID 없는 실제 기술 스펙도 원본을 변경하지 않
   }
 });
 
-test('109개 전투 아트의 접촉 정지 중에는 공격자가 미끄러지지 않는다', () => {
-  assert.equal(combatArtKeys.length, 109);
+test('132개 전투 아트의 접촉 정지 중에는 공격자가 미끄러지지 않는다', () => {
+  assert.equal(combatArtKeys.length, 132);
   for (const key of combatArtKeys) for (const mode of ['attack', 'skill']) {
-    const canonical = key.split('__form')[0];
+    const canonical = key.split('__')[0];
     const form = ADVANCED_CLASSES[canonical]?.find(value => value.id === key);
     const skill = form?.skill || CHARACTER_SKILLS[canonical]?.[0];
     const actor = { id: canonical, type: skill ? 'ally' : 'enemy', ...(form ? { advancedClass: form.id } : {}) };

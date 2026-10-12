@@ -1,0 +1,6 @@
+{
+  "windup": { "kind": "blade", "grip": [352, 179], "tip": [139, 72], "focus": [139, 72], "measured": true },
+  "strike": { "kind": "blade", "grip": [305, 294], "tip": [489, 347], "focus": [489, 347], "measured": true },
+  "skill-a": { "kind": "focus", "grip": [424, 285], "tip": [445, 276], "focus": [445, 276], "measured": true, "note": "칼날이 보이지 않고 손을 앞으로 펼친 준비 자세입니다. 실제 보이는 손과 손가락 끝을 사용했으며 칼날 위치는 추정하지 않았습니다." },
+  "skill-b": { "kind": "blade", "grip": [310, 264], "tip": [487, 335], "focus": [487, 335], "measured": true }
+}

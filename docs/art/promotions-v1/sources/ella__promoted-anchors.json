@@ -1,0 +1,6 @@
+{
+  "windup": { "kind": "music", "grip": [359, 283], "tip": [401, 252], "focus": [291, 309], "measured": true },
+  "strike": { "kind": "music", "grip": [398, 275], "tip": [435, 245], "focus": [325, 298], "measured": true },
+  "skill-a": { "kind": "music", "grip": [343, 279], "tip": [379, 257], "focus": [319, 277], "measured": true, "note": "악기 몸통이 팔과 의상에 가려져 있어 실제로 보이는 현을 짚는 손 부위에 집중점을 지정했습니다." },
+  "skill-b": { "kind": "music", "grip": [351, 188], "tip": [368, 148], "focus": [300, 243], "measured": true }
+}

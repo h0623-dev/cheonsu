@@ -1,0 +1,108 @@
+{
+  "windup": {
+    "kind": "fist",
+    "grip": [
+      211,
+      229
+    ],
+    "tip": [
+      239,
+      213
+    ],
+    "focus": [
+      229,
+      218
+    ],
+    "secondary": {
+      "grip": [
+        334,
+        324
+      ],
+      "tip": [
+        306,
+        328
+      ]
+    },
+    "measured": false,
+    "framePath": "public/art/promotions-v1/units/baekho__promoted-windup.webp",
+    "frameSha256": "4bbf8db87f80e264206765a7548fcee049734a91795e94100dabcf16b6e3130b",
+    "reviewMethod": "최종 512px 원화에서 손목과 주먹·손바닥의 위치를 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+  },
+  "strike": {
+    "kind": "fist",
+    "grip": [
+      407,
+      258
+    ],
+    "tip": [
+      439,
+      258
+    ],
+    "focus": [
+      432,
+      258
+    ],
+    "measured": false,
+    "framePath": "public/art/promotions-v1/units/baekho__promoted-strike.webp",
+    "frameSha256": "7f85a1966824907f10e168add4450a3932d9a19a25e91989d48f76491ef84f77",
+    "reviewMethod": "최종 512px 원화에서 손목과 주먹·손바닥의 위치를 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+  },
+  "skill-a": {
+    "kind": "fist",
+    "grip": [
+      398,
+      259
+    ],
+    "tip": [
+      417,
+      194
+    ],
+    "focus": [
+      417,
+      239
+    ],
+    "secondary": {
+      "grip": [
+        430,
+        264
+      ],
+      "tip": [
+        453,
+        222
+      ]
+    },
+    "measured": false,
+    "framePath": "public/art/promotions-v1/units/baekho__promoted-skill-a.webp",
+    "frameSha256": "3aa3cc4e35ef5615eb7d42657f3205be11d7f9d364af62ebb36c344253070c31",
+    "reviewMethod": "최종 512px 원화에서 손목과 주먹·손바닥의 위치를 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+  },
+  "skill-b": {
+    "kind": "fist",
+    "grip": [
+      174,
+      291
+    ],
+    "tip": [
+      195,
+      300
+    ],
+    "focus": [
+      192,
+      290
+    ],
+    "secondary": {
+      "grip": [
+        366,
+        294
+      ],
+      "tip": [
+        389,
+        272
+      ]
+    },
+    "measured": false,
+    "framePath": "public/art/promotions-v1/units/baekho__promoted-skill-b.webp",
+    "frameSha256": "7e3abd202002466a76217ef24cef6b7edaeec871753d773d73d595f328446c5d",
+    "reviewMethod": "최종 512px 원화에서 손목과 주먹·손바닥의 위치를 육안으로 지정한 수동 근삿값. 자동 실측 좌표로 표시하지 않음."
+  }
+}

@@ -7,7 +7,7 @@ import { getDuelPlan, getWeaponMotion } from './duelChoreography.js';
 import { directDuelPerformance } from './duelPerformance.js';
 import { getCharacterArt, getCharacterFrameStyle, getCharacterSkillPose } from './characterArt.js';
 import { getSkillSpectacle } from './skillSpectacle.js';
-import { EXPANSION_BASE_ART_KEYS, ADVANCED_CLASS_ART_KEYS, LEGACY_CHARACTER_ART_KEYS, getExpansionArtIdentity, isKnownCharacterArtKey } from './expansionArtRegistry.js';
+import { EXPANSION_BASE_ART_KEYS, ADVANCED_CLASS_ART_KEYS, PROMOTION_ART_KEYS, LEGACY_CHARACTER_ART_KEYS, getExpansionArtIdentity, isKnownCharacterArtKey } from './expansionArtRegistry.js';
 
 export function getCombatTiming(scene) {
   const skill = scene.mode === 'skill' || Boolean(scene.outcome?.heal || scene.outcome?.guard);
@@ -56,7 +56,7 @@ const weapons = {
 const casters = new Set(['aria', 'noah', 'yuna', 'miho', 'irene', 'ella', 'plague_doctor', 'storm_mage', 'pyromancer', 'frost_mage', 'cultist']);
 export const legacyCombatUnitIds = LEGACY_CHARACTER_ART_KEYS;
 export const combatUnitIds = [...legacyCombatUnitIds, ...EXPANSION_BASE_ART_KEYS];
-export const combatArtKeys = [...combatUnitIds, ...ADVANCED_CLASS_ART_KEYS];
+export const combatArtKeys = [...combatUnitIds, ...ADVANCED_CLASS_ART_KEYS, ...PROMOTION_ART_KEYS];
 export const combatMotionPoses = ['run-a', 'run-b', 'windup', 'strike', 'recover', 'recoil'];
 export const combatEffectIds = ['slash', 'thrust', 'arrow', 'heavy', 'guard', 'fire', 'ice', 'lightning', 'shadow', 'holy', 'heal', 'poison', 'music', 'claw', 'impact', 'cast'];
 

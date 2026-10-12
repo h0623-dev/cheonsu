@@ -1,0 +1,6 @@
+{
+  "windup": { "kind": "fist", "grip": [347, 289], "tip": [344, 267], "focus": [344, 267], "secondary": { "grip": [180, 270], "tip": [155, 281] }, "measured": true },
+  "strike": { "kind": "fist", "grip": [387, 270], "tip": [407, 268], "focus": [407, 268], "secondary": { "grip": [181, 286], "tip": [202, 273] }, "measured": true },
+  "skill-a": { "kind": "fist", "grip": [306, 278], "tip": [319, 248], "focus": [319, 263], "secondary": { "grip": [330, 283], "tip": [324, 251] }, "measured": true },
+  "skill-b": { "kind": "fist", "grip": [405, 259], "tip": [429, 219], "focus": [425, 245], "secondary": { "grip": [172, 287], "tip": [148, 294] }, "measured": true }
+}
