@@ -48,8 +48,8 @@
 .armory-base-stats dd small { font-size: 12px; margin-left: 3px; }
 .town-facility-dialog .armory-forge { display: flex; align-items: center; gap: 6px; justify-content: center; background: transparent; font-size: 12px; }
 .armory-loadout { min-width: 0; }
-.armory-slot-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-.armory-slot-tabs button { display: flex; align-items: center; justify-content: center; gap: 7px; }
+.armory-slot-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.armory-slot-tabs button { display: flex; align-items: center; justify-content: center; gap: 4px; padding: 8px 6px; font-size: 13px; }
 .armory-current { display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 8px 0; font-size: 12px; }
 .armory-current small { flex-shrink: 0; color: var(--facility-muted); }
 .armory-current strong { flex: 1; min-width: 0; overflow-wrap: anywhere; }
@@ -77,6 +77,52 @@
 .town-facility-dialog .armory-equip { grid-column: 2; grid-row: 1 / 3; display: flex; align-items: center; justify-content: center; gap: 6px; color: #14251e; background: #addcc5; border-color: #addcc5; }
 .town-facility-dialog .armory-equip:not(:disabled):hover { background: #d0efdf; }
 .town-facility-dialog .armory-equip:disabled { color: #c4cfc8; background: #34473e; border-color: #526259; opacity: 1; }
+.armory-equipped-slots { display: grid; gap: 6px; min-width: 0; }
+.town-facility-dialog .armory-equipped-slots > button { display: flex; align-items: center; gap: 8px; padding: 8px; text-align: left; min-width: 0; background: #29342f; }
+.armory-equipped-slots > button > span { display: grid; gap: 4px; flex: 1; min-width: 0; }
+.armory-equipped-slots small { color: var(--facility-muted); font-size: 10px; font-weight: 400; }
+.armory-equipped-slots strong { font-size: 12px; overflow-wrap: anywhere; }
+.armory-equipped-slots > button > svg:first-child { color: #ddcda1; }
+.armory-sharing-note { margin: 0; font-size: 11px; line-height: 1.7; color: var(--facility-muted); overflow-wrap: anywhere; }
+.armory-list-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 0; }
+.armory-list-heading h4 { margin: 0; font-size: 12px; color: #e4dfcd; }
+.armory-list-heading > span { font-size: 11px; color: var(--facility-muted); }
+.armory-missing { margin-top: 12px; border-top: 1px solid var(--facility-line); }
+.armory-missing summary { cursor: pointer; padding: 14px 0; font-size: 12px; line-height: 1.6; color: #e5dab3; }
+.armory-missing summary > span { display: inline-block; margin-left: 6px; font-size: 11px; color: var(--facility-muted); }
+.armory-missing summary:focus-visible { outline: 2px solid #fae2a4; outline-offset: 2px; }
+.armory-missing ul { list-style: none; margin: 0; padding: 0; }
+.armory-missing li { display: flex; gap: 10px; align-items: center; padding: 10px 0; border-top: 1px solid #3b4741; }
+.armory-missing li > svg { flex-shrink: 0; color: #b4bea8; }
+.armory-missing li > div { display: grid; gap: 5px; min-width: 0; overflow-wrap: anywhere; }
+.armory-missing li strong { font-size: 12px; font-weight: 500; }
+.armory-missing li span { font-size: 11px; color: var(--facility-muted); }
+.armory-missing li small { font-size: 11px; color: #d8cda5; }
+.town-facility-dialog .armory-shop-link { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 8px; font-size: 12px; }
+.town-facility-dialog.facility-shop { width: min(720px, calc(100vw - 24px)); height: 740px; }
+.facility-shop .town-facility-body { flex: 1; }
+.town-gear-help { margin: 0 0 12px; color: var(--facility-muted); font-size: 12px; line-height: 1.7; }
+.town-gear-slot-filter { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.town-gear-slot-filter > button { display: flex; align-items: center; justify-content: center; gap: 5px; padding: 8px 6px; font-size: 12px; }
+.town-gear-filters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+.town-gear-filters label, .forge-slot-filter { display: grid; gap: 6px; min-width: 0; font-size: 12px; color: #d5decf; }
+.town-gear-filters select, .forge-slot-filter select { width: 100%; min-width: 0; min-height: 44px; padding: 8px; border: 1px solid #657366; border-radius: 5px; font: inherit; font-size: 16px; background: #26382f; color: #f0f1e4; color-scheme: dark; }
+.town-gear-filters select:focus-visible, .forge-slot-filter select:focus-visible { outline: 2px solid #fae2a4; outline-offset: 2px; }
+.town-gear-result { margin: 14px 0 2px; font-size: 12px; color: #e4dab3; }
+.town-gear-stock article { align-items: flex-start; padding: 16px 0; }
+.town-gear-stock article > svg { margin-top: 21px; }
+.town-gear-stock article > .town-gear-description { gap: 6px; }
+.town-gear-stock .town-gear-family { color: var(--facility-muted); font-size: 10px; }
+.town-gear-stock .town-gear-stats { color: #e2eacb; font-variant-numeric: tabular-nums; }
+.town-gear-stock .town-gear-source { display: flex; align-items: center; gap: 4px; color: #dbc68e; font-size: 11px; line-height: 1.5; }
+.town-gear-source > svg { flex-shrink: 0; }
+.town-gear-stock article > .town-gear-purchase { flex: 0 0 94px; justify-items: stretch; align-self: center; gap: 7px; text-align: center; }
+.town-gear-purchase > span { color: #eed59a; font-weight: 700; font-size: 13px; font-variant-numeric: tabular-nums; }
+.town-gear-purchase > small { font-size: 10px; color: #ebbaa6; }
+.town-gear-stock .town-gear-purchase > button { min-width: 0; padding: 8px 5px; font-size: 12px; }
+.town-gear-stock .gear-stock-owned .town-gear-purchase > button { opacity: 1; color: #a8c9b7; background: transparent; }
+.town-gear-stock .gear-stock-locked .town-gear-purchase > button { opacity: 1; color: #a9b1a5; background: #252d28; }
+.forge-slot-filter { padding: 10px 0; margin-bottom: 4px; }
 @media (max-width: 580px) {
   .armory-roster { padding: 8px 10px; gap: 4px; }
   .town-facility-dialog .armory-roster > button { flex-basis: 66px; min-height: 92px; padding: 4px; }
@@ -90,11 +136,19 @@
   .armory-base-stats dd { font-size: 18px; margin: 0; }
   .town-facility-dialog .armory-forge { padding: 4px; font-size: 11px; gap: 4px; }
   .armory-forge > svg:last-child { display: none; }
+  .armory-equipped-slots { grid-column: 1 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .town-facility-dialog .armory-equipped-slots > button { display: grid; justify-items: start; align-content: start; gap: 5px; padding: 8px; }
+  .armory-equipped-slots > button > svg { display: none; }
+  .armory-equipped-slots strong { font-size: 11px; }
+  .armory-sharing-note { grid-column: 1 / -1; }
   .armory-comparison { grid-template-columns: minmax(0, 1fr); padding: 10px 12px; gap: 8px; }
   .armory-comparison-stats { grid-row: auto; gap: 16px; }
   .town-facility-dialog .armory-equip { grid-column: 1; grid-row: auto; }
   .town-stock-list article { gap: 8px; }
   .town-stock-list article > svg { display: none; }
+  .town-gear-stock article > .town-gear-purchase { flex-basis: 80px; }
+  .town-gear-stock article strong { font-size: 14px; }
+  .town-gear-stock article span { font-size: 12px; }
 }
 @media (max-height: 520px) {
   .town-facility-dialog.facility-armory .town-facility-body { overflow-y: auto; }
@@ -107,4 +161,8 @@
   .armory-comparison-stats { gap: 12px; }
   .armory-comparison-stats > div { gap: 4px; font-size: 12px; }
   .armory-comparison-stats span > svg, .armory-comparison-stats small > svg { display: none; }
+  .town-gear-slot-filter > button { gap: 3px; font-size: 11px; padding: 8px 3px; }
+  .town-gear-slot-filter > button > svg { width: 13px; }
+  .armory-slot-tabs button { font-size: 12px; }
+  .town-gear-filters { gap: 8px; }
 }

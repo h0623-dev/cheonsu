@@ -1,6 +1,6 @@
 import { stages } from "../data/stages.js";
 import { getUnlockedStageIds, normalizeClearedStageIds, normalizeLastBattleResult } from './campaignProgress.js';
-import { DEFAULT_GEAR_INVENTORY } from "../data/equipment.js";
+import { DEFAULT_GEAR_INVENTORY, EQUIPMENT_SLOTS, normalizeEquipmentSlots } from "../data/equipment.js";
 import { DEFAULT_SUPPORT_POINTS, DEFAULT_SUPPORT_DIALOGUES_SEEN } from "../data/supports.js";
 import { inMap } from "./movement.js";
 import { normalizeExploration, applyDiscoveryUnlocks } from "./discoveryEngine.js";
@@ -79,7 +79,31 @@ export function normalizeGearEnhance(enhance) {
 }
 
 
+function mergeStoredGearEnhancements(enhance, units) {
+  const merged = new Map(Object.entries(normalizeGearEnhance(enhance)));
+  for (const unit of units) {
+    for (const [id, level] of Object.entries(normalizeGearEnhance(unit?.gearEnhance))) {
+      merged.set(id, Math.max(merged.get(id) || 0, level));
+    }
+  }
+  return Object.fromEntries(merged);
+}
 
+function prepareStoredEquipment(unit, sharedEnhance) {
+  const localEnhance = unit.gearEnhance && typeof unit.gearEnhance === 'object' && !Array.isArray(unit.gearEnhance)
+    ? normalizeGearEnhance(unit.gearEnhance) : (sharedEnhance || {});
+  // Recover legacy bases using the enhancement that produced the stored display values,
+  // then apply the shared armoury's highest saved enhancement exactly once.
+  const restored = makeAlly({ ...unit, gearEnhance: localEnhance });
+  return sharedEnhance ? { ...restored, gearEnhance: { ...sharedEnhance } } : restored;
+}
+
+function normalizeGearInventory(inventory, units) {
+  const existing = safeArray(inventory, DEFAULT_GEAR_INVENTORY).filter(id => typeof id === 'string' && id);
+  const equipped = units.flatMap(unit => unit?.type === 'ally'
+    ? EQUIPMENT_SLOTS.map(slot => unit.equipment?.[slot]).filter(id => typeof id === 'string' && id) : []);
+  return [...new Set([...existing, ...equipped])];
+}
 
 export function normalizeCareerStats(stats) {
   const defaults = {
@@ -203,17 +227,20 @@ export function normalizeInventory(inventory) {
   );
 }
 
-export function normalizeParty(rawParty) {
+export function normalizeParty(rawParty, sharedEnhance = null) {
   const baseParty = getInitialParty();
   const incoming = safeArray(rawParty, []);
 
   const merged = baseParty.map((baseUnit) => {
     const saved = incoming.find((unit) => unit?.id === baseUnit.id);
-    if (!saved) return baseUnit;
+    if (!saved) return prepareStoredEquipment(baseUnit, sharedEnhance);
 
-    return {
+    return prepareStoredEquipment({
       ...baseUnit,
       ...saved,
+      // The initial template's base must not hide an old save's trained/equipped stats.
+      baseAtk: Number.isFinite(saved.baseAtk) ? saved.baseAtk : undefined,
+      baseDef: Number.isFinite(saved.baseDef) ? saved.baseDef : undefined,
       hp:
         typeof saved.hp === "number" && Number.isFinite(saved.hp)
           ? Math.min(saved.maxHp || baseUnit.maxHp, Math.max(1, saved.hp))
@@ -230,14 +257,12 @@ export function normalizeParty(rawParty) {
         typeof saved.exp === "number" && Number.isFinite(saved.exp)
           ? Math.max(0, saved.exp)
           : baseUnit.exp,
-      equipment: {
-        weapon: saved.equipment?.weapon || null,
-        armor: saved.equipment?.armor || null,
-      },
+      equipment: normalizeEquipmentSlots(saved.equipment),
+      gearEnhance: saved.gearEnhance ?? sharedEnhance ?? {},
       acted: false,
       moved: false,
       guard: false,
-    };
+    }, sharedEnhance);
   });
 
   const extraAllies = incoming
@@ -248,18 +273,18 @@ export function normalizeParty(rawParty) {
         !merged.some((baseUnit) => baseUnit.id === unit.id)
     )
     .map((unit) =>
-      makeAlly({
+      prepareStoredEquipment({
         ...unit,
         acted: false,
         moved: false,
         guard: false,
-      })
+      }, sharedEnhance)
     );
 
   return applyEquipmentToParty([...merged, ...extraAllies]);
 }
 
-export function normalizeUnits(rawUnits, stage, party) {
+export function normalizeUnits(rawUnits, stage, party, sharedEnhance = null) {
   const incoming = safeArray(rawUnits, null);
 
   if (!incoming) {
@@ -294,7 +319,11 @@ export function normalizeUnits(rawUnits, stage, party) {
             : stageUnit.y,
       };
 
-      return applyEquipmentStats(makeAlly(merged));
+      return applyEquipmentStats(prepareStoredEquipment({
+        ...merged,
+        baseAtk: Number.isFinite(base.baseAtk) ? base.baseAtk : undefined,
+        baseDef: Number.isFinite(base.baseDef) ? base.baseDef : undefined,
+      }, sharedEnhance));
     }
 
     return {
@@ -314,8 +343,9 @@ export function normalizeSaveData(raw, saveVersion = "0.12") {
   const data = safeObject(raw, {});
   const stage = resolveStageFromSave(data);
   const exploration = normalizeExploration(data.exploration);
-  const party = normalizeParty(data.party).map((unit) => applyDiscoveryUnlocks(unit, exploration));
-  const units = normalizeUnits(data.units, stage, party).map((unit) => applyDiscoveryUnlocks(unit, exploration));
+  const gearEnhance = mergeStoredGearEnhancements(data.gearEnhance, [...safeArray(data.party), ...safeArray(data.units)]);
+  const party = normalizeParty(data.party, gearEnhance).map((unit) => applyDiscoveryUnlocks(unit, exploration));
+  const units = normalizeUnits(data.units, stage, party, gearEnhance).map((unit) => applyDiscoveryUnlocks(unit, exploration));
   const clearedStages = normalizeClearedStageIds(data.clearedStages);
   const unlockedStages = getUnlockedStageIds(clearedStages);
   const legacyRetreat = !Object.hasOwn(data, 'lastBattleResult') && ['camp', 'campaign'].includes(data.screen)
@@ -374,8 +404,8 @@ export function normalizeSaveData(raw, saveVersion = "0.12") {
     snapshotGallery: safeArray(data.snapshotGallery, []).filter((entry) => entry && typeof entry === "object"),
     dailyLoginData: safeObject(data.dailyLoginData, {}),
     eventData: safeObject(data.eventData, {}),
-    gearInventory: safeArray(data.gearInventory, DEFAULT_GEAR_INVENTORY),
-    gearEnhance: normalizeGearEnhance(data.gearEnhance),
+    gearInventory: normalizeGearInventory(data.gearInventory, [...party, ...units]),
+    gearEnhance,
     supportPoints: normalizeSupportPoints(data.supportPoints),
     supportDialoguesSeen: normalizeSupportDialoguesSeen(data.supportDialoguesSeen),
     trainingUsed: lastBattleResult?.outcome === 'defeat' || Boolean(data.trainingUsed),

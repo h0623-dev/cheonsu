@@ -1,18 +1,74 @@
-.advanced-promotion-summary { display: grid; gap: 8px; margin: 14px 0; padding: 14px; border-radius: 12px; background: #173a32; color: #f5f0d7; font-size: 13px; line-height: 1.55; }
-.advanced-promotion-summary span { color: #d4e3d4; }
-.advanced-promotion { margin-top: 18px; padding-top: 12px; border-top: 1px solid #8e815d; }
-.advanced-promotion-heading { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-.advanced-promotion-heading span { font-size: 13px; }
+.promotion-dialog:has(.promotion-panel) { width: min(820px, calc(100vw - 24px)); }
+.promotion-dialog .promotion-card.promotion-panel { box-sizing: border-box; max-height: calc(100dvh - 40px); overflow: hidden; }
+.promotion-panel-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 16px; flex-shrink: 0; }
+.promotion-panel-header > strong { color: #e7d79e; font-size: 13px; }
+.promotion-unit-picker { display: flex; flex-shrink: 0; gap: 7px; overflow-x: auto; padding: 3px 2px 8px; scroll-snap-type: x proximity; overscroll-behavior-x: contain; }
+.promotion-unit-picker button { flex: 0 0 86px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 94px; padding: 7px 4px; border: 1px solid #70897a; border-radius: 7px; background: #233c32; color: #ecf2e9; scroll-snap-align: start; cursor: pointer; }
+.promotion-unit-picker button[aria-pressed="true"] { border-color: #e9cf7e; background: #405744; box-shadow: inset 0 0 0 1px #e9cf7e; }
+.promotion-unit-picker img { width: 40px; height: 40px; object-fit: contain; }
+.promotion-unit-picker strong { font-size: 13px; line-height: 1.3; }
+.promotion-unit-picker small { color: #c8d7c8; font-size: 10px; }
+.promotion-panel :is(button, summary):focus-visible, .promotion-panel .promotion-list:focus-visible { outline: 2px solid #f2dc93; outline-offset: 2px; }
+.promotion-dialog .promotion-panel .promotion-list { display: block; overflow-y: auto; overscroll-behavior-y: contain; scrollbar-gutter: stable; }
+.promotion-dialog .promotion-panel .promotion-entry { padding: 14px; }
+.promotion-panel .promotion-unit-head { padding-bottom: 2px; }
+.promotion-panel .promotion-unit-head > div { min-width: 0; }
+.promotion-panel .promotion-unit-head img { flex-shrink: 0; }
+.promotion-panel .promotion-route { margin-top: 16px; padding-top: 14px; border-top: 1px solid #64816c; }
+.promotion-route-heading, .advanced-promotion-heading { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.promotion-panel :is(.promotion-route-heading, .advanced-promotion-heading) h3 { margin: 0; color: #f2df9f; font-size: 15px; line-height: 1.5; }
+.promotion-route-heading > span, .advanced-promotion-heading > span { color: #c8d9c7; font-size: 12px; }
+.promotion-route > p, .promotion-preserve-note { margin: 8px 0; color: #d8e4d4; font-size: 12px; line-height: 1.65; overflow-wrap: anywhere; }
+.promotion-requirements { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.promotion-requirement { display: inline-flex; gap: 3px; padding: 4px 7px; border: 1px solid #7d8272; border-radius: 5px; background: #29372f; color: #cecbbd; font-size: 11px; line-height: 1.4; }
+.promotion-requirement.met { border-color: #7da788; background: #314d38; color: #d4f0d5; }
+.promotion-panel .promotion-relic-hint { padding: 10px; border-radius: 7px; background: #1c3029; }
+.promotion-dialog .promotion-panel .promotion-stat-preview { grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 10px 0; }
+.promotion-dialog .promotion-panel .promotion-stat-preview > div { text-align: center; padding: 7px 4px; }
+.promotion-panel .promotion-comparison strong { white-space: nowrap; }
+.promotion-panel .promotion-comparison strong > span { display: inline; margin: 0; color: #a8bca6; font-size: inherit; }
+.promotion-panel .promotion-comparison small { display: block; margin-top: 4px; color: #bbccba; font-size: 10px; }
+.promotion-panel .promotion-comparison .stat-increase { color: #b9e9ae; }
+.promotion-panel .promotion-comparison .stat-decrease { color: #ffc294; }
+.promotion-panel .promotion-footer { grid-template-columns: minmax(0, 1fr) minmax(90px, auto); }
+.promotion-panel .promotion-footer button { min-height: 44px; padding: 8px 12px; font-size: 13px; cursor: pointer; }
+.promotion-panel .promotion-footer button:disabled { opacity: .6; cursor: default; }
+.advanced-promotion { margin-top: 18px; padding-top: 14px; border-top: 1px solid #8e815d; }
+.advanced-promotion-summary { margin: 12px 0; padding: 8px 12px; border: 1px solid #55725c; border-radius: 7px; background: #173a32; color: #f5f0d7; font-size: 12px; line-height: 1.65; }
+.advanced-promotion-summary > summary { display: list-item; min-height: 44px; align-content: center; cursor: pointer; }
+.advanced-promotion-summary p { color: #d4e3d4; margin: 8px 0; }
 .advanced-promotion-forms { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
 .advanced-promotion-form { display: flex; flex-direction: column; align-items: stretch; gap: 8px; min-width: 0; padding: 12px; border: 1px solid #7c7355; border-radius: 12px; color: #eee6cc; background: #202c2a; }
 .advanced-promotion-form.current { border: 2px solid #d2b15f; }
 .advanced-promotion-form.previewing { background: #273c35; }
-.advanced-promotion-form img { width: 100%; height: 180px; object-fit: contain; }
-.advanced-promotion-form strong { font-size: 16px; }
-.advanced-promotion-form span,.advanced-promotion-form p,.advanced-promotion-form small { margin: 0; font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+.advanced-promotion-form > img { width: 100%; height: 180px; object-fit: contain; }
+.advanced-promotion-form > strong { font-size: 16px; }
+.advanced-promotion-form > :is(span, p, small), .advanced-form-details p { margin: 0; font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+.advanced-promotion-form > .advanced-form-role { color: #e9d7a4; }
+.advanced-promotion-form > .advanced-form-drawback { color: #e8c3a2; }
+.promotion-dialog .promotion-panel .advanced-promotion-form .promotion-stat-preview { grid-template-columns: repeat(2, minmax(0,1fr)); margin: 0; }
 .advanced-promotion-form button { min-height: 44px; border: 1px solid #a9985b; border-radius: 8px; padding: 8px; background: #325b4c; color: white; font-size: 13px; cursor: pointer; }
 .advanced-promotion-form button:disabled { opacity: .55; cursor: default; }
-.advanced-promotion-form .advanced-preview-button { background: #354657; }
+.promotion-dialog .promotion-panel .advanced-preview-button { background: #354657; }
 .advanced-promotion-reason { margin-top: auto !important; }
 .advanced-form-details { display: grid; gap: 8px; padding: 10px; border-radius: 8px; background: #172821; }
-@media (max-width: 560px) { .advanced-promotion-forms { grid-template-columns: minmax(0,1fr); } .advanced-promotion-form img { height: 190px; } }
+.promotion-panel .promotion-result-message { flex-shrink: 0; max-height: 54px; overflow-y: auto; margin: 0; color: #f2dfa4; font-size: 12px; line-height: 1.5; }
+.promotion-empty { color: #c8d5c9; font-size: 14px; }
+@media (max-width: 560px) {
+  .promotion-dialog .promotion-card.promotion-panel { padding: 12px; }
+  .promotion-dialog .promotion-panel .promotion-entry { padding: 10px; }
+  .advanced-promotion-forms { grid-template-columns: minmax(0,1fr); }
+  .advanced-promotion-form > img { height: 190px; }
+  .promotion-dialog .promotion-panel .advanced-promotion-form .promotion-stat-preview { grid-template-columns: repeat(4, minmax(0,1fr)); }
+}
+@media (max-width: 360px) {
+  .promotion-dialog .promotion-panel .promotion-stat-preview, .promotion-dialog .promotion-panel .advanced-promotion-form .promotion-stat-preview { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-height: 560px) and (orientation: landscape) {
+  .promotion-dialog .promotion-card.promotion-panel { gap: 6px; padding: 10px; }
+  .promotion-panel > .result-sub { display: none; }
+  .promotion-unit-picker { padding-bottom: 4px; }
+  .promotion-unit-picker button { min-height: 48px; flex-basis: 112px; display: grid; grid-template-columns: 30px minmax(0, 1fr); column-gap: 5px; padding: 4px 6px; }
+  .promotion-unit-picker img { width: 30px; height: 36px; grid-row: span 2; }
+  .promotion-unit-picker strong, .promotion-unit-picker small { text-align: left; }
+}

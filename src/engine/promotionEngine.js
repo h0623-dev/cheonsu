@@ -1,5 +1,6 @@
 import { ADVANCED_CLASSES, getAdvancedClassDefinition, NEW_ALLY_TEMPLATES } from '../data/advancedClasses.js';
 import { applyEquipmentStats } from './partyEngine.js';
+import { withSkill } from '../data/skills.js';
 
 export const ADVANCED_PROMOTION_GATE = 31;
 export const ADVANCED_PROMOTION_MASTERY = 3;
@@ -46,39 +47,50 @@ export function canAdvancedPromote(unit, formId, { party = [], clearedStages = [
   return { ok: true, reason: current ? goldCost ? `분기 변경 ${goldCost}G` : '첫 분기 변경 무료' : '전직인장 1개 · 골드 무료', sealCost, goldCost, form, changing: Boolean(current) };
 }
 
-export function applyAdvancedPromotion(unit, formId, context = {}) {
-  const check = canAdvancedPromote(unit, formId, context);
-  if (!check.ok) return { ok: false, unit, goldCost: 0, sealCost: 0, message: check.reason };
+function projectAdvancedPromotionStats(unit, form) {
   const previous = getAdvancedClass(unit);
   const storedBonus = unit.advancedClassBonus;
   const storedBonusValid = previous && storedBonus && ['hp', 'atk', 'def', 'move'].every(key =>
     typeof storedBonus[key] === 'number' && Number.isFinite(storedBonus[key]) && storedBonus[key] >= 0 && storedBonus[key] <= 20);
   const oldBonus = storedBonusValid ? storedBonus : previous?.bonuses || { hp: 0, atk: 0, def: 0, move: 0 };
-  const nextBonus = check.form.bonuses;
+  const nextBonus = form.bonuses;
   const equipmentOnly = applyEquipmentStats({ ...unit, baseAtk: 0, baseDef: 0 });
   const baseAtk = unit.baseAtk ?? ((unit.atk ?? 0) - equipmentOnly.atk);
   const baseDef = unit.baseDef ?? ((unit.def ?? 0) - equipmentOnly.def);
   const maxHp = Math.max(1, (unit.maxHp ?? unit.hp ?? 1) + nextBonus.hp - oldBonus.hp);
-  const promoted = applyEquipmentStats({
+  return applyEquipmentStats({
     ...unit,
-    advancedClass: check.form.id,
-    advancedClassBonus: { ...nextBonus },
-    advancedClassSealUsed: true,
-    advancedClassChanges: count(unit.advancedClassChanges) + (check.changing ? 1 : 0),
-    advancedMastery: Math.max(getAdvancedMastery(unit), getAdvancedMastery({ advancedMastery: context.mastery })),
     maxHp,
     // 분기 변경으로 회복하거나 쓰러진 동료를 부활시키지 않는다.
     hp: Math.max(0, Math.min(unit.hp ?? 0, maxHp)),
     baseAtk: baseAtk + nextBonus.atk - oldBonus.atk,
     baseDef: baseDef + nextBonus.def - oldBonus.def,
     move: Math.max(1, (unit.move ?? 1) + nextBonus.move - oldBonus.move),
-    activeSkillId: check.form.skill.id,
-    skill: check.form.skill.name,
-    skillType: check.form.skill.type,
-    skillBonus: (check.form.skill.bonus || 0) + (unit.skillLevel || 0) * 2,
-    skillRange: check.form.skill.range,
-    skillSpec: check.form.skill,
   });
+}
+
+export function getAdvancedPromotionPreview(unit, formId) {
+  const form = getAdvancedPromotionForms(unit).find(candidate => candidate.id === formId);
+  if (!form) return null;
+  const current = unit.advancedClass === formId;
+  const next = current ? unit : projectAdvancedPromotionStats(unit, form);
+  const before = { hp: unit.maxHp ?? unit.hp ?? 1, atk: unit.atk ?? 0, def: unit.def ?? 0, move: unit.move ?? 1 };
+  const after = { hp: next.maxHp ?? next.hp ?? 1, atk: next.atk ?? 0, def: next.def ?? 0, move: next.move ?? 1 };
+  return { form, current, before, after,
+    delta: Object.fromEntries(Object.keys(before).map(key => [key, after[key] - before[key]])) };
+}
+
+export function applyAdvancedPromotion(unit, formId, context = {}) {
+  const check = canAdvancedPromote(unit, formId, context);
+  if (!check.ok) return { ok: false, unit, goldCost: 0, sealCost: 0, message: check.reason };
+  const promoted = withSkill({
+    ...projectAdvancedPromotionStats(unit, check.form),
+    advancedClass: check.form.id,
+    advancedClassBonus: { ...check.form.bonuses },
+    advancedClassSealUsed: true,
+    advancedClassChanges: count(unit.advancedClassChanges) + (check.changing ? 1 : 0),
+    advancedMastery: Math.max(getAdvancedMastery(unit), getAdvancedMastery({ advancedMastery: context.mastery })),
+  }, check.form.skill.id);
   return { ok: true, unit: promoted, goldCost: check.goldCost, sealCost: check.sealCost,
     message: `${unit.name} ${check.changing ? '분기 변경' : '최상위 전직'} 완료: ${check.form.name}. 기존 성장·장비·습득 기술은 유지됩니다.` };
 }
@@ -93,6 +105,6 @@ export function createExpansionRecruit(id, referenceParty = []) {
   return applyEquipmentStats({ ...template,
     type: 'ally', level, exp: 0, hp: template.hp + growth * 2, maxHp: template.maxHp + growth * 2,
     baseAtk: template.atk + growth, baseDef: template.def + growth,
-    equipment: { weapon: null, armor: null }, moved: false, acted: false, guard: false,
+    equipment: { weapon: null, armor: null, accessory: null }, moved: false, acted: false, guard: false,
   });
 }

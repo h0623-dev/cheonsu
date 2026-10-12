@@ -5,7 +5,7 @@ import { getPaintedVisualProfile } from '../data/unitVisuals.js';
 import { getUnitSkills, skillDescription } from '../data/skills.js';
 import { applyEquipmentStats } from '../engine/partyEngine.js';
 import { formatAttackRange, getUnitMoveRange } from '../engine/movement.js';
-import { EQUIPMENT } from '../data/equipment.js';
+import { EQUIPMENT, EQUIPMENT_SLOTS, EQUIPMENT_SLOT_LABELS } from '../data/equipment.js';
 
 export default function CompanyRoster({ party, onBack, onManage, canManage }) {
   const [selectedId, setSelectedId] = useState(party[0]?.id);
@@ -24,7 +24,7 @@ export default function CompanyRoster({ party, onBack, onManage, canManage }) {
         <dl className="company-stats">{[[Heart,'체력',`${unit.hp}/${unit.maxHp}`],[Swords,'공격',unit.atk],[Shield,'방어',unit.def],[Footprints,'이동',`${getUnitMoveRange(unit)}칸`],[Crosshair,'사거리',`${formatAttackRange(unit)}칸`]].map(([Icon,label,value]) => <div key={label}><dt><Icon size={15}/>{label}</dt><dd>{value}</dd></div>)}</dl>
         <section className="company-biography"><h3><BookOpen size={17}/>인물 기록</h3><p>{profile.bio}</p><p>{profile.bond}</p></section>
         <section className="company-skills"><h3><Sparkles size={17}/>고유 기술</h3>{getUnitSkills(unit).map(skill => <article key={skill.id}><div><strong>{skill.name}</strong><small>재사용 {skill.cooldown}턴</small></div><p>{skillDescription(skill, unit.skillLevel || 0)}</p></article>)}</section>
-        <section className="company-loadout"><h3><Shield size={17}/>현재 장비</h3><p>{EQUIPMENT[unit.equipment?.weapon]?.name || '무기 미장착'} · {EQUIPMENT[unit.equipment?.armor]?.name || '방어구 미장착'}</p></section>
+        <section className="company-loadout"><h3><Shield size={17}/>현재 장비</h3><p>{EQUIPMENT_SLOTS.map(slot => EQUIPMENT[unit.equipment?.[slot]]?.name || `${EQUIPMENT_SLOT_LABELS[slot]} 미장착`).join(' · ')}</p></section>
         {canManage && <div className="ux-action-grid"><button onClick={() => onManage('armory', unit.id)}><Shield size={18}/>장비 관리</button><button onClick={() => onManage('training', unit.id)}><Swords size={18}/>성장 관리</button></div>}
       </div>
     </div>

@@ -174,8 +174,9 @@ async function runViewport(base, viewport) {
     await page.locator('.town-hub').waitFor();
     const beforePromotion = await saveCamp();
     await openPromotion(page);
-    assert.equal(await page.locator('[data-advanced-unit]').count(), 21);
-    assert.equal(await page.locator('button[data-advanced-select]').count(), 42, '21명 각각 두 전직 분기를 제공합니다');
+    assert.equal(await page.locator('button[data-promotion-unit]').count(), 21, '보유한 동료 21명 중 전직할 동료를 고를 수 있습니다');
+    assert.equal(await page.locator('[data-advanced-unit]').count(), 1, '선택한 동료의 전직 정보만 표시합니다');
+    assert.equal(await page.locator('button[data-advanced-select]').count(), 2, '선택한 동료의 두 전직 분기를 비교합니다');
     await ensureLayout(page, '최상위 전직');
     const promotedIds = viewport.width === 390 ? Object.keys(ADVANCED_CLASSES) : ['hero', ...newIds];
     const selectedPromotionIds = new Set();
@@ -193,6 +194,7 @@ async function runViewport(base, viewport) {
       assert.deepEqual(unit.equipment, before.equipment, '각 전직 분기에서 기존 장비를 유지합니다');
     };
     for (const id of promotedIds) for (const form of ADVANCED_CLASSES[id]) {
+      await page.locator(`button[data-promotion-unit="${id}"]`).click();
       const art = page.locator(`[data-advanced-form="${form.id}"] > img`);
       assert.equal(await art.getAttribute('src'), getCharacterArt(form.id).motion.recover, `${form.name}: 폼별 실제 전투 원화를 사용합니다`);
       const choice = page.locator(`button[data-advanced-select="${form.id}"]`);
@@ -217,6 +219,7 @@ async function runViewport(base, viewport) {
       console.log(`PASS 전직 ${viewport.width}x${viewport.height} ${selectedUnit.name} ${form.name}: 실제 저장 능력치/HP/기술/장비, 인장 ${selectedPromotionIds.size}개, ${selectionSave.gold}G`);
       await openPromotion(page);
     }
+    await page.locator('button[data-promotion-unit="hero"]').click();
     const heroA = ADVANCED_CLASSES.hero[0], heroChoice = page.locator(`button[data-advanced-select="${heroA.id}"]`);
     // Submit two same-task events while the paid change is still enabled; the busy guard must charge once.
     await heroChoice.evaluate(element => { element.click(); element.click(); });

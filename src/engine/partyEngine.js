@@ -1,5 +1,5 @@
 import { stages } from "../data/stages.js";
-import { EQUIPMENT } from "../data/equipment.js";
+import { EQUIPMENT, EQUIPMENT_SLOTS, normalizeEquipmentSlots } from "../data/equipment.js";
 import { getSkillDisplayName } from '../data/skills.js';
 
 export function clone(data) {
@@ -7,70 +7,66 @@ export function clone(data) {
 }
 
 
-export function makeAlly(unit) {
-  return {
-    ...unit,
-    skill: getSkillDisplayName(unit),
-    level: unit.level || 1,
-    exp: unit.exp || 0,
-    baseAtk: unit.baseAtk || unit.atk,
-    baseDef: unit.baseDef ?? (unit.def - (unit.skillGuardBoost || 0)),
-    baseSkillBonus: unit.baseSkillBonus ?? unit.skillBonus ?? 0,
-    skillLevel: unit.skillLevel || 0,
-    equipment: unit.equipment || { weapon: null, armor: null },
-    gearEnhance: unit.gearEnhance || {},
-  };
-}
-
-
-
-
-
-
 export function getGearEnhanceBonus(gear, level = 0) {
-  if (!gear || !level) return { atk: 0, def: 0 };
-
-  const safeLevel = Math.max(0, Math.min(5, Number(level) || 0));
-
+  if (!gear) return { atk: 0, def: 0 };
+  const value = Number(level);
+  const safeLevel = Number.isFinite(value) ? Math.max(0, Math.min(5, Math.floor(value))) : 0;
   return {
     atk: gear.atk > 0 ? safeLevel : 0,
     def: gear.def > 0 ? safeLevel : 0,
   };
 }
 
+export function getEquipmentBonus(unit) {
+  const equipment = normalizeEquipmentSlots(unit?.equipment);
+  const enhancements = unit?.gearEnhance || {};
+  return EQUIPMENT_SLOTS.reduce((total, slot) => {
+    const item = EQUIPMENT[equipment[slot]];
+    // A legacy unknown ID stays in the save but cannot become a duplicate bonus in another slot.
+    if (!item || item.slot !== slot) return total;
+    const enhanced = getGearEnhanceBonus(item, enhancements[item.id]);
+    return { atk: total.atk + item.atk + enhanced.atk, def: total.def + item.def + enhanced.def };
+  }, { atk: 0, def: 0 });
+}
+
+function getBaseEquipmentStats(unit) {
+  const bonus = getEquipmentBonus(unit);
+  const guard = Number.isFinite(unit.skillGuardBoost) ? unit.skillGuardBoost : 0;
+  // Pre-base-stat saves already store the displayed, equipped values in atk/def.
+  // Recover the base once, so loading, training and changing promotion never stack the gear.
+  return {
+    baseAtk: Number.isFinite(unit.baseAtk) ? unit.baseAtk : (Number.isFinite(unit.atk) ? unit.atk : 0) - bonus.atk,
+    baseDef: Number.isFinite(unit.baseDef) ? unit.baseDef : (Number.isFinite(unit.def) ? unit.def : 0) - bonus.def - guard,
+  };
+}
+
+export function makeAlly(unit) {
+  return {
+    ...unit,
+    ...getBaseEquipmentStats(unit),
+    skill: getSkillDisplayName(unit),
+    level: unit.level || 1,
+    exp: unit.exp || 0,
+    baseSkillBonus: unit.baseSkillBonus ?? unit.skillBonus ?? 0,
+    skillLevel: unit.skillLevel || 0,
+    equipment: normalizeEquipmentSlots(unit.equipment),
+    gearEnhance: unit.gearEnhance || {},
+  };
+}
 
 export function applyEquipmentStats(unit) {
   if (unit.type !== "ally") return unit;
-
-  const baseAtk = unit.baseAtk ?? unit.atk;
-  const skillGuardBoost = unit.skillGuardBoost || 0;
-  const baseDef = unit.baseDef ?? (unit.def - skillGuardBoost);
-  const gearEnhance = unit.gearEnhance || {};
-
-  const weapon = unit.equipment?.weapon ? EQUIPMENT[unit.equipment.weapon] : null;
-  const armor = unit.equipment?.armor ? EQUIPMENT[unit.equipment.armor] : null;
-
-  const weaponEnhance = weapon ? getGearEnhanceBonus(weapon, gearEnhance[weapon.id] || 0) : { atk: 0, def: 0 };
-  const armorEnhance = armor ? getGearEnhanceBonus(armor, gearEnhance[armor.id] || 0) : { atk: 0, def: 0 };
-
-  const atkBonus =
-    (weapon?.atk || 0) +
-    (armor?.atk || 0) +
-    weaponEnhance.atk +
-    armorEnhance.atk;
-  const defBonus =
-    (weapon?.def || 0) +
-    (armor?.def || 0) +
-    weaponEnhance.def +
-    armorEnhance.def;
-
+  const { baseAtk, baseDef } = getBaseEquipmentStats(unit);
+  const bonus = getEquipmentBonus(unit);
+  const skillGuardBoost = Number.isFinite(unit.skillGuardBoost) ? unit.skillGuardBoost : 0;
   return {
     ...unit,
-    gearEnhance,
+    equipment: normalizeEquipmentSlots(unit.equipment),
+    gearEnhance: unit.gearEnhance || {},
     baseAtk,
     baseDef,
-    atk: baseAtk + atkBonus,
-    def: baseDef + defBonus + skillGuardBoost,
+    atk: baseAtk + bonus.atk,
+    def: baseDef + bonus.def + skillGuardBoost,
   };
 }
 
@@ -217,7 +213,7 @@ export function grantExp(units, attackerId, expAmount) {
     if (unit.id !== attackerId || unit.type !== "ally") return unit;
     const storedExp = Number(unit.exp);
     let nextExp = (Number.isFinite(storedExp) ? Math.max(0, storedExp) : 0) + expAmount;
-    let nextUnit = { ...unit, exp: nextExp };
+    let nextUnit = applyEquipmentStats({ ...unit, exp: nextExp });
     messages.push(`${unit.name} EXP +${expAmount}`);
     while (nextExp >= 100) {
       const oldBaseAtk = nextUnit.baseAtk ?? nextUnit.atk;

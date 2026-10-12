@@ -1,11 +1,10 @@
 import { DISCOVERIES, DISCOVERY_TECHNIQUES, SECRET_PROMOTIONS } from '../data/discoveries.js';
 import { isTerrainBlocked } from './movement.js';
 import { applyEquipmentStats } from './partyEngine.js';
+import { ORDINARY_PROMOTION_BONUSES } from './ordinaryPromotion.js';
 
 const cellKey = (x, y) => `${x},${y}`;
 const directions = [[1, 0], [-1, 0], [0, 1], [0, -1]];
-// Keep in sync with App's ordinary promotion; route-equivalence tests cover this contract.
-const ORDINARY_PROMOTION_BONUSES = Object.freeze({ hp: 5, atk: 2, def: 2, skillBonus: 1 });
 
 function uniqueIds(value) {
   return Array.isArray(value)
@@ -156,20 +155,14 @@ export function canSecretPromote(unit, progress) {
   return { ok: true, reason: `${promotion.classTitle} 전직이 가능합니다.` };
 }
 
-/** Both promotion routes receive ordinary and secret bonuses exactly once. */
-export function applySecretPromotion(unit, progress) {
-  const nextProgress = normalizeExploration(progress);
-  const check = canSecretPromote(unit, nextProgress);
-  if (!check.ok) return { unit, progress: nextProgress, message: check.reason };
-
-  const promotion = getSecretPromotion(unit, nextProgress);
+function projectSecretPromotion(unit, promotion) {
   // Recover missing legacy bases without counting equipped gear or guard twice.
   const equipmentOnly = applyEquipmentStats({ ...unit, baseAtk: 0, baseDef: 0 });
   const baseAtk = unit.baseAtk ?? ((unit.atk ?? 0) - equipmentOnly.atk);
   const baseDef = unit.baseDef ?? ((unit.def ?? 0) - equipmentOnly.def);
   const maxHp = (unit.maxHp ?? unit.baseHP ?? unit.hp ?? 1) + promotion.bonuses.hp;
   const hp = unit.hp ?? unit.maxHp ?? unit.baseHP ?? 1;
-  const promoted = applyEquipmentStats({
+  return applyEquipmentStats({
     ...unit,
     promoted: true,
     secretClass: promotion.secretClass,
@@ -182,6 +175,24 @@ export function applySecretPromotion(unit, progress) {
     skillBonus: (unit.skillBonus || 0) + promotion.bonuses.skillBonus,
     ...(unit.promoted ? {} : { skillCooldown: 0 }),
   });
+}
+
+export function getSecretPromotionPreview(unit, progress) {
+  const promotion = getSecretPromotion(unit, progress);
+  if (!promotion) return null;
+  const next = unit.secretClass ? unit : projectSecretPromotion(unit, promotion);
+  const before = { hp: unit.maxHp ?? unit.hp ?? 1, atk: unit.atk ?? 0, def: unit.def ?? 0, move: unit.move ?? 1 };
+  const after = { hp: next.maxHp ?? next.hp ?? 1, atk: next.atk ?? 0, def: next.def ?? 0, move: next.move ?? 1 };
+  return { before, after, delta: Object.fromEntries(Object.keys(before).map(key => [key, after[key] - before[key]])) };
+}
+
+/** Both promotion routes receive ordinary and secret bonuses exactly once. */
+export function applySecretPromotion(unit, progress) {
+  const nextProgress = normalizeExploration(progress);
+  const check = canSecretPromote(unit, nextProgress);
+  if (!check.ok) return { unit, progress: nextProgress, message: check.reason };
+  const promotion = getSecretPromotion(unit, nextProgress);
+  const promoted = projectSecretPromotion(unit, promotion);
   nextProgress.relics = nextProgress.relics.filter((id) => id !== promotion.relicId);
   nextProgress.techniques = uniqueIds([...nextProgress.techniques, promotion.techniqueId]);
   return {

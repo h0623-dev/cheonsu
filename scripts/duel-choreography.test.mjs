@@ -84,7 +84,8 @@ test('old skill names migrate without discarding cooldowns, growth, learned skil
   const old={id:'lina',type:'ally',skill:'파이어볼',hp:29,maxHp:30,atk:12,def:4,level:8,exp:72,skillCooldowns:{ember:2,snipe:1},learnedTechniques:['lina-phoenix-flare'],equipment:{weapon:'longbow',armor:'leather'},gearEnhance:{longbow:3},facing:'north'};
   const frozen=structuredClone(old),migrated=makeAlly(old);
   assert.equal(migrated.skill,'불꽃 화살');assert.deepEqual(old,frozen);
-  for(const key of ['hp','maxHp','level','exp','skillCooldowns','learnedTechniques','equipment','gearEnhance','facing'])assert.deepEqual(migrated[key],old[key]);
+  for(const key of ['hp','maxHp','level','exp','skillCooldowns','learnedTechniques','gearEnhance','facing'])assert.deepEqual(migrated[key],old[key]);
+  assert.deepEqual(migrated.equipment,{...old.equipment,accessory:null});
   assert.equal(getSkillDisplayName({...old,activeSkillId:'lina-phoenix-flare'}),'불사조 화살');
   assert.equal(getSkillDisplayName({id:'boss',type:'enemy',skill:'파이어볼'}),'파이어볼');
   for(const stage of stages)for(const unit of stage.units.filter(unit=>unit.type==='ally'))assert.equal(unit.skill,CHARACTER_SKILLS[unit.id][0].name,`stage ${stage.id}/${unit.id}`);

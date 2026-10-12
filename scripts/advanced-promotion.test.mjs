@@ -4,7 +4,7 @@ import { ADVANCED_CLASSES } from '../src/data/advancedClasses.js';
 import { getInitialParty, grantExp } from '../src/engine/partyEngine.js';
 import { applySecretPromotion } from '../src/engine/discoveryEngine.js';
 import { getUnitSkills, getSkill, getSkillDisplayName, applyCooldown, tickCooldowns, applySupportSkill } from '../src/data/skills.js';
-import { getAdvancedPromotionForms, getAdvancedClass, getAdvancedSealBalance, getAdvancedMastery, canAdvancedPromote, applyAdvancedPromotion, createExpansionRecruit } from '../src/engine/promotionEngine.js';
+import { getAdvancedPromotionForms, getAdvancedClass, getAdvancedSealBalance, getAdvancedMastery, canAdvancedPromote, getAdvancedPromotionPreview, applyAdvancedPromotion, createExpansionRecruit } from '../src/engine/promotionEngine.js';
 import { finalizeExpansionAllySkill } from '../src/engine/expansionAllySkills.js';
 
 const hero = () => ({ ...getInitialParty()[0], promoted: true, level: 6, advancedMastery: 3 });
@@ -42,7 +42,7 @@ test('새 아군은 소유 동료 중앙값 성장으로 합류하며 기존 동
     assert.equal(joined.type, 'ally');
     assert.equal(getUnitSkills(joined).length, 2);
     assert.ok(joined.baseAtk > createExpansionRecruit(id).baseAtk);
-    assert.deepEqual(joined.equipment, { weapon: null, armor: null });
+    assert.deepEqual(joined.equipment, { weapon: null, armor: null, accessory: null });
   }
   assert.deepEqual(party, before);
   assert.equal(createExpansionRecruit('missing'), null);
@@ -123,7 +123,7 @@ test('일반·비전 전직과 장비·습득 기술·수집·소모품을 보�
   assert.equal(result.unit.secretClass, 'dawnblade');
   assert.equal(result.unit.classTitle, '여명검사');
   assert.ok(getUnitSkills(result.unit).some(skill => skill.id === 'hero-dawn-slash'));
-  assert.deepEqual(result.unit.equipment, withGear.equipment);
+  assert.deepEqual(result.unit.equipment, { ...withGear.equipment, accessory: null });
   assert.deepEqual(result.unit.gearEnhance, withGear.gearEnhance);
   assert.deepEqual(result.unit.collected, ['kept']);
   assert.deepEqual(ctx, before);
@@ -139,6 +139,24 @@ test('기존 전직 보너스 저장값을 제거하여 배포 후 수치 조정
   assert.equal(changed.maxHp, base.maxHp + 4);
   assert.equal(changed.baseAtk, base.baseAtk);
   assert.equal(changed.baseDef, base.baseDef + 2);
+});
+
+test('최상위 미리보기는 잠금 조건과 무관하게 이전 저장 보너스를 차감한 실제 변경 수치를 보여준다', () => {
+  const base = hero();
+  const historical = { ...base, advancedClass: 'hero__form0', advancedClassSealUsed: true,
+    advancedClassBonus: { hp: 5, atk: 4, def: 1, move: 0 },
+    maxHp: base.maxHp + 5, baseAtk: base.baseAtk + 4, atk: base.atk + 4,
+    baseDef: base.baseDef + 1, def: base.def + 1 };
+  const original = structuredClone(historical);
+  const preview = getAdvancedPromotionPreview(historical, 'hero__form1');
+  const changed = applyAdvancedPromotion(historical, 'hero__form1', context(historical)).unit;
+  assert.deepEqual(preview.after, { hp: changed.maxHp, atk: changed.atk, def: changed.def, move: changed.move });
+  assert.deepEqual(preview.delta, { hp: -1, atk: -4, def: 1, move: 0 });
+  assert.deepEqual(historical, original);
+  assert.deepEqual(getAdvancedPromotionPreview(historical, 'hero__form0').delta, { hp: 0, atk: 0, def: 0, move: 0 });
+  const locked = { ...base, promoted: false, advancedMastery: 0 };
+  assert.ok(getAdvancedPromotionPreview(locked, 'hero__form0'));
+  assert.equal(getAdvancedPromotionPreview(locked, 'bram__form0'), null);
 });
 
 test('최상위 전직 이후 비전 전직을 얻어도 선택 분기와 성장 보정은 그대로 남는다', () => {

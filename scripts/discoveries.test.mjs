@@ -24,6 +24,7 @@ import {
 } from '../src/data/skills.js';
 import { normalizeSaveData } from '../src/engine/saveEngine.js';
 import { createExpansionRecruit } from '../src/engine/promotionEngine.js';
+import { promoteAllyUnit } from '../src/engine/ordinaryPromotion.js';
 import { applyExpansionEnemyIdentity, createExpansionEnemy, createExpansionExtraEnemy, getExpansionEnemyKeys } from '../src/data/expansionEnemies.js';
 
 function freeze(value) {
@@ -35,7 +36,7 @@ function freeze(value) {
 }
 
 // App owns expansion today. Parse its declarations so tests use the real maps,
-// formations, recruits, and ordinary promotion without importing React or JSX.
+// formations and recruits without importing React or JSX. Promotion uses its engine module.
 const source = await readFile(new URL('../src/App.jsx', import.meta.url), 'utf8');
 const { body } = parse(source, {
   ecmaVersion: 'latest', sourceType: 'module', ecmaFeatures: { jsx: true },
@@ -52,11 +53,11 @@ const end = body.findIndex((node) => declares(node, 'getLogType'));
 assert.ok(start >= 0 && end > start, 'The actual battlefield builders must be available');
 const appHelpers = runInNewContext([
   ...body.slice(start, end).map((node) => source.slice(node.start, node.end)),
-  ...['ENEMY_VARIANT_KEYS', 'createRecruitAlly', 'getPromotionTitle', 'promoteAllyUnit'].map(declaration),
+  ...['ENEMY_VARIANT_KEYS', 'createRecruitAlly'].map(declaration),
   '({ expandStageForLargeBattle, extendMapForPlayableBoard, spaceBattleFormations, createRecruitAlly, promoteAllyUnit })',
 ].join('\n'), {
   alignMapToArtwork, createBattlefieldTerrain, getBattlefieldPlan, applyEquipmentStats, distributeBattleFormations, getSkillDisplayName, getChapterBossName, applyStageMonsterAppearance, withStageEnemyLevel,
-  createExpansionRecruit, applyExpansionEnemyIdentity, createExpansionEnemy, createExpansionExtraEnemy, getExpansionEnemyKeys,
+  createExpansionRecruit, promoteAllyUnit, applyExpansionEnemyIdentity, createExpansionEnemy, createExpansionExtraEnemy, getExpansionEnemyKeys,
   clone: (value) => JSON.parse(JSON.stringify(value)),
   Math: Object.assign(Object.create(Math), { random: () => { throw new Error('Random map placement'); } }),
 });
@@ -394,7 +395,7 @@ for (const id of ['hero', 'bram']) {
   test(`${id}: direct secret promotion and ordinary-then-secret produce identical final stats and rewards`, () => {
     const promotion = SECRET_PROMOTIONS[id];
     const progress = freeze({ claimed: ['kept'], relics: [promotion.relicId], techniques: [] });
-    for (const hp of [14, 40]) {
+    for (const hp of [0, 14, 40]) {
       const base = freeze(applyEquipmentStats(ally(id, {
         level: 5, exp: 87, hp, maxHp: 40, baseHP: 40, baseAtk: 15, baseDef: 10,
         equipment: { weapon: id === 'hero' ? 'ironSword' : 'guardShield', armor: 'chainArmor' },
@@ -413,7 +414,8 @@ for (const id of ['hero', 'bram']) {
       const afterOrdinary = applySecretPromotion(ordinary, progress);
       assert.deepEqual(direct, afterOrdinary, 'Actual App promotion and direct promotion must converge');
       for (const [stat, bonus] of Object.entries(preview.bonuses)) {
-        assert.equal(direct.unit[stat] - base[stat], bonus, `UI delta for ${stat} must match the applied delta`);
+        assert.equal(direct.unit[stat] - base[stat], stat === 'hp' && hp === 0 ? 0 : bonus,
+          `UI delta for ${stat} must match the applied delta without reviving a fallen ally`);
       }
       assert.deepEqual(direct.progress, { claimed: ['kept'], relics: [], techniques: [promotion.techniqueId] });
       assert.deepEqual(getUnitSkills(direct.unit), getUnitSkills(afterOrdinary.unit));

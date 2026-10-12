@@ -1,6 +1,9 @@
 import { DISCOVERY_TECHNIQUES, SECRET_PROMOTIONS } from './discoveries.js';
 import { getAdvancedClassDefinition } from './advancedClasses.js';
 
+// 전직 원장(promoted)에서 계산한다. 저장된 skillBonus나 분기 변경 횟수로 중첩하지 않는다.
+export const ORDINARY_PROMOTION_ATTACK_BONUS = 1;
+
 const attack = (id, name, bonus, range, cooldown, effect, extra = {}) => ({ id, name, type: 'attack', bonus, minRange: 1, range, cooldown, effect, ...extra });
 const heal = (id, name, power, targets, range, cooldown, cleanse = false, extra = {}) => ({ id, name, type: 'heal', power, targets, range, cooldown, effect: 'heal', cleanse, ...extra });
 const guard = (id, name, defense, radius, cooldown, extra = {}) => ({ id, name, type: 'guard', defense, radius, range: radius, cooldown, effect: 'guard', ...extra });
@@ -47,7 +50,9 @@ export function getUnitSkills(unit) {
     seen.add(id);
     skills.push(technique);
   }
-  return skills.length === base.length ? base : skills;
+  const available = skills.length === base.length ? base : skills;
+  return unit.promoted ? available.map(skill => skill.type === 'attack'
+    ? { ...skill, bonus: (skill.bonus ?? 0) + ORDINARY_PROMOTION_ATTACK_BONUS } : skill) : available;
 }
 export function getSkill(unit, id) { const skills = getUnitSkills(unit); return skills.find(skill => skill.id === id) || skills[0] || null; }
 export function getSkillDisplayName(unit) {

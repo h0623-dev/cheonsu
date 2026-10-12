@@ -3,9 +3,11 @@ import { memo, useCallback, useEffect, useEffectEvent, useMemo, useRef, useState
 import { X, Swords, Sparkles, BookOpen, ArrowRight, Save, ShoppingBag, Check, Users, Shield, Backpack, Settings, Undo2 } from "lucide-react";
 import DiscoveryDialog from "./components/DiscoveryDialog.jsx";
 import PromotionDialog from "./components/PromotionDialog.jsx";
+import PromotionPanel from "./components/PromotionPanel.jsx";
+import { getPromotionTitle, getPromotionCost, canPromoteUnit, promoteAllyUnit } from './engine/ordinaryPromotion.js';
 import { DISCOVERIES } from "./data/discoveries.js";
-import { getStageDiscoveries, getVisibleDiscoveries, normalizeExploration, claimDiscovery, applyDiscoveryUnlocks, getSecretPromotion, canSecretPromote, applySecretPromotion } from "./engine/discoveryEngine.js";
-import { getAdvancedPromotionForms, getAdvancedClass, getAdvancedSealBalance, getAdvancedMastery, canAdvancedPromote, applyAdvancedPromotion, createExpansionRecruit } from './engine/promotionEngine.js';
+import { getStageDiscoveries, getVisibleDiscoveries, normalizeExploration, claimDiscovery, applyDiscoveryUnlocks, canSecretPromote, applySecretPromotion } from "./engine/discoveryEngine.js";
+import { getAdvancedClass, getAdvancedMastery, applyAdvancedPromotion, createExpansionRecruit } from './engine/promotionEngine.js';
 import { finalizeExpansionAllySkill } from './engine/expansionAllySkills.js';
 import { createBattleAsyncLifecycle } from './engine/battleAsyncLifecycle.js';
 import './components/advanced-promotion.css';
@@ -63,7 +65,7 @@ import BossSplash from "./components/BossSplash.jsx";
 import { getBossPresentation } from "./data/bossPresentation.js";
 import "./components/boss-presence.css";
 import { stages } from "./data/stages.js";
-import { EQUIPMENT } from "./data/equipment.js";
+import { EQUIPMENT, EQUIPMENT_SLOTS, EQUIPMENT_SLOT_LABELS, getGearShopAvailability, getGearShopPrice } from "./data/equipment.js";
 import { STATUS_INFO } from "./data/statuses.js";
 import { SUPPORT_PAIRS, SUPPORT_RANK_THRESHOLDS } from "./data/supports.js";
 import { STORY_SCENES } from "./data/storyScenes.js";
@@ -113,7 +115,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.169";
+const SAVE_VERSION = "1.99.170";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -6578,20 +6580,17 @@ function getGearScoreForUnit(unit, gear, enhanceLevel = 0) {
 function autoEquipParty(party, gearInventory, gearEnhance = {}, onlyDeployedIds = null) {
   const targetIds = onlyDeployedIds ? new Set(onlyDeployedIds) : null;
   const gearIds = [...new Set(gearInventory || [])];
-  const usedBySlot = { weapon: new Set(), armor: new Set() };
   return applyEquipmentToParty((party || []).map((unit) => {
     if (unit.type !== "ally") return unit;
     if (targetIds && !targetIds.has(unit.id)) return unit;
-    const nextEquipment = { ...(unit.equipment || { weapon: null, armor: null }) };
-    ["weapon", "armor"].forEach((slot) => {
+    const nextEquipment = { weapon: null, armor: null, accessory: null, ...unit.equipment };
+    EQUIPMENT_SLOTS.forEach((slot) => {
       const candidates = gearIds
         .map((gearId) => EQUIPMENT[gearId])
         .filter((gear) => gear && gear.slot === slot && gear.allowed.includes(unit.id))
-        .filter((gear) => !usedBySlot[slot].has(gear.id))
         .sort((a, b) => getGearScoreForUnit(unit, b, getGearEnhanceLevel(gearEnhance, b.id)) - getGearScoreForUnit(unit, a, getGearEnhanceLevel(gearEnhance, a.id)));
       if (candidates[0]) {
         nextEquipment[slot] = candidates[0].id;
-        usedBySlot[slot].add(candidates[0].id);
       }
     });
     return { ...unit, equipment: nextEquipment, gearEnhance: normalizeGearEnhance(gearEnhance) };
@@ -6600,7 +6599,7 @@ function autoEquipParty(party, gearInventory, gearEnhance = {}, onlyDeployedIds 
 
 function countEquippedUnits(party, deployedIds = null) {
   const ids = deployedIds ? new Set(deployedIds) : null;
-  return (party || []).filter((unit) => (!ids || ids.has(unit.id)) && Boolean(unit.equipment?.weapon || unit.equipment?.armor)).length;
+  return (party || []).filter((unit) => (!ids || ids.has(unit.id)) && EQUIPMENT_SLOTS.some(slot => unit.equipment?.[slot])).length;
 }
 
 
@@ -6779,7 +6778,7 @@ function createRecruitAlly(id, referenceParty = []) {
     moved: false,
     acted: false,
     guard: false,
-    equipment: { weapon: null, armor: null },
+    equipment: { weapon: null, armor: null, accessory: null },
     baseAtk: base.atk,
     baseDef: base.def,
   });
@@ -7301,72 +7300,11 @@ function createStageReinforcements(stage, nextRound, units, activeMap) {
 }
 
 
-function getPromotionTitle(unit) {
-  const titles = {
-    hero: "천룡기사",
-    bram: "호국기사",
-    lina: "주술대사",
-    aria: "성무녀",
-    leon: "저격수",
-    sera: "암영자",
-    noah: "군략가",
-    yuna: "월광무녀",
-    rakan: "야왕",
-    miho: "환영검사",
-    teo: "파성장인",
-    irene: "빙결현자",
-    kaz: "섬광닌자",
-    ella: "별빛술사",
-    jin: "용검성",
-    luka: "천리안",
-    baekho: "백호장군",
-    mare: "청해창수",
-    harin: "호흡선사",
-    edan: "공방기장",
-    sylvan: "녹음현자",
-  };
-
-  return titles[unit?.id] || "상급 병과";
-}
-
-function getPromotionCost(unit) {
-  const level = unit?.level || 1;
-  return 900 + Math.max(0, level - 3) * 120;
-}
-
-function canPromoteUnit(unit, gold) {
-  if (!unit) return { ok: false, reason: "동료가 없습니다." };
-  if (unit.promoted) return { ok: false, reason: "이미 전직했습니다." };
-  if ((unit.level || 1) < 3) return { ok: false, reason: "Lv.3 이상 필요" };
-  if (gold < getPromotionCost(unit)) return { ok: false, reason: "골드 부족" };
-
-  return { ok: true, reason: "전직 가능" };
-}
-
-function promoteAllyUnit(unit) {
-  if (!unit || unit.promoted) return unit;
-
-  const baseAtk = unit.baseAtk ?? unit.atk ?? 1;
-  const baseDef = unit.baseDef ?? unit.def ?? 0;
-
-  return applyEquipmentStats({
-    ...unit,
-    promoted: true,
-    classTitle: getPromotionTitle(unit),
-    maxHp: (unit.maxHp || unit.hp || 1) + 5,
-    hp: Math.min((unit.maxHp || unit.hp || 1) + 5, (unit.hp || unit.maxHp || 1) + 5),
-    baseAtk: baseAtk + 2,
-    baseDef: baseDef + 2,
-    skillBonus: (unit.skillBonus || 0) + 1,
-    skillCooldown: 0,
-  });
-}
-
 function getUnitDisplayClass(unit) {
   if (!unit) return "";
   const advanced = getAdvancedClass(unit);
   if (advanced) return advanced.name;
-  return unit.promoted ? unit.classTitle || getPromotionTitle(unit) : getCharacterProfile(unit.id).role;
+  return unit.promoted ? (unit.secretClass ? unit.classTitle || getPromotionTitle(unit) : getPromotionTitle(unit)) : getCharacterProfile(unit.id).role;
 }
 
 
@@ -8263,6 +8201,8 @@ export default function App() {
   const [sessionStarted, setSessionStarted] = useState(false);
   const [settingsTab, setSettingsTab] = useState('sound');
   const [armorySelectedId, setArmorySelectedId] = useState(null);
+  const [shopTabHint, setShopTabHint] = useState('items');
+  const [forgeSlot, setForgeSlot] = useState('all');
   const utilityHistory = useRef([]);
   const openUtility = (destination, tab = 'sound') => {
     utilityHistory.current.push(screen);
@@ -8285,7 +8225,6 @@ export default function App() {
   const [deploySort, setDeploySort] = useState("default");
   const [deploymentHint, setDeploymentHint] = useState("균형 편성을 추천합니다.");
   const [party, setParty] = useState(getInitialParty());
-  const [advancedPreviewByUnit, setAdvancedPreviewByUnit] = useState({});
   const advancedPromotionBusyRef = useRef(false);
   useEffect(() => { advancedPromotionBusyRef.current = false; }, [party]);
   const [exploration, setExploration] = useState(() => normalizeExploration());
@@ -13780,12 +13719,16 @@ export default function App() {
     setCampMessage(`${item.name} 1개를 구매했습니다.`);
   };
 
-  const buyGear = (gearId, price) => {
+  const buyGear = (gearId) => {
     setSaveNotice(null);
-    if (gearInventory.includes(gearId)) { setCampMessage("이미 보유한 장비입니다."); return; }
+    const gear = EQUIPMENT[gearId];
+    const availability = getGearShopAvailability(gear, clearedStages);
+    if (!availability.ok) { setCampMessage(availability.reason); return; }
+    const price = getGearShopPrice(gear);
+    if (gearInventory.includes(gearId)) { setCampMessage("이미 보유한 공용 장비입니다. 착용 가능한 동료 모두 사용할 수 있습니다."); return; }
     if (gold < price) { setCampMessage("골드가 부족합니다."); return; }
     setGold((prev) => prev - price);
-    setGearInventory((prev) => [...prev, gearId]);
+    setGearInventory((prev) => [...new Set([...prev, gearId])]);
     setCampMessage(`${EQUIPMENT[gearId].name}을 구매했습니다.`);
   };
 
@@ -13802,7 +13745,7 @@ export default function App() {
             ? {
                 ...unit,
                 equipment: {
-                  ...(unit.equipment || { weapon: null, armor: null }),
+                  weapon: null, armor: null, accessory: null, ...unit.equipment,
                   [gear.slot]: gearId,
                 },
               }
@@ -13817,7 +13760,7 @@ export default function App() {
   const unequipGear = (slot, unitId = equipmentUnit?.id) => {
     setSaveNotice(null);
     const target = party.find(unit => unit.id === unitId);
-    if (!target || !['weapon', 'armor'].includes(slot)) return;
+    if (!target || !EQUIPMENT_SLOTS.includes(slot)) return;
     setParty((prev) =>
       applyGearEnhanceToParty(
         prev.map((unit) =>
@@ -13825,7 +13768,7 @@ export default function App() {
             ? {
                 ...unit,
                 equipment: {
-                  ...(unit.equipment || { weapon: null, armor: null }),
+                  weapon: null, armor: null, accessory: null, ...unit.equipment,
                   [slot]: null,
                 },
               }
@@ -13834,7 +13777,7 @@ export default function App() {
         gearEnhance
       )
     );
-    setCampMessage(`${target.name}의 ${slot === "weapon" ? "무기" : "방어구"}를 해제했습니다.`);
+    setCampMessage(`${target.name}의 ${EQUIPMENT_SLOT_LABELS[slot]}를 해제했습니다.`);
   };
 
 
@@ -14004,7 +13947,7 @@ export default function App() {
 
     playSfx("phase");
     setCampMessage(
-      `${target.name} 전직 완료! ${getPromotionTitle(target)}이(가) 되었습니다. 최대 HP +5, 공격 +2, 방어 +2, 스킬 위력 +1`
+      `${target.name} 전직 완료! ${getPromotionTitle(target)}이(가) 되었습니다. 최대 HP +5, 공격 +2, 방어 +2, 공격 기술 위력 +1`
     );
   };
 
@@ -14128,110 +14071,12 @@ export default function App() {
 
   const renderPromotionModal = () => {
     if (!promoteOpen) return null;
-
-    return (
-      <PromotionDialog onClose={() => setPromoteOpen(false)}>
-        <div className="battle-card equipment-card promotion-card">
-          <div className="battle-title">전직</div>
-          <div className="result-sub">
-            Lv.3 이상 동료를 상급 병과로 전직시킬 수 있습니다.
-          </div>
-          <div className="advanced-promotion-summary" data-advanced-seals={getAdvancedSealBalance(party, clearedStages).available}>
-            <strong>최상위 전직 · 보유 전직인장 {getAdvancedSealBalance(party, clearedStages).available}개</strong>
-            <span>31장 클리어 · 기존 상급 전직 · 스킬 사용 3회. 인장: 31장 첫 승리 3개, 이후 장 첫 승리마다 1개.</span>
-            <span>최초 전직은 인장 1개, 첫 분기 변경은 무료, 이후 변경은 300G. 성장·장비·비전 기술을 유지합니다.</span>
-          </div>
-
-          <div className="promotion-list">
-            {party.map((unit) => {
-              const check = canPromoteUnit(unit, gold);
-              const cost = getPromotionCost(unit);
-              const secret = getSecretPromotion(unit, exploration);
-              const secretCheck = canSecretPromote(unit, exploration);
-              const advancedForms = getAdvancedPromotionForms(unit);
-              const mastery = getAdvancedMastery(unit, unitBattleStats[unit.id]);
-              const previewId = advancedPreviewByUnit[unit.id];
-
-              return (
-                <div
-                  className={`promotion-entry ${unit.promoted ? "promoted" : ""}`}
-                  key={unit.id}
-                >
-                  <div className="promotion-unit-head">
-                    <img src={getUnitPortrait(unit)} alt={unit.name} onError={(event) => { event.currentTarget.style.display = "none"; }} />
-                    <div>
-                      <strong>
-                        {unit.name} Lv.{unit.level}
-                      </strong>
-                      <span>
-                        {unit.promoted ? getUnitDisplayClass(unit) : `전직 후: ${getPromotionTitle(unit)}`}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="promotion-stat-preview">
-                    <div>
-                      <span>HP</span>
-                      <strong>{unit.maxHp} → {unit.promoted ? unit.maxHp : unit.maxHp + 5}</strong>
-                    </div>
-                    <div>
-                      <span>공격</span>
-                      <strong>{unit.atk} → {unit.promoted ? unit.atk : unit.atk + 2}</strong>
-                    </div>
-                    <div>
-                      <span>방어</span>
-                      <strong>{unit.def} → {unit.promoted ? unit.def : unit.def + 2}</strong>
-                    </div>
-                  </div>
-
-                  <div className="promotion-footer">
-                    <span>{unit.promoted ? "전직 완료" : `비용 ${cost}G · ${check.reason}`}</span>
-                    <button disabled={!check.ok} onClick={() => promoteUnit(unit.id)}>
-                      {unit.promoted ? "완료" : "전직"}
-                    </button>
-                  </div>
-                  {secret && (secret.hasRelic || unit.secretClass) && <div className="secret-promotion-row">
-                    <div><strong>{secret.classTitle}</strong><span>{unit.secretClass ? "숨겨진 전직 완료" : secretCheck.reason}</span>
-                      {!unit.secretClass && <small>HP +{secret.bonuses.hp} · 공격 +{secret.bonuses.atk} · 방어 +{secret.bonuses.def} · 전용 기술</small>}
-                    </div>
-                    <button disabled={!secretCheck.ok} onClick={() => promoteSecretUnit(unit.id)}>비전 전직</button>
-                  </div>}
-                  {advancedForms.length > 0 && <section className="advanced-promotion" data-advanced-unit={unit.id}>
-                    <div className="advanced-promotion-heading"><strong>최상위 전직 선택</strong><span>스킬 숙련 {mastery}/3</span></div>
-                    <div className="advanced-promotion-forms">
-                      {advancedForms.map(form => {
-                        const advancedCheck = canAdvancedPromote(unit, form.id, { party, clearedStages, gold, mastery });
-                        const current = unit.advancedClass === form.id;
-                        const opened = previewId === form.id;
-                        const previewArt = getPaintedVisualProfile(form.id)?.battle || getUnitPortrait(unit);
-                        return <article key={form.id} data-advanced-form={form.id} className={`advanced-promotion-form ${current ? 'current' : ''} ${opened ? 'previewing' : ''}`}>
-                          <img src={previewArt} alt={`${unit.name} ${form.name} 전투 모습`} loading="lazy" onError={event => { event.currentTarget.style.display = 'none'; }} />
-                          <strong>{form.name}{current ? ' · 선택 중' : ''}</strong>
-                          <span>{form.role}</span>
-                          <p>{skillDescription(form.skill, unit.skillLevel || 0)}</p>
-                          <small>특성: HP +{form.bonuses.hp} · 공격 +{form.bonuses.atk} · 방어 +{form.bonuses.def}{form.bonuses.move ? ` · 이동 +${form.bonuses.move}` : ''}</small>
-                          <button className="advanced-preview-button" data-advanced-preview={form.id} onClick={() => setAdvancedPreviewByUnit(previous => ({ ...previous, [unit.id]: opened ? null : form.id }))}>{opened ? '설명 접기' : '외형·역할 상세 보기'}</button>
-                          {opened && <div className="advanced-form-details"><p>{form.appearance}</p><p>대가·약점: {form.drawback}</p><p>새 기술: {form.skill.name}. 기존 기술은 유지됩니다.</p></div>}
-                          <small className="advanced-promotion-reason">{advancedCheck.reason}</small>
-                          <button data-advanced-select={form.id} disabled={!advancedCheck.ok} onClick={() => promoteAdvancedUnit(unit.id, form.id)}>{current ? '현재 전직' : unit.advancedClass ? '이 분기로 변경' : '이 전직 선택'}</button>
-                        </article>;
-                      })}
-                    </div>
-                  </section>}
-                </div>
-              );
-            })}
-          </div>
-
-          <button
-            className="result-btn second"
-            onClick={() => setPromoteOpen(false)}
-          >
-            닫기
-          </button>
-        </div>
-      </PromotionDialog>
-    );
+    return <PromotionDialog onClose={() => setPromoteOpen(false)}>
+      <PromotionPanel party={party} clearedStages={clearedStages} gold={gold} exploration={exploration}
+        unitBattleStats={unitBattleStats} getPortrait={getUnitPortrait} getDisplayClass={getUnitDisplayClass}
+        onOrdinaryPromote={promoteUnit} onSecretPromote={promoteSecretUnit} onAdvancedPromote={promoteAdvancedUnit}
+        message={campMessage} onClose={() => setPromoteOpen(false)} />
+    </PromotionDialog>;
   };
 
   const dispatchUnit = (unitId, dispatchTypeId) => {
@@ -14405,7 +14250,7 @@ export default function App() {
 
   const upgradeGear = (gearId) => {
     const gear = EQUIPMENT[gearId];
-    if (!gear) return;
+    if (!gear || !gearInventory.includes(gearId)) return;
 
     const currentLevel = getGearEnhanceLevel(gearEnhance, gearId);
 
@@ -14449,7 +14294,13 @@ export default function App() {
           </div>
 
           <div className="forge-list">
-            {gearInventory.map((gearId) => {
+            <label className="forge-slot-filter">강화할 부위
+              <select value={forgeSlot} onChange={event => setForgeSlot(event.target.value)}>
+                <option value="all">전체 장비</option>
+                {EQUIPMENT_SLOTS.map(slot => <option key={slot} value={slot}>{EQUIPMENT_SLOT_LABELS[slot]}</option>)}
+              </select>
+            </label>
+            {gearInventory.filter(id => forgeSlot === 'all' || EQUIPMENT[id]?.slot === forgeSlot).map((gearId) => {
               const gear = EQUIPMENT[gearId];
               if (!gear) return null;
 
@@ -14492,8 +14343,8 @@ export default function App() {
     const facility = shopOpen ? 'shop' : equipmentOpen ? 'armory' : campFacility;
     if (!facility) return null;
     const close = () => { setShopOpen(false); setEquipmentOpen(false); setCampFacility(null); };
-    return <TownFacilityDialog key={facility} facility={facility} party={party} getPortrait={getUnitPortrait} initialUnitId={armorySelectedId}
-      items={ITEM_DEFS} inventory={inventory} equipment={EQUIPMENT} gearInventory={gearInventory} gold={gold}
+    return <TownFacilityDialog key={facility} facility={facility} party={party} getPortrait={getUnitPortrait} initialUnitId={armorySelectedId} initialShopTab={shopTabHint}
+      items={ITEM_DEFS} inventory={inventory} equipment={EQUIPMENT} gearInventory={gearInventory} gearEnhance={gearEnhance} clearedStages={clearedStages} gold={gold}
       message={campMessage} trainingAvailability={trainingAvailability} onClose={close} onBuyItem={buyItem} onBuyGear={buyGear} onEquip={equipGear} onUnequip={unequipGear}
       onSave={saveGame} saveNotice={saveNotice} onRest={() => {
         setSaveNotice(null);
@@ -14501,6 +14352,7 @@ export default function App() {
         setCampMessage('모든 동료가 휴식을 마쳤습니다. 체력과 상태가 회복되었습니다.'); playSfx('heal');
       }} onAction={action => {
         close();
+        if (action === 'shop') { setShopTabHint('gear'); setShopOpen(true); }
         if (action === 'forge') setForgeOpen(true);
         if (action === 'training') setTrainingOpen(true);
         if (action === 'skill') setSkillOpen(true);
@@ -17363,7 +17215,7 @@ export default function App() {
                     </em>
                     <small className="deploy-combat-stats">HP {unit.maxHp} · 공격 {unit.atk} · 이동 {getUnitMoveRange(unit)}</small>
                     <small className="deploy-equipment-line">
-                      장비: {unit.equipment?.weapon ? EQUIPMENT[unit.equipment.weapon]?.name : "무기 없음"} / {unit.equipment?.armor ? EQUIPMENT[unit.equipment.armor]?.name : "방어구 없음"}
+                      장비: {EQUIPMENT_SLOTS.map(slot => EQUIPMENT[unit.equipment?.[slot]]?.name || `${EQUIPMENT_SLOT_LABELS[slot]} 없음`).join(' / ')}
                     </small>
                     <small className="deploy-passive-line">
                       패시브: {getUnitPassiveDef(unit).name} · {getUnitPassiveDef(unit).desc}
