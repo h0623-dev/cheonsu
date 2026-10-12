@@ -2,7 +2,9 @@
 
 2026-10-12 KST · Android versionCode 369
 
-현재 구현 및 새 APK·서명 OTA·Safari 배포 준비 중입니다. 공개 완료 여부와 최종 소스는 배포 결과가 나온 뒤 기록합니다. 이전 버전 APK를 이번 변경 결과로 제공하지 않습니다.
+**공개 완료: 1.99.170 / Android versionCode 369.** 최종 게임 소스 `359dee02f1c0d4f1702be3ae484fe9a38f068bd4`에서 새 APK·서명 OTA·Safari를 제작·배포했습니다. GitHub 릴리스는 2026-10-12 **16:51:48 KST** 발행됐습니다.
+
+[새 APK 다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.170/cheonsu_1.99.170_update_debug.apk) · [서명 OTA·소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.170) · [아이폰 Safari](https://cheonsu-safari-production.up.railway.app)
 
 ## 장비
 
@@ -48,10 +50,24 @@
 
 ## 배포 결과
 
-최종 게임 소스 `b414fabdf91e6a744b60c016ddf89731b7387676`의 자동 Cloud Quality `38214370430` 및 Android APK and OTA `38214370399`가 진행 중입니다. 결과는 완료 후 갱신합니다.
+최종 게임 소스 `359dee02f1c0d4f1702be3ae484fe9a38f068bd4`의 기존 자동 [Cloud Quality](https://github.com/h0623-dev/cheonsu/actions/runs/38215253520)와 [Android APK and OTA](https://github.com/h0623-dev/cheonsu/actions/runs/38215253522)가 모두 성공했습니다. Android 실행은 2026-10-12 **16:52:06 KST** 완료됐습니다.
+
+두 자동 실행 모두 lint·단위 **822개(실패 0)**와 브라우저 **11종**을 통과했습니다. 브라우저 단계는 기본 실행·지도·마을 카메라·적군·스킬·배치·캠페인 진행·스테이지 미션·도감·50장 확장 및 전직·타격 연출입니다. Cloud 완료 로그에는 확장 검사 전투 35회·전직 72회·승리/합류 16회·실제 AI 반격 16회·4개 화면·오류 0이 기록됐습니다.
+
+Android 자동 제작 및 산출물 검사에서 **1.99.170 / code 369**, APK·OTA의 웹 파일 **각 2,726개**, 서명·네이티브 플러그인·원복·배포 출처 검사가 통과했습니다. 공개 스크립트는 세 파일의 업로드 상태·크기·SHA-256을 확인하고 APK·OTA 공개 URL의 응답 성공 뒤 실제 `updates/latest.json`을 갱신했습니다. 로컬에서 파일을 다시 내려받거나 별도 검사를 실행한 결과가 아닙니다.
+
+실제 공개 OTA는 **1.99.170 / Android 350~369 / `1.99.170-31908310f7de`**입니다. main의 오래된 `public/updates/latest.json`으로 채널을 초기화하지 않았습니다. API로 공개 릴리스와 실제 채널의 배포 메타데이터를 확인했습니다.
+
+| 공개 파일 | 크기(byte) | GitHub가 보고한 SHA-256 |
+| --- | ---: | --- |
+| `cheonsu_1.99.170_update_debug.apk` | 287,699,098 | `cd1bfd2d0f033e6afedec24008350de5328078b5f1a3b7b4da39ca6cab9f27f3` |
+| `cheonsu_1.99.170_ota.zip` | 278,925,027 | `31908310f7de158ca09e7456d50b06eb9c961f48853b3cb0033c2da76943fb27` |
+| `cheonsu_development_1.99.170.zip` | 842,432,725 | `0c5d63480d345cd9cd9e34408ad699d33708c56a4cf83b132ebdf5b043e0e581` |
+
+이후 배포 완료 기록만 바꾸는 문서 커밋은 게임 소스를 바꾸지 않으며 새 배포나 직접 검사를 시작하지 않습니다.
 
 ### Safari
 
-동일 게임 소스의 Railway 배포 `d6284f86-83fe-421b-9588-76647ce259fd`가 **2026-10-12 15:51:19 KST** `SUCCESS`로 완료됐습니다. [기존 Safari 주소](https://cheonsu-safari-production.up.railway.app)와 저장 위치를 유지하고 Android 산출물과 분리해 제작합니다. 소스를 해당 커밋에 고정해 문서만 수정한 후속 커밋으로 게임 배포가 다시 시작되지 않게 유지합니다.
+동일 게임 소스의 Railway 배포 `b1ecc410-9d41-402b-997d-7c3e5575cb92`가 **2026-10-12 16:01:55 KST** `SUCCESS`로 완료됐습니다. [기존 Safari 주소](https://cheonsu-safari-production.up.railway.app)와 저장 위치를 유지하고 Android 산출물과 분리해 제작합니다. 소스를 해당 커밋에 고정해 문서만 수정한 후속 커밋으로 게임 배포가 다시 시작되지 않게 유지합니다.
 
 에이전트가 실제 iPhone·Android 기기 또는 별도 브라우저 검사를 실행한 결과는 아닙니다. Railway의 배포 완료·서비스 상태를 확인한 기록입니다.
