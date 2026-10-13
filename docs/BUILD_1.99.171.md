@@ -1,8 +1,10 @@
 # 천수 1.99.171 · 전직에 따라 달라지는 캐릭터 외형
 
-2026-10-12 KST · Android versionCode 370
+2026-10-12 개발 · 2026-10-13 KST 공개 · Android versionCode 370
 
-**배포 준비 중입니다.** 새 APK·서명 OTA·Safari는 최종 게임 소스의 제작·공개가 끝난 뒤 아래 배포 기록을 갱신합니다. 이전 1.99.170 APK를 이번 외형 변경이 포함된 결과로 안내하지 않습니다.
+**1.99.171 / Android 370 새 APK·서명 OTA·전체 개발 소스 ZIP 공개 완료.** 최종 게임 소스 `0a4bd0e5f34018c00a6186e7543515f587091f30`의 공개 릴리스는 **2026-10-13 00:16:23 KST**에 발행됐습니다. Safari 웹은 **Railway 체험 기간 만료로 현재 중단**됐으며 요금제 활성화 후 같은 소스의 재배포가 필요합니다.
+
+[새 APK 다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.171/cheonsu_1.99.171_update_debug.apk) · [서명 OTA·소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.171)
 
 ## 변경 내용
 
@@ -34,7 +36,7 @@
 
 ## 제작과 검사 구분
 
-사용자 지시에 따라 수정 후 별도 검증은 실행하지 않았습니다. [검증 생략 스킬](../.agents/skills/cheonsu-no-post-change-validation/SKILL.md)에 따라 직접 테스트·린트·브라우저/화면 QA·검증용 빌드·아티팩트 재다운로드 대조를 하지 않습니다. 원화를 게임 파일로 분할·축소·인코딩하는 제작과 요청한 APK·OTA·Safari 산출물 제작은 진행합니다.
+사용자 지시에 따라 수정 후 별도 검증은 실행하지 않았습니다. [검증 생략 스킬](../.agents/skills/cheonsu-no-post-change-validation/SKILL.md)에 따라 직접 테스트·린트·브라우저/화면 QA·검증용 빌드·아티팩트 재다운로드 대조를 하지 않았습니다. 원화를 게임 파일로 분할·축소·인코딩하는 제작과 요청한 APK·OTA·Safari 산출물 제작은 별도로 수행했습니다.
 
 기존 자동 Cloud Quality·Android APK and OTA의 검사·서명·공개 보호는 유지합니다. 자동 실행 결과는 직접 검사와 구분해 기록합니다. 서명키는 기존 GitHub Actions `cheonsu-release` 환경에서만 사용합니다. 이전 버전의 [미해결 의존성 보안 경고](QA_IMPROVEMENT_1.99.169.md#별도-미해결-의존성-보안-경고)를 이번 외형 변경으로 해결했다고 표시하지 않습니다.
 
@@ -52,14 +54,22 @@
 
 ## 배포 기록
 
-| 항목 | 현재 상태 |
+| 항목 | 공개 결과 |
 | --- | --- |
-| 최종 게임 소스 | 확정·공개 대기 |
-| Cloud Quality 자동 실행 | 대기 |
-| Android APK and OTA 자동 실행 | 대기 |
-| 새 APK 1.99.171 / code 370 | 제작·공개 대기 |
-| 서명 OTA·실제 공개 채널 갱신 | 제작·공개 대기 |
-| 전체 개발 소스 ZIP | 제작·공개 대기 |
-| Safari 독립 웹 배포 | 제작·공개 대기 |
+| 최종 게임 소스 | [`0a4bd0e5f34018c00a6186e7543515f587091f30`](https://github.com/h0623-dev/cheonsu/commit/0a4bd0e5f34018c00a6186e7543515f587091f30) |
+| Cloud Quality 자동 실행 | [38262521487](https://github.com/h0623-dev/cheonsu/actions/runs/38262521487) · [job 114856380315](https://github.com/h0623-dev/cheonsu/actions/runs/38262521487/job/114856380315) · 성공 |
+| Android APK and OTA 자동 실행 | [38262521791](https://github.com/h0623-dev/cheonsu/actions/runs/38262521791) · [job 114856381817](https://github.com/h0623-dev/cheonsu/actions/runs/38262521791/job/114856381817) · 성공 |
+| 공개 릴리스 | [v1.99.171](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.171) · 2026-10-13 00:16:23 KST (2026-10-12 15:16:23 UTC) |
+| 새 APK 1.99.171 / code 370 | [다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.171/cheonsu_1.99.171_update_debug.apk) · 315,079,244 bytes |
+| 서명 OTA | [다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.171/cheonsu_1.99.171_ota.zip) · 306,218,807 bytes |
+| 실제 공개 OTA 채널 | [updates 브랜치 latest.json](https://raw.githubusercontent.com/h0623-dev/cheonsu/updates/latest.json) · **1.99.171 / Android 350~370 / `1.99.171-863371a0184a`** |
+| 전체 개발 소스 ZIP | [다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.171/cheonsu_development_1.99.171.zip) · 900,534,777 bytes |
+| Safari 독립 웹 배포 | **현재 중단** · 같은 게임 소스의 `14e554ef-8de1-4dee-b555-1aa5c9935fcb`는 과거 SUCCESS 후 2026-10-13 10:06:00 KST REMOVED · Railway 체험 기간 만료로 재배포 차단 |
 
-실제 공개 채널은 별도 `updates` 브랜치의 배포 흐름을 사용합니다. main의 오래된 `public/updates/latest.json`을 기준으로 채널을 초기화하거나 낮추지 않습니다. Safari는 기존 주소·저장 위치를 유지하며 Android `dist`와 다른 `tmp/safari-dist` 산출물을 사용합니다. 실제 기기의 플레이나 자동 검사의 성공을 아직 완료했다고 기록하지 않습니다.
+기존 자동 Cloud·Android 실행은 각각 단위 **825개·브라우저 11단계**를 통과했습니다. Android 자동 제작 흐름에서 새 APK·서명 OTA·전체 개발 소스 ZIP을 제작·공개했습니다. 기존 자동 Android 로그는 **2026-10-13 00:14:54.613 KST**에 APK·OTA 웹 파일 각각 **3,348개**와 서명·native plugin·rollback·origin 검사의 통과를 기록했습니다. 이 내용은 기존 자동 로그를 읽어 기록한 사실이며 별도 검사를 실행한 결과가 아닙니다. 위 성공은 기존 자동 Actions의 결과이며 에이전트가 직접 실행한 검사 결과가 아닙니다. 사용자 지시에 따라 수정 후 별도 검증은 실행하지 않았습니다. 실제 iPhone·Android 기기 플레이나 로컬 아티팩트 재다운로드 대조도 실행하지 않았습니다.
+
+실제 공개 OTA의 `releasedAt`은 **2026-10-13 00:14:49.429 KST**이며 공개 메타데이터의 SHA-256은 `863371a0184a645f47697947fe9577729e5db0188ee5f95754038e450ad85269`입니다. 이 값은 공개 기록이며 로컬 아티팩트를 내려받아 대조한 결과가 아닙니다.
+
+실제 공개 채널은 별도 `updates` 브랜치의 배포 흐름을 사용합니다. main의 오래된 `public/updates/latest.json`을 기준으로 채널을 초기화하거나 낮추지 않습니다. Safari의 기존 주소·저장 위치와 Android `dist`와 분리한 `tmp/safari-dist` 산출물 구조를 유지합니다. 이후 배포 기록을 정리하는 문서 커밋은 위 최종 게임 소스와 구분합니다.
+
+Safari는 같은 최종 게임 소스의 배포가 과거 성공했으나 현재 공개 웹이 중단됐습니다. 기존 배포를 다시 실행하려는 Railway API가 `Your trial has expired. Please select a plan to continue using Railway.`를 반환했으며 `That deployment has no build to copy`도 부가 반환했습니다. 새 재배포는 생성되지 않았습니다. 요금제를 활성화한 뒤 같은 소스로 다시 배포해야 하며, 이 작업에서 요금제 구매나 다른 호스팅 생성은 하지 않았습니다. 기존 [Safari 주소](https://cheonsu-safari-production.up.railway.app)는 보존하지만 복구 완료나 현재 웹 공개 완료로 표시하지 않습니다.
