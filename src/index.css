@@ -4824,7 +4824,7 @@ button {
     rgba(0,0,0,0.30);
   border: 1px solid rgba(245,210,140,0.18);
   display: grid;
-  grid-template-columns: 1fr 84px;
+  grid-template-columns: minmax(0, 1fr) 84px;
   gap: 12px;
   align-items: center;
 }
@@ -4837,6 +4837,7 @@ button {
   display: block;
   color: #f5d28c;
   font-size: 16px;
+  overflow-wrap: anywhere;
 }
 
 .forge-entry span {

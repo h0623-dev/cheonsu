@@ -80,7 +80,7 @@ try {
       // Browsing another portrait discards only the comparison, never equips on selection.
       await roster.getByRole('tab', { name: '리나 장비', exact: true }).click();
       assert.equal(await dialog.getByRole('button', { name: '철검 선택', exact: true }).count(), 0);
-      await dialog.getByRole('button', { name: '화염 지팡이 선택', exact: true }).click();
+      await dialog.getByRole('button', { name: '화염 활 선택', exact: true }).click();
       await roster.getByRole('tab', { name: '카일 장비', exact: true }).click();
       await roster.getByRole('tab', { name: '카일 장비', exact: true }).press('End');
       assert.equal(await roster.getByRole('tab').last().getAttribute('aria-selected'), 'true');

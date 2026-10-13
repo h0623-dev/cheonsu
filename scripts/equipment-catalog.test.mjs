@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { EQUIPMENT, EQUIPMENT_SLOTS, EQUIPMENT_SLOT_LABELS, DEFAULT_GEAR_INVENTORY, normalizeEquipmentSlots, getGearShopAvailability, getGearShopPrice } from '../src/data/equipment.js';
+import { EQUIPMENT, EQUIPMENT_SLOTS, EQUIPMENT_SLOT_LABELS, DEFAULT_GEAR_INVENTORY, normalizeEquipmentSlots, getGearShopAvailability, getGearShopPrice, getGearPresentation } from '../src/data/equipment.js';
+import { EQUIPMENT as LEGACY_EQUIPMENT_EXPORT } from '../src/data/gameData.js';
 import { ADVANCED_CLASSES } from '../src/data/advancedClasses.js';
 import { getInitialParty, makeAlly, applyEquipmentStats, applyEquipmentToParty, getEquipmentBonus, getGearEnhanceBonus, grantExp, mergePartyIntoStage } from '../src/engine/partyEngine.js';
 import { normalizeSaveData } from '../src/engine/saveEngine.js';
@@ -206,4 +207,78 @@ test('공유 장비 종류는 여러 동료가 동시에 착용하며 출전에�
     assert.equal(deployed.def, ally.def);
     assert.equal(deployed.gearEnhance.copperAccessory2, 2);
   }
+});
+
+test('구 저장의 공유 무기는 동료별 이름을 표시해도 같은 식별자와 강화·능력치를 유지한다', () => {
+  const source = ['leon', 'luka'].map(id => ({ ...hero(), id,
+    equipment: { weapon: 'hunterBow', armor: null, accessory: null }, gearEnhance: { hunterBow: 3 } }));
+  const snapshot = structuredClone(source);
+  const catalogSnapshot = structuredClone(EQUIPMENT);
+  const stats = source.map(applyEquipmentStats);
+  const views = source.map(unit => getGearPresentation(unit.equipment.weapon, unit));
+  assert.deepEqual(views.map(view => view.name), ['사냥꾼의 창', '사냥꾼의 검']);
+  assert.deepEqual(views.map(view => view.icon), ['spear', 'sword']);
+  for (const view of views) {
+    assert.equal(view.id, 'hunterBow');
+    assert.deepEqual(view.allowed, ['leon', 'luka']);
+    assert.deepEqual(getGearEnhanceBonus(view, 3), { atk: 3, def: 0 });
+    assert.equal(view.price, 210);
+    assert.deepEqual(getGearShopAvailability(view, []), getGearShopAvailability(EQUIPMENT.hunterBow, []));
+  }
+  assert.deepEqual(source.map(applyEquipmentStats), stats);
+  assert.deepEqual(stats.map(unit => [unit.atk, unit.def]), [[13, 5], [13, 5]]);
+  assert.deepEqual(source, snapshot);
+  assert.deepEqual(EQUIPMENT, catalogSnapshot);
+});
+
+test('전체 품목과 잘못된 동료 문맥은 공유 무기 이름을 빠짐없이 표시하며 특정 동료로 바뀌지 않는다', () => {
+  const all = getGearPresentation('holyStaff');
+  assert.equal(all.name, '성목 지팡이 / 성목 마법서 / 성목 류트');
+  assert.equal(all.family, '치유 지팡이 / 마법서 / 악기');
+  assert.equal(all.icon, 'arsenal');
+  for (const context of ['hero', 'unknown', 'constructor', {}, { id: 1 }, null]) {
+    assert.deepEqual(getGearPresentation(EQUIPMENT.holyStaff, context), all);
+  }
+  assert.equal(getGearPresentation('holyStaff', 'aria').name, '성목 지팡이');
+  assert.equal(getGearPresentation('holyStaff', 'noah').name, '성목 마법서');
+  assert.equal(getGearPresentation('holyStaff', 'ella').name, '성목 류트');
+  const noahView = { ...getGearPresentation('holyStaff', 'noah'), atk: 7 };
+  const snapshot = structuredClone(noahView);
+  const ariaView = getGearPresentation(noahView, 'aria');
+  assert.equal(ariaView.name, '성목 지팡이');
+  assert.equal(ariaView.family, '치유 지팡이');
+  assert.equal(ariaView.icon, 'staff');
+  assert.equal(ariaView.atk, 7);
+  const allAgain = getGearPresentation(noahView);
+  assert.equal(allAgain.name, all.name);
+  assert.equal(allAgain.family, all.family);
+  assert.equal(allAgain.icon, all.icon);
+  assert.equal(allAgain.atk, 7);
+  assert.deepEqual(noahView, snapshot);
+  assert.equal(getGearPresentation('leatherArmor'), EQUIPMENT.leatherArmor);
+  assert.equal(getGearPresentation('missing-gear'), null);
+  assert.equal(getGearPresentation('constructor'), null);
+  assert.equal(getGearPresentation(null), null);
+});
+
+test('리나의 구 무기와 전직 저장은 실제 무기 계열을 표시하고 오래된 데이터 모듈도 같은 목록을 사용한다', () => {
+  assert.equal(LEGACY_EQUIPMENT_EXPORT, EQUIPMENT);
+  for (const state of [{}, { promoted: true }, { promoted: true, advancedClass: 'lina__form1' }]) {
+    const unit = { ...hero(), id: 'lina', ...state,
+      equipment: { weapon: 'fireStaff', armor: 'mageRobe', accessory: null }, gearEnhance: { fireStaff: 4 } };
+    const snapshot = structuredClone(unit);
+    const display = getGearPresentation('fireStaff', unit);
+    assert.equal(display.name, '화염 활');
+    assert.equal(display.family, '활');
+    assert.equal(display.icon, 'bow');
+    assert.equal(display.id, 'fireStaff');
+    assert.deepEqual(getGearEnhanceBonus(display, 4), { atk: 4, def: 0 });
+    assert.deepEqual(unit, snapshot);
+  }
+  assert.equal(getGearPresentation('ironSword', 'teo').name, '철궁');
+  assert.equal(getGearPresentation('guardShield', 'rakan').family, '도끼');
+  assert.equal(getGearPresentation('guardShield', 'baekho').family, '권갑');
+  assert.equal(getGearPresentation('arcaneAssault', 'noah').family, '마법서');
+  assert.equal(getGearPresentation('arcaneAssault', 'miho').family, '주술 부적');
+  assert.equal(getGearPresentation('sanctuaryGuard', 'harin').family, '치유 권갑');
 });

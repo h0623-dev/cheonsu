@@ -65,7 +65,7 @@ import BossSplash from "./components/BossSplash.jsx";
 import { getBossPresentation } from "./data/bossPresentation.js";
 import "./components/boss-presence.css";
 import { stages } from "./data/stages.js";
-import { EQUIPMENT, EQUIPMENT_SLOTS, EQUIPMENT_SLOT_LABELS, getGearShopAvailability, getGearShopPrice } from "./data/equipment.js";
+import { EQUIPMENT, EQUIPMENT_SLOTS, EQUIPMENT_SLOT_LABELS, getGearPresentation, getGearShopAvailability, getGearShopPrice } from "./data/equipment.js";
 import { STATUS_INFO } from "./data/statuses.js";
 import { SUPPORT_PAIRS, SUPPORT_RANK_THRESHOLDS } from "./data/supports.js";
 import { STORY_SCENES } from "./data/storyScenes.js";
@@ -115,7 +115,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.171";
+const SAVE_VERSION = "1.99.172";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -7461,7 +7461,7 @@ function formatLoot(loot) {
   }
 
   for (const gearId of loot.gear || []) {
-    parts.push(EQUIPMENT[gearId]?.name || gearId);
+    parts.push(getGearPresentation(gearId)?.name || gearId);
   }
 
   return parts.join(", ");
@@ -13720,7 +13720,7 @@ export default function App() {
     setCampMessage(`${item.name} 1개를 구매했습니다.`);
   };
 
-  const buyGear = (gearId) => {
+  const buyGear = (gearId, unitId) => {
     setSaveNotice(null);
     const gear = EQUIPMENT[gearId];
     const availability = getGearShopAvailability(gear, clearedStages);
@@ -13730,7 +13730,7 @@ export default function App() {
     if (gold < price) { setCampMessage("골드가 부족합니다."); return; }
     setGold((prev) => prev - price);
     setGearInventory((prev) => [...new Set([...prev, gearId])]);
-    setCampMessage(`${EQUIPMENT[gearId].name}을 구매했습니다.`);
+    setCampMessage(`${getGearPresentation(gear, unitId).name} 구매를 완료했습니다.`);
   };
 
   const equipGear = (gearId, unitId = equipmentUnit?.id) => {
@@ -13738,7 +13738,8 @@ export default function App() {
     const gear = EQUIPMENT[gearId];
     const target = party.find(unit => unit.id === unitId);
     if (!gear || !target || !gearInventory.includes(gearId)) return;
-    if (!gear.allowed.includes(target.id)) { setCampMessage(`${target.name}은 ${gear.name}을 장착할 수 없습니다.`); return; }
+    const gearName = getGearPresentation(gear, target).name;
+    if (!gear.allowed.includes(target.id)) { setCampMessage(`${target.name}: ${gearName} 장착 불가`); return; }
     setParty((prev) =>
       applyGearEnhanceToParty(
         prev.map((unit) =>
@@ -13755,7 +13756,7 @@ export default function App() {
         gearEnhance
       )
     );
-    setCampMessage(`${target.name}이 ${gear.name}을 장착했습니다.`);
+    setCampMessage(`${target.name}: ${gearName} 장착 완료`);
   };
 
   const unequipGear = (slot, unitId = equipmentUnit?.id) => {
@@ -14114,7 +14115,7 @@ export default function App() {
     const rewardParts = [];
     if (dispatchType.gold) rewardParts.push(`${dispatchType.gold}G`);
     if (dispatchType.potion) rewardParts.push(`회복약 ${dispatchType.potion}개`);
-    if (bonusGear) rewardParts.push(`${EQUIPMENT[bonusGear]?.name || bonusGear}`);
+    if (bonusGear) rewardParts.push(getGearPresentation(bonusGear, target)?.name || bonusGear);
 
     setCampMessage(
       `${target.name} ${dispatchType.name} 완료. ${expResult.messages.join(" / ")}${
@@ -14250,7 +14251,7 @@ export default function App() {
   };
 
   const upgradeGear = (gearId) => {
-    const gear = EQUIPMENT[gearId];
+    const gear = getGearPresentation(gearId);
     if (!gear || !gearInventory.includes(gearId)) return;
 
     const currentLevel = getGearEnhanceLevel(gearEnhance, gearId);
@@ -14302,7 +14303,7 @@ export default function App() {
               </select>
             </label>
             {gearInventory.filter(id => forgeSlot === 'all' || EQUIPMENT[id]?.slot === forgeSlot).map((gearId) => {
-              const gear = EQUIPMENT[gearId];
+              const gear = getGearPresentation(gearId);
               if (!gear) return null;
 
               const level = getGearEnhanceLevel(gearEnhance, gearId);
@@ -17216,7 +17217,7 @@ export default function App() {
                     </em>
                     <small className="deploy-combat-stats">HP {unit.maxHp} · 공격 {unit.atk} · 이동 {getUnitMoveRange(unit)}</small>
                     <small className="deploy-equipment-line">
-                      장비: {EQUIPMENT_SLOTS.map(slot => EQUIPMENT[unit.equipment?.[slot]]?.name || `${EQUIPMENT_SLOT_LABELS[slot]} 없음`).join(' / ')}
+                      장비: {EQUIPMENT_SLOTS.map(slot => getGearPresentation(unit.equipment?.[slot], unit)?.name || `${EQUIPMENT_SLOT_LABELS[slot]} 없음`).join(' / ')}
                     </small>
                     <small className="deploy-passive-line">
                       패시브: {getUnitPassiveDef(unit).name} · {getUnitPassiveDef(unit).desc}

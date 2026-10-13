@@ -112,6 +112,7 @@
 .town-gear-stock article { align-items: flex-start; padding: 16px 0; }
 .town-gear-stock article > svg { margin-top: 21px; }
 .town-gear-stock article > .town-gear-description { gap: 6px; }
+.town-gear-description > strong, .town-gear-description > .town-gear-family { overflow-wrap: anywhere; }
 .town-gear-stock .town-gear-family { color: var(--facility-muted); font-size: 10px; }
 .town-gear-stock .town-gear-stats { color: #e2eacb; font-variant-numeric: tabular-nums; }
 .town-gear-stock .town-gear-source { display: flex; align-items: center; gap: 4px; color: #dbc68e; font-size: 11px; line-height: 1.5; }

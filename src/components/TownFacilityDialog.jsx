@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X, Save, ShoppingBag, BedDouble, Shield, Swords, Coins, FlaskConical, LockKeyhole, Check, Gem } from 'lucide-react';
 import ArmoryPanel, { GearIcon } from './ArmoryPanel.jsx';
-import { EQUIPMENT_SLOTS, EQUIPMENT_SLOT_LABELS, getGearShopAvailability, getGearShopPrice } from '../data/equipment.js';
+import { EQUIPMENT_SLOTS, EQUIPMENT_SLOT_LABELS, getGearPresentation, getGearShopAvailability, getGearShopPrice } from '../data/equipment.js';
 import { getGearEnhanceBonus } from '../engine/partyEngine.js';
 
 const facilities = { shop: ['상점', ShoppingBag], inn: ['여관', BedDouble], armory: ['장비점', Shield], training: ['훈련소', Swords] };
@@ -42,6 +42,7 @@ function GearShop({ party, equipment, gearInventory, gearEnhance, clearedStages,
     </div>
     <p className="town-gear-result" role="status">{unit ? `${unit.name}의 ` : ''}{slot === 'all' ? '장비' : EQUIPMENT_SLOT_LABELS[slot]} {gearList.length}종</p>
     <div className="town-stock-list town-gear-stock">{gearList.map(gear => {
+      const displayGear = getGearPresentation(gear, unit);
       const availability = getGearShopAvailability(gear, clearedStages);
       const price = getGearShopPrice(gear);
       const isOwned = owned.has(gear.id);
@@ -51,10 +52,10 @@ function GearShop({ party, equipment, gearInventory, gearEnhance, clearedStages,
         : members.length ? `${members.slice(0, 3).map(member => member.name).join(' · ')}${members.length > 3 ? ` 외 ${members.length - 3}명` : ''} 착용 가능` : '합류 전 동료용 장비';
       const purchaseDisabled = isOwned || !availability.ok || price === null || gold < price;
       return <article key={gear.id} className={isOwned ? 'gear-stock-owned' : availability.ok ? '' : 'gear-stock-locked'}>
-        <GearIcon gear={gear} />
+        <GearIcon gear={displayGear} />
         <div className="town-gear-description">
-          <small className="town-gear-family">{EQUIPMENT_SLOT_LABELS[gear.slot]} · {gear.family}</small>
-          <strong>{gear.name}{gearEnhance[gear.id] ? ` +${gearEnhance[gear.id]}` : ''}</strong>
+          <small className="town-gear-family">{EQUIPMENT_SLOT_LABELS[gear.slot]} · {displayGear.family}</small>
+          <strong>{displayGear.name}{gearEnhance[gear.id] ? ` +${gearEnhance[gear.id]}` : ''}</strong>
           <span className="town-gear-stats">공격 +{(gear.atk || 0) + bonus.atk} · 방어 +{(gear.def || 0) + bonus.def}{gearEnhance[gear.id] ? ' (강화 포함)' : ''}</span>
           <span>{wearers}</span>
           {gear.rewardStage ? <small className="town-gear-source">제{gear.rewardStage}장 첫 승리 보상</small>
@@ -63,8 +64,8 @@ function GearShop({ party, equipment, gearInventory, gearEnhance, clearedStages,
         </div>
         <div className="town-gear-purchase">
           {price !== null && <span>{price.toLocaleString()} G</span>}
-          <button disabled={purchaseDisabled} onClick={() => onBuyGear(gear.id, price)}
-            aria-label={isOwned ? `${gear.name} 보유 중` : price === null ? `${gear.name} 모험 보상` : `${gear.name} 구매 ${price}골드`}>
+          <button disabled={purchaseDisabled} onClick={() => onBuyGear(gear.id, unit?.id)}
+            aria-label={isOwned ? `${displayGear.name} 보유 중` : price === null ? `${displayGear.name} 모험 보상` : `${displayGear.name} 구매 ${price}골드`}>
             {isOwned ? <><Check size={15} />보유 중</> : !availability.ok ? <><LockKeyhole size={14} />{price === null ? '보상 장비' : '미개방'}</> : <><ShoppingBag size={15} />구매</>}
           </button>
           {!isOwned && availability.ok && price !== null && gold < price && <small>골드 부족</small>}

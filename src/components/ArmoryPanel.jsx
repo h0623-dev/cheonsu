@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { ArrowRight, ArrowUp, ArrowDown, Check, Sword, Shield, Shirt, WandSparkles, BowArrow, Hammer, CircleSlash, Heart, Gem, Music, Hand, ShoppingBag } from 'lucide-react';
+import { ArrowRight, ArrowUp, ArrowDown, Check, Sword, Shield, Shirt, WandSparkles, BowArrow, Hammer, CircleSlash, Heart, Gem, Music, Hand, ShoppingBag, BookOpen, ScrollText, Axe, Swords } from 'lucide-react';
 import { applyEquipmentStats, getGearEnhanceBonus } from '../engine/partyEngine.js';
 import { formatAttackRange } from '../engine/movement.js';
-import { EQUIPMENT_SLOTS, EQUIPMENT_SLOT_LABELS, getGearShopAvailability, getGearShopPrice } from '../data/equipment.js';
+import { EQUIPMENT_SLOTS, EQUIPMENT_SLOT_LABELS, getGearPresentation, getGearShopAvailability, getGearShopPrice } from '../data/equipment.js';
 
-const gearIcons = { sword: Sword, shield: Shield, bow: BowArrow, spear: Sword, dagger: Sword, staff: WandSparkles, lyre: Music, fist: Hand, hammer: Hammer, armor: Shirt, robe: Shirt, ring: Gem, amulet: Gem };
+const gearIcons = { sword: Sword, shield: Shield, bow: BowArrow, spear: Sword, dagger: Sword, staff: WandSparkles, book: BookOpen, charm: ScrollText, axe: Axe, arsenal: Swords, lyre: Music, fist: Hand, hammer: Hammer, armor: Shirt, robe: Shirt, ring: Gem, amulet: Gem };
 const slotIcons = { weapon: Sword, armor: Shield, accessory: Gem };
 
 export function GearIcon({ gear, size = 22 }) {
@@ -15,7 +15,7 @@ export function GearIcon({ gear, size = 22 }) {
 function gearName(gear, unit) {
   if (!gear) return '미장착';
   const level = unit.gearEnhance?.[gear.id] || 0;
-  return `${gear.name}${level ? ` +${level}` : ''}`;
+  return `${getGearPresentation(gear, unit).name}${level ? ` +${level}` : ''}`;
 }
 
 function gearAcquisitionText(gear, clearedStages = []) {
@@ -32,11 +32,12 @@ function Loadout({ unit, equipment, gearInventory, gearEnhance = {}, clearedStag
   const enhancedUnit = { ...unit, gearEnhance: { ...unit.gearEnhance, ...gearEnhance } };
   const owned = new Set(gearInventory);
   const currentId = unit.equipment?.[slot] || null;
-  const matching = Object.values(equipment).filter(gear => gear.slot === slot && gear.allowed.includes(unit.id));
+  const matching = Object.values(equipment).filter(gear => gear.slot === slot && gear.allowed.includes(unit.id))
+    .map(gear => getGearPresentation(gear, unit));
   const available = matching.filter(gear => owned.has(gear.id));
   const missing = matching.filter(gear => !owned.has(gear.id));
   const selectedId = selection?.slot === slot ? selection.id : currentId;
-  const selectedGear = equipment[selectedId];
+  const selectedGear = getGearPresentation(equipment[selectedId], unit);
   const current = applyEquipmentStats(enhancedUnit);
   const preview = applyEquipmentStats({ ...enhancedUnit, equipment: { ...unit.equipment, [slot]: selectedId } });
   const unchanged = selectedId === currentId;
@@ -51,10 +52,10 @@ function Loadout({ unit, equipment, gearInventory, gearEnhance = {}, clearedStag
         <button className="armory-forge" onClick={onForge}><Hammer size={17} />제련소<ArrowRight size={16} /></button>
         <div className="armory-equipped-slots" aria-label="현재 착용한 세 부위">
           {EQUIPMENT_SLOTS.map(id => {
-            const gear = equipment[unit.equipment?.[id]];
+            const gear = getGearPresentation(equipment[unit.equipment?.[id]], unit);
             const Icon = slotIcons[id];
             return <button key={id} aria-label={`${EQUIPMENT_SLOT_LABELS[id]} 장착 현황: ${gearName(gear, enhancedUnit)}`} aria-pressed={slot === id} onClick={() => chooseSlot(id)}>
-              <Icon size={17} /><span><small>{EQUIPMENT_SLOT_LABELS[id]}</small><strong>{gearName(gear, enhancedUnit)}</strong></span><ArrowRight size={14} />
+              {gear ? <GearIcon gear={gear} size={17} /> : <Icon size={17} />}<span><small>{EQUIPMENT_SLOT_LABELS[id]}</small><strong>{gearName(gear, enhancedUnit)}</strong></span><ArrowRight size={14} />
             </button>;
           })}
         </div>
