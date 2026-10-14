@@ -250,12 +250,12 @@ export function grantExp(units, attackerId, expAmount) {
   return { units: updated, messages };
 }
 
-// Persist only successful skill growth; battle HP and temporary effects stay on the field.
+// Persist only successful advanced mastery; battle HP and temporary effects stay on the field.
 export function syncBattleSkillMastery(party, sourceUnits, unitId) {
   const source = sourceUnits.find(unit => unit.id === unitId && unit.type === 'ally');
-  if (!source || !Number.isFinite(source.skillLevel)) return party;
-  const earned = Math.max(0, Math.min(3, Math.floor(source.skillLevel)));
+  const earned = source?.advancedMastery;
+  if (!Number.isInteger(earned) || earned < 0 || earned > 3) return party;
   return party.map(unit => unit.id === unitId && unit.type === 'ally'
-    ? { ...unit, skillLevel: Math.max(Number.isFinite(unit.skillLevel) ? Math.max(0, Math.min(3, Math.floor(unit.skillLevel))) : 0, earned) }
+    ? { ...unit, advancedMastery: Math.max(Number.isInteger(unit.advancedMastery) && unit.advancedMastery >= 0 && unit.advancedMastery <= 3 ? unit.advancedMastery : 0, earned) }
     : unit);
 }

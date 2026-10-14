@@ -52,7 +52,7 @@ test('new terrain paths use weighted movement, retained occupancy and no implici
   }
 });
 
-test('legacy terrain costs and class traits retain their original behavior', () => {
+test('legacy terrain costs stay stable while movement traits follow the current weapon identity', () => {
   const expected = { road: 1, gate: 1, plain: 1, fort: 1, trap: 1, forest: 2, hill: 2, fire: 2, ice: 2, water: 2, dark: 2, rune: 2, swamp: 3 };
   for (const [tile, cost] of Object.entries(expected)) {
     assert.equal(getTerrainBaseMoveCost(tile), cost, tile);
@@ -60,8 +60,12 @@ test('legacy terrain costs and class traits retain their original behavior', () 
   }
   assert.equal(getTerrainMoveCost('water', unit('bram')), 3);
   assert.equal(getTerrainMoveCost('swamp', unit('bram')), 4);
-  assert.equal(getTerrainMoveCost('forest', unit('leon')), 1);
-  assert.equal(getTerrainMoveCost('ice', unit('lina')), 1);
+  assert.equal(getTerrainMoveCost('forest', unit('leon')), 2);
+  assert.equal(getTerrainMoveCost('ice', unit('lina')), 2);
+  assert.equal(getTerrainMoveCost('forest', unit('teo')), 1);
+  assert.equal(getTerrainMoveCost('forest', unit('lina')), 1);
+  assert.equal(getTerrainMoveCost('ice', unit('miho')), 1);
+  assert.equal(getTerrainMoveCost('ice', unit('aria')), 1);
 });
 
 test('two recovery tiles heal only living active-side units and cannot exceed max HP', () => {
