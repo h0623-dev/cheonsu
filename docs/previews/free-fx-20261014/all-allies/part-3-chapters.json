@@ -1,0 +1,237 @@
+{
+  "part": 3,
+  "choices": [
+    {
+      "index": 42,
+      "id": "jin",
+      "name": "진",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "slash",
+      "sequence": 1,
+      "seconds": 0,
+      "durationMs": 1820
+    },
+    {
+      "index": 43,
+      "id": "jin",
+      "name": "진",
+      "category": "아군",
+      "action": "용염참",
+      "kind": "fire",
+      "sequence": 2,
+      "seconds": 2.347,
+      "durationMs": 2639
+    },
+    {
+      "index": 44,
+      "id": "jin",
+      "name": "진",
+      "category": "아군",
+      "action": "월광참",
+      "kind": "slash",
+      "sequence": 3,
+      "seconds": 5.52,
+      "durationMs": 2639
+    },
+    {
+      "index": 45,
+      "id": "luka",
+      "name": "루카",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "slash",
+      "sequence": 1,
+      "seconds": 8.634,
+      "durationMs": 1820
+    },
+    {
+      "index": 46,
+      "id": "luka",
+      "name": "루카",
+      "category": "아군",
+      "action": "기사 돌격",
+      "kind": "slash",
+      "sequence": 2,
+      "seconds": 10.924,
+      "durationMs": 2639
+    },
+    {
+      "index": 47,
+      "id": "luka",
+      "name": "루카",
+      "category": "아군",
+      "action": "수호의 빛",
+      "kind": "guard",
+      "sequence": 3,
+      "seconds": 14.012,
+      "durationMs": 2639
+    },
+    {
+      "index": 48,
+      "id": "baekho",
+      "name": "백호",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "impact",
+      "sequence": 1,
+      "seconds": 17.096,
+      "durationMs": 1820
+    },
+    {
+      "index": 49,
+      "id": "baekho",
+      "name": "백호",
+      "category": "아군",
+      "action": "백호권",
+      "kind": "impact",
+      "sequence": 2,
+      "seconds": 19.348,
+      "durationMs": 2639
+    },
+    {
+      "index": 50,
+      "id": "baekho",
+      "name": "백호",
+      "category": "아군",
+      "action": "백호 포효",
+      "kind": "heavy",
+      "sequence": 3,
+      "seconds": 22.426,
+      "durationMs": 2639
+    },
+    {
+      "index": 51,
+      "id": "mare",
+      "name": "마레",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "thrust",
+      "sequence": 1,
+      "seconds": 25.457,
+      "durationMs": 1820
+    },
+    {
+      "index": 52,
+      "id": "mare",
+      "name": "마레",
+      "category": "아군",
+      "action": "해류 찌르기",
+      "kind": "thrust",
+      "sequence": 2,
+      "seconds": 27.665,
+      "durationMs": 2639
+    },
+    {
+      "index": 53,
+      "id": "mare",
+      "name": "마레",
+      "category": "아군",
+      "action": "물길 엄호",
+      "kind": "guard",
+      "sequence": 3,
+      "seconds": 30.711,
+      "durationMs": 2639
+    },
+    {
+      "index": 54,
+      "id": "harin",
+      "name": "하린",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "impact",
+      "sequence": 1,
+      "seconds": 33.733,
+      "durationMs": 1820
+    },
+    {
+      "index": 55,
+      "id": "harin",
+      "name": "하린",
+      "category": "아군",
+      "action": "온맥수",
+      "kind": "heal",
+      "sequence": 2,
+      "seconds": 35.947,
+      "durationMs": 2639
+    },
+    {
+      "index": 56,
+      "id": "harin",
+      "name": "하린",
+      "category": "아군",
+      "action": "연환권",
+      "kind": "impact",
+      "sequence": 3,
+      "seconds": 38.987,
+      "durationMs": 2639
+    },
+    {
+      "index": 57,
+      "id": "edan",
+      "name": "에단",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "heavy",
+      "sequence": 1,
+      "seconds": 42.054,
+      "durationMs": 1820
+    },
+    {
+      "index": 58,
+      "id": "edan",
+      "name": "에단",
+      "category": "아군",
+      "action": "파쇄 망치",
+      "kind": "heavy",
+      "sequence": 2,
+      "seconds": 44.261,
+      "durationMs": 2639
+    },
+    {
+      "index": 59,
+      "id": "edan",
+      "name": "에단",
+      "category": "아군",
+      "action": "접이식 방벽 전개",
+      "kind": "guard",
+      "sequence": 3,
+      "seconds": 47.3,
+      "durationMs": 2639
+    },
+    {
+      "index": 60,
+      "id": "sylvan",
+      "name": "실반",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "nature",
+      "sequence": 1,
+      "seconds": 50.326,
+      "durationMs": 1820
+    },
+    {
+      "index": 61,
+      "id": "sylvan",
+      "name": "실반",
+      "category": "아군",
+      "action": "뿌리 얽기",
+      "kind": "nature",
+      "sequence": 2,
+      "seconds": 52.542,
+      "durationMs": 2639
+    },
+    {
+      "index": 62,
+      "id": "sylvan",
+      "name": "실반",
+      "category": "아군",
+      "action": "녹음 숨결",
+      "kind": "heal",
+      "sequence": 3,
+      "seconds": 55.585,
+      "durationMs": 2639
+    }
+  ],
+  "trimStart": 1.688
+}

@@ -1,0 +1,237 @@
+{
+  "part": 1,
+  "choices": [
+    {
+      "index": 0,
+      "id": "hero",
+      "name": "카일",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "slash",
+      "sequence": 1,
+      "seconds": 0,
+      "durationMs": 1820
+    },
+    {
+      "index": 1,
+      "id": "hero",
+      "name": "카일",
+      "category": "아군",
+      "action": "돌풍 베기",
+      "kind": "fire",
+      "sequence": 2,
+      "seconds": 2.342,
+      "durationMs": 2639
+    },
+    {
+      "index": 2,
+      "id": "hero",
+      "name": "카일",
+      "category": "아군",
+      "action": "수호의 맹세",
+      "kind": "guard",
+      "sequence": 3,
+      "seconds": 5.576,
+      "durationMs": 2639
+    },
+    {
+      "index": 3,
+      "id": "bram",
+      "name": "브람",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "impact",
+      "sequence": 1,
+      "seconds": 8.608,
+      "durationMs": 1820
+    },
+    {
+      "index": 4,
+      "id": "bram",
+      "name": "브람",
+      "category": "아군",
+      "action": "철벽 수호",
+      "kind": "guard",
+      "sequence": 2,
+      "seconds": 10.817,
+      "durationMs": 2639
+    },
+    {
+      "index": 5,
+      "id": "bram",
+      "name": "브람",
+      "category": "아군",
+      "action": "방패 강타",
+      "kind": "impact",
+      "sequence": 3,
+      "seconds": 13.841,
+      "durationMs": 2639
+    },
+    {
+      "index": 6,
+      "id": "lina",
+      "name": "리나",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "arrow",
+      "sequence": 1,
+      "seconds": 16.899,
+      "durationMs": 1820
+    },
+    {
+      "index": 7,
+      "id": "lina",
+      "name": "리나",
+      "category": "아군",
+      "action": "불꽃 화살",
+      "kind": "fire",
+      "sequence": 2,
+      "seconds": 19.135,
+      "durationMs": 2639
+    },
+    {
+      "index": 8,
+      "id": "lina",
+      "name": "리나",
+      "category": "아군",
+      "action": "정밀 사격",
+      "kind": "arrow",
+      "sequence": 3,
+      "seconds": 22.167,
+      "durationMs": 2639
+    },
+    {
+      "index": 9,
+      "id": "aria",
+      "name": "아리아",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "cast",
+      "sequence": 1,
+      "seconds": 25.196,
+      "durationMs": 1820
+    },
+    {
+      "index": 10,
+      "id": "aria",
+      "name": "아리아",
+      "category": "아군",
+      "action": "성빛 치유",
+      "kind": "heal",
+      "sequence": 2,
+      "seconds": 27.393,
+      "durationMs": 2639
+    },
+    {
+      "index": 11,
+      "id": "aria",
+      "name": "아리아",
+      "category": "아군",
+      "action": "성역의 기도",
+      "kind": "heal",
+      "sequence": 3,
+      "seconds": 30.424,
+      "durationMs": 2639
+    },
+    {
+      "index": 12,
+      "id": "leon",
+      "name": "레온",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "thrust",
+      "sequence": 1,
+      "seconds": 33.446,
+      "durationMs": 1820
+    },
+    {
+      "index": 13,
+      "id": "leon",
+      "name": "레온",
+      "category": "아군",
+      "action": "관통 찌르기",
+      "kind": "thrust",
+      "sequence": 2,
+      "seconds": 35.648,
+      "durationMs": 2639
+    },
+    {
+      "index": 14,
+      "id": "leon",
+      "name": "레온",
+      "category": "아군",
+      "action": "질풍 돌격",
+      "kind": "thrust",
+      "sequence": 3,
+      "seconds": 38.688,
+      "durationMs": 2639
+    },
+    {
+      "index": 15,
+      "id": "sera",
+      "name": "세라",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "slash",
+      "sequence": 1,
+      "seconds": 41.731,
+      "durationMs": 1820
+    },
+    {
+      "index": 16,
+      "id": "sera",
+      "name": "세라",
+      "category": "아군",
+      "action": "암영 베기",
+      "kind": "shadow",
+      "sequence": 2,
+      "seconds": 43.939,
+      "durationMs": 2639
+    },
+    {
+      "index": 17,
+      "id": "sera",
+      "name": "세라",
+      "category": "아군",
+      "action": "빈틈 가르기",
+      "kind": "slash",
+      "sequence": 3,
+      "seconds": 46.986,
+      "durationMs": 2639
+    },
+    {
+      "index": 18,
+      "id": "noah",
+      "name": "노아",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "lightning",
+      "sequence": 1,
+      "seconds": 50.051,
+      "durationMs": 1820
+    },
+    {
+      "index": 19,
+      "id": "noah",
+      "name": "노아",
+      "category": "아군",
+      "action": "낙뢰 사슬",
+      "kind": "lightning",
+      "sequence": 2,
+      "seconds": 52.247,
+      "durationMs": 2639
+    },
+    {
+      "index": 20,
+      "id": "noah",
+      "name": "노아",
+      "category": "아군",
+      "action": "전술 방벽",
+      "kind": "guard",
+      "sequence": 3,
+      "seconds": 55.314,
+      "durationMs": 2639
+    }
+  ],
+  "trimStart": 2.981
+}

@@ -1,5 +1,7 @@
 # 천수 무료 전투 이펙트 비교 시안
 
+**추가: [아군 21명 전체 비교 영상 3편·63장면](all-allies/README.md)**
+
 2026-10-14 KST. 사용자가 무료 에셋을 찾고 시스템 적용 전에 영상을 먼저 보여달라고 요청하여 제작한 **별도 미리보기**입니다. 이 브랜치는 영상과 조사 자료만 추가합니다. 게임 코드·인게임 에셋·버전·기존 저장·APK·OTA 채널은 변경하지 않았습니다.
 
 [휴대폰용 MP4 영상 보기·다운로드](https://raw.githubusercontent.com/h0623-dev/cheonsu/codex/free-fx-preview-20261014/docs/previews/free-fx-20261014/cheonsu-free-fx-preview.mp4)

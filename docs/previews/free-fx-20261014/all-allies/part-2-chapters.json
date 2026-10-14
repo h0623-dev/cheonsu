@@ -1,0 +1,237 @@
+{
+  "part": 2,
+  "choices": [
+    {
+      "index": 21,
+      "id": "yuna",
+      "name": "유나",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "cast",
+      "sequence": 1,
+      "seconds": 0,
+      "durationMs": 1820
+    },
+    {
+      "index": 22,
+      "id": "yuna",
+      "name": "유나",
+      "category": "아군",
+      "action": "달빛 회복",
+      "kind": "heal",
+      "sequence": 2,
+      "seconds": 2.232,
+      "durationMs": 2639
+    },
+    {
+      "index": 23,
+      "id": "yuna",
+      "name": "유나",
+      "category": "아군",
+      "action": "정화의 기도",
+      "kind": "heal",
+      "sequence": 3,
+      "seconds": 5.302,
+      "durationMs": 2639
+    },
+    {
+      "index": 24,
+      "id": "rakan",
+      "name": "라칸",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "heavy",
+      "sequence": 1,
+      "seconds": 8.328,
+      "durationMs": 1820
+    },
+    {
+      "index": 25,
+      "id": "rakan",
+      "name": "라칸",
+      "category": "아군",
+      "action": "대지 분쇄",
+      "kind": "heavy",
+      "sequence": 2,
+      "seconds": 10.541,
+      "durationMs": 2639
+    },
+    {
+      "index": 26,
+      "id": "rakan",
+      "name": "라칸",
+      "category": "아군",
+      "action": "불굴의 포효",
+      "kind": "guard",
+      "sequence": 3,
+      "seconds": 13.601,
+      "durationMs": 2639
+    },
+    {
+      "index": 27,
+      "id": "miho",
+      "name": "미호",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "fire",
+      "sequence": 1,
+      "seconds": 16.637,
+      "durationMs": 1820
+    },
+    {
+      "index": 28,
+      "id": "miho",
+      "name": "미호",
+      "category": "아군",
+      "action": "여우불",
+      "kind": "fire",
+      "sequence": 2,
+      "seconds": 18.845,
+      "durationMs": 2639
+    },
+    {
+      "index": 29,
+      "id": "miho",
+      "name": "미호",
+      "category": "아군",
+      "action": "환영 폭발",
+      "kind": "shadow",
+      "sequence": 3,
+      "seconds": 21.926,
+      "durationMs": 2639
+    },
+    {
+      "index": 30,
+      "id": "teo",
+      "name": "테오",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "arrow",
+      "sequence": 1,
+      "seconds": 24.968,
+      "durationMs": 1820
+    },
+    {
+      "index": 31,
+      "id": "teo",
+      "name": "테오",
+      "category": "아군",
+      "action": "삼연사",
+      "kind": "arrow",
+      "sequence": 2,
+      "seconds": 27.176,
+      "durationMs": 2639
+    },
+    {
+      "index": 32,
+      "id": "teo",
+      "name": "테오",
+      "category": "아군",
+      "action": "관통 화살",
+      "kind": "arrow",
+      "sequence": 3,
+      "seconds": 30.24,
+      "durationMs": 2639
+    },
+    {
+      "index": 33,
+      "id": "irene",
+      "name": "아이린",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "ice",
+      "sequence": 1,
+      "seconds": 33.271,
+      "durationMs": 1820
+    },
+    {
+      "index": 34,
+      "id": "irene",
+      "name": "아이린",
+      "category": "아군",
+      "action": "빙결창",
+      "kind": "ice",
+      "sequence": 2,
+      "seconds": 35.474,
+      "durationMs": 2639
+    },
+    {
+      "index": 35,
+      "id": "irene",
+      "name": "아이린",
+      "category": "아군",
+      "action": "서리 파동",
+      "kind": "ice",
+      "sequence": 3,
+      "seconds": 38.503,
+      "durationMs": 2639
+    },
+    {
+      "index": 36,
+      "id": "kaz",
+      "name": "카즈",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "slash",
+      "sequence": 1,
+      "seconds": 41.544,
+      "durationMs": 1820
+    },
+    {
+      "index": 37,
+      "id": "kaz",
+      "name": "카즈",
+      "category": "아군",
+      "action": "그림자 습격",
+      "kind": "shadow",
+      "sequence": 2,
+      "seconds": 43.754,
+      "durationMs": 2639
+    },
+    {
+      "index": 38,
+      "id": "kaz",
+      "name": "카즈",
+      "category": "아군",
+      "action": "급소 찌르기",
+      "kind": "thrust",
+      "sequence": 3,
+      "seconds": 46.823,
+      "durationMs": 2639
+    },
+    {
+      "index": 39,
+      "id": "ella",
+      "name": "엘라",
+      "category": "아군",
+      "action": "기본 공격",
+      "kind": "music",
+      "sequence": 1,
+      "seconds": 49.886,
+      "durationMs": 1820
+    },
+    {
+      "index": 40,
+      "id": "ella",
+      "name": "엘라",
+      "category": "아군",
+      "action": "치유의 선율",
+      "kind": "heal",
+      "sequence": 2,
+      "seconds": 52.097,
+      "durationMs": 2639
+    },
+    {
+      "index": 41,
+      "id": "ella",
+      "name": "엘라",
+      "category": "아군",
+      "action": "공명 파동",
+      "kind": "music",
+      "sequence": 3,
+      "seconds": 55.124,
+      "durationMs": 2639
+    }
+  ],
+  "trimStart": 1.067
+}

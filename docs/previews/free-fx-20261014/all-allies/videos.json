@@ -1,0 +1,41 @@
+[
+  {
+    "part": 1,
+    "filename": "cheonsu-all-allies-01.mp4",
+    "duration": 58.9,
+    "size": 18822445,
+    "stream": {
+      "codec_name": "h264",
+      "width": 720,
+      "height": 1280,
+      "pix_fmt": "yuv420p",
+      "r_frame_rate": "30/1"
+    }
+  },
+  {
+    "part": 2,
+    "filename": "cheonsu-all-allies-02.mp4",
+    "duration": 58.9,
+    "size": 18423606,
+    "stream": {
+      "codec_name": "h264",
+      "width": 720,
+      "height": 1280,
+      "pix_fmt": "yuv420p",
+      "r_frame_rate": "30/1"
+    }
+  },
+  {
+    "part": 3,
+    "filename": "cheonsu-all-allies-03.mp4",
+    "duration": 59.166667,
+    "size": 19838172,
+    "stream": {
+      "codec_name": "h264",
+      "width": 720,
+      "height": 1280,
+      "pix_fmt": "yuv420p",
+      "r_frame_rate": "30/1"
+    }
+  }
+]
