@@ -1,0 +1,1147 @@
+{
+  "production": true,
+  "passed": true,
+  "results": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "passed": true,
+      "stagesStarted": 3,
+      "resumedBattles": 3,
+      "legacyBattles": 2,
+      "checks": [
+        "3개 장에서 최대 15명 수동 배치 후 실제 전투 진입",
+        "실제 적 대장 이름·라운드 제한·승리 또는/패배 또는 안내 일치",
+        "도입 대화 후 실제전장 미션·확인/Escape·배치 잠금·배치 확정 뒤 미션 반복 없음",
+        "미션 대화창 가로 넘침 없음·확인 버튼 44px 이상·키보드 포커스 유지",
+        "1·13·50장 수동 재열기와 이어하기 후 유닛·진행도·수집·장비 보존",
+        "실제 1.99.156 전투 저장 2건의 전체 유닛·진행도 보존"
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "passed": true,
+      "stagesStarted": 50,
+      "resumedBattles": 3,
+      "legacyBattles": 2,
+      "checks": [
+        "50개 장에서 최대 15명 수동 배치 후 실제 전투 진입",
+        "실제 적 대장 이름·라운드 제한·승리 또는/패배 또는 안내 일치",
+        "도입 대화 후 실제전장 미션·확인/Escape·배치 잠금·배치 확정 뒤 미션 반복 없음",
+        "미션 대화창 가로 넘침 없음·확인 버튼 44px 이상·키보드 포커스 유지",
+        "1·13·50장 수동 재열기와 이어하기 후 유닛·진행도·수집·장비 보존",
+        "실제 1.99.156 전투 저장 2건의 전체 유닛·진행도 보존"
+      ]
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "passed": true,
+      "stagesStarted": 3,
+      "resumedBattles": 3,
+      "legacyBattles": 2,
+      "checks": [
+        "3개 장에서 최대 15명 수동 배치 후 실제 전투 진입",
+        "실제 적 대장 이름·라운드 제한·승리 또는/패배 또는 안내 일치",
+        "도입 대화 후 실제전장 미션·확인/Escape·배치 잠금·배치 확정 뒤 미션 반복 없음",
+        "미션 대화창 가로 넘침 없음·확인 버튼 44px 이상·키보드 포커스 유지",
+        "1·13·50장 수동 재열기와 이어하기 후 유닛·진행도·수집·장비 보존",
+        "실제 1.99.156 전투 저장 2건의 전체 유닛·진행도 보존"
+      ]
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 740
+      },
+      "passed": true,
+      "stagesStarted": 3,
+      "resumedBattles": 3,
+      "legacyBattles": 2,
+      "checks": [
+        "3개 장에서 최대 15명 수동 배치 후 실제 전투 진입",
+        "실제 적 대장 이름·라운드 제한·승리 또는/패배 또는 안내 일치",
+        "도입 대화 후 실제전장 미션·확인/Escape·배치 잠금·배치 확정 뒤 미션 반복 없음",
+        "미션 대화창 가로 넘침 없음·확인 버튼 44px 이상·키보드 포커스 유지",
+        "1·13·50장 수동 재열기와 이어하기 후 유닛·진행도·수집·장비 보존",
+        "실제 1.99.156 전투 저장 2건의 전체 유닛·진행도 보존"
+      ]
+    }
+  ],
+  "stageChecks": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "stageId": 1,
+      "bossNames": [
+        "초소장"
+      ],
+      "roundLimit": 24,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "stageId": 13,
+      "bossNames": [
+        "이름을 거두는 자"
+      ],
+      "roundLimit": 38,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "stageId": 50,
+      "bossNames": [
+        "첫 맹세 수호체 아스테르"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 1,
+      "bossNames": [
+        "초소장"
+      ],
+      "roundLimit": 24,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 2,
+      "bossNames": [
+        "도적장"
+      ],
+      "roundLimit": 24,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 3,
+      "bossNames": [
+        "흑천 가론"
+      ],
+      "roundLimit": 24,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "Escape"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 4,
+      "bossNames": [
+        "화염 마도사"
+      ],
+      "roundLimit": 27,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 5,
+      "bossNames": [
+        "요새 기사단장"
+      ],
+      "roundLimit": 27,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 6,
+      "bossNames": [
+        "빙결 마녀"
+      ],
+      "roundLimit": 27,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "Escape"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 7,
+      "bossNames": [
+        "그림자 지휘관"
+      ],
+      "roundLimit": 35,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 8,
+      "bossNames": [
+        "혈마도사"
+      ],
+      "roundLimit": 35,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 9,
+      "bossNames": [
+        "폐허 약탈단장"
+      ],
+      "roundLimit": 35,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "Escape"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 10,
+      "bossNames": [
+        "주술핵 수호자"
+      ],
+      "roundLimit": 35,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 11,
+      "bossNames": [
+        "항구 지휘관"
+      ],
+      "roundLimit": 35,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 12,
+      "bossNames": [
+        "재의 대주교"
+      ],
+      "roundLimit": 35,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "Escape"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 13,
+      "bossNames": [
+        "이름을 거두는 자"
+      ],
+      "roundLimit": 38,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 14,
+      "bossNames": [
+        "사원의 계약 감시자"
+      ],
+      "roundLimit": 38,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 15,
+      "bossNames": [
+        "장막의 파수꾼"
+      ],
+      "roundLimit": 38,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "Escape"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 16,
+      "bossNames": [
+        "사슬 감옥장"
+      ],
+      "roundLimit": 38,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 17,
+      "bossNames": [
+        "그림자 성벽장"
+      ],
+      "roundLimit": 38,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 18,
+      "bossNames": [
+        "밤의 집행자"
+      ],
+      "roundLimit": 38,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "Escape"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 19,
+      "bossNames": [
+        "묘역의 기억 수호자"
+      ],
+      "roundLimit": 41,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 20,
+      "bossNames": [
+        "왕도 점령대장"
+      ],
+      "roundLimit": 41,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 21,
+      "bossNames": [
+        "금서의 사제"
+      ],
+      "roundLimit": 41,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "Escape"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 22,
+      "bossNames": [
+        "검은 기도의 대행자"
+      ],
+      "roundLimit": 41,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 23,
+      "bossNames": [
+        "황혼 다리의 수문장"
+      ],
+      "roundLimit": 41,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 24,
+      "bossNames": [
+        "흑야의 심장"
+      ],
+      "roundLimit": 41,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "Escape"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 25,
+      "bossNames": [
+        "환영 계단의 감시자"
+      ],
+      "roundLimit": 44,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 26,
+      "bossNames": [
+        "붉은 수정의 포식자"
+      ],
+      "roundLimit": 44,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 27,
+      "bossNames": [
+        "옛 계약의 집행체"
+      ],
+      "roundLimit": 44,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "Escape"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 28,
+      "bossNames": [
+        "흑천 가론"
+      ],
+      "roundLimit": 44,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 29,
+      "bossNames": [
+        "흑야의 선봉"
+      ],
+      "roundLimit": 44,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 30,
+      "bossNames": [
+        "흑야의 잔영"
+      ],
+      "roundLimit": 44,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "Escape"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 31,
+      "bossNames": [
+        "갈대등 무리장"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 32,
+      "bossNames": [
+        "비늘가시 지휘사수"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 33,
+      "bossNames": [
+        "포자등 군락주"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "Escape"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 34,
+      "bossNames": [
+        "조개암초 파수장"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 35,
+      "bossNames": [
+        "심해 수문장 모르칸"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 36,
+      "bossNames": [
+        "눈안개 무리장"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "Escape"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 37,
+      "bossNames": [
+        "빙정날개 군주"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 38,
+      "bossNames": [
+        "온천도롱뇽 우두머리"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 39,
+      "bossNames": [
+        "설원 샘의 파수장"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "Escape"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 40,
+      "bossNames": [
+        "빙정 여왕 세르카"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 41,
+      "bossNames": [
+        "금실 인형장"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 42,
+      "bossNames": [
+        "가면종 감독관"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "Escape"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 43,
+      "bossNames": [
+        "접힌 서고의 기록장"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 44,
+      "bossNames": [
+        "공방 공정장"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 45,
+      "bossNames": [
+        "공명 집행관 아르켄"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "Escape"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 46,
+      "bossNames": [
+        "월식 무리장"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 47,
+      "bossNames": [
+        "잉크덩굴 군락핵"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 48,
+      "bossNames": [
+        "빈 갑옷의 선도자"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "Escape"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 49,
+      "bossNames": [
+        "첫 맹세의 전위"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageId": 50,
+      "bossNames": [
+        "첫 맹세 수호체 아스테르"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "stageId": 1,
+      "bossNames": [
+        "초소장"
+      ],
+      "roundLimit": 24,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "stageId": 13,
+      "bossNames": [
+        "이름을 거두는 자"
+      ],
+      "roundLimit": 38,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "stageId": 50,
+      "bossNames": [
+        "첫 맹세 수호체 아스테르"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 740
+      },
+      "stageId": 1,
+      "bossNames": [
+        "초소장"
+      ],
+      "roundLimit": 24,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 740
+      },
+      "stageId": 13,
+      "bossNames": [
+        "이름을 거두는 자"
+      ],
+      "roundLimit": 38,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 740
+      },
+      "stageId": 50,
+      "bossNames": [
+        "첫 맹세 수호체 아스테르"
+      ],
+      "roundLimit": 45,
+      "started": true,
+      "conditionsMatch": true,
+      "victoryOr": true,
+      "defeatOr": true,
+      "modalContained": true,
+      "manualCoordinatesPreserved": true,
+      "closeMethod": "미션 확인"
+    }
+  ],
+  "errors": [],
+  "build": {
+    "version": "1.99.175",
+    "sourceHash": "377df13f63a1c7616bb7977db0633c0a2ccfa6b87614fb38499ef94a762d6135"
+  }
+}
