@@ -2,13 +2,17 @@
 
 2026-10-14 KST · Android versionCode 372
 
-**1.99.173 / Android 372 변경 소스 준비 중. 새 APK·서명 OTA·전체 개발 소스 ZIP은 아직 공개하지 않았습니다.** 아래 1.99.172의 공개 파일은 이전 버전이며 이번 지형 수정이 포함된 새 산출물로 안내하지 않습니다. Safari 웹은 기존 Railway 체험 기간 만료로 중단된 상태이며 같은 최종 소스의 웹 배포는 요금제 활성화 후 진행해야 합니다.
+**1.99.173 / Android 372 새 APK·서명 OTA·전체 개발 소스 ZIP 공개 완료.** 최종 게임 소스 `572bac9caaf60ef7eda6bae845b0b1dcf78d4f4e`의 릴리스를 **2026-10-14 10:04:26 KST**에 공개했습니다. Safari 웹은 기존 Railway 체험 기간 만료로 중단된 상태이며 이번 최종 소스로 새 웹 배포를 하지 않았습니다. 요금제 활성화 후 같은 소스의 배포가 필요합니다.
+
+[새 APK 다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.173/cheonsu_1.99.173_update_debug.apk) · [서명 OTA·소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.173)
 
 ## 3장의 작은 상자가 생긴 이유
 
 3장의 작은 상자는 전장 원화에 그려진 상자가 아니라 **요새 칸에 공통으로 추가되던 상자 소품**에서 발생한 표현입니다. 기존 `getWorldTileVisual`은 `fort` 칸에 `crates`를 항상 올리고 `gate` 칸에는 기념비를 올렸습니다. 엄폐 칸이나 일부 지역의 통행 불가 칸에도 작은 상자가 자동으로 배치되어, 실제 상호작용 보상이나 전장의 배경 구조물과 구분하기 어려웠습니다.
 
 전장 50개의 원화 축소본을 각각 읽고 3장과 실내·지역 전장의 대표 원본을 읽었습니다. 3장 원화에는 이 작은 상자가 없으며 보급 자재가 필요한 전장의 배경은 기존 맥락을 유지합니다. 이번 작업은 게임을 실행한 후 화면 QA를 한 결과가 아니라 구현에 필요한 기존 원화·지도·렌더링 정의를 읽은 조사입니다.
+
+구현 근거는 [공통 지형 표현](../src/data/worldArt.js), [지형 규칙](../src/data/terrainPolicy.js), [실제 발견 지점 정의](../src/data/discoveries.js), [전장·발견 표식 렌더링](../src/App.jsx), [발견 표식 스타일](../src/discoveries.css), [3장 전장 원화](../public/art/chapters-v1/chapter-03.webp)입니다. 전장별 원화는 `public/art/chapters-v1/`과 확장 전장 아트의 기존 파일을 사용하며 새 외부 게임 자료를 가져오지 않습니다.
 
 ## 전체 50장에 적용하는 표현 정리
 
@@ -32,19 +36,27 @@
 
 사용자 지시에 따라 수정 후 별도 검증은 실행하지 않았습니다. [검증 생략 스킬](../.agents/skills/cheonsu-no-post-change-validation/SKILL.md)에 따라 직접 테스트·린트·스모크·브라우저/화면 QA·검증용 빌드·아티팩트 재다운로드 대조를 실행하지 않습니다. 위 전체 전장 조사는 구현에 필요한 기존 코드와 원화의 읽기이며 전투 실행·터치·스크린샷 검사와 구분합니다.
 
-요청한 새 APK·서명 OTA 제작은 기존 GitHub Actions 흐름으로 진행합니다. 기존 자동 Cloud Quality·Android APK and OTA의 검사·서명·배포 보호를 유지하고 서명키는 기존 `cheonsu-release` 환경에 유지합니다. 소품·바닥 표시 규칙을 위한 자동 회귀 사례는 작성했으며 에이전트가 직접 실행하지 않았습니다. 기존 자동 실행 결과는 완료 후 실제 로그와 공개 메타데이터를 읽어 아래 기록에 추가합니다. 이전 버전의 성공 결과를 이번 변경의 성공 결과로 대신하지 않습니다.
+요청한 새 APK·서명 OTA 제작은 기존 GitHub Actions 흐름으로 진행했고 자동 Cloud Quality·Android APK and OTA의 검사·서명·배포 보호를 유지했습니다. 서명키는 기존 `cheonsu-release` 환경에 유지합니다. 소품·바닥 표시 규칙을 위한 [자동 회귀 사례](../scripts/world-art.test.mjs) 4개를 작성했으며 에이전트가 직접 실행하지 않았습니다. 아래는 실제 완료된 기존 자동 실행의 로그와 공개 메타데이터를 읽어 기록한 결과이며 직접 검사와 구분합니다. 이전 버전의 성공 결과를 이번 변경의 성공 결과로 대신하지 않습니다.
 
 ## 배포 기록
 
-| 항목 | 이번 버전 상태 |
+| 항목 | 공개 결과 |
 | --- | --- |
 | 게임 / Android | 1.99.173 / versionCode 372 |
-| 최종 게임 소스 | 준비 중 |
-| Cloud Quality 자동 실행 | 아직 기록하지 않음 |
-| Android APK and OTA 자동 실행 | 아직 기록하지 않음 |
-| 새 APK | 아직 공개하지 않음 |
-| 서명 OTA·실제 공개 채널 | 아직 공개하지 않음 · 이전 채널을 이번 결과로 표시하지 않음 |
-| 전체 개발 소스 ZIP | 아직 공개하지 않음 |
-| Safari 독립 웹 배포 | 기존 Railway 체험 기간 만료로 중단 · 요금제 활성화 후 같은 최종 소스 배포 필요 |
+| 최종 게임 소스 | [`572bac9caaf60ef7eda6bae845b0b1dcf78d4f4e`](https://github.com/h0623-dev/cheonsu/commit/572bac9caaf60ef7eda6bae845b0b1dcf78d4f4e) |
+| Cloud Quality 자동 실행 | [38488585383](https://github.com/h0623-dev/cheonsu/actions/runs/38488585383) · [job 115608131496](https://github.com/h0623-dev/cheonsu/actions/runs/38488585383/job/115608131496) · 성공 · 2026-10-14 09:55:47 KST 완료 |
+| Android APK and OTA 자동 실행 | [38488585157](https://github.com/h0623-dev/cheonsu/actions/runs/38488585157) · [job 115608130729](https://github.com/h0623-dev/cheonsu/actions/runs/38488585157/job/115608130729) · 성공 |
+| 공개 릴리스 | [v1.99.173](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.173) · 2026-10-14 10:04:26 KST 발행 |
+| 새 APK 1.99.173 / code 372 | [다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.173/cheonsu_1.99.173_update_debug.apk) · 315,080,328 bytes |
+| 서명 OTA | [다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.173/cheonsu_1.99.173_ota.zip) · 306,219,651 bytes |
+| 전체 개발 소스 ZIP | [다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.173/cheonsu_development_1.99.173.zip) · 900,548,949 bytes |
+| 실제 공개 OTA 채널 | [updates 브랜치 latest.json](https://raw.githubusercontent.com/h0623-dev/cheonsu/updates/latest.json) · **1.99.173 / Android 350~372 / `1.99.173-cfa75179ce1b`** |
+| Safari 독립 웹 배포 | 기존 Railway 체험 기간 만료로 중단 · 이번 최종 소스 새 웹 배포·재시도 없음 · 요금제 활성화 후 배포 필요 |
+
+두 기존 자동 실행은 각각 단위 **832/832개·실패 0·브라우저 11단계**를 통과했습니다. 기존 Android 자동 로그는 **2026-10-14 10:02:56 KST**에 APK·OTA 웹 파일 각각 **3,348개**와 서명·네이티브 플러그인·복구·원본 주소 보호 검사의 통과를 기록했습니다. 자동 발행 로그는 공개 APK·OTA·전체 소스 ZIP의 다운로드·SHA-256 검사를 완료하고 **10:04:28 KST**에 배포 완료를 기록했습니다. 에이전트가 파일을 별도로 다운로드하거나 대조한 결과가 아닙니다.
+
+공개 OTA의 `releasedAt`은 **2026-10-14 10:02:51.237 KST**, SHA-256은 `cfa75179ce1b0bc3b35b30a79f9074bf10f0fc74560613283d3c261aded2a108`입니다. 기존 자동 실행과 공개 메타데이터에서 관찰한 사실만 기록하며 Android·iPhone 실기기 플레이를 직접 확인했다고 표시하지 않습니다. 사용자 지시에 따라 수정 후 별도 검증은 실행하지 않았습니다.
+
+전체 개발 소스 ZIP은 위 게임 소스 커밋의 발행 시점 스냅샷입니다. 공개 완료 후 갱신한 이 최종 배포 문서까지 포함된 ZIP을 뜻하지 않습니다.
 
 이전 공개 산출물과 자동 실행 기록은 [1.99.172 배포 기록](BUILD_1.99.172.md)에 보존합니다. 이번 지형 표현 수정으로 기존 [의존성 보안 경고](QA_IMPROVEMENT_1.99.169.md#별도-미해결-의존성-보안-경고)가 해결됐다고 표시하지 않습니다. 사용자 지시에 따라 수정 후 별도 검증은 실행하지 않았습니다.
