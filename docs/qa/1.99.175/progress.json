@@ -1,0 +1,239 @@
+{
+  "status": "검사 진행 중",
+  "version": "1.99.175",
+  "scope": "11~50장",
+  "sourceCommit": "e25e7b89943dbe8196813f4440fe9872137d1b8b",
+  "savedAt": "2026-10-14T16:26:42.744766+09:00",
+  "groups": [
+    {
+      "group": "stages11-20",
+      "rows": [
+        {
+          "stage": 11,
+          "passed": true
+        },
+        {
+          "stage": 12,
+          "passed": true
+        },
+        {
+          "stage": 13,
+          "passed": true
+        },
+        {
+          "stage": 14,
+          "passed": true
+        },
+        {
+          "stage": 15,
+          "passed": true
+        },
+        {
+          "stage": 16,
+          "passed": true
+        },
+        {
+          "stage": 17,
+          "passed": true
+        },
+        {
+          "stage": 18,
+          "passed": false,
+          "failure": "TypeError: Cannot read properties of undefined (reading 'x')"
+        }
+      ],
+      "pageErrors": 0,
+      "source": "장별 실제 UI 기록; 자연 전투와 종료 저장 시나리오를 구분"
+    },
+    {
+      "group": "stages21-30",
+      "rows": [
+        {
+          "stage": 21,
+          "passed": true
+        },
+        {
+          "stage": 22,
+          "passed": true
+        },
+        {
+          "stage": 23,
+          "passed": true
+        },
+        {
+          "stage": 24,
+          "passed": true
+        }
+      ],
+      "pageErrors": 0,
+      "source": "장별 실제 UI 기록; 자연 전투와 종료 저장 시나리오를 구분"
+    },
+    {
+      "group": "stages31-40",
+      "rows": [
+        {
+          "stage": 31,
+          "passed": false,
+          "failure": "locator.waitFor: Timeout 45000ms exceeded."
+        },
+        {
+          "stage": 32,
+          "passed": false,
+          "failure": "page.waitForFunction: Target page, context or browser has been closed"
+        },
+        {
+          "stage": 33,
+          "passed": false,
+          "failure": "page.setViewportSize: Target page, context or browser has been closed"
+        },
+        {
+          "stage": 34,
+          "passed": false,
+          "failure": "page.setViewportSize: Target page, context or browser has been closed"
+        },
+        {
+          "stage": 35,
+          "passed": false,
+          "failure": "page.setViewportSize: Target page, context or browser has been closed"
+        },
+        {
+          "stage": 36,
+          "passed": false,
+          "failure": "page.setViewportSize: Target page, context or browser has been closed"
+        },
+        {
+          "stage": 37,
+          "passed": false,
+          "failure": "page.setViewportSize: Target page, context or browser has been closed"
+        },
+        {
+          "stage": 38,
+          "passed": false,
+          "failure": "page.setViewportSize: Target page, context or browser has been closed"
+        },
+        {
+          "stage": 39,
+          "passed": false,
+          "failure": "page.setViewportSize: Target page, context or browser has been closed"
+        },
+        {
+          "stage": 40,
+          "passed": false,
+          "failure": "page.setViewportSize: Target page, context or browser has been closed"
+        },
+        {
+          "stage": 32,
+          "passed": true
+        },
+        {
+          "stage": 33,
+          "passed": true
+        },
+        {
+          "stage": 34,
+          "passed": true
+        },
+        {
+          "stage": 35,
+          "passed": true
+        },
+        {
+          "stage": 36,
+          "passed": true
+        }
+      ],
+      "pageErrors": 0,
+      "source": "장별 실제 UI 기록; 자연 전투와 종료 저장 시나리오를 구분"
+    },
+    {
+      "group": "stages41-50",
+      "rows": [
+        {
+          "stage": 41,
+          "passed": true,
+          "saveRestore": true,
+          "deploymentSlots": 18,
+          "unverified": [
+            "공격/스킬은 실제 사거리 내 대상이 있는 경우만 실행; actions 기록 참조"
+          ]
+        },
+        {
+          "stage": 42,
+          "passed": true,
+          "saveRestore": true,
+          "deploymentSlots": 18,
+          "unverified": [
+            "공격/스킬은 실제 사거리 내 대상이 있는 경우만 실행; actions 기록 참조"
+          ]
+        },
+        {
+          "stage": 43,
+          "passed": true,
+          "saveRestore": true,
+          "deploymentSlots": 18,
+          "unverified": [
+            "공격/스킬은 실제 사거리 내 대상이 있는 경우만 실행; actions 기록 참조"
+          ]
+        },
+        {
+          "stage": 44,
+          "passed": true,
+          "saveRestore": true,
+          "deploymentSlots": 18,
+          "unverified": [
+            "공격/스킬은 실제 사거리 내 대상이 있는 경우만 실행; actions 기록 참조"
+          ]
+        },
+        {
+          "stage": 45,
+          "passed": true,
+          "saveRestore": true,
+          "deploymentSlots": 18,
+          "unverified": [
+            "공격/스킬은 실제 사거리 내 대상이 있는 경우만 실행; actions 기록 참조"
+          ]
+        },
+        {
+          "stage": 46,
+          "passed": true,
+          "saveRestore": true,
+          "deploymentSlots": 18,
+          "unverified": [
+            "공격/스킬은 실제 사거리 내 대상이 있는 경우만 실행; actions 기록 참조"
+          ]
+        },
+        {
+          "stage": 47,
+          "passed": true,
+          "saveRestore": true,
+          "deploymentSlots": 18,
+          "unverified": [
+            "공격/스킬은 실제 사거리 내 대상이 있는 경우만 실행; actions 기록 참조"
+          ]
+        },
+        {
+          "stage": 48,
+          "passed": true,
+          "saveRestore": true,
+          "deploymentSlots": 18,
+          "unverified": [
+            "공격/스킬은 실제 사거리 내 대상이 있는 경우만 실행; actions 기록 참조"
+          ]
+        }
+      ],
+      "pageErrors": 0,
+      "source": "장별 실제 UI 기록; 자연 전투와 종료 저장 시나리오를 구분"
+    }
+  ],
+  "directChecks": {
+    "unitTests": 845,
+    "unitPassed": 845,
+    "lint": "통과",
+    "productionBuild": "통과",
+    "legacyEnemyTurn15": {
+      "resumedToAlly": true,
+      "round": 2,
+      "actualEnemyMovement": true
+    }
+  }
+}

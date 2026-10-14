@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {chromium} from 'playwright';
-import {configurePage,createStageSeed,enterStage,loadSeed,readBattle,readSaved,startDeploymentBattle,watchErrors,waitForBattleReady} from './qa175-harness.mjs';
+import {configurePage,createStageSeed,enterStage,loadSeed,readBattle,readSaved,startDeploymentBattle,watchErrors,waitForBattleReady,waitForDeployment} from './qa175-harness.mjs';
 const out='/workspace/work/qa175/stages31-40'; await fs.mkdir(out,{recursive:true});
 const browser=await chromium.launch({headless:true,executablePath:'/usr/bin/chromium',args:['--no-sandbox']});
 const page=await browser.newPage({viewport:{width:390,height:844},hasTouch:true,isMobile:true}); page.setDefaultTimeout(15000);
-await configurePage(page); const errors=[];watchErrors(page,errors);const results=[];
+await configurePage(page); const errors=[];watchErrors(page,errors);const results=process.env.QA_RESUME?JSON.parse(await fs.readFile(`${out}/report.json`,'utf8')).results:[];
 const capture=async(id,label)=>page.screenshot({path:`${out}/${id}-${label}.png`,fullPage:true});
 const sig=s=>s.units.map(u=>({id:u.id,hp:u.hp,x:u.x,y:u.y,atk:u.atk,def:u.def,stats:u.battleStats}));
 async function settle(){await page.waitForFunction(()=>document.querySelector('.victory-dialog[open],.defeat-dialog[open]')||!!document.querySelector('.battle-end-turn-float:not(:disabled)'));await waitForBattleReady(page);}
@@ -26,7 +26,7 @@ async function act(id,kind){
  const cancel=bar.locator('.battle-selection-cancel');if(await cancel.count())await cancel.click();
  if(await bar.locator('.cmd-wait').isEnabled())await bar.locator('.cmd-wait').click();await settle();return {id,used};
 }
-for(let id=31;id<=40;id++){
+for(let id=Number(process.env.QA_START||31);id<=Number(process.env.QA_END||40);id++){
  const r={id,naturalBattle:{enemyHpUnmodified:true,rounds:[],actions:[]},seededSettlement:{},errors:[]};results.push(r);const errorStart=errors.length;
  try{
  await page.setViewportSize({width:390,height:844});const seed=createStageSeed(id);await loadSeed(page,seed);await enterStage(page,id);
@@ -42,15 +42,15 @@ for(let id=31;id<=40;id++){
  await page.evaluate(async()=>{await Promise.all([...document.images].map(async i=>{i.loading='eager';try{await i.decode()}catch{}}))});
  r.imageFailures=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src));r.overflow=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,viewport:innerWidth}));
  await capture(id,'natural-round5');if(id===31||id===40){await page.setViewportSize({width:844,height:390});await capture(id,'landscape');await page.setViewportSize({width:390,height:844});}
- r.naturalBattle.passed=true;
+ r.naturalBattle.actualMoved=Object.fromEntries(['hero','aria','lina','bram'].map(id=>{const first=initial.units.find(u=>u.id===id),last=restored.units.find(u=>u.id===id);return[id,!!first&&!!last&&(first.x!==last.x||first.y!==last.y)]}));assert.ok(Object.values(r.naturalBattle.actualMoved).every(Boolean));r.naturalBattle.passed=true;
  // Explicit settlement fixture: original board, all allies healthy, only boss retained at 1 HP.
  const fixture=structuredClone(initial);let enemy=fixture.units.find(u=>u.type==='boss')||fixture.units.find(u=>u.type!=='ally');const hero=fixture.units.find(u=>u.id==='hero');
- enemy={...enemy,hp:1,maxHp:enemy.maxHp};hero.x=enemy.x;hero.y=enemy.y+1;hero.atk=9999;hero.baseAtk=9999;fixture.units=fixture.units.filter(u=>u.type==='ally').map(u=>({...u,hp:u.maxHp,moved:false,acted:false})).concat(enemy);fixture.turn='ally';fixture.round=1;fixture.selectedUnit=null;fixture.hazards=[];
+ enemy={...enemy,hp:1,maxHp:enemy.maxHp};hero.x=enemy.x;hero.y=enemy.y+1;fixture.units=fixture.units.filter(u=>u.type==='ally').map(u=>({...u,hp:u.maxHp,moved:false,acted:false})).concat(enemy);fixture.turn='ally';fixture.round=1;fixture.selectedUnit=null;fixture.hazards=[];
  await loadSeed(page,fixture);await waitForBattleReady(page);
  for(let attempt=0;attempt<5&&!await page.locator('.victory-dialog[open]').count();attempt++){const hu=page.locator('.world-battlefield [data-unit-id="hero"]').first();await hu.scrollIntoViewIfNeeded();await hu.click();await page.locator('.cinematic-command-bar .cmd-attack').click();const target=page.locator('.cinematic-command-bar .battle-target-buttons button:not(:disabled)').first();await target.click();await page.waitForTimeout(1000);if(!await page.locator('.victory-dialog[open]').count()){await settle();await page.locator('.battle-end-turn-float').click();await settle();}}
  await page.locator('.victory-dialog[open]').waitFor();await capture(id,'fixture-victory');await page.locator('.victory-dialog').getByRole('button',{name:'대기실',exact:true}).click();
- for(let i=0;i<4&&await page.locator('.narrative-skip').count();i++)await page.locator('.narrative-skip').click();await page.locator('.town-hub').waitFor();await page.locator('.camp-header .prominent-save').click();const won=await readSaved(page);assert.ok(won.clearedStages.includes(id));r.seededSettlement={fixture:true,actualAttack:true,goldBefore:fixture.gold,goldAfter:won.gold,newRecruit:won.party.filter(u=>!seed.party.some(p=>p.id===u.id)).map(u=>({id:u.id,level:u.level})),passed:true};
- await page.locator('.town-player-nav').getByRole('button',{name:/^(전투 진입|출전 준비)$/}).click();await page.locator('.battle-deployment-scene').waitFor({timeout:45000});r.seededSettlement.nextEntry=await page.locator('.deployment-screen h1').innerText();
+ for(let i=0;i<4&&await page.locator('.narrative-skip').count();i++)await page.locator('.narrative-skip').click();await page.locator('.town-hub').waitFor();await page.locator('.camp-header .prominent-save').click();const won=await readSaved(page);assert.ok(won.clearedStages.includes(id));r.seededSettlement={fixture:true,actualAttack:true,enemyHp:1,goldBefore:fixture.gold,goldAfter:won.gold,newRecruit:won.party.filter(u=>!seed.party.some(p=>p.id===u.id)).map(u=>({id:u.id,level:u.level})),passed:true};
+ await page.locator('.town-player-nav').getByRole('button',{name:/^(전투 진입|출전 준비)$/}).click();await waitForDeployment(page);r.seededSettlement.nextEntry=await page.locator('.deployment-screen h1').innerText();
  r.passed=true;
  }catch(e){r.failure={message:e.message,stack:e.stack};await capture(id,'failure').catch(()=>{});r.passed=false;}
  r.errors=errors.slice(errorStart);await fs.writeFile(`${out}/report.json`,JSON.stringify({results,errors,unverified:['전멸 캠프훈련 차단·동일장retry','replay 중복보상','맵 pointer pan']},null,2));console.log(JSON.stringify({id,passed:r.passed,failure:r.failure?.message}));
