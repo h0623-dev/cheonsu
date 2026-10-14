@@ -38,6 +38,21 @@
 .world-battlefield .discovery-marker { position: absolute; inset: 12%; z-index: 6; pointer-events: none; display: grid; place-items: center; }
 .discovery-marker img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 2px 2px #0009); }
 .discovery-marker svg { position: absolute; right: -3px; top: -8px; color: #fff3bf; filter: drop-shadow(0 1px 2px #152019); }
+.discovery-marker-label {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1px 5px;
+  border: 1px solid #bba878;
+  border-radius: 4px;
+  background: #24322eeb;
+  color: #fff3cc;
+  font-size: 10px;
+  line-height: 1.3;
+  white-space: nowrap;
+  text-shadow: 0 1px 1px #0008;
+}
 .secret-promotion-row { display: flex; align-items: center; gap: 12px; border-top: 1px solid #688476; padding-top: 12px; margin-top: 12px; }
 .secret-promotion-row > div { flex: 1; min-width: 0; }
 .secret-promotion-row :is(strong, span, small) { display: block; line-height: 1.5; overflow-wrap: anywhere; }

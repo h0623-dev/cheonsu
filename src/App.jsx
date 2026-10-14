@@ -115,7 +115,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.172";
+const SAVE_VERSION = "1.99.173";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -7964,9 +7964,10 @@ const BattlefieldTiles = memo(function BattlefieldTiles({ activeMap, stageId, un
         <span className={`world-ground ground-${terrainVisual.material}`} aria-hidden="true" />
         {deploymentValid && <span className="deployment-slot-marker" aria-hidden="true">{unit ? '' : '＋'}</span>}
         {terrainVisual.prop && <img className={`world-prop ${terrainVisual.blocked ? 'blocking-prop' : 'low-prop'}`} src={`${WORLD_ART_ROOT}/props/${terrainVisual.prop}.webp`} alt="" aria-hidden="true" draggable="false" />}
-        {discovery && <span className={`discovery-marker discovery-${discovery.kind}`} data-discovery-id={discovery.id} title={discovery.title}>
-          <img src={`/art/world-v2/props/${discovery.kind === 'relic' ? 'crystal' : discovery.kind === 'technique' ? 'monument' : 'crates'}.webp`} alt={discovery.title} draggable="false" />
+        {discovery && <span className={`discovery-marker discovery-${discovery.kind}`} data-discovery-id={discovery.id} title={`${discovery.title} · 이 칸으로 이동해 조사`}>
+          <img src={`/art/world-v2/props/${discovery.kind === 'relic' ? 'crystal' : 'monument'}.webp`} alt={discovery.title} draggable="false" />
           <Sparkles size={16} />
+          <span className="discovery-marker-label">조사</span>
         </span>}
         {danger && (
           <div className={`danger-tile danger-${hazardInfo?.pattern || "wave"}`}>

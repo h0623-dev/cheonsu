@@ -9,7 +9,7 @@ const definitions = {
   star_moss: { name: '별빛이끼', icon: '🌿', moveCost: 1, effect: 'restore', heal: 2, material: 'flowers', legacyTile: 'plain' },
   oath_rune: { name: '봉인문양', icon: '✨', moveCost: 2, effect: 'magic', material: 'rune', legacyTile: 'rune' },
   cracked_slab: { name: '균열석판', icon: '👣', moveCost: 2, effect: 'rough', material: 'stone', legacyTile: 'hill' },
-  low_rubble: { name: '낮은 잔해', icon: '🛡️', moveCost: 2, effect: 'cover', material: 'stone', legacyTile: 'fort', prop: 'crates' },
+  low_rubble: { name: '낮은 잔해', icon: '🛡️', moveCost: 2, effect: 'cover', material: 'stone', legacyTile: 'fort' },
 };
 
 export const NEW_TERRAIN_POLICIES = Object.freeze(Object.fromEntries(
