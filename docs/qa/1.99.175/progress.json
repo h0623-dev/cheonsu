@@ -3,5 +3,7 @@
   "finalReport": "final-summary.json",
   "version": "1.99.175",
   "stagesPassed": 40,
-  "stagesExpected": 40
+  "stagesExpected": 40,
+  "deliveryStatus": "1.99.175 APK·서명 OTA·소스 공개 완료",
+  "releaseSourceCommit": "31957b59d6b7556c9b46cb386b478b0025bc76cd"
 }

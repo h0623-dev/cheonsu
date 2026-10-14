@@ -1,6 +1,6 @@
 # 천수 1.99.175 · 11~50장 독립 QA와 공통 오류 수정
 
-게임 **1.99.175 / Android versionCode 374**. 직접 QA와 코드 수정이 완료되어 새 APK·서명 OTA·통소스 ZIP의 Actions 제작·검증·공개 배포를 준비합니다. 배포 완료·공개 다운로드 검사가 끝나기 전에는 전달 완료로 판단하지 않습니다.
+게임 **1.99.175 / Android versionCode 374**. 직접 QA·오류 수정과 새 APK·서명 OTA·통소스 ZIP의 제작·검증·공개 배포를 완료했습니다. 실제 공개 OTA 채널의 서명과 릴리스 메타데이터도 직접 대조했습니다.
 
 ## 수정 결과
 
@@ -20,7 +20,7 @@
 
 ## 산출물과 배포
 
-기존 GitHub Actions `cheonsu-release`에서 새 최종 소스로 APK·서명 OTA를 제작합니다. 서명키를 이 클라우드 작업으로 가져오거나 출력하지 않습니다. APK 인증서·버전·웹 파일 전체·OTA trust·서명과 공개 다운로드가 확인된 후 이 절에 최종 소스 커밋·Actions 실행·릴리스·파일 해시·실제 OTA 채널을 기록합니다.
+기존 GitHub Actions `cheonsu-release`에서 새 최종 소스로 APK·서명 OTA를 제작했습니다. 서명키를 이 클라우드 작업으로 가져오거나 출력하지 않았습니다. APK 인증서·버전·웹 파일 전체·OTA trust·서명·공개 다운로드를 확인했고 아래에 최종 소스 커밋·Actions 실행·릴리스·파일 해시·실제 OTA 채널을 기록합니다.
 
 기존 저장·진행·수집·전직·성장·장비·강화를 보존하며 고정 원복 기준은 변경하지 않습니다. 실제 공개 OTA 채널은 `updates` 브랜치이며 `main/public/updates/latest.json`의 옛 포인터를 낮추거나 초기화하지 않습니다. Safari 독립 웹 호스팅을 이번 작업에서 새로 배포하지 않았습니다.
 
@@ -33,3 +33,30 @@
 교정 후 `verify-monster-enemies.mjs` 직접 재검사는 세 화면 모두 통과했습니다(각 신규 적 모션 30건·실제 첫 등장 6곳·도감 6종·구형 저장 2곳, 페이지/아트 오류 0). 배치·미션의 추가 직접 재검사와 새 자동 실행은 진행 중입니다.
 
 교정된 기대값으로 직접 재검사한 세 브라우저 검사도 모두 통과했습니다. 신규 적 검사: 3개 화면·모션 90건·첫 등장/도감/구형 저장. 배치 검사: 전체 50장·3개 화면·수동 이동/교환/저장/전투 시작. 미션 검사: 실제 전투 진입 59회·4개 화면·구형 저장 보존. 각 오류는 0건이며 [신규 적](qa/1.99.175/compatibility-monster.json)·[배치](qa/1.99.175/compatibility-deployment.json)·[미션](qa/1.99.175/compatibility-missions.json) 결과를 보존합니다. 새 자동 실행은 최종 소스 `31957b59d6b7556c9b46cb386b478b0025bc76cd`의 Cloud Quality 38533639316과 Android APK and OTA 38533639234입니다.
+
+## 최종 공개 완료 · 2026-10-14 KST
+
+| 항목 | 최종 결과 |
+| --- | --- |
+| 최종 게임·배포 소스 | [`31957b59d6b7556c9b46cb386b478b0025bc76cd`](https://github.com/h0623-dev/cheonsu/commit/31957b59d6b7556c9b46cb386b478b0025bc76cd) |
+| Cloud Quality | [38533639316](https://github.com/h0623-dev/cheonsu/actions/runs/38533639316) · 성공 · 17:59:51 완료 |
+| Android APK and OTA | [38533639234](https://github.com/h0623-dev/cheonsu/actions/runs/38533639234) · 성공 · 18:01:40 완료 |
+| 공개 릴리스 | [v1.99.175](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.175) · 18:01:24 발행 |
+| 새 APK / Android code 374 | [다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.175/cheonsu_1.99.175_update_debug.apk) · 315,081,432 bytes |
+| 서명 OTA | [다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.175/cheonsu_1.99.175_ota.zip) · 306,221,246 bytes |
+| 전체 개발 소스 ZIP | [다운로드](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.175/cheonsu_development_1.99.175.zip) · 900,779,441 bytes |
+| 실제 OTA 채널 | [updates/latest.json](https://raw.githubusercontent.com/h0623-dev/cheonsu/updates/latest.json) · **1.99.175 / Android 350~374 / `1.99.175-c68294a6d010`** |
+
+두 최종 자동 실행은 각각 단위 테스트 **847/847·실패 0**과 모든 화면 QA 11단계를 통과했습니다. 확장 검사는 전투 진입 35회·전직 72회·승리 합류 16회·실제 AI 반격 16회·4개 화면·오류 0을 기록했고, 타격 검사는 132종을 4개 화면에서 통과했습니다. [자동 Quality 핵심 로그](qa/1.99.175/actions-quality.log)와 [자동 Android 핵심 로그](qa/1.99.175/actions-android.log)는 에이전트 직접 검사와 구분합니다.
+
+자동 Android 검사는 17:17:19에 최종 APK의 웹 파일 3,348개를 검사했고, **18:00:05**에는 APK·OTA의 웹 파일 각각 **3,348개 전체**, APK 인증서·버전·공개 trust·OTA 서명·네이티브 플러그인·복구·원본 주소 보호의 통과를 기록했습니다. 기존 APK 인증서 SHA-256 `1d4b2f3f8e7b30e2b9202121def34d4da6e39b4119bdd93c44a01aebfcd0518f`를 유지합니다.
+
+| 파일 | 자동 발행의 공개 다운로드·SHA 검사 완료(KST) | SHA-256 |
+| --- | --- | --- |
+| 서명 OTA | 18:00:51.1436357 | `c68294a6d010bd5f14503941a15af93985c4de3c4915b7af1ece7d10b6cce1c8` |
+| 새 APK | 18:01:00.4358028 | `58ce266640d169ab31fc40dd1cae953e35dad9a3f3efd3dfaae3da9b97bf6e00` |
+| 전체 개발 소스 ZIP | 18:01:23.4616140 | `e8c11f95116a972c464674327bcea4b72c5d43c00fa9a7050d0c9c6f66f5d9a1` |
+
+에이전트는 **18:02:31 KST**에 실제 공개 채널을 받아 앱의 기존 검증기로 RSA 서명을 직접 검증하고, 버전 1.99.175·네이티브 호환 350~374·파일 URL·OTA 크기 및 SHA·7개 패치 안내를 공개 릴리스 메타데이터와 대조하여 통과했습니다. [직접 공개 채널 확인](qa/1.99.175/public-verification.json). 공개 파일 세 개의 전체 다운로드·SHA 대조는 자동 발행 결과이며 에이전트가 별도로 세 대형 파일을 다시 다운로드한 결과가 아닙니다.
+
+소스 ZIP은 위 최종 게임 커밋의 발행 시점 스냅샷이며, 발행 후 작성한 최종 배포 문서까지 포함하지 않습니다. Android·iPhone 실기기 설치·플레이와 무중단 자연 완승은 직접 검사 범위 밖입니다. 기존 별도 의존성 보안 경고나 중단된 Safari 호스팅을 이번 작업으로 해결했다고 표시하지 않습니다. 기존 저장·고정 원복 기준과 과거 릴리스는 보존합니다.

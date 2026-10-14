@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "checkedAt": "2026-10-14T09:02:31.528Z",
+  "release": "https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.175",
+  "publishedAt": "2026-10-14T09:01:24Z",
+  "target": "31957b59d6b7556c9b46cb386b478b0025bc76cd",
+  "manifestSignatureVerified": true,
+  "version": "1.99.175",
+  "minNativeVersion": 350,
+  "maxNativeVersion": 374,
+  "bundleId": "1.99.175-c68294a6d010",
+  "releasedAt": "2026-10-14T09:00:01.296Z",
+  "assets": [
+    {
+      "name": "cheonsu_1.99.175_update_debug.apk",
+      "size": 315081432,
+      "sha256": "58ce266640d169ab31fc40dd1cae953e35dad9a3f3efd3dfaae3da9b97bf6e00",
+      "url": "https://github.com/h0623-dev/cheonsu/releases/download/v1.99.175/cheonsu_1.99.175_update_debug.apk"
+    },
+    {
+      "name": "cheonsu_1.99.175_ota.zip",
+      "size": 306221246,
+      "sha256": "c68294a6d010bd5f14503941a15af93985c4de3c4915b7af1ece7d10b6cce1c8",
+      "url": "https://github.com/h0623-dev/cheonsu/releases/download/v1.99.175/cheonsu_1.99.175_ota.zip"
+    },
+    {
+      "name": "cheonsu_development_1.99.175.zip",
+      "size": 900779441,
+      "sha256": "e8c11f95116a972c464674327bcea4b72c5d43c00fa9a7050d0c9c6f66f5d9a1",
+      "url": "https://github.com/h0623-dev/cheonsu/releases/download/v1.99.175/cheonsu_development_1.99.175.zip"
+    }
+  ],
+  "note": "실제 공개 채널 서명·버전·네이티브 호환 범위 및 릴리스 메타데이터 직접 대조. 파일 다운로드 SHA 검사는 자동 발행 로그와 별도 구분."
+}

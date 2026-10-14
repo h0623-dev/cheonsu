@@ -1,5 +1,5 @@
 {
-  "status": "직접 QA 통과·새 APK/서명 OTA 배포 준비",
+  "status": "직접 QA·새 APK/서명 OTA 공개 배포 및 채널 서명 대조 완료",
   "version": "1.99.175",
   "androidVersionCode": 374,
   "scope": "11~50장: 장별 저장 시나리오의 실제 UI 전투와 별도 승패 정산",
@@ -365,5 +365,8 @@
     "정상 HP로 자연 전멸하는 모든 장별 전술 경우",
     "Android·iPhone 실기기 설치·플레이"
   ],
-  "savedAt": "2026-10-14T16:50:36.397000+09:00"
+  "savedAt": "2026-10-14T16:50:36.397000+09:00",
+  "releaseSourceCommit": "31957b59d6b7556c9b46cb386b478b0025bc76cd",
+  "releaseUrl": "https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.175",
+  "publicVerification": "public-verification.json"
 }
