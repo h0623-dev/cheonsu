@@ -38,7 +38,7 @@ for(let id=Number(process.env.QA_START||31);id<=Number(process.env.QA_END||40);i
  const before=await readBattle(page);r.naturalBattle.rounds.push({round:before.round,units:sig(before)});
  if(turn<4){await page.locator('.battle-end-turn-float').click();await settle();}
  }
- const saved=await readBattle(page);const expected=sig(saved);await page.reload();await page.getByRole('button',{name:'이어하기',exact:true}).click();await waitForBattleReady(page);const restored=await readBattle(page);assert.deepEqual(sig(restored),expected);r.naturalBattle.battleRestore=true;assert.ok(restored.round>=5);
+ const saved=await readBattle(page);const expected=sig(saved);const expectedBattleStats=saved.battleStats;await page.reload();await page.getByRole('button',{name:'이어하기',exact:true}).click();await waitForBattleReady(page);const restored=await readBattle(page);assert.deepEqual(sig(restored),expected);assert.deepEqual(restored.battleStats,expectedBattleStats);r.naturalBattle.battleRestore=true;assert.ok(restored.round>=5);
  await page.evaluate(async()=>{await Promise.all([...document.images].map(async i=>{i.loading='eager';try{await i.decode()}catch{}}))});
  r.imageFailures=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src));r.overflow=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,viewport:innerWidth}));
  await capture(id,'natural-round5');if(id===31||id===40){await page.setViewportSize({width:844,height:390});await capture(id,'landscape');await page.setViewportSize({width:390,height:844});}

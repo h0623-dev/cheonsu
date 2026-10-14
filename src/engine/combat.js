@@ -5,6 +5,7 @@ const ALLY_COMBAT_CLASSES = {
   hero: 'sword', bram: 'shield', lina: 'bow', aria: 'magic', leon: 'spear', sera: 'dagger',
   noah: 'magic', yuna: 'magic', rakan: 'shield', miho: 'magic', teo: 'bow', irene: 'magic',
   kaz: 'dagger', ella: 'magic', jin: 'sword', luka: 'sword', baekho: 'shield',
+  mare: 'spear', sylvan: 'magic',
 };
 
 export function getUnitCombatClass(unit) {
