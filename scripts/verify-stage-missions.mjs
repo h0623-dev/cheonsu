@@ -11,7 +11,7 @@ import { getStageRoundLimit } from '../src/engine/stageRules.js';
 import { getBattleOutcome } from '../src/engine/battleOutcome.js';
 import { webBuildInfo } from './update-build-info.mjs';
 import { stages } from '../src/data/stages.js';
-import { withLegacyAccessorySlot } from './qa-legacy-equipment.mjs';
+import { withApprovedAllyMigration } from './qa-legacy-equipment.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const output = path.resolve(process.env.CHEONSU_MISSIONS_QA_OUT || path.join(root, 'tmp/stage-missions-qa'));
@@ -229,9 +229,9 @@ async function runViewport(base, viewport) {
       verifyConditions(await contents(openDialog(page)), baseline.selectedStage, baseline.units);
       await confirm(page, true);
       const after = await saveBattle();
-      assert.deepEqual(after.units, withLegacyAccessorySlot(baseline.units), '아군의 빈 장신구 칸만 추가하고 실제 구버전 저장의 전체 유닛 필드를 보존합니다');
+      assert.deepEqual(after.units, withApprovedAllyMigration(baseline.units), '승인된 무기·스킬 정보와 빈 소모품 플래그·장신구 칸 이외 실제 구버전 저장의 모든 HP·능력치·좌표·상태·쿨다운·장비를 보존합니다');
       assert.deepEqual(after.selectedStage.units, baseline.selectedStage.units);
-      assert.deepEqual(after.party, withLegacyAccessorySlot(baseline.party), '아군의 빈 장신구 칸을 제외한 구버전 보유 동료 전체 데이터를 보존합니다');
+      assert.deepEqual(after.party, withApprovedAllyMigration(baseline.party, { camp: true }), '승인된 무기·스킬 정보와 빈 소모품 플래그·장신구 칸 이외 보유 동료의 모든 HP·능력치·좌표·상태·쿨다운·장비를 보존합니다');
       for (const field of [...preserveFields.filter(field => field !== 'party'), 'turn', 'round', 'selectedUnit', 'trainingUsed', 'dispatchUsed']) assert.deepEqual(after[field], baseline[field], `실제 구버전 저장 ${field} 보존`);
       result.legacyBattles++;
     }

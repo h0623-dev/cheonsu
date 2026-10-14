@@ -14,7 +14,7 @@ import { duelProps, seekDuel, assertBodies, assertFit } from './duel-fixture.mjs
 import { qaBrowserOptions } from './qa-browser.mjs';
 import { startDeploymentBattle, waitForDeployment } from './qa-deployment-flow.mjs';
 import { EXPANSION_MONSTER_KEYS } from '../src/data/expansionEnemies.js';
-import { withLegacyAccessorySlot } from './qa-legacy-equipment.mjs';
+import { withApprovedAllyMigration } from './qa-legacy-equipment.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const output = path.resolve(process.env.CHEONSU_MONSTER_QA_OUT || path.join(root, 'tmp/monster-enemies-qa'));
@@ -199,9 +199,9 @@ async function actualApp(base, viewport) {
       assert.deepEqual(await saved(), baseline, `${testCase.stage}: 이어하기는 기존 저장에 쓰지 않습니다`);
       await clickBattleSave(page);
       const resumed = await saved();
-      assert.deepEqual(resumed.units, withLegacyAccessorySlot(baseline.units), `${testCase.stage}: 아군의 빈 장신구 칸만 추가하고 기존 전투 units의 모든 필드·전투 규칙·외형을 보존합니다`);
+      assert.deepEqual(resumed.units, withApprovedAllyMigration(baseline.units), `${testCase.stage}: 승인된 무기·스킬 정보와 빈 소모품 플래그·장신구 칸 이외 기존 전투 units의 모든 HP·능력치·좌표·상태·쿨다운·장비를 보존합니다`);
       assert.deepEqual(resumed.selectedStage.units, baseline.selectedStage.units, `${testCase.stage}: 저장한 전장 적 구성 전체를 보존합니다`);
-      assert.deepEqual(resumed.party, withLegacyAccessorySlot(baseline.party), `${testCase.stage}: 아군의 빈 장신구 칸을 제외한 보유 동료 전체 데이터를 보존합니다`);
+      assert.deepEqual(resumed.party, withApprovedAllyMigration(baseline.party, { camp: true }), `${testCase.stage}: 승인된 무기·스킬 정보와 빈 소모품 플래그·장신구 칸 이외 보유 동료의 모든 HP·능력치·좌표·상태·쿨다운·장비를 보존합니다`);
       for (const field of ['gold', 'inventory', 'clearedStages', 'gearInventory', 'gearEnhance', 'supportPoints', 'supportDialoguesSeen', 'exploration', 'stageNotes', 'stageMastery', 'claimedAchievements', 'claimedMasteryRewards', 'snapshotGallery']) {
         assert.deepEqual(resumed[field], baseline[field], `${testCase.stage}: ${field} 보존`);
       }

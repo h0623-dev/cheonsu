@@ -327,8 +327,8 @@
   ],
   "directChecks": {
     "lint": "통과",
-    "unitTests": 846,
-    "unitPassed": 846,
+    "unitTests": 847,
+    "unitPassed": 847,
     "productionBuild": "통과",
     "smokeViewports": [
       "1280x900",
