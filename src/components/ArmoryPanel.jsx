@@ -33,6 +33,8 @@ function Loadout({ unit, equipment, gearInventory, gearEnhance = {}, clearedStag
   const owned = new Set(gearInventory);
   const currentId = unit.equipment?.[slot] || null;
   const matching = Object.values(equipment).filter(gear => gear.slot === slot && gear.allowed.includes(unit.id))
+    .sort((a, b) => (a.rewardStage || a.unlockStage || 0) - (b.rewardStage || b.unlockStage || 0)
+      || (getGearShopPrice(a) || 0) - (getGearShopPrice(b) || 0))
     .map(gear => getGearPresentation(gear, unit));
   const available = matching.filter(gear => owned.has(gear.id));
   const missing = matching.filter(gear => !owned.has(gear.id));

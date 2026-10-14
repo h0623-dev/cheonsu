@@ -11,12 +11,13 @@ import { getPromotionTitle, getPromotionCost, canPromoteUnit, promoteAllyUnit, g
 
 const hero = extra => ({ ...getInitialParty()[0], level: 5, ...extra });
 
-test('일반 전직은 기존 레벨·비용 조건을 유지하며 비정상 골드와 적을 거부한다', () => {
-  assert.equal(getPromotionCost(hero({ level: 3 })), 900);
-  assert.equal(getPromotionCost(hero()), 1140);
-  assert.equal(canPromoteUnit(hero({ level: 2 }), 5000).ok, false);
-  assert.equal(canPromoteUnit(hero(), 1139).ok, false);
-  assert.equal(canPromoteUnit(hero(), 1140).ok, true);
+test('상급 전직은 Lv.5부터 900G이며 비정상 레벨·골드와 적을 거부한다', () => {
+  assert.equal(getPromotionCost(hero()), 900);
+  assert.equal(getPromotionCost(hero({ level: 7 })), 1140);
+  assert.equal(canPromoteUnit(hero({ level: 4 }), 5000).ok, false);
+  assert.equal(canPromoteUnit(hero(), 899).ok, false);
+  assert.equal(canPromoteUnit(hero(), 900).ok, true);
+  for (const level of [undefined, NaN, Infinity, '5']) assert.equal(canPromoteUnit(hero({ level }), 5000).ok, false);
   assert.equal(canPromoteUnit(hero({ promoted: true }), 5000).ok, false);
   for (const gold of [NaN, Infinity, '5000', undefined]) assert.equal(canPromoteUnit(hero(), gold).ok, false);
   assert.equal(canPromoteUnit(hero({ type: 'enemy' }), 5000).ok, false);
@@ -31,6 +32,8 @@ test('일반 전직은 HP 0을 보존하고 생존 동료에게만 최대HP 증�
   assert.equal(promoteAllyUnit(injured).hp, 9);
   assert.equal(promoteAllyUnit(after), after);
   assert.equal(fallen.promoted, undefined);
+  const legacy = hero({ level: 3, promoted: true, classTitle: '천룡기사' });
+  assert.equal(promoteAllyUnit(legacy), legacy);
 });
 
 test('구저장 기본치가 없어도 장비·강화·수호를 일반 전직 능력치에 두 번 더하지 않는다', () => {
@@ -94,7 +97,7 @@ test('전직 공격 기술 +1은 기본·비전·최상위 기술 표시와 실�
 
 test('구저장의 큰 skillBonus 값·비전과 반복 최상위 분기 전환은 전직 위력 보너스를 중첩하지 않는다', () => {
   const progress = { relics: ['dawnblade-relic'], techniques: [], claimed: [] };
-  const base = hero({ skillBonus: 999, advancedMastery: 3 });
+  const base = hero({ level: 10, skillBonus: 999, advancedMastery: 3 });
   const direct = applySecretPromotion(base, progress).unit;
   const ordinaryFirst = applySecretPromotion(promoteAllyUnit(base), progress).unit;
   assert.equal(getSkill(direct, 'gale').bonus, 5);
@@ -118,7 +121,7 @@ test('비전 미리보기는 유물 미보유에도 정확한 일반 전직 포�
   assert.deepEqual(progress, { relics: [], techniques: [], claimed: [] });
   const afterOrdinary = getSecretPromotionPreview(promoteAllyUnit(unit), progress);
   assert.deepEqual(afterOrdinary.delta, { hp: 8, atk: 3, def: 2, move: 0 });
-  const promoted = applySecretPromotion(hero(), { relics: ['dawnblade-relic'] }).unit;
+  const promoted = applySecretPromotion(hero({ level: 10 }), { relics: ['dawnblade-relic'] }).unit;
   assert.deepEqual(getSecretPromotionPreview(promoted, progress).delta, { hp: 0, atk: 0, def: 0, move: 0 });
   assert.equal(getSecretPromotionPreview({ id: 'lina', type: 'ally' }, progress), null);
 });

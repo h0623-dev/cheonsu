@@ -1,5 +1,6 @@
 import { applyEquipmentStats } from './partyEngine.js';
 import { ORDINARY_PROMOTION_ATTACK_BONUS } from '../data/skills.js';
+import { ORDINARY_PROMOTION_LEVEL } from '../data/promotionLevels.js';
 
 export const ORDINARY_PROMOTION_BONUSES = Object.freeze({ hp: 5, atk: 2, def: 2, skillBonus: ORDINARY_PROMOTION_ATTACK_BONUS });
 
@@ -17,13 +18,15 @@ export function getPromotionTitle(unit) {
 
 export function getPromotionCost(unit) {
   const level = Number.isFinite(unit?.level) ? Math.max(1, unit.level) : 1;
-  return 900 + Math.max(0, level - 3) * 120;
+  return 900 + Math.max(0, level - ORDINARY_PROMOTION_LEVEL) * 120;
 }
 
 export function canPromoteUnit(unit, gold) {
   if (!unit || unit.type !== 'ally') return { ok: false, reason: '전직할 동료가 없습니다.' };
   if (unit.promoted) return { ok: false, reason: '이미 전직했습니다.' };
-  if (!Number.isFinite(unit.level) || unit.level < 3) return { ok: false, reason: 'Lv.3 이상 필요' };
+  if (!Number.isFinite(unit.level) || unit.level < ORDINARY_PROMOTION_LEVEL) {
+    return { ok: false, reason: `Lv.${ORDINARY_PROMOTION_LEVEL} 이상 필요` };
+  }
   if (!Number.isFinite(gold) || gold < getPromotionCost(unit)) return { ok: false, reason: '골드 부족' };
   return { ok: true, reason: '전직 가능' };
 }

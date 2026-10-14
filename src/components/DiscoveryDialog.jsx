@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { BookOpen, Check, Sparkles, X } from 'lucide-react';
 import { DISCOVERY_TECHNIQUES, SECRET_PROMOTIONS } from '../data/discoveries.js';
+import { SECRET_PROMOTION_LEVEL } from '../data/promotionLevels.js';
 
 const kindLabels = { training: '수련의 흔적', technique: '비전 기록', relic: '전직 보물' };
 const artwork = kind => `/art/world-v2/props/${kind === 'relic' ? 'crystal' : kind === 'technique' ? 'monument' : 'crates'}.webp`;
@@ -23,7 +24,7 @@ export default function DiscoveryDialog({ receipt, progress, entries, onClose })
     {receipt ? <section className="discovery-receipt">
       <img src={artwork(receipt.kind)} alt="" /><span>{kindLabels[receipt.kind]}</span>
       <h3>{receipt.title}</h3><p>{receipt.hint}</p><strong>{receipt.message}</strong>
-      {receipt.kind === 'relic' && <small>야영진 · 전직 · Lv.5</small>}
+      {receipt.kind === 'relic' && <small>마을 · 전직 · Lv.{SECRET_PROMOTION_LEVEL}</small>}
       {receipt.growth?.map(message => <small key={message}>{message}</small>)}
     </section> : <div className="discovery-journal">
       <div className="discovery-count">발견 {progress.claimed.length} · 보유 전직 보물 {progress.relics.length} · 비전 {progress.techniques.length}</div>

@@ -10,10 +10,10 @@ import { stages } from '../src/data/stages.js';
 const hero = () => ({ ...getInitialParty()[0], baseAtk: 8, baseDef: 5, atk: 8, def: 5, hp: 13, maxHp: 24 });
 const oldIds = ['ironSword', 'fireStaff', 'guardShield', 'leatherArmor', 'chainArmor', 'mageRobe', 'holyStaff', 'hunterBow', 'shadowDagger', 'mareSpear', 'harinBracers', 'edanHammer', 'sylvanStaff', 'oathCommemorative'];
 
-test('68종 장비가 세 슬롯과 한국어 설명을 가지며 모든 동료에게 역할별 신규 무기를 제공한다', () => {
+test('110종 장비가 세 슬롯과 한국어 설명을 가지며 모든 동료에게 역할별 신규 무기를 제공한다', () => {
   const items = Object.values(EQUIPMENT);
-  assert.equal(items.length, 68);
-  assert.deepEqual(EQUIPMENT_SLOTS.map(slot => items.filter(item => item.slot === slot).length), [40, 16, 12]);
+  assert.equal(items.length, 110);
+  assert.deepEqual(EQUIPMENT_SLOTS.map(slot => items.filter(item => item.slot === slot).length), [70, 22, 18]);
   assert.deepEqual(EQUIPMENT_SLOT_LABELS, { weapon: '무기', armor: '방어구', accessory: '장신구' });
   for (const item of items) {
     assert.equal(EQUIPMENT[item.id], item);
@@ -21,7 +21,7 @@ test('68종 장비가 세 슬롯과 한국어 설명을 가지며 모든 동료�
     assert.match(item.name, /[가-힣]/);
     assert.match(item.desc, /[가-힣]/);
     assert.ok(item.family && item.icon);
-    assert.ok([0, 5, 15, 30, 40].includes(item.unlockStage));
+    assert.ok([0, 5, 10, 15, 30, 40].includes(item.unlockStage));
     assert.ok(Number.isInteger(item.atk) && Number.isInteger(item.def));
     assert.equal(item.hp, undefined);
     assert.equal(item.move, undefined);
@@ -39,6 +39,54 @@ test('68종 장비가 세 슬롯과 한국어 설명을 가지며 모든 동료�
   assert.ok(EQUIPMENT.lancerAssault.allowed.includes('leon'));
   assert.ok(EQUIPMENT.arcaneAssault.allowed.includes('irene'));
   assert.ok(EQUIPMENT.resonanceAssault.allowed.includes('ella'));
+});
+
+test('각 무기 계열의 추가 보급품은 단계별 가격과 다른 공격·방어 조합을 제공한다', () => {
+  const families = ['vanguard', 'bastion', 'marksman', 'lancer', 'scout', 'arcane', 'sanctuary', 'resonance', 'martial', 'engineer'];
+  for (const family of families) {
+    const expected = [['Veteran', 5, 330, 3, 1], ['Ward', 15, 560, 2, 3], ['Ascendant', 40, 1050, 4, 3]];
+    for (const [suffix, stage, price, atk, def] of expected) {
+      const item = EQUIPMENT[`${family}${suffix}`];
+      assert.deepEqual([item.unlockStage, item.price, item.atk, item.def], [stage, price, atk, def]);
+      assert.deepEqual(item.allowed, EQUIPMENT[`${family}Assault`].allowed);
+      assert.equal(DEFAULT_GEAR_INVENTORY.includes(item.id), false);
+      assert.equal(getGearShopAvailability(item, [stage - 1]).ok, false);
+      assert.equal(getGearShopAvailability(item, [stage]).ok, true);
+    }
+  }
+  for (const [prefix, stage] of [['sentinelArmor', 10], ['citadelArmor', 30], ['jadeAccessory', 10], ['sunstoneAccessory', 30]]) {
+    const variants = [0, 1, 2].map(index => EQUIPMENT[`${prefix}${index}`]);
+    assert.equal(new Set(variants.map(item => `${item.atk}/${item.def}`)).size, 3);
+    for (const item of variants) {
+      assert.equal(item.unlockStage, stage);
+      assert.deepEqual([...item.allowed].sort(), Object.keys(ADVANCED_CLASSES).sort());
+      assert.equal(DEFAULT_GEAR_INVENTORY.includes(item.id), false);
+    }
+  }
+});
+
+test('추가 보급 무기도 동료의 실제 무기 이름과 기존 강화 식별자를 유지한다', () => {
+  for (const suffix of ['Veteran', 'Ward', 'Ascendant']) {
+    const cases = [
+      [`marksman${suffix}`, 'lina', '활', 'bow'],
+      [`bastion${suffix}`, 'rakan', '도끼', 'axe'],
+      [`arcane${suffix}`, 'noah', '마법서', 'book'],
+      [`arcane${suffix}`, 'miho', '주술 부적', 'charm'],
+      [`sanctuary${suffix}`, 'harin', '치유 권갑', 'fist'],
+      [`scout${suffix}`, 'sera', '쌍검', 'dagger'],
+    ];
+    for (const [id, unitId, family, icon] of cases) {
+      const original = EQUIPMENT[id];
+      const view = getGearPresentation(id, unitId);
+      assert.equal(view.id, id);
+      assert.equal(view.family, family);
+      assert.equal(view.icon, icon);
+      assert.deepEqual(view.allowed, original.allowed);
+      assert.deepEqual([view.atk, view.def, view.price], [original.atk, original.def, original.price]);
+      assert.deepEqual(getGearEnhanceBonus(view, 3), getGearEnhanceBonus(original, 3));
+    }
+    assert.doesNotMatch(getGearPresentation(`marksman${suffix}`, 'lina').name, /지팡이|마도봉|마법서/);
+  }
 });
 
 test('기존 14종의 식별자와 효과·착용 동료 및 시작 수집품을 보존한다', () => {

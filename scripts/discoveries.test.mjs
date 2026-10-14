@@ -24,6 +24,7 @@ import {
 } from '../src/data/skills.js';
 import { normalizeSaveData } from '../src/engine/saveEngine.js';
 import { createExpansionRecruit } from '../src/engine/promotionEngine.js';
+import { applyRecruitStartingGrowth } from '../src/engine/recruitmentEngine.js';
 import { promoteAllyUnit } from '../src/engine/ordinaryPromotion.js';
 import { applyExpansionEnemyIdentity, createExpansionEnemy, createExpansionExtraEnemy, getExpansionEnemyKeys } from '../src/data/expansionEnemies.js';
 
@@ -57,7 +58,7 @@ const appHelpers = runInNewContext([
   '({ expandStageForLargeBattle, extendMapForPlayableBoard, spaceBattleFormations, createRecruitAlly, promoteAllyUnit })',
 ].join('\n'), {
   alignMapToArtwork, createBattlefieldTerrain, getBattlefieldPlan, applyEquipmentStats, distributeBattleFormations, getSkillDisplayName, getChapterBossName, applyStageMonsterAppearance, withStageEnemyLevel,
-  createExpansionRecruit, promoteAllyUnit, applyExpansionEnemyIdentity, createExpansionEnemy, createExpansionExtraEnemy, getExpansionEnemyKeys,
+  createExpansionRecruit, applyRecruitStartingGrowth, promoteAllyUnit, applyExpansionEnemyIdentity, createExpansionEnemy, createExpansionExtraEnemy, getExpansionEnemyKeys,
   clone: (value) => JSON.parse(JSON.stringify(value)),
   Math: Object.assign(Object.create(Math), { random: () => { throw new Error('Random map placement'); } }),
 });
@@ -315,19 +316,19 @@ test('techniques are shared discoveries, applied only to owners, and never dupli
 });
 
 for (const id of ['hero', 'bram']) {
-  test(`${id}: hidden promotion requires level 5 and its own relic`, () => {
+  test(`${id}: 비전 전직은 Lv.10과 전용 유물이 필요하다`, () => {
     const promotion = SECRET_PROMOTIONS[id];
     const progress = freeze({ claimed: ['kept'], relics: [promotion.relicId], techniques: [] });
     assert.equal(getSecretPromotion(ally(id), progress).hasRelic, true);
     assert.equal(getSecretPromotion(ally(id), null).hasRelic, false);
-    assert.equal(canSecretPromote(ally(id, { level: 4 }), progress).ok, false);
-    assert.equal(canSecretPromote(ally(id, { level: 5 }), progress).ok, true);
-    assert.equal(canSecretPromote(ally(id, { level: 5 }), null).ok, false);
-    assert.equal(canSecretPromote(ally(id, { level: 5 }), { relics: ['another-relic'] }).ok, false);
+    assert.equal(canSecretPromote(ally(id, { level: 9 }), progress).ok, false);
+    assert.equal(canSecretPromote(ally(id, { level: 10 }), progress).ok, true);
+    assert.equal(canSecretPromote(ally(id, { level: 10 }), null).ok, false);
+    assert.equal(canSecretPromote(ally(id, { level: 10 }), { relics: ['another-relic'] }).ok, false);
     for (const level of [undefined, NaN, Infinity, 'invalid']) {
       assert.equal(canSecretPromote(ally(id, { level }), progress).ok, false);
     }
-    const locked = freeze(ally(id, { level: 4 }));
+    const locked = freeze(ally(id, { level: 9 }));
     const failed = applySecretPromotion(locked, progress);
     assert.equal(failed.unit, locked);
     assert.deepEqual(failed.progress, progress);
@@ -342,7 +343,7 @@ for (const id of ['hero', 'bram']) {
       techniques: [technique.id],
     });
     const equipped = applyEquipmentStats(ally(id, {
-      level: 5, exp: 87, hp: 14, baseHP: 10, maxHp: 40, baseAtk: 15, baseDef: 10,
+      level: 10, exp: 87, hp: 14, baseHP: 10, maxHp: 40, baseAtk: 15, baseDef: 10,
       equipment: { weapon: id === 'hero' ? 'ironSword' : 'guardShield', armor: 'chainArmor' },
       gearEnhance: { ironSword: 3, guardShield: 2, chainArmor: 2 },
       guard: true, skillGuardBoost: 4, skillLevel: 2, skillCooldowns: { saved: 3 },
@@ -389,7 +390,7 @@ for (const id of ['hero', 'bram']) {
     const { bonuses } = getSecretPromotion(legacy, progress);
     assert.equal(fixed.atk, equipped.atk + bonuses.atk);
     assert.equal(fixed.def, equipped.def + bonuses.def);
-    assert.equal(applySecretPromotion(ally(id, { level: 5, hp: 0 }), progress).unit.hp, 0);
+    assert.equal(applySecretPromotion(ally(id, { level: 10, hp: 0 }), progress).unit.hp, 0);
   });
 
   test(`${id}: direct secret promotion and ordinary-then-secret produce identical final stats and rewards`, () => {
@@ -397,7 +398,7 @@ for (const id of ['hero', 'bram']) {
     const progress = freeze({ claimed: ['kept'], relics: [promotion.relicId], techniques: [] });
     for (const hp of [0, 14, 40]) {
       const base = freeze(applyEquipmentStats(ally(id, {
-        level: 5, exp: 87, hp, maxHp: 40, baseHP: 40, baseAtk: 15, baseDef: 10,
+        level: 10, exp: 87, hp, maxHp: 40, baseHP: 40, baseAtk: 15, baseDef: 10,
         equipment: { weapon: id === 'hero' ? 'ironSword' : 'guardShield', armor: 'chainArmor' },
         gearEnhance: { ironSword: 3, guardShield: 2, chainArmor: 2 },
         guard: true, skillGuardBoost: 4, skillLevel: 2, skillBonus: 7,
@@ -472,10 +473,10 @@ test('all discovery titles, hints, technique names, promotion names, and result 
   }
   for (const id of ['hero', 'bram']) {
     const progress = { relics: [SECRET_PROMOTIONS[id].relicId] };
-    messages.push(canSecretPromote(ally(id, { level: 4 }), progress).reason);
-    messages.push(canSecretPromote(ally(id, { level: 5 }), null).reason);
-    messages.push(canSecretPromote(ally(id, { level: 5 }), progress).reason);
-    const result = applySecretPromotion(ally(id, { level: 5, name: undefined }), progress);
+    messages.push(canSecretPromote(ally(id, { level: 9 }), progress).reason);
+    messages.push(canSecretPromote(ally(id, { level: 10 }), null).reason);
+    messages.push(canSecretPromote(ally(id, { level: 10 }), progress).reason);
+    const result = applySecretPromotion(ally(id, { level: 10, name: undefined }), progress);
     messages.push(result.message, canSecretPromote(result.unit, progress).reason);
   }
   messages.push(canSecretPromote(ally('lina'), null).reason);
@@ -536,7 +537,7 @@ for (const id of ['hero', 'bram']) {
   test(`${id}: secret upgrade grants its missing role technique once, including after ordinary promotion`, () => {
     const promotion = SECRET_PROMOTIONS[id];
     const progress = freeze({ claimed: ['kept'], relics: [promotion.relicId], techniques: [] });
-    const ordinary = appHelpers.promoteAllyUnit(ally(id, { level: 5, x: 0, y: 0 }));
+    const ordinary = appHelpers.promoteAllyUnit(ally(id, { level: 10, x: 0, y: 0 }));
     const result = applySecretPromotion(freeze(ordinary), progress);
     assert.deepEqual(result.progress, { claimed: ['kept'], relics: [], techniques: [promotion.techniqueId] });
     assert.deepEqual(result.unit.learnedTechniques, [promotion.techniqueId]);
@@ -629,10 +630,10 @@ test('saved secret promotions keep spent relics spent and restore Korean class t
   for (const id of ['hero', 'bram']) {
     const promotion = SECRET_PROMOTIONS[id];
     const discovery = DISCOVERIES.find((entry) => entry.reward.relicId === promotion.relicId);
-    const result = applySecretPromotion(ally(id, { level: 5 }), {
+    const result = applySecretPromotion(ally(id, { level: 10 }), {
       claimed: [discovery.id], relics: [promotion.relicId], techniques: [],
     });
-    const legacy = { ...result.unit, classTitle: id === 'hero' ? 'Dawnblade' : 'Oathwarden', learnedTechniques: undefined };
+    const legacy = { ...result.unit, level: 5, classTitle: id === 'hero' ? 'Dawnblade' : 'Oathwarden', learnedTechniques: undefined };
     const raw = freeze({
       selectedStage: { ...stages[0], units: [legacy] },
       party: fullParty.map((unit) => unit.id === id ? legacy : unit), units: [legacy],
@@ -642,6 +643,7 @@ test('saved secret promotions keep spent relics spent and restore Korean class t
     for (const unit of [saved.party.find((candidate) => candidate.id === id), saved.units[0]]) {
       assert.equal(unit.classTitle, promotion.classTitle);
       assert.equal(unit.secretClass, promotion.secretClass);
+      assert.equal(unit.level, 5, '이미 비전 전직한 구저장의 낮은 레벨과 전직은 보존한다');
       assert.equal(unit.baseAtk, result.unit.baseAtk);
       assert.equal(unit.baseDef, result.unit.baseDef);
       assert.equal(unit.maxHp, result.unit.maxHp);

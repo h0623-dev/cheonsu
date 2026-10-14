@@ -178,7 +178,7 @@ async function runViewport(base, viewport) {
     }
 
     const promotionSource = { ...structuredClone(source), screen: 'camp', gold: 10000, lastBattleResult: { stageId: 49, outcome: 'victory' },
-      party: fullParty.map(unit => ({ ...structuredClone(unit), promoted: true, advancedMastery: 3, hp: 2 })) };
+      party: fullParty.map(unit => ({ ...structuredClone(unit), level: Math.max(10, unit.level || 1), promoted: true, advancedMastery: 3, hp: 2 })) };
     await load(promotionSource);
     await page.locator('.town-hub').waitFor();
     const beforePromotion = await saveCamp();

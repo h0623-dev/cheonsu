@@ -5,6 +5,7 @@ import { DEFAULT_SUPPORT_POINTS, DEFAULT_SUPPORT_DIALOGUES_SEEN } from "../data/
 import { inMap } from "./movement.js";
 import { normalizeExploration, applyDiscoveryUnlocks } from "./discoveryEngine.js";
 import { sanitizeDeploymentDraft } from './deploymentEngine.js';
+import { normalizeTownWalkerId } from './townSelection.js';
 import {
   clone,
   getInitialParty,
@@ -366,6 +367,7 @@ export function normalizeSaveData(raw, saveVersion = "0.12") {
     exploration,
     party,
     units,
+    campWalkerId: normalizeTownWalkerId(data.campWalkerId, party),
     selectedUnit:
       typeof data.selectedUnit === "string" &&
       units.some((unit) => unit.id === data.selectedUnit)

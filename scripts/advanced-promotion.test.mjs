@@ -7,7 +7,7 @@ import { getUnitSkills, getSkill, getSkillDisplayName, applyCooldown, tickCooldo
 import { getAdvancedPromotionForms, getAdvancedClass, getAdvancedSealBalance, getAdvancedMastery, canAdvancedPromote, getAdvancedPromotionPreview, applyAdvancedPromotion, createExpansionRecruit } from '../src/engine/promotionEngine.js';
 import { finalizeExpansionAllySkill } from '../src/engine/expansionAllySkills.js';
 
-const hero = () => ({ ...getInitialParty()[0], promoted: true, level: 6, advancedMastery: 3 });
+const hero = () => ({ ...getInitialParty()[0], promoted: true, level: 10, advancedMastery: 3 });
 const context = unit => ({ party: [unit], clearedStages: [31], gold: 10000, mastery: getAdvancedMastery(unit) });
 const openMap = Array.from({ length: 6 }, () => Array(6).fill('plain'));
 const combatMare = () => ({ ...createExpansionRecruit('mare'), x: 1, y: 2 });
@@ -32,7 +32,7 @@ test('21명 모두 소유자별 두 상위 분기와 실제 사용 가능한 고
   assert.equal(getAdvancedClass({ id: 'hero', type: 'ally', advancedClass: 'bram__form0' }), null);
 });
 
-test('새 아군은 소유 동료 중앙값 성장으로 합류하며 기존 동료를 변경하지 않는다', () => {
+test('새 아군은 소유 동료 최고 레벨의 70% 성장으로 합류하며 기존 동료를 변경하지 않는다', () => {
   const party = getInitialParty().map((unit, index) => ({ ...unit, level: [11, 4, 7, 9][index] }));
   const before = structuredClone(party);
   for (const id of ['mare', 'harin', 'edan', 'sylvan']) {
@@ -48,9 +48,14 @@ test('새 아군은 소유 동료 중앙값 성장으로 합류하며 기존 동
   assert.equal(createExpansionRecruit('missing'), null);
 });
 
-test('31장·기존 상급직·숙련 3회 관문을 지키고 다른 캐릭터 분기를 거부한다', () => {
+test('최상위는 Lv.10·기존 상급직·숙련 3회가 필요하며 31장 이전에도 전직할 수 있다', () => {
   const unit = hero();
-  assert.equal(canAdvancedPromote(unit, 'hero__form0', { ...context(unit), clearedStages: [30] }).ok, false);
+  assert.equal(canAdvancedPromote(unit, 'hero__form0', { ...context(unit), clearedStages: [] }).ok, true);
+  assert.equal(canAdvancedPromote(unit, 'hero__form0', { ...context(unit), clearedStages: [30] }).ok, true);
+  assert.equal(canAdvancedPromote({ ...unit, level: 9 }, 'hero__form0', context(unit)).ok, false);
+  for (const level of [undefined, NaN, Infinity, '10']) {
+    assert.equal(canAdvancedPromote({ ...unit, level }, 'hero__form0', context(unit)).ok, false);
+  }
   assert.equal(canAdvancedPromote({ ...unit, promoted: false }, 'hero__form0', context(unit)).ok, false);
   assert.equal(canAdvancedPromote(unit, 'hero__form0', { ...context(unit), mastery: 2 }).ok, false);
   assert.equal(canAdvancedPromote(unit, 'bram__form0', context(unit)).ok, false);
@@ -58,14 +63,32 @@ test('31장·기존 상급직·숙련 3회 관문을 지키고 다른 캐릭터 
   assert.equal(canAdvancedPromote(unit, 'hero__form0', context(unit)).ok, true);
 });
 
-test('인장은 첫 클리어와 캐릭터별 최초 소모로 계산하며 재도전·중복 기록으로 복제되지 않는다', () => {
+test('성장 인장은 동료별 한 번만 획득하고 기존 첫 클리어·소모 원장도 보존한다', () => {
   assert.deepEqual(getAdvancedSealBalance([], [31, 31, 32, 32]), { earned: 4, spent: 0, available: 4 });
   assert.equal(getAdvancedSealBalance([], Array.from({ length: 50 }, (_, i) => i + 1)).earned, 22);
   assert.equal(getAdvancedSealBalance([], [32, 40, 50]).earned, 0);
   const used = { ...hero(), advancedClassSealUsed: true };
-  assert.deepEqual(getAdvancedSealBalance([used, { ...used }], [31]), { earned: 3, spent: 1, available: 2 });
+  assert.deepEqual(getAdvancedSealBalance([used, { ...used }], [31]), { earned: 4, spent: 1, available: 3 });
+  assert.deepEqual(getAdvancedSealBalance([hero(), { ...hero() }], []), { earned: 1, spent: 0, available: 1 });
+  assert.deepEqual(getAdvancedSealBalance([{ ...hero(), level: 9 }], []), { earned: 0, spent: 0, available: 0 });
+  assert.deepEqual(getAdvancedSealBalance([{ ...hero(), type: 'enemy' }, { id: 'unknown', type: 'ally', level: 10 }], []),
+    { earned: 0, spent: 0, available: 0 });
   const depleted = ['hero', 'bram', 'lina'].map(id => ({ id, type: 'ally', advancedClassSealUsed: true }));
-  assert.equal(canAdvancedPromote(hero(), 'hero__form0', { ...context(hero()), party: depleted }).ok, false);
+  assert.deepEqual(getAdvancedSealBalance(depleted, []), { earned: 3, spent: 3, available: 0 });
+  assert.equal(canAdvancedPromote(hero(), 'hero__form0', { ...context(hero()), party: depleted, clearedStages: [] }).ok, false);
+});
+
+test('Lv.10 이전 최상위 전직 구저장은 성장 인장과 분기 변경을 보존하며 능력치를 누적하지 않는다', () => {
+  const first = applyAdvancedPromotion(hero(), 'hero__form0', { ...context(hero()), clearedStages: [] });
+  const legacy = { ...first.unit, level: 6 };
+  const before = structuredClone(legacy);
+  assert.deepEqual(getAdvancedSealBalance([legacy, { ...legacy }], []), { earned: 1, spent: 1, available: 0 });
+  const changed = applyAdvancedPromotion(legacy, 'hero__form1', { ...context(legacy), clearedStages: [] });
+  assert.equal(changed.ok, true);
+  assert.equal(changed.sealCost, 0);
+  assert.equal(changed.unit.level, 6);
+  assert.equal(changed.unit.maxHp, hero().maxHp + ADVANCED_CLASSES.hero[1].bonuses.hp);
+  assert.deepEqual(legacy, before);
 });
 
 test('같은 분기 중복 실행은 실패하고 첫 변경만 무료·그 다음부터 300G', () => {
@@ -114,7 +137,7 @@ test('전직 후 레벨 성장·훈련 보정은 분기 변경을 해도 남는�
 
 test('일반·비전 전직과 장비·습득 기술·수집·소모품을 보존한다', () => {
   const explored = { relics: ['dawnblade-relic'], techniques: ['lina-phoenix-flare'], claimed: ['old-record'] };
-  const secret = applySecretPromotion({ ...getInitialParty()[0], level: 6, advancedMastery: 3 }, explored).unit;
+  const secret = applySecretPromotion({ ...getInitialParty()[0], level: 10, advancedMastery: 3 }, explored).unit;
   const withGear = { ...secret, equipment: { weapon: 'ironSword', armor: 'chainMail' },
     collected: ['kept'], learnedTechniques: [...(secret.learnedTechniques || [])], gearEnhance: { ironSword: 2 } };
   const ctx = { ...context(withGear), inventory: { potion: 7, elixir: 2, customItem: 4 }, exploration: explored };

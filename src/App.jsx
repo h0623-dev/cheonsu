@@ -23,6 +23,8 @@ import SupportTargetDialog from './components/SupportTargetDialog.jsx';
 import TrainingDialog from './components/TrainingDialog.jsx';
 import { TRAINING_TYPES, trainParty, grantEnemyDefeatExp, syncBattleExperience } from './engine/growthEngine.js';
 import { getExperienceReward } from './engine/experienceEngine.js';
+import { applyRecruitStartingGrowth } from './engine/recruitmentEngine.js';
+import { normalizeTownWalkerId } from './engine/townSelection.js';
 import TownHub from './components/TownHub.jsx';
 import TownFacilityDialog from './components/TownFacilityDialog.jsx';
 import TitleMenu from './components/TitleMenu.jsx';
@@ -115,7 +117,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.173";
+const SAVE_VERSION = "1.99.174";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -6768,7 +6770,7 @@ function createRecruitAlly(id, referenceParty = []) {
 
   if (!base) return null;
 
-  return applyEquipmentStats({
+  return applyRecruitStartingGrowth({
     ...base,
     skill: getSkillDisplayName(base),
     x: 0,
@@ -6782,7 +6784,7 @@ function createRecruitAlly(id, referenceParty = []) {
     equipment: { weapon: null, armor: null, accessory: null },
     baseAtk: base.atk,
     baseDef: base.def,
-  });
+  }, referenceParty);
 }
 
 function getRecruitName(id) {
@@ -6796,7 +6798,7 @@ function applyRecruitProgress(party, clearedStages) {
     if (!clearedStages?.includes(Number(stageId))) continue;
     if (nextParty.some((unit) => unit.id === recruitId)) continue;
 
-    const recruit = createRecruitAlly(recruitId);
+    const recruit = createRecruitAlly(recruitId, nextParty);
     if (recruit) nextParty.push(recruit);
   }
 
@@ -8227,6 +8229,7 @@ export default function App() {
   const [deploySort, setDeploySort] = useState("default");
   const [deploymentHint, setDeploymentHint] = useState("균형 편성을 추천합니다.");
   const [party, setParty] = useState(getInitialParty());
+  const [campWalkerId, setCampWalkerId] = useState('hero');
   const advancedPromotionBusyRef = useRef(false);
   useEffect(() => { advancedPromotionBusyRef.current = false; }, [party]);
   const [exploration, setExploration] = useState(() => normalizeExploration());
@@ -9453,6 +9456,7 @@ export default function App() {
     localStorage.removeItem(SAVE_KEY);
     setSessionStarted(false);
     setParty(getInitialParty());
+    setCampWalkerId('hero');
     setClearedStages([]);
     setLastBattleResult(null);
     setTrainingUsed(false);
@@ -10356,6 +10360,7 @@ export default function App() {
     setDiscoveryReceipt(null);
     setJournalOpen(false);
     setParty(enhancedFreshParty);
+    setCampWalkerId('hero');
     resetFacings();
     setUnits(mergePartyIntoStage(stages[0], enhancedFreshParty));
     setSelectedUnit(null);
@@ -11761,6 +11766,7 @@ export default function App() {
       selectedStage: deploymentSetup?.stage || selectedStage,
       currentStageId: deploymentSetup?.stage.id || selectedStage?.id || null,
       party,
+      campWalkerId: normalizeTownWalkerId(campWalkerId, party),
       units: saveFacings(deploymentSetup ? deploymentPreviewUnits : units),
       deploymentIntroSeen: Boolean(deploymentSetup && deploymentIntroSeen),
       selectedUnit,
@@ -11887,6 +11893,7 @@ export default function App() {
       setDeployedIds(restoredDeployedIds.length ? restoredDeployedIds : availableDeployIds.slice(0, MAX_DEPLOY_COUNT));
       setDeploymentHint("저장된 출전 편성을 불러왔습니다.");
       setParty(restoredParty);
+      setCampWalkerId(normalizeTownWalkerId(migratedData.campWalkerId, restoredParty));
       setExploration(normalizeExploration(migratedData.exploration));
       setDiscoveryReceipt(null);
       setJournalOpen(false);
@@ -13547,8 +13554,8 @@ export default function App() {
     const replay = clearedStages.includes(stageId) || stageRewardClaimed;
     const summary = lastClearSummary || calculateClearSummary(selectedStage, round, units);
     const recruitId = !replay ? RECRUIT_BY_STAGE[stageId] : null;
-    const recruit = recruitId ? createRecruitAlly(recruitId, party) : null;
     let nextParty = mergePartyFromUnits(party, units);
+    const recruit = recruitId ? createRecruitAlly(recruitId, nextParty) : null;
     if (recruit && !nextParty.some(unit => unit.id === recruit.id)) nextParty = [...nextParty, recruit];
     nextParty = applyGearEnhanceToParty(nextParty.map(unit => ({
       ...unit, acted: false, moved: false, guard: false, skillGuardBoost: 0,
@@ -13560,7 +13567,7 @@ export default function App() {
     const nextStage = stages.find(stage => stage.id === stageId + 1);
     const message = replay
       ? `${selectedStage.title} 재도전 완료. 전투에서 획득한 경험치를 보존했습니다. 골드와 아이템은 지급되지 않습니다.`
-      : `${selectedStage.title} 클리어! ${rewardGold}G, 회복약 ${(reward.potion || 0) + (bonus.potion || 0)}개 획득.${recruit ? ` ${recruit.name} 합류.` : ''} ${nextStage ? `${nextStage.title} 해금.` : '모든 스테이지를 클리어했습니다.'}`;
+      : `${selectedStage.title} 클리어! ${rewardGold}G, 회복약 ${(reward.potion || 0) + (bonus.potion || 0)}개 획득.${recruit ? ` ${recruit.name} Lv.${recruit.level} 합류.` : ''} ${nextStage ? `${nextStage.title} 해금.` : '모든 스테이지를 클리어했습니다.'}`;
     const receipt = createVictoryCheckpoint(data, {
       party: nextParty, reward: { gold: rewardGold, potion: (reward.potion || 0) + (bonus.potion || 0) },
       careerStats: mergeCareerStats(careerStats, battleStats, battleMvp?.unitId || null, true),
@@ -17329,7 +17336,7 @@ export default function App() {
               <button className="back-btn" onClick={() => setScreen("menu")}>메뉴</button>
             </div>
           </div>
-          <TownHub party={party} paused={shopOpen || equipmentOpen || Boolean(campFacility)} onVisit={facility => {
+          <TownHub party={party} walkerId={campWalkerId} onWalkerChange={id => setCampWalkerId(normalizeTownWalkerId(id, party))} paused={shopOpen || equipmentOpen || Boolean(campFacility)} onVisit={facility => {
             setCampMessage(''); setSaveNotice(null);
             if (facility === 'gate') setScreen('campaign');
             else if (facility === 'shop') setShopOpen(true);

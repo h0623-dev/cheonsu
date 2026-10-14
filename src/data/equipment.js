@@ -46,10 +46,37 @@ const NEW_WEAPONS = WEAPON_FAMILIES.flatMap(([id, family, icon, allowed, names])
   gear(`${id}Oath`, names[2], 'weapon', allowed, 3, 2, 780, 30, family, icon),
 ]);
 
+// Campaign supplies bridge the early weapons and late oath equipment without
+// replacing existing owned IDs, enchantments or first-clear rewards.
+const CAMPAIGN_WEAPON_SERIES = [
+  ['Veteran', 5, 330, 3, 1],
+  ['Ward', 15, 560, 2, 3],
+  ['Ascendant', 40, 1050, 4, 3],
+];
+const CAMPAIGN_WEAPON_NAMES = {
+  vanguard: ['기사의 장검', '호위의 은검', '새벽의 왕검'],
+  bastion: ['기사의 전투방패', '룬각인 대방패', '새벽의 용방패'],
+  marksman: ['명사수의 합성궁', '룬깃 호위궁', '여명의 월광궁'],
+  lancer: ['기사의 돌격창', '룬방벽 수호창', '새벽의 용기창'],
+  scout: ['척후의 단검', '수호의 룬단검', '월영의 흑단검'],
+  arcane: ['마도사의 수정봉', '보호의 은지팡이', '여명의 별지팡이'],
+  sanctuary: ['치유사의 성목봉', '결계의 수호봉', '여명의 성역봉'],
+  resonance: ['음유시인의 은류트', '결계의 공명류트', '여명의 천현류트'],
+  martial: ['무투가의 강철권갑', '수호의 룬권갑', '여명의 용린권갑'],
+  engineer: ['공병의 강화망치', '룬보루 수리망치', '여명의 공성망치'],
+};
+const CAMPAIGN_WEAPONS = WEAPON_FAMILIES.flatMap(([id, family, icon, allowed]) =>
+  CAMPAIGN_WEAPON_SERIES.map(([suffix, unlockStage, price, atk, def], index) =>
+    gear(`${id}${suffix}`, CAMPAIGN_WEAPON_NAMES[id][index], 'weapon', allowed, atk, def, price, unlockStage, family, icon),
+  ),
+);
+
 const ARMOR_SERIES = [
   ['traveler', 0, 160, [[2, 0], [0, 3], [1, 2]], ['척후 경갑', '보초 판금옷', '여행자의 전투복']],
   ['border', 5, 280, [[3, 0], [0, 4], [2, 2]], ['국경 돌격복', '국경 수호갑', '국경 룬전투복']],
+  ['sentinel', 10, 380, [[3, 1], [1, 4], [2, 3]], ['정찰대 바람경갑', '보루의 강철갑', '수호자의 전투복']],
   ['rune', 15, 470, [[4, 1], [1, 5], [3, 3]], ['룬돌격 경갑', '룬방벽 중갑', '공명의 전투로브']],
+  ['citadel', 30, 760, [[4, 2], [2, 5], [3, 4]], ['왕도 기사경갑', '왕도 요새갑', '왕도의 결계로브']],
   ['oathbound', 40, 1050, [[5, 2], [2, 6], [4, 4]], ['맹세의 돌격갑', '맹세의 수호갑', '귀환의 룬로브']],
 ];
 const NEW_ARMOR = ARMOR_SERIES.flatMap(([id, unlockStage, price, stats, names]) => stats.map(([atk, def], index) =>
@@ -60,7 +87,9 @@ const NEW_ARMOR = ARMOR_SERIES.flatMap(([id, unlockStage, price, stats, names]) 
 const ACCESSORY_SERIES = [
   ['copper', 0, 100, [[2, 0], [0, 2], [1, 1]], ['매의 구리 반지', '보호의 구리 부적', '여행자의 매듭']],
   ['silver', 5, 240, [[3, 0], [0, 3], [2, 1]], ['용기의 은반지', '수호의 은부적', '은빛 우정 매듭']],
+  ['jade', 10, 330, [[3, 1], [1, 3], [2, 2]], ['청옥의 결의 반지', '청옥의 수호 부적', '청옥의 우정 목걸이']],
   ['starlight', 15, 420, [[4, 0], [0, 4], [2, 2]], ['별빛 결의 반지', '별빛 방벽 부적', '공명의 별목걸이']],
+  ['sunstone', 30, 680, [[4, 1], [1, 4], [3, 2]], ['태양석 결의 반지', '태양석 수호 부적', '태양석 공명 목걸이']],
   ['homeward', 40, 900, [[5, 1], [1, 5], [3, 3]], ['귀환의 결의 반지', '귀환의 수호 부적', '천수의 맹세 목걸이']],
 ];
 const NEW_ACCESSORIES = ACCESSORY_SERIES.flatMap(([id, unlockStage, price, stats, names]) => stats.map(([atk, def], index) =>
@@ -68,7 +97,7 @@ const NEW_ACCESSORIES = ACCESSORY_SERIES.flatMap(([id, unlockStage, price, stats
     '장신구', index === 0 ? 'ring' : 'amulet'),
 ));
 
-export const EQUIPMENT = Object.fromEntries([...LEGACY_EQUIPMENT, ...NEW_WEAPONS, ...NEW_ARMOR, ...NEW_ACCESSORIES].map(item => [item.id, item]));
+export const EQUIPMENT = Object.fromEntries([...LEGACY_EQUIPMENT, ...NEW_WEAPONS, ...CAMPAIGN_WEAPONS, ...NEW_ARMOR, ...NEW_ACCESSORIES].map(item => [item.id, item]));
 
 // 공유 장비의 저장 식별자·능력치·강화는 그대로 두고 착용자에 맞는 이름만 표시한다.
 // 전직 상태가 바뀌어도 동료의 고유 무기 계열은 유지한다.
@@ -88,9 +117,18 @@ const WEAPON_PRESENTATIONS = Object.freeze({
   vanguardAssault: { sera: weaponPresentation('돌격 쌍검', '쌍검', 'dagger') },
   vanguardGuard: { sera: weaponPresentation('수비 쌍검', '쌍검', 'dagger') },
   vanguardOath: { sera: weaponPresentation('맹세의 룬쌍검', '쌍검', 'dagger') },
+  vanguardVeteran: { sera: weaponPresentation('기사의 쌍검', '쌍검', 'dagger') },
+  vanguardWard: { sera: weaponPresentation('호위의 은쌍검', '쌍검', 'dagger') },
+  vanguardAscendant: { sera: weaponPresentation('새벽의 왕쌍검', '쌍검', 'dagger') },
+  scoutVeteran: { sera: weaponPresentation('척후의 쌍검', '쌍검', 'dagger') },
+  scoutWard: { sera: weaponPresentation('수호의 룬쌍검', '쌍검', 'dagger') },
+  scoutAscendant: { sera: weaponPresentation('월영의 흑쌍검', '쌍검', 'dagger') },
   bastionAssault: { rakan: weaponPresentation('돌격 도끼', '도끼', 'axe') },
   bastionGuard: { rakan: weaponPresentation('강철 수호도끼', '도끼', 'axe') },
   bastionOath: { rakan: weaponPresentation('천수의 수호도끼', '도끼', 'axe') },
+  bastionVeteran: { rakan: weaponPresentation('기사의 전투도끼', '도끼', 'axe') },
+  bastionWard: { rakan: weaponPresentation('룬각인 수호도끼', '도끼', 'axe') },
+  bastionAscendant: { rakan: weaponPresentation('새벽의 용도끼', '도끼', 'axe') },
   arcaneAssault: {
     noah: weaponPresentation('흐름의 마법서', '마법서', 'book'),
     miho: weaponPresentation('흐름의 주술부', '주술 부적', 'charm'),
@@ -103,9 +141,24 @@ const WEAPON_PRESENTATIONS = Object.freeze({
     noah: weaponPresentation('별무리 룬마법서', '마법서', 'book'),
     miho: weaponPresentation('별무리 룬부적', '주술 부적', 'charm'),
   },
+  arcaneVeteran: {
+    noah: weaponPresentation('마도사의 수정마법서', '마법서', 'book'),
+    miho: weaponPresentation('주술사의 수정부적', '주술 부적', 'charm'),
+  },
+  arcaneWard: {
+    noah: weaponPresentation('보호의 은마법서', '마법서', 'book'),
+    miho: weaponPresentation('보호의 은부적', '주술 부적', 'charm'),
+  },
+  arcaneAscendant: {
+    noah: weaponPresentation('여명의 별마법서', '마법서', 'book'),
+    miho: weaponPresentation('여명의 별부적', '주술 부적', 'charm'),
+  },
   sanctuaryAssault: { harin: weaponPresentation('여명의 치유권갑', '치유 권갑', 'fist') },
   sanctuaryGuard: { harin: weaponPresentation('안식의 수호권갑', '치유 권갑', 'fist') },
   sanctuaryOath: { harin: weaponPresentation('귀환의 성광권갑', '치유 권갑', 'fist') },
+  sanctuaryVeteran: { harin: weaponPresentation('치유사의 성목권갑', '치유 권갑', 'fist') },
+  sanctuaryWard: { harin: weaponPresentation('결계의 수호권갑', '치유 권갑', 'fist') },
+  sanctuaryAscendant: { harin: weaponPresentation('여명의 성역권갑', '치유 권갑', 'fist') },
 });
 
 export function getGearPresentation(gearOrId, unitOrId) {

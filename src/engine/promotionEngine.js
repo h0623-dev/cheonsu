@@ -1,6 +1,8 @@
 import { ADVANCED_CLASSES, getAdvancedClassDefinition, NEW_ALLY_TEMPLATES } from '../data/advancedClasses.js';
 import { applyEquipmentStats } from './partyEngine.js';
 import { withSkill } from '../data/skills.js';
+import { ADVANCED_PROMOTION_LEVEL } from '../data/promotionLevels.js';
+import { applyRecruitStartingGrowth } from './recruitmentEngine.js';
 
 export const ADVANCED_PROMOTION_GATE = 31;
 export const ADVANCED_PROMOTION_MASTERY = 3;
@@ -21,10 +23,14 @@ export function getAdvancedMastery(unit, battleRecord) {
   return Math.min(ADVANCED_PROMOTION_MASTERY, Math.max(count(unit?.advancedMastery), count(battleRecord?.skillsUsed)));
 }
 
-// 인장을 소모품 목록에 섞지 않는다. 첫 클리어 기록과 캐릭터별 소모 기록이 원장이다.
+// 인장을 소모품 목록에 섞지 않는다. 동료의 성장·첫 클리어·캐릭터별 소모 기록이 원장이다.
 export function getAdvancedSealBalance(party = [], clearedStages = []) {
   const cleared = new Set(clearedStages.filter(id => Number.isInteger(id) && id >= 31 && id <= 50));
-  const earned = cleared.has(ADVANCED_PROMOTION_GATE) ? 3 + [...cleared].filter(id => id > 31).length : 0;
+  const growthIds = new Set(party.filter(unit => unit?.type === 'ally' && Object.hasOwn(ADVANCED_CLASSES, unit.id) &&
+    ((Number.isFinite(unit.level) && unit.level >= ADVANCED_PROMOTION_LEVEL) ||
+      unit.advancedClassSealUsed === true || getAdvancedClass(unit))).map(unit => unit.id));
+  const campaignSeals = cleared.has(ADVANCED_PROMOTION_GATE) ? 3 + [...cleared].filter(id => id > ADVANCED_PROMOTION_GATE).length : 0;
+  const earned = growthIds.size + campaignSeals;
   const spentIds = new Set(party.filter(unit => unit?.type === 'ally' &&
     (unit.advancedClassSealUsed === true || getAdvancedClass(unit))).map(unit => unit.id));
   return { earned, spent: spentIds.size, available: Math.max(0, earned - spentIds.size) };
@@ -33,10 +39,13 @@ export function getAdvancedSealBalance(party = [], clearedStages = []) {
 export function canAdvancedPromote(unit, formId, { party = [], clearedStages = [], gold = 0, mastery = getAdvancedMastery(unit) } = {}) {
   const form = getAdvancedPromotionForms(unit).find(candidate => candidate.id === formId);
   if (!form) return { ok: false, reason: '이 동료가 선택할 수 없는 전직입니다.' };
-  if (!clearedStages.includes(ADVANCED_PROMOTION_GATE)) return { ok: false, reason: '31장 첫 클리어 후 해금됩니다.' };
   if (!unit.promoted) return { ok: false, reason: '먼저 기존 상급 전직을 완료해 주세요.' };
   if (unit.advancedClass === formId) return { ok: false, reason: '현재 선택한 전직입니다.' };
   const current = getAdvancedClass(unit);
+  // 이미 최상위 전직한 구저장의 낮은 레벨 동료는 기존 분기를 계속 변경할 수 있다.
+  if (!current && (!Number.isFinite(unit.level) || unit.level < ADVANCED_PROMOTION_LEVEL)) {
+    return { ok: false, reason: `Lv.${ADVANCED_PROMOTION_LEVEL} 이상 필요` };
+  }
   if (!current && getAdvancedMastery({ advancedMastery: mastery }) < ADVANCED_PROMOTION_MASTERY) {
     return { ok: false, reason: `스킬 숙련 ${getAdvancedMastery({ advancedMastery: mastery })}/${ADVANCED_PROMOTION_MASTERY} · 성공한 스킬 사용 3회 필요` };
   }
@@ -98,13 +107,8 @@ export function applyAdvancedPromotion(unit, formId, context = {}) {
 export function createExpansionRecruit(id, referenceParty = []) {
   if (!Object.hasOwn(NEW_ALLY_TEMPLATES, id)) return null;
   const template = NEW_ALLY_TEMPLATES[id];
-  const levels = referenceParty.filter(unit => unit?.type === 'ally' && Number.isFinite(unit.level) && unit.level > 0)
-    .map(unit => Math.floor(unit.level)).sort((a, b) => a - b);
-  const level = levels.length ? levels[Math.floor((levels.length - 1) / 2)] : 1;
-  const growth = level - 1;
-  return applyEquipmentStats({ ...template,
-    type: 'ally', level, exp: 0, hp: template.hp + growth * 2, maxHp: template.maxHp + growth * 2,
-    baseAtk: template.atk + growth, baseDef: template.def + growth,
+  return applyRecruitStartingGrowth({ ...template,
+    type: 'ally', level: 1, exp: 0,
     equipment: { weapon: null, armor: null, accessory: null }, moved: false, acted: false, guard: false,
-  });
+  }, referenceParty);
 }

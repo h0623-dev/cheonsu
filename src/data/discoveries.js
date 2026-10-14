@@ -1,4 +1,5 @@
 import { getExperienceReward } from '../engine/experienceEngine.js';
+import { SECRET_PROMOTION_LEVEL } from './promotionLevels.js';
 
 // These IDs are save-data keys shared with learnedTechniques and the skill UI.
 export const DISCOVERY_TECHNIQUES = Object.freeze({
@@ -23,12 +24,12 @@ export const DISCOVERY_TECHNIQUES = Object.freeze({
 export const SECRET_PROMOTIONS = Object.freeze({
   hero: Object.freeze({
     id: 'dawnblade', unitId: 'hero', secretClass: 'dawnblade', classTitle: '여명검사',
-    relicId: 'dawnblade-relic', requiredLevel: 5, techniqueId: 'hero-dawn-slash',
+    relicId: 'dawnblade-relic', requiredLevel: SECRET_PROMOTION_LEVEL, techniqueId: 'hero-dawn-slash',
     bonuses: Object.freeze({ hp: 8, atk: 3, def: 2 }),
   }),
   bram: Object.freeze({
     id: 'oathwarden', unitId: 'bram', secretClass: 'oathwarden', classTitle: '서약수호자',
-    relicId: 'oathwarden-relic', requiredLevel: 5, techniqueId: 'bram-oath-wall',
+    relicId: 'oathwarden-relic', requiredLevel: SECRET_PROMOTION_LEVEL, techniqueId: 'bram-oath-wall',
     bonuses: Object.freeze({ hp: 10, atk: 2, def: 4 }),
   }),
 });

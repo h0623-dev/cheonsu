@@ -16,6 +16,7 @@ import { getSkillDisplayName } from '../src/data/skills.js';
 import { normalizeSaveData } from '../src/engine/saveEngine.js';
 import { processTerrainStartEffects } from '../src/engine/statusEngine.js';
 import { createExpansionRecruit } from '../src/engine/promotionEngine.js';
+import { applyRecruitStartingGrowth } from '../src/engine/recruitmentEngine.js';
 import { applyExpansionEnemyIdentity, createExpansionEnemy, createExpansionExtraEnemy, getExpansionEnemyKeys } from '../src/data/expansionEnemies.js';
 import { isDeploymentTerrainUnsafe } from '../src/data/terrainPolicy.js';
 import {
@@ -44,7 +45,7 @@ const builders = runInNewContext([
 ].join('\n'), {
   alignMapToArtwork, createBattlefieldTerrain, getBattlefieldPlan, applyEquipmentStats,
   distributeBattleFormations, getSkillDisplayName, getChapterBossName, applyStageMonsterAppearance, withStageEnemyLevel,
-  createExpansionRecruit, applyExpansionEnemyIdentity, createExpansionEnemy, createExpansionExtraEnemy, getExpansionEnemyKeys,
+  createExpansionRecruit, applyRecruitStartingGrowth, applyExpansionEnemyIdentity, createExpansionEnemy, createExpansionExtraEnemy, getExpansionEnemyKeys,
   clone: value => JSON.parse(JSON.stringify(value)),
   Math: Object.assign(Object.create(Math), { random: () => { throw new Error('Deployment must be deterministic'); } }),
 });

@@ -3,6 +3,7 @@ import { DISCOVERIES, DISCOVERY_TECHNIQUES } from '../data/discoveries.js';
 import { getSkill, skillDescription } from '../data/skills.js';
 import { getPaintedVisualProfile } from '../data/unitVisuals.js';
 import { getGameCharacterArtKey } from '../data/expansionArtRegistry.js';
+import { ORDINARY_PROMOTION_LEVEL, SECRET_PROMOTION_LEVEL, ADVANCED_PROMOTION_LEVEL } from '../data/promotionLevels.js';
 import { canPromoteUnit, getOrdinaryPromotionPreview, getPromotionCost, getPromotionTitle } from '../engine/ordinaryPromotion.js';
 import { canSecretPromote, getSecretPromotion, getSecretPromotionPreview } from '../engine/discoveryEngine.js';
 import {
@@ -85,7 +86,7 @@ export default function PromotionPanel({
       <div className="battle-title">전직</div>
       <strong>{gold.toLocaleString()}G · 전직인장 {seals.available}개</strong>
     </header>
-    <p className="result-sub">동료를 선택하고 전직할 모습·능력치·기술을 비교하세요. 장비·장비 강화·성장·습득 기술은 유지됩니다.</p>
+    <p className="result-sub">상급 Lv.{ORDINARY_PROMOTION_LEVEL} → 최상위 Lv.{ADVANCED_PROMOTION_LEVEL}. 유물 비전은 Lv.{SECRET_PROMOTION_LEVEL}부터 선택할 수 있습니다. 동료를 선택하고 모습·능력치·기술을 비교하세요. 장비·장비 강화·성장·습득 기술은 유지됩니다.</p>
 
     <div className="promotion-unit-picker" role="group" aria-label="전직할 동료 선택">
       {party.map(member => <button key={member.id} type="button" data-promotion-unit={member.id}
@@ -113,7 +114,7 @@ export default function PromotionPanel({
             after={{ ...unit, promoted: true, secretClass: null, advancedClass: null }}
             beforeLabel="기본 모습" afterLabel={getPromotionTitle(unit)} view={appearanceView} />
           {unit.promoted && <p className="promotion-preserve-note">기본·상급 전직 단계의 외형 비교입니다. 현재 전직은 유지됩니다.</p>}
-          <p>Lv.3부터 선택할 수 있습니다. 최대 HP +5 · 공격 +2 · 방어 +2 · 공격 기술 위력 +1.</p>
+          <p>Lv.{ORDINARY_PROMOTION_LEVEL}부터 선택할 수 있습니다. 최대 HP +5 · 공격 +2 · 방어 +2 · 공격 기술 위력 +1.</p>
           <PromotionStats preview={getOrdinaryPromotionPreview(unit)} label="상급 전직" />
           <div className="promotion-footer">
             <span>{unit.promoted ? '상급 전직 보정이 이미 적용되어 있습니다.' : `${getPromotionCost(unit)}G · ${ordinaryCheck.reason}`}</span>
@@ -128,7 +129,7 @@ export default function PromotionPanel({
             beforeLabel={unit.secretClass && !unit.advancedClass ? '상급 전직 모습' : '현재 모습'}
             afterLabel={unit.advancedClass ? '최상위 외형 유지' : secret.classTitle} view={appearanceView} />
           <div className="promotion-requirements">
-            <Requirement met={unit.level >= secret.requiredLevel}>Lv.{secret.requiredLevel} 이상</Requirement>
+            <Requirement met={unit.level >= secret.requiredLevel || Boolean(unit.secretClass)}>{unit.secretClass && unit.level < secret.requiredLevel ? '기존 비전 전직 유지' : `Lv.${secret.requiredLevel} 이상`}</Requirement>
             <Requirement met={secret.hasRelic || Boolean(unit.secretClass)}>{unit.secretClass ? '유물 사용 완료' : '전용 유물 보유'}</Requirement>
           </div>
           {relicDiscovery && <p className="promotion-relic-hint">유물 획득: {relicDiscovery.stageId}장 탐색 지점 「{relicDiscovery.title}」<br />{relicDiscovery.hint}</p>}
@@ -145,13 +146,13 @@ export default function PromotionPanel({
         {forms.length > 0 && <section className="advanced-promotion" data-advanced-unit={unit.id} aria-label="최상위 전직">
           <div className="advanced-promotion-heading"><h3>최상위 전직 · 두 가지 길</h3><span>스킬 숙련 {mastery}/{ADVANCED_PROMOTION_MASTERY}</span></div>
           <div className="promotion-requirements">
-            <Requirement met={clearedStages.includes(ADVANCED_PROMOTION_GATE)}>{ADVANCED_PROMOTION_GATE}장 클리어</Requirement>
+            <Requirement met={unit.level >= ADVANCED_PROMOTION_LEVEL || Boolean(unit.advancedClass)}>{unit.advancedClass && unit.level < ADVANCED_PROMOTION_LEVEL ? '기존 최상위 전직 유지' : `Lv.${ADVANCED_PROMOTION_LEVEL} 이상`}</Requirement>
             <Requirement met={Boolean(unit.promoted)}>상급 또는 비전 전직</Requirement>
             <Requirement met={mastery >= ADVANCED_PROMOTION_MASTERY || Boolean(unit.advancedClass)}>스킬 사용 {ADVANCED_PROMOTION_MASTERY}회</Requirement>
           </div>
           <details className="advanced-promotion-summary" data-advanced-seals={seals.available}>
             <summary>전직인장 {seals.available}개 · 획득 방법과 분기 변경 비용</summary>
-            <p>{ADVANCED_PROMOTION_GATE}장 첫 승리에 인장 3개, 32~50장 첫 승리마다 1개를 받습니다. 동료마다 최초 최상위 전직에 1개가 필요합니다.</p>
+            <p>동료마다 Lv.{ADVANCED_PROMOTION_LEVEL}에 도달하면 성장 인장 1개를 받습니다. {ADVANCED_PROMOTION_GATE}장 첫 승리에 보너스 인장 3개, 32~50장 첫 승리마다 1개를 추가로 받습니다. 최초 최상위 전직에 인장 1개가 필요하며 31장까지 기다릴 필요가 없습니다.</p>
             <p>첫 분기 변경은 무료, 이후에는 {ADVANCED_CHANGE_COST}G입니다. 분기를 바꾸면 현재 분기의 능력치를 새 분기의 능력치로 교체합니다. 현재 HP를 회복하지 않습니다.</p>
           </details>
           <div className="advanced-promotion-forms">

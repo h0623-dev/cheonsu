@@ -114,6 +114,7 @@ try {
       await page.locator('.town-hub').waitFor();
       await deliverLateObserver('새 마을이 생성된 후 이전 마을 콜백');
       await cameraCentered();
+      assert.equal(await page.getByRole('combobox', { name: '이동 캐릭터', exact: true }).inputValue(), 'lina', '설정에서 돌아와도 선택한 리나를 유지합니다');
 
       await captureObserver();
       await button('출전으로 이동').click();
@@ -123,6 +124,7 @@ try {
       await page.locator('.campaign-header-actions').getByRole('button', { name: '마을', exact: true }).click();
       await page.locator('.town-hub').waitFor();
       await deliverLateObserver('원정 지도에서 마을 재진입 후 이전 콜백');
+      assert.equal(await page.getByRole('combobox', { name: '이동 캐릭터', exact: true }).inputValue(), 'lina', '출전 지도에서 돌아와도 리나를 유지합니다');
 
       for (let cycle = 0; cycle < 3; cycle++) {
         await captureObserver();
@@ -138,6 +140,16 @@ try {
       await page.setViewportSize(viewport);
       await cameraCentered();
       assert.equal(await primarySave(), saved, '저장된 진행도·수집 데이터 전체를 보존합니다');
+      await page.getByRole('combobox', { name: '이동 캐릭터', exact: true }).selectOption('lina');
+      await page.locator('.camp-header .prominent-save').click();
+      const walkerSave = await primarySave();
+      assert.equal(JSON.parse(walkerSave).campWalkerId, 'lina');
+      await page.reload();
+      await button('이어하기').click();
+      await page.locator('.town-hub').waitFor();
+      assert.equal(await page.getByRole('combobox', { name: '이동 캐릭터', exact: true }).inputValue(), 'lina', '앱을 다시 열어 저장을 불러와도 리나를 유지합니다');
+      assert.equal(await primarySave(), walkerSave, '선택 복원은 저장을 다시 작성하지 않습니다');
+      result.checks.push('이동 캐릭터 선택을 화면 이탈·저장·앱 재실행 후 복원');
       assert.deepEqual(errors, []);
       result.checks.push('이탈 후 늦은 관찰자 콜백 7회 안전 처리', '마을 재진입과 반복 메뉴 복귀', '기존 저장 전체 보존');
       result.passed = true;
