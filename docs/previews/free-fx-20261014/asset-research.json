@@ -1,0 +1,534 @@
+{
+  "checkedDate": "2026-10-14",
+  "purpose": "게임 적용 전 무료 에셋 기반 전투 이펙트 시범 영상 검토",
+  "gameModified": false,
+  "licenseCommon": {
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "commercialUse": true,
+    "modification": true,
+    "redistribution": true,
+    "attributionRequired": false,
+    "attributionPlan": "의무는 없으나 검토 자료에 원저작자와 원문 출처를 표시"
+  },
+  "candidates": [
+    {
+      "name": "Particle Pack",
+      "author": "Kenney Vleugels (Kenney.nl)",
+      "sourcePage": "https://kenney.nl/assets/particle-pack",
+      "license": "CC0 1.0 Universal",
+      "officialDownload": "https://kenney.nl/media/pages/assets/particle-pack/f8fe0f8cb8-1677578741/kenney_particle-pack.zip",
+      "downloadStatus": "공식 호스트의 ZIP 접근은 세션 프록시에서 403으로 차단. 공개 GitHub 재포장본에서 정상 다운로드함. 정책을 우회하지 않음.",
+      "downloadSource": "https://github.com/Calinou/kenney-particle-pack",
+      "sourceCommit": "ab7086639ee73be31abd87feb21bf1402d4e8144",
+      "packageVersion": "1.1 (미러 LICENSE.txt 표기; 공식 현재 페이지는 1.0 업데이트 표시)",
+      "licenseEvidence": "https://github.com/Calinou/kenney-particle-pack/blob/ab7086639ee73be31abd87feb21bf1402d4e8144/LICENSE.txt",
+      "localPath": "/workspace/work/fx-preview/research/kenney-particle-pack/addons/kenney_particle_pack",
+      "effectTypes": [
+        "검격",
+        "불꽃",
+        "회오리",
+        "번개 입자",
+        "마법진",
+        "회복 빛",
+        "폭발",
+        "연기"
+      ],
+      "resolution": "80종, 각512×512 PNG",
+      "fit": "중성 흰색 투명 텍스처이므로 기존 손그림 캐릭터에 색·발광·시간·위치를 맞춰 합성하기 용이. 단일 sprite 자체는 애니메이션이 아니며 프리뷰 렌더러에서 움직임을 구성해야 함.",
+      "files": [
+        {
+          "file": "circle_01.png",
+          "sha256": "10e757a4b46893fc7d53f24eb09767b3cb3183d33d9bf2fded0c06beb45c2de0",
+          "bytes": 66234
+        },
+        {
+          "file": "circle_02.png",
+          "sha256": "71b208a2aa392f4cc53a422ef09bb9b54e1732fd440fa4d989b098a5fb6451cc",
+          "bytes": 41442
+        },
+        {
+          "file": "circle_03.png",
+          "sha256": "5c0d9704ed222df863a6a8602dca952ffcd04421136ea439a0be2f257ebb8c73",
+          "bytes": 69716
+        },
+        {
+          "file": "circle_04.png",
+          "sha256": "210aaed68de75133fe663eeba6dbceb31b4fca2c4ed49b85c62e1b6b5fcf7550",
+          "bytes": 56681
+        },
+        {
+          "file": "circle_05.png",
+          "sha256": "616c989de83cd805c80ed78f692c5a4cb754151edbb1d3550f20cc3a2857b706",
+          "bytes": 59553
+        },
+        {
+          "file": "dirt_01.png",
+          "sha256": "5dc794d1cde78d48b92b538f3fb4eedc47edefb636724df00d9815c15b4dc987",
+          "bytes": 46129
+        },
+        {
+          "file": "dirt_02.png",
+          "sha256": "ffd9d893775a42fa9d9d471cdd6d6fed15ed6ebf266f227274cd3ffeea7eaf05",
+          "bytes": 52813
+        },
+        {
+          "file": "dirt_03.png",
+          "sha256": "b69e01c33350424079ecd9788879ebac1736251605071e0db435ecfe22eb6a81",
+          "bytes": 112585
+        },
+        {
+          "file": "fire_01.png",
+          "sha256": "258f4fcbf20b20afe137fc4688ef24d6467a3e71b412c3dc9b400cd2c0ed3ce3",
+          "bytes": 95429
+        },
+        {
+          "file": "fire_02.png",
+          "sha256": "6b95e193b302d50980ba51fa77fb84c41af55c346a402cb5964f4c2305f35467",
+          "bytes": 84307
+        },
+        {
+          "file": "flame_01.png",
+          "sha256": "e9a3b7f44defc34251eccca5f54ad719765fe25b5266df7eb0906cd859076a43",
+          "bytes": 51191
+        },
+        {
+          "file": "flame_02.png",
+          "sha256": "42ccd379f7730d298ae4b156bb12e8877e6b6348302c061b97bfc4c086102847",
+          "bytes": 64804
+        },
+        {
+          "file": "flame_03.png",
+          "sha256": "d129aca9b22600f22fca302cfe3fad518faca0067fa50803724f2cf8ecf2f444",
+          "bytes": 47727
+        },
+        {
+          "file": "flame_04.png",
+          "sha256": "4ca5e6a8693849ed25291c4b8ad3dbbee41641f8b953761eff06ffcfd331fcd4",
+          "bytes": 67316
+        },
+        {
+          "file": "flame_05.png",
+          "sha256": "8252c743eec07c0f9d241bfe4eb0d703239f1102a31dcd08d3b9a5e071e4edc6",
+          "bytes": 12625
+        },
+        {
+          "file": "flame_06.png",
+          "sha256": "687f5707f4a8f7fb45825a3fb47ec2c523a75ba870aaa6b321ab05890900e821",
+          "bytes": 15133
+        },
+        {
+          "file": "flare_01.png",
+          "sha256": "7ec33b6648f555b958eee8b3c799d44e76ff0e7516a06525d37911e208373d5b",
+          "bytes": 39143
+        },
+        {
+          "file": "light_01.png",
+          "sha256": "e15db5a8ccea012f4df82689f1a829bdaac04fd8a3066a723f157e0b01ffbf0a",
+          "bytes": 86592
+        },
+        {
+          "file": "light_02.png",
+          "sha256": "275561886f2d6e0e235908012881658afc42214e55f8fd5741df369a18023955",
+          "bytes": 87708
+        },
+        {
+          "file": "light_03.png",
+          "sha256": "4e5ebf85c0b9b76336037330f6f6003aec0bfba4c266aba4e24f5876c0bd1d96",
+          "bytes": 94243
+        },
+        {
+          "file": "magic_01.png",
+          "sha256": "4530b084d541351c779aac12877e831a398f7e4575126fa2a26c5eb2c47ca37b",
+          "bytes": 77122
+        },
+        {
+          "file": "magic_02.png",
+          "sha256": "8f3594c9a8efdd8945a83e51b11b445a7450a4c46eedaf8f67154fbf472ecece",
+          "bytes": 82611
+        },
+        {
+          "file": "magic_03.png",
+          "sha256": "b4702e45c034d9ca22a9c45c051105502ac51e26523740782fd8fd77ebea4b83",
+          "bytes": 55275
+        },
+        {
+          "file": "magic_04.png",
+          "sha256": "5eb4cb258f1d3ba88588221dbe8d34b39ce94e8c45268ced0cf1a1653c1a71be",
+          "bytes": 46627
+        },
+        {
+          "file": "magic_05.png",
+          "sha256": "4df1710412939410a65b60133d4f54abe47d446eaecb9bbdf4528f0060faa63d",
+          "bytes": 69579
+        },
+        {
+          "file": "muzzle_01.png",
+          "sha256": "1e7da51836e4d703fbc336808e2f9b9570ccb149d340cbac1de15b7b0f4d6c2a",
+          "bytes": 77833
+        },
+        {
+          "file": "muzzle_02.png",
+          "sha256": "8bc460888f4be1b263b1857cc167422a92da7f60454948666dc954772be47c56",
+          "bytes": 53879
+        },
+        {
+          "file": "muzzle_03.png",
+          "sha256": "878f9e23a11427caf10946571950eb7ce55d672ab3a1c6c792436c4613ad6cbe",
+          "bytes": 53994
+        },
+        {
+          "file": "muzzle_04.png",
+          "sha256": "2353b4b16c26f51237b2d321e68bb8d335ddc8cbc8fbfb9940ba09b646a72094",
+          "bytes": 59586
+        },
+        {
+          "file": "muzzle_05.png",
+          "sha256": "3695ee37398cd825768292acdc0fbcd712a900728ee529b0df552b426390b9ea",
+          "bytes": 51350
+        },
+        {
+          "file": "scorch_01.png",
+          "sha256": "f2247ba0feeb084b1b26ea6bec312bcce3d4cd52c1891835dcfabea7bc0c77ce",
+          "bytes": 57261
+        },
+        {
+          "file": "scorch_02.png",
+          "sha256": "7408707eb3cd1aacb86bd008a99696b71df21df233227002bb9ba6ddc6b4da02",
+          "bytes": 70510
+        },
+        {
+          "file": "scorch_03.png",
+          "sha256": "9eec4d5b9e9c3ea4b7f2036fb4a094c93ac7829752d899979523733bd04182f8",
+          "bytes": 87486
+        },
+        {
+          "file": "scratch_01.png",
+          "sha256": "8ef43e57056e4d5dcf10739806cc43bb9cd14221c997c79b6c1680c5a1838443",
+          "bytes": 61785
+        },
+        {
+          "file": "slash_01.png",
+          "sha256": "ebe034d985eff38bcc5191317aa117997eb0e2ebf5a2988395dea056e0d84a5f",
+          "bytes": 23710
+        },
+        {
+          "file": "slash_02.png",
+          "sha256": "37a55c91023d5130ea816d2bd1f5083fe5230842e8308823fd957d38ad15145f",
+          "bytes": 35485
+        },
+        {
+          "file": "slash_03.png",
+          "sha256": "cbb7e33ba865f2471d8d08c0702e6ab2f3a86da0addbb4f168c212e21d40ef16",
+          "bytes": 15675
+        },
+        {
+          "file": "slash_04.png",
+          "sha256": "67befde24dc6643eb56573b3a7dbd485ccaaf76c72a545d7074e33ff521ac77c",
+          "bytes": 16589
+        },
+        {
+          "file": "smoke_01.png",
+          "sha256": "89df665bb2e9a021edad2a9077d2651c44e6c6cd28f3fd38f800c41a5febd2a2",
+          "bytes": 91637
+        },
+        {
+          "file": "smoke_02.png",
+          "sha256": "c1959ff3ae2f07495cd9f3a0417534402e0ea327f77502b942ae3b874c5017af",
+          "bytes": 91493
+        },
+        {
+          "file": "smoke_03.png",
+          "sha256": "03c219c4384206174c44ff6997ffdabd1bd4354709b9569f957bf9aa75e7dafd",
+          "bytes": 38182
+        },
+        {
+          "file": "smoke_04.png",
+          "sha256": "be2579db131de274567e0e1b5a2e81f9790205f0e68a3c1a038d130a7b24e092",
+          "bytes": 92360
+        },
+        {
+          "file": "smoke_05.png",
+          "sha256": "4c6607566fba4cb3e949f56ed0c38d49fddba844b29e8ec94d5fda20be1a8b01",
+          "bytes": 79571
+        },
+        {
+          "file": "smoke_06.png",
+          "sha256": "74968cd44ba5c72bdaf1ebfc50d6113a401aae0ffded43f785055b4eeb9399df",
+          "bytes": 58581
+        },
+        {
+          "file": "smoke_07.png",
+          "sha256": "b18497db9e6acfa194bace6d417e7e2d480df3b54d6d5c9b3e07fabc6398345a",
+          "bytes": 74367
+        },
+        {
+          "file": "smoke_08.png",
+          "sha256": "a42300871565cb677e6b4eb68dcc149fd968660b22dfcc8ec49285d4c4531a85",
+          "bytes": 87848
+        },
+        {
+          "file": "smoke_09.png",
+          "sha256": "41d2a384349aa9d9078b0d2857476d007aa04e65c99755d1a68e47cfd787080a",
+          "bytes": 85495
+        },
+        {
+          "file": "smoke_10.png",
+          "sha256": "49d1874ddf82cc334197e00166befd7e32f86fdc3404fb36418f4d7935e6543d",
+          "bytes": 88139
+        },
+        {
+          "file": "spark_01.png",
+          "sha256": "ca5e7eac772d5af176f0d45be34f416908859bf28697c31f3ec7f34609919f53",
+          "bytes": 89628
+        },
+        {
+          "file": "spark_02.png",
+          "sha256": "7e6272d9ac71494b553b114a0bc40ff4e7dd95749140eb92ce1ada3caef8d19d",
+          "bytes": 96325
+        },
+        {
+          "file": "spark_03.png",
+          "sha256": "72c4b00dd517c0cb360557318b92068970579658ac1a616d61c9750e53834e2f",
+          "bytes": 74008
+        },
+        {
+          "file": "spark_04.png",
+          "sha256": "e3fac37e94127b3b5fcfaaf91eca8c157dc32d08a760e8c9df35dc5fcf017407",
+          "bytes": 78726
+        },
+        {
+          "file": "spark_05.png",
+          "sha256": "31a0138d1c26c8110eff74fbfcd308439a82ca1e53ccd8fc002528e24fd32c36",
+          "bytes": 61925
+        },
+        {
+          "file": "spark_06.png",
+          "sha256": "ff6739dd4ad5a52e92f34309184fa5e1e0a1f42bbb04679e61fc856777b0c2f4",
+          "bytes": 45096
+        },
+        {
+          "file": "spark_07.png",
+          "sha256": "773ccfb10e62b46eaddc64af4fa200e9f78e436b3817ee49d188d0a0d4b9450f",
+          "bytes": 36199
+        },
+        {
+          "file": "star_01.png",
+          "sha256": "4cd179dbc319bfbe13a685abc6f3f4e8e668f4e1aff828bd86baddf0d20c72a7",
+          "bytes": 39485
+        },
+        {
+          "file": "star_02.png",
+          "sha256": "75f4e34f3f0d8ab1af638961f9913747a3dfd89e42f1c0328be181019ec17d1e",
+          "bytes": 47233
+        },
+        {
+          "file": "star_03.png",
+          "sha256": "ee04ebd6450811a52665134b363fedc1cc95e56b07910e90b37bd57d7fd79320",
+          "bytes": 53910
+        },
+        {
+          "file": "star_04.png",
+          "sha256": "76a6414a7689b9e7a86095cb0085a3a9f078e2e3c361abddf70d3117eba226b5",
+          "bytes": 28900
+        },
+        {
+          "file": "star_05.png",
+          "sha256": "9113f3620bf54a4afc8560ed006e67363850aceb46bcac059f5199e43407cd3b",
+          "bytes": 56993
+        },
+        {
+          "file": "star_06.png",
+          "sha256": "1eeea29f7a006be4a9682412fefc37087d158b100f60abde99933766870dcba0",
+          "bytes": 33593
+        },
+        {
+          "file": "star_07.png",
+          "sha256": "115baf371bb2781e8e925027d5bf4acf779062204d40a72ccc8c7164c65bdbd4",
+          "bytes": 30831
+        },
+        {
+          "file": "star_08.png",
+          "sha256": "806b774dd9f70752dae2c221754b586e303f7b51f7ccbae890a70f286702d302",
+          "bytes": 25445
+        },
+        {
+          "file": "star_09.png",
+          "sha256": "e6c58db1ca5ce4f7cec95c95f9ad60f07664ef32cfa21601da77679bd271496b",
+          "bytes": 47732
+        },
+        {
+          "file": "symbol_01.png",
+          "sha256": "7ce0a835e531bc552d52145c270110731a331082b7f7644a84524005c7a7edc4",
+          "bytes": 7703
+        },
+        {
+          "file": "symbol_02.png",
+          "sha256": "1a8a8508868d789f695ce8183dec75ef634d77c796594b727d564b3bd65d08cb",
+          "bytes": 6506
+        },
+        {
+          "file": "trace_01.png",
+          "sha256": "83744f00d8f1983703f1ab8f22bb6f8d59300ea699a0f42f4beb329ca6bcb378",
+          "bytes": 35209
+        },
+        {
+          "file": "trace_02.png",
+          "sha256": "1dca7e131bd013a83f543e575903befb7136809b4ff6564fac411deec44f7c82",
+          "bytes": 36995
+        },
+        {
+          "file": "trace_03.png",
+          "sha256": "0a08ccc56dcb937636d59cb4b747535f99b7a3a72d828ee2c8b3622900537574",
+          "bytes": 39767
+        },
+        {
+          "file": "trace_04.png",
+          "sha256": "515731b83110a2ef75c51ae2ceb94dd595dfc31739c21275fe07a270ba31a6ed",
+          "bytes": 43180
+        },
+        {
+          "file": "trace_05.png",
+          "sha256": "9298143bd42a366246230d3f6068988f5381edeeda1aa204fbe21323475e5182",
+          "bytes": 39617
+        },
+        {
+          "file": "trace_06.png",
+          "sha256": "7f9fde6077987e13760cdfc82cce5ab75c798999c53276abdfa807f4ef6e057d",
+          "bytes": 34070
+        },
+        {
+          "file": "trace_07.png",
+          "sha256": "d939697732db2cd135099bed066a4c495a44ca8048c20e9df601c33882d1fd0c",
+          "bytes": 31200
+        },
+        {
+          "file": "twirl_01.png",
+          "sha256": "a7031a2250cb2b98ef20ba049940fd7e8f4b4c4ee82000547ea12dd7445c9981",
+          "bytes": 47461
+        },
+        {
+          "file": "twirl_02.png",
+          "sha256": "70ec8ca0dac74ae75e435ec237d80aed74cfd762a0b02e50512fbf0a7a1adc0f",
+          "bytes": 70196
+        },
+        {
+          "file": "twirl_03.png",
+          "sha256": "0ed260c50958d0ac662c39604b1791fd84cd9564e2c1f69059ffb7bef28070d0",
+          "bytes": 76052
+        },
+        {
+          "file": "window_01.png",
+          "sha256": "e37e4793a277b1160946061bca33b815d82f4a0375df658c9c5329c10f1f1542",
+          "bytes": 31675
+        },
+        {
+          "file": "window_02.png",
+          "sha256": "f3f58eb14bcdcbff9b0a8003ef01d81c1dbff002304a7b44d637377f1e2548d3",
+          "bytes": 36550
+        },
+        {
+          "file": "window_03.png",
+          "sha256": "70fcf8794b87585a1f86aaa6846fc94771dd8da072948174066c68c9c76164f4",
+          "bytes": 15109
+        },
+        {
+          "file": "window_04.png",
+          "sha256": "bb0476bac5e4a3b6f64fa86b3b48000fc3265039794c6df9a64c721187ccd668",
+          "bytes": 49829
+        }
+      ]
+    },
+    {
+      "name": "2D Spell Effects / thunderstrike.png",
+      "author": "Mikodrak",
+      "sourcePage": "https://opengameart.org/content/2d-spell-effects",
+      "license": "CC0 1.0 Universal",
+      "officialDownload": "https://opengameart.org/sites/default/files/FX.zip",
+      "downloadStatus": "공식 OGA ZIP은 세션 프록시403. 공개 Flare 프로젝트에서 파일별 원저작자 및 CC0 표기가 있는 thunderstrike.png만 정상 다운로드함.",
+      "downloadSource": "https://raw.githubusercontent.com/flareteam/flare-game/af6eee6d339ac98011864bfe89da837fe7769c28/mods/fantasycore/images/powers/thunderstrike.png",
+      "sourceCommit": "af6eee6d339ac98011864bfe89da837fe7769c28",
+      "licenseEvidence": "https://github.com/flareteam/flare-game/wiki/Credits",
+      "licenseScope": "Flare 저장소 전체가 CC0인 것은 아님. 원문 크레딧이 Mikodrak의 thunderstrike.png original에만 Public Domain, CC0를 명시한 것으로 확인. 다른Flare파일을 이 근거로 사용하지 않음.",
+      "localPath": "/workspace/work/fx-preview/research/mikodrak-thunderstrike.png",
+      "sha256": "cf2641b8ed5d95977c65cdf3b9a72440759d4abd4ac34e60db13e9ed4e80bac0",
+      "effectTypes": [
+        "낙뢰",
+        "지면 번개 폭발"
+      ],
+      "resolution": "671×744 RGBA packed sheet, 실제6프레임",
+      "animationMetadata": "https://raw.githubusercontent.com/flareteam/flare-game/af6eee6d339ac98011864bfe89da837fe7769c28/mods/fantasycore/animations/powers/thunderstrike.txt",
+      "frames": [
+        {
+          "index": 0,
+          "x": 0,
+          "y": 0,
+          "width": 229,
+          "height": 664,
+          "anchorX": 115,
+          "anchorY": 569
+        },
+        {
+          "index": 1,
+          "x": 229,
+          "y": 0,
+          "width": 226,
+          "height": 600,
+          "anchorX": 113,
+          "anchorY": 514
+        },
+        {
+          "index": 2,
+          "x": 455,
+          "y": 0,
+          "width": 216,
+          "height": 458,
+          "anchorX": 109,
+          "anchorY": 383
+        },
+        {
+          "index": 3,
+          "x": 455,
+          "y": 458,
+          "width": 196,
+          "height": 286,
+          "anchorX": 99,
+          "anchorY": 224
+        },
+        {
+          "index": 4,
+          "x": 229,
+          "y": 600,
+          "width": 113,
+          "height": 138,
+          "anchorX": 54,
+          "anchorY": 104
+        },
+        {
+          "index": 5,
+          "x": 0,
+          "y": 664,
+          "width": 37,
+          "height": 51,
+          "anchorX": 18,
+          "anchorY": 47
+        }
+      ],
+      "fit": "부드러운 보랏빛 낙뢰와 둥근 타격 광원으로 비픽셀2D 판타지 전투에 어울림. 좌표/앵커를 지면과 캐릭터발에 맞춰야 함."
+    },
+    {
+      "name": "Slash Effect Collection",
+      "author": "MetaShinryu",
+      "sourcePage": "https://opengameart.org/content/slash-effect-collection",
+      "license": "CC0 1.0 Universal",
+      "officialDownload": "https://opengameart.org/sites/default/files/Slash%20Effect%20Collection.zip",
+      "downloadStatus": "라이선스1차원문 확인 완료. 공식ZIP은 세션 프록시403으로 다운로드하지 못했으며 현재영상에는미사용.",
+      "effectTypes": [
+        "소형 검격30여종",
+        "대형돌진검격3종",
+        "대형검격5종"
+      ],
+      "fit": "검객의 짧은 타격선과 돌진 연출에 적합한 후보. 실제에셋해상도와애니메이션은다운로드/실물확인전이므로확정하지않음."
+    }
+  ]
+}
