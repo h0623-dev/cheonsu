@@ -14,6 +14,7 @@ export default function BattleDeploymentScene({
   ready = false, busy = false, maxCount = 15, validCellCount = 0, hint = '',
   getPortrait, getRole, children,
 }) {
+  const stageTitle = String(stage?.title || stage?.name || "전장").replace(/^\d+장\s*[.·]\s*/, "");
   const viewportRef = useRef(null);
   const rosterRef = useRef(null);
   const panRef = useRef(null);
@@ -181,7 +182,7 @@ export default function BattleDeploymentScene({
   return <section className="deployment-screen battle-screen battle-final-concept battle-board-only battle-deployment-scene" aria-label="전장 배치" aria-busy={busy} lang="ko">
     <header className="battle-deploy-header">
       <button type="button" className="battle-deploy-icon-button" onClick={onExit} disabled={busy} aria-label="전장 배치를 나가고 원정 지도로 돌아가기" title="원정 지도로 돌아가기"><ArrowLeft size={20} aria-hidden="true" /></button>
-      <div className="battle-deploy-title"><h1>{stage?.id}장 · {stage?.title || stage?.name || '전장'}</h1><p>전장 배치 <span>출전 {placedIds.length} / {maxCount}명 · 지정 {validCellCount}칸</span></p></div>
+      <div className="battle-deploy-title"><h1>{stage?.id}장 · {stageTitle}</h1><p>전장 배치 <span>출전 {placedIds.length} / {maxCount}명 · 지정 {validCellCount}칸</span></p></div>
       <button type="button" className="battle-deploy-header-button" onClick={onMission} disabled={busy}><Flag size={16} aria-hidden="true" /><span>미션</span></button>
       {onManage && <button type="button" className="battle-deploy-header-button" onClick={onManage} disabled={busy}><Users size={16} aria-hidden="true" /><span>편성</span></button>}
     </header>

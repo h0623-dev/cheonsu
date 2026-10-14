@@ -53,7 +53,7 @@ export function getTerrainBaseMoveCost(tile) {
 export function getUnitMoveTrait(unit) {
   const id = unit?.id;
 
-  if (["sera", "miho", "kaz"].includes(id)) {
+  if (["sera", "kaz"].includes(id)) {
     return {
       id: "shadow",
       name: "은신 기동",
@@ -61,7 +61,7 @@ export function getUnitMoveTrait(unit) {
     };
   }
 
-  if (["leon", "luka"].includes(id)) {
+  if (["lina", "teo"].includes(id)) {
     return {
       id: "ranger",
       name: "척후 기동",
@@ -69,7 +69,7 @@ export function getUnitMoveTrait(unit) {
     };
   }
 
-  if (["bram", "rakan", "baekho", "teo"].includes(id)) {
+  if (["bram", "rakan", "baekho", "edan"].includes(id)) {
     return {
       id: "heavy",
       name: "중장갑 보행",
@@ -77,7 +77,7 @@ export function getUnitMoveTrait(unit) {
     };
   }
 
-  if (["lina", "aria", "noah", "yuna", "irene", "ella"].includes(id)) {
+  if (["aria", "noah", "yuna", "irene", "ella", "miho", "sylvan"].includes(id)) {
     return {
       id: "mystic",
       name: "주술 감응",
@@ -85,7 +85,7 @@ export function getUnitMoveTrait(unit) {
     };
   }
 
-  if (id === "hero" || id === "jin") {
+  if (["hero", "jin", "leon", "luka"].includes(id)) {
     return {
       id: "leader",
       name: "천수 보행",

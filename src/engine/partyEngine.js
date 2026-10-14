@@ -1,6 +1,8 @@
 import { stages } from "../data/stages.js";
 import { EQUIPMENT, EQUIPMENT_SLOTS, normalizeEquipmentSlots } from "../data/equipment.js";
-import { getSkillDisplayName } from '../data/skills.js';
+import { getSkill, getSkillDisplayName } from '../data/skills.js';
+
+import { restoreAllyWeaponIdentity } from './allyWeaponIdentity.js';
 
 export function clone(data) {
   return JSON.parse(JSON.stringify(data));
@@ -32,19 +34,24 @@ export function getEquipmentBonus(unit) {
 function recoverExistingEquipmentBaseStats(unit) {
   const bonus = getEquipmentBonus(unit);
   const guard = Number.isFinite(unit.skillGuardBoost) ? unit.skillGuardBoost : 0;
+  const power = Number.isFinite(unit.itemPowerBoost) ? unit.itemPowerBoost : 0;
+  const itemGuard = Number.isFinite(unit.itemGuardBoost) ? unit.itemGuardBoost : 0;
   // Pre-base-stat saves already store the displayed, equipped values in atk/def.
   // Recover the base once, so loading, training and changing promotion never stack the gear.
   return {
-    baseAtk: Number.isFinite(unit.baseAtk) ? unit.baseAtk : (Number.isFinite(unit.atk) ? unit.atk : 0) - bonus.atk,
-    baseDef: Number.isFinite(unit.baseDef) ? unit.baseDef : (Number.isFinite(unit.def) ? unit.def : 0) - bonus.def - guard,
+    baseAtk: Number.isFinite(unit.baseAtk) ? unit.baseAtk : (Number.isFinite(unit.atk) ? unit.atk : 0) - bonus.atk - power,
+    baseDef: Number.isFinite(unit.baseDef) ? unit.baseDef : (Number.isFinite(unit.def) ? unit.def : 0) - bonus.def - guard - itemGuard,
   };
 }
 
 export function makeAlly(unit) {
+  unit = restoreAllyWeaponIdentity(unit);
+  const skill = getSkill(unit, unit.activeSkillId);
   return {
     ...unit,
     ...recoverExistingEquipmentBaseStats(unit),
     skill: getSkillDisplayName(unit),
+    ...(skill ? { skillType: skill.type, skillRange: skill.range } : {}),
     level: unit.level || 1,
     exp: unit.exp || 0,
     baseSkillBonus: unit.baseSkillBonus ?? unit.skillBonus ?? 0,
@@ -58,29 +65,32 @@ export function applyEquipmentStats(unit) {
   if (unit.type !== "ally") return unit;
   const bonus = getEquipmentBonus(unit);
   const skillGuardBoost = Number.isFinite(unit.skillGuardBoost) ? unit.skillGuardBoost : 0;
+  const itemPowerBoost = Number.isFinite(unit.itemPowerBoost) ? unit.itemPowerBoost : 0;
+  const itemGuardBoost = Number.isFinite(unit.itemGuardBoost) ? unit.itemGuardBoost : 0;
   // Runtime callers can attach gear to a fresh unit that has never been equipped.
   // Its atk/def are bare stats; legacy equipped totals are recovered by makeAlly/save loading.
-  const baseAtk = Number.isFinite(unit.baseAtk) ? unit.baseAtk : (Number.isFinite(unit.atk) ? unit.atk : 0);
-  const baseDef = Number.isFinite(unit.baseDef) ? unit.baseDef : (Number.isFinite(unit.def) ? unit.def : 0) - skillGuardBoost;
+  const baseAtk = Number.isFinite(unit.baseAtk) ? unit.baseAtk : (Number.isFinite(unit.atk) ? unit.atk : 0) - itemPowerBoost;
+  const baseDef = Number.isFinite(unit.baseDef) ? unit.baseDef : (Number.isFinite(unit.def) ? unit.def : 0) - skillGuardBoost - itemGuardBoost;
   return {
     ...unit,
     equipment: normalizeEquipmentSlots(unit.equipment),
     gearEnhance: unit.gearEnhance || {},
     baseAtk,
     baseDef,
-    atk: baseAtk + bonus.atk,
-    def: baseDef + bonus.def + skillGuardBoost,
+    atk: baseAtk + bonus.atk + itemPowerBoost,
+    def: baseDef + bonus.def + skillGuardBoost + itemGuardBoost,
   };
 }
 
 
 export function applyEquipmentToParty(party) {
-  return party.map((unit) => applyEquipmentStats(makeAlly({
-    ...unit,
-    def: unit.def - (unit.skillGuardBoost || 0),
+  return party.map((unit) => applyEquipmentStats({
+    ...makeAlly(unit),
+    itemPowerBoost: 0,
+    itemGuardBoost: 0,
     skillGuardBoost: 0,
     guard: false,
-  })));
+  }));
 }
 
 
@@ -238,4 +248,14 @@ export function grantExp(units, attackerId, expAmount) {
     return nextUnit;
   });
   return { units: updated, messages };
+}
+
+// Persist only successful skill growth; battle HP and temporary effects stay on the field.
+export function syncBattleSkillMastery(party, sourceUnits, unitId) {
+  const source = sourceUnits.find(unit => unit.id === unitId && unit.type === 'ally');
+  if (!source || !Number.isFinite(source.skillLevel)) return party;
+  const earned = Math.max(0, Math.min(3, Math.floor(source.skillLevel)));
+  return party.map(unit => unit.id === unitId && unit.type === 'ally'
+    ? { ...unit, skillLevel: Math.max(Number.isFinite(unit.skillLevel) ? Math.max(0, Math.min(3, Math.floor(unit.skillLevel))) : 0, earned) }
+    : unit);
 }

@@ -1,5 +1,5 @@
 import { stages } from '../data/stages.js';
-import { mergePartyFromUnits } from './partyEngine.js';
+import { applyEquipmentToParty, mergePartyFromUnits } from './partyEngine.js';
 
 export function normalizeLastBattleResult(raw) {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)
@@ -72,7 +72,7 @@ export function createDefeatCheckpoint(data, settlement = {}) {
   const savedParty = Array.isArray(data.party) ? data.party : [];
   const liveUnits = Array.isArray(data.units) ? data.units : [];
   const recovered = Array.isArray(settlement.party) ? settlement.party : mergePartyFromUnits(savedParty, liveUnits);
-  const party = recovered.map(unit => ({
+  const party = applyEquipmentToParty(recovered).map(unit => ({
     ...unit, hp: unit.maxHp, status: [], acted: false, moved: false, guard: false,
     skillGuardBoost: 0, itemGuardBoost: 0, skillCooldown: 0, skillCooldowns: {}, supportUsed: false,
   }));

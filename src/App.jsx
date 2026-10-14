@@ -84,6 +84,7 @@ import {
   mergePartyIntoStage,
   mergePartyFromUnits,
   grantExp,
+  syncBattleSkillMastery,
   getGearEnhanceBonus,
 } from "./engine/partyEngine.js";
 import {
@@ -5411,7 +5412,7 @@ function getStageMissionOrder(stage) {
     return {
       id: "survive",
       title: "전선 유지",
-      desc: "8라운드 이내, 아군 10명 이상 생존",
+      desc: "8라운드 이내, 아군 10명 생존(10명 미만 출전 시 전원)",
       reward: { gold: 280 + id * 35, potion: 1 },
       type: "생존전",
     };
@@ -5456,19 +5457,29 @@ function getStageMissionOrder(stage) {
   };
 }
 
-function evaluateStageMissionOrder(stage, round, units) {
+function getBattleSurvival(stage, units, participantIds = null) {
+  const livingIds = new Set(units.filter(unit => unit.type === "ally" && unit.hp > 0).map(unit => unit.id));
+  const initialIds = new Set(participantIds ?? (stage?.units || []).filter(unit => unit.type === "ally").map(unit => unit.id));
+  for (const unit of units) if (unit.type === "ally") initialIds.add(unit.id);
+  const aliveAllies = [...initialIds].filter(id => livingIds.has(id)).length;
+  const totalAllies = initialIds.size;
+  return { aliveAllies, totalAllies, allAlive: totalAllies > 0 && aliveAllies === totalAllies };
+}
+
+function evaluateStageMissionOrder(stage, round, units, participantIds = null) {
   const mission = getStageMissionOrder(stage);
   const hero = units.find((unit) => unit.id === "hero");
   const heroHpRate = hero && hero.maxHp ? hero.hp / hero.maxHp : 0;
-  const aliveAllies = units.filter((unit) => unit.type === "ally" && unit.hp > 0).length;
+  const { aliveAllies, totalAllies } = getBattleSurvival(stage, units, participantIds);
   let met = true;
 
   if (mission.id === "bossSlayer") {
-    met = true;
+    const originalBossIds = new Set((stage?.units || []).filter(unit => unit.type !== "ally" && (unit.type === "boss" || unit.id === "boss")).map(unit => unit.id));
+    met = !units.some(unit => unit.type !== "ally" && unit.hp > 0 && (unit.type === "boss" || unit.id === "boss" || originalBossIds.has(unit.id)));
   }
 
   if (mission.id === "survive") {
-    met = round <= 8 && aliveAllies >= Math.min(10, units.filter((unit) => unit.type === "ally").length);
+    met = totalAllies > 0 && round <= 8 && aliveAllies >= Math.min(10, totalAllies);
   }
 
   if (mission.id === "breakthrough") {
@@ -5484,7 +5495,7 @@ function evaluateStageMissionOrder(stage, round, units) {
   }
 
   if (mission.id === "sweep") {
-    met = true;
+    met = !units.some(unit => unit.type !== "ally" && unit.hp > 0);
   }
 
   return {
@@ -5493,11 +5504,9 @@ function evaluateStageMissionOrder(stage, round, units) {
   };
 }
 
-function evaluateTacticalGoals(stage, round, units) {
+function evaluateTacticalGoals(stage, round, units, participantIds = null) {
   const hero = units.find((unit) => unit.id === "hero");
-  const allies = units.filter((unit) => unit.type === "ally");
-  const aliveAllies = allies.filter((unit) => unit.hp > 0).length;
-  const totalAllies = allies.length;
+  const { allAlive } = getBattleSurvival(stage, units, participantIds);
   const heroHpRate = hero && hero.maxHp ? hero.hp / hero.maxHp : 0;
   const speedLimit = getStageSpeedLimit(stage);
 
@@ -5513,7 +5522,7 @@ function evaluateTacticalGoals(stage, round, units) {
       id: "allAlive",
       title: "전원 생존",
       desc: "출전 아군 전원 생존",
-      met: aliveAllies >= totalAllies,
+      met: allAlive,
       reward: { gold: 0, potion: 1 },
     },
     {
@@ -5525,7 +5534,7 @@ function evaluateTacticalGoals(stage, round, units) {
     },
   ];
 
-  const missionGoal = evaluateStageMissionOrder(stage, round, units);
+  const missionGoal = evaluateStageMissionOrder(stage, round, units, participantIds);
   goals.push({
     id: `mission-${missionGoal.id}`,
     title: missionGoal.title,
@@ -5549,16 +5558,15 @@ function evaluateTacticalGoals(stage, round, units) {
   return { goals, total };
 }
 
-function calculateClearSummary(stage, round, units) {
+function calculateClearSummary(stage, round, units, participantIds = null) {
   const hero = units.find((unit) => unit.id === "hero");
   const heroHpRate = hero && hero.maxHp ? hero.hp / hero.maxHp : 0;
-  const aliveAllies = units.filter((unit) => unit.type === "ally" && unit.hp > 0).length;
-  const totalAllies = units.filter((unit) => unit.type === "ally").length;
-  const tactical = evaluateTacticalGoals(stage, round, units);
+  const { aliveAllies, allAlive } = getBattleSurvival(stage, units, participantIds);
+  const tactical = evaluateTacticalGoals(stage, round, units, participantIds);
 
   let rank = "B";
 
-  if (round <= 5 && heroHpRate >= 0.7 && aliveAllies >= totalAllies) {
+  if (round <= 5 && heroHpRate >= 0.7 && allAlive) {
     rank = "S";
   } else if (round <= 8 && heroHpRate >= 0.45) {
     rank = "A";
@@ -6751,18 +6759,18 @@ function createRecruitAlly(id, referenceParty = []) {
   if (expansionRecruit) return { ...expansionRecruit, skill: getSkillDisplayName(expansionRecruit), x: 0, y: 0 };
   const recruits = {
     aria: { id: "aria", icon: "🕊️", name: "아리아", hp: 20, maxHp: 20, atk: 6, def: 4, move: 3, range: 1, skill: "성빛 치유", skillType: "heal", skillBonus: 0, skillRange: 3 },
-    leon: { id: "leon", icon: "🏹", name: "레온", hp: 22, maxHp: 22, atk: 8, def: 4, move: 3, range: 2, skill: "관통 사격", skillType: "attack", skillBonus: 3, skillRange: 3 },
+    leon: { id: "leon", icon: "🔱", name: "레온", hp: 22, maxHp: 22, atk: 8, def: 4, move: 3, range: 2, minRange: 1, skill: "관통찌르기", skillType: "attack", skillBonus: 3, skillRange: 2 },
     sera: { id: "sera", icon: "🗡️", name: "세라", hp: 21, maxHp: 21, atk: 10, def: 3, move: 4, range: 1, skill: "암영 베기", skillType: "attack", skillBonus: 5, skillRange: 1 },
     noah: { id: "noah", icon: "📜", name: "노아", hp: 23, maxHp: 23, atk: 7, def: 5, move: 3, range: 2, skill: "전술 명령", skillType: "attack", skillBonus: 2, skillRange: 2 },
     yuna: { id: "yuna", icon: "🌙", name: "유나", hp: 22, maxHp: 22, atk: 8, def: 5, move: 3, range: 2, skill: "달빛 회복", skillType: "heal", skillBonus: 0, skillRange: 3 },
     rakan: { id: "rakan", icon: "🐺", name: "라칸", hp: 36, maxHp: 36, atk: 11, def: 7, move: 3, range: 1, skill: "야수 돌격", skillType: "attack", skillBonus: 4, skillRange: 1 },
-    miho: { id: "miho", icon: "🦊", name: "미호", hp: 24, maxHp: 24, atk: 10, def: 4, move: 4, range: 1, skill: "환영 베기", skillType: "attack", skillBonus: 4, skillRange: 1 },
-    teo: { id: "teo", icon: "⚒️", name: "테오", hp: 32, maxHp: 32, atk: 12, def: 6, move: 2, range: 1, skill: "분쇄", skillType: "attack", skillBonus: 5, skillRange: 1 },
+    miho: { id: "miho", icon: "🦊", name: "미호", hp: 24, maxHp: 24, atk: 10, def: 4, move: 4, range: 2, minRange: 2, skill: "여우불", skillType: "attack", skillBonus: 4, skillRange: 3 },
+    teo: { id: "teo", icon: "🏹", name: "테오", hp: 32, maxHp: 32, atk: 12, def: 6, move: 3, range: 2, minRange: 2, skill: "삼연사", skillType: "attack", skillBonus: 5, skillRange: 3 },
     irene: { id: "irene", icon: "❄️", name: "아이린", hp: 23, maxHp: 23, atk: 11, def: 4, move: 3, range: 2, skill: "빙결창", skillType: "attack", skillBonus: 4, skillRange: 2 },
     kaz: { id: "kaz", icon: "🥷", name: "카즈", hp: 25, maxHp: 25, atk: 12, def: 3, move: 4, range: 1, skill: "순간참", skillType: "attack", skillBonus: 5, skillRange: 1 },
-    ella: { id: "ella", icon: "🔮", name: "엘라", hp: 22, maxHp: 22, atk: 12, def: 3, move: 3, range: 2, skill: "별빛 폭발", skillType: "attack", skillBonus: 5, skillRange: 2 },
+    ella: { id: "ella", icon: "🎵", name: "엘라", hp: 22, maxHp: 22, atk: 12, def: 3, move: 3, range: 2, skill: "치유선율", skillType: "heal", skillBonus: 0, skillRange: 2 },
     jin: { id: "jin", icon: "🐉", name: "진", hp: 34, maxHp: 34, atk: 13, def: 7, move: 3, range: 1, skill: "용검", skillType: "attack", skillBonus: 5, skillRange: 1 },
-    luka: { id: "luka", icon: "🎯", name: "루카", hp: 24, maxHp: 24, atk: 12, def: 4, move: 3, range: 3, skill: "저격", skillType: "attack", skillBonus: 5, skillRange: 4 },
+    luka: { id: "luka", icon: "⚔️", name: "루카", hp: 24, maxHp: 24, atk: 12, def: 4, move: 3, range: 1, minRange: 1, skill: "기사돌격", skillType: "attack", skillBonus: 5, skillRange: 1 },
     baekho: { id: "baekho", icon: "🐯", name: "백호", hp: 40, maxHp: 40, atk: 14, def: 8, move: 3, range: 1, skill: "백호 포효", skillType: "attack", skillBonus: 6, skillRange: 1 },
   };
 
@@ -6856,13 +6864,15 @@ function getUnitRole(unit) {
   if (!unit) return "미정";
 
   if (["noah"].includes(unit.id)) return "전술";
-  if (["bram", "teo", "baekho"].includes(unit.id)) return "탱커";
-  if (["sera", "miho", "kaz"].includes(unit.id)) return "암살";
-  if (["luka"].includes(unit.id)) return "저격";
+  if (["bram", "rakan", "baekho", "edan"].includes(unit.id)) return "탱커";
+  if (["sera", "kaz"].includes(unit.id)) return "암살";
+  if (["hero", "leon", "jin", "luka", "mare"].includes(unit.id)) return "근접";
+  if (["aria", "yuna", "ella", "harin"].includes(unit.id)) return "힐러";
+  if (["lina", "teo", "miho", "irene", "sylvan"].includes(unit.id)) return "원거리";
   if (unit.skillType === "heal") return "힐러";
-  if ((unit.def || 0) >= 9) return "탱커";
   if ((unit.range || 1) >= 3) return "저격";
   if ((unit.range || 1) >= 2 || unit.id === "leon" || unit.id === "lina") return "원거리";
+  if ((unit.def || 0) >= 9) return "탱커";
   if ((unit.move || 3) >= 4) return "암살";
   return "근접";
 }
@@ -8390,6 +8400,7 @@ export default function App() {
   const suppressBattleMapClickRef = useRef(false);
   const [screenShake, setScreenShake] = useState(false);
   const visualTimersRef = useRef(new Set());
+  const pendingEnemyResumeRef = useRef(null);
   const battleAsyncRef = useRef(null);
   if (battleAsyncRef.current == null) battleAsyncRef.current = createBattleAsyncLifecycle();
   const combatBusy = Boolean(stageMissionOpen || turnBusy || movingUnit || battleResolving || combatCutscene || bossCutscene || stageBanner?.type === "start");
@@ -9165,8 +9176,11 @@ export default function App() {
 
   const getSkillCooldownValue = (unit) => getSkillCooldown(unit, unit?.activeSkillId);
   const getSkillCooldownTurns = (unit) => unit?.skillSpec?.cooldown || getSkill(unit)?.cooldown || 2;
-  const applySkillCooldown = (sourceUnits, unitId, cooldown = 2, skillId) =>
-    applyCooldown(sourceUnits, unitId, skillId || getUnitSkills(sourceUnits.find(unit => unit.id === unitId))[0]?.id, cooldown);
+  const applySkillCooldown = (sourceUnits, unitId, cooldown = 2, skillId) => {
+    const updated = applyCooldown(sourceUnits, unitId, skillId || getUnitSkills(sourceUnits.find(unit => unit.id === unitId))[0]?.id, cooldown);
+    setParty(previous => syncBattleSkillMastery(previous, updated, unitId));
+    return updated;
+  };
   const decrementSkillCooldowns = tickCooldowns;
 
   const selectedSkillCooldown = getSkillCooldownValue(selected);
@@ -10418,6 +10432,7 @@ export default function App() {
   };
 
   const beginStageBattle = (stage) => {
+    pendingEnemyResumeRef.current = null;
     if (!stage || !playableStageIds.includes(stage.id)) return;
     const setup = createDeploymentBattleSetup(stage, party, deployedIds, gearEnhance, clearedStages, settings);
     if (!setup) return;
@@ -11948,6 +11963,8 @@ export default function App() {
       const restoredOutcome = migratedData.screen === "battle" ? getBattleOutcome(migratedData.selectedStage, restoredUnits) : null;
       const restoredResult = restoredOutcome || (restoredDefeat ? "defeat" : null);
       setResult(restoredResult);
+      pendingEnemyResumeRef.current = !restoredResult && migratedData.screen === "battle" && migratedData.turn === "enemy"
+        ? migratedData.selectedStage.id : null;
       if (restoredResult === 'defeat') {
         setLastBattleResult({ stageId: migratedData.selectedStage.id, outcome: 'defeat' });
         setTrainingUsed(true);
@@ -11959,7 +11976,7 @@ export default function App() {
       setPhaseBanner(null);
       setStageBanner(null);
       setTurnPhaseBanner(null);
-      setLastClearSummary(restoredOutcome === "victory" ? calculateClearSummary(migratedData.selectedStage, migratedData.round, restoredUnits) : null);
+      setLastClearSummary(restoredOutcome === "victory" ? calculateClearSummary(migratedData.selectedStage, migratedData.round, restoredUnits, restoredDeployedIds) : null);
       setHazards(migratedData.hazards);
       setTurnBusy(false);
       setMoveUndo(null);
@@ -12177,7 +12194,7 @@ export default function App() {
     for (const enemy of enemies) {
       if (!battleAsyncRef.current.current(epoch)) return;
       if (getBattleOutcome(selectedStage, workingUnits) === "victory") {
-        const summary = calculateClearSummary(selectedStage, round, workingUnits);
+        const summary = calculateClearSummary(selectedStage, round, workingUnits, deployedIds);
         setUnits(workingUnits); setParty(prev => mergePartyFromUnits(prev, workingUnits));
         playSfx("victory"); showVictoryDirecting(summary); setResult("victory"); setTurnBusy(false);
         return;
@@ -12261,7 +12278,7 @@ export default function App() {
       ]);
     }
     if (getBattleOutcome(selectedStage, workingUnits) === "victory") {
-      const summary = calculateClearSummary(selectedStage, round, workingUnits);
+      const summary = calculateClearSummary(selectedStage, round, workingUnits, deployedIds);
       setUnits(workingUnits); setParty(prev => mergePartyFromUnits(prev, workingUnits));
       playSfx("victory"); showVictoryDirecting(summary); setResult("victory"); setTurnBusy(false);
       return;
@@ -12427,7 +12444,7 @@ export default function App() {
     ]);
 
     if (getBattleOutcome(selectedStage, processedUnits) === "victory") {
-      const summary = calculateClearSummary(selectedStage, round, processedUnits);
+      const summary = calculateClearSummary(selectedStage, round, processedUnits, deployedIds);
       playSfx("victory");
       showVictoryDirecting(summary);
       setResult("victory");
@@ -12453,6 +12470,24 @@ export default function App() {
       setLogs(previous => ["적 행동을 처리하지 못했습니다. 저장을 보존하고 메뉴에서 다시 진입해 주세요.", ...previous]);
     });
   };
+
+  const resumeSavedEnemyTurn = useEffectEvent(() => {
+    const epoch = battleAsyncRef.current.capture();
+    setTurnBusy(true);
+    setSelectedUnit(null);
+    setMode("move");
+    void executeEnemyTurn(units).catch(() => {
+      if (battleAsyncRef.current.current(epoch)) setLogs(previous => ["저장된 적 행동을 처리하지 못했습니다. 메뉴에서 다시 진입해 주세요.", ...previous]);
+    }).finally(() => {
+      if (battleAsyncRef.current.current(epoch)) setTurnBusy(false);
+    });
+  });
+
+  useEffect(() => {
+    if (pendingEnemyResumeRef.current !== selectedStage?.id || screen !== "battle" || turn !== "enemy" || result || combatBusy) return;
+    pendingEnemyResumeRef.current = null;
+    resumeSavedEnemyTurn();
+  }, [selectedStage?.id, screen, turn, result, combatBusy]);
 
   const selectNextReadyAlly = (preferredRole = null) => {
     if (turn !== "ally" || battleInputLocked) return;
@@ -13335,7 +13370,7 @@ export default function App() {
     }
 
     if (getBattleOutcome(selectedStage, nextUnits) === "victory") {
-      const summary = calculateClearSummary(selectedStage, round, nextUnits);
+      const summary = calculateClearSummary(selectedStage, round, nextUnits, deployedIds);
       setUnits(nextUnits);
       setParty((prev) => mergePartyFromUnits(prev, nextUnits));
       playSfx("victory");
@@ -13552,7 +13587,7 @@ export default function App() {
     const data = getSaveData();
     const stageId = selectedStage.id;
     const replay = clearedStages.includes(stageId) || stageRewardClaimed;
-    const summary = lastClearSummary || calculateClearSummary(selectedStage, round, units);
+    const summary = lastClearSummary || calculateClearSummary(selectedStage, round, units, deployedIds);
     const recruitId = !replay ? RECRUIT_BY_STAGE[stageId] : null;
     let nextParty = mergePartyFromUnits(party, units);
     const recruit = recruitId ? createRecruitAlly(recruitId, nextParty) : null;
