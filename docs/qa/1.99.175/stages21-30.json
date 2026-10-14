@@ -1,0 +1,4974 @@
+{
+  "version": "1.99.175",
+  "url": "http://127.0.0.1:4173",
+  "scope": "stages21-30",
+  "results": [
+    {
+      "stage": 21,
+      "tested": true,
+      "passed": true,
+      "actions": [
+        {
+          "round": 1,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 8,
+            "y": 18
+          }
+        },
+        {
+          "round": 1,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 7,
+            "y": 14
+          }
+        },
+        {
+          "round": 1,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 2,
+            "y": 13
+          }
+        },
+        {
+          "round": 2,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 6,
+            "y": 14
+          }
+        },
+        {
+          "round": 2,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 8,
+            "y": 14
+          }
+        },
+        {
+          "round": 2,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 8,
+            "y": 12
+          }
+        },
+        {
+          "round": 2,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 5,
+            "y": 12
+          }
+        },
+        {
+          "round": 3,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 7,
+            "y": 14
+          }
+        },
+        {
+          "round": 3,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "round": 3,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 8,
+            "y": 11
+          }
+        },
+        {
+          "round": 3,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "lina",
+          "mode": "skill"
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "round": 4,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 8,
+            "y": 13
+          }
+        },
+        {
+          "round": 4,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 11,
+            "y": 10
+          }
+        },
+        {
+          "round": 4,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 10,
+            "y": 11
+          }
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "aria",
+          "mode": "support-skill"
+        },
+        {
+          "id": "lina",
+          "mode": "skill"
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        }
+      ],
+      "checks": [
+        "entry cutscene skipped via visible UI; mission confirmed",
+        "manual hero placement save/reload",
+        "map pan gesture",
+        "4 actual enemy turns; battle HP/coordinates/stats restore",
+        "saved manual deployment coordinates used at actual battle entry",
+        "victory next stage real entry"
+      ],
+      "naturalPlay": {
+        "initial": [
+          {
+            "id": "hero",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 6,
+            "y": 17
+          },
+          {
+            "id": "bram",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 7,
+            "y": 17
+          },
+          {
+            "id": "lina",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 1,
+            "y": 16
+          },
+          {
+            "id": "shield1",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 17,
+            "y": 4
+          },
+          {
+            "id": "assassin2",
+            "hp": 38,
+            "maxHp": 38,
+            "x": 13,
+            "y": 1
+          },
+          {
+            "id": "priest3",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 18,
+            "y": 10
+          },
+          {
+            "id": "lancer4",
+            "hp": 39,
+            "maxHp": 39,
+            "x": 16,
+            "y": 2
+          },
+          {
+            "id": "archer5",
+            "hp": 39,
+            "maxHp": 39,
+            "x": 19,
+            "y": 15
+          },
+          {
+            "id": "boss",
+            "hp": 72,
+            "maxHp": 72,
+            "x": 20,
+            "y": 8
+          },
+          {
+            "id": "large-extra-21-1",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 15,
+            "y": 7
+          },
+          {
+            "id": "large-extra-21-2",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 11,
+            "y": 5
+          },
+          {
+            "id": "large-extra-21-3",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 20,
+            "y": 11
+          },
+          {
+            "id": "large-extra-21-4",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 13,
+            "y": 6
+          },
+          {
+            "id": "large-extra-21-5",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 12,
+            "y": 3
+          },
+          {
+            "id": "large-extra-21-6",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 16,
+            "y": 9
+          },
+          {
+            "id": "large-extra-21-7",
+            "hp": 42,
+            "maxHp": 42,
+            "x": 18,
+            "y": 1
+          },
+          {
+            "id": "large-extra-21-8",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 17,
+            "y": 13
+          },
+          {
+            "id": "large-extra-21-9",
+            "hp": 41,
+            "maxHp": 41,
+            "x": 19,
+            "y": 6
+          },
+          {
+            "id": "large-extra-21-10",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 9,
+            "y": 3
+          },
+          {
+            "id": "large-extra-21-11",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 14,
+            "y": 12
+          },
+          {
+            "id": "large-extra-21-12",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 14,
+            "y": 4
+          },
+          {
+            "id": "large-extra-21-13",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 10,
+            "y": 1
+          },
+          {
+            "id": "large-extra-21-14",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 20,
+            "y": 4
+          },
+          {
+            "id": "large-extra-21-15",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 8,
+            "y": 5
+          },
+          {
+            "id": "large-extra-21-16",
+            "hp": 42,
+            "maxHp": 42,
+            "x": 18,
+            "y": 17
+          },
+          {
+            "id": "large-extra-21-17",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 12,
+            "y": 8
+          },
+          {
+            "id": "aria",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 8,
+            "y": 22
+          },
+          {
+            "id": "leon",
+            "hp": 39,
+            "maxHp": 39,
+            "x": 3,
+            "y": 18
+          },
+          {
+            "id": "sera",
+            "hp": 38,
+            "maxHp": 38,
+            "x": 10,
+            "y": 24
+          },
+          {
+            "id": "noah",
+            "hp": 40,
+            "maxHp": 40,
+            "x": 6,
+            "y": 21
+          },
+          {
+            "id": "yuna",
+            "hp": 39,
+            "maxHp": 39,
+            "x": 2,
+            "y": 14
+          },
+          {
+            "id": "rakan",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 9,
+            "y": 19
+          },
+          {
+            "id": "miho",
+            "hp": 41,
+            "maxHp": 41,
+            "x": 5,
+            "y": 15
+          },
+          {
+            "id": "teo",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 1,
+            "y": 12
+          },
+          {
+            "id": "irene",
+            "hp": 40,
+            "maxHp": 40,
+            "x": 4,
+            "y": 23
+          },
+          {
+            "id": "kaz",
+            "hp": 42,
+            "maxHp": 42,
+            "x": 6,
+            "y": 13
+          },
+          {
+            "id": "ella",
+            "hp": 39,
+            "maxHp": 39,
+            "x": 7,
+            "y": 24
+          }
+        ],
+        "enemyTurns": 4,
+        "afterRound": 5
+      },
+      "seededSettlement": {
+        "fixture": {
+          "bossHp": 1,
+          "allyHealed": "hero",
+          "otherEnemiesRemoved": true
+        },
+        "victory": {
+          "goldDelta": 5993,
+          "inventory": {
+            "potion": 15,
+            "hiPotion": 6,
+            "remedy": 6,
+            "powerCharm": 2,
+            "guardCharm": 3
+          },
+          "cleared": true,
+          "recruit": []
+        },
+        "replayDuplicateReward": 0,
+        "defeatTrainingBlockedRetry": true
+      },
+      "partyCount": 14,
+      "expectedDeployment": 14,
+      "manualTo": {
+        "x": 6,
+        "y": 17
+      },
+      "images": {
+        "overflow": false,
+        "broken": [],
+        "width": 390,
+        "scrollWidth": 390
+      },
+      "settlementPassed": true
+    },
+    {
+      "stage": 22,
+      "tested": true,
+      "passed": true,
+      "actions": [
+        {
+          "round": 1,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 8,
+            "y": 14
+          }
+        },
+        {
+          "round": 1,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 8,
+            "y": 11
+          }
+        },
+        {
+          "round": 1,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 9,
+            "y": 6
+          }
+        },
+        {
+          "round": 2,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 8,
+            "y": 6
+          }
+        },
+        {
+          "round": 2,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 12,
+            "y": 14
+          }
+        },
+        {
+          "round": 2,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 11,
+            "y": 11
+          }
+        },
+        {
+          "round": 2,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 12,
+            "y": 5
+          }
+        },
+        {
+          "round": 3,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 11,
+            "y": 6
+          }
+        },
+        {
+          "round": 3,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 12,
+            "y": 12
+          }
+        },
+        {
+          "round": 3,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 11,
+            "y": 9
+          }
+        },
+        {
+          "round": 3,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 13,
+            "y": 3
+          }
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "aria",
+          "mode": "support-skill"
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "round": 4,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 12,
+            "y": 4
+          }
+        },
+        {
+          "round": 4,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 11,
+            "y": 11
+          }
+        },
+        {
+          "round": 4,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 10,
+            "y": 7
+          }
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "aria",
+          "mode": "support-skill"
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        }
+      ],
+      "checks": [
+        "entry cutscene skipped via visible UI; mission confirmed",
+        "manual hero placement save/reload",
+        "map pan gesture",
+        "4 actual enemy turns; battle HP/coordinates/stats restore",
+        "saved manual deployment coordinates used at actual battle entry",
+        "victory next stage real entry"
+      ],
+      "naturalPlay": {
+        "initial": [
+          {
+            "id": "hero",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 5,
+            "y": 7
+          },
+          {
+            "id": "bram",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 6,
+            "y": 11
+          },
+          {
+            "id": "lina",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 5,
+            "y": 6
+          },
+          {
+            "id": "assassin1",
+            "hp": 40,
+            "maxHp": 40,
+            "x": 21,
+            "y": 11
+          },
+          {
+            "id": "priest2",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 19,
+            "y": 6
+          },
+          {
+            "id": "lancer3",
+            "hp": 40,
+            "maxHp": 40,
+            "x": 18,
+            "y": 14
+          },
+          {
+            "id": "archer4",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 16,
+            "y": 9
+          },
+          {
+            "id": "mage5",
+            "hp": 39,
+            "maxHp": 39,
+            "x": 20,
+            "y": 4
+          },
+          {
+            "id": "boss",
+            "hp": 74,
+            "maxHp": 74,
+            "x": 22,
+            "y": 3
+          },
+          {
+            "id": "large-extra-22-1",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 17,
+            "y": 12
+          },
+          {
+            "id": "large-extra-22-2",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 23,
+            "y": 7
+          },
+          {
+            "id": "large-extra-22-3",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 19,
+            "y": 16
+          },
+          {
+            "id": "large-extra-22-4",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 24,
+            "y": 10
+          },
+          {
+            "id": "large-extra-22-5",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 24,
+            "y": 5
+          },
+          {
+            "id": "large-extra-22-6",
+            "hp": 48,
+            "maxHp": 48,
+            "x": 15,
+            "y": 13
+          },
+          {
+            "id": "large-extra-22-7",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 18,
+            "y": 8
+          },
+          {
+            "id": "large-extra-22-8",
+            "hp": 52,
+            "maxHp": 52,
+            "x": 16,
+            "y": 3
+          },
+          {
+            "id": "large-extra-22-9",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 21,
+            "y": 15
+          },
+          {
+            "id": "large-extra-22-10",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 15,
+            "y": 7
+          },
+          {
+            "id": "large-extra-22-11",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 22,
+            "y": 17
+          },
+          {
+            "id": "large-extra-22-12",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 20,
+            "y": 9
+          },
+          {
+            "id": "large-extra-22-13",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 23,
+            "y": 1
+          },
+          {
+            "id": "large-extra-22-14",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 22,
+            "y": 13
+          },
+          {
+            "id": "large-extra-22-15",
+            "hp": 48,
+            "maxHp": 48,
+            "x": 17,
+            "y": 5
+          },
+          {
+            "id": "large-extra-22-16",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 20,
+            "y": 18
+          },
+          {
+            "id": "large-extra-22-17",
+            "hp": 52,
+            "maxHp": 52,
+            "x": 16,
+            "y": 15
+          },
+          {
+            "id": "aria",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 4,
+            "y": 14
+          },
+          {
+            "id": "leon",
+            "hp": 39,
+            "maxHp": 39,
+            "x": 2,
+            "y": 9
+          },
+          {
+            "id": "sera",
+            "hp": 38,
+            "maxHp": 38,
+            "x": 9,
+            "y": 5
+          },
+          {
+            "id": "noah",
+            "hp": 40,
+            "maxHp": 40,
+            "x": 3,
+            "y": 12
+          },
+          {
+            "id": "yuna",
+            "hp": 39,
+            "maxHp": 39,
+            "x": 1,
+            "y": 7
+          },
+          {
+            "id": "rakan",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 10,
+            "y": 16
+          },
+          {
+            "id": "miho",
+            "hp": 41,
+            "maxHp": 41,
+            "x": 4,
+            "y": 10
+          },
+          {
+            "id": "teo",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 3,
+            "y": 4
+          },
+          {
+            "id": "irene",
+            "hp": 40,
+            "maxHp": 40,
+            "x": 7,
+            "y": 13
+          },
+          {
+            "id": "kaz",
+            "hp": 42,
+            "maxHp": 42,
+            "x": 8,
+            "y": 8
+          },
+          {
+            "id": "ella",
+            "hp": 39,
+            "maxHp": 39,
+            "x": 2,
+            "y": 2
+          }
+        ],
+        "enemyTurns": 4,
+        "afterRound": 5
+      },
+      "seededSettlement": {
+        "fixture": {
+          "bossHp": 1,
+          "allyHealed": "hero",
+          "otherEnemiesRemoved": true
+        },
+        "victory": {
+          "goldDelta": 5910,
+          "inventory": {
+            "potion": 14,
+            "hiPotion": 7,
+            "remedy": 6,
+            "powerCharm": 2,
+            "guardCharm": 2
+          },
+          "cleared": true,
+          "recruit": [
+            {
+              "id": "jin",
+              "hp": 46,
+              "maxHp": 46
+            }
+          ]
+        },
+        "recruitLevel": {
+          "id": "jin",
+          "level": 7,
+          "highest": 11
+        },
+        "replayDuplicateReward": 0,
+        "defeatTrainingBlockedRetry": true
+      },
+      "partyCount": 14,
+      "expectedDeployment": 14,
+      "manualTo": {
+        "x": 5,
+        "y": 7
+      },
+      "images": {
+        "overflow": false,
+        "broken": [],
+        "width": 390,
+        "scrollWidth": 390
+      },
+      "settlementPassed": true
+    },
+    {
+      "stage": 23,
+      "tested": true,
+      "passed": true,
+      "actions": [
+        {
+          "round": 1,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 4,
+            "y": 18
+          }
+        },
+        {
+          "round": 1,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 13,
+            "y": 12
+          }
+        },
+        {
+          "round": 1,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 7,
+            "y": 17
+          }
+        },
+        {
+          "round": 2,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 8,
+            "y": 14
+          }
+        },
+        {
+          "round": 2,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 5,
+            "y": 15
+          }
+        },
+        {
+          "round": 2,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 12,
+            "y": 10
+          }
+        },
+        {
+          "round": 2,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 6,
+            "y": 15
+          }
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "round": 3,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 7,
+            "y": 11
+          }
+        },
+        {
+          "round": 3,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 11,
+            "y": 8
+          }
+        },
+        {
+          "id": "aria",
+          "mode": "support-skill"
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "round": 4,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 6,
+            "y": 8
+          }
+        },
+        {
+          "round": 4,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 9,
+            "y": 7
+          }
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        }
+      ],
+      "checks": [
+        "entry cutscene skipped via visible UI; mission confirmed",
+        "manual hero placement save/reload",
+        "map pan gesture",
+        "4 actual enemy turns; battle HP/coordinates/stats restore",
+        "saved manual deployment coordinates used at actual battle entry",
+        "victory next stage real entry"
+      ],
+      "naturalPlay": {
+        "initial": [
+          {
+            "id": "hero",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 8,
+            "y": 18
+          },
+          {
+            "id": "bram",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 13,
+            "y": 15
+          },
+          {
+            "id": "lina",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 8,
+            "y": 20
+          },
+          {
+            "id": "priest1",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 13,
+            "y": 2
+          },
+          {
+            "id": "lancer2",
+            "hp": 41,
+            "maxHp": 41,
+            "x": 8,
+            "y": 3
+          },
+          {
+            "id": "archer3",
+            "hp": 39,
+            "maxHp": 39,
+            "x": 3,
+            "y": 5
+          },
+          {
+            "id": "mage4",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 11,
+            "y": 7
+          },
+          {
+            "id": "shield5",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 6,
+            "y": 1
+          },
+          {
+            "id": "boss",
+            "hp": 76,
+            "maxHp": 76,
+            "x": 5,
+            "y": 4
+          },
+          {
+            "id": "large-extra-23-1",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 14,
+            "y": 4
+          },
+          {
+            "id": "large-extra-23-2",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 9,
+            "y": 1
+          },
+          {
+            "id": "large-extra-23-3",
+            "hp": 50,
+            "maxHp": 50,
+            "x": 4,
+            "y": 8
+          },
+          {
+            "id": "large-extra-23-4",
+            "hp": 48,
+            "maxHp": 48,
+            "x": 12,
+            "y": 9
+          },
+          {
+            "id": "large-extra-23-5",
+            "hp": 40,
+            "maxHp": 40,
+            "x": 7,
+            "y": 6
+          },
+          {
+            "id": "large-extra-23-6",
+            "hp": 41,
+            "maxHp": 41,
+            "x": 16,
+            "y": 3
+          },
+          {
+            "id": "large-extra-23-7",
+            "hp": 50,
+            "maxHp": 50,
+            "x": 9,
+            "y": 8
+          },
+          {
+            "id": "large-extra-23-8",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 2,
+            "y": 2
+          },
+          {
+            "id": "large-extra-23-9",
+            "hp": 48,
+            "maxHp": 48,
+            "x": 17,
+            "y": 5
+          },
+          {
+            "id": "large-extra-23-10",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 10,
+            "y": 4
+          },
+          {
+            "id": "large-extra-23-11",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 1,
+            "y": 4
+          },
+          {
+            "id": "large-extra-23-12",
+            "hp": 50,
+            "maxHp": 50,
+            "x": 15,
+            "y": 9
+          },
+          {
+            "id": "large-extra-23-13",
+            "hp": 48,
+            "maxHp": 48,
+            "x": 12,
+            "y": 5
+          },
+          {
+            "id": "large-extra-23-14",
+            "hp": 40,
+            "maxHp": 40,
+            "x": 18,
+            "y": 1
+          },
+          {
+            "id": "large-extra-23-15",
+            "hp": 41,
+            "maxHp": 41,
+            "x": 15,
+            "y": 1
+          },
+          {
+            "id": "large-extra-23-16",
+            "hp": 50,
+            "maxHp": 50,
+            "x": 5,
+            "y": 7
+          },
+          {
+            "id": "large-extra-23-17",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 11,
+            "y": 2
+          },
+          {
+            "id": "large-extra-23-18",
+            "hp": 48,
+            "maxHp": 48,
+            "x": 6,
+            "y": 3
+          },
+          {
+            "id": "aria",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 3,
+            "y": 21
+          },
+          {
+            "id": "leon",
+            "hp": 41,
+            "maxHp": 41,
+            "x": 11,
+            "y": 19
+          },
+          {
+            "id": "sera",
+            "hp": 40,
+            "maxHp": 40,
+            "x": 7,
+            "y": 16
+          },
+          {
+            "id": "noah",
+            "hp": 42,
+            "maxHp": 42,
+            "x": 14,
+            "y": 22
+          },
+          {
+            "id": "yuna",
+            "hp": 41,
+            "maxHp": 41,
+            "x": 9,
+            "y": 18
+          },
+          {
+            "id": "rakan",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 6,
+            "y": 14
+          },
+          {
+            "id": "miho",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 12,
+            "y": 21
+          },
+          {
+            "id": "teo",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 4,
+            "y": 19
+          },
+          {
+            "id": "irene",
+            "hp": 42,
+            "maxHp": 42,
+            "x": 16,
+            "y": 20
+          },
+          {
+            "id": "kaz",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 10,
+            "y": 16
+          },
+          {
+            "id": "ella",
+            "hp": 41,
+            "maxHp": 41,
+            "x": 2,
+            "y": 18
+          },
+          {
+            "id": "jin",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 9,
+            "y": 17
+          }
+        ],
+        "enemyTurns": 4,
+        "afterRound": 5
+      },
+      "seededSettlement": {
+        "fixture": {
+          "bossHp": 1,
+          "allyHealed": "hero",
+          "otherEnemiesRemoved": true
+        },
+        "victory": {
+          "goldDelta": 6188,
+          "inventory": {
+            "potion": 13,
+            "hiPotion": 7,
+            "remedy": 6,
+            "powerCharm": 2,
+            "guardCharm": 2
+          },
+          "cleared": true,
+          "recruit": []
+        },
+        "replayDuplicateReward": 0,
+        "defeatTrainingBlockedRetry": true
+      },
+      "partyCount": 15,
+      "expectedDeployment": 15,
+      "manualTo": {
+        "x": 8,
+        "y": 18
+      },
+      "images": {
+        "overflow": false,
+        "broken": [],
+        "width": 390,
+        "scrollWidth": 390
+      },
+      "settlementPassed": true
+    },
+    {
+      "stage": 24,
+      "tested": true,
+      "passed": true,
+      "actions": [
+        {
+          "round": 1,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 23,
+            "y": 9
+          }
+        },
+        {
+          "round": 1,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 11,
+            "y": 3
+          }
+        },
+        {
+          "round": 1,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 20,
+            "y": 4
+          }
+        },
+        {
+          "round": 2,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 20,
+            "y": 8
+          }
+        },
+        {
+          "round": 2,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 20,
+            "y": 10
+          }
+        },
+        {
+          "round": 2,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 10,
+            "y": 5
+          }
+        },
+        {
+          "round": 2,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 20,
+            "y": 7
+          }
+        },
+        {
+          "round": 3,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 21,
+            "y": 11
+          }
+        },
+        {
+          "round": 3,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 19,
+            "y": 11
+          }
+        },
+        {
+          "round": 3,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 10,
+            "y": 5
+          }
+        },
+        {
+          "round": 3,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 17,
+            "y": 6
+          }
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "round": 4,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 21,
+            "y": 14
+          }
+        },
+        {
+          "round": 4,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 21,
+            "y": 13
+          }
+        },
+        {
+          "round": 4,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 10,
+            "y": 6
+          }
+        },
+        {
+          "round": 4,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 15,
+            "y": 7
+          }
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "aria",
+          "mode": "support-skill"
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        }
+      ],
+      "checks": [
+        "entry cutscene skipped via visible UI; mission confirmed",
+        "manual hero placement save/reload",
+        "map pan gesture",
+        "4 actual enemy turns; battle HP/coordinates/stats restore",
+        "saved manual deployment coordinates used at actual battle entry",
+        "victory next stage real entry"
+      ],
+      "naturalPlay": {
+        "initial": [
+          {
+            "id": "hero",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 22,
+            "y": 6
+          },
+          {
+            "id": "bram",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 14,
+            "y": 3
+          },
+          {
+            "id": "lina",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 24,
+            "y": 4
+          },
+          {
+            "id": "lancer1",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 4,
+            "y": 11
+          },
+          {
+            "id": "archer2",
+            "hp": 41,
+            "maxHp": 41,
+            "x": 6,
+            "y": 18
+          },
+          {
+            "id": "mage3",
+            "hp": 40,
+            "maxHp": 40,
+            "x": 9,
+            "y": 21
+          },
+          {
+            "id": "shield4",
+            "hp": 50,
+            "maxHp": 50,
+            "x": 5,
+            "y": 13
+          },
+          {
+            "id": "assassin5",
+            "hp": 41,
+            "maxHp": 41,
+            "x": 12,
+            "y": 16
+          },
+          {
+            "id": "boss",
+            "hp": 96,
+            "maxHp": 96,
+            "x": 7,
+            "y": 22
+          },
+          {
+            "id": "large-extra-24-1",
+            "hp": 56,
+            "maxHp": 56,
+            "x": 1,
+            "y": 12
+          },
+          {
+            "id": "large-extra-24-2",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 3,
+            "y": 17
+          },
+          {
+            "id": "large-extra-24-3",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 14,
+            "y": 19
+          },
+          {
+            "id": "large-extra-24-4",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 2,
+            "y": 15
+          },
+          {
+            "id": "large-extra-24-5",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 5,
+            "y": 20
+          },
+          {
+            "id": "large-extra-24-6",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 16,
+            "y": 20
+          },
+          {
+            "id": "large-extra-24-7",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 8,
+            "y": 14
+          },
+          {
+            "id": "large-extra-24-8",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 11,
+            "y": 18
+          },
+          {
+            "id": "large-extra-24-9",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 2,
+            "y": 10
+          },
+          {
+            "id": "large-extra-24-10",
+            "hp": 56,
+            "maxHp": 56,
+            "x": 7,
+            "y": 16
+          },
+          {
+            "id": "large-extra-24-11",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 13,
+            "y": 22
+          },
+          {
+            "id": "large-extra-24-12",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 6,
+            "y": 9
+          },
+          {
+            "id": "large-extra-24-13",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 2,
+            "y": 19
+          },
+          {
+            "id": "large-extra-24-14",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 15,
+            "y": 17
+          },
+          {
+            "id": "large-extra-24-15",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 10,
+            "y": 13
+          },
+          {
+            "id": "large-extra-24-16",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 12,
+            "y": 20
+          },
+          {
+            "id": "large-extra-24-17",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 4,
+            "y": 8
+          },
+          {
+            "id": "large-extra-24-18",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 8,
+            "y": 19
+          },
+          {
+            "id": "large-extra-24-19",
+            "hp": 56,
+            "maxHp": 56,
+            "x": 18,
+            "y": 18
+          },
+          {
+            "id": "large-extra-24-20",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 7,
+            "y": 12
+          },
+          {
+            "id": "aria",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 27,
+            "y": 9
+          },
+          {
+            "id": "leon",
+            "hp": 41,
+            "maxHp": 41,
+            "x": 20,
+            "y": 2
+          },
+          {
+            "id": "sera",
+            "hp": 40,
+            "maxHp": 40,
+            "x": 22,
+            "y": 8
+          },
+          {
+            "id": "noah",
+            "hp": 42,
+            "maxHp": 42,
+            "x": 15,
+            "y": 1
+          },
+          {
+            "id": "yuna",
+            "hp": 41,
+            "maxHp": 41,
+            "x": 22,
+            "y": 5
+          },
+          {
+            "id": "rakan",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 25,
+            "y": 10
+          },
+          {
+            "id": "miho",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 17,
+            "y": 2
+          },
+          {
+            "id": "teo",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 26,
+            "y": 6
+          },
+          {
+            "id": "irene",
+            "hp": 42,
+            "maxHp": 42,
+            "x": 28,
+            "y": 7
+          },
+          {
+            "id": "kaz",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 16,
+            "y": 6
+          },
+          {
+            "id": "ella",
+            "hp": 41,
+            "maxHp": 41,
+            "x": 26,
+            "y": 12
+          },
+          {
+            "id": "jin",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 21,
+            "y": 5
+          }
+        ],
+        "enemyTurns": 4,
+        "afterRound": 5
+      },
+      "seededSettlement": {
+        "fixture": {
+          "bossHp": 1,
+          "allyHealed": "hero",
+          "otherEnemiesRemoved": true
+        },
+        "victory": {
+          "goldDelta": 6803,
+          "inventory": {
+            "potion": 16,
+            "hiPotion": 6,
+            "remedy": 6,
+            "powerCharm": 2,
+            "guardCharm": 3
+          },
+          "cleared": true,
+          "recruit": [
+            {
+              "id": "luka",
+              "hp": 38,
+              "maxHp": 38
+            }
+          ]
+        },
+        "recruitLevel": {
+          "id": "luka",
+          "level": 8,
+          "highest": 12
+        },
+        "replayDuplicateReward": 0,
+        "defeatTrainingBlockedRetry": true
+      },
+      "partyCount": 15,
+      "expectedDeployment": 15,
+      "manualTo": {
+        "x": 22,
+        "y": 6
+      },
+      "images": {
+        "overflow": false,
+        "broken": [],
+        "width": 390,
+        "scrollWidth": 390
+      },
+      "settlementPassed": true
+    },
+    {
+      "stage": 25,
+      "tested": true,
+      "passed": true,
+      "actions": [
+        {
+          "round": 1,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 16,
+            "y": 12
+          }
+        },
+        {
+          "round": 1,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 15,
+            "y": 14
+          }
+        },
+        {
+          "round": 1,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 18,
+            "y": 6
+          }
+        },
+        {
+          "round": 2,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 13,
+            "y": 10
+          }
+        },
+        {
+          "round": 2,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 12,
+            "y": 12
+          }
+        },
+        {
+          "round": 2,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 12,
+            "y": 14
+          }
+        },
+        {
+          "round": 2,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 17,
+            "y": 9
+          }
+        },
+        {
+          "id": "aria",
+          "mode": "support-skill"
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "round": 3,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 11,
+            "y": 9
+          }
+        },
+        {
+          "round": 3,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "round": 3,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 13,
+            "y": 13
+          }
+        },
+        {
+          "round": 3,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 14,
+            "y": 10
+          }
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "aria",
+          "mode": "support-skill"
+        },
+        {
+          "id": "lina",
+          "mode": "skill"
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "round": 4,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 11,
+            "y": 8
+          }
+        },
+        {
+          "round": 4,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 11,
+            "y": 9
+          }
+        },
+        {
+          "round": 4,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 13,
+            "y": 11
+          }
+        },
+        {
+          "round": 4,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 14,
+            "y": 10
+          }
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "aria",
+          "mode": "support-skill"
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        }
+      ],
+      "checks": [
+        "entry cutscene skipped via visible UI; mission confirmed",
+        "manual hero placement save/reload",
+        "map pan gesture",
+        "4 actual enemy turns; battle HP/coordinates/stats restore",
+        "saved manual deployment coordinates used at actual battle entry",
+        "victory next stage real entry"
+      ],
+      "naturalPlay": {
+        "initial": [
+          {
+            "id": "hero",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 17,
+            "y": 10
+          },
+          {
+            "id": "bram",
+            "hp": 57,
+            "maxHp": 57,
+            "x": 17,
+            "y": 15
+          },
+          {
+            "id": "lina",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 19,
+            "y": 7
+          },
+          {
+            "id": "archer1",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 8,
+            "y": 15
+          },
+          {
+            "id": "mage2",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 6,
+            "y": 7
+          },
+          {
+            "id": "shield3",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 2,
+            "y": 12
+          },
+          {
+            "id": "assassin4",
+            "hp": 50,
+            "maxHp": 50,
+            "x": 7,
+            "y": 4
+          },
+          {
+            "id": "priest5",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 5,
+            "y": 9
+          },
+          {
+            "id": "boss",
+            "hp": 80,
+            "maxHp": 80,
+            "x": 3,
+            "y": 10
+          },
+          {
+            "id": "large-extra-25-1",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 4,
+            "y": 14
+          },
+          {
+            "id": "large-extra-25-2",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 9,
+            "y": 6
+          },
+          {
+            "id": "large-extra-25-3",
+            "hp": 59,
+            "maxHp": 59,
+            "x": 6,
+            "y": 11
+          },
+          {
+            "id": "large-extra-25-4",
+            "hp": 52,
+            "maxHp": 52,
+            "x": 1,
+            "y": 3
+          },
+          {
+            "id": "large-extra-25-5",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 2,
+            "y": 8
+          },
+          {
+            "id": "large-extra-25-6",
+            "hp": 63,
+            "maxHp": 63,
+            "x": 7,
+            "y": 13
+          },
+          {
+            "id": "large-extra-25-7",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 5,
+            "y": 5
+          },
+          {
+            "id": "large-extra-25-8",
+            "hp": 52,
+            "maxHp": 52,
+            "x": 8,
+            "y": 10
+          },
+          {
+            "id": "large-extra-25-9",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 1,
+            "y": 16
+          },
+          {
+            "id": "large-extra-25-10",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 4,
+            "y": 2
+          },
+          {
+            "id": "large-extra-25-11",
+            "hp": 59,
+            "maxHp": 59,
+            "x": 9,
+            "y": 12
+          },
+          {
+            "id": "large-extra-25-12",
+            "hp": 52,
+            "maxHp": 52,
+            "x": 2,
+            "y": 1
+          },
+          {
+            "id": "large-extra-25-13",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 3,
+            "y": 17
+          },
+          {
+            "id": "large-extra-25-14",
+            "hp": 63,
+            "maxHp": 63,
+            "x": 5,
+            "y": 18
+          },
+          {
+            "id": "large-extra-25-15",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 3,
+            "y": 6
+          },
+          {
+            "id": "large-extra-25-16",
+            "hp": 52,
+            "maxHp": 52,
+            "x": 6,
+            "y": 16
+          },
+          {
+            "id": "large-extra-25-17",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 1,
+            "y": 18
+          },
+          {
+            "id": "large-extra-25-18",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 7,
+            "y": 8
+          },
+          {
+            "id": "large-extra-25-19",
+            "hp": 59,
+            "maxHp": 59,
+            "x": 9,
+            "y": 14
+          },
+          {
+            "id": "aria",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 20,
+            "y": 12
+          },
+          {
+            "id": "leon",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 21,
+            "y": 4
+          },
+          {
+            "id": "sera",
+            "hp": 42,
+            "maxHp": 42,
+            "x": 14,
+            "y": 9
+          },
+          {
+            "id": "noah",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 22,
+            "y": 14
+          },
+          {
+            "id": "yuna",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 22,
+            "y": 6
+          },
+          {
+            "id": "rakan",
+            "hp": 57,
+            "maxHp": 57,
+            "x": 15,
+            "y": 13
+          },
+          {
+            "id": "miho",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 18,
+            "y": 3
+          },
+          {
+            "id": "teo",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 21,
+            "y": 8
+          },
+          {
+            "id": "irene",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 19,
+            "y": 16
+          },
+          {
+            "id": "kaz",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 19,
+            "y": 8
+          },
+          {
+            "id": "ella",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 22,
+            "y": 11
+          },
+          {
+            "id": "jin",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 14,
+            "y": 17
+          }
+        ],
+        "enemyTurns": 4,
+        "afterRound": 5
+      },
+      "seededSettlement": {
+        "fixture": {
+          "bossHp": 1,
+          "allyHealed": "hero",
+          "otherEnemiesRemoved": true
+        },
+        "victory": {
+          "goldDelta": 6832,
+          "inventory": {
+            "potion": 14,
+            "hiPotion": 6,
+            "remedy": 7,
+            "powerCharm": 2,
+            "guardCharm": 2
+          },
+          "cleared": true,
+          "recruit": []
+        },
+        "replayDuplicateReward": 0,
+        "defeatTrainingBlockedRetry": true
+      },
+      "partyCount": 16,
+      "expectedDeployment": 15,
+      "manualTo": {
+        "x": 17,
+        "y": 10
+      },
+      "images": {
+        "overflow": false,
+        "broken": [],
+        "width": 390,
+        "scrollWidth": 390
+      },
+      "settlementPassed": true
+    },
+    {
+      "stage": 26,
+      "tested": true,
+      "passed": true,
+      "actions": [
+        {
+          "round": 1,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 8,
+            "y": 2
+          }
+        },
+        {
+          "round": 1,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 13,
+            "y": 4
+          }
+        },
+        {
+          "round": 1,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 5,
+            "y": 8
+          }
+        },
+        {
+          "round": 2,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 4,
+            "y": 10
+          }
+        },
+        {
+          "round": 2,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 11,
+            "y": 3
+          }
+        },
+        {
+          "round": 2,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 14,
+            "y": 6
+          }
+        },
+        {
+          "round": 2,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 6,
+            "y": 11
+          }
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "round": 3,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 5,
+            "y": 12
+          }
+        },
+        {
+          "round": 3,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 13,
+            "y": 5
+          }
+        },
+        {
+          "round": 3,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 14,
+            "y": 6
+          }
+        },
+        {
+          "round": 3,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 7,
+            "y": 11
+          }
+        },
+        {
+          "id": "aria",
+          "mode": "support-skill"
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "round": 4,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 5,
+            "y": 12
+          }
+        },
+        {
+          "round": 4,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 15,
+            "y": 5
+          }
+        },
+        {
+          "round": 4,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 13,
+            "y": 6
+          }
+        },
+        {
+          "round": 4,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 7,
+            "y": 11
+          }
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "lina",
+          "mode": "skill"
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        }
+      ],
+      "checks": [
+        "entry cutscene skipped via visible UI; mission confirmed",
+        "manual hero placement save/reload",
+        "map pan gesture",
+        "4 actual enemy turns; battle HP/coordinates/stats restore",
+        "saved manual deployment coordinates used at actual battle entry",
+        "victory next stage real entry"
+      ],
+      "naturalPlay": {
+        "initial": [
+          {
+            "id": "hero",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 4,
+            "y": 6
+          },
+          {
+            "id": "bram",
+            "hp": 57,
+            "maxHp": 57,
+            "x": 10,
+            "y": 4
+          },
+          {
+            "id": "lina",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 1,
+            "y": 8
+          },
+          {
+            "id": "mage1",
+            "hp": 42,
+            "maxHp": 42,
+            "x": 18,
+            "y": 15
+          },
+          {
+            "id": "shield2",
+            "hp": 52,
+            "maxHp": 52,
+            "x": 13,
+            "y": 20
+          },
+          {
+            "id": "assassin3",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 15,
+            "y": 13
+          },
+          {
+            "id": "priest4",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 17,
+            "y": 10
+          },
+          {
+            "id": "lancer5",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 12,
+            "y": 16
+          },
+          {
+            "id": "boss",
+            "hp": 82,
+            "maxHp": 82,
+            "x": 14,
+            "y": 17
+          },
+          {
+            "id": "large-extra-26-1",
+            "hp": 56,
+            "maxHp": 56,
+            "x": 14,
+            "y": 11
+          },
+          {
+            "id": "large-extra-26-2",
+            "hp": 60,
+            "maxHp": 60,
+            "x": 10,
+            "y": 19
+          },
+          {
+            "id": "large-extra-26-3",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 16,
+            "y": 18
+          },
+          {
+            "id": "large-extra-26-4",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 18,
+            "y": 12
+          },
+          {
+            "id": "large-extra-26-5",
+            "hp": 64,
+            "maxHp": 64,
+            "x": 9,
+            "y": 14
+          },
+          {
+            "id": "large-extra-26-6",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 17,
+            "y": 20
+          },
+          {
+            "id": "large-extra-26-7",
+            "hp": 48,
+            "maxHp": 48,
+            "x": 7,
+            "y": 19
+          },
+          {
+            "id": "large-extra-26-8",
+            "hp": 56,
+            "maxHp": 56,
+            "x": 8,
+            "y": 16
+          },
+          {
+            "id": "large-extra-26-9",
+            "hp": 56,
+            "maxHp": 56,
+            "x": 15,
+            "y": 9
+          },
+          {
+            "id": "large-extra-26-10",
+            "hp": 60,
+            "maxHp": 60,
+            "x": 16,
+            "y": 7
+          },
+          {
+            "id": "large-extra-26-11",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 18,
+            "y": 8
+          },
+          {
+            "id": "large-extra-26-12",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 11,
+            "y": 12
+          },
+          {
+            "id": "large-extra-26-13",
+            "hp": 64,
+            "maxHp": 64,
+            "x": 10,
+            "y": 17
+          },
+          {
+            "id": "large-extra-26-14",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 18,
+            "y": 18
+          },
+          {
+            "id": "large-extra-26-15",
+            "hp": 48,
+            "maxHp": 48,
+            "x": 11,
+            "y": 20
+          },
+          {
+            "id": "large-extra-26-16",
+            "hp": 56,
+            "maxHp": 56,
+            "x": 13,
+            "y": 15
+          },
+          {
+            "id": "large-extra-26-17",
+            "hp": 56,
+            "maxHp": 56,
+            "x": 17,
+            "y": 13
+          },
+          {
+            "id": "large-extra-26-18",
+            "hp": 60,
+            "maxHp": 60,
+            "x": 6,
+            "y": 18
+          },
+          {
+            "id": "large-extra-26-19",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 16,
+            "y": 14
+          },
+          {
+            "id": "aria",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 4,
+            "y": 2
+          },
+          {
+            "id": "leon",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 9,
+            "y": 1
+          },
+          {
+            "id": "sera",
+            "hp": 42,
+            "maxHp": 42,
+            "x": 3,
+            "y": 9
+          },
+          {
+            "id": "noah",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 6,
+            "y": 3
+          },
+          {
+            "id": "yuna",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 2,
+            "y": 11
+          },
+          {
+            "id": "rakan",
+            "hp": 57,
+            "maxHp": 57,
+            "x": 7,
+            "y": 5
+          },
+          {
+            "id": "miho",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 2,
+            "y": 1
+          },
+          {
+            "id": "teo",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 3,
+            "y": 6
+          },
+          {
+            "id": "irene",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 1,
+            "y": 3
+          },
+          {
+            "id": "kaz",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 1,
+            "y": 13
+          },
+          {
+            "id": "ella",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 4,
+            "y": 12
+          },
+          {
+            "id": "jin",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 11,
+            "y": 2
+          }
+        ],
+        "enemyTurns": 4,
+        "afterRound": 5
+      },
+      "seededSettlement": {
+        "fixture": {
+          "bossHp": 1,
+          "allyHealed": "hero",
+          "otherEnemiesRemoved": true
+        },
+        "victory": {
+          "goldDelta": 6723,
+          "inventory": {
+            "potion": 14,
+            "hiPotion": 6,
+            "remedy": 7,
+            "powerCharm": 2,
+            "guardCharm": 2
+          },
+          "cleared": true,
+          "recruit": [
+            {
+              "id": "baekho",
+              "hp": 56,
+              "maxHp": 56
+            }
+          ]
+        },
+        "recruitLevel": {
+          "id": "baekho",
+          "level": 9,
+          "highest": 13
+        },
+        "replayDuplicateReward": 0,
+        "defeatTrainingBlockedRetry": true
+      },
+      "partyCount": 16,
+      "expectedDeployment": 15,
+      "manualTo": {
+        "x": 4,
+        "y": 6
+      },
+      "images": {
+        "overflow": false,
+        "broken": [],
+        "width": 390,
+        "scrollWidth": 390
+      },
+      "settlementPassed": true
+    },
+    {
+      "stage": 27,
+      "tested": true,
+      "passed": true,
+      "actions": [
+        {
+          "round": 1,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 9,
+            "y": 9
+          }
+        },
+        {
+          "round": 1,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 10,
+            "y": 5
+          }
+        },
+        {
+          "round": 1,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 7,
+            "y": 15
+          }
+        },
+        {
+          "round": 2,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 8,
+            "y": 7
+          }
+        },
+        {
+          "round": 2,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 9,
+            "y": 5
+          }
+        },
+        {
+          "round": 2,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 13,
+            "y": 5
+          }
+        },
+        {
+          "round": 2,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 10,
+            "y": 14
+          }
+        },
+        {
+          "round": 3,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 10,
+            "y": 5
+          }
+        },
+        {
+          "round": 3,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 11,
+            "y": 5
+          }
+        },
+        {
+          "round": 3,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 14,
+            "y": 4
+          }
+        },
+        {
+          "round": 3,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 14,
+            "y": 14
+          }
+        },
+        {
+          "id": "lina",
+          "mode": "skill"
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "round": 4,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 12,
+            "y": 5
+          }
+        },
+        {
+          "round": 4,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 13,
+            "y": 5
+          }
+        },
+        {
+          "round": 4,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 14,
+            "y": 4
+          }
+        },
+        {
+          "round": 4,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 15,
+            "y": 14
+          }
+        },
+        {
+          "id": "aria",
+          "mode": "support-skill"
+        },
+        {
+          "id": "lina",
+          "mode": "skill"
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        }
+      ],
+      "checks": [
+        "entry cutscene skipped via visible UI; mission confirmed",
+        "manual hero placement save/reload",
+        "map pan gesture",
+        "4 actual enemy turns; battle HP/coordinates/stats restore",
+        "saved manual deployment coordinates used at actual battle entry",
+        "victory next stage real entry"
+      ],
+      "naturalPlay": {
+        "initial": [
+          {
+            "id": "hero",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 6,
+            "y": 9
+          },
+          {
+            "id": "bram",
+            "hp": 59,
+            "maxHp": 59,
+            "x": 9,
+            "y": 7
+          },
+          {
+            "id": "lina",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 3,
+            "y": 15
+          },
+          {
+            "id": "shield1",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 22,
+            "y": 7
+          },
+          {
+            "id": "assassin2",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 26,
+            "y": 15
+          },
+          {
+            "id": "priest3",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 28,
+            "y": 10
+          },
+          {
+            "id": "lancer4",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 27,
+            "y": 5
+          },
+          {
+            "id": "archer5",
+            "hp": 56,
+            "maxHp": 56,
+            "x": 21,
+            "y": 13
+          },
+          {
+            "id": "boss",
+            "hp": 84,
+            "maxHp": 84,
+            "x": 29,
+            "y": 12
+          },
+          {
+            "id": "large-extra-27-1",
+            "hp": 61,
+            "maxHp": 61,
+            "x": 24,
+            "y": 8
+          },
+          {
+            "id": "large-extra-27-2",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 28,
+            "y": 3
+          },
+          {
+            "id": "large-extra-27-3",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 25,
+            "y": 11
+          },
+          {
+            "id": "large-extra-27-4",
+            "hp": 65,
+            "maxHp": 65,
+            "x": 23,
+            "y": 4
+          },
+          {
+            "id": "large-extra-27-5",
+            "hp": 57,
+            "maxHp": 57,
+            "x": 22,
+            "y": 16
+          },
+          {
+            "id": "large-extra-27-6",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 26,
+            "y": 9
+          },
+          {
+            "id": "large-extra-27-7",
+            "hp": 52,
+            "maxHp": 52,
+            "x": 30,
+            "y": 6
+          },
+          {
+            "id": "large-extra-27-8",
+            "hp": 48,
+            "maxHp": 48,
+            "x": 30,
+            "y": 14
+          },
+          {
+            "id": "large-extra-27-9",
+            "hp": 61,
+            "maxHp": 61,
+            "x": 20,
+            "y": 6
+          },
+          {
+            "id": "large-extra-27-10",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 29,
+            "y": 17
+          },
+          {
+            "id": "large-extra-27-11",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 27,
+            "y": 18
+          },
+          {
+            "id": "large-extra-27-12",
+            "hp": 65,
+            "maxHp": 65,
+            "x": 18,
+            "y": 5
+          },
+          {
+            "id": "large-extra-27-13",
+            "hp": 57,
+            "maxHp": 57,
+            "x": 23,
+            "y": 14
+          },
+          {
+            "id": "large-extra-27-14",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 27,
+            "y": 1
+          },
+          {
+            "id": "large-extra-27-15",
+            "hp": 52,
+            "maxHp": 52,
+            "x": 25,
+            "y": 2
+          },
+          {
+            "id": "large-extra-27-16",
+            "hp": 48,
+            "maxHp": 48,
+            "x": 29,
+            "y": 8
+          },
+          {
+            "id": "large-extra-27-17",
+            "hp": 61,
+            "maxHp": 61,
+            "x": 21,
+            "y": 9
+          },
+          {
+            "id": "large-extra-27-18",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 19,
+            "y": 15
+          },
+          {
+            "id": "large-extra-27-19",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 27,
+            "y": 13
+          },
+          {
+            "id": "aria",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 6,
+            "y": 10
+          },
+          {
+            "id": "leon",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 5,
+            "y": 5
+          },
+          {
+            "id": "sera",
+            "hp": 42,
+            "maxHp": 42,
+            "x": 8,
+            "y": 13
+          },
+          {
+            "id": "noah",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 7,
+            "y": 8
+          },
+          {
+            "id": "yuna",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 4,
+            "y": 3
+          },
+          {
+            "id": "rakan",
+            "hp": 57,
+            "maxHp": 57,
+            "x": 9,
+            "y": 11
+          },
+          {
+            "id": "miho",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 2,
+            "y": 6
+          },
+          {
+            "id": "teo",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 5,
+            "y": 14
+          },
+          {
+            "id": "irene",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 3,
+            "y": 9
+          },
+          {
+            "id": "kaz",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 12,
+            "y": 4
+          },
+          {
+            "id": "ella",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 4,
+            "y": 17
+          },
+          {
+            "id": "jin",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 6,
+            "y": 8
+          }
+        ],
+        "enemyTurns": 4,
+        "afterRound": 5
+      },
+      "seededSettlement": {
+        "fixture": {
+          "bossHp": 1,
+          "allyHealed": "hero",
+          "otherEnemiesRemoved": true
+        },
+        "victory": {
+          "goldDelta": 7263,
+          "inventory": {
+            "potion": 15,
+            "hiPotion": 8,
+            "remedy": 6,
+            "powerCharm": 2,
+            "guardCharm": 2
+          },
+          "cleared": true,
+          "recruit": []
+        },
+        "replayDuplicateReward": 0,
+        "defeatTrainingBlockedRetry": true
+      },
+      "partyCount": 17,
+      "expectedDeployment": 15,
+      "manualTo": {
+        "x": 6,
+        "y": 9
+      },
+      "images": {
+        "overflow": false,
+        "broken": [],
+        "width": 390,
+        "scrollWidth": 390
+      },
+      "settlementPassed": true
+    },
+    {
+      "stage": 28,
+      "tested": true,
+      "passed": true,
+      "actions": [
+        {
+          "round": 1,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 8,
+            "y": 7
+          }
+        },
+        {
+          "round": 1,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 9,
+            "y": 7
+          }
+        },
+        {
+          "round": 1,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 19,
+            "y": 8
+          }
+        },
+        {
+          "round": 2,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 9,
+            "y": 8
+          }
+        },
+        {
+          "round": 2,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "round": 2,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 7,
+            "y": 8
+          }
+        },
+        {
+          "round": 2,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 17,
+            "y": 10
+          }
+        },
+        {
+          "round": 3,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 6,
+            "y": 7
+          }
+        },
+        {
+          "round": 3,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "round": 3,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 6,
+            "y": 10
+          }
+        },
+        {
+          "round": 3,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 16,
+            "y": 13
+          }
+        },
+        {
+          "id": "lina",
+          "mode": "skill"
+        },
+        {
+          "round": 4,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 5,
+            "y": 9
+          }
+        },
+        {
+          "round": 4,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 5,
+            "y": 12
+          }
+        },
+        {
+          "round": 4,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "round": 4,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 17,
+            "y": 12
+          }
+        },
+        {
+          "id": "aria",
+          "mode": "support-skill"
+        },
+        {
+          "id": "lina",
+          "mode": "skill"
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        }
+      ],
+      "checks": [
+        "entry cutscene skipped via visible UI; mission confirmed",
+        "manual hero placement save/reload",
+        "map pan gesture",
+        "4 actual enemy turns; battle HP/coordinates/stats restore",
+        "saved manual deployment coordinates used at actual battle entry",
+        "victory next stage real entry"
+      ],
+      "naturalPlay": {
+        "initial": [
+          {
+            "id": "hero",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 11,
+            "y": 6
+          },
+          {
+            "id": "bram",
+            "hp": 59,
+            "maxHp": 59,
+            "x": 12,
+            "y": 7
+          },
+          {
+            "id": "lina",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 18,
+            "y": 5
+          },
+          {
+            "id": "assassin1",
+            "hp": 48,
+            "maxHp": 48,
+            "x": 13,
+            "y": 18
+          },
+          {
+            "id": "priest2",
+            "hp": 52,
+            "maxHp": 52,
+            "x": 18,
+            "y": 20
+          },
+          {
+            "id": "lancer3",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 9,
+            "y": 23
+          },
+          {
+            "id": "archer4",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 15,
+            "y": 17
+          },
+          {
+            "id": "mage5",
+            "hp": 56,
+            "maxHp": 56,
+            "x": 5,
+            "y": 21
+          },
+          {
+            "id": "boss",
+            "hp": 86,
+            "maxHp": 86,
+            "x": 6,
+            "y": 24
+          },
+          {
+            "id": "large-extra-28-1",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 11,
+            "y": 25
+          },
+          {
+            "id": "large-extra-28-2",
+            "hp": 56,
+            "maxHp": 56,
+            "x": 17,
+            "y": 22
+          },
+          {
+            "id": "large-extra-28-3",
+            "hp": 66,
+            "maxHp": 66,
+            "x": 7,
+            "y": 19
+          },
+          {
+            "id": "large-extra-28-4",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 14,
+            "y": 20
+          },
+          {
+            "id": "large-extra-28-5",
+            "hp": 58,
+            "maxHp": 58,
+            "x": 19,
+            "y": 16
+          },
+          {
+            "id": "large-extra-28-6",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 8,
+            "y": 25
+          },
+          {
+            "id": "large-extra-28-7",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 16,
+            "y": 19
+          },
+          {
+            "id": "large-extra-28-8",
+            "hp": 62,
+            "maxHp": 62,
+            "x": 4,
+            "y": 18
+          },
+          {
+            "id": "large-extra-28-9",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 16,
+            "y": 26
+          },
+          {
+            "id": "large-extra-28-10",
+            "hp": 56,
+            "maxHp": 56,
+            "x": 20,
+            "y": 24
+          },
+          {
+            "id": "large-extra-28-11",
+            "hp": 66,
+            "maxHp": 66,
+            "x": 8,
+            "y": 16
+          },
+          {
+            "id": "large-extra-28-12",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 12,
+            "y": 21
+          },
+          {
+            "id": "large-extra-28-13",
+            "hp": 58,
+            "maxHp": 58,
+            "x": 3,
+            "y": 22
+          },
+          {
+            "id": "large-extra-28-14",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 13,
+            "y": 23
+          },
+          {
+            "id": "large-extra-28-15",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 21,
+            "y": 21
+          },
+          {
+            "id": "large-extra-28-16",
+            "hp": 62,
+            "maxHp": 62,
+            "x": 6,
+            "y": 17
+          },
+          {
+            "id": "large-extra-28-17",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 14,
+            "y": 25
+          },
+          {
+            "id": "large-extra-28-18",
+            "hp": 56,
+            "maxHp": 56,
+            "x": 18,
+            "y": 25
+          },
+          {
+            "id": "large-extra-28-19",
+            "hp": 66,
+            "maxHp": 66,
+            "x": 10,
+            "y": 20
+          },
+          {
+            "id": "large-extra-28-20",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 9,
+            "y": 18
+          },
+          {
+            "id": "aria",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 9,
+            "y": 4
+          },
+          {
+            "id": "leon",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 15,
+            "y": 3
+          },
+          {
+            "id": "sera",
+            "hp": 42,
+            "maxHp": 42,
+            "x": 5,
+            "y": 10
+          },
+          {
+            "id": "noah",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 11,
+            "y": 2
+          },
+          {
+            "id": "yuna",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 17,
+            "y": 1
+          },
+          {
+            "id": "rakan",
+            "hp": 57,
+            "maxHp": 57,
+            "x": 8,
+            "y": 9
+          },
+          {
+            "id": "miho",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 14,
+            "y": 6
+          },
+          {
+            "id": "teo",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 19,
+            "y": 3
+          },
+          {
+            "id": "irene",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 10,
+            "y": 6
+          },
+          {
+            "id": "kaz",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 16,
+            "y": 11
+          },
+          {
+            "id": "ella",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 4,
+            "y": 2
+          },
+          {
+            "id": "jin",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 13,
+            "y": 9
+          }
+        ],
+        "enemyTurns": 4,
+        "afterRound": 5
+      },
+      "seededSettlement": {
+        "fixture": {
+          "bossHp": 1,
+          "allyHealed": "hero",
+          "otherEnemiesRemoved": true
+        },
+        "victory": {
+          "goldDelta": 7438,
+          "inventory": {
+            "potion": 15,
+            "hiPotion": 6,
+            "remedy": 6,
+            "powerCharm": 3,
+            "guardCharm": 2
+          },
+          "cleared": true,
+          "recruit": []
+        },
+        "replayDuplicateReward": 0,
+        "defeatTrainingBlockedRetry": true
+      },
+      "partyCount": 17,
+      "expectedDeployment": 15,
+      "manualTo": {
+        "x": 11,
+        "y": 6
+      },
+      "images": {
+        "overflow": false,
+        "broken": [],
+        "width": 390,
+        "scrollWidth": 390
+      },
+      "settlementPassed": true
+    },
+    {
+      "stage": 29,
+      "tested": true,
+      "passed": true,
+      "actions": [
+        {
+          "round": 1,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 19,
+            "y": 10
+          }
+        },
+        {
+          "round": 1,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 13,
+            "y": 12
+          }
+        },
+        {
+          "round": 1,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 13,
+            "y": 16
+          }
+        },
+        {
+          "round": 2,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 15,
+            "y": 12
+          }
+        },
+        {
+          "round": 2,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 18,
+            "y": 7
+          }
+        },
+        {
+          "round": 2,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 13,
+            "y": 9
+          }
+        },
+        {
+          "round": 2,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 13,
+            "y": 12
+          }
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "round": 3,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 17,
+            "y": 10
+          }
+        },
+        {
+          "round": 3,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 17,
+            "y": 6
+          }
+        },
+        {
+          "round": 3,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 13,
+            "y": 7
+          }
+        },
+        {
+          "round": 3,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 12,
+            "y": 9
+          }
+        },
+        {
+          "id": "aria",
+          "mode": "support-skill"
+        },
+        {
+          "id": "lina",
+          "mode": "skill"
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "round": 4,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 18,
+            "y": 7
+          }
+        },
+        {
+          "round": 4,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 15,
+            "y": 5
+          }
+        },
+        {
+          "round": 4,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 12,
+            "y": 5
+          }
+        },
+        {
+          "round": 4,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 13,
+            "y": 7
+          }
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "aria",
+          "mode": "support-skill"
+        },
+        {
+          "id": "lina",
+          "mode": "skill"
+        },
+        {
+          "id": "bram",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        }
+      ],
+      "checks": [
+        "entry cutscene skipped via visible UI; mission confirmed",
+        "manual hero placement save/reload",
+        "map pan gesture",
+        "4 actual enemy turns; battle HP/coordinates/stats restore",
+        "saved manual deployment coordinates used at actual battle entry",
+        "victory next stage real entry"
+      ],
+      "naturalPlay": {
+        "initial": [
+          {
+            "id": "hero",
+            "hp": 57,
+            "maxHp": 57,
+            "x": 15,
+            "y": 16
+          },
+          {
+            "id": "bram",
+            "hp": 61,
+            "maxHp": 61,
+            "x": 13,
+            "y": 15
+          },
+          {
+            "id": "lina",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 13,
+            "y": 20
+          },
+          {
+            "id": "priest1",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 4,
+            "y": 2
+          },
+          {
+            "id": "lancer2",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 3,
+            "y": 10
+          },
+          {
+            "id": "archer3",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 8,
+            "y": 3
+          },
+          {
+            "id": "mage4",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 5,
+            "y": 6
+          },
+          {
+            "id": "shield5",
+            "hp": 57,
+            "maxHp": 57,
+            "x": 2,
+            "y": 12
+          },
+          {
+            "id": "boss",
+            "hp": 88,
+            "maxHp": 88,
+            "x": 9,
+            "y": 1
+          },
+          {
+            "id": "large-extra-29-1",
+            "hp": 57,
+            "maxHp": 57,
+            "x": 6,
+            "y": 4
+          },
+          {
+            "id": "large-extra-29-2",
+            "hp": 67,
+            "maxHp": 67,
+            "x": 4,
+            "y": 8
+          },
+          {
+            "id": "large-extra-29-3",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 10,
+            "y": 5
+          },
+          {
+            "id": "large-extra-29-4",
+            "hp": 59,
+            "maxHp": 59,
+            "x": 7,
+            "y": 9
+          },
+          {
+            "id": "large-extra-29-5",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 1,
+            "y": 7
+          },
+          {
+            "id": "large-extra-29-6",
+            "hp": 50,
+            "maxHp": 50,
+            "x": 12,
+            "y": 4
+          },
+          {
+            "id": "large-extra-29-7",
+            "hp": 63,
+            "maxHp": 63,
+            "x": 6,
+            "y": 11
+          },
+          {
+            "id": "large-extra-29-8",
+            "hp": 56,
+            "maxHp": 56,
+            "x": 1,
+            "y": 3
+          },
+          {
+            "id": "large-extra-29-9",
+            "hp": 57,
+            "maxHp": 57,
+            "x": 2,
+            "y": 1
+          },
+          {
+            "id": "large-extra-29-10",
+            "hp": 67,
+            "maxHp": 67,
+            "x": 5,
+            "y": 13
+          },
+          {
+            "id": "large-extra-29-11",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 11,
+            "y": 2
+          },
+          {
+            "id": "large-extra-29-12",
+            "hp": 59,
+            "maxHp": 59,
+            "x": 9,
+            "y": 7
+          },
+          {
+            "id": "large-extra-29-13",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 2,
+            "y": 5
+          },
+          {
+            "id": "large-extra-29-14",
+            "hp": 50,
+            "maxHp": 50,
+            "x": 14,
+            "y": 3
+          },
+          {
+            "id": "large-extra-29-15",
+            "hp": 63,
+            "maxHp": 63,
+            "x": 6,
+            "y": 1
+          },
+          {
+            "id": "large-extra-29-16",
+            "hp": 56,
+            "maxHp": 56,
+            "x": 13,
+            "y": 2
+          },
+          {
+            "id": "large-extra-29-17",
+            "hp": 57,
+            "maxHp": 57,
+            "x": 3,
+            "y": 6
+          },
+          {
+            "id": "large-extra-29-18",
+            "hp": 67,
+            "maxHp": 67,
+            "x": 1,
+            "y": 10
+          },
+          {
+            "id": "large-extra-29-19",
+            "hp": 49,
+            "maxHp": 49,
+            "x": 10,
+            "y": 8
+          },
+          {
+            "id": "large-extra-29-20",
+            "hp": 59,
+            "maxHp": 59,
+            "x": 5,
+            "y": 9
+          },
+          {
+            "id": "aria",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 19,
+            "y": 14
+          },
+          {
+            "id": "leon",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 15,
+            "y": 17
+          },
+          {
+            "id": "sera",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 10,
+            "y": 18
+          },
+          {
+            "id": "noah",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 18,
+            "y": 16
+          },
+          {
+            "id": "yuna",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 16,
+            "y": 19
+          },
+          {
+            "id": "rakan",
+            "hp": 59,
+            "maxHp": 59,
+            "x": 17,
+            "y": 9
+          },
+          {
+            "id": "miho",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 19,
+            "y": 18
+          },
+          {
+            "id": "teo",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 12,
+            "y": 15
+          },
+          {
+            "id": "irene",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 17,
+            "y": 13
+          },
+          {
+            "id": "kaz",
+            "hp": 48,
+            "maxHp": 48,
+            "x": 9,
+            "y": 16
+          },
+          {
+            "id": "ella",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 8,
+            "y": 20
+          },
+          {
+            "id": "jin",
+            "hp": 57,
+            "maxHp": 57,
+            "x": 16,
+            "y": 11
+          }
+        ],
+        "enemyTurns": 4,
+        "afterRound": 5
+      },
+      "seededSettlement": {
+        "fixture": {
+          "bossHp": 1,
+          "allyHealed": "hero",
+          "otherEnemiesRemoved": true
+        },
+        "victory": {
+          "goldDelta": 7579,
+          "inventory": {
+            "potion": 15,
+            "hiPotion": 6,
+            "remedy": 6,
+            "powerCharm": 3,
+            "guardCharm": 2
+          },
+          "cleared": true,
+          "recruit": []
+        },
+        "replayDuplicateReward": 0,
+        "defeatTrainingBlockedRetry": true
+      },
+      "partyCount": 17,
+      "expectedDeployment": 15,
+      "manualTo": {
+        "x": 15,
+        "y": 16
+      },
+      "images": {
+        "overflow": false,
+        "broken": [],
+        "width": 390,
+        "scrollWidth": 390
+      },
+      "settlementPassed": true
+    },
+    {
+      "stage": 30,
+      "tested": true,
+      "passed": true,
+      "actions": [
+        {
+          "round": 1,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 12,
+            "y": 24
+          }
+        },
+        {
+          "round": 1,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 14,
+            "y": 19
+          }
+        },
+        {
+          "round": 1,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 2,
+            "y": 16
+          }
+        },
+        {
+          "round": 2,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 8,
+            "y": 16
+          }
+        },
+        {
+          "round": 2,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 10,
+            "y": 22
+          }
+        },
+        {
+          "round": 2,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 15,
+            "y": 18
+          }
+        },
+        {
+          "round": 2,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 4,
+            "y": 17
+          }
+        },
+        {
+          "round": 3,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 12,
+            "y": 16
+          }
+        },
+        {
+          "round": 3,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 10,
+            "y": 18
+          }
+        },
+        {
+          "round": 3,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 16,
+            "y": 18
+          }
+        },
+        {
+          "round": 3,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 6,
+            "y": 16
+          }
+        },
+        {
+          "id": "aria",
+          "mode": "support-skill"
+        },
+        {
+          "round": 4,
+          "id": "hero",
+          "mode": "move",
+          "target": {
+            "x": 15,
+            "y": 16
+          }
+        },
+        {
+          "round": 4,
+          "id": "aria",
+          "mode": "move",
+          "target": {
+            "x": 12,
+            "y": 16
+          }
+        },
+        {
+          "round": 4,
+          "id": "bram",
+          "mode": "move",
+          "target": {
+            "x": 16,
+            "y": 18
+          }
+        },
+        {
+          "round": 4,
+          "id": "lina",
+          "mode": "move",
+          "target": {
+            "x": 10,
+            "y": 16
+          }
+        },
+        {
+          "id": "aria",
+          "mode": "support-skill"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        },
+        {
+          "id": "hero",
+          "mode": "attack"
+        }
+      ],
+      "checks": [
+        "entry cutscene skipped via visible UI; mission confirmed",
+        "manual hero placement save/reload",
+        "map pan gesture",
+        "4 actual enemy turns; battle HP/coordinates/stats restore",
+        "saved manual deployment coordinates used at actual battle entry",
+        "victory next stage real entry"
+      ],
+      "naturalPlay": {
+        "initial": [
+          {
+            "id": "hero",
+            "hp": 57,
+            "maxHp": 57,
+            "x": 7,
+            "y": 19
+          },
+          {
+            "id": "bram",
+            "hp": 61,
+            "maxHp": 61,
+            "x": 13,
+            "y": 21
+          },
+          {
+            "id": "lina",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 2,
+            "y": 20
+          },
+          {
+            "id": "lancer1",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 23,
+            "y": 12
+          },
+          {
+            "id": "archer2",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 17,
+            "y": 8
+          },
+          {
+            "id": "mage3",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 28,
+            "y": 10
+          },
+          {
+            "id": "shield4",
+            "hp": 56,
+            "maxHp": 56,
+            "x": 25,
+            "y": 6
+          },
+          {
+            "id": "assassin5",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 18,
+            "y": 2
+          },
+          {
+            "id": "boss",
+            "hp": 108,
+            "maxHp": 108,
+            "x": 20,
+            "y": 1
+          },
+          {
+            "id": "large-extra-30-1",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 27,
+            "y": 7
+          },
+          {
+            "id": "large-extra-30-2",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 22,
+            "y": 4
+          },
+          {
+            "id": "large-extra-30-3",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 16,
+            "y": 3
+          },
+          {
+            "id": "large-extra-30-4",
+            "hp": 58,
+            "maxHp": 58,
+            "x": 26,
+            "y": 9
+          },
+          {
+            "id": "large-extra-30-5",
+            "hp": 60,
+            "maxHp": 60,
+            "x": 15,
+            "y": 5
+          },
+          {
+            "id": "large-extra-30-6",
+            "hp": 60,
+            "maxHp": 60,
+            "x": 24,
+            "y": 15
+          },
+          {
+            "id": "large-extra-30-7",
+            "hp": 52,
+            "maxHp": 52,
+            "x": 26,
+            "y": 4
+          },
+          {
+            "id": "large-extra-30-8",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 14,
+            "y": 1
+          },
+          {
+            "id": "large-extra-30-9",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 27,
+            "y": 13
+          },
+          {
+            "id": "large-extra-30-10",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 24,
+            "y": 2
+          },
+          {
+            "id": "large-extra-30-11",
+            "hp": 58,
+            "maxHp": 58,
+            "x": 28,
+            "y": 16
+          },
+          {
+            "id": "large-extra-30-12",
+            "hp": 60,
+            "maxHp": 60,
+            "x": 19,
+            "y": 11
+          },
+          {
+            "id": "large-extra-30-13",
+            "hp": 60,
+            "maxHp": 60,
+            "x": 18,
+            "y": 5
+          },
+          {
+            "id": "large-extra-30-14",
+            "hp": 52,
+            "maxHp": 52,
+            "x": 25,
+            "y": 11
+          },
+          {
+            "id": "large-extra-30-15",
+            "hp": 54,
+            "maxHp": 54,
+            "x": 21,
+            "y": 6
+          },
+          {
+            "id": "large-extra-30-16",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 12,
+            "y": 3
+          },
+          {
+            "id": "large-extra-30-17",
+            "hp": 51,
+            "maxHp": 51,
+            "x": 23,
+            "y": 8
+          },
+          {
+            "id": "large-extra-30-18",
+            "hp": 58,
+            "maxHp": 58,
+            "x": 20,
+            "y": 14
+          },
+          {
+            "id": "large-extra-30-19",
+            "hp": 60,
+            "maxHp": 60,
+            "x": 26,
+            "y": 17
+          },
+          {
+            "id": "large-extra-30-20",
+            "hp": 60,
+            "maxHp": 60,
+            "x": 21,
+            "y": 10
+          },
+          {
+            "id": "aria",
+            "hp": 53,
+            "maxHp": 53,
+            "x": 14,
+            "y": 26
+          },
+          {
+            "id": "leon",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 7,
+            "y": 23
+          },
+          {
+            "id": "sera",
+            "hp": 44,
+            "maxHp": 44,
+            "x": 3,
+            "y": 16
+          },
+          {
+            "id": "noah",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 11,
+            "y": 25
+          },
+          {
+            "id": "yuna",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 4,
+            "y": 22
+          },
+          {
+            "id": "rakan",
+            "hp": 59,
+            "maxHp": 59,
+            "x": 1,
+            "y": 13
+          },
+          {
+            "id": "miho",
+            "hp": 47,
+            "maxHp": 47,
+            "x": 9,
+            "y": 24
+          },
+          {
+            "id": "teo",
+            "hp": 55,
+            "maxHp": 55,
+            "x": 6,
+            "y": 19
+          },
+          {
+            "id": "irene",
+            "hp": 46,
+            "maxHp": 46,
+            "x": 8,
+            "y": 26
+          },
+          {
+            "id": "kaz",
+            "hp": 48,
+            "maxHp": 48,
+            "x": 12,
+            "y": 17
+          },
+          {
+            "id": "ella",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 1,
+            "y": 18
+          },
+          {
+            "id": "jin",
+            "hp": 57,
+            "maxHp": 57,
+            "x": 8,
+            "y": 23
+          }
+        ],
+        "enemyTurns": 4,
+        "afterRound": 5
+      },
+      "seededSettlement": {
+        "fixture": {
+          "bossHp": 1,
+          "allyHealed": "hero",
+          "otherEnemiesRemoved": true
+        },
+        "victory": {
+          "goldDelta": 8090,
+          "inventory": {
+            "potion": 15,
+            "hiPotion": 7,
+            "remedy": 6,
+            "powerCharm": 2,
+            "guardCharm": 2
+          },
+          "cleared": true,
+          "recruit": []
+        },
+        "replayDuplicateReward": 0,
+        "defeatTrainingBlockedRetry": true
+      },
+      "partyCount": 17,
+      "expectedDeployment": 15,
+      "manualTo": {
+        "x": 7,
+        "y": 19
+      },
+      "images": {
+        "overflow": false,
+        "broken": [],
+        "width": 390,
+        "scrollWidth": 390
+      },
+      "settlementPassed": true
+    }
+  ],
+  "errors": [],
+  "naturalPlay": "stage seeds contain ordinary HP; no battle HP or stats injection",
+  "seededSettlement": "separate terminal save fixtures; actual UI attack",
+  "passed": true,
+  "settlementErrors": []
+}

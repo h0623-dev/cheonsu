@@ -1,0 +1,286 @@
+{
+  "results": [
+    {
+      "stage": 33,
+      "id": "mare",
+      "classLabel": "창 타입",
+      "primary": "tide-thrust",
+      "status": "passed",
+      "fixture": "normal enemy HP/stats preserved; explicit safe proximity; healing target HP50%; no stat amplification",
+      "checks": [
+        "actual entry/deployment/new ally in selected 15/information weapon class",
+        "real basic attack original enemy HP",
+        "tide-thrust/damage-or-heal/status/mastery/save-continue",
+        "actual enemy turn/end cleanup"
+      ],
+      "infoText": "마레 Lv.11아군전열창 타입기본 전술해류 찌르기 · 스킬 가능 · 이동 4 · 일반 보행 · EXP 0 · 상태 정상HP 55 / 55공격21방어17이동4사거리1~2지형평지좌표9,19",
+      "basic": {
+        "actor": {
+          "hp": 48,
+          "x": 3,
+          "y": 1,
+          "skillCooldowns": {},
+          "status": []
+        },
+        "target": {
+          "hp": 41,
+          "x": 4,
+          "y": 1,
+          "status": []
+        }
+      },
+      "tide-thrust": {
+        "actor": {
+          "hp": 55,
+          "x": 3,
+          "y": 1,
+          "advancedMastery": 1,
+          "skillCooldowns": {
+            "tide-thrust": 2,
+            "water-cover": 0
+          },
+          "status": []
+        },
+        "target": {
+          "hp": 36,
+          "x": 5,
+          "y": 1,
+          "status": []
+        },
+        "partyMastery": 1
+      },
+      "enemyTurn": {
+        "round": 2,
+        "livingNewAlly": true
+      },
+      "errors": []
+    },
+    {
+      "stage": 38,
+      "id": "harin",
+      "primary": "warm-touch",
+      "secondary": "linked-fist",
+      "fixture": "normal enemy HP/stats preserved; explicit safe proximity; healing target HP50%; no stat amplification",
+      "checks": [
+        "actual entry/deployment/new ally in selected 15/information weapon class",
+        "real basic attack original enemy HP",
+        "warm-touch/damage-or-heal/status/mastery/save-continue",
+        "linked-fist/damage-or-heal/status/mastery/save-continue",
+        "actual enemy turn/end cleanup"
+      ],
+      "infoText": "하린 Lv.13아군지원검 타입기본 전술온맥수 · 스킬 가능 · 이동 5 · 일반 보행 · EXP 0 · 상태 정상HP 57 / 57공격22방어19이동5사거리1지형평지좌표25,5",
+      "basic": {
+        "actor": {
+          "hp": 47,
+          "x": 2,
+          "y": 2,
+          "skillCooldowns": {},
+          "status": []
+        },
+        "target": {
+          "hp": 104,
+          "x": 3,
+          "y": 2,
+          "status": []
+        }
+      },
+      "warm-touch": {
+        "actor": {
+          "hp": 57,
+          "x": 2,
+          "y": 2,
+          "advancedMastery": 1,
+          "skillCooldowns": {
+            "warm-touch": 2,
+            "linked-fist": 0
+          },
+          "status": []
+        },
+        "target": {
+          "hp": 44,
+          "x": 3,
+          "y": 2,
+          "status": []
+        },
+        "partyMastery": 1
+      },
+      "linked-fist": {
+        "actor": {
+          "hp": 57,
+          "x": 2,
+          "y": 2,
+          "advancedMastery": 1,
+          "skillCooldowns": {
+            "warm-touch": 0,
+            "linked-fist": 2
+          },
+          "status": []
+        },
+        "target": {
+          "hp": 98,
+          "x": 3,
+          "y": 2,
+          "status": []
+        },
+        "partyMastery": 1
+      },
+      "enemyTurn": {
+        "round": 2,
+        "livingNewAlly": true
+      },
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "stage": 43,
+      "id": "edan",
+      "primary": "breaker-hammer",
+      "status": "passed",
+      "fixture": "normal enemy HP/stats preserved; explicit safe proximity; healing target HP50%; no stat amplification",
+      "checks": [
+        "actual entry/deployment/new ally in selected 15/information weapon class",
+        "real basic attack original enemy HP",
+        "breaker-hammer/damage-or-heal/status/mastery/save-continue",
+        "actual enemy turn/end cleanup"
+      ],
+      "infoText": "에단 Lv.15아군전열검 타입기본 전술파쇄 망치 · 스킬 가능 · 이동 3 · 중장갑 보행 · EXP 0 · 상태 정상HP 67 / 67공격26방어23이동3사거리1지형동력도선좌표18,16지형 효과 · 공격 명중 +3",
+      "basic": {
+        "actor": {
+          "hp": 59,
+          "x": 3,
+          "y": 1,
+          "skillCooldowns": {},
+          "status": []
+        },
+        "target": {
+          "hp": 56,
+          "x": 4,
+          "y": 1,
+          "status": []
+        }
+      },
+      "breaker-hammer": {
+        "actor": {
+          "hp": 59,
+          "x": 3,
+          "y": 1,
+          "advancedMastery": 1,
+          "skillCooldowns": {
+            "breaker-hammer": 2,
+            "folding-barrier": 0
+          },
+          "status": []
+        },
+        "target": {
+          "hp": 24,
+          "x": 4,
+          "y": 1,
+          "status": [
+            {
+              "type": "armorBreak",
+              "turns": 2,
+              "sourceId": "edan"
+            }
+          ]
+        },
+        "partyMastery": 1
+      },
+      "enemyTurn": {
+        "round": 2,
+        "livingNewAlly": true
+      },
+      "errors": []
+    },
+    {
+      "stage": 48,
+      "id": "sylvan",
+      "classLabel": "마법 타입",
+      "primary": "root-snare",
+      "status": "passed",
+      "secondary": "green-breath",
+      "regen": true,
+      "fixture": "normal enemy HP/stats preserved; explicit safe proximity; healing target HP50%; no stat amplification",
+      "checks": [
+        "actual entry/deployment/new ally in selected 15/information weapon class",
+        "real basic attack original enemy HP",
+        "root-snare/damage-or-heal/status/mastery/save-continue",
+        "green-breath/damage-or-heal/status/mastery/save-continue",
+        "actual enemy turn/end cleanup"
+      ],
+      "infoText": "실반 Lv.16아군후열마법 타입기본 전술뿌리 얽기 · 스킬 가능 · 이동 4 · 주술 감응 · EXP 0 · 상태 정상HP 60 / 60공격26방어21이동4사거리1~2지형평지좌표21,6",
+      "basic": {
+        "actor": {
+          "hp": 53,
+          "x": 13,
+          "y": 1,
+          "skillCooldowns": {},
+          "status": []
+        },
+        "target": {
+          "hp": 127,
+          "x": 14,
+          "y": 1,
+          "status": []
+        }
+      },
+      "root-snare": {
+        "actor": {
+          "hp": 53,
+          "x": 13,
+          "y": 1,
+          "advancedMastery": 1,
+          "skillCooldowns": {
+            "root-snare": 3,
+            "green-breath": 0
+          },
+          "status": []
+        },
+        "target": {
+          "hp": 131,
+          "x": 14,
+          "y": 1,
+          "status": [
+            {
+              "type": "slow",
+              "turns": 2,
+              "power": 1
+            }
+          ]
+        },
+        "partyMastery": 1
+      },
+      "green-breath": {
+        "actor": {
+          "hp": 60,
+          "x": 13,
+          "y": 1,
+          "advancedMastery": 1,
+          "skillCooldowns": {
+            "root-snare": 0,
+            "green-breath": 2
+          },
+          "status": []
+        },
+        "target": {
+          "hp": 47,
+          "x": 14,
+          "y": 1,
+          "status": [
+            {
+              "type": "regen",
+              "turns": 2,
+              "power": 4
+            }
+          ]
+        },
+        "partyMastery": 1
+      },
+      "enemyTurn": {
+        "round": 2,
+        "livingNewAlly": true
+      },
+      "errors": []
+    }
+  ],
+  "errors": []
+}

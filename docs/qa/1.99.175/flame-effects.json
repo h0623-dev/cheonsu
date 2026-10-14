@@ -1,0 +1,229 @@
+{
+  "results": [
+    {
+      "stage": 35,
+      "fixture": "original-HP proximity, actual promotion engine",
+      "checks": [
+        "actual entry/mission/deployment/original HP",
+        "upper skill/full effects/real damage/cleanup/save",
+        "damage save/continue persistence",
+        "basic hit/enemy counter/full scene cleanup"
+      ],
+      "boss": {
+        "id": "boss",
+        "x": 9,
+        "y": 21,
+        "type": "boss",
+        "name": "심해 수문장 모르칸",
+        "firstStage": 35,
+        "icon": "🔱",
+        "role": "해안 지역 보스",
+        "rank": "boss",
+        "aiType": "boss",
+        "move": 2,
+        "range": 2,
+        "minRange": 1,
+        "skill": "수문 개방",
+        "skillType": "attack",
+        "skillBonus": 6,
+        "skillRange": 2,
+        "skillMinRange": 1,
+        "skillSpec": {
+          "name": "수문 개방",
+          "type": "attack",
+          "bonus": 6,
+          "minRange": 1,
+          "range": 2,
+          "effect": "thrust",
+          "status": "armorBreak"
+        },
+        "combatIdentityName": "긴 창 수문장",
+        "phaseSkill": {
+          "name": "해류의 열쇠",
+          "type": "attack",
+          "bonus": 8,
+          "minRange": 1,
+          "range": 2,
+          "effect": "thrust",
+          "status": "slow"
+        },
+        "hazardLabel": "수문 물결",
+        "hp": 189,
+        "maxHp": 189,
+        "atk": 28,
+        "def": 17,
+        "level": 20,
+        "spriteKey": "tide_keeper",
+        "artId": "tide_keeper",
+        "stageEnemyRole": "boss",
+        "monsterRank": "boss",
+        "expansionEnemy": true,
+        "expansionStatsStage": 35,
+        "moved": false,
+        "acted": false,
+        "guard": false,
+        "baseMaxHp": 189,
+        "baseAtkDifficulty": 28,
+        "baseDefDifficulty": 17,
+        "difficultyApplied": "normal:standard",
+        "facing": "up"
+      },
+      "skillScenes": [
+        {
+          "heading": "여명 회오리참",
+          "presentation": "skill",
+          "actor": "카일"
+        },
+        {
+          "heading": "반격",
+          "presentation": "attack",
+          "actor": "심해 수문장 모르칸"
+        }
+      ],
+      "skillFx": [
+        {
+          "theme": "fire",
+          "className": "skill-spectacle"
+        }
+      ],
+      "counterScenes": [
+        {
+          "heading": "공격",
+          "presentation": "attack",
+          "actor": "카일"
+        },
+        {
+          "heading": "반격",
+          "presentation": "attack",
+          "actor": "갈대등 갑각병"
+        }
+      ],
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "stage": 50,
+      "fixture": "original-HP proximity, actual promotion engine",
+      "checks": [
+        "actual entry/mission/deployment/original HP",
+        "upper skill/full effects/real damage/cleanup/save",
+        "damage save/continue persistence",
+        "basic hit/enemy counter/full scene cleanup",
+        "45% HP phase fixture/actual enemy turn/phase2/end cleanup"
+      ],
+      "boss": {
+        "id": "boss",
+        "x": 23,
+        "y": 5,
+        "type": "boss",
+        "name": "첫 맹세 수호체 아스테르",
+        "firstStage": 50,
+        "icon": "✦",
+        "role": "확장 캠페인 최종 보스",
+        "rank": "boss",
+        "aiType": "boss",
+        "move": 3,
+        "range": 1,
+        "minRange": 1,
+        "skill": "맹세의 원",
+        "skillType": "attack",
+        "skillBonus": 8,
+        "skillRange": 2,
+        "skillMinRange": 1,
+        "skillSpec": {
+          "name": "맹세의 원",
+          "type": "attack",
+          "bonus": 8,
+          "minRange": 1,
+          "range": 2,
+          "effect": "holy",
+          "status": "armorBreak"
+        },
+        "combatIdentityName": "의식 검 수호자",
+        "phaseSkill": {
+          "name": "돌아갈 길",
+          "type": "attack",
+          "bonus": 10,
+          "minRange": 1,
+          "range": 2,
+          "effect": "holy",
+          "status": "attackDown"
+        },
+        "hazardLabel": "맹세의 별빛",
+        "hp": 255,
+        "maxHp": 255,
+        "atk": 34,
+        "def": 19,
+        "level": 27,
+        "spriteKey": "oath_guardian",
+        "artId": "oath_guardian",
+        "stageEnemyRole": "boss",
+        "monsterRank": "boss",
+        "expansionEnemy": true,
+        "expansionStatsStage": 50,
+        "moved": false,
+        "acted": false,
+        "guard": false,
+        "baseMaxHp": 255,
+        "baseAtkDifficulty": 34,
+        "baseDefDifficulty": 19,
+        "difficultyApplied": "normal:standard",
+        "facing": "down"
+      },
+      "skillScenes": [
+        {
+          "heading": "여명 회오리참",
+          "presentation": "skill",
+          "actor": "카일"
+        },
+        {
+          "heading": "반격",
+          "presentation": "attack",
+          "actor": "첫 맹세 수호체 아스테르"
+        }
+      ],
+      "skillFx": [
+        {
+          "theme": "fire",
+          "className": "skill-spectacle"
+        }
+      ],
+      "counterScenes": [
+        {
+          "heading": "공격",
+          "presentation": "attack",
+          "actor": "카일"
+        },
+        {
+          "heading": "반격",
+          "presentation": "attack",
+          "actor": "월식 사냥고양이"
+        }
+      ],
+      "phaseScenes": [
+        {
+          "heading": "boss-splash",
+          "text": "2페이즈 · 각성제 50장첫 맹세의 원형 제단원형 제단의 별빛이 거대한 검에 모이고, 첫 계약을 지키던 수호체가 깨어난다.한 사람을 남기는 별의 계약 · 각성첫 맹세 수호체 아스테르 · 각성“함께 돌아가는 맹세는 기록에 없다. 증명하라.”!변화한 전황일반 공격 1칸 · 돌아갈 길 1~2칸 · 공격 약화 · 공격 +2 · 방어 +1적장 체력116 / 255전장으로 →"
+        },
+        {
+          "heading": "돌아갈 길",
+          "presentation": "skill",
+          "actor": "첫 맹세 수호체 아스테르"
+        },
+        {
+          "heading": "반격",
+          "presentation": "attack",
+          "actor": "카일"
+        },
+        {
+          "heading": "달그늘 도약",
+          "presentation": "skill",
+          "actor": "월식 사냥고양이"
+        }
+      ],
+      "status": "passed",
+      "errors": []
+    }
+  ],
+  "errors": []
+}

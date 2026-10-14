@@ -51,8 +51,8 @@ function positioned(saved, spec, skillId = null) {
 }
 async function perform(arranged, skillId) {
   await loadSeed(page, arranged.seed);
-  await ensureBattleInformationOpen(page);
-  await page.locator(`.world-battlefield .unit[data-unit-id="${arranged.actor.id}"]`).click();
+  // The saved fixture selects this ally through the actual continue flow.
+  // Avoid clicking a top-row fixture tile beneath the information HUD.
   await page.locator(skillId ? '.cmd-skill' : '.cmd-attack').click();
   if (skillId) await page.locator(`.skill-choice-dialog button[data-skill-id="${skillId}"]`).click();
   if (arranged.support) {

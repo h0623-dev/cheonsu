@@ -1,0 +1,369 @@
+{
+  "status": "직접 QA 통과·새 APK/서명 OTA 배포 준비",
+  "version": "1.99.175",
+  "androidVersionCode": 374,
+  "scope": "11~50장: 장별 저장 시나리오의 실제 UI 전투와 별도 승패 정산",
+  "stages": [
+    {
+      "stage": 11,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 12,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 13,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 14,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 15,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 16,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 17,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 18,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 19,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 20,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 21,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 22,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 23,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 24,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 25,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 26,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 27,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 28,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 29,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 30,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 31,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 32,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 33,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 34,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 35,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 36,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 37,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 38,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 39,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 40,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 41,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 42,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 43,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 44,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 45,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 46,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 47,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 48,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 49,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    },
+    {
+      "stage": 50,
+      "passed": true,
+      "naturalEnemyTurnsAtLeast": 4,
+      "actualUiMovementAttackSkills": true,
+      "manualDeploymentAndSaveRestore": true,
+      "seededVictoryDefeatProgression": true
+    }
+  ],
+  "directChecks": {
+    "lint": "통과",
+    "unitTests": 846,
+    "unitPassed": 846,
+    "productionBuild": "통과",
+    "smokeViewports": [
+      "1280x900",
+      "390x844",
+      "844x390"
+    ],
+    "legacyEnemyTurnStage15": {
+      "actualEnemyMovement": true,
+      "resumedTurn": "ally",
+      "roundAfter": 2
+    },
+    "fullEffectsBossStages": [
+      35,
+      40,
+      45,
+      50
+    ],
+    "phase2Fixtures": [
+      40,
+      50
+    ],
+    "expansionAllies": [
+      "mare",
+      "harin",
+      "edan",
+      "sylvan"
+    ],
+    "pageErrors": 0
+  },
+  "sourceCoreCommit": "f757359341d88cf353046cc30e6c6bec51aeb7bd",
+  "coverageNote": "마레·실반 상성의 마지막 변경은 기존 17명·적의 분류를 바꾸지 않음. 40장 자연 QA 뒤 최종 별도 빌드에서 신규4명 실제 기술·표시·적턴·저장 검사를 수행함.",
+  "unverified": [
+    "11~50장 전체를 무중단으로 정상 HP 자연 클리어한 기록",
+    "정상 HP로 자연 전멸하는 모든 장별 전술 경우",
+    "Android·iPhone 실기기 설치·플레이"
+  ],
+  "savedAt": "2026-10-14T16:50:36.397000+09:00"
+}
