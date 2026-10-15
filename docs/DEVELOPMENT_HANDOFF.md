@@ -1,5 +1,7 @@
 # 천수 개발 인계
 
+> 아래 원래 본문은 1.99.154 무렵의 역사적 인수인계입니다. 현재 상태로 사용하지 마세요. 새 세션은 [Notion 기억 안내](NOTION_MEMORY.md), 루트 `AGENTS.md`, 최신 README·BUILD·QA와 [현재 원복 기준](ROLLBACK_BASELINE.md)을 먼저 읽습니다. 비공개 Notion 기준 페이지의 제목은 **천수 개발 기억·인수인계**입니다.
+
 ## 현재 상태
 
 - 버전 1.99.154, Android 353, API 36, 패키지 com.cheonsu.game.

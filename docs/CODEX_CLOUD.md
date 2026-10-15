@@ -1,5 +1,7 @@
 # Codex Cloud 개발 환경
 
+새 채팅의 개발 맥락은 [Notion 기억 안내](NOTION_MEMORY.md)와 [기억 연결 스킬](../.agents/skills/cheonsu-notion-memory/SKILL.md)을 사용합니다. 세션 시작 시 활성화된 Notion 스킬과 **천수 개발 기억·인수인계**를 읽고 중요한 수정·결정·작업 완료 때 같은 페이지를 갱신합니다. 비공개 페이지 링크는 사용자에게 받은 링크를 사용하거나 연결된 Notion에서 제목으로 찾으며 공개 소스에는 적지 않습니다.
+
 2026-10-05 KST 최신 사용자 지시에 따라 코드 수정 후 에이전트의 별도 검증은 생략합니다. 새 작업은 먼저 루트 `AGENTS.md`와 [검증 생략 스킬](../.agents/skills/cheonsu-no-post-change-validation/SKILL.md)을 읽습니다. 아래 검사 절차가 있다는 이유로 테스트·린트·스모크·브라우저 QA를 자동 실행하지 않습니다. 요청한 산출물 제작과 기존 자동 Actions는 스킬에 명시한 범위로 구분합니다.
 
 ## 작업 구조
