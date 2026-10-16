@@ -2,7 +2,6 @@ import { useId } from 'react';
 
 export default function EpicCombatVisuals() {
   return <>
-    <div className="epic-combat-backdrop" aria-hidden="true" />
     <div className="epic-combat-ground" aria-hidden="true" />
     <div className="epic-contact-light" aria-hidden="true" />
     <div className="epic-floor-pressure" aria-hidden="true" />

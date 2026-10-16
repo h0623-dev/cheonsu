@@ -74,7 +74,6 @@ export default function CombatScene({ scene, attackerKey, defenderKey, backgroun
       style={{ '--combat-duration': `${duration}ms`, '--combat-action-duration': `${duration * timing.action}ms`, '--combat-lead': `${duration * timing.lead}ms`, '--skill-color': getSkillPalette(presentation.effect), '--combat-scene': `url("${combatBackground}")` }}>
       <header className="painted-combat-heading"><span>{scene.attacker.name}</span><h2>{timing.skill ? plan.name : scene.title}</h2><span>{scene.outcome?.crit ? '치명타' : scene.finish ? '결정타' : scene.effectLabel}</span></header>
       <div className="painted-combat-arena">
-        <div className="epic-combat-world">
         <EpicCombatVisuals />
         {timing.skill && <div className="skill-stage-shade" aria-hidden="true" />}
         <div className="duel-impact-ink" aria-hidden="true" />
@@ -91,7 +90,6 @@ export default function CombatScene({ scene, attackerKey, defenderKey, backgroun
           <div className="fighter-shadow" />
           <FighterPoses unitKey={defenderKey} name={scene.defender.name} defender />
         </div>}
-        </div>
         {timing.skill && <>
           <EpicCombatCutIn art={cutInArt} label={presentation.healing ? '회복술' : presentation.guarding ? '수호술' : presentation.style === 'cast' ? '마법 발동' : '고유 기술'} name={plan.name} />
         </>}

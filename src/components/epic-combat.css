@@ -68,45 +68,28 @@
   height: min(61dvh, 560px);
   min-height: 200px;
   isolation: isolate;
-  background: #0a171b;
-}
-
-.painted-combat.epic-combat .epic-combat-world {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  transform-origin: var(--duel-contact-x, 66%) var(--duel-contact-y, 60%);
-  pointer-events: none;
-}
-
-.painted-combat.epic-combat :is(.epic-combat-backdrop, .epic-combat-ground) {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-repeat: no-repeat;
-}
-
-.painted-combat.epic-combat .epic-combat-backdrop {
-  z-index: 0;
+  /* Keep the image on the arena's own paint surface, independent of moving effects. */
+  background-color: #0a171b;
   background-image:
     linear-gradient(180deg, #02091036 0%, #07131b16 40%, #08111675 100%),
     var(--combat-scene);
   background-position: center, center 68%;
   background-size: cover;
-  filter: saturate(.76) brightness(.73);
+  background-repeat: no-repeat;
 }
 
 .painted-combat.epic-combat .epic-combat-ground {
+  position: absolute;
   z-index: 1;
   inset: 52% -5% -4%;
+  pointer-events: none;
   background:
     radial-gradient(ellipse at 52% 60%, #d8c39916 0%, transparent 63%),
     linear-gradient(180deg, transparent, #07111680);
   border-radius: 50% 50% 0 0 / 18% 18% 0 0;
 }
 
-.painted-combat.epic-combat .epic-combat-world::after {
+.painted-combat.epic-combat .painted-combat-arena::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -128,7 +111,6 @@
 
 .painted-combat.epic-combat .fighter-attacker { left: 5%; }
 .painted-combat.epic-combat .fighter-defender { right: 5%; }
-.painted-combat.epic-combat .fighter-body { filter: drop-shadow(0 8px 6px #02090b78); }
 .painted-combat.epic-combat .fighter-shadow {
   bottom: -1.5%;
   left: 18%;
@@ -172,7 +154,12 @@
 .painted-combat.epic-combat.has-boss .combat-enemy-intro { border-color: #e2be75; }
 .painted-combat.epic-combat.has-boss .combat-enemy-intro span { color: #f0cd87; }
 
-.painted-combat.epic-combat .skill-stage-shade { z-index: 2; background: #020711; }
+.painted-combat.epic-combat .skill-stage-shade {
+  z-index: 2;
+  /* A failed/interrupted shade animation must never leave an opaque black field. */
+  background: rgb(2 7 17 / .22);
+  opacity: 0;
+}
 .painted-combat.epic-combat .skill-cut-in.epic-cut-in {
   inset: 10% 0 auto;
   height: 36%;
@@ -376,7 +363,6 @@
 /* Support and evasion keep their readable results without depicting a successful hit. */
 .painted-combat.epic-combat:is(.is-miss, .is-support) :is(.epic-floor-pressure, .epic-hit-flare, .epic-debris-field, .epic-strike-ribbon) { display: none; }
 .painted-combat.epic-combat:is(.motion-off, .duel-motion-disabled) :is(.epic-contact-light, .epic-floor-pressure, .epic-hit-flare, .epic-debris-field, .epic-strike-ribbon) { display: none; }
-.painted-combat.epic-combat:is(.motion-off, .duel-motion-disabled) .epic-combat-world { transform: none !important; }
 .painted-combat.epic-combat:is(.motion-off, .duel-motion-disabled) .combat-enemy-intro { animation: none; opacity: 1; transform: none; }
 
 @media (max-width: 600px) {
@@ -467,6 +453,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .painted-combat.epic-combat :is(.epic-contact-light, .epic-floor-pressure, .epic-hit-flare, .epic-debris-field, .epic-strike-ribbon) { display: none; }
-  .painted-combat.epic-combat .epic-combat-world { transform: none !important; }
   .painted-combat.epic-combat .combat-enemy-intro { opacity: 1; transform: none; }
 }
