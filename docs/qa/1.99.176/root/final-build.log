@@ -5,32 +5,28 @@
 npm 라이선스 고지 제작 완료: 96개 → public/legal/npm
 
 > cheonsu@1.99.176 build
-> vite build --outDir /workspace/work/qa176/final-dist
+> vite build
 
 vite v8.3.2 building client environment for production...
 transforming...
 ✓ 2054 modules transformed.
-
-(!) outDir /workspace/work/qa176/final-dist is not inside project root and will not be emptied.
-Use --emptyOutDir to override.
-
 rendering chunks...
 computing gzip size...
-../work/qa176/final-dist/ota-build.json                        0.10 kB │ gzip:   0.10 kB
-../work/qa176/final-dist/index.html                            1.10 kB │ gzip:   0.53 kB
-../work/qa176/final-dist/legal/bundled-web-notices.md         21.99 kB
-../work/qa176/final-dist/assets/index-ICuuuwo4.css           983.90 kB │ gzip: 162.11 kB
-../work/qa176/final-dist/assets/index.esm-CbfT3ivU.js          0.13 kB │ gzip:   0.13 kB
-../work/qa176/final-dist/assets/esm-DCqBjk_E.js                0.93 kB │ gzip:   0.55 kB
-../work/qa176/final-dist/assets/web-D266GKbt.js                1.61 kB │ gzip:   0.33 kB
-../work/qa176/final-dist/assets/web-DGyV9bQG.js               12.75 kB │ gzip:   2.92 kB
-../work/qa176/final-dist/assets/index.esm2017-Dg2Ndkw0.js     30.88 kB │ gzip:  10.46 kB
-../work/qa176/final-dist/assets/index.esm-BtYUdAN5.js        126.23 kB │ gzip:  35.98 kB
-../work/qa176/final-dist/assets/index-CPjDjwM-.js          1,517.18 kB │ gzip: 392.08 kB
+dist/ota-build.json                        0.10 kB │ gzip:   0.11 kB
+dist/index.html                            1.10 kB │ gzip:   0.52 kB
+dist/legal/bundled-web-notices.md         21.99 kB
+dist/assets/index-ICuuuwo4.css           983.90 kB │ gzip: 162.11 kB
+dist/assets/index.esm-CbfT3ivU.js          0.13 kB │ gzip:   0.13 kB
+dist/assets/esm-DEG1H-GQ.js                0.93 kB │ gzip:   0.55 kB
+dist/assets/web-C6sxD2xB.js                1.61 kB │ gzip:   0.33 kB
+dist/assets/web-Aq8OJtly.js               12.75 kB │ gzip:   2.92 kB
+dist/assets/index.esm2017-Dg2Ndkw0.js     30.88 kB │ gzip:  10.46 kB
+dist/assets/index.esm-BtYUdAN5.js        126.23 kB │ gzip:  35.98 kB
+dist/assets/index-Ds9WWFH_.js          1,517.18 kB │ gzip: 392.08 kB
 
 [plugin builtin:vite-reporter] 
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
-✓ built in 2.06s
+✓ built in 2.04s

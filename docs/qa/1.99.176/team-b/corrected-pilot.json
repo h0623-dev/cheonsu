@@ -1,0 +1,1389 @@
+{
+  "team": "독립 QA B팀",
+  "version": "1.99.176",
+  "url": "http://127.0.0.1:4173",
+  "startedAt": "2026-10-16T00:02:10.970Z",
+  "scope": "1~50장 UI·배치·원본 HP의 실제 명령/적 턴·저장 복원·승패/재도전",
+  "limitations": [
+    "장별 저장 진입; 1장부터 50장까지 무중단 자연 클리어 검사가 아님",
+    "승패·보상·재도전은 명시한 별도 종료용 fixture를 사용",
+    "실제 Android/iPhone 기기를 이용한 실행 검사가 아님"
+  ],
+  "results": [
+    {
+      "stage": 5,
+      "passed": true,
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "natural": {
+        "actions": [
+          {
+            "id": "aria",
+            "kind": "move",
+            "round": 1,
+            "to": {
+              "x": 3,
+              "y": 18
+            }
+          },
+          {
+            "id": "lina",
+            "kind": "move",
+            "round": 1,
+            "to": {
+              "x": 7,
+              "y": 20
+            }
+          },
+          {
+            "id": "bram",
+            "kind": "move",
+            "round": 1,
+            "to": {
+              "x": 4,
+              "y": 12
+            }
+          },
+          {
+            "id": "hero",
+            "kind": "move",
+            "round": 2,
+            "to": {
+              "x": 5,
+              "y": 13
+            }
+          },
+          {
+            "id": "aria",
+            "kind": "move",
+            "round": 2,
+            "to": {
+              "x": 3,
+              "y": 14
+            }
+          },
+          {
+            "id": "lina",
+            "kind": "move",
+            "round": 2,
+            "to": {
+              "x": 7,
+              "y": 16
+            }
+          },
+          {
+            "id": "bram",
+            "kind": "move",
+            "round": 2,
+            "to": {
+              "x": 4,
+              "y": 11
+            }
+          }
+        ],
+        "enemyTurns": [
+          {
+            "before": 1,
+            "after": 2,
+            "enemyMoves": [
+              {
+                "id": "shield1",
+                "x": 11,
+                "y": 6
+              },
+              {
+                "id": "shield2",
+                "x": 13,
+                "y": 14
+              },
+              {
+                "id": "elite",
+                "x": 12,
+                "y": 7
+              },
+              {
+                "id": "archer",
+                "x": 10,
+                "y": 1
+              },
+              {
+                "id": "boss",
+                "x": 14,
+                "y": 7
+              },
+              {
+                "id": "large-extra-5-1",
+                "x": 15,
+                "y": 9
+              },
+              {
+                "id": "large-extra-5-2",
+                "x": 7,
+                "y": 8
+              }
+            ],
+            "remainingAllies": 6
+          },
+          {
+            "before": 2,
+            "after": 3,
+            "enemyMoves": [
+              {
+                "id": "shield1",
+                "x": 10,
+                "y": 6
+              },
+              {
+                "id": "shield2",
+                "x": 13,
+                "y": 16
+              },
+              {
+                "id": "elite",
+                "x": 10,
+                "y": 7
+              },
+              {
+                "id": "archer",
+                "x": 8,
+                "y": 1
+              },
+              {
+                "id": "boss",
+                "x": 15,
+                "y": 7
+              },
+              {
+                "id": "large-extra-5-1",
+                "x": 14,
+                "y": 9
+              },
+              {
+                "id": "large-extra-5-2",
+                "x": 7,
+                "y": 10
+              }
+            ],
+            "remainingAllies": 6
+          }
+        ],
+        "HPStatsUnmodified": true,
+        "initialEnemyHP": [
+          {
+            "id": "shield1",
+            "hp": 30,
+            "maxHp": 30,
+            "level": 3,
+            "move": 1,
+            "x": 11,
+            "y": 5
+          },
+          {
+            "id": "shield2",
+            "hp": 30,
+            "maxHp": 30,
+            "level": 3,
+            "move": 2,
+            "x": 14,
+            "y": 13
+          },
+          {
+            "id": "elite",
+            "hp": 28,
+            "maxHp": 28,
+            "level": 3,
+            "move": 2,
+            "x": 13,
+            "y": 6
+          },
+          {
+            "id": "archer",
+            "hp": 21,
+            "maxHp": 21,
+            "level": 3,
+            "move": 2,
+            "x": 12,
+            "y": 1
+          },
+          {
+            "id": "boss",
+            "hp": 42,
+            "maxHp": 42,
+            "level": 5,
+            "move": 1,
+            "x": 15,
+            "y": 7
+          },
+          {
+            "id": "large-extra-5-1",
+            "hp": 24,
+            "maxHp": 24,
+            "level": 3,
+            "move": 1,
+            "x": 16,
+            "y": 9
+          },
+          {
+            "id": "large-extra-5-2",
+            "hp": 34,
+            "maxHp": 34,
+            "level": 3,
+            "move": 2,
+            "x": 9,
+            "y": 8
+          }
+        ],
+        "finalRound": 3,
+        "finalUnits": [
+          {
+            "id": "hero",
+            "type": "ally",
+            "hp": 28,
+            "maxHp": 28,
+            "x": 5,
+            "y": 13,
+            "level": 3,
+            "atk": 10,
+            "def": 7,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "bram",
+            "type": "ally",
+            "hp": 32,
+            "maxHp": 32,
+            "x": 4,
+            "y": 11,
+            "level": 3,
+            "atk": 9,
+            "def": 10,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "lina",
+            "type": "ally",
+            "hp": 22,
+            "maxHp": 22,
+            "x": 7,
+            "y": 16,
+            "level": 3,
+            "atk": 11,
+            "def": 4,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "aria",
+            "type": "ally",
+            "hp": 24,
+            "maxHp": 24,
+            "x": 3,
+            "y": 14,
+            "level": 3,
+            "atk": 8,
+            "def": 6,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "leon",
+            "type": "ally",
+            "hp": 24,
+            "maxHp": 24,
+            "x": 1,
+            "y": 15,
+            "level": 2,
+            "atk": 9,
+            "def": 5,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "shield1",
+            "type": "enemy",
+            "hp": 30,
+            "maxHp": 30,
+            "x": 10,
+            "y": 6,
+            "level": 3,
+            "atk": 8,
+            "def": 11,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "shield2",
+            "type": "enemy",
+            "hp": 30,
+            "maxHp": 30,
+            "x": 13,
+            "y": 16,
+            "level": 3,
+            "atk": 11,
+            "def": 8,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "elite",
+            "type": "enemy",
+            "hp": 28,
+            "maxHp": 28,
+            "x": 10,
+            "y": 7,
+            "level": 3,
+            "atk": 10,
+            "def": 8,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "archer",
+            "type": "enemy",
+            "hp": 21,
+            "maxHp": 21,
+            "x": 8,
+            "y": 1,
+            "level": 3,
+            "atk": 10,
+            "def": 4,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "boss",
+            "type": "boss",
+            "hp": 42,
+            "maxHp": 42,
+            "x": 15,
+            "y": 7,
+            "level": 5,
+            "atk": 13,
+            "def": 9,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "large-extra-5-1",
+            "type": "enemy",
+            "hp": 24,
+            "maxHp": 24,
+            "x": 14,
+            "y": 9,
+            "level": 3,
+            "atk": 11,
+            "def": 5,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "large-extra-5-2",
+            "type": "enemy",
+            "hp": 34,
+            "maxHp": 34,
+            "x": 7,
+            "y": 10,
+            "level": 3,
+            "atk": 11,
+            "def": 9,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "sera",
+            "type": "ally",
+            "hp": 23,
+            "maxHp": 23,
+            "x": 8,
+            "y": 19,
+            "level": 2,
+            "atk": 11,
+            "def": 4,
+            "moved": false,
+            "acted": false,
+            "status": []
+          }
+        ],
+        "battleStats": {
+          "damageDealt": 0,
+          "damageTaken": 0,
+          "healingDone": 0,
+          "kills": 0,
+          "assists": 0,
+          "itemsUsed": 0,
+          "skillsUsed": 0,
+          "counters": 0,
+          "lootDrops": 0
+        },
+        "battleSaveRestore": true
+      },
+      "fixtures": {
+        "heroDeathContinues": true,
+        "contactCombat": {
+          "kind": "좌표만 조정, HP·공방 원본 유지",
+          "actions": [
+            {
+              "id": "hero",
+              "kind": "attack",
+              "round": 1
+            },
+            {
+              "id": "lina",
+              "kind": "skill",
+              "round": 1
+            }
+          ],
+          "battleStats": {
+            "damageDealt": 15,
+            "damageTaken": 10,
+            "healingDone": 0,
+            "kills": 0,
+            "assists": 0,
+            "itemsUsed": 0,
+            "skillsUsed": 1,
+            "counters": 0,
+            "lootDrops": 0
+          }
+        },
+        "victory": {
+          "kind": "원본 능력치·적 대장 HP1 인접 저장 fixture, 실제 UI 공격",
+          "actions": [
+            {
+              "id": "hero",
+              "kind": "attack",
+              "round": 1
+            }
+          ],
+          "goldBefore": 3400,
+          "goldAfter": 5925,
+          "cleared": true
+        },
+        "campWalkerPreserved": true,
+        "actualNextStage": 6,
+        "replayNoDuplicateReward": true,
+        "defeatTrainingBlockedNoProgress": true,
+        "actualSameStageRetry": 5
+      },
+      "campaignLock": true,
+      "mission": {
+        "bossNames": [
+          "요새 기사단장"
+        ],
+        "roundLimit": 27,
+        "heroDeathExcluded": true
+      },
+      "deploymentSaveRestore": true,
+      "deploymentPan": {
+        "before": {
+          "x": 0,
+          "y": 429,
+          "maxX": 0,
+          "maxY": 617
+        },
+        "after": {
+          "x": 0,
+          "y": 364
+        }
+      },
+      "deployment": {
+        "viewport": {
+          "width": 1280,
+          "height": 900
+        },
+        "scrollWidth": 1280,
+        "overflow": false,
+        "broken": []
+      },
+      "battle": {
+        "viewport": {
+          "width": 1280,
+          "height": 900
+        },
+        "scrollWidth": 1280,
+        "overflow": false,
+        "broken": []
+      }
+    },
+    {
+      "stage": 13,
+      "passed": false,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "natural": {
+        "actions": [
+          {
+            "id": "aria",
+            "kind": "move",
+            "round": 1,
+            "to": {
+              "x": 9,
+              "y": 8
+            }
+          },
+          {
+            "id": "lina",
+            "kind": "move",
+            "round": 1,
+            "to": {
+              "x": 16,
+              "y": 8
+            }
+          },
+          {
+            "id": "bram",
+            "kind": "move",
+            "round": 1,
+            "to": {
+              "x": 12,
+              "y": 9
+            }
+          },
+          {
+            "id": "hero",
+            "kind": "move",
+            "round": 2,
+            "to": {
+              "x": 12,
+              "y": 6
+            }
+          },
+          {
+            "id": "aria",
+            "kind": "move",
+            "round": 2,
+            "to": {
+              "x": 5,
+              "y": 8
+            }
+          },
+          {
+            "id": "lina",
+            "kind": "move",
+            "round": 2,
+            "to": {
+              "x": 12,
+              "y": 8
+            }
+          },
+          {
+            "id": "bram",
+            "kind": "move",
+            "round": 2,
+            "to": {
+              "x": 12,
+              "y": 10
+            }
+          }
+        ],
+        "enemyTurns": [
+          {
+            "before": 1,
+            "after": 2,
+            "enemyMoves": [
+              {
+                "id": "archer1",
+                "x": 12,
+                "y": 15
+              },
+              {
+                "id": "mage2",
+                "x": 15,
+                "y": 23
+              },
+              {
+                "id": "shield3",
+                "x": 7,
+                "y": 18
+              },
+              {
+                "id": "assassin4",
+                "x": 14,
+                "y": 20
+              },
+              {
+                "id": "priest5",
+                "x": 4,
+                "y": 16
+              },
+              {
+                "id": "large-extra-13-1",
+                "x": 7,
+                "y": 20
+              },
+              {
+                "id": "large-extra-13-2",
+                "x": 13,
+                "y": 24
+              },
+              {
+                "id": "large-extra-13-3",
+                "x": 5,
+                "y": 15
+              },
+              {
+                "id": "large-extra-13-4",
+                "x": 12,
+                "y": 22
+              },
+              {
+                "id": "large-extra-13-5",
+                "x": 4,
+                "y": 12
+              },
+              {
+                "id": "large-extra-13-6",
+                "x": 11,
+                "y": 23
+              },
+              {
+                "id": "large-extra-13-7",
+                "x": 15,
+                "y": 18
+              },
+              {
+                "id": "large-extra-13-8",
+                "x": 6,
+                "y": 21
+              },
+              {
+                "id": "large-extra-13-9",
+                "x": 13,
+                "y": 16
+              },
+              {
+                "id": "large-extra-13-10",
+                "x": 16,
+                "y": 19
+              },
+              {
+                "id": "large-extra-13-11",
+                "x": 8,
+                "y": 19
+              }
+            ],
+            "remainingAllies": 10
+          },
+          {
+            "before": 2,
+            "after": 3,
+            "enemyMoves": [
+              {
+                "id": "archer1",
+                "x": 12,
+                "y": 12
+              },
+              {
+                "id": "mage2",
+                "x": 14,
+                "y": 22
+              },
+              {
+                "id": "shield3",
+                "x": 6,
+                "y": 17
+              },
+              {
+                "id": "assassin4",
+                "x": 13,
+                "y": 20
+              },
+              {
+                "id": "priest5",
+                "x": 5,
+                "y": 13
+              },
+              {
+                "id": "large-extra-13-1",
+                "x": 7,
+                "y": 17
+              },
+              {
+                "id": "large-extra-13-2",
+                "x": 14,
+                "y": 23
+              },
+              {
+                "id": "large-extra-13-3",
+                "x": 4,
+                "y": 14
+              },
+              {
+                "id": "large-extra-13-4",
+                "x": 12,
+                "y": 20
+              },
+              {
+                "id": "large-extra-13-5",
+                "x": 4,
+                "y": 10
+              },
+              {
+                "id": "large-extra-13-6",
+                "x": 11,
+                "y": 21
+              },
+              {
+                "id": "large-extra-13-7",
+                "x": 14,
+                "y": 17
+              },
+              {
+                "id": "large-extra-13-8",
+                "x": 5,
+                "y": 20
+              },
+              {
+                "id": "large-extra-13-9",
+                "x": 13,
+                "y": 12
+              },
+              {
+                "id": "large-extra-13-10",
+                "x": 15,
+                "y": 18
+              },
+              {
+                "id": "large-extra-13-11",
+                "x": 6,
+                "y": 19
+              }
+            ],
+            "remainingAllies": 10
+          }
+        ],
+        "HPStatsUnmodified": true,
+        "initialEnemyHP": [
+          {
+            "id": "archer1",
+            "hp": 31,
+            "maxHp": 31,
+            "level": 7,
+            "move": 4,
+            "x": 12,
+            "y": 17
+          },
+          {
+            "id": "mage2",
+            "hp": 28,
+            "maxHp": 28,
+            "level": 7,
+            "move": 2,
+            "x": 17,
+            "y": 23
+          },
+          {
+            "id": "shield3",
+            "hp": 39,
+            "maxHp": 39,
+            "level": 7,
+            "move": 2,
+            "x": 9,
+            "y": 18
+          },
+          {
+            "id": "assassin4",
+            "hp": 32,
+            "maxHp": 32,
+            "level": 7,
+            "move": 2,
+            "x": 14,
+            "y": 21
+          },
+          {
+            "id": "priest5",
+            "hp": 31,
+            "maxHp": 31,
+            "level": 7,
+            "move": 4,
+            "x": 5,
+            "y": 19
+          },
+          {
+            "id": "boss",
+            "hp": 56,
+            "maxHp": 56,
+            "level": 9,
+            "move": 1,
+            "x": 6,
+            "y": 22
+          },
+          {
+            "id": "large-extra-13-1",
+            "hp": 34,
+            "maxHp": 34,
+            "level": 7,
+            "move": 4,
+            "x": 11,
+            "y": 20
+          },
+          {
+            "id": "large-extra-13-2",
+            "hp": 36,
+            "maxHp": 36,
+            "level": 7,
+            "move": 2,
+            "x": 15,
+            "y": 24
+          },
+          {
+            "id": "large-extra-13-3",
+            "hp": 43,
+            "maxHp": 43,
+            "level": 7,
+            "move": 2,
+            "x": 6,
+            "y": 16
+          },
+          {
+            "id": "large-extra-13-4",
+            "hp": 34,
+            "maxHp": 34,
+            "level": 7,
+            "move": 2,
+            "x": 13,
+            "y": 23
+          },
+          {
+            "id": "large-extra-13-5",
+            "hp": 33,
+            "maxHp": 33,
+            "level": 7,
+            "move": 4,
+            "x": 3,
+            "y": 15
+          },
+          {
+            "id": "large-extra-13-6",
+            "hp": 29,
+            "maxHp": 29,
+            "level": 7,
+            "move": 2,
+            "x": 10,
+            "y": 24
+          },
+          {
+            "id": "large-extra-13-7",
+            "hp": 33,
+            "maxHp": 33,
+            "level": 7,
+            "move": 2,
+            "x": 16,
+            "y": 18
+          },
+          {
+            "id": "large-extra-13-8",
+            "hp": 34,
+            "maxHp": 34,
+            "level": 7,
+            "move": 2,
+            "x": 4,
+            "y": 21
+          },
+          {
+            "id": "large-extra-13-9",
+            "hp": 33,
+            "maxHp": 33,
+            "level": 7,
+            "move": 4,
+            "x": 13,
+            "y": 19
+          },
+          {
+            "id": "large-extra-13-10",
+            "hp": 34,
+            "maxHp": 34,
+            "level": 7,
+            "move": 4,
+            "x": 18,
+            "y": 20
+          },
+          {
+            "id": "large-extra-13-11",
+            "hp": 36,
+            "maxHp": 36,
+            "level": 7,
+            "move": 2,
+            "x": 8,
+            "y": 21
+          }
+        ],
+        "finalRound": 3,
+        "finalUnits": [
+          {
+            "id": "hero",
+            "type": "ally",
+            "hp": 41,
+            "maxHp": 41,
+            "x": 12,
+            "y": 6,
+            "level": 7,
+            "atk": 16,
+            "def": 13,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "bram",
+            "type": "ally",
+            "hp": 45,
+            "maxHp": 45,
+            "x": 12,
+            "y": 10,
+            "level": 7,
+            "atk": 15,
+            "def": 16,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "lina",
+            "type": "ally",
+            "hp": 35,
+            "maxHp": 35,
+            "x": 12,
+            "y": 8,
+            "level": 7,
+            "atk": 17,
+            "def": 10,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "archer1",
+            "type": "enemy",
+            "hp": 31,
+            "maxHp": 31,
+            "x": 12,
+            "y": 12,
+            "level": 7,
+            "atk": 15,
+            "def": 6,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "mage2",
+            "type": "enemy",
+            "hp": 28,
+            "maxHp": 28,
+            "x": 14,
+            "y": 22,
+            "level": 7,
+            "atk": 12,
+            "def": 5,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "shield3",
+            "type": "enemy",
+            "hp": 39,
+            "maxHp": 39,
+            "x": 6,
+            "y": 17,
+            "level": 7,
+            "atk": 11,
+            "def": 12,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "assassin4",
+            "type": "enemy",
+            "hp": 32,
+            "maxHp": 32,
+            "x": 13,
+            "y": 20,
+            "level": 7,
+            "atk": 13,
+            "def": 7,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "priest5",
+            "type": "enemy",
+            "hp": 31,
+            "maxHp": 31,
+            "x": 5,
+            "y": 13,
+            "level": 7,
+            "atk": 14,
+            "def": 6,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "boss",
+            "type": "boss",
+            "hp": 56,
+            "maxHp": 56,
+            "x": 6,
+            "y": 22,
+            "level": 9,
+            "atk": 14,
+            "def": 9,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "large-extra-13-1",
+            "type": "enemy",
+            "hp": 34,
+            "maxHp": 34,
+            "x": 7,
+            "y": 17,
+            "level": 7,
+            "atk": 15,
+            "def": 6,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "large-extra-13-2",
+            "type": "enemy",
+            "hp": 36,
+            "maxHp": 36,
+            "x": 14,
+            "y": 23,
+            "level": 7,
+            "atk": 13,
+            "def": 8,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "large-extra-13-3",
+            "type": "enemy",
+            "hp": 43,
+            "maxHp": 43,
+            "x": 4,
+            "y": 14,
+            "level": 7,
+            "atk": 14,
+            "def": 11,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "large-extra-13-4",
+            "type": "enemy",
+            "hp": 34,
+            "maxHp": 34,
+            "x": 12,
+            "y": 20,
+            "level": 7,
+            "atk": 14,
+            "def": 6,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "large-extra-13-5",
+            "type": "enemy",
+            "hp": 24,
+            "maxHp": 33,
+            "x": 4,
+            "y": 10,
+            "level": 7,
+            "atk": 15,
+            "def": 6,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "large-extra-13-6",
+            "type": "enemy",
+            "hp": 29,
+            "maxHp": 29,
+            "x": 11,
+            "y": 21,
+            "level": 7,
+            "atk": 12,
+            "def": 5,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "large-extra-13-7",
+            "type": "enemy",
+            "hp": 33,
+            "maxHp": 33,
+            "x": 14,
+            "y": 17,
+            "level": 7,
+            "atk": 11,
+            "def": 6,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "large-extra-13-8",
+            "type": "enemy",
+            "hp": 34,
+            "maxHp": 34,
+            "x": 5,
+            "y": 20,
+            "level": 7,
+            "atk": 13,
+            "def": 7,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "large-extra-13-9",
+            "type": "enemy",
+            "hp": 33,
+            "maxHp": 33,
+            "x": 13,
+            "y": 12,
+            "level": 7,
+            "atk": 14,
+            "def": 6,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "large-extra-13-10",
+            "type": "enemy",
+            "hp": 34,
+            "maxHp": 34,
+            "x": 15,
+            "y": 18,
+            "level": 7,
+            "atk": 15,
+            "def": 6,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "large-extra-13-11",
+            "type": "enemy",
+            "hp": 36,
+            "maxHp": 36,
+            "x": 6,
+            "y": 19,
+            "level": 7,
+            "atk": 13,
+            "def": 8,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "aria",
+            "type": "ally",
+            "hp": 37,
+            "maxHp": 37,
+            "x": 5,
+            "y": 8,
+            "level": 7,
+            "atk": 14,
+            "def": 12,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "leon",
+            "type": "ally",
+            "hp": 28,
+            "maxHp": 28,
+            "x": 14,
+            "y": 2,
+            "level": 4,
+            "atk": 11,
+            "def": 7,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "sera",
+            "type": "ally",
+            "hp": 6,
+            "maxHp": 27,
+            "x": 4,
+            "y": 9,
+            "level": 4,
+            "atk": 13,
+            "def": 6,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "noah",
+            "type": "ally",
+            "hp": 29,
+            "maxHp": 29,
+            "x": 11,
+            "y": 3,
+            "level": 4,
+            "atk": 10,
+            "def": 8,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "yuna",
+            "type": "ally",
+            "hp": 28,
+            "maxHp": 28,
+            "x": 16,
+            "y": 1,
+            "level": 4,
+            "atk": 11,
+            "def": 8,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "rakan",
+            "type": "ally",
+            "hp": 42,
+            "maxHp": 42,
+            "x": 7,
+            "y": 10,
+            "level": 4,
+            "atk": 14,
+            "def": 10,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "miho",
+            "type": "ally",
+            "hp": 30,
+            "maxHp": 30,
+            "x": 13,
+            "y": 4,
+            "level": 4,
+            "atk": 13,
+            "def": 7,
+            "moved": false,
+            "acted": false,
+            "status": []
+          },
+          {
+            "id": "reinforce-13-3-1",
+            "type": "enemy",
+            "hp": 29,
+            "maxHp": 29,
+            "x": 2,
+            "y": 24,
+            "level": 7,
+            "atk": 14,
+            "def": 4,
+            "moved": false,
+            "acted": false,
+            "status": []
+          }
+        ],
+        "battleStats": {
+          "damageDealt": 9,
+          "damageTaken": 21,
+          "healingDone": 0,
+          "kills": 0,
+          "assists": 0,
+          "itemsUsed": 0,
+          "skillsUsed": 0,
+          "counters": 1,
+          "lootDrops": 0
+        },
+        "battleSaveRestore": true
+      },
+      "fixtures": {
+        "heroDeathContinues": true
+      },
+      "campaignLock": true,
+      "mission": {
+        "bossNames": [
+          "이름을 거두는 자"
+        ],
+        "roundLimit": 36,
+        "heroDeathExcluded": true
+      },
+      "deploymentSaveRestore": true,
+      "deploymentPan": {
+        "before": {
+          "x": 417,
+          "y": 0,
+          "maxX": 902,
+          "maxY": 765
+        },
+        "after": {
+          "x": 497,
+          "y": 65
+        }
+      },
+      "deployment": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollWidth": 390,
+        "overflow": false,
+        "broken": []
+      },
+      "battle": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollWidth": 390,
+        "overflow": false,
+        "broken": []
+      },
+      "failure": {
+        "message": "page.waitForFunction: Timeout 120000ms exceeded.",
+        "stack": "page.waitForFunction: Timeout 120000ms exceeded.\n    at waitForBattleReady (/workspace/cheonsu/scripts/qa-battle-tools.mjs:9:14)\n    at saveBattle (/workspace/cheonsu/scripts/qa-battle-tools.mjs:22:9)\n    at readBattle (/workspace/cheonsu/scripts/qa175-harness.mjs:78:48)\n    at test (/workspace/cheonsu/scripts/qa176-team-b.mjs:114:247)\n    at async file:///workspace/cheonsu/scripts/qa176-team-b.mjs:138:90\n    at async file:///workspace/cheonsu/scripts/qa176-team-b.mjs:135:5"
+      }
+    }
+  ],
+  "errors": [],
+  "bundle": "/assets/index-CPjDjwM-.js",
+  "finishedAt": "2026-10-16T00:04:49.956Z",
+  "interrupted": false,
+  "passed": false
+}

@@ -1,0 +1,19 @@
+{
+  "version": "1.99.176",
+  "url": "http://127.0.0.1:4173",
+  "startedAt": "2026-10-16T00:16:25.464Z",
+  "beforeFix": true,
+  "scope": "clearedStages 미기록 구형 저장의 타이틀·기록실·도감·이어하기·수동 저장",
+  "isolatedSyntheticSave": true,
+  "errors": [
+    {
+      "message": "Cannot read properties of undefined (reading 'length')",
+      "stack": "TypeError: Cannot read properties of undefined (reading 'length')\n    at zl (http://127.0.0.1:4173/assets/index-CPjDjwM-.js:21:6928)\n    at xo (http://127.0.0.1:4173/assets/index-CPjDjwM-.js:9:47547)\n    at uc (http://127.0.0.1:4173/assets/index-CPjDjwM-.js:9:70050)\n    at Dc (http://127.0.0.1:4173/assets/index-CPjDjwM-.js:9:80312)\n    at Nu (http://127.0.0.1:4173/assets/index-CPjDjwM-.js:9:115851)\n    at Au (http://127.0.0.1:4173/assets/index-CPjDjwM-.js:9:114901)\n    at ku (http://127.0.0.1:4173/assets/index-CPjDjwM-.js:9:114735)\n    at _u (http://127.0.0.1:4173/assets/index-CPjDjwM-.js:9:111568)\n    at ud (http://127.0.0.1:4173/assets/index-CPjDjwM-.js:9:123213)\n    at MessagePort.te (http://127.0.0.1:4173/assets/index-CPjDjwM-.js:2:9759)"
+    }
+  ],
+  "passed": true,
+  "bundle": "/assets/index-CPjDjwM-.js",
+  "observed": "clearedStages.length TypeError",
+  "storageUnchanged": true,
+  "finishedAt": "2026-10-16T00:16:27.109Z"
+}

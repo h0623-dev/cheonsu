@@ -1,7 +1,7 @@
 {
   "version": "1.99.176",
   "androidVersionCode": 375,
-  "generatedAt": "2026-10-16T00:00:03.267Z",
+  "generatedAt": "2026-10-16T00:18:33.457Z",
   "command": "npm test",
   "node": "v24.19.0",
   "counts": {
@@ -12,12 +12,14 @@
     "skipped": 0,
     "todo": 0
   },
+  "durationMs": 24692.157808,
   "newTeamATests": 211,
   "engineStages": 50,
   "rewardCombinations": 800,
   "rewardFailures": 0,
   "sourceFileSha256": {
     "src/App.jsx": "bc0abe251b3f1851068f2b279b836ef678e5312a70ae4dca77bd8b6c5572fd37",
+    "src/components/TitleMenu.jsx": "8afa88f8c56e5c3727266331999d8d6ff76306a4e06ab51f9b2100ae5f57f1fa",
     "src/engine/movement.js": "4d9731459c0bebb1bf20efda9ade145496e0807b3e9a0e7ee8144515475be427",
     "src/engine/enemyAI.js": "38ed5f0f0dc06bf47768440fad1777c6b9cbd59634b4b1f7ede65ea3cb39de92",
     "src/engine/stageRules.js": "ae7cbd629a2885612a041149f24ace340f457fe87b1e176262a977765509f8b9",
@@ -26,6 +28,7 @@
     "scripts/qa176-team-a-contracts.test.mjs": "c30cdf50e712f3d5193920f906482086ed676f2a5f7175321fa4c2fe44bab910",
     "scripts/qa176-team-a-ink-vine.test.mjs": "4153b100136f3f066d0c3164c8d990c61e97612a2b148d6ca6a596cfb896d857"
   },
+  "previousSuccessfulRun": "npm-test-before-title.log",
   "limits": [
     "장별 엔진/저장 계약; 자연 플레이 50회 연속 승리 아님",
     "브라우저 QA·물리 기기 QA 결과와 구분"

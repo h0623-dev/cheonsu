@@ -31,3 +31,16 @@
 - 이 보고서가 전체 50장 브라우저 QA·전체 21명 모든 기술·실기기 검사 또는 APK 검증을 의미하지는 않습니다. 다른 QA 팀의 별도 근거와 최종 통합 기록을 구분해야 합니다.
 - 기본 sandbox에서 `node --test`의 하위 프로세스 실행은 `test failed`로 중단됐습니다. 이를 통과로 계상하지 않았습니다. `node scripts/각파일.test.mjs` 직접 실행으로 Node test 러너의 개별 결과를 얻었습니다.
 - 개발팀은 공개 업로드·커밋·게임 버전·Notion·서명키를 다루지 않았습니다. 루트 팀이 최종 소스 통합과 APK/OTA 제작·전체 QA·배포를 담당합니다.
+
+## 최종 통합에서 추가한 구형 타이틀 회귀
+
+저장 구조 검사 보완에서 `clearedStages`가 없는 초기 구형 저장을 허용하면서, 타이틀의 기존 `saved.clearedStages.length` 직접 접근이 새로 도달 가능한 경로가 됐습니다. 루트 최종 검토가 이 표시 누락을 발견했고 개발팀이 실제 브라우저로 확인했습니다. 기존 175에서 재현한 세 버그와 별개인 이번 수정의 호환성 보강입니다.
+
+- 수정 전 번들 `/assets/index-CPjDjwM-.js`, 독립 390×844 브라우저에 초기 파티 4명·골드 4567·진행 필드 미기록 구형 저장을 주입하고 타이틀을 새로고침했습니다.
+- 실제 오류 `Cannot read properties of undefined (reading 'length')`를 확인했습니다. 저장 원문은 바뀌지 않았습니다.
+- 소스 수정은 `TitleMenu.jsx`의 표시 한 곳을 `saved.clearedStages?.length ?? 0`으로 변경한 것뿐입니다. App의 기록실·도감은 기존 `browsingCleared ... || []`를 통해 빈 배열을 전달하므로 추가 소스 변경이 필요하지 않았습니다.
+- 수정 전 증거: `legacy-title-before/report.json`, `legacy-title-before/before-title.png`.
+- 최종 빌드용 회귀 `scripts/qa176-legacy-title.mjs`: 타이틀 0/50 완료, 기록실 0/50, 도감, 읽기 전용 이어하기, 수동 저장 후 골드·동료 4명·성장·능력·장비·강화·마을 캐릭터 보존을 검사합니다. 수정 전 오류 재현 모드는 `QA_LEGACY_EXPECT_BUG=1`입니다.
+- 이 타이틀 한 곳의 수정 이후에는 최종 소스의 해당 회귀·세 화면 스모크를 별도로 기록하고, 앞서 수행한 50장 전투 QA의 검사 대상과 혼동하지 않습니다.
+- 수정 후 실제 UI 회귀가 **2026-10-16 09:18:04 KST**에 통과했습니다. 새 최종 번들은 `/assets/index-Ds9WWFH_.js`입니다. 타이틀 `원정 준비 · 0/50장 완료`, 기록실 0/50, 도감, 이어하기, 수동 저장까지 페이지 오류 **0건**입니다. 수동 저장 전에는 원문이 그대로 유지됐고, 저장 후 골드 4567·카일/브람/리나/아리아 4명·성장/능력/장비/강화·마을 리나 선택이 보존됐습니다.
+- 수정 후 증거: `legacy-title-after/report.json`, `legacy-title-after/after-title.png`, `legacy-title-after/after-continued-saved.png`. 이는 타이틀 한 줄 수정이 포함된 최종 빌드의 별도 회귀입니다.

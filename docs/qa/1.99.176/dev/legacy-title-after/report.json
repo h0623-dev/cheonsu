@@ -1,0 +1,34 @@
+{
+  "version": "1.99.176",
+  "url": "http://127.0.0.1:4173",
+  "startedAt": "2026-10-16T00:18:01.816Z",
+  "beforeFix": false,
+  "scope": "clearedStages 미기록 구형 저장의 타이틀·기록실·도감·이어하기·수동 저장",
+  "isolatedSyntheticSave": true,
+  "errors": [],
+  "passed": true,
+  "bundle": "/assets/index-Ds9WWFH_.js",
+  "title": "원정 준비 · 0/50장 완료",
+  "preserved": {
+    "gold": 4567,
+    "characterIds": [
+      "hero",
+      "bram",
+      "lina",
+      "aria"
+    ],
+    "fields": [
+      "이름",
+      "레벨",
+      "경험치",
+      "HP",
+      "기본 능력",
+      "장비",
+      "강화",
+      "마을 캐릭터"
+    ],
+    "clearedStages": [],
+    "readOnlyUntilManualSave": true
+  },
+  "finishedAt": "2026-10-16T00:18:04.891Z"
+}
