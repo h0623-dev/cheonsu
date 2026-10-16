@@ -6182,74 +6182,74 @@
       "windup": {
         "kind": "blade",
         "grip": [
-          247,
-          138
+          338,
+          143
         ],
         "tip": [
-          428,
-          228
+          181,
+          55
         ],
         "focus": [
-          370,
-          200
+          181,
+          55
         ],
-        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewMethod": "2026-10-16: 생성 원본 시트 또는 단일 교정 원화의 손잡이·검끝을 눈으로 읽은 근삿값을 제작기의 크기·발 정렬 affine 변환으로 512px에 옮김. 최종 출력의 정밀 실측·후속 검증으로 표시하지 않음.",
         "framePath": "public/art/characters-v3/units/oath_guardian-windup.webp",
-        "frameSha256": "8b63ebc84708fb7238fd938e8d91578d2f772ceb2955c23283c452d9fa06de57"
+        "frameSha256": "cfa2a2ed6601a275e66326ab6fe0b34ae7085d6b950621d8ddf6e1cbc821a8a9"
       },
       "strike": {
         "kind": "blade",
         "grip": [
-          289,
-          244
+          307,
+          315
         ],
         "tip": [
-          485,
-          251
+          419,
+          476
         ],
         "focus": [
-          421,
-          247
+          419,
+          476
         ],
-        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewMethod": "2026-10-16: 생성 원본 시트 또는 단일 교정 원화의 손잡이·검끝을 눈으로 읽은 근삿값을 제작기의 크기·발 정렬 affine 변환으로 512px에 옮김. 최종 출력의 정밀 실측·후속 검증으로 표시하지 않음.",
         "framePath": "public/art/characters-v3/units/oath_guardian-strike.webp",
-        "frameSha256": "80fbaf242d9bd468764fb1bd61febe3dd088a551ae0c27ee7e4b606ba92c9c67"
+        "frameSha256": "0a21c15506cd866f80ab08d6fae72e79da0391075d9c95eee236843184ce3445"
       },
       "skill-a": {
         "kind": "blade",
         "grip": [
-          166,
-          277
+          353,
+          107
         ],
         "tip": [
-          68,
-          430
+          161,
+          12
         ],
         "focus": [
-          112,
-          363
+          161,
+          12
         ],
-        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewMethod": "2026-10-16: 생성 원본 시트 또는 단일 교정 원화의 손잡이·검끝을 눈으로 읽은 근삿값을 제작기의 크기·발 정렬 affine 변환으로 512px에 옮김. 최종 출력의 정밀 실측·후속 검증으로 표시하지 않음.",
         "framePath": "public/art/characters-v3/units/oath_guardian-skill-a.webp",
-        "frameSha256": "ba2517cca4a46d7385345bdcb5909ed1b2e0fd69a501670f14e1897f1d56af17"
+        "frameSha256": "d478b0908584e33df7d771a6a6d7ba8c1e2e6e0a187e0f128d1f70b558b76a6d"
       },
       "skill-b": {
         "kind": "blade",
         "grip": [
-          326,
-          232
+          182,
+          183
         ],
         "tip": [
-          460,
-          268
+          176,
+          476
         ],
         "focus": [
-          417,
-          255
+          176,
+          476
         ],
-        "reviewMethod": "최종 512px 원화를 눈금·확대로 직접 수동 검토한 근삿값. 정밀 실측 좌표로 표시하지 않음.",
+        "reviewMethod": "2026-10-16: 생성 원본 시트 또는 단일 교정 원화의 손잡이·검끝을 눈으로 읽은 근삿값을 제작기의 크기·발 정렬 affine 변환으로 512px에 옮김. 최종 출력의 정밀 실측·후속 검증으로 표시하지 않음.",
         "framePath": "public/art/characters-v3/units/oath_guardian-skill-b.webp",
-        "frameSha256": "d4b8faf54dcd48bae246a7d160a01bd6e792e5de26f2b2d427e8daeba2ba97e3"
+        "frameSha256": "0710afd87c2d7a4f7093daa4186c29ae0077a388a717f2491f90255e554d9012"
       }
     }
   },

@@ -34,6 +34,10 @@
 
 제작 중 메모리의 알파 경계에서 `metrics`를 계산하고, 같은 변환으로 손잡이·끝·마법 중심·활 양끝/곡선 앵커를 `manifest.units[id].anchors`에 기록합니다. 기술의 `src`, `scale`, `footOffset`도 새 프레임과 함께 기록합니다. 기존 `getCharacterArt`·`getSkillAuraAnchor`가 이 값을 사용합니다. `packaging-report.json`은 이 제작 계산의 기록이며 별도 검사를 통과했다는 보고서가 아닙니다.
 
+앵커의 제작 자료와 카탈로그를 함께 갱신합니다. 기본 카일·리나·아리아의 `windup`, `strike`, `skill-a`, `skill-b`는 기존 `src/data/skillWeaponAnchors.json`의 같은 네 자세를 새 좌표로 동기화합니다. 기존 카탈로그 항목이 이전 원화의 손·검·활·지팡이 위치를 계속 가리키지 않게 하며 다른 캐릭터의 항목은 보존합니다.
+
+수호체의 같은 네 자세는 `src/data/reviewedSkillWeaponAnchors.json`이 소유합니다. 생성 원본에서 눈으로 읽은 손잡이·검끝의 근삿값을 제작 변환으로 옮겼다는 방법과 새 `framePath`·`frameSha256`를 기록합니다. 이 SHA는 새 WebP를 인코딩한 메모리 바이트에서 쓰기 전에 생성하며 출력 파일을 다시 읽어 대조하지 않습니다. 수호체 manifest에서는 이 네 direct 앵커를 생략하여 기존 `reviewed-frame` 조회를 사용하고, 달리기 두 자세·회수·피격은 `measured:false`의 별도 `frame-profile`로 남깁니다. 수호체를 최종 원화의 정밀 실측 자료로 표시하지 않습니다. 기존 조회 함수와 테스트 소스·조건은 변경하지 않습니다.
+
 ```sh
 node scripts/prepare-cinematic-art.mjs
 ```

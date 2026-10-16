@@ -922,7 +922,7 @@
             435,
             395
           ],
-          "measured": true,
+          "measured": false,
           "focus": [
             435,
             395
@@ -938,42 +938,10 @@
             101,
             348
           ],
-          "measured": true,
+          "measured": false,
           "focus": [
             101,
             348
-          ]
-        },
-        "windup": {
-          "kind": "blade",
-          "grip": [
-            338,
-            143
-          ],
-          "tip": [
-            181,
-            55
-          ],
-          "measured": true,
-          "focus": [
-            181,
-            55
-          ]
-        },
-        "strike": {
-          "kind": "blade",
-          "grip": [
-            307,
-            315
-          ],
-          "tip": [
-            419,
-            476
-          ],
-          "measured": true,
-          "focus": [
-            419,
-            476
           ]
         },
         "recover": {
@@ -986,7 +954,7 @@
             404,
             459
           ],
-          "measured": true,
+          "measured": false,
           "focus": [
             404,
             459
@@ -1002,42 +970,10 @@
             403,
             478
           ],
-          "measured": true,
+          "measured": false,
           "focus": [
             403,
             478
-          ]
-        },
-        "skill-a": {
-          "kind": "blade",
-          "grip": [
-            353,
-            107
-          ],
-          "tip": [
-            161,
-            12
-          ],
-          "measured": true,
-          "focus": [
-            161,
-            12
-          ]
-        },
-        "skill-b": {
-          "kind": "blade",
-          "grip": [
-            182,
-            183
-          ],
-          "tip": [
-            176,
-            476
-          ],
-          "measured": true,
-          "focus": [
-            176,
-            476
           ]
         }
       },

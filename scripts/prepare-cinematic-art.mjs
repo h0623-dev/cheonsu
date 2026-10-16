@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 import silhouetteTools from './prepare-painted-sprites.cjs';
@@ -10,6 +11,7 @@ const characters = ['hero', 'lina', 'aria', 'oath_guardian'];
 const canvasSize = 512;
 const foot = 480;
 const alphaThreshold = 64;
+const contactPoses = ['windup', 'strike', 'skill-a', 'skill-b'];
 const serialize = value => `${JSON.stringify(value, null, 2)}\n`;
 
 // Bounds are part of placing the authored artwork and generating its runtime
@@ -92,7 +94,7 @@ function normalizedAnchor(authored, frame, placement) {
   return result;
 }
 
-async function prepareCharacter(id, entry, manifest) {
+async function prepareCharacter(id, entry, manifest, catalogs) {
   const sourcePath = path.resolve(root, entry.sourcePath);
   const sheet = await extractSheet(sourcePath);
   const overrides = {};
@@ -128,17 +130,49 @@ async function prepareCharacter(id, entry, manifest) {
     const authored = entry.anchors?.[frame.pose];
     if (!authored) throw new Error(`${id}/${frame.pose}: 원화에서 지정한 무기 앵커가 필요합니다.`);
     const input = await sharp(resized, { raw: { width, height, channels: 4 } }).png().toBuffer();
-    await sharp({ create: { width: canvasSize, height: canvasSize, channels: 4, background: '#00000000' } })
+    const output = await sharp({ create: { width: canvasSize, height: canvasSize, channels: 4, background: '#00000000' } })
       .composite([{ input, left, top }]).webp({ quality: 94, alphaQuality: 100 })
-      .toFile(path.join(directory, `${id}-${frame.pose}.webp`));
+      .toBuffer();
+    // Record the bytes being manufactured before writing them. This is the
+    // source binding for the production catalog, not a later artifact reread.
+    const frameSha256 = createHash('sha256').update(output).digest('hex');
+    await fs.writeFile(path.join(directory, `${id}-${frame.pose}.webp`), output);
     metrics[frame.pose] = { height: canvasSize, top: top + box.top, bottom: top + box.bottom };
     anchors[frame.pose] = normalizedAnchor(authored, frame, placement);
     placements[frame.pose] = { sourceBounds: frame.box, ...placement,
       pixelBounds: { left: left + box.left, right: left + box.right, top: top + box.top, bottom: top + box.bottom },
-      metrics: metrics[frame.pose] };
+      frameSha256, metrics: metrics[frame.pose] };
   }
   unit.metrics = metrics;
-  unit.anchors = anchors;
+  if (id === 'oath_guardian') {
+    // Expansion art uses a reviewed catalog rather than claiming the final
+    // output was precisely measured. Leave those four poses to the existing
+    // reviewed-frame lookup; the other poses keep their own frame profiles.
+    unit.anchors = Object.fromEntries(Object.entries(anchors)
+      .filter(([pose]) => !contactPoses.includes(pose))
+      .map(([pose, anchor]) => [pose, { ...anchor, measured: false }]));
+    catalogs.reviewed.units[id] ||= {};
+    for (const pose of contactPoses) {
+      const { measured, ...geometry } = anchors[pose];
+      void measured;
+      catalogs.reviewed.units[id][pose] = {
+        ...geometry,
+        reviewMethod: '2026-10-16: 생성 원본 시트 또는 단일 교정 원화의 손잡이·검끝을 눈으로 읽은 근삿값을 제작기의 크기·발 정렬 affine 변환으로 512px에 옮김. 최종 출력의 정밀 실측·후속 검증으로 표시하지 않음.',
+        framePath: `public/art/${collection}/units/${id}-${pose}.webp`,
+        frameSha256: placements[pose].frameSha256,
+      };
+      anchors[pose] = { ...catalogs.reviewed.units[id][pose], measured: false, reviewed: true };
+    }
+    for (const pose of poses.filter(pose => !contactPoses.includes(pose))) anchors[pose].measured = false;
+  } else {
+    unit.anchors = anchors;
+    catalogs.authored[id] ||= {};
+    for (const pose of contactPoses) {
+      const { measured, ...geometry } = anchors[pose];
+      void measured;
+      catalogs.authored[id][pose] = geometry;
+    }
+  }
   const referenceHeight = metrics.recover.bottom - metrics.recover.top + 1;
   // Runtime uses recover to enlarge all poses together. Reserve 12px inside the
   // final actor box for every authored sword, bow, robe and raised focus.
@@ -154,6 +188,11 @@ async function prepareCharacter(id, entry, manifest) {
   }]));
   return { sourcePath: entry.sourcePath, sourceSize: [sheet.width, sheet.height], overrides, collection,
     baseScale, foot, canvasSize, displayScale, visibleFraction: unit.visibleFraction,
+    anchorCatalog: id === 'oath_guardian'
+      ? { contactPoses, path: 'src/data/reviewedSkillWeaponAnchors.json', classification: 'reviewed-frame',
+          directFrameProfiles: poses.filter(pose => !contactPoses.includes(pose)), hashSource: 'newly-encoded-webp-buffer-before-write' }
+      : { contactPoses, path: 'src/data/skillWeaponAnchors.json', classification: 'authored-frame',
+          directFrameProfiles: [...poses] },
     placements, anchors, skills: unit.skills };
 }
 
@@ -171,13 +210,21 @@ for (const id of requested) {
   }
 }
 const reportPath = path.join(root, 'docs/art/cinematic-v1/packaging-report.json');
+const authoredPath = path.join(root, 'src/data/skillWeaponAnchors.json');
+const reviewedPath = path.join(root, 'src/data/reviewedSkillWeaponAnchors.json');
+const catalogs = {
+  authored: JSON.parse(await fs.readFile(authoredPath, 'utf8')),
+  reviewed: JSON.parse(await fs.readFile(reviewedPath, 'utf8')),
+};
 let report = { version: 1, units: {} };
 try { report = JSON.parse(await fs.readFile(reportPath, 'utf8')); }
 catch (error) { if (error.code !== 'ENOENT') throw error; }
 for (const id of requested) {
   const collection = config.units[id].collection || 'characters-v2';
-  report.units[id] = await prepareCharacter(id, config.units[id], manifests.get(collection).data);
+  report.units[id] = await prepareCharacter(id, config.units[id], manifests.get(collection).data, catalogs);
   console.log(`전투 원화 제작: ${id} · 8개 자세 · 기존 경로 유지`);
 }
 for (const { manifestPath, data } of manifests.values()) await fs.writeFile(manifestPath, serialize(data));
+await fs.writeFile(authoredPath, serialize(catalogs.authored));
+await fs.writeFile(reviewedPath, serialize(catalogs.reviewed));
 await fs.writeFile(reportPath, serialize(report));
