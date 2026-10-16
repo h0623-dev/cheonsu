@@ -53,5 +53,32 @@ for (const [pose, guide] of Object.entries(guides)) {
     guide, construction: '원본 시트의 수동 활 윤곽 가이드와 주변 금빛 불투명 픽셀로 제작한 짧은 선분 경로. 출력 원화·검사 샘플 재대조 없음.' });
 }
 
+// Focus is the nock/drawing hand, not the short exposed point in front of the
+// bow grip. The same source artwork supplies the complete loaded arrow axis.
+const arrowGuides = {
+  windup: { start: [943, 182], tip: [1166, 159] },
+  strike: { start: [1271, 169], tip: [1512, 108] },
+  'skill-a': { start: [919, 675], tip: [1172, 650] },
+  'skill-b': { start: [1281, 755], tip: [1526, 753] },
+};
+function arrowPoint([x, y]) {
+  let selected = null;
+  for (let dy = -3; dy <= 3; dy++) for (let dx = -3; dx <= 3; dx++) {
+    const px = x + dx, py = y + dy;
+    if (px < 0 || px >= info.width || py < 0 || py >= info.height) continue;
+    if (data[(py * info.width + px) * 4 + 3] <= 64) continue;
+    const distance = dx * dx + dy * dy;
+    if (!selected || distance < selected.distance) selected = { point: [px, py], distance };
+  }
+  if (!selected) throw new Error(`화살 시작·촉 제작 가이드를 원본에서 다시 지정해야 합니다: ${x},${y}`);
+  return selected.point;
+}
+for (const [pose, guide] of Object.entries(arrowGuides)) {
+  entry.anchors[pose].focus = arrowPoint(guide.start);
+  entry.anchors[pose].tip = arrowPoint(guide.tip);
+  entry.anchors[pose].bow.arrowGuide = { ...guide,
+    construction: '원본 화살의 뒤쪽 깃·당긴 손 또는 방출축에서 촉 끝까지의 수동 가이드와 인접 원화 픽셀로 제작. 기존 화살 표시 여부 보존.' };
+}
+
 await fs.writeFile(configPath, `${JSON.stringify(config, null, 2)}\n`);
-console.log('리나의 네 자세 활 윤곽 좌표 제작 완료 · 원본 그림 보존');
+console.log('리나의 네 자세 활 윤곽·전체 화살 좌표 제작 완료 · 원본 그림 보존');
