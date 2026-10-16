@@ -1,0 +1,62 @@
+{
+  "checkedAt": "2026-10-16T01:15:59.909Z",
+  "mode": "download",
+  "version": "1.99.176",
+  "sourceCommit": "0c8619fc54992dbe1299b8b92bbc7f56eab7a805",
+  "releaseUrl": "https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.176",
+  "channelUrl": "https://raw.githubusercontent.com/h0623-dev/cheonsu/updates/latest.json",
+  "envelopeSignatureVerified": true,
+  "manifest": {
+    "version": "1.99.176",
+    "bundleId": "1.99.176-7b207e57dd63",
+    "size": 306222115,
+    "sha256": "7b207e57dd63be635c117b7756368286f1358784110fc738e5886318388e9a5f",
+    "minNativeVersion": 350,
+    "maxNativeVersion": 375,
+    "notes": [
+      "전투 기본·추가 보상에 선택한 밸런스 프리셋의 골드 배율을 반영합니다. 반격으로 격파한 적도 부대와 개인 격파 기록에 포함합니다.",
+      "구형 적 턴 저장을 이어갈 때 이미 행동한 지원형 적이 추가 지원을 하지 않도록 했습니다. 다음 적 턴에는 정상적으로 다시 행동합니다.",
+      "불완전한 JSON 저장을 가져오거나 복구해 정상 진행을 덮어쓰는 일을 차단합니다. 유효한 구형 저장과 기존 진행·장비·성장을 보존하고 클리어 진행도 복구 선택을 50장까지 확장했습니다.",
+      "49장에서 잉크덩굴 포식자의 추격을 막던 여울 이동 비용을 해당 종에 한해 보정합니다. 기본 이동력과 다른 적의 이동 규칙은 유지합니다.",
+      "35·40·45·50장 확장 보스의 추천 편성·작전 브리핑·보급 안내를 실제 보스전과 맞췄습니다. 원정 지도에는 적 수와 위험도가 15인 편성 기준 예상임을 표시합니다.",
+      "승패 조건과 추가 보상 목표를 구분하고 지휘관 엄호의 실제 HP 조건, 카일 사망만으로 패배하지 않는 규칙, 전직·합류·훈련 도움말을 보강했습니다. 턴 배너를 한국어로 표시합니다.",
+      "기기에서 모션 줄이기를 선택하면 턴 배너와 카메라·위험·범위 표식의 움직임을 정적 표시로 바꿉니다. 미리보기로 공개한 무료 이펙트는 이번 패치에 적용하지 않았습니다.",
+      "두 독립 QA 역할로 전체 50장 엔진·실제 UI와 저장·승패·재도전을 점검했습니다. 최종 단위 1,068개, 전장 50개와 후반 복구 3개 화면을 통과했고 구형 저장의 타이틀·이어하기·진행 보존도 확인했습니다."
+    ]
+  },
+  "assets": [
+    {
+      "name": "cheonsu_1.99.176_ota.zip",
+      "url": "https://github.com/h0623-dev/cheonsu/releases/download/v1.99.176/cheonsu_1.99.176_ota.zip",
+      "size": 306222115,
+      "sha256": "7b207e57dd63be635c117b7756368286f1358784110fc738e5886318388e9a5f",
+      "publicMetadataMatched": true,
+      "downloadedBytes": 306222115,
+      "downloadedSha256": "7b207e57dd63be635c117b7756368286f1358784110fc738e5886318388e9a5f",
+      "downloadedBundleSignatureVerified": true
+    },
+    {
+      "name": "cheonsu_1.99.176_update_debug.apk",
+      "url": "https://github.com/h0623-dev/cheonsu/releases/download/v1.99.176/cheonsu_1.99.176_update_debug.apk",
+      "size": 315085285,
+      "sha256": "7a0b1cfb5cbc9b126afd25c20a19da493734db03786a8bdd8ae69608f9d93c06",
+      "publicMetadataMatched": true,
+      "downloadedBytes": 315085285,
+      "downloadedSha256": "7a0b1cfb5cbc9b126afd25c20a19da493734db03786a8bdd8ae69608f9d93c06"
+    },
+    {
+      "name": "cheonsu_development_1.99.176.zip",
+      "url": "https://github.com/h0623-dev/cheonsu/releases/download/v1.99.176/cheonsu_development_1.99.176.zip",
+      "size": 902675179,
+      "sha256": "170a75be0e3384b6a0e6c7870cc820c241fa0b42836f748d40c54f1ea75e437b",
+      "publicMetadataMatched": true,
+      "downloadedBytes": 902675179,
+      "downloadedSha256": "170a75be0e3384b6a0e6c7870cc820c241fa0b42836f748d40c54f1ea75e437b"
+    }
+  ],
+  "actualAndroidDevice": false,
+  "actualIPhoneDevice": false,
+  "passed": true,
+  "downloadCompletedAt": "2026-10-16T01:16:48.603416+00:00",
+  "totalDownloadedBytes": 1523982579
+}

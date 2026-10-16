@@ -1,0 +1,8 @@
+Source: 0c8619fc54992dbe1299b8b92bbc7f56eab7a805
+Mode: direct public full-byte streaming downloads, not Actions HEAD/asset metadata only
+Started: 2026-10-16T01:15:59.909Z
+Completed: 2026-10-16T01:16:48.603416+00:00
+PASS public bytes cheonsu_1.99.176_ota.zip: 306222115 7b207e57dd63be635c117b7756368286f1358784110fc738e5886318388e9a5f
+PASS public bytes cheonsu_1.99.176_update_debug.apk: 315085285 7a0b1cfb5cbc9b126afd25c20a19da493734db03786a8bdd8ae69608f9d93c06
+PASS public bytes cheonsu_development_1.99.176.zip: 902675179 170a75be0e3384b6a0e6c7870cc820c241fa0b42836f748d40c54f1ea75e437b
+PASS signed public channel 1.99.176 1.99.176-7b207e57dd63; download
