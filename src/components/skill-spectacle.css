@@ -51,6 +51,24 @@
   transform-origin: 50% 50%;
 }
 
+/* 작은 배우에서도 무기에 붙은 빛의 선을 유지하고, 원화나 앵커는 확대하지 않습니다. */
+@media (max-width: 600px), (max-height: 500px) and (orientation: landscape) {
+  .vfx-weapon-aura .vfx-weapon-flow {
+    vector-effect: non-scaling-stroke;
+    stroke-width: 1.6px;
+  }
+
+  .vfx-weapon-aura .vfx-weapon-contour {
+    vector-effect: non-scaling-stroke;
+    stroke-width: 3.2px;
+  }
+
+  .vfx-weapon-aura .vfx-weapon-core {
+    vector-effect: non-scaling-stroke;
+    stroke-width: 1.05px;
+  }
+}
+
 .duel-motion-disabled :is(.skill-spectacle, .vfx-blade-aura, .vfx-weapon-aura),
 .motion-off :is(.skill-spectacle, .vfx-blade-aura, .vfx-weapon-aura) {
   display: none;

@@ -273,8 +273,10 @@ function WeaponShape({ anchor, kind, visual, id }) {
     <path d="M0-20V22M-15-1H15M-20-19-15-9M20-19 15-9M-12 23 0 31 12 23" stroke={visual.color} strokeWidth="2.5" />
   </g>;
   if (kind === 'fist' || kind === 'claw') return <g transform={`translate(${focus.join(' ')}) rotate(${angle})`} fill="none" strokeLinecap="round">
-    <path className="vfx-weapon-flow" d="M-23-14Q-6-23 17-11M-25 0Q-4-7 22 2M-20 14Q-4 9 17 16" stroke={energy} strokeWidth={kind === 'claw' ? 4 : 5.5} strokeDasharray="14 7" />
-    <path d="M-18-13Q-4-17 14-10M-20 0Q-3-3 17 2M-15 13Q-2 11 13 15" stroke={visual.core} strokeWidth="1.2" />
+    {/* 짧은 발톱과 권격은 점선 사이에서도 속성색 윤곽이 이어져 보이도록 합니다. */}
+    <path className="vfx-weapon-contour" d="M-23-14Q-6-23 17-11M-25 0Q-4-7 22 2M-20 14Q-4 9 17 16" stroke={visual.color} strokeWidth={kind === 'claw' ? 9 : 10} opacity=".28" />
+    <path className="vfx-weapon-flow" d="M-23-14Q-6-23 17-11M-25 0Q-4-7 22 2M-20 14Q-4 9 17 16" stroke={energy} strokeWidth={kind === 'claw' ? 6 : 7} strokeDasharray="14 7" />
+    <path className="vfx-weapon-core" d="M-18-13Q-4-17 14-10M-20 0Q-3-3 17 2M-15 13Q-2 11 13 15" stroke={visual.core} strokeWidth="2.3" />
     <path d={star} transform="translate(2 0) scale(.8)" fill={visual.core} />
     {anchor.secondary && <path d={star} transform={`translate(${(anchor.secondary.tip[0] - focus[0]) * Math.cos(-angle * Math.PI / 180) - (anchor.secondary.tip[1] - focus[1]) * Math.sin(-angle * Math.PI / 180)} ${(anchor.secondary.tip[0] - focus[0]) * Math.sin(-angle * Math.PI / 180) + (anchor.secondary.tip[1] - focus[1]) * Math.cos(-angle * Math.PI / 180)}) scale(.9)`} fill={visual.color} opacity=".7" />}
   </g>;
