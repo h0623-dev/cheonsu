@@ -4240,10 +4240,10 @@
           "sourcePath": "docs/art/style-b-v1/sources/ally-06.png",
           "sheet": "ally-06",
           "sourceCell": {
-            "left": 44,
-            "top": 88,
-            "width": 319,
-            "height": 319
+            "left": 48,
+            "top": 95,
+            "width": 314,
+            "height": 317
           },
           "sourceBounds": {
             "left": 63,
@@ -4276,16 +4276,16 @@
           "anchors": {
             "kind": "blade",
             "grip": [
-              187,
-              282
+              191,
+              288
             ],
             "tip": [
-              424,
-              424
+              421,
+              425
             ],
             "focus": [
-              424,
-              424
+              421,
+              425
             ]
           },
           "frameSha256": "b63759c21a94d3de0c3e4c18f56355a5e43112ab3d9b50fdc7ac1f8f092ca082"
@@ -4294,32 +4294,32 @@
           "sourcePath": "docs/art/style-b-v1/sources/ally-06.png",
           "sheet": "ally-06",
           "sourceCell": {
-            "left": 442,
-            "top": 170,
-            "width": 403,
-            "height": 223
+            "left": 455,
+            "top": 179,
+            "width": 408,
+            "height": 219
           },
           "sourceBounds": {
             "left": 471,
             "top": 195,
-            "right": 844,
+            "right": 846,
             "bottom": 381
           },
           "sourceSize": [
-            374,
+            376,
             187
           ],
           "silhouetteIsolation": false,
           "framePath": "public/art/characters-v2/units/luka-strike.webp",
           "normalization": 1,
-          "left": 18,
+          "left": 17,
           "top": 242,
-          "width": 475,
+          "width": 478,
           "height": 238,
           "pixelBounds": {
-            "left": 20,
+            "left": 19,
             "top": 245,
-            "right": 491,
+            "right": 490,
             "bottom": 477
           },
           "metrics": {
@@ -4330,50 +4330,50 @@
           "anchors": {
             "kind": "blade",
             "grip": [
-              286,
-              326
+              303,
+              334
             ],
             "tip": [
-              471,
-              335
+              484,
+              343
             ],
             "focus": [
-              471,
-              335
+              484,
+              343
             ]
           },
-          "frameSha256": "2608dafd4427bd762b736eb99601b2493b724fc1c86ea3ce0f0a18fa47ca6607"
+          "frameSha256": "7007511d66b3ea7ead5b659f865f3fa3bc51d2eb299163b1488aa73321cc70fe"
         },
         "skill-a": {
           "sourcePath": "docs/art/style-b-v1/sources/ally-06.png",
           "sheet": "ally-06",
           "sourceCell": {
-            "left": 895,
-            "top": 67,
-            "width": 302,
-            "height": 340
+            "left": 915,
+            "top": 69,
+            "width": 303,
+            "height": 345
           },
           "sourceBounds": {
             "left": 930,
             "top": 85,
-            "right": 1196,
+            "right": 1202,
             "bottom": 398
           },
           "sourceSize": [
-            267,
+            273,
             314
           ],
           "silhouetteIsolation": false,
           "framePath": "public/art/characters-v2/units/luka-skill-a.webp",
           "normalization": 1,
-          "left": 86,
+          "left": 82,
           "top": 81,
-          "width": 339,
+          "width": 347,
           "height": 399,
           "pixelBounds": {
-            "left": 90,
+            "left": 86,
             "top": 85,
-            "right": 424,
+            "right": 425,
             "bottom": 477
           },
           "metrics": {
@@ -4384,24 +4384,24 @@
           "anchors": {
             "kind": "blade",
             "grip": [
-              345,
-              157
+              371,
+              161
             ],
             "tip": [
-              153,
-              82
+              179,
+              87
             ],
             "focus": [
-              153,
-              82
+              179,
+              87
             ]
           },
-          "frameSha256": "9b912eac451920c4cb74a12c98abd1e26f313b77cab29283ed2a09d6a58956c4"
+          "frameSha256": "a94df214caca7a944f3b3f31f85fa64a2b082eb970c7bb3ad07fa847a29c4370"
         }
       },
       "nominalDisplayScale": 0.994475138121547,
       "displayScale": 0.994475138121547,
-      "safeDisplayScale": 1.0338983050847457,
+      "safeDisplayScale": 1.029535864978903,
       "visibleFraction": 0.6914709944751382,
       "completePoseBounds": {
         "run-a": {
@@ -4423,9 +4423,9 @@
           "bottom": 479
         },
         "strike": {
-          "left": 20,
+          "left": 19,
           "top": 245,
-          "right": 491,
+          "right": 490,
           "bottom": 477
         },
         "recover": {
@@ -4441,9 +4441,9 @@
           "bottom": 479
         },
         "skill-a": {
-          "left": 90,
+          "left": 86,
           "top": 85,
-          "right": 424,
+          "right": 425,
           "bottom": 477
         },
         "skill-b": {
@@ -4510,9 +4510,9 @@
           "sheet": "ally-06",
           "sourceCell": {
             "left": 47,
-            "top": 476,
-            "width": 287,
-            "height": 341
+            "top": 497,
+            "width": 292,
+            "height": 334
           },
           "sourceBounds": {
             "left": 63,
@@ -4545,25 +4545,25 @@
           "anchors": {
             "kind": "fist",
             "grip": [
-              358,
-              233
+              365,
+              250
             ],
             "tip": [
-              389,
-              226
+              392,
+              240
             ],
             "focus": [
-              382,
-              226
+              389,
+              243
             ],
             "secondary": {
               "grip": [
-                196,
-                223
+                199,
+                240
               ],
               "tip": [
-                216,
-                226
+                220,
+                243
               ]
             }
           },
@@ -4573,10 +4573,10 @@
           "sourcePath": "docs/art/style-b-v1/sources/ally-06.png",
           "sheet": "ally-06",
           "sourceCell": {
-            "left": 434,
-            "top": 503,
-            "width": 372,
-            "height": 305
+            "left": 442,
+            "top": 525,
+            "width": 377,
+            "height": 297
           },
           "sourceBounds": {
             "left": 458,
@@ -4609,25 +4609,25 @@
           "anchors": {
             "kind": "fist",
             "grip": [
-              427,
-              202
+              448,
+              219
             ],
             "tip": [
-              464,
-              205
+              480,
+              219
             ],
             "focus": [
-              450,
-              202
+              470,
+              219
             ],
             "secondary": {
               "grip": [
-                124,
-                247
+                139,
+                265
               ],
               "tip": [
-                153,
-                247
+                169,
+                265
               ]
             }
           },
@@ -4637,32 +4637,32 @@
           "sourcePath": "docs/art/style-b-v1/sources/ally-06.png",
           "sheet": "ally-06",
           "sourceCell": {
-            "left": 877,
-            "top": 497,
-            "width": 332,
-            "height": 317
+            "left": 896,
+            "top": 511,
+            "width": 337,
+            "height": 316
           },
           "sourceBounds": {
             "left": 912,
             "top": 526,
-            "right": 1208,
+            "right": 1217,
             "bottom": 811
           },
           "sourceSize": [
-            297,
+            306,
             286
           ],
           "silhouetteIsolation": false,
           "framePath": "public/art/characters-v2/units/baekho-skill-a.webp",
           "normalization": 1,
-          "left": 56,
+          "left": 50,
           "top": 95,
-          "width": 400,
+          "width": 412,
           "height": 385,
           "pixelBounds": {
-            "left": 60,
+            "left": 54,
             "top": 99,
-            "right": 455,
+            "right": 458,
             "bottom": 476
           },
           "metrics": {
@@ -4673,29 +4673,29 @@
           "anchors": {
             "kind": "fist",
             "grip": [
-              391,
-              200
+              418,
+              218
             ],
             "tip": [
-              404,
-              141
+              424,
+              161
             ],
             "focus": [
-              404,
-              178
+              427,
+              188
             ],
             "secondary": {
               "grip": [
-                170,
-                227
+                193,
+                244
               ],
               "tip": [
-                187,
-                192
+                210,
+                209
               ]
             }
           },
-          "frameSha256": "8e88cf599f00a126f40eb7df49b8caba3195fad27225593042d92113cc837a69"
+          "frameSha256": "efffe9b051a1614475006f1c8d8b2f3ccf1c4d24a83ddcd4aad634c365503740"
         }
       },
       "nominalDisplayScale": 0.8823529411764706,
@@ -4740,9 +4740,9 @@
           "bottom": 479
         },
         "skill-a": {
-          "left": 60,
+          "left": 54,
           "top": 99,
-          "right": 455,
+          "right": 458,
           "bottom": 476
         },
         "skill-b": {
@@ -17655,195 +17655,195 @@
       },
       "originalVisibleFraction": 0.703125,
       "originalDisplayScale": 0.9498680738786279,
-      "baseScale": 1.184375,
+      "baseScale": 1.1697530864197532,
       "placements": {
         "recover": {
           "sourcePath": "docs/art/style-b-v1/sources/ally-07.png",
           "sheet": "ally-07",
           "sourceCell": {
-            "left": 70,
-            "top": 84,
-            "width": 242,
-            "height": 328
+            "left": 78,
+            "top": 65,
+            "width": 222,
+            "height": 355
           },
           "sourceBounds": {
             "left": 94,
-            "top": 84,
+            "top": 80,
             "right": 284,
             "bottom": 403
           },
           "sourceSize": [
             191,
-            320
+            324
           ],
           "silhouetteIsolation": false,
           "framePath": "public/art/characters-v3/units/harin-recover.webp",
           "normalization": 1,
-          "left": 143,
+          "left": 144,
           "top": 101,
-          "width": 226,
+          "width": 223,
           "height": 379,
           "pixelBounds": {
-            "left": 146,
-            "top": 101,
-            "right": 366,
+            "left": 147,
+            "top": 105,
+            "right": 364,
             "bottom": 477
           },
           "metrics": {
             "height": 512,
-            "top": 101,
+            "top": 105,
             "bottom": 477
           },
           "anchors": {
             "kind": "fist",
             "grip": [
-              322,
-              234
+              341,
+              233
             ],
             "tip": [
               333,
-              205
+              200
             ],
             "focus": [
-              333,
-              216
+              335,
+              212
             ],
             "secondary": {
               "grip": [
-                304,
-                235
+                313,
+                233
               ],
               "tip": [
-                321,
-                211
+                327,
+                209
               ]
             }
           },
-          "frameSha256": "306d8dffaae0750d6064658b154fed9c915a6fc99f6e054c3cb05e78059b433a"
+          "frameSha256": "1da5f17564283243eae48f4b5ae59c46a5f6626d05f15c2b61a878ae4427eaa6"
         },
         "strike": {
           "sourcePath": "docs/art/style-b-v1/sources/ally-07.png",
           "sheet": "ally-07",
           "sourceCell": {
-            "left": 429,
-            "top": 89,
-            "width": 357,
-            "height": 323
+            "left": 440,
+            "top": 97,
+            "width": 363,
+            "height": 320
           },
           "sourceBounds": {
             "left": 456,
             "top": 112,
-            "right": 785,
+            "right": 787,
             "bottom": 400
           },
           "sourceSize": [
-            330,
+            332,
             289
           ],
           "silhouetteIsolation": false,
           "framePath": "public/art/characters-v3/units/harin-strike.webp",
           "normalization": 1,
-          "left": 60,
-          "top": 138,
-          "width": 391,
-          "height": 342,
+          "left": 62,
+          "top": 142,
+          "width": 388,
+          "height": 338,
           "pixelBounds": {
-            "left": 63,
-            "top": 142,
-            "right": 450,
+            "left": 65,
+            "top": 146,
+            "right": 447,
             "bottom": 477
           },
           "metrics": {
             "height": 512,
-            "top": 142,
+            "top": 146,
             "bottom": 477
           },
           "anchors": {
             "kind": "fist",
             "grip": [
-              360,
-              255
+              375,
+              262
             ],
             "tip": [
-              388,
-              213
+              400,
+              223
             ],
             "focus": [
-              380,
-              237
+              395,
+              245
             ]
           },
-          "frameSha256": "4fac613921093fba83ba9fe639e76ad80a2c01fbc10c2b8eaa729f3576228766"
+          "frameSha256": "46e74c727bff733f744ca18ccc2ff0392d0f1dad9a2ecac67f9169ab4f6895c4"
         },
         "skill-a": {
           "sourcePath": "docs/art/style-b-v1/sources/ally-07.png",
           "sheet": "ally-07",
           "sourceCell": {
-            "left": 866,
-            "top": 91,
-            "width": 321,
-            "height": 321
+            "left": 888,
+            "top": 99,
+            "width": 325,
+            "height": 315
           },
           "sourceBounds": {
             "left": 904,
             "top": 114,
-            "right": 1186,
+            "right": 1196,
             "bottom": 397
           },
           "sourceSize": [
-            283,
+            293,
             284
           ],
           "silhouetteIsolation": false,
           "framePath": "public/art/characters-v3/units/harin-skill-a.webp",
           "normalization": 1,
-          "left": 88,
-          "top": 144,
-          "width": 335,
-          "height": 336,
+          "left": 84,
+          "top": 148,
+          "width": 343,
+          "height": 332,
           "pixelBounds": {
-            "left": 91,
-            "top": 148,
-            "right": 422,
-            "bottom": 477
+            "left": 87,
+            "top": 152,
+            "right": 424,
+            "bottom": 478
           },
           "metrics": {
             "height": 512,
-            "top": 148,
-            "bottom": 477
+            "top": 152,
+            "bottom": 478
           },
           "anchors": {
             "kind": "fist",
             "grip": [
-              381,
-              285
+              392,
+              292
             ],
             "tip": [
-              399,
-              260
+              411,
+              266
             ],
             "focus": [
-              396,
-              276
+              405,
+              280
             ],
             "secondary": {
               "grip": [
-                321,
-                253
+                340,
+                260
               ],
               "tip": [
-                343,
-                216
+                356,
+                227
               ]
             }
           },
-          "frameSha256": "77dd9827e8b6b8633334e92e87635ded2d71ff6fc54920b3490d55497dda6578"
+          "frameSha256": "5356f61d2665efd0643df13bec893fdc9230d407004cce8634bcec655fa3788e"
         }
       },
       "nominalDisplayScale": 0.9498680738786279,
       "displayScale": 0.9498680738786279,
       "safeDisplayScale": 1.164179104477612,
-      "visibleFraction": 0.6994145778364116,
+      "visibleFraction": 0.6919937335092348,
       "completePoseBounds": {
         "run-a": {
           "left": 97,
@@ -17864,15 +17864,15 @@
           "bottom": 478
         },
         "strike": {
-          "left": 63,
-          "top": 142,
-          "right": 450,
+          "left": 65,
+          "top": 146,
+          "right": 447,
           "bottom": 477
         },
         "recover": {
-          "left": 146,
-          "top": 101,
-          "right": 366,
+          "left": 147,
+          "top": 105,
+          "right": 364,
           "bottom": 477
         },
         "recoil": {
@@ -17882,10 +17882,10 @@
           "bottom": 479
         },
         "skill-a": {
-          "left": 91,
-          "top": 148,
-          "right": 422,
-          "bottom": 477
+          "left": 87,
+          "top": 152,
+          "right": 424,
+          "bottom": 478
         },
         "skill-b": {
           "left": 77,
@@ -17950,10 +17950,10 @@
           "sourcePath": "docs/art/style-b-v1/sources/ally-07.png",
           "sheet": "ally-07",
           "sourceCell": {
-            "left": 56,
-            "top": 482,
-            "width": 310,
-            "height": 328
+            "left": 58,
+            "top": 500,
+            "width": 313,
+            "height": 325
           },
           "sourceBounds": {
             "left": 74,
@@ -17986,16 +17986,16 @@
           "anchors": {
             "kind": "hammer",
             "grip": [
-              254,
-              339
+              259,
+              353
             ],
             "tip": [
-              371,
-              444
+              362,
+              450
             ],
             "focus": [
-              341,
-              415
+              347,
+              430
             ]
           },
           "frameSha256": "a9742592ea53fe15bfb1d77fa5d74d4ef4225965e0085baf7523bf098e3846a4"
@@ -18004,32 +18004,32 @@
           "sourcePath": "docs/art/style-b-v1/sources/ally-07.png",
           "sheet": "ally-07",
           "sourceCell": {
-            "left": 441,
-            "top": 544,
-            "width": 394,
-            "height": 266
+            "left": 448,
+            "top": 565,
+            "width": 406,
+            "height": 259
           },
           "sourceBounds": {
             "left": 464,
             "top": 580,
-            "right": 834,
+            "right": 838,
             "bottom": 807
           },
           "sourceSize": [
-            371,
+            375,
             228
           ],
           "silhouetteIsolation": false,
           "framePath": "public/art/characters-v3/units/edan-strike.webp",
           "normalization": 1,
-          "left": 74,
+          "left": 72,
           "top": 257,
-          "width": 363,
+          "width": 367,
           "height": 223,
           "pixelBounds": {
-            "left": 76,
+            "left": 74,
             "top": 260,
-            "right": 436,
+            "right": 435,
             "bottom": 477
           },
           "metrics": {
@@ -18040,73 +18040,73 @@
           "anchors": {
             "kind": "hammer",
             "grip": [
-              278,
-              348
+              290,
+              362
             ],
             "tip": [
-              413,
-              409
+              432,
+              400
             ],
             "focus": [
-              379,
-              404
+              393,
+              418
             ]
           },
-          "frameSha256": "24272aded2e760db0aa862d78cdbdca05f0e18541338c50cabb79708a16378d8"
+          "frameSha256": "84885ff991f3fb25f8b8cb9a903ff080c9b16586d7170e289feaabca7c15de56"
         },
         "skill-a": {
           "sourcePath": "docs/art/style-b-v1/sources/ally-07.png",
           "sheet": "ally-07",
           "sourceCell": {
-            "left": 893,
-            "top": 472,
-            "width": 305,
-            "height": 338
+            "left": 919,
+            "top": 480,
+            "width": 293,
+            "height": 347
           },
           "sourceBounds": {
             "left": 935,
             "top": 495,
             "right": 1196,
-            "bottom": 809
+            "bottom": 810
           },
           "sourceSize": [
             262,
-            315
+            316
           ],
           "silhouetteIsolation": false,
           "framePath": "public/art/characters-v3/units/edan-skill-a.webp",
           "normalization": 1,
           "left": 127,
-          "top": 171,
+          "top": 170,
           "width": 257,
-          "height": 309,
+          "height": 310,
           "pixelBounds": {
             "left": 129,
-            "top": 174,
+            "top": 173,
             "right": 380,
-            "bottom": 478
+            "bottom": 477
           },
           "metrics": {
             "height": 512,
-            "top": 174,
-            "bottom": 478
+            "top": 173,
+            "bottom": 477
           },
           "anchors": {
             "kind": "hammer",
             "grip": [
-              294,
-              238
+              316,
+              248
             ],
             "tip": [
-              159,
-              185
+              201,
+              178
             ],
             "focus": [
-              179,
-              204
+              200,
+              214
             ]
           },
-          "frameSha256": "903202a408ed6d0af74c17080711563a4a57b6ec9d4a2c2d5b8c48674605930f"
+          "frameSha256": "7080ec7d22f299fbedd34564fc6b4706ae189ddbb5894d1a9203e2d6cd5f2289"
         }
       },
       "nominalDisplayScale": 1.0608695652173914,
@@ -18133,9 +18133,9 @@
           "bottom": 479
         },
         "strike": {
-          "left": 76,
+          "left": 74,
           "top": 260,
-          "right": 436,
+          "right": 435,
           "bottom": 477
         },
         "recover": {
@@ -18152,9 +18152,9 @@
         },
         "skill-a": {
           "left": 129,
-          "top": 174,
+          "top": 173,
           "right": 380,
-          "bottom": 478
+          "bottom": 477
         },
         "skill-b": {
           "left": 26,
@@ -18213,185 +18213,185 @@
       },
       "originalVisibleFraction": 0.703125,
       "originalDisplayScale": 1.2949640287769784,
-      "baseScale": 0.9391891891891891,
+      "baseScale": 0.9235880398671097,
       "placements": {
         "recover": {
           "sourcePath": "docs/art/style-b-v1/sources/ally-07.png",
           "sheet": "ally-07",
           "sourceCell": {
-            "left": 59,
-            "top": 850,
-            "width": 280,
-            "height": 332
+            "left": 61,
+            "top": 870,
+            "width": 276,
+            "height": 333
           },
           "sourceBounds": {
             "left": 77,
             "top": 886,
             "right": 320,
-            "bottom": 1181
+            "bottom": 1186
           },
           "sourceSize": [
             244,
-            296
+            301
           ],
           "silhouetteIsolation": false,
           "framePath": "public/art/characters-v3/units/silvan-recover.webp",
           "normalization": 1,
-          "left": 141,
+          "left": 143,
           "top": 202,
-          "width": 229,
+          "width": 225,
           "height": 278,
           "pixelBounds": {
-            "left": 143,
+            "left": 145,
             "top": 204,
-            "right": 367,
-            "bottom": 479
+            "right": 365,
+            "bottom": 477
           },
           "metrics": {
             "height": 512,
             "top": 204,
-            "bottom": 479
+            "bottom": 477
           },
           "anchors": {
             "kind": "staff",
             "grip": [
-              302,
-              289
+              306,
+              306
             ],
             "tip": [
-              329,
-              184
+              341,
+              207
             ],
             "focus": [
-              329,
-              215
+              333,
+              232
             ]
           },
-          "frameSha256": "2a7a30e323c1ae50923f891ecabfbcc88830d4935577359fc0c1e9ab579b2cf1"
+          "frameSha256": "92577788340597fac3fa62cb75254768a5753c29e63b5d116d487fa173a49618"
         },
         "strike": {
           "sourcePath": "docs/art/style-b-v1/sources/ally-07.png",
           "sheet": "ally-07",
           "sourceCell": {
-            "left": 393,
-            "top": 882,
-            "width": 446,
-            "height": 300
+            "left": 405,
+            "top": 908,
+            "width": 454,
+            "height": 286
           },
           "sourceBounds": {
             "left": 421,
             "top": 923,
-            "right": 838,
+            "right": 843,
             "bottom": 1178
           },
           "sourceSize": [
-            418,
+            423,
             256
           ],
           "silhouetteIsolation": false,
           "framePath": "public/art/characters-v3/units/silvan-strike.webp",
           "normalization": 1,
-          "left": 59,
-          "top": 240,
-          "width": 393,
-          "height": 240,
+          "left": 60,
+          "top": 244,
+          "width": 391,
+          "height": 236,
           "pixelBounds": {
-            "left": 61,
-            "top": 242,
-            "right": 451,
+            "left": 62,
+            "top": 246,
+            "right": 447,
             "bottom": 476
           },
           "metrics": {
             "height": 512,
-            "top": 242,
+            "top": 246,
             "bottom": 476
           },
           "anchors": {
             "kind": "staff",
             "grip": [
-              317,
-              278
+              327,
+              300
             ],
             "tip": [
-              430,
-              257
+              444,
+              304
             ],
             "focus": [
-              399,
-              273
+              409,
+              296
             ]
           },
-          "frameSha256": "1b4417dadb9f93aa8f3406da0307acf7aecce3cbb50add6ffc9bc93a7b1683ad"
+          "frameSha256": "cb2dfd6c9a315b79cc0753b131764329aac00fc7c3afbc1b0ddf8b344cd1d04a"
         },
         "skill-a": {
           "sourcePath": "docs/art/style-b-v1/sources/ally-07.png",
           "sheet": "ally-07",
           "sourceCell": {
-            "left": 858,
-            "top": 847,
-            "width": 337,
-            "height": 335
+            "left": 876,
+            "top": 860,
+            "width": 340,
+            "height": 342
           },
           "sourceBounds": {
             "left": 892,
             "top": 876,
-            "right": 1194,
-            "bottom": 1181
+            "right": 1199,
+            "bottom": 1185
           },
           "sourceSize": [
-            303,
-            306
+            308,
+            310
           ],
           "silhouetteIsolation": false,
           "framePath": "public/art/characters-v3/units/silvan-skill-a.webp",
           "normalization": 1,
-          "left": 113,
-          "top": 193,
-          "width": 285,
-          "height": 287,
+          "left": 114,
+          "top": 194,
+          "width": 284,
+          "height": 286,
           "pixelBounds": {
-            "left": 115,
-            "top": 194,
-            "right": 397,
-            "bottom": 479
+            "left": 116,
+            "top": 196,
+            "right": 395,
+            "bottom": 477
           },
           "metrics": {
             "height": 512,
-            "top": 194,
-            "bottom": 479
+            "top": 196,
+            "bottom": 477
           },
           "anchors": {
             "kind": "staff",
             "grip": [
-              186,
-              274
+              204,
+              292
             ],
             "tip": [
-              193,
-              182
+              211,
+              200
             ],
             "focus": [
-              180,
-              211
+              198,
+              229
             ],
             "secondary": {
               "grip": [
-                350,
-                264
+                368,
+                283
               ],
               "tip": [
-                378,
-                250
+                391,
+                277
               ]
             }
           },
-          "frameSha256": "8eea7597e538bb352f4db10c9d706ca38158b1b78155ecbf7153ad6a3aed0fad"
+          "frameSha256": "8290c013bd4b0032522f31b35e7b0117f70e3e651062536c9fa5932ae7be30b4"
         }
       },
-      "nominalDisplayScale": 1.2512820512820513,
-      "displayScale": 1.2512820512820513,
-      "safeDisplayScale": 1.2512820512820513,
-      "visibleFraction": 0.6745192307692308,
+      "nominalDisplayScale": 1.2577319587628866,
+      "displayScale": 1.2577319587628866,
+      "safeDisplayScale": 1.2577319587628866,
+      "visibleFraction": 0.673083118556701,
       "completePoseBounds": {
         "run-a": {
           "left": 83,
@@ -18412,16 +18412,16 @@
           "bottom": 479
         },
         "strike": {
-          "left": 61,
-          "top": 242,
-          "right": 451,
+          "left": 62,
+          "top": 246,
+          "right": 447,
           "bottom": 476
         },
         "recover": {
-          "left": 143,
+          "left": 145,
           "top": 204,
-          "right": 367,
-          "bottom": 479
+          "right": 365,
+          "bottom": 477
         },
         "recoil": {
           "left": 99,
@@ -18430,10 +18430,10 @@
           "bottom": 479
         },
         "skill-a": {
-          "left": 115,
-          "top": 194,
-          "right": 397,
-          "bottom": 479
+          "left": 116,
+          "top": 196,
+          "right": 395,
+          "bottom": 477
         },
         "skill-b": {
           "left": 72,
@@ -18492,70 +18492,70 @@
       },
       "originalVisibleFraction": 0.703125,
       "originalDisplayScale": 1.4007782101167314,
-      "baseScale": 0.9049295774647887,
+      "baseScale": 0.8801369863013698,
       "placements": {
         "recover": {
           "sourcePath": "docs/art/style-b-v1/sources/ally-06.png",
           "sheet": "ally-06",
           "sourceCell": {
-            "left": 27,
-            "top": 860,
-            "width": 349,
-            "height": 323
+            "left": 35,
+            "top": 884,
+            "width": 341,
+            "height": 322
           },
           "sourceBounds": {
             "left": 51,
             "top": 899,
             "right": 359,
-            "bottom": 1182
+            "bottom": 1190
           },
           "sourceSize": [
             309,
-            284
+            292
           ],
           "silhouetteIsolation": false,
           "framePath": "public/art/characters-v3/units/mare-recover.webp",
           "normalization": 1,
-          "left": 116,
+          "left": 120,
           "top": 223,
-          "width": 280,
+          "width": 272,
           "height": 257,
           "pixelBounds": {
-            "left": 118,
+            "left": 122,
             "top": 225,
-            "right": 393,
-            "bottom": 479
+            "right": 389,
+            "bottom": 477
           },
           "metrics": {
             "height": 512,
             "top": 225,
-            "bottom": 479
+            "bottom": 477
           },
           "anchors": {
             "kind": "spear",
             "grip": [
-              288,
-              281
+              292,
+              297
             ],
             "tip": [
-              386,
-              211
+              387,
+              230
             ],
             "focus": [
-              386,
-              211
+              387,
+              230
             ]
           },
-          "frameSha256": "50c101a8f58de810dbe01cf3be80adcf302dc63bcfbf3dfe21f3284115f58063"
+          "frameSha256": "f52ad7fe79bc0aab86c40fc72d24f49211afdac5f6cdcf1bce12953df8e83f20"
         },
         "strike": {
           "sourcePath": "docs/art/style-b-v1/sources/ally-06.png",
           "sheet": "ally-06",
           "sourceCell": {
-            "left": 414,
-            "top": 913,
+            "left": 426,
+            "top": 938,
             "width": 429,
-            "height": 251
+            "height": 242
           },
           "sourceBounds": {
             "left": 442,
@@ -18570,97 +18570,97 @@
           "silhouetteIsolation": false,
           "framePath": "public/art/characters-v3/units/mare-strike.webp",
           "normalization": 1,
-          "left": 76,
-          "top": 290,
-          "width": 360,
-          "height": 190,
+          "left": 81,
+          "top": 295,
+          "width": 350,
+          "height": 185,
           "pixelBounds": {
-            "left": 78,
-            "top": 292,
-            "right": 433,
+            "left": 82,
+            "top": 297,
+            "right": 427,
             "bottom": 477
           },
           "metrics": {
             "height": 512,
-            "top": 292,
+            "top": 297,
             "bottom": 477
           },
           "anchors": {
             "kind": "spear",
             "grip": [
-              298,
-              339
+              309,
+              361
             ],
             "tip": [
-              419,
-              334
+              426,
+              365
             ],
             "focus": [
-              419,
-              334
+              426,
+              365
             ]
           },
-          "frameSha256": "6636709157f20c031d438d9d5c42c9099e1db05d03b028d5dab8f581b1ad73c7"
+          "frameSha256": "833bba0e9d0fcfb18d5ccddd4f5543e4aae9a3f4fcce4145fd80b96227aaa567"
         },
         "skill-a": {
           "sourcePath": "docs/art/style-b-v1/sources/ally-06.png",
           "sheet": "ally-06",
           "sourceCell": {
-            "left": 881,
-            "top": 858,
-            "width": 328,
-            "height": 323
+            "left": 907,
+            "top": 879,
+            "width": 322,
+            "height": 322
           },
           "sourceBounds": {
             "left": 923,
             "top": 894,
-            "right": 1208,
-            "bottom": 1180
+            "right": 1212,
+            "bottom": 1184
           },
           "sourceSize": [
-            286,
-            287
+            290,
+            291
           ],
           "silhouetteIsolation": false,
           "framePath": "public/art/characters-v3/units/mare-skill-a.webp",
           "normalization": 1,
-          "left": 126,
-          "top": 220,
-          "width": 259,
-          "height": 260,
+          "left": 128,
+          "top": 224,
+          "width": 255,
+          "height": 256,
           "pixelBounds": {
-            "left": 128,
-            "top": 222,
-            "right": 384,
-            "bottom": 479
+            "left": 130,
+            "top": 226,
+            "right": 380,
+            "bottom": 477
           },
           "metrics": {
             "height": 512,
-            "top": 222,
-            "bottom": 479
+            "top": 226,
+            "bottom": 477
           },
           "anchors": {
             "kind": "spear",
             "grip": [
-              291,
-              354
+              308,
+              373
             ],
             "tip": [
-              360,
-              209
+              374,
+              230
             ],
             "focus": [
-              360,
-              209
+              374,
+              230
             ]
           },
-          "frameSha256": "f502552e2f217e2e6a819f83384439baca2f10a1c0d7c98fb4ea4b70be8a4948"
+          "frameSha256": "034f83296055c1699d5a7202d09f6178066c6a69383326a571fe2368919e74a5"
         }
       },
       "nominalDisplayScale": 1.2708333333333333,
       "displayScale": 1.2708333333333333,
       "safeDisplayScale": 1.2708333333333333,
-      "visibleFraction": 0.6329345703125,
+      "visibleFraction": 0.6279703776041666,
       "completePoseBounds": {
         "run-a": {
           "left": 69,
@@ -18681,16 +18681,16 @@
           "bottom": 479
         },
         "strike": {
-          "left": 78,
-          "top": 292,
-          "right": 433,
+          "left": 82,
+          "top": 297,
+          "right": 427,
           "bottom": 477
         },
         "recover": {
-          "left": 118,
+          "left": 122,
           "top": 225,
-          "right": 393,
-          "bottom": 479
+          "right": 389,
+          "bottom": 477
         },
         "recoil": {
           "left": 107,
@@ -18699,10 +18699,10 @@
           "bottom": 479
         },
         "skill-a": {
-          "left": 128,
-          "top": 222,
-          "right": 384,
-          "bottom": 479
+          "left": 130,
+          "top": 226,
+          "right": 380,
+          "bottom": 477
         },
         "skill-b": {
           "left": 64,

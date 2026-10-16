@@ -1361,12 +1361,12 @@
         },
         "strike": {
           "height": 512,
-          "top": 142,
+          "top": 146,
           "bottom": 477
         },
         "recover": {
           "height": 512,
-          "top": 101,
+          "top": 105,
           "bottom": 477
         },
         "recoil": {
@@ -1376,8 +1376,8 @@
         },
         "skill-a": {
           "height": 512,
-          "top": 148,
-          "bottom": 477
+          "top": 152,
+          "bottom": 478
         },
         "skill-b": {
           "height": 512,
@@ -1392,31 +1392,31 @@
         "recover": {
           "kind": "fist",
           "grip": [
-            322,
-            234
+            341,
+            233
           ],
           "tip": [
             333,
-            205
+            200
           ],
           "focus": [
-            333,
-            216
+            335,
+            212
           ],
           "secondary": {
             "grip": [
-              304,
-              235
+              313,
+              233
             ],
             "tip": [
-              321,
-              211
+              327,
+              209
             ]
           },
           "measured": false
         }
       },
-      "visibleFraction": 0.6994145778364116
+      "visibleFraction": 0.6919937335092348
     },
     "edan": {
       "motion": {
@@ -1462,8 +1462,8 @@
         },
         "skill-a": {
           "height": 512,
-          "top": 174,
-          "bottom": 478
+          "top": 173,
+          "bottom": 477
         },
         "skill-b": {
           "height": 512,
@@ -1478,16 +1478,16 @@
         "recover": {
           "kind": "hammer",
           "grip": [
-            254,
-            339
+            259,
+            353
           ],
           "tip": [
-            371,
-            444
+            362,
+            450
           ],
           "focus": [
-            341,
-            415
+            347,
+            430
           ],
           "measured": false
         }
@@ -1523,13 +1523,13 @@
         },
         "strike": {
           "height": 512,
-          "top": 242,
+          "top": 246,
           "bottom": 476
         },
         "recover": {
           "height": 512,
           "top": 204,
-          "bottom": 479
+          "bottom": 477
         },
         "recoil": {
           "height": 512,
@@ -1538,8 +1538,8 @@
         },
         "skill-a": {
           "height": 512,
-          "top": 194,
-          "bottom": 479
+          "top": 196,
+          "bottom": 477
         },
         "skill-b": {
           "height": 512,
@@ -1554,21 +1554,21 @@
         "recover": {
           "kind": "staff",
           "grip": [
-            302,
-            289
+            306,
+            306
           ],
           "tip": [
-            329,
-            184
+            341,
+            207
           ],
           "focus": [
-            329,
-            215
+            333,
+            232
           ],
           "measured": false
         }
       },
-      "visibleFraction": 0.6745192307692308
+      "visibleFraction": 0.673083118556701
     },
     "mare": {
       "motion": {
@@ -1599,13 +1599,13 @@
         },
         "strike": {
           "height": 512,
-          "top": 292,
+          "top": 297,
           "bottom": 477
         },
         "recover": {
           "height": 512,
           "top": 225,
-          "bottom": 479
+          "bottom": 477
         },
         "recoil": {
           "height": 512,
@@ -1614,8 +1614,8 @@
         },
         "skill-a": {
           "height": 512,
-          "top": 222,
-          "bottom": 479
+          "top": 226,
+          "bottom": 477
         },
         "skill-b": {
           "height": 512,
@@ -1630,21 +1630,21 @@
         "recover": {
           "kind": "spear",
           "grip": [
-            288,
-            281
+            292,
+            297
           ],
           "tip": [
-            386,
-            211
+            387,
+            230
           ],
           "focus": [
-            386,
-            211
+            387,
+            230
           ],
           "measured": false
         }
       },
-      "visibleFraction": 0.6329345703125
+      "visibleFraction": 0.6279703776041666
     },
     "mare__form0": {
       "motion": {
