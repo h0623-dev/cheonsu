@@ -6,7 +6,7 @@
 
 32개 새 전신 원화·11무기 동작·거대 보스·132형태 실루엣 배치·50장 지형 깊이와 접촉 조명에 더해, 근접 무기 끝의 실제 높이와 전경·중경의 전투 평면을 함께 정렬합니다. 180 마지막 자동 타격 검사에서 드러난 라칸 중병기 세로 접점 문제를 공통 배치 규칙으로 보완합니다. 저장·전직 외형·대기·대화·지도·피해·접촉 시계와 원복165+Safari를 보존합니다.
 
-**181 제작 중입니다. 현재 웹은180이며 Android APK·OTA 공개본은178입니다.** 최종181 소스로 새 APK·서명OTA·같은 Sites 웹을 제작·공개합니다. 사용자 지시에 따라 수정 후 별도 검증은 실행하지 않았으며 기존 자동 보호를 유지합니다. [구현 범위](docs/COMBAT_CINEMATIC_1.99.181.md) · [제작·공개 기록](docs/BUILD_1.99.181.md).
+**1.99.181 새 APK·서명 OTA·전체 소스 ZIP을19:10:17 KST에 공개했고, 같은 소스의 아이폰·웹은18:33:08 KST 같은 Sites에 게시 완료했습니다.** 최종 게임 소스는 [`4233283`](https://github.com/h0623-dev/cheonsu/commit/42332836078c2a206a738bc2f5a0466a1a0762ae), Android380입니다. [새 APK](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.181/cheonsu_1.99.181_update_debug.apk) · [서명 OTA·전체 소스 ZIP](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.181) · [아이폰·웹 실행](https://cheonsu-ios-20261016.h9206.chatgpt.site). 실제 OTA는181 / Android350~380 / `1.99.181-e6f8ce236186`입니다. 최종 소스의 기존 [Cloud Quality](https://github.com/h0623-dev/cheonsu/actions/runs/38879956485)·[Android APK and OTA](https://github.com/h0623-dev/cheonsu/actions/runs/38879956405)가 모두 성공했습니다. 단위 1,068개·50장 확장·타격 132형태 4화면·APK/OTA 웹 파일 각 3,350개와 기존 인증서·버전·신뢰 보호를 통과했습니다. 공개 도달성은 기존 발행 스크립트의 HEAD 응답과 GitHub 서버 size/digest 대조 범위이며 공개 파일 전체를 다시 내려받은 결과로 표현하지 않습니다. 사용자 지시에 따라 수정 후 별도 검증은 실행하지 않았으며 기존 자동 보호를 유지합니다. [구현 범위](docs/COMBAT_CINEMATIC_1.99.181.md) · [제작·공개 기록](docs/BUILD_1.99.181.md).
 
 ## 웹 1.99.180 · 전신 전투 게시 / Android 중간 미공개
 

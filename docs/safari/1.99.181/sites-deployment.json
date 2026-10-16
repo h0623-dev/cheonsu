@@ -1,0 +1,22 @@
+{
+  "game_source_commit": "42332836078c2a206a738bc2f5a0466a1a0762ae",
+  "game_version": "1.99.181",
+  "sites_source_commit": "7e1177f19b543e081445f5160357bf1c97052a06",
+  "web_cache": "1.99.181-safari-1-b6924df1d69f",
+  "archive_bytes": 209072481,
+  "publication": {
+    "id": "appgdep_6ad1ef3f58488191b4bd86b23d6fd3e4",
+    "project_id": "appgprj_6ad17df8b73481918b41ccab787d8c8a",
+    "title": "천수 · 아이폰 플레이",
+    "version_id": "appgprj_6ad17df8b73481918b41ccab787d8c8a~appgver_33985eda6a608191a2173100b6819221",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://cheonsu-ios-20261016.h9206.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ad17df8b73481918b41ccab787d8c8a",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-16T09:33:08.469693+00:00"
+  }
+}
