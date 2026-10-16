@@ -1,0 +1,320 @@
+{
+  "key": "ally-02",
+  "authoringComplete": true,
+  "sourcePath": "docs/art/style-b-v1/sources/ally-02.png",
+  "sourceOriginal": "/workspace/generated_images/exec-056cbf56-d347-4f9d-935e-865848988ba4.png",
+  "anchorSpace": "cell-fraction",
+  "reviewMethod": "생성된 투명 원본을 보며 손잡이·실제 무기 끝·방출점·활 윤곽을 수동 저작한 근사 좌표. 가려진 손/관절은 보이는 손목과 무기 축을 기준으로 근사. box는 각 배우의 실제 투명 여백을 기준으로 지정. 신체 높이는 머리에서 발까지 보이는 신체의 수동 근사치이며 최종 산출물 정밀 실측·게임 QA 결과가 아님.",
+  "cells": [
+    {
+      "id": "aria",
+      "name": "아리아",
+      "pose": "recover",
+      "row": 0,
+      "column": 0,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.334146,
+          0.419149
+        ],
+        "tip": [
+          0.370732,
+          0.097872
+        ],
+        "focus": [
+          0.37561,
+          0.195745
+        ]
+      },
+      "box": {
+        "left": 0,
+        "top": 0,
+        "width": 410,
+        "height": 470
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.702128
+    },
+    {
+      "id": "aria",
+      "name": "아리아",
+      "pose": "strike",
+      "row": 0,
+      "column": 1,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.727473,
+          0.389362
+        ],
+        "tip": [
+          0.986813,
+          0.314894
+        ],
+        "focus": [
+          0.883516,
+          0.340426
+        ]
+      },
+      "box": {
+        "left": 410,
+        "top": 0,
+        "width": 455,
+        "height": 470
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.66383
+    },
+    {
+      "id": "aria",
+      "name": "아리아",
+      "pose": "skill-a",
+      "row": 0,
+      "column": 2,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.544987,
+          0.289362
+        ],
+        "tip": [
+          0.748072,
+          0.106383
+        ],
+        "focus": [
+          0.66838,
+          0.180851
+        ]
+      },
+      "box": {
+        "left": 865,
+        "top": 0,
+        "width": 389,
+        "height": 470
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.568085
+    },
+    {
+      "id": "leon",
+      "name": "레온",
+      "pose": "recover",
+      "row": 1,
+      "column": 0,
+      "anchors": {
+        "kind": "spear",
+        "grip": [
+          0.690367,
+          0.571429
+        ],
+        "tip": [
+          0.988532,
+          0.871429
+        ],
+        "focus": [
+          0.988532,
+          0.871429
+        ]
+      },
+      "box": {
+        "left": 0,
+        "top": 480,
+        "width": 436,
+        "height": 350
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.937143,
+      "isolateSilhouette": true,
+      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님."
+    },
+    {
+      "id": "leon",
+      "name": "레온",
+      "pose": "strike",
+      "row": 1,
+      "column": 1,
+      "anchors": {
+        "kind": "spear",
+        "grip": [
+          0.714563,
+          0.402857
+        ],
+        "tip": [
+          0.984466,
+          0.451429
+        ],
+        "focus": [
+          0.984466,
+          0.451429
+        ]
+      },
+      "box": {
+        "left": 380,
+        "top": 480,
+        "width": 515,
+        "height": 350
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.777143,
+      "isolateSilhouette": true,
+      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님."
+    },
+    {
+      "id": "leon",
+      "name": "레온",
+      "pose": "skill-a",
+      "row": 1,
+      "column": 2,
+      "anchors": {
+        "kind": "spear",
+        "grip": [
+          0.816425,
+          0.577143
+        ],
+        "tip": [
+          0.985507,
+          0.594286
+        ],
+        "focus": [
+          0.985507,
+          0.594286
+        ]
+      },
+      "box": {
+        "left": 840,
+        "top": 480,
+        "width": 414,
+        "height": 350
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.582857,
+      "isolateSilhouette": true,
+      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님."
+    },
+    {
+      "id": "sera",
+      "name": "세라",
+      "pose": "recover",
+      "row": 2,
+      "column": 0,
+      "anchors": {
+        "kind": "dagger",
+        "grip": [
+          0.802439,
+          0.572792
+        ],
+        "tip": [
+          0.936585,
+          0.708831
+        ],
+        "focus": [
+          0.936585,
+          0.708831
+        ],
+        "secondary": {
+          "grip": [
+            0.243902,
+            0.53222
+          ],
+          "tip": [
+            0.078049,
+            0.656325
+          ]
+        }
+      },
+      "box": {
+        "left": 0,
+        "top": 835,
+        "width": 410,
+        "height": 419
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.699284
+    },
+    {
+      "id": "sera",
+      "name": "세라",
+      "pose": "strike",
+      "row": 2,
+      "column": 1,
+      "anchors": {
+        "kind": "dagger",
+        "grip": [
+          0.822511,
+          0.46778
+        ],
+        "tip": [
+          0.974026,
+          0.508353
+        ],
+        "focus": [
+          0.974026,
+          0.508353
+        ],
+        "secondary": {
+          "grip": [
+            0.324675,
+            0.362768
+          ],
+          "tip": [
+            0.186147,
+            0.477327
+          ]
+        }
+      },
+      "box": {
+        "left": 410,
+        "top": 835,
+        "width": 462,
+        "height": 419
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.596659,
+      "isolateSilhouette": true,
+      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님."
+    },
+    {
+      "id": "sera",
+      "name": "세라",
+      "pose": "skill-a",
+      "row": 2,
+      "column": 2,
+      "anchors": {
+        "kind": "dagger",
+        "grip": [
+          0.864734,
+          0.558473
+        ],
+        "tip": [
+          0.968599,
+          0.706444
+        ],
+        "focus": [
+          0.968599,
+          0.706444
+        ],
+        "secondary": {
+          "grip": [
+            0.217391,
+            0.23389
+          ],
+          "tip": [
+            0.028986,
+            0.336516
+          ]
+        }
+      },
+      "box": {
+        "left": 840,
+        "top": 835,
+        "width": 414,
+        "height": 419
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.677804,
+      "isolateSilhouette": true,
+      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님."
+    }
+  ]
+}

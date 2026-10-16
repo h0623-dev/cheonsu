@@ -1,0 +1,453 @@
+{
+  "key": "ally-01",
+  "authoringComplete": true,
+  "sourcePath": "docs/art/style-b-v1/sources/ally-01.png",
+  "sourceOriginal": "/workspace/generated_images/exec-90be7cb6-8833-4fef-8e7c-06a47fb8bab1.png",
+  "anchorSpace": "cell-fraction",
+  "reviewMethod": "생성된 투명 원본을 보며 손잡이·실제 무기 끝·방출점·활 윤곽을 수동 저작한 근사 좌표. 가려진 손/관절은 보이는 손목과 무기 축을 기준으로 근사. box는 각 배우의 실제 투명 여백을 기준으로 지정. 신체 높이는 머리에서 발까지 보이는 신체의 수동 근사치이며 최종 산출물 정밀 실측·게임 QA 결과가 아님.",
+  "cells": [
+    {
+      "id": "hero",
+      "name": "카일",
+      "pose": "recover",
+      "row": 0,
+      "column": 0,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.369231,
+          0.62201
+        ],
+        "tip": [
+          0.715385,
+          0.911483
+        ],
+        "focus": [
+          0.715385,
+          0.911483
+        ]
+      },
+      "box": {
+        "left": 0,
+        "top": 0,
+        "width": 390,
+        "height": 418
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.808612
+    },
+    {
+      "id": "hero",
+      "name": "카일",
+      "pose": "strike",
+      "row": 0,
+      "column": 1,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.695918,
+          0.447368
+        ],
+        "tip": [
+          0.971429,
+          0.452153
+        ],
+        "focus": [
+          0.971429,
+          0.452153
+        ]
+      },
+      "box": {
+        "left": 390,
+        "top": 0,
+        "width": 490,
+        "height": 418
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.674641
+    },
+    {
+      "id": "hero",
+      "name": "카일",
+      "pose": "skill-a",
+      "row": 0,
+      "column": 2,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.783422,
+          0.296651
+        ],
+        "tip": [
+          0.315508,
+          0.04067
+        ],
+        "focus": [
+          0.315508,
+          0.04067
+        ]
+      },
+      "box": {
+        "left": 880,
+        "top": 0,
+        "width": 374,
+        "height": 418
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.777512
+    },
+    {
+      "id": "bram",
+      "name": "브람",
+      "pose": "recover",
+      "row": 1,
+      "column": 0,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.289474,
+          0.576555
+        ],
+        "tip": [
+          0.547368,
+          0.830144
+        ],
+        "focus": [
+          0.547368,
+          0.830144
+        ],
+        "secondary": {
+          "grip": [
+            0.742105,
+            0.421053
+          ],
+          "tip": [
+            0.813158,
+            0.492823
+          ]
+        }
+      },
+      "box": {
+        "left": 0,
+        "top": 418,
+        "width": 380,
+        "height": 418
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.832536
+    },
+    {
+      "id": "bram",
+      "name": "브람",
+      "pose": "strike",
+      "row": 1,
+      "column": 1,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.730612,
+          0.399522
+        ],
+        "tip": [
+          0.987755,
+          0.401914
+        ],
+        "focus": [
+          0.987755,
+          0.401914
+        ],
+        "secondary": {
+          "grip": [
+            0.710204,
+            0.480861
+          ],
+          "tip": [
+            0.763265,
+            0.442584
+          ]
+        }
+      },
+      "box": {
+        "left": 380,
+        "top": 418,
+        "width": 490,
+        "height": 418
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.681818
+    },
+    {
+      "id": "bram",
+      "name": "브람",
+      "pose": "skill-a",
+      "row": 1,
+      "column": 2,
+      "anchors": {
+        "kind": "shield",
+        "grip": [
+          0.770833,
+          0.437799
+        ],
+        "tip": [
+          0.945312,
+          0.440191
+        ],
+        "focus": [
+          0.885417,
+          0.433014
+        ],
+        "secondary": {
+          "grip": [
+            0.294271,
+            0.416268
+          ],
+          "tip": [
+            0.023438,
+            0.569378
+          ]
+        }
+      },
+      "box": {
+        "left": 870,
+        "top": 418,
+        "width": 384,
+        "height": 418
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.636364
+    },
+    {
+      "id": "lina",
+      "name": "리나",
+      "pose": "recover",
+      "row": 2,
+      "column": 0,
+      "anchors": {
+        "kind": "bow",
+        "grip": [
+          0.669856,
+          0.519139
+        ],
+        "tip": [
+          0.796651,
+          0.248804
+        ],
+        "focus": [
+          0.669856,
+          0.519139
+        ],
+        "bow": {
+          "upper": [
+            0.796651,
+            0.248804
+          ],
+          "lower": [
+            0.705742,
+            0.610048
+          ],
+          "points": [
+            [
+              0.796651,
+              0.248804
+            ],
+            [
+              0.772727,
+              0.303828
+            ],
+            [
+              0.763158,
+              0.358852
+            ],
+            [
+              0.722488,
+              0.413876
+            ],
+            [
+              0.698565,
+              0.476077
+            ],
+            [
+              0.669856,
+              0.519139
+            ],
+            [
+              0.681818,
+              0.569378
+            ],
+            [
+              0.705742,
+              0.610048
+            ]
+          ],
+          "arrowVisible": false
+        }
+      },
+      "box": {
+        "left": 0,
+        "top": 836,
+        "width": 418,
+        "height": 418
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.866029
+    },
+    {
+      "id": "lina",
+      "name": "리나",
+      "pose": "strike",
+      "row": 2,
+      "column": 1,
+      "anchors": {
+        "kind": "bow",
+        "grip": [
+          0.748804,
+          0.260766
+        ],
+        "tip": [
+          0.844498,
+          0.246411
+        ],
+        "focus": [
+          0.394737,
+          0.246411
+        ],
+        "bow": {
+          "upper": [
+            0.593301,
+            0.0311
+          ],
+          "lower": [
+            0.641148,
+            0.538278
+          ],
+          "points": [
+            [
+              0.593301,
+              0.0311
+            ],
+            [
+              0.650718,
+              0.076555
+            ],
+            [
+              0.705742,
+              0.131579
+            ],
+            [
+              0.73445,
+              0.196172
+            ],
+            [
+              0.748804,
+              0.260766
+            ],
+            [
+              0.73445,
+              0.327751
+            ],
+            [
+              0.69378,
+              0.397129
+            ],
+            [
+              0.662679,
+              0.4689
+            ],
+            [
+              0.641148,
+              0.538278
+            ]
+          ],
+          "arrowVisible": true
+        }
+      },
+      "box": {
+        "left": 418,
+        "top": 836,
+        "width": 418,
+        "height": 418
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.818182
+    },
+    {
+      "id": "lina",
+      "name": "리나",
+      "pose": "skill-a",
+      "row": 2,
+      "column": 2,
+      "anchors": {
+        "kind": "bow",
+        "grip": [
+          0.889952,
+          0.34689
+        ],
+        "tip": [
+          0.952153,
+          0.332536
+        ],
+        "focus": [
+          0.535885,
+          0.351675
+        ],
+        "bow": {
+          "upper": [
+            0.741627,
+            0.069378
+          ],
+          "lower": [
+            0.796651,
+            0.662679
+          ],
+          "points": [
+            [
+              0.741627,
+              0.069378
+            ],
+            [
+              0.799043,
+              0.126794
+            ],
+            [
+              0.851675,
+              0.212919
+            ],
+            [
+              0.875598,
+              0.279904
+            ],
+            [
+              0.889952,
+              0.34689
+            ],
+            [
+              0.873206,
+              0.425837
+            ],
+            [
+              0.834928,
+              0.514354
+            ],
+            [
+              0.818182,
+              0.586124
+            ],
+            [
+              0.796651,
+              0.662679
+            ]
+          ],
+          "arrowVisible": true
+        }
+      },
+      "box": {
+        "left": 836,
+        "top": 836,
+        "width": 418,
+        "height": 418
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.732057
+    }
+  ]
+}

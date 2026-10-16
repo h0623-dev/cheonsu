@@ -1,3 +1,5 @@
+import { getCharacterArt } from './characterArt.js';
+
 export const EPIC_COMBAT_KEYFRAME = '/art/combat-epic-v1/oath-battle-keyframe.png';
 export const EPIC_COMBAT_SANCTUARY = '/art/combat-epic-v1/sanctuary-arena.png';
 export const EPIC_COMBAT_ART_ASSETS = Object.freeze([EPIC_COMBAT_KEYFRAME, EPIC_COMBAT_SANCTUARY]);
@@ -15,6 +17,16 @@ export function getEpicCombatCutInArt(unitKey, portrait) {
   return crop
     ? { kind: unitKey, src: EPIC_COMBAT_KEYFRAME, crop, width: 1672, height: 941 }
     : { kind: 'portrait', src: portrait, crop: null };
+}
+
+// B안은 전투에 참여하는 한 명의 실제 전신 원화만 사용합니다. 기본 외형과
+// 전직 외형의 키를 그대로 조회하므로 다른 인물이나 기본 의상으로 바뀌지 않습니다.
+// 구형 합성 컷인 API는 기존 자료와의 호환을 위해 위에 보존합니다.
+export function getBattleStyleBCutInArt(unitKey, portrait, skillPose) {
+  const art = getCharacterArt(unitKey);
+  const src = skillPose?.src || art?.motion?.['skill-a'] || art?.motion?.strike
+    || art?.motion?.recover || portrait;
+  return { kind: 'b-frame', src, crop: null, unitKey };
 }
 
 function hasBoss(scene) {

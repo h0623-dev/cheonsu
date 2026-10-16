@@ -1,0 +1,205 @@
+{
+  "key": "enemy-13",
+  "authoringComplete": true,
+  "reviewMethod": "이미지 생성 도구로 새 세 자세를 저작한 원본 PNG의 실제 손·의장봉·방패를 보며 수동 근사 좌표와 분할 영역 작성. 준비/공격은 의장봉, 지원의 focus는 방패 면. 몸 높이는 투구부터 부츠까지의 수동 근사치이며 정밀 실측 또는 완성 WebP 사후 QA가 아님. 화면상 배경 RGB에도 실제 알파가0인 원본의 분할용 입력값을 사용.",
+  "cells": [
+    {
+      "id": "hollow_armor",
+      "name": "빈갑옷 운반자",
+      "pose": "recover",
+      "row": 0,
+      "column": 0,
+      "anchors": {
+        "grip": [
+          0.567213,
+          0.407477
+        ],
+        "tip": [
+          0.506557,
+          0.170093
+        ],
+        "focus": [
+          0.508197,
+          0.218692
+        ],
+        "kind": "hammer",
+        "secondary": {
+          "grip": [
+            0.708197,
+            0.471028
+          ],
+          "tip": [
+            0.901639,
+            0.476636
+          ]
+        }
+      },
+      "box": {
+        "left": 150,
+        "top": 0,
+        "width": 610,
+        "height": 535
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.835514,
+      "sourceLandmarksPx": {
+        "bodyHeightPx": 447,
+        "kind": "hammer",
+        "grip": [
+          496,
+          218
+        ],
+        "tip": [
+          459,
+          91
+        ],
+        "focus": [
+          460,
+          117
+        ],
+        "secondary": {
+          "grip": [
+            582,
+            252
+          ],
+          "tip": [
+            700,
+            255
+          ]
+        }
+      }
+    },
+    {
+      "id": "hollow_armor",
+      "name": "빈갑옷 운반자",
+      "pose": "strike",
+      "row": 1,
+      "column": 0,
+      "anchors": {
+        "grip": [
+          0.746465,
+          0.331337
+        ],
+        "tip": [
+          0.976768,
+          0.311377
+        ],
+        "focus": [
+          0.927273,
+          0.313373
+        ],
+        "kind": "hammer",
+        "secondary": {
+          "grip": [
+            0.606061,
+            0.431138
+          ],
+          "tip": [
+            0.644444,
+            0.40519
+          ]
+        }
+      },
+      "box": {
+        "left": 20,
+        "top": 538,
+        "width": 990,
+        "height": 501
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.838323,
+      "sourceLandmarksPx": {
+        "bodyHeightPx": 420,
+        "kind": "hammer",
+        "grip": [
+          759,
+          704
+        ],
+        "tip": [
+          987,
+          694
+        ],
+        "focus": [
+          938,
+          695
+        ],
+        "secondary": {
+          "grip": [
+            620,
+            754
+          ],
+          "tip": [
+            658,
+            741
+          ]
+        }
+      }
+    },
+    {
+      "id": "hollow_armor",
+      "name": "빈갑옷 운반자",
+      "pose": "skill-a",
+      "row": 2,
+      "column": 0,
+      "anchors": {
+        "grip": [
+          0.318621,
+          0.576613
+        ],
+        "tip": [
+          0.104828,
+          0.731855
+        ],
+        "focus": [
+          0.833103,
+          0.266129
+        ],
+        "kind": "hammer",
+        "secondary": {
+          "grip": [
+            0.695172,
+            0.243952
+          ],
+          "tip": [
+            0.950345,
+            0.350806
+          ]
+        }
+      },
+      "box": {
+        "left": 160,
+        "top": 1040,
+        "width": 725,
+        "height": 496
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.84879,
+      "sourceLandmarksPx": {
+        "bodyHeightPx": 421,
+        "kind": "hammer",
+        "grip": [
+          391,
+          1326
+        ],
+        "tip": [
+          236,
+          1403
+        ],
+        "focus": [
+          764,
+          1172
+        ],
+        "secondary": {
+          "grip": [
+            664,
+            1161
+          ],
+          "tip": [
+            849,
+            1214
+          ]
+        }
+      }
+    }
+  ]
+}

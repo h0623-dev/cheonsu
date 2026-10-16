@@ -1,0 +1,296 @@
+{
+  "key": "ally-03",
+  "authoringComplete": true,
+  "sourcePath": "docs/art/style-b-v1/sources/ally-03.png",
+  "sourceOriginal": "/workspace/generated_images/exec-4f64f727-8081-4744-8ee8-507fd3e433a1.png",
+  "anchorSpace": "cell-fraction",
+  "reviewMethod": "생성된 투명 원본을 보며 손잡이·실제 무기 끝·방출점·활 윤곽을 수동 저작한 근사 좌표. 가려진 손/관절은 보이는 손목과 무기 축을 기준으로 근사. box는 각 배우의 실제 투명 여백을 기준으로 지정. 신체 높이는 머리에서 발까지 보이는 신체의 수동 근사치이며 최종 산출물 정밀 실측·게임 QA 결과가 아님.",
+  "cells": [
+    {
+      "id": "noah",
+      "name": "노아",
+      "pose": "recover",
+      "row": 0,
+      "column": 0,
+      "anchors": {
+        "kind": "focus",
+        "grip": [
+          0.533333,
+          0.491765
+        ],
+        "tip": [
+          0.692308,
+          0.432941
+        ],
+        "focus": [
+          0.692308,
+          0.432941
+        ],
+        "bookCenter": [
+          0.597436,
+          0.447059
+        ]
+      },
+      "box": {
+        "left": 0,
+        "top": 0,
+        "width": 390,
+        "height": 425
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.84
+    },
+    {
+      "id": "noah",
+      "name": "노아",
+      "pose": "strike",
+      "row": 0,
+      "column": 1,
+      "anchors": {
+        "kind": "focus",
+        "grip": [
+          0.8375,
+          0.374118
+        ],
+        "tip": [
+          0.965,
+          0.341176
+        ],
+        "focus": [
+          0.965,
+          0.341176
+        ],
+        "bookCenter": [
+          0.4625,
+          0.44
+        ]
+      },
+      "box": {
+        "left": 400,
+        "top": 0,
+        "width": 400,
+        "height": 425
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.778824
+    },
+    {
+      "id": "noah",
+      "name": "노아",
+      "pose": "skill-a",
+      "row": 0,
+      "column": 2,
+      "anchors": {
+        "kind": "focus",
+        "grip": [
+          0.825991,
+          0.381176
+        ],
+        "tip": [
+          0.949339,
+          0.338824
+        ],
+        "focus": [
+          0.949339,
+          0.338824
+        ],
+        "bookCenter": [
+          0.493392,
+          0.454118
+        ]
+      },
+      "box": {
+        "left": 800,
+        "top": 0,
+        "width": 454,
+        "height": 425
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.781176
+    },
+    {
+      "id": "yuna",
+      "name": "유나",
+      "pose": "recover",
+      "row": 1,
+      "column": 0,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.387179,
+          0.329268
+        ],
+        "tip": [
+          0.361538,
+          0.009756
+        ],
+        "focus": [
+          0.35641,
+          0.109756
+        ]
+      },
+      "box": {
+        "left": 0,
+        "top": 425,
+        "width": 390,
+        "height": 410
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.904878
+    },
+    {
+      "id": "yuna",
+      "name": "유나",
+      "pose": "strike",
+      "row": 1,
+      "column": 1,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.283333,
+          0.360976
+        ],
+        "tip": [
+          0.335714,
+          0.104878
+        ],
+        "focus": [
+          0.335714,
+          0.187805
+        ]
+      },
+      "box": {
+        "left": 400,
+        "top": 425,
+        "width": 420,
+        "height": 410
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.819512
+    },
+    {
+      "id": "yuna",
+      "name": "유나",
+      "pose": "skill-a",
+      "row": 1,
+      "column": 2,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.366359,
+          0.239024
+        ],
+        "tip": [
+          0.158986,
+          0.060976
+        ],
+        "focus": [
+          0.211982,
+          0.131707
+        ]
+      },
+      "box": {
+        "left": 820,
+        "top": 425,
+        "width": 434,
+        "height": 410
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.717073
+    },
+    {
+      "id": "rakan",
+      "name": "라칸",
+      "pose": "recover",
+      "row": 2,
+      "column": 0,
+      "anchors": {
+        "kind": "hammer",
+        "grip": [
+          0.681481,
+          0.572792
+        ],
+        "tip": [
+          0.977778,
+          0.742243
+        ],
+        "focus": [
+          0.977778,
+          0.742243
+        ]
+      },
+      "box": {
+        "left": 0,
+        "top": 835,
+        "width": 405,
+        "height": 419
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.856802
+    },
+    {
+      "id": "rakan",
+      "name": "라칸",
+      "pose": "strike",
+      "row": 2,
+      "column": 1,
+      "anchors": {
+        "kind": "hammer",
+        "grip": [
+          0.746154,
+          0.465394
+        ],
+        "tip": [
+          0.95,
+          0.513126
+        ],
+        "focus": [
+          0.95,
+          0.513126
+        ]
+      },
+      "box": {
+        "left": 400,
+        "top": 835,
+        "width": 520,
+        "height": 419
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.763723,
+      "isolateSilhouette": true,
+      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님."
+    },
+    {
+      "id": "rakan",
+      "name": "라칸",
+      "pose": "skill-a",
+      "row": 2,
+      "column": 2,
+      "anchors": {
+        "kind": "hammer",
+        "grip": [
+          0.620053,
+          0.112172
+        ],
+        "tip": [
+          0.153034,
+          0.272076
+        ],
+        "focus": [
+          0.155673,
+          0.186158
+        ]
+      },
+      "box": {
+        "left": 875,
+        "top": 835,
+        "width": 379,
+        "height": 419
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.71599,
+      "isolateSilhouette": true,
+      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님."
+    }
+  ]
+}

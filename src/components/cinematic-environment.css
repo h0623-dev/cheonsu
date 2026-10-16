@@ -9,8 +9,17 @@
 .epic-combat .cinematic-atmosphere { z-index: 1; overflow: hidden; }
 .epic-combat .cinematic-horizon-glow {
   position: absolute;
-  inset: 5% 0 20%;
-  background: radial-gradient(ellipse at 58% 37%, rgb(var(--cinematic-air) / .09), transparent 66%);
+  inset: 0;
+  background:
+    radial-gradient(ellipse at var(--cinematic-light-x, 58%) var(--cinematic-horizon, 43%), rgb(var(--cinematic-light) / .2), transparent 42%),
+    radial-gradient(ellipse at 50% var(--cinematic-horizon, 43%), rgb(var(--cinematic-air) / .12), transparent 64%);
+}
+.epic-combat .cinematic-sky-light {
+  position: absolute;
+  inset: 0 0 36%;
+  background:
+    radial-gradient(ellipse at var(--cinematic-light-x, 58%) 2%, rgb(var(--cinematic-light) / .19), transparent 43%),
+    radial-gradient(ellipse at 12% 42%, rgb(var(--cinematic-air) / .08), transparent 42%);
 }
 .epic-combat .cinematic-light-shafts {
   position: absolute;
@@ -24,8 +33,24 @@
   position: absolute;
   inset: 37% -5% 4%;
   background:
-    radial-gradient(ellipse at 14% 48%, rgb(var(--cinematic-air) / var(--cinematic-mist, .1)), transparent 58%),
-    radial-gradient(ellipse at 86% 65%, rgb(var(--cinematic-air) / var(--cinematic-mist, .1)), transparent 56%);
+    radial-gradient(ellipse at 9% 30%, rgb(var(--cinematic-air) / var(--cinematic-mist, .1)), transparent 51%),
+    radial-gradient(ellipse at 91% 43%, rgb(var(--cinematic-air) / var(--cinematic-mist, .1)), transparent 49%);
+}
+.epic-combat .cinematic-midground {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.epic-combat .cinematic-midground-mass {
+  fill: rgb(var(--cinematic-edge) / .18);
+}
+.epic-combat .cinematic-midground-line {
+  fill: none;
+  stroke: rgb(var(--cinematic-light) / .23);
+  stroke-width: 1.35;
+  stroke-linecap: round;
 }
 .epic-combat .cinematic-motes { position: absolute; inset: 0; }
 .epic-combat .cinematic-motes > i {
@@ -55,12 +80,36 @@
 .epic-combat .cinematic-ground-bed {
   z-index: 2;
   inset: 58% 0 0;
-  background: radial-gradient(ellipse at 50% 88%, rgb(var(--cinematic-edge) / .14), transparent 73%);
+  background: radial-gradient(ellipse at 50% 88%, rgb(var(--cinematic-edge) / .16), transparent 73%);
 }
 .epic-combat .cinematic-ground-haze {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 68%, rgb(var(--cinematic-air) / .07), transparent 66%);
+  background: radial-gradient(ellipse at 50% 68%, rgb(var(--cinematic-air) / .1), transparent 66%);
+}
+.epic-combat .cinematic-ground-reflection {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 26% 68%, rgb(var(--cinematic-light) / .12), transparent 24%),
+    radial-gradient(ellipse at 73% 44%, rgb(var(--cinematic-air) / .12), transparent 23%),
+    radial-gradient(ellipse at var(--cinematic-light-x, 58%) 5%, rgb(var(--cinematic-light) / .08), transparent 43%);
+}
+.epic-combat [data-cinematic-ground="wet"] .cinematic-ground-reflection {
+  background:
+    radial-gradient(ellipse at 27% 70%, rgb(var(--cinematic-light) / .18), transparent 27%),
+    radial-gradient(ellipse at 74% 40%, rgb(var(--cinematic-light) / .2), transparent 25%),
+    linear-gradient(180deg, transparent 8%, rgb(var(--cinematic-air) / .05) 49%, transparent 88%);
+}
+.epic-combat [data-cinematic-ground="ice"] .cinematic-ground-reflection {
+  background:
+    radial-gradient(ellipse at 24% 66%, rgb(var(--cinematic-light) / .23), transparent 25%),
+    radial-gradient(ellipse at 76% 38%, rgb(var(--cinematic-light) / .19), transparent 24%);
+}
+.epic-combat [data-cinematic-ground="rune"] .cinematic-ground-reflection {
+  background:
+    radial-gradient(ellipse at 26% 67%, rgb(var(--cinematic-light) / .14), transparent 25%),
+    radial-gradient(ellipse at 74% 43%, rgb(var(--cinematic-light) / .13), transparent 24%);
 }
 .epic-combat .cinematic-ground-grain {
   position: absolute;
@@ -73,6 +122,8 @@
 }
 .epic-combat .cinematic-water-sheen { stroke: rgb(var(--cinematic-light) / .4); stroke-width: 1.5; }
 .epic-combat .cinematic-rune-inlay { stroke: rgb(var(--cinematic-light) / .35); stroke-width: 1.6; }
+.epic-combat .cinematic-depth-grain { stroke: rgb(var(--cinematic-light) / .14); stroke-width: .9; }
+.epic-combat .cinematic-metal-seams { stroke: rgb(var(--cinematic-light) / .19); stroke-width: 1.1; }
 .epic-combat .cinematic-foreground {
   z-index: 5;
   inset: auto -1% -1%;
@@ -81,6 +132,7 @@
   fill: rgb(var(--cinematic-edge) / .66);
 }
 .epic-combat .cinematic-edge-highlight { stroke: rgb(var(--cinematic-light) / .24); stroke-width: 2; }
+.epic-combat .cinematic-foreground-glints { stroke: rgb(var(--cinematic-light) / .65); stroke-width: 1.4; stroke-linecap: round; }
 
 /* These stay transparent until the existing contact clock places and lights them. */
 .epic-combat :is(.cinematic-impact-light, .cinematic-ground-wave, .cinematic-contact-cracks) {
@@ -93,7 +145,9 @@
   width: 70%;
   aspect-ratio: 1.3;
   border-radius: 50%;
-  background: radial-gradient(ellipse, rgb(var(--epic-tone) / .65) 0%, rgb(var(--epic-tone) / .22) 29%, transparent 66%);
+  background:
+    radial-gradient(ellipse at 50% 39%, rgb(var(--epic-tone) / .66), transparent 48%),
+    radial-gradient(ellipse at 50% 74%, rgb(var(--epic-tone) / .36), transparent 61%);
 }
 .epic-combat .cinematic-ground-wave {
   z-index: 4;
@@ -105,6 +159,10 @@
 .epic-combat .cinematic-wave-outer { stroke: rgb(var(--epic-tone) / .8); stroke-width: 2.1; }
 .epic-combat .cinematic-wave-inner { stroke: var(--epic-light); stroke-width: 1; opacity: .72; }
 .epic-combat .cinematic-wave-spray { stroke: rgb(var(--epic-tone) / .7); stroke-width: 1.5; }
+.epic-combat .cinematic-wave-fringe { stroke: rgb(var(--epic-tone) / .52); stroke-width: 1.1; stroke-dasharray: 16 9 5 11; }
+.epic-combat .cinematic-wave-fragments { stroke: var(--epic-light); stroke-width: 1.35; opacity: .8; }
+.epic-combat:is([data-epic-theme="ice"], [data-epic-theme="lightning"]) .cinematic-wave-fragments { stroke-width: 1.8; }
+.epic-combat.has-boss .cinematic-wave-outer { stroke-width: 2.6; }
 .epic-combat .cinematic-contact-cracks {
   z-index: 2;
   inset: 0;

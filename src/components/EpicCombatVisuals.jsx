@@ -9,7 +9,9 @@ export default function EpicCombatVisuals() {
     <svg className="cinematic-ground-wave" viewBox="0 0 200 200" aria-hidden="true">
       <ellipse cx="100" cy="100" rx="86" ry="30" fill="none" className="cinematic-wave-outer" />
       <ellipse cx="100" cy="100" rx="63" ry="21" fill="none" className="cinematic-wave-inner" />
+      <path d="M24 84Q100 49 176 84M29 121Q100 151 171 121" fill="none" className="cinematic-wave-fringe" />
       <path d="M18 100Q43 77 67 88M133 112Q158 123 182 100" fill="none" className="cinematic-wave-spray" />
+      <path d="M38 83 33 72 40 76M159 81 165 69 161 85M58 122 51 132 62 127M138 124 150 135 145 122" fill="none" className="cinematic-wave-fragments" />
     </svg>
     <svg className="cinematic-contact-cracks" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
       <path className="cinematic-crack-line" d="M50 50L40 55M50 50L60 55" fill="none" />
@@ -27,6 +29,31 @@ export default function EpicCombatVisuals() {
       <path className="epic-strike-core" d="M0 0 Q50 0 100 0" fill="none" />
       <path className="epic-strike-filament" d="M0 0 Q50 0 100 0" fill="none" />
     </svg>
+  </>;
+}
+
+// Midground marks stay at the edges and below the distant skyline. They do not
+// duplicate the chapter painting, add obstacles or hide the actors' contact lane.
+function MidgroundTerrain({ biome }) {
+  if (['frontier', 'forest'].includes(biome)) return <>
+    <path className="cinematic-midground-mass" d="M0 402V330Q24 313 41 338Q54 306 78 336Q98 320 115 355L144 413ZM1000 408V338Q973 314 956 344Q933 323 912 350L875 414Z" />
+    <path className="cinematic-midground-line" d="M0 409Q61 392 153 418M846 420Q928 398 1000 410M42 386 48 359 53 387M103 405 110 377 116 409M923 399 929 369 936 401" />
+  </>;
+  if (biome === 'snow') return <>
+    <path className="cinematic-midground-mass" d="M0 404V364L32 349 62 374 91 361 133 406ZM1000 410V361L964 348 943 372 911 360 867 413Z" />
+    <path className="cinematic-midground-line" d="M4 371 32 355 58 379M917 368 941 380 964 355 996 369M0 411Q85 392 173 422M825 424Q919 397 1000 416" />
+  </>;
+  if (biome === 'coast') return <>
+    <path className="cinematic-midground-mass" d="M0 410V393L27 384 50 393 73 387 118 417ZM1000 418V390L978 377 957 395 932 390 902 423Z" />
+    <path className="cinematic-midground-line" d="M0 371Q53 360 108 371M889 376Q946 363 1000 376M0 402Q87 389 178 405M815 411Q909 394 1000 406" />
+  </>;
+  if (biome === 'workshop') return <>
+    <path className="cinematic-midground-mass" d="M0 414V365H27V347H46V382H74V373H91V419ZM1000 419V369H972V348H956V386H927V377H908V423Z" />
+    <path className="cinematic-midground-line" d="M0 404H94L123 420M901 421 924 405H1000M18 371V396M967 363V397" />
+  </>;
+  return <>
+    <path className="cinematic-midground-mass" d="M0 415V367L18 358 35 368V396H58V378L75 371 92 381V420ZM1000 422V369L980 359 963 371V397H939V380L922 373 905 383V424Z" />
+    <path className="cinematic-midground-line" d="M0 407H82L108 423M886 426 912 408H1000M18 366V392M980 367V393" />
   </>;
 }
 
@@ -49,28 +76,34 @@ function ForegroundTerrain({ ground }) {
 // painting stays a single arena background instead of being tiled or duplicated.
 export function CinematicEnvironment({ stageId, background }) {
   const environment = getCinematicEnvironment(stageId, background);
-  const data = { 'data-cinematic-biome': environment.biome, 'data-cinematic-weather': environment.weather, 'data-cinematic-ground': environment.ground };
+  const data = { 'data-cinematic-biome': environment.biome, 'data-cinematic-weather': environment.weather, 'data-cinematic-ground': environment.ground, 'data-cinematic-layout': environment.layout };
   return <>
     <div className="cinematic-atmosphere" data-cinematic-layer="atmosphere" {...data} style={environment.style} aria-hidden="true">
       <div className="cinematic-horizon-glow" />
+      <div className="cinematic-sky-light" />
       <svg className="cinematic-light-shafts" viewBox="0 0 1000 600" preserveAspectRatio="none">
         <path d="M178 0H220L457 600H242Z" />
         <path d="M267 0H281L591 600H515Z" opacity=".55" />
         <path d="M724 0H747L617 600H495Z" opacity=".65" />
       </svg>
       <div className="cinematic-haze" />
+      <svg className="cinematic-midground" viewBox="0 0 1000 600" preserveAspectRatio="none"><MidgroundTerrain biome={environment.biome} /></svg>
       <div className="cinematic-motes">{environment.motes.map((mote, index) => <i key={index} data-cinematic-mote={index} data-cinematic-depth={mote.depth} style={{ left: `${mote.x}%`, top: `${mote.y}%`, '--cinematic-mote-size': `${mote.size}px` }} />)}</div>
     </div>
     <div className="cinematic-ground-bed" data-cinematic-layer="ground" {...data} style={environment.style} aria-hidden="true">
       <div className="cinematic-ground-haze" />
+      <div className="cinematic-ground-reflection" />
       <svg className="cinematic-ground-grain" viewBox="0 0 1000 160" preserveAspectRatio="none">
         <path d="M58 129 102 123M184 145 226 138M778 141 834 145M898 113 935 120M318 152 337 151M657 148 682 146" />
+        <path className="cinematic-depth-grain" d="M0 84 114 87M882 86 1000 83M0 114 168 123M825 119 1000 110M25 156 198 138M812 140 980 157M204 20 173 53M794 21 823 53" />
         {['wet', 'ice'].includes(environment.ground) && <path className="cinematic-water-sheen" d="M49 115Q130 98 211 115M736 127Q831 108 932 128M238 146Q332 134 421 146M578 151Q634 142 708 151" />}
         {environment.ground === 'rune' && <path className="cinematic-rune-inlay" d="M78 143 118 132 159 143M837 143 877 132 918 143M112 136V148M871 136V148" />}
+        {environment.ground === 'metal' && <path className="cinematic-metal-seams" d="M46 158 168 23M954 158 831 23M0 102H190M808 102H1000M12 137H157M843 137H989" />}
       </svg>
     </div>
     <svg className="cinematic-foreground" data-cinematic-layer="foreground" {...data} style={environment.style} viewBox="0 0 1000 220" preserveAspectRatio="none" aria-hidden="true">
       <ForegroundTerrain ground={environment.ground} />
+      <path className="cinematic-foreground-glints" d="M13 205 17 193M48 211 53 203M84 216 88 209M989 209 984 198M951 214 945 207M924 219 918 214" fill="none" />
     </svg>
   </>;
 }

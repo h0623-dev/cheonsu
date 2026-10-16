@@ -19,6 +19,91 @@ const THEME_PALETTES = {
   water: { color: '#81d8dd', core: '#eafffb' },
 };
 
+// 승인된 B안 67개 기본 정체성의 연출 원장. 전직 의상은 교체하지 않고
+// 같은 인물의 모티브만 계승합니다. 실제 속성·피해·지원 판정은 아래의
+// presentation과 기존 공통 접촉 시계가 계속 결정합니다.
+const battleStyle = (name, motif, theme, color, power = 1.26, boss = false) => ({
+  name, motif, theme, color, core: THEME_PALETTES[theme].core, power, boss,
+});
+const battleStyleBEntries = {
+  hero: battleStyle('카일', 'flame-vortex', 'fire', '#ff9b42', 1.34),
+  bram: battleStyle('브람', 'bastion', 'guard', '#b9dea0'),
+  lina: battleStyle('리나', 'phoenix-arrow', 'fire', '#ffb14c', 1.3),
+  aria: battleStyle('아리아', 'sanctuary', 'heal', '#c6e9ef'),
+  leon: battleStyle('레온', 'wind-lance', 'wind', '#b2eee0'),
+  sera: battleStyle('세라', 'cross-shadow', 'shadow', '#dc9be5'),
+  noah: battleStyle('노아', 'thunder-formula', 'lightning', '#a7e8ff', 1.3),
+  yuna: battleStyle('유나', 'moon-ribbon', 'heal', '#e7c3f4'),
+  rakan: battleStyle('라칸', 'earth-split', 'earth', '#f1bd75', 1.34),
+  miho: battleStyle('미호', 'foxfire', 'fire', '#ffac82'),
+  teo: battleStyle('테오', 'arrow-volley', 'wind', '#c2e8a3'),
+  irene: battleStyle('아이린', 'crystal-lance', 'ice', '#a4edff', 1.3),
+  kaz: battleStyle('카즈', 'cross-shadow', 'shadow', '#b3a4ed'),
+  ella: battleStyle('엘라', 'lute-resonance', 'music', '#eac3a3'),
+  jin: battleStyle('진', 'dragon-coil', 'fire', '#ff9562', 1.34),
+  luka: battleStyle('루카', 'knight-aegis', 'holy', '#e7edb8'),
+  baekho: battleStyle('백호', 'tiger-pressure', 'martial', '#f6dfaa', 1.32),
+  mare: battleStyle('마레', 'tidal-lance', 'water', '#9de5de'),
+  harin: battleStyle('하린', 'meridian-lotus', 'heal', '#f0c3a1'),
+  edan: battleStyle('에단', 'forge-impact', 'earth', '#edc378', 1.3),
+  sylvan: battleStyle('실반', 'living-roots', 'nature', '#a7e1a2'),
+  raider: battleStyle('약탈병', 'amber-cleave', 'wind', '#efc781'),
+  ranger: battleStyle('궁병', 'leaf-arrow', 'wind', '#afe7ac'),
+  sniper: battleStyle('저격수', 'precision-bolt', 'wind', '#e5e8b0'),
+  marauder: battleStyle('투창병', 'earth-split', 'earth', '#dfaf7d', 1.3),
+  assassin_elite: battleStyle('암살자', 'cross-shadow', 'shadow', '#d88fdb'),
+  iron_lancer: battleStyle('철창병', 'piercing-cone', 'wind', '#a8e0f6'),
+  plague_doctor: battleStyle('역병 의술사', 'venom-seal', 'poison', '#c7df83'),
+  beast_tamer: battleStyle('조련병', 'whip-spiral', 'martial', '#edc590'),
+  storm_mage: battleStyle('폭풍 마도병', 'thunder-formula', 'lightning', '#a7e2ff', 1.3),
+  blade_dancer: battleStyle('쌍검 무희', 'twin-crescents', 'wind', '#ecc3ee'),
+  siege_gunner: battleStyle('공성 포병', 'cannon-flare', 'martial', '#ffbd7d', 1.32),
+  sentinel: battleStyle('방패병', 'bastion', 'guard', '#ade2ec'),
+  blackguard: battleStyle('흑기사', 'crimson-cleave', 'wind', '#d4b8d2'),
+  warlord: battleStyle('집행관', 'commander-impact', 'earth', '#e8ae79', 1.3),
+  pyromancer: battleStyle('화염 술사', 'flame-vortex', 'fire', '#ff9157', 1.3),
+  frost_mage: battleStyle('빙결 술사', 'crystal-lance', 'ice', '#a1e6ff'),
+  cultist: battleStyle('의식 사제', 'occult-seal', 'shadow', '#d6a1e9'),
+  void_knight: battleStyle('공허 기사', 'void-cleave', 'shadow', '#b2b8ff', 1.3),
+  wolf: battleStyle('전투 늑대', 'frost-claws', 'ice', '#c7f1ff'),
+  'kobold-hunter': battleStyle('코볼트 사냥꾼', 'precision-bolt', 'wind', '#e9d59c'),
+  'lizard-spearman': battleStyle('도마뱀 창병', 'tidal-lance', 'wind', '#9be4c5'),
+  'horned-ogre': battleStyle('뿔오거', 'earth-split', 'earth', '#eab584', 1.34),
+  'harpy-scout': battleStyle('하피 정찰병', 'feather-claws', 'martial', '#d8c6f3'),
+  'skeleton-warrior': battleStyle('해골전사', 'spectral-cleave', 'earth', '#b9e5ee'),
+  'rock-spirit': battleStyle('바위정령', 'stone-fissure', 'martial', '#edca7b', 1.34),
+  crab_guard: battleStyle('갈대등 갑각병', 'shell-ward', 'martial', '#b8e1d8'),
+  eel_archer: battleStyle('비늘가시 사수', 'tide-arrow', 'wind', '#afe0d8'),
+  spore_colony: battleStyle('포자등 균사체', 'spore-spiral', 'poison', '#c0dda0'),
+  mist_ram: battleStyle('눈안개 뿔양', 'mist-horns', 'martial', '#d6e6f4'),
+  crystal_insect: battleStyle('빙정날개 벌레', 'prism-claws', 'martial', '#c4e9f7'),
+  spring_salamander: battleStyle('온천 도롱뇽', 'steam-vents', 'fire', '#ffc18e'),
+  gold_puppet: battleStyle('금실 인형병', 'clockwork-threads', 'wind', '#e8cd8d'),
+  bell_keeper: battleStyle('가면 종지기', 'bell-resonance', 'music', '#d8c8ad'),
+  scroll_spirit: battleStyle('접힌서고 정령', 'paper-seal', 'holy', '#dedbb6'),
+  eclipse_cat: battleStyle('월식 사냥고양이', 'eclipse-claws', 'shadow', '#bdb5ed'),
+  ink_vine: battleStyle('잉크덩굴 포식자', 'ink-roots', 'poison', '#c0d28f'),
+  hollow_armor: battleStyle('빈갑옷 운반자', 'empty-aegis', 'guard', '#dbdfca'),
+  boss_commander: battleStyle('황금의 지휘관', 'commander-impact', 'earth', '#ffd080', 1.46, true),
+  boss_frost: battleStyle('서리의 군주', 'royal-frost-wave', 'ice', '#a1edff', 1.46, true),
+  boss_ember: battleStyle('잿불의 군주', 'inferno-vortex', 'fire', '#ff9a54', 1.48, true),
+  boss_oracle: battleStyle('검은 예언자', 'covenant-oracle', 'holy', '#f6e5a2', 1.44, true),
+  boss_abyss: battleStyle('흑천 가론', 'void-cleave', 'shadow', '#b8b0f7', 1.48, true),
+  tide_keeper: battleStyle('심해 수문장 모르칸', 'water-gates', 'wind', '#a5e3e3', 1.46, true),
+  frost_queen: battleStyle('빙정 여왕 세르카', 'crystal-crown', 'ice', '#b6f0ff', 1.46, true),
+  resonance_judge: battleStyle('공명 집행관 아르켄', 'judgment-resonance', 'music', '#e8d09e', 1.46, true),
+  oath_guardian: battleStyle('첫 맹세 수호체 아스테르', 'five-oath-tablets', 'holy', '#f4e2b0', 1.5, true),
+};
+export const BATTLE_STYLE_B_PROFILES = Object.freeze(Object.fromEntries(
+  Object.entries(battleStyleBEntries).map(([id, entry]) => [id, Object.freeze({ id, ...entry })]),
+));
+
+export function getBattleStyleBProfile(unitKey) {
+  if (typeof unitKey !== 'string') return null;
+  const canonical = getExpansionBaseKey(unitKey.replace(/^silvan(?=__|$)/, 'sylvan'));
+  return Object.hasOwn(BATTLE_STYLE_B_PROFILES, canonical) ? BATTLE_STYLE_B_PROFILES[canonical] : null;
+}
+
 const profile = (theme, power, color, core) => ({ theme, power, color, core });
 const SKILL_PROFILES = {
   gale: profile('fire', 1.1),
@@ -138,22 +223,38 @@ export function getSkillSpectacle(plan, key, presentation, scene) {
   const theme = presentation.healing ? 'heal' : presentation.guarding ? 'guard'
     : authored?.theme || EFFECT_THEMES[presentation.effect] || 'martial';
   const palette = THEME_PALETTES[theme];
+  const styleB = getBattleStyleBProfile(key);
   const unit = UNIT_ACCENTS[canonical];
   const accent = unit?.theme === theme ? unit : null;
+  const styleAccent = styleB?.theme === theme ? styleB : null;
   const firstRelease = plan.releases?.[0] ?? .45;
   const lastContact = plan.contacts.at(-1) ?? plan.impact;
+  const supportMotifs = {
+    hero: 'five-oath-tablets', bram: 'bastion', noah: 'thunder-formula', yuna: 'moon-ribbon',
+    rakan: 'tiger-pressure', ella: 'lute-resonance', luka: 'knight-aegis', mare: 'water-gates',
+    harin: 'meridian-lotus', edan: 'forge-impact', sylvan: 'living-roots',
+    crab_guard: 'shell-ward', spore_colony: 'spore-spiral', bell_keeper: 'bell-resonance',
+    hollow_armor: 'empty-aegis', resonance_judge: 'judgment-resonance',
+  };
+  const motif = presentation.support ? supportMotifs[canonical] || 'sanctuary' : styleB?.motif || theme;
   return {
     id: plan.id,
     theme,
-    color: authored?.color || accent?.color || palette.color,
-    core: authored?.core || accent?.core || palette.core,
-    power: authored?.power ?? unit?.power ?? (scene.attacker?.type === 'boss' ? 1.12 : 1.06),
+    style: 'b', identity: styleB?.id || canonical, motif, boss: Boolean(styleB?.boss),
+    melee: Boolean(plan.moving && !presentation.support),
+    color: authored?.color || styleAccent?.color || accent?.color || palette.color,
+    core: authored?.core || styleAccent?.core || accent?.core || palette.core,
+    power: styleB?.power ?? authored?.power ?? unit?.power ?? (scene.attacker?.type === 'boss' ? 1.3 : 1.2),
     support: presentation.support,
     heal: presentation.healing,
     guard: presentation.guarding,
     sword: canonical === 'hero' ? { kind: presentation.support ? 'gold' : 'fire', at: .24, until: lastContact + .16 } : null,
     weapon: { unit: key, at: .24, until: lastContact + .16 },
     charge: { at: .23, until: Math.min(firstRelease + .015, .60) },
+    ribbons: (plan.releases || [firstRelease]).map((at, index) => ({
+      at, contact: plan.contacts[index] ?? plan.impact,
+      until: Math.min(.94, (plan.contacts[index] ?? plan.impact) + (presentation.support ? .2 : .15)),
+    })),
     bursts: plan.contacts.map(at => ({ at, until: Math.min(.94, at + .23), kind: theme })),
   };
 }

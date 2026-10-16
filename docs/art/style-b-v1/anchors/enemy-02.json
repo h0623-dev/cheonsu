@@ -1,0 +1,320 @@
+{
+  "key": "enemy-02",
+  "sourcePath": "docs/art/style-b-v1/sources/enemy-02.png",
+  "rows": 3,
+  "columns": 3,
+  "anchorSpace": "cell-fraction",
+  "authoringComplete": true,
+  "reviewMethod": "승인 B안 보드와 기존 원화를 참고한 image_gen 신규 투명 전신 세 자세. 원본을 보며 셀·앵커 수동 저작, 오차 가능. 원본 포즈에서 같은 몸 비율을 유지하고 무릎 자세를 키우지 않도록 별도 bodyHeight 정규화는 생략.",
+  "cells": [
+    {
+      "id": "marauder",
+      "name": "투창병",
+      "pose": "recover",
+      "row": 0,
+      "column": 0,
+      "anchors": {
+        "kind": "axe",
+        "grip": [
+          0.692308,
+          0.524444
+        ],
+        "tip": [
+          0.876923,
+          0.193333
+        ],
+        "focus": [
+          0.876923,
+          0.193333
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.0,
+        0.0,
+        0.311004785,
+        0.358851675
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "marauder",
+      "name": "투창병",
+      "pose": "strike",
+      "row": 0,
+      "column": 1,
+      "anchors": {
+        "kind": "axe",
+        "grip": [
+          0.576642,
+          0.617778
+        ],
+        "tip": [
+          0.94708,
+          0.704444
+        ],
+        "focus": [
+          0.94708,
+          0.704444
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.295055821,
+        0.0,
+        0.437001595,
+        0.358851675
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "marauder",
+      "name": "투창병",
+      "pose": "skill-a",
+      "row": 0,
+      "column": 2,
+      "anchors": {
+        "kind": "axe",
+        "grip": [
+          0.492268,
+          0.235556
+        ],
+        "tip": [
+          0.134021,
+          0.188889
+        ],
+        "focus": [
+          0.134021,
+          0.188889
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.690590112,
+        0.0,
+        0.309409888,
+        0.358851675
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "assassin_elite",
+      "name": "암살자",
+      "pose": "recover",
+      "row": 1,
+      "column": 0,
+      "anchors": {
+        "kind": "dagger",
+        "grip": [
+          0.776923,
+          0.608108
+        ],
+        "tip": [
+          0.946154,
+          0.705405
+        ],
+        "focus": [
+          0.946154,
+          0.705405
+        ],
+        "secondary": {
+          "grip": [
+            0.269231,
+            0.591892
+          ],
+          "tip": [
+            0.341026,
+            0.751351
+          ]
+        }
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.0,
+        0.358851675,
+        0.311004785,
+        0.295055821
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "assassin_elite",
+      "name": "암살자",
+      "pose": "strike",
+      "row": 1,
+      "column": 1,
+      "anchors": {
+        "kind": "dagger",
+        "grip": [
+          0.786496,
+          0.489189
+        ],
+        "tip": [
+          0.976277,
+          0.489189
+        ],
+        "focus": [
+          0.976277,
+          0.489189
+        ],
+        "secondary": {
+          "grip": [
+            0.308394,
+            0.462162
+          ],
+          "tip": [
+            0.217153,
+            0.648649
+          ]
+        }
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.295055821,
+        0.358851675,
+        0.437001595,
+        0.295055821
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "assassin_elite",
+      "name": "암살자",
+      "pose": "skill-a",
+      "row": 1,
+      "column": 2,
+      "anchors": {
+        "kind": "dagger",
+        "grip": [
+          0.530928,
+          0.478378
+        ],
+        "tip": [
+          0.873711,
+          0.427027
+        ],
+        "focus": [
+          0.873711,
+          0.427027
+        ],
+        "secondary": {
+          "grip": [
+            0.451031,
+            0.572973
+          ],
+          "tip": [
+            0.206186,
+            0.648649
+          ]
+        }
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.690590112,
+        0.358851675,
+        0.309409888,
+        0.295055821
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "iron_lancer",
+      "name": "철창병",
+      "pose": "recover",
+      "row": 2,
+      "column": 0,
+      "anchors": {
+        "kind": "spear",
+        "grip": [
+          0.487179,
+          0.495392
+        ],
+        "tip": [
+          0.964103,
+          0.043779
+        ],
+        "focus": [
+          0.964103,
+          0.043779
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.0,
+        0.653907496,
+        0.311004785,
+        0.346092504
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "iron_lancer",
+      "name": "철창병",
+      "pose": "strike",
+      "row": 2,
+      "column": 1,
+      "anchors": {
+        "kind": "spear",
+        "grip": [
+          0.507299,
+          0.407834
+        ],
+        "tip": [
+          0.979927,
+          0.417051
+        ],
+        "focus": [
+          0.979927,
+          0.417051
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.295055821,
+        0.653907496,
+        0.437001595,
+        0.346092504
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "iron_lancer",
+      "name": "철창병",
+      "pose": "skill-a",
+      "row": 2,
+      "column": 2,
+      "anchors": {
+        "kind": "spear",
+        "grip": [
+          0.659794,
+          0.329493
+        ],
+        "tip": [
+          0.938144,
+          0.004608
+        ],
+        "focus": [
+          0.938144,
+          0.004608
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.690590112,
+        0.653907496,
+        0.309409888,
+        0.346092504
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    }
+  ]
+}

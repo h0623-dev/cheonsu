@@ -13,39 +13,79 @@ const cinematicTracks = points => [...new Map(points
   .map(([at, ...values]) => [clamp(at).toFixed(5), [clamp(at), ...values]]))
   .values()].sort((left, right) => left[0] - right[0]);
 
-// Add weight around the authored beats; release/contact poses and their exact coordinates stay anchored.
+// B안의 전신 연기. Each weapon loads, releases and settles differently, inside the original clock.
+// Values describe bend, compression, retreat, follow-through, plant and recoil, not damage or reach.
+const cinematicMotionProfiles = {
+  slash: { bend: 5.4, compression: .025, retreat: .018, follow: 3.4, plant: .9, recoil: 1 },
+  thrust: { bend: 3.6, compression: .018, retreat: .014, follow: 2.4, plant: .75, recoil: .75 },
+  heavy: { bend: 7.2, compression: .038, retreat: .022, follow: 4.6, plant: 1.3, recoil: 1.25 },
+  guard: { bend: 3.5, compression: .026, retreat: .013, follow: 2.1, plant: 1.1, recoil: .75 },
+  quick: { bend: 4.0, compression: .021, retreat: .021, follow: 3.2, plant: .65, recoil: .65 },
+  beast: { bend: 4.7, compression: .032, retreat: .019, follow: 3.0, plant: 1.15, recoil: .9 },
+  whip: { bend: 5.3, compression: .023, retreat: .019, follow: 4.1, plant: .75, recoil: 1.1 },
+  fist: { bend: 5.0, compression: .029, retreat: .017, follow: 3.3, plant: 1, recoil: .8 },
+  bow: { bend: 3.7, compression: .017, retreat: .015, follow: 2.6, plant: .45, recoil: 1.2 },
+  cannon: { bend: 3.0, compression: .025, retreat: .025, follow: 4.5, plant: 1.1, recoil: 1.65 },
+  cast: { bend: 2.4, compression: .014, retreat: .006, follow: 1.6, plant: .25, recoil: .45 },
+};
+
+function cinematicMotionEasing(plan, at) {
+  if (plan.contacts.some(contact => at >= contact && at < contact + (plan.contactPause || 0))) return 'linear';
+  // The last loaded frame accelerates into the original release; the body and feet arrive together.
+  if (plan.releases.some(release => release > at + .001 && release - at <= .045)) return 'cubic-bezier(.58,.025,.82,.44)';
+  return 'cubic-bezier(.24,.72,.32,1)';
+}
+
+// Add anticipation and follow-through without moving the authored release or contact anchors.
 function getCinematicActing(plan, { support, boss }) {
-  const profiles = {
-    slash: [3.6, .018, .013, 2.2], thrust: [2.8, .014, .01, 1.8],
-    heavy: [5.1, .028, .017, 3.1], guard: [2.5, .018, .009, 1.5],
-    quick: [2.4, .015, .015, 1.9], beast: [3.2, .023, .014, 2.1],
-    whip: [3.4, .017, .012, 2.4], fist: [3.8, .022, .012, 2.3],
-    bow: [2.5, .012, .01, 1.7], cannon: [2.1, .019, .018, 3.1],
-    cast: [1.6, .01, .004, 1.1],
-  };
-  const [bend, compression, retreat, follow] = profiles[plan.weapon] || profiles.slash;
-  const weight = support ? .42 : boss ? .58 : 1;
+  const { bend, compression, retreat, follow, plant, recoil } = cinematicMotionProfiles[plan.weapon] || cinematicMotionProfiles.slash;
+  const weight = (support ? .48 : boss ? .72 : 1) * (plan.skill ? 1.12 : 1);
   const actor = plan.actor.map(point => [...point]), body = plan.body.map(point => [...point]);
   const sampleActor = at => sampleDuelTrack(plan.actor, clamp(at));
   const sampleBody = at => sampleDuelTrack(plan.body, clamp(at));
   const releases = plan.releases || [plan.impact];
+  const inContactHold = at => plan.contacts.some(contact => at >= contact && at <= contact + (plan.contactPause || 0));
+  const addActor = (at, ...values) => { if (!inContactHold(at)) actor.push([at, ...values]); };
+  const addBody = (at, ...values) => { if (!inContactHold(at)) body.push([at, ...values]); };
+
+  // Alternate a lifted stride and a planted, compressed step. Large bodies take heavier,
+  // lower steps; flying/pouncing poses keep their authored airborne arc.
+  if (plan.moving && !support) {
+    for (const [index, footfall] of (plan.footfalls || []).entries()) {
+      const [x, y] = sampleActor(footfall);
+      if (y < -5 || releases.some(at => Math.abs(at - footfall) < .035)) continue;
+      const toeOff = Math.max(0, footfall - .017), settle = Math.min(.955, footfall + .024);
+      const [toeX, toeY] = sampleActor(toeOff), [angle, sx, sy] = sampleBody(footfall);
+      addActor(toeOff, toeX, toeY - plant * weight * .75);
+      addActor(footfall, x, y + plant * weight * .42);
+      addActor(settle, ...sampleActor(settle));
+      addBody(toeOff, ...sampleBody(toeOff));
+      addBody(footfall, angle + (index % 2 ? -.65 : .65) * weight,
+        sx * (1 + compression * .18 * weight), sy * (1 - compression * .5 * weight));
+      addBody(settle, ...sampleBody(settle));
+    }
+  }
   for (const [index, release] of releases.entries()) {
     const previous = index ? releases[index - 1] : .08;
-    const preparation = Math.max(previous + .025, release - (plan.weapon === 'heavy' ? .115 : .085));
+    const preparation = Math.max(previous + .025, release - (plan.weapon === 'heavy' ? .13 : plan.weapon === 'bow' ? .105 : .09));
     const loaded = Math.max(preparation + .008, release - .025);
     if (loaded >= release - .003) continue;
     const [x, y] = sampleActor(loaded), [angle, sx, sy] = sampleBody(loaded);
-    actor.push([loaded, x - retreat * weight, y + (support ? -.35 : .65) * weight]);
-    body.push([preparation, ...sampleBody(preparation)],
-      [loaded, angle - bend * weight, sx * (1 + compression * .35 * weight), sy * (1 - compression * weight)]);
+    const channel = plan.weapon === 'cast';
+    addActor(preparation, ...sampleActor(preparation));
+    addActor(loaded, x - retreat * weight, y + (channel ? -1.1 : support ? -.35 : plant * .8) * weight);
+    addBody(preparation, ...sampleBody(preparation));
+    addBody(loaded, angle - bend * weight, sx * (1 + compression * .35 * weight), sy * (1 - compression * weight));
     if (!plan.moving) {
       const nextRelease = releases[index + 1] ?? .94;
-      const recoilAt = Math.min(nextRelease - .008, release + .019);
-      const recoverAt = Math.min(nextRelease - .004, release + .083);
+      const recoilAt = Math.min(nextRelease - .008, release + (plan.weapon === 'cannon' ? .023 : .015));
+      const recoverAt = Math.min(nextRelease - .004, release + (plan.weapon === 'cannon' ? .105 : .086));
       if (recoilAt > release && recoverAt >= recoilAt) {
         const [rx, ry] = sampleActor(recoilAt), [ra, rsx, rsy] = sampleBody(recoilAt);
-        actor.push([recoilAt, rx - retreat * weight * .8, ry + (support ? -.5 : .25) * weight], [recoverAt, ...sampleActor(recoverAt)]);
-        body.push([recoilAt, ra - follow * weight, rsx, rsy * (1 - compression * .35 * weight)], [recoverAt, ...sampleBody(recoverAt)]);
+        addActor(recoilAt, rx - retreat * weight * recoil, ry + (channel ? -.7 : .3) * weight);
+        addActor(recoverAt, ...sampleActor(recoverAt));
+        addBody(recoilAt, ra - follow * weight * recoil, rsx, rsy * (1 - compression * .35 * weight));
+        addBody(recoverAt, ...sampleBody(recoverAt));
       }
     }
   }
@@ -53,12 +93,14 @@ function getCinematicActing(plan, { support, boss }) {
     for (const [index, contact] of plan.contacts.entries()) {
       const hold = contact + (plan.contactPause || 0);
       const nextRelease = releases[index + 1] ?? .94;
-      const followAt = Math.min(nextRelease - .012, hold + .027);
-      const recoverAt = Math.min(nextRelease - .004, hold + .085);
+      const followAt = Math.min(nextRelease - .012, hold + (boss ? .037 : .025));
+      const recoverAt = Math.min(nextRelease - .004, hold + (boss ? .106 : .085));
       if (followAt > hold && recoverAt >= followAt) {
         const [x, y] = sampleActor(followAt), [angle, sx, sy] = sampleBody(followAt);
-        actor.push([followAt, x - retreat * weight * .6, y + .35 * weight], [recoverAt, ...sampleActor(recoverAt)]);
-        body.push([followAt, angle + follow * weight, sx * (1 + compression * .15 * weight), sy * (1 - compression * .35 * weight)], [recoverAt, ...sampleBody(recoverAt)]);
+        addActor(followAt, x - retreat * weight * .6, y + plant * .5 * weight);
+        addActor(recoverAt, ...sampleActor(recoverAt));
+        addBody(followAt, angle + follow * weight, sx * (1 + compression * .15 * weight), sy * (1 - compression * .35 * weight));
+        addBody(recoverAt, ...sampleBody(recoverAt));
       }
     }
   }
@@ -151,8 +193,8 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
         const animation=element.animate(ordered,{duration,fill:'both',easing:'linear',...options});
         animation.currentTime=elapsed;if(paused)animation.pause();animations.push(animation);
       };
-      animate(attacker,acting.actor.map(([offset,x,y])=>({offset,transform:`translateX(calc(var(--combat-reach) * ${x})) translateY(${y}%)`,easing:plan.releases.some(at=>at>offset+.001&&at-offset<=.04)?'cubic-bezier(.55,.02,.88,.4)':'cubic-bezier(.3,.65,.4,1)'})));
-      animate(attacker.querySelector('.fighter-body'),acting.body.map(([offset,angle,sx,sy])=>({offset,transform:`rotate(${angle}deg) scale(${sx},${sy})`,easing:'cubic-bezier(.22,.65,.35,1)'})));
+      animate(attacker,acting.actor.map(([offset,x,y])=>({offset,transform:`translateX(calc(var(--combat-reach) * ${x})) translateY(${y}%)`,easing:cinematicMotionEasing(plan,offset)})));
+      animate(attacker.querySelector('.fighter-body'),acting.body.map(([offset,angle,sx,sy])=>({offset,transform:`rotate(${angle}deg) scale(${sx},${sy})`,easing:cinematicMotionEasing(plan,offset)})));
       animate(attacker.querySelector('.fighter-shadow'),acting.actor.map(([offset,,height])=>({offset,opacity:height < -3 ? .45 : .85,transform:`scale(${height < -3 ? .76 : 1.04},${height < -3 ? .7 : 1})`})));
       const litBeats = ['bow','cannon','cast'].includes(plan.weapon) || support ? plan.releases : plan.contacts;
       animate(attacker.querySelector('.fighter-poses'), [{ offset: 0, filter: 'brightness(1)' }, ...litBeats.flatMap(at => [
@@ -239,14 +281,14 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
         animate(dust,[{offset:0,opacity:0,transform:'scale(.35)'},{offset:at,opacity:0,transform:'scale(.35)'},{offset:at+.004,opacity:.4,transform:'scale(.35)'},
           {offset:Math.min(.99,at+.085),opacity:0,transform:'translateY(-7px) scale(1.5)'},{offset:1,opacity:0}]);
       }
-      const weaponPoint = at => {
+      const weaponPoint = (at, endpoint = 'grip') => {
         const [x, y] = sampleDuelTrack(acting.actor, at);
         const activePose = getDuelPoseAt(plan, at);
         const sourcePose = activePose === 'skill' ? plan.skillPose?.src?.includes('skill-b') ? 'skill-b' : 'skill-a' : activePose === 'ready' ? 'recover' : activePose;
         const sourceStyle = activePose === 'skill' && plan.skillPose ? skillFrameStyle : getCombatFrameStyle(attackerKey, sourcePose);
         const sourceAnchor = getDuelWeaponAnchor(attackerKey, sourcePose, plan.weapon);
-        const grip = projectDuelAnchor(sourceAnchor.grip, { width: attacker.offsetWidth, scale: Number(sourceStyle?.['--combat-sprite-scale']) || 1, footOffset: (parseFloat(sourceStyle?.['--combat-foot-offset']) || 0) / 100, body: sampleDuelTrack(acting.body, at) });
-        return [attacker.offsetLeft + reach * x + grip[0], arena.clientHeight - parseFloat(getComputedStyle(attacker).bottom) - attacker.offsetWidth + grip[1] + attacker.offsetHeight * y / 100];
+        const anchorPoint = projectDuelAnchor(sourceAnchor[endpoint] || sourceAnchor.grip, { width: attacker.offsetWidth, scale: Number(sourceStyle?.['--combat-sprite-scale']) || 1, footOffset: (parseFloat(sourceStyle?.['--combat-foot-offset']) || 0) / 100, body: sampleDuelTrack(acting.body, at) });
+        return [attacker.offsetLeft + reach * x + anchorPoint[0], arena.clientHeight - parseFloat(getComputedStyle(attacker).bottom) - attacker.offsetWidth + anchorPoint[1] + attacker.offsetHeight * y / 100];
       };
       const point=([fraction,y],at)=>{
         const source = weaponPoint(at);
@@ -274,7 +316,7 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
           {offset:end,opacity:isTravel?opacity:0,transform:final},{offset:clamp(end+.012),opacity:0,transform:final},{offset:1,opacity:0,transform:final}]);
         for(const stroke of element.querySelectorAll('.duel-stroke'))animate(stroke,[{offset:0,strokeDashoffset:500},{offset:at,strokeDashoffset:500},{offset:mid,strokeDashoffset:0},{offset:1,strokeDashoffset:0}]);
       }
-      animateSkillSpectacle(root,plan,{arena,attacker,a,d,dy,ground,miss,actorTrack:acting.actor},animate);
+      animateSkillSpectacle(root,plan,{arena,attacker,a,d,dy,ground,miss,actorTrack:acting.actor,weaponPoint},animate);
       animateEpicCombat(root,plan,{arena,attacker,defender,d,dy,ground,weaponPoint,miss,support,selfSupport,shake,finish},animate);
       if(shake&&!support&&!miss)animate(arena,[{offset:0,transform:'none'},...plan.contacts.flatMap(at=>[{offset:at-.003,transform:'none'},{offset:at+.008,transform:`translateX(-${plan.skill?2:1}px)`},{offset:at+.019,transform:`translateX(${plan.skill?2:1}px)`},{offset:at+.033,transform:'none'}]),{offset:1,transform:'none'}]);
     };

@@ -1,0 +1,410 @@
+{
+  "key": "boss-01",
+  "authoringComplete": true,
+  "anchorSpace": "cell-fraction",
+  "reviewMethod": "생성 PNG 원본의 손·무기끝·결정/음차 발광점과 실제 투명 분할 여백을 보며 수동 근사 저작. sourceRect 내부 비율이며 왕관 포함 두정부~발끝 bodyHeight는 무기·손·떠있는 석판을 제외함. 완성 WebP·게임 화면 QA 또는 자동 검증은 실행하지 않음.",
+  "sourceImage": "exec-a5c1cd10-dd82-4ba7-9804-c47cc0fd7cb4.png",
+  "sourceDimensions": [
+    1254,
+    1254
+  ],
+  "identityNotes": "승인 B안 보스 원종족·외모·무기 보존. 모르칸은 인간/열쇠형 삼지창, 아르켄은 인간/금빛 음차봉, 아스테르는 인간형 거대검/등 뒤 다섯 금빛 맹세 석판.",
+  "cells": [
+    {
+      "id": "boss_commander",
+      "name": "황금의 지휘관",
+      "pose": "recover",
+      "row": 0,
+      "column": 0,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.47027,
+          0.609524
+        ],
+        "tip": [
+          0.910811,
+          0.879365
+        ],
+        "focus": [
+          0.910811,
+          0.879365
+        ]
+      },
+      "sourceRect": [
+        0.03189793,
+        0.07974482,
+        0.29505582,
+        0.25119617
+      ],
+      "bodyHeight": 0.863492,
+      "sourceLandmarksPx": {
+        "grip": [
+          214,
+          292
+        ],
+        "tip": [
+          377,
+          377
+        ],
+        "focus": [
+          377,
+          377
+        ],
+        "headToFootHeight": 272
+      }
+    },
+    {
+      "id": "boss_commander",
+      "name": "황금의 지휘관",
+      "pose": "strike",
+      "row": 0,
+      "column": 1,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.614737,
+          0.450847
+        ],
+        "tip": [
+          0.978947,
+          0.501695
+        ],
+        "focus": [
+          0.978947,
+          0.501695
+        ]
+      },
+      "sourceRect": [
+        0.34290271,
+        0.09569378,
+        0.37878788,
+        0.23524721
+      ],
+      "bodyHeight": 0.789831,
+      "sourceLandmarksPx": {
+        "grip": [
+          722,
+          253
+        ],
+        "tip": [
+          895,
+          268
+        ],
+        "focus": [
+          895,
+          268
+        ],
+        "headToFootHeight": 233
+      }
+    },
+    {
+      "id": "boss_commander",
+      "name": "황금의 지휘관",
+      "pose": "skill-a",
+      "row": 0,
+      "column": 2,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.628125,
+          0.194667
+        ],
+        "tip": [
+          0.1,
+          0.061333
+        ],
+        "focus": [
+          0.1,
+          0.061333
+        ]
+      },
+      "sourceRect": [
+        0.72567783,
+        0.03189793,
+        0.25518341,
+        0.29904306
+      ],
+      "bodyHeight": 0.709333,
+      "sourceLandmarksPx": {
+        "grip": [
+          1111,
+          113
+        ],
+        "tip": [
+          942,
+          63
+        ],
+        "focus": [
+          942,
+          63
+        ],
+        "headToFootHeight": 266
+      }
+    },
+    {
+      "id": "boss_frost",
+      "name": "서리의 군주",
+      "pose": "recover",
+      "row": 1,
+      "column": 0,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.772727,
+          0.426316
+        ],
+        "tip": [
+          0.763636,
+          0.089474
+        ],
+        "focus": [
+          0.772727,
+          0.178947
+        ]
+      },
+      "sourceRect": [
+        0.02791069,
+        0.36283892,
+        0.26315789,
+        0.3030303
+      ],
+      "bodyHeight": 0.765789,
+      "sourceLandmarksPx": {
+        "grip": [
+          290,
+          617
+        ],
+        "tip": [
+          287,
+          489
+        ],
+        "focus": [
+          290,
+          523
+        ],
+        "headToFootHeight": 291
+      }
+    },
+    {
+      "id": "boss_frost",
+      "name": "서리의 군주",
+      "pose": "strike",
+      "row": 1,
+      "column": 1,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.6375,
+          0.331343
+        ],
+        "tip": [
+          0.9625,
+          0.286567
+        ],
+        "focus": [
+          0.885417,
+          0.319403
+        ]
+      },
+      "sourceRect": [
+        0.33891547,
+        0.39872408,
+        0.38277512,
+        0.26714514
+      ],
+      "bodyHeight": 0.808955,
+      "sourceLandmarksPx": {
+        "grip": [
+          731,
+          611
+        ],
+        "tip": [
+          887,
+          596
+        ],
+        "focus": [
+          850,
+          607
+        ],
+        "headToFootHeight": 271
+      }
+    },
+    {
+      "id": "boss_frost",
+      "name": "서리의 군주",
+      "pose": "skill-a",
+      "row": 1,
+      "column": 2,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.635821,
+          0.283544
+        ],
+        "tip": [
+          0.901493,
+          0.058228
+        ],
+        "focus": [
+          0.850746,
+          0.124051
+        ]
+      },
+      "sourceRect": [
+        0.72567783,
+        0.35087719,
+        0.26714514,
+        0.31499203
+      ],
+      "bodyHeight": 0.703797,
+      "sourceLandmarksPx": {
+        "grip": [
+          1123,
+          552
+        ],
+        "tip": [
+          1212,
+          463
+        ],
+        "focus": [
+          1195,
+          489
+        ],
+        "headToFootHeight": 278
+      }
+    },
+    {
+      "id": "boss_ember",
+      "name": "잿불의 군주",
+      "pose": "recover",
+      "row": 2,
+      "column": 0,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.477333,
+          0.618182
+        ],
+        "tip": [
+          0.949333,
+          0.818182
+        ],
+        "focus": [
+          0.949333,
+          0.818182
+        ]
+      },
+      "sourceRect": [
+        0.03189793,
+        0.70175439,
+        0.29904306,
+        0.26315789
+      ],
+      "bodyHeight": 0.815152,
+      "sourceLandmarksPx": {
+        "grip": [
+          219,
+          1084
+        ],
+        "tip": [
+          396,
+          1150
+        ],
+        "focus": [
+          396,
+          1150
+        ],
+        "headToFootHeight": 269
+      }
+    },
+    {
+      "id": "boss_ember",
+      "name": "잿불의 군주",
+      "pose": "strike",
+      "row": 2,
+      "column": 1,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.547917,
+          0.555556
+        ],
+        "tip": [
+          0.96875,
+          0.701587
+        ],
+        "focus": [
+          0.96875,
+          0.701587
+        ]
+      },
+      "sourceRect": [
+        0.34290271,
+        0.71371611,
+        0.38277512,
+        0.25119617
+      ],
+      "bodyHeight": 0.698413,
+      "sourceLandmarksPx": {
+        "grip": [
+          693,
+          1070
+        ],
+        "tip": [
+          895,
+          1116
+        ],
+        "focus": [
+          895,
+          1116
+        ],
+        "headToFootHeight": 220
+      }
+    },
+    {
+      "id": "boss_ember",
+      "name": "잿불의 군주",
+      "pose": "skill-a",
+      "row": 2,
+      "column": 2,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.728358,
+          0.22973
+        ],
+        "tip": [
+          0.101493,
+          0.094595
+        ],
+        "focus": [
+          0.101493,
+          0.094595
+        ]
+      },
+      "sourceRect": [
+        0.72567783,
+        0.66985646,
+        0.26714514,
+        0.29505582
+      ],
+      "bodyHeight": 0.627027,
+      "sourceLandmarksPx": {
+        "grip": [
+          1154,
+          925
+        ],
+        "tip": [
+          944,
+          875
+        ],
+        "focus": [
+          944,
+          875
+        ],
+        "headToFootHeight": 232
+      }
+    }
+  ]
+}

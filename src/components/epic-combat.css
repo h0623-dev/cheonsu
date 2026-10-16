@@ -502,3 +502,183 @@
   .painted-combat.epic-combat .combat-enemy-intro { opacity: 1; transform: none; }
   .painted-combat.epic-combat .cinematic-fighter-light { display: none; }
 }
+
+/* B안: 전신과 실제 타격이 중심이 되도록 정보 영역을 줄입니다. 배우 프레임의
+   크기만 지정하며, 이동·무기 접촉·화면 경계는 기존 결투 배치기가 함께 맞춥니다. */
+.painted-combat.epic-combat[data-battle-style="b"] {
+  --epic-arena-height: min(78dvh, 680px, calc(100dvh - 124px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)));
+  width: min(100%, 1280px);
+  border-color: #e5bf7c;
+  border-radius: 3px;
+}
+.painted-combat.epic-combat[data-battle-style="b"] .painted-combat-heading {
+  min-height: 39px;
+  padding: 6px 18px;
+  gap: 10px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr) minmax(0, 1fr);
+  background: linear-gradient(100deg, #14272be8, #091318f5 48%, #18232bea);
+}
+.painted-combat.epic-combat[data-battle-style="b"] .painted-combat-heading h2 {
+  font-size: clamp(17px, 1.8vw, 22px);
+  letter-spacing: .025em;
+  color: var(--battle-b-light);
+}
+.painted-combat.epic-combat[data-battle-style="b"] .painted-combat-heading > span {
+  font-size: 10px;
+  line-height: 1.25;
+}
+.painted-combat.epic-combat[data-battle-style="b"] .fighter-attacker {
+  width: min(46%, calc(var(--epic-arena-height) * .84));
+  left: 8%;
+  bottom: 8%;
+}
+.painted-combat.epic-combat[data-battle-style="b"] .fighter-defender {
+  width: min(37%, calc(var(--epic-arena-height) * .68));
+  right: 9%;
+  bottom: 18%;
+}
+.painted-combat.epic-combat[data-battle-style="b"][data-epic-boss-side="attacker"] .fighter-attacker,
+.painted-combat.epic-combat[data-battle-style="b"][data-epic-boss-side="defender"] .fighter-defender {
+  width: min(72%, calc(var(--epic-arena-height) * .94));
+  bottom: 11%;
+  z-index: 3;
+}
+.painted-combat.epic-combat[data-battle-style="b"][data-epic-boss-side="attacker"] .fighter-attacker { left: 8%; }
+.painted-combat.epic-combat[data-battle-style="b"][data-epic-boss-side="defender"] .fighter-defender { right: 8%; }
+.painted-combat.epic-combat[data-battle-style="b"][data-epic-boss-side="attacker"] .fighter-defender,
+.painted-combat.epic-combat[data-battle-style="b"][data-epic-boss-side="defender"] .fighter-attacker {
+  width: min(35%, calc(var(--epic-arena-height) * .46));
+  bottom: 7%;
+  z-index: 4;
+}
+.painted-combat.epic-combat[data-battle-style="b"].is-self-support .fighter-attacker {
+  left: calc(50% - min(23%, calc(var(--epic-arena-height) * .42)));
+}
+.painted-combat.epic-combat[data-battle-style="b"].is-self-support[data-epic-boss-side="attacker"] .fighter-attacker {
+  left: calc(50% - min(36%, calc(var(--epic-arena-height) * .47)));
+}
+.painted-combat.epic-combat[data-battle-style="b"] .painted-combat-health {
+  padding: 7px 18px 9px;
+  gap: 30px;
+  background: linear-gradient(100deg, #11282be8, #0a171deF 50%, #242126e8);
+}
+.painted-combat.epic-combat[data-battle-style="b"] .combat-health > div:first-child {
+  margin-bottom: 4px;
+  font-size: 11px;
+}
+.painted-combat.epic-combat[data-battle-style="b"] .combat-health-track { height: 5px; }
+.painted-combat.epic-combat[data-battle-style="b"] .combat-enemy-intro {
+  inset: 6px 10px auto auto;
+  max-width: 42%;
+  padding: 2px 6px 3px 12px;
+  opacity: .92;
+}
+.painted-combat.epic-combat[data-battle-style="b"] .combat-enemy-intro.intro-attacker {
+  inset: 6px auto auto 10px;
+  padding: 2px 12px 3px 6px;
+}
+.painted-combat.epic-combat[data-battle-style="b"] .combat-enemy-intro strong { font-size: 13px; }
+.painted-combat.epic-combat[data-battle-style="b"] .combat-enemy-intro span { font-size: 8px; }
+
+/* 컷인은 시전 초기에만 나타나는 실제 배우의 원화입니다. 합성된 상대나
+   미리 그려진 피해 결과를 표시하지 않으며 전직 의상도 배우와 일치합니다. */
+.painted-combat.epic-combat[data-battle-style="b"] .skill-cut-in.epic-cut-in {
+  inset: 5% 0 auto;
+  height: 20%;
+  min-height: 56px;
+  max-height: 120px;
+  padding-inline: 7%;
+  border-color: var(--battle-b-accent);
+  background: linear-gradient(100deg, #08151ed9, #102a35e8 42%, #09131eeB);
+}
+.painted-combat.epic-combat[data-battle-style="b"] .epic-cut-in[data-epic-art="b-frame"] > .epic-cut-in-art {
+  inset: -43% auto -23% 5%;
+  width: 48%;
+  height: 166%;
+  object-fit: contain;
+  object-position: center 45%;
+  filter: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.painted-combat.epic-combat[data-battle-style="b"] .epic-cut-in[data-epic-art="b-frame"]::after {
+  background: linear-gradient(90deg, transparent 30%, #0a18224f 47%, #07141ee8 73%);
+}
+.painted-combat.epic-combat[data-battle-style="b"] .epic-cut-in > .epic-cut-in-copy {
+  width: 49%;
+  padding-block: 8px;
+  align-self: center;
+}
+.painted-combat.epic-combat[data-battle-style="b"] .epic-cut-in small {
+  color: var(--battle-b-accent);
+  letter-spacing: .13em;
+  font-size: 9px;
+  margin-bottom: 3px;
+}
+.painted-combat.epic-combat[data-battle-style="b"] .epic-cut-in strong {
+  font-size: clamp(18px, 2.2vw, 28px);
+  color: var(--battle-b-light);
+}
+.painted-combat.epic-combat[data-battle-style="b"] .combat-result strong { font-size: clamp(32px, 4.2vw, 54px); }
+.painted-combat.epic-combat[data-battle-style="b"].is-support:not(.is-self-support):not(.has-boss) .fighter-attacker {
+  width: min(43%, calc(var(--epic-arena-height) * .78));
+}
+
+@media (max-width: 600px) {
+  .painted-combat.epic-combat[data-battle-style="b"] {
+    --epic-arena-height: min(136vw, 74dvh, calc(100dvh - 106px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)));
+  }
+  .painted-combat.epic-combat[data-battle-style="b"] .painted-combat-heading {
+    min-height: 37px;
+    padding: 5px 9px;
+    gap: 6px;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 2.2fr) minmax(0, .8fr);
+  }
+  .painted-combat.epic-combat[data-battle-style="b"] .painted-combat-heading h2 { font-size: 15px; }
+  .painted-combat.epic-combat[data-battle-style="b"] .painted-combat-heading > span { font-size: 8px; }
+  .painted-combat.epic-combat[data-battle-style="b"] .fighter-attacker { width: 49%; left: 9%; }
+  .painted-combat.epic-combat[data-battle-style="b"] .fighter-defender { width: 39%; right: 10%; }
+  .painted-combat.epic-combat[data-battle-style="b"][data-epic-boss-side="attacker"] .fighter-attacker,
+  .painted-combat.epic-combat[data-battle-style="b"][data-epic-boss-side="defender"] .fighter-defender { width: min(78%, calc(var(--epic-arena-height) * .94)); }
+  .painted-combat.epic-combat[data-battle-style="b"][data-epic-boss-side="attacker"] .fighter-attacker { left: 10%; }
+  .painted-combat.epic-combat[data-battle-style="b"][data-epic-boss-side="defender"] .fighter-defender { right: 10%; }
+  .painted-combat.epic-combat[data-battle-style="b"][data-epic-boss-side="attacker"] .fighter-defender,
+  .painted-combat.epic-combat[data-battle-style="b"][data-epic-boss-side="defender"] .fighter-attacker { width: min(38%, calc(var(--epic-arena-height) * .46)); }
+  .painted-combat.epic-combat[data-battle-style="b"].is-self-support .fighter-attacker { left: 25.5%; }
+  .painted-combat.epic-combat[data-battle-style="b"].is-self-support[data-epic-boss-side="attacker"] .fighter-attacker { left: calc(50% - min(39%, calc(var(--epic-arena-height) * .47))); }
+  .painted-combat.epic-combat[data-battle-style="b"] .painted-combat-health { padding: 6px 9px 8px; gap: 16px; }
+  .painted-combat.epic-combat[data-battle-style="b"] .combat-health > div:first-child { font-size: 10px; gap: 5px; margin-bottom: 3px; }
+  .painted-combat.epic-combat[data-battle-style="b"] .combat-health span { font-size: 9px; }
+  .painted-combat.epic-combat[data-battle-style="b"] .combat-enemy-intro { max-width: 49%; inset: 5px 7px auto auto; }
+  .painted-combat.epic-combat[data-battle-style="b"] .combat-enemy-intro.intro-attacker { inset: 5px auto auto 7px; }
+  .painted-combat.epic-combat[data-battle-style="b"] .combat-enemy-intro strong { font-size: 11px; }
+  .painted-combat.epic-combat[data-battle-style="b"] .skill-cut-in.epic-cut-in { height: 18%; min-height: 54px; max-height: 96px; padding-inline: 4%; }
+  .painted-combat.epic-combat[data-battle-style="b"] .epic-cut-in[data-epic-art="b-frame"] > .epic-cut-in-art { width: 53%; left: 0; }
+  .painted-combat.epic-combat[data-battle-style="b"] .epic-cut-in > .epic-cut-in-copy { width: 49%; padding-block: 6px; }
+  .painted-combat.epic-combat[data-battle-style="b"] .epic-cut-in strong { font-size: clamp(16px, 4.5vw, 22px); }
+  .painted-combat.epic-combat[data-battle-style="b"] .epic-cut-in small { font-size: 8px; }
+  .painted-combat.epic-combat[data-battle-style="b"] .combat-result strong { font-size: 32px; }
+  .painted-combat.epic-combat[data-battle-style="b"].is-support:not(.is-self-support):not(.has-boss) .fighter-attacker { width: 45%; }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .painted-combat.epic-combat[data-battle-style="b"] {
+    --epic-arena-height: min(82dvh, calc(100dvh - 89px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)));
+  }
+  .painted-combat.epic-combat[data-battle-style="b"] .painted-combat-heading { min-height: 29px; padding: 4px 14px; }
+  .painted-combat.epic-combat[data-battle-style="b"] .painted-combat-heading h2 { font-size: 15px; }
+  .painted-combat.epic-combat[data-battle-style="b"] .painted-combat-heading > span { font-size: 8px; }
+  .painted-combat.epic-combat[data-battle-style="b"] .fighter-attacker { left: max(8%, calc(50% - min(37%, calc(var(--epic-arena-height) * 1.05)))); }
+  .painted-combat.epic-combat[data-battle-style="b"] .fighter-defender { right: max(9%, calc(50% - min(37%, calc(var(--epic-arena-height) * 1.05)))); }
+  .painted-combat.epic-combat[data-battle-style="b"][data-epic-boss-side="attacker"] .fighter-attacker { left: max(8%, calc(50% - min(37%, calc(var(--epic-arena-height) * 1.05)))); }
+  .painted-combat.epic-combat[data-battle-style="b"][data-epic-boss-side="defender"] .fighter-defender { right: max(8%, calc(50% - min(37%, calc(var(--epic-arena-height) * 1.05)))); }
+  .painted-combat.epic-combat[data-battle-style="b"].is-self-support .fighter-attacker { left: calc(50% - min(23%, calc(var(--epic-arena-height) * .42))); }
+  .painted-combat.epic-combat[data-battle-style="b"].is-self-support[data-epic-boss-side="attacker"] .fighter-attacker { left: calc(50% - min(36%, calc(var(--epic-arena-height) * .47))); }
+  .painted-combat.epic-combat[data-battle-style="b"] .painted-combat-health { padding: 5px 14px 6px; gap: 24px; }
+  .painted-combat.epic-combat[data-battle-style="b"] .combat-health > div:first-child { font-size: 10px; margin-bottom: 3px; }
+  .painted-combat.epic-combat[data-battle-style="b"] .combat-health span { font-size: 9px; }
+  .painted-combat.epic-combat[data-battle-style="b"] .skill-cut-in.epic-cut-in { min-height: 40px; max-height: 66px; height: 22%; inset-block-start: 4%; }
+  .painted-combat.epic-combat[data-battle-style="b"] .epic-cut-in > .epic-cut-in-copy { padding-block: 4px; }
+  .painted-combat.epic-combat[data-battle-style="b"] .epic-cut-in small { margin-bottom: 2px; font-size: 8px; }
+  .painted-combat.epic-combat[data-battle-style="b"] .epic-cut-in strong { font-size: 18px; }
+}

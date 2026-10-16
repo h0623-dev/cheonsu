@@ -1,0 +1,410 @@
+{
+  "key": "boss-02",
+  "authoringComplete": true,
+  "anchorSpace": "cell-fraction",
+  "reviewMethod": "생성 PNG 원본의 손·무기끝·결정/음차 발광점과 실제 투명 분할 여백을 보며 수동 근사 저작. sourceRect 내부 비율이며 왕관 포함 두정부~발끝 bodyHeight는 무기·손·떠있는 석판을 제외함. 완성 WebP·게임 화면 QA 또는 자동 검증은 실행하지 않음.",
+  "sourceImage": "exec-0f3a6446-50d4-4e84-aace-5f27734954dd.png",
+  "sourceDimensions": [
+    1254,
+    1254
+  ],
+  "identityNotes": "승인 B안 보스 원종족·외모·무기 보존. 모르칸은 인간/열쇠형 삼지창, 아르켄은 인간/금빛 음차봉, 아스테르는 인간형 거대검/등 뒤 다섯 금빛 맹세 석판.",
+  "cells": [
+    {
+      "id": "boss_oracle",
+      "name": "검은 예언자",
+      "pose": "recover",
+      "row": 0,
+      "column": 0,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.241379,
+          0.480645
+        ],
+        "tip": [
+          0.303448,
+          0.103226
+        ],
+        "focus": [
+          0.293103,
+          0.216129
+        ]
+      },
+      "sourceRect": [
+        0.05582137,
+        0.07974482,
+        0.23125997,
+        0.24720893
+      ],
+      "bodyHeight": 0.822581,
+      "sourceLandmarksPx": {
+        "grip": [
+          140,
+          249
+        ],
+        "tip": [
+          158,
+          132
+        ],
+        "focus": [
+          155,
+          167
+        ],
+        "headToFootHeight": 255
+      }
+    },
+    {
+      "id": "boss_oracle",
+      "name": "검은 예언자",
+      "pose": "strike",
+      "row": 0,
+      "column": 1,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.633333,
+          0.429032
+        ],
+        "tip": [
+          0.920513,
+          0.367742
+        ],
+        "focus": [
+          0.835897,
+          0.367742
+        ]
+      },
+      "sourceRect": [
+        0.35087719,
+        0.07974482,
+        0.31100478,
+        0.24720893
+      ],
+      "bodyHeight": 0.819355,
+      "sourceLandmarksPx": {
+        "grip": [
+          687,
+          233
+        ],
+        "tip": [
+          799,
+          214
+        ],
+        "focus": [
+          766,
+          214
+        ],
+        "headToFootHeight": 254
+      }
+    },
+    {
+      "id": "boss_oracle",
+      "name": "검은 예언자",
+      "pose": "skill-a",
+      "row": 0,
+      "column": 2,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.394286,
+          0.312121
+        ],
+        "tip": [
+          0.588571,
+          0.066667
+        ],
+        "focus": [
+          0.491429,
+          0.172727
+        ]
+      },
+      "sourceRect": [
+        0.6937799,
+        0.06379585,
+        0.27910686,
+        0.26315789
+      ],
+      "bodyHeight": 0.690909,
+      "sourceLandmarksPx": {
+        "grip": [
+          1008,
+          183
+        ],
+        "tip": [
+          1076,
+          102
+        ],
+        "focus": [
+          1042,
+          137
+        ],
+        "headToFootHeight": 228
+      }
+    },
+    {
+      "id": "boss_abyss",
+      "name": "흑천 가론",
+      "pose": "recover",
+      "row": 1,
+      "column": 0,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.406452,
+          0.56
+        ],
+        "tip": [
+          0.906452,
+          0.896667
+        ],
+        "focus": [
+          0.906452,
+          0.896667
+        ]
+      },
+      "sourceRect": [
+        0.03987241,
+        0.40669856,
+        0.24720893,
+        0.23923445
+      ],
+      "bodyHeight": 0.733333,
+      "sourceLandmarksPx": {
+        "grip": [
+          176,
+          678
+        ],
+        "tip": [
+          331,
+          779
+        ],
+        "focus": [
+          331,
+          779
+        ],
+        "headToFootHeight": 220
+      }
+    },
+    {
+      "id": "boss_abyss",
+      "name": "흑천 가론",
+      "pose": "strike",
+      "row": 1,
+      "column": 1,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.595349,
+          0.410345
+        ],
+        "tip": [
+          0.962791,
+          0.437931
+        ],
+        "focus": [
+          0.962791,
+          0.437931
+        ]
+      },
+      "sourceRect": [
+        0.34290271,
+        0.41467305,
+        0.34290271,
+        0.23125997
+      ],
+      "bodyHeight": 0.710345,
+      "sourceLandmarksPx": {
+        "grip": [
+          686,
+          639
+        ],
+        "tip": [
+          844,
+          647
+        ],
+        "focus": [
+          844,
+          647
+        ],
+        "headToFootHeight": 206
+      }
+    },
+    {
+      "id": "boss_abyss",
+      "name": "흑천 가론",
+      "pose": "skill-a",
+      "row": 1,
+      "column": 2,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.648485,
+          0.205714
+        ],
+        "tip": [
+          0.321212,
+          0.071429
+        ],
+        "focus": [
+          0.321212,
+          0.071429
+        ]
+      },
+      "sourceRect": [
+        0.70972887,
+        0.36682616,
+        0.26315789,
+        0.27910686
+      ],
+      "bodyHeight": 0.602857,
+      "sourceLandmarksPx": {
+        "grip": [
+          1104,
+          532
+        ],
+        "tip": [
+          996,
+          485
+        ],
+        "focus": [
+          996,
+          485
+        ],
+        "headToFootHeight": 211
+      }
+    },
+    {
+      "id": "tide_keeper",
+      "name": "심해 수문장 모르칸",
+      "pose": "recover",
+      "row": 2,
+      "column": 0,
+      "anchors": {
+        "kind": "spear",
+        "grip": [
+          0.35873,
+          0.432836
+        ],
+        "tip": [
+          0.35873,
+          0.062687
+        ],
+        "focus": [
+          0.35873,
+          0.191045
+        ]
+      },
+      "sourceRect": [
+        0.04784689,
+        0.68580542,
+        0.25119617,
+        0.26714514
+      ],
+      "bodyHeight": 0.719403,
+      "sourceLandmarksPx": {
+        "grip": [
+          173,
+          1005
+        ],
+        "tip": [
+          173,
+          881
+        ],
+        "focus": [
+          173,
+          924
+        ],
+        "headToFootHeight": 241
+      }
+    },
+    {
+      "id": "tide_keeper",
+      "name": "심해 수문장 모르칸",
+      "pose": "strike",
+      "row": 2,
+      "column": 1,
+      "anchors": {
+        "kind": "spear",
+        "grip": [
+          0.57619,
+          0.35
+        ],
+        "tip": [
+          0.938095,
+          0.303571
+        ],
+        "focus": [
+          0.866667,
+          0.310714
+        ]
+      },
+      "sourceRect": [
+        0.33891547,
+        0.72966507,
+        0.33492823,
+        0.22328549
+      ],
+      "bodyHeight": 0.742857,
+      "sourceLandmarksPx": {
+        "grip": [
+          667,
+          1013
+        ],
+        "tip": [
+          819,
+          1000
+        ],
+        "focus": [
+          789,
+          1002
+        ],
+        "headToFootHeight": 208
+      }
+    },
+    {
+      "id": "tide_keeper",
+      "name": "심해 수문장 모르칸",
+      "pose": "skill-a",
+      "row": 2,
+      "column": 2,
+      "anchors": {
+        "kind": "spear",
+        "grip": [
+          0.297222,
+          0.433846
+        ],
+        "tip": [
+          0.911111,
+          0.076923
+        ],
+        "focus": [
+          0.786111,
+          0.16
+        ]
+      },
+      "sourceRect": [
+        0.69776715,
+        0.6937799,
+        0.28708134,
+        0.25917065
+      ],
+      "bodyHeight": 0.723077,
+      "sourceLandmarksPx": {
+        "grip": [
+          982,
+          1011
+        ],
+        "tip": [
+          1203,
+          895
+        ],
+        "focus": [
+          1158,
+          922
+        ],
+        "headToFootHeight": 235
+      }
+    }
+  ]
+}

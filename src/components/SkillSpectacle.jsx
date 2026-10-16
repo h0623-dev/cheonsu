@@ -21,6 +21,113 @@ function LightPaint({ id, color, core }) {
 
 const star = 'M0-7 2-2 7 0 2 2 0 7-2 2-7 0-2-2Z';
 
+// 열린 윤곽으로 B안의 큰 곡선을 그립니다. 중심을 흰 면으로 채우지 않아
+// 얼굴·실제 무기·상대의 피격 자세가 그 안에서 계속 읽힙니다.
+const B_SIGNS = {
+  'flame-vortex': 'M24 146C171 186 203 47 66 25C157 64 156 132 24 146M36 163C149 177 185 112 151 69M57 167C103 153 115 123 115 98',
+  'inferno-vortex': 'M14 143C164 194 211 37 59 13C165 53 163 137 14 143M25 169C171 183 187 86 138 42M53 178C122 157 133 113 124 73',
+  'phoenix-arrow': 'M30 119Q69 127 101 103Q64 92 28 47Q82 55 112 91Q146 53 177 56Q159 91 121 102L181 100M35 139Q81 151 115 114',
+  sanctuary: 'M22 142A78 78 0 0 1 178 142M39 141A61 61 0 0 1 161 141M24 145Q100 179 176 145M45 163Q100 185 155 163M65 59 74 51M135 59 126 51',
+  bastion: 'M100 18 166 41 158 116Q145 155 100 181Q55 155 42 116L34 41ZM100 34 151 52 144 111Q133 140 100 160Q67 140 56 111L49 52ZM50 153Q100 177 150 153',
+  'wind-lance': 'M18 102 163 84 190 100 163 116ZM31 67Q106 40 165 74M31 133Q106 160 165 126M136 74Q112 100 136 126',
+  'tidal-lance': 'M17 116C86 154 157 116 177 54C153 84 135 110 91 108M23 145C93 173 169 134 183 89M40 60Q87 29 139 60M41 103H174',
+  'cross-shadow': 'M23 162Q104 119 172 27Q133 116 46 178M27 29Q105 119 174 163Q105 141 38 51M28 147Q31 76 90 41',
+  'thunder-formula': 'M100 12 79 65 112 59 89 109 121 98 100 188M90 105 41 86 19 110M110 60 155 39 181 61M43 42H67V66M157 158H133V134',
+  'moon-ribbon': 'M131 20A82 82 0 1 0 172 143A73 73 0 0 1 131 20M27 138Q98 184 177 130M44 159Q107 184 158 151',
+  'earth-split': 'M100 109 20 143 8 175M100 109 59 71 20 56M100 109 145 154 181 165M100 109 161 82 190 36M57 129 43 170M145 99 150 59',
+  foxfire: 'M19 136C97 181 182 118 158 38C147 80 110 69 97 94C121 83 132 102 116 119C85 150 45 126 19 136M42 79 57 46 81 66M120 61 145 41 152 71',
+  'arrow-volley': 'M19 73H166L153 65M19 100H188L173 91M19 127H166L153 119M30 42Q100 8 170 42M30 158Q100 192 170 158',
+  'crystal-lance': 'M100 12 118 121 100 181 82 121ZM100 24V178M30 139 62 47 69 134M170 139 138 47 131 134',
+  'lute-resonance': 'M51 27A82 82 0 0 1 51 173M77 40A68 68 0 0 1 77 160M97 54A53 53 0 0 1 97 146M42 102Q83 69 126 105T184 85M85 129V76L112 68V116',
+  'dragon-coil': 'M24 157C146 180 179 125 117 105S44 83 99 62C119 53 151 54 158 29L178 45 158 65 146 60M32 178C169 186 196 109 126 91M151 39 156 16M168 46 188 43',
+  'knight-aegis': 'M100 19 153 48 143 116 100 170 57 116 47 48ZM37 115Q24 73 44 40M163 115Q176 73 156 40M50 158Q100 183 150 158',
+  'tiger-pressure': 'M45 50 54 23 78 45H122L146 23 155 50 151 118 125 153 100 166 75 153 49 118ZM61 72 84 89 65 98M139 72 116 89 135 98M86 122 100 134 115 122M46 166Q100 190 154 166',
+  'meridian-lotus': 'M100 153Q43 130 39 93Q81 91 100 136Q119 91 161 93Q157 130 100 153ZM100 145Q67 93 100 54Q133 93 100 145M26 154Q100 182 174 154M45 169Q100 190 155 169',
+  'forge-impact': 'M100 25 165 62V137L100 175 35 137V62ZM100 48 144 74V124L100 151 56 124V74ZM35 100H17M165 100H183M100 25V10M100 175V190',
+  'living-roots': 'M22 177C53 147 42 113 80 91S85 45 118 22M61 185C88 151 78 127 114 105S143 60 168 30M113 181C146 150 154 121 179 109M77 95Q48 88 52 62Q79 63 77 95M119 104Q145 103 151 78Q123 77 119 104',
+  'precision-bolt': 'M13 100H188L170 90M36 61V39H61M139 39H164V61M164 139V161H139M61 161H36V139M127 62A43 43 0 0 1 127 138M89 68V132',
+  'venom-seal': 'M38 56 100 19 162 56V138L100 177 38 138ZM67 62Q94 35 125 67T137 135Q99 111 64 136T67 62M80 152Q100 164 120 152',
+  'whip-spiral': 'M15 153C38 44 115 13 165 48S181 126 107 144C151 116 166 85 129 73M27 174C93 191 171 155 184 108M169 105 179 123 193 110',
+  'twin-crescents': 'M22 156C160 171 197 50 75 21C146 74 132 129 22 156M178 44C40 29 3 150 125 179C54 126 68 71 178 44',
+  'cannon-flare': 'M100 18 113 69 152 41 132 85 187 96 136 113 159 158 113 133 96 186 85 135 39 156 64 112 12 94 66 82 45 39 87 69Z',
+  'void-cleave': 'M22 162C169 179 199 36 61 17C157 69 136 130 22 162M46 180C162 170 178 102 148 69M46 48 35 72M157 152 169 130',
+  'frost-claws': 'M36 160Q82 131 143 35M62 176Q109 142 166 53M17 133Q69 101 120 20M33 177Q100 192 167 163',
+  'feather-claws': 'M34 162Q91 130 158 25M64 175Q122 133 182 52M15 133Q70 102 128 15M35 68 17 48 44 55M148 148 175 144 160 163',
+  'stone-fissure': 'M100 113 16 150 8 175M100 113 43 62 18 49M100 113 157 78 188 31M100 113 144 164 181 176M24 103 37 87 51 107 37 120ZM148 48 159 29 176 45 165 64Z',
+  'shell-ward': 'M24 137Q21 53 100 24Q179 53 176 137M43 136Q39 75 100 47Q161 75 157 136M38 146Q100 177 162 146M54 92 72 108M146 92 128 108',
+  'spore-spiral': 'M23 141C65 173 159 150 166 96C174 43 78 21 46 60C18 91 60 126 105 108M66 70A9 9 0 1 0 66 88A9 9 0 1 0 66 70M132 58A7 7 0 1 0 132 72A7 7 0 1 0 132 58M132 124A11 11 0 1 0 132 146A11 11 0 1 0 132 124',
+  'mist-horns': 'M32 132C5 88 48 29 88 53C114 69 91 102 73 83M168 132C195 88 152 29 112 53C86 69 109 102 127 83M21 152Q100 191 179 152M34 169Q100 191 166 169',
+  'prism-claws': 'M33 159 92 51 83 132 157 27 137 130 179 71 164 158M39 42 63 23 78 51 62 76ZM130 161 146 138 166 162 148 187Z',
+  'steam-vents': 'M26 155C52 117 43 77 78 48C58 92 92 111 81 152M106 157C136 122 123 69 157 34C140 81 179 111 160 146M21 164Q100 189 179 157',
+  'clockwork-threads': 'M27 100H173M100 27V173M45 45 155 155M45 155 155 45M100 21 108 37 128 35 134 54 153 60 151 80 172 91 164 110 174 129 156 141 154 161 132 163 121 182 100 174 79 182 68 163 46 161 44 141 26 129 36 110 28 91 49 80 47 60 66 54 72 35 92 37Z',
+  'bell-resonance': 'M100 30Q62 32 60 95L45 126H155L140 95Q138 32 100 30ZM83 143Q100 161 117 143M27 59Q8 100 27 141M173 59Q192 100 173 141',
+  'paper-seal': 'M35 37H78V69H119V103H163V157H122V125H81V91H35ZM57 54 142 141M71 157H44V130M130 27H157V54',
+  'eclipse-claws': 'M130 23A80 80 0 1 0 172 144A70 70 0 0 1 130 23M45 150 130 58M61 167 149 75M29 129 111 40',
+  'ink-roots': 'M21 174C52 145 37 113 85 99S118 48 153 28M63 184C89 153 79 122 135 108S154 63 180 53M40 127Q15 100 30 79M131 112Q163 131 177 111',
+  'empty-aegis': 'M100 24A75 75 0 1 1 99.9 24M100 44A55 55 0 1 0 100.1 44M50 154Q100 182 150 154M100 60 108 89 138 100 108 111 100 140 92 111 62 100 92 89Z',
+  'royal-frost-wave': 'M15 143C48 43 90 34 107 91S155 127 185 45M16 163C57 82 79 79 100 127S159 164 184 89M37 151 48 108 60 153M133 154 147 105 158 148',
+  'crystal-crown': 'M26 146 43 60 72 109 100 22 128 109 157 60 174 146ZM43 155H157M63 66 71 20 79 66M121 66 129 20 137 66M100 48V133',
+  'judgment-resonance': 'M100 18A82 82 0 1 1 99.9 18M100 40A60 60 0 1 0 100.1 40M100 66 134 100 100 134 66 100ZM29 100H171M100 5V49M100 151V195',
+  'five-oath-tablets': 'M28 49 42 31 56 49V95H28ZM65 28 79 10 93 28V74H65ZM108 22 122 4 136 22V68H108ZM147 41 161 23 175 41V87H147ZM85 123 100 105 115 123V168H85ZM25 136Q100 190 175 136',
+};
+const B_SIGN_ALIASES = {
+  'leaf-arrow': 'arrow-volley', 'tide-arrow': 'tidal-lance', 'piercing-cone': 'wind-lance',
+  'amber-cleave': 'twin-crescents', 'crimson-cleave': 'void-cleave', 'spectral-cleave': 'twin-crescents',
+  'commander-impact': 'earth-split', 'occult-seal': 'venom-seal', 'covenant-oracle': 'judgment-resonance',
+  'water-gates': 'tidal-lance',
+};
+
+function BSignature({ motif, core, opacity = .8 }) {
+  const shape = B_SIGNS[motif] || B_SIGNS[B_SIGN_ALIASES[motif]] || B_SIGNS.sanctuary;
+  return <path className="vfx-b-signature" d={shape} fill="none" stroke={core} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" opacity={opacity} />;
+}
+
+const B_RIBBONS = {
+  fire: 'M2 100C73 12 153 187 222 95S302 23 358 100M6 109C75 181 156 16 231 100S308 170 358 100',
+  wind: 'M2 100C91 16 219 14 358 100M2 100C94 161 245 172 358 100M22 102Q171 55 351 100',
+  lightning: 'M2 100 55 78 79 112 126 52 151 101 200 65 224 119 282 76 310 104 358 100',
+  ice: 'M2 100 133 76 303 83 358 100 303 117 133 124ZM117 88 206 38 196 88M154 115 242 164 226 115',
+  shadow: 'M2 100C77 12 224 13 358 100M7 101C121 181 275 161 358 100M83 125Q212 63 329 91',
+  earth: 'M2 100 87 130 159 81 211 125 289 86 358 100M56 140 111 153 145 119M197 77 233 53 279 74',
+  martial: 'M2 100Q120 25 358 100M2 100Q120 175 358 100M110 64Q171 100 110 136M222 76Q270 100 222 124',
+  water: 'M2 100C80 180 144 21 222 99S309 171 358 100M2 100C89 20 154 181 235 100S304 27 358 100',
+  nature: 'M2 100C87 134 97 30 162 71S228 164 284 107 330 80 358 100M61 102Q64 55 106 62M212 107Q226 152 268 143',
+  poison: 'M2 100C77 27 143 172 216 94S304 44 358 100M23 122Q114 174 183 111T338 113',
+  music: 'M2 100C50 41 76 159 120 100S183 41 224 100 283 158 322 100 343 82 358 100M85 45Q135 100 85 155M215 54Q263 100 215 146',
+  heal: 'M2 100C90 44 150 158 220 98S305 59 358 100M2 100C90 148 155 43 225 102S305 144 358 100',
+  guard: 'M2 100Q150 23 358 100M2 100Q150 177 358 100M217 42Q265 100 217 158',
+  holy: 'M2 100Q125 31 358 100M2 100Q125 169 358 100M170 43 205 100 170 157M256 64 278 100 256 136',
+};
+const B_MELEE_ARCS = {
+  fire: 'M180 100C132 174 17 163 27 79C36 7 168 1 281 46C344 71 333 137 278 163C235 184 202 151 180 100M180 100C230 35 325 50 321 107C315 165 192 195 78 155',
+  wind: 'M180 100C275 159 330 102 300 53C260 6 98 3 25 143C104 89 167 64 180 100M180 100C118 172 24 164 23 107',
+  shadow: 'M180 100C75 188 8 136 36 64C71-1 224 7 333 151C264 106 201 66 180 100M180 100C265 22 338 62 327 129',
+  earth: 'M180 100 137 154 62 173 22 140 49 64 137 23 246 32 330 91 307 156 230 177 180 100M180 100 245 61 302 75M112 149 100 177',
+  martial: 'M180 100C256 23 337 67 318 128C292 201 99 195 29 103M180 100C104 177 23 133 42 72C68-1 261 5 331 97',
+  ice: 'M180 100 105 147 33 133 78 62 184 20 304 45 328 115 253 162 180 100M102 63 88 20 143 44M258 153 292 185 311 136',
+  guard: 'M180 100Q286 36 330 100Q297 186 156 166Q52 160 29 100Q62 16 202 34Q276 44 296 74',
+  holy: 'M180 100C262 173 344 121 314 60C276-6 111 4 26 141C108 88 163 68 180 100M58 138 83 158M254 35 283 48',
+  water: 'M180 100C105 171 9 148 35 69C63-1 218 13 322 134C277 185 198 168 180 100M180 100C263 27 339 72 309 128',
+};
+const B_MOTIF_RIBBONS = {
+  'phoenix-arrow': 'M2 100Q133 143 254 104Q174 76 126 24Q248 40 291 89L358 100 291 111Q248 160 126 176Q174 124 254 96',
+  'arrow-volley': 'M2 100Q151 33 358 74M2 100H358M2 100Q151 167 358 126',
+  'precision-bolt': 'M2 100H358M74 65Q111 100 74 135M169 55Q215 100 169 145M276 68Q309 100 276 132',
+  'water-gates': 'M2 100C91 30 153 28 193 77M2 100C91 170 153 172 193 123M192 78Q237 23 283 59T358 100M192 122Q237 177 283 141T358 100',
+  'paper-seal': 'M2 100H67V62H118V101H174V143H224V102H279V61H319V100H358',
+  'clockwork-threads': 'M2 100H358M62 70 92 100 62 130M159 58 201 100 159 142M262 70 292 100 262 130',
+};
+
+function BReleaseRibbon({ visual }) {
+  const path = visual.melee ? B_MELEE_ARCS[visual.theme] || B_MELEE_ARCS.martial
+    : B_MOTIF_RIBBONS[visual.motif] || B_RIBBONS[visual.theme] || B_RIBBONS.wind;
+  return <svg viewBox="0 0 360 200" preserveAspectRatio="none" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <path d={path} stroke={visual.color} strokeWidth="13" opacity=".18" />
+    <path d={path} stroke={visual.color} strokeWidth="5.8" opacity=".88" />
+    <path d={path} stroke={visual.core} strokeWidth="1.8" opacity=".94" />
+  </svg>;
+}
+
 function ContactShape({ theme, id, core }) {
   const ribbon = `url(#${id}-ribbon)`;
   if (theme === 'fire') return <>
@@ -145,10 +252,11 @@ export default function SkillSpectacle({ plan }) {
   const visual = plan.spectacle;
   if (!visual) return null;
   const id = `spectacle-${unique}`;
-  return <div className="skill-spectacle" data-skill-theme={visual.theme} aria-hidden="true" style={{ color: visual.color }}>
+  return <div className="skill-spectacle skill-spectacle-b" data-skill-theme={visual.theme} data-b-motif={visual.motif} data-b-identity={visual.identity} data-b-support={String(Boolean(visual.support))} aria-hidden="true" style={{ color: visual.color }}>
     <div className="vfx-charge" data-vfx-phase="charge" data-vfx-anchor="attacker">
       <svg viewBox="0 0 200 200" fill="none">
         <LightPaint id={`${id}-charge`} color={visual.color} core={visual.core} />
+        <LightPaint id={`${id}-contact`} color={visual.color} core={visual.core} />
         <ellipse cx="100" cy="151" rx="69" ry="20" fill={`url(#${id}-charge-core)`} />
         <g className="vfx-spin" stroke="currentColor">
           <ellipse cx="100" cy="151" rx="70" ry="19" strokeWidth="2.1" strokeDasharray="54 9 10 9" />
@@ -157,12 +265,14 @@ export default function SkillSpectacle({ plan }) {
         </g>
         <path className="vfx-plume" d="M53 139Q52 112 76 94M148 139Q150 107 127 85M78 131Q74 105 94 70M123 128Q127 99 110 51" stroke={`url(#${id}-charge-ribbon)`} strokeWidth="3" strokeLinecap="round" />
         {[[70, 81], [125, 69], [103, 40], [143, 111]].map(([x, y], index) => <path key={index} d={star} transform={`translate(${x} ${y}) scale(${index % 2 ? .7 : .5})`} fill={visual.core} />)}
+        <BSignature motif={visual.motif} core={visual.core} opacity={visual.support ? .66 : .48} />
       </svg>
     </div>
+    {visual.ribbons?.map((ribbon, index) => <div key={index} className="vfx-b-release" data-vfx-phase="release" data-vfx-anchor="weapon" data-vfx-release={index}><BReleaseRibbon visual={visual} /></div>)}
     {visual.bursts.map((burst, index) => <div key={index} className={`vfx-burst vfx-${visual.theme}`} data-vfx-phase="contact" data-vfx-anchor="target" data-vfx-index={index}>
       <svg viewBox="0 0 200 200" fill="none">
-        <LightPaint id={`${id}-burst-${index}`} color={visual.color} core={visual.core} />
-        <ContactShape theme={burst.kind} id={`${id}-burst-${index}`} core={visual.core} />
+        <ContactShape theme={burst.kind} id={`${id}-contact`} core={visual.core} />
+        <BSignature motif={visual.motif} core={visual.core} />
       </svg>
     </div>)}
   </div>;

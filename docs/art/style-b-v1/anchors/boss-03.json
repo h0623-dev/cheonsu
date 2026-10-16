@@ -1,0 +1,410 @@
+{
+  "key": "boss-03",
+  "authoringComplete": true,
+  "anchorSpace": "cell-fraction",
+  "reviewMethod": "생성 PNG 원본의 손·무기끝·결정/음차 발광점과 실제 투명 분할 여백을 보며 수동 근사 저작. sourceRect 내부 비율이며 왕관 포함 두정부~발끝 bodyHeight는 무기·손·떠있는 석판을 제외함. 완성 WebP·게임 화면 QA 또는 자동 검증은 실행하지 않음.",
+  "sourceImage": "exec-689f5bd2-4a1d-4e52-8c5a-36b09b396318.png",
+  "sourceDimensions": [
+    1254,
+    1254
+  ],
+  "identityNotes": "승인 B안 보스 원종족·외모·무기 보존. 모르칸은 인간/열쇠형 삼지창, 아르켄은 인간/금빛 음차봉, 아스테르는 인간형 거대검/등 뒤 다섯 금빛 맹세 석판.",
+  "cells": [
+    {
+      "id": "frost_queen",
+      "name": "빙정 여왕 세르카",
+      "pose": "recover",
+      "row": 0,
+      "column": 0,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.348571,
+          0.4
+        ],
+        "tip": [
+          0.257143,
+          0.084058
+        ],
+        "focus": [
+          0.271429,
+          0.171014
+        ]
+      },
+      "sourceRect": [
+        0.02791069,
+        0.04784689,
+        0.27910686,
+        0.27511962
+      ],
+      "bodyHeight": 0.768116,
+      "sourceLandmarksPx": {
+        "grip": [
+          157,
+          198
+        ],
+        "tip": [
+          125,
+          89
+        ],
+        "focus": [
+          130,
+          119
+        ],
+        "headToFootHeight": 265
+      }
+    },
+    {
+      "id": "frost_queen",
+      "name": "빙정 여왕 세르카",
+      "pose": "strike",
+      "row": 0,
+      "column": 1,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.6325,
+          0.352381
+        ],
+        "tip": [
+          0.9075,
+          0.149206
+        ],
+        "focus": [
+          0.825,
+          0.222222
+        ]
+      },
+      "sourceRect": [
+        0.35087719,
+        0.07177033,
+        0.31897927,
+        0.25119617
+      ],
+      "bodyHeight": 0.736508,
+      "sourceLandmarksPx": {
+        "grip": [
+          693,
+          201
+        ],
+        "tip": [
+          803,
+          137
+        ],
+        "focus": [
+          770,
+          160
+        ],
+        "headToFootHeight": 232
+      }
+    },
+    {
+      "id": "frost_queen",
+      "name": "빙정 여왕 세르카",
+      "pose": "skill-a",
+      "row": 0,
+      "column": 2,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.337143,
+          0.435821
+        ],
+        "tip": [
+          0.228571,
+          0.104478
+        ],
+        "focus": [
+          0.251429,
+          0.18806
+        ]
+      },
+      "sourceRect": [
+        0.70972887,
+        0.05582137,
+        0.27910686,
+        0.26714514
+      ],
+      "bodyHeight": 0.78209,
+      "sourceLandmarksPx": {
+        "grip": [
+          1008,
+          216
+        ],
+        "tip": [
+          970,
+          105
+        ],
+        "focus": [
+          978,
+          133
+        ],
+        "headToFootHeight": 262
+      }
+    },
+    {
+      "id": "resonance_judge",
+      "name": "공명 집행관 아르켄",
+      "pose": "recover",
+      "row": 1,
+      "column": 0,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.271429,
+          0.447222
+        ],
+        "tip": [
+          0.254286,
+          0.086111
+        ],
+        "focus": [
+          0.274286,
+          0.197222
+        ]
+      },
+      "sourceRect": [
+        0.02791069,
+        0.36283892,
+        0.27910686,
+        0.28708134
+      ],
+      "bodyHeight": 0.719444,
+      "sourceLandmarksPx": {
+        "grip": [
+          130,
+          616
+        ],
+        "tip": [
+          124,
+          486
+        ],
+        "focus": [
+          131,
+          526
+        ],
+        "headToFootHeight": 259
+      }
+    },
+    {
+      "id": "resonance_judge",
+      "name": "공명 집행관 아르켄",
+      "pose": "strike",
+      "row": 1,
+      "column": 1,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.670455,
+          0.332203
+        ],
+        "tip": [
+          0.925,
+          0.288136
+        ],
+        "focus": [
+          0.847727,
+          0.308475
+        ]
+      },
+      "sourceRect": [
+        0.33492823,
+        0.41467305,
+        0.35087719,
+        0.23524721
+      ],
+      "bodyHeight": 0.789831,
+      "sourceLandmarksPx": {
+        "grip": [
+          715,
+          618
+        ],
+        "tip": [
+          827,
+          605
+        ],
+        "focus": [
+          793,
+          611
+        ],
+        "headToFootHeight": 233
+      }
+    },
+    {
+      "id": "resonance_judge",
+      "name": "공명 집행관 아르켄",
+      "pose": "skill-a",
+      "row": 1,
+      "column": 2,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.331429,
+          0.245714
+        ],
+        "tip": [
+          0.645714,
+          0.097143
+        ],
+        "focus": [
+          0.56,
+          0.148571
+        ]
+      },
+      "sourceRect": [
+        0.70972887,
+        0.3708134,
+        0.27910686,
+        0.27910686
+      ],
+      "bodyHeight": 0.685714,
+      "sourceLandmarksPx": {
+        "grip": [
+          1006,
+          551
+        ],
+        "tip": [
+          1116,
+          499
+        ],
+        "focus": [
+          1086,
+          517
+        ],
+        "headToFootHeight": 240
+      }
+    },
+    {
+      "id": "oath_guardian",
+      "name": "첫 맹세 수호체 아스테르",
+      "pose": "recover",
+      "row": 2,
+      "column": 0,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.489189,
+          0.553425
+        ],
+        "tip": [
+          0.92973,
+          0.835616
+        ],
+        "focus": [
+          0.92973,
+          0.835616
+        ]
+      },
+      "sourceRect": [
+        0.02791069,
+        0.67783094,
+        0.29505582,
+        0.29106858
+      ],
+      "bodyHeight": 0.608219,
+      "sourceLandmarksPx": {
+        "grip": [
+          216,
+          1052
+        ],
+        "tip": [
+          379,
+          1155
+        ],
+        "focus": [
+          379,
+          1155
+        ],
+        "headToFootHeight": 222
+      }
+    },
+    {
+      "id": "oath_guardian",
+      "name": "첫 맹세 수호체 아스테르",
+      "pose": "strike",
+      "row": 2,
+      "column": 1,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.574468,
+          0.415625
+        ],
+        "tip": [
+          0.97234,
+          0.353125
+        ],
+        "focus": [
+          0.97234,
+          0.353125
+        ]
+      },
+      "sourceRect": [
+        0.33492823,
+        0.71371611,
+        0.37480064,
+        0.25518341
+      ],
+      "bodyHeight": 0.625,
+      "sourceLandmarksPx": {
+        "grip": [
+          690,
+          1028
+        ],
+        "tip": [
+          877,
+          1008
+        ],
+        "focus": [
+          877,
+          1008
+        ],
+        "headToFootHeight": 200
+      }
+    },
+    {
+      "id": "oath_guardian",
+      "name": "첫 맹세 수호체 아스테르",
+      "pose": "skill-a",
+      "row": 2,
+      "column": 2,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.738889,
+          0.28
+        ],
+        "tip": [
+          0.286111,
+          0.074667
+        ],
+        "focus": [
+          0.286111,
+          0.074667
+        ]
+      },
+      "sourceRect": [
+        0.70175439,
+        0.66985646,
+        0.28708134,
+        0.29904306
+      ],
+      "bodyHeight": 0.573333,
+      "sourceLandmarksPx": {
+        "grip": [
+          1146,
+          945
+        ],
+        "tip": [
+          983,
+          868
+        ],
+        "focus": [
+          983,
+          868
+        ],
+        "headToFootHeight": 215
+      }
+    }
+  ]
+}

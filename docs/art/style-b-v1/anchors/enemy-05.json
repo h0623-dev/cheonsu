@@ -1,0 +1,290 @@
+{
+  "key": "enemy-05",
+  "sourcePath": "docs/art/style-b-v1/sources/enemy-05.png",
+  "rows": 3,
+  "columns": 3,
+  "anchorSpace": "cell-fraction",
+  "authoringComplete": true,
+  "reviewMethod": "승인 B안 보드와 기존 원화를 참고한 image_gen 신규 투명 전신 세 자세. 원본을 보며 셀·앵커 수동 저작, 오차 가능. 원본 포즈에서 같은 몸 비율을 유지하고 무릎 자세를 키우지 않도록 별도 bodyHeight 정규화는 생략.",
+  "cells": [
+    {
+      "id": "blackguard",
+      "name": "흑기사",
+      "pose": "recover",
+      "row": 0,
+      "column": 0,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.407895,
+          0.58753
+        ],
+        "tip": [
+          0.926316,
+          0.865707
+        ],
+        "focus": [
+          0.926316,
+          0.865707
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.0,
+        0.0,
+        0.303030303,
+        0.332535885
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "blackguard",
+      "name": "흑기사",
+      "pose": "strike",
+      "row": 0,
+      "column": 1,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.642086,
+          0.621103
+        ],
+        "tip": [
+          0.971223,
+          0.784173
+        ],
+        "focus": [
+          0.971223,
+          0.784173
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.303030303,
+        0.0,
+        0.44338118,
+        0.332535885
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "blackguard",
+      "name": "흑기사",
+      "pose": "skill-a",
+      "row": 0,
+      "column": 2,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.730871,
+          0.119904
+        ],
+        "tip": [
+          0.029024,
+          0.258993
+        ],
+        "focus": [
+          0.029024,
+          0.258993
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.697767145,
+        0.0,
+        0.302232855,
+        0.332535885
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "warlord",
+      "name": "집행관",
+      "pose": "recover",
+      "row": 1,
+      "column": 0,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.828947,
+          0.293144
+        ],
+        "tip": [
+          0.097368,
+          0.13948
+        ],
+        "focus": [
+          0.097368,
+          0.13948
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.0,
+        0.332535885,
+        0.303030303,
+        0.337320574
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "warlord",
+      "name": "집행관",
+      "pose": "strike",
+      "row": 1,
+      "column": 1,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.598921,
+          0.650118
+        ],
+        "tip": [
+          0.956835,
+          0.855792
+        ],
+        "focus": [
+          0.956835,
+          0.855792
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.303030303,
+        0.332535885,
+        0.44338118,
+        0.337320574
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "warlord",
+      "name": "집행관",
+      "pose": "skill-a",
+      "row": 1,
+      "column": 2,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.717678,
+          0.20331
+        ],
+        "tip": [
+          0.234828,
+          0.002364
+        ],
+        "focus": [
+          0.234828,
+          0.002364
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.697767145,
+        0.332535885,
+        0.302232855,
+        0.337320574
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "pyromancer",
+      "name": "화염 술사",
+      "pose": "recover",
+      "row": 2,
+      "column": 0,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.202632,
+          0.326087
+        ],
+        "tip": [
+          0.2,
+          0.091787
+        ],
+        "focus": [
+          0.2,
+          0.091787
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.0,
+        0.669856459,
+        0.303030303,
+        0.330143541
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "pyromancer",
+      "name": "화염 술사",
+      "pose": "strike",
+      "row": 2,
+      "column": 1,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.370504,
+          0.282609
+        ],
+        "tip": [
+          0.217626,
+          0.188406
+        ],
+        "focus": [
+          0.757194,
+          0.301932
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.303030303,
+        0.669856459,
+        0.44338118,
+        0.330143541
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "pyromancer",
+      "name": "화염 술사",
+      "pose": "skill-a",
+      "row": 2,
+      "column": 2,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.329815,
+          0.178744
+        ],
+        "tip": [
+          0.121372,
+          0.096618
+        ],
+        "focus": [
+          0.905013,
+          0.183575
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.697767145,
+        0.669856459,
+        0.302232855,
+        0.330143541
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    }
+  ]
+}

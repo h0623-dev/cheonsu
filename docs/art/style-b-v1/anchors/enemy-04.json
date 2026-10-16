@@ -1,0 +1,287 @@
+{
+  "key": "enemy-04",
+  "sourcePath": "docs/art/style-b-v1/sources/enemy-04.png",
+  "rows": 3,
+  "columns": 3,
+  "anchorSpace": "cell-fraction",
+  "authoringComplete": true,
+  "reviewMethod": "승인 B안 보드와 기존 원화를 참고한 image_gen 신규 투명 전신 세 자세. 원본을 보며 셀·앵커 수동 저작, 오차 가능. 원본 포즈에서 같은 몸 비율을 유지하고 무릎 자세를 키우지 않도록 별도 bodyHeight 정규화는 생략.",
+  "cells": [
+    {
+      "id": "blade_dancer",
+      "name": "쌍검 무희",
+      "pose": "recover",
+      "row": 0,
+      "column": 0,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.370813,
+          0.614833
+        ],
+        "tip": [
+          0.270335,
+          0.727273
+        ],
+        "focus": [
+          0.270335,
+          0.727273
+        ],
+        "secondary": {
+          "grip": [
+            0.600478,
+            0.626794
+          ],
+          "tip": [
+            0.770335,
+            0.69378
+          ]
+        }
+      },
+      "anchorSpace": "cell-fraction",
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "blade_dancer",
+      "name": "쌍검 무희",
+      "pose": "strike",
+      "row": 0,
+      "column": 1,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.686603,
+          0.633971
+        ],
+        "tip": [
+          0.87799,
+          0.58134
+        ],
+        "focus": [
+          0.87799,
+          0.58134
+        ],
+        "secondary": {
+          "grip": [
+            0.447368,
+            0.495215
+          ],
+          "tip": [
+            0.311005,
+            0.454545
+          ]
+        }
+      },
+      "anchorSpace": "cell-fraction",
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "blade_dancer",
+      "name": "쌍검 무희",
+      "pose": "skill-a",
+      "row": 0,
+      "column": 2,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.440191,
+          0.435407
+        ],
+        "tip": [
+          0.645933,
+          0.313397
+        ],
+        "focus": [
+          0.645933,
+          0.313397
+        ],
+        "secondary": {
+          "grip": [
+            0.607656,
+            0.435407
+          ],
+          "tip": [
+            0.394737,
+            0.299043
+          ]
+        }
+      },
+      "anchorSpace": "cell-fraction",
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "siege_gunner",
+      "name": "공성 포병",
+      "pose": "recover",
+      "row": 1,
+      "column": 0,
+      "anchors": {
+        "kind": "cannon",
+        "grip": [
+          0.495215,
+          0.555024
+        ],
+        "tip": [
+          0.727273,
+          0.593301
+        ],
+        "focus": [
+          0.727273,
+          0.593301
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "siege_gunner",
+      "name": "공성 포병",
+      "pose": "strike",
+      "row": 1,
+      "column": 1,
+      "anchors": {
+        "kind": "cannon",
+        "grip": [
+          0.562201,
+          0.492823
+        ],
+        "tip": [
+          0.77512,
+          0.461722
+        ],
+        "focus": [
+          0.77512,
+          0.461722
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "siege_gunner",
+      "name": "공성 포병",
+      "pose": "skill-a",
+      "row": 1,
+      "column": 2,
+      "anchors": {
+        "kind": "cannon",
+        "grip": [
+          0.58134,
+          0.502392
+        ],
+        "tip": [
+          0.746411,
+          0.356459
+        ],
+        "focus": [
+          0.746411,
+          0.356459
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "sentinel",
+      "name": "방패병",
+      "pose": "recover",
+      "row": 2,
+      "column": 0,
+      "anchors": {
+        "kind": "shield",
+        "grip": [
+          0.555024,
+          0.5311
+        ],
+        "tip": [
+          0.648325,
+          0.466507
+        ],
+        "focus": [
+          0.648325,
+          0.466507
+        ],
+        "secondary": {
+          "grip": [
+            0.337321,
+            0.545455
+          ],
+          "tip": [
+            0.284689,
+            0.741627
+          ]
+        }
+      },
+      "anchorSpace": "cell-fraction",
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "sentinel",
+      "name": "방패병",
+      "pose": "strike",
+      "row": 2,
+      "column": 1,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.638756,
+          0.437799
+        ],
+        "tip": [
+          0.87799,
+          0.425837
+        ],
+        "focus": [
+          0.87799,
+          0.425837
+        ],
+        "secondary": {
+          "grip": [
+            0.57177,
+            0.466507
+          ],
+          "tip": [
+            0.624402,
+            0.361244
+          ]
+        }
+      },
+      "anchorSpace": "cell-fraction",
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "sentinel",
+      "name": "방패병",
+      "pose": "skill-a",
+      "row": 2,
+      "column": 2,
+      "anchors": {
+        "kind": "shield",
+        "grip": [
+          0.691388,
+          0.552632
+        ],
+        "tip": [
+          0.760766,
+          0.473684
+        ],
+        "focus": [
+          0.760766,
+          0.473684
+        ],
+        "secondary": {
+          "grip": [
+            0.437799,
+            0.562201
+          ],
+          "tip": [
+            0.272727,
+            0.669856
+          ]
+        }
+      },
+      "anchorSpace": "cell-fraction",
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    }
+  ]
+}

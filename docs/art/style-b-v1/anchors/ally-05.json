@@ -1,0 +1,318 @@
+{
+  "key": "ally-05",
+  "authoringComplete": true,
+  "sourcePath": "docs/art/style-b-v1/sources/ally-05.png",
+  "sourceOriginal": "/workspace/generated_images/exec-3b703cc0-4484-41fd-b423-1735b93946ee.png",
+  "anchorSpace": "cell-fraction",
+  "reviewMethod": "생성된 투명 원본을 보며 손잡이·실제 무기 끝·방출점·활 윤곽을 수동 저작한 근사 좌표. 가려진 손/관절은 보이는 손목과 무기 축을 기준으로 근사. box는 각 배우의 실제 투명 여백을 기준으로 지정. 신체 높이는 머리에서 발까지 보이는 신체의 수동 근사치이며 최종 산출물 정밀 실측·게임 QA 결과가 아님.",
+  "cells": [
+    {
+      "id": "kaz",
+      "name": "카즈",
+      "pose": "recover",
+      "row": 0,
+      "column": 0,
+      "anchors": {
+        "kind": "dagger",
+        "grip": [
+          0.471605,
+          0.65977
+        ],
+        "tip": [
+          0.62716,
+          0.802299
+        ],
+        "focus": [
+          0.62716,
+          0.802299
+        ],
+        "secondary": {
+          "grip": [
+            0.797531,
+            0.54023
+          ],
+          "tip": [
+            0.916049,
+            0.668966
+          ]
+        }
+      },
+      "box": {
+        "left": 0,
+        "top": 0,
+        "width": 405,
+        "height": 435
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.616092
+    },
+    {
+      "id": "kaz",
+      "name": "카즈",
+      "pose": "strike",
+      "row": 0,
+      "column": 1,
+      "anchors": {
+        "kind": "dagger",
+        "grip": [
+          0.848485,
+          0.535632
+        ],
+        "tip": [
+          0.981818,
+          0.549425
+        ],
+        "focus": [
+          0.981818,
+          0.549425
+        ],
+        "secondary": {
+          "grip": [
+            0.20202,
+            0.528736
+          ],
+          "tip": [
+            0.09697,
+            0.618391
+          ]
+        }
+      },
+      "box": {
+        "left": 410,
+        "top": 0,
+        "width": 495,
+        "height": 435
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.586207,
+      "isolateSilhouette": true,
+      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님."
+    },
+    {
+      "id": "kaz",
+      "name": "카즈",
+      "pose": "skill-a",
+      "row": 0,
+      "column": 2,
+      "anchors": {
+        "kind": "dagger",
+        "grip": [
+          0.806763,
+          0.445977
+        ],
+        "tip": [
+          0.968599,
+          0.491954
+        ],
+        "focus": [
+          0.968599,
+          0.491954
+        ],
+        "secondary": {
+          "grip": [
+            0.794686,
+            0.597701
+          ],
+          "tip": [
+            0.925121,
+            0.724138
+          ]
+        }
+      },
+      "box": {
+        "left": 840,
+        "top": 0,
+        "width": 414,
+        "height": 435
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.705747,
+      "isolateSilhouette": true,
+      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님."
+    },
+    {
+      "id": "ella",
+      "name": "엘라",
+      "pose": "recover",
+      "row": 1,
+      "column": 0,
+      "anchors": {
+        "kind": "music",
+        "grip": [
+          0.680488,
+          0.380488
+        ],
+        "tip": [
+          0.780488,
+          0.287805
+        ],
+        "focus": [
+          0.531707,
+          0.453659
+        ]
+      },
+      "box": {
+        "left": 0,
+        "top": 435,
+        "width": 410,
+        "height": 410
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.917073
+    },
+    {
+      "id": "ella",
+      "name": "엘라",
+      "pose": "strike",
+      "row": 1,
+      "column": 1,
+      "anchors": {
+        "kind": "music",
+        "grip": [
+          0.797561,
+          0.321951
+        ],
+        "tip": [
+          0.919512,
+          0.22439
+        ],
+        "focus": [
+          0.585366,
+          0.446341
+        ]
+      },
+      "box": {
+        "left": 410,
+        "top": 435,
+        "width": 410,
+        "height": 410
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.907317
+    },
+    {
+      "id": "ella",
+      "name": "엘라",
+      "pose": "skill-a",
+      "row": 1,
+      "column": 2,
+      "anchors": {
+        "kind": "music",
+        "grip": [
+          0.760369,
+          0.136585
+        ],
+        "tip": [
+          0.78341,
+          0.039024
+        ],
+        "focus": [
+          0.737327,
+          0.307317
+        ]
+      },
+      "box": {
+        "left": 820,
+        "top": 435,
+        "width": 434,
+        "height": 410
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.892683
+    },
+    {
+      "id": "jin",
+      "name": "진",
+      "pose": "recover",
+      "row": 2,
+      "column": 0,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.474074,
+          0.511002
+        ],
+        "tip": [
+          0.962963,
+          0.779951
+        ],
+        "focus": [
+          0.962963,
+          0.779951
+        ]
+      },
+      "box": {
+        "left": 0,
+        "top": 845,
+        "width": 405,
+        "height": 409
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.767726
+    },
+    {
+      "id": "jin",
+      "name": "진",
+      "pose": "strike",
+      "row": 2,
+      "column": 1,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.672,
+          0.486553
+        ],
+        "tip": [
+          0.982,
+          0.577017
+        ],
+        "focus": [
+          0.982,
+          0.577017
+        ]
+      },
+      "box": {
+        "left": 405,
+        "top": 845,
+        "width": 500,
+        "height": 409
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.718826,
+      "isolateSilhouette": true,
+      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님."
+    },
+    {
+      "id": "jin",
+      "name": "진",
+      "pose": "skill-a",
+      "row": 2,
+      "column": 2,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.383459,
+          0.06357
+        ],
+        "tip": [
+          0.952381,
+          0.356968
+        ],
+        "focus": [
+          0.952381,
+          0.356968
+        ]
+      },
+      "box": {
+        "left": 855,
+        "top": 845,
+        "width": 399,
+        "height": 409
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.772616,
+      "isolateSilhouette": true,
+      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님."
+    }
+  ]
+}

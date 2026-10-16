@@ -1,0 +1,418 @@
+{
+  "key": "enemy-03",
+  "sourcePath": "docs/art/style-b-v1/sources/enemy-03.png",
+  "rows": 3,
+  "columns": 3,
+  "anchorSpace": "cell-fraction",
+  "authoringComplete": true,
+  "reviewMethod": "승인 B안 보드와 기존 원화를 참고한 image_gen 신규 투명 전신 세 자세. 원본을 보며 셀·앵커 수동 저작, 오차 가능. 원본 포즈에서 같은 몸 비율을 유지하고 무릎 자세를 키우지 않도록 별도 bodyHeight 정규화는 생략.",
+  "cells": [
+    {
+      "id": "plague_doctor",
+      "name": "역병 의술사",
+      "pose": "recover",
+      "row": 0,
+      "column": 0,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.289474,
+          0.511962
+        ],
+        "tip": [
+          0.176316,
+          0.349282
+        ],
+        "focus": [
+          0.176316,
+          0.349282
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.0,
+        0.0,
+        0.303030303,
+        0.333333333
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "plague_doctor",
+      "name": "역병 의술사",
+      "pose": "strike",
+      "row": 0,
+      "column": 1,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.287129,
+          0.514354
+        ],
+        "tip": [
+          0.168317,
+          0.37799
+        ],
+        "focus": [
+          0.879208,
+          0.375598
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.303030303,
+        0.0,
+        0.402711324,
+        0.333333333
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "plague_doctor",
+      "name": "역병 의술사",
+      "pose": "skill-a",
+      "row": 0,
+      "column": 2,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.280206,
+          0.595694
+        ],
+        "tip": [
+          0.213368,
+          0.433014
+        ],
+        "focus": [
+          0.830334,
+          0.157895
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.689792663,
+        0.0,
+        0.310207337,
+        0.333333333
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "beast_tamer",
+      "name": "조련병",
+      "pose": "recover",
+      "row": 1,
+      "column": 0,
+      "anchors": {
+        "kind": "whip",
+        "grip": [
+          0.244737,
+          0.502427
+        ],
+        "tip": [
+          0.210526,
+          0.631068
+        ],
+        "focus": [
+          0.210526,
+          0.631068
+        ],
+        "pathPoints": [
+          [
+            0.244737,
+            0.502427
+          ],
+          [
+            0.173684,
+            0.817961
+          ],
+          [
+            0.068421,
+            0.762136
+          ],
+          [
+            0.068421,
+            0.684466
+          ],
+          [
+            0.107895,
+            0.572816
+          ],
+          [
+            0.181579,
+            0.502427
+          ],
+          [
+            0.210526,
+            0.631068
+          ]
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.0,
+        0.333333333,
+        0.303030303,
+        0.328548644
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "beast_tamer",
+      "name": "조련병",
+      "pose": "strike",
+      "row": 1,
+      "column": 1,
+      "anchors": {
+        "kind": "whip",
+        "grip": [
+          0.645545,
+          0.381068
+        ],
+        "tip": [
+          0.857426,
+          0.211165
+        ],
+        "focus": [
+          0.857426,
+          0.211165
+        ],
+        "pathPoints": [
+          [
+            0.645545,
+            0.381068
+          ],
+          [
+            0.811881,
+            0.332524
+          ],
+          [
+            0.956436,
+            0.279126
+          ],
+          [
+            0.974257,
+            0.223301
+          ],
+          [
+            0.922772,
+            0.182039
+          ],
+          [
+            0.849505,
+            0.186893
+          ],
+          [
+            0.813861,
+            0.223301
+          ],
+          [
+            0.857426,
+            0.211165
+          ]
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.303030303,
+        0.333333333,
+        0.402711324,
+        0.328548644
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "beast_tamer",
+      "name": "조련병",
+      "pose": "skill-a",
+      "row": 1,
+      "column": 2,
+      "anchors": {
+        "kind": "whip",
+        "grip": [
+          0.29563,
+          0.089806
+        ],
+        "tip": [
+          0.85347,
+          0.368932
+        ],
+        "focus": [
+          0.85347,
+          0.368932
+        ],
+        "pathPoints": [
+          [
+            0.29563,
+            0.089806
+          ],
+          [
+            0.508997,
+            0.055825
+          ],
+          [
+            0.858612,
+            0.121359
+          ],
+          [
+            0.966581,
+            0.242718
+          ],
+          [
+            0.969152,
+            0.376214
+          ],
+          [
+            0.856041,
+            0.410194
+          ],
+          [
+            0.699229,
+            0.376214
+          ],
+          [
+            0.642674,
+            0.31068
+          ],
+          [
+            0.730077,
+            0.274272
+          ],
+          [
+            0.886889,
+            0.281553
+          ],
+          [
+            0.951157,
+            0.337379
+          ],
+          [
+            0.910026,
+            0.38835
+          ],
+          [
+            0.85347,
+            0.368932
+          ]
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.689792663,
+        0.333333333,
+        0.310207337,
+        0.328548644
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "storm_mage",
+      "name": "폭풍 마도병",
+      "pose": "recover",
+      "row": 2,
+      "column": 0,
+      "anchors": {
+        "kind": "fist",
+        "grip": [
+          0.644737,
+          0.441038
+        ],
+        "tip": [
+          0.660526,
+          0.476415
+        ],
+        "focus": [
+          0.660526,
+          0.476415
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.0,
+        0.661881978,
+        0.303030303,
+        0.338118022
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "storm_mage",
+      "name": "폭풍 마도병",
+      "pose": "strike",
+      "row": 2,
+      "column": 1,
+      "anchors": {
+        "kind": "fist",
+        "grip": [
+          0.794059,
+          0.323113
+        ],
+        "tip": [
+          0.861386,
+          0.228774
+        ],
+        "focus": [
+          0.861386,
+          0.228774
+        ]
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.303030303,
+        0.661881978,
+        0.402711324,
+        0.338118022
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    },
+    {
+      "id": "storm_mage",
+      "name": "폭풍 마도병",
+      "pose": "skill-a",
+      "row": 2,
+      "column": 2,
+      "anchors": {
+        "kind": "fist",
+        "grip": [
+          0.799486,
+          0.183962
+        ],
+        "tip": [
+          0.879177,
+          0.127358
+        ],
+        "focus": [
+          0.879177,
+          0.127358
+        ],
+        "secondary": {
+          "grip": [
+            0.213368,
+            0.110849
+          ],
+          "tip": [
+            0.14653,
+            0.03066
+          ]
+        }
+      },
+      "anchorSpace": "cell-fraction",
+      "sourceRect": [
+        0.689792663,
+        0.661881978,
+        0.310207337,
+        0.338118022
+      ],
+      "isolateSilhouette": true,
+      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+    }
+  ]
+}

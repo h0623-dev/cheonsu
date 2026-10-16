@@ -1,0 +1,413 @@
+{
+  "key": "enemy-11",
+  "authoringComplete": true,
+  "anchorSpace": "cell-fraction",
+  "sourceImage": "exec-056f123d-5df9-4009-93b4-7f7d6a9d7be9.png",
+  "sourceDimensions": [
+    1254,
+    1254
+  ],
+  "reviewMethod": "생성 PNG 입력을 보며 투명 여백 crop과 실제 손·물리적 무기끝/보조기관·발광점을 수동 근사 저작. sourceRect 내부 비율. 비인간 종족의 몸높이는 과도한 추정 정규화를 피하려고 생략하고 인형·종지기만 두정부~발끝 bodyHeight 기입. isolateSilhouette로 crop에 섞인 이웃 투명분리 조각은 중앙 생산기의 기존 배우분리 절차를 사용. 완성 WebP·게임 출력 QA/자동검증은 하지 않음.",
+  "identityNotes": "원종족과 실제 기관 보존: 도롱뇽 네발/등 온천구, 도자기 태엽소녀 검, 가면 종지기 황동종 지원, 무얼굴 종이정령, 네발 월식고양이 두 앞발, 얼굴없는 꽃봉오리 덩굴.",
+  "cells": [
+    {
+      "id": "spring_salamander",
+      "name": "온천 도롱뇽",
+      "pose": "recover",
+      "row": 0,
+      "column": 0,
+      "anchors": {
+        "kind": "focus",
+        "grip": [
+          0.481481,
+          0.369492
+        ],
+        "tip": [
+          0.488889,
+          0.274576
+        ],
+        "focus": [
+          0.488889,
+          0.274576
+        ]
+      },
+      "sourceRect": [
+        0.00797448,
+        0.05980861,
+        0.32296651,
+        0.23524721
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          205,
+          184
+        ],
+        "tip": [
+          208,
+          156
+        ],
+        "focus": [
+          208,
+          156
+        ]
+      }
+    },
+    {
+      "id": "spring_salamander",
+      "name": "온천 도롱뇽",
+      "pose": "strike",
+      "row": 0,
+      "column": 1,
+      "anchors": {
+        "kind": "focus",
+        "grip": [
+          0.614815,
+          0.474194
+        ],
+        "tip": [
+          0.62963,
+          0.393548
+        ],
+        "focus": [
+          0.62963,
+          0.393548
+        ]
+      },
+      "sourceRect": [
+        0.34688995,
+        0.04784689,
+        0.32296651,
+        0.24720893
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          684,
+          207
+        ],
+        "tip": [
+          690,
+          182
+        ],
+        "focus": [
+          690,
+          182
+        ]
+      }
+    },
+    {
+      "id": "spring_salamander",
+      "name": "온천 도롱뇽",
+      "pose": "skill-a",
+      "row": 0,
+      "column": 2,
+      "anchors": {
+        "kind": "focus",
+        "grip": [
+          0.506329,
+          0.378788
+        ],
+        "tip": [
+          0.508861,
+          0.3
+        ],
+        "focus": [
+          0.508861,
+          0.3
+        ]
+      },
+      "sourceRect": [
+        0.67783094,
+        0.03189793,
+        0.31499203,
+        0.26315789
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          1050,
+          165
+        ],
+        "tip": [
+          1051,
+          139
+        ],
+        "focus": [
+          1051,
+          139
+        ]
+      }
+    },
+    {
+      "id": "gold_puppet",
+      "name": "금실 인형병",
+      "pose": "recover",
+      "row": 1,
+      "column": 0,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.663415,
+          0.474667
+        ],
+        "tip": [
+          0.965854,
+          0.677333
+        ],
+        "focus": [
+          0.965854,
+          0.677333
+        ]
+      },
+      "sourceRect": [
+        0.01196172,
+        0.33492823,
+        0.32695375,
+        0.29904306
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          287,
+          598
+        ],
+        "tip": [
+          411,
+          674
+        ],
+        "focus": [
+          411,
+          674
+        ],
+        "headToFootHeight": 317
+      },
+      "bodyHeight": 0.845333
+    },
+    {
+      "id": "gold_puppet",
+      "name": "금실 인형병",
+      "pose": "strike",
+      "row": 1,
+      "column": 1,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.709278,
+          0.31831
+        ],
+        "tip": [
+          0.96701,
+          0.267606
+        ],
+        "focus": [
+          0.96701,
+          0.267606
+        ]
+      },
+      "sourceRect": [
+        0.33492823,
+        0.34290271,
+        0.38676236,
+        0.2830941
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          764,
+          543
+        ],
+        "tip": [
+          889,
+          525
+        ],
+        "focus": [
+          889,
+          525
+        ],
+        "headToFootHeight": 281
+      },
+      "bodyHeight": 0.791549
+    },
+    {
+      "id": "gold_puppet",
+      "name": "금실 인형병",
+      "pose": "skill-a",
+      "row": 1,
+      "column": 2,
+      "anchors": {
+        "kind": "blade",
+        "grip": [
+          0.428986,
+          0.20241
+        ],
+        "tip": [
+          0.933333,
+          0.060241
+        ],
+        "focus": [
+          0.933333,
+          0.060241
+        ]
+      },
+      "sourceRect": [
+        0.71770335,
+        0.29505582,
+        0.27511962,
+        0.33094099
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          1048,
+          454
+        ],
+        "tip": [
+          1222,
+          395
+        ],
+        "focus": [
+          1222,
+          395
+        ],
+        "headToFootHeight": 319
+      },
+      "bodyHeight": 0.768675
+    },
+    {
+      "id": "bell_keeper",
+      "name": "가면 종지기",
+      "pose": "recover",
+      "row": 2,
+      "column": 0,
+      "anchors": {
+        "kind": "music",
+        "grip": [
+          0.402564,
+          0.525581
+        ],
+        "tip": [
+          0.366667,
+          0.681395
+        ],
+        "focus": [
+          0.351282,
+          0.669767
+        ]
+      },
+      "sourceRect": [
+        0.01196172,
+        0.64593301,
+        0.31100478,
+        0.34290271
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          172,
+          1036
+        ],
+        "tip": [
+          158,
+          1103
+        ],
+        "focus": [
+          152,
+          1098
+        ],
+        "headToFootHeight": 386
+      },
+      "bodyHeight": 0.897674
+    },
+    {
+      "id": "bell_keeper",
+      "name": "가면 종지기",
+      "pose": "strike",
+      "row": 2,
+      "column": 1,
+      "anchors": {
+        "kind": "music",
+        "grip": [
+          0.808602,
+          0.225581
+        ],
+        "tip": [
+          0.952688,
+          0.232558
+        ],
+        "focus": [
+          0.946237,
+          0.232558
+        ]
+      },
+      "sourceRect": [
+        0.32695375,
+        0.64593301,
+        0.3708134,
+        0.34290271
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          786,
+          907
+        ],
+        "tip": [
+          853,
+          910
+        ],
+        "focus": [
+          850,
+          910
+        ],
+        "headToFootHeight": 370
+      },
+      "bodyHeight": 0.860465
+    },
+    {
+      "id": "bell_keeper",
+      "name": "가면 종지기",
+      "pose": "skill-a",
+      "row": 2,
+      "column": 2,
+      "anchors": {
+        "kind": "music",
+        "grip": [
+          0.283784,
+          0.140659
+        ],
+        "tip": [
+          0.391892,
+          0.065934
+        ],
+        "focus": [
+          0.394595,
+          0.07033
+        ]
+      },
+      "sourceRect": [
+        0.69776715,
+        0.62599681,
+        0.29505582,
+        0.36283892
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          980,
+          849
+        ],
+        "tip": [
+          1020,
+          815
+        ],
+        "focus": [
+          1021,
+          817
+        ],
+        "headToFootHeight": 343
+      },
+      "bodyHeight": 0.753846
+    }
+  ]
+}

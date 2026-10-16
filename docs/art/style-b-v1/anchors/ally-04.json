@@ -1,0 +1,419 @@
+{
+  "key": "ally-04",
+  "authoringComplete": true,
+  "sourcePath": "docs/art/style-b-v1/sources/ally-04.png",
+  "sourceOriginal": "/workspace/generated_images/exec-e1832390-38aa-486b-9966-8c050d39840f.png",
+  "anchorSpace": "cell-fraction",
+  "reviewMethod": "생성된 투명 원본을 보며 손잡이·실제 무기 끝·방출점·활 윤곽을 수동 저작한 근사 좌표. 가려진 손/관절은 보이는 손목과 무기 축을 기준으로 근사. box는 각 배우의 실제 투명 여백을 기준으로 지정. 신체 높이는 머리에서 발까지 보이는 신체의 수동 근사치이며 최종 산출물 정밀 실측·게임 QA 결과가 아님.",
+  "cells": [
+    {
+      "id": "miho",
+      "name": "미호",
+      "pose": "recover",
+      "row": 0,
+      "column": 0,
+      "anchors": {
+        "kind": "focus",
+        "grip": [
+          0.6,
+          0.556522
+        ],
+        "tip": [
+          0.663415,
+          0.536957
+        ],
+        "focus": [
+          0.663415,
+          0.536957
+        ]
+      },
+      "box": {
+        "left": 0,
+        "top": 0,
+        "width": 410,
+        "height": 460
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.55
+    },
+    {
+      "id": "miho",
+      "name": "미호",
+      "pose": "strike",
+      "row": 0,
+      "column": 1,
+      "anchors": {
+        "kind": "focus",
+        "grip": [
+          0.756098,
+          0.467391
+        ],
+        "tip": [
+          0.858537,
+          0.408696
+        ],
+        "focus": [
+          0.858537,
+          0.408696
+        ]
+      },
+      "box": {
+        "left": 410,
+        "top": 0,
+        "width": 410,
+        "height": 460
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.543478
+    },
+    {
+      "id": "miho",
+      "name": "미호",
+      "pose": "skill-a",
+      "row": 0,
+      "column": 2,
+      "anchors": {
+        "kind": "focus",
+        "grip": [
+          0.762673,
+          0.482609
+        ],
+        "tip": [
+          0.868664,
+          0.417391
+        ],
+        "focus": [
+          0.868664,
+          0.417391
+        ]
+      },
+      "box": {
+        "left": 820,
+        "top": 0,
+        "width": 434,
+        "height": 460
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.532609
+    },
+    {
+      "id": "teo",
+      "name": "테오",
+      "pose": "recover",
+      "row": 1,
+      "column": 0,
+      "anchors": {
+        "kind": "bow",
+        "grip": [
+          0.709756,
+          0.610667
+        ],
+        "tip": [
+          0.814634,
+          0.333333
+        ],
+        "focus": [
+          0.709756,
+          0.610667
+        ],
+        "bow": {
+          "upper": [
+            0.814634,
+            0.333333
+          ],
+          "lower": [
+            0.721951,
+            0.690667
+          ],
+          "points": [
+            [
+              0.814634,
+              0.333333
+            ],
+            [
+              0.804878,
+              0.397333
+            ],
+            [
+              0.8,
+              0.464
+            ],
+            [
+              0.770732,
+              0.530667
+            ],
+            [
+              0.736585,
+              0.586667
+            ],
+            [
+              0.709756,
+              0.610667
+            ],
+            [
+              0.707317,
+              0.650667
+            ],
+            [
+              0.721951,
+              0.690667
+            ]
+          ],
+          "arrowVisible": false
+        }
+      },
+      "box": {
+        "left": 0,
+        "top": 460,
+        "width": 410,
+        "height": 375
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.821333
+    },
+    {
+      "id": "teo",
+      "name": "테오",
+      "pose": "strike",
+      "row": 1,
+      "column": 1,
+      "anchors": {
+        "kind": "bow",
+        "grip": [
+          0.787805,
+          0.352
+        ],
+        "tip": [
+          0.87561,
+          0.341333
+        ],
+        "focus": [
+          0.441463,
+          0.352
+        ],
+        "bow": {
+          "upper": [
+            0.617073,
+            0.074667
+          ],
+          "lower": [
+            0.639024,
+            0.658667
+          ],
+          "points": [
+            [
+              0.617073,
+              0.074667
+            ],
+            [
+              0.7,
+              0.154667
+            ],
+            [
+              0.743902,
+              0.221333
+            ],
+            [
+              0.778049,
+              0.293333
+            ],
+            [
+              0.787805,
+              0.352
+            ],
+            [
+              0.760976,
+              0.442667
+            ],
+            [
+              0.709756,
+              0.522667
+            ],
+            [
+              0.660976,
+              0.6
+            ],
+            [
+              0.639024,
+              0.658667
+            ]
+          ],
+          "arrowVisible": true
+        }
+      },
+      "box": {
+        "left": 410,
+        "top": 460,
+        "width": 410,
+        "height": 375
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.757333
+    },
+    {
+      "id": "teo",
+      "name": "테오",
+      "pose": "skill-a",
+      "row": 1,
+      "column": 2,
+      "anchors": {
+        "kind": "bow",
+        "grip": [
+          0.880184,
+          0.450667
+        ],
+        "tip": [
+          0.958525,
+          0.456
+        ],
+        "focus": [
+          0.539171,
+          0.464
+        ],
+        "bow": {
+          "upper": [
+            0.723502,
+            0.157333
+          ],
+          "lower": [
+            0.769585,
+            0.693333
+          ],
+          "points": [
+            [
+              0.723502,
+              0.157333
+            ],
+            [
+              0.790323,
+              0.253333
+            ],
+            [
+              0.83871,
+              0.32
+            ],
+            [
+              0.870968,
+              0.394667
+            ],
+            [
+              0.880184,
+              0.450667
+            ],
+            [
+              0.861751,
+              0.541333
+            ],
+            [
+              0.820276,
+              0.616
+            ],
+            [
+              0.769585,
+              0.693333
+            ]
+          ],
+          "arrowVisible": true
+        }
+      },
+      "box": {
+        "left": 820,
+        "top": 460,
+        "width": 434,
+        "height": 375
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.669333
+    },
+    {
+      "id": "irene",
+      "name": "아이린",
+      "pose": "recover",
+      "row": 2,
+      "column": 0,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.62439,
+          0.348449
+        ],
+        "tip": [
+          0.65122,
+          0.073986
+        ],
+        "focus": [
+          0.65122,
+          0.138425
+        ]
+      },
+      "box": {
+        "left": 0,
+        "top": 835,
+        "width": 410,
+        "height": 419
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.73031
+    },
+    {
+      "id": "irene",
+      "name": "아이린",
+      "pose": "strike",
+      "row": 2,
+      "column": 1,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.534146,
+          0.446301
+        ],
+        "tip": [
+          0.770732,
+          0.140811
+        ],
+        "focus": [
+          0.719512,
+          0.229117
+        ]
+      },
+      "box": {
+        "left": 410,
+        "top": 835,
+        "width": 410,
+        "height": 419
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.692124
+    },
+    {
+      "id": "irene",
+      "name": "아이린",
+      "pose": "skill-a",
+      "row": 2,
+      "column": 2,
+      "anchors": {
+        "kind": "staff",
+        "grip": [
+          0.668203,
+          0.245823
+        ],
+        "tip": [
+          0.898618,
+          0.02148
+        ],
+        "focus": [
+          0.83871,
+          0.114558
+        ]
+      },
+      "box": {
+        "left": 820,
+        "top": 835,
+        "width": 434,
+        "height": 419
+      },
+      "anchorSpace": "cell-fraction",
+      "bodyHeight": 0.665871
+    }
+  ]
+}

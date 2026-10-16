@@ -1,0 +1,443 @@
+{
+  "key": "enemy-12",
+  "authoringComplete": true,
+  "anchorSpace": "cell-fraction",
+  "sourceImage": "exec-96a478e0-37c7-4974-9dfe-902ab0d7a8f5.png",
+  "sourceDimensions": [
+    1254,
+    1254
+  ],
+  "reviewMethod": "생성 PNG 입력을 보며 투명 여백 crop과 실제 손·물리적 무기끝/보조기관·발광점을 수동 근사 저작. sourceRect 내부 비율. 비인간 종족의 몸높이는 과도한 추정 정규화를 피하려고 생략하고 인형·종지기만 두정부~발끝 bodyHeight 기입. isolateSilhouette로 crop에 섞인 이웃 투명분리 조각은 중앙 생산기의 기존 배우분리 절차를 사용. 완성 WebP·게임 출력 QA/자동검증은 하지 않음.",
+  "identityNotes": "원종족과 실제 기관 보존: 도롱뇽 네발/등 온천구, 도자기 태엽소녀 검, 가면 종지기 황동종 지원, 무얼굴 종이정령, 네발 월식고양이 두 앞발, 얼굴없는 꽃봉오리 덩굴.",
+  "cells": [
+    {
+      "id": "scroll_spirit",
+      "name": "접힌서고 정령",
+      "pose": "recover",
+      "row": 0,
+      "column": 0,
+      "anchors": {
+        "kind": "book",
+        "grip": [
+          0.662857,
+          0.369231
+        ],
+        "tip": [
+          0.777143,
+          0.351282
+        ],
+        "focus": [
+          0.78,
+          0.351282
+        ],
+        "bookCenter": [
+          0.385714,
+          0.315385
+        ]
+      },
+      "sourceRect": [
+        0.03189793,
+        0.05183413,
+        0.27910686,
+        0.31100478
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          272,
+          209
+        ],
+        "tip": [
+          312,
+          202
+        ],
+        "focus": [
+          313,
+          202
+        ]
+      }
+    },
+    {
+      "id": "scroll_spirit",
+      "name": "접힌서고 정령",
+      "pose": "strike",
+      "row": 0,
+      "column": 1,
+      "anchors": {
+        "kind": "book",
+        "grip": [
+          0.809091,
+          0.356962
+        ],
+        "tip": [
+          0.931818,
+          0.331646
+        ],
+        "focus": [
+          0.922727,
+          0.336709
+        ],
+        "bookCenter": [
+          0.422727,
+          0.273418
+        ]
+      },
+      "sourceRect": [
+        0.31100478,
+        0.04784689,
+        0.35087719,
+        0.31499203
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          746,
+          201
+        ],
+        "tip": [
+          800,
+          191
+        ],
+        "focus": [
+          796,
+          193
+        ]
+      }
+    },
+    {
+      "id": "scroll_spirit",
+      "name": "접힌서고 정령",
+      "pose": "skill-a",
+      "row": 0,
+      "column": 2,
+      "anchors": {
+        "kind": "book",
+        "grip": [
+          0.73012,
+          0.385185
+        ],
+        "tip": [
+          0.831325,
+          0.298765
+        ],
+        "focus": [
+          0.821687,
+          0.308642
+        ],
+        "bookCenter": [
+          0.301205,
+          0.165432
+        ]
+      },
+      "sourceRect": [
+        0.66188198,
+        0.03987241,
+        0.33094099,
+        0.32296651
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          1133,
+          206
+        ],
+        "tip": [
+          1175,
+          171
+        ],
+        "focus": [
+          1171,
+          175
+        ]
+      }
+    },
+    {
+      "id": "eclipse_cat",
+      "name": "월식 사냥고양이",
+      "pose": "recover",
+      "row": 1,
+      "column": 0,
+      "anchors": {
+        "kind": "claw",
+        "grip": [
+          0.874667,
+          0.588889
+        ],
+        "tip": [
+          0.936,
+          0.577778
+        ],
+        "focus": [
+          0.936,
+          0.577778
+        ],
+        "secondary": {
+          "grip": [
+            0.701333,
+            0.85
+          ],
+          "tip": [
+            0.728,
+            0.908333
+          ]
+        }
+      },
+      "sourceRect": [
+        0.01594896,
+        0.37480064,
+        0.29904306,
+        0.28708134
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          348,
+          682
+        ],
+        "tip": [
+          371,
+          678
+        ],
+        "focus": [
+          371,
+          678
+        ]
+      }
+    },
+    {
+      "id": "eclipse_cat",
+      "name": "월식 사냥고양이",
+      "pose": "strike",
+      "row": 1,
+      "column": 1,
+      "anchors": {
+        "kind": "claw",
+        "grip": [
+          0.874468,
+          0.703896
+        ],
+        "tip": [
+          0.965957,
+          0.724675
+        ],
+        "focus": [
+          0.965957,
+          0.724675
+        ],
+        "secondary": {
+          "grip": [
+            0.812766,
+            0.8
+          ],
+          "tip": [
+            0.851064,
+            0.838961
+          ]
+        }
+      },
+      "sourceRect": [
+        0.31897927,
+        0.35486443,
+        0.37480064,
+        0.30701754
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          811,
+          716
+        ],
+        "tip": [
+          854,
+          724
+        ],
+        "focus": [
+          854,
+          724
+        ]
+      }
+    },
+    {
+      "id": "eclipse_cat",
+      "name": "월식 사냥고양이",
+      "pose": "skill-a",
+      "row": 1,
+      "column": 2,
+      "anchors": {
+        "kind": "claw",
+        "grip": [
+          0.766265,
+          0.8775
+        ],
+        "tip": [
+          0.901205,
+          0.9275
+        ],
+        "focus": [
+          0.901205,
+          0.9275
+        ],
+        "secondary": {
+          "grip": [
+            0.710843,
+            0.8275
+          ],
+          "tip": [
+            0.807229,
+            0.9
+          ]
+        }
+      },
+      "sourceRect": [
+        0.66188198,
+        0.34290271,
+        0.33094099,
+        0.31897927
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          1148,
+          781
+        ],
+        "tip": [
+          1204,
+          801
+        ],
+        "focus": [
+          1204,
+          801
+        ]
+      }
+    },
+    {
+      "id": "ink_vine",
+      "name": "잉크덩굴 포식자",
+      "pose": "recover",
+      "row": 2,
+      "column": 0,
+      "anchors": {
+        "kind": "whip",
+        "grip": [
+          0.779221,
+          0.6
+        ],
+        "tip": [
+          0.924675,
+          0.442857
+        ],
+        "focus": [
+          0.924675,
+          0.442857
+        ]
+      },
+      "sourceRect": [
+        0.00398724,
+        0.6937799,
+        0.30701754,
+        0.27910686
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          305,
+          1080
+        ],
+        "tip": [
+          361,
+          1025
+        ],
+        "focus": [
+          361,
+          1025
+        ]
+      }
+    },
+    {
+      "id": "ink_vine",
+      "name": "잉크덩굴 포식자",
+      "pose": "strike",
+      "row": 2,
+      "column": 1,
+      "anchors": {
+        "kind": "whip",
+        "grip": [
+          0.628866,
+          0.551429
+        ],
+        "tip": [
+          0.958763,
+          0.365714
+        ],
+        "focus": [
+          0.958763,
+          0.365714
+        ]
+      },
+      "sourceRect": [
+        0.31100478,
+        0.6937799,
+        0.38676236,
+        0.27910686
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          695,
+          1063
+        ],
+        "tip": [
+          855,
+          998
+        ],
+        "focus": [
+          855,
+          998
+        ]
+      }
+    },
+    {
+      "id": "ink_vine",
+      "name": "잉크덩굴 포식자",
+      "pose": "skill-a",
+      "row": 2,
+      "column": 2,
+      "anchors": {
+        "kind": "whip",
+        "grip": [
+          0.792593,
+          0.565
+        ],
+        "tip": [
+          0.869136,
+          0.2675
+        ],
+        "focus": [
+          0.869136,
+          0.2675
+        ]
+      },
+      "sourceRect": [
+        0.66985646,
+        0.6539075,
+        0.32296651,
+        0.31897927
+      ],
+      "isolateSilhouette": true,
+      "sourceLandmarksPx": {
+        "grip": [
+          1161,
+          1046
+        ],
+        "tip": [
+          1192,
+          927
+        ],
+        "focus": [
+          1192,
+          927
+        ]
+      }
+    }
+  ]
+}

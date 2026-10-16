@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cheonsu/style-b-v1/sourcepack",
+  "title": "천수 B안 기본 67종 전투 원화 저작 입력",
+  "type": "object",
+  "required": ["schema", "style", "sheets"],
+  "properties": {
+    "schema": {"const": 1},
+    "style": {"type": "string", "minLength": 1},
+    "status": {"type": "string"},
+    "scope": {"type": "object"},
+    "sheets": {"type": "array", "items": {"$ref": "#/$defs/sheet"}}
+  },
+  "$defs": {
+    "point": {
+      "type": "array",
+      "items": {"type": "number"},
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "polyline": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/point"},
+      "minItems": 2
+    },
+    "anchorSpace": {"enum": ["cell-fraction", "cell-pixels", "sheet-pixels"]},
+    "anchors": {
+      "type": "object",
+      "required": ["kind", "grip", "tip"],
+      "properties": {
+        "kind": {"enum": ["blade", "spear", "axe", "hammer", "shield", "dagger", "claw", "whip", "fist", "bow", "crossbow", "cannon", "focus", "staff", "book", "music"]},
+        "grip": {"$ref": "#/$defs/point"},
+        "tip": {"$ref": "#/$defs/point"},
+        "focus": {"$ref": "#/$defs/point"},
+        "bookCenter": {"$ref": "#/$defs/point"},
+        "pathPoints": {"$ref": "#/$defs/polyline"},
+        "secondary": {
+          "type": "object",
+          "required": ["grip", "tip"],
+          "properties": {
+            "grip": {"$ref": "#/$defs/point"},
+            "tip": {"$ref": "#/$defs/point"},
+            "points": {"$ref": "#/$defs/polyline"}
+          }
+        },
+        "bow": {
+          "type": "object",
+          "required": ["upper", "lower"],
+          "properties": {
+            "upper": {"$ref": "#/$defs/point"},
+            "lower": {"$ref": "#/$defs/point"},
+            "points": {"$ref": "#/$defs/polyline"},
+            "curve": {"type": "array", "items": {"$ref": "#/$defs/point"}, "minItems": 2, "maxItems": 2},
+            "arrowVisible": {"type": "boolean"}
+          },
+          "anyOf": [{"required": ["points"]}, {"required": ["curve"]}]
+        }
+      }
+    },
+    "cell": {
+      "type": "object",
+      "required": ["id", "pose", "row", "column", "anchors"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1, "not": {"pattern": "__"}},
+        "name": {"type": "string"},
+        "pose": {"enum": ["recover", "strike", "skill-a"]},
+        "row": {"type": "integer", "minimum": 0},
+        "column": {"type": "integer", "minimum": 0},
+        "anchorSpace": {"$ref": "#/$defs/anchorSpace"},
+        "bodyHeight": {"type": "number", "exclusiveMinimum": 0},
+        "isolateSilhouette": {"type": "boolean"},
+        "reviewMethod": {"type": "string"},
+        "sourceRect": {
+          "description": "원본 전체의 0~1 비율 [left,top,width,height]. 이 영역이 cell-fraction의 기준이 된다.",
+          "type": "array", "items": {"type": "number", "minimum": 0, "maximum": 1}, "minItems": 4, "maxItems": 4
+        },
+        "box": {
+          "type": "object",
+          "required": ["left", "top", "width", "height"],
+          "additionalProperties": false,
+          "properties": {
+            "left": {"type": "integer", "minimum": 0},
+            "top": {"type": "integer", "minimum": 0},
+            "width": {"type": "integer", "minimum": 1},
+            "height": {"type": "integer", "minimum": 1}
+          }
+        },
+        "anchors": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/anchors"}]}
+      }
+    },
+    "sheet": {
+      "type": "object",
+      "required": ["key", "sourcePath", "rows", "columns", "authoringComplete", "cells"],
+      "properties": {
+        "key": {"type": "string", "minLength": 1},
+        "sourcePath": {"type": "string", "minLength": 1},
+        "rows": {"type": "integer", "minimum": 1, "maximum": 3},
+        "columns": {"enum": [1, 3]},
+        "anchorSpace": {"$ref": "#/$defs/anchorSpace"},
+        "authoringComplete": {"type": "boolean"},
+        "conceptReference": {"type": "string"},
+        "reviewMethod": {"type": "string"},
+        "cells": {"type": "array", "items": {"$ref": "#/$defs/cell"}, "minItems": 3, "maxItems": 9}
+      },
+      "allOf": [{
+        "if": {"properties": {"authoringComplete": {"const": true}}},
+        "then": {"properties": {"cells": {"items": {"properties": {"anchors": {"$ref": "#/$defs/anchors"}}}}}}
+      }]
+    }
+  }
+}
