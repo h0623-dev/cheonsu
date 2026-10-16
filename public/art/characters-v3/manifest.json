@@ -869,48 +869,191 @@
       "metrics": {
         "run-a": {
           "height": 512,
-          "top": 104,
-          "bottom": 479
+          "top": 88,
+          "bottom": 477
         },
         "run-b": {
           "height": 512,
-          "top": 103,
-          "bottom": 479
+          "top": 80,
+          "bottom": 477
         },
         "windup": {
           "height": 512,
-          "top": 93,
-          "bottom": 479
+          "top": 54,
+          "bottom": 477
         },
         "strike": {
           "height": 512,
-          "top": 117,
-          "bottom": 479
+          "top": 95,
+          "bottom": 476
         },
         "recover": {
           "height": 512,
-          "top": 107,
-          "bottom": 479
+          "top": 75,
+          "bottom": 477
         },
         "recoil": {
           "height": 512,
-          "top": 104,
-          "bottom": 479
+          "top": 107,
+          "bottom": 477
         },
         "skill-a": {
           "height": 512,
-          "top": 44,
-          "bottom": 479
+          "top": 13,
+          "bottom": 478
         },
         "skill-b": {
           "height": 512,
-          "top": 69,
-          "bottom": 479
+          "top": 60,
+          "bottom": 477
         }
       },
       "portrait": "/art/characters-v3/portraits/oath_guardian.webp",
       "dialogue": "/art/characters-v3/dialogue/oath_guardian.webp",
-      "map": "/art/characters-v3/map/oath_guardian.webp"
+      "map": "/art/characters-v3/map/oath_guardian.webp",
+      "anchors": {
+        "run-a": {
+          "kind": "blade",
+          "grip": [
+            228,
+            269
+          ],
+          "tip": [
+            435,
+            395
+          ],
+          "measured": true,
+          "focus": [
+            435,
+            395
+          ]
+        },
+        "run-b": {
+          "kind": "blade",
+          "grip": [
+            323,
+            283
+          ],
+          "tip": [
+            101,
+            348
+          ],
+          "measured": true,
+          "focus": [
+            101,
+            348
+          ]
+        },
+        "windup": {
+          "kind": "blade",
+          "grip": [
+            338,
+            143
+          ],
+          "tip": [
+            181,
+            55
+          ],
+          "measured": true,
+          "focus": [
+            181,
+            55
+          ]
+        },
+        "strike": {
+          "kind": "blade",
+          "grip": [
+            307,
+            315
+          ],
+          "tip": [
+            419,
+            476
+          ],
+          "measured": true,
+          "focus": [
+            419,
+            476
+          ]
+        },
+        "recover": {
+          "kind": "blade",
+          "grip": [
+            193,
+            272
+          ],
+          "tip": [
+            404,
+            459
+          ],
+          "measured": true,
+          "focus": [
+            404,
+            459
+          ]
+        },
+        "recoil": {
+          "kind": "blade",
+          "grip": [
+            208,
+            290
+          ],
+          "tip": [
+            403,
+            478
+          ],
+          "measured": true,
+          "focus": [
+            403,
+            478
+          ]
+        },
+        "skill-a": {
+          "kind": "blade",
+          "grip": [
+            353,
+            107
+          ],
+          "tip": [
+            161,
+            12
+          ],
+          "measured": true,
+          "focus": [
+            161,
+            12
+          ]
+        },
+        "skill-b": {
+          "kind": "blade",
+          "grip": [
+            182,
+            183
+          ],
+          "tip": [
+            176,
+            476
+          ],
+          "measured": true,
+          "focus": [
+            176,
+            476
+          ]
+        }
+      },
+      "visibleFraction": 0.703125,
+      "skills": {
+        "맹세의 원": {
+          "src": "/art/characters-v3/units/oath_guardian-skill-a.webp",
+          "scale": 0.8933002481389578,
+          "footOffset": "0.1744727047146402%"
+        },
+        "돌아갈 길": {
+          "src": "/art/characters-v3/units/oath_guardian-skill-b.webp",
+          "scale": 0.8933002481389578,
+          "footOffset": "0.3489454094292804%"
+        }
+      }
     },
     "harin": {
       "motion": {

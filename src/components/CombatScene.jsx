@@ -8,7 +8,7 @@ import { useDuelAnimation } from '../engine/useDuelAnimation.js';
 import DuelEffects from './DuelEffects.jsx';
 import DuelImpacts from './DuelImpacts.jsx';
 import SkillSpectacle, { SwordSkillAura } from './SkillSpectacle.jsx';
-import EpicCombatVisuals, { EpicCombatCutIn } from './EpicCombatVisuals.jsx';
+import EpicCombatVisuals, { CinematicEnvironment, EpicCombatCutIn } from './EpicCombatVisuals.jsx';
 import './skill-presentation.css';
 import './duel-acting.css';
 import './epic-combat.css';
@@ -74,6 +74,7 @@ export default function CombatScene({ scene, attackerKey, defenderKey, backgroun
       style={{ '--combat-duration': `${duration}ms`, '--combat-action-duration': `${duration * timing.action}ms`, '--combat-lead': `${duration * timing.lead}ms`, '--skill-color': getSkillPalette(presentation.effect), '--combat-scene': `url("${combatBackground}")` }}>
       <header className="painted-combat-heading"><span>{scene.attacker.name}</span><h2>{timing.skill ? plan.name : scene.title}</h2><span>{scene.outcome?.crit ? '치명타' : scene.finish ? '결정타' : scene.effectLabel}</span></header>
       <div className="painted-combat-arena">
+        <CinematicEnvironment stageId={stageId} background={combatBackground} />
         <EpicCombatVisuals />
         {timing.skill && <div className="skill-stage-shade" aria-hidden="true" />}
         <div className="duel-impact-ink" aria-hidden="true" />
@@ -81,12 +82,14 @@ export default function CombatScene({ scene, attackerKey, defenderKey, backgroun
         <DuelEffects plan={plan} unitKey={attackerKey}/>
         <DuelImpacts plan={plan}/>
         <SkillSpectacle plan={plan} />
-        <div className="painted-fighter fighter-attacker">
+        <div className="painted-fighter fighter-attacker" data-unit-key={attackerKey}>
+          <div className="cinematic-fighter-light" aria-hidden="true" />
           <div className="fighter-shadow" />
           {plan.afterimages?.map((echo, index) => <img key={index} className="duel-action-echo" data-action-echo={index} data-at={echo.at} src={plan.contactPose === 'strike' ? getCombatMotionSprite(attackerKey, 'strike') : plan.skillPose?.src || getCombatMotionSprite(attackerKey, 'strike')} alt="" draggable="false" style={plan.contactPose !== 'strike' && plan.skillPose ? { '--combat-sprite-scale': plan.skillPose.scale, '--combat-foot-offset': plan.skillPose.footOffset || '0%' } : getCombatFrameStyle(attackerKey, 'strike')} />)}
           <FighterPoses unitKey={attackerKey} name={scene.attacker.name} skillPose={plan.skillPose} plan={plan} />
         </div>
         {!selfSupport && <div className="painted-fighter fighter-defender" data-unit-key={defenderKey}>
+          <div className="cinematic-fighter-light" aria-hidden="true" />
           <div className="fighter-shadow" />
           <FighterPoses unitKey={defenderKey} name={scene.defender.name} defender />
         </div>}

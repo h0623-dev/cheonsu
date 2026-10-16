@@ -1,0 +1,130 @@
+/* Atmosphere is painted over the original chapter image without copying it. */
+.epic-combat :is(.cinematic-atmosphere, .cinematic-ground-bed, .cinematic-foreground) {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform-origin: 50% 80%;
+}
+
+.epic-combat .cinematic-atmosphere { z-index: 1; overflow: hidden; }
+.epic-combat .cinematic-horizon-glow {
+  position: absolute;
+  inset: 5% 0 20%;
+  background: radial-gradient(ellipse at 58% 37%, rgb(var(--cinematic-air) / .09), transparent 66%);
+}
+.epic-combat .cinematic-light-shafts {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: rgb(var(--cinematic-light));
+  opacity: var(--cinematic-shafts, .12);
+}
+.epic-combat .cinematic-haze {
+  position: absolute;
+  inset: 37% -5% 4%;
+  background:
+    radial-gradient(ellipse at 14% 48%, rgb(var(--cinematic-air) / var(--cinematic-mist, .1)), transparent 58%),
+    radial-gradient(ellipse at 86% 65%, rgb(var(--cinematic-air) / var(--cinematic-mist, .1)), transparent 56%);
+}
+.epic-combat .cinematic-motes { position: absolute; inset: 0; }
+.epic-combat .cinematic-motes > i {
+  position: absolute;
+  display: block;
+  width: var(--cinematic-mote-size, 2px);
+  height: var(--cinematic-mote-size, 2px);
+  border-radius: 50%;
+  background: rgb(var(--cinematic-light));
+  opacity: .45;
+}
+.epic-combat [data-cinematic-weather="leaves"] .cinematic-motes > i {
+  width: calc(var(--cinematic-mote-size) * 1.8);
+  border-radius: 80% 0 80% 0;
+  background: #b2c790;
+}
+.epic-combat [data-cinematic-weather="embers"] .cinematic-motes > i {
+  height: calc(var(--cinematic-mote-size) * 1.65);
+  border-radius: 60% 20% 70% 30%;
+  background: #ffca85;
+}
+.epic-combat [data-cinematic-weather="ash"] .cinematic-motes > i { border-radius: 2px; background: #c0bed0; }
+.epic-combat [data-cinematic-weather="snow"] .cinematic-motes > i { background: #edf8ff; }
+.epic-combat [data-cinematic-weather="spray"] .cinematic-motes > i { height: calc(var(--cinematic-mote-size) * 1.8); background: #d0f0f4; }
+.epic-combat [data-cinematic-weather="stars"] .cinematic-motes > i { border-radius: 0; clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); width: calc(var(--cinematic-mote-size) * 1.8); height: calc(var(--cinematic-mote-size) * 1.8); }
+
+.epic-combat .cinematic-ground-bed {
+  z-index: 2;
+  inset: 58% 0 0;
+  background: radial-gradient(ellipse at 50% 88%, rgb(var(--cinematic-edge) / .14), transparent 73%);
+}
+.epic-combat .cinematic-ground-haze {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 68%, rgb(var(--cinematic-air) / .07), transparent 66%);
+}
+.epic-combat .cinematic-ground-grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: rgb(var(--cinematic-light) / .26);
+  stroke-width: 1.2;
+}
+.epic-combat .cinematic-water-sheen { stroke: rgb(var(--cinematic-light) / .4); stroke-width: 1.5; }
+.epic-combat .cinematic-rune-inlay { stroke: rgb(var(--cinematic-light) / .35); stroke-width: 1.6; }
+.epic-combat .cinematic-foreground {
+  z-index: 5;
+  inset: auto -1% -1%;
+  width: 102%;
+  height: 26%;
+  fill: rgb(var(--cinematic-edge) / .66);
+}
+.epic-combat .cinematic-edge-highlight { stroke: rgb(var(--cinematic-light) / .24); stroke-width: 2; }
+
+/* These stay transparent until the existing contact clock places and lights them. */
+.epic-combat :is(.cinematic-impact-light, .cinematic-ground-wave, .cinematic-contact-cracks) {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.epic-combat .cinematic-impact-light {
+  z-index: 2;
+  width: 70%;
+  aspect-ratio: 1.3;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgb(var(--epic-tone) / .65) 0%, rgb(var(--epic-tone) / .22) 29%, transparent 66%);
+}
+.epic-combat .cinematic-ground-wave {
+  z-index: 4;
+  width: 36%;
+  aspect-ratio: 1;
+  overflow: visible;
+  stroke-linecap: round;
+}
+.epic-combat .cinematic-wave-outer { stroke: rgb(var(--epic-tone) / .8); stroke-width: 2.1; }
+.epic-combat .cinematic-wave-inner { stroke: var(--epic-light); stroke-width: 1; opacity: .72; }
+.epic-combat .cinematic-wave-spray { stroke: rgb(var(--epic-tone) / .7); stroke-width: 1.5; }
+.epic-combat .cinematic-contact-cracks {
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  stroke: rgb(var(--epic-tone) / .7);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.epic-combat:is(.is-support, .is-miss) :is(.cinematic-ground-wave, .cinematic-contact-cracks) { display: none; }
+.epic-combat:is(.motion-off, .duel-motion-disabled) :is(.cinematic-atmosphere, .cinematic-impact-light, .cinematic-ground-wave, .cinematic-contact-cracks) { display: none; }
+.epic-combat:is(.motion-off, .duel-motion-disabled) :is(.cinematic-ground-bed, .cinematic-foreground) { transform: none !important; }
+
+@media (max-width: 600px) {
+  .epic-combat .cinematic-foreground { height: 22%; }
+  .epic-combat .cinematic-light-shafts { opacity: calc(var(--cinematic-shafts, .12) * .75); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .epic-combat :is(.cinematic-motes, .cinematic-impact-light, .cinematic-ground-wave, .cinematic-contact-cracks) { display: none; }
+  .epic-combat :is(.cinematic-atmosphere, .cinematic-ground-bed, .cinematic-foreground) { transform: none !important; }
+}

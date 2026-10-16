@@ -15,54 +15,195 @@
       "metrics": {
         "run-a": {
           "height": 512,
-          "top": 156,
-          "bottom": 479
+          "top": 137,
+          "bottom": 476
         },
         "run-b": {
           "height": 512,
-          "top": 163,
-          "bottom": 479
+          "top": 122,
+          "bottom": 477
         },
         "windup": {
           "height": 512,
-          "top": 128,
-          "bottom": 479
+          "top": 71,
+          "bottom": 477
         },
         "strike": {
           "height": 512,
-          "top": 190,
-          "bottom": 479
+          "top": 17,
+          "bottom": 477
         },
         "recover": {
           "height": 512,
-          "top": 141,
-          "bottom": 479
+          "top": 86,
+          "bottom": 477
         },
         "recoil": {
           "height": 512,
-          "top": 169,
-          "bottom": 479
+          "top": 121,
+          "bottom": 477
         },
         "skill-a": {
           "height": 512,
-          "top": 200,
-          "bottom": 479
+          "top": 15,
+          "bottom": 477
         },
         "skill-b": {
           "height": 512,
-          "top": 69,
-          "bottom": 479
+          "top": 92,
+          "bottom": 477
         }
       },
       "portrait": "/art/characters-v2/portraits/hero.webp",
       "dialogue": "/art/characters-v2/dialogue/hero.webp",
       "skills": {
+        "gale": {
+          "src": "/art/characters-v2/units/hero-skill-a.webp",
+          "scale": 0.9183673469387755,
+          "footOffset": "0.3587372448979592%"
+        },
+        "oath": {
+          "src": "/art/characters-v2/units/hero-skill-b.webp",
+          "scale": 0.9183673469387755,
+          "footOffset": "0.3587372448979592%"
+        },
         "hero-dawn-slash": {
           "src": "/art/characters-v2/units/hero-skill-a.webp",
-          "scale": 1.0619469026548674,
-          "footOffset": "0%"
+          "scale": 0.9183673469387755,
+          "footOffset": "0.3587372448979592%"
         }
-      }
+      },
+      "anchors": {
+        "run-a": {
+          "kind": "blade",
+          "grip": [
+            194,
+            278
+          ],
+          "tip": [
+            81,
+            416
+          ],
+          "measured": true,
+          "focus": [
+            81,
+            416
+          ]
+        },
+        "run-b": {
+          "kind": "blade",
+          "grip": [
+            211,
+            263
+          ],
+          "tip": [
+            87,
+            433
+          ],
+          "measured": true,
+          "focus": [
+            87,
+            433
+          ]
+        },
+        "windup": {
+          "kind": "blade",
+          "grip": [
+            177,
+            154
+          ],
+          "tip": [
+            290,
+            75
+          ],
+          "measured": true,
+          "focus": [
+            290,
+            75
+          ]
+        },
+        "strike": {
+          "kind": "blade",
+          "grip": [
+            329,
+            139
+          ],
+          "tip": [
+            447,
+            20
+          ],
+          "measured": true,
+          "focus": [
+            447,
+            20
+          ]
+        },
+        "recover": {
+          "kind": "blade",
+          "grip": [
+            187,
+            274
+          ],
+          "tip": [
+            358,
+            438
+          ],
+          "measured": true,
+          "focus": [
+            358,
+            438
+          ]
+        },
+        "recoil": {
+          "kind": "blade",
+          "grip": [
+            126,
+            301
+          ],
+          "tip": [
+            312,
+            409
+          ],
+          "measured": true,
+          "focus": [
+            312,
+            409
+          ]
+        },
+        "skill-a": {
+          "kind": "blade",
+          "grip": [
+            389,
+            122
+          ],
+          "tip": [
+            247,
+            18
+          ],
+          "measured": true,
+          "focus": [
+            247,
+            18
+          ]
+        },
+        "skill-b": {
+          "kind": "blade",
+          "grip": [
+            179,
+            252
+          ],
+          "tip": [
+            193,
+            472
+          ],
+          "measured": true,
+          "focus": [
+            193,
+            472
+          ]
+        }
+      },
+      "visibleFraction": 0.703125
     },
     "bram": {
       "motion": {
@@ -151,54 +292,291 @@
       "metrics": {
         "run-a": {
           "height": 512,
-          "top": 81,
-          "bottom": 479
+          "top": 87,
+          "bottom": 477
         },
         "run-b": {
           "height": 512,
-          "top": 83,
-          "bottom": 479
+          "top": 95,
+          "bottom": 477
         },
         "windup": {
           "height": 512,
-          "top": 77,
-          "bottom": 479
+          "top": 35,
+          "bottom": 477
         },
         "strike": {
           "height": 512,
-          "top": 76,
-          "bottom": 478
+          "top": 16,
+          "bottom": 477
         },
         "recover": {
           "height": 512,
-          "top": 73,
-          "bottom": 479
+          "top": 74,
+          "bottom": 477
         },
         "recoil": {
           "height": 512,
-          "top": 80,
-          "bottom": 478
+          "top": 114,
+          "bottom": 477
         },
         "skill-a": {
           "height": 512,
-          "top": 100,
-          "bottom": 479
+          "top": 28,
+          "bottom": 477
         },
         "skill-b": {
           "height": 512,
           "top": 133,
-          "bottom": 479
+          "bottom": 477
         }
       },
       "portrait": "/art/characters-v2/portraits/lina.webp",
       "dialogue": "/art/characters-v2/dialogue/lina.webp",
       "skills": {
+        "ember": {
+          "src": "/art/characters-v2/units/lina-skill-a.webp",
+          "scale": 0.8910891089108911,
+          "footOffset": "0.34808168316831684%"
+        },
+        "snipe": {
+          "src": "/art/characters-v2/units/lina-skill-b.webp",
+          "scale": 0.8910891089108911,
+          "footOffset": "0.34808168316831684%"
+        },
         "lina-phoenix-flare": {
           "src": "/art/characters-v2/units/lina-skill-a.webp",
-          "scale": 0.8845208845208845,
-          "footOffset": "0%"
+          "scale": 0.8910891089108911,
+          "footOffset": "0.34808168316831684%"
         }
-      }
+      },
+      "anchors": {
+        "run-a": {
+          "kind": "bow",
+          "grip": [
+            392,
+            283
+          ],
+          "tip": [
+            454,
+            150
+          ],
+          "measured": true,
+          "focus": [
+            392,
+            283
+          ],
+          "bow": {
+            "upper": [
+              454,
+              150
+            ],
+            "lower": [
+              369,
+              326
+            ],
+            "path": "M454 150C411 177 452 261 369 326",
+            "arrowVisible": false
+          }
+        },
+        "run-b": {
+          "kind": "bow",
+          "grip": [
+            383,
+            285
+          ],
+          "tip": [
+            434,
+            150
+          ],
+          "measured": true,
+          "focus": [
+            383,
+            285
+          ],
+          "bow": {
+            "upper": [
+              434,
+              150
+            ],
+            "lower": [
+              361,
+              336
+            ],
+            "path": "M434 150C389 179 454 271 361 336",
+            "arrowVisible": false
+          }
+        },
+        "windup": {
+          "kind": "bow",
+          "grip": [
+            410,
+            174
+          ],
+          "tip": [
+            446,
+            160
+          ],
+          "measured": true,
+          "focus": [
+            429,
+            162
+          ],
+          "bow": {
+            "upper": [
+              352,
+              36
+            ],
+            "lower": [
+              363,
+              319
+            ],
+            "path": "M352 36C433 100 444 221 363 319",
+            "arrowVisible": true
+          }
+        },
+        "strike": {
+          "kind": "bow",
+          "grip": [
+            405,
+            126
+          ],
+          "tip": [
+            423,
+            107
+          ],
+          "measured": true,
+          "focus": [
+            407,
+            115
+          ],
+          "bow": {
+            "upper": [
+              284,
+              20
+            ],
+            "lower": [
+              405,
+              273
+            ],
+            "path": "M284 20C423 35 458 172 405 273",
+            "arrowVisible": false
+          }
+        },
+        "recover": {
+          "kind": "bow",
+          "grip": [
+            353,
+            296
+          ],
+          "tip": [
+            432,
+            341
+          ],
+          "measured": true,
+          "focus": [
+            353,
+            296
+          ],
+          "bow": {
+            "upper": [
+              413,
+              167
+            ],
+            "lower": [
+              201,
+              304
+            ],
+            "path": "M413 167C391 233 400 316 201 304",
+            "arrowVisible": false
+          }
+        },
+        "recoil": {
+          "kind": "bow",
+          "grip": [
+            376,
+            248
+          ],
+          "tip": [
+            377,
+            117
+          ],
+          "measured": true,
+          "focus": [
+            376,
+            248
+          ],
+          "bow": {
+            "upper": [
+              377,
+              117
+            ],
+            "lower": [
+              356,
+              305
+            ],
+            "path": "M377 117C425 166 381 281 356 305",
+            "arrowVisible": false
+          }
+        },
+        "skill-a": {
+          "kind": "bow",
+          "grip": [
+            413,
+            180
+          ],
+          "tip": [
+            461,
+            161
+          ],
+          "measured": true,
+          "focus": [
+            424,
+            167
+          ],
+          "bow": {
+            "upper": [
+              339,
+              33
+            ],
+            "lower": [
+              421,
+              354
+            ],
+            "path": "M339 33C426 65 447 273 421 354",
+            "arrowVisible": true
+          }
+        },
+        "skill-b": {
+          "kind": "bow",
+          "grip": [
+            406,
+            278
+          ],
+          "tip": [
+            430,
+            266
+          ],
+          "measured": true,
+          "focus": [
+            416,
+            268
+          ],
+          "bow": {
+            "upper": [
+              340,
+              138
+            ],
+            "lower": [
+              387,
+              447
+            ],
+            "path": "M340 138C417 179 443 345 387 447",
+            "arrowVisible": true
+          }
+        }
+      },
+      "visibleFraction": 0.703125
     },
     "aria": {
       "motion": {
@@ -214,54 +592,195 @@
       "metrics": {
         "run-a": {
           "height": 512,
-          "top": 81,
-          "bottom": 479
+          "top": 84,
+          "bottom": 477
         },
         "run-b": {
           "height": 512,
-          "top": 79,
-          "bottom": 479
+          "top": 112,
+          "bottom": 477
         },
         "windup": {
           "height": 512,
-          "top": 21,
-          "bottom": 479
+          "top": 82,
+          "bottom": 477
         },
         "strike": {
           "height": 512,
-          "top": 86,
-          "bottom": 479
+          "top": 106,
+          "bottom": 477
         },
         "recover": {
           "height": 512,
           "top": 73,
-          "bottom": 479
+          "bottom": 477
         },
         "recoil": {
           "height": 512,
-          "top": 116,
-          "bottom": 479
+          "top": 151,
+          "bottom": 477
         },
         "skill-a": {
           "height": 512,
-          "top": 66,
-          "bottom": 479
+          "top": 42,
+          "bottom": 477
         },
         "skill-b": {
           "height": 512,
-          "top": 68,
-          "bottom": 479
+          "top": 116,
+          "bottom": 477
         }
       },
       "portrait": "/art/characters-v2/portraits/aria.webp",
       "dialogue": "/art/characters-v2/dialogue/aria.webp",
       "skills": {
+        "light": {
+          "src": "/art/characters-v2/units/aria-skill-a.webp",
+          "scale": 0.8888888888888888,
+          "footOffset": "0.3472222222222222%"
+        },
+        "sanctuary": {
+          "src": "/art/characters-v2/units/aria-skill-b.webp",
+          "scale": 0.8888888888888888,
+          "footOffset": "0.3472222222222222%"
+        },
         "aria-sanctuary-song": {
           "src": "/art/characters-v2/units/aria-skill-b.webp",
-          "scale": 0.8845208845208845,
-          "footOffset": "0%"
+          "scale": 0.8888888888888888,
+          "footOffset": "0.3472222222222222%"
         }
-      }
+      },
+      "anchors": {
+        "run-a": {
+          "kind": "staff",
+          "grip": [
+            347,
+            235
+          ],
+          "tip": [
+            360,
+            88
+          ],
+          "measured": true,
+          "focus": [
+            360,
+            127
+          ]
+        },
+        "run-b": {
+          "kind": "staff",
+          "grip": [
+            345,
+            239
+          ],
+          "tip": [
+            393,
+            115
+          ],
+          "measured": true,
+          "focus": [
+            383,
+            156
+          ]
+        },
+        "windup": {
+          "kind": "staff",
+          "grip": [
+            213,
+            199
+          ],
+          "tip": [
+            169,
+            82
+          ],
+          "measured": true,
+          "focus": [
+            172,
+            115
+          ]
+        },
+        "strike": {
+          "kind": "staff",
+          "grip": [
+            288,
+            204
+          ],
+          "tip": [
+            413,
+            117
+          ],
+          "measured": true,
+          "focus": [
+            376,
+            143
+          ]
+        },
+        "recover": {
+          "kind": "staff",
+          "grip": [
+            327,
+            218
+          ],
+          "tip": [
+            334,
+            79
+          ],
+          "measured": true,
+          "focus": [
+            327,
+            115
+          ]
+        },
+        "recoil": {
+          "kind": "focus",
+          "grip": [
+            212,
+            289
+          ],
+          "tip": [
+            231,
+            174
+          ],
+          "measured": true,
+          "focus": [
+            231,
+            174
+          ]
+        },
+        "skill-a": {
+          "kind": "staff",
+          "grip": [
+            231,
+            120
+          ],
+          "tip": [
+            288,
+            45
+          ],
+          "measured": true,
+          "focus": [
+            267,
+            78
+          ]
+        },
+        "skill-b": {
+          "kind": "staff",
+          "grip": [
+            344,
+            254
+          ],
+          "tip": [
+            325,
+            125
+          ],
+          "measured": true,
+          "focus": [
+            327,
+            168
+          ]
+        }
+      },
+      "visibleFraction": 0.703125
     },
     "leon": {
       "motion": {

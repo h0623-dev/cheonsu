@@ -19,7 +19,10 @@ export function getCombatChoreography(key,scene){
   const presentation = getCombatPresentation(key, scene);
   const weapon = getWeaponMotion(key, getCombatPresentation(key, {outcome:{hit:true}}));
   const plan = getDuelPlan(key, scene, presentation, weapon);
-  const redesignedSkill = plan.skill ? getCharacterSkillPose(key, scene.attacker?.activeSkillId || scene.attacker?.skillSpec?.id || plan.id.slice(key.length + 1)) : null;
+  const authoredSkillId = scene.attacker?.activeSkillId || scene.attacker?.skillSpec?.id
+    || (key === 'oath_guardian' ? scene.attacker?.skillSpec?.name || scene.attacker?.skill : null)
+    || plan.id.slice(key.length + 1);
+  const redesignedSkill = plan.skill ? getCharacterSkillPose(key, authoredSkillId) : null;
   const performance = directDuelPerformance(redesignedSkill ? { ...plan, skillPose: redesignedSkill } : plan, weapon, presentation, scene);
   return { ...performance, spectacle: getSkillSpectacle(performance, key, presentation, scene) };
 }

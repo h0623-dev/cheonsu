@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "units": {
+    "hero": {
+      "sourcePath": "docs/art/cinematic-v1/sources/hero.png",
+      "skills": {
+        "gale": "skill-a",
+        "oath": "skill-b",
+        "hero-dawn-slash": "skill-a"
+      },
+      "anchors": {
+        "run-a": { "kind": "blade", "grip": [139, 285], "tip": [19, 431], "focus": [19, 431] },
+        "run-b": { "kind": "blade", "grip": [520, 281], "tip": [389, 460], "focus": [389, 460] },
+        "windup": { "kind": "blade", "grip": [857, 167], "tip": [976, 83], "focus": [976, 83] },
+        "strike": { "kind": "blade", "grip": [1399, 149], "tip": [1523, 23], "focus": [1523, 23] },
+        "recover": { "kind": "blade", "grip": [143, 772], "tip": [324, 945], "focus": [324, 945] },
+        "recoil": { "kind": "blade", "grip": [477, 778], "tip": [673, 892], "focus": [673, 892] },
+        "skill-a": { "kind": "blade", "grip": [1078, 609], "tip": [929, 499], "focus": [929, 499] },
+        "skill-b": { "kind": "blade", "grip": [1231, 749], "tip": [1246, 982], "focus": [1246, 982] }
+      }
+    },
+    "lina": {
+      "sourcePath": "docs/art/cinematic-v1/sources/lina.png",
+      "skills": {
+        "ember": "skill-a",
+        "snipe": "skill-b",
+        "lina-phoenix-flare": "skill-a"
+      },
+      "anchors": {
+        "run-a": { "kind": "bow", "grip": [371, 278], "tip": [438, 136], "focus": [371, 278], "bow": { "upper": [438, 136], "lower": [346, 324], "curve": [[392, 165], [435, 254]], "arrowVisible": false } },
+        "run-b": { "kind": "bow", "grip": [740, 280], "tip": [795, 135], "focus": [740, 280], "bow": { "upper": [795, 135], "lower": [717, 335], "curve": [[747, 166], [816, 265]], "arrowVisible": false } },
+        "windup": { "kind": "bow", "grip": [1127, 174], "tip": [1166, 159], "focus": [1147, 161], "bow": { "upper": [1065, 26], "lower": [1077, 329], "curve": [[1152, 95], [1164, 224]], "arrowVisible": true } },
+        "strike": { "kind": "bow", "grip": [1493, 128], "tip": [1512, 108], "focus": [1495, 116], "bow": { "upper": [1363, 14], "lower": [1493, 285], "curve": [[1512, 31], [1550, 177]], "arrowVisible": false } },
+        "recover": { "kind": "bow", "grip": [310, 776], "tip": [394, 824], "focus": [310, 776], "bow": { "upper": [374, 638], "lower": [147, 784], "curve": [[351, 708], [360, 797]], "arrowVisible": false } },
+        "recoil": { "kind": "bow", "grip": [692, 716], "tip": [693, 575], "focus": [692, 716], "bow": { "upper": [693, 575], "lower": [671, 777], "curve": [[744, 628], [697, 751]], "arrowVisible": false } },
+        "skill-a": { "kind": "bow", "grip": [1121, 671], "tip": [1172, 650], "focus": [1132, 657], "bow": { "upper": [1041, 513], "lower": [1129, 857], "curve": [[1134, 548], [1157, 770]], "arrowVisible": true } },
+        "skill-b": { "kind": "bow", "grip": [1500, 766], "tip": [1526, 753], "focus": [1511, 755], "bow": { "upper": [1429, 616], "lower": [1480, 947], "curve": [[1512, 659], [1540, 837]], "arrowVisible": true } }
+      }
+    },
+    "aria": {
+      "sourcePath": "docs/art/cinematic-v1/sources/aria.png",
+      "skills": {
+        "light": "skill-a",
+        "sanctuary": "skill-b",
+        "aria-sanctuary-song": "skill-b"
+      },
+      "anchors": {
+        "run-a": { "kind": "staff", "grip": [302, 191], "tip": [318, 11], "focus": [318, 59] },
+        "run-b": { "kind": "staff", "grip": [700, 191], "tip": [759, 39], "focus": [747, 89] },
+        "windup": { "kind": "staff", "grip": [904, 150], "tip": [850, 8], "focus": [854, 48] },
+        "strike": { "kind": "staff", "grip": [1368, 154], "tip": [1520, 48], "focus": [1475, 80] },
+        "recover": { "kind": "staff", "grip": [282, 670], "tip": [291, 499], "focus": [282, 544] },
+        "recoil": { "kind": "focus", "grip": [525, 744], "tip": [548, 604], "focus": [548, 604] },
+        "skill-a": { "kind": "staff", "grip": [935, 557], "tip": [1005, 465], "focus": [979, 506] },
+        "skill-b": { "kind": "staff", "grip": [1461, 708], "tip": [1438, 550], "focus": [1441, 603] }
+      }
+    },
+    "oath_guardian": {
+      "sourcePath": "docs/art/cinematic-v1/sources/oath_guardian.png",
+      "collection": "characters-v3",
+      "overrides": {
+        "skill-a": { "sourcePath": "docs/art/cinematic-v1/sources/oath_guardian-skill-a.png" }
+      },
+      "bodyHeights": { "recover": 386, "skill-a": 901 },
+      "skills": {
+        "맹세의 원": "skill-a",
+        "돌아갈 길": "skill-b"
+      },
+      "anchors": {
+        "run-a": { "kind": "blade", "grip": [191, 257], "tip": [427, 400], "focus": [427, 400] },
+        "run-b": { "kind": "blade", "grip": [653, 275], "tip": [400, 349], "focus": [400, 349] },
+        "windup": { "kind": "blade", "grip": [1054, 112], "tip": [875, 12], "focus": [875, 12] },
+        "strike": { "kind": "blade", "grip": [1398, 313], "tip": [1526, 497], "focus": [1526, 497] },
+        "recover": { "kind": "blade", "grip": [134, 752], "tip": [375, 965], "focus": [375, 965] },
+        "recoil": { "kind": "blade", "grip": [530, 765], "tip": [751, 979], "focus": [751, 979] },
+        "skill-a": { "kind": "blade", "grip": [907, 257], "tip": [395, 5], "focus": [395, 5] },
+        "skill-b": { "kind": "blade", "grip": [1258, 667], "tip": [1251, 1000], "focus": [1251, 1000] }
+      }
+    }
+  }
+}

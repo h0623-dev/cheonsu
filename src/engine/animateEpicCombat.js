@@ -4,7 +4,7 @@ const bound = (value, low, high) => Math.max(low, Math.min(high, finite(value, l
 
 // Every new visual belongs to the existing duel animation pool. No damage, clock or pose is changed.
 export function animateEpicCombat(root, plan, {
-  arena, attacker, d, dy, ground, weaponPoint, miss, support, selfSupport,
+  arena, attacker, defender, d, dy, ground, weaponPoint, miss, support, selfSupport, shake, finish,
 }, animate) {
   const width = finite(arena.clientWidth), height = finite(arena.clientHeight);
   if (width <= 0 || height <= 0) return;
@@ -18,16 +18,62 @@ export function animateEpicCombat(root, plan, {
   };
   const contacts = [...new Set((plan.contacts || [plan.impact]).filter(Number.isFinite).map(clamp))].sort((left, right) => left - right);
   const impact = contacts[0] ?? clamp(plan.impact);
+  const lastContact = contacts.at(-1) ?? impact;
   const firstRelease = clamp(plan.releases?.[0] ?? impact - .02);
   const targetX = bound(d, 0, width), targetY = bound(dy, 0, height);
   const floorY = bound(ground, 0, height);
   const unit = Math.max(1, Math.min(finite(attacker.offsetWidth, 150), height * .68));
   const theme = plan.spectacle?.theme || root.dataset.epicTheme || 'martial';
-  const quiet = support || selfSupport || ['holy', 'heal', 'guard'].includes(theme);
+  const quiet = support || selfSupport;
   const heroFlame = plan.spectacle?.sword?.kind === 'fire' && plan.skill && theme === 'fire' && plan.moving;
   const ranged = ['bow', 'cannon', 'cast'].includes(plan.weapon);
+  const bossStrike = root.dataset.epicBossSide === 'attacker';
+  const colors = {
+    fire: '#ff9b50', ice: '#a9eaff', lightning: '#c9efff', shadow: '#c8a6ff',
+    holy: '#fff0b5', heal: '#c5efd3', guard: '#b1e1ef', poison: '#c3e78d',
+    water: '#a4eeed', nature: '#b5e0a4', music: '#ebc5e6', earth: '#dec69b', wind: '#c7e9be',
+  };
+  root.style.setProperty('--cinematic-impact-color', colors[theme] || '#f2dfb7');
   // Actors and the background paint directly in the arena. Do not composite the
   // entire battlefield into a transformed 3D layer in embedded web views.
+
+  // These are separate decorative planes, never a transformed parent of actors or the scene image.
+  if (shake) {
+    for (const [selector, distance] of [['.cinematic-atmosphere', 2], ['.cinematic-ground-bed', 3], ['.cinematic-foreground', 5]]) {
+      const amount = distance * (quiet ? .25 : bossStrike ? 1 : .7);
+      play(root.querySelector(selector), [
+        { offset: 0, transform: 'translate(0,0)' },
+        { offset: Math.max(0, firstRelease - .08), transform: 'translate(0,0)', easing: 'cubic-bezier(.3,.1,.6,1)' },
+        { offset: impact, transform: `translate(${-amount}px,${amount * .18}px)` },
+        { offset: Math.min(.94, lastContact + .09), transform: `translate(${-amount}px,${amount * .18}px)` },
+        { offset: 1, transform: 'translate(0,0)' },
+      ]);
+    }
+  }
+  const weather = root.querySelector('[data-cinematic-weather]')?.dataset.cinematicWeather;
+  for (const [index, mote] of [...root.querySelectorAll('.cinematic-motes > i')].slice(0, 12).entries()) {
+    const rising = ['embers', 'ash', 'stars'].includes(weather);
+    const depth = Number(mote.dataset.cinematicDepth) || 0;
+    const horizontal = (index % 2 ? 1 : -1) * (3 + index % 4 * 2) * (1 + depth * .2);
+    const vertical = (rising ? -1 : 1) * (5 + index % 5 * 2);
+    play(mote, [
+      { offset: 0, opacity: .12 + index % 3 * .06, transform: 'translate(0,0)' },
+      { offset: .46, opacity: .3 + depth * .06, transform: `translate(${horizontal * .48}px,${vertical * .48}px)` },
+      { offset: 1, opacity: .08, transform: `translate(${horizontal}px,${vertical}px)` },
+    ]);
+  }
+
+  const rimFrames = beats => [
+    { offset: 0, opacity: 0, transform: 'translate(-50%,-50%) scale(.8)' },
+    ...beats.flatMap(at => [
+      { offset: Math.max(0, at - .025), opacity: 0, transform: 'translate(-50%,-50%) scale(.8)' },
+      { offset: at, opacity: quiet ? .18 : .34, transform: 'translate(-50%,-50%) scale(1)' },
+      { offset: Math.min(.99, at + .075), opacity: 0, transform: 'translate(-50%,-50%) scale(1.08)' },
+    ]),
+    { offset: 1, opacity: 0, transform: 'translate(-50%,-50%) scale(1.08)' },
+  ];
+  play(attacker.querySelector('.cinematic-fighter-light'), rimFrames(ranged || support ? plan.releases : contacts));
+  if (defender && !miss) play(defender.querySelector('.cinematic-fighter-light'), rimFrames(contacts));
 
   // The opening illustration shares resize, elapsed time, reduced motion and cleanup with the duel.
   const cutIn = root.querySelector('.skill-cut-in.epic-cut-in');
@@ -90,6 +136,38 @@ export function animateEpicCombat(root, plan, {
     opacity: alpha * (plan.skill ? .78 : .54),
     transform: `translate(-50%,-50%) rotate(${-18 + progress * 25}deg) scale(${.18 + progress * 1.2})`,
   }), .105));
+
+  const bounceLight = root.querySelector('.cinematic-impact-light');
+  place(bounceLight, targetX, targetY + unit * .13, Math.min(unit * (bossStrike ? 2.1 : 1.8), width * .8, height * .92));
+  play(bounceLight, pulses((alpha, progress) => ({
+    opacity: alpha * (heroFlame ? .24 : bossStrike ? .22 : .17),
+    transform: `translate(-50%,-50%) scale(${.62 + progress * .58})`,
+  }), .17));
+
+  const groundWave = root.querySelector('.cinematic-ground-wave');
+  place(groundWave, targetX, floorY, Math.min(unit * (bossStrike ? 1.65 : 1.4), width * .72));
+  play(groundWave, pulses((alpha, progress) => ({
+    opacity: alpha * (finish ? .7 : bossStrike || plan.skill ? .58 : .36),
+    transform: `translate(-50%,-50%) scale(${.35 + progress * 1.25})`,
+  }), bossStrike ? .21 : .17));
+
+  const cracks = root.querySelector('.cinematic-contact-cracks');
+  if (cracks) {
+    cracks.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    const radius = Math.min(unit * (bossStrike ? .7 : .45), width * .28);
+    const segments = Array.from({ length: bossStrike ? 7 : 5 }, (_, index) => {
+      const angle = index / (bossStrike ? 7 : 5) * Math.PI * 2 + .24;
+      const x = bound(targetX + Math.cos(angle) * radius, 5, width - 5);
+      const y = bound(floorY + Math.sin(angle) * radius * .24, 5, height - 5);
+      const midX = targetX + (x - targetX) * .53 + (index % 2 ? 2 : -2);
+      const midY = floorY + (y - floorY) * .46 - 1;
+      return `M ${targetX} ${floorY} L ${midX} ${midY} L ${x} ${y}`;
+    }).join(' ');
+    for (const path of cracks.querySelectorAll('.cinematic-crack-line')) path.setAttribute('d', segments);
+    play(cracks, pulses((alpha, progress) => ({
+      opacity: alpha * (bossStrike || plan.skill ? .6 : .28) * (1 - progress * .2),
+    }), .25));
+  }
 
   const ribbon = root.querySelector('.epic-strike-ribbon');
   if (ribbon) {
