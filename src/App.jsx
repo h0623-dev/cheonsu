@@ -13065,7 +13065,7 @@ export default function App() {
       };
       const remove = lifecycle.register(() => finish(false));
       timeout = window.setTimeout(() => finish(true), 2500);
-      Promise.resolve().then(() => preloadCombatArt(attackerKey, defenderKey, { ...battleInfo, effectType, outcome, stageId: activeStage.id }))
+      Promise.resolve().then(() => preloadCombatArt(attackerKey, defenderKey, { ...battleInfo, effectType, outcome }))
         .then(() => finish(true), () => finish(true));
     });
     if (!ready || !lifecycle.current(epoch)) return false;

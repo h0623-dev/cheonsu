@@ -30,6 +30,8 @@ export function getEpicCombatAssets(attackerKey, scene, stageId = scene?.stageId
   const assets = [];
   const skill = scene?.mode === 'skill' || Boolean(scene?.outcome?.heal || scene?.outcome?.guard);
   if (skill && Object.hasOwn(cutInCrops, attackerKey)) assets.push(EPIC_COMBAT_KEYFRAME);
-  if (Number(stageId) === 50 && hasBoss(scene)) assets.push(EPIC_COMBAT_SANCTUARY);
+  // The battle lifecycle stays independent of the active map. Preload the boss plate
+  // when its stage is unspecified; only CombatScene chooses whether to display it.
+  if (hasBoss(scene) && (stageId == null || Number(stageId) === 50)) assets.push(EPIC_COMBAT_SANCTUARY);
   return assets;
 }
