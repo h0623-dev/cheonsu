@@ -104,8 +104,7 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
       let ground=arena.clientHeight-parseFloat(getComputedStyle(target).bottom);
       let dy=ground-target.offsetWidth*.37;
       let contactFraction=.37;
-      const ratio = attacker.offsetWidth / Math.max(1, target.offsetWidth);
-      if (plan.moving && !support && !miss && (ratio > 1.35 || ratio < .74)) {
+      if (plan.moving && !support && !miss) {
         const tip = projectDuelAnchor(anchor.tip, { width: attacker.offsetWidth, scale, footOffset, body: contactBody });
         const attackerGround = arena.clientHeight - parseFloat(getComputedStyle(attacker).bottom);
         const authoredY = sampleDuelTrack(acting.actor, plan.impact)[1];
@@ -134,7 +133,8 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
       }
       const layout=fitCinematicDuel({arena,attacker,defender:selfSupport?null:defender,attackerKey,
         defenderKey:defenderKey||defender?.dataset.unitKey,plan,acting,
-        contact:{tip:anchor.tip,scale,footOffset,body:contactBody},miss,support,finish,defenderBoss});
+        contact:{tip:anchor.tip,scale,footOffset,body:contactBody},contactFraction,miss,support,finish,defenderBoss});
+      if(Number.isFinite(layout.contactFraction))contactFraction=layout.contactFraction;
       const reachOptions=defender&&plan.moving?{attackerLeft:attacker.offsetLeft,attackerWidth:attacker.offsetWidth,
         defenderLeft:defender.offsetLeft,defenderWidth:defender.offsetWidth,tip:anchor.tip,scale,footOffset,
         body:contactBody,advance:sampleDuelTrack(acting.actor,plan.impact)[0]}:null;

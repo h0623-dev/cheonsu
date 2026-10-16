@@ -1,7 +1,7 @@
 import frameBounds from '../data/cinematicFrameBounds.json' with { type: 'json' };
 import { getCombatFrameStyle } from '../data/combatArt.js';
 import { getDuelDefenderReaction, getDuelPoseAt, sampleDuelTrack } from '../data/duelPerformance.js';
-import { projectDuelAnchor } from '../data/duelContactGeometry.js';
+import { getDuelWeaponAnchor, projectDuelAnchor } from '../data/duelContactGeometry.js';
 
 const clamp = value => Math.max(0, Math.min(1, Number.isFinite(value) ? value : 0));
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
@@ -35,7 +35,7 @@ function frameFor(key, pose, plan, skill = false) {
     '--combat-sprite-scale': plan.skillPose.scale,
     '--combat-foot-offset': plan.skillPose.footOffset,
   } : getCombatFrameStyle(key, resolvedPose);
-  return { bounds, scale: Number(style?.['--combat-sprite-scale']) || 1,
+  return { bounds, pose: resolvedPose, scale: Number(style?.['--combat-sprite-scale']) || 1,
     footOffset: (parseFloat(style?.['--combat-foot-offset']) || 0) / 100 };
 }
 
@@ -67,6 +67,63 @@ function defenderMotion(plan, { miss, support, finish, defenderBoss }) {
     [1, defenderBoss ? 7 : 18, 1, 1, defenderBoss ? 6 : 10],
   ];
   return { actor, body, poses: defenderPoseTrack(plan, { miss, support, finish }) };
+}
+
+function alignContactPlane({ plan, acting, attackerKey, attackerWidth, attackerHeight, defenderWidth, defenderHeight, defenseMotion, contactFraction }) {
+  const tipRelative = at => {
+    const pose = getDuelPoseAt(plan, at);
+    const frame = frameFor(attackerKey, pose, plan, pose === 'skill');
+    const anchor = getDuelWeaponAnchor(attackerKey, frame.pose, plan.weapon);
+    const tip = projectDuelAnchor(anchor.tip, { width: attackerWidth, scale: frame.scale,
+      footOffset: frame.footOffset, body: sample(acting.body, at) });
+    const actorY = sample(acting.actor, at)[1] * attackerHeight / 100;
+    const defenderY = sample(defenseMotion.actor, at)[1] * defenderHeight / 100;
+    return -attackerWidth + tip[1] + actorY - defenderY;
+  };
+  const groups = [...new Set([...plan.contacts, plan.impact])].sort((left, right) => left - right).map(at => {
+    const until = clamp(at + (plan.contactPause || 0));
+    const offsets = new Set([at, until]);
+    // A hold must keep one actor position even if a source pose changes at its boundary.
+    for (const [poseAt] of plan.poses) if (poseAt > at && poseAt < until) {
+      offsets.add(Math.max(at, poseAt - .000001)); offsets.add(poseAt);
+    }
+    const ys = [...offsets].map(tipRelative);
+    return { at, until, min: Math.min(...ys), max: Math.max(...ys) };
+  });
+  const topDepth = Math.min(defenderWidth * .78, defenderHeight * .88);
+  const bottomDepth = Math.min(defenderWidth * .18, defenderHeight * .2);
+  const low = Math.max(...groups.map(group => group.max + bottomDepth));
+  const high = Math.min(...groups.map(group => group.min + topDepth));
+  const wanted = tipRelative(plan.impact) + defenderWidth * contactFraction;
+  // Move the shared combat plane before asking the actor to make any extra airborne movement.
+  const deltaGround = low <= high ? Math.max(low, Math.min(high, wanted)) : (low + high) * .5;
+  if (low > high) {
+    const corrections = [[0, 0], [Math.max(0, (plan.releases[0] ?? plan.impact) - .055), 0]];
+    for (const group of groups) {
+      const minimum = deltaGround - topDepth - group.min;
+      const maximum = deltaGround - bottomDepth - group.max;
+      const pixels = minimum <= maximum ? Math.max(minimum, Math.min(maximum, 0)) : (minimum + maximum) * .5;
+      const percent = pixels / Math.max(1, attackerHeight) * 100;
+      corrections.push([group.at, percent], [group.until, percent]);
+    }
+    const lastHold = Math.max(...groups.map(group => group.until));
+    if (lastHold < 1) corrections.push([Math.min(1, lastHold + .085), 0], [1, 0]);
+    const correctionTrack = [...new Map(corrections.map(([at, value]) => [clamp(at).toFixed(6), [clamp(at), value]]))
+      .values()].sort((left, right) => left[0] - right[0]);
+    const original = acting.actor;
+    const offsets = [...new Set([...original.map(([at]) => at), ...correctionTrack.map(([at]) => at)])].sort((left, right) => left - right);
+    acting.actor = offsets.map(at => {
+      const [x, y] = sample(original, at);
+      return [at, x, y + sample(correctionTrack, at)[0]];
+    });
+    // Preserve a literal flat position over every contact pause, not just matching endpoints.
+    const holds = groups.map(group => ({ ...group, actor: sample(acting.actor, group.at) }));
+    acting.actor = acting.actor.map(([at, x, y]) => {
+      const hold = holds.find(group => at >= group.at && at <= group.until);
+      return hold ? [at, ...hold.actor] : [at, x, y];
+    });
+  }
+  return { deltaGround, contactFraction: (deltaGround - tipRelative(plan.impact)) / Math.max(1, defenderWidth) };
 }
 
 function poseAt(poses, at) {
@@ -127,7 +184,7 @@ function includeFrame(union, frame, dimensions, motion, interval, mirrored, extr
   extend(union, left + maxX + width * .83, ground + maxY + width * .025);
 }
 
-export function fitCinematicDuel({ arena, attacker, defender, attackerKey, defenderKey, plan, acting, contact, miss, support, finish, defenderBoss }) {
+export function fitCinematicDuel({ arena, attacker, defender, attackerKey, defenderKey, plan, acting, contact, contactFraction = .37, miss, support, finish, defenderBoss }) {
   const width = arena.clientWidth, height = arena.clientHeight;
   const attackerWidth = attacker.offsetWidth, attackerHeight = attacker.offsetHeight;
   if (width <= 0 || height <= 0 || attackerWidth <= 0) return { fitted: false };
@@ -135,13 +192,19 @@ export function fitCinematicDuel({ arena, attacker, defender, attackerKey, defen
   const attackerGround = height - (parseFloat(getComputedStyle(attacker).bottom) || 0);
   const defenderWidth = defender?.offsetWidth || 0, defenderHeight = defender?.offsetHeight || 0;
   const deltaLeft = defender ? defender.offsetLeft - attackerLeft : 0;
-  const deltaGround = defender ? height - (parseFloat(getComputedStyle(defender).bottom) || 0) - attackerGround : 0;
+  let deltaGround = defender ? height - (parseFloat(getComputedStyle(defender).bottom) || 0) - attackerGround : 0;
   const moving = Boolean(defender && plan.moving && !support);
+  const defenseMotion = defender ? defenderMotion(plan, { miss, support, finish, defenderBoss }) : null;
+  if (moving && !miss) {
+    const aligned = alignContactPlane({ plan, acting, attackerKey, attackerWidth, attackerHeight,
+      defenderWidth, defenderHeight, defenseMotion, contactFraction });
+    deltaGround = aligned.deltaGround;
+    contactFraction = aligned.contactFraction;
+  }
   const reach = moving ? getCinematicReach({ attackerLeft: 0, attackerWidth, defenderLeft: deltaLeft, defenderWidth,
     ...contact, advance: sample(acting.actor, plan.impact)[0] })
     : Math.max(0, defender ? deltaLeft - attackerWidth * .51 : 0);
   const attackMotion = { actor: acting.actor, body: acting.body, poses: plan.poses };
-  const defenseMotion = defender ? defenderMotion(plan, { miss, support, finish, defenderBoss }) : null;
   const offsets = new Set([0, 1, ...plan.releases, ...plan.contacts]);
   for (const motion of [attackMotion, defenseMotion].filter(Boolean)) {
     for (const track of [motion.actor, motion.body, motion.poses]) for (const [at] of track) offsets.add(clamp(at));
@@ -190,5 +253,5 @@ export function fitCinematicDuel({ arena, attacker, defender, attackerKey, defen
   };
   place(attacker, attackerWidth, translateX, translateY);
   if (defender) place(defender, defenderWidth, translateX + deltaLeft * factor, translateY + deltaGround * factor);
-  return { fitted: true, factor };
+  return { fitted: true, factor, contactFraction };
 }

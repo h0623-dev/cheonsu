@@ -250,6 +250,12 @@ for (const id of requested) {
       method: '원본 시트의 수동 활 윤곽 가이드 주변 금빛 alpha>64 픽셀을 짧은 선분으로 연결하고 기존 제작 배치로 512px에 변환. 원화 파일 재제작·출력 대조·검사 샘플 측정 없음.',
       originalArtworkPreserved: true,
     };
+    if (id === 'lina') production.arrowAxisConstruction = {
+      sourcePath: config.units[id].sourcePath,
+      guides: Object.fromEntries(contactPoses.map(pose => [pose, config.units[id].anchors[pose].bow.arrowGuide])),
+      method: '원본의 화살 뒤쪽 깃·당긴 손/방출축과 촉 끝 좌표를 기존 제작 배치로 변환. 짧은 촉 부분만 화살 전체로 표현하지 않으며 기존 arrowVisible 값을 보존.',
+      originalArtworkPreserved: true,
+    };
     console.log(`전투 무기 좌표 제작: ${id} · 원화 파일 보존`);
   } else {
     report.units[id] = await prepareCharacter(id, config.units[id], manifests.get(collection).data, catalogs);

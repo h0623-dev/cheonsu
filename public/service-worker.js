@@ -9,7 +9,7 @@ importScripts('/art/skills-v1/precache.js');
 importScripts('/art/characters-v2/precache.js');
 importScripts('/art/promotions-v1/precache.js');
 importScripts('/art/village-walk-v2/precache.js');
-const CACHE_VERSION = "cheonsu-v199180-cinematic-pair-fit";
+const CACHE_VERSION = "cheonsu-v199181-cinematic-contact";
 const APP_SHELL_CACHE = `${CACHE_VERSION}-app-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
