@@ -172,7 +172,7 @@
 .painted-combat.epic-combat.has-boss .combat-enemy-intro { border-color: #e2be75; }
 .painted-combat.epic-combat.has-boss .combat-enemy-intro span { color: #f0cd87; }
 
-.painted-combat.epic-combat .skill-stage-shade { z-index: 6; background: #020711; }
+.painted-combat.epic-combat .skill-stage-shade { z-index: 2; background: #020711; }
 .painted-combat.epic-combat .skill-cut-in.epic-cut-in {
   inset: 10% 0 auto;
   height: 36%;

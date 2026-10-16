@@ -76,6 +76,7 @@ export default function CombatScene({ scene, attackerKey, defenderKey, backgroun
       <div className="painted-combat-arena">
         <div className="epic-combat-world">
         <EpicCombatVisuals />
+        {timing.skill && <div className="skill-stage-shade" aria-hidden="true" />}
         <div className="duel-impact-ink" aria-hidden="true" />
         <div className="duel-action-lines" aria-hidden="true">{Array.from({ length: 9 }, (_, index) => <i key={index} style={{ '--line-row': index, '--line-span': `${28 + index % 3 * 14}%` }} />)}</div>
         <DuelEffects plan={plan} unitKey={attackerKey}/>
@@ -92,7 +93,6 @@ export default function CombatScene({ scene, attackerKey, defenderKey, backgroun
         </div>}
         </div>
         {timing.skill && <>
-          <div className="skill-stage-shade" aria-hidden="true" />
           <EpicCombatCutIn art={cutInArt} label={presentation.healing ? '회복술' : presentation.guarding ? '수호술' : presentation.style === 'cast' ? '마법 발동' : '고유 기술'} name={plan.name} />
         </>}
         {enemy && <aside className={`combat-enemy-intro intro-${enemy.side}`} aria-label={`${enemy.unit.type === 'boss' ? '적장' : '적군'} ${enemy.unit.name}`}>

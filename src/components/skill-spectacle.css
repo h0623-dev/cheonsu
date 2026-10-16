@@ -60,12 +60,17 @@
 
   .vfx-weapon-aura .vfx-weapon-contour {
     vector-effect: non-scaling-stroke;
-    stroke-width: 3.2px;
+    stroke-width: 4.6px;
+    opacity: .72;
   }
 
   .vfx-weapon-aura .vfx-weapon-core {
     vector-effect: non-scaling-stroke;
-    stroke-width: 1.05px;
+    stroke-width: 1.5px;
+  }
+
+  .vfx-weapon-aura:is([data-vfx-kind="claw"], [data-vfx-kind="fist"]) .vfx-weapon-flow {
+    stroke-width: 1.9px;
   }
 }
 
