@@ -4,7 +4,7 @@ importScripts('/art/characters-v2/precache.js');
 importScripts('/art/characters-v3/precache.js');
 importScripts('/art/promotions-v1/precache.js');
 importScripts('/art/village-walk-v2/precache.js');
-const CACHE_NAME = "cheonsu-v1-99-175";
+const CACHE_NAME = "cheonsu-v1-99-177";
 const FINAL_STAGE_MAPS = Array.from(
   { length: 30 },
   (_, index) => `/maps/concept/stage_${index + 1}_frontier_final.png`
@@ -36,6 +36,8 @@ const ENEMY_VARIANT_SPRITES = ENEMY_VARIANT_KEYS.flatMap((key) => [
 ]);
 
 const CORE_ASSETS = [
+  "/art/combat-epic-v1/oath-battle-keyframe.png",
+  "/art/combat-epic-v1/sanctuary-arena.png",
   "/",
   "/manifest.webmanifest",
   "/icons/icon-192.png",

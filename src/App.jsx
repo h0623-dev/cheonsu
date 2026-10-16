@@ -118,7 +118,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.176";
+const SAVE_VERSION = "1.99.177";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -13065,7 +13065,7 @@ export default function App() {
       };
       const remove = lifecycle.register(() => finish(false));
       timeout = window.setTimeout(() => finish(true), 2500);
-      Promise.resolve().then(() => preloadCombatArt(attackerKey, defenderKey, { ...battleInfo, effectType, outcome }))
+      Promise.resolve().then(() => preloadCombatArt(attackerKey, defenderKey, { ...battleInfo, effectType, outcome, stageId: activeStage.id }))
         .then(() => finish(true), () => finish(true));
     });
     if (!ready || !lifecycle.current(epoch)) return false;
@@ -14590,7 +14590,7 @@ export default function App() {
           onImpact={combatCutscene.onImpact} onComplete={combatCutscene.onComplete}
           attackerKey={combatCutscene.attacker.type === "ally" ? getGameCharacterArtKey(combatCutscene.attacker) || combatCutscene.attacker.id : getEnemySpriteKey(combatCutscene.attacker)}
           defenderKey={combatCutscene.defender.type === "ally" ? getGameCharacterArtKey(combatCutscene.defender) || combatCutscene.defender.id : getEnemySpriteKey(combatCutscene.defender)}
-          background={getWorldScene(activeStage.id)} effectsEnabled={settings.effectsOn} shakeEnabled={settings.shakeOn} />
+          background={getWorldScene(activeStage.id)} stageId={activeStage.id} effectsEnabled={settings.effectsOn} shakeEnabled={settings.shakeOn} />
       )}
 
 

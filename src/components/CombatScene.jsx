@@ -3,12 +3,15 @@ import { getCombatMotionSprite, getCombatPresentation, getCombatFrameStyle, getC
 import { getWeaponMotion as weaponMotionFor } from '../data/duelChoreography.js';
 import { createDuelLifecycle } from '../engine/duelLifecycle.js';
 import { getPaintedVisualProfile } from '../data/unitVisuals.js';
+import { getEpicCombatCutInArt, getEpicCombatBackdrop } from '../data/epicCombatArt.js';
 import { useDuelAnimation } from '../engine/useDuelAnimation.js';
 import DuelEffects from './DuelEffects.jsx';
 import DuelImpacts from './DuelImpacts.jsx';
 import SkillSpectacle, { SwordSkillAura } from './SkillSpectacle.jsx';
+import EpicCombatVisuals, { EpicCombatCutIn } from './EpicCombatVisuals.jsx';
 import './skill-presentation.css';
 import './duel-acting.css';
+import './epic-combat.css';
 
 const weaponLabels = { slash: '검', thrust: '창', heavy: '중병기', guard: '방패', quick: '단검', beast: '야수', whip: '채찍', fist: '권격', bow: '활', cannon: '포격', cast: '마법' };
 
@@ -37,7 +40,7 @@ function Health({ unit, hp }) {
   </div>;
 }
 
-export default function CombatScene({ scene, attackerKey, defenderKey, background, effectsEnabled = true, shakeEnabled = true, onImpact, onComplete }) {
+export default function CombatScene({ scene, attackerKey, defenderKey, background, stageId = scene.stageId, effectsEnabled = true, shakeEnabled = true, onImpact, onComplete }) {
   const root=useRef(null);
   const callbacks=useRef({ onImpact, onComplete });
   const plan=useMemo(()=>getCombatChoreography(attackerKey,scene),[attackerKey,scene]);
@@ -53,6 +56,9 @@ export default function CombatScene({ scene, attackerKey, defenderKey, backgroun
     ? { unit: scene.attacker, key: attackerKey, side: 'attacker' }
     : ['enemy', 'boss'].includes(scene.defender.type) && !selfSupport
       ? { unit: scene.defender, key: defenderKey, side: 'defender' } : null;
+  const bossSide = scene.attacker.type === 'boss' ? 'attacker' : scene.defender.type === 'boss' && !selfSupport ? 'defender' : 'none';
+  const cutInArt = getEpicCombatCutInArt(attackerKey, getPaintedVisualProfile(attackerKey)?.portrait || getCombatSprite(attackerKey));
+  const combatBackground = getEpicCombatBackdrop(stageId, scene, background);
   useEffect(() => {
     callbacks.current = { onImpact, onComplete };
   }, [onImpact, onComplete]);
@@ -64,26 +70,17 @@ export default function CombatScene({ scene, attackerKey, defenderKey, backgroun
   }, [duration, scene, timing.impact]);
   const result = presentation.guarding ? '수호' : presentation.healing ? `+${scene.outcome.damage}` : presentation.miss ? '회피' : `${scene.outcome.damage}`;
   return <div className="painted-combat-overlay" role="status" aria-label={`${scene.attacker.name} ${scene.title}`}>
-    <section ref={root} key={scene.id} data-choreography={plan.id} data-motion={plan.motion} data-presentation={timing.skill ? 'skill' : 'attack'} data-impact={timing.impact} data-contact-state={impacted ? 'resolved' : 'pending'} className={`painted-combat duel-choreographed motion-${presentation.style} weapon-${weaponMotion} element-${presentation.effect} ${timing.skill ? 'is-skill' : 'is-basic'} ${scene.outcome?.crit ? 'is-critical' : ''} ${shakeEnabled ? 'shake-enabled' : ''} ${enemy?.unit.type === 'boss' ? 'has-boss' : ''} ${presentation.support ? 'is-support' : ''} ${selfSupport ? 'is-self-support' : ''} ${presentation.healing ? 'is-healing' : ''} ${presentation.guarding ? 'is-guarding' : ''} ${presentation.miss ? 'is-miss' : ''} ${scene.finish ? 'is-finish' : ''} ${!effectsEnabled ? 'motion-off' : ''}`}
-      style={{ '--combat-duration': `${duration}ms`, '--combat-action-duration': `${duration * timing.action}ms`, '--combat-lead': `${duration * timing.lead}ms`, '--skill-color': getSkillPalette(presentation.effect), '--combat-scene': `url("${background}")` }}>
+    <section ref={root} key={scene.id} data-choreography={plan.id} data-motion={plan.motion} data-presentation={timing.skill ? 'skill' : 'attack'} data-impact={timing.impact} data-contact-state={impacted ? 'resolved' : 'pending'} data-epic-art={cutInArt.kind} data-epic-theme={plan.spectacle?.theme || presentation.effect} data-epic-boss-side={bossSide} data-epic-frame={timing.skill ? 'skill' : scene.finish ? 'finish' : bossSide !== 'none' ? 'boss' : 'attack'} className={`painted-combat duel-choreographed epic-combat motion-${presentation.style} weapon-${weaponMotion} element-${presentation.effect} ${timing.skill ? 'is-skill' : 'is-basic'} ${scene.outcome?.crit ? 'is-critical' : ''} ${shakeEnabled ? 'shake-enabled' : ''} ${enemy?.unit.type === 'boss' ? 'has-boss' : ''} ${presentation.support ? 'is-support' : ''} ${selfSupport ? 'is-self-support' : ''} ${presentation.healing ? 'is-healing' : ''} ${presentation.guarding ? 'is-guarding' : ''} ${presentation.miss ? 'is-miss' : ''} ${scene.finish ? 'is-finish' : ''} ${!effectsEnabled ? 'motion-off' : ''}`}
+      style={{ '--combat-duration': `${duration}ms`, '--combat-action-duration': `${duration * timing.action}ms`, '--combat-lead': `${duration * timing.lead}ms`, '--skill-color': getSkillPalette(presentation.effect), '--combat-scene': `url("${combatBackground}")` }}>
       <header className="painted-combat-heading"><span>{scene.attacker.name}</span><h2>{timing.skill ? plan.name : scene.title}</h2><span>{scene.outcome?.crit ? '치명타' : scene.finish ? '결정타' : scene.effectLabel}</span></header>
       <div className="painted-combat-arena">
+        <div className="epic-combat-world">
+        <EpicCombatVisuals />
         <div className="duel-impact-ink" aria-hidden="true" />
         <div className="duel-action-lines" aria-hidden="true">{Array.from({ length: 9 }, (_, index) => <i key={index} style={{ '--line-row': index, '--line-span': `${28 + index % 3 * 14}%` }} />)}</div>
-        {timing.skill && <>
-          <div className="skill-stage-shade" aria-hidden="true" />
-          <div className="skill-cut-in" aria-hidden="true">
-            <img src={getPaintedVisualProfile(attackerKey)?.portrait || getCombatSprite(attackerKey)} alt="" />
-            <div><small>{presentation.healing ? '회복술' : presentation.guarding ? '수호술' : presentation.style === 'cast' ? '마법 발동' : '고유 기술'}</small><strong>{plan.name}</strong></div>
-          </div>
-        </>}
         <DuelEffects plan={plan} unitKey={attackerKey}/>
         <DuelImpacts plan={plan}/>
         <SkillSpectacle plan={plan} />
-        {enemy && <aside className={`combat-enemy-intro intro-${enemy.side}`} aria-label={`${enemy.unit.type === 'boss' ? '적장' : '적군'} ${enemy.unit.name}`}>
-          <span>{enemy.unit.type === 'boss' ? '적장' : '적군'} · {weaponLabels[getWeaponMotion(enemy.key)]}</span>
-          <strong>{enemy.unit.name}</strong>
-        </aside>}
         <div className="painted-fighter fighter-attacker">
           <div className="fighter-shadow" />
           {plan.afterimages?.map((echo, index) => <img key={index} className="duel-action-echo" data-action-echo={index} data-at={echo.at} src={plan.contactPose === 'strike' ? getCombatMotionSprite(attackerKey, 'strike') : plan.skillPose?.src || getCombatMotionSprite(attackerKey, 'strike')} alt="" draggable="false" style={plan.contactPose !== 'strike' && plan.skillPose ? { '--combat-sprite-scale': plan.skillPose.scale, '--combat-foot-offset': plan.skillPose.footOffset || '0%' } : getCombatFrameStyle(attackerKey, 'strike')} />)}
@@ -93,6 +90,15 @@ export default function CombatScene({ scene, attackerKey, defenderKey, backgroun
           <div className="fighter-shadow" />
           <FighterPoses unitKey={defenderKey} name={scene.defender.name} defender />
         </div>}
+        </div>
+        {timing.skill && <>
+          <div className="skill-stage-shade" aria-hidden="true" />
+          <EpicCombatCutIn art={cutInArt} label={presentation.healing ? '회복술' : presentation.guarding ? '수호술' : presentation.style === 'cast' ? '마법 발동' : '고유 기술'} name={plan.name} />
+        </>}
+        {enemy && <aside className={`combat-enemy-intro intro-${enemy.side}`} aria-label={`${enemy.unit.type === 'boss' ? '적장' : '적군'} ${enemy.unit.name}`}>
+          <span>{enemy.unit.type === 'boss' ? '적장' : '적군'} · {weaponLabels[getWeaponMotion(enemy.key)]}</span>
+          <strong>{enemy.unit.name}</strong>
+        </aside>}
         <div className="combat-result"><small>{scene.outcome?.crit ? '치명타' : presentation.guarding ? '수호' : presentation.healing ? '회복' : scene.finish ? '결정타' : ''}</small><strong>{result}</strong></div>
       </div>
       <footer className="painted-combat-health">

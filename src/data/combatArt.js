@@ -7,6 +7,7 @@ import { getDuelPlan, getWeaponMotion } from './duelChoreography.js';
 import { directDuelPerformance } from './duelPerformance.js';
 import { getCharacterArt, getCharacterFrameStyle, getCharacterSkillPose } from './characterArt.js';
 import { getSkillSpectacle } from './skillSpectacle.js';
+import { getEpicCombatAssets } from './epicCombatArt.js';
 import { EXPANSION_BASE_ART_KEYS, ADVANCED_CLASS_ART_KEYS, PROMOTION_ART_KEYS, LEGACY_CHARACTER_ART_KEYS, getExpansionArtIdentity, isKnownCharacterArtKey } from './expansionArtRegistry.js';
 
 export function getCombatTiming(scene) {
@@ -105,7 +106,8 @@ export function preloadCombatArt(attackerKey, defenderKey, scene) {
   const effect = getCombatPresentation(attackerKey, scene).effect;
   const paths = [...combatMotionPoses.map(pose => getCombatMotionSprite(attackerKey, pose)),
     ...['recover', 'recoil', 'run-a'].map(pose => getCombatMotionSprite(defenderKey, pose)),
-    getCombatEffect(effect), getCombatEffect('cast'), getCombatEffect('impact')];
+    getCombatEffect(effect), getCombatEffect('cast'), getCombatEffect('impact'),
+    ...getEpicCombatAssets(attackerKey, scene)];
   if (getCombatTiming(scene).skill) paths.push(getPaintedVisualProfile(attackerKey)?.portrait || getCombatSprite(attackerKey));
   const choreography=getCombatChoreography(attackerKey,scene);
   if(choreography.skillPose) paths.push(choreography.skillPose.src);

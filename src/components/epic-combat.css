@@ -1,0 +1,471 @@
+/* Battle staging shares the duel clock. The animation hook owns every moving accent. */
+.painted-combat.epic-combat {
+  --epic-tone: 246 190 116;
+  --epic-light: #fff0c4;
+  --epic-ink: #071015;
+  width: min(100%, 1220px);
+  max-height: calc(100dvh - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  border: 1px solid #c6a66b;
+  border-radius: 5px;
+  background: #071216;
+  color: #f9f3e4;
+  box-shadow: 0 24px 90px #000b, 0 0 0 4px #081316b3, inset 0 0 0 1px #d9b66b15;
+  isolation: isolate;
+}
+
+.painted-combat.epic-combat[data-epic-theme="fire"] { --epic-tone: 255 157 65; --epic-light: #fff0b5; }
+.painted-combat.epic-combat[data-epic-theme="wind"] { --epic-tone: 169 233 170; --epic-light: #f3ffe0; }
+.painted-combat.epic-combat[data-epic-theme="holy"] { --epic-tone: 184 224 255; --epic-light: #fff9d8; }
+.painted-combat.epic-combat[data-epic-theme="heal"] { --epic-tone: 139 235 186; --epic-light: #e4fff2; }
+.painted-combat.epic-combat[data-epic-theme="ice"] { --epic-tone: 124 211 255; --epic-light: #edfdff; }
+.painted-combat.epic-combat[data-epic-theme="lightning"] { --epic-tone: 180 181 255; --epic-light: #fcf1ff; }
+.painted-combat.epic-combat[data-epic-theme="shadow"] { --epic-tone: 177 130 229; --epic-light: #eedcff; }
+.painted-combat.epic-combat[data-epic-theme="poison"] { --epic-tone: 170 215 111; --epic-light: #f5ffd1; }
+.painted-combat.epic-combat[data-epic-theme="music"] { --epic-tone: 241 176 213; --epic-light: #fff0f8; }
+.painted-combat.epic-combat[data-epic-theme="guard"] { --epic-tone: 132 209 221; --epic-light: #e8fcff; }
+
+.painted-combat.epic-combat .painted-combat-heading {
+  position: relative;
+  z-index: 12;
+  min-height: 72px;
+  padding: 13px 26px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.1fr) minmax(0, 1fr);
+  gap: 14px;
+  border-bottom: 1px solid #bb985b7a;
+  background: linear-gradient(105deg, #10242a, #091217 48%, #172027);
+  box-shadow: 0 8px 22px #0005;
+}
+
+.painted-combat.epic-combat .painted-combat-heading::after {
+  content: "";
+  position: absolute;
+  inset: auto 28% -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--epic-light), transparent);
+  pointer-events: none;
+}
+
+.painted-combat.epic-combat .painted-combat-heading h2 {
+  font-size: clamp(20px, 2.2vw, 29px);
+  line-height: 1.25;
+  letter-spacing: .06em;
+  color: #fff0cd;
+  text-shadow: 0 2px 6px #000b;
+}
+
+.painted-combat.epic-combat .painted-combat-heading > span {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #c4d9d6;
+}
+
+.painted-combat.epic-combat .painted-combat-heading > span:last-child {
+  color: #e8c994;
+  letter-spacing: .06em;
+}
+
+.painted-combat.epic-combat .painted-combat-arena {
+  height: min(61dvh, 560px);
+  min-height: 200px;
+  isolation: isolate;
+  background: #0a171b;
+}
+
+.painted-combat.epic-combat .epic-combat-world {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  transform-origin: var(--duel-contact-x, 66%) var(--duel-contact-y, 60%);
+  pointer-events: none;
+}
+
+.painted-combat.epic-combat :is(.epic-combat-backdrop, .epic-combat-ground) {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+}
+
+.painted-combat.epic-combat .epic-combat-backdrop {
+  z-index: 0;
+  background-image:
+    linear-gradient(180deg, #02091036 0%, #07131b16 40%, #08111675 100%),
+    var(--combat-scene);
+  background-position: center, center 68%;
+  background-size: cover;
+  filter: saturate(.76) brightness(.73);
+}
+
+.painted-combat.epic-combat .epic-combat-ground {
+  z-index: 1;
+  inset: 52% -5% -4%;
+  background:
+    radial-gradient(ellipse at 52% 60%, #d8c39916 0%, transparent 63%),
+    linear-gradient(180deg, transparent, #07111680);
+  border-radius: 50% 50% 0 0 / 18% 18% 0 0;
+}
+
+.painted-combat.epic-combat .epic-combat-world::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse at 18% 52%, #68c5d01a, transparent 48%),
+    radial-gradient(ellipse at 82% 60%, rgb(var(--epic-tone) / .09), transparent 53%),
+    linear-gradient(180deg, #02070f4d, transparent 24%, transparent 75%, #02070fb3),
+    linear-gradient(90deg, #01060b80, transparent 25%, transparent 76%, #01060b80);
+  pointer-events: none;
+}
+
+.painted-combat.epic-combat .painted-fighter {
+  width: 38%;
+  max-width: 420px;
+  bottom: 12%;
+  z-index: 3;
+}
+
+.painted-combat.epic-combat .fighter-attacker { left: 5%; }
+.painted-combat.epic-combat .fighter-defender { right: 5%; }
+.painted-combat.epic-combat .fighter-body { filter: drop-shadow(0 8px 6px #02090b78); }
+.painted-combat.epic-combat .fighter-shadow {
+  bottom: -1.5%;
+  left: 18%;
+  width: 65%;
+  height: 9%;
+  background: #01060894;
+  filter: blur(6px);
+}
+
+/* Size the actors themselves so the existing contact geometry measures the same silhouettes. */
+.painted-combat.epic-combat[data-epic-boss-side="attacker"] .fighter-attacker,
+.painted-combat.epic-combat[data-epic-boss-side="defender"] .fighter-defender {
+  width: 45%;
+  max-width: 490px;
+  bottom: 10%;
+}
+.painted-combat.epic-combat[data-epic-boss-side="attacker"] .fighter-attacker { left: 1%; }
+.painted-combat.epic-combat[data-epic-boss-side="defender"] .fighter-defender { right: 1%; }
+.painted-combat.epic-combat.is-self-support .fighter-attacker { left: 31%; }
+.painted-combat.epic-combat.is-self-support[data-epic-boss-side="attacker"] .fighter-attacker { left: 27.5%; }
+
+.painted-combat.epic-combat .combat-enemy-intro {
+  inset: 10px 18px auto auto;
+  z-index: 9;
+  max-width: 46%;
+  padding: 5px 10px 6px 18px;
+  border: 0;
+  border-right: 2px solid #be876c;
+  background: linear-gradient(90deg, transparent, #071216c7 35%);
+  text-shadow: 0 2px 3px #000;
+}
+.painted-combat.epic-combat .combat-enemy-intro strong { font-size: 17px; }
+.painted-combat.epic-combat .combat-enemy-intro span { color: #d6b19a; font-size: 10px; }
+.painted-combat.epic-combat .combat-enemy-intro.intro-attacker {
+  inset: 10px auto auto 18px;
+  padding: 5px 18px 6px 10px;
+  border-right: 0;
+  border-left: 2px solid #be876c;
+  background: linear-gradient(270deg, transparent, #071216c7 35%);
+}
+.painted-combat.epic-combat.has-boss .combat-enemy-intro { border-color: #e2be75; }
+.painted-combat.epic-combat.has-boss .combat-enemy-intro span { color: #f0cd87; }
+
+.painted-combat.epic-combat .skill-stage-shade { z-index: 6; background: #020711; }
+.painted-combat.epic-combat .skill-cut-in.epic-cut-in {
+  inset: 10% 0 auto;
+  height: 36%;
+  min-height: 92px;
+  max-height: 190px;
+  z-index: 8;
+  display: flex;
+  padding: 0 7%;
+  gap: 24px;
+  overflow: hidden;
+  border: 0;
+  border-block: 1px solid rgb(var(--epic-tone) / .72);
+  background: linear-gradient(100deg, #0a1419f2 0%, #102831ed 36%, #08131af2 75%);
+  box-shadow: 0 14px 36px #0008, 0 -1px 12px rgb(var(--epic-tone) / .12);
+  animation: none;
+  opacity: 0;
+}
+
+.painted-combat.epic-combat .epic-cut-in::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 25%, #061119b3 53%, #071117f5 76%),
+    linear-gradient(180deg, #07111738, transparent 30%, #07111757);
+  pointer-events: none;
+}
+
+.painted-combat.epic-combat .epic-cut-in > .epic-cut-in-art {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 65%;
+  height: 100%;
+  max-width: none;
+  align-self: stretch;
+  object-fit: cover;
+  object-position: 50% 35%;
+  filter: saturate(.94) contrast(1.05);
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 67%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 67%, transparent 100%);
+}
+
+.painted-combat.epic-combat .epic-cut-in > .epic-cut-in-copy {
+  position: relative;
+  z-index: 1;
+  width: 50%;
+  margin-left: auto;
+  padding: 12px 0;
+  min-width: 0;
+}
+.painted-combat.epic-combat .epic-cut-in small {
+  margin-bottom: 9px;
+  font-size: 11px;
+  line-height: 1.25;
+  letter-spacing: .2em;
+  color: rgb(var(--epic-tone));
+}
+.painted-combat.epic-combat .epic-cut-in strong {
+  font: 700 clamp(22px, 3.2vw, 42px)/1.2 'Batang', serif;
+  letter-spacing: .025em;
+  color: #fff1d2;
+  text-shadow: 0 3px 10px #000b;
+}
+.painted-combat.epic-combat .epic-cut-in[data-epic-art="aria"] > .epic-cut-in-art {
+  inset: 0 0 0 auto;
+  -webkit-mask-image: linear-gradient(270deg, #000 0%, #000 67%, transparent 100%);
+  mask-image: linear-gradient(270deg, #000 0%, #000 67%, transparent 100%);
+}
+.painted-combat.epic-combat .epic-cut-in[data-epic-art="aria"]::after {
+  background: linear-gradient(270deg, transparent 25%, #061119b3 53%, #071117f5 76%);
+}
+.painted-combat.epic-combat .epic-cut-in[data-epic-art="aria"] > .epic-cut-in-copy { margin-left: 0; margin-right: auto; }
+.painted-combat.epic-combat .epic-cut-in[data-epic-art="portrait"] > .epic-cut-in-art {
+  inset: auto auto -14% 4%;
+  width: 33%;
+  height: 128%;
+  object-fit: contain;
+  object-position: center bottom;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.painted-combat.epic-combat .epic-cut-in[data-epic-art="portrait"]::after { background: linear-gradient(90deg, transparent 25%, #071117d9 53%); }
+
+.painted-combat.epic-combat :is(.epic-contact-light, .epic-floor-pressure, .epic-hit-flare, .epic-debris-field, .epic-debris, .epic-strike-ribbon) {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: center;
+}
+.painted-combat.epic-combat .epic-contact-light {
+  z-index: 2;
+  left: var(--duel-contact-x, 70%);
+  top: var(--duel-contact-y, 58%);
+  width: 76%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(var(--epic-tone) / .46), rgb(var(--epic-tone) / .18) 28%, transparent 66%);
+  mix-blend-mode: screen;
+}
+.painted-combat.epic-combat .epic-floor-pressure {
+  z-index: 2;
+  left: var(--duel-contact-x, 70%);
+  top: var(--epic-ground-y, 83%);
+  width: 38%;
+  aspect-ratio: 3.7;
+  border-radius: 50%;
+  border: 2px solid rgb(var(--epic-tone) / .8);
+  background: radial-gradient(ellipse, rgb(var(--epic-tone) / .03) 38%, rgb(var(--epic-tone) / .22) 62%, transparent 72%);
+  box-shadow: 0 0 18px rgb(var(--epic-tone) / .15), inset 0 0 13px rgb(var(--epic-tone) / .17);
+}
+.painted-combat.epic-combat .epic-hit-flare {
+  z-index: 6;
+  left: var(--duel-contact-x, 70%);
+  top: var(--duel-contact-y, 58%);
+  width: 22%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffdf1 0%, var(--epic-light) 4%, rgb(var(--epic-tone) / .8) 10%, rgb(var(--epic-tone) / .25) 24%, transparent 57%);
+  mix-blend-mode: screen;
+}
+.painted-combat.epic-combat .epic-flare-ray {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 68%;
+  height: 2px;
+  transform: rotate(calc(var(--epic-ray) * 45deg));
+  transform-origin: left center;
+  background: linear-gradient(90deg, #fff9e1, rgb(var(--epic-tone) / .55) 25%, transparent);
+}
+.painted-combat.epic-combat .epic-flare-ray:nth-child(2n) { width: 43%; height: 1px; }
+.painted-combat.epic-combat .epic-debris-field { inset: 0; z-index: 5; opacity: 1; }
+.painted-combat.epic-combat .epic-debris {
+  left: var(--duel-contact-x, 70%);
+  top: var(--duel-contact-y, 58%);
+  width: 7px;
+  height: 4px;
+  border-radius: 1px;
+  background: #fff2c3;
+  box-shadow: 0 0 5px rgb(var(--epic-tone) / .8);
+}
+.painted-combat.epic-combat .epic-debris:nth-child(3n) {
+  width: 10px;
+  height: 7px;
+  background: #655347;
+  box-shadow: inset 1px 1px #d2b08a, 0 2px 3px #0005;
+  clip-path: polygon(20% 0, 100% 15%, 80% 100%, 0 70%);
+}
+.painted-combat.epic-combat .epic-strike-ribbon {
+  inset: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  mix-blend-mode: screen;
+}
+.painted-combat.epic-combat .epic-strike-edge { stroke: rgb(var(--epic-tone) / .4); stroke-width: 20; }
+.painted-combat.epic-combat .epic-strike-core { stroke: var(--epic-light); stroke-width: 6; }
+.painted-combat.epic-combat .epic-strike-filament { stroke: #fffdf1; stroke-width: 1.5; }
+
+.painted-combat.epic-combat .combat-result {
+  z-index: 11;
+  top: 43%;
+  left: 60%;
+  width: 35%;
+  color: #fff1c6;
+  text-shadow: 0 3px 0 #372715, 0 5px 15px #000, 0 0 24px rgb(var(--epic-tone) / .4);
+}
+.painted-combat.epic-combat .combat-result small { font-size: 12px; letter-spacing: .18em; min-height: 20px; }
+.painted-combat.epic-combat .combat-result strong { font-size: clamp(38px, 5.6vw, 72px); line-height: 1; letter-spacing: -.04em; }
+.painted-combat.epic-combat.is-support .combat-result { color: #d6ffde; }
+.painted-combat.epic-combat.is-guarding .combat-result { color: #d9f8ff; }
+.painted-combat.epic-combat.is-self-support .combat-result { left: 32.5%; top: 38%; }
+.painted-combat.epic-combat.is-miss .combat-result { color: #d0e4e8; }
+
+.painted-combat.epic-combat .painted-combat-health {
+  position: relative;
+  z-index: 12;
+  padding: 17px 26px 19px;
+  gap: 46px;
+  border-top: 1px solid #c8a26273;
+  background: linear-gradient(100deg, #10262b, #09181e 50%, #201e21);
+}
+.painted-combat.epic-combat .combat-health > div:first-child { gap: 12px; margin-bottom: 9px; font-size: 14px; }
+.painted-combat.epic-combat .combat-health strong { color: #f7ead2; letter-spacing: .025em; }
+.painted-combat.epic-combat .combat-health span { color: #c6d9db; font-variant-numeric: tabular-nums; }
+.painted-combat.epic-combat .combat-health-track {
+  height: 7px;
+  border: 1px solid #b7d1cc36;
+  border-radius: 1px;
+  background: #030b10;
+  box-shadow: 0 1px 0 #e9d6a70d;
+}
+.painted-combat.epic-combat .combat-health-track i { background: linear-gradient(90deg, #357b80, #8ed4bb); }
+.painted-combat.epic-combat .team-enemy .combat-health-track i { background: linear-gradient(90deg, #914743, #e7aa7e); }
+.painted-combat.epic-combat.is-self-support .painted-combat-health { width: 100%; padding-inline: 24%; }
+
+/* Support and evasion keep their readable results without depicting a successful hit. */
+.painted-combat.epic-combat:is(.is-miss, .is-support) :is(.epic-floor-pressure, .epic-hit-flare, .epic-debris-field, .epic-strike-ribbon) { display: none; }
+.painted-combat.epic-combat:is(.motion-off, .duel-motion-disabled) :is(.epic-contact-light, .epic-floor-pressure, .epic-hit-flare, .epic-debris-field, .epic-strike-ribbon) { display: none; }
+.painted-combat.epic-combat:is(.motion-off, .duel-motion-disabled) .epic-combat-world { transform: none !important; }
+.painted-combat.epic-combat:is(.motion-off, .duel-motion-disabled) .combat-enemy-intro { animation: none; opacity: 1; transform: none; }
+
+@media (max-width: 600px) {
+  .painted-combat.epic-combat {
+    max-height: calc(100dvh - 16px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    border-radius: 4px;
+  }
+  .painted-combat.epic-combat .painted-combat-heading {
+    min-height: 70px;
+    padding: 10px 13px;
+    gap: 5px 10px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .painted-combat.epic-combat .painted-combat-heading h2 { grid-column: 1 / -1; grid-row: 1; font-size: 20px; }
+  .painted-combat.epic-combat .painted-combat-heading > span { font-size: 10px; }
+  .painted-combat.epic-combat .painted-combat-arena { height: min(52dvh, 390px, calc(100dvh - 190px)); min-height: 160px; }
+  .painted-combat.epic-combat .painted-fighter { width: 49%; bottom: 14%; }
+  .painted-combat.epic-combat .fighter-attacker { left: -4%; }
+  .painted-combat.epic-combat .fighter-defender { right: -4%; }
+  .painted-combat.epic-combat[data-epic-boss-side="attacker"] .fighter-attacker,
+  .painted-combat.epic-combat[data-epic-boss-side="defender"] .fighter-defender { width: 57%; bottom: 12%; }
+  .painted-combat.epic-combat[data-epic-boss-side="attacker"] .fighter-attacker { left: -7%; }
+  .painted-combat.epic-combat[data-epic-boss-side="defender"] .fighter-defender { right: -7%; }
+  .painted-combat.epic-combat.is-self-support .fighter-attacker { left: 25.5%; }
+  .painted-combat.epic-combat.is-self-support[data-epic-boss-side="attacker"] .fighter-attacker { left: 21.5%; }
+  .painted-combat.epic-combat.is-support:not(.is-self-support) .painted-fighter { width: 40%; }
+  .painted-combat.epic-combat.is-support:not(.is-self-support) .fighter-attacker { left: 5%; }
+  .painted-combat.epic-combat.is-support:not(.is-self-support) .fighter-defender { right: 5%; }
+  .painted-combat.epic-combat .combat-enemy-intro { inset: 7px 8px auto auto; max-width: 58%; padding: 3px 7px 4px 12px; }
+  .painted-combat.epic-combat .combat-enemy-intro.intro-attacker { inset: 7px auto auto 8px; padding: 3px 12px 4px 7px; }
+  .painted-combat.epic-combat .combat-enemy-intro strong { font-size: 13px; }
+  .painted-combat.epic-combat .combat-enemy-intro span { font-size: 9px; }
+  .painted-combat.epic-combat .skill-cut-in.epic-cut-in { inset: 15% 0 auto; height: 34%; min-height: 80px; padding-inline: 6%; gap: 10px; }
+  .painted-combat.epic-combat .epic-cut-in > .epic-cut-in-art { width: 70%; }
+  .painted-combat.epic-combat .epic-cut-in > .epic-cut-in-copy { width: 53%; }
+  .painted-combat.epic-combat .epic-cut-in small { font-size: 9px; letter-spacing: .12em; margin-bottom: 6px; }
+  .painted-combat.epic-combat .epic-cut-in strong { font-size: clamp(19px, 5.4vw, 29px); }
+  .painted-combat.epic-combat .epic-cut-in[data-epic-art="portrait"] > .epic-cut-in-art { width: 39%; left: 1%; }
+  .painted-combat.epic-combat .combat-result { top: 44%; left: 58%; width: 39%; }
+  .painted-combat.epic-combat .combat-result small { font-size: 10px; min-height: 17px; }
+  .painted-combat.epic-combat .combat-result strong { font-size: 39px; }
+  .painted-combat.epic-combat .painted-combat-health { padding: 12px 13px 14px; gap: 20px; }
+  .painted-combat.epic-combat .combat-health > div:first-child { font-size: 12px; gap: 4px 8px; margin-bottom: 7px; }
+  .painted-combat.epic-combat .combat-health span { font-size: 10px; }
+  .painted-combat.epic-combat .combat-health-track { height: 6px; }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .painted-combat.epic-combat {
+    width: min(100%, 1120px);
+    max-height: calc(100dvh - 12px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  }
+  .painted-combat.epic-combat .painted-combat-heading {
+    min-height: 40px;
+    padding: 7px 18px;
+    gap: 10px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2.1fr) minmax(0, 1fr);
+  }
+  .painted-combat.epic-combat .painted-combat-heading h2 { grid-area: auto; font-size: 17px; }
+  .painted-combat.epic-combat .painted-combat-heading > span { font-size: 10px; }
+  .painted-combat.epic-combat .painted-combat-arena { height: min(61dvh, calc(100dvh - 126px)); min-height: 110px; }
+  .painted-combat.epic-combat .painted-fighter { width: min(33%, 47dvh, calc(80dvh - 101px)); bottom: 10%; }
+  .painted-combat.epic-combat .fighter-attacker { left: calc(50% - min(37%, 58dvh)); }
+  .painted-combat.epic-combat .fighter-defender { right: calc(50% - min(37%, 58dvh)); }
+  .painted-combat.epic-combat[data-epic-boss-side="attacker"] .fighter-attacker,
+  .painted-combat.epic-combat[data-epic-boss-side="defender"] .fighter-defender { width: min(39%, 54dvh, calc(88dvh - 111px)); bottom: 8%; }
+  .painted-combat.epic-combat[data-epic-boss-side="attacker"] .fighter-attacker { left: calc(50% - min(40%, 63dvh)); }
+  .painted-combat.epic-combat[data-epic-boss-side="defender"] .fighter-defender { right: calc(50% - min(40%, 63dvh)); }
+  .painted-combat.epic-combat.is-self-support .fighter-attacker { left: calc(50% - min(16.5%, 23.5dvh, calc(40dvh - 50.5px))); }
+  .painted-combat.epic-combat.is-self-support[data-epic-boss-side="attacker"] .fighter-attacker { left: calc(50% - min(19.5%, 27dvh, calc(44dvh - 55.5px))); }
+  .painted-combat.epic-combat .combat-enemy-intro { inset: 5px 12px auto auto; padding-block: 2px; }
+  .painted-combat.epic-combat .combat-enemy-intro.intro-attacker { inset: 5px auto auto 12px; padding-block: 2px; }
+  .painted-combat.epic-combat .combat-enemy-intro strong { font-size: 12px; }
+  .painted-combat.epic-combat .combat-enemy-intro span { font-size: 9px; }
+  .painted-combat.epic-combat .skill-cut-in.epic-cut-in { inset: 12% 0 auto; height: 38%; min-height: 56px; max-height: 108px; padding-inline: 9%; }
+  .painted-combat.epic-combat .epic-cut-in > .epic-cut-in-copy { padding-block: 5px; }
+  .painted-combat.epic-combat .epic-cut-in small { margin-bottom: 4px; font-size: 9px; }
+  .painted-combat.epic-combat .epic-cut-in strong { font-size: 24px; }
+  .painted-combat.epic-combat .combat-result { top: 34%; }
+  .painted-combat.epic-combat .combat-result small { min-height: 14px; font-size: 9px; }
+  .painted-combat.epic-combat .combat-result strong { font-size: 38px; }
+  .painted-combat.epic-combat .painted-combat-health { padding: 8px 18px 10px; gap: 32px; }
+  .painted-combat.epic-combat .combat-health > div:first-child { flex-wrap: nowrap; font-size: 11px; margin-bottom: 5px; }
+  .painted-combat.epic-combat .combat-health span { font-size: 10px; }
+  .painted-combat.epic-combat .combat-health-track { height: 5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .painted-combat.epic-combat :is(.epic-contact-light, .epic-floor-pressure, .epic-hit-flare, .epic-debris-field, .epic-strike-ribbon) { display: none; }
+  .painted-combat.epic-combat .epic-combat-world { transform: none !important; }
+  .painted-combat.epic-combat .combat-enemy-intro { opacity: 1; transform: none; }
+}

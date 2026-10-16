@@ -3,6 +3,7 @@ import { getImpactParticle, getDuelDefenderReaction, getDuelPoseAt, sampleDuelTr
 import { getDuelWeaponAnchor, getDuelReach, projectDuelAnchor } from '../data/duelContactGeometry.js';
 import { getCombatFrameStyle } from '../data/combatArt.js';
 import { animateSkillSpectacle } from './animateSkillSpectacle.js';
+import { animateEpicCombat } from './animateEpicCombat.js';
 
 const clamp=value=>Math.max(0,Math.min(1,value));
 export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,finish,selfSupport,attackerKey}){
@@ -153,6 +154,7 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
         for(const stroke of element.querySelectorAll('.duel-stroke'))animate(stroke,[{offset:0,strokeDashoffset:500},{offset:at,strokeDashoffset:500},{offset:mid,strokeDashoffset:0},{offset:1,strokeDashoffset:0}]);
       }
       animateSkillSpectacle(root,plan,{arena,attacker,a,d,dy,ground,miss},animate);
+      animateEpicCombat(root,plan,{arena,attacker,defender,a,d,dy,ground,weaponPoint,miss,support,finish,shake,selfSupport},animate);
       if(shake&&!support&&!miss)animate(arena,[{offset:0,transform:'none'},...plan.contacts.flatMap(at=>[{offset:at-.003,transform:'none'},{offset:at+.008,transform:`translateX(-${plan.skill?2:1}px)`},{offset:at+.019,transform:`translateX(${plan.skill?2:1}px)`},{offset:at+.033,transform:'none'}]),{offset:1,transform:'none'}]);
     };
     start();
