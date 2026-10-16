@@ -33,11 +33,26 @@ export function animateEpicCombat(root, plan, {
   if (world && shake) {
     const focusX = quiet ? bound(a, 0, width) : targetX;
     const focusY = quiet ? bound(floorY - unit * .36, 0, height) : targetY;
-    world.style.transformOrigin = `${focusX}px ${focusY}px`;
-    const pushX = bound((width * .5 - focusX) * .025, -5, 5);
-    const pushY = bound((height * .54 - focusY) * .025, -3, 3);
+    const halfWidth = width * .5, halfHeight = height * .5;
+    // Use only half of the minimum 5% composition inset; a target-biased origin can crop the opposite fighter.
+    const edgeBudget = Math.min(width, height) * .025;
+    world.style.transformOrigin = `${halfWidth}px ${halfHeight}px`;
+    const pushX = bound((halfWidth - focusX) * .025, -Math.min(5, edgeBudget * .22), Math.min(5, edgeBudget * .22));
+    const pushY = bound((height * .54 - focusY) * .025, -Math.min(3, edgeBudget * .18), Math.min(3, edgeBudget * .18));
     const zoom = quiet ? 1.014 : finish ? 1.065 : plan.skill ? 1.055 : 1.027;
-    const transform = (scale, x = 0, y = 0, tilt = 0) => `translate3d(${x}px,${y}px,0) rotate(${tilt}deg) scale(${scale})`;
+    const transform = (scale, x = 0, y = 0, tilt = 0) => {
+      const safeX = bound(x, -edgeBudget * .45, edgeBudget * .45);
+      const safeY = bound(y, -edgeBudget * .4, edgeBudget * .4);
+      const maxTilt = Math.atan(edgeBudget * .1 / Math.max(width, height)) * 180 / Math.PI;
+      const safeTilt = bound(tilt, -maxTilt, maxTilt);
+      const angle = Math.abs(safeTilt) * Math.PI / 180;
+      const cosine = Math.cos(angle), sine = Math.sin(angle);
+      // Budget the rotated/scaled rectangle and translation together on both axes, including contact recoil.
+      const horizontalLimit = (halfWidth + edgeBudget - Math.abs(safeX)) / (halfWidth * cosine + halfHeight * sine);
+      const verticalLimit = (halfHeight + edgeBudget - Math.abs(safeY)) / (halfHeight * cosine + halfWidth * sine);
+      const safeScale = Math.max(1, Math.min(scale, horizontalLimit, verticalLimit));
+      return `translate3d(${safeX}px,${safeY}px,0) rotate(${safeTilt}deg) scale(${safeScale})`;
+    };
     const camera = [
       { offset: 0, transform: transform(1) },
       { offset: Math.max(0, firstRelease - .12), transform: transform(1), easing: 'cubic-bezier(.22,.65,.35,1)' },
