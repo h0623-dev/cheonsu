@@ -51,7 +51,7 @@ export default function CombatScene({ scene, attackerKey, defenderKey, backgroun
   const timing = getCombatTiming(scene);
   const weaponMotion = presentation.support ? 'cast' : getWeaponMotion(attackerKey);
   const selfSupport = presentation.support && scene.attacker.id && scene.attacker.id === scene.defender.id;
-  useDuelAnimation(root,plan,duration,{enabled:effectsEnabled,shake:shakeEnabled,miss:presentation.miss,support:presentation.support,finish:scene.finish,selfSupport,attackerKey});
+  useDuelAnimation(root,plan,duration,{enabled:effectsEnabled,shake:shakeEnabled,miss:presentation.miss,support:presentation.support,finish:scene.finish,selfSupport,attackerKey,defenderKey});
   const enemy = ['enemy', 'boss'].includes(scene.attacker.type)
     ? { unit: scene.attacker, key: attackerKey, side: 'attacker' }
     : ['enemy', 'boss'].includes(scene.defender.type) && !selfSupport

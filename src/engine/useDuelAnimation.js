@@ -4,6 +4,7 @@ import { getDuelWeaponAnchor, getDuelReach, projectDuelAnchor } from '../data/du
 import { getCombatFrameStyle } from '../data/combatArt.js';
 import { animateSkillSpectacle } from './animateSkillSpectacle.js';
 import { animateEpicCombat } from './animateEpicCombat.js';
+import { fitCinematicDuel, getCinematicReach, resetCinematicDuelLayout } from './fitCinematicDuel.js';
 
 const clamp=value=>Math.max(0,Math.min(1,value));
 
@@ -71,7 +72,7 @@ function getCinematicActing(plan, { support, boss }) {
   return { actor: cinematicTracks(actor), body: cinematicTracks(body) };
 }
 
-export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,finish,selfSupport,attackerKey}){
+export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,finish,selfSupport,attackerKey,defenderKey}){
   useLayoutEffect(()=>{
     const root=ref.current,media=matchMedia('(prefers-reduced-motion: reduce)');
     if(!root)return;
@@ -83,6 +84,7 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
     const start=()=>{
       if(!active)return;
       const elapsed=animations[0]?.currentTime ?? Math.min(duration, performance.now() - startedAt),paused=animations[0]?.playState==='paused';stop();
+      resetCinematicDuelLayout(attacker,defender);
       root.classList.toggle('duel-motion-disabled',!enabled||media.matches);
       if(!enabled||media.matches)return;
       const attackerBoss = root.dataset.epicBossSide === 'attacker', defenderBoss = root.dataset.epicBossSide === 'defender';
@@ -98,12 +100,10 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
       const scale = Number(frameStyle?.['--combat-sprite-scale']) || 1;
       const footOffset = (parseFloat(frameStyle?.['--combat-foot-offset']) || 0) / 100;
       const contactBody = sampleDuelTrack(acting.body, plan.impact);
-      const reach = defender && plan.moving ? getDuelReach({ attackerLeft: attacker.offsetLeft, attackerWidth: attacker.offsetWidth, defenderLeft: defender.offsetLeft, defenderWidth: defender.offsetWidth, tip: anchor.tip, scale, footOffset, body: contactBody, advance: sampleDuelTrack(plan.actor, plan.impact)[0] }) : Math.max(0, defender ? defender.offsetLeft - attacker.offsetLeft - attacker.offsetWidth * .51 : 0);
-      root.style.setProperty('--combat-reach', `${reach}px`);
       const target=selfSupport?attacker:defender||attacker;
-      const a=attacker.offsetLeft+attacker.offsetWidth*.55,d=target.offsetLeft+target.offsetWidth*.46;
-      const ground=arena.clientHeight-parseFloat(getComputedStyle(target).bottom);
+      let ground=arena.clientHeight-parseFloat(getComputedStyle(target).bottom);
       let dy=ground-target.offsetWidth*.37;
+      let contactFraction=.37;
       const ratio = attacker.offsetWidth / Math.max(1, target.offsetWidth);
       if (plan.moving && !support && !miss && (ratio > 1.35 || ratio < .74)) {
         const tip = projectDuelAnchor(anchor.tip, { width: attacker.offsetWidth, scale, footOffset, body: contactBody });
@@ -112,6 +112,7 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
         const tipY = attackerGround - attacker.offsetWidth + tip[1] + attacker.offsetHeight * authoredY / 100;
         // A small fighter strikes the giant's lower torso; a giant aims at the small fighter's upper body.
         dy = Math.max(ground - target.offsetWidth * .78, Math.min(ground - target.offsetWidth * .18, tipY));
+        contactFraction = (ground - dy) / Math.max(1,target.offsetWidth);
         const correction = Math.max(-7, Math.min(5, (dy - tipY) / Math.max(1, attacker.offsetHeight) * 100));
         const liftStart = Math.max(.1, (plan.releases[0] ?? plan.impact) - .055);
         const firstContact = plan.contacts[0] ?? plan.impact;
@@ -131,6 +132,18 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
           return [at, x, y + liftAt(at)];
         }));
       }
+      const layout=fitCinematicDuel({arena,attacker,defender:selfSupport?null:defender,attackerKey,
+        defenderKey:defenderKey||defender?.dataset.unitKey,plan,acting,
+        contact:{tip:anchor.tip,scale,footOffset,body:contactBody},miss,support,finish,defenderBoss});
+      const reachOptions=defender&&plan.moving?{attackerLeft:attacker.offsetLeft,attackerWidth:attacker.offsetWidth,
+        defenderLeft:defender.offsetLeft,defenderWidth:defender.offsetWidth,tip:anchor.tip,scale,footOffset,
+        body:contactBody,advance:sampleDuelTrack(acting.actor,plan.impact)[0]}:null;
+      const reach=reachOptions?(layout.fitted?getCinematicReach(reachOptions):getDuelReach(reachOptions))
+        :Math.max(0,defender?defender.offsetLeft-attacker.offsetLeft-attacker.offsetWidth*.51:0);
+      root.style.setProperty('--combat-reach', `${reach}px`);
+      const a=attacker.offsetLeft+attacker.offsetWidth*.55,d=target.offsetLeft+target.offsetWidth*.46;
+      ground=arena.clientHeight-parseFloat(getComputedStyle(target).bottom);
+      dy=ground-target.offsetWidth*contactFraction;
       const animate=(element,frames,options={})=>{
         if(!element)return;
         const ordered=frames.filter(frame=>Number.isFinite(frame.offset)).map((frame,index)=>[clamp(frame.offset),index,frame])
@@ -261,13 +274,13 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
           {offset:end,opacity:isTravel?opacity:0,transform:final},{offset:clamp(end+.012),opacity:0,transform:final},{offset:1,opacity:0,transform:final}]);
         for(const stroke of element.querySelectorAll('.duel-stroke'))animate(stroke,[{offset:0,strokeDashoffset:500},{offset:at,strokeDashoffset:500},{offset:mid,strokeDashoffset:0},{offset:1,strokeDashoffset:0}]);
       }
-      animateSkillSpectacle(root,plan,{arena,attacker,a,d,dy,ground,miss},animate);
+      animateSkillSpectacle(root,plan,{arena,attacker,a,d,dy,ground,miss,actorTrack:acting.actor},animate);
       animateEpicCombat(root,plan,{arena,attacker,defender,d,dy,ground,weaponPoint,miss,support,selfSupport,shake,finish},animate);
       if(shake&&!support&&!miss)animate(arena,[{offset:0,transform:'none'},...plan.contacts.flatMap(at=>[{offset:at-.003,transform:'none'},{offset:at+.008,transform:`translateX(-${plan.skill?2:1}px)`},{offset:at+.019,transform:`translateX(${plan.skill?2:1}px)`},{offset:at+.033,transform:'none'}]),{offset:1,transform:'none'}]);
     };
     start();
     const observer=new ResizeObserver(start);observer.observe(arena);
     media.addEventListener('change',start);
-    return()=>{active=false;stop();observer.disconnect();media.removeEventListener('change',start);};
-  },[ref,plan,duration,enabled,shake,miss,support,finish,selfSupport,attackerKey]);
+    return()=>{active=false;stop();resetCinematicDuelLayout(attacker,defender);observer.disconnect();media.removeEventListener('change',start);};
+  },[ref,plan,duration,enabled,shake,miss,support,finish,selfSupport,attackerKey,defenderKey]);
 }

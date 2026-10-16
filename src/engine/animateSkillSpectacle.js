@@ -3,7 +3,7 @@ import { getDuelPoseAt } from '../data/duelPerformance.js';
 const clamp = value => Math.max(0, Math.min(1, value));
 
 // Use the duel's animation pool, duration and contact timeline. Decoration cannot deal damage.
-export function animateSkillSpectacle(root, plan, { arena, attacker, a, d, dy, ground, miss }, animate) {
+export function animateSkillSpectacle(root, plan, { arena, attacker, a, d, dy, ground, miss, actorTrack = plan.actor }, animate) {
   const visual = plan.spectacle;
   if (!visual) return;
   const charge = root.querySelector('[data-vfx-phase="charge"]');
@@ -14,7 +14,7 @@ export function animateSkillSpectacle(root, plan, { arena, attacker, a, d, dy, g
     charge.style.width = `${size}px`;
     charge.style.height = `${size}px`;
     const transform = (x, y) => `translate(${a + reach * x}px,${attackerGround + attacker.offsetHeight * y / 100 - size * .755}px) translateX(-50%)`;
-    const actor = plan.actor.map(([offset, x, y]) => ({ offset, transform: transform(x, y), easing: 'cubic-bezier(.3,.65,.4,1)' }));
+    const actor = actorTrack.map(([offset, x, y]) => ({ offset, transform: transform(x, y), easing: 'cubic-bezier(.3,.65,.4,1)' }));
     animate(charge, actor);
     const { at, until } = visual.charge;
     animate(charge, [

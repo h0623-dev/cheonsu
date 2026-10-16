@@ -1,0 +1,6802 @@
+{
+  "hero": {
+    "run-a": {
+      "left": 79,
+      "top": 137,
+      "right": 433,
+      "bottom": 476
+    },
+    "run-b": {
+      "left": 85,
+      "top": 122,
+      "right": 427,
+      "bottom": 477
+    },
+    "windup": {
+      "left": 85,
+      "top": 71,
+      "right": 425,
+      "bottom": 477
+    },
+    "strike": {
+      "left": 55,
+      "top": 17,
+      "right": 457,
+      "bottom": 477
+    },
+    "recover": {
+      "left": 60,
+      "top": 86,
+      "right": 450,
+      "bottom": 477
+    },
+    "recoil": {
+      "left": 81,
+      "top": 121,
+      "right": 430,
+      "bottom": 477
+    },
+    "skill-a": {
+      "left": 77,
+      "top": 15,
+      "right": 432,
+      "bottom": 477
+    },
+    "skill-b": {
+      "left": 48,
+      "top": 92,
+      "right": 461,
+      "bottom": 477
+    }
+  },
+  "bram": {
+    "run-a": {
+      "left": 65,
+      "top": 103,
+      "right": 446,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 75,
+      "top": 100,
+      "right": 435,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 67,
+      "top": 74,
+      "right": 443,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 15,
+      "top": 145,
+      "right": 495,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 116,
+      "top": 73,
+      "right": 396,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 69,
+      "top": 109,
+      "right": 441,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 29,
+      "top": 88,
+      "right": 483,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 81,
+      "top": 92,
+      "right": 431,
+      "bottom": 479
+    }
+  },
+  "lina": {
+    "run-a": {
+      "left": 52,
+      "top": 87,
+      "right": 458,
+      "bottom": 477
+    },
+    "run-b": {
+      "left": 78,
+      "top": 95,
+      "right": 434,
+      "bottom": 477
+    },
+    "windup": {
+      "left": 63,
+      "top": 35,
+      "right": 448,
+      "bottom": 477
+    },
+    "strike": {
+      "left": 78,
+      "top": 16,
+      "right": 433,
+      "bottom": 477
+    },
+    "recover": {
+      "left": 73,
+      "top": 74,
+      "right": 436,
+      "bottom": 477
+    },
+    "recoil": {
+      "left": 96,
+      "top": 114,
+      "right": 415,
+      "bottom": 477
+    },
+    "skill-a": {
+      "left": 24,
+      "top": 28,
+      "right": 487,
+      "bottom": 477
+    },
+    "skill-b": {
+      "left": 82,
+      "top": 133,
+      "right": 429,
+      "bottom": 477
+    }
+  },
+  "aria": {
+    "run-a": {
+      "left": 111,
+      "top": 84,
+      "right": 400,
+      "bottom": 477
+    },
+    "run-b": {
+      "left": 96,
+      "top": 112,
+      "right": 413,
+      "bottom": 477
+    },
+    "windup": {
+      "left": 113,
+      "top": 82,
+      "right": 398,
+      "bottom": 477
+    },
+    "strike": {
+      "left": 93,
+      "top": 106,
+      "right": 417,
+      "bottom": 477
+    },
+    "recover": {
+      "left": 111,
+      "top": 73,
+      "right": 400,
+      "bottom": 477
+    },
+    "recoil": {
+      "left": 112,
+      "top": 151,
+      "right": 399,
+      "bottom": 477
+    },
+    "skill-a": {
+      "left": 83,
+      "top": 42,
+      "right": 429,
+      "bottom": 477
+    },
+    "skill-b": {
+      "left": 116,
+      "top": 116,
+      "right": 394,
+      "bottom": 477
+    }
+  },
+  "leon": {
+    "run-a": {
+      "left": 69,
+      "top": 172,
+      "right": 440,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 59,
+      "top": 186,
+      "right": 451,
+      "bottom": 478
+    },
+    "windup": {
+      "left": 92,
+      "top": 127,
+      "right": 417,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 14,
+      "top": 212,
+      "right": 496,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 72,
+      "top": 152,
+      "right": 438,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 92,
+      "top": 171,
+      "right": 418,
+      "bottom": 478
+    },
+    "skill-a": {
+      "left": 26,
+      "top": 259,
+      "right": 485,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 60,
+      "top": 230,
+      "right": 451,
+      "bottom": 479
+    }
+  },
+  "sera": {
+    "run-a": {
+      "left": 67,
+      "top": 81,
+      "right": 444,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 76,
+      "top": 87,
+      "right": 435,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 51,
+      "top": 98,
+      "right": 459,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 22,
+      "top": 99,
+      "right": 488,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 59,
+      "top": 72,
+      "right": 452,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 59,
+      "top": 101,
+      "right": 453,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 39,
+      "top": 111,
+      "right": 470,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 67,
+      "top": 76,
+      "right": 445,
+      "bottom": 479
+    }
+  },
+  "noah": {
+    "run-a": {
+      "left": 99,
+      "top": 76,
+      "right": 412,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 76,
+      "top": 77,
+      "right": 434,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 90,
+      "top": 69,
+      "right": 420,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 47,
+      "top": 84,
+      "right": 463,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 86,
+      "top": 73,
+      "right": 425,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 76,
+      "top": 75,
+      "right": 435,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 47,
+      "top": 58,
+      "right": 463,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 76,
+      "top": 57,
+      "right": 435,
+      "bottom": 479
+    }
+  },
+  "yuna": {
+    "run-a": {
+      "left": 56,
+      "top": 96,
+      "right": 456,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 59,
+      "top": 99,
+      "right": 452,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 84,
+      "top": 12,
+      "right": 426,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 27,
+      "top": 80,
+      "right": 483,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 71,
+      "top": 94,
+      "right": 440,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 52,
+      "top": 78,
+      "right": 459,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 69,
+      "top": 33,
+      "right": 441,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 112,
+      "top": 56,
+      "right": 400,
+      "bottom": 479
+    }
+  },
+  "rakan": {
+    "run-a": {
+      "left": 42,
+      "top": 55,
+      "right": 470,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 28,
+      "top": 68,
+      "right": 483,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 63,
+      "top": 19,
+      "right": 448,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 20,
+      "top": 61,
+      "right": 491,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 42,
+      "top": 72,
+      "right": 469,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 85,
+      "top": 75,
+      "right": 426,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 47,
+      "top": 29,
+      "right": 464,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 25,
+      "top": 71,
+      "right": 487,
+      "bottom": 479
+    }
+  },
+  "miho": {
+    "run-a": {
+      "left": 82,
+      "top": 86,
+      "right": 428,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 85,
+      "top": 92,
+      "right": 427,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 76,
+      "top": 99,
+      "right": 434,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 54,
+      "top": 77,
+      "right": 457,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 81,
+      "top": 73,
+      "right": 430,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 78,
+      "top": 100,
+      "right": 433,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 70,
+      "top": 91,
+      "right": 441,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 46,
+      "top": 85,
+      "right": 464,
+      "bottom": 478
+    }
+  },
+  "teo": {
+    "run-a": {
+      "left": 56,
+      "top": 74,
+      "right": 455,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 61,
+      "top": 73,
+      "right": 451,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 42,
+      "top": 34,
+      "right": 468,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 46,
+      "top": 30,
+      "right": 465,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 53,
+      "top": 72,
+      "right": 458,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 57,
+      "top": 91,
+      "right": 454,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 51,
+      "top": 31,
+      "right": 459,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 23,
+      "top": 64,
+      "right": 487,
+      "bottom": 479
+    }
+  },
+  "irene": {
+    "run-a": {
+      "left": 51,
+      "top": 100,
+      "right": 460,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 62,
+      "top": 93,
+      "right": 450,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 66,
+      "top": 26,
+      "right": 445,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 32,
+      "top": 54,
+      "right": 479,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 74,
+      "top": 72,
+      "right": 437,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 56,
+      "top": 74,
+      "right": 454,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 41,
+      "top": 36,
+      "right": 469,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 45,
+      "top": 46,
+      "right": 465,
+      "bottom": 479
+    }
+  },
+  "kaz": {
+    "run-a": {
+      "left": 62,
+      "top": 85,
+      "right": 448,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 63,
+      "top": 92,
+      "right": 449,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 89,
+      "top": 76,
+      "right": 422,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 35,
+      "top": 107,
+      "right": 475,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 70,
+      "top": 95,
+      "right": 441,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 83,
+      "top": 98,
+      "right": 427,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 14,
+      "top": 175,
+      "right": 497,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 37,
+      "top": 112,
+      "right": 473,
+      "bottom": 479
+    }
+  },
+  "ella": {
+    "run-a": {
+      "left": 78,
+      "top": 67,
+      "right": 433,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 86,
+      "top": 75,
+      "right": 424,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 89,
+      "top": 59,
+      "right": 422,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 71,
+      "top": 83,
+      "right": 440,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 97,
+      "top": 72,
+      "right": 414,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 83,
+      "top": 91,
+      "right": 428,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 92,
+      "top": 63,
+      "right": 420,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 72,
+      "top": 79,
+      "right": 440,
+      "bottom": 479
+    }
+  },
+  "jin": {
+    "run-a": {
+      "left": 77,
+      "top": 98,
+      "right": 434,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 84,
+      "top": 100,
+      "right": 428,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 92,
+      "top": 49,
+      "right": 419,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 23,
+      "top": 104,
+      "right": 488,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 30,
+      "top": 95,
+      "right": 480,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 49,
+      "top": 115,
+      "right": 461,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 61,
+      "top": 56,
+      "right": 450,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 15,
+      "top": 111,
+      "right": 497,
+      "bottom": 479
+    }
+  },
+  "luka": {
+    "run-a": {
+      "left": 72,
+      "top": 141,
+      "right": 439,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 64,
+      "top": 132,
+      "right": 447,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 79,
+      "top": 80,
+      "right": 432,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 35,
+      "top": 132,
+      "right": 476,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 62,
+      "top": 118,
+      "right": 449,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 81,
+      "top": 127,
+      "right": 430,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 14,
+      "top": 183,
+      "right": 497,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 101,
+      "top": 52,
+      "right": 411,
+      "bottom": 479
+    }
+  },
+  "baekho": {
+    "run-a": {
+      "left": 80,
+      "top": 69,
+      "right": 431,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 81,
+      "top": 74,
+      "right": 429,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 78,
+      "top": 72,
+      "right": 433,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 26,
+      "top": 75,
+      "right": 485,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 69,
+      "top": 72,
+      "right": 442,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 86,
+      "top": 86,
+      "right": 424,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 30,
+      "top": 97,
+      "right": 481,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 65,
+      "top": 74,
+      "right": 447,
+      "bottom": 479
+    }
+  },
+  "raider": {
+    "run-a": {
+      "left": 64,
+      "top": 112,
+      "right": 448,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 70,
+      "top": 106,
+      "right": 443,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 86,
+      "top": 18,
+      "right": 426,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 15,
+      "top": 121,
+      "right": 497,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 119,
+      "top": 89,
+      "right": 393,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 93,
+      "top": 118,
+      "right": 419,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 79,
+      "top": 71,
+      "right": 431,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 23,
+      "top": 198,
+      "right": 487,
+      "bottom": 479
+    }
+  },
+  "ranger": {
+    "run-a": {
+      "left": 68,
+      "top": 111,
+      "right": 444,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 58,
+      "top": 110,
+      "right": 452,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 77,
+      "top": 13,
+      "right": 434,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 55,
+      "top": 50,
+      "right": 455,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 73,
+      "top": 77,
+      "right": 437,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 72,
+      "top": 98,
+      "right": 438,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 56,
+      "top": 137,
+      "right": 454,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 85,
+      "top": 62,
+      "right": 425,
+      "bottom": 479
+    }
+  },
+  "sniper": {
+    "run-a": {
+      "left": 64,
+      "top": 107,
+      "right": 447,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 66,
+      "top": 110,
+      "right": 445,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 94,
+      "top": 61,
+      "right": 418,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 43,
+      "top": 85,
+      "right": 468,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 91,
+      "top": 73,
+      "right": 420,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 63,
+      "top": 86,
+      "right": 448,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 50,
+      "top": 182,
+      "right": 462,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 58,
+      "top": 116,
+      "right": 453,
+      "bottom": 479
+    }
+  },
+  "marauder": {
+    "run-a": {
+      "left": 50,
+      "top": 111,
+      "right": 461,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 85,
+      "top": 128,
+      "right": 425,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 59,
+      "top": 42,
+      "right": 452,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 15,
+      "top": 123,
+      "right": 497,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 67,
+      "top": 116,
+      "right": 445,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 90,
+      "top": 120,
+      "right": 421,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 63,
+      "top": 63,
+      "right": 448,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 23,
+      "top": 181,
+      "right": 488,
+      "bottom": 479
+    }
+  },
+  "assassin_elite": {
+    "run-a": {
+      "left": 55,
+      "top": 106,
+      "right": 455,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 83,
+      "top": 133,
+      "right": 427,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 74,
+      "top": 143,
+      "right": 437,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 14,
+      "top": 99,
+      "right": 496,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 50,
+      "top": 108,
+      "right": 462,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 79,
+      "top": 128,
+      "right": 432,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 80,
+      "top": 79,
+      "right": 432,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 15,
+      "top": 180,
+      "right": 496,
+      "bottom": 479
+    }
+  },
+  "iron_lancer": {
+    "run-a": {
+      "left": 52,
+      "top": 160,
+      "right": 458,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 53,
+      "top": 158,
+      "right": 457,
+      "bottom": 478
+    },
+    "windup": {
+      "left": 66,
+      "top": 116,
+      "right": 446,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 15,
+      "top": 188,
+      "right": 497,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 134,
+      "top": 105,
+      "right": 377,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 96,
+      "top": 153,
+      "right": 416,
+      "bottom": 478
+    },
+    "skill-a": {
+      "left": 48,
+      "top": 131,
+      "right": 462,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 42,
+      "top": 219,
+      "right": 468,
+      "bottom": 479
+    }
+  },
+  "plague_doctor": {
+    "run-a": {
+      "left": 69,
+      "top": 167,
+      "right": 440,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 94,
+      "top": 158,
+      "right": 416,
+      "bottom": 478
+    },
+    "windup": {
+      "left": 106,
+      "top": 75,
+      "right": 403,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 14,
+      "top": 182,
+      "right": 497,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 103,
+      "top": 153,
+      "right": 407,
+      "bottom": 478
+    },
+    "recoil": {
+      "left": 97,
+      "top": 169,
+      "right": 413,
+      "bottom": 478
+    },
+    "skill-a": {
+      "left": 51,
+      "top": 185,
+      "right": 461,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 86,
+      "top": 96,
+      "right": 425,
+      "bottom": 479
+    }
+  },
+  "beast_tamer": {
+    "run-a": {
+      "left": 98,
+      "top": 162,
+      "right": 412,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 106,
+      "top": 160,
+      "right": 405,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 100,
+      "top": 113,
+      "right": 411,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 15,
+      "top": 167,
+      "right": 497,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 111,
+      "top": 158,
+      "right": 400,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 117,
+      "top": 162,
+      "right": 394,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 69,
+      "top": 120,
+      "right": 442,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 81,
+      "top": 154,
+      "right": 431,
+      "bottom": 479
+    }
+  },
+  "storm_mage": {
+    "run-a": {
+      "left": 79,
+      "top": 122,
+      "right": 432,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 79,
+      "top": 133,
+      "right": 432,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 89,
+      "top": 46,
+      "right": 422,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 14,
+      "top": 141,
+      "right": 497,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 98,
+      "top": 90,
+      "right": 412,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 81,
+      "top": 117,
+      "right": 429,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 56,
+      "top": 129,
+      "right": 454,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 112,
+      "top": 19,
+      "right": 399,
+      "bottom": 479
+    }
+  },
+  "blade_dancer": {
+    "run-a": {
+      "left": 65,
+      "top": 133,
+      "right": 444,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 56,
+      "top": 144,
+      "right": 454,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 109,
+      "top": 98,
+      "right": 400,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 14,
+      "top": 171,
+      "right": 496,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 32,
+      "top": 157,
+      "right": 479,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 110,
+      "top": 158,
+      "right": 401,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 72,
+      "top": 155,
+      "right": 439,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 51,
+      "top": 213,
+      "right": 459,
+      "bottom": 479
+    }
+  },
+  "siege_gunner": {
+    "run-a": {
+      "left": 45,
+      "top": 79,
+      "right": 465,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 63,
+      "top": 73,
+      "right": 447,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 86,
+      "top": 58,
+      "right": 426,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 41,
+      "top": 75,
+      "right": 470,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 71,
+      "top": 72,
+      "right": 441,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 81,
+      "top": 94,
+      "right": 430,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 41,
+      "top": 167,
+      "right": 471,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 36,
+      "top": 134,
+      "right": 476,
+      "bottom": 479
+    }
+  },
+  "sentinel": {
+    "run-a": {
+      "left": 99,
+      "top": 109,
+      "right": 411,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 88,
+      "top": 115,
+      "right": 423,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 98,
+      "top": 63,
+      "right": 413,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 14,
+      "top": 130,
+      "right": 497,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 112,
+      "top": 100,
+      "right": 400,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 71,
+      "top": 132,
+      "right": 440,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 59,
+      "top": 122,
+      "right": 452,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 15,
+      "top": 177,
+      "right": 496,
+      "bottom": 479
+    }
+  },
+  "blackguard": {
+    "run-a": {
+      "left": 91,
+      "top": 130,
+      "right": 421,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 77,
+      "top": 138,
+      "right": 433,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 73,
+      "top": 32,
+      "right": 438,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 14,
+      "top": 172,
+      "right": 496,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 89,
+      "top": 128,
+      "right": 422,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 65,
+      "top": 147,
+      "right": 446,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 62,
+      "top": 177,
+      "right": 448,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 61,
+      "top": 69,
+      "right": 449,
+      "bottom": 479
+    }
+  },
+  "warlord": {
+    "run-a": {
+      "left": 52,
+      "top": 154,
+      "right": 459,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 62,
+      "top": 171,
+      "right": 449,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 107,
+      "top": 78,
+      "right": 404,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 15,
+      "top": 188,
+      "right": 497,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 76,
+      "top": 146,
+      "right": 435,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 69,
+      "top": 164,
+      "right": 441,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 40,
+      "top": 211,
+      "right": 469,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 52,
+      "top": 117,
+      "right": 460,
+      "bottom": 479
+    }
+  },
+  "pyromancer": {
+    "run-a": {
+      "left": 49,
+      "top": 118,
+      "right": 462,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 89,
+      "top": 128,
+      "right": 423,
+      "bottom": 478
+    },
+    "windup": {
+      "left": 92,
+      "top": 65,
+      "right": 418,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 14,
+      "top": 151,
+      "right": 496,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 80,
+      "top": 117,
+      "right": 430,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 83,
+      "top": 126,
+      "right": 428,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 35,
+      "top": 99,
+      "right": 475,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 97,
+      "top": 92,
+      "right": 414,
+      "bottom": 479
+    }
+  },
+  "frost_mage": {
+    "run-a": {
+      "left": 93,
+      "top": 158,
+      "right": 418,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 105,
+      "top": 166,
+      "right": 405,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 110,
+      "top": 85,
+      "right": 401,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 15,
+      "top": 182,
+      "right": 497,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 128,
+      "top": 116,
+      "right": 383,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 94,
+      "top": 125,
+      "right": 418,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 70,
+      "top": 199,
+      "right": 441,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 104,
+      "top": 64,
+      "right": 408,
+      "bottom": 479
+    }
+  },
+  "cultist": {
+    "run-a": {
+      "left": 62,
+      "top": 122,
+      "right": 449,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 69,
+      "top": 158,
+      "right": 441,
+      "bottom": 478
+    },
+    "windup": {
+      "left": 66,
+      "top": 65,
+      "right": 445,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 15,
+      "top": 115,
+      "right": 497,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 110,
+      "top": 86,
+      "right": 401,
+      "bottom": 478
+    },
+    "recoil": {
+      "left": 57,
+      "top": 131,
+      "right": 454,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 72,
+      "top": 113,
+      "right": 440,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 122,
+      "top": 45,
+      "right": 390,
+      "bottom": 479
+    }
+  },
+  "void_knight": {
+    "run-a": {
+      "left": 77,
+      "top": 194,
+      "right": 435,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 105,
+      "top": 193,
+      "right": 405,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 113,
+      "top": 114,
+      "right": 399,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 14,
+      "top": 179,
+      "right": 496,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 89,
+      "top": 158,
+      "right": 422,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 103,
+      "top": 181,
+      "right": 407,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 75,
+      "top": 146,
+      "right": 435,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 45,
+      "top": 268,
+      "right": 465,
+      "bottom": 479
+    }
+  },
+  "wolf": {
+    "run-a": {
+      "left": 95,
+      "top": 254,
+      "right": 416,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 90,
+      "top": 257,
+      "right": 421,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 94,
+      "top": 297,
+      "right": 418,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 77,
+      "top": 288,
+      "right": 433,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 106,
+      "top": 231,
+      "right": 405,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 107,
+      "top": 201,
+      "right": 404,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 68,
+      "top": 271,
+      "right": 442,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 83,
+      "top": 208,
+      "right": 428,
+      "bottom": 479
+    }
+  },
+  "boss_commander": {
+    "run-a": {
+      "left": 75,
+      "top": 177,
+      "right": 435,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 69,
+      "top": 167,
+      "right": 443,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 96,
+      "top": 158,
+      "right": 415,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 14,
+      "top": 189,
+      "right": 497,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 84,
+      "top": 167,
+      "right": 427,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 104,
+      "top": 207,
+      "right": 406,
+      "bottom": 478
+    },
+    "skill-a": {
+      "left": 32,
+      "top": 206,
+      "right": 478,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 92,
+      "top": 135,
+      "right": 418,
+      "bottom": 478
+    }
+  },
+  "boss_frost": {
+    "run-a": {
+      "left": 74,
+      "top": 155,
+      "right": 436,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 89,
+      "top": 155,
+      "right": 422,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 94,
+      "top": 109,
+      "right": 417,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 14,
+      "top": 184,
+      "right": 496,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 101,
+      "top": 121,
+      "right": 409,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 90,
+      "top": 149,
+      "right": 421,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 31,
+      "top": 157,
+      "right": 479,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 92,
+      "top": 74,
+      "right": 420,
+      "bottom": 479
+    }
+  },
+  "boss_ember": {
+    "run-a": {
+      "left": 63,
+      "top": 143,
+      "right": 449,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 59,
+      "top": 152,
+      "right": 451,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 72,
+      "top": 92,
+      "right": 438,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 14,
+      "top": 158,
+      "right": 496,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 58,
+      "top": 127,
+      "right": 453,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 59,
+      "top": 173,
+      "right": 451,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 32,
+      "top": 193,
+      "right": 478,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 76,
+      "top": 83,
+      "right": 435,
+      "bottom": 479
+    }
+  },
+  "boss_oracle": {
+    "run-a": {
+      "left": 60,
+      "top": 88,
+      "right": 451,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 59,
+      "top": 83,
+      "right": 451,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 92,
+      "top": 75,
+      "right": 418,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 14,
+      "top": 90,
+      "right": 497,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 85,
+      "top": 93,
+      "right": 426,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 57,
+      "top": 99,
+      "right": 453,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 44,
+      "top": 91,
+      "right": 466,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 95,
+      "top": 84,
+      "right": 416,
+      "bottom": 479
+    }
+  },
+  "boss_abyss": {
+    "run-a": {
+      "left": 58,
+      "top": 152,
+      "right": 452,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 100,
+      "top": 159,
+      "right": 410,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 79,
+      "top": 74,
+      "right": 432,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 14,
+      "top": 161,
+      "right": 497,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 60,
+      "top": 119,
+      "right": 450,
+      "bottom": 478
+    },
+    "recoil": {
+      "left": 83,
+      "top": 156,
+      "right": 427,
+      "bottom": 478
+    },
+    "skill-a": {
+      "left": 61,
+      "top": 147,
+      "right": 449,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 52,
+      "top": 174,
+      "right": 459,
+      "bottom": 479
+    }
+  },
+  "kobold-hunter": {
+    "run-a": {
+      "left": 38,
+      "top": 95,
+      "right": 473,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 49,
+      "top": 90,
+      "right": 461,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 45,
+      "top": 91,
+      "right": 466,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 26,
+      "top": 128,
+      "right": 485,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 56,
+      "top": 73,
+      "right": 455,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 63,
+      "top": 105,
+      "right": 448,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 45,
+      "top": 190,
+      "right": 465,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 58,
+      "top": 102,
+      "right": 453,
+      "bottom": 479
+    }
+  },
+  "lizard-spearman": {
+    "run-a": {
+      "left": 63,
+      "top": 183,
+      "right": 449,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 66,
+      "top": 183,
+      "right": 443,
+      "bottom": 478
+    },
+    "windup": {
+      "left": 81,
+      "top": 185,
+      "right": 430,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 14,
+      "top": 206,
+      "right": 497,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 75,
+      "top": 171,
+      "right": 437,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 65,
+      "top": 188,
+      "right": 445,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 35,
+      "top": 227,
+      "right": 475,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 93,
+      "top": 136,
+      "right": 418,
+      "bottom": 478
+    }
+  },
+  "horned-ogre": {
+    "run-a": {
+      "left": 101,
+      "top": 123,
+      "right": 409,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 99,
+      "top": 167,
+      "right": 412,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 61,
+      "top": 12,
+      "right": 450,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 26,
+      "top": 181,
+      "right": 485,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 100,
+      "top": 126,
+      "right": 411,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 95,
+      "top": 116,
+      "right": 414,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 67,
+      "top": 162,
+      "right": 444,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 61,
+      "top": 145,
+      "right": 450,
+      "bottom": 479
+    }
+  },
+  "harpy-scout": {
+    "run-a": {
+      "left": 70,
+      "top": 209,
+      "right": 441,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 44,
+      "top": 210,
+      "right": 467,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 37,
+      "top": 188,
+      "right": 475,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 28,
+      "top": 226,
+      "right": 482,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 86,
+      "top": 192,
+      "right": 424,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 42,
+      "top": 179,
+      "right": 469,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 43,
+      "top": 128,
+      "right": 467,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 14,
+      "top": 222,
+      "right": 497,
+      "bottom": 479
+    }
+  },
+  "skeleton-warrior": {
+    "run-a": {
+      "left": 69,
+      "top": 202,
+      "right": 441,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 81,
+      "top": 164,
+      "right": 430,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 81,
+      "top": 101,
+      "right": 429,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 14,
+      "top": 203,
+      "right": 496,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 96,
+      "top": 137,
+      "right": 414,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 83,
+      "top": 167,
+      "right": 426,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 76,
+      "top": 96,
+      "right": 433,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 39,
+      "top": 195,
+      "right": 471,
+      "bottom": 479
+    }
+  },
+  "rock-spirit": {
+    "run-a": {
+      "left": 74,
+      "top": 180,
+      "right": 435,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 84,
+      "top": 186,
+      "right": 427,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 76,
+      "top": 180,
+      "right": 434,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 15,
+      "top": 212,
+      "right": 497,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 83,
+      "top": 191,
+      "right": 428,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 71,
+      "top": 199,
+      "right": 439,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 58,
+      "top": 157,
+      "right": 452,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 88,
+      "top": 240,
+      "right": 422,
+      "bottom": 479
+    }
+  },
+  "mare": {
+    "run-a": {
+      "left": 69,
+      "top": 224,
+      "right": 440,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 64,
+      "top": 219,
+      "right": 448,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 110,
+      "top": 169,
+      "right": 400,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 257,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 102,
+      "top": 223,
+      "right": 410,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 107,
+      "top": 256,
+      "right": 403,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 84,
+      "top": 195,
+      "right": 428,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 64,
+      "top": 227,
+      "right": 446,
+      "bottom": 479
+    }
+  },
+  "harin": {
+    "run-a": {
+      "left": 97,
+      "top": 77,
+      "right": 413,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 101,
+      "top": 107,
+      "right": 410,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 104,
+      "top": 105,
+      "right": 407,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 54,
+      "top": 119,
+      "right": 456,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 109,
+      "top": 101,
+      "right": 403,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 120,
+      "top": 140,
+      "right": 390,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 150,
+      "top": 51,
+      "right": 360,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 77,
+      "top": 88,
+      "right": 434,
+      "bottom": 479
+    }
+  },
+  "edan": {
+    "run-a": {
+      "left": 88,
+      "top": 171,
+      "right": 424,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 106,
+      "top": 167,
+      "right": 404,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 112,
+      "top": 147,
+      "right": 400,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 209,
+      "right": 493,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 107,
+      "top": 191,
+      "right": 404,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 130,
+      "top": 215,
+      "right": 381,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 93,
+      "top": 184,
+      "right": 417,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 26,
+      "top": 203,
+      "right": 485,
+      "bottom": 479
+    }
+  },
+  "sylvan": {
+    "run-a": {
+      "left": 83,
+      "top": 211,
+      "right": 428,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 93,
+      "top": 202,
+      "right": 418,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 88,
+      "top": 196,
+      "right": 422,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 225,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 107,
+      "top": 202,
+      "right": 403,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 99,
+      "top": 232,
+      "right": 412,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 75,
+      "top": 192,
+      "right": 436,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 72,
+      "top": 199,
+      "right": 439,
+      "bottom": 479
+    }
+  },
+  "crab_guard": {
+    "run-a": {
+      "left": 85,
+      "top": 235,
+      "right": 426,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 73,
+      "top": 233,
+      "right": 438,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 97,
+      "top": 233,
+      "right": 413,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 18,
+      "top": 253,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 100,
+      "top": 251,
+      "right": 411,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 102,
+      "top": 261,
+      "right": 409,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 84,
+      "top": 196,
+      "right": 427,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 60,
+      "top": 200,
+      "right": 451,
+      "bottom": 479
+    }
+  },
+  "eel_archer": {
+    "run-a": {
+      "left": 45,
+      "top": 172,
+      "right": 465,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 48,
+      "top": 176,
+      "right": 462,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 55,
+      "top": 166,
+      "right": 455,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 18,
+      "top": 165,
+      "right": 493,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 56,
+      "top": 174,
+      "right": 455,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 64,
+      "top": 184,
+      "right": 445,
+      "bottom": 478
+    },
+    "skill-a": {
+      "left": 57,
+      "top": 165,
+      "right": 454,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 20,
+      "top": 168,
+      "right": 491,
+      "bottom": 478
+    }
+  },
+  "spore_colony": {
+    "run-a": {
+      "left": 49,
+      "top": 176,
+      "right": 461,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 65,
+      "top": 186,
+      "right": 447,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 80,
+      "top": 188,
+      "right": 429,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 193,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 101,
+      "top": 193,
+      "right": 410,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 76,
+      "top": 226,
+      "right": 434,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 109,
+      "top": 171,
+      "right": 402,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 51,
+      "top": 179,
+      "right": 461,
+      "bottom": 478
+    }
+  },
+  "mist_ram": {
+    "run-a": {
+      "left": 55,
+      "top": 209,
+      "right": 455,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 56,
+      "top": 218,
+      "right": 454,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 66,
+      "top": 218,
+      "right": 445,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 245,
+      "right": 493,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 83,
+      "top": 195,
+      "right": 426,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 88,
+      "top": 218,
+      "right": 423,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 59,
+      "top": 161,
+      "right": 452,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 36,
+      "top": 219,
+      "right": 475,
+      "bottom": 478
+    }
+  },
+  "crystal_insect": {
+    "run-a": {
+      "left": 71,
+      "top": 211,
+      "right": 439,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 91,
+      "top": 213,
+      "right": 419,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 103,
+      "top": 178,
+      "right": 408,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 18,
+      "top": 218,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 74,
+      "top": 219,
+      "right": 437,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 85,
+      "top": 218,
+      "right": 426,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 61,
+      "top": 201,
+      "right": 449,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 31,
+      "top": 198,
+      "right": 478,
+      "bottom": 479
+    }
+  },
+  "spring_salamander": {
+    "run-a": {
+      "left": 49,
+      "top": 269,
+      "right": 461,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 53,
+      "top": 275,
+      "right": 456,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 78,
+      "top": 265,
+      "right": 432,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 308,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 86,
+      "top": 273,
+      "right": 426,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 82,
+      "top": 276,
+      "right": 428,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 52,
+      "top": 212,
+      "right": 459,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 52,
+      "top": 280,
+      "right": 457,
+      "bottom": 479
+    }
+  },
+  "gold_puppet": {
+    "run-a": {
+      "left": 80,
+      "top": 153,
+      "right": 431,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 90,
+      "top": 158,
+      "right": 420,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 94,
+      "top": 153,
+      "right": 418,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 19,
+      "top": 164,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 96,
+      "top": 162,
+      "right": 415,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 125,
+      "top": 177,
+      "right": 386,
+      "bottom": 478
+    },
+    "skill-a": {
+      "left": 106,
+      "top": 161,
+      "right": 403,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 53,
+      "top": 182,
+      "right": 458,
+      "bottom": 478
+    }
+  },
+  "bell_keeper": {
+    "run-a": {
+      "left": 95,
+      "top": 172,
+      "right": 415,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 67,
+      "top": 165,
+      "right": 443,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 111,
+      "top": 154,
+      "right": 399,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 177,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 124,
+      "top": 144,
+      "right": 387,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 98,
+      "top": 192,
+      "right": 411,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 120,
+      "top": 122,
+      "right": 389,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 41,
+      "top": 143,
+      "right": 470,
+      "bottom": 478
+    }
+  },
+  "scroll_spirit": {
+    "run-a": {
+      "left": 94,
+      "top": 223,
+      "right": 417,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 94,
+      "top": 225,
+      "right": 416,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 114,
+      "top": 230,
+      "right": 396,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 248,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 100,
+      "top": 249,
+      "right": 410,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 138,
+      "top": 271,
+      "right": 373,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 130,
+      "top": 199,
+      "right": 380,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 71,
+      "top": 202,
+      "right": 439,
+      "bottom": 479
+    }
+  },
+  "eclipse_cat": {
+    "run-a": {
+      "left": 61,
+      "top": 212,
+      "right": 448,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 56,
+      "top": 235,
+      "right": 456,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 53,
+      "top": 206,
+      "right": 457,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 28,
+      "top": 238,
+      "right": 481,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 70,
+      "top": 193,
+      "right": 441,
+      "bottom": 478
+    },
+    "recoil": {
+      "left": 104,
+      "top": 242,
+      "right": 407,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 52,
+      "top": 175,
+      "right": 459,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 19,
+      "top": 230,
+      "right": 493,
+      "bottom": 479
+    }
+  },
+  "ink_vine": {
+    "run-a": {
+      "left": 103,
+      "top": 269,
+      "right": 407,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 115,
+      "top": 276,
+      "right": 395,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 127,
+      "top": 248,
+      "right": 384,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 296,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 133,
+      "top": 273,
+      "right": 377,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 143,
+      "top": 294,
+      "right": 367,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 99,
+      "top": 247,
+      "right": 412,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 79,
+      "top": 256,
+      "right": 432,
+      "bottom": 479
+    }
+  },
+  "hollow_armor": {
+    "run-a": {
+      "left": 49,
+      "top": 165,
+      "right": 460,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 78,
+      "top": 164,
+      "right": 434,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 77,
+      "top": 146,
+      "right": 433,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 202,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 104,
+      "top": 187,
+      "right": 406,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 102,
+      "top": 209,
+      "right": 409,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 109,
+      "top": 179,
+      "right": 402,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 67,
+      "top": 191,
+      "right": 444,
+      "bottom": 479
+    }
+  },
+  "tide_keeper": {
+    "run-a": {
+      "left": 109,
+      "top": 239,
+      "right": 401,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 81,
+      "top": 251,
+      "right": 430,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 110,
+      "top": 223,
+      "right": 401,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 281,
+      "right": 492,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 90,
+      "top": 237,
+      "right": 421,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 129,
+      "top": 287,
+      "right": 382,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 125,
+      "top": 205,
+      "right": 385,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 54,
+      "top": 258,
+      "right": 455,
+      "bottom": 479
+    }
+  },
+  "frost_queen": {
+    "run-a": {
+      "left": 96,
+      "top": 223,
+      "right": 415,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 103,
+      "top": 224,
+      "right": 409,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 85,
+      "top": 214,
+      "right": 424,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 222,
+      "right": 492,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 119,
+      "top": 196,
+      "right": 391,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 98,
+      "top": 242,
+      "right": 413,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 89,
+      "top": 204,
+      "right": 422,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 57,
+      "top": 230,
+      "right": 454,
+      "bottom": 479
+    }
+  },
+  "resonance_judge": {
+    "run-a": {
+      "left": 78,
+      "top": 247,
+      "right": 434,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 84,
+      "top": 243,
+      "right": 427,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 96,
+      "top": 219,
+      "right": 414,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 263,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 107,
+      "top": 237,
+      "right": 403,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 101,
+      "top": 250,
+      "right": 410,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 120,
+      "top": 197,
+      "right": 391,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 70,
+      "top": 245,
+      "right": 440,
+      "bottom": 479
+    }
+  },
+  "oath_guardian": {
+    "run-a": {
+      "left": 75,
+      "top": 88,
+      "right": 436,
+      "bottom": 477
+    },
+    "run-b": {
+      "left": 87,
+      "top": 80,
+      "right": 423,
+      "bottom": 477
+    },
+    "windup": {
+      "left": 87,
+      "top": 54,
+      "right": 424,
+      "bottom": 477
+    },
+    "strike": {
+      "left": 91,
+      "top": 95,
+      "right": 419,
+      "bottom": 476
+    },
+    "recover": {
+      "left": 78,
+      "top": 75,
+      "right": 431,
+      "bottom": 477
+    },
+    "recoil": {
+      "left": 91,
+      "top": 107,
+      "right": 420,
+      "bottom": 477
+    },
+    "skill-a": {
+      "left": 34,
+      "top": 13,
+      "right": 477,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 89,
+      "top": 60,
+      "right": 422,
+      "bottom": 477
+    }
+  },
+  "hero__form0": {
+    "run-a": {
+      "left": 77,
+      "top": 221,
+      "right": 432,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 78,
+      "top": 232,
+      "right": 432,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 104,
+      "top": 222,
+      "right": 407,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 215,
+      "right": 493,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 94,
+      "top": 201,
+      "right": 416,
+      "bottom": 477
+    },
+    "recoil": {
+      "left": 68,
+      "top": 230,
+      "right": 443,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 79,
+      "top": 178,
+      "right": 432,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 27,
+      "top": 206,
+      "right": 482,
+      "bottom": 479
+    }
+  },
+  "hero__form1": {
+    "run-a": {
+      "left": 78,
+      "top": 129,
+      "right": 432,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 73,
+      "top": 132,
+      "right": 437,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 103,
+      "top": 105,
+      "right": 408,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 18,
+      "top": 175,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 123,
+      "top": 132,
+      "right": 388,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 85,
+      "top": 141,
+      "right": 425,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 75,
+      "top": 114,
+      "right": 435,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 94,
+      "top": 80,
+      "right": 417,
+      "bottom": 479
+    }
+  },
+  "bram__form0": {
+    "run-a": {
+      "left": 73,
+      "top": 126,
+      "right": 437,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 82,
+      "top": 147,
+      "right": 428,
+      "bottom": 478
+    },
+    "windup": {
+      "left": 89,
+      "top": 121,
+      "right": 422,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 36,
+      "top": 150,
+      "right": 475,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 83,
+      "top": 100,
+      "right": 428,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 93,
+      "top": 125,
+      "right": 418,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 61,
+      "top": 122,
+      "right": 449,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 81,
+      "top": 128,
+      "right": 430,
+      "bottom": 479
+    }
+  },
+  "bram__form1": {
+    "run-a": {
+      "left": 89,
+      "top": 133,
+      "right": 422,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 90,
+      "top": 136,
+      "right": 420,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 96,
+      "top": 122,
+      "right": 414,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 175,
+      "right": 492,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 118,
+      "top": 131,
+      "right": 393,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 110,
+      "top": 148,
+      "right": 401,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 83,
+      "top": 138,
+      "right": 427,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 54,
+      "top": 124,
+      "right": 455,
+      "bottom": 478
+    }
+  },
+  "lina__form0": {
+    "run-a": {
+      "left": 33,
+      "top": 100,
+      "right": 478,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 36,
+      "top": 102,
+      "right": 474,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 45,
+      "top": 99,
+      "right": 466,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 37,
+      "top": 88,
+      "right": 474,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 88,
+      "top": 100,
+      "right": 423,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 44,
+      "top": 148,
+      "right": 467,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 50,
+      "top": 140,
+      "right": 462,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 46,
+      "top": 100,
+      "right": 463,
+      "bottom": 479
+    }
+  },
+  "lina__form1": {
+    "run-a": {
+      "left": 62,
+      "top": 108,
+      "right": 449,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 91,
+      "top": 113,
+      "right": 420,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 75,
+      "top": 116,
+      "right": 435,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 64,
+      "top": 80,
+      "right": 446,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 106,
+      "top": 101,
+      "right": 405,
+      "bottom": 478
+    },
+    "recoil": {
+      "left": 99,
+      "top": 117,
+      "right": 411,
+      "bottom": 478
+    },
+    "skill-a": {
+      "left": 89,
+      "top": 124,
+      "right": 422,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 87,
+      "top": 118,
+      "right": 423,
+      "bottom": 479
+    }
+  },
+  "aria__form0": {
+    "run-a": {
+      "left": 72,
+      "top": 188,
+      "right": 439,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 98,
+      "top": 185,
+      "right": 412,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 83,
+      "top": 179,
+      "right": 427,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 191,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 145,
+      "top": 171,
+      "right": 366,
+      "bottom": 478
+    },
+    "recoil": {
+      "left": 86,
+      "top": 174,
+      "right": 425,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 60,
+      "top": 170,
+      "right": 449,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 79,
+      "top": 152,
+      "right": 432,
+      "bottom": 479
+    }
+  },
+  "aria__form1": {
+    "run-a": {
+      "left": 112,
+      "top": 229,
+      "right": 398,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 113,
+      "top": 224,
+      "right": 398,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 101,
+      "top": 225,
+      "right": 408,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 224,
+      "right": 492,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 165,
+      "top": 227,
+      "right": 347,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 113,
+      "top": 227,
+      "right": 397,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 85,
+      "top": 213,
+      "right": 425,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 120,
+      "top": 224,
+      "right": 391,
+      "bottom": 479
+    }
+  },
+  "leon__form0": {
+    "run-a": {
+      "left": 98,
+      "top": 279,
+      "right": 413,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 129,
+      "top": 226,
+      "right": 382,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 96,
+      "top": 279,
+      "right": 415,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 291,
+      "right": 492,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 134,
+      "top": 217,
+      "right": 377,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 123,
+      "top": 243,
+      "right": 388,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 53,
+      "top": 266,
+      "right": 456,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 82,
+      "top": 273,
+      "right": 428,
+      "bottom": 478
+    }
+  },
+  "leon__form1": {
+    "run-a": {
+      "left": 115,
+      "top": 253,
+      "right": 395,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 142,
+      "top": 222,
+      "right": 369,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 83,
+      "top": 290,
+      "right": 428,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 300,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 130,
+      "top": 235,
+      "right": 381,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 128,
+      "top": 273,
+      "right": 382,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 58,
+      "top": 260,
+      "right": 452,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 98,
+      "top": 256,
+      "right": 412,
+      "bottom": 479
+    }
+  },
+  "sera__form0": {
+    "run-a": {
+      "left": 92,
+      "top": 163,
+      "right": 418,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 90,
+      "top": 158,
+      "right": 421,
+      "bottom": 478
+    },
+    "windup": {
+      "left": 92,
+      "top": 187,
+      "right": 419,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 193,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 116,
+      "top": 129,
+      "right": 394,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 103,
+      "top": 158,
+      "right": 408,
+      "bottom": 478
+    },
+    "skill-a": {
+      "left": 72,
+      "top": 183,
+      "right": 437,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 62,
+      "top": 164,
+      "right": 449,
+      "bottom": 479
+    }
+  },
+  "sera__form1": {
+    "run-a": {
+      "left": 86,
+      "top": 149,
+      "right": 425,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 90,
+      "top": 135,
+      "right": 419,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 63,
+      "top": 153,
+      "right": 448,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 154,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 130,
+      "top": 122,
+      "right": 380,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 119,
+      "top": 154,
+      "right": 391,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 31,
+      "top": 200,
+      "right": 480,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 57,
+      "top": 156,
+      "right": 454,
+      "bottom": 479
+    }
+  },
+  "noah__form0": {
+    "run-a": {
+      "left": 100,
+      "top": 102,
+      "right": 410,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 83,
+      "top": 104,
+      "right": 428,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 97,
+      "top": 96,
+      "right": 413,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 59,
+      "top": 109,
+      "right": 451,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 95,
+      "top": 100,
+      "right": 416,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 86,
+      "top": 100,
+      "right": 426,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 57,
+      "top": 85,
+      "right": 453,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 73,
+      "top": 85,
+      "right": 436,
+      "bottom": 479
+    }
+  },
+  "noah__form1": {
+    "run-a": {
+      "left": 99,
+      "top": 97,
+      "right": 413,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 87,
+      "top": 98,
+      "right": 424,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 92,
+      "top": 89,
+      "right": 419,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 52,
+      "top": 107,
+      "right": 459,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 87,
+      "top": 100,
+      "right": 422,
+      "bottom": 478
+    },
+    "recoil": {
+      "left": 82,
+      "top": 97,
+      "right": 429,
+      "bottom": 478
+    },
+    "skill-a": {
+      "left": 67,
+      "top": 87,
+      "right": 445,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 71,
+      "top": 94,
+      "right": 438,
+      "bottom": 478
+    }
+  },
+  "yuna__form0": {
+    "run-a": {
+      "left": 63,
+      "top": 120,
+      "right": 447,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 75,
+      "top": 125,
+      "right": 437,
+      "bottom": 478
+    },
+    "windup": {
+      "left": 103,
+      "top": 25,
+      "right": 408,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 43,
+      "top": 122,
+      "right": 468,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 87,
+      "top": 115,
+      "right": 424,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 69,
+      "top": 124,
+      "right": 442,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 84,
+      "top": 82,
+      "right": 428,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 114,
+      "top": 112,
+      "right": 397,
+      "bottom": 479
+    }
+  },
+  "yuna__form1": {
+    "run-a": {
+      "left": 71,
+      "top": 120,
+      "right": 440,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 72,
+      "top": 124,
+      "right": 439,
+      "bottom": 478
+    },
+    "windup": {
+      "left": 93,
+      "top": 25,
+      "right": 418,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 29,
+      "top": 114,
+      "right": 482,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 82,
+      "top": 116,
+      "right": 429,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 72,
+      "top": 122,
+      "right": 439,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 78,
+      "top": 85,
+      "right": 434,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 114,
+      "top": 86,
+      "right": 397,
+      "bottom": 479
+    }
+  },
+  "rakan__form0": {
+    "run-a": {
+      "left": 40,
+      "top": 99,
+      "right": 470,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 45,
+      "top": 107,
+      "right": 466,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 76,
+      "top": 30,
+      "right": 435,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 23,
+      "top": 104,
+      "right": 487,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 42,
+      "top": 101,
+      "right": 469,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 81,
+      "top": 92,
+      "right": 430,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 53,
+      "top": 65,
+      "right": 457,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 25,
+      "top": 110,
+      "right": 486,
+      "bottom": 479
+    }
+  },
+  "rakan__form1": {
+    "run-a": {
+      "left": 52,
+      "top": 98,
+      "right": 460,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 52,
+      "top": 104,
+      "right": 458,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 67,
+      "top": 30,
+      "right": 444,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 19,
+      "top": 110,
+      "right": 491,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 52,
+      "top": 101,
+      "right": 458,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 86,
+      "top": 89,
+      "right": 426,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 60,
+      "top": 60,
+      "right": 451,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 35,
+      "top": 102,
+      "right": 477,
+      "bottom": 479
+    }
+  },
+  "miho__form0": {
+    "run-a": {
+      "left": 77,
+      "top": 86,
+      "right": 432,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 57,
+      "top": 94,
+      "right": 454,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 80,
+      "top": 92,
+      "right": 430,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 53,
+      "top": 98,
+      "right": 459,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 81,
+      "top": 101,
+      "right": 431,
+      "bottom": 478
+    },
+    "recoil": {
+      "left": 79,
+      "top": 115,
+      "right": 431,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 69,
+      "top": 97,
+      "right": 442,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 53,
+      "top": 111,
+      "right": 457,
+      "bottom": 479
+    }
+  },
+  "miho__form1": {
+    "run-a": {
+      "left": 90,
+      "top": 100,
+      "right": 420,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 66,
+      "top": 104,
+      "right": 445,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 85,
+      "top": 109,
+      "right": 425,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 58,
+      "top": 102,
+      "right": 452,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 78,
+      "top": 100,
+      "right": 433,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 83,
+      "top": 134,
+      "right": 427,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 70,
+      "top": 98,
+      "right": 440,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 64,
+      "top": 106,
+      "right": 446,
+      "bottom": 479
+    }
+  },
+  "teo__form0": {
+    "run-a": {
+      "left": 59,
+      "top": 99,
+      "right": 451,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 44,
+      "top": 97,
+      "right": 466,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 71,
+      "top": 53,
+      "right": 440,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 38,
+      "top": 57,
+      "right": 473,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 68,
+      "top": 102,
+      "right": 443,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 67,
+      "top": 96,
+      "right": 445,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 58,
+      "top": 56,
+      "right": 453,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 24,
+      "top": 92,
+      "right": 486,
+      "bottom": 479
+    }
+  },
+  "teo__form1": {
+    "run-a": {
+      "left": 65,
+      "top": 88,
+      "right": 445,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 45,
+      "top": 102,
+      "right": 465,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 54,
+      "top": 59,
+      "right": 457,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 54,
+      "top": 69,
+      "right": 456,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 70,
+      "top": 100,
+      "right": 442,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 70,
+      "top": 108,
+      "right": 440,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 65,
+      "top": 89,
+      "right": 446,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 36,
+      "top": 103,
+      "right": 476,
+      "bottom": 479
+    }
+  },
+  "irene__form0": {
+    "run-a": {
+      "left": 62,
+      "top": 107,
+      "right": 449,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 67,
+      "top": 103,
+      "right": 443,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 71,
+      "top": 31,
+      "right": 440,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 38,
+      "top": 56,
+      "right": 473,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 78,
+      "top": 100,
+      "right": 432,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 59,
+      "top": 93,
+      "right": 452,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 45,
+      "top": 57,
+      "right": 465,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 57,
+      "top": 80,
+      "right": 454,
+      "bottom": 479
+    }
+  },
+  "irene__form1": {
+    "run-a": {
+      "left": 58,
+      "top": 112,
+      "right": 452,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 71,
+      "top": 110,
+      "right": 439,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 77,
+      "top": 30,
+      "right": 433,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 37,
+      "top": 57,
+      "right": 474,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 73,
+      "top": 102,
+      "right": 439,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 63,
+      "top": 106,
+      "right": 447,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 38,
+      "top": 53,
+      "right": 472,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 49,
+      "top": 68,
+      "right": 462,
+      "bottom": 479
+    }
+  },
+  "kaz__form0": {
+    "run-a": {
+      "left": 64,
+      "top": 102,
+      "right": 447,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 73,
+      "top": 127,
+      "right": 438,
+      "bottom": 478
+    },
+    "windup": {
+      "left": 87,
+      "top": 95,
+      "right": 425,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 36,
+      "top": 126,
+      "right": 474,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 71,
+      "top": 122,
+      "right": 438,
+      "bottom": 478
+    },
+    "recoil": {
+      "left": 90,
+      "top": 129,
+      "right": 421,
+      "bottom": 478
+    },
+    "skill-a": {
+      "left": 18,
+      "top": 208,
+      "right": 492,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 51,
+      "top": 125,
+      "right": 459,
+      "bottom": 479
+    }
+  },
+  "kaz__form1": {
+    "run-a": {
+      "left": 60,
+      "top": 113,
+      "right": 450,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 84,
+      "top": 133,
+      "right": 426,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 94,
+      "top": 92,
+      "right": 415,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 41,
+      "top": 128,
+      "right": 469,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 69,
+      "top": 124,
+      "right": 441,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 103,
+      "top": 128,
+      "right": 408,
+      "bottom": 478
+    },
+    "skill-a": {
+      "left": 18,
+      "top": 207,
+      "right": 493,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 60,
+      "top": 136,
+      "right": 452,
+      "bottom": 479
+    }
+  },
+  "ella__form0": {
+    "run-a": {
+      "left": 81,
+      "top": 80,
+      "right": 431,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 63,
+      "top": 85,
+      "right": 447,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 87,
+      "top": 81,
+      "right": 423,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 73,
+      "top": 108,
+      "right": 436,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 92,
+      "top": 101,
+      "right": 418,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 90,
+      "top": 117,
+      "right": 420,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 103,
+      "top": 93,
+      "right": 407,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 71,
+      "top": 92,
+      "right": 439,
+      "bottom": 479
+    }
+  },
+  "ella__form1": {
+    "run-a": {
+      "left": 76,
+      "top": 88,
+      "right": 435,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 79,
+      "top": 105,
+      "right": 431,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 95,
+      "top": 82,
+      "right": 417,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 75,
+      "top": 107,
+      "right": 436,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 84,
+      "top": 101,
+      "right": 426,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 92,
+      "top": 114,
+      "right": 418,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 106,
+      "top": 89,
+      "right": 405,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 70,
+      "top": 88,
+      "right": 441,
+      "bottom": 479
+    }
+  },
+  "jin__form0": {
+    "run-a": {
+      "left": 78,
+      "top": 115,
+      "right": 432,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 75,
+      "top": 128,
+      "right": 436,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 84,
+      "top": 49,
+      "right": 426,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 22,
+      "top": 140,
+      "right": 488,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 29,
+      "top": 131,
+      "right": 481,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 54,
+      "top": 134,
+      "right": 456,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 55,
+      "top": 64,
+      "right": 457,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 18,
+      "top": 112,
+      "right": 493,
+      "bottom": 479
+    }
+  },
+  "jin__form1": {
+    "run-a": {
+      "left": 76,
+      "top": 117,
+      "right": 434,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 75,
+      "top": 120,
+      "right": 436,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 85,
+      "top": 71,
+      "right": 425,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 29,
+      "top": 122,
+      "right": 482,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 41,
+      "top": 106,
+      "right": 469,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 53,
+      "top": 131,
+      "right": 456,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 64,
+      "top": 65,
+      "right": 447,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 18,
+      "top": 124,
+      "right": 493,
+      "bottom": 479
+    }
+  },
+  "luka__form0": {
+    "run-a": {
+      "left": 71,
+      "top": 122,
+      "right": 439,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 67,
+      "top": 119,
+      "right": 444,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 67,
+      "top": 52,
+      "right": 444,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 22,
+      "top": 139,
+      "right": 489,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 56,
+      "top": 125,
+      "right": 455,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 72,
+      "top": 131,
+      "right": 439,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 19,
+      "top": 181,
+      "right": 492,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 90,
+      "top": 37,
+      "right": 421,
+      "bottom": 479
+    }
+  },
+  "luka__form1": {
+    "run-a": {
+      "left": 72,
+      "top": 145,
+      "right": 437,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 63,
+      "top": 138,
+      "right": 448,
+      "bottom": 478
+    },
+    "windup": {
+      "left": 76,
+      "top": 73,
+      "right": 434,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 35,
+      "top": 139,
+      "right": 475,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 61,
+      "top": 124,
+      "right": 449,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 79,
+      "top": 127,
+      "right": 432,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 19,
+      "top": 181,
+      "right": 492,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 86,
+      "top": 50,
+      "right": 425,
+      "bottom": 479
+    }
+  },
+  "baekho__form0": {
+    "run-a": {
+      "left": 90,
+      "top": 81,
+      "right": 421,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 84,
+      "top": 77,
+      "right": 426,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 85,
+      "top": 94,
+      "right": 426,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 47,
+      "top": 107,
+      "right": 464,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 72,
+      "top": 100,
+      "right": 438,
+      "bottom": 478
+    },
+    "recoil": {
+      "left": 97,
+      "top": 118,
+      "right": 414,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 85,
+      "top": 149,
+      "right": 426,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 47,
+      "top": 111,
+      "right": 465,
+      "bottom": 478
+    }
+  },
+  "baekho__form1": {
+    "run-a": {
+      "left": 81,
+      "top": 92,
+      "right": 429,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 96,
+      "top": 96,
+      "right": 414,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 79,
+      "top": 88,
+      "right": 431,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 31,
+      "top": 106,
+      "right": 481,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 73,
+      "top": 100,
+      "right": 437,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 88,
+      "top": 118,
+      "right": 421,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 47,
+      "top": 120,
+      "right": 463,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 52,
+      "top": 114,
+      "right": 457,
+      "bottom": 479
+    }
+  },
+  "mare__form0": {
+    "run-a": {
+      "left": 46,
+      "top": 242,
+      "right": 463,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 57,
+      "top": 236,
+      "right": 455,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 106,
+      "top": 182,
+      "right": 406,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 259,
+      "right": 493,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 76,
+      "top": 230,
+      "right": 434,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 93,
+      "top": 265,
+      "right": 416,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 56,
+      "top": 196,
+      "right": 455,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 38,
+      "top": 229,
+      "right": 472,
+      "bottom": 478
+    }
+  },
+  "mare__form1": {
+    "run-a": {
+      "left": 50,
+      "top": 209,
+      "right": 462,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 52,
+      "top": 208,
+      "right": 459,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 90,
+      "top": 176,
+      "right": 418,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 257,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 75,
+      "top": 232,
+      "right": 436,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 100,
+      "top": 256,
+      "right": 411,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 72,
+      "top": 178,
+      "right": 439,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 29,
+      "top": 223,
+      "right": 481,
+      "bottom": 479
+    }
+  },
+  "harin__form0": {
+    "run-a": {
+      "left": 72,
+      "top": 56,
+      "right": 439,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 89,
+      "top": 69,
+      "right": 421,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 81,
+      "top": 93,
+      "right": 431,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 40,
+      "top": 102,
+      "right": 470,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 70,
+      "top": 101,
+      "right": 440,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 103,
+      "top": 118,
+      "right": 407,
+      "bottom": 478
+    },
+    "skill-a": {
+      "left": 111,
+      "top": 57,
+      "right": 400,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 43,
+      "top": 95,
+      "right": 469,
+      "bottom": 479
+    }
+  },
+  "harin__form1": {
+    "run-a": {
+      "left": 87,
+      "top": 77,
+      "right": 423,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 101,
+      "top": 99,
+      "right": 410,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 99,
+      "top": 102,
+      "right": 412,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 48,
+      "top": 114,
+      "right": 463,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 95,
+      "top": 100,
+      "right": 416,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 110,
+      "top": 137,
+      "right": 401,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 143,
+      "top": 51,
+      "right": 367,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 72,
+      "top": 85,
+      "right": 438,
+      "bottom": 479
+    }
+  },
+  "edan__form0": {
+    "run-a": {
+      "left": 76,
+      "top": 166,
+      "right": 434,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 97,
+      "top": 161,
+      "right": 414,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 99,
+      "top": 117,
+      "right": 412,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 19,
+      "top": 212,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 96,
+      "top": 193,
+      "right": 414,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 121,
+      "top": 219,
+      "right": 390,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 69,
+      "top": 180,
+      "right": 443,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 44,
+      "top": 206,
+      "right": 466,
+      "bottom": 479
+    }
+  },
+  "edan__form1": {
+    "run-a": {
+      "left": 68,
+      "top": 178,
+      "right": 443,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 85,
+      "top": 181,
+      "right": 425,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 93,
+      "top": 159,
+      "right": 417,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 18,
+      "top": 214,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 94,
+      "top": 196,
+      "right": 416,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 88,
+      "top": 205,
+      "right": 423,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 81,
+      "top": 207,
+      "right": 429,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 37,
+      "top": 222,
+      "right": 473,
+      "bottom": 479
+    }
+  },
+  "sylvan__form0": {
+    "run-a": {
+      "left": 78,
+      "top": 217,
+      "right": 432,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 88,
+      "top": 206,
+      "right": 422,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 76,
+      "top": 193,
+      "right": 433,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 228,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 109,
+      "top": 210,
+      "right": 402,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 95,
+      "top": 238,
+      "right": 416,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 77,
+      "top": 188,
+      "right": 433,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 70,
+      "top": 203,
+      "right": 440,
+      "bottom": 478
+    }
+  },
+  "sylvan__form1": {
+    "run-a": {
+      "left": 80,
+      "top": 218,
+      "right": 430,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 88,
+      "top": 212,
+      "right": 422,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 119,
+      "top": 230,
+      "right": 391,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 235,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 104,
+      "top": 204,
+      "right": 407,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 93,
+      "top": 231,
+      "right": 419,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 67,
+      "top": 203,
+      "right": 443,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 68,
+      "top": 203,
+      "right": 443,
+      "bottom": 479
+    }
+  },
+  "hero__promoted": {
+    "run-a": {
+      "left": 89,
+      "top": 173,
+      "right": 422,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 93,
+      "top": 177,
+      "right": 418,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 122,
+      "top": 111,
+      "right": 389,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 105,
+      "top": 164,
+      "right": 406,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 110,
+      "top": 111,
+      "right": 400,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 98,
+      "top": 148,
+      "right": 412,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 18,
+      "top": 208,
+      "right": 493,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 130,
+      "top": 114,
+      "right": 382,
+      "bottom": 479
+    }
+  },
+  "bram__promoted": {
+    "run-a": {
+      "left": 32,
+      "top": 58,
+      "right": 480,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 41,
+      "top": 54,
+      "right": 470,
+      "bottom": 478
+    },
+    "windup": {
+      "left": 104,
+      "top": 103,
+      "right": 407,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 30,
+      "top": 109,
+      "right": 480,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 29,
+      "top": 102,
+      "right": 483,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 43,
+      "top": 101,
+      "right": 469,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 66,
+      "top": 72,
+      "right": 445,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 28,
+      "top": 78,
+      "right": 484,
+      "bottom": 479
+    }
+  },
+  "lina__promoted": {
+    "run-a": {
+      "left": 48,
+      "top": 120,
+      "right": 462,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 74,
+      "top": 127,
+      "right": 437,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 88,
+      "top": 109,
+      "right": 424,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 84,
+      "top": 126,
+      "right": 428,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 69,
+      "top": 101,
+      "right": 442,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 94,
+      "top": 127,
+      "right": 416,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 97,
+      "top": 91,
+      "right": 415,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 72,
+      "top": 100,
+      "right": 439,
+      "bottom": 479
+    }
+  },
+  "aria__promoted": {
+    "run-a": {
+      "left": 51,
+      "top": 143,
+      "right": 459,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 48,
+      "top": 142,
+      "right": 462,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 83,
+      "top": 59,
+      "right": 429,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 41,
+      "top": 115,
+      "right": 471,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 86,
+      "top": 100,
+      "right": 425,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 89,
+      "top": 142,
+      "right": 424,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 73,
+      "top": 66,
+      "right": 437,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 35,
+      "top": 57,
+      "right": 476,
+      "bottom": 479
+    }
+  },
+  "leon__promoted": {
+    "run-a": {
+      "left": 22,
+      "top": 155,
+      "right": 490,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 30,
+      "top": 173,
+      "right": 480,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 74,
+      "top": 24,
+      "right": 436,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 44,
+      "top": 208,
+      "right": 468,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 18,
+      "top": 162,
+      "right": 492,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 61,
+      "top": 161,
+      "right": 450,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 82,
+      "top": 90,
+      "right": 427,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 43,
+      "top": 186,
+      "right": 467,
+      "bottom": 478
+    }
+  },
+  "sera__promoted": {
+    "run-a": {
+      "left": 72,
+      "top": 96,
+      "right": 438,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 82,
+      "top": 120,
+      "right": 429,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 71,
+      "top": 101,
+      "right": 440,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 71,
+      "top": 127,
+      "right": 440,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 56,
+      "top": 100,
+      "right": 454,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 68,
+      "top": 113,
+      "right": 444,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 88,
+      "top": 116,
+      "right": 423,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 69,
+      "top": 138,
+      "right": 442,
+      "bottom": 479
+    }
+  },
+  "noah__promoted": {
+    "run-a": {
+      "left": 79,
+      "top": 108,
+      "right": 431,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 74,
+      "top": 110,
+      "right": 436,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 92,
+      "top": 118,
+      "right": 419,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 74,
+      "top": 135,
+      "right": 436,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 80,
+      "top": 101,
+      "right": 431,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 96,
+      "top": 107,
+      "right": 413,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 102,
+      "top": 110,
+      "right": 408,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 78,
+      "top": 125,
+      "right": 433,
+      "bottom": 479
+    }
+  },
+  "yuna__promoted": {
+    "run-a": {
+      "left": 68,
+      "top": 119,
+      "right": 442,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 70,
+      "top": 121,
+      "right": 441,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 126,
+      "top": 90,
+      "right": 385,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 62,
+      "top": 113,
+      "right": 447,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 86,
+      "top": 100,
+      "right": 426,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 83,
+      "top": 144,
+      "right": 428,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 99,
+      "top": 91,
+      "right": 411,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 61,
+      "top": 100,
+      "right": 450,
+      "bottom": 479
+    }
+  },
+  "rakan__promoted": {
+    "run-a": {
+      "left": 37,
+      "top": 90,
+      "right": 474,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 47,
+      "top": 96,
+      "right": 463,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 79,
+      "top": 26,
+      "right": 433,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 60,
+      "top": 114,
+      "right": 451,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 28,
+      "top": 106,
+      "right": 482,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 92,
+      "top": 100,
+      "right": 419,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 67,
+      "top": 98,
+      "right": 445,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 32,
+      "top": 105,
+      "right": 480,
+      "bottom": 479
+    }
+  },
+  "miho__promoted": {
+    "run-a": {
+      "left": 68,
+      "top": 91,
+      "right": 443,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 87,
+      "top": 101,
+      "right": 423,
+      "bottom": 478
+    },
+    "windup": {
+      "left": 85,
+      "top": 110,
+      "right": 425,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 74,
+      "top": 119,
+      "right": 437,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 70,
+      "top": 100,
+      "right": 442,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 91,
+      "top": 115,
+      "right": 419,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 91,
+      "top": 78,
+      "right": 420,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 65,
+      "top": 103,
+      "right": 446,
+      "bottom": 479
+    }
+  },
+  "teo__promoted": {
+    "run-a": {
+      "left": 88,
+      "top": 119,
+      "right": 424,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 95,
+      "top": 133,
+      "right": 417,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 85,
+      "top": 98,
+      "right": 424,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 90,
+      "top": 84,
+      "right": 421,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 83,
+      "top": 100,
+      "right": 428,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 101,
+      "top": 136,
+      "right": 410,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 70,
+      "top": 93,
+      "right": 441,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 83,
+      "top": 85,
+      "right": 428,
+      "bottom": 479
+    }
+  },
+  "irene__promoted": {
+    "run-a": {
+      "left": 64,
+      "top": 154,
+      "right": 446,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 78,
+      "top": 158,
+      "right": 432,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 92,
+      "top": 87,
+      "right": 418,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 61,
+      "top": 186,
+      "right": 450,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 74,
+      "top": 102,
+      "right": 437,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 98,
+      "top": 141,
+      "right": 412,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 67,
+      "top": 101,
+      "right": 444,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 68,
+      "top": 101,
+      "right": 443,
+      "bottom": 479
+    }
+  },
+  "kaz__promoted": {
+    "run-a": {
+      "left": 35,
+      "top": 91,
+      "right": 476,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 60,
+      "top": 101,
+      "right": 450,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 65,
+      "top": 48,
+      "right": 445,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 59,
+      "top": 123,
+      "right": 452,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 45,
+      "top": 102,
+      "right": 465,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 70,
+      "top": 74,
+      "right": 440,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 87,
+      "top": 68,
+      "right": 424,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 27,
+      "top": 127,
+      "right": 486,
+      "bottom": 478
+    }
+  },
+  "ella__promoted": {
+    "run-a": {
+      "left": 85,
+      "top": 110,
+      "right": 425,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 81,
+      "top": 127,
+      "right": 430,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 93,
+      "top": 79,
+      "right": 417,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 67,
+      "top": 132,
+      "right": 444,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 64,
+      "top": 101,
+      "right": 447,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 93,
+      "top": 144,
+      "right": 417,
+      "bottom": 478
+    },
+    "skill-a": {
+      "left": 80,
+      "top": 110,
+      "right": 431,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 74,
+      "top": 98,
+      "right": 436,
+      "bottom": 479
+    }
+  },
+  "jin__promoted": {
+    "run-a": {
+      "left": 68,
+      "top": 128,
+      "right": 443,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 71,
+      "top": 126,
+      "right": 439,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 75,
+      "top": 70,
+      "right": 436,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 20,
+      "top": 146,
+      "right": 491,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 23,
+      "top": 100,
+      "right": 487,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 32,
+      "top": 98,
+      "right": 478,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 52,
+      "top": 138,
+      "right": 460,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 21,
+      "top": 115,
+      "right": 491,
+      "bottom": 479
+    }
+  },
+  "luka__promoted": {
+    "run-a": {
+      "left": 96,
+      "top": 171,
+      "right": 413,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 89,
+      "top": 174,
+      "right": 421,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 86,
+      "top": 127,
+      "right": 424,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 75,
+      "top": 187,
+      "right": 435,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 100,
+      "top": 139,
+      "right": 409,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 108,
+      "top": 177,
+      "right": 403,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 18,
+      "top": 203,
+      "right": 493,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 113,
+      "top": 118,
+      "right": 400,
+      "bottom": 479
+    }
+  },
+  "baekho__promoted": {
+    "run-a": {
+      "left": 89,
+      "top": 136,
+      "right": 421,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 86,
+      "top": 135,
+      "right": 424,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 90,
+      "top": 127,
+      "right": 421,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 67,
+      "top": 137,
+      "right": 444,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 63,
+      "top": 100,
+      "right": 447,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 90,
+      "top": 117,
+      "right": 423,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 51,
+      "top": 114,
+      "right": 458,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 91,
+      "top": 97,
+      "right": 419,
+      "bottom": 479
+    }
+  },
+  "mare__promoted": {
+    "run-a": {
+      "left": 48,
+      "top": 157,
+      "right": 463,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 37,
+      "top": 165,
+      "right": 473,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 48,
+      "top": 53,
+      "right": 462,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 55,
+      "top": 186,
+      "right": 456,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 33,
+      "top": 102,
+      "right": 478,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 54,
+      "top": 125,
+      "right": 456,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 78,
+      "top": 111,
+      "right": 432,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 48,
+      "top": 110,
+      "right": 463,
+      "bottom": 479
+    }
+  },
+  "harin__promoted": {
+    "run-a": {
+      "left": 103,
+      "top": 108,
+      "right": 407,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 113,
+      "top": 127,
+      "right": 398,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 112,
+      "top": 138,
+      "right": 398,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 96,
+      "top": 157,
+      "right": 415,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 99,
+      "top": 101,
+      "right": 412,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 88,
+      "top": 140,
+      "right": 422,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 103,
+      "top": 116,
+      "right": 407,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 73,
+      "top": 136,
+      "right": 439,
+      "bottom": 479
+    }
+  },
+  "edan__promoted": {
+    "run-a": {
+      "left": 69,
+      "top": 151,
+      "right": 441,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 75,
+      "top": 132,
+      "right": 435,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 84,
+      "top": 66,
+      "right": 426,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 73,
+      "top": 161,
+      "right": 439,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 92,
+      "top": 101,
+      "right": 418,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 99,
+      "top": 115,
+      "right": 414,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 79,
+      "top": 181,
+      "right": 432,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 71,
+      "top": 141,
+      "right": 439,
+      "bottom": 479
+    }
+  },
+  "sylvan__promoted": {
+    "run-a": {
+      "left": 87,
+      "top": 148,
+      "right": 423,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 93,
+      "top": 159,
+      "right": 418,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 88,
+      "top": 93,
+      "right": 423,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 53,
+      "top": 194,
+      "right": 457,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 81,
+      "top": 101,
+      "right": 429,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 84,
+      "top": 149,
+      "right": 429,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 83,
+      "top": 96,
+      "right": 427,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 72,
+      "top": 109,
+      "right": 438,
+      "bottom": 478
+    }
+  },
+  "hero__dawnblade": {
+    "run-a": {
+      "left": 73,
+      "top": 148,
+      "right": 437,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 83,
+      "top": 150,
+      "right": 427,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 77,
+      "top": 69,
+      "right": 434,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 54,
+      "top": 180,
+      "right": 456,
+      "bottom": 478
+    },
+    "recover": {
+      "left": 74,
+      "top": 105,
+      "right": 436,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 60,
+      "top": 132,
+      "right": 451,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 20,
+      "top": 160,
+      "right": 493,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 98,
+      "top": 64,
+      "right": 412,
+      "bottom": 479
+    }
+  },
+  "bram__oathwarden": {
+    "run-a": {
+      "left": 61,
+      "top": 118,
+      "right": 449,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 71,
+      "top": 129,
+      "right": 439,
+      "bottom": 478
+    },
+    "windup": {
+      "left": 83,
+      "top": 80,
+      "right": 427,
+      "bottom": 478
+    },
+    "strike": {
+      "left": 34,
+      "top": 145,
+      "right": 476,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 70,
+      "top": 102,
+      "right": 440,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 64,
+      "top": 118,
+      "right": 448,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 40,
+      "top": 149,
+      "right": 471,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 74,
+      "top": 161,
+      "right": 437,
+      "bottom": 479
+    }
+  },
+  "silvan": {
+    "run-a": {
+      "left": 83,
+      "top": 211,
+      "right": 428,
+      "bottom": 478
+    },
+    "run-b": {
+      "left": 93,
+      "top": 202,
+      "right": 418,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 88,
+      "top": 196,
+      "right": 422,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 225,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 107,
+      "top": 202,
+      "right": 403,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 99,
+      "top": 232,
+      "right": 412,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 75,
+      "top": 192,
+      "right": 436,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 72,
+      "top": 199,
+      "right": 439,
+      "bottom": 479
+    }
+  },
+  "silvan__form0": {
+    "run-a": {
+      "left": 78,
+      "top": 217,
+      "right": 432,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 88,
+      "top": 206,
+      "right": 422,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 76,
+      "top": 193,
+      "right": 433,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 228,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 109,
+      "top": 210,
+      "right": 402,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 95,
+      "top": 238,
+      "right": 416,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 77,
+      "top": 188,
+      "right": 433,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 70,
+      "top": 203,
+      "right": 440,
+      "bottom": 478
+    }
+  },
+  "silvan__form1": {
+    "run-a": {
+      "left": 80,
+      "top": 218,
+      "right": 430,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 88,
+      "top": 212,
+      "right": 422,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 119,
+      "top": 230,
+      "right": 391,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 18,
+      "top": 235,
+      "right": 493,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 104,
+      "top": 204,
+      "right": 407,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 93,
+      "top": 231,
+      "right": 419,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 67,
+      "top": 203,
+      "right": 443,
+      "bottom": 479
+    },
+    "skill-b": {
+      "left": 68,
+      "top": 203,
+      "right": 443,
+      "bottom": 479
+    }
+  },
+  "silvan__promoted": {
+    "run-a": {
+      "left": 87,
+      "top": 148,
+      "right": 423,
+      "bottom": 479
+    },
+    "run-b": {
+      "left": 93,
+      "top": 159,
+      "right": 418,
+      "bottom": 479
+    },
+    "windup": {
+      "left": 88,
+      "top": 93,
+      "right": 423,
+      "bottom": 479
+    },
+    "strike": {
+      "left": 53,
+      "top": 194,
+      "right": 457,
+      "bottom": 479
+    },
+    "recover": {
+      "left": 81,
+      "top": 101,
+      "right": 429,
+      "bottom": 479
+    },
+    "recoil": {
+      "left": 84,
+      "top": 149,
+      "right": 429,
+      "bottom": 479
+    },
+    "skill-a": {
+      "left": 83,
+      "top": 96,
+      "right": 427,
+      "bottom": 478
+    },
+    "skill-b": {
+      "left": 72,
+      "top": 109,
+      "right": 438,
+      "bottom": 478
+    }
+  }
+}

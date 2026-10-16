@@ -168,13 +168,6 @@ export default function SkillSpectacle({ plan }) {
   </div>;
 }
 
-const HERO_BLADE = {
-  windup: { grip: [310, 186], tip: [149, 129] },
-  strike: { grip: [336, 276], tip: [491, 276] },
-  'skill-a': { grip: [329, 288], tip: [488, 288] },
-  'skill-b': { grip: [329, 214], tip: [335, 72] },
-};
-
 const WEAPON_KINDS = {
   sword: 'blade', greatsword: 'blade', katana: 'blade', scimitar: 'blade',
   lance: 'spear', polearm: 'spear', halberd: 'axe', poleaxe: 'axe', club: 'hammer',
@@ -345,13 +338,14 @@ export function SwordSkillAura({ plan, unitKey }) {
   const color = visual.sword.kind === 'gold' ? '#eabc59' : '#ff8739';
   const core = visual.sword.kind === 'gold' ? '#fff5c5' : '#fff2ae';
   return ['windup', 'strike', 'skill'].map(pose => {
-    const anchor = HERO_BLADE[pose === 'skill' ? skillFrame : pose];
+    const sourcePose = pose === 'skill' ? skillFrame : pose;
+    const anchor = getSkillAuraAnchor(unitKey, sourcePose, plan.weapon);
     const [x, y] = anchor.grip;
     const length = Math.hypot(anchor.tip[0] - x, anchor.tip[1] - y);
     const angle = Math.atan2(anchor.tip[1] - y, anchor.tip[0] - x) * 180 / Math.PI;
-    const style = pose === 'skill' && plan.skillPose ? { '--combat-sprite-scale': plan.skillPose.scale, '--combat-foot-offset': plan.skillPose.footOffset || '0%' } : getCombatFrameStyle(unitKey, pose);
+    const style = pose === 'skill' && plan.skillPose ? { '--combat-sprite-scale': plan.skillPose.scale, '--combat-foot-offset': plan.skillPose.footOffset || '0%' } : getCombatFrameStyle(unitKey, sourcePose);
     const id = `blade-${unique}-${pose}`;
-    return <svg key={pose} className="vfx-blade-aura" viewBox="0 0 512 512" data-vfx-phase="weapon" data-vfx-anchor="weapon" data-pose={pose} data-grip={anchor.grip.join(',')} data-tip={anchor.tip.join(',')} data-kind="blade" data-vfx-kind="blade" data-vfx-unit={unitKey} data-anchor-origin="authored-frame" data-anchor-authored="true" style={style} aria-hidden="true">
+    return <svg key={pose} className="vfx-blade-aura" viewBox="0 0 512 512" data-vfx-phase="weapon" data-vfx-anchor="weapon" data-pose={pose} data-grip={anchor.grip.join(',')} data-tip={anchor.tip.join(',')} data-kind="blade" data-vfx-kind="blade" data-vfx-unit={unitKey} data-anchor-origin={anchor.origin} data-anchor-authored={String(anchor.authored)} data-anchor-reviewed={String(Boolean(anchor.reviewed))} style={style} aria-hidden="true">
       <LightPaint id={id} color={color} core={core} />
       <g transform={`translate(${x} ${y}) rotate(${angle})`} fill="none" strokeLinecap="round">
         <path d={`M12 0Q${length * .3} -20 ${length * .6} -13Q${length * .82} -23 ${length + 6} 0Q${length * .8} 15 ${length * .6} 9Q${length * .35} 22 12 0Z`} fill={`url(#${id}-ribbon)`} opacity=".6" />

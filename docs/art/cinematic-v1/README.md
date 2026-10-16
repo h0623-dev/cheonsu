@@ -43,3 +43,15 @@ node scripts/prepare-cinematic-art.mjs
 ```
 
 일부 시트가 먼저 준비되면 `--only=aria`처럼 지정할 수 있습니다. 산출물 제작 이후 테스트·린트·스모크·브라우저·별도 에셋 대조는 이 제작기에서 실행하지 않습니다. 사용자 지시에 따라 수정 후 별도 검증은 실행하지 않았습니다.
+
+## 실제 원화 경계를 사용하는 전투 배치 자료
+
+확대된 보스의 검·창이나 넓은 자세는 recover의 높이만으로 화면 여유를 계산할 수 없습니다. `scripts/prepare-cinematic-bounds.mjs`는 기존 `combatArtKeys` 132개와 각 8개 자세의 실제 원화 입력을 읽고 alpha가 64보다 큰 픽셀의 `left`, `top`, `right`, `bottom`을 `src/data/cinematicFrameBounds.json`에 제작합니다. 이는 몸과 무기 실루엣을 함께 수용하는 런타임 배치용 자료이며 이미지 검사 통과 기록이 아닙니다.
+
+각 경계는 원본 512px 좌표계이고 `right`, `bottom`은 마지막 픽셀을 포함합니다. 기술 자세는 `getCharacterArt(key).motion[pose]`를 우선 사용하여 recover로 대체하지 않습니다. 확장·전직 원화는 기존 레지스트리로 해석하며 기존 `sylvan`과 원본 자산 철자 `silvan` 별칭도 같은 경계로 제공합니다. 아트 카탈로그의 실제 캐릭터 수는 변경하지 않습니다.
+
+```sh
+node scripts/prepare-cinematic-bounds.mjs
+```
+
+별도 JSON을 사용하므로 기존 manifest의 metrics 자료 형태는 보존합니다. 입력 픽셀로 배치 메타데이터를 제작한 뒤 출력 원화 대조·독립 QA·테스트는 실행하지 않습니다.
