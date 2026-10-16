@@ -4,7 +4,7 @@ const bound = (value, low, high) => Math.max(low, Math.min(high, finite(value, l
 
 // Every new visual belongs to the existing duel animation pool. No damage, clock or pose is changed.
 export function animateEpicCombat(root, plan, {
-  arena, attacker, d, dy, weaponPoint, miss, support, selfSupport,
+  arena, attacker, d, dy, ground, weaponPoint, miss, support, selfSupport,
 }, animate) {
   const width = finite(arena.clientWidth), height = finite(arena.clientHeight);
   if (width <= 0 || height <= 0) return;
@@ -20,6 +20,7 @@ export function animateEpicCombat(root, plan, {
   const impact = contacts[0] ?? clamp(plan.impact);
   const firstRelease = clamp(plan.releases?.[0] ?? impact - .02);
   const targetX = bound(d, 0, width), targetY = bound(dy, 0, height);
+  const floorY = bound(ground, 0, height);
   const unit = Math.max(1, Math.min(finite(attacker.offsetWidth, 150), height * .68));
   const theme = plan.spectacle?.theme || root.dataset.epicTheme || 'martial';
   const quiet = support || selfSupport || ['holy', 'heal', 'guard'].includes(theme);
