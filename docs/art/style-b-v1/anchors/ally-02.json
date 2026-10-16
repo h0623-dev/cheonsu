@@ -19,8 +19,8 @@
           0.419149
         ],
         "tip": [
-          0.370732,
-          0.097872
+          0.368293,
+          0.110638
         ],
         "focus": [
           0.37561,
@@ -34,7 +34,21 @@
         "height": 470
       },
       "anchorSpace": "cell-fraction",
-      "bodyHeight": 0.702128
+      "bodyHeight": 0.702128,
+      "physicalAnchorAuthoring": {
+        "method": "실제 생성 원본 RGBA·정수 셀 영역·가시적인 손/무기 도형을 바탕으로 수동 저작한 입력 좌표. 완성 WebP나 게임 출력 검사 결과가 아님. 일반적인 최근접 불투명 픽셀 이동을 사용하지 않음.",
+        "sourceDimensions": [
+          1254,
+          1254
+        ],
+        "note": "청색 구슬의 금속 장식 끝 안쪽을 식별. 구슬 방출점은 보존.",
+        "sourcePoints": {
+          "tip": [
+            151,
+            52
+          ]
+        }
+      }
     },
     {
       "id": "aria",
@@ -49,8 +63,8 @@
           0.389362
         ],
         "tip": [
-          0.986813,
-          0.314894
+          0.96044,
+          0.321277
         ],
         "focus": [
           0.883516,
@@ -64,7 +78,21 @@
         "height": 470
       },
       "anchorSpace": "cell-fraction",
-      "bodyHeight": 0.66383
+      "bodyHeight": 0.66383,
+      "physicalAnchorAuthoring": {
+        "method": "실제 생성 원본 RGBA·정수 셀 영역·가시적인 손/무기 도형을 바탕으로 수동 저작한 입력 좌표. 완성 WebP나 게임 출력 검사 결과가 아님. 일반적인 최근접 불투명 픽셀 이동을 사용하지 않음.",
+        "sourceDimensions": [
+          1254,
+          1254
+        ],
+        "note": "청색 구슬의 금속 장식 끝 안쪽을 식별. 구슬 방출점은 보존.",
+        "sourcePoints": {
+          "tip": [
+            847,
+            151
+          ]
+        }
+      }
     },
     {
       "id": "aria",
@@ -109,12 +137,12 @@
           0.571429
         ],
         "tip": [
-          0.988532,
-          0.871429
+          0.977064,
+          0.86
         ],
         "focus": [
-          0.988532,
-          0.871429
+          0.977064,
+          0.86
         ]
       },
       "box": {
@@ -126,7 +154,25 @@
       "anchorSpace": "cell-fraction",
       "bodyHeight": 0.937143,
       "isolateSilhouette": true,
-      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님."
+      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님.",
+      "physicalAnchorAuthoring": {
+        "method": "실제 생성 원본 RGBA·정수 셀 영역·가시적인 손/무기 도형을 바탕으로 수동 저작한 입력 좌표. 완성 WebP나 게임 출력 검사 결과가 아님. 일반적인 최근접 불투명 픽셀 이동을 사용하지 않음.",
+        "sourceDimensions": [
+          1254,
+          1254
+        ],
+        "note": "창 촉의 은빛 금속 면 및 창대를 쥔 장갑 안쪽을 식별. 망토가 아닌 촉의 도형을 기준으로 지정.",
+        "sourcePoints": {
+          "tip": [
+            426,
+            781
+          ],
+          "focus": [
+            426,
+            781
+          ]
+        }
+      }
     },
     {
       "id": "leon",
@@ -137,15 +183,15 @@
       "anchors": {
         "kind": "spear",
         "grip": [
-          0.714563,
-          0.402857
+          0.671845,
+          0.388571
         ],
         "tip": [
-          0.984466,
+          0.939806,
           0.451429
         ],
         "focus": [
-          0.984466,
+          0.939806,
           0.451429
         ]
       },
@@ -158,7 +204,29 @@
       "anchorSpace": "cell-fraction",
       "bodyHeight": 0.777143,
       "isolateSilhouette": true,
-      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님."
+      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님.",
+      "physicalAnchorAuthoring": {
+        "method": "실제 생성 원본 RGBA·정수 셀 영역·가시적인 손/무기 도형을 바탕으로 수동 저작한 입력 좌표. 완성 WebP나 게임 출력 검사 결과가 아님. 일반적인 최근접 불투명 픽셀 이동을 사용하지 않음.",
+        "sourceDimensions": [
+          1254,
+          1254
+        ],
+        "note": "창 촉의 은빛 금속 면 및 창대를 쥔 장갑 안쪽을 식별. 망토가 아닌 촉의 도형을 기준으로 지정.",
+        "sourcePoints": {
+          "grip": [
+            726,
+            616
+          ],
+          "tip": [
+            864,
+            638
+          ],
+          "focus": [
+            864,
+            638
+          ]
+        }
+      }
     },
     {
       "id": "leon",
@@ -169,16 +237,16 @@
       "anchors": {
         "kind": "spear",
         "grip": [
-          0.816425,
-          0.577143
+          0.772947,
+          0.574286
         ],
         "tip": [
-          0.985507,
-          0.594286
+          0.94686,
+          0.591429
         ],
         "focus": [
-          0.985507,
-          0.594286
+          0.94686,
+          0.591429
         ]
       },
       "box": {
@@ -190,7 +258,29 @@
       "anchorSpace": "cell-fraction",
       "bodyHeight": 0.582857,
       "isolateSilhouette": true,
-      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님."
+      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님.",
+      "physicalAnchorAuthoring": {
+        "method": "실제 생성 원본 RGBA·정수 셀 영역·가시적인 손/무기 도형을 바탕으로 수동 저작한 입력 좌표. 완성 WebP나 게임 출력 검사 결과가 아님. 일반적인 최근접 불투명 픽셀 이동을 사용하지 않음.",
+        "sourceDimensions": [
+          1254,
+          1254
+        ],
+        "note": "창 촉의 은빛 금속 면 및 창대를 쥔 장갑 안쪽을 식별. 망토가 아닌 촉의 도형을 기준으로 지정.",
+        "sourcePoints": {
+          "grip": [
+            1160,
+            681
+          ],
+          "tip": [
+            1232,
+            687
+          ],
+          "focus": [
+            1232,
+            687
+          ]
+        }
+      }
     },
     {
       "id": "sera",
@@ -205,12 +295,12 @@
           0.572792
         ],
         "tip": [
-          0.936585,
-          0.708831
+          0.931707,
+          0.704057
         ],
         "focus": [
-          0.936585,
-          0.708831
+          0.931707,
+          0.704057
         ],
         "secondary": {
           "grip": [
@@ -218,8 +308,8 @@
             0.53222
           ],
           "tip": [
-            0.078049,
-            0.656325
+            0.102439,
+            0.639618
           ]
         }
       },
@@ -230,7 +320,29 @@
         "height": 419
       },
       "anchorSpace": "cell-fraction",
-      "bodyHeight": 0.699284
+      "bodyHeight": 0.699284,
+      "physicalAnchorAuthoring": {
+        "method": "실제 생성 원본 RGBA·정수 셀 영역·가시적인 손/무기 도형을 바탕으로 수동 저작한 입력 좌표. 완성 WebP나 게임 출력 검사 결과가 아님. 일반적인 최근접 불투명 픽셀 이동을 사용하지 않음.",
+        "sourceDimensions": [
+          1254,
+          1254
+        ],
+        "note": "두 단검의 금속 촉 끝과 장갑을 각각 식별.",
+        "sourcePoints": {
+          "tip": [
+            382,
+            1130
+          ],
+          "focus": [
+            382,
+            1130
+          ],
+          "secondary.tip": [
+            42,
+            1103
+          ]
+        }
+      }
     },
     {
       "id": "sera",
@@ -245,12 +357,12 @@
           0.46778
         ],
         "tip": [
-          0.974026,
-          0.508353
+          0.954545,
+          0.50358
         ],
         "focus": [
-          0.974026,
-          0.508353
+          0.954545,
+          0.50358
         ],
         "secondary": {
           "grip": [
@@ -272,7 +384,25 @@
       "anchorSpace": "cell-fraction",
       "bodyHeight": 0.596659,
       "isolateSilhouette": true,
-      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님."
+      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님.",
+      "physicalAnchorAuthoring": {
+        "method": "실제 생성 원본 RGBA·정수 셀 영역·가시적인 손/무기 도형을 바탕으로 수동 저작한 입력 좌표. 완성 WebP나 게임 출력 검사 결과가 아님. 일반적인 최근접 불투명 픽셀 이동을 사용하지 않음.",
+        "sourceDimensions": [
+          1254,
+          1254
+        ],
+        "note": "두 단검의 금속 촉 끝과 장갑을 각각 식별.",
+        "sourcePoints": {
+          "tip": [
+            851,
+            1046
+          ],
+          "focus": [
+            851,
+            1046
+          ]
+        }
+      }
     },
     {
       "id": "sera",
@@ -283,16 +413,16 @@
       "anchors": {
         "kind": "dagger",
         "grip": [
-          0.864734,
-          0.558473
+          0.84058,
+          0.529833
         ],
         "tip": [
-          0.968599,
-          0.706444
+          0.956522,
+          0.689737
         ],
         "focus": [
-          0.968599,
-          0.706444
+          0.956522,
+          0.689737
         ],
         "secondary": {
           "grip": [
@@ -300,8 +430,8 @@
             0.23389
           ],
           "tip": [
-            0.028986,
-            0.336516
+            0.036232,
+            0.334129
           ]
         }
       },
@@ -314,7 +444,33 @@
       "anchorSpace": "cell-fraction",
       "bodyHeight": 0.677804,
       "isolateSilhouette": true,
-      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님."
+      "reviewMethod": "수동 저작 근사 좌표. source box는 전신·무기 전체를 담으며 근접한 다른 배우의 분리된 끝 조각은 기존 splitSilhouettes 생산 옵션으로 제외. 실제 도형 복원·붙이기 또는 게임 QA가 아님.",
+      "physicalAnchorAuthoring": {
+        "method": "실제 생성 원본 RGBA·정수 셀 영역·가시적인 손/무기 도형을 바탕으로 수동 저작한 입력 좌표. 완성 WebP나 게임 출력 검사 결과가 아님. 일반적인 최근접 불투명 픽셀 이동을 사용하지 않음.",
+        "sourceDimensions": [
+          1254,
+          1254
+        ],
+        "note": "두 단검의 금속 촉 끝과 장갑을 각각 식별.",
+        "sourcePoints": {
+          "grip": [
+            1188,
+            1057
+          ],
+          "tip": [
+            1236,
+            1124
+          ],
+          "focus": [
+            1236,
+            1124
+          ],
+          "secondary.tip": [
+            855,
+            975
+          ]
+        }
+      }
     }
   ]
 }

@@ -2,7 +2,7 @@
   "key": "boss-01",
   "authoringComplete": true,
   "anchorSpace": "cell-fraction",
-  "reviewMethod": "생성 PNG 원본의 손·무기끝·결정/음차 발광점과 실제 투명 분할 여백을 보며 수동 근사 저작. sourceRect 내부 비율이며 왕관 포함 두정부~발끝 bodyHeight는 무기·손·떠있는 석판을 제외함. 완성 WebP·게임 화면 QA 또는 자동 검증은 실행하지 않음.",
+  "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함.",
   "sourceImage": "exec-a5c1cd10-dd82-4ba7-9804-c47cc0fd7cb4.png",
   "sourceDimensions": [
     1254,
@@ -19,16 +19,16 @@
       "anchors": {
         "kind": "blade",
         "grip": [
-          0.47027,
-          0.609524
+          0.4690027,
+          0.60759494
         ],
         "tip": [
-          0.910811,
-          0.879365
+          0.88679245,
+          0.87025316
         ],
         "focus": [
-          0.910811,
-          0.879365
+          0.88679245,
+          0.87025316
         ]
       },
       "sourceRect": [
@@ -37,21 +37,66 @@
         0.29505582,
         0.25119617
       ],
-      "bodyHeight": 0.863492,
+      "bodyHeight": 0.86075949,
       "sourceLandmarksPx": {
         "grip": [
           214,
           292
         ],
         "tip": [
-          377,
-          377
+          369,
+          375
         ],
         "focus": [
-          377,
-          377
+          369,
+          375
         ],
         "headToFootHeight": 272
+      },
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "금빛 장갑을 보존하고 실제 은빛 검날 끝 바로 안쪽.",
+        "pointsPx": {
+          "grip": [
+            214,
+            292
+          ],
+          "tip": [
+            369,
+            375
+          ],
+          "focus": [
+            369,
+            375
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            208,
+            113,
+            31,
+            253
+          ],
+          "tip": [
+            235,
+            233,
+            233,
+            244
+          ],
+          "focus": [
+            235,
+            233,
+            233,
+            244
+          ]
+        },
+        "normalizationBox": {
+          "left": 40,
+          "top": 100,
+          "width": 371,
+          "height": 316
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
       }
     },
     {
@@ -63,16 +108,16 @@
       "anchors": {
         "kind": "blade",
         "grip": [
-          0.614737,
-          0.450847
+          0.61554622,
+          0.44932432
         ],
         "tip": [
-          0.978947,
-          0.501695
+          0.96638655,
+          0.49662162
         ],
         "focus": [
-          0.978947,
-          0.501695
+          0.96638655,
+          0.49662162
         ]
       },
       "sourceRect": [
@@ -81,21 +126,66 @@
         0.37878788,
         0.23524721
       ],
-      "bodyHeight": 0.789831,
+      "bodyHeight": 0.78716216,
       "sourceLandmarksPx": {
         "grip": [
           722,
           253
         ],
         "tip": [
-          895,
-          268
+          889,
+          267
         ],
         "focus": [
-          895,
-          268
+          889,
+          267
         ],
         "headToFootHeight": 233
+      },
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "금빛 장갑을 보존하고 실제 은빛 검날 끝 바로 안쪽.",
+        "pointsPx": {
+          "grip": [
+            722,
+            253
+          ],
+          "tip": [
+            889,
+            267
+          ],
+          "focus": [
+            889,
+            267
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            35,
+            8,
+            4,
+            252
+          ],
+          "tip": [
+            106,
+            81,
+            78,
+            252
+          ],
+          "focus": [
+            106,
+            81,
+            78,
+            252
+          ]
+        },
+        "normalizationBox": {
+          "left": 429,
+          "top": 120,
+          "width": 476,
+          "height": 296
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
       }
     },
     {
@@ -107,16 +197,16 @@
       "anchors": {
         "kind": "blade",
         "grip": [
-          0.628125,
-          0.194667
+          0.62928349,
+          0.19414894
         ],
         "tip": [
-          0.1,
-          0.061333
+          0.10280374,
+          0.06117021
         ],
         "focus": [
-          0.1,
-          0.061333
+          0.10280374,
+          0.06117021
         ]
       },
       "sourceRect": [
@@ -125,7 +215,7 @@
         0.25518341,
         0.29904306
       ],
-      "bodyHeight": 0.709333,
+      "bodyHeight": 0.70744681,
       "sourceLandmarksPx": {
         "grip": [
           1111,
@@ -140,6 +230,51 @@
           63
         ],
         "headToFootHeight": 266
+      },
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "금빛 장갑을 보존하고 실제 은빛 검날 끝 바로 안쪽.",
+        "pointsPx": {
+          "grip": [
+            1111,
+            113
+          ],
+          "tip": [
+            942,
+            63
+          ],
+          "focus": [
+            942,
+            63
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            165,
+            105,
+            48,
+            251
+          ],
+          "tip": [
+            229,
+            223,
+            227,
+            240
+          ],
+          "focus": [
+            229,
+            223,
+            227,
+            240
+          ]
+        },
+        "normalizationBox": {
+          "left": 909,
+          "top": 40,
+          "width": 321,
+          "height": 376
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
       }
     },
     {
@@ -151,16 +286,16 @@
       "anchors": {
         "kind": "staff",
         "grip": [
-          0.772727,
-          0.426316
+          0.77272727,
+          0.42519685
         ],
         "tip": [
-          0.763636,
-          0.089474
+          0.77878788,
+          0.11023622
         ],
         "focus": [
-          0.772727,
-          0.178947
+          0.77272727,
+          0.17847769
         ]
       },
       "sourceRect": [
@@ -169,21 +304,66 @@
         0.26315789,
         0.3030303
       ],
-      "bodyHeight": 0.765789,
+      "bodyHeight": 0.76377953,
       "sourceLandmarksPx": {
         "grip": [
           290,
           617
         ],
         "tip": [
-          287,
-          489
+          292,
+          497
         ],
         "focus": [
           290,
           523
         ],
         "headToFootHeight": 291
+      },
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "손은 보존. 실제 분지형 푸른 결정의 뾰족한 끝 안쪽과 결정 광원을 분리.",
+        "pointsPx": {
+          "grip": [
+            290,
+            617
+          ],
+          "tip": [
+            292,
+            497
+          ],
+          "focus": [
+            290,
+            523
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            217,
+            165,
+            156,
+            249
+          ],
+          "tip": [
+            148,
+            187,
+            225,
+            247
+          ],
+          "focus": [
+            50,
+            131,
+            216,
+            253
+          ]
+        },
+        "normalizationBox": {
+          "left": 35,
+          "top": 455,
+          "width": 330,
+          "height": 381
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
       }
     },
     {
@@ -195,16 +375,16 @@
       "anchors": {
         "kind": "staff",
         "grip": [
-          0.6375,
-          0.331343
+          0.63825364,
+          0.33234421
         ],
         "tip": [
-          0.9625,
-          0.286567
+          0.94178794,
+          0.27002967
         ],
         "focus": [
-          0.885417,
-          0.319403
+          0.88565489,
+          0.32047478
         ]
       },
       "sourceRect": [
@@ -213,21 +393,66 @@
         0.38277512,
         0.26714514
       ],
-      "bodyHeight": 0.808955,
+      "bodyHeight": 0.8041543,
       "sourceLandmarksPx": {
         "grip": [
           731,
           611
         ],
         "tip": [
-          887,
-          596
+          877,
+          590
         ],
         "focus": [
           850,
           607
         ],
         "headToFootHeight": 271
+      },
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "손은 보존. 실제 분지형 푸른 결정의 뾰족한 끝 안쪽과 결정 광원을 분리.",
+        "pointsPx": {
+          "grip": [
+            731,
+            611
+          ],
+          "tip": [
+            877,
+            590
+          ],
+          "focus": [
+            850,
+            607
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            202,
+            102,
+            87,
+            250
+          ],
+          "tip": [
+            179,
+            221,
+            248,
+            242
+          ],
+          "focus": [
+            126,
+            206,
+            234,
+            252
+          ]
+        },
+        "normalizationBox": {
+          "left": 424,
+          "top": 499,
+          "width": 481,
+          "height": 337
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
       }
     },
     {
@@ -239,16 +464,16 @@
       "anchors": {
         "kind": "staff",
         "grip": [
-          0.635821,
-          0.283544
+          0.63501484,
+          0.28463476
         ],
         "tip": [
-          0.901493,
-          0.058228
+          0.884273,
+          0.07304786
         ],
         "focus": [
-          0.850746,
-          0.124051
+          0.84866469,
+          0.12594458
         ]
       },
       "sourceRect": [
@@ -257,21 +482,66 @@
         0.26714514,
         0.31499203
       ],
-      "bodyHeight": 0.703797,
+      "bodyHeight": 0.70025189,
       "sourceLandmarksPx": {
         "grip": [
           1123,
           552
         ],
         "tip": [
-          1212,
-          463
+          1207,
+          468
         ],
         "focus": [
           1195,
           489
         ],
         "headToFootHeight": 278
+      },
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "손은 보존. 실제 분지형 푸른 결정의 뾰족한 끝 안쪽과 결정 광원을 분리.",
+        "pointsPx": {
+          "grip": [
+            1123,
+            552
+          ],
+          "tip": [
+            1207,
+            468
+          ],
+          "focus": [
+            1195,
+            489
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            228,
+            184,
+            160,
+            246
+          ],
+          "tip": [
+            196,
+            239,
+            252,
+            234
+          ],
+          "focus": [
+            173,
+            200,
+            228,
+            249
+          ]
+        },
+        "normalizationBox": {
+          "left": 909,
+          "top": 439,
+          "width": 337,
+          "height": 397
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
       }
     },
     {
@@ -283,16 +553,16 @@
       "anchors": {
         "kind": "blade",
         "grip": [
-          0.477333,
-          0.618182
+          0.47606383,
+          0.61818182
         ],
         "tip": [
-          0.949333,
-          0.818182
+          0.93085106,
+          0.8030303
         ],
         "focus": [
-          0.949333,
-          0.818182
+          0.93085106,
+          0.8030303
         ]
       },
       "sourceRect": [
@@ -301,21 +571,66 @@
         0.29904306,
         0.26315789
       ],
-      "bodyHeight": 0.815152,
+      "bodyHeight": 0.81515152,
       "sourceLandmarksPx": {
         "grip": [
           219,
           1084
         ],
         "tip": [
-          396,
-          1150
+          390,
+          1145
         ],
         "focus": [
-          396,
-          1150
+          390,
+          1145
         ],
         "headToFootHeight": 269
+      },
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "장갑 보존. 실제 주황 테두리 곡검의 끝 가까운 날 내부.",
+        "pointsPx": {
+          "grip": [
+            219,
+            1084
+          ],
+          "tip": [
+            390,
+            1145
+          ],
+          "focus": [
+            390,
+            1145
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            69,
+            41,
+            39,
+            253
+          ],
+          "tip": [
+            224,
+            162,
+            54,
+            235
+          ],
+          "focus": [
+            224,
+            162,
+            54,
+            235
+          ]
+        },
+        "normalizationBox": {
+          "left": 40,
+          "top": 880,
+          "width": 376,
+          "height": 330
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
       }
     },
     {
@@ -327,16 +642,16 @@
       "anchors": {
         "kind": "blade",
         "grip": [
-          0.547917,
-          0.555556
+          0.54885655,
+          0.55555556
         ],
         "tip": [
-          0.96875,
-          0.701587
+          0.95010395,
+          0.70793651
         ],
         "focus": [
-          0.96875,
-          0.701587
+          0.95010395,
+          0.70793651
         ]
       },
       "sourceRect": [
@@ -345,21 +660,66 @@
         0.38277512,
         0.25119617
       ],
-      "bodyHeight": 0.698413,
+      "bodyHeight": 0.6984127,
       "sourceLandmarksPx": {
         "grip": [
           693,
           1070
         ],
         "tip": [
-          895,
-          1116
+          886,
+          1118
         ],
         "focus": [
-          895,
-          1116
+          886,
+          1118
         ],
         "headToFootHeight": 220
+      },
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "장갑 보존. 실제 주황 테두리 곡검의 끝 가까운 날 내부.",
+        "pointsPx": {
+          "grip": [
+            693,
+            1070
+          ],
+          "tip": [
+            886,
+            1118
+          ],
+          "focus": [
+            886,
+            1118
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            39,
+            15,
+            11,
+            254
+          ],
+          "tip": [
+            253,
+            249,
+            168,
+            245
+          ],
+          "focus": [
+            253,
+            249,
+            168,
+            245
+          ]
+        },
+        "normalizationBox": {
+          "left": 429,
+          "top": 895,
+          "width": 481,
+          "height": 315
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
       }
     },
     {
@@ -371,16 +731,16 @@
       "anchors": {
         "kind": "blade",
         "grip": [
-          0.728358,
-          0.22973
+          0.72700297,
+          0.22972973
         ],
         "tip": [
-          0.101493,
-          0.094595
+          0.14540059,
+          0.1027027
         ],
         "focus": [
-          0.101493,
-          0.094595
+          0.14540059,
+          0.1027027
         ]
       },
       "sourceRect": [
@@ -389,21 +749,66 @@
         0.26714514,
         0.29505582
       ],
-      "bodyHeight": 0.627027,
+      "bodyHeight": 0.62702703,
       "sourceLandmarksPx": {
         "grip": [
           1154,
           925
         ],
         "tip": [
-          944,
-          875
+          958,
+          878
         ],
         "focus": [
-          944,
-          875
+          958,
+          878
         ],
         "headToFootHeight": 232
+      },
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "장갑 보존. 실제 주황 테두리 곡검의 끝 가까운 날 내부.",
+        "pointsPx": {
+          "grip": [
+            1154,
+            925
+          ],
+          "tip": [
+            958,
+            878
+          ],
+          "focus": [
+            958,
+            878
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            86,
+            51,
+            39,
+            251
+          ],
+          "tip": [
+            203,
+            44,
+            13,
+            247
+          ],
+          "focus": [
+            203,
+            44,
+            13,
+            247
+          ]
+        },
+        "normalizationBox": {
+          "left": 909,
+          "top": 840,
+          "width": 337,
+          "height": 370
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
       }
     }
   ]

@@ -16,16 +16,16 @@
       "anchors": {
         "kind": "axe",
         "grip": [
-          0.692308,
-          0.524444
+          0.728900255754,
+          0.452328159645
         ],
         "tip": [
-          0.876923,
-          0.193333
+          0.938618925831,
+          0.310421286031
         ],
         "focus": [
-          0.876923,
-          0.193333
+          0.938618925831,
+          0.310421286031
         ]
       },
       "anchorSpace": "cell-fraction",
@@ -36,7 +36,59 @@
         0.358851675
       ],
       "isolateSilhouette": true,
-      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+      "reviewMethod": "실제 생성 PNG의 원본 metadata 치수와 생산기와 같은 정수 box(floor left/top·ceil right/bottom)를 기준으로 물리적 무기·쥔 손·금속 끝을 수동 재저작. 기록한 원본 픽셀의 alpha는 모두 240 이상. 출력 WebP 재열람·게임 QA·검사 기준 변경이 아님.",
+      "sourcePixelAuthoring": {
+        "sourceWidth": 1254,
+        "sourceHeight": 1254,
+        "integerSourceBox": {
+          "left": 0,
+          "top": 0,
+          "width": 391,
+          "height": 451
+        },
+        "selection": "실제 투명 생성 PNG의 목재·금속·쥔 손을 확대해 고른 원본 픽셀. 투명 경계 대신 안쪽 물리적 재질을 선택. 원본 픽셀 RGBA를 입력 저작 중 기록.",
+        "samples": [
+          {
+            "name": "grip",
+            "sourcePixel": [
+              285,
+              204
+            ],
+            "rgba": [
+              235,
+              134,
+              94,
+              253
+            ]
+          },
+          {
+            "name": "tip",
+            "sourcePixel": [
+              367,
+              140
+            ],
+            "rgba": [
+              204,
+              187,
+              177,
+              252
+            ]
+          },
+          {
+            "name": "focus",
+            "sourcePixel": [
+              367,
+              140
+            ],
+            "rgba": [
+              204,
+              187,
+              177,
+              252
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "marauder",
@@ -47,16 +99,16 @@
       "anchors": {
         "kind": "axe",
         "grip": [
-          0.576642,
-          0.617778
+          0.63752276867,
+          0.631929046563
         ],
         "tip": [
-          0.94708,
-          0.704444
+          0.930783242259,
+          0.687361419069
         ],
         "focus": [
-          0.94708,
-          0.704444
+          0.930783242259,
+          0.687361419069
         ]
       },
       "anchorSpace": "cell-fraction",
@@ -67,7 +119,59 @@
         0.358851675
       ],
       "isolateSilhouette": true,
-      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+      "reviewMethod": "실제 생성 PNG의 원본 metadata 치수와 생산기와 같은 정수 box(floor left/top·ceil right/bottom)를 기준으로 물리적 무기·쥔 손·금속 끝을 수동 재저작. 기록한 원본 픽셀의 alpha는 모두 240 이상. 출력 WebP 재열람·게임 QA·검사 기준 변경이 아님.",
+      "sourcePixelAuthoring": {
+        "sourceWidth": 1254,
+        "sourceHeight": 1254,
+        "integerSourceBox": {
+          "left": 369,
+          "top": 0,
+          "width": 549,
+          "height": 451
+        },
+        "selection": "실제 투명 생성 PNG의 목재·금속·쥔 손을 확대해 고른 원본 픽셀. 투명 경계 대신 안쪽 물리적 재질을 선택. 원본 픽셀 RGBA를 입력 저작 중 기록.",
+        "samples": [
+          {
+            "name": "grip",
+            "sourcePixel": [
+              719,
+              285
+            ],
+            "rgba": [
+              255,
+              204,
+              163,
+              253
+            ]
+          },
+          {
+            "name": "tip",
+            "sourcePixel": [
+              880,
+              310
+            ],
+            "rgba": [
+              252,
+              249,
+              244,
+              252
+            ]
+          },
+          {
+            "name": "focus",
+            "sourcePixel": [
+              880,
+              310
+            ],
+            "rgba": [
+              252,
+              249,
+              244,
+              252
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "marauder",
@@ -78,16 +182,16 @@
       "anchors": {
         "kind": "axe",
         "grip": [
-          0.492268,
-          0.235556
+          0.34793814433,
+          0.221729490022
         ],
         "tip": [
-          0.134021,
-          0.188889
+          0.126288659794,
+          0.257206208426
         ],
         "focus": [
-          0.134021,
-          0.188889
+          0.126288659794,
+          0.257206208426
         ]
       },
       "anchorSpace": "cell-fraction",
@@ -98,7 +202,59 @@
         0.358851675
       ],
       "isolateSilhouette": true,
-      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+      "reviewMethod": "실제 생성 PNG의 원본 metadata 치수와 생산기와 같은 정수 box(floor left/top·ceil right/bottom)를 기준으로 물리적 무기·쥔 손·금속 끝을 수동 재저작. 기록한 원본 픽셀의 alpha는 모두 240 이상. 출력 WebP 재열람·게임 QA·검사 기준 변경이 아님.",
+      "sourcePixelAuthoring": {
+        "sourceWidth": 1254,
+        "sourceHeight": 1254,
+        "integerSourceBox": {
+          "left": 866,
+          "top": 0,
+          "width": 388,
+          "height": 451
+        },
+        "selection": "실제 투명 생성 PNG의 목재·금속·쥔 손을 확대해 고른 원본 픽셀. 투명 경계 대신 안쪽 물리적 재질을 선택. 원본 픽셀 RGBA를 입력 저작 중 기록.",
+        "samples": [
+          {
+            "name": "grip",
+            "sourcePixel": [
+              1001,
+              100
+            ],
+            "rgba": [
+              127,
+              71,
+              56,
+              252
+            ]
+          },
+          {
+            "name": "tip",
+            "sourcePixel": [
+              915,
+              116
+            ],
+            "rgba": [
+              199,
+              179,
+              176,
+              251
+            ]
+          },
+          {
+            "name": "focus",
+            "sourcePixel": [
+              915,
+              116
+            ],
+            "rgba": [
+              199,
+              179,
+              176,
+              251
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "assassin_elite",
@@ -109,25 +265,25 @@
       "anchors": {
         "kind": "dagger",
         "grip": [
-          0.776923,
-          0.608108
+          0.764705882353,
+          0.548648648649
         ],
         "tip": [
-          0.946154,
-          0.705405
+          0.913043478261,
+          0.691891891892
         ],
         "focus": [
-          0.946154,
-          0.705405
+          0.913043478261,
+          0.691891891892
         ],
         "secondary": {
           "grip": [
-            0.269231,
-            0.591892
+            0.281329923274,
+            0.524324324324
           ],
           "tip": [
-            0.341026,
-            0.751351
+            0.355498721228,
+            0.740540540541
           ]
         }
       },
@@ -139,7 +295,85 @@
         0.295055821
       ],
       "isolateSilhouette": true,
-      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+      "reviewMethod": "실제 생성 PNG의 원본 metadata 치수와 생산기와 같은 정수 box(floor left/top·ceil right/bottom)를 기준으로 물리적 무기·쥔 손·금속 끝을 수동 재저작. 기록한 원본 픽셀의 alpha는 모두 240 이상. 출력 WebP 재열람·게임 QA·검사 기준 변경이 아님.",
+      "sourcePixelAuthoring": {
+        "sourceWidth": 1254,
+        "sourceHeight": 1254,
+        "integerSourceBox": {
+          "left": 0,
+          "top": 450,
+          "width": 391,
+          "height": 370
+        },
+        "selection": "실제 투명 생성 PNG의 목재·금속·쥔 손을 확대해 고른 원본 픽셀. 투명 경계 대신 안쪽 물리적 재질을 선택. 원본 픽셀 RGBA를 입력 저작 중 기록.",
+        "samples": [
+          {
+            "name": "grip",
+            "sourcePixel": [
+              299,
+              653
+            ],
+            "rgba": [
+              78,
+              47,
+              29,
+              252
+            ]
+          },
+          {
+            "name": "tip",
+            "sourcePixel": [
+              357,
+              706
+            ],
+            "rgba": [
+              66,
+              55,
+              60,
+              255
+            ]
+          },
+          {
+            "name": "focus",
+            "sourcePixel": [
+              357,
+              706
+            ],
+            "rgba": [
+              66,
+              55,
+              60,
+              255
+            ]
+          },
+          {
+            "name": "secondary.grip",
+            "sourcePixel": [
+              110,
+              644
+            ],
+            "rgba": [
+              25,
+              13,
+              16,
+              252
+            ]
+          },
+          {
+            "name": "secondary.tip",
+            "sourcePixel": [
+              139,
+              724
+            ],
+            "rgba": [
+              119,
+              86,
+              63,
+              253
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "assassin_elite",
@@ -150,25 +384,25 @@
       "anchors": {
         "kind": "dagger",
         "grip": [
-          0.786496,
-          0.489189
+          0.775956284153,
+          0.459459459459
         ],
         "tip": [
-          0.976277,
-          0.489189
+          0.925318761384,
+          0.475675675676
         ],
         "focus": [
-          0.976277,
-          0.489189
+          0.925318761384,
+          0.475675675676
         ],
         "secondary": {
           "grip": [
-            0.308394,
-            0.462162
+            0.302367941712,
+            0.437837837838
           ],
           "tip": [
-            0.217153,
-            0.648649
+            0.213114754098,
+            0.572972972973
           ]
         }
       },
@@ -180,7 +414,85 @@
         0.295055821
       ],
       "isolateSilhouette": true,
-      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+      "reviewMethod": "실제 생성 PNG의 원본 metadata 치수와 생산기와 같은 정수 box(floor left/top·ceil right/bottom)를 기준으로 물리적 무기·쥔 손·금속 끝을 수동 재저작. 기록한 원본 픽셀의 alpha는 모두 240 이상. 출력 WebP 재열람·게임 QA·검사 기준 변경이 아님.",
+      "sourcePixelAuthoring": {
+        "sourceWidth": 1254,
+        "sourceHeight": 1254,
+        "integerSourceBox": {
+          "left": 369,
+          "top": 450,
+          "width": 549,
+          "height": 370
+        },
+        "selection": "실제 투명 생성 PNG의 목재·금속·쥔 손을 확대해 고른 원본 픽셀. 투명 경계 대신 안쪽 물리적 재질을 선택. 원본 픽셀 RGBA를 입력 저작 중 기록.",
+        "samples": [
+          {
+            "name": "grip",
+            "sourcePixel": [
+              795,
+              620
+            ],
+            "rgba": [
+              66,
+              42,
+              37,
+              253
+            ]
+          },
+          {
+            "name": "tip",
+            "sourcePixel": [
+              877,
+              626
+            ],
+            "rgba": [
+              199,
+              187,
+              185,
+              247
+            ]
+          },
+          {
+            "name": "focus",
+            "sourcePixel": [
+              877,
+              626
+            ],
+            "rgba": [
+              199,
+              187,
+              185,
+              247
+            ]
+          },
+          {
+            "name": "secondary.grip",
+            "sourcePixel": [
+              535,
+              612
+            ],
+            "rgba": [
+              198,
+              149,
+              81,
+              253
+            ]
+          },
+          {
+            "name": "secondary.tip",
+            "sourcePixel": [
+              486,
+              662
+            ],
+            "rgba": [
+              197,
+              194,
+              200,
+              250
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "assassin_elite",
@@ -191,25 +503,25 @@
       "anchors": {
         "kind": "dagger",
         "grip": [
-          0.530928,
-          0.478378
+          0.505154639175,
+          0.4
         ],
         "tip": [
-          0.873711,
-          0.427027
+          0.737113402062,
+          0.475675675676
         ],
         "focus": [
-          0.873711,
-          0.427027
+          0.737113402062,
+          0.475675675676
         ],
         "secondary": {
           "grip": [
-            0.451031,
-            0.572973
+            0.474226804124,
+            0.505405405405
           ],
           "tip": [
-            0.206186,
-            0.648649
+            0.314432989691,
+            0.586486486486
           ]
         }
       },
@@ -221,7 +533,85 @@
         0.295055821
       ],
       "isolateSilhouette": true,
-      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+      "reviewMethod": "실제 생성 PNG의 원본 metadata 치수와 생산기와 같은 정수 box(floor left/top·ceil right/bottom)를 기준으로 물리적 무기·쥔 손·금속 끝을 수동 재저작. 기록한 원본 픽셀의 alpha는 모두 240 이상. 출력 WebP 재열람·게임 QA·검사 기준 변경이 아님.",
+      "sourcePixelAuthoring": {
+        "sourceWidth": 1254,
+        "sourceHeight": 1254,
+        "integerSourceBox": {
+          "left": 866,
+          "top": 450,
+          "width": 388,
+          "height": 370
+        },
+        "selection": "실제 투명 생성 PNG의 목재·금속·쥔 손을 확대해 고른 원본 픽셀. 투명 경계 대신 안쪽 물리적 재질을 선택. 원본 픽셀 RGBA를 입력 저작 중 기록.",
+        "samples": [
+          {
+            "name": "grip",
+            "sourcePixel": [
+              1062,
+              598
+            ],
+            "rgba": [
+              101,
+              75,
+              68,
+              253
+            ]
+          },
+          {
+            "name": "tip",
+            "sourcePixel": [
+              1152,
+              626
+            ],
+            "rgba": [
+              89,
+              84,
+              87,
+              253
+            ]
+          },
+          {
+            "name": "focus",
+            "sourcePixel": [
+              1152,
+              626
+            ],
+            "rgba": [
+              89,
+              84,
+              87,
+              253
+            ]
+          },
+          {
+            "name": "secondary.grip",
+            "sourcePixel": [
+              1050,
+              637
+            ],
+            "rgba": [
+              214,
+              171,
+              77,
+              253
+            ]
+          },
+          {
+            "name": "secondary.tip",
+            "sourcePixel": [
+              988,
+              667
+            ],
+            "rgba": [
+              168,
+              164,
+              171,
+              250
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "iron_lancer",
@@ -232,16 +622,16 @@
       "anchors": {
         "kind": "spear",
         "grip": [
-          0.487179,
-          0.495392
+          0.6726342711,
+          0.280459770115
         ],
         "tip": [
-          0.964103,
-          0.043779
+          0.943734015345,
+          0.064367816092
         ],
         "focus": [
-          0.964103,
-          0.043779
+          0.943734015345,
+          0.064367816092
         ]
       },
       "anchorSpace": "cell-fraction",
@@ -252,7 +642,59 @@
         0.346092504
       ],
       "isolateSilhouette": true,
-      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+      "reviewMethod": "실제 생성 PNG의 원본 metadata 치수와 생산기와 같은 정수 box(floor left/top·ceil right/bottom)를 기준으로 물리적 무기·쥔 손·금속 끝을 수동 재저작. 기록한 원본 픽셀의 alpha는 모두 240 이상. 출력 WebP 재열람·게임 QA·검사 기준 변경이 아님.",
+      "sourcePixelAuthoring": {
+        "sourceWidth": 1254,
+        "sourceHeight": 1254,
+        "integerSourceBox": {
+          "left": 0,
+          "top": 819,
+          "width": 391,
+          "height": 435
+        },
+        "selection": "실제 투명 생성 PNG의 목재·금속·쥔 손을 확대해 고른 원본 픽셀. 투명 경계 대신 안쪽 물리적 재질을 선택. 원본 픽셀 RGBA를 입력 저작 중 기록.",
+        "samples": [
+          {
+            "name": "grip",
+            "sourcePixel": [
+              263,
+              941
+            ],
+            "rgba": [
+              104,
+              85,
+              79,
+              252
+            ]
+          },
+          {
+            "name": "tip",
+            "sourcePixel": [
+              369,
+              847
+            ],
+            "rgba": [
+              114,
+              107,
+              108,
+              248
+            ]
+          },
+          {
+            "name": "focus",
+            "sourcePixel": [
+              369,
+              847
+            ],
+            "rgba": [
+              114,
+              107,
+              108,
+              248
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "iron_lancer",
@@ -263,16 +705,16 @@
       "anchors": {
         "kind": "spear",
         "grip": [
-          0.507299,
-          0.407834
+          0.617486338798,
+          0.411494252874
         ],
         "tip": [
-          0.979927,
-          0.417051
+          0.948998178506,
+          0.420689655172
         ],
         "focus": [
-          0.979927,
-          0.417051
+          0.948998178506,
+          0.420689655172
         ]
       },
       "anchorSpace": "cell-fraction",
@@ -283,7 +725,59 @@
         0.346092504
       ],
       "isolateSilhouette": true,
-      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+      "reviewMethod": "실제 생성 PNG의 원본 metadata 치수와 생산기와 같은 정수 box(floor left/top·ceil right/bottom)를 기준으로 물리적 무기·쥔 손·금속 끝을 수동 재저작. 기록한 원본 픽셀의 alpha는 모두 240 이상. 출력 WebP 재열람·게임 QA·검사 기준 변경이 아님.",
+      "sourcePixelAuthoring": {
+        "sourceWidth": 1254,
+        "sourceHeight": 1254,
+        "integerSourceBox": {
+          "left": 369,
+          "top": 819,
+          "width": 549,
+          "height": 435
+        },
+        "selection": "실제 투명 생성 PNG의 목재·금속·쥔 손을 확대해 고른 원본 픽셀. 투명 경계 대신 안쪽 물리적 재질을 선택. 원본 픽셀 RGBA를 입력 저작 중 기록.",
+        "samples": [
+          {
+            "name": "grip",
+            "sourcePixel": [
+              708,
+              998
+            ],
+            "rgba": [
+              132,
+              105,
+              92,
+              252
+            ]
+          },
+          {
+            "name": "tip",
+            "sourcePixel": [
+              890,
+              1002
+            ],
+            "rgba": [
+              240,
+              237,
+              236,
+              242
+            ]
+          },
+          {
+            "name": "focus",
+            "sourcePixel": [
+              890,
+              1002
+            ],
+            "rgba": [
+              240,
+              237,
+              236,
+              242
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "iron_lancer",
@@ -294,16 +788,16 @@
       "anchors": {
         "kind": "spear",
         "grip": [
-          0.659794,
-          0.329493
+          0.561855670103,
+          0.294252873563
         ],
         "tip": [
-          0.938144,
-          0.004608
+          0.904639175258,
+          0.052873563218
         ],
         "focus": [
-          0.938144,
-          0.004608
+          0.904639175258,
+          0.052873563218
         ]
       },
       "anchorSpace": "cell-fraction",
@@ -314,7 +808,59 @@
         0.346092504
       ],
       "isolateSilhouette": true,
-      "reviewMethod": "생성 투명 PNG를 보며 실제 손·무기 끝·방출점과 윤곽을 수동 저작한 근삿값. 최종 WebP 실측·재열람 또는 게임 QA가 아님."
+      "reviewMethod": "실제 생성 PNG의 원본 metadata 치수와 생산기와 같은 정수 box(floor left/top·ceil right/bottom)를 기준으로 물리적 무기·쥔 손·금속 끝을 수동 재저작. 기록한 원본 픽셀의 alpha는 모두 240 이상. 출력 WebP 재열람·게임 QA·검사 기준 변경이 아님.",
+      "sourcePixelAuthoring": {
+        "sourceWidth": 1254,
+        "sourceHeight": 1254,
+        "integerSourceBox": {
+          "left": 866,
+          "top": 819,
+          "width": 388,
+          "height": 435
+        },
+        "selection": "실제 투명 생성 PNG의 목재·금속·쥔 손을 확대해 고른 원본 픽셀. 투명 경계 대신 안쪽 물리적 재질을 선택. 원본 픽셀 RGBA를 입력 저작 중 기록.",
+        "samples": [
+          {
+            "name": "grip",
+            "sourcePixel": [
+              1084,
+              947
+            ],
+            "rgba": [
+              35,
+              14,
+              17,
+              252
+            ]
+          },
+          {
+            "name": "tip",
+            "sourcePixel": [
+              1217,
+              842
+            ],
+            "rgba": [
+              237,
+              232,
+              236,
+              250
+            ]
+          },
+          {
+            "name": "focus",
+            "sourcePixel": [
+              1217,
+              842
+            ],
+            "rgba": [
+              237,
+              232,
+              236,
+              250
+            ]
+          }
+        ]
+      }
     }
   ]
 }

@@ -4976,8 +4976,8 @@
           353
         ],
         "tip": [
-          487,
-          361
+          485,
+          338
         ],
         "focus": [
           471,
@@ -4985,7 +4985,7 @@
         ],
         "secondary": {
           "grip": [
-            163,
+            164,
             378
           ],
           "tip": [
@@ -4995,7 +4995,7 @@
         },
         "framePath": "public/art/characters-v3/units/crab_guard-strike.webp",
         "frameSha256": "0cd3c490c94debae22492919c4bd2826800670fad8fa7aeda9aa705289eaf979",
-        "reviewMethod": "생성 투명 PNG 원본의 자세·무기·부위를 보며 사람이 좌표와 분리 영역을 수동 근사 저작. 자동 측정·완성 WebP 검증 결과가 아님."
+        "reviewMethod": "생성 원본PNG의 실제 치수·물리 부위와 raw RGBA를 사용해 수동 근사 저작한36자세 중 담당9자세. 활31점·전체화살축 의미·원본 분리 영역 보존, 완성 WebP/게임 사후 검사 아님."
       },
       "skill-a": {
         "kind": "claw",
@@ -5004,26 +5004,26 @@
           345
         ],
         "tip": [
-          215,
-          263
+          225,
+          258
         ],
         "focus": [
-          215,
+          216,
           294
         ],
         "secondary": {
           "grip": [
-            289,
+            290,
             335
           ],
           "tip": [
-            262,
-            261
+            283,
+            267
           ]
         },
         "framePath": "public/art/characters-v3/units/crab_guard-skill-a.webp",
         "frameSha256": "8ae464785a88a35333bee1fcaf9155f4b57377e4fcb0f2d220b43ab2aa03159f",
-        "reviewMethod": "생성 투명 PNG 원본의 자세·무기·부위를 보며 사람이 좌표와 분리 영역을 수동 근사 저작. 자동 측정·완성 WebP 검증 결과가 아님."
+        "reviewMethod": "생성 원본PNG의 실제 치수·물리 부위와 raw RGBA를 사용해 수동 근사 저작한36자세 중 담당9자세. 활31점·전체화살축 의미·원본 분리 영역 보존, 완성 WebP/게임 사후 검사 아님."
       },
       "skill-b": {
         "kind": "claw",
@@ -5095,7 +5095,7 @@
           269
         ],
         "focus": [
-          212,
+          213,
           281
         ],
         "bow": {
@@ -5107,42 +5107,42 @@
             285,
             386
           ],
-          "path": "M268 168L278 173L288 177L296 183L306 188L316 193L323 199L329 207L335 216L341 226L347 235L353 245L357 256L358 268L358 279L357 290L354 301L349 312L345 322L339 332L335 341L330 350L325 357L319 362L312 368L306 372L300 377L294 380L290 383L287 385L285 386",
+          "path": "M268 168L278 173L288 177L296 183L306 188L316 193L323 199L330 207L335 216L342 226L347 235L353 245L357 256L358 268L358 279L357 290L354 301L350 312L345 322L340 332L335 341L331 350L325 357L319 362L313 368L306 372L300 377L294 380L290 383L287 385L285 386",
           "arrowVisible": true
         },
         "framePath": "public/art/characters-v3/units/eel_archer-strike.webp",
         "frameSha256": "5bb30f1a0159dc700e0bd22998b377f953296e280d2cfb9f617b872b09b35f17",
-        "reviewMethod": "원본 생성 PNG의 실제 치수·목재/금속 윤곽을 확대해 수동 근사 저작. 활3자세31점 경로와 실제 분리 영역을 기록하며 완성 WebP 재검사·QA 결과가 아님."
+        "reviewMethod": "생성 원본PNG의 실제 치수·물리 부위와 raw RGBA를 사용해 수동 근사 저작한36자세 중 담당9자세. 활31점·전체화살축 의미·원본 분리 영역 보존, 완성 WebP/게임 사후 검사 아님."
       },
       "skill-a": {
         "kind": "bow",
         "grip": [
-          358,
+          359,
           236
         ],
         "tip": [
-          411,
+          412,
           180
         ],
         "focus": [
-          255,
+          256,
           313
         ],
         "bow": {
           "upper": [
-            262,
+            263,
             169
           ],
           "lower": [
-            380,
+            381,
             350
           ],
-          "path": "M262 169L266 174L272 179L278 183L285 186L293 188L300 191L307 193L315 196L322 200L329 204L336 210L341 216L347 221L352 227L357 234L361 241L364 249L368 256L371 263L374 271L377 278L380 285L382 293L383 300L383 307L383 315L382 322L380 331L379 340L380 350",
+          "path": "M263 169L267 174L273 179L279 183L286 186L294 188L301 191L308 193L316 196L323 200L330 204L337 210L342 215L348 221L353 227L358 234L362 241L365 249L369 256L372 263L375 271L378 278L381 285L383 293L384 300L384 307L384 315L383 322L381 331L380 340L381 350",
           "arrowVisible": true
         },
         "framePath": "public/art/characters-v3/units/eel_archer-skill-a.webp",
-        "frameSha256": "6a5e37d2418eac3c5fe1bd6cdb7f1cf3cd534279f1e51953f21bb1b6f901afcb",
-        "reviewMethod": "원본 생성 PNG의 실제 치수·목재/금속 윤곽을 확대해 수동 근사 저작. 활3자세31점 경로와 실제 분리 영역을 기록하며 완성 WebP 재검사·QA 결과가 아님."
+        "frameSha256": "f845c21ca48f2ca87e13680e40038464098336ad44d6b3d3e6d64bb2e18717dd",
+        "reviewMethod": "생성 원본PNG의 실제 치수·물리 부위와 raw RGBA를 사용해 수동 근사 저작한36자세 중 담당9자세. 활31점·전체화살축 의미·원본 분리 영역 보존, 완성 WebP/게임 사후 검사 아님."
       },
       "skill-b": {
         "kind": "bow",
@@ -5204,8 +5204,8 @@
           363
         ],
         "focus": [
-          454,
-          362
+          476,
+          363
         ],
         "secondary": {
           "grip": [
@@ -5213,13 +5213,13 @@
             327
           ],
           "tip": [
-            474,
-            292
+            472,
+            312
           ]
         },
         "framePath": "public/art/characters-v3/units/spore_colony-strike.webp",
         "frameSha256": "8e54b786950b31a08e161b19ea67a8a80d465441ecf7617638d0827a7e3acd23",
-        "reviewMethod": "생성 투명 PNG 원본의 자세·무기·부위를 보며 사람이 좌표와 분리 영역을 수동 근사 저작. 자동 측정·완성 WebP 검증 결과가 아님."
+        "reviewMethod": "생성 원본PNG의 실제 치수·물리 부위와 raw RGBA를 사용해 수동 근사 저작한36자세 중 담당9자세. 활31점·전체화살축 의미·원본 분리 영역 보존, 완성 WebP/게임 사후 검사 아님."
       },
       "skill-a": {
         "kind": "focus",
@@ -5241,13 +5241,13 @@
             346
           ],
           "tip": [
-            430,
-            359
+            422,
+            322
           ]
         },
         "framePath": "public/art/characters-v3/units/spore_colony-skill-a.webp",
         "frameSha256": "fb93c4c024105be653322308cffa399dba4d9f96b6023456d05b5254e296ff0f",
-        "reviewMethod": "생성 투명 PNG 원본의 자세·무기·부위를 보며 사람이 좌표와 분리 영역을 수동 근사 저작. 자동 측정·완성 WebP 검증 결과가 아님."
+        "reviewMethod": "생성 원본PNG의 실제 치수·물리 부위와 raw RGBA를 사용해 수동 근사 저작한36자세 중 담당9자세. 활31점·전체화살축 의미·원본 분리 영역 보존, 완성 WebP/게임 사후 검사 아님."
       },
       "skill-b": {
         "kind": "focus",
@@ -5290,8 +5290,8 @@
       "strike": {
         "kind": "focus",
         "grip": [
-          433,
-          360
+          452,
+          336
         ],
         "tip": [
           491,
@@ -5303,25 +5303,25 @@
         ],
         "framePath": "public/art/characters-v3/units/mist_ram-strike.webp",
         "frameSha256": "834582703a46c2d471abf5f07f773c67b0b98810bdb3cff474876a77f49a1519",
-        "reviewMethod": "생성 투명 PNG 원본의 자세·무기·부위를 보며 사람이 좌표와 분리 영역을 수동 근사 저작. 자동 측정·완성 WebP 검증 결과가 아님."
+        "reviewMethod": "생성 원본PNG의 실제 치수·물리 부위와 raw RGBA를 사용해 수동 근사 저작한36자세 중 담당9자세. 활31점·전체화살축 의미·원본 분리 영역 보존, 완성 WebP/게임 사후 검사 아님."
       },
       "skill-a": {
         "kind": "focus",
         "grip": [
-          402,
-          340
+          405,
+          315
         ],
         "tip": [
-          433,
-          375
+          434,
+          374
         ],
         "focus": [
-          426,
-          370
+          434,
+          374
         ],
         "framePath": "public/art/characters-v3/units/mist_ram-skill-a.webp",
-        "frameSha256": "07bfc7379e682a6c257a584d7eb46d3a5bfe01313a37ee14b781ef4f1dcecce3",
-        "reviewMethod": "생성 투명 PNG 원본의 자세·무기·부위를 보며 사람이 좌표와 분리 영역을 수동 근사 저작. 자동 측정·완성 WebP 검증 결과가 아님."
+        "frameSha256": "8b4b4d5939101e07e3a73d87fe55038f103187dab74dd7b99091729db79c5562",
+        "reviewMethod": "생성 원본PNG의 실제 치수·물리 부위와 raw RGBA를 사용해 수동 근사 저작한36자세 중 담당9자세. 활31점·전체화살축 의미·원본 분리 영역 보존, 완성 WebP/게임 사후 검사 아님."
       },
       "skill-b": {
         "kind": "focus",
@@ -5397,7 +5397,7 @@
         },
         "framePath": "public/art/characters-v3/units/crystal_insect-strike.webp",
         "frameSha256": "f30320883453aacad7fbdc3f005a1e52ef978815a109a0e2b16281a512142f34",
-        "reviewMethod": "생성 투명 PNG 원본의 자세·무기·부위를 보며 사람이 좌표와 분리 영역을 수동 근사 저작. 자동 측정·완성 WebP 검증 결과가 아님."
+        "reviewMethod": "생성 원본PNG의 실제 치수·물리 부위와 raw RGBA를 사용해 수동 근사 저작한36자세 중 담당9자세. 활31점·전체화살축 의미·원본 분리 영역 보존, 완성 WebP/게임 사후 검사 아님."
       },
       "skill-a": {
         "kind": "claw",
@@ -5419,13 +5419,13 @@
             331
           ],
           "tip": [
-            355,
-            385
+            413,
+            359
           ]
         },
         "framePath": "public/art/characters-v3/units/crystal_insect-skill-a.webp",
-        "frameSha256": "e5db67535cf47da61892d2811af71d6fd00bb8788395d32a12df148d5ed8e569",
-        "reviewMethod": "생성 투명 PNG 원본의 자세·무기·부위를 보며 사람이 좌표와 분리 영역을 수동 근사 저작. 자동 측정·완성 WebP 검증 결과가 아님."
+        "frameSha256": "ae8ad2ab696e10215fc68afa943817f4811a4e2f6d89a8fcc4934b2d61cc19be",
+        "reviewMethod": "생성 원본PNG의 실제 치수·물리 부위와 raw RGBA를 사용해 수동 근사 저작한36자세 중 담당9자세. 활31점·전체화살축 의미·원본 분리 영역 보존, 완성 WebP/게임 사후 검사 아님."
       },
       "skill-b": {
         "kind": "claw",
@@ -5491,7 +5491,7 @@
         ],
         "framePath": "public/art/characters-v3/units/spring_salamander-strike.webp",
         "frameSha256": "a1b0cd8bc501034553165165cc255c23f7700ded12dd4d94eb835ae76fdca016",
-        "reviewMethod": "생성 PNG 입력을 보며 투명 여백 crop과 실제 손·물리적 무기끝/보조기관·발광점을 수동 근사 저작. sourceRect 내부 비율. 비인간 종족의 몸높이는 과도한 추정 정규화를 피하려고 생략하고 인형·종지기만 두정부~발끝 bodyHeight 기입. isolateSilhouette로 crop에 섞인 이웃 투명분리 조각은 중앙 생산기의 기존 배우분리 절차를 사용. 완성 WebP·게임 출력 QA/자동검증은 하지 않음."
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-a": {
         "kind": "focus",
@@ -5509,7 +5509,7 @@
         ],
         "framePath": "public/art/characters-v3/units/spring_salamander-skill-a.webp",
         "frameSha256": "43cc9d7834bbd01a61dfb7c40dc80dc7beb7612f24fd5fcb09a5b90253569962",
-        "reviewMethod": "생성 PNG 입력을 보며 투명 여백 crop과 실제 손·물리적 무기끝/보조기관·발광점을 수동 근사 저작. sourceRect 내부 비율. 비인간 종족의 몸높이는 과도한 추정 정규화를 피하려고 생략하고 인형·종지기만 두정부~발끝 bodyHeight 기입. isolateSilhouette로 crop에 섞인 이웃 투명분리 조각은 중앙 생산기의 기존 배우분리 절차를 사용. 완성 WebP·게임 출력 QA/자동검증은 하지 않음."
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-b": {
         "kind": "focus",
@@ -5552,20 +5552,20 @@
       "strike": {
         "kind": "blade",
         "grip": [
-          362,
-          252
+          363,
+          253
         ],
         "tip": [
-          490,
-          234
+          482,
+          232
         ],
         "focus": [
-          490,
-          234
+          482,
+          232
         ],
         "framePath": "public/art/characters-v3/units/gold_puppet-strike.webp",
-        "frameSha256": "795faba1e0e69d3f19309a97b9e96642def8f583abeb79249da5d8acc9bb5640",
-        "reviewMethod": "생성 PNG 입력을 보며 투명 여백 crop과 실제 손·물리적 무기끝/보조기관·발광점을 수동 근사 저작. sourceRect 내부 비율. 비인간 종족의 몸높이는 과도한 추정 정규화를 피하려고 생략하고 인형·종지기만 두정부~발끝 bodyHeight 기입. isolateSilhouette로 crop에 섞인 이웃 투명분리 조각은 중앙 생산기의 기존 배우분리 절차를 사용. 완성 WebP·게임 출력 QA/자동검증은 하지 않음."
+        "frameSha256": "549b78eb31fd1f7ba792b00c6e64d7bdc69d11746b4cec87e574a0debcbe346e",
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-a": {
         "kind": "blade",
@@ -5574,16 +5574,16 @@
           181
         ],
         "tip": [
-          393,
-          128
+          385,
+          130
         ],
         "focus": [
-          393,
-          128
+          385,
+          130
         ],
         "framePath": "public/art/characters-v3/units/gold_puppet-skill-a.webp",
-        "frameSha256": "107f8085dae941c73b0c4da03168659d15a2e6ad24f982b3cd30dda10519d3e1",
-        "reviewMethod": "생성 PNG 입력을 보며 투명 여백 crop과 실제 손·물리적 무기끝/보조기관·발광점을 수동 근사 저작. sourceRect 내부 비율. 비인간 종족의 몸높이는 과도한 추정 정규화를 피하려고 생략하고 인형·종지기만 두정부~발끝 bodyHeight 기입. isolateSilhouette로 crop에 섞인 이웃 투명분리 조각은 중앙 생산기의 기존 배우분리 절차를 사용. 완성 WebP·게임 출력 QA/자동검증은 하지 않음."
+        "frameSha256": "a3113cdf1c1d515ad0e8104f6b72a042e55f59504a2b3a39e2952952e229c040",
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-b": {
         "kind": "blade",
@@ -5626,11 +5626,11 @@
       "strike": {
         "kind": "music",
         "grip": [
-          383,
-          205
+          382,
+          206
         ],
         "tip": [
-          441,
+          440,
           208
         ],
         "focus": [
@@ -5639,25 +5639,25 @@
         ],
         "framePath": "public/art/characters-v3/units/bell_keeper-strike.webp",
         "frameSha256": "0bf37b616845ae5b1bda2e6f5b96dce28fd58c11be86194f24de587d8cace98b",
-        "reviewMethod": "생성 PNG 입력을 보며 투명 여백 crop과 실제 손·물리적 무기끝/보조기관·발광점을 수동 근사 저작. sourceRect 내부 비율. 비인간 종족의 몸높이는 과도한 추정 정규화를 피하려고 생략하고 인형·종지기만 두정부~발끝 bodyHeight 기입. isolateSilhouette로 crop에 섞인 이웃 투명분리 조각은 중앙 생산기의 기존 배우분리 절차를 사용. 완성 WebP·게임 출력 QA/자동검증은 하지 않음."
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-a": {
         "kind": "music",
         "grip": [
-          185,
+          184,
           122
         ],
         "tip": [
-          222,
+          221,
           90
         ],
         "focus": [
-          223,
+          222,
           92
         ],
         "framePath": "public/art/characters-v3/units/bell_keeper-skill-a.webp",
-        "frameSha256": "13c29cab9e0ed2488c5abcd8210ec934a55384342017920e29b42c09d4ffc99e",
-        "reviewMethod": "생성 PNG 입력을 보며 투명 여백 crop과 실제 손·물리적 무기끝/보조기관·발광점을 수동 근사 저작. sourceRect 내부 비율. 비인간 종족의 몸높이는 과도한 추정 정규화를 피하려고 생략하고 인형·종지기만 두정부~발끝 bodyHeight 기입. isolateSilhouette로 crop에 섞인 이웃 투명분리 조각은 중앙 생산기의 기존 배우분리 절차를 사용. 완성 WebP·게임 출력 QA/자동검증은 하지 않음."
+        "frameSha256": "73f4ea87faf1ea013245cb879b8b5557a3794b29dba57f46ee514b8419dc499f",
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-b": {
         "kind": "music",
@@ -5704,34 +5704,34 @@
           338
         ],
         "tip": [
-          391,
-          331
+          385,
+          330
         ],
         "focus": [
-          388,
+          382,
           332
         ],
         "bookCenter": [
           239,
-          316
+          315
         ],
         "framePath": "public/art/characters-v3/units/scroll_spirit-strike.webp",
         "frameSha256": "557363949dee8c7abc7e861a9265d11128311375a9229738dfad4abe7161030b",
-        "reviewMethod": "생성 PNG 입력을 보며 투명 여백 crop과 실제 손·물리적 무기끝/보조기관·발광점을 수동 근사 저작. sourceRect 내부 비율. 비인간 종족의 몸높이는 과도한 추정 정규화를 피하려고 생략하고 인형·종지기만 두정부~발끝 bodyHeight 기입. isolateSilhouette로 crop에 섞인 이웃 투명분리 조각은 중앙 생산기의 기존 배우분리 절차를 사용. 완성 WebP·게임 출력 QA/자동검증은 하지 않음."
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-a": {
         "kind": "book",
         "grip": [
-          319,
+          318,
           317
         ],
         "tip": [
-          347,
-          294
+          339,
+          299
         ],
         "focus": [
-          345,
-          296
+          335,
+          302
         ],
         "bookCenter": [
           198,
@@ -5739,7 +5739,7 @@
         ],
         "framePath": "public/art/characters-v3/units/scroll_spirit-skill-a.webp",
         "frameSha256": "e04845944fefce18fc5e5f4745c2b91447709c283bb83148065b9e5e8ca5928d",
-        "reviewMethod": "생성 PNG 입력을 보며 투명 여백 crop과 실제 손·물리적 무기끝/보조기관·발광점을 수동 근사 저작. sourceRect 내부 비율. 비인간 종족의 몸높이는 과도한 추정 정규화를 피하려고 생략하고 인형·종지기만 두정부~발끝 bodyHeight 기입. isolateSilhouette로 crop에 섞인 이웃 투명분리 조각은 중앙 생산기의 기존 배우분리 절차를 사용. 완성 WebP·게임 출력 QA/자동검증은 하지 않음."
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-b": {
         "kind": "focus",
@@ -5792,58 +5792,58 @@
       "strike": {
         "kind": "claw",
         "grip": [
-          416,
-          421
+          412,
+          413
         ],
         "tip": [
-          456,
-          429
+          453,
+          425
         ],
         "focus": [
-          456,
-          429
+          453,
+          425
         ],
         "secondary": {
           "grip": [
-            389,
+            388,
             456
           ],
           "tip": [
-            406,
-            470
+            403,
+            464
           ]
         },
         "framePath": "public/art/characters-v3/units/eclipse_cat-strike.webp",
         "frameSha256": "deefa40543493f6ed26a13b782ea1c4815488abbf07131436c51b359f8ef7b70",
-        "reviewMethod": "생성 PNG 입력을 보며 투명 여백 crop과 실제 손·물리적 무기끝/보조기관·발광점을 수동 근사 저작. sourceRect 내부 비율. 비인간 종족의 몸높이는 과도한 추정 정규화를 피하려고 생략하고 인형·종지기만 두정부~발끝 bodyHeight 기입. isolateSilhouette로 crop에 섞인 이웃 투명분리 조각은 중앙 생산기의 기존 배우분리 절차를 사용. 완성 WebP·게임 출력 QA/자동검증은 하지 않음."
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-a": {
         "kind": "claw",
         "grip": [
-          370,
-          444
+          369,
+          443
         ],
         "tip": [
-          422,
-          462
+          425,
+          444
         ],
         "focus": [
-          422,
-          462
+          425,
+          444
         ],
         "secondary": {
           "grip": [
             348,
-            425
+            424
           ],
           "tip": [
-            386,
-            452
+            385,
+            451
           ]
         },
         "framePath": "public/art/characters-v3/units/eclipse_cat-skill-a.webp",
         "frameSha256": "eec34f118a8dfa238e0379e2b388cadc225e7c27fd27ec817919369db8ca10e2",
-        "reviewMethod": "생성 PNG 입력을 보며 투명 여백 crop과 실제 손·물리적 무기끝/보조기관·발광점을 수동 근사 저작. sourceRect 내부 비율. 비인간 종족의 몸높이는 과도한 추정 정규화를 피하려고 생략하고 인형·종지기만 두정부~발끝 bodyHeight 기입. isolateSilhouette로 crop에 섞인 이웃 투명분리 조각은 중앙 생산기의 기존 배우분리 절차를 사용. 완성 WebP·게임 출력 QA/자동검증은 하지 않음."
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-b": {
         "kind": "claw",
@@ -5897,7 +5897,7 @@
       "strike": {
         "kind": "whip",
         "grip": [
-          299,
+          300,
           389
         ],
         "tip": [
@@ -5910,13 +5910,13 @@
         ],
         "framePath": "public/art/characters-v3/units/ink_vine-strike.webp",
         "frameSha256": "8212543df90d90b874876b62496328607138eb9529e85ebe28437d67993c03b8",
-        "reviewMethod": "생성 PNG 입력을 보며 투명 여백 crop과 실제 손·물리적 무기끝/보조기관·발광점을 수동 근사 저작. sourceRect 내부 비율. 비인간 종족의 몸높이는 과도한 추정 정규화를 피하려고 생략하고 인형·종지기만 두정부~발끝 bodyHeight 기입. isolateSilhouette로 crop에 섞인 이웃 투명분리 조각은 중앙 생산기의 기존 배우분리 절차를 사용. 완성 WebP·게임 출력 QA/자동검증은 하지 않음."
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-a": {
         "kind": "whip",
         "grip": [
-          339,
-          371
+          329,
+          380
         ],
         "tip": [
           360,
@@ -5928,7 +5928,7 @@
         ],
         "framePath": "public/art/characters-v3/units/ink_vine-skill-a.webp",
         "frameSha256": "14ca91f7c76e5a43341eaac795ff81f4b3e218a9e29120a96f7adb74e9e4334a",
-        "reviewMethod": "생성 PNG 입력을 보며 투명 여백 crop과 실제 손·물리적 무기끝/보조기관·발광점을 수동 근사 저작. sourceRect 내부 비율. 비인간 종족의 몸높이는 과도한 추정 정규화를 피하려고 생략하고 인형·종지기만 두정부~발끝 bodyHeight 기입. isolateSilhouette로 crop에 섞인 이웃 투명분리 조각은 중앙 생산기의 기존 배우분리 절차를 사용. 완성 WebP·게임 출력 QA/자동검증은 하지 않음."
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-b": {
         "kind": "whip",
@@ -5995,7 +5995,7 @@
         },
         "framePath": "public/art/characters-v3/units/hollow_armor-strike.webp",
         "frameSha256": "7ce226a9c10ddf998deefd07c4906f99740ade2a723e2c63bad1e94b17e4e862",
-        "reviewMethod": "이미지 생성 도구로 새 세 자세를 저작한 원본 PNG의 실제 손·의장봉·방패를 보며 수동 근사 좌표와 분할 영역 작성. 준비/공격은 의장봉, 지원의 focus는 방패 면. 몸 높이는 투구부터 부츠까지의 수동 근사치이며 정밀 실측 또는 완성 WebP 사후 QA가 아님. 화면상 배경 RGB에도 실제 알파가0인 원본의 분할용 입력값을 사용."
+        "reviewMethod": "이미지 생성 도구로 새 세 자세를 저작한 원본 PNG의 실제 손·의장봉·방패를 보며 수동 근사 좌표와 분할 영역 작성. 준비/공격은 의장봉, 지원의 focus는 방패 면. 몸 높이는 투구부터 부츠까지의 수동 근사치이며 정밀 실측 또는 완성 WebP 사후 QA가 아님. 화면상 배경 RGB에도 실제 알파가0인 원본의 분할용 입력값을 사용. 실제1024×1536 원본에서 의장봉 금속·손·방패 테두리의 불투명점을 입력 저작: 지원 의장봉은 왼쪽 아래 금속첨단243/1441, 지원 방패끝840/1273, 준비 방패손은 보이는 손목574/234. 완성 게임 이미지 재열람이나 사후 QA가 아닌 원본 랜드마크 저작."
       },
       "skill-a": {
         "kind": "hammer",
@@ -6004,8 +6004,8 @@
           373
         ],
         "tip": [
-          109,
-          413
+          113,
+          432
         ],
         "focus": [
           383,
@@ -6017,13 +6017,13 @@
             288
           ],
           "tip": [
-            427,
-            315
+            422,
+            345
           ]
         },
         "framePath": "public/art/characters-v3/units/hollow_armor-skill-a.webp",
         "frameSha256": "4441bd28903a9fe98f304ad685ec014a9ab0cf2a2df825779dcdb2e05a82d51b",
-        "reviewMethod": "이미지 생성 도구로 새 세 자세를 저작한 원본 PNG의 실제 손·의장봉·방패를 보며 수동 근사 좌표와 분할 영역 작성. 준비/공격은 의장봉, 지원의 focus는 방패 면. 몸 높이는 투구부터 부츠까지의 수동 근사치이며 정밀 실측 또는 완성 WebP 사후 QA가 아님. 화면상 배경 RGB에도 실제 알파가0인 원본의 분할용 입력값을 사용."
+        "reviewMethod": "이미지 생성 도구로 새 세 자세를 저작한 원본 PNG의 실제 손·의장봉·방패를 보며 수동 근사 좌표와 분할 영역 작성. 준비/공격은 의장봉, 지원의 focus는 방패 면. 몸 높이는 투구부터 부츠까지의 수동 근사치이며 정밀 실측 또는 완성 WebP 사후 QA가 아님. 화면상 배경 RGB에도 실제 알파가0인 원본의 분할용 입력값을 사용. 실제1024×1536 원본에서 의장봉 금속·손·방패 테두리의 불투명점을 입력 저작: 지원 의장봉은 왼쪽 아래 금속첨단243/1441, 지원 방패끝840/1273, 준비 방패손은 보이는 손목574/234. 완성 게임 이미지 재열람이나 사후 QA가 아닌 원본 랜드마크 저작."
       },
       "skill-b": {
         "kind": "hammer",
@@ -6067,11 +6067,11 @@
         "kind": "spear",
         "grip": [
           282,
-          332
+          333
         ],
         "tip": [
-          424,
-          320
+          420,
+          321
         ],
         "focus": [
           396,
@@ -6079,25 +6079,25 @@
         ],
         "framePath": "public/art/characters-v3/units/tide_keeper-strike.webp",
         "frameSha256": "a44e55f998236eaa30f2f1410081595f18f644341de54e7d865d0190ea17e4b8",
-        "reviewMethod": "생성 PNG 원본의 손·무기끝·결정/음차 발광점과 실제 투명 분할 여백을 보며 수동 근사 저작. sourceRect 내부 비율이며 왕관 포함 두정부~발끝 bodyHeight는 무기·손·떠있는 석판을 제외함. 완성 WebP·게임 화면 QA 또는 자동 검증은 실행하지 않음."
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-a": {
         "kind": "spear",
         "grip": [
           194,
-          343
+          344
         ],
         "tip": [
-          378,
-          246
+          369,
+          257
         ],
         "focus": [
-          340,
-          269
+          339,
+          270
         ],
         "framePath": "public/art/characters-v3/units/tide_keeper-skill-a.webp",
-        "frameSha256": "ba31462acf1f20dbb2805e29d10f7d2668f77e0eff73c0a8ce64e75986d8c939",
-        "reviewMethod": "생성 PNG 원본의 손·무기끝·결정/음차 발광점과 실제 투명 분할 여백을 보며 수동 근사 저작. sourceRect 내부 비율이며 왕관 포함 두정부~발끝 bodyHeight는 무기·손·떠있는 석판을 제외함. 완성 WebP·게임 화면 QA 또는 자동 검증은 실행하지 않음."
+        "frameSha256": "f29506e2c4b583e9938c3be993edea11de246294f79dd7d3f0567d9529ee4088",
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-b": {
         "kind": "spear",
@@ -6144,34 +6144,34 @@
           289
         ],
         "tip": [
-          424,
-          221
+          415,
+          233
         ],
         "focus": [
-          390,
-          245
+          389,
+          246
         ],
         "framePath": "public/art/characters-v3/units/frost_queen-strike.webp",
         "frameSha256": "3a3853a544f66fa4f0b17ea38df486bd7403e57861a3f70d7565748f4270b33a",
-        "reviewMethod": "생성 PNG 원본의 손·무기끝·결정/음차 발광점과 실제 투명 분할 여백을 보며 수동 근사 저작. sourceRect 내부 비율이며 왕관 포함 두정부~발끝 bodyHeight는 무기·손·떠있는 석판을 제외함. 완성 WebP·게임 화면 QA 또는 자동 검증은 실행하지 않음."
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-a": {
         "kind": "staff",
         "grip": [
-          206,
-          324
+          205,
+          323
         ],
         "tip": [
-          170,
-          220
+          171,
+          225
         ],
         "focus": [
-          178,
+          177,
           246
         ],
         "framePath": "public/art/characters-v3/units/frost_queen-skill-a.webp",
-        "frameSha256": "7ee1cfb4a06db66d547fa9cf5e42eb684c0459bcd5ab32abc924d6aa3dcea04a",
-        "reviewMethod": "생성 PNG 원본의 손·무기끝·결정/음차 발광점과 실제 투명 분할 여백을 보며 수동 근사 저작. sourceRect 내부 비율이며 왕관 포함 두정부~발끝 bodyHeight는 무기·손·떠있는 석판을 제외함. 완성 WebP·게임 화면 QA 또는 자동 검증은 실행하지 않음."
+        "frameSha256": "7caacf52c3a1c099e6f01d1e4325abc2803456ed6e77117cf145e27bf340caf9",
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-b": {
         "kind": "staff",
@@ -6214,30 +6214,30 @@
       "strike": {
         "kind": "staff",
         "grip": [
-          318,
+          317,
           327
         ],
         "tip": [
-          411,
-          316
+          410,
+          320
         ],
         "focus": [
-          383,
-          321
+          382,
+          326
         ],
         "framePath": "public/art/characters-v3/units/resonance_judge-strike.webp",
-        "frameSha256": "9b6160b25387b5ab24c591862695faee7709aafda3f95b903462fd45ce417df9",
-        "reviewMethod": "생성 PNG 원본의 손·무기끝·결정/음차 발광점과 실제 투명 분할 여백을 보며 수동 근사 저작. sourceRect 내부 비율이며 왕관 포함 두정부~발끝 bodyHeight는 무기·손·떠있는 석판을 제외함. 완성 WebP·게임 화면 QA 또는 자동 검증은 실행하지 않음."
+        "frameSha256": "6d2e352db3fcfe9ed27609d5dbb8bbef349463997b85040641574e1317d58dfb",
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-a": {
         "kind": "staff",
         "grip": [
           207,
-          277
+          276
         ],
         "tip": [
-          296,
-          234
+          290,
+          231
         ],
         "focus": [
           272,
@@ -6245,7 +6245,7 @@
         ],
         "framePath": "public/art/characters-v3/units/resonance_judge-skill-a.webp",
         "frameSha256": "951a2abba0bf6283116b233c5cee958f1d731f30539958d6be121dd3fc6ead1f",
-        "reviewMethod": "생성 PNG 원본의 손·무기끝·결정/음차 발광점과 실제 투명 분할 여백을 보며 수동 근사 저작. sourceRect 내부 비율이며 왕관 포함 두정부~발끝 bodyHeight는 무기·손·떠있는 석판을 제외함. 완성 WebP·게임 화면 QA 또는 자동 검증은 실행하지 않음."
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-b": {
         "kind": "music",
@@ -6288,38 +6288,38 @@
       "strike": {
         "kind": "blade",
         "grip": [
-          283,
+          282,
           296
         ],
         "tip": [
-          490,
+          489,
           274
         ],
         "focus": [
-          490,
+          489,
           274
         ],
         "framePath": "public/art/characters-v3/units/oath_guardian-strike.webp",
         "frameSha256": "e76198fa222a057c244a2e491768319d4d470e25bbd30d774ca9893aadb1d605",
-        "reviewMethod": "생성 PNG 원본의 손·무기끝·결정/음차 발광점과 실제 투명 분할 여백을 보며 수동 근사 저작. sourceRect 내부 비율이며 왕관 포함 두정부~발끝 bodyHeight는 무기·손·떠있는 석판을 제외함. 완성 WebP·게임 화면 QA 또는 자동 검증은 실행하지 않음."
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-a": {
         "kind": "blade",
         "grip": [
-          363,
+          362,
           212
         ],
         "tip": [
-          194,
-          133
+          202,
+          136
         ],
         "focus": [
-          194,
-          133
+          202,
+          136
         ],
         "framePath": "public/art/characters-v3/units/oath_guardian-skill-a.webp",
         "frameSha256": "ab074381df11fdadc7a435c4d018dc97823fa68595ff8ff5f0fa15d11120ea14",
-        "reviewMethod": "생성 PNG 원본의 손·무기끝·결정/음차 발광점과 실제 투명 분할 여백을 보며 수동 근사 저작. sourceRect 내부 비율이며 왕관 포함 두정부~발끝 bodyHeight는 무기·손·떠있는 석판을 제외함. 완성 WebP·게임 화면 QA 또는 자동 검증은 실행하지 않음."
+        "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함."
       },
       "skill-b": {
         "kind": "blade",

@@ -7,7 +7,7 @@
     1254,
     1254
   ],
-  "reviewMethod": "생성 PNG 입력을 보며 투명 여백 crop과 실제 손·물리적 무기끝/보조기관·발광점을 수동 근사 저작. sourceRect 내부 비율. 비인간 종족의 몸높이는 과도한 추정 정규화를 피하려고 생략하고 인형·종지기만 두정부~발끝 bodyHeight 기입. isolateSilhouette로 crop에 섞인 이웃 투명분리 조각은 중앙 생산기의 기존 배우분리 절차를 사용. 완성 WebP·게임 출력 QA/자동검증은 하지 않음.",
+  "reviewMethod": "실제 1254×1254 생성 PNG 원본을 확대하여 손 안쪽·물리 무기/기관 끝 바로 안쪽을 수동 저작하고 raw RGBA를 함께 기록. 기존 올바른 손/초점은 보존하고 허공/빈 음차 틈 근사점만 같은 무기/기관의 실제 그림으로 보완. sourceRect/몸높이/원본 PNG는 변경하지 않음. 완성 WebP·게임 화면 QA나 자동 검증은 실행하지 않음. 앵커/몸높이 비율의 분모는 생산 sourceBox와 같은 floor/ceil 정수박스를 사용하며 실제 pointsPx/rawRGBA와 원본 sourceRect를 보존함.",
   "identityNotes": "원종족과 실제 기관 보존: 도롱뇽 네발/등 온천구, 도자기 태엽소녀 검, 가면 종지기 황동종 지원, 무얼굴 종이정령, 네발 월식고양이 두 앞발, 얼굴없는 꽃봉오리 덩굴.",
   "cells": [
     {
@@ -19,16 +19,16 @@
       "anchors": {
         "kind": "focus",
         "grip": [
-          0.481481,
-          0.369492
+          0.48157248,
+          0.37162162
         ],
         "tip": [
-          0.488889,
-          0.274576
+          0.48894349,
+          0.27702703
         ],
         "focus": [
-          0.488889,
-          0.274576
+          0.48894349,
+          0.27702703
         ]
       },
       "sourceRect": [
@@ -51,6 +51,51 @@
           208,
           156
         ]
+      },
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "네발 도롱뇽 실제 주황 온천구 밑동/열린 구멍점 그대로 보존.",
+        "pointsPx": {
+          "grip": [
+            205,
+            184
+          ],
+          "tip": [
+            208,
+            156
+          ],
+          "focus": [
+            208,
+            156
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            253,
+            192,
+            141,
+            253
+          ],
+          "tip": [
+            130,
+            71,
+            53,
+            250
+          ],
+          "focus": [
+            130,
+            71,
+            53,
+            250
+          ]
+        },
+        "normalizationBox": {
+          "left": 9,
+          "top": 74,
+          "width": 407,
+          "height": 296
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
       }
     },
     {
@@ -62,16 +107,16 @@
       "anchors": {
         "kind": "focus",
         "grip": [
-          0.614815,
-          0.474194
+          0.61425061,
+          0.47419355
         ],
         "tip": [
-          0.62963,
-          0.393548
+          0.62899263,
+          0.39354839
         ],
         "focus": [
-          0.62963,
-          0.393548
+          0.62899263,
+          0.39354839
         ]
       },
       "sourceRect": [
@@ -94,6 +139,51 @@
           690,
           182
         ]
+      },
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "네발 도롱뇽 실제 주황 온천구 밑동/열린 구멍점 그대로 보존.",
+        "pointsPx": {
+          "grip": [
+            684,
+            207
+          ],
+          "tip": [
+            690,
+            182
+          ],
+          "focus": [
+            690,
+            182
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            251,
+            203,
+            156,
+            253
+          ],
+          "tip": [
+            117,
+            57,
+            41,
+            253
+          ],
+          "focus": [
+            117,
+            57,
+            41,
+            253
+          ]
+        },
+        "normalizationBox": {
+          "left": 434,
+          "top": 60,
+          "width": 407,
+          "height": 310
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
       }
     },
     {
@@ -105,15 +195,15 @@
       "anchors": {
         "kind": "focus",
         "grip": [
-          0.506329,
-          0.378788
+          0.50629723,
+          0.37878788
         ],
         "tip": [
-          0.508861,
+          0.50881612,
           0.3
         ],
         "focus": [
-          0.508861,
+          0.50881612,
           0.3
         ]
       },
@@ -137,6 +227,51 @@
           1051,
           139
         ]
+      },
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "네발 도롱뇽 실제 주황 온천구 밑동/열린 구멍점 그대로 보존.",
+        "pointsPx": {
+          "grip": [
+            1050,
+            165
+          ],
+          "tip": [
+            1051,
+            139
+          ],
+          "focus": [
+            1051,
+            139
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            200,
+            157,
+            139,
+            253
+          ],
+          "tip": [
+            65,
+            19,
+            10,
+            253
+          ],
+          "focus": [
+            65,
+            19,
+            10,
+            253
+          ]
+        },
+        "normalizationBox": {
+          "left": 849,
+          "top": 40,
+          "width": 397,
+          "height": 330
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
       }
     },
     {
@@ -148,16 +283,16 @@
       "anchors": {
         "kind": "blade",
         "grip": [
-          0.663415,
-          0.474667
+          0.66423358,
+          0.47466667
         ],
         "tip": [
-          0.965854,
-          0.677333
+          0.96593674,
+          0.67733333
         ],
         "focus": [
-          0.965854,
-          0.677333
+          0.96593674,
+          0.67733333
         ]
       },
       "sourceRect": [
@@ -182,7 +317,52 @@
         ],
         "headToFootHeight": 317
       },
-      "bodyHeight": 0.845333
+      "bodyHeight": 0.84533333,
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "도자기 인형의 검 쥔 장갑 보존. 가느다란 실제 은빛 검 끝 안쪽.",
+        "pointsPx": {
+          "grip": [
+            287,
+            598
+          ],
+          "tip": [
+            411,
+            674
+          ],
+          "focus": [
+            411,
+            674
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            140,
+            98,
+            66,
+            250
+          ],
+          "tip": [
+            211,
+            187,
+            166,
+            235
+          ],
+          "focus": [
+            211,
+            187,
+            166,
+            235
+          ]
+        },
+        "normalizationBox": {
+          "left": 14,
+          "top": 420,
+          "width": 411,
+          "height": 375
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
+      }
     },
     {
       "id": "gold_puppet",
@@ -193,16 +373,16 @@
       "anchors": {
         "kind": "blade",
         "grip": [
-          0.709278,
-          0.31831
+          0.70927835,
+          0.32022472
         ],
         "tip": [
-          0.96701,
-          0.267606
+          0.94845361,
+          0.26404494
         ],
         "focus": [
-          0.96701,
-          0.267606
+          0.94845361,
+          0.26404494
         ]
       },
       "sourceRect": [
@@ -218,16 +398,61 @@
           543
         ],
         "tip": [
-          889,
-          525
+          880,
+          523
         ],
         "focus": [
-          889,
-          525
+          880,
+          523
         ],
         "headToFootHeight": 281
       },
-      "bodyHeight": 0.791549
+      "bodyHeight": 0.78932584,
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "도자기 인형의 검 쥔 장갑 보존. 가느다란 실제 은빛 검 끝 안쪽.",
+        "pointsPx": {
+          "grip": [
+            764,
+            543
+          ],
+          "tip": [
+            880,
+            523
+          ],
+          "focus": [
+            880,
+            523
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            56,
+            29,
+            13,
+            252
+          ],
+          "tip": [
+            245,
+            226,
+            201,
+            242
+          ],
+          "focus": [
+            245,
+            226,
+            201,
+            242
+          ]
+        },
+        "normalizationBox": {
+          "left": 420,
+          "top": 429,
+          "width": 485,
+          "height": 356
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
+      }
     },
     {
       "id": "gold_puppet",
@@ -238,16 +463,16 @@
       "anchors": {
         "kind": "blade",
         "grip": [
-          0.428986,
-          0.20241
+          0.42774566,
+          0.20432692
         ],
         "tip": [
-          0.933333,
-          0.060241
+          0.90462428,
+          0.06730769
         ],
         "focus": [
-          0.933333,
-          0.060241
+          0.90462428,
+          0.06730769
         ]
       },
       "sourceRect": [
@@ -263,16 +488,61 @@
           454
         ],
         "tip": [
-          1222,
-          395
+          1213,
+          397
         ],
         "focus": [
-          1222,
-          395
+          1213,
+          397
         ],
         "headToFootHeight": 319
       },
-      "bodyHeight": 0.768675
+      "bodyHeight": 0.76682692,
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "도자기 인형의 검 쥔 장갑 보존. 가느다란 실제 은빛 검 끝 안쪽.",
+        "pointsPx": {
+          "grip": [
+            1048,
+            454
+          ],
+          "tip": [
+            1213,
+            397
+          ],
+          "focus": [
+            1213,
+            397
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            53,
+            33,
+            26,
+            253
+          ],
+          "tip": [
+            255,
+            250,
+            235,
+            225
+          ],
+          "focus": [
+            255,
+            250,
+            235,
+            225
+          ]
+        },
+        "normalizationBox": {
+          "left": 900,
+          "top": 369,
+          "width": 346,
+          "height": 416
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
+      }
     },
     {
       "id": "bell_keeper",
@@ -283,16 +553,16 @@
       "anchors": {
         "kind": "music",
         "grip": [
-          0.402564,
-          0.525581
+          0.40409207,
+          0.52668213
         ],
         "tip": [
-          0.366667,
-          0.681395
+          0.36828645,
+          0.68213457
         ],
         "focus": [
-          0.351282,
-          0.669767
+          0.35294118,
+          0.67053364
         ]
       },
       "sourceRect": [
@@ -317,7 +587,52 @@
         ],
         "headToFootHeight": 386
       },
-      "bodyHeight": 0.897674
+      "bodyHeight": 0.89559165,
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "마스크 종지기의 실제 손/황동 종 입구 불투명점 그대로 보존.",
+        "pointsPx": {
+          "grip": [
+            172,
+            1036
+          ],
+          "tip": [
+            158,
+            1103
+          ],
+          "focus": [
+            152,
+            1098
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            102,
+            76,
+            64,
+            253
+          ],
+          "tip": [
+            252,
+            255,
+            228,
+            253
+          ],
+          "focus": [
+            176,
+            130,
+            75,
+            252
+          ]
+        },
+        "normalizationBox": {
+          "left": 14,
+          "top": 809,
+          "width": 391,
+          "height": 431
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
+      }
     },
     {
       "id": "bell_keeper",
@@ -328,16 +643,16 @@
       "anchors": {
         "kind": "music",
         "grip": [
-          0.808602,
-          0.225581
+          0.80686695,
+          0.22737819
         ],
         "tip": [
-          0.952688,
-          0.232558
+          0.95064378,
+          0.23433875
         ],
         "focus": [
-          0.946237,
-          0.232558
+          0.94420601,
+          0.23433875
         ]
       },
       "sourceRect": [
@@ -362,7 +677,52 @@
         ],
         "headToFootHeight": 370
       },
-      "bodyHeight": 0.860465
+      "bodyHeight": 0.85846868,
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "마스크 종지기의 실제 손/황동 종 입구 불투명점 그대로 보존.",
+        "pointsPx": {
+          "grip": [
+            786,
+            907
+          ],
+          "tip": [
+            853,
+            910
+          ],
+          "focus": [
+            850,
+            910
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            62,
+            42,
+            37,
+            252
+          ],
+          "tip": [
+            136,
+            85,
+            33,
+            250
+          ],
+          "focus": [
+            146,
+            92,
+            37,
+            251
+          ]
+        },
+        "normalizationBox": {
+          "left": 410,
+          "top": 809,
+          "width": 466,
+          "height": 431
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
+      }
     },
     {
       "id": "bell_keeper",
@@ -373,16 +733,16 @@
       "anchors": {
         "kind": "music",
         "grip": [
-          0.283784,
-          0.140659
+          0.28301887,
+          0.14223195
         ],
         "tip": [
-          0.391892,
-          0.065934
+          0.39083558,
+          0.0678337
         ],
         "focus": [
-          0.394595,
-          0.07033
+          0.393531,
+          0.07221007
         ]
       },
       "sourceRect": [
@@ -407,7 +767,52 @@
         ],
         "headToFootHeight": 343
       },
-      "bodyHeight": 0.753846
+      "bodyHeight": 0.75054705,
+      "sourceAnchorAuthoring": {
+        "method": "원본 PNG 확대에서 실제 무기/기관 의미점을 수동 지정하고 그 원본의 raw RGBA를 읽음. 망토/몸체의 가까운 불투명점으로 자동 스냅하지 않음.",
+        "semantics": "마스크 종지기의 실제 손/황동 종 입구 불투명점 그대로 보존.",
+        "pointsPx": {
+          "grip": [
+            980,
+            849
+          ],
+          "tip": [
+            1020,
+            815
+          ],
+          "focus": [
+            1021,
+            817
+          ]
+        },
+        "rawRGBA": {
+          "grip": [
+            76,
+            44,
+            37,
+            251
+          ],
+          "tip": [
+            236,
+            183,
+            97,
+            251
+          ],
+          "focus": [
+            219,
+            158,
+            85,
+            251
+          ]
+        },
+        "normalizationBox": {
+          "left": 875,
+          "top": 784,
+          "width": 371,
+          "height": 457
+        },
+        "normalizationMethod": "생산 sourceBox와 동일한 sourceRect × 실제 원본 치수의 floor(left/top), ceil(right/bottom) 정수박스. 원본 물리점 pointsPx/rawRGBA와 두정부~발끝 픽셀 높이는 보존하고 fractions만 이 박스 안 비율로 표현함."
+      }
     }
   ]
 }

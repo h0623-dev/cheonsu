@@ -1828,7 +1828,7 @@
       "left": 105,
       "top": 217,
       "right": 406,
-      "bottom": 477
+      "bottom": 476
     },
     "recoil": {
       "left": 104,
@@ -1837,8 +1837,8 @@
       "bottom": 478
     },
     "skill-a": {
-      "left": 116,
-      "top": 145,
+      "left": 117,
+      "top": 146,
       "right": 394,
       "bottom": 477
     },
@@ -1875,8 +1875,8 @@
       "bottom": 477
     },
     "recover": {
-      "left": 114,
-      "top": 131,
+      "left": 115,
+      "top": 132,
       "right": 395,
       "bottom": 477
     },
@@ -1975,8 +1975,8 @@
       "bottom": 476
     },
     "recover": {
-      "left": 112,
-      "top": 115,
+      "left": 111,
+      "top": 114,
       "right": 400,
       "bottom": 477
     },
@@ -2039,8 +2039,8 @@
     "skill-a": {
       "left": 94,
       "top": 115,
-      "right": 417,
-      "bottom": 477
+      "right": 416,
+      "bottom": 476
     },
     "skill-b": {
       "left": 52,
@@ -2070,9 +2070,9 @@
     },
     "strike": {
       "left": 30,
-      "top": 124,
-      "right": 482,
-      "bottom": 476
+      "top": 125,
+      "right": 481,
+      "bottom": 477
     },
     "recover": {
       "left": 57,
@@ -2638,8 +2638,8 @@
     },
     "skill-a": {
       "left": 56,
-      "top": 165,
-      "right": 454,
+      "top": 164,
+      "right": 455,
       "bottom": 477
     },
     "skill-b": {
@@ -2725,8 +2725,8 @@
       "bottom": 477
     },
     "recover": {
-      "left": 93,
-      "top": 255,
+      "left": 91,
+      "top": 254,
       "right": 420,
       "bottom": 477
     },
@@ -2738,8 +2738,8 @@
     },
     "skill-a": {
       "left": 75,
-      "top": 259,
-      "right": 435,
+      "top": 258,
+      "right": 436,
       "bottom": 477
     },
     "skill-b": {
@@ -2787,8 +2787,8 @@
       "bottom": 479
     },
     "skill-a": {
-      "left": 93,
-      "top": 227,
+      "left": 92,
+      "top": 226,
       "right": 419,
       "bottom": 477
     },
@@ -2870,8 +2870,8 @@
     },
     "strike": {
       "left": 20,
-      "top": 181,
-      "right": 491,
+      "top": 180,
+      "right": 492,
       "bottom": 477
     },
     "recover": {
@@ -2888,8 +2888,8 @@
     },
     "skill-a": {
       "left": 107,
-      "top": 128,
-      "right": 402,
+      "top": 127,
+      "right": 403,
       "bottom": 477
     },
     "skill-b": {
@@ -2937,8 +2937,8 @@
       "bottom": 479
     },
     "skill-a": {
-      "left": 86,
-      "top": 75,
+      "left": 85,
+      "top": 74,
       "right": 423,
       "bottom": 477
     },
@@ -3189,7 +3189,7 @@
     "skill-a": {
       "left": 132,
       "top": 250,
-      "right": 378,
+      "right": 377,
       "bottom": 477
     },
     "skill-b": {
@@ -3237,8 +3237,8 @@
       "bottom": 479
     },
     "skill-a": {
-      "left": 120,
-      "top": 217,
+      "left": 119,
+      "top": 216,
       "right": 391,
       "bottom": 477
     },
@@ -3326,8 +3326,8 @@
     },
     "recover": {
       "left": 96,
-      "top": 170,
-      "right": 415,
+      "top": 169,
+      "right": 416,
       "bottom": 477
     },
     "recoil": {

@@ -44,7 +44,7 @@
         },
         "skill-a": {
           "height": 512,
-          "top": 165,
+          "top": 164,
           "bottom": 477
         },
         "skill-b": {
@@ -64,8 +64,8 @@
             317
           ],
           "tip": [
-            414,
-            311
+            405,
+            302
           ],
           "focus": [
             291,
@@ -198,7 +198,7 @@
         },
         "recover": {
           "height": 512,
-          "top": 255,
+          "top": 254,
           "bottom": 477
         },
         "recoil": {
@@ -208,7 +208,7 @@
         },
         "skill-a": {
           "height": 512,
-          "top": 259,
+          "top": 258,
           "bottom": 477
         },
         "skill-b": {
@@ -224,21 +224,21 @@
         "recover": {
           "kind": "focus",
           "grip": [
-            308,
-            298
+            317,
+            303
           ],
           "tip": [
             335,
-            310
+            285
           ],
           "focus": [
-            329,
-            303
+            335,
+            285
           ],
           "measured": false
         }
       },
-      "visibleFraction": 0.4391464359504132
+      "visibleFraction": 0.44111570247933884
     },
     "crystal_insect": {
       "motion": {
@@ -284,7 +284,7 @@
         },
         "skill-a": {
           "height": 512,
-          "top": 227,
+          "top": 226,
           "bottom": 477
         },
         "skill-b": {
@@ -304,8 +304,8 @@
             281
           ],
           "tip": [
-            410,
-            364
+            406,
+            358
           ],
           "focus": [
             405,
@@ -313,12 +313,12 @@
           ],
           "secondary": {
             "grip": [
-              359,
-              350
+              367,
+              338
             ],
             "tip": [
-              379,
-              422
+              375,
+              420
             ]
           },
           "measured": false
@@ -387,15 +387,15 @@
           "kind": "focus",
           "grip": [
             247,
-            338
+            339
           ],
           "tip": [
             249,
-            315
+            316
           ],
           "focus": [
             249,
-            315
+            316
           ],
           "measured": false
         }
@@ -466,8 +466,8 @@
             351
           ],
           "tip": [
-            380,
-            268
+            349,
+            279
           ],
           "focus": [
             369,
@@ -479,8 +479,8 @@
               353
             ],
             "tip": [
-              158,
-              261
+              174,
+              262
             ]
           },
           "measured": false
@@ -517,7 +517,7 @@
         },
         "strike": {
           "height": 512,
-          "top": 181,
+          "top": 180,
           "bottom": 477
         },
         "recover": {
@@ -532,7 +532,7 @@
         },
         "skill-a": {
           "height": 512,
-          "top": 128,
+          "top": 127,
           "bottom": 477
         },
         "skill-b": {
@@ -608,7 +608,7 @@
         },
         "skill-a": {
           "height": 512,
-          "top": 75,
+          "top": 74,
           "bottom": 477
         },
         "skill-b": {
@@ -625,7 +625,7 @@
           "kind": "music",
           "grip": [
             228,
-            316
+            317
           ],
           "tip": [
             216,
@@ -705,14 +705,14 @@
           ],
           "tip": [
             320,
-            328
+            329
           ],
           "focus": [
             321,
-            328
+            329
           ],
           "bookCenter": [
-            228,
+            227,
             319
           ],
           "measured": false
@@ -784,12 +784,12 @@
             360
           ],
           "tip": [
-            400,
-            357
+            392,
+            361
           ],
           "focus": [
-            400,
-            357
+            392,
+            361
           ],
           "secondary": {
             "grip": [
@@ -798,7 +798,7 @@
             ],
             "tip": [
               328,
-              467
+              466
             ]
           },
           "measured": false
@@ -870,12 +870,12 @@
             398
           ],
           "tip": [
-            368,
-            360
+            370,
+            341
           ],
           "focus": [
-            368,
-            360
+            369,
+            346
           ],
           "measured": false
         }
@@ -955,8 +955,8 @@
           ],
           "secondary": {
             "grip": [
-              315,
-              348
+              311,
+              339
             ],
             "tip": [
               373,
@@ -1088,7 +1088,7 @@
         },
         "skill-a": {
           "height": 512,
-          "top": 217,
+          "top": 216,
           "bottom": 477
         },
         "skill-b": {
@@ -1105,10 +1105,10 @@
           "kind": "staff",
           "grip": [
             215,
-            309
+            308
           ],
           "tip": [
-            186,
+            185,
             208
           ],
           "focus": [
@@ -1180,16 +1180,16 @@
         "recover": {
           "kind": "staff",
           "grip": [
-            199,
-            341
+            198,
+            340
           ],
           "tip": [
-            194,
-            243
+            190,
+            245
           ],
           "focus": [
-            199,
-            273
+            191,
+            257
           ],
           "measured": false
         }
@@ -1230,7 +1230,7 @@
         },
         "recover": {
           "height": 512,
-          "top": 170,
+          "top": 169,
           "bottom": 477
         },
         "recoil": {
@@ -1288,16 +1288,16 @@
         "recover": {
           "kind": "blade",
           "grip": [
-            254,
+            255,
             333
           ],
           "tip": [
-            417,
-            436
+            409,
+            431
           ],
           "focus": [
-            417,
-            436
+            409,
+            431
           ],
           "measured": false
         },
@@ -1318,7 +1318,7 @@
           ]
         }
       },
-      "visibleFraction": 0.5373759305210918,
+      "visibleFraction": 0.5391206575682382,
       "skills": {
         "맹세의 원": {
           "src": "/art/characters-v3/units/oath_guardian-skill-a.webp",
