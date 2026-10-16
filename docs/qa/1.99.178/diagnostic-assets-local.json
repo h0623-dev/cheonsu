@@ -1,0 +1,159 @@
+{
+  "check": "cheonsu-web-graphics-1",
+  "at": "2026-10-16T06:37:29.086Z",
+  "origin": "http://127.0.0.1:5191",
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+  "viewport": {
+    "width": 390,
+    "height": 844,
+    "dpr": 1
+  },
+  "online": true,
+  "features": {
+    "nesting": true,
+    "maskIntersect": true,
+    "dvh": true
+  },
+  "release": {
+    "status": 200,
+    "contentType": "application/json",
+    "data": {
+      "gameVersion": "1.99.178",
+      "webRevision": "safari-1",
+      "cacheRevision": "1.99.178-safari-1-59d47bd0ed97",
+      "sourceCommit": "13de4da03815dc31772e711d1de74ff451d7769c",
+      "builtAt": "2026-10-16T06:18:51.994Z",
+      "platform": "safari-web"
+    }
+  },
+  "assets": [
+    {
+      "name": "1장 전투 배경",
+      "path": "/art/chapters-v1/chapter-01.webp",
+      "http": {
+        "status": 200,
+        "contentType": "image/webp",
+        "contentLength": "451680",
+        "redirected": false
+      },
+      "image": {
+        "state": "loaded",
+        "naturalWidth": 1536,
+        "naturalHeight": 1024,
+        "complete": true
+      }
+    },
+    {
+      "name": "지도 풀 바닥",
+      "path": "/art/world-v2/terrain/grass.webp",
+      "http": {
+        "status": 200,
+        "contentType": "image/webp",
+        "contentLength": "69504",
+        "redirected": false
+      },
+      "image": {
+        "state": "loaded",
+        "naturalWidth": 314,
+        "naturalHeight": 314,
+        "complete": true
+      }
+    },
+    {
+      "name": "지도 나무",
+      "path": "/art/world-v2/props/oak.webp",
+      "http": {
+        "status": 200,
+        "contentType": "image/webp",
+        "contentLength": "57334",
+        "redirected": false
+      },
+      "image": {
+        "state": "loaded",
+        "naturalWidth": 384,
+        "naturalHeight": 407,
+        "complete": true
+      }
+    },
+    {
+      "name": "카일 지도 모습",
+      "path": "/art/directions-v1/hero-back.webp",
+      "http": {
+        "status": 200,
+        "contentType": "image/webp",
+        "contentLength": "45286",
+        "redirected": false
+      },
+      "image": {
+        "state": "loaded",
+        "naturalWidth": 439,
+        "naturalHeight": 480,
+        "complete": true
+      }
+    },
+    {
+      "name": "리나 지도 모습",
+      "path": "/art/directions-v1/lina-back.webp",
+      "http": {
+        "status": 200,
+        "contentType": "image/webp",
+        "contentLength": "50036",
+        "redirected": false
+      },
+      "image": {
+        "state": "loaded",
+        "naturalWidth": 384,
+        "naturalHeight": 480,
+        "complete": true
+      }
+    },
+    {
+      "name": "아리아 지도 모습",
+      "path": "/art/directions-v1/aria-back.webp",
+      "http": {
+        "status": 200,
+        "contentType": "image/webp",
+        "contentLength": "61250",
+        "redirected": false
+      },
+      "image": {
+        "state": "loaded",
+        "naturalWidth": 384,
+        "naturalHeight": 480,
+        "complete": true
+      }
+    },
+    {
+      "name": "카일 전투 모습",
+      "path": "/art/characters-v2/units/hero-recover.webp",
+      "http": {
+        "status": 200,
+        "contentType": "image/webp",
+        "contentLength": "40708",
+        "redirected": false
+      },
+      "image": {
+        "state": "loaded",
+        "naturalWidth": 512,
+        "naturalHeight": 512,
+        "complete": true
+      }
+    },
+    {
+      "name": "국경 방패병",
+      "path": "/art/characters-v2/units/sentinel-recover.webp",
+      "http": {
+        "status": 200,
+        "contentType": "image/webp",
+        "contentLength": "57968",
+        "redirected": false
+      },
+      "image": {
+        "state": "loaded",
+        "naturalWidth": 512,
+        "naturalHeight": 512,
+        "complete": true
+      }
+    }
+  ]
+}

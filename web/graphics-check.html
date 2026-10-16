@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>천수 · 전장 그림 확인</title>
+<style>
+*{box-sizing:border-box}body{margin:0;padding:24px 16px 40px;background:#102321;color:#edf3e9;font:16px/1.6 system-ui,sans-serif}main{max-width:760px;margin:auto}h1{font-size:25px}p{color:#c6d7cf}button,a{display:inline-block;padding:12px 16px;margin:4px 8px 12px 0;border:1px solid #8fb9a4;border-radius:6px;background:#315f50;color:#fff;font:inherit;text-decoration:none}button:disabled{opacity:.5}article{border:1px solid #4f7465;padding:12px;margin:12px 0;border-radius:6px}article strong{display:block}img{display:block;width:100%;height:180px;object-fit:contain;background:repeating-conic-gradient(#32443d 0 25%,#24372e 0 50%) 0/24px 24px}article:first-child img{height:240px;object-fit:cover}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;background:#071713;padding:12px;border-radius:6px}#status{font-weight:700;color:#f1d497}.copy-note{font-size:14px}
+</style>
+<main>
+<h1>천수 · 전장 그림 확인</h1>
+<p>현재 브라우저에서 1장 배경과 캐릭터 그림을 불러옵니다. 결과에는 그림 응답·화면 크기·브라우저 정보만 담으며 게임 저장은 읽거나 변경하지 않습니다.</p>
+<button id="run">그림 확인 시작</button><button id="copy" disabled>결과 복사</button><button id="game">게임 화면에서 확인</button><a href="/">게임으로 돌아가기</a>
+<div id="status" role="status">그림 확인 시작을 눌러주세요.</div>
+<p class="copy-note">완료 후 ‘결과 복사’를 눌러 이 대화에 붙여 넣어주세요. 복사가 안 되면 아래 결과를 길게 눌러 복사할 수 있습니다.</p>
+<section id="pictures"></section><pre id="result"></pre>
+</main>
+<script type="module">
+const assets=[['1장 전투 배경','/art/chapters-v1/chapter-01.webp'],['지도 풀 바닥','/art/world-v2/terrain/grass.webp'],['지도 나무','/art/world-v2/props/oak.webp'],['카일 지도 모습','/art/directions-v1/hero-back.webp'],['리나 지도 모습','/art/directions-v1/lina-back.webp'],['아리아 지도 모습','/art/directions-v1/aria-back.webp'],['카일 전투 모습','/art/characters-v2/units/hero-recover.webp'],['국경 방패병','/art/characters-v2/units/sentinel-recover.webp']];
+const run=document.querySelector('#run'),copy=document.querySelector('#copy'),status=document.querySelector('#status'),result=document.querySelector('#result'),pictures=document.querySelector('#pictures');
+let report;
+const update=()=>{result.textContent=JSON.stringify(report,null,2);copy.disabled=false};
+const readImage=(url,image)=>new Promise(resolve=>{const timer=setTimeout(()=>finish('timeout'),12000);const finish=state=>{clearTimeout(timer);image.onload=null;image.onerror=null;resolve({state,naturalWidth:image.naturalWidth,naturalHeight:image.naturalHeight,complete:image.complete})};image.onload=()=>finish('loaded');image.onerror=()=>finish('error');image.src=url});
+run.onclick=async()=>{
+ run.disabled=true;pictures.replaceChildren();status.textContent='1장 그림을 불러오는 중입니다…';
+ report={check:'cheonsu-web-graphics-1',at:new Date().toISOString(),origin:location.origin,userAgent:navigator.userAgent,viewport:{width:innerWidth,height:innerHeight,dpr:devicePixelRatio},online:navigator.onLine,features:{nesting:CSS.supports('selector(&)'),maskIntersect:CSS.supports('mask-composite','intersect'),dvh:CSS.supports('height','100dvh')},release:null,assets:[]};
+ try{const response=await fetch('/web-release.json',{cache:'no-store',credentials:'same-origin'});report.release={status:response.status,contentType:response.headers.get('content-type')};if(response.ok&&response.headers.get('content-type')?.includes('json'))report.release.data=await response.json()}catch(error){report.release={error:error.message}}
+ await Promise.all(assets.map(async([name,path])=>{
+  const row={name,path};report.assets.push(row);const article=document.createElement('article'),title=document.createElement('strong'),image=document.createElement('img');title.textContent=name;image.alt=name;article.append(title,image);pictures.append(article);
+  const fresh=path+'?graphics-check='+Date.now();const imageRead=readImage(fresh,image);const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),12000);
+  try{const response=await fetch(fresh,{cache:'no-store',credentials:'same-origin',signal:controller.signal});row.http={status:response.status,contentType:response.headers.get('content-type'),contentLength:response.headers.get('content-length'),redirected:response.redirected};await response.body?.cancel()}catch(error){row.http={error:error.message}}finally{clearTimeout(timer)}
+  row.image=await imageRead;title.textContent=name+' · '+(row.image.state==='loaded'?'표시됨':'표시 실패');update();
+ }));
+ const bad=report.assets.filter(row=>row.image.state!=='loaded');status.textContent=bad.length?`${bad.length}개 그림을 표시하지 못했습니다. 결과를 복사해 보내주세요.`:'그림을 모두 표시했습니다. 결과를 복사해 보내주세요.';run.disabled=false;update();
+};
+copy.onclick=async()=>{try{await navigator.clipboard.writeText(result.textContent);status.textContent='결과를 복사했습니다. 이 대화에 붙여 넣어주세요.'}catch{const range=document.createRange();range.selectNodeContents(result);const selection=getSelection();selection.removeAllRanges();selection.addRange(range);status.textContent='아래 결과를 선택했습니다. 복사해 이 대화에 붙여 넣어주세요.'}};
+document.querySelector('#game').onclick=async()=>{
+ const response=await fetch('/index.html',{cache:'no-store',credentials:'same-origin'});if(!response.ok){status.textContent='게임 시작 파일을 불러오지 못했습니다. 그림 확인 결과를 복사해 주세요.';return}
+ const html=new DOMParser().parseFromString(await response.text(),'text/html');const script=html.querySelector('script[type="module"][src]');if(!script){status.textContent='게임 시작 파일의 형식을 확인할 수 없습니다.';return}
+ for(const link of html.querySelectorAll('link[rel="stylesheet"]')){const item=document.createElement('link');item.rel='stylesheet';item.href=link.getAttribute('href');document.head.append(item)}
+ document.querySelector('main').hidden=true;document.body.style.cssText='margin:0;padding:0;overflow:hidden;width:100%;height:100dvh';const root=document.createElement('div');root.id='root';document.body.append(root);
+ const tools=document.createElement('div');tools.style.cssText='position:fixed;right:8px;top:8px;z-index:2147483647;display:flex;gap:4px;background:#102321e8;border-radius:6px;padding:3px';
+ const capture=document.createElement('button'),back=document.createElement('button');capture.textContent='현재 화면 상태 복사';back.textContent='진단 닫기';for(const button of [capture,back])button.style.cssText='font:12px/1.3 system-ui;padding:8px;margin:0';tools.append(capture,back);document.body.append(tools);back.onclick=()=>location.assign('/');
+ capture.onclick=async()=>{
+  const info=(element,pseudo)=>{if(!element)return null;const s=getComputedStyle(element,pseudo),r=element.getBoundingClientRect();return{class:element.className?.baseVal??element.className,pseudo,rect:{x:r.x,y:r.y,width:r.width,height:r.height},display:s.display,visibility:s.visibility,opacity:s.opacity,filter:s.filter,transform:s.transform,background:s.backgroundImage,zIndex:s.zIndex,content:s.content}};
+  const map=document.querySelector('.world-battlefield');const snapshot={check:'cheonsu-live-battle-graphics-1',at:new Date().toISOString(),userAgent:navigator.userAgent,viewport:{width:innerWidth,height:innerHeight,dpr:devicePixelRatio},map:info(map),before:info(map,'::before'),after:info(map,'::after'),shell:info(document.querySelector('.battle-map-scroll-shell')),battle:info(document.querySelector('.battle-screen')),combat:info(document.querySelector('.painted-combat')),units:[...document.querySelectorAll('.world-battlefield .unit')].slice(0,12).map(e=>info(e)),images:[...document.querySelectorAll('.world-battlefield img')].slice(0,100).map(i=>({path:new URL(i.currentSrc||i.src,location.href).pathname,...info(i),naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight,complete:i.complete})),centerStack:document.elementsFromPoint(innerWidth/2,innerHeight*.45).slice(0,10).map(e=>info(e))};
+  const text=JSON.stringify(snapshot,null,2);try{await navigator.clipboard.writeText(text);capture.textContent='복사 완료 · 대화에 붙여넣기'}catch{const area=document.createElement('textarea');area.value=text;area.style.cssText='position:fixed;inset:12% 4%;width:92%;height:76%;z-index:2147483647;background:white;color:black';document.body.append(area);area.focus();area.select();capture.textContent='결과를 길게 눌러 복사'}
+ };
+ const loader=document.createElement('script');loader.type='module';loader.src=script.getAttribute('src');document.body.append(loader);
+};
+</script>
+</html>

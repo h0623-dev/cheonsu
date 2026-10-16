@@ -1,0 +1,30 @@
+{
+  "gameVersion": "1.99.178",
+  "gameSourceCommit": "13de4da03815dc31772e711d1de74ff451d7769c",
+  "platform": "safari-web",
+  "siteProjectId": "appgprj_6ad17df8b73481918b41ccab787d8c8a",
+  "siteSourceCommit": "87c0d6be7d915d7a4612b308d4bf21d0699c70be",
+  "cacheRevision": "1.99.178-safari-1-59d47bd0ed97",
+  "archiveBytes": 208726868,
+  "nativeDeployment": {
+    "id": "appgdep_6ad1c2536b3081918a19ee93eb52ee6e",
+    "project_id": "appgprj_6ad17df8b73481918b41ccab787d8c8a",
+    "title": "천수 · 아이폰 플레이",
+    "version_id": "appgprj_6ad17df8b73481918b41ccab787d8c8a~appgver_6966e0bb8e98819183357a568a88fb53",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://cheonsu-ios-20261016.h9206.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ad17df8b73481918b41ccab787d8c8a",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-16T06:21:51.330805+00:00"
+  },
+  "sourcePublication": "Exact production web artifact pushed before native save/deploy; session-only short-lived credential passed through hidden stdin.",
+  "buildScope": "Independent web/build.mjs production artifact; unused legacy maps/concept excluded from Sites artifact only.",
+  "directPostChangeValidationRun": false,
+  "actualDevicePlayTested": false,
+  "firstSourceNotPublished": "7aed9744c9452dfa8305ab6cb9744021a7c38c31",
+  "note": "ChatGPT 웹 검은 전투 화면 신고 대응. 기기 재현으로 GPU 원인을 확정한 결과는 아닙니다. 기존 Sites 주소·계정·저장을 보존하며 Android APK/OTA 공개는 별도 자동 절차입니다."
+}

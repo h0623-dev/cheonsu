@@ -1,0 +1,591 @@
+{
+  "scope": "사용자가 허용한 ChatGPT 웹 전투 검은 화면 한정 재현",
+  "version": "1.99.178",
+  "source": "13de4da",
+  "host": "게시와 같은 정적 산출물을 로컬 제공",
+  "errors": [],
+  "responses": [],
+  "steps": [
+    "실제 웹 시작·이어하기",
+    "실제1장배치후전투진입",
+    "원래HP/스탯유지·한적만인접한검사용저장복원",
+    "전투DOM·이미지·화면수집"
+  ],
+  "scene": {
+    "root": {
+      "tag": "SECTION",
+      "class": "painted-combat duel-choreographed epic-combat motion-melee weapon-slash element-slash is-basic  shake-enabled      is-miss  ",
+      "rect": {
+        "x": 8,
+        "y": 162.5,
+        "width": 374,
+        "height": 519
+      },
+      "position": "static",
+      "zIndex": "auto",
+      "display": "block",
+      "visibility": "visible",
+      "opacity": "1",
+      "filter": "none",
+      "transform": "none",
+      "background": "none",
+      "height": "519px"
+    },
+    "arena": {
+      "tag": "DIV",
+      "class": "painted-combat-arena",
+      "rect": {
+        "x": 9,
+        "y": 233.5,
+        "width": 372,
+        "height": 390
+      },
+      "position": "relative",
+      "zIndex": "auto",
+      "display": "block",
+      "visibility": "visible",
+      "opacity": "1",
+      "filter": "none",
+      "transform": "none",
+      "background": "linear-gradient(rgba(2, 9, 16, 0.21) 0%, rgba(7, 19, 27, 0.086) 40%, rgba(8, 17, 22, 0.46) 100%), url(\"http://127.0.0.1:5191/art/chapters-v1/chapter-01.webp\")",
+      "height": "390px"
+    },
+    "children": [
+      {
+        "tag": "DIV",
+        "class": "epic-combat-ground",
+        "rect": {
+          "x": -9.59375,
+          "y": 436.296875,
+          "width": 409.1875,
+          "height": 202.796875
+        },
+        "position": "absolute",
+        "zIndex": "1",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "none",
+        "background": "radial-gradient(at 52% 60%, rgba(216, 195, 153, 0.086) 0%, rgba(0, 0, 0, 0) 63%), linear-gradient(rgba(0, 0, 0, 0), rgba(7, 17, 22, 0.5))",
+        "height": "202.797px"
+      },
+      {
+        "tag": "DIV",
+        "class": "epic-contact-light",
+        "rect": {
+          "x": 264.59375,
+          "y": 509.703125,
+          "width": 282.71875,
+          "height": 282.71875
+        },
+        "position": "absolute",
+        "zIndex": "2",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "none",
+        "background": "radial-gradient(circle, rgba(246, 190, 116, 0.46), rgba(246, 190, 116, 0.18) 28%, rgba(0, 0, 0, 0) 66%)",
+        "height": "282.719px"
+      },
+      {
+        "tag": "DIV",
+        "class": "epic-floor-pressure",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "position": "absolute",
+        "zIndex": "2",
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "none",
+        "background": "radial-gradient(rgba(246, 190, 116, 0.03) 38%, rgba(246, 190, 116, 0.22) 62%, rgba(0, 0, 0, 0) 72%)",
+        "height": "auto"
+      },
+      {
+        "tag": "DIV",
+        "class": "epic-hit-flare",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "position": "absolute",
+        "zIndex": "6",
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "none",
+        "background": "radial-gradient(circle, rgb(255, 253, 241) 0%, rgb(255, 240, 196) 4%, rgba(246, 190, 116, 0.8) 10%, rgba(246, 190, 116, 0.25) 24%, rgba(0, 0, 0, 0) 57%)",
+        "height": "auto"
+      },
+      {
+        "tag": "DIV",
+        "class": "epic-debris-field",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "position": "absolute",
+        "zIndex": "5",
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "none",
+        "background": "none",
+        "height": "auto"
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "position": "absolute",
+        "zIndex": "5",
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "none",
+        "background": "none",
+        "height": "100%"
+      },
+      {
+        "tag": "DIV",
+        "class": "duel-impact-ink",
+        "rect": {
+          "x": 9,
+          "y": 233.5,
+          "width": 372,
+          "height": 390
+        },
+        "position": "absolute",
+        "zIndex": "3",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "none",
+        "background": "radial-gradient(at 68.7097% 70.8221%, rgba(255, 243, 200, 0.3) 0px, rgba(0, 0, 0, 0) 19%, rgba(5, 15, 21, 0.28) 86%)",
+        "height": "390px"
+      },
+      {
+        "tag": "DIV",
+        "class": "duel-action-lines",
+        "rect": {
+          "x": 44.34001159667969,
+          "y": 299.796875,
+          "width": 241.8000030517578,
+          "height": 273.015625
+        },
+        "position": "absolute",
+        "zIndex": "1",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(0.65, 0, 0, 1, -29.76, 0)",
+        "background": "none",
+        "height": "273.016px"
+      },
+      {
+        "tag": "DIV",
+        "class": "duel-effects",
+        "rect": {
+          "x": 9,
+          "y": 233.5,
+          "width": 372,
+          "height": 390
+        },
+        "position": "absolute",
+        "zIndex": "4",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "none",
+        "background": "none",
+        "height": "390px"
+      },
+      {
+        "tag": "DIV",
+        "class": "duel-impacts",
+        "rect": {
+          "x": 9,
+          "y": 233.5,
+          "width": 372,
+          "height": 390
+        },
+        "position": "absolute",
+        "zIndex": "5",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "none",
+        "background": "none",
+        "height": "390px"
+      },
+      {
+        "tag": "DIV",
+        "class": "painted-fighter fighter-attacker",
+        "rect": {
+          "x": 38.75,
+          "y": 408.953125,
+          "width": 159.953125,
+          "height": 159.953125
+        },
+        "position": "absolute",
+        "zIndex": "3",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "background": "none",
+        "height": "159.953px"
+      },
+      {
+        "tag": "DIV",
+        "class": "painted-fighter fighter-defender",
+        "rect": {
+          "x": 191.296875,
+          "y": 408.953125,
+          "width": 159.953125,
+          "height": 159.953125
+        },
+        "position": "absolute",
+        "zIndex": "3",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "background": "none",
+        "height": "159.953px"
+      },
+      {
+        "tag": "ASIDE",
+        "class": "combat-enemy-intro intro-defender",
+        "rect": {
+          "x": 289.7969970703125,
+          "y": 240.5,
+          "width": 87.828125,
+          "height": 38.25
+        },
+        "position": "absolute",
+        "zIndex": "9",
+        "display": "grid",
+        "visibility": "visible",
+        "opacity": "0.768744",
+        "filter": "none",
+        "transform": "matrix(1, 0, 0, 1, 4.62512, 0)",
+        "background": "none",
+        "height": "38.25px"
+      },
+      {
+        "tag": "DIV",
+        "class": "combat-result",
+        "rect": {
+          "x": 242.884765625,
+          "y": 422.21875,
+          "width": 108.80859375,
+          "height": 42.75
+        },
+        "position": "absolute",
+        "zIndex": "11",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(0.75, 0, 0, 0.75, 0, 10)",
+        "background": "none",
+        "height": "57px"
+      }
+    ],
+    "images": [
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-ready",
+        "rect": {
+          "x": 33.79570007324219,
+          "y": 409.660888671875,
+          "width": 169.86172485351562,
+          "height": 169.8616943359375
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "matrix(1.06195, 0, 0, 1.06195, 0, 0)",
+        "background": "none",
+        "height": "159.953px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/hero-recover.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      },
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-run-a",
+        "rect": {
+          "x": 33.79570007324219,
+          "y": 409.660888671875,
+          "width": 169.86172485351562,
+          "height": 169.8616943359375
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(1.06195, 0, 0, 1.06195, 0, 0)",
+        "background": "none",
+        "height": "159.953px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/hero-run-a.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      },
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-run-b",
+        "rect": {
+          "x": 33.79570007324219,
+          "y": 409.660888671875,
+          "width": 169.86172485351562,
+          "height": 169.8616943359375
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(1.06195, 0, 0, 1.06195, 0, 0)",
+        "background": "none",
+        "height": "159.953px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/hero-run-b.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      },
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-windup",
+        "rect": {
+          "x": 33.79570007324219,
+          "y": 409.660888671875,
+          "width": 169.86172485351562,
+          "height": 169.8616943359375
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(1.06195, 0, 0, 1.06195, 0, 0)",
+        "background": "none",
+        "height": "159.953px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/hero-windup.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      },
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-strike fighter-action",
+        "rect": {
+          "x": 33.79570007324219,
+          "y": 409.660888671875,
+          "width": 169.86172485351562,
+          "height": 169.8616943359375
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(1.06195, 0, 0, 1.06195, 0, 0)",
+        "background": "none",
+        "height": "159.953px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/hero-strike.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      },
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-recover",
+        "rect": {
+          "x": 33.79570007324219,
+          "y": 409.660888671875,
+          "width": 169.86172485351562,
+          "height": 169.8616943359375
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(1.06195, 0, 0, 1.06195, 0, 0)",
+        "background": "none",
+        "height": "159.953px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/hero-recover.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      },
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-ready",
+        "rect": {
+          "x": 195.3861541748047,
+          "y": 426.6037902832031,
+          "width": 152.49745178222656,
+          "height": 152.22201538085938
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "matrix(0.947368, 0, 0, 0.947368, 0, 0)",
+        "background": "none",
+        "height": "159.953px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/sentinel-recover.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      },
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-recoil",
+        "rect": {
+          "x": 195.3861541748047,
+          "y": 426.6037902832031,
+          "width": 152.49745178222656,
+          "height": 152.22201538085938
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(0.947368, 0, 0, 0.947368, 0, 0)",
+        "background": "none",
+        "height": "159.953px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/sentinel-recoil.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      },
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-evade",
+        "rect": {
+          "x": 195.3861541748047,
+          "y": 426.6037902832031,
+          "width": 152.49745178222656,
+          "height": 152.22201538085938
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(0.947368, 0, 0, 0.947368, 0, 0)",
+        "background": "none",
+        "height": "159.953px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/sentinel-run-a.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      }
+    ],
+    "ancestors": [
+      {
+        "tag": "DIV",
+        "class": "painted-combat-overlay",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844
+        },
+        "position": "fixed",
+        "zIndex": "15000",
+        "display": "grid",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "none",
+        "background": "none",
+        "height": "844px"
+      },
+      {
+        "tag": "DIV",
+        "class": "app world-art-app",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844
+        },
+        "position": "relative",
+        "zIndex": "auto",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "none",
+        "background": "none",
+        "height": "844px"
+      },
+      {
+        "tag": "DIV",
+        "class": "",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844
+        },
+        "position": "static",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "none",
+        "background": "none",
+        "height": "844px"
+      }
+    ]
+  },
+  "after": 0
+}

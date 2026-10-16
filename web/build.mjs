@@ -1,7 +1,7 @@
 import { build } from 'vite';
 import react from '@vitejs/plugin-react';
 import { createHash } from 'node:crypto';
-import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, readdir, copyFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { generateThirdPartyNotices } from '../scripts/generate-third-party-notices.mjs';
@@ -23,6 +23,9 @@ await build({
   resolve: { dedupe: ['react', 'react-dom'] },
   build: { outDir: output, emptyOutDir: true, target: 'safari16.4', license: { fileName: 'legal/bundled-web-notices.md' } },
 });
+
+// A separate opt-in diagnostic page; it never becomes part of the game shell cache.
+await copyFile(path.join(root, 'web/graphics-check.html'), path.join(output, 'graphics-check.html'));
 
 const manifest = JSON.parse(await readFile(path.join(root, 'public/manifest.webmanifest'), 'utf8'));
 Object.assign(manifest, {
