@@ -1,0 +1,56 @@
+[
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "passed": true,
+    "checks": [
+      "title",
+      "codex",
+      "settings",
+      "campaign",
+      "save",
+      "continue",
+      "images",
+      "overflow",
+      "console"
+    ]
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "passed": true,
+    "checks": [
+      "title",
+      "codex",
+      "settings",
+      "campaign",
+      "save",
+      "continue",
+      "images",
+      "overflow",
+      "console"
+    ]
+  },
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "passed": true,
+    "checks": [
+      "title",
+      "codex",
+      "settings",
+      "campaign",
+      "save",
+      "continue",
+      "images",
+      "overflow",
+      "console"
+    ]
+  }
+]

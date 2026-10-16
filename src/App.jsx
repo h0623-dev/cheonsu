@@ -33,7 +33,7 @@ import CompanyRoster from './components/CompanyRoster.jsx';
 import JourneyLibrary from './components/JourneyLibrary.jsx';
 import CharacterCodex from './components/CharacterCodex.jsx';
 import { RECRUIT_BY_STAGE } from './data/characterCollection.js';
-import { readMenuCheckpoint, canReplayStory, getNextChapter } from './engine/playerExperience.js';
+import { readMenuCheckpoint, canReplayStory, getNextChapter, isSaveJourneyData } from './engine/playerExperience.js';
 import { getCharacterProfile } from './data/characterProfiles.js';
 import { getGameCharacterArtKey } from './data/expansionArtRegistry.js';
 import { getChapterBrief } from './data/chapterBriefs.js';
@@ -95,7 +95,7 @@ import {
 import { normalizeSaveData } from "./engine/saveEngine.js";
 import { getMoveTiles, getAttackTiles, getTilesInRadius, findMovePath, getUnitMoveTrait, getUnitMoveRange, canAttackTarget, canCounter, formatAttackRange } from "./engine/movement.js";
 import { getEnemyAttackChoice, moveEnemyToward, getAITypeLabel, getEnemyTurnOrder } from "./engine/enemyAI.js";
-import { getStageRoundLimit } from "./engine/stageRules.js";
+import { getStageRoundLimit, isMajorBossStage } from "./engine/stageRules.js";
 import {
   getStatusText,
   applySkillStatusAfterHit,
@@ -118,7 +118,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.175";
+const SAVE_VERSION = "1.99.176";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -141,6 +141,7 @@ function getManualSaveSlotKey(slot) {
 function getSaveSummary(raw) {
   try {
     const data = JSON.parse(raw || "{}");
+    if (!isSaveJourneyData(data)) throw new Error('저장 형식을 확인할 수 없습니다.');
     const date = data.savedAt ? new Date(data.savedAt) : null;
     const dateText = date && !Number.isNaN(date.getTime()) ? date.toLocaleString() : "시간 없음";
 
@@ -4786,6 +4787,8 @@ const TUTORIAL_GUIDES = [
       "아이템이나 턴종료를 누르면 열린 패널이 자동으로 닫혀 전장을 가리지 않습니다.",
       "시야 버튼으로 전술 타일 강조와 배경맵 아트 가시성을 전환할 수 있습니다.",
       "부대 명령의 추천 공격/자동 접근/턴 위임으로 조작 피로를 줄일 수 있습니다.",
+      "카일이 쓰러져도 다른 아군이 살아 있으면 계속 싸울 수 있습니다. 미션 보기에서 승패 조건과 최종 제한 라운드를 확인하세요.",
+      "추가 보상 목표와 속전속결 목표를 놓쳐도 즉시 패배하지 않습니다.",
     ],
   },
   {
@@ -4817,6 +4820,9 @@ const TUTORIAL_GUIDES = [
     desc: "전투 사이에 동료 성장, 장비, 보급, 저장을 관리합니다.",
     tips: [
       "성장 탭에서 훈련/스킬강화/전직을 관리합니다.",
+      "일반 전직은 레벨 5, 최상위 전직은 레벨 10부터 도전할 수 있습니다. 필요한 골드·숙련 등 상세 조건은 전직 화면에서 확인하세요.",
+      "패배 직후에는 훈련을 이용할 수 없습니다. 같은 전장에 재도전해 승리하면 다시 준비할 수 있습니다.",
+      "새 동료는 보유 동료 중 최고 레벨의 70%를 내림한 레벨로 합류합니다(최소 레벨 1).",
       "장비 탭에서 자동 장착과 제련을 사용할 수 있습니다.",
       "보급 탭에서 다음 전투 전 아이템을 보충하세요.",
     ],
@@ -5441,10 +5447,10 @@ function getStageMissionOrder(stage) {
   if (id % 2 === 0) {
     return {
       id: "noItem",
-      title: "보급 절약",
-      desc: "회복약 보너스 목표와 함께 안정 클리어",
+      title: "지휘관 엄호",
+      desc: "카일 HP 50% 이상 유지",
       reward: { gold: 220 + id * 25, potion: 1 },
-      type: "보급전",
+      type: "엄호전",
     };
   }
 
@@ -6365,7 +6371,7 @@ function getRecommendedFormationForStage(stage) {
   if (!stage) return "balanced";
 
   const title = `${stage.title || ""} ${stage.desc || ""}`;
-  const bossStage = stage.id % 6 === 0;
+  const bossStage = isMajorBossStage(stage);
 
   if (bossStage || title.includes("왕좌") || title.includes("성") || title.includes("요새")) {
     return "guard";
@@ -6388,7 +6394,7 @@ function getStageBriefingTips(stage) {
   const text = `${stage.title || ""} ${stage.desc || ""}`;
   const tips = [];
 
-  if (stage.id % 6 === 0) {
+  if (isMajorBossStage(stage)) {
     tips.push("보스전입니다. 2페이즈 장판 패턴에 대비하세요.");
   }
 
@@ -6422,7 +6428,7 @@ function getRecommendedSupplyItems(stage) {
   const text = `${stage.title || ""} ${stage.desc || ""}`;
   const items = ["potion"];
 
-  if (stage.id >= 7 || stage.id % 6 === 0) {
+  if (stage.id >= 7 || isMajorBossStage(stage)) {
     items.push("hiPotion");
   }
 
@@ -6437,7 +6443,7 @@ function getRecommendedSupplyItems(stage) {
     items.push("remedy");
   }
 
-  if (stage.id % 6 === 0 || text.includes("왕좌") || text.includes("보스")) {
+  if (isMajorBossStage(stage) || text.includes("왕좌") || text.includes("보스")) {
     items.push("guardCharm");
     items.push("powerCharm");
   }
@@ -10318,7 +10324,7 @@ export default function App() {
     setTurnPhaseBanner({
       id,
       side,
-      label: isAlly ? "PLAYER PHASE" : "ENEMY PHASE",
+      label: isAlly ? "아군 행동 단계" : "적군 행동 단계",
       title: isAlly ? "아군 턴" : "적군 턴",
       subtitle: isAlly
         ? `${nextRound}라운드 · 지휘를 시작하세요`
@@ -10605,6 +10611,10 @@ export default function App() {
       alert(`수동 저장 슬롯 ${slot}이 비어 있습니다.`);
       return;
     }
+    if (!getSaveSummary(raw).ok) {
+      alert('수동 저장 슬롯이 손상되어 불러오지 않았습니다. 현재 저장과 백업은 보존됩니다.');
+      return;
+    }
 
     const currentRaw = localStorage.getItem(SAVE_KEY);
     if (currentRaw) {
@@ -10621,6 +10631,10 @@ export default function App() {
 
     if (!raw) {
       alert("복구할 백업 저장이 없습니다.");
+      return;
+    }
+    if (!getSaveSummary(raw).ok) {
+      alert('백업 저장이 손상되어 복구하지 않았습니다. 현재 저장과 다른 백업은 보존됩니다.');
       return;
     }
 
@@ -11385,9 +11399,6 @@ export default function App() {
       return;
     }
 
-    const ok = window.confirm("가져온 저장 데이터로 현재 저장/백업/수동 슬롯을 덮어쓸까요?");
-    if (!ok) return;
-
     const map = {
       current: SAVE_KEY,
       autoBackup: SAVE_BACKUP_KEY,
@@ -11396,13 +11407,18 @@ export default function App() {
       manual2: getManualSaveSlotKey(2),
       manual3: getManualSaveSlotKey(3),
     };
-
-    Object.entries(map).forEach(([name, key]) => {
+    const entries = Object.entries(map).flatMap(([name, key]) => {
       const value = bundle.saves?.[name];
-      if (typeof value === "string" && getSaveSummary(value).ok) {
-        localStorage.setItem(key, value);
-      }
+      return typeof value === 'string' && getSaveSummary(value).ok ? [[key, value]] : [];
     });
+    if (!entries.length) {
+      alert('가져올 수 있는 정상 저장이 없습니다. 현재 저장과 백업은 보존됩니다.');
+      return;
+    }
+    const ok = window.confirm('가져온 정상 저장 항목으로 해당 저장/백업/수동 슬롯을 덮어쓸까요? 손상된 항목은 건너뜁니다.');
+    if (!ok) return;
+
+    entries.forEach(([key, value]) => localStorage.setItem(key, value));
 
     setSaveImportText("");
     setSaveHealthRefreshKey((prev) => prev + 1);
@@ -11866,6 +11882,10 @@ export default function App() {
 
     try {
       const savedData = JSON.parse(raw);
+      if (!isSaveJourneyData(savedData)) {
+        alert('저장 데이터 형식이 손상되었습니다. 현재 저장을 유지했습니다. 설정의 정상 백업에서 복구해 주세요.');
+        return;
+      }
       const migratedData = normalizeSaveData(savedData, SAVE_VERSION);
       // 저장된 생존 명단을 유지하며 카일이 없어도 다른 아군으로 전투를 이어갑니다.
       const restoredUnits = migratedData.units;
@@ -12138,6 +12158,8 @@ export default function App() {
             const expResult = awardEnemyExperience(workingUnits, counterActor.id, counterTarget);
             workingUnits = expResult.units;
             expMessages = [...expResult.messages, ...registerLootDrop(counterTarget)];
+            addBattleStats({ kills: 1 });
+            addUnitBattleStats(counterActor.id, { kills: 1 });
           }
           setUnits(workingUnits);
         });
@@ -13598,7 +13620,7 @@ export default function App() {
     })), gearEnhance);
     const reward = selectedStage.reward || { gold: 500, potion: 2 };
     const bonus = summary.bonusReward || {};
-    const rewardGold = getDifficultyRewardGold(reward.gold, settings.difficulty) + getDifficultyRewardGold(bonus.gold || 0, settings.difficulty) + (battleLoot.gold || 0);
+    const rewardGold = getDifficultyRewardGold(reward.gold, settings.difficulty, settings.balancePreset) + getDifficultyRewardGold(bonus.gold || 0, settings.difficulty, settings.balancePreset) + (battleLoot.gold || 0);
     const nextStage = stages.find(stage => stage.id === stageId + 1);
     const message = replay
       ? `${selectedStage.title} 재도전 완료. 전투에서 획득한 경험치를 보존했습니다. 골드와 아이템은 지급되지 않습니다.`
@@ -16656,6 +16678,7 @@ export default function App() {
                 <span className="legend-enemy">적</span>
                 <span className="legend-boss">보스</span>
                 <span className="legend-block">이동불가</span>
+                <span>적 수·위험도: 15인 편성 기준 예상</span>
               </div>
 
               <div className="stage-map-card-list">
@@ -16802,7 +16825,7 @@ export default function App() {
                             </em>
                             <small>
                               {nodeState === 'cleared' ? '재도전 · 경험치 | ' : ''}
-                              {enemySummary ? `위험도 ${threat.level} · 적 ${enemySummary.total}명` : '미정찰 전장'}
+                              {enemySummary ? `15인 편성 예상 · 위험도 ${threat.level} · 적 ${enemySummary.total}명` : '미정찰 전장'}
                               {recruitName ? ` · 동료 ${recruitName}` : ""}
                               {getStageNote(stageNotes, stage) ? " · 메모 있음" : ""}
                               {getStageTags(stageNoteTags, stage).length ? ` · 태그 ${getStageTags(stageNoteTags, stage).length}` : ""}
@@ -17748,7 +17771,7 @@ export default function App() {
                 <strong>{enemiesAlive.length}명</strong>
               </div>
               <div>
-                <span>전술 제한</span>
+                <span>속전속결 목표</span>
                 <strong>{getStageSpeedLimit(activeStage)}R</strong>
               </div>
               <div>
@@ -17775,10 +17798,13 @@ export default function App() {
             )}
 
             <div className="tactical-goal-mini">
-              주 작전: {activeMissionOrder.desc}
+              추가 보상 목표: {activeMissionOrder.desc}
             </div>
             <div className="tactical-goal-mini secondary">
               추가 전술 목표: 속전속결 · 출전 아군 전원 생존 · 카일 HP 50% 이상
+            </div>
+            <div className="tactical-goal-mini secondary">
+              보상 목표 미달이나 카일 사망만으로 패배하지 않습니다. 최종 제한은 {activeRoundLimit}라운드입니다.
             </div>
           </div>
 

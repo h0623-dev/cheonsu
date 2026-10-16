@@ -1,0 +1,344 @@
+{
+  "checkedAt": "2026-10-15T23:49:51.157Z",
+  "baseline": "1.99.175",
+  "kind": "아트팀 별도 직접 브라우저 검사. 저장 시나리오로 장별 진입·실제 화면 확인. 자연 연속 클리어/실기기 아님.",
+  "results": [
+    {
+      "width": 390,
+      "height": 844,
+      "stage": 1,
+      "motion": "no-preference",
+      "state": {
+        "overflow": 0,
+        "broken": [],
+        "visibleImages": 112,
+        "rect": {
+          "x": 4,
+          "y": 28,
+          "width": 672,
+          "height": 619.90625
+        },
+        "duplicateMapImages": 0,
+        "atmosphere": 1,
+        "grass": 12,
+        "clouds": 1,
+        "runningAnimations": [
+          {
+            "name": "turnPhaseBannerIn",
+            "target": "turn-phase-banner turn-phase-ally"
+          },
+          {
+            "name": "battle-map-cloud-drift",
+            "target": "battle-map-cloud-shadow"
+          },
+          {
+            "name": "battle-map-grass-sway",
+            "target": {}
+          },
+          {
+            "name": "battle-map-grass-sway",
+            "target": {}
+          },
+          {
+            "name": "battle-map-grass-sway",
+            "target": {}
+          },
+          {
+            "name": "battle-map-grass-sway",
+            "target": {}
+          },
+          {
+            "name": "battle-map-grass-sway",
+            "target": {}
+          },
+          {
+            "name": "battle-map-grass-sway",
+            "target": {}
+          },
+          {
+            "name": "battle-map-grass-sway",
+            "target": {}
+          },
+          {
+            "name": "battle-map-grass-sway",
+            "target": {}
+          },
+          {
+            "name": "battle-map-grass-sway",
+            "target": {}
+          },
+          {
+            "name": "battle-map-grass-sway",
+            "target": {}
+          },
+          {
+            "name": "battle-map-grass-sway",
+            "target": {}
+          },
+          {
+            "name": "battle-map-grass-sway",
+            "target": {}
+          },
+          {
+            "name": "cameraFocusPulse",
+            "target": "camera-focus-tile"
+          },
+          {
+            "name": "paintedUnitBreathe",
+            "target": ""
+          }
+        ]
+      },
+      "pan": {
+        "available": false
+      },
+      "errors": [],
+      "passed": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "stage": 3,
+      "motion": "reduce",
+      "state": {
+        "overflow": 0,
+        "broken": [],
+        "visibleImages": 121,
+        "rect": {
+          "x": -246,
+          "y": 72,
+          "width": 756,
+          "height": 757.671875
+        },
+        "duplicateMapImages": 0,
+        "atmosphere": 0,
+        "grass": 0,
+        "clouds": 0,
+        "runningAnimations": [
+          {
+            "name": "turnPhaseBannerIn",
+            "target": "turn-phase-banner turn-phase-ally"
+          },
+          {
+            "name": "cameraFocusPulse",
+            "target": "camera-focus-tile"
+          }
+        ]
+      },
+      "pan": {
+        "available": false
+      },
+      "errors": [],
+      "passed": true
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "stage": 12,
+      "motion": "reduce",
+      "state": {
+        "overflow": 0,
+        "broken": [],
+        "visibleImages": 154,
+        "rect": {
+          "x": -219,
+          "y": -80,
+          "width": 1114,
+          "height": 822.125
+        },
+        "duplicateMapImages": 0,
+        "atmosphere": 0,
+        "grass": 0,
+        "clouds": 0,
+        "runningAnimations": [
+          {
+            "name": "turnPhaseBannerIn",
+            "target": "turn-phase-banner turn-phase-ally"
+          },
+          {
+            "name": "cameraFocusPulse",
+            "target": "camera-focus-tile"
+          }
+        ]
+      },
+      "pan": {
+        "available": false
+      },
+      "errors": [],
+      "passed": true
+    },
+    {
+      "width": 1280,
+      "height": 900,
+      "stage": 30,
+      "motion": "no-preference",
+      "state": {
+        "overflow": 0,
+        "broken": [],
+        "visibleImages": 361,
+        "rect": {
+          "x": 84,
+          "y": -96,
+          "width": 1530,
+          "height": 1170.953125
+        },
+        "duplicateMapImages": 0,
+        "atmosphere": 0,
+        "grass": 0,
+        "clouds": 0,
+        "runningAnimations": [
+          {
+            "name": "cameraFocusPulse",
+            "target": "camera-focus-tile"
+          },
+          {
+            "name": "paintedUnitBreathe",
+            "target": ""
+          }
+        ]
+      },
+      "pan": {
+        "available": false
+      },
+      "errors": [],
+      "passed": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "stage": 35,
+      "motion": "reduce",
+      "state": {
+        "overflow": 0,
+        "broken": [],
+        "visibleImages": 382,
+        "rect": {
+          "x": -204,
+          "y": 72,
+          "width": 1260,
+          "height": 895.4375
+        },
+        "duplicateMapImages": 0,
+        "atmosphere": 0,
+        "grass": 0,
+        "clouds": 0,
+        "runningAnimations": [
+          {
+            "name": "turnPhaseBannerIn",
+            "target": "turn-phase-banner turn-phase-ally"
+          },
+          {
+            "name": "cameraFocusPulse",
+            "target": "camera-focus-tile"
+          }
+        ]
+      },
+      "pan": {
+        "available": false
+      },
+      "errors": [],
+      "passed": true
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "stage": 40,
+      "motion": "reduce",
+      "state": {
+        "overflow": 0,
+        "broken": [],
+        "visibleImages": 283,
+        "rect": {
+          "x": -200,
+          "y": -149,
+          "width": 1198,
+          "height": 1057.921875
+        },
+        "duplicateMapImages": 0,
+        "atmosphere": 0,
+        "grass": 0,
+        "clouds": 0,
+        "runningAnimations": [
+          {
+            "name": "turnPhaseBannerIn",
+            "target": "turn-phase-banner turn-phase-ally"
+          },
+          {
+            "name": "cameraFocusPulse",
+            "target": "camera-focus-tile"
+          }
+        ]
+      },
+      "pan": {
+        "available": false
+      },
+      "errors": [],
+      "passed": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "stage": 45,
+      "motion": "reduce",
+      "state": {
+        "overflow": 0,
+        "broken": [],
+        "visibleImages": 335,
+        "rect": {
+          "x": -708,
+          "y": -107,
+          "width": 1176,
+          "height": 964.3125
+        },
+        "duplicateMapImages": 0,
+        "atmosphere": 0,
+        "grass": 0,
+        "clouds": 0,
+        "runningAnimations": [
+          {
+            "name": "cameraFocusPulse",
+            "target": "camera-focus-tile"
+          }
+        ]
+      },
+      "pan": {
+        "available": false
+      },
+      "errors": [],
+      "passed": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "stage": 50,
+      "motion": "reduce",
+      "state": {
+        "overflow": 0,
+        "broken": [],
+        "visibleImages": 405,
+        "rect": {
+          "x": -792,
+          "y": -348,
+          "width": 1344,
+          "height": 1033.1875
+        },
+        "duplicateMapImages": 0,
+        "atmosphere": 0,
+        "grass": 0,
+        "clouds": 0,
+        "runningAnimations": [
+          {
+            "name": "cameraFocusPulse",
+            "target": "camera-focus-tile"
+          }
+        ]
+      },
+      "pan": {
+        "available": false
+      },
+      "errors": [],
+      "passed": true
+    }
+  ],
+  "errors": []
+}

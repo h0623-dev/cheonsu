@@ -1,0 +1,281 @@
+✖ 저장 요약·메뉴는 파싱 가능한 손상 JSON을 정상 저장으로 인정하지 않는다 (4.722725ms)
+✖ 추천 복구는 미래 시각의 잘못된 백업을 제외하고 유효한 진행을 선택한다 (20.722875ms)
+✖ 수동 슬롯·자동/이전 백업 복구는 손상 데이터를 쓰기 전에 거절한다 (26.556813ms)
+✖ 직접 이어하기도 손상 저장을 기본 파티/초기 진행으로 정규화하지 않는다 (19.097139ms)
+✖ 가져오기는 모두 무효인 묶음을 성공으로 알리지 않고 유효한 항목만 덮어쓴다 (14.325871ms)
+✖ 구형 실제 저장 2건과 진행 필드 미기록 초기 저장을 허용하며 원문은 바꾸지 않는다 (36.548001ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 0
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 127.429065
+
+✖ failing tests:
+
+test at scripts/qa176-dev-save-guard.test.mjs:48:1
+✖ 저장 요약·메뉴는 파싱 가능한 손상 JSON을 정상 저장으로 인정하지 않는다 (4.722725ms)
+  AssertionError [ERR_ASSERTION]: []
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///workspace/cheonsu/scripts/qa176-dev-save-guard.test.mjs:51:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/qa176-dev-save-guard.test.mjs:57:1
+✖ 추천 복구는 미래 시각의 잘못된 백업을 제외하고 유효한 진행을 선택한다 (20.722875ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'backup'
+  - 'current'
+  
+      at TestContext.<anonymous> (file:///workspace/cheonsu/scripts/qa176-dev-save-guard.test.mjs:61:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'backup',
+    expected: 'current',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/qa176-dev-save-guard.test.mjs:66:1
+✖ 수동 슬롯·자동/이전 백업 복구는 손상 데이터를 쓰기 전에 거절한다 (26.556813ms)
+  AssertionError [ERR_ASSERTION]: loadManualSlot: null
+  + actual - expected
+  
+  + 'null'
+  - '{"version":"1.99.175","party":[{"id":"hero","x":1,"y":6,"type":"ally","icon":"⚔️","name":"카일","hp":24,"maxHp":24,"atk":8,"def":5,"move":3,"range":1,"skill":"돌풍 베기","skillType":"attack","skillBonus":3,"skillRange":1,"level":1,"exp":0,"moved":false,"acted":false,"guard":false,"equipment":{"weapon":null,"armor":null,"accessory":null},"baseAtk":8,"baseDef":5,"baseSkillBonus":3,"skillLevel":0,"gearEnhance":{}},{"id":"bram","x":2,"y":6,"type":"ally","icon":"🛡️","name":"브람","hp":28,"maxHp":28,"atk":7,"def":8,"move":2,"range":1,"skill":"철벽 수호","skillType":"guard","skillBonus":0,"skillRange":0,"level":1,"exp":0,"moved":false,"acted":false,"guard":false,"equipment":{"weapon":null,"armor":null,"accessory":null},"baseAtk":7,"baseDef":8,"baseSkillBonus":0,"skillLevel":0,"gearEnhance":{}},{"id":"lina","x":1,"y":7,"type":"ally","icon":"✨","name":"리나","hp":18,"maxHp":18,"atk":9,"def":2,"move":3,"range":2,"skill":"불꽃 화살","skillType":"attack","skillBonus":4,"skillRange":3,"level":1,"exp":0,"moved":false,"acted":false,"guard":false,"equipment":{"weapon":null,"armor":null,"accessory":null},"baseAtk":9,"baseDef":2,"baseSkillBonus":4,"skillLevel":0,"gearEnhance":{}},{"id":"aria","x":0,"y":7,"type":"ally","icon":"🕊️","name":"아리아","hp":20,"maxHp":20,"atk":6,"def":4,"move":3,"range":1,"skill":"성빛 치유","skillType":"heal","skillBonus":0,"skillRange":3,"level":1,"exp":0,"moved":false,"acted":false,"guard":false,"equipment":{"weapon":null,"armor":null,"accessory":null},"baseAtk":6,"baseDef":4,"baseSkillBonus":0,"skillLevel":0,"gearEnhance":{}}],"clearedStages":[1,2,3,4,5],"gold":9123,"savedAt":"2026-10-15T09:00:00Z","screen":"camp","currentStageId":6}'
+  
+      at TestContext.<anonymous> (file:///workspace/cheonsu/scripts/qa176-dev-save-guard.test.mjs:71:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'null',
+    expected: 'e":2,"range":1,"skill":"철벽 수호","skillType":"guard","skillBonus":0,"skillRange":0,"level":1,"exp":0,"moved":false,"acted":false,"guard":false,"equipment":{"weapon":null,"armor":null,"accessory":null},"baseAtk":7,"baseDef":8,"baseSkillBonus":0,"skillLevel":0,"gearEnhance":{}},{"id":"lina","x":1,"y":7,"type":"ally","icon":"✨","name":"리나","hp":18,"maxHp":18,"atk":9,"def":2,"move":3,"range":2,"skill":"불꽃 화살","skillType":"attack","skillBonus":4,"skillRange":3,"level":1,"exp":0,"moved":false,"acted":false,"guard":false,"equipment":{"weapon":null,"armor":null,"accessory":null},"baseAtk":9,"baseDef":2,"baseSkillBonus":4,"skillLevel":0,"gearEnhance":{}},{"id":"aria","x":0,"y":7,"type":"ally","icon":"🕊️","name":"아리아","hp":20,"maxHp":20,"atk":6,"def":4,"move":3,"range":1,"skill":"성빛 치유","skillType":"heal","skillBonus":0,"skillRange":3,"level":1,"exp":0,"moved":false,"acted":false,"guard":false,"equipment":{"weapon":null,"armor":null,"accessory":null},"baseAtk":6,"baseDef":4,"baseSkillBonus":0,"skillLevel":0,"gearEnhance":{}}],"clearedStages":[1,2,3,4,5],"gold":9123,"savedAt":"2026-10-15T09:00:00Z","screen":"camp","currentStageId":6}...',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/qa176-dev-save-guard.test.mjs:79:1
+✖ 직접 이어하기도 손상 저장을 기본 파티/초기 진행으로 정규화하지 않는다 (19.097139ms)
+  AssertionError [ERR_ASSERTION]: null
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///workspace/cheonsu/scripts/qa176-dev-save-guard.test.mjs:85:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/qa176-dev-save-guard.test.mjs:91:1
+✖ 가져오기는 모두 무효인 묶음을 성공으로 알리지 않고 유효한 항목만 덮어쓴다 (14.325871ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '{}'
+  - '{"version":"1.99.175","party":[{"id":"hero","x":1,"y":6,"type":"ally","icon":"⚔️","name":"카일","hp":24,"maxHp":24,"atk":8,"def":5,"move":3,"range":1,"skill":"돌풍 베기","skillType":"attack","skillBonus":3,"skillRange":1,"level":1,"exp":0,"moved":false,"acted":false,"guard":false,"equipment":{"weapon":null,"armor":null,"accessory":null},"baseAtk":8,"baseDef":5,"baseSkillBonus":3,"skillLevel":0,"gearEnhance":{}},{"id":"bram","x":2,"y":6,"type":"ally","icon":"🛡️","name":"브람","hp":28,"maxHp":28,"atk":7,"def":8,"move":2,"range":1,"skill":"철벽 수호","skillType":"guard","skillBonus":0,"skillRange":0,"level":1,"exp":0,"moved":false,"acted":false,"guard":false,"equipment":{"weapon":null,"armor":null,"accessory":null},"baseAtk":7,"baseDef":8,"baseSkillBonus":0,"skillLevel":0,"gearEnhance":{}},{"id":"lina","x":1,"y":7,"type":"ally","icon":"✨","name":"리나","hp":18,"maxHp":18,"atk":9,"def":2,"move":3,"range":2,"skill":"불꽃 화살","skillType":"attack","skillBonus":4,"skillRange":3,"level":1,"exp":0,"moved":false,"acted":false,"guard":false,"equipment":{"weapon":null,"armor":null,"accessory":null},"baseAtk":9,"baseDef":2,"baseSkillBonus":4,"skillLevel":0,"gearEnhance":{}},{"id":"aria","x":0,"y":7,"type":"ally","icon":"🕊️","name":"아리아","hp":20,"maxHp":20,"atk":6,"def":4,"move":3,"range":1,"skill":"성빛 치유","skillType":"heal","skillBonus":0,"skillRange":3,"level":1,"exp":0,"moved":false,"acted":false,"guard":false,"equipment":{"weapon":null,"armor":null,"accessory":null},"baseAtk":6,"baseDef":4,"baseSkillBonus":0,"skillLevel":0,"gearEnhance":{}}],"clearedStages":[1,2,3,4,5],"gold":9123,"savedAt":"2026-10-15T09:00:00Z","screen":"camp","currentStageId":6}'
+  
+      at TestContext.<anonymous> (file:///workspace/cheonsu/scripts/qa176-dev-save-guard.test.mjs:96:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '{}',
+    expected: 'e":2,"range":1,"skill":"철벽 수호","skillType":"guard","skillBonus":0,"skillRange":0,"level":1,"exp":0,"moved":false,"acted":false,"guard":false,"equipment":{"weapon":null,"armor":null,"accessory":null},"baseAtk":7,"baseDef":8,"baseSkillBonus":0,"skillLevel":0,"gearEnhance":{}},{"id":"lina","x":1,"y":7,"type":"ally","icon":"✨","name":"리나","hp":18,"maxHp":18,"atk":9,"def":2,"move":3,"range":2,"skill":"불꽃 화살","skillType":"attack","skillBonus":4,"skillRange":3,"level":1,"exp":0,"moved":false,"acted":false,"guard":false,"equipment":{"weapon":null,"armor":null,"accessory":null},"baseAtk":9,"baseDef":2,"baseSkillBonus":4,"skillLevel":0,"gearEnhance":{}},{"id":"aria","x":0,"y":7,"type":"ally","icon":"🕊️","name":"아리아","hp":20,"maxHp":20,"atk":6,"def":4,"move":3,"range":1,"skill":"성빛 치유","skillType":"heal","skillBonus":0,"skillRange":3,"level":1,"exp":0,"moved":false,"acted":false,"guard":false,"equipment":{"weapon":null,"armor":null,"accessory":null},"baseAtk":6,"baseDef":4,"baseSkillBonus":0,"skillLevel":0,"gearEnhance":{}}],"clearedStages":[1,2,3,4,5],"gold":9123,"savedAt":"2026-10-15T09:00:00Z","screen":"camp","currentStageId":6}...',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/qa176-dev-save-guard.test.mjs:110:1
+✖ 구형 실제 저장 2건과 진행 필드 미기록 초기 저장을 허용하며 원문은 바꾸지 않는다 (36.548001ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + null
+  - {
+  -   gold: 456,
+  -   party: [
+  -     {
+  -       acted: false,
+  -       atk: 8,
+  -       baseAtk: 8,
+  -       baseDef: 5,
+  -       baseSkillBonus: 3,
+  -       def: 5,
+  -       equipment: {
+  -         accessory: null,
+  -         armor: null,
+  -         weapon: null
+  -       },
+  -       exp: 0,
+  -       gearEnhance: {},
+  -       guard: false,
+  -       hp: 24,
+  -       icon: '⚔️',
+  -       id: 'hero',
+  -       level: 1,
+  -       maxHp: 24,
+  -       move: 3,
+  -       moved: false,
+  -       name: '카일',
+  -       range: 1,
+  -       skill: '돌풍 베기',
+  -       skillBonus: 3,
+  -       skillLevel: 0,
+  -       skillRange: 1,
+  -       skillType: 'attack',
+  -       type: 'ally',
+  -       x: 1,
+  -       y: 6
+  -     },
+  -     {
+  -       acted: false,
+  -       atk: 7,
+  -       baseAtk: 7,
+  -       baseDef: 8,
+  -       baseSkillBonus: 0,
+  -       def: 8,
+  -       equipment: {
+  -         accessory: null,
+  -         armor: null,
+  -         weapon: null
+  -       },
+  -       exp: 0,
+  -       gearEnhance: {},
+  -       guard: false,
+  -       hp: 28,
+  -       icon: '🛡️',
+  -       id: 'bram',
+  -       level: 1,
+  -       maxHp: 28,
+  -       move: 2,
+  -       moved: false,
+  -       name: '브람',
+  -       range: 1,
+  -       skill: '철벽 수호',
+  -       skillBonus: 0,
+  -       skillLevel: 0,
+  -       skillRange: 0,
+  -       skillType: 'guard',
+  -       type: 'ally',
+  -       x: 2,
+  -       y: 6
+  -     },
+  -     {
+  -       acted: false,
+  -       atk: 9,
+  -       baseAtk: 9,
+  -       baseDef: 2,
+  -       baseSkillBonus: 4,
+  -       def: 2,
+  -       equipment: {
+  -         accessory: null,
+  -         armor: null,
+  -         weapon: null
+  -       },
+  -       exp: 0,
+  -       gearEnhance: {},
+  -       guard: false,
+  -       hp: 18,
+  -       icon: '✨',
+  -       id: 'lina',
+  -       level: 1,
+  -       maxHp: 18,
+  -       move: 3,
+  -       moved: false,
+  -       name: '리나',
+  -       range: 2,
+  -       skill: '불꽃 화살',
+  -       skillBonus: 4,
+  -       skillLevel: 0,
+  -       skillRange: 3,
+  -       skillType: 'attack',
+  -       type: 'ally',
+  -       x: 1,
+  -       y: 7
+  -     },
+  -     {
+  -       acted: false,
+  -       atk: 6,
+  -       baseAtk: 6,
+  -       baseDef: 4,
+  -       baseSkillBonus: 0,
+  -       def: 4,
+  -       equipment: {
+  -         accessory: null,
+  -         armor: null,
+  -         weapon: null
+  -       },
+  -       exp: 0,
+  -       gearEnhance: {},
+  -       guard: false,
+  -       hp: 20,
+  -       icon: '🕊️',
+  -       id: 'aria',
+  -       level: 1,
+  -       maxHp: 20,
+  -       move: 3,
+  -       moved: false,
+  -       name: '아리아',
+  -       range: 1,
+  -       skill: '성빛 치유',
+  -       skillBonus: 0,
+  -       skillLevel: 0,
+  -       skillRange: 3,
+  -       skillType: 'heal',
+  -       type: 'ally',
+  -       x: 0,
+  -       y: 7
+  -     }
+  -   ],
+  -   version: '0.12'
+  - }
+  
+      at TestContext.<anonymous> (file:///workspace/cheonsu/scripts/qa176-dev-save-guard.test.mjs:119:12)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: [Object],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

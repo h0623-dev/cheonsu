@@ -1,0 +1,175 @@
+{
+  "base": "http://127.0.0.1:4173",
+  "checkedAt": "2026-10-15T23:58:35.205Z",
+  "kind": "새 미션 안내의 작은 화면·본문 스크롤·터치 확인. 저장 시나리오 진입.",
+  "results": [
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "errors": [],
+      "before": {
+        "dialog": {
+          "left": 19,
+          "top": 12,
+          "right": 301,
+          "bottom": 556,
+          "width": 282,
+          "height": 544
+        },
+        "body": {
+          "left": 20,
+          "top": 102,
+          "right": 300,
+          "bottom": 484,
+          "width": 280,
+          "height": 382
+        },
+        "note": {
+          "left": 34,
+          "top": 407.15625,
+          "right": 286,
+          "bottom": 514.09375,
+          "width": 252,
+          "height": 106.9375
+        },
+        "button": {
+          "left": 34,
+          "top": 495,
+          "right": 286,
+          "bottom": 541,
+          "width": 252,
+          "height": 46
+        },
+        "bodyScrollHeight": 426,
+        "bodyClientHeight": 382,
+        "noteText": "적 대장을 모두 섬멸하면 일반 적이나 증원이 남아 있어도 승리합니다. 적 전멸에는 전장에 남아 있는 증원도 포함됩니다. 카일이 쓰러져도 다른 아군이 생존하면 전투를 계속합니다. 추가 보상 목표는 승패 조건과 별개입니다.",
+        "overflow": 0,
+        "viewport": {
+          "width": 320,
+          "height": 568
+        }
+      },
+      "afterScroll": {
+        "noteBottom": 470.09375,
+        "bodyBottom": 484,
+        "scrollTop": 44,
+        "maxScroll": 44
+      },
+      "touchConfirmed": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "errors": [],
+      "before": {
+        "dialog": {
+          "left": 19,
+          "top": 161.34375,
+          "right": 371,
+          "bottom": 682.65625,
+          "width": 352,
+          "height": 521.3125
+        },
+        "body": {
+          "left": 20,
+          "top": 251.34375,
+          "right": 370,
+          "bottom": 610.65625,
+          "width": 350,
+          "height": 359.3125
+        },
+        "note": {
+          "left": 34,
+          "top": 508.90625,
+          "right": 356,
+          "bottom": 596.65625,
+          "width": 322,
+          "height": 87.75
+        },
+        "button": {
+          "left": 34,
+          "top": 621.65625,
+          "right": 356,
+          "bottom": 667.65625,
+          "width": 322,
+          "height": 46
+        },
+        "bodyScrollHeight": 359,
+        "bodyClientHeight": 359,
+        "noteText": "적 대장을 모두 섬멸하면 일반 적이나 증원이 남아 있어도 승리합니다. 적 전멸에는 전장에 남아 있는 증원도 포함됩니다. 카일이 쓰러져도 다른 아군이 생존하면 전투를 계속합니다. 추가 보상 목표는 승패 조건과 별개입니다.",
+        "overflow": 0,
+        "viewport": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "afterScroll": {
+        "noteBottom": 596.65625,
+        "bodyBottom": 610.65625,
+        "scrollTop": 0,
+        "maxScroll": 0
+      },
+      "touchConfirmed": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "errors": [],
+      "before": {
+        "dialog": {
+          "left": 152,
+          "top": 12,
+          "right": 692,
+          "bottom": 378,
+          "width": 540,
+          "height": 366
+        },
+        "body": {
+          "left": 153,
+          "top": 88,
+          "right": 691,
+          "bottom": 314,
+          "width": 538,
+          "height": 226
+        },
+        "note": {
+          "left": 167,
+          "top": 245.578125,
+          "right": 677,
+          "bottom": 314.140625,
+          "width": 510,
+          "height": 68.5625
+        },
+        "button": {
+          "left": 167,
+          "top": 323,
+          "right": 677,
+          "bottom": 369,
+          "width": 510,
+          "height": 46
+        },
+        "bodyScrollHeight": 238,
+        "bodyClientHeight": 226,
+        "noteText": "적 대장을 모두 섬멸하면 일반 적이나 증원이 남아 있어도 승리합니다. 적 전멸에는 전장에 남아 있는 증원도 포함됩니다. 카일이 쓰러져도 다른 아군이 생존하면 전투를 계속합니다. 추가 보상 목표는 승패 조건과 별개입니다.",
+        "overflow": 0,
+        "viewport": {
+          "width": 844,
+          "height": 390
+        }
+      },
+      "afterScroll": {
+        "noteBottom": 302.140625,
+        "bodyBottom": 314,
+        "scrollTop": 12,
+        "maxScroll": 12
+      },
+      "touchConfirmed": true
+    }
+  ]
+}

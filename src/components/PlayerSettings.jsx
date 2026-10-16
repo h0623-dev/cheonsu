@@ -4,6 +4,7 @@ import AccountPanel from './AccountPanel.jsx';
 import LegalNotices from './LegalNotices.jsx';
 import { PatchSettings } from './PatchUpdates.jsx';
 import { MUSIC_TRACKS } from '../data/musicScore.js';
+import { stages } from '../data/stages.js';
 
 const tabs = [['sound', '소리', Volume2], ['battle', '전투', Swords], ['save', '저장', Save], ['account', '계정', UserRound], ['update', '업데이트', Download], ['legal', '권리 안내', BookOpen]];
 function Toggle({ label, checked, onChange }) {
@@ -52,7 +53,7 @@ export default function PlayerSettings({ initialTab = 'sound', version, settings
         <div className="ux-save-slots">{slots.map(({ id, summary }) => <article key={id}><div><strong>슬롯 {id}</strong><span>{summary?.stage || '비어 있음'}</span><small>{summary?.dateText || ''}</small></div><div><button aria-label={`슬롯 ${id} 저장`} onClick={() => onSaveSlot(id)} disabled={!canSave && !canCopyCheckpoint}><Save size={17} />저장</button><button aria-label={`슬롯 ${id} 불러오기`} disabled={!summary?.ok} onClick={() => onLoadSlot(id)}><Upload size={17} />불러오기</button></div></article>)}</div>
         <div className="ux-action-grid"><button onClick={() => onBackup(false)}><RotateCcw size={17} />자동 백업 복구</button><button onClick={() => onBackup(true)}><RotateCcw size={17} />이전 저장 복구</button><button onClick={onExport}><Upload size={17} />저장 데이터 복사</button></div>
         <details className="ux-details progress-recovery"><summary>클리어 진행도 복구</summary>
-          <label>실제로 완료한 마지막 장<select aria-label="완료한 마지막 장" value={completedThrough} onChange={event => setCompletedThrough(Number(event.target.value))}>{Array.from({ length: 31 }, (_, id) => <option key={id} value={id}>{id === 0 ? '완료한 장 없음' : `${id}장까지 완료`}</option>)}</select></label>
+          <label>실제로 완료한 마지막 장<select aria-label="완료한 마지막 장" value={completedThrough} onChange={event => setCompletedThrough(Number(event.target.value))}>{Array.from({ length: stages.length + 1 }, (_, id) => <option key={id} value={id}>{id === 0 ? '완료한 장 없음' : `${id}장까지 완료`}</option>)}</select></label>
           <p className="ux-status">캐릭터·장비·골드는 유지됩니다. 현재 전투를 종료하고 원정 화면으로 이동합니다. 원본 저장은 별도로 백업됩니다.</p>
           <div className="ux-action-grid"><button disabled={!canRecoverProgress} onClick={() => onRecoverProgress(completedThrough)}><RotateCcw size={17}/>진행도 복구 적용</button><button disabled={!hasRecoveryBackup} onClick={onRestoreProgressBackup}>복구 전 원본 되돌리기</button></div>
         </details>

@@ -195,3 +195,20 @@
   0%, 100% { translate: 0 0; rotate: -0.6deg; }
   50% { translate: 0 -1px; rotate: 0.6deg; }
 }
+
+/* 축소 모션에서도 턴·경고 정보는 같은 시간 동안 정적으로 표시합니다.
+   배너와 카메라 표식의 제거는 App의 예약 타이머가 담당합니다. */
+@media (prefers-reduced-motion: reduce) {
+  .world-art-app .turn-phase-banner {
+    animation: none !important;
+    opacity: 1;
+  }
+
+  .world-art-app .world-battlefield :is(.camera-focus-tile, .danger-tile, .move-tile, .attack-tile, .enemy-threat-tile, .aoe-preview-tile),
+  .world-art-app .world-battlefield .danger-tile::after {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1;
+    transform: none !important;
+  }
+}

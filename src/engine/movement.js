@@ -93,6 +93,17 @@ export function getUnitMoveTrait(unit) {
     };
   }
 
+  // 느린 잉크덩굴도 수로로 분리된 49장 전장을 건널 수 있다.
+  // 저장된 종족 식별자로 판정하여 기존 전투의 이동력·좌표는 바꾸지 않는다.
+  if (unit?.expansionEnemy === true && ["enemy", "boss"].includes(unit.type)
+    && (unit.artId || unit.spriteKey) === "ink_vine") {
+    return {
+      id: "vine",
+      name: "덩굴 부유",
+      desc: "여울 이동 비용 1",
+    };
+  }
+
   return {
     id: "normal",
     name: "일반 보행",
@@ -109,6 +120,8 @@ export function getTerrainMoveCost(tile, unit = null) {
 
   const base = getTerrainBaseMoveCost(tile);
   const trait = getUnitMoveTrait(unit);
+
+  if (trait.id === "vine" && tile === "water") return 1;
 
   if (trait.id === "shadow" && ["forest", "dark", "trap"].includes(tile)) {
     return Math.max(1, base - 1);

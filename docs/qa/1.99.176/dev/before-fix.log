@@ -1,0 +1,75 @@
+✖ 구형 적 턴 저장은 이미 공격한 적을 다시 행동 순서에 넣지 않는다 (4.654292ms)
+✖ 실제 적 턴 재개는 공격 완료한 지원형 적의 추가 회복을 막고 다음 라운드 행동을 복구한다 (29.141262ms)
+✖ 실제 적 공격의 아군 반격 격파는 경험치·전리품과 함께 총계·개인 격파를 각각 한 번 기록한다 (16.930587ms)
+✔ 실제 반격의 빗나감·비격파는 격파·경험치·전리품을 생성하지 않는다 (27.704633ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 1
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 83.920908
+
+✖ failing tests:
+
+test at ../work/qa176/dev/baseline-regressions.mjs:38:1
+✖ 구형 적 턴 저장은 이미 공격한 적을 다시 행동 순서에 넣지 않는다 (4.654292ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+      'ready',
+  +   'done'
+    ]
+  
+      at TestContext.<anonymous> (file:///workspace/work/qa176/dev/baseline-regressions.mjs:43:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [Array],
+    expected: [Array],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at ../work/qa176/dev/baseline-regressions.mjs:73:1
+✖ 실제 적 턴 재개는 공격 완료한 지원형 적의 추가 회복을 막고 다음 라운드 행동을 복구한다 (29.141262ms)
+  AssertionError [ERR_ASSERTION]: 이미 공격한 적이 회복까지 추가로 사용하면 안 된다
+  + actual - expected
+  
+  + [
+  +   'done'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///workspace/work/qa176/dev/baseline-regressions.mjs:79:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [Array],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at ../work/qa176/dev/baseline-regressions.mjs:115:1
+✖ 실제 적 공격의 아군 반격 격파는 경험치·전리품과 함께 총계·개인 격파를 각각 한 번 기록한다 (16.930587ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///workspace/work/qa176/dev/baseline-regressions.mjs:122:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -15,6 +15,11 @@ function resolveStageId(stageOrId) {
   return 1;
 }
 
+export function isMajorBossStage(stageOrId) {
+  const id = resolveStageId(stageOrId);
+  return id >= 31 ? [35, 40, 45, 50].includes(id) : id % 6 === 0;
+}
+
 function resolveEnemyCount(stageOrId) {
   if (!stageOrId || typeof stageOrId !== "object") return 0;
   if (!Array.isArray(stageOrId.units)) return 0;

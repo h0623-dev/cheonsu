@@ -1,0 +1,153 @@
+{
+  "base": "http://127.0.0.1:4173",
+  "checkedAt": "2026-10-15T23:58:00.726Z",
+  "kind": "수정 소스의 모션 축소/일반 동작 직접 비교. UI상 전투 시작과 순수 장식 표식만 분리 확인.",
+  "results": [
+    {
+      "reducedMotion": "reduce",
+      "errors": [],
+      "actualUI": {
+        "banner": {
+          "animation": "none",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, -165, -56.0469)"
+        },
+        "focus": {
+          "animation": "none",
+          "opacity": "1",
+          "transform": "none"
+        }
+      },
+      "automaticDismissal": true,
+      "decorativeWarnings": [
+        {
+          "className": "danger-tile",
+          "animation": "none",
+          "opacity": "1",
+          "display": "flex",
+          "afterAnimation": "none"
+        },
+        {
+          "className": "move-tile",
+          "animation": "none",
+          "opacity": "1",
+          "display": "flex",
+          "afterAnimation": "moveTilePulse"
+        },
+        {
+          "className": "attack-tile",
+          "animation": "none",
+          "opacity": "1",
+          "display": "block",
+          "afterAnimation": "none"
+        },
+        {
+          "className": "enemy-threat-tile",
+          "animation": "none",
+          "opacity": "0.64",
+          "display": "block",
+          "afterAnimation": "none"
+        },
+        {
+          "className": "aoe-preview-tile",
+          "animation": "none",
+          "opacity": "1",
+          "display": "block",
+          "afterAnimation": "none"
+        }
+      ],
+      "pan": {
+        "before": {
+          "left": 250,
+          "top": 0,
+          "mapX": -246,
+          "mapY": 72,
+          "relativeMarkerX": 0,
+          "relativeMarkerY": 0
+        },
+        "after": {
+          "left": 390,
+          "top": 182,
+          "mapX": -386,
+          "mapY": -110,
+          "relativeMarkerX": 0,
+          "relativeMarkerY": 0
+        },
+        "worldBattlefields": 1
+      }
+    },
+    {
+      "reducedMotion": "no-preference",
+      "errors": [],
+      "actualUI": {
+        "banner": {
+          "animation": "turnPhaseBannerIn",
+          "opacity": "0.938668",
+          "transform": "matrix(1.02896, 0, 0, 1.02896, -165, -56.0469)"
+        },
+        "focus": {
+          "animation": "cameraFocusPulse",
+          "opacity": "0",
+          "transform": "matrix(0.72, 0, 0, 0.72, 0, 0)"
+        }
+      },
+      "automaticDismissal": true,
+      "decorativeWarnings": [
+        {
+          "className": "danger-tile",
+          "animation": "dangerPulse",
+          "opacity": "0.55",
+          "display": "flex",
+          "afterAnimation": "dangerRune"
+        },
+        {
+          "className": "move-tile",
+          "animation": "none",
+          "opacity": "1",
+          "display": "flex",
+          "afterAnimation": "moveTilePulse"
+        },
+        {
+          "className": "attack-tile",
+          "animation": "none",
+          "opacity": "1",
+          "display": "block",
+          "afterAnimation": "none"
+        },
+        {
+          "className": "enemy-threat-tile",
+          "animation": "none",
+          "opacity": "0.64",
+          "display": "block",
+          "afterAnimation": "none"
+        },
+        {
+          "className": "aoe-preview-tile",
+          "animation": "aoePreviewPulse",
+          "opacity": "0.68",
+          "display": "block",
+          "afterAnimation": "none"
+        }
+      ],
+      "pan": {
+        "before": {
+          "left": 250,
+          "top": 0,
+          "mapX": -246,
+          "mapY": 72,
+          "relativeMarkerX": 0,
+          "relativeMarkerY": 0
+        },
+        "after": {
+          "left": 390,
+          "top": 182,
+          "mapX": -386,
+          "mapY": -110,
+          "relativeMarkerX": 0,
+          "relativeMarkerY": 0
+        },
+        "worldBattlefields": 1
+      }
+    }
+  ]
+}

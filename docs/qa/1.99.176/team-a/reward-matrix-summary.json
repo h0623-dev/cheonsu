@@ -1,0 +1,81 @@
+{
+  "version": "1.99.176",
+  "generatedAt": "2026-10-16T00:00:03.271Z",
+  "before": {
+    "total": 800,
+    "pass": 200,
+    "fail": 600,
+    "examples": [
+      {
+        "stage": 1,
+        "difficulty": "story",
+        "balancePreset": "heroic",
+        "expected": 513,
+        "actual": 538,
+        "pass": false
+      },
+      {
+        "stage": 1,
+        "difficulty": "story",
+        "balancePreset": "swarm",
+        "expected": 580,
+        "actual": 538,
+        "pass": false
+      },
+      {
+        "stage": 1,
+        "difficulty": "story",
+        "balancePreset": "bossRush",
+        "expected": 601,
+        "actual": 538,
+        "pass": false
+      },
+      {
+        "stage": 1,
+        "difficulty": "normal",
+        "balancePreset": "heroic",
+        "expected": 567,
+        "actual": 596,
+        "pass": false
+      },
+      {
+        "stage": 1,
+        "difficulty": "normal",
+        "balancePreset": "swarm",
+        "expected": 642,
+        "actual": 596,
+        "pass": false
+      },
+      {
+        "stage": 1,
+        "difficulty": "normal",
+        "balancePreset": "bossRush",
+        "expected": 665,
+        "actual": 596,
+        "pass": false
+      },
+      {
+        "stage": 1,
+        "difficulty": "hard",
+        "balancePreset": "heroic",
+        "expected": 666,
+        "actual": 700,
+        "pass": false
+      },
+      {
+        "stage": 1,
+        "difficulty": "hard",
+        "balancePreset": "swarm",
+        "expected": 754,
+        "actual": 700,
+        "pass": false
+      }
+    ]
+  },
+  "after": {
+    "total": 800,
+    "pass": 800,
+    "fail": 0
+  },
+  "source": "scripts/qa176-team-a-contracts.test.mjs"
+}

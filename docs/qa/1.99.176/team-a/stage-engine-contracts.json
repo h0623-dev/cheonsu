@@ -1,0 +1,456 @@
+{
+  "generatedAt": "2026-10-15T23:59:31.335Z",
+  "mode": "engine-contract-not-natural-full-clear",
+  "stages": [
+    {
+      "stage": 1,
+      "allies": 4,
+      "deployed": 4,
+      "enemies": 4,
+      "roundLimit": 24,
+      "normalEnemyLevel": 1,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 2,
+      "allies": 4,
+      "deployed": 4,
+      "enemies": 4,
+      "roundLimit": 24,
+      "normalEnemyLevel": 1,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 3,
+      "allies": 5,
+      "deployed": 5,
+      "enemies": 4,
+      "roundLimit": 24,
+      "normalEnemyLevel": 2,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 4,
+      "allies": 5,
+      "deployed": 5,
+      "enemies": 4,
+      "roundLimit": 27,
+      "normalEnemyLevel": 2,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 5,
+      "allies": 6,
+      "deployed": 6,
+      "enemies": 5,
+      "roundLimit": 27,
+      "normalEnemyLevel": 3,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 6,
+      "allies": 6,
+      "deployed": 6,
+      "enemies": 4,
+      "roundLimit": 27,
+      "normalEnemyLevel": 3,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 7,
+      "allies": 7,
+      "deployed": 7,
+      "enemies": 5,
+      "roundLimit": 30,
+      "normalEnemyLevel": 4,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 8,
+      "allies": 7,
+      "deployed": 7,
+      "enemies": 5,
+      "roundLimit": 30,
+      "normalEnemyLevel": 4,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 9,
+      "allies": 8,
+      "deployed": 8,
+      "enemies": 5,
+      "roundLimit": 30,
+      "normalEnemyLevel": 5,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 10,
+      "allies": 8,
+      "deployed": 8,
+      "enemies": 5,
+      "roundLimit": 30,
+      "normalEnemyLevel": 5,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 11,
+      "allies": 9,
+      "deployed": 9,
+      "enemies": 5,
+      "roundLimit": 30,
+      "normalEnemyLevel": 6,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 12,
+      "allies": 9,
+      "deployed": 9,
+      "enemies": 5,
+      "roundLimit": 30,
+      "normalEnemyLevel": 6,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 13,
+      "allies": 10,
+      "deployed": 10,
+      "enemies": 6,
+      "roundLimit": 33,
+      "normalEnemyLevel": 7,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 14,
+      "allies": 10,
+      "deployed": 10,
+      "enemies": 6,
+      "roundLimit": 33,
+      "normalEnemyLevel": 7,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 15,
+      "allies": 11,
+      "deployed": 11,
+      "enemies": 6,
+      "roundLimit": 33,
+      "normalEnemyLevel": 8,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 16,
+      "allies": 11,
+      "deployed": 11,
+      "enemies": 6,
+      "roundLimit": 33,
+      "normalEnemyLevel": 8,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 17,
+      "allies": 12,
+      "deployed": 12,
+      "enemies": 6,
+      "roundLimit": 33,
+      "normalEnemyLevel": 9,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 18,
+      "allies": 12,
+      "deployed": 12,
+      "enemies": 6,
+      "roundLimit": 33,
+      "normalEnemyLevel": 9,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 19,
+      "allies": 13,
+      "deployed": 13,
+      "enemies": 6,
+      "roundLimit": 36,
+      "normalEnemyLevel": 10,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 20,
+      "allies": 13,
+      "deployed": 13,
+      "enemies": 6,
+      "roundLimit": 36,
+      "normalEnemyLevel": 10,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 21,
+      "allies": 14,
+      "deployed": 14,
+      "enemies": 6,
+      "roundLimit": 36,
+      "normalEnemyLevel": 11,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 22,
+      "allies": 14,
+      "deployed": 14,
+      "enemies": 6,
+      "roundLimit": 36,
+      "normalEnemyLevel": 11,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 23,
+      "allies": 15,
+      "deployed": 15,
+      "enemies": 6,
+      "roundLimit": 36,
+      "normalEnemyLevel": 12,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 24,
+      "allies": 15,
+      "deployed": 15,
+      "enemies": 6,
+      "roundLimit": 36,
+      "normalEnemyLevel": 12,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 25,
+      "allies": 16,
+      "deployed": 15,
+      "enemies": 6,
+      "roundLimit": 39,
+      "normalEnemyLevel": 13,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 26,
+      "allies": 16,
+      "deployed": 15,
+      "enemies": 6,
+      "roundLimit": 39,
+      "normalEnemyLevel": 13,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 27,
+      "allies": 17,
+      "deployed": 15,
+      "enemies": 6,
+      "roundLimit": 39,
+      "normalEnemyLevel": 14,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 28,
+      "allies": 17,
+      "deployed": 15,
+      "enemies": 6,
+      "roundLimit": 39,
+      "normalEnemyLevel": 14,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 29,
+      "allies": 17,
+      "deployed": 15,
+      "enemies": 6,
+      "roundLimit": 39,
+      "normalEnemyLevel": 15,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 30,
+      "allies": 17,
+      "deployed": 15,
+      "enemies": 6,
+      "roundLimit": 39,
+      "normalEnemyLevel": 15,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 31,
+      "allies": 17,
+      "deployed": 15,
+      "enemies": 7,
+      "roundLimit": 42,
+      "normalEnemyLevel": 16,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 32,
+      "allies": 17,
+      "deployed": 15,
+      "enemies": 8,
+      "roundLimit": 42,
+      "normalEnemyLevel": 16,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 33,
+      "allies": 18,
+      "deployed": 15,
+      "enemies": 9,
+      "roundLimit": 42,
+      "normalEnemyLevel": 17,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 34,
+      "allies": 18,
+      "deployed": 15,
+      "enemies": 10,
+      "roundLimit": 42,
+      "normalEnemyLevel": 17,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 35,
+      "allies": 18,
+      "deployed": 15,
+      "enemies": 11,
+      "roundLimit": 42,
+      "normalEnemyLevel": 18,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 36,
+      "allies": 18,
+      "deployed": 15,
+      "enemies": 7,
+      "roundLimit": 42,
+      "normalEnemyLevel": 18,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 37,
+      "allies": 18,
+      "deployed": 15,
+      "enemies": 8,
+      "roundLimit": 42,
+      "normalEnemyLevel": 19,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 38,
+      "allies": 19,
+      "deployed": 15,
+      "enemies": 9,
+      "roundLimit": 42,
+      "normalEnemyLevel": 19,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 39,
+      "allies": 19,
+      "deployed": 15,
+      "enemies": 10,
+      "roundLimit": 42,
+      "normalEnemyLevel": 20,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 40,
+      "allies": 19,
+      "deployed": 15,
+      "enemies": 11,
+      "roundLimit": 42,
+      "normalEnemyLevel": 20,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 41,
+      "allies": 19,
+      "deployed": 15,
+      "enemies": 7,
+      "roundLimit": 42,
+      "normalEnemyLevel": 21,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 42,
+      "allies": 19,
+      "deployed": 15,
+      "enemies": 8,
+      "roundLimit": 42,
+      "normalEnemyLevel": 21,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 43,
+      "allies": 20,
+      "deployed": 15,
+      "enemies": 9,
+      "roundLimit": 42,
+      "normalEnemyLevel": 22,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 44,
+      "allies": 20,
+      "deployed": 15,
+      "enemies": 10,
+      "roundLimit": 42,
+      "normalEnemyLevel": 22,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 45,
+      "allies": 20,
+      "deployed": 15,
+      "enemies": 11,
+      "roundLimit": 42,
+      "normalEnemyLevel": 23,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 46,
+      "allies": 20,
+      "deployed": 15,
+      "enemies": 7,
+      "roundLimit": 42,
+      "normalEnemyLevel": 23,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 47,
+      "allies": 20,
+      "deployed": 15,
+      "enemies": 8,
+      "roundLimit": 42,
+      "normalEnemyLevel": 24,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 48,
+      "allies": 21,
+      "deployed": 15,
+      "enemies": 9,
+      "roundLimit": 42,
+      "normalEnemyLevel": 24,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 49,
+      "allies": 21,
+      "deployed": 15,
+      "enemies": 10,
+      "roundLimit": 42,
+      "normalEnemyLevel": 25,
+      "lifecycle": "pass"
+    },
+    {
+      "stage": 50,
+      "allies": 21,
+      "deployed": 15,
+      "enemies": 11,
+      "roundLimit": 42,
+      "normalEnemyLevel": 25,
+      "lifecycle": "pass"
+    }
+  ]
+}

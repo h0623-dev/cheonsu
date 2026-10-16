@@ -190,7 +190,8 @@ function getPursuitRoutes(enemy, allies, units, activeMap) {
 // Front-line units act first so the following ranks can use the space they clear.
 export function getEnemyTurnOrder(units, activeMap) {
   const allies = units.filter(unit => unit.type === "ally" && isAlive(unit));
-  return units.filter(unit => unit.type !== "ally" && isAlive(unit))
+  // A restored enemy turn can already contain completed attacks or support actions.
+  return units.filter(unit => unit.type !== "ally" && isAlive(unit) && !unit.acted)
     .map(enemy => ({
       enemy,
       canAttack: Boolean(getEnemyAttackChoice(enemy, allies, activeMap)),

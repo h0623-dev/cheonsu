@@ -1,0 +1,745 @@
+{
+  "generatedAt": "2026-10-15T23:59:28.315Z",
+  "mode": "actual-App-expanded-stage-final-formation-isolated-enemy-pursuit",
+  "stage": 49,
+  "terrainRevision": 3,
+  "totalEnemies": 26,
+  "initial": {
+    "id": "expansion-49-2",
+    "x": 11,
+    "y": 1,
+    "type": "enemy",
+    "name": "잉크덩굴 포식자",
+    "firstStage": 47,
+    "icon": "🌿",
+    "role": "느린 거리 제어",
+    "rank": "normal",
+    "aiType": "archer",
+    "move": 1,
+    "range": 2,
+    "minRange": 1,
+    "skill": "잉크 덩굴",
+    "skillType": "attack",
+    "skillBonus": 4,
+    "skillRange": 2,
+    "skillMinRange": 1,
+    "skillSpec": {
+      "name": "잉크 덩굴",
+      "type": "attack",
+      "bonus": 4,
+      "minRange": 1,
+      "range": 2,
+      "effect": "poison",
+      "status": "slow"
+    },
+    "combatIdentityName": "긴 창 촉수 식물",
+    "hp": 108,
+    "maxHp": 108,
+    "atk": 26,
+    "def": 16,
+    "level": 25,
+    "spriteKey": "ink_vine",
+    "artId": "ink_vine",
+    "stageEnemyRole": "ink_vine",
+    "monsterRank": "normal",
+    "expansionEnemy": true,
+    "expansionStatsStage": 49,
+    "moved": false,
+    "acted": false,
+    "guard": false
+  },
+  "target": {
+    "id": "hero",
+    "x": 24,
+    "y": 16,
+    "type": "ally",
+    "icon": "⚔️",
+    "name": "카일",
+    "hp": 24,
+    "maxHp": 24,
+    "atk": 8,
+    "def": 5,
+    "move": 3,
+    "range": 1,
+    "skill": "돌풍 베기",
+    "skillType": "attack",
+    "skillBonus": 3,
+    "skillRange": 1,
+    "level": 1,
+    "exp": 0,
+    "moved": false,
+    "acted": false,
+    "guard": false,
+    "equipment": {
+      "weapon": null,
+      "armor": null,
+      "accessory": null
+    },
+    "baseAtk": 8,
+    "baseDef": 5,
+    "baseSkillBonus": 3,
+    "skillLevel": 0,
+    "gearEnhance": {},
+    "itemPowerBoost": 0,
+    "itemGuardBoost": 0,
+    "skillGuardBoost": 0,
+    "skillCooldown": 0,
+    "skillCooldowns": {},
+    "supportUsed": false,
+    "status": []
+  },
+  "trace": [
+    {
+      "turn": 0,
+      "x": 11,
+      "y": 1,
+      "nextX": 12,
+      "nextY": 1,
+      "reachableThisTurn": 4
+    },
+    {
+      "turn": 1,
+      "x": 12,
+      "y": 1,
+      "nextX": 13,
+      "nextY": 1,
+      "reachableThisTurn": 4
+    },
+    {
+      "turn": 2,
+      "x": 13,
+      "y": 1,
+      "nextX": 14,
+      "nextY": 1,
+      "reachableThisTurn": 4
+    },
+    {
+      "turn": 3,
+      "x": 14,
+      "y": 1,
+      "nextX": 15,
+      "nextY": 1,
+      "reachableThisTurn": 4
+    },
+    {
+      "turn": 4,
+      "x": 15,
+      "y": 1,
+      "nextX": 16,
+      "nextY": 1,
+      "reachableThisTurn": 4
+    },
+    {
+      "turn": 5,
+      "x": 16,
+      "y": 1,
+      "nextX": 16,
+      "nextY": 2,
+      "reachableThisTurn": 3
+    },
+    {
+      "turn": 6,
+      "x": 16,
+      "y": 2,
+      "nextX": 17,
+      "nextY": 2,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 7,
+      "x": 17,
+      "y": 2,
+      "nextX": 17,
+      "nextY": 3,
+      "reachableThisTurn": 3
+    },
+    {
+      "turn": 8,
+      "x": 17,
+      "y": 3,
+      "nextX": 17,
+      "nextY": 4,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 9,
+      "x": 17,
+      "y": 4,
+      "nextX": 17,
+      "nextY": 5,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 10,
+      "x": 17,
+      "y": 5,
+      "nextX": 17,
+      "nextY": 6,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 11,
+      "x": 17,
+      "y": 6,
+      "nextX": 17,
+      "nextY": 7,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 12,
+      "x": 17,
+      "y": 7,
+      "nextX": 17,
+      "nextY": 8,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 13,
+      "x": 17,
+      "y": 8,
+      "nextX": 17,
+      "nextY": 9,
+      "reachableThisTurn": 4
+    },
+    {
+      "turn": 14,
+      "x": 17,
+      "y": 9,
+      "nextX": 17,
+      "nextY": 10,
+      "reachableThisTurn": 4
+    },
+    {
+      "turn": 15,
+      "x": 17,
+      "y": 10,
+      "nextX": 16,
+      "nextY": 10,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 16,
+      "x": 16,
+      "y": 10,
+      "nextX": 16,
+      "nextY": 11,
+      "reachableThisTurn": 3
+    },
+    {
+      "turn": 17,
+      "x": 16,
+      "y": 11,
+      "nextX": 15,
+      "nextY": 11,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 18,
+      "x": 15,
+      "y": 11,
+      "nextX": 15,
+      "nextY": 12,
+      "reachableThisTurn": 3
+    },
+    {
+      "turn": 19,
+      "x": 15,
+      "y": 12,
+      "nextX": 14,
+      "nextY": 12,
+      "reachableThisTurn": 4
+    },
+    {
+      "turn": 20,
+      "x": 14,
+      "y": 12,
+      "nextX": 14,
+      "nextY": 13,
+      "reachableThisTurn": 3
+    },
+    {
+      "turn": 21,
+      "x": 14,
+      "y": 13,
+      "nextX": 13,
+      "nextY": 13,
+      "reachableThisTurn": 4
+    },
+    {
+      "turn": 22,
+      "x": 13,
+      "y": 13,
+      "nextX": 13,
+      "nextY": 14,
+      "reachableThisTurn": 3
+    },
+    {
+      "turn": 23,
+      "x": 13,
+      "y": 14,
+      "nextX": 13,
+      "nextY": 15,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 24,
+      "x": 13,
+      "y": 15,
+      "nextX": 13,
+      "nextY": 16,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 25,
+      "x": 13,
+      "y": 16,
+      "nextX": 13,
+      "nextY": 17,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 26,
+      "x": 13,
+      "y": 17,
+      "nextX": 13,
+      "nextY": 18,
+      "reachableThisTurn": 4
+    },
+    {
+      "turn": 27,
+      "x": 13,
+      "y": 18,
+      "nextX": 13,
+      "nextY": 19,
+      "reachableThisTurn": 4
+    },
+    {
+      "turn": 28,
+      "x": 13,
+      "y": 19,
+      "nextX": 14,
+      "nextY": 19,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 29,
+      "x": 14,
+      "y": 19,
+      "nextX": 14,
+      "nextY": 20,
+      "reachableThisTurn": 3
+    },
+    {
+      "turn": 30,
+      "x": 14,
+      "y": 20,
+      "nextX": 15,
+      "nextY": 20,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 31,
+      "x": 15,
+      "y": 20,
+      "nextX": 15,
+      "nextY": 21,
+      "reachableThisTurn": 3
+    },
+    {
+      "turn": 32,
+      "x": 15,
+      "y": 21,
+      "nextX": 16,
+      "nextY": 21,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 33,
+      "x": 16,
+      "y": 21,
+      "nextX": 16,
+      "nextY": 22,
+      "reachableThisTurn": 3
+    },
+    {
+      "turn": 34,
+      "x": 16,
+      "y": 22,
+      "nextX": 17,
+      "nextY": 22,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 35,
+      "x": 17,
+      "y": 22,
+      "nextX": 18,
+      "nextY": 22,
+      "reachableThisTurn": 4
+    },
+    {
+      "turn": 36,
+      "x": 18,
+      "y": 22,
+      "nextX": 19,
+      "nextY": 22,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 37,
+      "x": 19,
+      "y": 22,
+      "nextX": 20,
+      "nextY": 22,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 38,
+      "x": 20,
+      "y": 22,
+      "nextX": 21,
+      "nextY": 22,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 39,
+      "x": 21,
+      "y": 22,
+      "nextX": 22,
+      "nextY": 22,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 40,
+      "x": 22,
+      "y": 22,
+      "nextX": 23,
+      "nextY": 22,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 41,
+      "x": 23,
+      "y": 22,
+      "nextX": 24,
+      "nextY": 22,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 42,
+      "x": 24,
+      "y": 22,
+      "nextX": 24,
+      "nextY": 21,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 43,
+      "x": 24,
+      "y": 21,
+      "nextX": 24,
+      "nextY": 20,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 44,
+      "x": 24,
+      "y": 20,
+      "nextX": 24,
+      "nextY": 19,
+      "reachableThisTurn": 5
+    },
+    {
+      "turn": 45,
+      "x": 24,
+      "y": 19,
+      "nextX": 24,
+      "nextY": 18,
+      "reachableThisTurn": 5
+    }
+  ],
+  "expansionRoutes": [
+    {
+      "stage": 47,
+      "id": "expansion-47-1",
+      "move": 1,
+      "turns": 24,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 47,
+      "id": "expansion-47-3",
+      "move": 1,
+      "turns": 21,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 47,
+      "id": "expansion-47-5",
+      "move": 1,
+      "turns": 25,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 47,
+      "id": "expansion-47-7",
+      "move": 1,
+      "turns": 26,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 47,
+      "id": "boss",
+      "move": 1,
+      "turns": 23,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 47,
+      "id": "large-extra-47-2",
+      "move": 1,
+      "turns": 20,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 47,
+      "id": "large-extra-47-4",
+      "move": 1,
+      "turns": 28,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 47,
+      "id": "large-extra-47-6",
+      "move": 1,
+      "turns": 28,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 47,
+      "id": "large-extra-47-8",
+      "move": 1,
+      "turns": 23,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 47,
+      "id": "large-extra-47-10",
+      "move": 1,
+      "turns": 16,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 47,
+      "id": "large-extra-47-12",
+      "move": 1,
+      "turns": 17,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 47,
+      "id": "large-extra-47-14",
+      "move": 1,
+      "turns": 22,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 47,
+      "id": "large-extra-47-16",
+      "move": 1,
+      "turns": 13,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 47,
+      "id": "large-extra-47-18",
+      "move": 1,
+      "turns": 24,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 48,
+      "id": "expansion-48-3",
+      "move": 1,
+      "turns": 16,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 48,
+      "id": "expansion-48-6",
+      "move": 1,
+      "turns": 17,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 48,
+      "id": "large-extra-48-1",
+      "move": 1,
+      "turns": 19,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 48,
+      "id": "large-extra-48-4",
+      "move": 1,
+      "turns": 20,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 48,
+      "id": "large-extra-48-7",
+      "move": 1,
+      "turns": 19,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 48,
+      "id": "large-extra-48-10",
+      "move": 1,
+      "turns": 15,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 48,
+      "id": "large-extra-48-13",
+      "move": 1,
+      "turns": 15,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 48,
+      "id": "large-extra-48-16",
+      "move": 1,
+      "turns": 20,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 49,
+      "id": "expansion-49-2",
+      "move": 1,
+      "turns": 46,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 49,
+      "id": "expansion-49-5",
+      "move": 1,
+      "turns": 40,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 49,
+      "id": "expansion-49-8",
+      "move": 1,
+      "turns": 43,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 49,
+      "id": "large-extra-49-3",
+      "move": 1,
+      "turns": 40,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 49,
+      "id": "large-extra-49-6",
+      "move": 1,
+      "turns": 43,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 49,
+      "id": "large-extra-49-9",
+      "move": 1,
+      "turns": 40,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 49,
+      "id": "large-extra-49-12",
+      "move": 1,
+      "turns": 42,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 49,
+      "id": "large-extra-49-15",
+      "move": 1,
+      "turns": 39,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 50,
+      "id": "expansion-50-2",
+      "move": 1,
+      "turns": 32,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 50,
+      "id": "expansion-50-5",
+      "move": 1,
+      "turns": 21,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 50,
+      "id": "expansion-50-8",
+      "move": 1,
+      "turns": 20,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 50,
+      "id": "large-extra-50-2",
+      "move": 1,
+      "turns": 28,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 50,
+      "id": "large-extra-50-5",
+      "move": 1,
+      "turns": 34,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 50,
+      "id": "large-extra-50-8",
+      "move": 1,
+      "turns": 24,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 50,
+      "id": "large-extra-50-11",
+      "move": 1,
+      "turns": 12,
+      "reachedAttackPosition": true
+    },
+    {
+      "stage": 50,
+      "id": "large-extra-50-14",
+      "move": 1,
+      "turns": 21,
+      "reachedAttackPosition": true
+    }
+  ],
+  "original": {
+    "reachable": true,
+    "visited": 412
+  },
+  "onlyOathRune": {
+    "reachable": true,
+    "visited": 418
+  },
+  "onlyCrackedSlab": {
+    "reachable": true,
+    "visited": 412
+  },
+  "both": {
+    "reachable": true,
+    "visited": 418
+  }
+}

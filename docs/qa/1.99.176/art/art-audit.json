@@ -1,0 +1,5631 @@
+{
+  "checkedAt": "2026-10-15T23:48:21.998Z",
+  "scope": "이번 실행에서 현재 소스·manifest·실제 파일 연결 검사. 브라우저·실기기·원화 미술 감수와 구분.",
+  "counts": {
+    "combatKeys": 132,
+    "allies": 21,
+    "stages": 50,
+    "paths": 1961,
+    "missing": 0
+  },
+  "missing": [],
+  "absentProfiles": [],
+  "missingSixPoses": [],
+  "sceneDuplicates": [],
+  "formMapDuplicates": [],
+  "formBattleDuplicates": [],
+  "art": [
+    {
+      "key": "hero",
+      "exists": true,
+      "identity": "hero",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/hero.webp",
+        "dialogue": "/art/characters-v2/dialogue/hero.webp",
+        "recover": "/art/characters-v2/units/hero-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/hero-front-a.webp",
+        "/art/village-walk-v2/hero-front-b.webp",
+        "/art/village-walk-v2/hero-back-a.webp",
+        "/art/village-walk-v2/hero-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "bram",
+      "exists": true,
+      "identity": "bram",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/bram.webp",
+        "dialogue": "/art/characters-v2/dialogue/bram.webp",
+        "recover": "/art/characters-v2/units/bram-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/bram-front-a.webp",
+        "/art/village-walk-v2/bram-front-b.webp",
+        "/art/village-walk-v2/bram-back-a.webp",
+        "/art/village-walk-v2/bram-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "lina",
+      "exists": true,
+      "identity": "lina",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/lina.webp",
+        "dialogue": "/art/characters-v2/dialogue/lina.webp",
+        "recover": "/art/characters-v2/units/lina-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/lina-front-a.webp",
+        "/art/village-walk-v2/lina-front-b.webp",
+        "/art/village-walk-v2/lina-back-a.webp",
+        "/art/village-walk-v2/lina-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "aria",
+      "exists": true,
+      "identity": "aria",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/aria.webp",
+        "dialogue": "/art/characters-v2/dialogue/aria.webp",
+        "recover": "/art/characters-v2/units/aria-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/aria-front-a.webp",
+        "/art/village-walk-v2/aria-front-b.webp",
+        "/art/village-walk-v2/aria-back-a.webp",
+        "/art/village-walk-v2/aria-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "leon",
+      "exists": true,
+      "identity": "leon",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/leon.webp",
+        "dialogue": "/art/characters-v2/dialogue/leon.webp",
+        "recover": "/art/characters-v2/units/leon-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/leon-front-a.webp",
+        "/art/village-walk-v2/leon-front-b.webp",
+        "/art/village-walk-v2/leon-back-a.webp",
+        "/art/village-walk-v2/leon-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "sera",
+      "exists": true,
+      "identity": "sera",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/sera.webp",
+        "dialogue": "/art/characters-v2/dialogue/sera.webp",
+        "recover": "/art/characters-v2/units/sera-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/sera-front-a.webp",
+        "/art/village-walk-v2/sera-front-b.webp",
+        "/art/village-walk-v2/sera-back-a.webp",
+        "/art/village-walk-v2/sera-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "noah",
+      "exists": true,
+      "identity": "noah",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/noah.webp",
+        "dialogue": "/art/characters-v2/dialogue/noah.webp",
+        "recover": "/art/characters-v2/units/noah-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/noah-front-a.webp",
+        "/art/village-walk-v2/noah-front-b.webp",
+        "/art/village-walk-v2/noah-back-a.webp",
+        "/art/village-walk-v2/noah-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "yuna",
+      "exists": true,
+      "identity": "yuna",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/yuna.webp",
+        "dialogue": "/art/characters-v2/dialogue/yuna.webp",
+        "recover": "/art/characters-v2/units/yuna-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/yuna-front-a.webp",
+        "/art/village-walk-v2/yuna-front-b.webp",
+        "/art/village-walk-v2/yuna-back-a.webp",
+        "/art/village-walk-v2/yuna-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "rakan",
+      "exists": true,
+      "identity": "rakan",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/rakan.webp",
+        "dialogue": "/art/characters-v2/dialogue/rakan.webp",
+        "recover": "/art/characters-v2/units/rakan-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/rakan-front-a.webp",
+        "/art/village-walk-v2/rakan-front-b.webp",
+        "/art/village-walk-v2/rakan-back-a.webp",
+        "/art/village-walk-v2/rakan-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "miho",
+      "exists": true,
+      "identity": "miho",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/miho.webp",
+        "dialogue": "/art/characters-v2/dialogue/miho.webp",
+        "recover": "/art/characters-v2/units/miho-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/miho-front-a.webp",
+        "/art/village-walk-v2/miho-front-b.webp",
+        "/art/village-walk-v2/miho-back-a.webp",
+        "/art/village-walk-v2/miho-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "teo",
+      "exists": true,
+      "identity": "teo",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/teo.webp",
+        "dialogue": "/art/characters-v2/dialogue/teo.webp",
+        "recover": "/art/characters-v2/units/teo-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/teo-front-a.webp",
+        "/art/village-walk-v2/teo-front-b.webp",
+        "/art/village-walk-v2/teo-back-a.webp",
+        "/art/village-walk-v2/teo-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "irene",
+      "exists": true,
+      "identity": "irene",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/irene.webp",
+        "dialogue": "/art/characters-v2/dialogue/irene.webp",
+        "recover": "/art/characters-v2/units/irene-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/irene-front-a.webp",
+        "/art/village-walk-v2/irene-front-b.webp",
+        "/art/village-walk-v2/irene-back-a.webp",
+        "/art/village-walk-v2/irene-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "kaz",
+      "exists": true,
+      "identity": "kaz",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/kaz.webp",
+        "dialogue": "/art/characters-v2/dialogue/kaz.webp",
+        "recover": "/art/characters-v2/units/kaz-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/kaz-front-a.webp",
+        "/art/village-walk-v2/kaz-front-b.webp",
+        "/art/village-walk-v2/kaz-back-a.webp",
+        "/art/village-walk-v2/kaz-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "ella",
+      "exists": true,
+      "identity": "ella",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/ella.webp",
+        "dialogue": "/art/characters-v2/dialogue/ella.webp",
+        "recover": "/art/characters-v2/units/ella-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/ella-front-a.webp",
+        "/art/village-walk-v2/ella-front-b.webp",
+        "/art/village-walk-v2/ella-back-a.webp",
+        "/art/village-walk-v2/ella-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "jin",
+      "exists": true,
+      "identity": "jin",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/jin.webp",
+        "dialogue": "/art/characters-v2/dialogue/jin.webp",
+        "recover": "/art/characters-v2/units/jin-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/jin-front-a.webp",
+        "/art/village-walk-v2/jin-front-b.webp",
+        "/art/village-walk-v2/jin-back-a.webp",
+        "/art/village-walk-v2/jin-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "luka",
+      "exists": true,
+      "identity": "luka",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/luka.webp",
+        "dialogue": "/art/characters-v2/dialogue/luka.webp",
+        "recover": "/art/characters-v2/units/luka-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/luka-front-a.webp",
+        "/art/village-walk-v2/luka-front-b.webp",
+        "/art/village-walk-v2/luka-back-a.webp",
+        "/art/village-walk-v2/luka-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "baekho",
+      "exists": true,
+      "identity": "baekho",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/baekho.webp",
+        "dialogue": "/art/characters-v2/dialogue/baekho.webp",
+        "recover": "/art/characters-v2/units/baekho-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/baekho-front-a.webp",
+        "/art/village-walk-v2/baekho-front-b.webp",
+        "/art/village-walk-v2/baekho-back-a.webp",
+        "/art/village-walk-v2/baekho-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "raider",
+      "exists": true,
+      "identity": "raider",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/raider.webp",
+        "dialogue": "/art/characters-v2/dialogue/raider.webp",
+        "recover": "/art/characters-v2/units/raider-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "ranger",
+      "exists": true,
+      "identity": "ranger",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/ranger.webp",
+        "dialogue": "/art/characters-v2/dialogue/ranger.webp",
+        "recover": "/art/characters-v2/units/ranger-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "sniper",
+      "exists": true,
+      "identity": "sniper",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/sniper.webp",
+        "dialogue": "/art/characters-v2/dialogue/sniper.webp",
+        "recover": "/art/characters-v2/units/sniper-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "marauder",
+      "exists": true,
+      "identity": "marauder",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/marauder.webp",
+        "dialogue": "/art/characters-v2/dialogue/marauder.webp",
+        "recover": "/art/characters-v2/units/marauder-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "assassin_elite",
+      "exists": true,
+      "identity": "assassin_elite",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/assassin_elite.webp",
+        "dialogue": "/art/characters-v2/dialogue/assassin_elite.webp",
+        "recover": "/art/characters-v2/units/assassin_elite-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "iron_lancer",
+      "exists": true,
+      "identity": "iron_lancer",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/iron_lancer.webp",
+        "dialogue": "/art/characters-v2/dialogue/iron_lancer.webp",
+        "recover": "/art/characters-v2/units/iron_lancer-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "plague_doctor",
+      "exists": true,
+      "identity": "plague_doctor",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/plague_doctor.webp",
+        "dialogue": "/art/characters-v2/dialogue/plague_doctor.webp",
+        "recover": "/art/characters-v2/units/plague_doctor-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "beast_tamer",
+      "exists": true,
+      "identity": "beast_tamer",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/beast_tamer.webp",
+        "dialogue": "/art/characters-v2/dialogue/beast_tamer.webp",
+        "recover": "/art/characters-v2/units/beast_tamer-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "storm_mage",
+      "exists": true,
+      "identity": "storm_mage",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/storm_mage.webp",
+        "dialogue": "/art/characters-v2/dialogue/storm_mage.webp",
+        "recover": "/art/characters-v2/units/storm_mage-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "blade_dancer",
+      "exists": true,
+      "identity": "blade_dancer",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/blade_dancer.webp",
+        "dialogue": "/art/characters-v2/dialogue/blade_dancer.webp",
+        "recover": "/art/characters-v2/units/blade_dancer-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "siege_gunner",
+      "exists": true,
+      "identity": "siege_gunner",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/siege_gunner.webp",
+        "dialogue": "/art/characters-v2/dialogue/siege_gunner.webp",
+        "recover": "/art/characters-v2/units/siege_gunner-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "sentinel",
+      "exists": true,
+      "identity": "sentinel",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/sentinel.webp",
+        "dialogue": "/art/characters-v2/dialogue/sentinel.webp",
+        "recover": "/art/characters-v2/units/sentinel-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "blackguard",
+      "exists": true,
+      "identity": "blackguard",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/blackguard.webp",
+        "dialogue": "/art/characters-v2/dialogue/blackguard.webp",
+        "recover": "/art/characters-v2/units/blackguard-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "warlord",
+      "exists": true,
+      "identity": "warlord",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/warlord.webp",
+        "dialogue": "/art/characters-v2/dialogue/warlord.webp",
+        "recover": "/art/characters-v2/units/warlord-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "pyromancer",
+      "exists": true,
+      "identity": "pyromancer",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/pyromancer.webp",
+        "dialogue": "/art/characters-v2/dialogue/pyromancer.webp",
+        "recover": "/art/characters-v2/units/pyromancer-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "frost_mage",
+      "exists": true,
+      "identity": "frost_mage",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/frost_mage.webp",
+        "dialogue": "/art/characters-v2/dialogue/frost_mage.webp",
+        "recover": "/art/characters-v2/units/frost_mage-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "cultist",
+      "exists": true,
+      "identity": "cultist",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/cultist.webp",
+        "dialogue": "/art/characters-v2/dialogue/cultist.webp",
+        "recover": "/art/characters-v2/units/cultist-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "void_knight",
+      "exists": true,
+      "identity": "void_knight",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/void_knight.webp",
+        "dialogue": "/art/characters-v2/dialogue/void_knight.webp",
+        "recover": "/art/characters-v2/units/void_knight-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "wolf",
+      "exists": true,
+      "identity": "wolf",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/wolf.webp",
+        "dialogue": "/art/characters-v2/dialogue/wolf.webp",
+        "recover": "/art/characters-v2/units/wolf-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "boss_commander",
+      "exists": true,
+      "identity": "boss_commander",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/boss_commander.webp",
+        "dialogue": "/art/characters-v2/dialogue/boss_commander.webp",
+        "recover": "/art/characters-v2/units/boss_commander-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "boss_frost",
+      "exists": true,
+      "identity": "boss_frost",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/boss_frost.webp",
+        "dialogue": "/art/characters-v2/dialogue/boss_frost.webp",
+        "recover": "/art/characters-v2/units/boss_frost-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "boss_ember",
+      "exists": true,
+      "identity": "boss_ember",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/boss_ember.webp",
+        "dialogue": "/art/characters-v2/dialogue/boss_ember.webp",
+        "recover": "/art/characters-v2/units/boss_ember-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "boss_oracle",
+      "exists": true,
+      "identity": "boss_oracle",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/boss_oracle.webp",
+        "dialogue": "/art/characters-v2/dialogue/boss_oracle.webp",
+        "recover": "/art/characters-v2/units/boss_oracle-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "boss_abyss",
+      "exists": true,
+      "identity": "boss_abyss",
+      "paths": {
+        "portrait": "/art/characters-v2/portraits/boss_abyss.webp",
+        "dialogue": "/art/characters-v2/dialogue/boss_abyss.webp",
+        "recover": "/art/characters-v2/units/boss_abyss-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "kobold-hunter",
+      "exists": true,
+      "identity": "kobold-hunter",
+      "paths": {
+        "map": "/art/map-sprites-v4/kobold-hunter.webp",
+        "portrait": "/art/characters-v2/portraits/kobold-hunter.webp",
+        "dialogue": "/art/characters-v2/dialogue/kobold-hunter.webp",
+        "recover": "/art/characters-v2/units/kobold-hunter-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "lizard-spearman",
+      "exists": true,
+      "identity": "lizard-spearman",
+      "paths": {
+        "map": "/art/map-sprites-v4/lizard-spearman.webp",
+        "portrait": "/art/characters-v2/portraits/lizard-spearman.webp",
+        "dialogue": "/art/characters-v2/dialogue/lizard-spearman.webp",
+        "recover": "/art/characters-v2/units/lizard-spearman-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "horned-ogre",
+      "exists": true,
+      "identity": "horned-ogre",
+      "paths": {
+        "map": "/art/map-sprites-v4/horned-ogre.webp",
+        "portrait": "/art/characters-v2/portraits/horned-ogre.webp",
+        "dialogue": "/art/characters-v2/dialogue/horned-ogre.webp",
+        "recover": "/art/characters-v2/units/horned-ogre-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "harpy-scout",
+      "exists": true,
+      "identity": "harpy-scout",
+      "paths": {
+        "map": "/art/map-sprites-v4/harpy-scout.webp",
+        "portrait": "/art/characters-v2/portraits/harpy-scout.webp",
+        "dialogue": "/art/characters-v2/dialogue/harpy-scout.webp",
+        "recover": "/art/characters-v2/units/harpy-scout-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "skeleton-warrior",
+      "exists": true,
+      "identity": "skeleton-warrior",
+      "paths": {
+        "map": "/art/map-sprites-v4/skeleton-warrior.webp",
+        "portrait": "/art/characters-v2/portraits/skeleton-warrior.webp",
+        "dialogue": "/art/characters-v2/dialogue/skeleton-warrior.webp",
+        "recover": "/art/characters-v2/units/skeleton-warrior-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "rock-spirit",
+      "exists": true,
+      "identity": "rock-spirit",
+      "paths": {
+        "map": "/art/map-sprites-v4/rock-spirit.webp",
+        "portrait": "/art/characters-v2/portraits/rock-spirit.webp",
+        "dialogue": "/art/characters-v2/dialogue/rock-spirit.webp",
+        "recover": "/art/characters-v2/units/rock-spirit-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "mare",
+      "exists": true,
+      "identity": "mare",
+      "paths": {
+        "map": "/art/characters-v3/map/mare.webp",
+        "portrait": "/art/characters-v3/portraits/mare.webp",
+        "dialogue": "/art/characters-v3/dialogue/mare.webp",
+        "recover": "/art/characters-v3/units/mare-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/mare-front-a.webp",
+        "/art/village-walk-v2/mare-front-b.webp",
+        "/art/village-walk-v2/mare-back-a.webp",
+        "/art/village-walk-v2/mare-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "harin",
+      "exists": true,
+      "identity": "harin",
+      "paths": {
+        "map": "/art/characters-v3/map/harin.webp",
+        "portrait": "/art/characters-v3/portraits/harin.webp",
+        "dialogue": "/art/characters-v3/dialogue/harin.webp",
+        "recover": "/art/characters-v3/units/harin-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/harin-front-a.webp",
+        "/art/village-walk-v2/harin-front-b.webp",
+        "/art/village-walk-v2/harin-back-a.webp",
+        "/art/village-walk-v2/harin-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "edan",
+      "exists": true,
+      "identity": "edan",
+      "paths": {
+        "map": "/art/characters-v3/map/edan.webp",
+        "portrait": "/art/characters-v3/portraits/edan.webp",
+        "dialogue": "/art/characters-v3/dialogue/edan.webp",
+        "recover": "/art/characters-v3/units/edan-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/edan-front-a.webp",
+        "/art/village-walk-v2/edan-front-b.webp",
+        "/art/village-walk-v2/edan-back-a.webp",
+        "/art/village-walk-v2/edan-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "sylvan",
+      "exists": true,
+      "identity": "sylvan",
+      "paths": {
+        "map": "/art/characters-v3/map/silvan.webp",
+        "portrait": "/art/characters-v3/portraits/silvan.webp",
+        "dialogue": "/art/characters-v3/dialogue/silvan.webp",
+        "recover": "/art/characters-v3/units/silvan-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/village-walk-v2/sylvan-front-a.webp",
+        "/art/village-walk-v2/sylvan-front-b.webp",
+        "/art/village-walk-v2/sylvan-back-a.webp",
+        "/art/village-walk-v2/sylvan-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "crab_guard",
+      "exists": true,
+      "identity": "crab_guard",
+      "paths": {
+        "map": "/art/characters-v3/map/crab_guard.webp",
+        "portrait": "/art/characters-v3/portraits/crab_guard.webp",
+        "dialogue": "/art/characters-v3/dialogue/crab_guard.webp",
+        "recover": "/art/characters-v3/units/crab_guard-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "eel_archer",
+      "exists": true,
+      "identity": "eel_archer",
+      "paths": {
+        "map": "/art/characters-v3/map/eel_archer.webp",
+        "portrait": "/art/characters-v3/portraits/eel_archer.webp",
+        "dialogue": "/art/characters-v3/dialogue/eel_archer.webp",
+        "recover": "/art/characters-v3/units/eel_archer-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "spore_colony",
+      "exists": true,
+      "identity": "spore_colony",
+      "paths": {
+        "map": "/art/characters-v3/map/spore_colony.webp",
+        "portrait": "/art/characters-v3/portraits/spore_colony.webp",
+        "dialogue": "/art/characters-v3/dialogue/spore_colony.webp",
+        "recover": "/art/characters-v3/units/spore_colony-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "mist_ram",
+      "exists": true,
+      "identity": "mist_ram",
+      "paths": {
+        "map": "/art/characters-v3/map/mist_ram.webp",
+        "portrait": "/art/characters-v3/portraits/mist_ram.webp",
+        "dialogue": "/art/characters-v3/dialogue/mist_ram.webp",
+        "recover": "/art/characters-v3/units/mist_ram-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "crystal_insect",
+      "exists": true,
+      "identity": "crystal_insect",
+      "paths": {
+        "map": "/art/characters-v3/map/crystal_insect.webp",
+        "portrait": "/art/characters-v3/portraits/crystal_insect.webp",
+        "dialogue": "/art/characters-v3/dialogue/crystal_insect.webp",
+        "recover": "/art/characters-v3/units/crystal_insect-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "spring_salamander",
+      "exists": true,
+      "identity": "spring_salamander",
+      "paths": {
+        "map": "/art/characters-v3/map/spring_salamander.webp",
+        "portrait": "/art/characters-v3/portraits/spring_salamander.webp",
+        "dialogue": "/art/characters-v3/dialogue/spring_salamander.webp",
+        "recover": "/art/characters-v3/units/spring_salamander-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "gold_puppet",
+      "exists": true,
+      "identity": "gold_puppet",
+      "paths": {
+        "map": "/art/characters-v3/map/gold_puppet.webp",
+        "portrait": "/art/characters-v3/portraits/gold_puppet.webp",
+        "dialogue": "/art/characters-v3/dialogue/gold_puppet.webp",
+        "recover": "/art/characters-v3/units/gold_puppet-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "bell_keeper",
+      "exists": true,
+      "identity": "bell_keeper",
+      "paths": {
+        "map": "/art/characters-v3/map/bell_keeper.webp",
+        "portrait": "/art/characters-v3/portraits/bell_keeper.webp",
+        "dialogue": "/art/characters-v3/dialogue/bell_keeper.webp",
+        "recover": "/art/characters-v3/units/bell_keeper-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "scroll_spirit",
+      "exists": true,
+      "identity": "scroll_spirit",
+      "paths": {
+        "map": "/art/characters-v3/map/scroll_spirit.webp",
+        "portrait": "/art/characters-v3/portraits/scroll_spirit.webp",
+        "dialogue": "/art/characters-v3/dialogue/scroll_spirit.webp",
+        "recover": "/art/characters-v3/units/scroll_spirit-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "eclipse_cat",
+      "exists": true,
+      "identity": "eclipse_cat",
+      "paths": {
+        "map": "/art/characters-v3/map/eclipse_cat.webp",
+        "portrait": "/art/characters-v3/portraits/eclipse_cat.webp",
+        "dialogue": "/art/characters-v3/dialogue/eclipse_cat.webp",
+        "recover": "/art/characters-v3/units/eclipse_cat-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "ink_vine",
+      "exists": true,
+      "identity": "ink_vine",
+      "paths": {
+        "map": "/art/characters-v3/map/ink_vine.webp",
+        "portrait": "/art/characters-v3/portraits/ink_vine.webp",
+        "dialogue": "/art/characters-v3/dialogue/ink_vine.webp",
+        "recover": "/art/characters-v3/units/ink_vine-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "hollow_armor",
+      "exists": true,
+      "identity": "hollow_armor",
+      "paths": {
+        "map": "/art/characters-v3/map/hollow_armor.webp",
+        "portrait": "/art/characters-v3/portraits/hollow_armor.webp",
+        "dialogue": "/art/characters-v3/dialogue/hollow_armor.webp",
+        "recover": "/art/characters-v3/units/hollow_armor-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "tide_keeper",
+      "exists": true,
+      "identity": "tide_keeper",
+      "paths": {
+        "map": "/art/characters-v3/map/tide_keeper.webp",
+        "portrait": "/art/characters-v3/portraits/tide_keeper.webp",
+        "dialogue": "/art/characters-v3/dialogue/tide_keeper.webp",
+        "recover": "/art/characters-v3/units/tide_keeper-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "frost_queen",
+      "exists": true,
+      "identity": "frost_queen",
+      "paths": {
+        "map": "/art/characters-v3/map/frost_queen.webp",
+        "portrait": "/art/characters-v3/portraits/frost_queen.webp",
+        "dialogue": "/art/characters-v3/dialogue/frost_queen.webp",
+        "recover": "/art/characters-v3/units/frost_queen-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "resonance_judge",
+      "exists": true,
+      "identity": "resonance_judge",
+      "paths": {
+        "map": "/art/characters-v3/map/resonance_judge.webp",
+        "portrait": "/art/characters-v3/portraits/resonance_judge.webp",
+        "dialogue": "/art/characters-v3/dialogue/resonance_judge.webp",
+        "recover": "/art/characters-v3/units/resonance_judge-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "oath_guardian",
+      "exists": true,
+      "identity": "oath_guardian",
+      "paths": {
+        "map": "/art/characters-v3/map/oath_guardian.webp",
+        "portrait": "/art/characters-v3/portraits/oath_guardian.webp",
+        "dialogue": "/art/characters-v3/dialogue/oath_guardian.webp",
+        "recover": "/art/characters-v3/units/oath_guardian-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [],
+      "metricWarnings": []
+    },
+    {
+      "key": "hero__form0",
+      "exists": true,
+      "identity": "hero",
+      "paths": {
+        "map": "/art/promotions-v1/map/hero__form0.webp",
+        "portrait": "/art/characters-v3/portraits/hero__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/hero__form0.webp",
+        "recover": "/art/characters-v3/units/hero__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/hero__form0-front-a.webp",
+        "/art/promotions-v1/walk/hero__form0-front-b.webp",
+        "/art/promotions-v1/walk/hero__form0-back-a.webp",
+        "/art/promotions-v1/walk/hero__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "hero__form1",
+      "exists": true,
+      "identity": "hero",
+      "paths": {
+        "map": "/art/promotions-v1/map/hero__form1.webp",
+        "portrait": "/art/characters-v3/portraits/hero__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/hero__form1.webp",
+        "recover": "/art/characters-v3/units/hero__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/hero__form1-front-a.webp",
+        "/art/promotions-v1/walk/hero__form1-front-b.webp",
+        "/art/promotions-v1/walk/hero__form1-back-a.webp",
+        "/art/promotions-v1/walk/hero__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "bram__form0",
+      "exists": true,
+      "identity": "bram",
+      "paths": {
+        "map": "/art/promotions-v1/map/bram__form0.webp",
+        "portrait": "/art/characters-v3/portraits/bram__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/bram__form0.webp",
+        "recover": "/art/characters-v3/units/bram__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/bram__form0-front-a.webp",
+        "/art/promotions-v1/walk/bram__form0-front-b.webp",
+        "/art/promotions-v1/walk/bram__form0-back-a.webp",
+        "/art/promotions-v1/walk/bram__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "bram__form1",
+      "exists": true,
+      "identity": "bram",
+      "paths": {
+        "map": "/art/promotions-v1/map/bram__form1.webp",
+        "portrait": "/art/characters-v3/portraits/bram__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/bram__form1.webp",
+        "recover": "/art/characters-v3/units/bram__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/bram__form1-front-a.webp",
+        "/art/promotions-v1/walk/bram__form1-front-b.webp",
+        "/art/promotions-v1/walk/bram__form1-back-a.webp",
+        "/art/promotions-v1/walk/bram__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "lina__form0",
+      "exists": true,
+      "identity": "lina",
+      "paths": {
+        "map": "/art/promotions-v1/map/lina__form0.webp",
+        "portrait": "/art/characters-v3/portraits/lina__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/lina__form0.webp",
+        "recover": "/art/characters-v3/units/lina__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/lina__form0-front-a.webp",
+        "/art/promotions-v1/walk/lina__form0-front-b.webp",
+        "/art/promotions-v1/walk/lina__form0-back-a.webp",
+        "/art/promotions-v1/walk/lina__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "lina__form1",
+      "exists": true,
+      "identity": "lina",
+      "paths": {
+        "map": "/art/promotions-v1/map/lina__form1.webp",
+        "portrait": "/art/characters-v3/portraits/lina__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/lina__form1.webp",
+        "recover": "/art/characters-v3/units/lina__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/lina__form1-front-a.webp",
+        "/art/promotions-v1/walk/lina__form1-front-b.webp",
+        "/art/promotions-v1/walk/lina__form1-back-a.webp",
+        "/art/promotions-v1/walk/lina__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "aria__form0",
+      "exists": true,
+      "identity": "aria",
+      "paths": {
+        "map": "/art/promotions-v1/map/aria__form0.webp",
+        "portrait": "/art/characters-v3/portraits/aria__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/aria__form0.webp",
+        "recover": "/art/characters-v3/units/aria__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/aria__form0-front-a.webp",
+        "/art/promotions-v1/walk/aria__form0-front-b.webp",
+        "/art/promotions-v1/walk/aria__form0-back-a.webp",
+        "/art/promotions-v1/walk/aria__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "aria__form1",
+      "exists": true,
+      "identity": "aria",
+      "paths": {
+        "map": "/art/promotions-v1/map/aria__form1.webp",
+        "portrait": "/art/characters-v3/portraits/aria__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/aria__form1.webp",
+        "recover": "/art/characters-v3/units/aria__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/aria__form1-front-a.webp",
+        "/art/promotions-v1/walk/aria__form1-front-b.webp",
+        "/art/promotions-v1/walk/aria__form1-back-a.webp",
+        "/art/promotions-v1/walk/aria__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "leon__form0",
+      "exists": true,
+      "identity": "leon",
+      "paths": {
+        "map": "/art/promotions-v1/map/leon__form0.webp",
+        "portrait": "/art/characters-v3/portraits/leon__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/leon__form0.webp",
+        "recover": "/art/characters-v3/units/leon__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/leon__form0-front-a.webp",
+        "/art/promotions-v1/walk/leon__form0-front-b.webp",
+        "/art/promotions-v1/walk/leon__form0-back-a.webp",
+        "/art/promotions-v1/walk/leon__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "leon__form1",
+      "exists": true,
+      "identity": "leon",
+      "paths": {
+        "map": "/art/promotions-v1/map/leon__form1.webp",
+        "portrait": "/art/characters-v3/portraits/leon__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/leon__form1.webp",
+        "recover": "/art/characters-v3/units/leon__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/leon__form1-front-a.webp",
+        "/art/promotions-v1/walk/leon__form1-front-b.webp",
+        "/art/promotions-v1/walk/leon__form1-back-a.webp",
+        "/art/promotions-v1/walk/leon__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "sera__form0",
+      "exists": true,
+      "identity": "sera",
+      "paths": {
+        "map": "/art/promotions-v1/map/sera__form0.webp",
+        "portrait": "/art/characters-v3/portraits/sera__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/sera__form0.webp",
+        "recover": "/art/characters-v3/units/sera__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/sera__form0-front-a.webp",
+        "/art/promotions-v1/walk/sera__form0-front-b.webp",
+        "/art/promotions-v1/walk/sera__form0-back-a.webp",
+        "/art/promotions-v1/walk/sera__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "sera__form1",
+      "exists": true,
+      "identity": "sera",
+      "paths": {
+        "map": "/art/promotions-v1/map/sera__form1.webp",
+        "portrait": "/art/characters-v3/portraits/sera__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/sera__form1.webp",
+        "recover": "/art/characters-v3/units/sera__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/sera__form1-front-a.webp",
+        "/art/promotions-v1/walk/sera__form1-front-b.webp",
+        "/art/promotions-v1/walk/sera__form1-back-a.webp",
+        "/art/promotions-v1/walk/sera__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "noah__form0",
+      "exists": true,
+      "identity": "noah",
+      "paths": {
+        "map": "/art/promotions-v1/map/noah__form0.webp",
+        "portrait": "/art/characters-v3/portraits/noah__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/noah__form0.webp",
+        "recover": "/art/characters-v3/units/noah__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/noah__form0-front-a.webp",
+        "/art/promotions-v1/walk/noah__form0-front-b.webp",
+        "/art/promotions-v1/walk/noah__form0-back-a.webp",
+        "/art/promotions-v1/walk/noah__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "noah__form1",
+      "exists": true,
+      "identity": "noah",
+      "paths": {
+        "map": "/art/promotions-v1/map/noah__form1.webp",
+        "portrait": "/art/characters-v3/portraits/noah__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/noah__form1.webp",
+        "recover": "/art/characters-v3/units/noah__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/noah__form1-front-a.webp",
+        "/art/promotions-v1/walk/noah__form1-front-b.webp",
+        "/art/promotions-v1/walk/noah__form1-back-a.webp",
+        "/art/promotions-v1/walk/noah__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "yuna__form0",
+      "exists": true,
+      "identity": "yuna",
+      "paths": {
+        "map": "/art/promotions-v1/map/yuna__form0.webp",
+        "portrait": "/art/characters-v3/portraits/yuna__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/yuna__form0.webp",
+        "recover": "/art/characters-v3/units/yuna__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/yuna__form0-front-a.webp",
+        "/art/promotions-v1/walk/yuna__form0-front-b.webp",
+        "/art/promotions-v1/walk/yuna__form0-back-a.webp",
+        "/art/promotions-v1/walk/yuna__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "yuna__form1",
+      "exists": true,
+      "identity": "yuna",
+      "paths": {
+        "map": "/art/promotions-v1/map/yuna__form1.webp",
+        "portrait": "/art/characters-v3/portraits/yuna__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/yuna__form1.webp",
+        "recover": "/art/characters-v3/units/yuna__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/yuna__form1-front-a.webp",
+        "/art/promotions-v1/walk/yuna__form1-front-b.webp",
+        "/art/promotions-v1/walk/yuna__form1-back-a.webp",
+        "/art/promotions-v1/walk/yuna__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "rakan__form0",
+      "exists": true,
+      "identity": "rakan",
+      "paths": {
+        "map": "/art/promotions-v1/map/rakan__form0.webp",
+        "portrait": "/art/characters-v3/portraits/rakan__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/rakan__form0.webp",
+        "recover": "/art/characters-v3/units/rakan__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/rakan__form0-front-a.webp",
+        "/art/promotions-v1/walk/rakan__form0-front-b.webp",
+        "/art/promotions-v1/walk/rakan__form0-back-a.webp",
+        "/art/promotions-v1/walk/rakan__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "rakan__form1",
+      "exists": true,
+      "identity": "rakan",
+      "paths": {
+        "map": "/art/promotions-v1/map/rakan__form1.webp",
+        "portrait": "/art/characters-v3/portraits/rakan__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/rakan__form1.webp",
+        "recover": "/art/characters-v3/units/rakan__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/rakan__form1-front-a.webp",
+        "/art/promotions-v1/walk/rakan__form1-front-b.webp",
+        "/art/promotions-v1/walk/rakan__form1-back-a.webp",
+        "/art/promotions-v1/walk/rakan__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "miho__form0",
+      "exists": true,
+      "identity": "miho",
+      "paths": {
+        "map": "/art/promotions-v1/map/miho__form0.webp",
+        "portrait": "/art/characters-v3/portraits/miho__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/miho__form0.webp",
+        "recover": "/art/characters-v3/units/miho__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/miho__form0-front-a.webp",
+        "/art/promotions-v1/walk/miho__form0-front-b.webp",
+        "/art/promotions-v1/walk/miho__form0-back-a.webp",
+        "/art/promotions-v1/walk/miho__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "miho__form1",
+      "exists": true,
+      "identity": "miho",
+      "paths": {
+        "map": "/art/promotions-v1/map/miho__form1.webp",
+        "portrait": "/art/characters-v3/portraits/miho__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/miho__form1.webp",
+        "recover": "/art/characters-v3/units/miho__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/miho__form1-front-a.webp",
+        "/art/promotions-v1/walk/miho__form1-front-b.webp",
+        "/art/promotions-v1/walk/miho__form1-back-a.webp",
+        "/art/promotions-v1/walk/miho__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "teo__form0",
+      "exists": true,
+      "identity": "teo",
+      "paths": {
+        "map": "/art/promotions-v1/map/teo__form0.webp",
+        "portrait": "/art/characters-v3/portraits/teo__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/teo__form0.webp",
+        "recover": "/art/characters-v3/units/teo__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/teo__form0-front-a.webp",
+        "/art/promotions-v1/walk/teo__form0-front-b.webp",
+        "/art/promotions-v1/walk/teo__form0-back-a.webp",
+        "/art/promotions-v1/walk/teo__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "teo__form1",
+      "exists": true,
+      "identity": "teo",
+      "paths": {
+        "map": "/art/promotions-v1/map/teo__form1.webp",
+        "portrait": "/art/characters-v3/portraits/teo__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/teo__form1.webp",
+        "recover": "/art/characters-v3/units/teo__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/teo__form1-front-a.webp",
+        "/art/promotions-v1/walk/teo__form1-front-b.webp",
+        "/art/promotions-v1/walk/teo__form1-back-a.webp",
+        "/art/promotions-v1/walk/teo__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "irene__form0",
+      "exists": true,
+      "identity": "irene",
+      "paths": {
+        "map": "/art/promotions-v1/map/irene__form0.webp",
+        "portrait": "/art/characters-v3/portraits/irene__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/irene__form0.webp",
+        "recover": "/art/characters-v3/units/irene__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/irene__form0-front-a.webp",
+        "/art/promotions-v1/walk/irene__form0-front-b.webp",
+        "/art/promotions-v1/walk/irene__form0-back-a.webp",
+        "/art/promotions-v1/walk/irene__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "irene__form1",
+      "exists": true,
+      "identity": "irene",
+      "paths": {
+        "map": "/art/promotions-v1/map/irene__form1.webp",
+        "portrait": "/art/characters-v3/portraits/irene__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/irene__form1.webp",
+        "recover": "/art/characters-v3/units/irene__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/irene__form1-front-a.webp",
+        "/art/promotions-v1/walk/irene__form1-front-b.webp",
+        "/art/promotions-v1/walk/irene__form1-back-a.webp",
+        "/art/promotions-v1/walk/irene__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "kaz__form0",
+      "exists": true,
+      "identity": "kaz",
+      "paths": {
+        "map": "/art/promotions-v1/map/kaz__form0.webp",
+        "portrait": "/art/characters-v3/portraits/kaz__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/kaz__form0.webp",
+        "recover": "/art/characters-v3/units/kaz__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/kaz__form0-front-a.webp",
+        "/art/promotions-v1/walk/kaz__form0-front-b.webp",
+        "/art/promotions-v1/walk/kaz__form0-back-a.webp",
+        "/art/promotions-v1/walk/kaz__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "kaz__form1",
+      "exists": true,
+      "identity": "kaz",
+      "paths": {
+        "map": "/art/promotions-v1/map/kaz__form1.webp",
+        "portrait": "/art/characters-v3/portraits/kaz__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/kaz__form1.webp",
+        "recover": "/art/characters-v3/units/kaz__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/kaz__form1-front-a.webp",
+        "/art/promotions-v1/walk/kaz__form1-front-b.webp",
+        "/art/promotions-v1/walk/kaz__form1-back-a.webp",
+        "/art/promotions-v1/walk/kaz__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "ella__form0",
+      "exists": true,
+      "identity": "ella",
+      "paths": {
+        "map": "/art/promotions-v1/map/ella__form0.webp",
+        "portrait": "/art/characters-v3/portraits/ella__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/ella__form0.webp",
+        "recover": "/art/characters-v3/units/ella__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/ella__form0-front-a.webp",
+        "/art/promotions-v1/walk/ella__form0-front-b.webp",
+        "/art/promotions-v1/walk/ella__form0-back-a.webp",
+        "/art/promotions-v1/walk/ella__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "ella__form1",
+      "exists": true,
+      "identity": "ella",
+      "paths": {
+        "map": "/art/promotions-v1/map/ella__form1.webp",
+        "portrait": "/art/characters-v3/portraits/ella__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/ella__form1.webp",
+        "recover": "/art/characters-v3/units/ella__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/ella__form1-front-a.webp",
+        "/art/promotions-v1/walk/ella__form1-front-b.webp",
+        "/art/promotions-v1/walk/ella__form1-back-a.webp",
+        "/art/promotions-v1/walk/ella__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "jin__form0",
+      "exists": true,
+      "identity": "jin",
+      "paths": {
+        "map": "/art/promotions-v1/map/jin__form0.webp",
+        "portrait": "/art/characters-v3/portraits/jin__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/jin__form0.webp",
+        "recover": "/art/characters-v3/units/jin__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/jin__form0-front-a.webp",
+        "/art/promotions-v1/walk/jin__form0-front-b.webp",
+        "/art/promotions-v1/walk/jin__form0-back-a.webp",
+        "/art/promotions-v1/walk/jin__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "jin__form1",
+      "exists": true,
+      "identity": "jin",
+      "paths": {
+        "map": "/art/promotions-v1/map/jin__form1.webp",
+        "portrait": "/art/characters-v3/portraits/jin__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/jin__form1.webp",
+        "recover": "/art/characters-v3/units/jin__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/jin__form1-front-a.webp",
+        "/art/promotions-v1/walk/jin__form1-front-b.webp",
+        "/art/promotions-v1/walk/jin__form1-back-a.webp",
+        "/art/promotions-v1/walk/jin__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "luka__form0",
+      "exists": true,
+      "identity": "luka",
+      "paths": {
+        "map": "/art/promotions-v1/map/luka__form0.webp",
+        "portrait": "/art/characters-v3/portraits/luka__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/luka__form0.webp",
+        "recover": "/art/characters-v3/units/luka__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/luka__form0-front-a.webp",
+        "/art/promotions-v1/walk/luka__form0-front-b.webp",
+        "/art/promotions-v1/walk/luka__form0-back-a.webp",
+        "/art/promotions-v1/walk/luka__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "luka__form1",
+      "exists": true,
+      "identity": "luka",
+      "paths": {
+        "map": "/art/promotions-v1/map/luka__form1.webp",
+        "portrait": "/art/characters-v3/portraits/luka__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/luka__form1.webp",
+        "recover": "/art/characters-v3/units/luka__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/luka__form1-front-a.webp",
+        "/art/promotions-v1/walk/luka__form1-front-b.webp",
+        "/art/promotions-v1/walk/luka__form1-back-a.webp",
+        "/art/promotions-v1/walk/luka__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "baekho__form0",
+      "exists": true,
+      "identity": "baekho",
+      "paths": {
+        "map": "/art/promotions-v1/map/baekho__form0.webp",
+        "portrait": "/art/characters-v3/portraits/baekho__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/baekho__form0.webp",
+        "recover": "/art/characters-v3/units/baekho__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/baekho__form0-front-a.webp",
+        "/art/promotions-v1/walk/baekho__form0-front-b.webp",
+        "/art/promotions-v1/walk/baekho__form0-back-a.webp",
+        "/art/promotions-v1/walk/baekho__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "baekho__form1",
+      "exists": true,
+      "identity": "baekho",
+      "paths": {
+        "map": "/art/promotions-v1/map/baekho__form1.webp",
+        "portrait": "/art/characters-v3/portraits/baekho__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/baekho__form1.webp",
+        "recover": "/art/characters-v3/units/baekho__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/baekho__form1-front-a.webp",
+        "/art/promotions-v1/walk/baekho__form1-front-b.webp",
+        "/art/promotions-v1/walk/baekho__form1-back-a.webp",
+        "/art/promotions-v1/walk/baekho__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "mare__form0",
+      "exists": true,
+      "identity": "mare",
+      "paths": {
+        "map": "/art/promotions-v1/map/mare__form0.webp",
+        "portrait": "/art/characters-v3/portraits/mare__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/mare__form0.webp",
+        "recover": "/art/characters-v3/units/mare__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/mare__form0-front-a.webp",
+        "/art/promotions-v1/walk/mare__form0-front-b.webp",
+        "/art/promotions-v1/walk/mare__form0-back-a.webp",
+        "/art/promotions-v1/walk/mare__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "mare__form1",
+      "exists": true,
+      "identity": "mare",
+      "paths": {
+        "map": "/art/promotions-v1/map/mare__form1.webp",
+        "portrait": "/art/characters-v3/portraits/mare__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/mare__form1.webp",
+        "recover": "/art/characters-v3/units/mare__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/mare__form1-front-a.webp",
+        "/art/promotions-v1/walk/mare__form1-front-b.webp",
+        "/art/promotions-v1/walk/mare__form1-back-a.webp",
+        "/art/promotions-v1/walk/mare__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "harin__form0",
+      "exists": true,
+      "identity": "harin",
+      "paths": {
+        "map": "/art/promotions-v1/map/harin__form0.webp",
+        "portrait": "/art/characters-v3/portraits/harin__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/harin__form0.webp",
+        "recover": "/art/characters-v3/units/harin__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/harin__form0-front-a.webp",
+        "/art/promotions-v1/walk/harin__form0-front-b.webp",
+        "/art/promotions-v1/walk/harin__form0-back-a.webp",
+        "/art/promotions-v1/walk/harin__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "harin__form1",
+      "exists": true,
+      "identity": "harin",
+      "paths": {
+        "map": "/art/promotions-v1/map/harin__form1.webp",
+        "portrait": "/art/characters-v3/portraits/harin__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/harin__form1.webp",
+        "recover": "/art/characters-v3/units/harin__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/harin__form1-front-a.webp",
+        "/art/promotions-v1/walk/harin__form1-front-b.webp",
+        "/art/promotions-v1/walk/harin__form1-back-a.webp",
+        "/art/promotions-v1/walk/harin__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "edan__form0",
+      "exists": true,
+      "identity": "edan",
+      "paths": {
+        "map": "/art/promotions-v1/map/edan__form0.webp",
+        "portrait": "/art/characters-v3/portraits/edan__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/edan__form0.webp",
+        "recover": "/art/characters-v3/units/edan__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/edan__form0-front-a.webp",
+        "/art/promotions-v1/walk/edan__form0-front-b.webp",
+        "/art/promotions-v1/walk/edan__form0-back-a.webp",
+        "/art/promotions-v1/walk/edan__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "edan__form1",
+      "exists": true,
+      "identity": "edan",
+      "paths": {
+        "map": "/art/promotions-v1/map/edan__form1.webp",
+        "portrait": "/art/characters-v3/portraits/edan__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/edan__form1.webp",
+        "recover": "/art/characters-v3/units/edan__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/edan__form1-front-a.webp",
+        "/art/promotions-v1/walk/edan__form1-front-b.webp",
+        "/art/promotions-v1/walk/edan__form1-back-a.webp",
+        "/art/promotions-v1/walk/edan__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "sylvan__form0",
+      "exists": true,
+      "identity": "sylvan",
+      "paths": {
+        "map": "/art/promotions-v1/map/sylvan__form0.webp",
+        "portrait": "/art/characters-v3/portraits/silvan__form0.webp",
+        "dialogue": "/art/characters-v3/dialogue/silvan__form0.webp",
+        "recover": "/art/characters-v3/units/silvan__form0-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/sylvan__form0-front-a.webp",
+        "/art/promotions-v1/walk/sylvan__form0-front-b.webp",
+        "/art/promotions-v1/walk/sylvan__form0-back-a.webp",
+        "/art/promotions-v1/walk/sylvan__form0-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "sylvan__form1",
+      "exists": true,
+      "identity": "sylvan",
+      "paths": {
+        "map": "/art/promotions-v1/map/sylvan__form1.webp",
+        "portrait": "/art/characters-v3/portraits/silvan__form1.webp",
+        "dialogue": "/art/characters-v3/dialogue/silvan__form1.webp",
+        "recover": "/art/characters-v3/units/silvan__form1-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/sylvan__form1-front-a.webp",
+        "/art/promotions-v1/walk/sylvan__form1-front-b.webp",
+        "/art/promotions-v1/walk/sylvan__form1-back-a.webp",
+        "/art/promotions-v1/walk/sylvan__form1-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "hero__promoted",
+      "exists": true,
+      "identity": "hero",
+      "paths": {
+        "map": "/art/promotions-v1/map/hero__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/hero__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/hero__promoted.webp",
+        "recover": "/art/promotions-v1/units/hero__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/hero__promoted-front-a.webp",
+        "/art/promotions-v1/walk/hero__promoted-front-b.webp",
+        "/art/promotions-v1/walk/hero__promoted-back-a.webp",
+        "/art/promotions-v1/walk/hero__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "bram__promoted",
+      "exists": true,
+      "identity": "bram",
+      "paths": {
+        "map": "/art/promotions-v1/map/bram__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/bram__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/bram__promoted.webp",
+        "recover": "/art/promotions-v1/units/bram__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/bram__promoted-front-a.webp",
+        "/art/promotions-v1/walk/bram__promoted-front-b.webp",
+        "/art/promotions-v1/walk/bram__promoted-back-a.webp",
+        "/art/promotions-v1/walk/bram__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "lina__promoted",
+      "exists": true,
+      "identity": "lina",
+      "paths": {
+        "map": "/art/promotions-v1/map/lina__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/lina__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/lina__promoted.webp",
+        "recover": "/art/promotions-v1/units/lina__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/lina__promoted-front-a.webp",
+        "/art/promotions-v1/walk/lina__promoted-front-b.webp",
+        "/art/promotions-v1/walk/lina__promoted-back-a.webp",
+        "/art/promotions-v1/walk/lina__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "aria__promoted",
+      "exists": true,
+      "identity": "aria",
+      "paths": {
+        "map": "/art/promotions-v1/map/aria__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/aria__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/aria__promoted.webp",
+        "recover": "/art/promotions-v1/units/aria__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/aria__promoted-front-a.webp",
+        "/art/promotions-v1/walk/aria__promoted-front-b.webp",
+        "/art/promotions-v1/walk/aria__promoted-back-a.webp",
+        "/art/promotions-v1/walk/aria__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "leon__promoted",
+      "exists": true,
+      "identity": "leon",
+      "paths": {
+        "map": "/art/promotions-v1/map/leon__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/leon__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/leon__promoted.webp",
+        "recover": "/art/promotions-v1/units/leon__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/leon__promoted-front-a.webp",
+        "/art/promotions-v1/walk/leon__promoted-front-b.webp",
+        "/art/promotions-v1/walk/leon__promoted-back-a.webp",
+        "/art/promotions-v1/walk/leon__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "sera__promoted",
+      "exists": true,
+      "identity": "sera",
+      "paths": {
+        "map": "/art/promotions-v1/map/sera__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/sera__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/sera__promoted.webp",
+        "recover": "/art/promotions-v1/units/sera__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/sera__promoted-front-a.webp",
+        "/art/promotions-v1/walk/sera__promoted-front-b.webp",
+        "/art/promotions-v1/walk/sera__promoted-back-a.webp",
+        "/art/promotions-v1/walk/sera__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "noah__promoted",
+      "exists": true,
+      "identity": "noah",
+      "paths": {
+        "map": "/art/promotions-v1/map/noah__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/noah__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/noah__promoted.webp",
+        "recover": "/art/promotions-v1/units/noah__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/noah__promoted-front-a.webp",
+        "/art/promotions-v1/walk/noah__promoted-front-b.webp",
+        "/art/promotions-v1/walk/noah__promoted-back-a.webp",
+        "/art/promotions-v1/walk/noah__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "yuna__promoted",
+      "exists": true,
+      "identity": "yuna",
+      "paths": {
+        "map": "/art/promotions-v1/map/yuna__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/yuna__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/yuna__promoted.webp",
+        "recover": "/art/promotions-v1/units/yuna__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/yuna__promoted-front-a.webp",
+        "/art/promotions-v1/walk/yuna__promoted-front-b.webp",
+        "/art/promotions-v1/walk/yuna__promoted-back-a.webp",
+        "/art/promotions-v1/walk/yuna__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "rakan__promoted",
+      "exists": true,
+      "identity": "rakan",
+      "paths": {
+        "map": "/art/promotions-v1/map/rakan__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/rakan__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/rakan__promoted.webp",
+        "recover": "/art/promotions-v1/units/rakan__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/rakan__promoted-front-a.webp",
+        "/art/promotions-v1/walk/rakan__promoted-front-b.webp",
+        "/art/promotions-v1/walk/rakan__promoted-back-a.webp",
+        "/art/promotions-v1/walk/rakan__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "miho__promoted",
+      "exists": true,
+      "identity": "miho",
+      "paths": {
+        "map": "/art/promotions-v1/map/miho__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/miho__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/miho__promoted.webp",
+        "recover": "/art/promotions-v1/units/miho__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/miho__promoted-front-a.webp",
+        "/art/promotions-v1/walk/miho__promoted-front-b.webp",
+        "/art/promotions-v1/walk/miho__promoted-back-a.webp",
+        "/art/promotions-v1/walk/miho__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "teo__promoted",
+      "exists": true,
+      "identity": "teo",
+      "paths": {
+        "map": "/art/promotions-v1/map/teo__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/teo__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/teo__promoted.webp",
+        "recover": "/art/promotions-v1/units/teo__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/teo__promoted-front-a.webp",
+        "/art/promotions-v1/walk/teo__promoted-front-b.webp",
+        "/art/promotions-v1/walk/teo__promoted-back-a.webp",
+        "/art/promotions-v1/walk/teo__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "irene__promoted",
+      "exists": true,
+      "identity": "irene",
+      "paths": {
+        "map": "/art/promotions-v1/map/irene__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/irene__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/irene__promoted.webp",
+        "recover": "/art/promotions-v1/units/irene__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/irene__promoted-front-a.webp",
+        "/art/promotions-v1/walk/irene__promoted-front-b.webp",
+        "/art/promotions-v1/walk/irene__promoted-back-a.webp",
+        "/art/promotions-v1/walk/irene__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "kaz__promoted",
+      "exists": true,
+      "identity": "kaz",
+      "paths": {
+        "map": "/art/promotions-v1/map/kaz__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/kaz__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/kaz__promoted.webp",
+        "recover": "/art/promotions-v1/units/kaz__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/kaz__promoted-front-a.webp",
+        "/art/promotions-v1/walk/kaz__promoted-front-b.webp",
+        "/art/promotions-v1/walk/kaz__promoted-back-a.webp",
+        "/art/promotions-v1/walk/kaz__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "ella__promoted",
+      "exists": true,
+      "identity": "ella",
+      "paths": {
+        "map": "/art/promotions-v1/map/ella__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/ella__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/ella__promoted.webp",
+        "recover": "/art/promotions-v1/units/ella__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/ella__promoted-front-a.webp",
+        "/art/promotions-v1/walk/ella__promoted-front-b.webp",
+        "/art/promotions-v1/walk/ella__promoted-back-a.webp",
+        "/art/promotions-v1/walk/ella__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "jin__promoted",
+      "exists": true,
+      "identity": "jin",
+      "paths": {
+        "map": "/art/promotions-v1/map/jin__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/jin__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/jin__promoted.webp",
+        "recover": "/art/promotions-v1/units/jin__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/jin__promoted-front-a.webp",
+        "/art/promotions-v1/walk/jin__promoted-front-b.webp",
+        "/art/promotions-v1/walk/jin__promoted-back-a.webp",
+        "/art/promotions-v1/walk/jin__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "luka__promoted",
+      "exists": true,
+      "identity": "luka",
+      "paths": {
+        "map": "/art/promotions-v1/map/luka__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/luka__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/luka__promoted.webp",
+        "recover": "/art/promotions-v1/units/luka__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/luka__promoted-front-a.webp",
+        "/art/promotions-v1/walk/luka__promoted-front-b.webp",
+        "/art/promotions-v1/walk/luka__promoted-back-a.webp",
+        "/art/promotions-v1/walk/luka__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "baekho__promoted",
+      "exists": true,
+      "identity": "baekho",
+      "paths": {
+        "map": "/art/promotions-v1/map/baekho__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/baekho__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/baekho__promoted.webp",
+        "recover": "/art/promotions-v1/units/baekho__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/baekho__promoted-front-a.webp",
+        "/art/promotions-v1/walk/baekho__promoted-front-b.webp",
+        "/art/promotions-v1/walk/baekho__promoted-back-a.webp",
+        "/art/promotions-v1/walk/baekho__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "mare__promoted",
+      "exists": true,
+      "identity": "mare",
+      "paths": {
+        "map": "/art/promotions-v1/map/mare__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/mare__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/mare__promoted.webp",
+        "recover": "/art/promotions-v1/units/mare__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/mare__promoted-front-a.webp",
+        "/art/promotions-v1/walk/mare__promoted-front-b.webp",
+        "/art/promotions-v1/walk/mare__promoted-back-a.webp",
+        "/art/promotions-v1/walk/mare__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "harin__promoted",
+      "exists": true,
+      "identity": "harin",
+      "paths": {
+        "map": "/art/promotions-v1/map/harin__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/harin__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/harin__promoted.webp",
+        "recover": "/art/promotions-v1/units/harin__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/harin__promoted-front-a.webp",
+        "/art/promotions-v1/walk/harin__promoted-front-b.webp",
+        "/art/promotions-v1/walk/harin__promoted-back-a.webp",
+        "/art/promotions-v1/walk/harin__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "edan__promoted",
+      "exists": true,
+      "identity": "edan",
+      "paths": {
+        "map": "/art/promotions-v1/map/edan__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/edan__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/edan__promoted.webp",
+        "recover": "/art/promotions-v1/units/edan__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/edan__promoted-front-a.webp",
+        "/art/promotions-v1/walk/edan__promoted-front-b.webp",
+        "/art/promotions-v1/walk/edan__promoted-back-a.webp",
+        "/art/promotions-v1/walk/edan__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "sylvan__promoted",
+      "exists": true,
+      "identity": "sylvan",
+      "paths": {
+        "map": "/art/promotions-v1/map/sylvan__promoted.webp",
+        "portrait": "/art/promotions-v1/portraits/sylvan__promoted.webp",
+        "dialogue": "/art/promotions-v1/dialogue/sylvan__promoted.webp",
+        "recover": "/art/promotions-v1/units/sylvan__promoted-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/sylvan__promoted-front-a.webp",
+        "/art/promotions-v1/walk/sylvan__promoted-front-b.webp",
+        "/art/promotions-v1/walk/sylvan__promoted-back-a.webp",
+        "/art/promotions-v1/walk/sylvan__promoted-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "hero__dawnblade",
+      "exists": true,
+      "identity": "hero",
+      "paths": {
+        "map": "/art/promotions-v1/map/hero__dawnblade.webp",
+        "portrait": "/art/promotions-v1/portraits/hero__dawnblade.webp",
+        "dialogue": "/art/promotions-v1/dialogue/hero__dawnblade.webp",
+        "recover": "/art/promotions-v1/units/hero__dawnblade-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/hero__dawnblade-front-a.webp",
+        "/art/promotions-v1/walk/hero__dawnblade-front-b.webp",
+        "/art/promotions-v1/walk/hero__dawnblade-back-a.webp",
+        "/art/promotions-v1/walk/hero__dawnblade-back-b.webp"
+      ],
+      "metricWarnings": []
+    },
+    {
+      "key": "bram__oathwarden",
+      "exists": true,
+      "identity": "bram",
+      "paths": {
+        "map": "/art/promotions-v1/map/bram__oathwarden.webp",
+        "portrait": "/art/promotions-v1/portraits/bram__oathwarden.webp",
+        "dialogue": "/art/promotions-v1/dialogue/bram__oathwarden.webp",
+        "recover": "/art/promotions-v1/units/bram__oathwarden-recover.webp"
+      },
+      "poses": [
+        "run-a",
+        "run-b",
+        "windup",
+        "strike",
+        "recover",
+        "recoil",
+        "skill-a",
+        "skill-b"
+      ],
+      "walk": [
+        "/art/promotions-v1/walk/bram__oathwarden-front-a.webp",
+        "/art/promotions-v1/walk/bram__oathwarden-front-b.webp",
+        "/art/promotions-v1/walk/bram__oathwarden-back-a.webp",
+        "/art/promotions-v1/walk/bram__oathwarden-back-b.webp"
+      ],
+      "metricWarnings": []
+    }
+  ],
+  "allies": [
+    {
+      "id": "hero",
+      "forms": [
+        {
+          "key": "hero",
+          "map": "/art/map-sprites-v4/hero.webp",
+          "portrait": "/art/characters-v2/portraits/hero.webp",
+          "recover": "/art/characters-v2/units/hero-recover.webp",
+          "dialogue": "/art/characters-v2/dialogue/hero.webp"
+        },
+        {
+          "key": "hero__promoted",
+          "map": "/art/promotions-v1/map/hero__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/hero__promoted.webp",
+          "recover": "/art/promotions-v1/units/hero__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/hero__promoted.webp"
+        },
+        {
+          "key": "hero__form0",
+          "map": "/art/promotions-v1/map/hero__form0.webp",
+          "portrait": "/art/characters-v3/portraits/hero__form0.webp",
+          "recover": "/art/characters-v3/units/hero__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/hero__form0.webp"
+        },
+        {
+          "key": "hero__form1",
+          "map": "/art/promotions-v1/map/hero__form1.webp",
+          "portrait": "/art/characters-v3/portraits/hero__form1.webp",
+          "recover": "/art/characters-v3/units/hero__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/hero__form1.webp"
+        },
+        {
+          "key": "hero__dawnblade",
+          "map": "/art/promotions-v1/map/hero__dawnblade.webp",
+          "portrait": "/art/promotions-v1/portraits/hero__dawnblade.webp",
+          "recover": "/art/promotions-v1/units/hero__dawnblade-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/hero__dawnblade.webp"
+        }
+      ]
+    },
+    {
+      "id": "bram",
+      "forms": [
+        {
+          "key": "bram",
+          "map": "/art/map-sprites-v4/bram.webp",
+          "portrait": "/art/characters-v2/portraits/bram.webp",
+          "recover": "/art/characters-v2/units/bram-recover.webp",
+          "dialogue": "/art/characters-v2/dialogue/bram.webp"
+        },
+        {
+          "key": "bram__promoted",
+          "map": "/art/promotions-v1/map/bram__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/bram__promoted.webp",
+          "recover": "/art/promotions-v1/units/bram__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/bram__promoted.webp"
+        },
+        {
+          "key": "bram__form0",
+          "map": "/art/promotions-v1/map/bram__form0.webp",
+          "portrait": "/art/characters-v3/portraits/bram__form0.webp",
+          "recover": "/art/characters-v3/units/bram__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/bram__form0.webp"
+        },
+        {
+          "key": "bram__form1",
+          "map": "/art/promotions-v1/map/bram__form1.webp",
+          "portrait": "/art/characters-v3/portraits/bram__form1.webp",
+          "recover": "/art/characters-v3/units/bram__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/bram__form1.webp"
+        },
+        {
+          "key": "bram__oathwarden",
+          "map": "/art/promotions-v1/map/bram__oathwarden.webp",
+          "portrait": "/art/promotions-v1/portraits/bram__oathwarden.webp",
+          "recover": "/art/promotions-v1/units/bram__oathwarden-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/bram__oathwarden.webp"
+        }
+      ]
+    },
+    {
+      "id": "lina",
+      "forms": [
+        {
+          "key": "lina",
+          "map": "/art/map-sprites-v4/lina.webp",
+          "portrait": "/art/characters-v2/portraits/lina.webp",
+          "recover": "/art/characters-v2/units/lina-recover.webp",
+          "dialogue": "/art/characters-v2/dialogue/lina.webp"
+        },
+        {
+          "key": "lina__promoted",
+          "map": "/art/promotions-v1/map/lina__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/lina__promoted.webp",
+          "recover": "/art/promotions-v1/units/lina__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/lina__promoted.webp"
+        },
+        {
+          "key": "lina__form0",
+          "map": "/art/promotions-v1/map/lina__form0.webp",
+          "portrait": "/art/characters-v3/portraits/lina__form0.webp",
+          "recover": "/art/characters-v3/units/lina__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/lina__form0.webp"
+        },
+        {
+          "key": "lina__form1",
+          "map": "/art/promotions-v1/map/lina__form1.webp",
+          "portrait": "/art/characters-v3/portraits/lina__form1.webp",
+          "recover": "/art/characters-v3/units/lina__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/lina__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "aria",
+      "forms": [
+        {
+          "key": "aria",
+          "map": "/art/map-sprites-v4/aria.webp",
+          "portrait": "/art/characters-v2/portraits/aria.webp",
+          "recover": "/art/characters-v2/units/aria-recover.webp",
+          "dialogue": "/art/characters-v2/dialogue/aria.webp"
+        },
+        {
+          "key": "aria__promoted",
+          "map": "/art/promotions-v1/map/aria__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/aria__promoted.webp",
+          "recover": "/art/promotions-v1/units/aria__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/aria__promoted.webp"
+        },
+        {
+          "key": "aria__form0",
+          "map": "/art/promotions-v1/map/aria__form0.webp",
+          "portrait": "/art/characters-v3/portraits/aria__form0.webp",
+          "recover": "/art/characters-v3/units/aria__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/aria__form0.webp"
+        },
+        {
+          "key": "aria__form1",
+          "map": "/art/promotions-v1/map/aria__form1.webp",
+          "portrait": "/art/characters-v3/portraits/aria__form1.webp",
+          "recover": "/art/characters-v3/units/aria__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/aria__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "leon",
+      "forms": [
+        {
+          "key": "leon",
+          "map": "/art/map-sprites-v4/leon.webp",
+          "portrait": "/art/characters-v2/portraits/leon.webp",
+          "recover": "/art/characters-v2/units/leon-recover.webp",
+          "dialogue": "/art/characters-v2/dialogue/leon.webp"
+        },
+        {
+          "key": "leon__promoted",
+          "map": "/art/promotions-v1/map/leon__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/leon__promoted.webp",
+          "recover": "/art/promotions-v1/units/leon__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/leon__promoted.webp"
+        },
+        {
+          "key": "leon__form0",
+          "map": "/art/promotions-v1/map/leon__form0.webp",
+          "portrait": "/art/characters-v3/portraits/leon__form0.webp",
+          "recover": "/art/characters-v3/units/leon__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/leon__form0.webp"
+        },
+        {
+          "key": "leon__form1",
+          "map": "/art/promotions-v1/map/leon__form1.webp",
+          "portrait": "/art/characters-v3/portraits/leon__form1.webp",
+          "recover": "/art/characters-v3/units/leon__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/leon__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "sera",
+      "forms": [
+        {
+          "key": "sera",
+          "map": "/art/map-sprites-v4/sera.webp",
+          "portrait": "/art/characters-v2/portraits/sera.webp",
+          "recover": "/art/characters-v2/units/sera-recover.webp",
+          "dialogue": "/art/characters-v2/dialogue/sera.webp"
+        },
+        {
+          "key": "sera__promoted",
+          "map": "/art/promotions-v1/map/sera__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/sera__promoted.webp",
+          "recover": "/art/promotions-v1/units/sera__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/sera__promoted.webp"
+        },
+        {
+          "key": "sera__form0",
+          "map": "/art/promotions-v1/map/sera__form0.webp",
+          "portrait": "/art/characters-v3/portraits/sera__form0.webp",
+          "recover": "/art/characters-v3/units/sera__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/sera__form0.webp"
+        },
+        {
+          "key": "sera__form1",
+          "map": "/art/promotions-v1/map/sera__form1.webp",
+          "portrait": "/art/characters-v3/portraits/sera__form1.webp",
+          "recover": "/art/characters-v3/units/sera__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/sera__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "noah",
+      "forms": [
+        {
+          "key": "noah",
+          "map": "/art/map-sprites-v4/noah.webp",
+          "portrait": "/art/characters-v2/portraits/noah.webp",
+          "recover": "/art/characters-v2/units/noah-recover.webp",
+          "dialogue": "/art/characters-v2/dialogue/noah.webp"
+        },
+        {
+          "key": "noah__promoted",
+          "map": "/art/promotions-v1/map/noah__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/noah__promoted.webp",
+          "recover": "/art/promotions-v1/units/noah__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/noah__promoted.webp"
+        },
+        {
+          "key": "noah__form0",
+          "map": "/art/promotions-v1/map/noah__form0.webp",
+          "portrait": "/art/characters-v3/portraits/noah__form0.webp",
+          "recover": "/art/characters-v3/units/noah__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/noah__form0.webp"
+        },
+        {
+          "key": "noah__form1",
+          "map": "/art/promotions-v1/map/noah__form1.webp",
+          "portrait": "/art/characters-v3/portraits/noah__form1.webp",
+          "recover": "/art/characters-v3/units/noah__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/noah__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "yuna",
+      "forms": [
+        {
+          "key": "yuna",
+          "map": "/art/map-sprites-v4/yuna.webp",
+          "portrait": "/art/characters-v2/portraits/yuna.webp",
+          "recover": "/art/characters-v2/units/yuna-recover.webp",
+          "dialogue": "/art/characters-v2/dialogue/yuna.webp"
+        },
+        {
+          "key": "yuna__promoted",
+          "map": "/art/promotions-v1/map/yuna__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/yuna__promoted.webp",
+          "recover": "/art/promotions-v1/units/yuna__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/yuna__promoted.webp"
+        },
+        {
+          "key": "yuna__form0",
+          "map": "/art/promotions-v1/map/yuna__form0.webp",
+          "portrait": "/art/characters-v3/portraits/yuna__form0.webp",
+          "recover": "/art/characters-v3/units/yuna__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/yuna__form0.webp"
+        },
+        {
+          "key": "yuna__form1",
+          "map": "/art/promotions-v1/map/yuna__form1.webp",
+          "portrait": "/art/characters-v3/portraits/yuna__form1.webp",
+          "recover": "/art/characters-v3/units/yuna__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/yuna__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "rakan",
+      "forms": [
+        {
+          "key": "rakan",
+          "map": "/art/map-sprites-v4/rakan.webp",
+          "portrait": "/art/characters-v2/portraits/rakan.webp",
+          "recover": "/art/characters-v2/units/rakan-recover.webp",
+          "dialogue": "/art/characters-v2/dialogue/rakan.webp"
+        },
+        {
+          "key": "rakan__promoted",
+          "map": "/art/promotions-v1/map/rakan__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/rakan__promoted.webp",
+          "recover": "/art/promotions-v1/units/rakan__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/rakan__promoted.webp"
+        },
+        {
+          "key": "rakan__form0",
+          "map": "/art/promotions-v1/map/rakan__form0.webp",
+          "portrait": "/art/characters-v3/portraits/rakan__form0.webp",
+          "recover": "/art/characters-v3/units/rakan__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/rakan__form0.webp"
+        },
+        {
+          "key": "rakan__form1",
+          "map": "/art/promotions-v1/map/rakan__form1.webp",
+          "portrait": "/art/characters-v3/portraits/rakan__form1.webp",
+          "recover": "/art/characters-v3/units/rakan__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/rakan__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "miho",
+      "forms": [
+        {
+          "key": "miho",
+          "map": "/art/map-sprites-v4/miho.webp",
+          "portrait": "/art/characters-v2/portraits/miho.webp",
+          "recover": "/art/characters-v2/units/miho-recover.webp",
+          "dialogue": "/art/characters-v2/dialogue/miho.webp"
+        },
+        {
+          "key": "miho__promoted",
+          "map": "/art/promotions-v1/map/miho__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/miho__promoted.webp",
+          "recover": "/art/promotions-v1/units/miho__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/miho__promoted.webp"
+        },
+        {
+          "key": "miho__form0",
+          "map": "/art/promotions-v1/map/miho__form0.webp",
+          "portrait": "/art/characters-v3/portraits/miho__form0.webp",
+          "recover": "/art/characters-v3/units/miho__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/miho__form0.webp"
+        },
+        {
+          "key": "miho__form1",
+          "map": "/art/promotions-v1/map/miho__form1.webp",
+          "portrait": "/art/characters-v3/portraits/miho__form1.webp",
+          "recover": "/art/characters-v3/units/miho__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/miho__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "teo",
+      "forms": [
+        {
+          "key": "teo",
+          "map": "/art/map-sprites-v4/teo.webp",
+          "portrait": "/art/characters-v2/portraits/teo.webp",
+          "recover": "/art/characters-v2/units/teo-recover.webp",
+          "dialogue": "/art/characters-v2/dialogue/teo.webp"
+        },
+        {
+          "key": "teo__promoted",
+          "map": "/art/promotions-v1/map/teo__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/teo__promoted.webp",
+          "recover": "/art/promotions-v1/units/teo__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/teo__promoted.webp"
+        },
+        {
+          "key": "teo__form0",
+          "map": "/art/promotions-v1/map/teo__form0.webp",
+          "portrait": "/art/characters-v3/portraits/teo__form0.webp",
+          "recover": "/art/characters-v3/units/teo__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/teo__form0.webp"
+        },
+        {
+          "key": "teo__form1",
+          "map": "/art/promotions-v1/map/teo__form1.webp",
+          "portrait": "/art/characters-v3/portraits/teo__form1.webp",
+          "recover": "/art/characters-v3/units/teo__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/teo__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "irene",
+      "forms": [
+        {
+          "key": "irene",
+          "map": "/art/map-sprites-v4/irene.webp",
+          "portrait": "/art/characters-v2/portraits/irene.webp",
+          "recover": "/art/characters-v2/units/irene-recover.webp",
+          "dialogue": "/art/characters-v2/dialogue/irene.webp"
+        },
+        {
+          "key": "irene__promoted",
+          "map": "/art/promotions-v1/map/irene__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/irene__promoted.webp",
+          "recover": "/art/promotions-v1/units/irene__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/irene__promoted.webp"
+        },
+        {
+          "key": "irene__form0",
+          "map": "/art/promotions-v1/map/irene__form0.webp",
+          "portrait": "/art/characters-v3/portraits/irene__form0.webp",
+          "recover": "/art/characters-v3/units/irene__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/irene__form0.webp"
+        },
+        {
+          "key": "irene__form1",
+          "map": "/art/promotions-v1/map/irene__form1.webp",
+          "portrait": "/art/characters-v3/portraits/irene__form1.webp",
+          "recover": "/art/characters-v3/units/irene__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/irene__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "kaz",
+      "forms": [
+        {
+          "key": "kaz",
+          "map": "/art/map-sprites-v4/kaz.webp",
+          "portrait": "/art/characters-v2/portraits/kaz.webp",
+          "recover": "/art/characters-v2/units/kaz-recover.webp",
+          "dialogue": "/art/characters-v2/dialogue/kaz.webp"
+        },
+        {
+          "key": "kaz__promoted",
+          "map": "/art/promotions-v1/map/kaz__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/kaz__promoted.webp",
+          "recover": "/art/promotions-v1/units/kaz__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/kaz__promoted.webp"
+        },
+        {
+          "key": "kaz__form0",
+          "map": "/art/promotions-v1/map/kaz__form0.webp",
+          "portrait": "/art/characters-v3/portraits/kaz__form0.webp",
+          "recover": "/art/characters-v3/units/kaz__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/kaz__form0.webp"
+        },
+        {
+          "key": "kaz__form1",
+          "map": "/art/promotions-v1/map/kaz__form1.webp",
+          "portrait": "/art/characters-v3/portraits/kaz__form1.webp",
+          "recover": "/art/characters-v3/units/kaz__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/kaz__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "ella",
+      "forms": [
+        {
+          "key": "ella",
+          "map": "/art/map-sprites-v4/ella.webp",
+          "portrait": "/art/characters-v2/portraits/ella.webp",
+          "recover": "/art/characters-v2/units/ella-recover.webp",
+          "dialogue": "/art/characters-v2/dialogue/ella.webp"
+        },
+        {
+          "key": "ella__promoted",
+          "map": "/art/promotions-v1/map/ella__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/ella__promoted.webp",
+          "recover": "/art/promotions-v1/units/ella__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/ella__promoted.webp"
+        },
+        {
+          "key": "ella__form0",
+          "map": "/art/promotions-v1/map/ella__form0.webp",
+          "portrait": "/art/characters-v3/portraits/ella__form0.webp",
+          "recover": "/art/characters-v3/units/ella__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/ella__form0.webp"
+        },
+        {
+          "key": "ella__form1",
+          "map": "/art/promotions-v1/map/ella__form1.webp",
+          "portrait": "/art/characters-v3/portraits/ella__form1.webp",
+          "recover": "/art/characters-v3/units/ella__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/ella__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "jin",
+      "forms": [
+        {
+          "key": "jin",
+          "map": "/art/map-sprites-v4/jin.webp",
+          "portrait": "/art/characters-v2/portraits/jin.webp",
+          "recover": "/art/characters-v2/units/jin-recover.webp",
+          "dialogue": "/art/characters-v2/dialogue/jin.webp"
+        },
+        {
+          "key": "jin__promoted",
+          "map": "/art/promotions-v1/map/jin__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/jin__promoted.webp",
+          "recover": "/art/promotions-v1/units/jin__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/jin__promoted.webp"
+        },
+        {
+          "key": "jin__form0",
+          "map": "/art/promotions-v1/map/jin__form0.webp",
+          "portrait": "/art/characters-v3/portraits/jin__form0.webp",
+          "recover": "/art/characters-v3/units/jin__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/jin__form0.webp"
+        },
+        {
+          "key": "jin__form1",
+          "map": "/art/promotions-v1/map/jin__form1.webp",
+          "portrait": "/art/characters-v3/portraits/jin__form1.webp",
+          "recover": "/art/characters-v3/units/jin__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/jin__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "luka",
+      "forms": [
+        {
+          "key": "luka",
+          "map": "/art/map-sprites-v4/luka.webp",
+          "portrait": "/art/characters-v2/portraits/luka.webp",
+          "recover": "/art/characters-v2/units/luka-recover.webp",
+          "dialogue": "/art/characters-v2/dialogue/luka.webp"
+        },
+        {
+          "key": "luka__promoted",
+          "map": "/art/promotions-v1/map/luka__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/luka__promoted.webp",
+          "recover": "/art/promotions-v1/units/luka__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/luka__promoted.webp"
+        },
+        {
+          "key": "luka__form0",
+          "map": "/art/promotions-v1/map/luka__form0.webp",
+          "portrait": "/art/characters-v3/portraits/luka__form0.webp",
+          "recover": "/art/characters-v3/units/luka__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/luka__form0.webp"
+        },
+        {
+          "key": "luka__form1",
+          "map": "/art/promotions-v1/map/luka__form1.webp",
+          "portrait": "/art/characters-v3/portraits/luka__form1.webp",
+          "recover": "/art/characters-v3/units/luka__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/luka__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "baekho",
+      "forms": [
+        {
+          "key": "baekho",
+          "map": "/art/map-sprites-v4/baekho.webp",
+          "portrait": "/art/characters-v2/portraits/baekho.webp",
+          "recover": "/art/characters-v2/units/baekho-recover.webp",
+          "dialogue": "/art/characters-v2/dialogue/baekho.webp"
+        },
+        {
+          "key": "baekho__promoted",
+          "map": "/art/promotions-v1/map/baekho__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/baekho__promoted.webp",
+          "recover": "/art/promotions-v1/units/baekho__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/baekho__promoted.webp"
+        },
+        {
+          "key": "baekho__form0",
+          "map": "/art/promotions-v1/map/baekho__form0.webp",
+          "portrait": "/art/characters-v3/portraits/baekho__form0.webp",
+          "recover": "/art/characters-v3/units/baekho__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/baekho__form0.webp"
+        },
+        {
+          "key": "baekho__form1",
+          "map": "/art/promotions-v1/map/baekho__form1.webp",
+          "portrait": "/art/characters-v3/portraits/baekho__form1.webp",
+          "recover": "/art/characters-v3/units/baekho__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/baekho__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "mare",
+      "forms": [
+        {
+          "key": "mare",
+          "map": "/art/characters-v3/map/mare.webp",
+          "portrait": "/art/characters-v3/portraits/mare.webp",
+          "recover": "/art/characters-v3/units/mare-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/mare.webp"
+        },
+        {
+          "key": "mare__promoted",
+          "map": "/art/promotions-v1/map/mare__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/mare__promoted.webp",
+          "recover": "/art/promotions-v1/units/mare__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/mare__promoted.webp"
+        },
+        {
+          "key": "mare__form0",
+          "map": "/art/promotions-v1/map/mare__form0.webp",
+          "portrait": "/art/characters-v3/portraits/mare__form0.webp",
+          "recover": "/art/characters-v3/units/mare__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/mare__form0.webp"
+        },
+        {
+          "key": "mare__form1",
+          "map": "/art/promotions-v1/map/mare__form1.webp",
+          "portrait": "/art/characters-v3/portraits/mare__form1.webp",
+          "recover": "/art/characters-v3/units/mare__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/mare__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "harin",
+      "forms": [
+        {
+          "key": "harin",
+          "map": "/art/characters-v3/map/harin.webp",
+          "portrait": "/art/characters-v3/portraits/harin.webp",
+          "recover": "/art/characters-v3/units/harin-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/harin.webp"
+        },
+        {
+          "key": "harin__promoted",
+          "map": "/art/promotions-v1/map/harin__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/harin__promoted.webp",
+          "recover": "/art/promotions-v1/units/harin__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/harin__promoted.webp"
+        },
+        {
+          "key": "harin__form0",
+          "map": "/art/promotions-v1/map/harin__form0.webp",
+          "portrait": "/art/characters-v3/portraits/harin__form0.webp",
+          "recover": "/art/characters-v3/units/harin__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/harin__form0.webp"
+        },
+        {
+          "key": "harin__form1",
+          "map": "/art/promotions-v1/map/harin__form1.webp",
+          "portrait": "/art/characters-v3/portraits/harin__form1.webp",
+          "recover": "/art/characters-v3/units/harin__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/harin__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "edan",
+      "forms": [
+        {
+          "key": "edan",
+          "map": "/art/characters-v3/map/edan.webp",
+          "portrait": "/art/characters-v3/portraits/edan.webp",
+          "recover": "/art/characters-v3/units/edan-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/edan.webp"
+        },
+        {
+          "key": "edan__promoted",
+          "map": "/art/promotions-v1/map/edan__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/edan__promoted.webp",
+          "recover": "/art/promotions-v1/units/edan__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/edan__promoted.webp"
+        },
+        {
+          "key": "edan__form0",
+          "map": "/art/promotions-v1/map/edan__form0.webp",
+          "portrait": "/art/characters-v3/portraits/edan__form0.webp",
+          "recover": "/art/characters-v3/units/edan__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/edan__form0.webp"
+        },
+        {
+          "key": "edan__form1",
+          "map": "/art/promotions-v1/map/edan__form1.webp",
+          "portrait": "/art/characters-v3/portraits/edan__form1.webp",
+          "recover": "/art/characters-v3/units/edan__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/edan__form1.webp"
+        }
+      ]
+    },
+    {
+      "id": "sylvan",
+      "forms": [
+        {
+          "key": "sylvan",
+          "map": "/art/characters-v3/map/silvan.webp",
+          "portrait": "/art/characters-v3/portraits/silvan.webp",
+          "recover": "/art/characters-v3/units/silvan-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/silvan.webp"
+        },
+        {
+          "key": "sylvan__promoted",
+          "map": "/art/promotions-v1/map/sylvan__promoted.webp",
+          "portrait": "/art/promotions-v1/portraits/sylvan__promoted.webp",
+          "recover": "/art/promotions-v1/units/sylvan__promoted-recover.webp",
+          "dialogue": "/art/promotions-v1/dialogue/sylvan__promoted.webp"
+        },
+        {
+          "key": "sylvan__form0",
+          "map": "/art/promotions-v1/map/sylvan__form0.webp",
+          "portrait": "/art/characters-v3/portraits/silvan__form0.webp",
+          "recover": "/art/characters-v3/units/silvan__form0-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/silvan__form0.webp"
+        },
+        {
+          "key": "sylvan__form1",
+          "map": "/art/promotions-v1/map/sylvan__form1.webp",
+          "portrait": "/art/characters-v3/portraits/silvan__form1.webp",
+          "recover": "/art/characters-v3/units/silvan__form1-recover.webp",
+          "dialogue": "/art/characters-v3/dialogue/silvan__form1.webp"
+        }
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "stageId": 1,
+      "title": "1장. 국경 초소",
+      "biome": "frontier",
+      "scene": "/art/chapters-v1/chapter-01.webp",
+      "sceneHash": "f517155b672d21cb9e1eb306ce4b920dd0efc2bf4880e1d05326f09a516c3fd2",
+      "thumbnail": "/art/chapters-v1/chapter-01-thumb.webp",
+      "material": [
+        "grass",
+        "stone",
+        "paving",
+        "road",
+        "forest"
+      ],
+      "props": [
+        "rocks",
+        "maple",
+        "oak",
+        "pine",
+        "shrub"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-01.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 2,
+      "title": "2장. 협곡 매복",
+      "biome": "frontier",
+      "scene": "/art/chapters-v1/chapter-02.webp",
+      "sceneHash": "1c65aada59c59bb23558b8dc5a1be03cbfdcd4074c0bf1f4881d19077d3fde97",
+      "thumbnail": "/art/chapters-v1/chapter-02-thumb.webp",
+      "material": [
+        "grass",
+        "forest",
+        "road",
+        "stone",
+        "paving"
+      ],
+      "props": [
+        "oak",
+        "maple",
+        "pine",
+        "rocks",
+        "shrub"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-02.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 3,
+      "title": "3장. 성문 돌파",
+      "biome": "fortress",
+      "scene": "/art/chapters-v1/chapter-03.webp",
+      "sceneHash": "e6018bc482eec48f10b3c8c256402b130c8c5abf3a54266ff90f6006781ed774",
+      "thumbnail": "/art/chapters-v1/chapter-03-thumb.webp",
+      "material": [
+        "stone",
+        "paving",
+        "rock"
+      ],
+      "props": [
+        "wall",
+        "pillar",
+        "rocks"
+      ],
+      "splash": {
+        "key": "boss_abyss",
+        "src": "/art/characters-v2/dialogue/boss_abyss.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_abyss.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-03.webp",
+        "accent": "#d0baff"
+      }
+    },
+    {
+      "stageId": 4,
+      "title": "4장. 불타는 숲",
+      "biome": "forest",
+      "scene": "/art/chapters-v1/chapter-04.webp",
+      "sceneHash": "60a1b312dd72108bedd5ebe9bf3d831723b22cf8f775c601fd0109a9bce506aa",
+      "thumbnail": "/art/chapters-v1/chapter-04-thumb.webp",
+      "material": [
+        "forest",
+        "road",
+        "fire",
+        "stone",
+        "paving"
+      ],
+      "props": [
+        "oak",
+        "rocks",
+        "pine",
+        "shrub"
+      ],
+      "splash": {
+        "key": "boss_ember",
+        "src": "/art/characters-v2/dialogue/boss_ember.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_ember.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-04.webp",
+        "accent": "#ffb675"
+      }
+    },
+    {
+      "stageId": 5,
+      "title": "5장. 무너진 요새",
+      "biome": "frontier",
+      "scene": "/art/chapters-v1/chapter-05.webp",
+      "sceneHash": "153fe20be2bba1a876c613ab44a063793ace5401d1fecb42908e9907dd93b570",
+      "thumbnail": "/art/chapters-v1/chapter-05-thumb.webp",
+      "material": [
+        "grass",
+        "forest",
+        "rock",
+        "road",
+        "stone",
+        "paving"
+      ],
+      "props": [
+        "rocks",
+        "pine",
+        "oak",
+        "maple",
+        "shrub"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-05.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 6,
+      "title": "6장. 얼어붙은 계곡",
+      "biome": "snow",
+      "scene": "/art/chapters-v1/chapter-06.webp",
+      "sceneHash": "1cc3d6152350c6d97c70c028b888ee5e036e1ed7f0a218194c66184c185d8e88",
+      "thumbnail": "/art/chapters-v1/chapter-06-thumb.webp",
+      "material": [
+        "snow",
+        "ice",
+        "gravel",
+        "stone",
+        "paving"
+      ],
+      "props": [
+        "snow-pine",
+        "rocks",
+        "ice-crystal"
+      ],
+      "splash": {
+        "key": "boss_frost",
+        "src": "/art/characters-v2/dialogue/boss_frost.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_frost.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-06.webp",
+        "accent": "#a7e8ff"
+      }
+    },
+    {
+      "stageId": 7,
+      "title": "7장. 그림자 숲",
+      "biome": "forest",
+      "scene": "/art/chapters-v1/chapter-07.webp",
+      "sceneHash": "8f04689d3c751089b899cfffea2028d0a28fb36343ac274aadffa50c1eef4e1e",
+      "thumbnail": "/art/chapters-v1/chapter-07-thumb.webp",
+      "material": [
+        "forest",
+        "road",
+        "stone",
+        "paving",
+        "swamp"
+      ],
+      "props": [
+        "oak",
+        "rocks",
+        "pine",
+        "shrub"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-07.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 8,
+      "title": "8장. 붉은 여울",
+      "biome": "frontier",
+      "scene": "/art/chapters-v1/chapter-08.webp",
+      "sceneHash": "def7188f91ad867a220e2debaaecd12d086ecdd9d026bf4ee9013b323e31383e",
+      "thumbnail": "/art/chapters-v1/chapter-08-thumb.webp",
+      "material": [
+        "grass",
+        "forest",
+        "stone",
+        "road",
+        "paving"
+      ],
+      "props": [
+        "oak",
+        "rocks",
+        "pine",
+        "maple",
+        "shrub"
+      ],
+      "splash": {
+        "key": "boss_ember",
+        "src": "/art/characters-v2/dialogue/boss_ember.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_ember.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-08.webp",
+        "accent": "#ffb675"
+      }
+    },
+    {
+      "stageId": 9,
+      "title": "9장. 폐허의 시장",
+      "biome": "forest",
+      "scene": "/art/chapters-v1/chapter-09.webp",
+      "sceneHash": "f14ee142d873d33bf325381281b6e2755e56fb2ec6f05610a8038eddf7dd7ea6",
+      "thumbnail": "/art/chapters-v1/chapter-09-thumb.webp",
+      "material": [
+        "forest",
+        "road",
+        "stone",
+        "paving"
+      ],
+      "props": [
+        "oak",
+        "rocks",
+        "pine",
+        "shrub"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-09.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 10,
+      "title": "10장. 흑야의 탑",
+      "biome": "fortress",
+      "scene": "/art/chapters-v1/chapter-10.webp",
+      "sceneHash": "d1a805f511a8a65b2ef3b9065422e9dccc36efb2e164ea675b1a11f1abfbb739",
+      "thumbnail": "/art/chapters-v1/chapter-10-thumb.webp",
+      "material": [
+        "stone",
+        "paving",
+        "rock"
+      ],
+      "props": [
+        "rocks",
+        "wall",
+        "pillar"
+      ],
+      "splash": {
+        "key": "boss_oracle",
+        "src": "/art/characters-v2/dialogue/boss_oracle.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_oracle.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-10.webp",
+        "accent": "#96ebca"
+      }
+    },
+    {
+      "stageId": 11,
+      "title": "11장. 불길한 항구",
+      "biome": "fortress",
+      "scene": "/art/chapters-v1/chapter-11.webp",
+      "sceneHash": "2d73148664aba5841402592f28b41756b917199d9050fbb08de7ec9485c57ad8",
+      "thumbnail": "/art/chapters-v1/chapter-11-thumb.webp",
+      "material": [
+        "stone",
+        "rock",
+        "paving",
+        "water"
+      ],
+      "props": [
+        "rocks",
+        "pillar",
+        "wall"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-11.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 12,
+      "title": "12장. 재의 왕좌",
+      "biome": "citadel",
+      "scene": "/art/chapters-v1/chapter-12.webp",
+      "sceneHash": "ddd2c82aff210b64d58b5b07c67e83f9f1216a0a44da524d02f3e018376eed25",
+      "thumbnail": "/art/chapters-v1/chapter-12-thumb.webp",
+      "material": [
+        "dark",
+        "paving",
+        "stone"
+      ],
+      "props": [
+        "pillar",
+        "wall",
+        "rocks"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-12.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 13,
+      "title": "13장. 암살자의 골목",
+      "biome": "frontier",
+      "scene": "/art/chapters-v1/chapter-13.webp",
+      "sceneHash": "18ac1c2deb310159ddc3c7b77d84563ef1e4a683c15562a6e5aefba7c3017845",
+      "thumbnail": "/art/chapters-v1/chapter-13-thumb.webp",
+      "material": [
+        "grass",
+        "forest",
+        "road",
+        "rock",
+        "stone",
+        "paving"
+      ],
+      "props": [
+        "pine",
+        "maple",
+        "oak",
+        "rocks",
+        "shrub"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-13.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 14,
+      "title": "14장. 저주받은 사원",
+      "biome": "fortress",
+      "scene": "/art/chapters-v1/chapter-14.webp",
+      "sceneHash": "9042dca84481270882d0a2c50ac6e113c3bb30c648e7e7f603a57b9927fda4f1",
+      "thumbnail": "/art/chapters-v1/chapter-14-thumb.webp",
+      "material": [
+        "stone",
+        "rock",
+        "paving"
+      ],
+      "props": [
+        "wall",
+        "pillar",
+        "rocks"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-14.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 15,
+      "title": "15장. 달 없는 협곡",
+      "biome": "forest",
+      "scene": "/art/chapters-v1/chapter-15.webp",
+      "sceneHash": "8eddd3bdabd3d18532678c64a4359d3cf159a7a25e2a785074a9671b40d2140e",
+      "thumbnail": "/art/chapters-v1/chapter-15-thumb.webp",
+      "material": [
+        "forest",
+        "road",
+        "swamp",
+        "stone",
+        "paving"
+      ],
+      "props": [
+        "oak",
+        "pine",
+        "rocks",
+        "shrub"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-15.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 16,
+      "title": "16장. 사슬 감옥",
+      "biome": "snow",
+      "scene": "/art/chapters-v1/chapter-16.webp",
+      "sceneHash": "72b89c3e2604310b6c6ea3d0e55d6b272e9a1adb6c97d8ba2677dca7bd7bef37",
+      "thumbnail": "/art/chapters-v1/chapter-16-thumb.webp",
+      "material": [
+        "snow",
+        "ice",
+        "gravel",
+        "stone",
+        "paving"
+      ],
+      "props": [
+        "wall",
+        "pillar",
+        "ice-crystal",
+        "rocks"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-16.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 17,
+      "title": "17장. 그림자 성벽",
+      "biome": "fortress",
+      "scene": "/art/chapters-v1/chapter-17.webp",
+      "sceneHash": "bfc7133641f7abf486bf6e0c5a55472ab339e72bc3e29742d71ecd572831a07b",
+      "thumbnail": "/art/chapters-v1/chapter-17-thumb.webp",
+      "material": [
+        "stone",
+        "rock",
+        "paving",
+        "water"
+      ],
+      "props": [
+        "wall",
+        "pillar",
+        "rocks"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-17.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 18,
+      "title": "18장. 밤의 집행자",
+      "biome": "citadel",
+      "scene": "/art/chapters-v1/chapter-18.webp",
+      "sceneHash": "c2b25b8ba3e612b8cf910b686a67cb59426039837df7f23e17f820499d30b92c",
+      "thumbnail": "/art/chapters-v1/chapter-18-thumb.webp",
+      "material": [
+        "dark",
+        "paving",
+        "stone",
+        "rune"
+      ],
+      "props": [
+        "rocks",
+        "pillar",
+        "wall"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-18.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 19,
+      "title": "19장. 옛 천수의 묘",
+      "biome": "snow",
+      "scene": "/art/chapters-v1/chapter-19.webp",
+      "sceneHash": "bf3310ca2fffaf516c6d3194723d88ddac09925df5774b126fa592992cf801c1",
+      "thumbnail": "/art/chapters-v1/chapter-19-thumb.webp",
+      "material": [
+        "snow",
+        "gravel",
+        "ice",
+        "stone",
+        "paving"
+      ],
+      "props": [
+        "snow-pine",
+        "ice-crystal",
+        "rocks"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-19.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 20,
+      "title": "20장. 무너진 왕도",
+      "biome": "snow",
+      "scene": "/art/chapters-v1/chapter-20.webp",
+      "sceneHash": "2d644b71c6a4fa5d0526139f594d79eb17552d25643a288480cefb7366de9c8e",
+      "thumbnail": "/art/chapters-v1/chapter-20-thumb.webp",
+      "material": [
+        "snow",
+        "ice",
+        "gravel",
+        "rock",
+        "stone",
+        "paving"
+      ],
+      "props": [
+        "snow-pine",
+        "rocks",
+        "ice-crystal"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-20.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 21,
+      "title": "21장. 심연의 도서관",
+      "biome": "snow",
+      "scene": "/art/chapters-v1/chapter-21.webp",
+      "sceneHash": "c04e77de3e5e433228ec2701d096a1bd9c4da5861d9b2fc1a13b8771565775aa",
+      "thumbnail": "/art/chapters-v1/chapter-21-thumb.webp",
+      "material": [
+        "snow",
+        "stone",
+        "ice",
+        "gravel",
+        "paving"
+      ],
+      "props": [
+        "wall",
+        "ice-crystal",
+        "pillar",
+        "rocks"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-21.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 22,
+      "title": "22장. 검은 기도실",
+      "biome": "fortress",
+      "scene": "/art/chapters-v1/chapter-22.webp",
+      "sceneHash": "e51872f8c43a4cc10bd03ef0e16458096848ef6b61a7f8f2d9b6233e87d688ec",
+      "thumbnail": "/art/chapters-v1/chapter-22-thumb.webp",
+      "material": [
+        "stone",
+        "rock",
+        "paving"
+      ],
+      "props": [
+        "wall",
+        "pillar",
+        "rocks"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-22.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 23,
+      "title": "23장. 황혼의 다리",
+      "biome": "snow",
+      "scene": "/art/chapters-v1/chapter-23.webp",
+      "sceneHash": "d071f295fe56ca0bb5dae639682f69c7ccb1f8afba34865fe5da0a1554a9251d",
+      "thumbnail": "/art/chapters-v1/chapter-23-thumb.webp",
+      "material": [
+        "snow",
+        "gravel",
+        "stone",
+        "paving",
+        "ice"
+      ],
+      "props": [
+        "snow-pine",
+        "rocks",
+        "ice-crystal"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-23.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 24,
+      "title": "24장. 흑야의 심장",
+      "biome": "citadel",
+      "scene": "/art/chapters-v1/chapter-24.webp",
+      "sceneHash": "096379e5827e92862bbb4f3caff4d8e1cf5e22a3fce0af24bff9a61316c238cc",
+      "thumbnail": "/art/chapters-v1/chapter-24-thumb.webp",
+      "material": [
+        "dark",
+        "paving",
+        "stone"
+      ],
+      "props": [
+        "wall",
+        "crystal",
+        "dead-tree",
+        "rocks"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-24.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 25,
+      "title": "25장. 끝없는 계단",
+      "biome": "citadel",
+      "scene": "/art/chapters-v1/chapter-25.webp",
+      "sceneHash": "e268ea70f722488a06622d0f7df8151354674473ca7ca825abb18ad65faa1aa2",
+      "thumbnail": "/art/chapters-v1/chapter-25-thumb.webp",
+      "material": [
+        "dark",
+        "paving",
+        "stone"
+      ],
+      "props": [
+        "rocks",
+        "wall",
+        "pillar"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-25.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 26,
+      "title": "26장. 붉은 달의 성소",
+      "biome": "forest",
+      "scene": "/art/chapters-v1/chapter-26.webp",
+      "sceneHash": "a748d8df2b7fee8c1d07d973c4023fe2183037e95984e34c6f930d3e90fe37f4",
+      "thumbnail": "/art/chapters-v1/chapter-26-thumb.webp",
+      "material": [
+        "forest",
+        "road",
+        "swamp",
+        "stone",
+        "paving"
+      ],
+      "props": [
+        "rocks",
+        "oak",
+        "pine",
+        "shrub"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-26.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 27,
+      "title": "27장. 천공 관문",
+      "biome": "citadel",
+      "scene": "/art/chapters-v1/chapter-27.webp",
+      "sceneHash": "793cefbf98703d5227f5a480aed91337838a657a888c62627bca1f942fc5b9a1",
+      "thumbnail": "/art/chapters-v1/chapter-27-thumb.webp",
+      "material": [
+        "dark",
+        "water",
+        "paving",
+        "stone"
+      ],
+      "props": [
+        "crystal",
+        "dead-tree",
+        "wall",
+        "rocks"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-27.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 28,
+      "title": "28장. 잊힌 수호자",
+      "biome": "fortress",
+      "scene": "/art/chapters-v1/chapter-28.webp",
+      "sceneHash": "646cd4912a1bed1c1ca36930afdbb2bb244fd0c6a147fdc8bb255fee930a358d",
+      "thumbnail": "/art/chapters-v1/chapter-28-thumb.webp",
+      "material": [
+        "stone",
+        "rock",
+        "paving",
+        "water"
+      ],
+      "props": [
+        "pillar",
+        "wall",
+        "rocks"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-28.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 29,
+      "title": "29장. 파멸의 평원",
+      "biome": "citadel",
+      "scene": "/art/chapters-v1/chapter-29.webp",
+      "sceneHash": "1eecd6b944020886172744e8fedced7e15abd346223fd4264f932e510f939300",
+      "thumbnail": "/art/chapters-v1/chapter-29-thumb.webp",
+      "material": [
+        "dark",
+        "stone",
+        "paving"
+      ],
+      "props": [
+        "rocks",
+        "crystal",
+        "dead-tree",
+        "wall"
+      ],
+      "splash": {
+        "key": "boss_commander",
+        "src": "/art/characters-v2/dialogue/boss_commander.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_commander.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-29.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 30,
+      "title": "30장. 마지막 천수",
+      "biome": "citadel",
+      "scene": "/art/chapters-v1/chapter-30.webp",
+      "sceneHash": "5a2d6ee72e3b9d274867d9b846df254750e1891d7acd2f8ca89e5c41f68b77e2",
+      "thumbnail": "/art/chapters-v1/chapter-30-thumb.webp",
+      "material": [
+        "dark",
+        "paving",
+        "stone",
+        "rune"
+      ],
+      "props": [
+        "pillar",
+        "rocks",
+        "wall"
+      ],
+      "splash": {
+        "key": "boss_abyss",
+        "src": "/art/characters-v2/dialogue/boss_abyss.webp",
+        "bodySrc": "/art/boss-presence-v1/boss_abyss.webp",
+        "bodyScale": 1,
+        "bodyOffset": "0%",
+        "backdrop": "/art/chapters-v1/chapter-30.webp",
+        "accent": "#d0baff"
+      }
+    },
+    {
+      "stageId": 31,
+      "title": "31장. 돌아온 파도",
+      "biome": "coast",
+      "scene": "/art/chapters-v1/chapter-31.webp",
+      "sceneHash": "56beae20ea4a77c837fe7a2d9c8a7010d515375a3f43488ac48d81c8cd6aa046",
+      "thumbnail": "/art/chapters-v1/chapter-31-thumb.webp",
+      "material": [
+        "paving",
+        "shell_reef",
+        "sluice_bridge",
+        "low_rubble",
+        "water",
+        "stone"
+      ],
+      "props": [
+        "pillar",
+        "rocks"
+      ],
+      "splash": {
+        "key": "crab_guard",
+        "src": "/art/characters-v3/dialogue/crab_guard.webp",
+        "bodySrc": "/art/characters-v3/units/crab_guard-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-31.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 32,
+      "title": "32장. 물길의 창",
+      "biome": "coast",
+      "scene": "/art/chapters-v1/chapter-32.webp",
+      "sceneHash": "35e717e34793b4fb630d724e10fa662592e1583050bd2deb79bbf02bc7e6f0f9",
+      "thumbnail": "/art/chapters-v1/chapter-32-thumb.webp",
+      "material": [
+        "paving",
+        "water",
+        "shell_reef",
+        "sluice_bridge",
+        "stone",
+        "low_rubble"
+      ],
+      "props": [
+        "rocks",
+        "pillar"
+      ],
+      "splash": {
+        "key": "eel_archer",
+        "src": "/art/characters-v3/dialogue/eel_archer.webp",
+        "bodySrc": "/art/characters-v3/units/eel_archer-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-32.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 33,
+      "title": "33장. 포자가 핀 수문",
+      "biome": "coast",
+      "scene": "/art/chapters-v1/chapter-33.webp",
+      "sceneHash": "47b824491f6878db79802eb04d9436b44bbb416a3ff9d1726cf8892c5efdee36",
+      "thumbnail": "/art/chapters-v1/chapter-33-thumb.webp",
+      "material": [
+        "paving",
+        "sluice_bridge",
+        "stone",
+        "shell_reef",
+        "water",
+        "low_rubble"
+      ],
+      "props": [
+        "pillar",
+        "rocks"
+      ],
+      "splash": {
+        "key": "spore_colony",
+        "src": "/art/characters-v3/dialogue/spore_colony.webp",
+        "bodySrc": "/art/characters-v3/units/spore_colony-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-33.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 34,
+      "title": "34장. 두 개의 귀환로",
+      "biome": "coast",
+      "scene": "/art/chapters-v1/chapter-34.webp",
+      "sceneHash": "14a12b20e8319fbf51bdd5024d4064710f50111c28f19bb07449d0ed953cdda0",
+      "thumbnail": "/art/chapters-v1/chapter-34-thumb.webp",
+      "material": [
+        "paving",
+        "shell_reef",
+        "sluice_bridge",
+        "low_rubble",
+        "stone"
+      ],
+      "props": [
+        "pillar",
+        "wall",
+        "rocks"
+      ],
+      "splash": {
+        "key": "crab_guard",
+        "src": "/art/characters-v3/dialogue/crab_guard.webp",
+        "bodySrc": "/art/characters-v3/units/crab_guard-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-34.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 35,
+      "title": "35장. 심해의 수문장",
+      "biome": "coast",
+      "scene": "/art/chapters-v1/chapter-35.webp",
+      "sceneHash": "859446f96a9bfede7e2a510f8809281de4adfd48b57c7bbad40c1e8db5fd5026",
+      "thumbnail": "/art/chapters-v1/chapter-35-thumb.webp",
+      "material": [
+        "paving",
+        "shell_reef",
+        "sluice_bridge",
+        "low_rubble",
+        "cracked_slab",
+        "stone"
+      ],
+      "props": [
+        "rocks",
+        "pillar"
+      ],
+      "splash": {
+        "key": "tide_keeper",
+        "src": "/art/characters-v3/dialogue/tide_keeper.webp",
+        "bodySrc": "/art/characters-v3/units/tide_keeper-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-35.webp",
+        "accent": "#85d7cf"
+      }
+    },
+    {
+      "stageId": 36,
+      "title": "36장. 눈 아래의 발자국",
+      "biome": "snow",
+      "scene": "/art/chapters-v1/chapter-36.webp",
+      "sceneHash": "9f69385c7b9124c7a86e521f0598d1cb3a4580c1b540f6442ce868f4b29cb25c",
+      "thumbnail": "/art/chapters-v1/chapter-36-thumb.webp",
+      "material": [
+        "snow",
+        "packed_snow",
+        "ice",
+        "cracked_slab",
+        "hot_spring",
+        "stone",
+        "paving"
+      ],
+      "props": [
+        "rocks",
+        "ice-crystal",
+        "snow-pine"
+      ],
+      "splash": {
+        "key": "mist_ram",
+        "src": "/art/characters-v3/dialogue/mist_ram.webp",
+        "bodySrc": "/art/characters-v3/units/mist_ram-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-36.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 37,
+      "title": "37장. 바람 속의 손길",
+      "biome": "snow",
+      "scene": "/art/chapters-v1/chapter-37.webp",
+      "sceneHash": "a2dc1467a5ef55eb1f2eef6a4a59590eef6b3d6390892b501275be008a805992",
+      "thumbnail": "/art/chapters-v1/chapter-37-thumb.webp",
+      "material": [
+        "snow",
+        "ice",
+        "packed_snow",
+        "stone",
+        "paving",
+        "cracked_slab",
+        "hot_spring"
+      ],
+      "props": [
+        "ice-crystal",
+        "rocks",
+        "snow-pine"
+      ],
+      "splash": {
+        "key": "crystal_insect",
+        "src": "/art/characters-v3/dialogue/crystal_insect.webp",
+        "bodySrc": "/art/characters-v3/units/crystal_insect-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-37.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 38,
+      "title": "38장. 따뜻한 돌",
+      "biome": "snow",
+      "scene": "/art/chapters-v1/chapter-38.webp",
+      "sceneHash": "ee5ae88a229e6ce778dee441d6e2e9bc88453474237d31bb1a9af627d9367de0",
+      "thumbnail": "/art/chapters-v1/chapter-38-thumb.webp",
+      "material": [
+        "snow",
+        "ice",
+        "packed_snow",
+        "cracked_slab",
+        "stone",
+        "hot_spring",
+        "paving"
+      ],
+      "props": [
+        "rocks",
+        "ice-crystal",
+        "snow-pine"
+      ],
+      "splash": {
+        "key": "spring_salamander",
+        "src": "/art/characters-v3/dialogue/spring_salamander.webp",
+        "bodySrc": "/art/characters-v3/units/spring_salamander-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-38.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 39,
+      "title": "39장. 흰 능선의 약속",
+      "biome": "snow",
+      "scene": "/art/chapters-v1/chapter-39.webp",
+      "sceneHash": "e6b1163560de7aceee8dbf53da9a5748bfde750c910ce1d83d8aebe58d3385e2",
+      "thumbnail": "/art/chapters-v1/chapter-39-thumb.webp",
+      "material": [
+        "snow",
+        "packed_snow",
+        "ice",
+        "stone",
+        "cracked_slab",
+        "paving",
+        "hot_spring"
+      ],
+      "props": [
+        "snow-pine",
+        "ice-crystal",
+        "rocks"
+      ],
+      "splash": {
+        "key": "mist_ram",
+        "src": "/art/characters-v3/dialogue/mist_ram.webp",
+        "bodySrc": "/art/characters-v3/units/mist_ram-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-39.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 40,
+      "title": "40장. 얼음에 갇힌 온기",
+      "biome": "snow",
+      "scene": "/art/chapters-v1/chapter-40.webp",
+      "sceneHash": "bd3e997fd815a79f4b49ce2c7772ff9b709637e5f7c9aeaa735c93773a5e5951",
+      "thumbnail": "/art/chapters-v1/chapter-40-thumb.webp",
+      "material": [
+        "snow",
+        "ice",
+        "packed_snow",
+        "cracked_slab",
+        "hot_spring",
+        "stone",
+        "paving"
+      ],
+      "props": [
+        "wall",
+        "pillar",
+        "ice-crystal",
+        "rocks"
+      ],
+      "splash": {
+        "key": "frost_queen",
+        "src": "/art/characters-v3/dialogue/frost_queen.webp",
+        "bodySrc": "/art/characters-v3/units/frost_queen-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-40.webp",
+        "accent": "#c7efff"
+      }
+    },
+    {
+      "stageId": 41,
+      "title": "41장. 멎지 않는 망치",
+      "biome": "workshop",
+      "scene": "/art/chapters-v1/chapter-41.webp",
+      "sceneHash": "856eef92b696b594321285cedb715b6e0df0e4ad6ba7c533143d37f4ad7da7d1",
+      "thumbnail": "/art/chapters-v1/chapter-41-thumb.webp",
+      "material": [
+        "stone",
+        "low_rubble",
+        "power_conduit",
+        "paving",
+        "cracked_slab"
+      ],
+      "props": [
+        "wall",
+        "pillar",
+        "rocks"
+      ],
+      "splash": {
+        "key": "gold_puppet",
+        "src": "/art/characters-v3/dialogue/gold_puppet.webp",
+        "bodySrc": "/art/characters-v3/units/gold_puppet-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-41.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 42,
+      "title": "42장. 종을 멈출 시간",
+      "biome": "workshop",
+      "scene": "/art/chapters-v1/chapter-42.webp",
+      "sceneHash": "7e0e72d8edab5087424f96e62d6bf7b42ee620685e3519356624185fdce24a83",
+      "thumbnail": "/art/chapters-v1/chapter-42-thumb.webp",
+      "material": [
+        "stone",
+        "power_conduit",
+        "low_rubble",
+        "paving",
+        "cracked_slab",
+        "resonance_pad"
+      ],
+      "props": [
+        "rocks",
+        "wall",
+        "pillar"
+      ],
+      "splash": {
+        "key": "bell_keeper",
+        "src": "/art/characters-v3/dialogue/bell_keeper.webp",
+        "bodySrc": "/art/characters-v3/units/bell_keeper-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-42.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 43,
+      "title": "43장. 접힌 기록실",
+      "biome": "workshop",
+      "scene": "/art/chapters-v1/chapter-43.webp",
+      "sceneHash": "cc9efab9285be8eb50234e82225637b802667cce1d1a93391f1e700816710d78",
+      "thumbnail": "/art/chapters-v1/chapter-43-thumb.webp",
+      "material": [
+        "stone",
+        "power_conduit",
+        "paving",
+        "low_rubble",
+        "resonance_pad",
+        "cracked_slab"
+      ],
+      "props": [
+        "rocks",
+        "wall",
+        "pillar"
+      ],
+      "splash": {
+        "key": "scroll_spirit",
+        "src": "/art/characters-v3/dialogue/scroll_spirit.webp",
+        "bodySrc": "/art/characters-v3/units/scroll_spirit-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-43.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 44,
+      "title": "44장. 이름 없는 작업대",
+      "biome": "workshop",
+      "scene": "/art/chapters-v1/chapter-44.webp",
+      "sceneHash": "7b45bf84f571deaecea82a652888ffce86884152728934970243fa020627e595",
+      "thumbnail": "/art/chapters-v1/chapter-44-thumb.webp",
+      "material": [
+        "stone",
+        "low_rubble",
+        "power_conduit",
+        "cracked_slab",
+        "resonance_pad",
+        "paving"
+      ],
+      "props": [
+        "wall",
+        "pillar",
+        "rocks"
+      ],
+      "splash": {
+        "key": "gold_puppet",
+        "src": "/art/characters-v3/dialogue/gold_puppet.webp",
+        "bodySrc": "/art/characters-v3/units/gold_puppet-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-44.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 45,
+      "title": "45장. 공명의 집행관",
+      "biome": "workshop",
+      "scene": "/art/chapters-v1/chapter-45.webp",
+      "sceneHash": "c776e0ca91c9069e57f654abb10f3dab582ce494e45ebb9f7e4bbc756cfa3256",
+      "thumbnail": "/art/chapters-v1/chapter-45-thumb.webp",
+      "material": [
+        "stone",
+        "low_rubble",
+        "power_conduit",
+        "cracked_slab",
+        "resonance_pad",
+        "paving"
+      ],
+      "props": [
+        "wall",
+        "rocks",
+        "pillar"
+      ],
+      "splash": {
+        "key": "resonance_judge",
+        "src": "/art/characters-v3/dialogue/resonance_judge.webp",
+        "bodySrc": "/art/characters-v3/units/resonance_judge-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-45.webp",
+        "accent": "#d8bf83"
+      }
+    },
+    {
+      "stageId": 46,
+      "title": "46장. 별이 남긴 길",
+      "biome": "starlight",
+      "scene": "/art/chapters-v1/chapter-46.webp",
+      "sceneHash": "cbb14f8a9610dccebb840992e3a018b4b7d2885ce7238fbd43a6834722298bcf",
+      "thumbnail": "/art/chapters-v1/chapter-46-thumb.webp",
+      "material": [
+        "paving",
+        "star_moss",
+        "road",
+        "oath_rune",
+        "stone",
+        "low_rubble"
+      ],
+      "props": [
+        "rocks",
+        "pillar",
+        "monument",
+        "crystal"
+      ],
+      "splash": {
+        "key": "eclipse_cat",
+        "src": "/art/characters-v3/dialogue/eclipse_cat.webp",
+        "bodySrc": "/art/characters-v3/units/eclipse_cat-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-46.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 47,
+      "title": "47장. 뿌리의 언어",
+      "biome": "starlight",
+      "scene": "/art/chapters-v1/chapter-47.webp",
+      "sceneHash": "14fc444d407ef59bde3b5910eeab0c148ba2e6aa72a79c8994d50680a22d1ca7",
+      "thumbnail": "/art/chapters-v1/chapter-47-thumb.webp",
+      "material": [
+        "paving",
+        "stone",
+        "star_moss",
+        "road",
+        "oath_rune",
+        "low_rubble"
+      ],
+      "props": [
+        "monument",
+        "pillar",
+        "rocks",
+        "crystal"
+      ],
+      "splash": {
+        "key": "ink_vine",
+        "src": "/art/characters-v3/dialogue/ink_vine.webp",
+        "bodySrc": "/art/characters-v3/units/ink_vine-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-47.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 48,
+      "title": "48장. 빈 갑옷의 행렬",
+      "biome": "starlight",
+      "scene": "/art/chapters-v1/chapter-48.webp",
+      "sceneHash": "b6e19496ba8e523175ba0caa8f8a5e323a08a18c3e77419cee0c38117f9cfa19",
+      "thumbnail": "/art/chapters-v1/chapter-48-thumb.webp",
+      "material": [
+        "paving",
+        "road",
+        "star_moss",
+        "low_rubble",
+        "oath_rune",
+        "stone"
+      ],
+      "props": [
+        "crystal",
+        "monument",
+        "pillar",
+        "rocks"
+      ],
+      "splash": {
+        "key": "hollow_armor",
+        "src": "/art/characters-v3/dialogue/hollow_armor.webp",
+        "bodySrc": "/art/characters-v3/units/hollow_armor-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-48.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 49,
+      "title": "49장. 모든 이름의 응답",
+      "biome": "starlight",
+      "scene": "/art/chapters-v1/chapter-49.webp",
+      "sceneHash": "9cf99872287d571d7641a95ecea16e8831a0b9d58581c669476d08a5099ff64b",
+      "thumbnail": "/art/chapters-v1/chapter-49-thumb.webp",
+      "material": [
+        "paving",
+        "road",
+        "star_moss",
+        "stone",
+        "water",
+        "low_rubble",
+        "oath_rune"
+      ],
+      "props": [
+        "monument",
+        "rocks",
+        "crystal",
+        "pillar"
+      ],
+      "splash": {
+        "key": "hollow_armor",
+        "src": "/art/characters-v3/dialogue/hollow_armor.webp",
+        "bodySrc": "/art/characters-v3/units/hollow_armor-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-49.webp",
+        "accent": "#e7c98b"
+      }
+    },
+    {
+      "stageId": 50,
+      "title": "50장. 함께 여는 새벽",
+      "biome": "starlight",
+      "scene": "/art/chapters-v1/chapter-50.webp",
+      "sceneHash": "037872e46c134315e8e3f1a63d9889dfd54422e6c335682361875a3f44bc13d9",
+      "thumbnail": "/art/chapters-v1/chapter-50-thumb.webp",
+      "material": [
+        "paving",
+        "star_moss",
+        "road",
+        "stone",
+        "oath_rune",
+        "low_rubble"
+      ],
+      "props": [
+        "rocks",
+        "pillar",
+        "crystal",
+        "monument"
+      ],
+      "splash": {
+        "key": "oath_guardian",
+        "src": "/art/characters-v3/dialogue/oath_guardian.webp",
+        "bodySrc": "/art/characters-v3/units/oath_guardian-recover.webp",
+        "bodyScale": 1.16,
+        "bodyOffset": "4%",
+        "backdrop": "/art/chapters-v1/chapter-50.webp",
+        "accent": "#e1dbf5"
+      }
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "generatedAt": "2026-10-15T23:54:25.400Z",
+  "mode": "actual-App-expanded-stage-final-formation-isolated-enemy-pursuit",
+  "stage": 49,
+  "terrainRevision": 3,
+  "totalEnemies": 26,
+  "initial": {
+    "id": "expansion-49-2",
+    "x": 11,
+    "y": 1,
+    "type": "enemy",
+    "name": "잉크덩굴 포식자",
+    "firstStage": 47,
+    "icon": "🌿",
+    "role": "느린 거리 제어",
+    "rank": "normal",
+    "aiType": "archer",
+    "move": 1,
+    "range": 2,
+    "minRange": 1,
+    "skill": "잉크 덩굴",
+    "skillType": "attack",
+    "skillBonus": 4,
+    "skillRange": 2,
+    "skillMinRange": 1,
+    "skillSpec": {
+      "name": "잉크 덩굴",
+      "type": "attack",
+      "bonus": 4,
+      "minRange": 1,
+      "range": 2,
+      "effect": "poison",
+      "status": "slow"
+    },
+    "combatIdentityName": "긴 창 촉수 식물",
+    "hp": 108,
+    "maxHp": 108,
+    "atk": 26,
+    "def": 16,
+    "level": 25,
+    "spriteKey": "ink_vine",
+    "artId": "ink_vine",
+    "stageEnemyRole": "ink_vine",
+    "monsterRank": "normal",
+    "expansionEnemy": true,
+    "expansionStatsStage": 49,
+    "moved": false,
+    "acted": false,
+    "guard": false
+  },
+  "target": {
+    "id": "hero",
+    "x": 24,
+    "y": 16,
+    "type": "ally",
+    "icon": "⚔️",
+    "name": "카일",
+    "hp": 24,
+    "maxHp": 24,
+    "atk": 8,
+    "def": 5,
+    "move": 3,
+    "range": 1,
+    "skill": "돌풍 베기",
+    "skillType": "attack",
+    "skillBonus": 3,
+    "skillRange": 1,
+    "level": 1,
+    "exp": 0,
+    "moved": false,
+    "acted": false,
+    "guard": false,
+    "equipment": {
+      "weapon": null,
+      "armor": null,
+      "accessory": null
+    },
+    "baseAtk": 8,
+    "baseDef": 5,
+    "baseSkillBonus": 3,
+    "skillLevel": 0,
+    "gearEnhance": {},
+    "itemPowerBoost": 0,
+    "itemGuardBoost": 0,
+    "skillGuardBoost": 0,
+    "skillCooldown": 0,
+    "skillCooldowns": {},
+    "supportUsed": false,
+    "status": []
+  },
+  "trace": [
+    {
+      "turn": 0,
+      "x": 11,
+      "y": 1,
+      "nextX": 11,
+      "nextY": 1,
+      "reachableThisTurn": 4
+    },
+    {
+      "turn": 1,
+      "x": 11,
+      "y": 1,
+      "nextX": 11,
+      "nextY": 1,
+      "reachableThisTurn": 4
+    }
+  ],
+  "original": {
+    "reachable": false,
+    "visited": 187,
+    "blocked": [
+      "water"
+    ]
+  },
+  "onlyOathRune": {
+    "reachable": false,
+    "visited": 187,
+    "blocked": [
+      "water"
+    ]
+  },
+  "onlyCrackedSlab": {
+    "reachable": false,
+    "visited": 187,
+    "blocked": [
+      "water"
+    ]
+  },
+  "both": {
+    "reachable": false,
+    "visited": 187,
+    "blocked": [
+      "water"
+    ]
+  }
+}

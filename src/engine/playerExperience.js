@@ -1,12 +1,22 @@
 import { getUnlockedStageIds } from './campaignProgress.js';
 import { stages } from '../data/stages.js';
 
+// Parsing JSON alone cannot distinguish a journey from an empty or unrelated document.
+// Early saves may omit clearedStages; the existing migration fills that field in.
+export function isSaveJourneyData(data) {
+  return Boolean(data && typeof data === 'object' && !Array.isArray(data)
+    && Array.isArray(data.party) && data.party.length > 0
+    && data.party.every(unit => unit && typeof unit === 'object' && !Array.isArray(unit)
+      && typeof unit.id === 'string' && unit.id.trim().length > 0)
+    && (data.clearedStages === undefined || Array.isArray(data.clearedStages)));
+}
+
 export function readMenuCheckpoint(storage) {
   try {
     const raw = storage.getItem('cheonsu_v01_save');
     if (!raw) return { exists: false, data: null };
     const data = JSON.parse(raw);
-    const valid = data && Array.isArray(data.party) && data.party.length > 0 && data.party.every(unit => unit && typeof unit.id === 'string') && Array.isArray(data.clearedStages);
+    const valid = isSaveJourneyData(data);
     return { exists: true, data: valid ? data : null };
   } catch { return { exists: true, data: null }; }
 }

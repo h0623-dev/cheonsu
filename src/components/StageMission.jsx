@@ -16,6 +16,7 @@ function MissionConditions({ mission }) {
       <ul>{mission.defeatConditions.map(condition => <li key={condition.id}>{condition.text}</li>)}</ul>
       <p>위 조건 중 하나라도 발생하면 패배합니다.</p>
     </section>
+    <p className="stage-mission-note">{mission.note} 카일이 쓰러져도 다른 아군이 생존하면 전투를 계속합니다. 추가 보상 목표는 승패 조건과 별개입니다.</p>
   </div>;
 }
 
