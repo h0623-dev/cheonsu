@@ -292,9 +292,12 @@ for (const [id, frames] of inputs) {
   const maxHalfWidth = Math.max(...completeBounds.flatMap(box => [canvas / 2 - box.left, box.right - canvas / 2]));
   const maxRise = Math.max(...completeBounds.map(box => box.bottom - box.top + 1));
   const safeDisplayScale = Math.min((canvas / 2 - 12) / maxHalfWidth, (foot - 12) / maxRise);
-  const displayScale = Math.min(originalScale, safeDisplayScale);
+  const nominalDisplayScale = Math.min(originalScale, safeDisplayScale);
   const referenceHeight = unit.metrics.recover.bottom - unit.metrics.recover.top + 1;
-  unit.visibleFraction = displayScale * referenceHeight / canvas;
+  unit.visibleFraction = nominalDisplayScale * referenceHeight / canvas;
+  // Match the runtime's exact operation order, including its floating-point
+  // rounding, when authoring both skill scale and foot offset metadata.
+  const displayScale = unit.visibleFraction * unit.metrics.recover.height / referenceHeight;
   const updateSkill = skill => {
     const pose = Object.entries(unit.motion).find(([, source]) => source === skill?.src)?.[0];
     if (!pose || !unit.metrics[pose]) return;
@@ -303,7 +306,7 @@ for (const [id, frames] of inputs) {
   };
   for (const skill of Object.values(unit.skills || {})) updateSkill(skill);
   if (unit.skill) updateSkill(unit.skill);
-  Object.assign(production, { displayScale, safeDisplayScale, visibleFraction: unit.visibleFraction,
+  Object.assign(production, { nominalDisplayScale, displayScale, safeDisplayScale, visibleFraction: unit.visibleFraction,
     completePoseBounds: Object.fromEntries(allPoses.map(pose => [pose, bounds[id][pose]])),
     preservedMetrics: Object.fromEntries(production.preservedPoses.map(pose => [pose, originalMetrics[pose]])) });
   report.units[id] = production;

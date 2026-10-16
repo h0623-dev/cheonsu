@@ -190,7 +190,8 @@
           "frameSha256": "4b1beccd83f3f5fa911f03e9a71321761e394bab67dea840ba650ae2bbe025b2"
         }
       },
-      "displayScale": 0.9183673469387755,
+      "nominalDisplayScale": 0.9183673469387755,
+      "displayScale": 0.9183673469387756,
       "safeDisplayScale": 1.0209205020920502,
       "visibleFraction": 0.5793606505102041,
       "completePoseBounds": {
@@ -488,6 +489,7 @@
           "frameSha256": "1814cd06aa5c71bf8343c7c5409fff7d6d7410896e015c356c92f8f5872906a9"
         }
       },
+      "nominalDisplayScale": 0.8845208845208845,
       "displayScale": 0.8845208845208845,
       "safeDisplayScale": 1.0166666666666666,
       "visibleFraction": 0.5372773341523341,
@@ -792,6 +794,7 @@
           "frameSha256": "c52045e4d0fd15538bbb337cdff97a552c1c398647e81938891bd078cfbb13b2"
         }
       },
+      "nominalDisplayScale": 0.8910891089108911,
       "displayScale": 0.8910891089108911,
       "safeDisplayScale": 1.0209205020920502,
       "visibleFraction": 0.6648360148514851,
@@ -1060,6 +1063,7 @@
           "frameSha256": "3eba41f0e00a420c7211eb75498cc916b711e888390bb5f00351b83d8dabba2d"
         }
       },
+      "nominalDisplayScale": 0.8888888888888888,
       "displayScale": 0.8888888888888888,
       "safeDisplayScale": 1.0151843817787418,
       "visibleFraction": 0.6614583333333333,
@@ -1328,6 +1332,7 @@
           "frameSha256": "86b4b5c7639d2625b8f48337886405b50eab7024afca69b3ac50a3e05ebb9bab"
         }
       },
+      "nominalDisplayScale": 1.0252100840336134,
       "displayScale": 1.0252100840336134,
       "safeDisplayScale": 1.0252100840336134,
       "visibleFraction": 0.4985884978991596,
@@ -1626,7 +1631,8 @@
           "frameSha256": "4fdb3838e5d5cb59e2d0cbef3d3be9128d82b276b7a0c4ed54b6799ac2f670af"
         }
       },
-      "displayScale": 0.8823529411764706,
+      "nominalDisplayScale": 0.8823529411764706,
+      "displayScale": 0.8823529411764707,
       "safeDisplayScale": 1.0209205020920502,
       "visibleFraction": 0.5376838235294118,
       "completePoseBounds": {
@@ -1906,6 +1912,7 @@
           "frameSha256": "123e75f481989d75dafd46443f2c8b342938bac83e68aff0fe08358c4a8f9dc7"
         }
       },
+      "nominalDisplayScale": 0.8845208845208845,
       "displayScale": 0.8845208845208845,
       "safeDisplayScale": 1.0209205020920502,
       "visibleFraction": 0.6616630835380836,
@@ -2174,6 +2181,7 @@
           "frameSha256": "917b6cfb8efed3f2b4073b12f8171104a5cb1611d5bffde4349c81a23b77c7f2"
         }
       },
+      "nominalDisplayScale": 0.9326424870466321,
       "displayScale": 0.9326424870466321,
       "safeDisplayScale": 1,
       "visibleFraction": 0.6940171632124352,
@@ -2442,6 +2450,7 @@
           "frameSha256": "ba0f7f5375ba983872268130676f5b7ddb4a40692780549d64321f8348fe8be7"
         }
       },
+      "nominalDisplayScale": 0.8823529411764706,
       "displayScale": 0.8823529411764706,
       "safeDisplayScale": 1.0151843817787418,
       "visibleFraction": 0.5463005514705882,
@@ -2710,6 +2719,7 @@
           "frameSha256": "f0a080e8c03bb240650c24ff508dccbfa12fcf6007667fa8ebb1e2c0469b1d8a"
         }
       },
+      "nominalDisplayScale": 0.8845208845208845,
       "displayScale": 0.8845208845208845,
       "safeDisplayScale": 1.0209205020920502,
       "visibleFraction": 0.6167460073710074,
@@ -3014,6 +3024,7 @@
           "frameSha256": "06be9894bb14e0ea836900125445b34f44db6566f39a75fdc64078cc18d49485"
         }
       },
+      "nominalDisplayScale": 0.8823529411764706,
       "displayScale": 0.8823529411764706,
       "safeDisplayScale": 1.0209205020920502,
       "visibleFraction": 0.52734375,
@@ -3282,7 +3293,8 @@
           "frameSha256": "6caf1874c4d48a920c175c324ea6aedf89ba455cf370d98e31df363a7ac0c712"
         }
       },
-      "displayScale": 0.8823529411764706,
+      "nominalDisplayScale": 0.8823529411764706,
+      "displayScale": 0.8823529411764705,
       "safeDisplayScale": 1.0196078431372548,
       "visibleFraction": 0.6824448529411764,
       "completePoseBounds": {
@@ -3580,6 +3592,7 @@
           "frameSha256": "aa47bf263363a77d62066390ce6eb2ea0e91a3f2c30923cd6508ce1b47988d8f"
         }
       },
+      "nominalDisplayScale": 0.935064935064935,
       "displayScale": 0.935064935064935,
       "safeDisplayScale": 1.0209205020920502,
       "visibleFraction": 0.5515422077922078,
@@ -3848,6 +3861,7 @@
           "frameSha256": "0f0d69aa79adc3df7be9abe7afd0681339ec659c5a7707ce299fa37848649d6a"
         }
       },
+      "nominalDisplayScale": 0.8823529411764706,
       "displayScale": 0.8823529411764706,
       "safeDisplayScale": 1.1116389548693586,
       "visibleFraction": 0.6945082720588235,
@@ -4116,6 +4130,7 @@
           "frameSha256": "e7a940bdf06a380b55c5e4735908a59362aad6dc78f2fadeb6ede5ce526ed2d8"
         }
       },
+      "nominalDisplayScale": 0.935064935064935,
       "displayScale": 0.935064935064935,
       "safeDisplayScale": 1.012448132780083,
       "visibleFraction": 0.6026785714285714,
@@ -4384,6 +4399,7 @@
           "frameSha256": "9b912eac451920c4cb74a12c98abd1e26f313b77cab29283ed2a09d6a58956c4"
         }
       },
+      "nominalDisplayScale": 0.994475138121547,
       "displayScale": 0.994475138121547,
       "safeDisplayScale": 1.0338983050847457,
       "visibleFraction": 0.6914709944751382,
@@ -4682,6 +4698,7 @@
           "frameSha256": "8e88cf599f00a126f40eb7df49b8caba3195fad27225593042d92113cc837a69"
         }
       },
+      "nominalDisplayScale": 0.8823529411764706,
       "displayScale": 0.8823529411764706,
       "safeDisplayScale": 1.0608695652173914,
       "visibleFraction": 0.6927849264705882,
@@ -4950,6 +4967,7 @@
           "frameSha256": "45b7cf74e2d9a8bdf38cc35ff420d2b787e34136dfa3b0d3bac22a5a368dbe01"
         }
       },
+      "nominalDisplayScale": 0.9207161125319693,
       "displayScale": 0.9207161125319693,
       "safeDisplayScale": 1.0129870129870129,
       "visibleFraction": 0.6096147698209718,
@@ -5254,6 +5272,7 @@
           "frameSha256": "7edd571026444a1581c37eaadffd0899234924b5175354fae335d344c35d0000"
         }
       },
+      "nominalDisplayScale": 0.8933002481389578,
       "displayScale": 0.8933002481389578,
       "safeDisplayScale": 1.0021413276231264,
       "visibleFraction": 0.6926566377171216,
@@ -5558,7 +5577,8 @@
           "frameSha256": "04de4d6850f9df432e0ff2503da463f94d73233407c56c944ebb6fc5911ed2ef"
         }
       },
-      "displayScale": 0.8845208845208845,
+      "nominalDisplayScale": 0.8845208845208845,
+      "displayScale": 0.8845208845208846,
       "safeDisplayScale": 1.0209205020920502,
       "visibleFraction": 0.6893043611793612,
       "completePoseBounds": {
@@ -5826,6 +5846,7 @@
           "frameSha256": "69e0a38f2c6351b0280cc64510b4e766397a627f33a17f1523942ae2f493f655"
         }
       },
+      "nominalDisplayScale": 0.989010989010989,
       "displayScale": 0.989010989010989,
       "safeDisplayScale": 1.0166666666666666,
       "visibleFraction": 0.6625600961538461,
@@ -6124,7 +6145,8 @@
           "frameSha256": "3f3c3375196ea65c598864e7f79ccb698b905cda67236e8a1b4bace70c645d36"
         }
       },
-      "displayScale": 0.967741935483871,
+      "nominalDisplayScale": 0.967741935483871,
+      "displayScale": 0.9677419354838709,
       "safeDisplayScale": 1.012448132780083,
       "visibleFraction": 0.5594758064516129,
       "completePoseBounds": {
@@ -6392,6 +6414,7 @@
           "frameSha256": "2731e38cdf35832ef778fbb4fce534f8294cfce0983ae519a269d81a1e631624"
         }
       },
+      "nominalDisplayScale": 0.96,
       "displayScale": 0.96,
       "safeDisplayScale": 1.0166666666666666,
       "visibleFraction": 0.60375,
@@ -6660,6 +6683,7 @@
           "frameSha256": "02c6bd40aaf6d22db5b6fd827ba58aedadd4ade883b15db2681af4166cf5a5e2"
         }
       },
+      "nominalDisplayScale": 1.1042944785276074,
       "displayScale": 1.1042944785276074,
       "safeDisplayScale": 1.1584158415841583,
       "visibleFraction": 0.6944976993865031,
@@ -6931,6 +6955,7 @@
           "frameSha256": "df7bfc74b4cdca8c26beddc5bd80229d3e88eb0c05271d179916b12ac2a5e182"
         }
       },
+      "nominalDisplayScale": 1.1180124223602483,
       "displayScale": 1.1180124223602483,
       "safeDisplayScale": 1.1401869158878504,
       "visibleFraction": 0.6943905279503105,
@@ -7209,6 +7234,7 @@
           "frameSha256": "ae8ccfdbd14b56cfe0f9023dbcf21e901768eafb3d3bc6c3934a524267769f73"
         }
       },
+      "nominalDisplayScale": 0.9230769230769231,
       "displayScale": 0.9230769230769231,
       "safeDisplayScale": 1.0151843817787418,
       "visibleFraction": 0.694110576923077,
@@ -7507,6 +7533,7 @@
           "frameSha256": "3cd42f4198a60b608d68c30a8db1be9363e996d0becdf4caf705a91c827a2d6f"
         }
       },
+      "nominalDisplayScale": 1.0748898678414096,
       "displayScale": 1.0748898678414096,
       "safeDisplayScale": 1.0748898678414096,
       "visibleFraction": 0.66340859030837,
@@ -7775,7 +7802,8 @@
           "frameSha256": "63acd55462c341d69c9514455245e6767899d848f571dfa57510ea1120463a23"
         }
       },
-      "displayScale": 0.8823529411764706,
+      "nominalDisplayScale": 0.8823529411764706,
+      "displayScale": 0.8823529411764705,
       "safeDisplayScale": 1.0517241379310345,
       "visibleFraction": 0.6824448529411764,
       "completePoseBounds": {
@@ -8073,7 +8101,8 @@
           "frameSha256": "67bb6be952db5946468a316cfb99f72ffc79b3bcb85d2f2f08606601a696b7ca"
         }
       },
-      "displayScale": 0.9473684210526315,
+      "nominalDisplayScale": 0.9473684210526315,
+      "displayScale": 0.9473684210526316,
       "safeDisplayScale": 1.012448132780083,
       "visibleFraction": 0.6254111842105263,
       "completePoseBounds": {
@@ -8341,6 +8370,7 @@
           "frameSha256": "fca45f0676080401ab1705df217f67dfacb2f458f09f9be3d1d47612ddc32844"
         }
       },
+      "nominalDisplayScale": 1.0166666666666666,
       "displayScale": 1.0166666666666666,
       "safeDisplayScale": 1.0166666666666666,
       "visibleFraction": 0.6810872395833333,
@@ -8609,6 +8639,7 @@
           "frameSha256": "fac9616d34f431cd41ac1e8c49e773a16e604aae6aa3c2c62f9197aa5ed20b91"
         }
       },
+      "nominalDisplayScale": 1.0778443113772456,
       "displayScale": 1.0778443113772456,
       "safeDisplayScale": 1.1348837209302325,
       "visibleFraction": 0.6925991766467067,
@@ -8877,6 +8908,7 @@
           "frameSha256": "5db2a65a1ffef6c2cfe3f496de7a5e58fb24ee286d7d64dea1695db699896c6a"
         }
       },
+      "nominalDisplayScale": 0.9917355371900827,
       "displayScale": 0.9917355371900827,
       "safeDisplayScale": 1.127710843373494,
       "visibleFraction": 0.6953770661157025,
@@ -9145,6 +9177,7 @@
           "frameSha256": "afe8e033429c84f69179720b3388420353c6d3fff022ba37202ed25b5e44fc77"
         }
       },
+      "nominalDisplayScale": 0.989010989010989,
       "displayScale": 0.989010989010989,
       "safeDisplayScale": 1.125,
       "visibleFraction": 0.6934666895604396,
@@ -9413,6 +9446,7 @@
           "frameSha256": "603e096b05b30612d4cb9af4247fd022ab56f91fbdc231fa95639cac54ed9133"
         }
       },
+      "nominalDisplayScale": 0.916030534351145,
       "displayScale": 0.916030534351145,
       "safeDisplayScale": 1.0758620689655172,
       "visibleFraction": 0.6959685114503816,
@@ -9681,6 +9715,7 @@
           "frameSha256": "085b5134a1b995f87c2e691eb8af53a83181fddab292e43610e0e445f5b3adad"
         }
       },
+      "nominalDisplayScale": 1.0166666666666666,
       "displayScale": 1.0166666666666666,
       "safeDisplayScale": 1.0166666666666666,
       "visibleFraction": 0.5996744791666666,
@@ -9979,6 +10014,7 @@
           "frameSha256": "2b0fb9ae31fd98fcfb6e7d4e3efa6fbf4d989705e8b8690097ea0619ab739fa0"
         }
       },
+      "nominalDisplayScale": 0.9253012048192771,
       "displayScale": 0.9253012048192771,
       "safeDisplayScale": 1.4104046242774566,
       "visibleFraction": 0.4427710843373494,
@@ -10247,6 +10283,7 @@
           "frameSha256": "c5a908f3abbce931898fac71c08f45178675d4b2556715ec06ece9ca3fb74c90"
         }
       },
+      "nominalDisplayScale": 1.0209205020920502,
       "displayScale": 1.0209205020920502,
       "safeDisplayScale": 1.0209205020920502,
       "visibleFraction": 0.5204301778242678,
@@ -10515,6 +10552,7 @@
           "frameSha256": "68abb4b1b96a801e61324cd30b14d423165bb9809fc897e954c474ae8b62647d"
         }
       },
+      "nominalDisplayScale": 1.0027855153203342,
       "displayScale": 1.0027855153203342,
       "safeDisplayScale": 1.0166666666666666,
       "visibleFraction": 0.6796222144846796,
@@ -10783,6 +10821,7 @@
           "frameSha256": "d3ce968c87648caaa253cb2a7b117c1c0292b4e4857f43e3d7fd0cb58d1abfbb"
         }
       },
+      "nominalDisplayScale": 1.0166666666666666,
       "displayScale": 1.0166666666666666,
       "safeDisplayScale": 1.0166666666666666,
       "visibleFraction": 0.500390625,
@@ -11051,7 +11090,8 @@
           "frameSha256": "43297346378f0a43de6977fee9a54c7de7c6db6dada6052ef860f526537d9a67"
         }
       },
-      "displayScale": 0.9302325581395349,
+      "nominalDisplayScale": 0.9302325581395349,
+      "displayScale": 0.930232558139535,
       "safeDisplayScale": 1.0129870129870129,
       "visibleFraction": 0.6595203488372093,
       "completePoseBounds": {
@@ -11319,6 +11359,7 @@
           "frameSha256": "4e5e8c16308a620536c146b04414c2fe18be8b1e456c68c6da7ecff5da32bd88"
         }
       },
+      "nominalDisplayScale": 1,
       "displayScale": 1,
       "safeDisplayScale": 1.0209205020920502,
       "visibleFraction": 0.53515625,
@@ -11623,6 +11664,7 @@
           "frameSha256": "7b6aff6fe7aee7f17589e2d2acbc0bc0afc4da63be52436764c08730f7562b18"
         }
       },
+      "nominalDisplayScale": 0.8845208845208845,
       "displayScale": 0.8845208845208845,
       "safeDisplayScale": 1.0082644628099173,
       "visibleFraction": 0.6150184275184275,
@@ -11891,6 +11933,7 @@
           "frameSha256": "14f220cc9560ed39710022f502c46dc671db10bb823babfb5d5b6024ced915e6"
         }
       },
+      "nominalDisplayScale": 1.0209205020920502,
       "displayScale": 1.0209205020920502,
       "safeDisplayScale": 1.0209205020920502,
       "visibleFraction": 0.5642978556485355,
@@ -12159,6 +12202,7 @@
           "frameSha256": "05aabee93aa4c5f1b0d5d7255f2082eb375505d1207577b96e33e6b8f88fbf0d"
         }
       },
+      "nominalDisplayScale": 1,
       "displayScale": 1,
       "safeDisplayScale": 1,
       "visibleFraction": 0.5859375,
@@ -12457,6 +12501,7 @@
           "frameSha256": "5b8cd08b553ef3a8f4586ba8c71fdea958d9ca035b23defe0c073e8b833e22e8"
         }
       },
+      "nominalDisplayScale": 1.0082644628099173,
       "displayScale": 1.0082644628099173,
       "safeDisplayScale": 1.0082644628099173,
       "visibleFraction": 0.5573024276859504,
@@ -12725,6 +12770,7 @@
           "frameSha256": "4775d5d40c5a4a680c4560bb5e312642b4e154c8cdbaff5cc1f95987fda1a985"
         }
       },
+      "nominalDisplayScale": 1.0209205020920502,
       "displayScale": 1.0209205020920502,
       "safeDisplayScale": 1.0209205020920502,
       "visibleFraction": 0.5762617677824268,
@@ -13013,6 +13059,7 @@
           "frameSha256": "5f2a3f8834174a0e0e9d6abe20468dc30027eaba745887e3fea7e1737665080e"
         }
       },
+      "nominalDisplayScale": 1.0166666666666666,
       "displayScale": 1.0166666666666666,
       "safeDisplayScale": 1.0166666666666666,
       "visibleFraction": 0.5103190104166666,
@@ -13317,6 +13364,7 @@
           "frameSha256": "6a5e37d2418eac3c5fe1bd6cdb7f1cf3cd534279f1e51953f21bb1b6f901afcb"
         }
       },
+      "nominalDisplayScale": 1.0338983050847457,
       "displayScale": 1.0338983050847457,
       "safeDisplayScale": 1.0338983050847457,
       "visibleFraction": 0.6118577860169491,
@@ -13605,6 +13653,7 @@
           "frameSha256": "fb93c4c024105be653322308cffa399dba4d9f96b6023456d05b5254e296ff0f"
         }
       },
+      "nominalDisplayScale": 1.079646017699115,
       "displayScale": 1.079646017699115,
       "safeDisplayScale": 1.079646017699115,
       "visibleFraction": 0.5967574668141592,
@@ -13873,6 +13922,7 @@
           "frameSha256": "07bfc7379e682a6c257a584d7eb46d3a5bfe01313a37ee14b781ef4f1dcecce3"
         }
       },
+      "nominalDisplayScale": 1.0082644628099173,
       "displayScale": 1.0082644628099173,
       "safeDisplayScale": 1.0082644628099173,
       "visibleFraction": 0.4391464359504132,
@@ -14171,6 +14221,7 @@
           "frameSha256": "e5db67535cf47da61892d2811af71d6fd00bb8788395d32a12df148d5ed8e569"
         }
       },
+      "nominalDisplayScale": 1.012448132780083,
       "displayScale": 1.012448132780083,
       "safeDisplayScale": 1.012448132780083,
       "visibleFraction": 0.48249481327800825,
@@ -14439,6 +14490,7 @@
           "frameSha256": "43cc9d7834bbd01a61dfb7c40dc80dc7beb7612f24fd5fcb09a5b90253569962"
         }
       },
+      "nominalDisplayScale": 1.178743961352657,
       "displayScale": 1.178743961352657,
       "safeDisplayScale": 1.178743961352657,
       "visibleFraction": 0.46735356280193235,
@@ -14737,6 +14789,7 @@
           "frameSha256": "8ae464785a88a35333bee1fcaf9155f4b57377e4fcb0f2d220b43ab2aa03159f"
         }
       },
+      "nominalDisplayScale": 1.012448132780083,
       "displayScale": 1.012448132780083,
       "safeDisplayScale": 1.012448132780083,
       "visibleFraction": 0.4389911825726141,
@@ -15005,6 +15058,7 @@
           "frameSha256": "107f8085dae941c73b0c4da03168659d15a2e6ad24f982b3cd30dda10519d3e1"
         }
       },
+      "nominalDisplayScale": 1.0338983050847457,
       "displayScale": 1.0338983050847457,
       "safeDisplayScale": 1.0338983050847457,
       "visibleFraction": 0.6320511122881355,
@@ -15273,6 +15327,7 @@
           "frameSha256": "13c29cab9e0ed2488c5abcd8210ec934a55384342017920e29b42c09d4ffc99e"
         }
       },
+      "nominalDisplayScale": 1.0714285714285714,
       "displayScale": 1.0714285714285714,
       "safeDisplayScale": 1.1348837209302325,
       "visibleFraction": 0.6947544642857143,
@@ -15553,6 +15608,7 @@
           "frameSha256": "e04845944fefce18fc5e5f4745c2b91447709c283bb83148065b9e5e8ca5928d"
         }
       },
+      "nominalDisplayScale": 1.318918918918919,
       "displayScale": 1.318918918918919,
       "safeDisplayScale": 1.318918918918919,
       "visibleFraction": 0.5873310810810811,
@@ -15851,6 +15907,7 @@
           "frameSha256": "eec34f118a8dfa238e0379e2b388cadc225e7c27fd27ec817919369db8ca10e2"
         }
       },
+      "nominalDisplayScale": 1.029535864978903,
       "displayScale": 1.029535864978903,
       "safeDisplayScale": 1.029535864978903,
       "visibleFraction": 0.5670490506329114,
@@ -16119,6 +16176,7 @@
           "frameSha256": "14ca91f7c76e5a43341eaac795ff81f4b3e218a9e29120a96f7adb74e9e4334a"
         }
       },
+      "nominalDisplayScale": 1.3785310734463276,
       "displayScale": 1.3785310734463276,
       "safeDisplayScale": 1.3785310734463276,
       "visibleFraction": 0.5492584745762712,
@@ -16417,6 +16475,7 @@
           "frameSha256": "4441bd28903a9fe98f304ad685ec014a9ab0cf2a2df825779dcdb2e05a82d51b"
         }
       },
+      "nominalDisplayScale": 1.012448132780083,
       "displayScale": 1.012448132780083,
       "safeDisplayScale": 1.012448132780083,
       "visibleFraction": 0.49435943983402486,
@@ -16685,6 +16744,7 @@
           "frameSha256": "ba31462acf1f20dbb2805e29d10f7d2668f77e0eff73c0a8ce64e75986d8c939"
         }
       },
+      "nominalDisplayScale": 1.2079207920792079,
       "displayScale": 1.2079207920792079,
       "safeDisplayScale": 1.2079207920792079,
       "visibleFraction": 0.563853650990099,
@@ -16953,6 +17013,7 @@
           "frameSha256": "7ee1cfb4a06db66d547fa9cf5e42eb684c0459bcd5ab32abc924d6aa3dcea04a"
         }
       },
+      "nominalDisplayScale": 1.2261306532663316,
       "displayScale": 1.2261306532663316,
       "safeDisplayScale": 1.2261306532663316,
       "visibleFraction": 0.6681454145728644,
@@ -17221,6 +17282,7 @@
           "frameSha256": "951a2abba0bf6283116b233c5cee958f1d731f30539958d6be121dd3fc6ead1f"
         }
       },
+      "nominalDisplayScale": 1.3118279569892473,
       "displayScale": 1.3118279569892473,
       "safeDisplayScale": 1.3118279569892473,
       "visibleFraction": 0.6149193548387096,
@@ -17489,6 +17551,7 @@
           "frameSha256": "ab074381df11fdadc7a435c4d018dc97823fa68595ff8ff5f0fa15d11120ea14"
         }
       },
+      "nominalDisplayScale": 0.8933002481389578,
       "displayScale": 0.8933002481389578,
       "safeDisplayScale": 1.0209205020920502,
       "visibleFraction": 0.5373759305210918,
@@ -17777,6 +17840,7 @@
           "frameSha256": "77dd9827e8b6b8633334e92e87635ded2d71ff6fc54920b3490d55497dda6578"
         }
       },
+      "nominalDisplayScale": 0.9498680738786279,
       "displayScale": 0.9498680738786279,
       "safeDisplayScale": 1.164179104477612,
       "visibleFraction": 0.6994145778364116,
@@ -18045,6 +18109,7 @@
           "frameSha256": "903202a408ed6d0af74c17080711563a4a57b6ec9d4a2c2d5b8c48674605930f"
         }
       },
+      "nominalDisplayScale": 1.0608695652173914,
       "displayScale": 1.0608695652173914,
       "safeDisplayScale": 1.0608695652173914,
       "visibleFraction": 0.5863790760869566,
@@ -18323,6 +18388,7 @@
           "frameSha256": "8eea7597e538bb352f4db10c9d706ca38158b1b78155ecbf7153ad6a3aed0fad"
         }
       },
+      "nominalDisplayScale": 1.2512820512820513,
       "displayScale": 1.2512820512820513,
       "safeDisplayScale": 1.2512820512820513,
       "visibleFraction": 0.6745192307692308,
@@ -18591,6 +18657,7 @@
           "frameSha256": "f502552e2f217e2e6a819f83384439baca2f10a1c0d7c98fb4ea4b70be8a4948"
         }
       },
+      "nominalDisplayScale": 1.2708333333333333,
       "displayScale": 1.2708333333333333,
       "safeDisplayScale": 1.2708333333333333,
       "visibleFraction": 0.6329345703125,

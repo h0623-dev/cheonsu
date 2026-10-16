@@ -59,17 +59,17 @@
       "skills": {
         "gale": {
           "src": "/art/characters-v2/units/hero-skill-a.webp",
-          "scale": 0.9183673469387755,
+          "scale": 0.9183673469387756,
           "footOffset": "0.3587372448979592%"
         },
         "oath": {
           "src": "/art/characters-v2/units/hero-skill-b.webp",
-          "scale": 0.9183673469387755,
+          "scale": 0.9183673469387756,
           "footOffset": "0.3587372448979592%"
         },
         "hero-dawn-slash": {
           "src": "/art/characters-v2/units/hero-skill-a.webp",
-          "scale": 0.9183673469387755,
+          "scale": 0.9183673469387756,
           "footOffset": "0.3587372448979592%"
         }
       },
