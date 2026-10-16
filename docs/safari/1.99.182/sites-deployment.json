@@ -1,0 +1,89 @@
+{
+  "gameVersion": "1.99.182",
+  "androidVersionCode": 381,
+  "gameSourceCommit": "e85e0aa9830db85fcaa1a1aca32eef5e66306147",
+  "siteSourceCommit": "1558163b9803fde95a61757c5205d5857a84fb10",
+  "webRelease": {
+    "gameVersion": "1.99.182",
+    "webRevision": "safari-1",
+    "cacheRevision": "1.99.182-safari-1-c201ab5c419d",
+    "sourceCommit": "e85e0aa9830db85fcaa1a1aca32eef5e66306147",
+    "builtAt": "2026-10-16T16:54:09.617Z",
+    "platform": "safari-web"
+  },
+  "archiveBytes": 210165416,
+  "operation": "sites_save_version_and_deploy_private",
+  "deployment": {
+    "id": "appgdep_6ad264d62e848191a866701706b38713",
+    "project_id": "appgprj_6ad17df8b73481918b41ccab787d8c8a",
+    "version_id": "appgprj_6ad17df8b73481918b41ccab787d8c8a~appgver_a8ded8b1dec081919e15fe972bbca0f7",
+    "status": "succeeded",
+    "type": "publish",
+    "title": "천수 · 아이폰 플레이",
+    "url": "https://cheonsu-ios-20261016.h9206.chatgpt.site",
+    "updated_at": "2026-10-16T17:54:53.075937+00:00",
+    "failure_message": null
+  },
+  "publishedKst": "2026-10-17 02:54:53 KST",
+  "audience": "기존 owner 계정 전용 대상 유지",
+  "androidRelease": {
+    "version": "1.99.182",
+    "androidVersionCode": 381,
+    "sourceCommit": "e85e0aa9830db85fcaa1a1aca32eef5e66306147",
+    "qualityRun": "38935448646",
+    "qualityCompletedKst": "2026-10-17 02:46:14 KST",
+    "androidRun": "38935448262",
+    "androidCompletedKst": "2026-10-17 02:52:03 KST",
+    "publishedKst": "2026-10-17 02:51:38 KST",
+    "releaseUrl": "https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.182",
+    "bundleId": "1.99.182-a83d20af94f3",
+    "minNativeVersionCode": 350,
+    "maxNativeVersionCode": 381,
+    "assets": [
+      {
+        "kind": "apk",
+        "bytes": 323424684,
+        "sha256": "4c507517f57dfb8782f03615152b8ac82c762ef3724f36e327aa3049673c39b3",
+        "url": "https://github.com/h0623-dev/cheonsu/releases/download/v1.99.182/cheonsu_1.99.182_update_debug.apk"
+      },
+      {
+        "kind": "ota",
+        "bytes": 314449521,
+        "sha256": "a83d20af94f380d4b34722752892f3e6cdfd226ac817a5c355d31f9d5304d9ec",
+        "url": "https://github.com/h0623-dev/cheonsu/releases/download/v1.99.182/cheonsu_1.99.182_ota.zip"
+      },
+      {
+        "kind": "source",
+        "bytes": 968707113,
+        "sha256": "dde4e089075a2a28f2eb2af98e4a6cd9c95ee166697fc133afdaa9826bd76480",
+        "url": "https://github.com/h0623-dev/cheonsu/releases/download/v1.99.182/cheonsu_development_1.99.182.zip"
+      }
+    ],
+    "noAgentArtifactDownload": true,
+    "publishedChannelCompletedKst": "2026-10-17 02:51:41 KST",
+    "webFilesPerApkAndOta": 3350,
+    "sourceFiles": 4462,
+    "apkCertificateSha256": "1d4b2f3f8e7b30e2b9202121def34d4da6e39b4119bdd93c44a01aebfcd0518f"
+  },
+  "verificationScope": {
+    "existingAutomaticActions": "success",
+    "nativeSiteDeployment": "succeeded",
+    "agentManualGameQa": false,
+    "agentPublicArtifactDownload": false,
+    "postSuccessSiteRead": false
+  },
+  "preserved": {
+    "savedProgress": true,
+    "promotionOutfits": 65,
+    "remainingBasePoses": 5,
+    "lobbyDialogueMapWalking": true,
+    "rollbackBaseline": "1.99.165 + Safari"
+  },
+  "priorSiteCandidatesNotPublished": [
+    "2fb590146825bfe047fbc96ce90129c49f8d0514",
+    "98e3b2f7fe7546992383c9350fc91f7dc2cdf990",
+    "097b2dfcf5f59c71a007d4a956d62c62648bb0cb",
+    "1d28e4bee55b810d390f1694190902566715a968",
+    "210a472c22a649ace07ad76b90921e44c31cc960"
+  ]
+}
