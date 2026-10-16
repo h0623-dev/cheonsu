@@ -83,9 +83,12 @@ function normalizedAnchor(authored, frame, placement) {
   if (authored.bow) {
     const upper = point(authored.bow.upper), lower = point(authored.bow.lower);
     const curve = (authored.bow.curve || []).map(point);
+    const outline = (authored.bow.points || []).map(point);
     result.bow = {
       upper, lower,
-      path: curve.length === 2
+      path: outline.length > 1
+        ? `M${outline[0].join(' ')}${outline.slice(1).map(position => `L${position.join(' ')}`).join('')}`
+        : curve.length === 2
         ? `M${upper.join(' ')}C${curve[0].join(' ')} ${curve[1].join(' ')} ${lower.join(' ')}`
         : `M${upper.join(' ')}Q${result.grip.join(' ')} ${lower.join(' ')}`,
       ...(authored.bow.arrowVisible == null ? {} : { arrowVisible: authored.bow.arrowVisible }),
@@ -200,6 +203,7 @@ const configPath = path.resolve(root, process.argv.find(argument => argument.sta
   || 'docs/art/cinematic-v1/packaging.json');
 const config = JSON.parse(await fs.readFile(configPath, 'utf8'));
 const requested = process.argv.find(argument => argument.startsWith('--only='))?.slice(7).split(',') || characters;
+const anchorsOnly = process.argv.includes('--anchors-only');
 for (const id of requested) if (!characters.includes(id) || !config.units[id]) throw new Error(`제작 대상이 아닙니다: ${id}`);
 const manifests = new Map();
 for (const id of requested) {
@@ -221,8 +225,36 @@ try { report = JSON.parse(await fs.readFile(reportPath, 'utf8')); }
 catch (error) { if (error.code !== 'ENOENT') throw error; }
 for (const id of requested) {
   const collection = config.units[id].collection || 'characters-v2';
-  report.units[id] = await prepareCharacter(id, config.units[id], manifests.get(collection).data, catalogs);
-  console.log(`전투 원화 제작: ${id} · 8개 자세 · 기존 경로 유지`);
+  if (anchorsOnly) {
+    const unit = manifests.get(collection).data.units[id];
+    const production = report.units[id];
+    for (const pose of contactPoses) {
+      const placement = production.placements[pose];
+      const box = placement.sourceBounds;
+      const frame = { box, width: box.right - box.left + 1, height: box.bottom - box.top + 1 };
+      const anchor = normalizedAnchor(config.units[id].anchors[pose], frame, placement);
+      const { measured, ...geometry } = anchor;
+      void measured;
+      if (id === 'oath_guardian') {
+        Object.assign(catalogs.reviewed.units[id][pose], geometry);
+        production.anchors[pose] = { ...catalogs.reviewed.units[id][pose], measured: false, reviewed: true };
+      } else {
+        unit.anchors[pose] = anchor;
+        catalogs.authored[id][pose] = geometry;
+        production.anchors[pose] = anchor;
+      }
+    }
+    if (id === 'lina') production.bowContourConstruction = {
+      sourcePath: config.units[id].sourcePath,
+      poses: contactPoses,
+      method: '원본 시트의 수동 활 윤곽 가이드 주변 금빛 alpha>64 픽셀을 짧은 선분으로 연결하고 기존 제작 배치로 512px에 변환. 원화 파일 재제작·출력 대조·검사 샘플 측정 없음.',
+      originalArtworkPreserved: true,
+    };
+    console.log(`전투 무기 좌표 제작: ${id} · 원화 파일 보존`);
+  } else {
+    report.units[id] = await prepareCharacter(id, config.units[id], manifests.get(collection).data, catalogs);
+    console.log(`전투 원화 제작: ${id} · 8개 자세 · 기존 경로 유지`);
+  }
 }
 for (const { manifestPath, data } of manifests.values()) await fs.writeFile(manifestPath, serialize(data));
 await fs.writeFile(authoredPath, serialize(catalogs.authored));

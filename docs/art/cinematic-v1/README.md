@@ -38,6 +38,8 @@
 
 수호체의 같은 네 자세는 `src/data/reviewedSkillWeaponAnchors.json`이 소유합니다. 생성 원본에서 눈으로 읽은 손잡이·검끝의 근삿값을 제작 변환으로 옮겼다는 방법과 새 `framePath`·`frameSha256`를 기록합니다. 이 SHA는 새 WebP를 인코딩한 메모리 바이트에서 쓰기 전에 생성하며 출력 파일을 다시 읽어 대조하지 않습니다. 수호체 manifest에서는 이 네 direct 앵커를 생략하여 기존 `reviewed-frame` 조회를 사용하고, 달리기 두 자세·회수·피격은 `measured:false`의 별도 `frame-profile`로 남깁니다. 수호체를 최종 원화의 정밀 실측 자료로 표시하지 않습니다. 기존 조회 함수와 테스트 소스·조건은 변경하지 않습니다.
 
+1.99.180 제작에서는 리나의 비대칭 활 네 자세를 한 개의 긴 cubic으로 근사하던 경로를 보완했습니다. 원본 시트를 직접 읽고 활의 양쪽 굽은 윤곽에 수동 가이드를 지정한 뒤 그 주변 금빛 alpha>64 픽셀에서 짧은 선분 경로를 제작합니다. 팽팽한 시위나 망토를 활 몸체 경로로 사용하지 않습니다. `scripts/prepare-cinematic-bow.mjs`가 원본 시트 좌표를 `packaging.json`에 기록하고 `prepare-cinematic-art.mjs --only=lina --anchors-only`가 기존 배치 변환을 사용해 manifest·실측 카탈로그·제작 보고서의 같은 네 자세를 함께 갱신합니다. 원화 WebP·배율·발 위치·원화 해시는 보존하며 완성 결과나 검사 샘플을 재대조하지 않습니다.
+
 ```sh
 node scripts/prepare-cinematic-art.mjs
 ```
