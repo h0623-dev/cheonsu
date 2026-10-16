@@ -1,0 +1,27 @@
+{
+  "publishedAt": "2026-10-16T03:51:17.507781+00:00",
+  "gameVersion": "1.99.177",
+  "gameSourceCommit": "e2dd0934500e73004bbba07ad1237e1549bdefa6",
+  "siteSourceCommit": "6c04a749f90c82faf9e8ebfc788fae9b8e675851",
+  "cacheRevision": "1.99.177-safari-1-3bbee90f095b",
+  "audience": "owner-private",
+  "nativeDeploymentResult": {
+    "id": "appgdep_6ad19f053fec81919c5613d65dcf316a",
+    "project_id": "appgprj_6ad17df8b73481918b41ccab787d8c8a",
+    "title": "천수 · 아이폰 플레이",
+    "version_id": "appgprj_6ad17df8b73481918b41ccab787d8c8a~appgver_d80fabae86d08191a58a4fa201deea78",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://cheonsu-ios-20261016.h9206.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ad17df8b73481918b41ccab787d8c8a",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-16T03:51:17.507781+00:00"
+  },
+  "archiveBytes": 208726243,
+  "statusNote": "첫 웹 게시 성공. 이후 전투 사전 로딩 보완 a47da16의 최종 웹 산출물로 갱신 예정.",
+  "separateGameTestsRun": false,
+  "actualIPhoneDeviceTested": false
+}

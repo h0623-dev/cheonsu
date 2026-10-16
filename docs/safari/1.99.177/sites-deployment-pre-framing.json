@@ -1,0 +1,37 @@
+{
+  "publishedAt": "2026-10-16T03:54:48.912452+00:00",
+  "gameVersion": "1.99.177",
+  "gameSourceCommit": "a47da16f83449042f5fa5789c3cfced07beab2d0",
+  "siteSourceCommit": "0baaa02deea812933036d446f782d374b46eb330",
+  "cacheRevision": "1.99.177-safari-1-c7ab3da58311",
+  "audience": "owner-private",
+  "nativeDeploymentResult": {
+    "id": "appgdep_6ad19fe111388191bc4e089564ea92fc",
+    "project_id": "appgprj_6ad17df8b73481918b41ccab787d8c8a",
+    "title": "천수 · 아이폰 플레이",
+    "version_id": "appgprj_6ad17df8b73481918b41ccab787d8c8a~appgver_64ac477ec1408191bc4afd42f974e093",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://cheonsu-ios-20261016.h9206.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ad17df8b73481918b41ccab787d8c8a",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-16T03:54:48.912452+00:00"
+  },
+  "archiveBytes": 208722376,
+  "packaging": {
+    "excludedFromSiteOnly": "maps/concept/*.png",
+    "excludedFiles": 30,
+    "originalRepositoryAssetsPreserved": true,
+    "webBuildSeparateFromAndroid": true
+  },
+  "previousPublication": {
+    "sourceCommit": "e2dd0934500e73004bbba07ad1237e1549bdefa6",
+    "record": "sites-deployment-initial.json",
+    "replacedByFinalSource": true
+  },
+  "separateGameTestsRun": false,
+  "actualIPhoneDeviceTested": false
+}
