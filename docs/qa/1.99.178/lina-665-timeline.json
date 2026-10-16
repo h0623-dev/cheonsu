@@ -1,0 +1,825 @@
+{
+  "scope": "사용자가 허용한 ChatGPT 웹 전투 검은 화면 한정 재현",
+  "version": "1.99.178",
+  "source": "13de4da",
+  "host": "게시와 같은 정적 산출물을 로컬 제공",
+  "errors": [],
+  "responses": [],
+  "steps": [
+    "실제 웹 시작·이어하기",
+    "실제1장배치후전투진입",
+    "원래HP/스탯유지·한적만인접한검사용저장복원",
+    "전투DOM·이미지·화면수집"
+  ],
+  "timeline": [
+    {
+      "phase": 0.15,
+      "class": "painted-combat duel-choreographed epic-combat motion-ranged weapon-bow element-fire is-skill  shake-enabled        ",
+      "impact": "0.62",
+      "duration": "4147ms",
+      "images": [
+        {
+          "src": "http://127.0.0.1:5191/art/characters-v2/units/lina-recover.webp",
+          "naturalWidth": 512,
+          "opacity": "1",
+          "rect": {
+            "x": 52.81022262573242,
+            "y": 236.012451171875,
+            "width": 221.94410705566406,
+            "height": 225.02090454101562,
+            "top": 236.012451171875,
+            "right": 274.7543296813965,
+            "bottom": 461.0333557128906,
+            "left": 52.81022262573242
+          }
+        },
+        {
+          "src": "http://127.0.0.1:5191/art/characters-v2/units/sentinel-recover.webp",
+          "naturalWidth": 512,
+          "opacity": "1",
+          "rect": {
+            "x": 382.99713134765625,
+            "y": 228.56588745117188,
+            "width": 227.1463623046875,
+            "height": 227.14639282226562,
+            "top": 228.56588745117188,
+            "right": 610.1434936523438,
+            "bottom": 455.7122802734375,
+            "left": 382.99713134765625
+          }
+        }
+      ]
+    },
+    {
+      "phase": 0.4,
+      "class": "painted-combat duel-choreographed epic-combat motion-ranged weapon-bow element-fire is-skill  shake-enabled        ",
+      "impact": "0.62",
+      "duration": "4147ms",
+      "images": [
+        {
+          "src": "http://127.0.0.1:5191/art/characters-v2/units/lina-windup.webp",
+          "naturalWidth": 512,
+          "opacity": "1",
+          "rect": {
+            "x": 45.3330078125,
+            "y": 233.8071746826172,
+            "width": 225.3341064453125,
+            "height": 229.4162139892578,
+            "top": 233.8071746826172,
+            "right": 270.6671142578125,
+            "bottom": 463.223388671875,
+            "left": 45.3330078125
+          }
+        },
+        {
+          "src": "http://127.0.0.1:5191/art/characters-v2/units/sentinel-recover.webp",
+          "naturalWidth": 512,
+          "opacity": "1",
+          "rect": {
+            "x": 382.99713134765625,
+            "y": 228.56588745117188,
+            "width": 227.1463623046875,
+            "height": 227.14639282226562,
+            "top": 228.56588745117188,
+            "right": 610.1434936523438,
+            "bottom": 455.7122802734375,
+            "left": 382.99713134765625
+          }
+        }
+      ]
+    },
+    {
+      "phase": 0.62,
+      "class": "painted-combat duel-choreographed epic-combat motion-ranged weapon-bow element-fire is-skill  shake-enabled        ",
+      "impact": "0.62",
+      "duration": "4147ms",
+      "images": [
+        {
+          "src": "http://127.0.0.1:5191/art/characters-v2/units/lina-skill-a.webp",
+          "naturalWidth": 512,
+          "opacity": "1",
+          "rect": {
+            "x": 59.83489990234375,
+            "y": 239.20401000976562,
+            "width": 221.1177978515625,
+            "height": 219.66949462890625,
+            "top": 239.20401000976562,
+            "right": 280.95269775390625,
+            "bottom": 458.8735046386719,
+            "left": 59.83489990234375
+          }
+        },
+        {
+          "src": "http://127.0.0.1:5191/art/characters-v2/units/sentinel-recoil.webp",
+          "naturalWidth": 512,
+          "opacity": "1",
+          "rect": {
+            "x": 381.5701599121094,
+            "y": 224.5166015625,
+            "width": 242.19003295898438,
+            "height": 240.12515258789062,
+            "top": 224.5166015625,
+            "right": 623.7601928710938,
+            "bottom": 464.6417541503906,
+            "left": 381.5701599121094
+          }
+        }
+      ]
+    },
+    {
+      "phase": 0.84,
+      "class": "painted-combat duel-choreographed epic-combat motion-ranged weapon-bow element-fire is-skill  shake-enabled        ",
+      "impact": "0.62",
+      "duration": "4147ms",
+      "images": [
+        {
+          "src": "http://127.0.0.1:5191/art/characters-v2/units/lina-recover.webp",
+          "naturalWidth": 512,
+          "opacity": "1",
+          "rect": {
+            "x": 59.343223571777344,
+            "y": 240.95762634277344,
+            "width": 215.56961059570312,
+            "height": 215.5696258544922,
+            "top": 240.95762634277344,
+            "right": 274.91283416748047,
+            "bottom": 456.5272521972656,
+            "left": 59.343223571777344
+          }
+        },
+        {
+          "src": "http://127.0.0.1:5191/art/characters-v2/units/sentinel-recover.webp",
+          "naturalWidth": 512,
+          "opacity": "1",
+          "rect": {
+            "x": 388.2469787597656,
+            "y": 227.58709716796875,
+            "width": 232.24264526367188,
+            "height": 229.98883056640625,
+            "top": 227.58709716796875,
+            "right": 620.4896240234375,
+            "bottom": 457.575927734375,
+            "left": 388.2469787597656
+          }
+        }
+      ]
+    }
+  ],
+  "scene": {
+    "root": {
+      "tag": "SECTION",
+      "class": "painted-combat duel-choreographed epic-combat motion-ranged weapon-bow element-fire is-skill  shake-enabled        ",
+      "rect": {
+        "x": 16,
+        "y": 44.28125,
+        "width": 633,
+        "height": 515.4375
+      },
+      "position": "static",
+      "zIndex": "auto",
+      "display": "block",
+      "visibility": "visible",
+      "opacity": "1",
+      "filter": "none",
+      "transform": "none",
+      "background": "none",
+      "height": "515.438px"
+    },
+    "arena": {
+      "tag": "DIV",
+      "class": "painted-combat-arena",
+      "rect": {
+        "x": 17,
+        "y": 117.28125,
+        "width": 631,
+        "height": 368.4375
+      },
+      "position": "relative",
+      "zIndex": "auto",
+      "display": "block",
+      "visibility": "visible",
+      "opacity": "1",
+      "filter": "none",
+      "transform": "none",
+      "background": "linear-gradient(rgba(2, 9, 16, 0.21) 0%, rgba(7, 19, 27, 0.086) 40%, rgba(8, 17, 22, 0.46) 100%), url(\"http://127.0.0.1:5191/art/chapters-v1/chapter-01.webp\")",
+      "height": "368.438px"
+    },
+    "children": [
+      {
+        "tag": "DIV",
+        "class": "epic-combat-ground",
+        "rect": {
+          "x": -14.546875,
+          "y": 308.859375,
+          "width": 694.09375,
+          "height": 191.59375
+        },
+        "position": "absolute",
+        "zIndex": "1",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "none",
+        "background": "radial-gradient(at 52% 60%, rgba(216, 195, 153, 0.086) 0%, rgba(0, 0, 0, 0) 63%), linear-gradient(rgba(0, 0, 0, 0), rgba(7, 17, 22, 0.5))",
+        "height": "191.594px"
+      },
+      {
+        "tag": "DIV",
+        "class": "epic-contact-light",
+        "rect": {
+          "x": 330.48065185546875,
+          "y": 195.3556365966797,
+          "width": 313.82000732421875,
+          "height": 313.8199462890625
+        },
+        "position": "absolute",
+        "zIndex": "2",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(1.04, 0, 0, 1.04, -150.875, -150.875)",
+        "background": "radial-gradient(circle, rgba(255, 157, 65, 0.46), rgba(255, 157, 65, 0.18) 28%, rgba(0, 0, 0, 0) 66%)",
+        "height": "301.75px"
+      },
+      {
+        "tag": "DIV",
+        "class": "epic-floor-pressure",
+        "rect": {
+          "x": 254.890625,
+          "y": 369.078125,
+          "width": 465,
+          "height": 144
+        },
+        "position": "absolute",
+        "zIndex": "2",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(1.55, 0, 0, 0.48, -150, -150)",
+        "background": "radial-gradient(rgba(255, 157, 65, 0.03) 38%, rgba(255, 157, 65, 0.22) 62%, rgba(0, 0, 0, 0) 72%)",
+        "height": "300px"
+      },
+      {
+        "tag": "DIV",
+        "class": "epic-hit-flare",
+        "rect": {
+          "x": 374.2112731933594,
+          "y": 239.08627319335938,
+          "width": 226.35867309570312,
+          "height": 226.35870361328125
+        },
+        "position": "absolute",
+        "zIndex": "6",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(1.36971, 0.16818, -0.16818, 1.36971, -73.5938, -73.5938)",
+        "background": "radial-gradient(circle, rgb(255, 253, 241) 0%, rgb(255, 240, 181) 4%, rgba(255, 157, 65, 0.8) 10%, rgba(255, 157, 65, 0.25) 24%, rgba(0, 0, 0, 0) 57%)",
+        "height": "147.188px"
+      },
+      {
+        "tag": "DIV",
+        "class": "epic-debris-field",
+        "rect": {
+          "x": 17,
+          "y": 117.28125,
+          "width": 631,
+          "height": 368.4375
+        },
+        "position": "absolute",
+        "zIndex": "5",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "none",
+        "background": "none",
+        "height": "368.438px"
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "rect": {
+          "x": 17,
+          "y": 117.28125,
+          "width": 631,
+          "height": 368.4375
+        },
+        "position": "absolute",
+        "zIndex": "5",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "none",
+        "background": "none",
+        "height": "368.438px"
+      },
+      {
+        "tag": "DIV",
+        "class": "skill-stage-shade",
+        "rect": {
+          "x": 17,
+          "y": 117.28125,
+          "width": 631,
+          "height": 368.4375
+        },
+        "position": "absolute",
+        "zIndex": "2",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "none",
+        "background": "none",
+        "height": "368.438px"
+      },
+      {
+        "tag": "DIV",
+        "class": "duel-impact-ink",
+        "rect": {
+          "x": 17,
+          "y": 117.28125,
+          "width": 631,
+          "height": 368.4375
+        },
+        "position": "absolute",
+        "zIndex": "3",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "none",
+        "background": "radial-gradient(at 74.5483% 63.8579%, rgba(255, 243, 200, 0.3) 0px, rgba(0, 0, 0, 0) 19%, rgba(5, 15, 21, 0.28) 86%)",
+        "height": "368.438px"
+      },
+      {
+        "tag": "DIV",
+        "class": "duel-action-lines",
+        "rect": {
+          "x": 23.616302490234375,
+          "y": 179.90625,
+          "width": 641.586181640625,
+          "height": 257.921875
+        },
+        "position": "absolute",
+        "zIndex": "1",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(1.01678, 0, 0, 1, 11.9094, 0)",
+        "background": "none",
+        "height": "257.922px"
+      },
+      {
+        "tag": "DIV",
+        "class": "duel-effects",
+        "rect": {
+          "x": 17,
+          "y": 117.28125,
+          "width": 631,
+          "height": 368.4375
+        },
+        "position": "absolute",
+        "zIndex": "4",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "none",
+        "background": "none",
+        "height": "368.438px"
+      },
+      {
+        "tag": "DIV",
+        "class": "duel-impacts",
+        "rect": {
+          "x": 17,
+          "y": 117.28125,
+          "width": 631,
+          "height": 368.4375
+        },
+        "position": "absolute",
+        "zIndex": "5",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "none",
+        "background": "none",
+        "height": "368.438px"
+      },
+      {
+        "tag": "DIV",
+        "class": "skill-spectacle",
+        "rect": {
+          "x": 17,
+          "y": 117.28125,
+          "width": 631,
+          "height": 368.4375
+        },
+        "position": "absolute",
+        "zIndex": "4",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "none",
+        "background": "none",
+        "height": "368.438px"
+      },
+      {
+        "tag": "DIV",
+        "class": "painted-fighter fighter-attacker",
+        "rect": {
+          "x": 48.546875,
+          "y": 201.75,
+          "width": 239.765625,
+          "height": 239.765625
+        },
+        "position": "absolute",
+        "zIndex": "3",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "background": "none",
+        "height": "239.766px"
+      },
+      {
+        "tag": "DIV",
+        "class": "painted-fighter fighter-defender",
+        "rect": {
+          "x": 376.6875,
+          "y": 201.75,
+          "width": 239.765625,
+          "height": 239.765625
+        },
+        "position": "absolute",
+        "zIndex": "3",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "background": "none",
+        "height": "239.766px"
+      },
+      {
+        "tag": "DIV",
+        "class": "skill-cut-in epic-cut-in",
+        "rect": {
+          "x": 42.23999786376953,
+          "y": 154.125,
+          "width": 631,
+          "height": 132.625
+        },
+        "position": "absolute",
+        "zIndex": "8",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(1, 0, 0, 1, 25.24, 0)",
+        "background": "linear-gradient(100deg, rgba(10, 20, 25, 0.95) 0%, rgba(16, 40, 49, 0.93) 36%, rgba(8, 19, 26, 0.95) 75%)",
+        "height": "132.625px"
+      },
+      {
+        "tag": "ASIDE",
+        "class": "combat-enemy-intro intro-defender",
+        "rect": {
+          "x": 512.609375,
+          "y": 127.28125,
+          "width": 117.390625,
+          "height": 49.25
+        },
+        "position": "absolute",
+        "zIndex": "9",
+        "display": "grid",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "none",
+        "background": "linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(7, 18, 22, 0.78) 35%)",
+        "height": "49.25px"
+      },
+      {
+        "tag": "DIV",
+        "class": "combat-result",
+        "rect": {
+          "x": 395.59375,
+          "y": 270.0363464355469,
+          "width": 220.84375,
+          "height": 58
+        },
+        "position": "absolute",
+        "zIndex": "11",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0.527769",
+        "filter": "none",
+        "transform": "matrix(1, 0, 0, 1, 0, -5.66677)",
+        "background": "none",
+        "height": "58px"
+      }
+    ],
+    "images": [
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-ready",
+        "rect": {
+          "x": 62.25615310668945,
+          "y": 242.61537170410156,
+          "width": 212.23255920410156,
+          "height": 212.23252868652344
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(0.884521, 0, 0, 0.884521, 0, 0)",
+        "background": "none",
+        "height": "239.766px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/lina-recover.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      },
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-run-a",
+        "rect": {
+          "x": 62.25615310668945,
+          "y": 242.61537170410156,
+          "width": 212.23255920410156,
+          "height": 212.23252868652344
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(0.884521, 0, 0, 0.884521, 0, 0)",
+        "background": "none",
+        "height": "239.766px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/lina-run-a.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      },
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-run-b",
+        "rect": {
+          "x": 62.25615310668945,
+          "y": 242.61537170410156,
+          "width": 212.23255920410156,
+          "height": 212.23252868652344
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(0.884521, 0, 0, 0.884521, 0, 0)",
+        "background": "none",
+        "height": "239.766px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/lina-run-b.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      },
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-windup",
+        "rect": {
+          "x": 62.25615310668945,
+          "y": 242.61537170410156,
+          "width": 212.23255920410156,
+          "height": 212.23252868652344
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(0.884521, 0, 0, 0.884521, 0, 0)",
+        "background": "none",
+        "height": "239.766px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/lina-windup.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      },
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-strike fighter-action",
+        "rect": {
+          "x": 62.25645446777344,
+          "y": 243.0295867919922,
+          "width": 212.23255920410156,
+          "height": 212.23255920410156
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(0.884521, 0, 0, 0.884521, 0, 0.414214)",
+        "background": "none",
+        "height": "239.766px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/lina-strike.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      },
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-recover",
+        "rect": {
+          "x": 62.25615310668945,
+          "y": 242.61537170410156,
+          "width": 212.23255920410156,
+          "height": 212.23252868652344
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "matrix(0.884521, 0, 0, 0.884521, 0, 0)",
+        "background": "none",
+        "height": "239.766px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/lina-recover.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      },
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-skill",
+        "rect": {
+          "x": 62.25615310668945,
+          "y": 242.61537170410156,
+          "width": 212.23255920410156,
+          "height": 212.23252868652344
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(0.884521, 0, 0, 0.884521, 0, 0)",
+        "background": "none",
+        "height": "239.766px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/lina-skill-a.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      },
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-ready",
+        "rect": {
+          "x": 382.99713134765625,
+          "y": 228.56588745117188,
+          "width": 227.1463623046875,
+          "height": 227.14639282226562
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "matrix(0.947368, 0, 0, 0.947368, 0, 0)",
+        "background": "none",
+        "height": "239.766px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/sentinel-recover.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      },
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-recoil",
+        "rect": {
+          "x": 382.99713134765625,
+          "y": 228.56588745117188,
+          "width": 227.1463623046875,
+          "height": 227.14639282226562
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(0.947368, 0, 0, 0.947368, 0, 0)",
+        "background": "none",
+        "height": "239.766px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/sentinel-recoil.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      },
+      {
+        "tag": "IMG",
+        "class": "fighter-frame fighter-evade",
+        "rect": {
+          "x": 382.99713134765625,
+          "y": 228.56588745117188,
+          "width": 227.1463623046875,
+          "height": 227.14639282226562
+        },
+        "position": "absolute",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "0",
+        "filter": "none",
+        "transform": "matrix(0.947368, 0, 0, 0.947368, 0, 0)",
+        "background": "none",
+        "height": "239.766px",
+        "src": "http://127.0.0.1:5191/art/characters-v2/units/sentinel-run-a.webp",
+        "complete": true,
+        "naturalWidth": 512,
+        "naturalHeight": 512
+      }
+    ],
+    "ancestors": [
+      {
+        "tag": "DIV",
+        "class": "painted-combat-overlay",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 665,
+          "height": 604
+        },
+        "position": "fixed",
+        "zIndex": "15000",
+        "display": "grid",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "none",
+        "background": "none",
+        "height": "604px"
+      },
+      {
+        "tag": "DIV",
+        "class": "app world-art-app",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 665,
+          "height": 604
+        },
+        "position": "relative",
+        "zIndex": "auto",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "none",
+        "background": "none",
+        "height": "604px"
+      },
+      {
+        "tag": "DIV",
+        "class": "",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 665,
+          "height": 604
+        },
+        "position": "static",
+        "zIndex": "auto",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "filter": "none",
+        "transform": "none",
+        "background": "none",
+        "height": "604px"
+      }
+    ]
+  },
+  "after": 0
+}

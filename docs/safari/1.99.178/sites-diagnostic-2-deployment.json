@@ -1,0 +1,30 @@
+{
+  "gameVersion": "1.99.178",
+  "gameSourceCommit": "13de4da03815dc31772e711d1de74ff451d7769c",
+  "siteProjectId": "appgprj_6ad17df8b73481918b41ccab787d8c8a",
+  "siteSourceCommit": "ffbb6b46381ea3f7faa93275bc91576e1e5f7078",
+  "cacheRevision": "1.99.178-safari-1-59d47bd0ed97",
+  "archiveBytes": 208730723,
+  "nativeDeployment": {
+    "id": "appgdep_6ad1ca0a9e308191b08861cd0daf6d8a",
+    "project_id": "appgprj_6ad17df8b73481918b41ccab787d8c8a",
+    "title": "천수 · 아이폰 플레이",
+    "version_id": "appgprj_6ad17df8b73481918b41ccab787d8c8a~appgver_e75a71e559fc81919576cdb61681a158",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://cheonsu-ios-20261016.h9206.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ad17df8b73481918b41ccab787d8c8a",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-16T06:54:43.224154+00:00"
+  },
+  "diagnosticPath": "/graphics-check.html?check=2",
+  "gameBundleChanged": false,
+  "scope": "별도 웹 진단 HTML의 CSS 범위 격리와 전투창 내부 이미지·레이어·애니메이션 시계 수집. 실제 게임App/Android/저장 형식 변경 없음.",
+  "directChecks": "기존 사용자 허용 범위에서 로컬665x604/DPR1.5의 리나 스킬4시점과 진단2 게임부팅·상태복사 확인. 실제 Site는 환경 CONNECT403으로 접속 차단.",
+  "reportedIssueResolved": false,
+  "mobileUserFeedback": "사용자가 휴대폰 정상 표시를 확인했으나, 전투 콘셉트의 느낌은 전혀 아니라고 지적함. 이전 Windows 신고의 원인은 미확정.",
+  "actualDevicePlayTested": false
+}
