@@ -12,6 +12,7 @@ import { webBuildInfo } from './update-build-info.mjs';
 import { stages } from '../src/data/stages.js';
 import { getStageRoundLimit } from '../src/engine/stageRules.js';
 import { withApprovedAllyMigration } from './qa-legacy-equipment.mjs';
+import { DEFAULT_SUPPORT_DIALOGUES_SEEN } from '../src/data/supports.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const output = path.resolve(process.env.CHEONSU_DEPLOYMENT_QA_OUT || path.join(root, 'tmp/deployment-qa'));
@@ -19,6 +20,7 @@ const saveKey = 'cheonsu_v01_save';
 const settingsKey = 'cheonsu_settings_v1';
 const viewports = [{ width: 1280, height: 900 }, { width: 390, height: 844 }, { width: 844, height: 390 }];
 const initialIds = ['hero', 'bram', 'lina', 'aria'];
+const preservedProgressFields = ['gold', 'inventory', 'clearedStages', 'gearInventory', 'gearEnhance', 'exploration', 'supportPoints', 'supportDialoguesSeen'];
 const legacy = JSON.parse(await fs.readFile(new URL('./fixtures/monster-save-1.99.156.json', import.meta.url), 'utf8'));
 const report = { production: true, passed: false, results: [], stageChecks: [], errors: [] };
 let browser, server;
@@ -183,6 +185,7 @@ async function runViewport(base, viewport) {
     const partialRaw = await rawSave();
     assert.equal(partial.deploymentDraft.autoFill, false, '수동 배치 초안은 자동 보충을 하지 않는 상태로 저장합니다');
     assert.deepEqual([...partial.deployedIds].sort(), [...initialIds].sort(), '부분 수동 배치 저장은 출전 예정 명단을 줄이지 않습니다');
+    for (const field of preservedProgressFields) assert.deepEqual(partial[field], freshCampaign[field], `최초 부분 배치 저장은 ${field}를 변경하지 않습니다`);
     await page.reload();
     await button('이어하기').click();
     await board(page, { autoPlace: false });
@@ -190,6 +193,12 @@ async function runViewport(base, viewport) {
     assert.deepEqual(await placements(page), firstManualPlacement, '부분 배치를 이어하면 직접 정한 카일 좌표만 복원합니다');
     assert.equal(await page.locator('.deployment-roster-card[data-placed="true"]').count(), 1, '부분 배치 복원이 다른 아군을 자동으로 추가하지 않습니다');
     assert.equal(await page.locator('.deployment-start-btn').isDisabled(), true, '부분 배치 복원 후에도 남은 출전 인원을 배치해야 합니다');
+    // 기존 이어하기는 빠진 지원 대화 쌍에 빈 배열만 추가합니다. 배치 전후 원본 보존과
+    // 이 저장 마이그레이션을 각각 대조하고, 이후 조작은 복원 직후의 같은 기준과 비교합니다.
+    // 원본 배열을 그대로 덮어 써 기대하므로 이미 읽은 대화가 사라져도 통과하지 않습니다.
+    const restoredPartial = await saveDeployment();
+    for (const field of preservedProgressFields.filter(field => field !== 'supportDialoguesSeen')) assert.deepEqual(restoredPartial[field], partial[field], `부분 배치 복원은 ${field}를 변경하지 않습니다`);
+    assert.deepEqual(restoredPartial.supportDialoguesSeen, { ...DEFAULT_SUPPORT_DIALOGUES_SEEN, ...partial.supportDialoguesSeen }, '부분 배치 복원은 빠진 빈 지원 대화 쌍만 채우며 기존 대화 배열을 그대로 보존합니다');
     result.checks.push('자동 배치 전 빈 전장과 시작 차단', '보유 캐릭터 선택 후 한 명 수동 배치', '부분 배치 저장·읽기 전용 이어하기·자동 보충 방지');
     await button('자동 배치').click();
     assert.deepEqual(Object.keys(await placements(page)).sort(), [...initialIds].sort(), '자동 배치를 명시적으로 누르면 기존 출전 부대를 안전한 초기 칸에 배치합니다');
@@ -247,7 +256,7 @@ async function runViewport(base, viewport) {
     const pending = await saveDeployment();
     const pendingRaw = await rawSave();
     const finalCoordinates = await placements(page);
-    for (const field of ['gold', 'inventory', 'clearedStages', 'gearInventory', 'gearEnhance', 'exploration', 'supportPoints', 'supportDialoguesSeen']) assert.deepEqual(pending[field], freshCampaign[field], `배치 저장은 ${field}를 변경하지 않습니다`);
+    for (const field of preservedProgressFields) assert.deepEqual(pending[field], restoredPartial[field], `배치 저장은 ${field}를 변경하지 않습니다`);
     await page.screenshot({ path: path.join(output, `${viewport.width}x${viewport.height}-deployment.png`) });
     await page.reload();
     await button('이어하기').click();
