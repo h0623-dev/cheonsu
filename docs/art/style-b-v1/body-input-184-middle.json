@@ -1,0 +1,1164 @@
+{
+  "schema": 1,
+  "method": "manual-input-estimate",
+  "authoringNote": "지정된 생성 원본 PNG 8장을 직접 보며 각 인물의 동일한 두개골 축 두 점과 recover 신체 구간을 수동 근사 저작했다. 원본은 모두 1254×1254이며 feature 및 bodyBox는 전체 원본 픽셀 좌표다. 자세를 바꾸며 웅크린 신체 높이를 확대 기준으로 오인하지 않도록 무기·머리 장식·흐르는 긴 머리·수염·넓은 망토·날개·꼬리를 기준 길이에서 제외한다. 가려진 뼈대는 가까운 두개골 윤곽 또는 눈 위치로 근사한 입력이며 정밀 실측·완성 WebP 확인·게임 QA 결과가 아니다. 원본 이외의 산출물 열람이나 수정 후 검증은 하지 않았다.",
+  "sourceDimensions": [
+    1254,
+    1254
+  ],
+  "coordinateSpace": "full-source-pixels",
+  "units": {
+    "luka": {
+      "sheet": "ally-06",
+      "feature": "skull-axis: close cranial crown to chin; exclude loose hair",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              228,
+              118
+            ],
+            [
+              243,
+              160
+            ]
+          ],
+          "bodyBox": [
+            95,
+            116,
+            321,
+            385
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              663,
+              212
+            ],
+            [
+              680,
+              245
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1072,
+              150
+            ],
+            [
+              1085,
+              185
+            ]
+          ]
+        }
+      }
+    },
+    "baekho": {
+      "sheet": "ally-06",
+      "feature": "skull-axis: close cranial crown to chin; exclude ponytail and beard",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              206,
+              522
+            ],
+            [
+              220,
+              575
+            ]
+          ],
+          "bodyBox": [
+            63,
+            517,
+            315,
+            797
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              631,
+              549
+            ],
+            [
+              647,
+              601
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1048,
+              533
+            ],
+            [
+              1065,
+              590
+            ]
+          ]
+        }
+      }
+    },
+    "mare": {
+      "sheet": "ally-06",
+      "feature": "skull-axis: close cranial crown to chin; exclude loose hair",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              187,
+              903
+            ],
+            [
+              190,
+              943
+            ]
+          ],
+          "bodyBox": [
+            64,
+            899,
+            301,
+            1165
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              625,
+              951
+            ],
+            [
+              627,
+              988
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1051,
+              924
+            ],
+            [
+              1057,
+              961
+            ]
+          ]
+        }
+      }
+    },
+    "harin": {
+      "sheet": "ally-07",
+      "feature": "skull-axis: close cranial crown to chin; exclude ponytail and hair ornaments",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              216,
+              109
+            ],
+            [
+              226,
+              159
+            ]
+          ],
+          "bodyBox": [
+            129,
+            109,
+            278,
+            395
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              655,
+              147
+            ],
+            [
+              664,
+              195
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1057,
+              152
+            ],
+            [
+              1067,
+              198
+            ]
+          ]
+        }
+      }
+    },
+    "edan": {
+      "sheet": "ally-07",
+      "feature": "skull-axis: close cranial crown to chin; exclude loose hair",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              205,
+              515
+            ],
+            [
+              207,
+              564
+            ]
+          ],
+          "bodyBox": [
+            74,
+            511,
+            268,
+            792
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              629,
+              579
+            ],
+            [
+              637,
+              621
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1086,
+              572
+            ],
+            [
+              1093,
+              621
+            ]
+          ]
+        }
+      }
+    },
+    "sylvan": {
+      "sheet": "ally-07",
+      "feature": "skull-axis: close cranial crown to chin; exclude long hair",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              202,
+              881
+            ],
+            [
+              207,
+              928
+            ]
+          ],
+          "bodyBox": [
+            95,
+            880,
+            274,
+            1163
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              602,
+              921
+            ],
+            [
+              607,
+              966
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1046,
+              909
+            ],
+            [
+              1052,
+              954
+            ]
+          ]
+        }
+      }
+    },
+    "raider": {
+      "sheet": "enemy-01",
+      "feature": "skull-axis: close cranial crown to chin; exclude loose hair",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              218,
+              137
+            ],
+            [
+              233,
+              170
+            ]
+          ],
+          "bodyBox": [
+            115,
+            132,
+            293,
+            363
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              615,
+              175
+            ],
+            [
+              633,
+              212
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1093,
+              181
+            ],
+            [
+              1111,
+              217
+            ]
+          ]
+        }
+      }
+    },
+    "ranger": {
+      "sheet": "enemy-01",
+      "feature": "skull-axis: forehead under hood to chin; exclude loose hood crown",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              208,
+              519
+            ],
+            [
+              210,
+              554
+            ]
+          ],
+          "bodyBox": [
+            125,
+            509,
+            269,
+            760
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              603,
+              548
+            ],
+            [
+              607,
+              583
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1038,
+              586
+            ],
+            [
+              1040,
+              623
+            ]
+          ]
+        }
+      }
+    },
+    "sniper": {
+      "sheet": "enemy-01",
+      "feature": "skull-axis: close cranial crown to chin; exclude long hair",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              206,
+              889
+            ],
+            [
+              207,
+              931
+            ]
+          ],
+          "bodyBox": [
+            114,
+            884,
+            277,
+            1129
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              633,
+              918
+            ],
+            [
+              640,
+              959
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1040,
+              939
+            ],
+            [
+              1048,
+              980
+            ]
+          ]
+        }
+      }
+    },
+    "marauder": {
+      "sheet": "enemy-02",
+      "feature": "skull-axis: close cranial crown to jaw; exclude ponytail and hanging beard",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              220,
+              125
+            ],
+            [
+              235,
+              169
+            ]
+          ],
+          "bodyBox": [
+            64,
+            123,
+            357,
+            419
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              637,
+              163
+            ],
+            [
+              650,
+              204
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1048,
+              167
+            ],
+            [
+              1057,
+              209
+            ]
+          ]
+        }
+      }
+    },
+    "assassin_elite": {
+      "sheet": "enemy-02",
+      "feature": "skull-axis: fitted hood over cranial crown to masked chin; exclude flowing hood cloth",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              210,
+              491
+            ],
+            [
+              217,
+              541
+            ]
+          ],
+          "bodyBox": [
+            57,
+            491,
+            314,
+            792
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              678,
+              552
+            ],
+            [
+              686,
+              601
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1089,
+              538
+            ],
+            [
+              1099,
+              587
+            ]
+          ]
+        }
+      }
+    },
+    "iron_lancer": {
+      "sheet": "enemy-02",
+      "feature": "skull-axis: fitted helmet crown to chin guard; exclude red plume",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              204,
+              863
+            ],
+            [
+              212,
+              909
+            ]
+          ],
+          "bodyBox": [
+            86,
+            860,
+            311,
+            1158
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              634,
+              926
+            ],
+            [
+              645,
+              971
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              988,
+              936
+            ],
+            [
+              997,
+              978
+            ]
+          ]
+        }
+      }
+    },
+    "plague_doctor": {
+      "sheet": "enemy-03",
+      "feature": "skull-axis: back of fitted hood at skull to eye centre; exclude hat and mask beak",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              186,
+              112
+            ],
+            [
+              221,
+              102
+            ]
+          ],
+          "bodyBox": [
+            79,
+            97,
+            294,
+            393
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              653,
+              175
+            ],
+            [
+              694,
+              166
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1016,
+              139
+            ],
+            [
+              1054,
+              127
+            ]
+          ]
+        }
+      }
+    },
+    "beast_tamer": {
+      "sheet": "enemy-03",
+      "feature": "skull-axis: close cranial crown to chin; exclude long hair",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              204,
+              449
+            ],
+            [
+              206,
+              499
+            ]
+          ],
+          "bodyBox": [
+            58,
+            450,
+            314,
+            789
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              597,
+              533
+            ],
+            [
+              607,
+              577
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1042,
+              502
+            ],
+            [
+              1050,
+              556
+            ]
+          ]
+        }
+      }
+    },
+    "storm_mage": {
+      "sheet": "enemy-03",
+      "feature": "skull-axis: close cranial crown to chin; exclude loose hair",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              192,
+              829
+            ],
+            [
+              204,
+              881
+            ]
+          ],
+          "bodyBox": [
+            66,
+            822,
+            292,
+            1183
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              660,
+              891
+            ],
+            [
+              673,
+              939
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1029,
+              860
+            ],
+            [
+              1045,
+              908
+            ]
+          ]
+        }
+      }
+    },
+    "blade_dancer": {
+      "sheet": "enemy-04",
+      "feature": "skull-axis: close cranial crown to chin; exclude ponytail and ribbons",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              219,
+              158
+            ],
+            [
+              222,
+              189
+            ]
+          ],
+          "bodyBox": [
+            144,
+            156,
+            267,
+            327
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              657,
+              206
+            ],
+            [
+              662,
+              232
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1062,
+              198
+            ],
+            [
+              1066,
+              223
+            ]
+          ]
+        }
+      }
+    },
+    "siege_gunner": {
+      "sheet": "enemy-04",
+      "feature": "skull-axis: close cranial crown to jaw; exclude hanging beard",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              212,
+              559
+            ],
+            [
+              220,
+              593
+            ]
+          ],
+          "bodyBox": [
+            135,
+            558,
+            268,
+            731
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              618,
+              572
+            ],
+            [
+              625,
+              603
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1006,
+              590
+            ],
+            [
+              1015,
+              622
+            ]
+          ]
+        }
+      }
+    },
+    "sentinel": {
+      "sheet": "enemy-04",
+      "feature": "skull-axis: fitted helmet crown to chin guard; exclude blue plume",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              204,
+              945
+            ],
+            [
+              208,
+              975
+            ]
+          ],
+          "bodyBox": [
+            141,
+            944,
+            269,
+            1127
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              623,
+              969
+            ],
+            [
+              629,
+              997
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1070,
+              982
+            ],
+            [
+              1075,
+              1008
+            ]
+          ]
+        }
+      }
+    },
+    "blackguard": {
+      "sheet": "enemy-05",
+      "feature": "skull-axis: close cranial crown to chin; exclude long hair",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              212,
+              72
+            ],
+            [
+              213,
+              121
+            ]
+          ],
+          "bodyBox": [
+            90,
+            67,
+            297,
+            405
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              663,
+              167
+            ],
+            [
+              674,
+              212
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1155,
+              118
+            ],
+            [
+              1152,
+              166
+            ]
+          ]
+        }
+      }
+    },
+    "warlord": {
+      "sheet": "enemy-05",
+      "feature": "skull-axis: close cranial crown to jaw; exclude ponytail and beard",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              221,
+              461
+            ],
+            [
+              235,
+              507
+            ]
+          ],
+          "bodyBox": [
+            100,
+            456,
+            315,
+            819
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              693,
+              556
+            ],
+            [
+              699,
+              603
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1138,
+              539
+            ],
+            [
+              1143,
+              588
+            ]
+          ]
+        }
+      }
+    },
+    "pyromancer": {
+      "sheet": "enemy-05",
+      "feature": "skull-axis: close cranial crown to chin; exclude loose hair",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              184,
+              873
+            ],
+            [
+              190,
+              921
+            ]
+          ],
+          "bodyBox": [
+            64,
+            871,
+            270,
+            1203
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              671,
+              917
+            ],
+            [
+              675,
+              961
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1071,
+              917
+            ],
+            [
+              1079,
+              960
+            ]
+          ]
+        }
+      }
+    },
+    "frost_mage": {
+      "sheet": "enemy-06",
+      "feature": "skull-axis: close cranial crown to chin; exclude long hair and circlet ornament",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              193,
+              60
+            ],
+            [
+              198,
+              109
+            ]
+          ],
+          "bodyBox": [
+            108,
+            60,
+            257,
+            392
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              667,
+              103
+            ],
+            [
+              670,
+              147
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1043,
+              74
+            ],
+            [
+              1049,
+              117
+            ]
+          ]
+        }
+      }
+    },
+    "cultist": {
+      "sheet": "enemy-06",
+      "feature": "skull-axis: close cranial crown to chin; exclude long hair",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              204,
+              476
+            ],
+            [
+              212,
+              520
+            ]
+          ],
+          "bodyBox": [
+            115,
+            472,
+            264,
+            800
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              640,
+              481
+            ],
+            [
+              646,
+              525
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1046,
+              507
+            ],
+            [
+              1066,
+              545
+            ]
+          ]
+        }
+      }
+    },
+    "void_knight": {
+      "sheet": "enemy-06",
+      "feature": "skull-axis: fitted helmet crown to chin guard; exclude helmet horns and crests",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              200,
+              841
+            ],
+            [
+              209,
+              885
+            ]
+          ],
+          "bodyBox": [
+            106,
+            846,
+            268,
+            1168
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              668,
+              898
+            ],
+            [
+              679,
+              941
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1111,
+              911
+            ],
+            [
+              1123,
+              953
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

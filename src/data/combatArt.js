@@ -10,6 +10,7 @@ import { getSkillSpectacle } from './skillSpectacle.js';
 import { getEpicCombatAssets } from './epicCombatArt.js';
 import { EXPANSION_BASE_ART_KEYS, ADVANCED_CLASS_ART_KEYS, PROMOTION_ART_KEYS, LEGACY_CHARACTER_ART_KEYS, getExpansionArtIdentity, isKnownCharacterArtKey } from './expansionArtRegistry.js';
 import { resolveCombatPose } from './combatPoseIdentity.js';
+import { applyCombatBodyProportion } from './combatBodyProportions.js';
 
 export function getCombatTiming(scene) {
   const skill = scene.mode === 'skill' || Boolean(scene.outcome?.heal || scene.outcome?.guard);
@@ -23,7 +24,12 @@ export function getCombatChoreography(key,scene){
   const authoredSkillId = scene.attacker?.activeSkillId || scene.attacker?.skillSpec?.id
     || (key === 'oath_guardian' ? scene.attacker?.skillSpec?.name || scene.attacker?.skill : null)
     || plan.id.slice(key.length + 1);
-  const redesignedSkill = plan.skill ? getCharacterSkillPose(key, authoredSkillId) : null;
+  const authoredSkill = plan.skill ? getCharacterSkillPose(key, authoredSkillId) : null;
+  const skillSourcePose = authoredSkill?.src?.match(/-(skill-[ab])\.webp$/)?.[1];
+  const skillStyle = authoredSkill && applyCombatBodyProportion(key, skillSourcePose, {
+    '--combat-sprite-scale': authoredSkill.scale, '--combat-foot-offset': authoredSkill.footOffset || '0%',
+  });
+  const redesignedSkill = authoredSkill && { ...authoredSkill, scale: skillStyle['--combat-sprite-scale'], footOffset: skillStyle['--combat-foot-offset'] };
   const performance = directDuelPerformance(redesignedSkill ? { ...plan, skillPose: redesignedSkill } : plan, weapon, presentation, scene);
   return { ...performance, spectacle: getSkillSpectacle(performance, key, presentation, scene) };
 }
@@ -49,7 +55,8 @@ export function getCombatFrameStyle(key, pose) {
 // The source-art API above retains each authored pose's metrics. Only the duel's
 // acting consumers resolve B's settled body for footwork, anticipation and recoil.
 export function getCombatActingFrameStyle(key, pose = 'recover') {
-  return getCombatFrameStyle(key, resolveCombatPose(key, pose));
+  const sourcePose = resolveCombatPose(key, pose);
+  return applyCombatBodyProportion(key, sourcePose, getCombatFrameStyle(key, sourcePose));
 }
 
 const weapons = {

@@ -5,7 +5,7 @@ import { getCombatActingFrameStyle as getCombatFrameStyle } from '../data/combat
 import { animateSkillSpectacle } from './animateSkillSpectacle.js';
 import { animateEpicCombat } from './animateEpicCombat.js';
 import { fitCinematicDuel, getCinematicReach, resetCinematicDuelLayout } from './fitCinematicDuel.js';
-import { resolveCombatPose } from '../data/combatPoseIdentity.js';
+import { resolveCombatPose, isBattleStyleBBaseKey } from '../data/combatPoseIdentity.js';
 
 const clamp=value=>Math.max(0,Math.min(1,value));
 
@@ -38,7 +38,7 @@ function cinematicMotionEasing(plan, at) {
 }
 
 // Add anticipation and follow-through without moving the authored release or contact anchors.
-function getCinematicActing(plan, { support, boss }) {
+function getCinematicActing(plan, { support, boss, constantBodyScale = false }) {
   const { bend, compression, retreat, follow, plant, recoil } = cinematicMotionProfiles[plan.weapon] || cinematicMotionProfiles.slash;
   const weight = (support ? .48 : boss ? .72 : 1) * (plan.skill ? 1.12 : 1);
   const actor = plan.actor.map(point => [...point]), body = plan.body.map(point => [...point]);
@@ -112,7 +112,9 @@ function getCinematicActing(plan, { support, boss }) {
   }
   actor.push([0, ...sampleActor(0)], [1, ...sampleActor(1)]);
   body.push([0, ...sampleBody(0)], [1, ...sampleBody(1)]);
-  return { actor: cinematicTracks(actor), body: cinematicTracks(body) };
+  const bodyTrack = cinematicTracks(body);
+  return { actor: cinematicTracks(actor), body: constantBodyScale
+    ? bodyTrack.map(([at, angle]) => [at, angle, 1, 1]) : bodyTrack };
 }
 
 export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,finish,selfSupport,attackerKey,defenderKey}){
@@ -128,10 +130,10 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
       if(!active)return;
       const elapsed=animations[0]?.currentTime ?? Math.min(duration, performance.now() - startedAt),paused=animations[0]?.playState==='paused';stop();
       resetCinematicDuelLayout(attacker,defender);
-      root.classList.toggle('duel-motion-disabled',!enabled||media.matches);
-      if(!enabled||media.matches)return;
+      const motionDisabled = !enabled || media.matches;
+      root.classList.toggle('duel-motion-disabled',motionDisabled);
       const attackerBoss = root.dataset.epicBossSide === 'attacker', defenderBoss = root.dataset.epicBossSide === 'defender';
-      const acting = getCinematicActing(plan, { support, boss: attackerBoss });
+      const acting = getCinematicActing(plan, { support, boss: attackerBoss, constantBodyScale: isBattleStyleBBaseKey(attackerKey) });
       const theme = plan.spectacle?.theme || root.dataset.epicTheme;
       const contactFilter = theme === 'fire' ? 'brightness(1.19) sepia(.23) saturate(1.32)'
         : ['heal','holy','guard'].includes(theme) ? 'brightness(1.14) sepia(.08) saturate(1.06)'
@@ -187,6 +189,11 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
       const a=attacker.offsetLeft+attacker.offsetWidth*.55,d=target.offsetLeft+target.offsetWidth*.46;
       ground=arena.clientHeight-parseFloat(getComputedStyle(target).bottom);
       dy=ground-target.offsetWidth*contactFraction;
+      // Settled-body spacing and the one-time pair fit also apply when animation
+      // is disabled. Keep the existing static ready poses; skip only WAAPI motion.
+      root.style.setProperty('--duel-contact-x', `${d / arena.clientWidth * 100}%`);
+      root.style.setProperty('--duel-contact-y', `${dy / arena.clientHeight * 100}%`);
+      if(motionDisabled)return;
       const animate=(element,frames,options={})=>{
         if(!element)return;
         const ordered=frames.filter(frame=>Number.isFinite(frame.offset)).map((frame,index)=>[clamp(frame.offset),index,frame])

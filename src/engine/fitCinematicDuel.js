@@ -3,6 +3,7 @@ import { getCombatActingFrameStyle as getCombatFrameStyle } from '../data/combat
 import { getDuelDefenderReaction, getDuelPoseAt, sampleDuelTrack } from '../data/duelPerformance.js';
 import { getDuelWeaponAnchor, projectDuelAnchor } from '../data/duelContactGeometry.js';
 import { resolveCombatPose } from '../data/combatPoseIdentity.js';
+import { getCombatBodyBounds } from '../data/combatBodyProportions.js';
 
 const clamp = value => Math.max(0, Math.min(1, Number.isFinite(value) ? value : 0));
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
@@ -21,8 +22,8 @@ export function resetCinematicDuelLayout(...actors) {
   }
 }
 
-// A negative advance is legitimate for a giant whose weapon already passes its target.
-// Its use is paired with silhouette fitting below, never with a raw off-screen retreat.
+// Keep physical contact exact. Home placement below leaves enough room for even a
+// giant's long weapon before asking this solver for a positive approach distance.
 export function getCinematicReach({ attackerLeft, attackerWidth, defenderLeft, defenderWidth, tip, scale, footOffset, body, advance = 1 }) {
   const weaponX = projectDuelAnchor(tip, { width: attackerWidth, scale, footOffset, body })[0];
   return (defenderLeft + defenderWidth * .46 - attackerLeft - weaponX) / Math.max(.001, advance);
@@ -185,6 +186,23 @@ function includeFrame(union, frame, dimensions, motion, interval, mirrored, extr
   extend(union, left + maxX + width * .83, ground + maxY + width * .025);
 }
 
+function homeBodyEnvelope(key, width, plan, body, mirrored) {
+  const frame = frameFor(key, 'recover', plan);
+  const bounds = getCombatBodyBounds(key);
+  const envelope = emptyBounds();
+  // Body authoring excludes weapons, spell auras and decorative silhouettes. Its
+  // projection shares the ready image's scale, foot origin and mirrored facing.
+  for (const x of [bounds.left / 512, (bounds.right + 1) / 512]) {
+    for (const y of [bounds.top / 512, (bounds.bottom + 1) / 512]) {
+      const source = [mirrored ? 1 - x : x, y];
+      const [px, py] = projectDuelAnchor(source, { width, scale: frame.scale,
+        footOffset: frame.footOffset, body });
+      extend(envelope, px, py);
+    }
+  }
+  return envelope;
+}
+
 export function fitCinematicDuel({ arena, attacker, defender, attackerKey, defenderKey, plan, acting, contact, contactFraction = .37, miss, support, finish, defenderBoss }) {
   const width = arena.clientWidth, height = arena.clientHeight;
   const attackerWidth = attacker.offsetWidth, attackerHeight = attacker.offsetHeight;
@@ -192,7 +210,7 @@ export function fitCinematicDuel({ arena, attacker, defender, attackerKey, defen
   const attackerLeft = attacker.offsetLeft;
   const attackerGround = height - (parseFloat(getComputedStyle(attacker).bottom) || 0);
   const defenderWidth = defender?.offsetWidth || 0, defenderHeight = defender?.offsetHeight || 0;
-  const deltaLeft = defender ? defender.offsetLeft - attackerLeft : 0;
+  let deltaLeft = defender ? defender.offsetLeft - attackerLeft : 0;
   let deltaGround = defender ? height - (parseFloat(getComputedStyle(defender).bottom) || 0) - attackerGround : 0;
   const moving = Boolean(defender && plan.moving && !support);
   const defenseMotion = defender ? defenderMotion(plan, { miss, support, finish, defenderBoss }) : null;
@@ -202,9 +220,6 @@ export function fitCinematicDuel({ arena, attacker, defender, attackerKey, defen
     deltaGround = aligned.deltaGround;
     contactFraction = aligned.contactFraction;
   }
-  const reach = moving ? getCinematicReach({ attackerLeft: 0, attackerWidth, defenderLeft: deltaLeft, defenderWidth,
-    ...contact, advance: sample(acting.actor, plan.impact)[0] })
-    : Math.max(0, defender ? deltaLeft - attackerWidth * .51 : 0);
   const attackMotion = { actor: acting.actor, body: acting.body, poses: plan.poses };
   const offsets = new Set([0, 1, ...plan.releases, ...plan.contacts]);
   for (const motion of [attackMotion, defenseMotion].filter(Boolean)) {
@@ -212,34 +227,69 @@ export function fitCinematicDuel({ arena, attacker, defender, attackerKey, defen
   }
   for (const echo of plan.afterimages || []) { offsets.add(clamp(echo.at)); offsets.add(clamp(echo.until)); }
   const times = [...offsets].sort((left, right) => left - right);
-  const union = emptyBounds();
-  const attackerDimensions = { width: attackerWidth, height: attackerHeight, left: 0, ground: 0, reach, percentX: false };
-  const defenderDimensions = { width: defenderWidth, height: defenderHeight, left: deltaLeft, ground: deltaGround, reach: 0, percentX: true };
-  for (let index = 0; index < times.length - 1; index++) {
-    const interval = [times[index], times[index + 1]];
-    const middle = (interval[0] + interval[1]) * .5;
-    // At a step boundary include both adjacent poses, not just the image before the switch.
-    for (const pose of new Set([getDuelPoseAt(plan, interval[0]), getDuelPoseAt(plan, middle), getDuelPoseAt(plan, interval[1])])) {
-      includeFrame(union, frameFor(attackerKey, pose, plan, pose === 'skill'), attackerDimensions, attackMotion, interval, false);
-    }
-    if (defender) {
-      for (const pose of new Set([poseAt(defenseMotion.poses, interval[0]), poseAt(defenseMotion.poses, middle), poseAt(defenseMotion.poses, interval[1])])) {
-        includeFrame(union, frameFor(defenderKey, pose, plan), defenderDimensions, defenseMotion, interval, true);
+  const padding = Math.max(7, Math.min(14, Math.min(width, height) * .025));
+  const availableWidth = Math.max(1, width - padding * 2 - 5);
+  const availableHeight = Math.max(1, height - padding * 2 - 5);
+  const advance = sample(acting.actor, plan.impact)[0];
+  const measure = separation => {
+    const reach = moving ? getCinematicReach({ attackerLeft: 0, attackerWidth, defenderLeft: separation, defenderWidth,
+      ...contact, advance }) : Math.max(0, defender ? separation - attackerWidth * .51 : 0);
+    const union = emptyBounds();
+    const attackerDimensions = { width: attackerWidth, height: attackerHeight, left: 0, ground: 0, reach, percentX: false };
+    const defenderDimensions = { width: defenderWidth, height: defenderHeight, left: separation, ground: deltaGround, reach: 0, percentX: true };
+    for (let index = 0; index < times.length - 1; index++) {
+      const interval = [times[index], times[index + 1]];
+      const middle = (interval[0] + interval[1]) * .5;
+      // At a step boundary include both adjacent poses, not just the image before the switch.
+      for (const pose of new Set([getDuelPoseAt(plan, interval[0]), getDuelPoseAt(plan, middle), getDuelPoseAt(plan, interval[1])])) {
+        includeFrame(union, frameFor(attackerKey, pose, plan, pose === 'skill'), attackerDimensions, attackMotion, interval, false);
+      }
+      if (defender) {
+        for (const pose of new Set([poseAt(defenseMotion.poses, interval[0]), poseAt(defenseMotion.poses, middle), poseAt(defenseMotion.poses, interval[1])])) {
+          includeFrame(union, frameFor(defenderKey, pose, plan), defenderDimensions, defenseMotion, interval, true);
+        }
+      }
+      for (const echo of plan.afterimages || []) {
+        if (interval[1] < echo.at || interval[0] > echo.until) continue;
+        const pose = plan.contactPose === 'strike' ? 'strike' : 'skill';
+        const echoMotion = { actor: acting.actor, body: [[0, 0, 1, 1], [1, 0, 1, 1]] };
+        includeFrame(union, frameFor(attackerKey, pose, plan, pose === 'skill'), attackerDimensions, echoMotion, interval, false,
+          [echo.distance * attackerWidth, echo.distance * 1.5 * attackerWidth]);
       }
     }
-    for (const echo of plan.afterimages || []) {
-      if (interval[1] < echo.at || interval[0] > echo.until) continue;
-      const pose = plan.contactPose === 'strike' ? 'strike' : 'skill';
-      const echoMotion = { actor: acting.actor, body: [[0, 0, 1, 1], [1, 0, 1, 1]] };
-      includeFrame(union, frameFor(attackerKey, pose, plan, pose === 'skill'), attackerDimensions, echoMotion, interval, false,
-        [echo.distance * attackerWidth, echo.distance * 1.5 * attackerWidth]);
+    const spanWidth = Math.max(1, union.right - union.left), spanHeight = Math.max(1, union.bottom - union.top);
+    return { union, reach, factor: Math.min(1, availableWidth / spanWidth, availableHeight / spanHeight) };
+  };
+  let bodyOverlap = 0;
+  // Reserve actual screen space between settled bodies, not between transparent
+  // image boxes. Ranged weapons retain their distance; bosses retain their size ratio.
+  const homeGap = defender ? width * (support ? .18 : moving ? .14 : .23) : 0;
+  if (defender) {
+    const attackBody = homeBodyEnvelope(attackerKey, attackerWidth, plan, sample(acting.body, 0), false);
+    const defendBody = homeBodyEnvelope(defenderKey, defenderWidth, plan, sample(defenseMotion.body, 0), true);
+    bodyOverlap = attackBody.right - defendBody.left;
+    deltaLeft = Math.max(deltaLeft, bodyOverlap + homeGap);
+    if (moving) {
+      const weaponX = projectDuelAnchor(contact.tip, { width: attackerWidth, ...contact })[0];
+      const minimumApproach = Math.max(attackerWidth * .06, width * .025);
+      deltaLeft = Math.max(deltaLeft, weaponX - defenderWidth * .46 + minimumApproach * Math.max(.001, advance));
     }
   }
-  if (![union.left, union.top, union.right, union.bottom, reach].every(Number.isFinite)) return { fitted: false };
-  // Preserve the boss-to-ally size ratio: the pair receives one uniform layout factor.
-  const padding = Math.max(7, Math.min(14, Math.min(width, height) * .025));
-  const spanWidth = Math.max(1, union.right - union.left), spanHeight = Math.max(1, union.bottom - union.top);
-  const factor = Math.min(1, Math.max(1, width - padding * 2 - 5) / spanWidth, Math.max(1, height - padding * 2 - 5) / spanHeight);
+  let layout = measure(deltaLeft);
+  // Fitting raised weapons and echoes reduces both actors and their spacing. Solve
+  // the home distance again in that same coordinate space, once for the full duel.
+  // This never changes scale at release/contact or changes the combat clock.
+  const maximumSeparation = Math.max(deltaLeft, width * 16 + attackerWidth * 8 + defenderWidth * 8);
+  for (let pass = 0; defender && pass < 16; pass++) {
+    if (!Number.isFinite(layout.factor) || layout.factor <= 0 || (deltaLeft - bodyOverlap) * layout.factor >= homeGap) break;
+    const next = Math.min(maximumSeparation, Math.max(deltaLeft + 1, bodyOverlap + (homeGap + .5) / layout.factor));
+    if (next <= deltaLeft) break;
+    deltaLeft = next;
+    layout = measure(deltaLeft);
+  }
+  const { union, reach, factor } = layout;
+  if (![union.left, union.top, union.right, union.bottom, reach, factor].every(Number.isFinite)) return { fitted: false };
+  // Preserve the boss-to-ally size ratio: the pair receives one constant layout factor.
   const lowX = padding + 2.5 - union.left * factor, highX = width - padding - 2.5 - union.right * factor;
   const lowY = padding + 2.5 - union.top * factor, highY = height - padding - 2.5 - union.bottom * factor;
   const center = (union.left + union.right) * .5;

@@ -1,0 +1,340 @@
+{
+  "schema": 1,
+  "method": "manual-input-estimate",
+  "coordinateSpace": "source-png-pixels",
+  "purpose": "1.99.184 기본형 10명의 고유 skill-b 원화를 보존하며 B안 준비 몸 비율과 연결하는 입력 저작",
+  "authoringNote": "기존 skill-b의 실제 입력 PNG를 직접 보며 같은 두개골 기관 두 점을 수동 근사. 기존 제작 보고서와 제조기의 반올림·중앙 배치·발480 산식으로 placement를 기록했다. 완성 WebP 열람·게임 화면 측정·테스트·브라우저 QA 결과가 아니며 정밀 실측으로 표현하지 않는다. 기존 manifest·앵커·제작 보고서와 원화는 보존한다.",
+  "units": {
+    "hero": {
+      "sourcePath": "docs/art/cinematic-v1/sources/hero.png",
+      "sourceDimensions": [
+        1536,
+        1024
+      ],
+      "pose": "skill-b",
+      "featureName": "skull-crown-to-chin-axis",
+      "feature": [
+        [
+          1302,
+          596
+        ],
+        [
+          1316,
+          645
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 1091,
+          "top": 579,
+          "right": 1532,
+          "bottom": 989
+        },
+        "left": 46,
+        "top": 91,
+        "width": 419,
+        "height": 389
+      },
+      "placementOrigin": "docs/art/cinematic-v1/packaging-report.json",
+      "featureDefinition": "B안 새 준비 자세와 같은 두개골 정수리→턱 축. 머리카락 외곽·귀·장식·수염은 제외하며, 가려진 기관은 보이는 얼굴과 관자놀이에서 수동 근사한다."
+    },
+    "lina": {
+      "sourcePath": "docs/art/cinematic-v1/sources/lina.png",
+      "sourceDimensions": [
+        1536,
+        1024
+      ],
+      "pose": "skill-b",
+      "featureName": "skull-crown-to-chin-axis",
+      "feature": [
+        [
+          1338,
+          714
+        ],
+        [
+          1345,
+          758
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 1151,
+          "top": 608,
+          "right": 1527,
+          "bottom": 981
+        },
+        "left": 80,
+        "top": 131,
+        "width": 352,
+        "height": 349
+      },
+      "placementOrigin": "docs/art/cinematic-v1/packaging-report.json",
+      "featureDefinition": "B안 새 준비 자세와 같은 두개골 정수리→턱 축. 머리카락 외곽·귀·장식·수염은 제외하며, 가려진 기관은 보이는 얼굴과 관자놀이에서 수동 근사한다."
+    },
+    "aria": {
+      "sourcePath": "docs/art/cinematic-v1/sources/aria.png",
+      "sourceDimensions": [
+        1536,
+        1024
+      ],
+      "pose": "skill-b",
+      "featureName": "skull-crown-to-chin-axis",
+      "feature": [
+        [
+          1398,
+          651
+        ],
+        [
+          1401,
+          700
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 1180,
+          "top": 538,
+          "right": 1525,
+          "bottom": 984
+        },
+        "left": 114,
+        "top": 115,
+        "width": 283,
+        "height": 365
+      },
+      "placementOrigin": "docs/art/cinematic-v1/packaging-report.json",
+      "featureDefinition": "B안 새 준비 자세와 같은 두개골 정수리→턱 축. 머리카락 외곽·귀·장식·수염은 제외하며, 가려진 기관은 보이는 얼굴과 관자놀이에서 수동 근사한다."
+    },
+    "bram": {
+      "sourcePath": "docs/art/characters-v2/sources/bram.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "pose": "skill-b",
+      "featureName": "skull-crown-to-chin-axis",
+      "feature": [
+        [
+          638,
+          854
+        ],
+        [
+          647,
+          904
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 467,
+          "top": 840,
+          "right": 810,
+          "bottom": 1218
+        },
+        "left": 80,
+        "top": 92,
+        "width": 352,
+        "height": 388
+      },
+      "placementOrigin": "docs/art/characters-v2/extraction-report.json",
+      "featureDefinition": "B안 새 준비 자세와 같은 두개골 정수리→턱 축. 머리카락 외곽·귀·장식·수염은 제외하며, 가려진 기관은 보이는 얼굴과 관자놀이에서 수동 근사한다.",
+      "authoringNote": "방패로 가려진 턱 끝은 보이는 광대·턱선과 목도리 윗면으로 근사. 방패나 수염의 길이를 두개골 축에 포함하지 않음."
+    },
+    "leon": {
+      "sourcePath": "docs/art/characters-v2/sources/leon.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "pose": "skill-b",
+      "featureName": "skull-crown-to-chin-axis",
+      "feature": [
+        [
+          776,
+          969
+        ],
+        [
+          778,
+          1018
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 517,
+          "top": 928,
+          "right": 927,
+          "bottom": 1189
+        },
+        "left": 60,
+        "top": 230,
+        "width": 392,
+        "height": 250
+      },
+      "placementOrigin": "docs/art/characters-v2/extraction-report.json",
+      "featureDefinition": "B안 새 준비 자세와 같은 두개골 정수리→턱 축. 머리카락 외곽·귀·장식·수염은 제외하며, 가려진 기관은 보이는 얼굴과 관자놀이에서 수동 근사한다."
+    },
+    "sera": {
+      "sourcePath": "docs/art/characters-v2/sources/sera.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "pose": "skill-b",
+      "featureName": "skull-crown-to-chin-axis",
+      "feature": [
+        [
+          663,
+          878
+        ],
+        [
+          672,
+          945
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 476,
+          "top": 833,
+          "right": 852,
+          "bottom": 1234
+        },
+        "left": 66,
+        "top": 75,
+        "width": 380,
+        "height": 405
+      },
+      "placementOrigin": "docs/art/characters-v2/extraction-report.json",
+      "featureDefinition": "B안 새 준비 자세와 같은 두개골 정수리→턱 축. 머리카락 외곽·귀·장식·수염은 제외하며, 가려진 기관은 보이는 얼굴과 관자놀이에서 수동 근사한다."
+    },
+    "noah": {
+      "sourcePath": "docs/art/characters-v2/sources/noah.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "pose": "skill-b",
+      "featureName": "skull-crown-to-chin-axis",
+      "feature": [
+        [
+          627,
+          856
+        ],
+        [
+          642,
+          922
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 455,
+          "top": 836,
+          "right": 798,
+          "bottom": 1239
+        },
+        "left": 76,
+        "top": 57,
+        "width": 360,
+        "height": 423
+      },
+      "placementOrigin": "docs/art/characters-v2/extraction-report.json",
+      "featureDefinition": "B안 새 준비 자세와 같은 두개골 정수리→턱 축. 머리카락 외곽·귀·장식·수염은 제외하며, 가려진 기관은 보이는 얼굴과 관자놀이에서 수동 근사한다."
+    },
+    "yuna": {
+      "sourcePath": "docs/art/characters-v2/sources/yuna.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "pose": "skill-b",
+      "featureName": "skull-crown-to-chin-axis",
+      "feature": [
+        [
+          652,
+          907
+        ],
+        [
+          650,
+          963
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 493,
+          "top": 860,
+          "right": 737,
+          "bottom": 1218
+        },
+        "left": 111,
+        "top": 56,
+        "width": 290,
+        "height": 424
+      },
+      "placementOrigin": "docs/art/characters-v2/extraction-report.json",
+      "featureDefinition": "B안 새 준비 자세와 같은 두개골 정수리→턱 축. 머리카락 외곽·귀·장식·수염은 제외하며, 가려진 기관은 보이는 얼굴과 관자놀이에서 수동 근사한다."
+    },
+    "rakan": {
+      "sourcePath": "docs/art/characters-v2/sources/rakan.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "pose": "skill-b",
+      "featureName": "skull-crown-to-chin-axis",
+      "feature": [
+        [
+          683,
+          854
+        ],
+        [
+          690,
+          919
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 429,
+          "top": 844,
+          "right": 851,
+          "bottom": 1217
+        },
+        "left": 24,
+        "top": 70,
+        "width": 464,
+        "height": 410
+      },
+      "placementOrigin": "docs/art/characters-v2/extraction-report.json",
+      "featureDefinition": "B안 새 준비 자세와 같은 두개골 정수리→턱 축. 머리카락 외곽·귀·장식·수염은 제외하며, 가려진 기관은 보이는 얼굴과 관자놀이에서 수동 근사한다."
+    },
+    "miho": {
+      "sourcePath": "docs/art/characters-v2/sources/miho.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "pose": "skill-b",
+      "featureName": "skull-crown-to-chin-axis",
+      "feature": [
+        [
+          648,
+          916
+        ],
+        [
+          658,
+          969
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 442,
+          "top": 847,
+          "right": 836,
+          "bottom": 1219
+        },
+        "left": 46,
+        "top": 85,
+        "width": 419,
+        "height": 395
+      },
+      "placementOrigin": "docs/art/characters-v2/extraction-report.json",
+      "featureDefinition": "B안 새 준비 자세와 같은 두개골 정수리→턱 축. 머리카락 외곽·귀·장식·수염은 제외하며, 가려진 기관은 보이는 얼굴과 관자놀이에서 수동 근사한다."
+    }
+  }
+}

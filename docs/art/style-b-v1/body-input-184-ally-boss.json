@@ -1,0 +1,1305 @@
+{
+  "schema": 1,
+  "method": "manual-input-estimate",
+  "coordinateSpace": "source-png-pixels",
+  "purpose": "1.99.184 전투 자세 사이의 신체 비율과 준비 간격을 저작하기 위한 입력 자료",
+  "authoringNote": "신규 B안 원본 PNG를 직접 보며 두개골의 같은 기관을 수동 근사한 좌표. 준비 자세와 웅크린 자세의 선 키를 동일 높이로 확대하지 않기 위한 기준이다. bodyBox는 준비 자세의 머리·몸통·사지·발을 포함하며 무기·넓은 망토·날개·꼬리·후광을 제외한다. 완성 WebP·게임 화면을 읽거나 테스트·브라우저 QA로 측정한 결과가 아니며 정밀 실측으로 표현하지 않는다. 원본 manifest·앵커·제작 보고서는 보존한다.",
+  "units": {
+    "hero": {
+      "sourceSheet": "ally-01",
+      "sourcePath": "docs/art/style-b-v1/sources/ally-01.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              220,
+              80
+            ],
+            [
+              232,
+              124
+            ]
+          ],
+          "bodyBox": [
+            126,
+            68,
+            309,
+            405
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              663,
+              123
+            ],
+            [
+              674,
+              168
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1115,
+              104
+            ],
+            [
+              1126,
+              150
+            ]
+          ]
+        }
+      }
+    },
+    "bram": {
+      "sourceSheet": "ally-01",
+      "sourcePath": "docs/art/style-b-v1/sources/ally-01.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              204,
+              481
+            ],
+            [
+              218,
+              523
+            ]
+          ],
+          "bodyBox": [
+            79,
+            468,
+            308,
+            816
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              671,
+              527
+            ],
+            [
+              684,
+              570
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1090,
+              545
+            ],
+            [
+              1103,
+              590
+            ]
+          ]
+        }
+      }
+    },
+    "lina": {
+      "sourceSheet": "ally-01",
+      "sourcePath": "docs/art/style-b-v1/sources/ally-01.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              217,
+              878
+            ],
+            [
+              226,
+              928
+            ]
+          ],
+          "bodyBox": [
+            104,
+            863,
+            298,
+            1220
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              603,
+              900
+            ],
+            [
+              612,
+              949
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1053,
+              945
+            ],
+            [
+              1065,
+              991
+            ]
+          ]
+        }
+      }
+    },
+    "aria": {
+      "sourceSheet": "ally-02",
+      "sourcePath": "docs/art/style-b-v1/sources/ally-02.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              226,
+              135
+            ],
+            [
+              233,
+              180
+            ]
+          ],
+          "bodyBox": [
+            114,
+            123,
+            358,
+            455
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              622,
+              153
+            ],
+            [
+              631,
+              198
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1120,
+              207
+            ],
+            [
+              1126,
+              252
+            ]
+          ]
+        }
+      }
+    },
+    "leon": {
+      "sourceSheet": "ally-02",
+      "sourcePath": "docs/art/style-b-v1/sources/ally-02.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              239,
+              502
+            ],
+            [
+              249,
+              551
+            ]
+          ],
+          "bodyBox": [
+            53,
+            491,
+            373,
+            820
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              682,
+              551
+            ],
+            [
+              691,
+              598
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1115,
+              613
+            ],
+            [
+              1124,
+              660
+            ]
+          ]
+        }
+      }
+    },
+    "sera": {
+      "sourceSheet": "ally-02",
+      "sourcePath": "docs/art/style-b-v1/sources/ally-02.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              264,
+              921
+            ],
+            [
+              266,
+              970
+            ]
+          ],
+          "bodyBox": [
+            57,
+            913,
+            369,
+            1200
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              704,
+              956
+            ],
+            [
+              709,
+              1002
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1125,
+              955
+            ],
+            [
+              1135,
+              1004
+            ]
+          ]
+        }
+      }
+    },
+    "noah": {
+      "sourceSheet": "ally-03",
+      "sourcePath": "docs/art/style-b-v1/sources/ally-03.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              214,
+              66
+            ],
+            [
+              227,
+              119
+            ]
+          ],
+          "bodyBox": [
+            98,
+            55,
+            302,
+            407
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              631,
+              86
+            ],
+            [
+              646,
+              138
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1053,
+              89
+            ],
+            [
+              1064,
+              141
+            ]
+          ]
+        }
+      }
+    },
+    "yuna": {
+      "sourceSheet": "ally-03",
+      "sourcePath": "docs/art/style-b-v1/sources/ally-03.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              221,
+              472
+            ],
+            [
+              227,
+              521
+            ]
+          ],
+          "bodyBox": [
+            120,
+            455,
+            336,
+            827
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              651,
+              499
+            ],
+            [
+              659,
+              549
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1089,
+              530
+            ],
+            [
+              1096,
+              578
+            ]
+          ]
+        }
+      }
+    },
+    "rakan": {
+      "sourceSheet": "ally-03",
+      "sourcePath": "docs/art/style-b-v1/sources/ally-03.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              230,
+              870
+            ],
+            [
+              245,
+              921
+            ]
+          ],
+          "bodyBox": [
+            30,
+            855,
+            364,
+            1213
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              639,
+              904
+            ],
+            [
+              647,
+              955
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1081,
+              923
+            ],
+            [
+              1091,
+              975
+            ]
+          ]
+        }
+      }
+    },
+    "miho": {
+      "sourceSheet": "ally-04",
+      "sourcePath": "docs/art/style-b-v1/sources/ally-04.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              248,
+              158
+            ],
+            [
+              251,
+              203
+            ]
+          ],
+          "bodyBox": [
+            154,
+            152,
+            302,
+            420
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              650,
+              161
+            ],
+            [
+              655,
+              206
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1080,
+              169
+            ],
+            [
+              1086,
+              212
+            ]
+          ]
+        }
+      }
+    },
+    "teo": {
+      "sourceSheet": "ally-04",
+      "sourcePath": "docs/art/style-b-v1/sources/ally-04.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              225,
+              525
+            ],
+            [
+              232,
+              569
+            ]
+          ],
+          "bodyBox": [
+            133,
+            510,
+            294,
+            819
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              605,
+              548
+            ],
+            [
+              611,
+              593
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1063,
+              580
+            ],
+            [
+              1075,
+              625
+            ]
+          ]
+        }
+      }
+    },
+    "irene": {
+      "sourceSheet": "ally-04",
+      "sourcePath": "docs/art/style-b-v1/sources/ally-04.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              213,
+              913
+            ],
+            [
+              218,
+              960
+            ]
+          ],
+          "bodyBox": [
+            105,
+            899,
+            315,
+            1203
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              629,
+              929
+            ],
+            [
+              637,
+              975
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1024,
+              943
+            ],
+            [
+              1037,
+              990
+            ]
+          ]
+        }
+      }
+    },
+    "kaz": {
+      "sourceSheet": "ally-05",
+      "sourcePath": "docs/art/style-b-v1/sources/ally-05.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              272,
+              153
+            ],
+            [
+              273,
+              200
+            ]
+          ],
+          "bodyBox": [
+            76,
+            146,
+            386,
+            394
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              714,
+              162
+            ],
+            [
+              719,
+              208
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1085,
+              128
+            ],
+            [
+              1092,
+              172
+            ]
+          ]
+        }
+      }
+    },
+    "ella": {
+      "sourceSheet": "ally-05",
+      "sourcePath": "docs/art/style-b-v1/sources/ally-05.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              223,
+              490
+            ],
+            [
+              235,
+              541
+            ]
+          ],
+          "bodyBox": [
+            116,
+            477,
+            291,
+            833
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              656,
+              490
+            ],
+            [
+              665,
+              543
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1057,
+              482
+            ],
+            [
+              1066,
+              535
+            ]
+          ]
+        }
+      }
+    },
+    "jin": {
+      "sourceSheet": "ally-05",
+      "sourcePath": "docs/art/style-b-v1/sources/ally-05.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              243,
+              902
+            ],
+            [
+              253,
+              951
+            ]
+          ],
+          "bodyBox": [
+            25,
+            894,
+            384,
+            1203
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              671,
+              936
+            ],
+            [
+              684,
+              983
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1090,
+              921
+            ],
+            [
+              1106,
+              969
+            ]
+          ]
+        }
+      }
+    },
+    "boss_commander": {
+      "sourceSheet": "boss-01",
+      "sourcePath": "docs/art/style-b-v1/sources/boss-01.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              276,
+              162
+            ],
+            [
+              281,
+              203
+            ]
+          ],
+          "bodyBox": [
+            135,
+            151,
+            347,
+            401
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              679,
+              190
+            ],
+            [
+              690,
+              227
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1126,
+              144
+            ],
+            [
+              1136,
+              190
+            ]
+          ]
+        }
+      }
+    },
+    "boss_frost": {
+      "sourceSheet": "boss-01",
+      "sourcePath": "docs/art/style-b-v1/sources/boss-01.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              233,
+              545
+            ],
+            [
+              236,
+              585
+            ]
+          ],
+          "bodyBox": [
+            181,
+            537,
+            325,
+            833
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              658,
+              558
+            ],
+            [
+              663,
+              602
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1066,
+              564
+            ],
+            [
+              1075,
+              606
+            ]
+          ]
+        }
+      }
+    },
+    "boss_ember": {
+      "sourceSheet": "boss-01",
+      "sourcePath": "docs/art/style-b-v1/sources/boss-01.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              272,
+              949
+            ],
+            [
+              276,
+              992
+            ]
+          ],
+          "bodyBox": [
+            99,
+            945,
+            339,
+            1196
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              711,
+              980
+            ],
+            [
+              720,
+              1023
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1128,
+              940
+            ],
+            [
+              1141,
+              982
+            ]
+          ]
+        }
+      }
+    },
+    "boss_oracle": {
+      "sourceSheet": "boss-02",
+      "sourcePath": "docs/art/style-b-v1/sources/boss-02.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              238,
+              184
+            ],
+            [
+              242,
+              214
+            ]
+          ],
+          "bodyBox": [
+            146,
+            183,
+            311,
+            398
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              628,
+              200
+            ],
+            [
+              636,
+              230
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1078,
+              205
+            ],
+            [
+              1089,
+              237
+            ]
+          ]
+        }
+      }
+    },
+    "boss_abyss": {
+      "sourceSheet": "boss-02",
+      "sourcePath": "docs/art/style-b-v1/sources/boss-02.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              239,
+              556
+            ],
+            [
+              242,
+              597
+            ]
+          ],
+          "bodyBox": [
+            98,
+            548,
+            291,
+            774
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              652,
+              587
+            ],
+            [
+              660,
+              627
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1123,
+              572
+            ],
+            [
+              1131,
+              611
+            ]
+          ]
+        }
+      }
+    },
+    "tide_keeper": {
+      "sourceSheet": "boss-02",
+      "sourcePath": "docs/art/style-b-v1/sources/boss-02.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              225,
+              933
+            ],
+            [
+              232,
+              967
+            ]
+          ],
+          "bodyBox": [
+            137,
+            922,
+            308,
+            1172
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              604,
+              962
+            ],
+            [
+              614,
+              994
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1024,
+              948
+            ],
+            [
+              1031,
+              981
+            ]
+          ]
+        }
+      }
+    },
+    "frost_queen": {
+      "sourceSheet": "boss-03",
+      "sourcePath": "docs/art/style-b-v1/sources/boss-03.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              205,
+              132
+            ],
+            [
+              212,
+              164
+            ]
+          ],
+          "bodyBox": [
+            130,
+            132,
+            300,
+            382
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              648,
+              163
+            ],
+            [
+              653,
+              195
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1065,
+              131
+            ],
+            [
+              1074,
+              166
+            ]
+          ]
+        }
+      }
+    },
+    "resonance_judge": {
+      "sourceSheet": "boss-03",
+      "sourcePath": "docs/art/style-b-v1/sources/boss-03.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              209,
+              552
+            ],
+            [
+              215,
+              582
+            ]
+          ],
+          "bodyBox": [
+            114,
+            550,
+            337,
+            802
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              652,
+              579
+            ],
+            [
+              659,
+              609
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1092,
+              565
+            ],
+            [
+              1101,
+              598
+            ]
+          ]
+        }
+      }
+    },
+    "oath_guardian": {
+      "sourceSheet": "boss-03",
+      "sourcePath": "docs/art/style-b-v1/sources/boss-03.png",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "featureName": "skull-crown-to-chin-axis",
+      "featureDefinition": "머리카락의 바깥 부피·머리장식·투구 돌출부·수염을 제외한 해부학적 두개골의 정수리에서 턱까지 축. 가려진 정수리는 보이는 얼굴·관자놀이·투구 안쪽의 위치로 수동 근사.",
+      "poses": {
+        "recover": {
+          "feature": [
+            [
+              227,
+              953
+            ],
+            [
+              237,
+              983
+            ]
+          ],
+          "bodyBox": [
+            85,
+            950,
+            340,
+            1201
+          ]
+        },
+        "strike": {
+          "feature": [
+            [
+              654,
+              994
+            ],
+            [
+              664,
+              1023
+            ]
+          ]
+        },
+        "skill-a": {
+          "feature": [
+            [
+              1106,
+              966
+            ],
+            [
+              1117,
+              993
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

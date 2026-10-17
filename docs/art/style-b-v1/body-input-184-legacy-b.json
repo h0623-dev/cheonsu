@@ -1,0 +1,281 @@
+{
+  "schema": 1,
+  "method": "manual-input-estimate",
+  "units": {
+    "teo": {
+      "sourcePath": "docs/art/characters-v2/sources/teo.png",
+      "feature": [
+        [
+          635,
+          930
+        ],
+        [
+          650,
+          986
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 436,
+          "top": 853,
+          "right": 844,
+          "bottom": 1218
+        },
+        "left": 23,
+        "top": 64,
+        "width": 465,
+        "height": 416
+      }
+    },
+    "irene": {
+      "sourcePath": "docs/art/characters-v2/sources/irene.png",
+      "feature": [
+        [
+          656,
+          902
+        ],
+        [
+          668,
+          972
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 458,
+          "top": 838,
+          "right": 835,
+          "bottom": 1227
+        },
+        "left": 45,
+        "top": 45,
+        "width": 421,
+        "height": 435
+      }
+    },
+    "kaz": {
+      "sourcePath": "docs/art/characters-v2/sources/kaz.png",
+      "feature": [
+        [
+          691,
+          904
+        ],
+        [
+          704,
+          967
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 488,
+          "top": 864,
+          "right": 916,
+          "bottom": 1223
+        },
+        "left": 37,
+        "top": 112,
+        "width": 438,
+        "height": 368
+      }
+    },
+    "ella": {
+      "sourcePath": "docs/art/characters-v2/sources/ella.png",
+      "feature": [
+        [
+          655,
+          888
+        ],
+        [
+          658,
+          954
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 448,
+          "top": 853,
+          "right": 781,
+          "bottom": 1215
+        },
+        "left": 71,
+        "top": 78,
+        "width": 370,
+        "height": 402
+      }
+    },
+    "jin": {
+      "sourcePath": "docs/art/characters-v2/sources/jin.png",
+      "feature": [
+        [
+          665,
+          923
+        ],
+        [
+          668,
+          983
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 444,
+          "top": 875,
+          "right": 874,
+          "bottom": 1203
+        },
+        "left": 14,
+        "top": 111,
+        "width": 484,
+        "height": 369
+      }
+    },
+    "luka": {
+      "sourcePath": "docs/art/characters-v2/sources/luka.png",
+      "feature": [
+        [
+          666,
+          868
+        ],
+        [
+          671,
+          925
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 499,
+          "top": 793,
+          "right": 805,
+          "bottom": 1214
+        },
+        "left": 100,
+        "top": 52,
+        "width": 312,
+        "height": 428
+      }
+    },
+    "baekho": {
+      "sourcePath": "docs/art/characters-v2/sources/baekho.png",
+      "feature": [
+        [
+          672,
+          866
+        ],
+        [
+          695,
+          917
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 468,
+          "top": 835,
+          "right": 836,
+          "bottom": 1225
+        },
+        "left": 64,
+        "top": 73,
+        "width": 384,
+        "height": 407
+      }
+    },
+    "mare": {
+      "sourcePath": "docs/art/characters-v3/sources/mare.png",
+      "feature": [
+        [
+          790,
+          730
+        ],
+        [
+          804,
+          784
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 531,
+          "top": 718,
+          "right": 962,
+          "bottom": 1002
+        },
+        "left": 64,
+        "top": 227,
+        "width": 383,
+        "height": 253
+      }
+    },
+    "harin": {
+      "sourcePath": "docs/art/characters-v3/sources/harin.png",
+      "feature": [
+        [
+          637,
+          916
+        ],
+        [
+          641,
+          980
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 424,
+          "top": 861,
+          "right": 806,
+          "bottom": 1280
+        },
+        "left": 77,
+        "top": 88,
+        "width": 358,
+        "height": 392
+      }
+    },
+    "edan": {
+      "sourcePath": "docs/art/characters-v3/sources/edan.png",
+      "feature": [
+        [
+          785,
+          722
+        ],
+        [
+          789,
+          782
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 542,
+          "top": 700,
+          "right": 1043,
+          "bottom": 1002
+        },
+        "left": 26,
+        "top": 203,
+        "width": 460,
+        "height": 277
+      }
+    },
+    "sylvan": {
+      "sourcePath": "docs/art/characters-v3/sources/silvan.png",
+      "feature": [
+        [
+          826,
+          691
+        ],
+        [
+          837,
+          750
+        ]
+      ],
+      "placement": {
+        "sourceBounds": {
+          "left": 576,
+          "top": 676,
+          "right": 1024,
+          "bottom": 1019
+        },
+        "left": 72,
+        "top": 198,
+        "width": 368,
+        "height": 282
+      }
+    }
+  }
+}

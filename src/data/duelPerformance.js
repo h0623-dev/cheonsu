@@ -1,3 +1,5 @@
+import { isBattleStyleBBaseKey } from './combatPoseIdentity.js';
+
 const clamp = value => Math.max(0, Math.min(1, value));
 const tracks = points => [...new Map(points.filter(point => point.every(Number.isFinite) || typeof point[1] === 'string').map(point => [Number(clamp(point[0]).toFixed(5)), [clamp(point[0]), ...point.slice(1)]])).values()].sort((a, b) => a[0] - b[0]);
 const weapons = {
@@ -44,7 +46,10 @@ export function directDuelPerformance(plan, weapon, presentation, scene) {
   });
   const pause = presentation.miss || support ? 0 : scene.outcome?.crit || scene.finish ? .040 : plan.skill ? .033 : .028;
   const contactPose = plan.skillPose && !(plan.skill && presentation.style === 'melee' && !support) ? 'skill' : 'strike';
-  const physicalSkill = plan.skill && plan.skillPose && contactPose === 'strike';
+  // B's physical skills load the same body used for the strike. Briefly inserting
+  // an unrelated cast pose before release creates an extra size/shape jump.
+  const physicalSkill = plan.skill && plan.skillPose && contactPose === 'strike'
+    && !isBattleStyleBBaseKey(plan.id.split(':')[0]);
   const poses = [[0, 'ready']];
   if (moving) {
     const stepStart = plan.skill ? .20 : .10;
