@@ -1,6 +1,6 @@
 # 천수 1.99.183 / Android 382 · 아군·적군 전투 크기와 동작
 
-2026-10-17 KST. 적군이 아군보다 작고 전투 동작이 서로 다른 모습으로 튀는 문제를 보완합니다. 현재 제작·배포 진행 중이며, 이전182 APK나 웹을 이번 결과로 제시하지 않습니다.
+2026-10-17 KST. 적군이 아군보다 작고 전투 동작이 서로 다른 모습으로 튀는 문제를 보완합니다. 최종 게임 소스 `d5e71e8323c4bc576e37d58bcddfdc5751e6c970`의 새 APK·서명 OTA·전체 소스 ZIP과 같은 아이폰·웹 게시를 완료했습니다.
 
 ## 원인과 변경
 
@@ -15,8 +15,40 @@
 
 저장 키·진행도·수집·전직·장비·성장·HP·피해·사거리·반격·턴 순서와 접촉/완료 시계, 대기·대화·지도·보행을 바꾸지 않습니다. 고정 원복1.99.165+Safari와 기존 Android 서명·OTA 신뢰를 유지합니다.
 
-새 버전1.99.183 / Android382. 최종 게임 소스의 main 반영으로 기존 Cloud Quality 및 Android APK and OTA가 자동 실행되고 GitHub Actions의 기존 cheonsu-release Secrets에서만 서명합니다. 같은 게임 소스의 Safari 독립 산출물을 같은 계정 전용 Sites에 게시합니다. 공개 완료 시 소스 SHA·자동 결과·APK/OTA/소스 ZIP·실제 updates 채널·Sites 반환 기록을 여기에 추가합니다.
+새 버전1.99.183 / Android382. 최종 게임 소스의 main 반영으로 기존 Cloud Quality 및 Android APK and OTA가 자동 실행되고 GitHub Actions의 기존 cheonsu-release Secrets에서만 서명합니다. 같은 게임 소스의 Safari 독립 산출물을 같은 계정 전용 Sites에 게시합니다. 아래 기록은 실제 최종 자동 로그·릴리스 API·updates 채널과 Sites 네이티브 게시 반환에 근거합니다.
 
-첫 후보 `dd1e6eb8258e506693d7345dcd8bcbd44e0f56fb`는 기존 자동 Quality38986554522·Android38986554460의 단위 검사에서 중단되어 공개하지 않았습니다. 일반 카탈로그 조회 API까지 실제 연기 자세로 치환하여 원본 경로·발 정렬을 유지해야 하는5개 계약이 달라졌습니다. 원본 조회 함수는 보존하고 실제 전투 렌더 전용 선택 함수를 분리해 보완합니다. 검사 조건을 낮추거나 단위 검사 파일을 수정하지 않습니다. 첫 Safari 후보도 소스 전송·패키징까지이며 실제 게시와 구분합니다.
+첫 후보 `dd1e6eb8258e506693d7345dcd8bcbd44e0f56fb`는 기존 자동 Quality38986554522·Android38986554460의 단위 검사에서 중단되어 공개하지 않았습니다. 일반 카탈로그 조회 API까지 실제 연기 자세로 치환하여 원본 경로·발 정렬을 유지해야 하는5개 계약이 달라졌습니다. 원본 조회 함수는 보존하고 실제 전투 렌더 전용 선택 함수를 분리해 보완했습니다. 검사 조건을 낮추거나 단위 검사 파일을 수정하지 않습니다. 첫 Safari 후보도 소스 전송·패키징까지이며 실제 게시와 구분합니다.
 
 사용자 지시에 따라 수정 후 별도 검증은 실행하지 않았습니다. 소스 읽기 진단과 필수 제작·패키징·서명·배포를 수행하며, 기존 자동 Actions 결과와 직접 QA를 구분합니다. 실제 기기에서 시각적 만족을 확인한 결과로 표현하지 않습니다.
+
+
+## 최종 공개 결과
+
+- 최종 게임 소스: `d5e71e8323c4bc576e37d58bcddfdc5751e6c970`, main·`codex/enemy-parity-183`. 후속 문서 커밋은 게임 산출물과 구분합니다.
+- [Cloud Quality38986885630](https://github.com/h0623-dev/cheonsu/actions/runs/38986885630): **success /10:26:21 KST**, job117260316216.
+- [Android APK and OTA38986885641](https://github.com/h0623-dev/cheonsu/actions/runs/38986885641): **success /10:30:40 KST**, job117260316129.
+- [1.99.183 릴리스](https://github.com/h0623-dev/cheonsu/releases/tag/v1.99.183): **10:30:18 KST** 공개, 발행 스크립트 **10:30:20 KST** 배포 완료.
+- 실제 `updates/latest.json`: **1.99.183 /1.99.183-6d0c08bef93b /native350~382**. main의 옛127 포인터는 바꾸지 않습니다.
+
+| 파일 | GitHub 업로드 크기 | 서버 SHA-256 |
+| --- | ---: | --- |
+| [새 APK](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.183/cheonsu_1.99.183_update_debug.apk) | 323,422,801 bytes | `4fca8023616cf8ccc85f8e0a46f90b9b62d19ebccc95d0a2469d4288905a4672` |
+| [서명 OTA](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.183/cheonsu_1.99.183_ota.zip) | 314,448,262 bytes | `6d0c08bef93b6a3360385ba0c0891ac6ae97f61e786f2580f99bc649b901952e` |
+| [전체 개발 소스](https://github.com/h0623-dev/cheonsu/releases/download/v1.99.183/cheonsu_development_1.99.183.zip) | 968,710,502 bytes | `5d90ae1c09ffe6f06ee5674bc8d47fb68918c7bd6ece28efd0d35b58c856ce6d` |
+
+기존 자동 로그에서 단위 **1,068/1,068 /실패0**, 일반 공격132형태·아군136기술·적/보스46종·지원5종·무기 부착132형태3화면, 타격132형태 일반/스킬4화면을 통과했습니다. 전장·마을·배치·캠페인·미션·도감·확장50장(진입35·전직72·승리/합류16·실제 AI반격16·4화면)도 성공했습니다. APK 웹 파일 **3,350개**와 OTA **3,350개**, 인증서·native plugin·rollback·origin·신뢰 보호를 통과했습니다. 기존 인증서 SHA-256은 `1d4b2f3f8e7b30e2b9202121def34d4da6e39b4119bdd93c44a01aebfcd0518f`입니다. 공개 도달성·서버 크기/digest 확인은 기존 발행 로그의 범위이며 에이전트가 공개 파일 전체를 다시 내려받은 결과가 아닙니다.
+
+## 같은 아이폰·웹 게시
+
+**11:08:19 KST succeeded**, [기존 천수 아이폰·웹](https://cheonsu-ios-20261016.h9206.chatgpt.site). 같은 ChatGPT 계정 대상·주소·저장 origin과 기존 진단2 페이지를 유지합니다. iOS16.4 이상 Safari에서 공유→홈 화면에 추가로 실행할 수 있습니다. 저장한 뒤 창을 완전히 닫았다가 다시 열어183을 받고 사이트 데이터를 삭제하지 않습니다.
+
+| 항목 | 최종 결과 |
+| --- | --- |
+| 게임 소스 | `d5e71e8323c4bc576e37d58bcddfdc5751e6c970` |
+| Sites 산출물 소스 | `b084c694945dadb75bc1397bd5c63fbe80256074` |
+| 웹 캐시 | `1.99.183-safari-1-b9711207d679` |
+| 압축 산출물 | 210,167,404 bytes |
+| 사이트 버전 | `appgprj_6ad17df8b73481918b41ccab787d8c8a~appgver_e6487a4424948191af9e79c456434e43` |
+| 배포 | `appgdep_6ad2d88056488191ada694e802017467` /succeeded |
+
+[비밀값 없는 게시 반환 기록](safari/1.99.183/sites-deployment.json). 새 게임 소스의 독립 Safari 산출물이며 구형 미사용 개념지도PNG30개만 기존과 같이 웹 패키지에서 제외했습니다. 원본 저장소·Android·실제 전장·캐릭터와 저장을 보존합니다. 첫dd1e6eb의 웹후보c079fde는 미게시이며 최종b084c69만 네이티브 저장·게시했습니다. terminal 성공 뒤 추가 사이트 조회·브라우저 QA는 실행하지 않았습니다.

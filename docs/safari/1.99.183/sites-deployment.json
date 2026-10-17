@@ -1,0 +1,17 @@
+{
+  "gameVersion": "1.99.183",
+  "androidVersionCode": 382,
+  "gameSourceCommit": "d5e71e8323c4bc576e37d58bcddfdc5751e6c970",
+  "siteSourceCommit": "b084c694945dadb75bc1397bd5c63fbe80256074",
+  "webCacheRevision": "1.99.183-safari-1-b9711207d679",
+  "archiveBytes": 210167404,
+  "project_id": "appgprj_6ad17df8b73481918b41ccab787d8c8a",
+  "version_id": "appgprj_6ad17df8b73481918b41ccab787d8c8a~appgver_e6487a4424948191af9e79c456434e43",
+  "deployment_id": "appgdep_6ad2d88056488191ada694e802017467",
+  "status": "succeeded",
+  "url": "https://cheonsu-ios-20261016.h9206.chatgpt.site",
+  "updated_at": "2026-10-17T02:08:19.625497+00:00",
+  "manualQA": false,
+  "automaticQualityRun": 38986885630,
+  "automaticAndroidRun": 38986885641
+}
