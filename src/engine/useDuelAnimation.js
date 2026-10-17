@@ -5,6 +5,7 @@ import { getCombatFrameStyle } from '../data/combatArt.js';
 import { animateSkillSpectacle } from './animateSkillSpectacle.js';
 import { animateEpicCombat } from './animateEpicCombat.js';
 import { fitCinematicDuel, getCinematicReach, resetCinematicDuelLayout } from './fitCinematicDuel.js';
+import { resolveCombatPose } from '../data/combatPoseIdentity.js';
 
 const clamp=value=>Math.max(0,Math.min(1,value));
 
@@ -284,7 +285,8 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
       const weaponPoint = (at, endpoint = 'grip') => {
         const [x, y] = sampleDuelTrack(acting.actor, at);
         const activePose = getDuelPoseAt(plan, at);
-        const sourcePose = activePose === 'skill' ? plan.skillPose?.src?.includes('skill-b') ? 'skill-b' : 'skill-a' : activePose === 'ready' ? 'recover' : activePose;
+        const sourcePose = resolveCombatPose(attackerKey,
+          activePose === 'skill' ? plan.skillPose?.src?.includes('skill-b') ? 'skill-b' : 'skill-a' : activePose);
         const sourceStyle = activePose === 'skill' && plan.skillPose ? skillFrameStyle : getCombatFrameStyle(attackerKey, sourcePose);
         const sourceAnchor = getDuelWeaponAnchor(attackerKey, sourcePose, plan.weapon);
         const anchorPoint = projectDuelAnchor(sourceAnchor[endpoint] || sourceAnchor.grip, { width: attacker.offsetWidth, scale: Number(sourceStyle?.['--combat-sprite-scale']) || 1, footOffset: (parseFloat(sourceStyle?.['--combat-foot-offset']) || 0) / 100, body: sampleDuelTrack(acting.body, at) });

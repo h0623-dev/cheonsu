@@ -86,7 +86,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.6118577860169491
+      "visibleFraction": 0.703125
     },
     "spore_colony": {
       "motion": {
@@ -162,7 +162,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.5967574668141592
+      "visibleFraction": 0.703125
     },
     "mist_ram": {
       "motion": {
@@ -238,7 +238,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.44111570247933884
+      "visibleFraction": 0.703125
     },
     "crystal_insect": {
       "motion": {
@@ -324,7 +324,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.48249481327800825
+      "visibleFraction": 0.703125
     },
     "spring_salamander": {
       "motion": {
@@ -400,7 +400,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.46735356280193235
+      "visibleFraction": 0.703125
     },
     "crab_guard": {
       "motion": {
@@ -486,7 +486,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.4389911825726141
+      "visibleFraction": 0.703125
     },
     "gold_puppet": {
       "motion": {
@@ -562,7 +562,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.6320511122881355
+      "visibleFraction": 0.703125
     },
     "bell_keeper": {
       "motion": {
@@ -638,7 +638,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.6947544642857143
+      "visibleFraction": 0.703125
     },
     "scroll_spirit": {
       "motion": {
@@ -718,7 +718,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.5873310810810811
+      "visibleFraction": 0.703125
     },
     "eclipse_cat": {
       "motion": {
@@ -804,7 +804,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.5670490506329114
+      "visibleFraction": 0.703125
     },
     "ink_vine": {
       "motion": {
@@ -880,7 +880,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.5492584745762712
+      "visibleFraction": 0.703125
     },
     "hollow_armor": {
       "motion": {
@@ -966,7 +966,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.49435943983402486
+      "visibleFraction": 0.703125
     },
     "tide_keeper": {
       "motion": {
@@ -1042,7 +1042,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.563853650990099
+      "visibleFraction": 0.703125
     },
     "frost_queen": {
       "motion": {
@@ -1118,7 +1118,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.6681454145728644
+      "visibleFraction": 0.703125
     },
     "resonance_judge": {
       "motion": {
@@ -1194,7 +1194,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.6149193548387096
+      "visibleFraction": 0.703125
     },
     "oath_guardian": {
       "motion": {
@@ -1318,17 +1318,17 @@
           ]
         }
       },
-      "visibleFraction": 0.5391206575682382,
+      "visibleFraction": 0.703125,
       "skills": {
         "맹세의 원": {
           "src": "/art/characters-v3/units/oath_guardian-skill-a.webp",
-          "scale": 0.8933002481389578,
-          "footOffset": "0.1744727047146402%"
+          "scale": 1.1650485436893203,
+          "footOffset": "0.22754854368932037%"
         },
         "돌아갈 길": {
           "src": "/art/characters-v3/units/oath_guardian-skill-b.webp",
-          "scale": 0.8933002481389578,
-          "footOffset": "0.3489454094292804%"
+          "scale": 1.1650485436893203,
+          "footOffset": "0.45509708737864074%"
         }
       }
     },
@@ -1416,7 +1416,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.6919937335092348
+      "visibleFraction": 0.703125
     },
     "edan": {
       "motion": {
@@ -1492,7 +1492,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.5863790760869566
+      "visibleFraction": 0.703125
     },
     "silvan": {
       "motion": {
@@ -1568,7 +1568,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.673083118556701
+      "visibleFraction": 0.703125
     },
     "mare": {
       "motion": {
@@ -1644,7 +1644,7 @@
           "measured": false
         }
       },
-      "visibleFraction": 0.6279703776041666
+      "visibleFraction": 0.703125
     },
     "mare__form0": {
       "motion": {

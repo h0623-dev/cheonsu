@@ -1,7 +1,8 @@
 import { getSkillAuraAnchor } from './skillAuraAnchors.js';
+import { resolveCombatPose } from './combatPoseIdentity.js';
 
 export function getDuelWeaponAnchor(key, pose = 'strike', weapon = 'slash') {
-  const anchor = getSkillAuraAnchor(key, pose, weapon);
+  const anchor = getSkillAuraAnchor(key, resolveCombatPose(key, pose), weapon);
   return { grip: anchor.grip.map(value => value / 512), tip: (anchor.focus || anchor.tip).map(value => value / 512), authored: anchor.authored, origin: anchor.origin };
 }
 

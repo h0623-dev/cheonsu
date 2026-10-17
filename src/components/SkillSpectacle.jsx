@@ -1,6 +1,7 @@
 import { useId } from 'react';
 import { getCombatFrameStyle } from '../data/combatArt.js';
 import { getSkillAuraAnchor } from '../data/skillAuraAnchors.js';
+import { resolveCombatPose } from '../data/combatPoseIdentity.js';
 import './skill-spectacle.css';
 
 function LightPaint({ id, color, core }) {
@@ -427,7 +428,7 @@ function UnitSkillAura({ plan, unitKey }) {
   const visual = baseVisual.sword ? { ...baseVisual, color: baseVisual.sword.kind === 'gold' ? '#eabc59' : '#ff8739', core: baseVisual.sword.kind === 'gold' ? '#fff5c5' : '#fff2ae' } : baseVisual;
   const skillFrame = plan.skillPose?.src?.includes('skill-b') ? 'skill-b' : 'skill-a';
   return ['windup', 'strike', 'skill'].map(pose => {
-    const sourcePose = pose === 'skill' ? skillFrame : pose;
+    const sourcePose = resolveCombatPose(unitKey, pose === 'skill' ? skillFrame : pose);
     const anchor = getSkillAuraAnchor(unitKey, sourcePose, plan.weapon);
     const kind = WEAPON_KINDS[anchor.kind] || anchor.kind;
     const style = pose === 'skill' && plan.skillPose ? { '--combat-sprite-scale': plan.skillPose.scale, '--combat-foot-offset': plan.skillPose.footOffset || '0%' } : getCombatFrameStyle(unitKey, sourcePose);
@@ -448,7 +449,7 @@ export function SwordSkillAura({ plan, unitKey }) {
   const color = visual.sword.kind === 'gold' ? '#eabc59' : '#ff8739';
   const core = visual.sword.kind === 'gold' ? '#fff5c5' : '#fff2ae';
   return ['windup', 'strike', 'skill'].map(pose => {
-    const sourcePose = pose === 'skill' ? skillFrame : pose;
+    const sourcePose = resolveCombatPose(unitKey, pose === 'skill' ? skillFrame : pose);
     const anchor = getSkillAuraAnchor(unitKey, sourcePose, plan.weapon);
     const [x, y] = anchor.grip;
     const length = Math.hypot(anchor.tip[0] - x, anchor.tip[1] - y);

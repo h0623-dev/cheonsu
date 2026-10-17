@@ -2,6 +2,7 @@ import frameBounds from '../data/cinematicFrameBounds.json' with { type: 'json' 
 import { getCombatFrameStyle } from '../data/combatArt.js';
 import { getDuelDefenderReaction, getDuelPoseAt, sampleDuelTrack } from '../data/duelPerformance.js';
 import { getDuelWeaponAnchor, projectDuelAnchor } from '../data/duelContactGeometry.js';
+import { resolveCombatPose } from '../data/combatPoseIdentity.js';
 
 const clamp = value => Math.max(0, Math.min(1, Number.isFinite(value) ? value : 0));
 const finite = (value, fallback = 0) => Number.isFinite(value) ? value : fallback;
@@ -28,8 +29,8 @@ export function getCinematicReach({ attackerLeft, attackerWidth, defenderLeft, d
 }
 
 function frameFor(key, pose, plan, skill = false) {
-  const resolvedPose = pose === 'ready' ? 'recover' : pose === 'evade' ? 'run-a'
-    : pose === 'skill' ? plan.skillPose?.src?.includes('skill-b') ? 'skill-b' : 'skill-a' : pose;
+  const resolvedPose = resolveCombatPose(key,
+    pose === 'skill' ? plan.skillPose?.src?.includes('skill-b') ? 'skill-b' : 'skill-a' : pose);
   const bounds = frameBounds[key]?.[resolvedPose] || fullFrame;
   const style = skill && plan.skillPose ? {
     '--combat-sprite-scale': plan.skillPose.scale,

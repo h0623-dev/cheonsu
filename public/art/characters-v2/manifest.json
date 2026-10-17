@@ -59,18 +59,18 @@
       "skills": {
         "gale": {
           "src": "/art/characters-v2/units/hero-skill-a.webp",
-          "scale": 0.9183673469387756,
-          "footOffset": "0.3587372448979592%"
+          "scale": 1.1145510835913313,
+          "footOffset": "0.43537151702786375%"
         },
         "oath": {
           "src": "/art/characters-v2/units/hero-skill-b.webp",
-          "scale": 0.9183673469387756,
-          "footOffset": "0.3587372448979592%"
+          "scale": 1.1145510835913313,
+          "footOffset": "0.43537151702786375%"
         },
         "hero-dawn-slash": {
           "src": "/art/characters-v2/units/hero-skill-a.webp",
-          "scale": 0.9183673469387756,
-          "footOffset": "0.3587372448979592%"
+          "scale": 1.1145510835913313,
+          "footOffset": "0.43537151702786375%"
         }
       },
       "anchors": {
@@ -203,7 +203,7 @@
           ]
         }
       },
-      "visibleFraction": 0.5793606505102041
+      "visibleFraction": 0.703125
     },
     "bram": {
       "motion": {
@@ -263,17 +263,17 @@
       "skills": {
         "bulwark": {
           "src": "/art/characters-v2/units/bram-skill-b.webp",
-          "scale": 0.8845208845208845,
+          "scale": 1.157556270096463,
           "footOffset": "0%"
         },
         "bash": {
           "src": "/art/characters-v2/units/bram-skill-a.webp",
-          "scale": 0.8845208845208845,
-          "footOffset": "0.17275798525798525%"
+          "scale": 1.157556270096463,
+          "footOffset": "0.22608520900321544%"
         },
         "bram-oath-wall": {
           "src": "/art/characters-v2/units/bram-skill-b.webp",
-          "scale": 0.8845208845208845,
+          "scale": 1.157556270096463,
           "footOffset": "0%"
         }
       },
@@ -357,7 +357,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.5372773341523341
+      "visibleFraction": 0.703125
     },
     "lina": {
       "motion": {
@@ -417,18 +417,18 @@
       "skills": {
         "ember": {
           "src": "/art/characters-v2/units/lina-skill-a.webp",
-          "scale": 0.8910891089108911,
-          "footOffset": "0.34808168316831684%"
+          "scale": 0.9424083769633508,
+          "footOffset": "0.3681282722513089%"
         },
         "snipe": {
           "src": "/art/characters-v2/units/lina-skill-b.webp",
-          "scale": 0.8910891089108911,
-          "footOffset": "0.34808168316831684%"
+          "scale": 0.9424083769633508,
+          "footOffset": "0.3681282722513089%"
         },
         "lina-phoenix-flare": {
           "src": "/art/characters-v2/units/lina-skill-a.webp",
-          "scale": 0.8910891089108911,
-          "footOffset": "0.34808168316831684%"
+          "scale": 0.9424083769633508,
+          "footOffset": "0.3681282722513089%"
         }
       },
       "anchors": {
@@ -657,7 +657,7 @@
           }
         }
       },
-      "visibleFraction": 0.6648360148514851
+      "visibleFraction": 0.703125
     },
     "aria": {
       "motion": {
@@ -717,18 +717,18 @@
       "skills": {
         "light": {
           "src": "/art/characters-v2/units/aria-skill-a.webp",
-          "scale": 0.8888888888888888,
-          "footOffset": "0.5208333333333333%"
+          "scale": 0.9448818897637795,
+          "footOffset": "0.5536417322834646%"
         },
         "sanctuary": {
           "src": "/art/characters-v2/units/aria-skill-b.webp",
-          "scale": 0.8888888888888888,
-          "footOffset": "0.3472222222222222%"
+          "scale": 0.9448818897637795,
+          "footOffset": "0.3690944881889764%"
         },
         "aria-sanctuary-song": {
           "src": "/art/characters-v2/units/aria-skill-b.webp",
-          "scale": 0.8888888888888888,
-          "footOffset": "0.3472222222222222%"
+          "scale": 0.9448818897637795,
+          "footOffset": "0.3690944881889764%"
         }
       },
       "anchors": {
@@ -861,7 +861,7 @@
           ]
         }
       },
-      "visibleFraction": 0.6614583333333333
+      "visibleFraction": 0.703125
     },
     "leon": {
       "motion": {
@@ -968,7 +968,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.4985884978991596
+      "visibleFraction": 0.703125
     },
     "sera": {
       "motion": {
@@ -1105,7 +1105,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.5376838235294118
+      "visibleFraction": 0.703125
     },
     "noah": {
       "motion": {
@@ -1224,7 +1224,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6616630835380836
+      "visibleFraction": 0.703125
     },
     "yuna": {
       "motion": {
@@ -1331,7 +1331,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6940171632124352
+      "visibleFraction": 0.703125
     },
     "rakan": {
       "motion": {
@@ -1438,7 +1438,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.5463005514705882
+      "visibleFraction": 0.703125
     },
     "miho": {
       "motion": {
@@ -1545,7 +1545,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6167460073710074
+      "visibleFraction": 0.703125
     },
     "teo": {
       "motion": {
@@ -1688,7 +1688,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.52734375
+      "visibleFraction": 0.703125
     },
     "irene": {
       "motion": {
@@ -1795,7 +1795,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6824448529411764
+      "visibleFraction": 0.703125
     },
     "kaz": {
       "motion": {
@@ -1932,7 +1932,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.5515422077922078
+      "visibleFraction": 0.703125
     },
     "ella": {
       "motion": {
@@ -2039,7 +2039,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6945082720588235
+      "visibleFraction": 0.703125
     },
     "jin": {
       "motion": {
@@ -2146,7 +2146,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6026785714285714
+      "visibleFraction": 0.703125
     },
     "luka": {
       "motion": {
@@ -2253,7 +2253,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6914709944751382
+      "visibleFraction": 0.703125
     },
     "baekho": {
       "motion": {
@@ -2390,7 +2390,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6927849264705882
+      "visibleFraction": 0.703125
     },
     "raider": {
       "motion": {
@@ -2497,7 +2497,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6096147698209718
+      "visibleFraction": 0.703125
     },
     "ranger": {
       "motion": {
@@ -2640,7 +2640,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6926566377171216
+      "visibleFraction": 0.703125
     },
     "sniper": {
       "motion": {
@@ -2783,7 +2783,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6893043611793612
+      "visibleFraction": 0.703125
     },
     "marauder": {
       "motion": {
@@ -2890,7 +2890,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6625600961538461
+      "visibleFraction": 0.703125
     },
     "assassin_elite": {
       "motion": {
@@ -3027,7 +3027,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.5594758064516129
+      "visibleFraction": 0.703125
     },
     "iron_lancer": {
       "motion": {
@@ -3134,7 +3134,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.60375
+      "visibleFraction": 0.703125
     },
     "plague_doctor": {
       "motion": {
@@ -3241,7 +3241,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6944976993865031
+      "visibleFraction": 0.703125
     },
     "beast_tamer": {
       "motion": {
@@ -3351,7 +3351,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6943905279503105
+      "visibleFraction": 0.703125
     },
     "storm_mage": {
       "motion": {
@@ -3468,7 +3468,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.694110576923077
+      "visibleFraction": 0.703125
     },
     "blade_dancer": {
       "motion": {
@@ -3605,7 +3605,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.66340859030837
+      "visibleFraction": 0.703125
     },
     "siege_gunner": {
       "motion": {
@@ -3712,7 +3712,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6824448529411764
+      "visibleFraction": 0.703125
     },
     "sentinel": {
       "motion": {
@@ -3849,7 +3849,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6254111842105263
+      "visibleFraction": 0.703125
     },
     "blackguard": {
       "motion": {
@@ -3956,7 +3956,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6810872395833333
+      "visibleFraction": 0.703125
     },
     "warlord": {
       "motion": {
@@ -4063,7 +4063,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6925991766467067
+      "visibleFraction": 0.703125
     },
     "pyromancer": {
       "motion": {
@@ -4170,7 +4170,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6953770661157025
+      "visibleFraction": 0.703125
     },
     "frost_mage": {
       "motion": {
@@ -4277,7 +4277,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6934666895604396
+      "visibleFraction": 0.703125
     },
     "cultist": {
       "motion": {
@@ -4384,7 +4384,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6959685114503816
+      "visibleFraction": 0.703125
     },
     "void_knight": {
       "motion": {
@@ -4491,7 +4491,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.5996744791666666
+      "visibleFraction": 0.703125
     },
     "wolf": {
       "motion": {
@@ -4628,7 +4628,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.4427710843373494
+      "visibleFraction": 0.45
     },
     "boss_commander": {
       "motion": {
@@ -4735,7 +4735,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.5184361924686193
+      "visibleFraction": 0.703125
     },
     "boss_frost": {
       "motion": {
@@ -4842,7 +4842,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6776636490250696
+      "visibleFraction": 0.703125
     },
     "boss_ember": {
       "motion": {
@@ -4949,7 +4949,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.500390625
+      "visibleFraction": 0.703125
     },
     "boss_oracle": {
       "motion": {
@@ -5056,7 +5056,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6613372093023255
+      "visibleFraction": 0.703125
     },
     "boss_abyss": {
       "motion": {
@@ -5163,7 +5163,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.53515625
+      "visibleFraction": 0.703125
     },
     "kobold-hunter": {
       "motion": {
@@ -5307,7 +5307,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.6150184275184275
+      "visibleFraction": 0.703125
     },
     "lizard-spearman": {
       "motion": {
@@ -5415,7 +5415,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.5642978556485355
+      "visibleFraction": 0.703125
     },
     "horned-ogre": {
       "motion": {
@@ -5523,7 +5523,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.5859375
+      "visibleFraction": 0.703125
     },
     "harpy-scout": {
       "motion": {
@@ -5661,7 +5661,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.5573024276859504
+      "visibleFraction": 0.703125
     },
     "skeleton-warrior": {
       "motion": {
@@ -5769,7 +5769,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.5762617677824268
+      "visibleFraction": 0.703125
     },
     "rock-spirit": {
       "motion": {
@@ -5897,7 +5897,7 @@
           "measured": true
         }
       },
-      "visibleFraction": 0.5103190104166666
+      "visibleFraction": 0.703125
     }
   }
 }

@@ -9,6 +9,7 @@ import { getCharacterArt, getCharacterFrameStyle, getCharacterSkillPose } from '
 import { getSkillSpectacle } from './skillSpectacle.js';
 import { getEpicCombatAssets } from './epicCombatArt.js';
 import { EXPANSION_BASE_ART_KEYS, ADVANCED_CLASS_ART_KEYS, PROMOTION_ART_KEYS, LEGACY_CHARACTER_ART_KEYS, getExpansionArtIdentity, isKnownCharacterArtKey } from './expansionArtRegistry.js';
+import { resolveCombatPose } from './combatPoseIdentity.js';
 
 export function getCombatTiming(scene) {
   const skill = scene.mode === 'skill' || Boolean(scene.outcome?.heal || scene.outcome?.guard);
@@ -34,6 +35,7 @@ export function getSkillPalette(effect) {
 export function getCombatScale(key) { return mapManifest[key]?.combatScale || 1; }
 
 export function getCombatFrameStyle(key, pose) {
+  pose = resolveCombatPose(key, pose);
   const redesigned = getCharacterFrameStyle(isKnownCharacterArtKey(key) ? key : 'raider', pose);
   if (redesigned) return redesigned;
   const metrics = combatFrameMetrics[key]?.[pose];
@@ -79,6 +81,7 @@ export function getCombatEffect(key) {
   return `/art/combat-v1/effects/${combatEffectIds.includes(assetKey) ? assetKey : 'impact'}.webp`;
 }
 export function getCombatMotionSprite(key, pose = 'recover') {
+  pose = resolveCombatPose(key, pose);
   const redesigned = getCharacterArt(isKnownCharacterArtKey(key) ? key : 'raider');
   if (redesigned) return redesigned.motion[combatMotionPoses.includes(pose) ? pose : 'recover'];
   if (bossManifest.units[key]) return bossManifest.units[key].motion[combatMotionPoses.includes(pose) ? pose : 'recover'];

@@ -5,6 +5,7 @@ import { createDuelLifecycle } from '../engine/duelLifecycle.js';
 import { getPaintedVisualProfile } from '../data/unitVisuals.js';
 import { getBattleStyleBCutInArt, getEpicCombatBackdrop } from '../data/epicCombatArt.js';
 import { getBattleStyleBProfile } from '../data/skillSpectacle.js';
+import { resolveCombatPose } from '../data/combatPoseIdentity.js';
 import { useDuelAnimation } from '../engine/useDuelAnimation.js';
 import DuelEffects from './DuelEffects.jsx';
 import DuelImpacts from './DuelImpacts.jsx';
@@ -23,11 +24,14 @@ function getWeaponMotion(unitKey) {
 function FighterPoses({ unitKey, name, defender = false, skillPose, plan }) {
   const poses = defender ? ['ready', 'recoil', 'evade'] : ['ready', 'run-a', 'run-b', 'windup', 'strike', 'recover'];
   return <div className="fighter-body"><div className="fighter-poses">
-    {poses.map(pose => <img key={pose} data-pose={pose}
-      className={`fighter-frame fighter-${pose}${pose === 'strike' ? ' fighter-action' : ''}`}
-      style={getCombatFrameStyle(unitKey, pose === 'ready' ? 'recover' : pose === 'evade' ? 'run-a' : pose)}
-      src={getCombatMotionSprite(unitKey, pose === 'ready' ? 'recover' : pose === 'evade' ? 'run-a' : pose)}
-      alt={pose === 'ready' ? name : ''} draggable="false" />)}
+    {poses.map(pose => {
+      const sourcePose = resolveCombatPose(unitKey, pose);
+      return <img key={pose} data-pose={pose} data-source-pose={sourcePose}
+        className={`fighter-frame fighter-${pose}${pose === 'strike' ? ' fighter-action' : ''}`}
+        style={getCombatFrameStyle(unitKey, sourcePose)}
+        src={getCombatMotionSprite(unitKey, sourcePose)}
+        alt={pose === 'ready' ? name : ''} draggable="false" />;
+    })}
     {skillPose&&<img data-pose="skill" className="fighter-frame fighter-skill" src={skillPose.src} alt="" draggable="false" style={{'--combat-sprite-scale':skillPose.scale,'--combat-foot-offset':skillPose.footOffset || '0%'}}/>}
     {!defender && <SwordSkillAura plan={plan} unitKey={unitKey} />}
   </div></div>;

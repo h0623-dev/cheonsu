@@ -17,6 +17,7 @@ import { getCharacterArt } from '../src/data/characterArt.js';
 import { ADVANCED_CLASSES } from '../src/data/advancedClasses.js';
 import { EXPANSION_ENEMY_TEMPLATES, createExpansionEnemy, isExpansionEnemyKey, resolveExpansionEnemySupport } from '../src/data/expansionEnemies.js';
 import { getSkillAuraAnchor } from '../src/data/skillAuraAnchors.js';
+import { resolveCombatPose } from '../src/data/combatPoseIdentity.js';
 import { productionDuelProps } from './production-duel-fixture.mjs';
 import { getBossSpriteKey } from '../src/data/bossArt.js';
 import { getChapterBossName } from '../src/data/chapterIdentity.js';
@@ -260,7 +261,7 @@ function assertTarget(burst, state, label) {
 
 async function attachmentFrames(page, label, unit, plan) {
   const skillPose = Object.entries(getCharacterArt(unit).motion).find(([, source]) => source === plan.skillPose.src)?.[0];
-  const sourceAnchors = Object.fromEntries(['windup', 'strike', 'skill'].map(pose => [pose, getSkillAuraAnchor(unit, pose === 'skill' ? skillPose : pose, plan.weapon)]));
+  const sourceAnchors = Object.fromEntries(['windup', 'strike', 'skill'].map(pose => [pose, getSkillAuraAnchor(unit, resolveCombatPose(unit, pose === 'skill' ? skillPose : pose), plan.weapon)]));
   const frames = await page.locator('.vfx-blade-aura,.vfx-weapon-aura').evaluateAll((elements, anchors) => elements.map(aura => {
     const frame = aura.parentElement.querySelector(`.fighter-frame[data-pose="${aura.dataset.pose}"]`);
     const style = getComputedStyle(aura), frameStyle = frame && getComputedStyle(frame);
