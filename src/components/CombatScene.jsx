@@ -6,6 +6,7 @@ import { getPaintedVisualProfile } from '../data/unitVisuals.js';
 import { getBattleStyleBCutInArt, getEpicCombatBackdrop } from '../data/epicCombatArt.js';
 import { getBattleStyleBProfile } from '../data/skillSpectacle.js';
 import { resolveCombatPose } from '../data/combatPoseIdentity.js';
+import { isLargeCombatBody } from '../data/combatStature.js';
 import { useDuelAnimation } from '../engine/useDuelAnimation.js';
 import DuelEffects from './DuelEffects.jsx';
 import DuelImpacts from './DuelImpacts.jsx';
@@ -62,6 +63,8 @@ export default function CombatScene({ scene, attackerKey, defenderKey, backgroun
     : ['enemy', 'boss'].includes(scene.defender.type) && !selfSupport
       ? { unit: scene.defender, key: defenderKey, side: 'defender' } : null;
   const bossSide = scene.attacker.type === 'boss' ? 'attacker' : scene.defender.type === 'boss' && !selfSupport ? 'defender' : 'none';
+  const largeSide = bossSide === 'attacker' && isLargeCombatBody(attackerKey) ? 'attacker'
+    : bossSide === 'defender' && isLargeCombatBody(defenderKey) ? 'defender' : 'none';
   const bProfile = getBattleStyleBProfile(attackerKey);
   const defenderBProfile = getBattleStyleBProfile(defenderKey);
   const cutInArt = getBattleStyleBCutInArt(attackerKey,
@@ -78,7 +81,7 @@ export default function CombatScene({ scene, attackerKey, defenderKey, backgroun
   }, [duration, scene, timing.impact]);
   const result = presentation.guarding ? '수호' : presentation.healing ? `+${scene.outcome.damage}` : presentation.miss ? '회피' : `${scene.outcome.damage}`;
   return <div className="painted-combat-overlay" role="status" aria-label={`${scene.attacker.name} ${scene.title}`}>
-    <section ref={root} key={scene.id} data-battle-style="b" data-b-identity={bProfile?.id} data-b-motif={bProfile?.motif} data-choreography={plan.id} data-motion={plan.motion} data-presentation={timing.skill ? 'skill' : 'attack'} data-impact={timing.impact} data-contact-state={impacted ? 'resolved' : 'pending'} data-epic-art={cutInArt.kind} data-epic-theme={plan.spectacle?.theme || presentation.effect} data-epic-boss-side={bossSide} data-epic-frame={timing.skill ? 'skill' : scene.finish ? 'finish' : bossSide !== 'none' ? 'boss' : 'attack'} className={`painted-combat duel-choreographed epic-combat motion-${presentation.style} weapon-${weaponMotion} element-${presentation.effect} ${timing.skill ? 'is-skill' : 'is-basic'} ${scene.outcome?.crit ? 'is-critical' : ''} ${shakeEnabled ? 'shake-enabled' : ''} ${enemy?.unit.type === 'boss' ? 'has-boss' : ''} ${presentation.support ? 'is-support' : ''} ${selfSupport ? 'is-self-support' : ''} ${presentation.healing ? 'is-healing' : ''} ${presentation.guarding ? 'is-guarding' : ''} ${presentation.miss ? 'is-miss' : ''} ${scene.finish ? 'is-finish' : ''} ${!effectsEnabled ? 'motion-off' : ''}`}
+    <section ref={root} key={scene.id} data-battle-style="b" data-b-identity={bProfile?.id} data-b-motif={bProfile?.motif} data-choreography={plan.id} data-motion={plan.motion} data-presentation={timing.skill ? 'skill' : 'attack'} data-impact={timing.impact} data-contact-state={impacted ? 'resolved' : 'pending'} data-epic-art={cutInArt.kind} data-epic-theme={plan.spectacle?.theme || presentation.effect} data-epic-boss-side={bossSide} data-epic-large-side={largeSide} data-epic-frame={timing.skill ? 'skill' : scene.finish ? 'finish' : bossSide !== 'none' ? 'boss' : 'attack'} className={`painted-combat duel-choreographed epic-combat motion-${presentation.style} weapon-${weaponMotion} element-${presentation.effect} ${timing.skill ? 'is-skill' : 'is-basic'} ${scene.outcome?.crit ? 'is-critical' : ''} ${shakeEnabled ? 'shake-enabled' : ''} ${enemy?.unit.type === 'boss' ? 'has-boss' : ''} ${presentation.support ? 'is-support' : ''} ${selfSupport ? 'is-self-support' : ''} ${presentation.healing ? 'is-healing' : ''} ${presentation.guarding ? 'is-guarding' : ''} ${presentation.miss ? 'is-miss' : ''} ${scene.finish ? 'is-finish' : ''} ${!effectsEnabled ? 'motion-off' : ''}`}
       style={{ '--combat-duration': `${duration}ms`, '--combat-action-duration': `${duration * timing.action}ms`, '--combat-lead': `${duration * timing.lead}ms`, '--skill-color': getSkillPalette(presentation.effect), '--combat-scene': `url("${combatBackground}")`, '--battle-b-accent': plan.spectacle?.color || bProfile?.color || getSkillPalette(presentation.effect), '--battle-b-light': plan.spectacle?.core || bProfile?.core || '#fff3d2' }}>
       <header className="painted-combat-heading"><span>{scene.attacker.name}</span><h2>{timing.skill ? plan.name : scene.title}</h2><span>{scene.outcome?.crit ? '치명타' : scene.finish ? '결정타' : scene.effectLabel}</span></header>
       <div className="painted-combat-arena">

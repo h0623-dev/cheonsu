@@ -38,9 +38,9 @@ function cinematicMotionEasing(plan, at) {
 }
 
 // Add anticipation and follow-through without moving the authored release or contact anchors.
-function getCinematicActing(plan, { support, boss, constantBodyScale = false }) {
+function getCinematicActing(plan, { support, largeBody, constantBodyScale = false }) {
   const { bend, compression, retreat, follow, plant, recoil } = cinematicMotionProfiles[plan.weapon] || cinematicMotionProfiles.slash;
-  const weight = (support ? .48 : boss ? .72 : 1) * (plan.skill ? 1.12 : 1);
+  const weight = (support ? .48 : largeBody ? .72 : 1) * (plan.skill ? 1.12 : 1);
   const actor = plan.actor.map(point => [...point]), body = plan.body.map(point => [...point]);
   const sampleActor = at => sampleDuelTrack(plan.actor, clamp(at));
   const sampleBody = at => sampleDuelTrack(plan.body, clamp(at));
@@ -94,8 +94,8 @@ function getCinematicActing(plan, { support, boss, constantBodyScale = false }) 
     for (const [index, contact] of plan.contacts.entries()) {
       const hold = contact + (plan.contactPause || 0);
       const nextRelease = releases[index + 1] ?? .94;
-      const followAt = Math.min(nextRelease - .012, hold + (boss ? .037 : .025));
-      const recoverAt = Math.min(nextRelease - .004, hold + (boss ? .106 : .085));
+      const followAt = Math.min(nextRelease - .012, hold + (largeBody ? .037 : .025));
+      const recoverAt = Math.min(nextRelease - .004, hold + (largeBody ? .106 : .085));
       if (followAt > hold && recoverAt >= followAt) {
         const [x, y] = sampleActor(followAt), [angle, sx, sy] = sampleBody(followAt);
         addActor(followAt, x - retreat * weight * .6, y + plant * .5 * weight);
@@ -132,8 +132,9 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
       resetCinematicDuelLayout(attacker,defender);
       const motionDisabled = !enabled || media.matches;
       root.classList.toggle('duel-motion-disabled',motionDisabled);
-      const attackerBoss = root.dataset.epicBossSide === 'attacker', defenderBoss = root.dataset.epicBossSide === 'defender';
-      const acting = getCinematicActing(plan, { support, boss: attackerBoss, constantBodyScale: isBattleStyleBBaseKey(attackerKey) });
+      // 보스의 지위는 VFX에 남기고 실제 큰 몸에만 무거운 동작/피격을 적용합니다.
+      const attackerLarge = root.dataset.epicLargeSide === 'attacker', defenderLarge = root.dataset.epicLargeSide === 'defender';
+      const acting = getCinematicActing(plan, { support, largeBody: attackerLarge, constantBodyScale: isBattleStyleBBaseKey(attackerKey) });
       const theme = plan.spectacle?.theme || root.dataset.epicTheme;
       const contactFilter = theme === 'fire' ? 'brightness(1.19) sepia(.23) saturate(1.32)'
         : ['heal','holy','guard'].includes(theme) ? 'brightness(1.14) sepia(.08) saturate(1.06)'
@@ -178,7 +179,7 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
       }
       const layout=fitCinematicDuel({arena,attacker,defender:selfSupport?null:defender,attackerKey,
         defenderKey:defenderKey||defender?.dataset.unitKey,plan,acting,
-        contact:{tip:anchor.tip,scale,footOffset,body:contactBody},contactFraction,miss,support,finish,defenderBoss});
+        contact:{tip:anchor.tip,scale,footOffset,body:contactBody},contactFraction,miss,support,finish,defenderBoss: defenderLarge});
       if(Number.isFinite(layout.contactFraction))contactFraction=layout.contactFraction;
       const reachOptions=defender&&plan.moving?{attackerLeft:attacker.offsetLeft,attackerWidth:attacker.offsetWidth,
         defenderLeft:defender.offsetLeft,defenderWidth:defender.offsetWidth,tip:anchor.tip,scale,footOffset,
@@ -223,7 +224,7 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
       const impact=plan.impact;
       if(defender){
         const reaction = getDuelDefenderReaction(plan, { miss, support, finish });
-        const resistance = defenderBoss ? .34 : 1;
+        const resistance = defenderLarge ? .34 : 1;
         animate(defender,reaction.actor.map(([offset,x,y]) => ({ offset, transform: `translate(${x*resistance}%,${y*resistance}%)` })));
         if (!finish) animate(defender.querySelector('.fighter-body'), reaction.body.map(([offset,angle,sx,sy]) => ({ offset, transform: `rotate(${angle*resistance}deg) scale(${1+(sx-1)*resistance},${1+(sy-1)*resistance})` })));
         if(!support&&!miss){
@@ -245,7 +246,7 @@ export function useDuelAnimation(ref,plan,duration,{enabled,shake,miss,support,f
           }
           frames.push({offset:1,opacity:pose===(finish&&!support&&!miss?'recoil':'ready')?1:0});animate(image,frames);
         }
-        if(finish&&!support&&!miss)animate(defender.querySelector('.fighter-body'),[{offset:0,transform:'none',opacity:1},{offset:impact-.001,transform:'none',opacity:1},{offset:impact,transform:`rotate(${defenderBoss?2:6}deg) scale(.99,.98)`,opacity:1},{offset:impact+plan.contactPause,transform:`rotate(${defenderBoss?2:6}deg) scale(.99,.98)`,opacity:1},{offset:.84,transform:`translateY(${defenderBoss?3:6}%) rotate(${defenderBoss?4:12}deg)`,opacity:1},{offset:1,transform:`translateY(${defenderBoss?6:10}%) rotate(${defenderBoss?7:18}deg)`,opacity:0}]);
+        if(finish&&!support&&!miss)animate(defender.querySelector('.fighter-body'),[{offset:0,transform:'none',opacity:1},{offset:impact-.001,transform:'none',opacity:1},{offset:impact,transform:`rotate(${defenderLarge?2:6}deg) scale(.99,.98)`,opacity:1},{offset:impact+plan.contactPause,transform:`rotate(${defenderLarge?2:6}deg) scale(.99,.98)`,opacity:1},{offset:.84,transform:`translateY(${defenderLarge?3:6}%) rotate(${defenderLarge?4:12}deg)`,opacity:1},{offset:1,transform:`translateY(${defenderLarge?6:10}%) rotate(${defenderLarge?7:18}deg)`,opacity:0}]);
       }
       root.style.setProperty('--duel-contact-x', `${d / arena.clientWidth * 100}%`);
       root.style.setProperty('--duel-contact-y', `${dy / arena.clientHeight * 100}%`);

@@ -55,6 +55,7 @@ function defenderPoseTrack(plan, { miss, support, finish }) {
   return poses.sort((left, right) => left[0] - right[0]);
 }
 
+// The legacy defenderBoss option receives physical stature from the scene, not boss rank.
 function defenderMotion(plan, { miss, support, finish, defenderBoss }) {
   const reaction = getDuelDefenderReaction(plan, { miss, support, finish });
   const resistance = defenderBoss ? .34 : 1;
