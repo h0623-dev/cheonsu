@@ -34,8 +34,13 @@ export function getDeploymentCells(stage, actualFinalUnits = []) {
   // These must be the generated formation positions, never the mutable manual draft.
   // Preserve its front/rear spacing and offer only three nearby alternatives for a full party.
   const allowed = new Set(safeCells.map(key));
-  const automatic = actualFinalUnits.filter(unit => unit?.type === 'ally' && isPoint(unit)
-    && unit.x < width && unit.y < height).slice(0, MAX_DEPLOY_COUNT);
+  const referenceAnchors = Array.isArray(stage.deploymentAnchors)
+    ? stage.deploymentAnchors.filter(cell => isPoint(cell) && cell.x < width && cell.y < height)
+      .slice(0, MAX_DEPLOY_COUNT).map(point)
+    : [];
+  const automatic = referenceAnchors.length ? referenceAnchors
+    : actualFinalUnits.filter(unit => unit?.type === 'ally' && isPoint(unit)
+      && unit.x < width && unit.y < height).slice(0, MAX_DEPLOY_COUNT);
   const [u, v] = orientBattlePoint(.5, .8, direction);
   const anchors = automatic.length ? automatic : [{ x: u * Math.max(1, width - 1), y: v * Math.max(1, height - 1) }];
   const center = anchors.reduce((sum, cell) => ({ x: sum.x + cell.x / anchors.length, y: sum.y + cell.y / anchors.length }), { x: 0, y: 0 });
@@ -79,6 +84,10 @@ export function sanitizeDeploymentDraft(raw, stageId) {
   for (const [id, cell] of Object.entries(raw.placements)) {
     if (isSafeId(id) && isPoint(cell)) result.placements[id] = point(cell);
   }
+  if (Object.hasOwn(raw, 'autoFill') && raw.autoFill === false) result.autoFill = false;
+  if (Object.hasOwn(raw, 'formationIds') && Array.isArray(raw.formationIds)) {
+    result.formationIds = [...new Set(raw.formationIds.filter(isSafeId))].slice(0, MAX_DEPLOY_COUNT);
+  }
   return result;
 }
 
@@ -93,20 +102,22 @@ function currentCells(stage, units, suppliedCells) {
   return actual.filter(cell => supplied.has(key(cell)));
 }
 
-/** Keep valid manual choices before filling new members from their actual automatic positions. */
+/** Keep manual choices; only legacy or automatic drafts fill missing positions. */
 export function reconcileDeploymentPlacements(draft, stage, units, ids, cells) {
   const allies = new Map((Array.isArray(units) ? units : []).filter(unit => unit?.type === 'ally' && isSafeId(unit.id))
     .map(unit => [unit.id, unit]));
   const chosen = [...new Set((Array.isArray(ids) ? ids : []).filter(id => isSafeId(id) && allies.has(id)))];
   const available = currentCells(stage, units, cells);
   const allowed = allowedCellKeys(available), occupied = new Set(), placements = {};
-  const saved = sanitizeDeploymentDraft(draft, stage?.id).placements;
+  const sanitized = sanitizeDeploymentDraft(draft, stage?.id);
+  const saved = sanitized.placements;
   for (const id of chosen) {
     const cell = saved[id];
     if (!Object.hasOwn(saved, id) || !allowed.has(key(cell)) || occupied.has(key(cell))) continue;
     placements[id] = point(cell);
     occupied.add(key(cell));
   }
+  if (sanitized.autoFill === false) return placements;
   for (const id of chosen) {
     if (Object.hasOwn(placements, id)) continue;
     const automatic = allies.get(id);

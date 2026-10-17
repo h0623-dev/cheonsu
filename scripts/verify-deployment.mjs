@@ -31,8 +31,8 @@ function watch(page, viewport) {
   });
 }
 
-async function board(page) {
-  await waitForDeployment(page);
+async function board(page, options) {
+  await waitForDeployment(page, options);
 }
 
 async function layout(page, label) {
@@ -69,10 +69,10 @@ async function emptyCell(page, excluded = [], allowOccupied = false) {
   return point;
 }
 
-async function selectStage(page, stageId) {
+async function selectStage(page, stageId, options) {
   await page.locator('.campaign-stage-select').waitFor();
   await page.locator('.campaign-stage-select button').filter({ has: page.locator('strong').filter({ hasText: new RegExp(`^${stageId}장[.]`) }) }).click();
-  await board(page);
+  await board(page, options);
 }
 
 async function startBattle(page) {
@@ -163,12 +163,38 @@ async function runViewport(base, viewport) {
     await button('새 게임').click();
     await page.locator('.campaign-header .prominent-save').click();
     const freshCampaign = await saved();
-    await selectStage(page, 1);
+    await selectStage(page, 1, { autoPlace: false });
     assert.deepEqual(await page.locator('.deployment-roster-card').evaluateAll(elements => elements.map(element => element.dataset.characterId).sort()), [...initialIds].sort(), '보유 중인 4명만 표시하며 미보유 레온을 추가하지 않습니다');
-    assert.deepEqual(Object.keys(await placements(page)).sort(), [...initialIds].sort(), '기존 출전 부대는 안전한 초기 칸에 자동 배치됩니다');
+    assert.deepEqual(await placements(page), {}, '새 전장은 자동 배치를 누르기 전까지 아군을 임의로 배치하지 않습니다');
+    assert.equal(await page.locator('.deployment-board .ally-unit').count(), 0, '미배치 아군의 자동 좌표 그림을 지도에 남기지 않습니다');
+    assert.equal(await page.locator('.deployment-roster-card[data-placed="true"]').count(), 0, '출전 예정 명단을 실제 배치 완료로 표시하지 않습니다');
+    assert.equal(await page.locator('.deployment-start-btn').isDisabled(), true, '아직 배치하지 않은 편성으로 전투를 시작하지 않습니다');
     assert.equal(await page.locator('.deployment-roster-card[aria-pressed="true"]').count(), 0, '처음에는 이동 대상을 임의로 선택하지 않습니다');
+    await card(page, 'hero').click();
+    assert.deepEqual(await placements(page), {}, '보유 캐릭터 선택만으로 자동 배치하지 않습니다');
+    const firstManualCell = await emptyCell(page);
+    await cell(page, firstManualCell).click();
+    const firstManualPlacement = { hero: firstManualCell };
+    assert.deepEqual(await placements(page), firstManualPlacement, '파란 칸을 누르면 선택한 카일 한 명만 정확히 배치합니다');
+    assert.equal(await page.locator('.deployment-board .ally-unit').count(), 1, '수동으로 놓은 한 명만 지도에 표시합니다');
+    assert.equal(await page.locator('.deployment-roster-card[data-placed="true"]').count(), 1, '다른 출전 예정 아군을 배치 완료로 바꾸지 않습니다');
+    assert.equal(await page.locator('.deployment-start-btn').isDisabled(), true, '남은 출전 예정 동료를 배치하기 전에는 시작을 막습니다');
+    const partial = await saveDeployment();
+    const partialRaw = await rawSave();
+    assert.equal(partial.deploymentDraft.autoFill, false, '수동 배치 초안은 자동 보충을 하지 않는 상태로 저장합니다');
+    assert.deepEqual([...partial.deployedIds].sort(), [...initialIds].sort(), '부분 수동 배치 저장은 출전 예정 명단을 줄이지 않습니다');
+    await page.reload();
+    await button('이어하기').click();
+    await board(page, { autoPlace: false });
+    assert.equal(await rawSave(), partialRaw, '부분 배치 이어하기도 원본 저장 문자열을 덮어쓰지 않습니다');
+    assert.deepEqual(await placements(page), firstManualPlacement, '부분 배치를 이어하면 직접 정한 카일 좌표만 복원합니다');
+    assert.equal(await page.locator('.deployment-roster-card[data-placed="true"]').count(), 1, '부분 배치 복원이 다른 아군을 자동으로 추가하지 않습니다');
+    assert.equal(await page.locator('.deployment-start-btn').isDisabled(), true, '부분 배치 복원 후에도 남은 출전 인원을 배치해야 합니다');
+    result.checks.push('자동 배치 전 빈 전장과 시작 차단', '보유 캐릭터 선택 후 한 명 수동 배치', '부분 배치 저장·읽기 전용 이어하기·자동 보충 방지');
+    await button('자동 배치').click();
+    assert.deepEqual(Object.keys(await placements(page)).sort(), [...initialIds].sort(), '자동 배치를 명시적으로 누르면 기존 출전 부대를 안전한 초기 칸에 배치합니다');
     await layout(page, '초기 배치');
-    result.checks.push('실제 새 게임 보유 4명만 표시', '안전한 초기 배치와 단일 시작 버튼');
+    result.checks.push('실제 새 게임 보유 4명만 표시', '명시적 자동 배치와 단일 시작 버튼');
 
     const initial = await placements(page);
     await card(page, 'bram').click();

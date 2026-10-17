@@ -9,7 +9,7 @@ const ZOOM_OPTIONS = [
 ];
 
 export default function BattleDeploymentScene({
-  stage, roster = [], placedIds = [], placements = {}, selectedId = null,
+  stage, roster = [], placedIds = [], plannedIds = placedIds, placements = {}, selectedId = null,
   onSelect, onRemove, onAutoPlace, onStart, onSave, onExit, onMission, onManage,
   ready = false, busy = false, maxCount = 15, validCellCount = 0, hint = '',
   getPortrait, getRole, children,
@@ -22,6 +22,8 @@ export default function BattleDeploymentScene({
   const suppressClickUntilRef = useRef(0);
   const [zoom, setZoom] = useState('normal');
   const placed = useMemo(() => new Set(placedIds), [placedIds]);
+  const planned = useMemo(() => new Set(plannedIds), [plannedIds]);
+  const pendingCount = plannedIds.filter(id => !placed.has(id)).length;
   const selected = roster.find(unit => unit.id === selectedId) || null;
   const selectedPosition = selected && placed.has(selected.id) ? placements[selected.id] : null;
   const focusPosition = selectedPosition || placements.hero;
@@ -182,7 +184,7 @@ export default function BattleDeploymentScene({
   return <section className="deployment-screen battle-screen battle-final-concept battle-board-only battle-deployment-scene" aria-label="전장 배치" aria-busy={busy} lang="ko">
     <header className="battle-deploy-header">
       <button type="button" className="battle-deploy-icon-button" onClick={onExit} disabled={busy} aria-label="전장 배치를 나가고 원정 지도로 돌아가기" title="원정 지도로 돌아가기"><ArrowLeft size={20} aria-hidden="true" /></button>
-      <div className="battle-deploy-title"><h1>{stage?.id}장 · {stageTitle}</h1><p>전장 배치 <span>출전 {placedIds.length} / {maxCount}명 · 지정 {validCellCount}칸</span></p></div>
+      <div className="battle-deploy-title"><h1>{stage?.id}장 · {stageTitle}</h1><p>전장 배치 <span>출전 {placedIds.length} / {maxCount}명 · 지정 {validCellCount}칸</span>{pendingCount > 0 && <span>배치 필요 {pendingCount}명</span>}</p></div>
       <button type="button" className="battle-deploy-header-button" onClick={onMission} disabled={busy}><Flag size={16} aria-hidden="true" /><span>미션</span></button>
       {onManage && <button type="button" className="battle-deploy-header-button" onClick={onManage} disabled={busy}><Users size={16} aria-hidden="true" /><span>편성</span></button>}
     </header>
@@ -209,18 +211,19 @@ export default function BattleDeploymentScene({
     <footer className="battle-deploy-footer">
       <div className="battle-deploy-selection">
         <div><strong>{selected ? `${selected.name} 선택` : '배치할 아군을 선택하세요'}</strong><span>{selectedPosition ? `${getRole?.(selected) || '아군'} · ${selectedPosition.x + 1}, ${selectedPosition.y + 1}에 배치됨` : selected ? `${getRole?.(selected) || '아군'} · 파란 칸을 눌러 배치` : '아래 보유 캐릭터를 누르세요'}</span></div>
-        <button type="button" onClick={() => selected && onRemove?.(selected.id)} disabled={busy || !selected || !placed.has(selected.id) || selected.id === 'hero'} aria-label={selected?.id === 'hero' ? '주인공은 필수 출전으로 배치를 해제할 수 없습니다' : '선택 아군 배치 해제'}><X size={15} aria-hidden="true" />배치 해제</button>
+        <button type="button" onClick={() => selected && onRemove?.(selected.id)} disabled={busy || !selected || !planned.has(selected.id) || selected.id === 'hero'} aria-label={selected?.id === 'hero' ? '주인공은 필수 출전으로 배치를 해제할 수 없습니다' : '선택 아군 배치 해제'}><X size={15} aria-hidden="true" />{selected && !placed.has(selected.id) ? '출전 제외' : '배치 해제'}</button>
       </div>
       <div className="battle-deploy-roster-panel">
         <div className="battle-deploy-roster-heading"><h2>보유 캐릭터 <span>{roster.length}명</span></h2><span>옆으로 넘겨 보기</span></div>
         <div className="battle-deploy-roster" ref={rosterRef} aria-label="보유 캐릭터 목록">
           {roster.map(unit => {
             const isPlaced = placed.has(unit.id);
+            const placementLabel = isPlaced ? '배치됨' : planned.has(unit.id) ? '배치 필요' : '대기';
             const isSelected = unit.id === selectedId;
             const portrait = getPortrait?.(unit);
-            return <button type="button" key={unit.id} className={`deployment-roster-card battle-deploy-roster-card${isPlaced ? ' is-placed' : ''}${isSelected ? ' is-selected' : ''}`} data-character-id={unit.id} data-placed={isPlaced} aria-pressed={isSelected} disabled={busy} aria-label={`${unit.name} 배치 선택 · ${isPlaced ? '배치됨' : '대기'}${unit.id === 'hero' ? ' · 필수 출전' : ''}`} onClick={() => onSelect?.(unit.id)}>
+            return <button type="button" key={unit.id} className={`deployment-roster-card battle-deploy-roster-card${isPlaced ? ' is-placed' : ''}${isSelected ? ' is-selected' : ''}`} data-character-id={unit.id} data-placed={isPlaced} aria-pressed={isSelected} disabled={busy} aria-label={`${unit.name} 배치 선택 · ${placementLabel}${unit.id === 'hero' ? ' · 필수 출전' : ''}`} onClick={() => onSelect?.(unit.id)}>
               <span className="battle-deploy-face"><span aria-hidden="true">{unit.name?.slice(0, 1)}</span>{portrait && <img src={portrait} alt="" loading="lazy" draggable="false" onError={event => { event.currentTarget.hidden = true; }} />}</span>
-              <span className="battle-deploy-identity"><strong>{unit.name}{unit.id === 'hero' && <small>필수</small>}</strong><span>Lv.{unit.level || 1} · {getRole?.(unit) || '아군'}</span><em>{isPlaced ? '배치됨' : '대기'}</em></span>
+              <span className="battle-deploy-identity"><strong>{unit.name}{unit.id === 'hero' && <small>필수</small>}</strong><span>Lv.{unit.level || 1} · {getRole?.(unit) || '아군'}</span><em>{placementLabel}</em></span>
               {isSelected && <Check className="battle-deploy-selected-mark" size={14} aria-hidden="true" />}
             </button>;
           })}

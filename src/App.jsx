@@ -118,7 +118,7 @@ import { isNativeCapacitorRuntime } from "./engine/runtime.js";
 import "./index.css";
 
 const SAVE_KEY = "cheonsu_v01_save";
-const SAVE_VERSION = "1.99.185";
+const SAVE_VERSION = "1.99.186";
 const SAVE_BACKUP_KEY = "cheonsu_v01_auto_backup";
 const SAVE_PREVIOUS_KEY = "cheonsu_v01_previous_backup";
 const FEEDBACK_KEY = "cheonsu_v01_feedback_reports";
@@ -6843,8 +6843,12 @@ function getPartyForStageAccess(party, stage, clearedStages) {
   return applyRecruitProgress(baseParty, recruitProgress);
 }
 
-// The preview and first turn use the same roster, enemies and automatic formation.
-function createDeploymentBattleSetup(stage, party, deployedIds, gearEnhance, clearedStages, settings) {
+function createExplicitDeploymentDraft(stageId, placements, formationIds) {
+  return { stageId, placements, formationIds, autoFill: false };
+}
+
+// The preview and first turn use the same roster, enemies and placement reference.
+function createDeploymentBattleSetup(stage, party, deployedIds, gearEnhance, clearedStages, settings, formationIds = null) {
   const baseStage = stages.find(candidate => candidate.id === stage?.id);
   if (!baseStage) return null;
   const enhancement = normalizeGearEnhance(gearEnhance);
@@ -6862,7 +6866,22 @@ function createDeploymentBattleSetup(stage, party, deployedIds, gearEnhance, cle
   const battleStage = expandStageForLargeBattle(baseStage, battleParty.length);
   const battleUnits = spaceBattleFormations(battleStage,
     applyDifficultyToUnits(mergePartyIntoStage(battleStage, battleParty), settings.difficulty, settings.balancePreset));
-  return { stage: battleStage, units: battleUnits, roster, ids };
+  const referenceIds = Array.isArray(formationIds)
+    ? [...new Set(formationIds)].filter(id => owned.has(id)).slice(0, MAX_DEPLOY_COUNT) : [];
+  if (!referenceIds.length) return { stage: battleStage, units: battleUnits, roster, ids };
+  // Keep the marked area and enemy geometry anchored to the entry formation when
+  // a player adds/removes an ally. Counts, equipment and enemy scaling still use ids.
+  const referenceUnits = spaceBattleFormations(battleStage,
+    applyDifficultyToUnits(mergePartyIntoStage(battleStage, referenceIds.map(id => owned.get(id))), settings.difficulty, settings.balancePreset));
+  const enemyPositions = new Map(referenceUnits.filter(unit => unit.type !== 'ally').map(unit => [unit.id, unit]));
+  return {
+    stage: { ...battleStage, deploymentAnchors: referenceUnits.filter(unit => unit.type === 'ally').map(({ x, y }) => ({ x, y })) },
+    units: battleUnits.map(unit => {
+      const position = unit.type !== 'ally' && enemyPositions.get(unit.id);
+      return position ? { ...unit, x: position.x, y: position.y } : unit;
+    }),
+    roster, ids,
+  };
 }
 
 
@@ -8491,9 +8510,10 @@ export default function App() {
     playSfx("confirm");
   };
 
+  const deploymentFormationIds = deploymentDraft.stageId === deploymentStage?.id ? deploymentDraft.formationIds : null;
   const deploymentSetup = useMemo(() => deploymentStage && (screen === 'deployment' || lastPlayScreen === 'deployment')
-    ? createDeploymentBattleSetup(deploymentStage, party, deployedIds, gearEnhance, clearedStages, settings)
-    : null, [deploymentStage, screen, lastPlayScreen, party, deployedIds, gearEnhance, clearedStages, settings]);
+    ? createDeploymentBattleSetup(deploymentStage, party, deployedIds, gearEnhance, clearedStages, settings, deploymentFormationIds)
+    : null, [deploymentStage, screen, lastPlayScreen, party, deployedIds, gearEnhance, clearedStages, settings, deploymentFormationIds]);
   const deploymentCells = useMemo(() => deploymentSetup
     ? getDeploymentCells(deploymentSetup.stage, deploymentSetup.units) : [], [deploymentSetup]);
   const deploymentPlacements = useMemo(() => deploymentSetup
@@ -8503,7 +8523,9 @@ export default function App() {
     ? validateDeploymentPlacements(deploymentSetup.stage, deploymentSetup.units, deploymentSetup.ids, deploymentPlacements, deploymentCells)
     : { ok: false, reason: '전장을 선택해 주세요.' };
   const deploymentPreviewUnits = useMemo(() => deploymentSetup
-    ? applyDeploymentPlacements(deploymentSetup.units, deploymentPlacements) : [], [deploymentSetup, deploymentPlacements]);
+    ? applyDeploymentPlacements(deploymentSetup.units, deploymentPlacements)
+      .filter(unit => unit.type !== 'ally' || Object.hasOwn(deploymentPlacements, unit.id)) : [], [deploymentSetup, deploymentPlacements]);
+  const actuallyPlacedDeployIds = deploymentSetup?.ids.filter(id => Object.hasOwn(deploymentPlacements, id)) || [];
 
   const activeStage = (screen === 'deployment' && deploymentSetup?.stage) || selectedStage || stages[0];
   const activeStageMission = getStageMission(activeStage);
@@ -10440,7 +10462,8 @@ export default function App() {
   const beginStageBattle = (stage) => {
     pendingEnemyResumeRef.current = null;
     if (!stage || !playableStageIds.includes(stage.id)) return;
-    const setup = createDeploymentBattleSetup(stage, party, deployedIds, gearEnhance, clearedStages, settings);
+    const setup = createDeploymentBattleSetup(stage, party, deployedIds, gearEnhance, clearedStages, settings,
+      deploymentDraft.stageId === stage.id ? deploymentDraft.formationIds : null);
     if (!setup) return;
     const cells = getDeploymentCells(setup.stage, setup.units);
     const placements = reconcileDeploymentPlacements(deploymentDraft, setup.stage, setup.units, setup.ids, cells);
@@ -10462,7 +10485,7 @@ export default function App() {
     setParty(setup.roster);
     setSelectedStage(battleStage);
     const battleUnits = applyDeploymentPlacements(setup.units, placements);
-    setDeploymentDraft({ stageId: stage.id, placements });
+    setDeploymentDraft(createExplicitDeploymentDraft(stage.id, placements, (deploymentDraft.formationIds?.length ? deploymentDraft.formationIds : setup.ids)));
     setDeployedIds(battleUnits.filter(unit => unit.type === 'ally').map(unit => unit.id));
     const openingAlly = battleUnits.find((unit) => unit.id === "hero" && unit.type === "ally") ||
       battleUnits.find((unit) => unit.type === "ally");
@@ -11155,7 +11178,7 @@ export default function App() {
 
     setSelectedStage(targetStage);
     setDeploymentStage(targetStage);
-    if (deploymentDraft.stageId !== targetStage.id) setDeploymentDraft({ stageId: targetStage.id, placements: {} });
+    if (deploymentDraft.stageId !== targetStage.id) setDeploymentDraft(createExplicitDeploymentDraft(targetStage.id, {}, deployedIds));
     setSelectedDeployUnitId(null);
     clearVisuals();
     setResult(null);
@@ -11488,9 +11511,9 @@ export default function App() {
     setDeploymentStage(stage);
     setSelectedStage(stage);
     setDeployedIds(initialDeploy);
-    setDeploymentDraft({ stageId: stage.id, placements: {} });
+    setDeploymentDraft(createExplicitDeploymentDraft(stage.id, {}, initialDeploy));
     setSelectedDeployUnitId(null);
-    setDeploymentHint('보유 캐릭터를 고른 뒤 파란 배치 칸을 눌러 위치를 정하세요.');
+    setDeploymentHint('직접 배치하려면 보유 캐릭터와 파란 칸을 차례로 누르세요. 자동 배치를 누르면 출전 예정 아군을 한 번에 배치합니다.');
     clearVisuals();
     closeMobileCombatPanels();
     setResult(null);
@@ -11528,7 +11551,7 @@ export default function App() {
       deploymentSetup.roster.filter(unit => unit.type === 'ally').map(unit => unit.id));
     setDeploymentHint(placed.reason);
     if (!placed.ok) return;
-    setDeploymentDraft({ stageId: deploymentStage.id, placements: placed.placements });
+    setDeploymentDraft(createExplicitDeploymentDraft(deploymentStage.id, placed.placements, (deploymentDraft.formationIds?.length ? deploymentDraft.formationIds : deploymentSetup.ids)));
     if (adding) setDeployedIds([...deploymentSetup.ids, selectedDeployUnitId]);
     playSfx('confirm');
   };
@@ -11541,15 +11564,19 @@ export default function App() {
     }
     if (!deploymentSetup?.ids.includes(id)) return;
     setDeployedIds(deploymentSetup.ids.filter(unitId => unitId !== id));
-    setDeploymentDraft({ stageId: deploymentStage.id,
-      placements: Object.fromEntries(Object.entries(deploymentPlacements).filter(([unitId]) => unitId !== id)) });
+    setDeploymentDraft(createExplicitDeploymentDraft(deploymentStage.id,
+      Object.fromEntries(Object.entries(deploymentPlacements).filter(([unitId]) => unitId !== id)),
+      (deploymentDraft.formationIds?.length ? deploymentDraft.formationIds : deploymentSetup.ids)));
     setDeploymentHint('배치를 해제했습니다. 캐릭터를 선택하고 빈 파란 칸을 누르면 다시 배치됩니다.');
   };
 
   const resetDeploymentPositions = () => {
-    if (combatBusy || !deploymentStage) return;
-    setDeploymentDraft({ stageId: deploymentStage.id, placements: {} });
-    setDeploymentHint('출전 캐릭터를 안전한 시작 위치에 자동 배치했습니다.');
+    if (combatBusy || !deploymentSetup) return;
+    const automatic = reconcileDeploymentPlacements(null, deploymentSetup.stage, deploymentSetup.units, deploymentSetup.ids, deploymentCells);
+    setDeploymentDraft(createExplicitDeploymentDraft(deploymentStage.id, automatic, (deploymentDraft.formationIds?.length ? deploymentDraft.formationIds : deploymentSetup.ids)));
+    setSelectedDeployUnitId(null);
+    setDeploymentHint('자동 배치했습니다. 보유 캐릭터와 파란 칸을 눌러 원하는 위치로 다시 옮길 수 있습니다.');
+    playSfx('confirm');
   };
 
   const handleDeploymentMapPress = (event) => {
@@ -11722,7 +11749,7 @@ export default function App() {
       setDeploymentHint(deploymentValidation.reason);
       return;
     }
-    setDeploymentDraft({ stageId: deploymentStage.id, placements: deploymentPlacements });
+    setDeploymentDraft(createExplicitDeploymentDraft(deploymentStage.id, deploymentPlacements, (deploymentDraft.formationIds?.length ? deploymentDraft.formationIds : deploymentSetup.ids)));
     try {
       localStorage.setItem("cheonsu_last_deploy_v1", JSON.stringify(deploymentSetup.ids));
     } catch {
@@ -11803,7 +11830,7 @@ export default function App() {
       selectedUnit,
       deployedIds,
       deploymentDraft: deploymentSetup && (screen === 'deployment' || lastPlayScreen === 'deployment')
-        ? { stageId: deploymentSetup.stage.id, placements: deploymentPlacements }
+        ? sanitizeDeploymentDraft({ ...deploymentDraft, stageId: deploymentSetup.stage.id, placements: deploymentPlacements }, deploymentSetup.stage.id)
         : sanitizeDeploymentDraft(deploymentDraft, selectedStage?.id),
       mode,
       turn,
@@ -13679,7 +13706,7 @@ export default function App() {
     const nextStage = stages.find(stage => stage.id === selectedStage.id + 1);
     if (destination === "next" && nextStage && receipt.checkpoint.unlockedStages.includes(nextStage.id)) {
       setDeploymentStage(nextStage); setSelectedStage(nextStage);
-      setDeploymentDraft({ stageId: nextStage.id, placements: {} }); setSelectedDeployUnitId(null);
+      setDeploymentDraft(createExplicitDeploymentDraft(nextStage.id, {}, deployedIds)); setSelectedDeployUnitId(null);
       setDeploymentHint(`${nextStage.title} 지정된 시작 칸에 동료의 위치를 정하세요.`);
       setDeploymentIntroSeen(false); setDeploymentManagementOpen(false); setLastPlayScreen('deployment');
       openStoryScene(nextStage, 'intro', 'deployment');
@@ -16857,7 +16884,7 @@ export default function App() {
       {screen === 'deployment' && !deploymentManagementOpen && deploymentSetup && (
         <BattleDeploymentScene
           stage={deploymentSetup.stage} roster={deploymentSetup.roster}
-          placedIds={deploymentSetup.ids} placements={deploymentPlacements}
+          placedIds={actuallyPlacedDeployIds} plannedIds={deploymentSetup.ids} placements={deploymentPlacements}
           selectedId={selectedDeployUnitId} onSelect={selectDeploymentUnit}
           onRemove={removeDeploymentUnit} onAutoPlace={resetDeploymentPositions}
           onStart={confirmDeployment} onSave={saveGame}
