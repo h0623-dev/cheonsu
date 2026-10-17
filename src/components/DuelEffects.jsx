@@ -1,4 +1,4 @@
-import { getCombatEffect, getCombatMotionSprite } from '../data/combatArt.js';
+import { getCombatEffect, getCombatActingSprite as getCombatMotionSprite } from '../data/combatArt.js';
 
 function EffectShape({ effect }) {
   const {shape,variant}=effect;

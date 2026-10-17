@@ -1,5 +1,5 @@
 import frameBounds from '../data/cinematicFrameBounds.json' with { type: 'json' };
-import { getCombatFrameStyle } from '../data/combatArt.js';
+import { getCombatActingFrameStyle as getCombatFrameStyle } from '../data/combatArt.js';
 import { getDuelDefenderReaction, getDuelPoseAt, sampleDuelTrack } from '../data/duelPerformance.js';
 import { getDuelWeaponAnchor, projectDuelAnchor } from '../data/duelContactGeometry.js';
 import { resolveCombatPose } from '../data/combatPoseIdentity.js';

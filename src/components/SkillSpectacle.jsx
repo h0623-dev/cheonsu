@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import { getCombatFrameStyle } from '../data/combatArt.js';
+import { getCombatActingFrameStyle as getCombatFrameStyle } from '../data/combatArt.js';
 import { getSkillAuraAnchor } from '../data/skillAuraAnchors.js';
 import { resolveCombatPose } from '../data/combatPoseIdentity.js';
 import './skill-spectacle.css';

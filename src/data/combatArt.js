@@ -35,7 +35,6 @@ export function getSkillPalette(effect) {
 export function getCombatScale(key) { return mapManifest[key]?.combatScale || 1; }
 
 export function getCombatFrameStyle(key, pose) {
-  pose = resolveCombatPose(key, pose);
   const redesigned = getCharacterFrameStyle(isKnownCharacterArtKey(key) ? key : 'raider', pose);
   if (redesigned) return redesigned;
   const metrics = combatFrameMetrics[key]?.[pose];
@@ -45,6 +44,12 @@ export function getCombatFrameStyle(key, pose) {
   const reference = combatFrameMetrics[key].recover;
   const scale = visibleFraction * reference.height / (reference.bottom - reference.top + 1);
   return { '--combat-sprite-scale': scale, '--combat-foot-offset': `${100 * scale * (0.9375 - (metrics.bottom + 1) / metrics.height)}%` };
+}
+
+// The source-art API above retains each authored pose's metrics. Only the duel's
+// acting consumers resolve B's settled body for footwork, anticipation and recoil.
+export function getCombatActingFrameStyle(key, pose = 'recover') {
+  return getCombatFrameStyle(key, resolveCombatPose(key, pose));
 }
 
 const weapons = {
@@ -81,7 +86,6 @@ export function getCombatEffect(key) {
   return `/art/combat-v1/effects/${combatEffectIds.includes(assetKey) ? assetKey : 'impact'}.webp`;
 }
 export function getCombatMotionSprite(key, pose = 'recover') {
-  pose = resolveCombatPose(key, pose);
   const redesigned = getCharacterArt(isKnownCharacterArtKey(key) ? key : 'raider');
   if (redesigned) return redesigned.motion[combatMotionPoses.includes(pose) ? pose : 'recover'];
   if (bossManifest.units[key]) return bossManifest.units[key].motion[combatMotionPoses.includes(pose) ? pose : 'recover'];
@@ -89,6 +93,10 @@ export function getCombatMotionSprite(key, pose = 'recover') {
     return enemyManifest.units[key].motion[combatMotionPoses.includes(pose) ? pose : 'recover'];
   }
   return `/art/combat-v2/units/${Object.hasOwn(weapons, key) ? key : 'raider'}-${combatMotionPoses.includes(pose) ? pose : 'recover'}.webp`;
+}
+
+export function getCombatActingSprite(key, pose = 'recover') {
+  return getCombatMotionSprite(key, resolveCombatPose(key, pose));
 }
 export function getCombatPresentation(key, scene) {
   const healing = Boolean(scene.outcome?.heal);

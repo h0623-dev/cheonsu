@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo, useRef } from 'react';
-import { getCombatMotionSprite, getCombatPresentation, getCombatFrameStyle, getCombatTiming, getSkillPalette, getCombatSprite, getCombatChoreography } from '../data/combatArt.js';
+import { getCombatActingSprite as getCombatMotionSprite, getCombatPresentation, getCombatActingFrameStyle as getCombatFrameStyle, getCombatTiming, getSkillPalette, getCombatSprite, getCombatChoreography } from '../data/combatArt.js';
 import { getWeaponMotion as weaponMotionFor } from '../data/duelChoreography.js';
 import { createDuelLifecycle } from '../engine/duelLifecycle.js';
 import { getPaintedVisualProfile } from '../data/unitVisuals.js';

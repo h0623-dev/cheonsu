@@ -1,7 +1,7 @@
 import { useLayoutEffect } from 'react';
 import { getImpactParticle, getDuelDefenderReaction, getDuelPoseAt, sampleDuelTrack } from '../data/duelPerformance.js';
 import { getDuelWeaponAnchor, getDuelReach, projectDuelAnchor } from '../data/duelContactGeometry.js';
-import { getCombatFrameStyle } from '../data/combatArt.js';
+import { getCombatActingFrameStyle as getCombatFrameStyle } from '../data/combatArt.js';
 import { animateSkillSpectacle } from './animateSkillSpectacle.js';
 import { animateEpicCombat } from './animateEpicCombat.js';
 import { fitCinematicDuel, getCinematicReach, resetCinematicDuelLayout } from './fitCinematicDuel.js';
