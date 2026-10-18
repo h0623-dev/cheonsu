@@ -159,7 +159,7 @@ async function runViewport(base, viewport) {
       await dialog.waitFor();
       assert.equal(await dialog.getAttribute('data-mission-stage'), String(stageId));
       assert.equal(await page.locator('.battle-deployment-scene .world-battlefield').count(), 1, '도입 대화 뒤 실제 전장에서 미션과 배치를 안내합니다');
-      assert.equal(await page.locator('.deployment-roster-card[data-placed="true"]').count(), 15);
+      assert.equal(await page.locator('.deployment-roster-card[data-placed="true"]').count(), 0, '미션 확인과 명시적 자동 배치 전에는 출전 예정 아군을 임의로 배치하지 않습니다');
       const dialogContents = await contents(dialog);
       const unchangedCampaign = await rawSave();
       await geometry(page, dialog, { modal: true });
@@ -173,6 +173,7 @@ async function runViewport(base, viewport) {
         await page.screenshot({ path: path.join(output, `${viewport.width}x${viewport.height}-stage-${stageId}-mission.png`) });
       }
       await confirm(page, stageId % 3 === 0);
+      assert.equal(await page.locator('.deployment-roster-card[data-placed="true"]').count(), 15, '미션 확인 뒤 자동 배치를 명시적으로 선택하면 예정 아군 15명을 배치합니다');
       await page.locator('.deployment-roster-card[data-character-id="hero"]').click();
       const destination = page.locator('.deployment-board-cell[data-deployment-valid="true"][data-deployment-unit=""],.deployment-board-cell[data-deployment-valid="true"][data-deployment-unit="bram"]').first();
       const point = await destination.evaluate(element => ({ x: Number(element.dataset.deploymentX), y: Number(element.dataset.deploymentY) }));

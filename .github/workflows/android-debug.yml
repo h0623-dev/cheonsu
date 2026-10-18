@@ -19,6 +19,9 @@ on:
       - 'vite.config.js'
       - 'docs/update-notes.json'
       - 'scripts/build-android.mjs'
+      - 'scripts/qa-deployment-flow.mjs'
+      - 'scripts/verify-deployment.mjs'
+      - 'scripts/verify-stage-missions.mjs'
       - 'scripts/verify-skill-spectacle.mjs'
       - 'scripts/verify-expansion-50.mjs'
 permissions:
