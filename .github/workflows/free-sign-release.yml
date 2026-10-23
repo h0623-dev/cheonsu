@@ -38,7 +38,6 @@ jobs:
       SOURCE_RUN_ID: ${{ inputs.source_run_id }}
       SOURCE_RUN_ATTEMPT: ${{ inputs.source_run_attempt }}
       SOURCE_SHA: ${{ inputs.source_sha }}
-      CHEONSU_RELEASE_OUTPUT: ${{ runner.temp }}/cheonsu-signed-output
     steps:
       - name: Require enrolled immutable public control revision
         shell: bash
@@ -48,6 +47,8 @@ jobs:
             exit 1
           fi
           ulimit -c 0
+          # 공통 출력 경로는 runner가 배정된 실행 단계에서 설정합니다.
+          printf 'CHEONSU_RELEASE_OUTPUT=%s/cheonsu-signed-output\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           ref: ${{ env.CONTROL_SOURCE_REVISION }}
