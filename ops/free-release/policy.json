@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "state": "enrolled",
+  "source": {
+    "repository": "h0623-dev/cheonsu-source",
+    "repositoryId": 1248868923,
+    "branch": "main",
+    "workflowPath": ".github/workflows/private-unsigned-release.yml",
+    "workflowId": 393640798,
+    "workflowBlobSha": "700c79d0db970f63ee8cccf79c1f1b566e7a54b6"
+  },
+  "distribution": {
+    "repository": "h0623-dev/cheonsu",
+    "repositoryId": 1430565223,
+    "branch": "main",
+    "environment": "cheonsu-release",
+    "workflowPath": ".github/workflows/free-sign-release.yml"
+  },
+  "artifact": {
+    "namePrefix": "cheonsu-unsigned",
+    "maximumArchiveBytes": 450000000
+  }
+}

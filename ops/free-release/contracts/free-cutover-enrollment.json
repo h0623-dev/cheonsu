@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "state": "pending-enrollment",
+  "sourceExpectedSha": null,
+  "preparedStateSha256": null,
+  "targetRepositoryId": 1430565223,
+  "targetExpectedMainSha": null,
+  "controlCommitSha": null,
+  "expectedReleaseCount": null,
+  "expectedBinaryAssetCount": null,
+  "ownerSpendStopConfirmed": false,
+  "approvedPublicBlobs": null,
+  "sourceUnsignedWorkflow": {
+    "id": null,
+    "path": ".github/workflows/private-unsigned-release.yml",
+    "blobSha": null
+  },
+  "targetSigningWorkflow": {
+    "id": null,
+    "path": ".github/workflows/free-sign-release.yml",
+    "blobSha": null
+  },
+  "managementWorkflow": {
+    "id": null,
+    "path": ".github/workflows/free-repository-management.yml",
+    "blobSha": null,
+    "controlCommitSha": null
+  },
+  "keyMigrationProof": {
+    "runId": null,
+    "runAttempt": null,
+    "workflowId": null,
+    "path": ".github/workflows/migrate-signing-keys.yml",
+    "blobSha": null,
+    "controlCommitSha": null
+  },
+  "targetIdentityProof": {
+    "runId": null,
+    "runAttempt": null,
+    "workflowId": null,
+    "path": ".github/workflows/free-key-identity-preflight.yml",
+    "blobSha": null
+  },
+  "postCutoverPreflightProof": {
+    "runId": null,
+    "runAttempt": null,
+    "workflowId": null,
+    "path": ".github/workflows/free-key-identity-preflight.yml",
+    "blobSha": null
+  },
+  "requiredSourceRepositorySecrets": [
+    "CHEONSU_SIGN_REQUEST_TOKEN"
+  ],
+  "requiredTargetEnvironmentSecrets": [
+    "ANDROID_DEBUG_KEYSTORE_BASE64",
+    "OTA_PRIVATE_KEY_PEM",
+    "SOURCE_ARTIFACT_READ_TOKEN",
+    "PUBLIC_RELEASE_TOKEN"
+  ]
+}

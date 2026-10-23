@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "androidCertificateSha256": "1d4b2f3f8e7b30e2b9202121def34d4da6e39b4119bdd93c44a01aebfcd0518f",
+  "androidKeyAlias": "androiddebugkey",
+  "androidPackageId": "com.cheonsu.game",
+  "otaPublicKeyPem": "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAtUXYpt9XlmP/5B0jiJfW\nkjIqf0v0x9ItaaF252vvVQATs2FXrjuwGcZh6VmMLWF7egAi6M2WZ0tBOn1gzYGu\n/ql1+knZ39Kbj6WHtTMG3eMTMBEuvVGYLenGZV5+IQJK8TcFlc81j8LHLM5OkXVW\nAE71T/uV2ANxJs8Tfm6nWEf1gsBmQM/NFLJ61s/kqR2c6z6UATJXIugNnt8wy4zE\nzCb6F03idRh/4igiUPU04BJwxDn6pi2v5jOSZ4hcJeW0Xesw6WzOrN3gF4Sku5yM\nAcFwUKVITf6O4dENuG6TYtDw9zyPAOgfSsWZgPRMPDaSfYOP9keaL5Tv35zqmysn\n4RU8FMSGIVuQ0EvXc3BY/cPPa7KCN6ynwrUY+BjyHFSVjVYaz4eSNTgOvhm11HEU\n9DmxEVB44lZ3k79Oqtn/I98tZ+snTYiPmEuS63mF/dhce4FUXWg9/banN+iycx1y\nyRMAlbmCIxHq4zpvJsiMKR6zP12Q+k+4+iDG5lxXjVojAgMBAAE=\n-----END PUBLIC KEY-----\n",
+  "repository": "h0623-dev/cheonsu",
+  "manifestUrl": "https://raw.githubusercontent.com/h0623-dev/cheonsu/updates/latest.json",
+  "minNativeVersion": 350,
+  "nativeFingerprint": "e4a96c16ff95a60f9cf68440c9bf9fd72d5710729264d2464199f400a559dfc6",
+  "rollbackBaselineCommit": "5d0f52175792dcaf464fd870db3f6e7c313d9314",
+  "requiredCapacitorConfig": {
+    "appId": "com.cheonsu.game",
+    "appName": "천수",
+    "webDir": "dist",
+    "bundledWebRuntime": false,
+    "includePlugins": [],
+    "android": {
+      "adjustMarginsForEdgeToEdge": "auto"
+    },
+    "server": {
+      "androidScheme": "https"
+    },
+    "plugins": {
+      "FirebaseAuthentication": {
+        "skipNativeAuth": false,
+        "providers": [
+          "google.com"
+        ]
+      },
+      "LiveUpdate": {
+        "publicKey": "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAtUXYpt9XlmP/5B0jiJfW\nkjIqf0v0x9ItaaF252vvVQATs2FXrjuwGcZh6VmMLWF7egAi6M2WZ0tBOn1gzYGu\n/ql1+knZ39Kbj6WHtTMG3eMTMBEuvVGYLenGZV5+IQJK8TcFlc81j8LHLM5OkXVW\nAE71T/uV2ANxJs8Tfm6nWEf1gsBmQM/NFLJ61s/kqR2c6z6UATJXIugNnt8wy4zE\nzCb6F03idRh/4igiUPU04BJwxDn6pi2v5jOSZ4hcJeW0Xesw6WzOrN3gF4Sku5yM\nAcFwUKVITf6O4dENuG6TYtDw9zyPAOgfSsWZgPRMPDaSfYOP9keaL5Tv35zqmysn\n4RU8FMSGIVuQ0EvXc3BY/cPPa7KCN6ynwrUY+BjyHFSVjVYaz4eSNTgOvhm11HEU\n9DmxEVB44lZ3k79Oqtn/I98tZ+snTYiPmEuS63mF/dhce4FUXWg9/banN+iycx1y\nyRMAlbmCIxHq4zpvJsiMKR6zP12Q+k+4+iDG5lxXjVojAgMBAAE=\n-----END PUBLIC KEY-----\n",
+        "readyTimeout": 30000,
+        "autoBlockRolledBackBundles": true,
+        "autoDeleteBundles": true,
+        "autoUpdateStrategy": "none",
+        "httpTimeout": 120000
+      }
+    }
+  },
+  "requiredNativeBaseline": {
+    "minNativeVersion": 350,
+    "fingerprint": "e4a96c16ff95a60f9cf68440c9bf9fd72d5710729264d2464199f400a559dfc6",
+    "compatibilityReview": "1.99.151: API 36/AGP 8.9.2 및 Firebase 인증 라이브러리, 조건부 네이티브 플러그인 등록과 Play 전용 release 구성을 추가했습니다. 이전 APK에는 설치 안내만 제공하고 OTA는 APK 350 이상에 제한합니다. google-services.json은 미설정 상태이며 추후 설정 시 지문·최소 버전을 다시 검토해야 합니다."
+  },
+  "maximumApkBytes": 450000000,
+  "maximumPayloadBytes": 1073741824,
+  "maximumPayloadEntries": 10000
+}

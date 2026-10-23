@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "state": "enrolled",
+  "preparedStateSha256": "9a3595decb5b09064b5961e7f3e4f35e3d4f9c5c3fcd601ed0ceae78cc327634",
+  "source": {
+    "repositoryId": 1248868923,
+    "repository": "h0623-dev/cheonsu",
+    "privateRepository": "h0623-dev/cheonsu-source",
+    "expectedSha": "35e90b33f262eab9a790745d3fd75d007c55c053",
+    "managementWorkflow": {
+      "id": 393680346,
+      "path": ".github/workflows/repository-migration-management.yml",
+      "blobSha": "592abd4a2ff4454f0c1163c323c64ac2c8655cf9",
+      "controlCommitSha": "51b47a6393daa00165c7d4eea8cf2a9d8e5ebc9c"
+    }
+  },
+  "distribution": {
+    "repositoryId": 1430565223,
+    "stagingRepository": "h0623-dev/cheonsu-distribution-staging",
+    "repository": "h0623-dev/cheonsu",
+    "branch": "main",
+    "environment": "cheonsu-release",
+    "initialMainSha": "e8c9a7017fb12a6e6f8220ca45b29d7f3858cea7"
+  },
+  "allowedNames": {
+    "sourcePublic": "h0623-dev/cheonsu",
+    "sourcePrivate": "h0623-dev/cheonsu-source",
+    "targetStaging": "h0623-dev/cheonsu-distribution-staging",
+    "targetPublic": "h0623-dev/cheonsu"
+  },
+  "allowedOperations": [
+    "staging-proof",
+    "cutover",
+    "postflight",
+    "finalize",
+    "status"
+  ],
+  "recovery": {
+    "schemaVersion": 1,
+    "algorithm": "AES-256-GCM",
+    "artifactNameTemplate": "cheonsu-free-management-{runId}-{runAttempt}",
+    "archiveEntry": "checkpoint.json",
+    "maximumArtifactBytes": 25165824,
+    "maximumPlaintextBytes": 16777216
+  }
+}
