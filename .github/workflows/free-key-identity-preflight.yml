@@ -1,0 +1,82 @@
+# Inactive example. Install only after review as:
+# .github/workflows/free-key-identity-preflight.yml
+# Keep the immutable control SHA in env and checkout identical. This workflow
+# proves identities/read-write readiness, never signs or publishes a game.
+name: Public signing identity readiness
+run-name: cheonsu-free-identity/${{ inputs.phase }}/${{ inputs.source_expected_sha }}/${{ inputs.target_repository_id }}
+on:
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: '이름 전환 전 staging / 원본 비공개 전환 후 post-cutover'
+        type: choice
+        options: [staging, post-cutover]
+        required: true
+      source_expected_sha:
+        description: '현재 원본 main의 전체40자리 SHA'
+        type: string
+        required: true
+      target_repository_id:
+        description: '별도 public 배포 저장소의 실제 숫자 ID'
+        type: string
+        required: true
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: cheonsu-free-public-key-identity-readiness
+  cancel-in-progress: false
+jobs:
+  identify:
+    if: github.event.repository.id != 1248868923 && github.ref == 'refs/heads/main' && github.ref_type == 'branch' && (github.repository == 'h0623-dev/cheonsu-distribution-staging' || github.repository == 'h0623-dev/cheonsu')
+    environment: cheonsu-release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      # Full approved control SHA, never a caller-supplied revision or main.
+      CONTROL_SOURCE_REVISION: 881d7fa34ce7e0c3a88ccef3d812f25961bb03d7
+      KEY_IDENTITY_PHASE: ${{ inputs.phase }}
+      SOURCE_EXPECTED_SHA: ${{ inputs.source_expected_sha }}
+      TARGET_REPOSITORY_ID: ${{ inputs.target_repository_id }}
+    steps:
+      - name: Refuse an unenrolled control revision
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          if (!/^[a-f0-9]{40}$/.test(process.env.CONTROL_SOURCE_REVISION)) {
+            throw new Error('승인된 전체 control SHA가 없는 비활성 준비안입니다.');
+          }
+          NODE
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: 881d7fa34ce7e0c3a88ccef3d812f25961bb03d7
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Confirm actual signing identities and scoped API access inside GitHub
+        # SOURCE_ARTIFACT_READ_TOKEN: only the original source repository's
+        # Actions:read + Contents:read. Post-cutover requires successful PRIVATE
+        # repository access. Public staging reads alone do not prove that.
+        # PUBLIC_RELEASE_TOKEN: only this public target's Contents:write.
+        # Existing signing identities remain Environment-only and unchanged.
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          SOURCE_ARTIFACT_READ_TOKEN: ${{ secrets.SOURCE_ARTIFACT_READ_TOKEN }}
+          PUBLIC_RELEASE_TOKEN: ${{ secrets.PUBLIC_RELEASE_TOKEN }}
+          ANDROID_DEBUG_KEYSTORE_BASE64: ${{ secrets.ANDROID_DEBUG_KEYSTORE_BASE64 }}
+          OTA_PRIVATE_KEY_PEM: ${{ secrets.OTA_PRIVATE_KEY_PEM }}
+        shell: bash
+        run: |
+          set +x
+          ulimit -c 0
+          node ops/free-release/key-identity-preflight.mjs
+      # The only API mutation is a harmless unreferenced metadata blob. No
+      # source/private ZIP, signing file, secret value or artifact is uploaded.
+      # A successful staging record is not proof of future private access and
+      # does not itself approve renaming, privatization, signing or publication.

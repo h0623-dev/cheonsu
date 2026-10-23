@@ -1,0 +1,99 @@
+# Inactive example. Install only after metadata-only transfer completes as:
+# .github/workflows/free-repository-management.yml
+# Public control commit A is immutable; workflow main B pins A. Never run a
+# source/private controller here, and never inject Android/OTA signing keys.
+name: Public repository migration management
+run-name: cheonsu-free-management/${{ inputs.phase }}/${{ inputs.source_expected_sha }}/${{ inputs.checkpoint_run_id }}
+on:
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: 'staging 신원 확인 / 전환 / 사후 확인 / 완료 / 상태 읽기'
+        type: choice
+        options: [staging-proof, cutover, postflight, finalize, status]
+        required: true
+      checkpoint_repository_id:
+        description: '승인된 원본 또는 공개 저장소의 실제 숫자 ID'
+        type: string
+        required: true
+      checkpoint_run_id:
+        description: '인증된 암호화 복구 artifact를 발행한 run ID'
+        type: string
+        required: true
+      checkpoint_run_attempt:
+        description: '복구 artifact의 정확한 attempt'
+        type: string
+        required: true
+        default: '1'
+      source_expected_sha:
+        description: '원본 최종 main의 전체 40자리 SHA; 공개 control A/main B와 다릅니다'
+        type: string
+        required: true
+      owner_spend_stop_confirmed:
+        description: '소유자가 GitHub 사용량 초과 지출 중지 설정을 확인했습니다. cutover에 필수입니다'
+        type: boolean
+        required: true
+        default: false
+      confirmation:
+        description: 'preserve-game-data-identities-and-addresses 입력'
+        type: string
+        required: true
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: cheonsu-free-repository-management
+  cancel-in-progress: false
+jobs:
+  manage:
+    if: github.event.repository.id == 1430565223 && github.ref == 'refs/heads/main' && github.ref_type == 'branch' && (github.repository == 'h0623-dev/cheonsu-distribution-staging' || github.repository == 'h0623-dev/cheonsu')
+    environment: cheonsu-release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      CONTROL_SOURCE_REVISION: 881d7fa34ce7e0c3a88ccef3d812f25961bb03d7
+      MANAGEMENT_PHASE: ${{ inputs.phase }}
+      CHECKPOINT_REPOSITORY_ID: ${{ inputs.checkpoint_repository_id }}
+      CHECKPOINT_RUN_ID: ${{ inputs.checkpoint_run_id }}
+      CHECKPOINT_RUN_ATTEMPT: ${{ inputs.checkpoint_run_attempt }}
+      SOURCE_EXPECTED_SHA: ${{ inputs.source_expected_sha }}
+      OWNER_SPEND_STOP_CONFIRMED: ${{ inputs.owner_spend_stop_confirmed }}
+      MANAGEMENT_CONFIRMATION: ${{ inputs.confirmation }}
+    steps:
+      - name: Refuse an unenrolled public control revision
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          if (!/^[a-f0-9]{40}$/.test(process.env.CONTROL_SOURCE_REVISION)) {
+            throw new Error('승인된 공개 control SHA가 없는 비활성 준비안입니다.');
+          }
+          NODE
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: 881d7fa34ce7e0c3a88ccef3d812f25961bb03d7
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+      - name: Run pinned public administration with encrypted recovery only
+        # Both credentials are injected inside this protected public Environment.
+        # The management PAT is short-lived and selected-repository scoped. The
+        # checkpoint key already exists; this job cannot generate or replace it.
+        # No Android/OTA keys, source checkout or unsigned build belongs here.
+        env:
+          CHEONSU_REPOSITORY_MIGRATION_TOKEN: ${{ secrets.CHEONSU_REPOSITORY_MIGRATION_TOKEN }}
+          CHEONSU_MIGRATION_CHECKPOINT_KEY: ${{ secrets.CHEONSU_MIGRATION_CHECKPOINT_KEY }}
+        shell: bash
+        run: |
+          set +x
+          ulimit -c 0
+          node ops/free-release/management/public-controller.mjs
+      - name: Preserve exactly one encrypted checkpoint on success or failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: cheonsu-free-management-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/cheonsu-free-management-${{ github.run_id }}-${{ github.run_attempt }}/checkpoint.json
+          if-no-files-found: error
+          retention-days: 7
