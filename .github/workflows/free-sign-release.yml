@@ -3,6 +3,7 @@
 # CONTROL_SOURCE_REVISION은 이 공개 저장소에 최소 제어 파일만 별도로 커밋한
 # 승인 SHA입니다. private 원본의 소스 커밋/트리를 공개로 가져오지 않습니다.
 name: Free protected Android APK and OTA
+run-name: cheonsu-source/${{ inputs.source_run_id }}/${{ inputs.source_run_attempt }}/${{ inputs.source_sha }}
 on:
   workflow_dispatch:
     inputs:
