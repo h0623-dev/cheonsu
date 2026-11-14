@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "version": "1.99.205",
+  "sourceSha": "15c5d552d0906b3f8d296450cfb5ebf569ecc315",
+  "nativeVersionCode": 404,
+  "minNativeVersion": 350,
+  "maxNativeVersion": 404,
+  "files": [
+    {
+      "name": "cheonsu_1.99.205_ota.zip",
+      "size": 321158074,
+      "sha256": "d4231592b6c3bba44eb42f66bfe4a9ad0804a6511e38d62fa6e176cff28f2133"
+    },
+    {
+      "name": "cheonsu_1.99.205_update_debug.apk",
+      "size": 330254668,
+      "sha256": "c5651534ebfa457fb0f59975f516439805adfc7355b155b2ae927a72ad835edd"
+    }
+  ]
+}
