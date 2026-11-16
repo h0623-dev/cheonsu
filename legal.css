@@ -1,0 +1,8 @@
+body { margin: 0; color: #26352d; background: #f8faf8; font: 16px/1.8 Arial, sans-serif; }
+main { max-width: 740px; padding: 32px 20px 80px; margin: auto; overflow-wrap: anywhere; }
+h1 { font-size: 28px; } h2 { font-size: 20px; margin-top: 32px; }
+a { color: #246443; } .notice { background: #eaf0ed; border-left: 4px solid #658673; padding: 16px; }
+table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+th, td { border: 1px solid #cfdad3; padding: 8px 10px; text-align: left; vertical-align: top; font-size: 15px; }
+th { background: #eaf0ed; }
+footer { margin-top: 48px; font-size: 14px; color: #5b6b62; }
