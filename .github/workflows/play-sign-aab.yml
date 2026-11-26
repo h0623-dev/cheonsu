@@ -1,0 +1,171 @@
+# Google Play 제출용 AAB 서명.
+# 1) verify: 비공개 원본의 "Play unsigned AAB" main 실행이 소유자가 돌린 성공 실행인지 GitHub API로 확인하고
+#    그 실행의 AAB 하나만 받아 기록(패키지·버전·해시)과 대조합니다. 기존 cheonsu-release의 원본 읽기 토큰만 쓰며
+#    APK/OTA 서명 키는 이 job에 들어오지 않습니다. 비공개 원본의 코드는 실행하지 않습니다.
+# 2) sign: cheonsu-play-release Environment의 Play 업로드 키로만 서명합니다. 결과는 이 실행의 artifact로 남깁니다.
+# 기존 APK/OTA 서명·게시(free-sign-release.yml)와 업데이트 채널은 건드리지 않습니다.
+name: Play sign AAB
+run-name: play-sign/${{ inputs.source_run_id }}
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: 'cheonsu-source의 Play unsigned AAB 성공 run ID'
+        type: string
+        required: true
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: cheonsu-play-sign
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.repository == 'h0623-dev/cheonsu' && github.repository_id == '1430565223' && github.event.repository.private == false && github.ref == 'refs/heads/main' && github.actor == 'h0623-dev' && github.triggering_actor == 'h0623-dev'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    environment: cheonsu-release
+    steps:
+      - name: Verify the private Play build and take its single AAB
+        env:
+          SOURCE_READ_TOKEN: ${{ secrets.SOURCE_ARTIFACT_READ_TOKEN }}
+          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          set +x
+          [[ "$SOURCE_RUN_ID" =~ ^[0-9]{1,20}$ ]] || { echo 'run ID 형식이 다릅니다.'; exit 1; }
+          [ -n "${SOURCE_READ_TOKEN:-}" ] || { echo '원본 읽기 자격증명이 없습니다.'; exit 1; }
+          WORK="$RUNNER_TEMP/play-verify"; mkdir -p "$WORK/out"
+          api() { curl -fsS --proto '=https' --max-time 60 -H "Authorization: Bearer $SOURCE_READ_TOKEN" -H 'Accept: application/vnd.github+json' -H 'X-GitHub-Api-Version: 2022-11-28' "https://api.github.com/repos/h0623-dev/cheonsu-source$1"; }
+          api '' > "$WORK/repo.json"
+          api "/actions/runs/$SOURCE_RUN_ID" > "$WORK/run.json"
+          api '/git/ref/heads/main' > "$WORK/main.json"
+          api "/actions/runs/$SOURCE_RUN_ID/artifacts?per_page=100" > "$WORK/artifacts.json"
+          node --input-type=module - "$WORK" <<'NODE'
+          import fs from 'node:fs';
+          const dir = process.argv[2];
+          const read = name => JSON.parse(fs.readFileSync(`${dir}/${name}`, 'utf8'));
+          const must = (ok, message) => { if (!ok) { console.error(message); process.exit(1); } };
+          const repo = read('repo.json'), run = read('run.json'), main = read('main.json'), list = read('artifacts.json');
+          must(repo.id === 1248868923 && repo.full_name === 'h0623-dev/cheonsu-source' && repo.private === true, '원본 저장소 신원이 다릅니다.');
+          must(run.repository?.id === 1248868923 && run.head_repository?.id === 1248868923, '다른 저장소의 실행입니다.');
+          must(run.path === '.github/workflows/play-aab-build.yml' && run.event === 'workflow_dispatch' && run.head_branch === 'main', 'Play unsigned AAB의 main 수동 실행만 받습니다.');
+          must(run.status === 'completed' && run.conclusion === 'success', '성공으로 끝난 실행만 받습니다.');
+          must(run.actor?.login === 'h0623-dev' && run.triggering_actor?.login === 'h0623-dev', '소유자가 실행한 빌드만 받습니다.');
+          must(/^[a-f0-9]{40}$/.test(run.head_sha) && /^[a-f0-9]{40}$/.test(main.object?.sha || ''), 'SHA 형식이 다릅니다.');
+          const name = `cheonsu-play-aab-unsigned-${run.id}-${run.run_attempt}`;
+          const matches = (list.artifacts || []).filter(item => item.name === name);
+          must(matches.length === 1 && !matches[0].expired && matches[0].size_in_bytes > 0 && matches[0].size_in_bytes < 700_000_000, `artifact ${name} 하나가 필요합니다.`);
+          fs.writeFileSync(`${dir}/facts.env`, `HEAD_SHA=${run.head_sha}\nMAIN_SHA=${main.object.sha}\nARTIFACT_ID=${matches[0].id}\nRUN_ATTEMPT=${run.run_attempt}\n`);
+          NODE
+          source "$WORK/facts.env"
+          # 빌드한 커밋이 지금 main의 조상(또는 같음)이어야 합니다.
+          STATUS="$(api "/compare/$HEAD_SHA...$MAIN_SHA" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.parse(s).status))')"
+          [[ "$STATUS" == identical || "$STATUS" == ahead ]] || { echo "빌드 커밋이 현재 main에 없습니다 ($STATUS)."; exit 1; }
+          curl -fsSL --proto '=https' --max-time 600 --max-filesize 700000000 -H "Authorization: Bearer $SOURCE_READ_TOKEN" -H 'Accept: application/vnd.github+json' \
+            "https://api.github.com/repos/h0623-dev/cheonsu-source/actions/artifacts/$ARTIFACT_ID/zip" -o "$WORK/artifact.zip"
+          python3 -I - "$WORK/artifact.zip" "$WORK/out" <<'PY'
+          import json, sys, zipfile, re, os
+          src, out = sys.argv[1], sys.argv[2]
+          with zipfile.ZipFile(src) as z:
+              names = z.namelist()
+              aabs = [n for n in names if re.fullmatch(r'cheonsu-play-[0-9.]+-unsigned\.aab', n)]
+              if sorted(names) != sorted(aabs + ['cheonsu-play-aab.json']) or len(aabs) != 1:
+                  sys.exit(f'예상한 두 파일이 아닙니다: {names}')
+              for info in z.infolist():
+                  if info.file_size > 700_000_000: sys.exit('파일이 너무 큽니다.')
+              for n in names:
+                  with z.open(n) as r, open(os.path.join(out, n), 'wb') as w:
+                      while chunk := r.read(1 << 20): w.write(chunk)
+          PY
+          node --input-type=module - "$WORK" <<'NODE'
+          import fs from 'node:fs'; import crypto from 'node:crypto';
+          const dir = process.argv[2];
+          const facts = Object.fromEntries(fs.readFileSync(`${dir}/facts.env`, 'utf8').trim().split('\n').map(line => line.split('=')));
+          const record = JSON.parse(fs.readFileSync(`${dir}/out/cheonsu-play-aab.json`, 'utf8'));
+          const must = (ok, message) => { if (!ok) { console.error(message); process.exit(1); } };
+          must(record.kind === 'cheonsu-play-unsigned-aab' && record.signed === false, '서명 전 AAB 기록이 아닙니다.');
+          must(record.package === 'com.steey.cheonsu', `Play 패키지가 다릅니다: ${record.package}`);
+          must(record.sourceRepository === 'h0623-dev/cheonsu-source' && record.sourceSha === facts.HEAD_SHA && String(record.runId) === process.env.SOURCE_RUN_ID && String(record.runAttempt) === facts.RUN_ATTEMPT, '기록의 출처가 실행과 다릅니다.');
+          must(/^[0-9]+\.[0-9]+\.[0-9]+$/.test(record.versionName) && Number.isSafeInteger(record.versionCode) && record.versionCode > 0, '버전 기록이 다릅니다.');
+          must(record.file === `cheonsu-play-${record.versionName}-unsigned.aab`, '파일 이름이 기록과 다릅니다.');
+          const bytes = fs.readFileSync(`${dir}/out/${record.file}`);
+          must(bytes.length === record.bytes && crypto.createHash('sha256').update(bytes).digest('hex') === record.sha256, 'AAB 크기·해시가 기록과 다릅니다.');
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### 원본 확인\n- run ${process.env.SOURCE_RUN_ID}, SHA \`${facts.HEAD_SHA}\`\n- ${record.package} ${record.versionName} / ${record.versionCode}, ${record.bytes} 바이트\n`);
+          NODE
+          echo "PLAY_VERIFY_DIR=$WORK/out" >> "$GITHUB_ENV"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: play-aab-verified-${{ github.run_id }}
+          path: ${{ env.PLAY_VERIFY_DIR }}/*
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+  sign:
+    needs: verify
+    if: github.repository == 'h0623-dev/cheonsu' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    environment: cheonsu-play-release
+    steps:
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Take the verified AAB from this run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          WORK="$RUNNER_TEMP/play-sign"; mkdir -p "$WORK/in" "$WORK/out"
+          ID="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts" --jq ".artifacts[] | select(.name == \"play-aab-verified-$GITHUB_RUN_ID\") | .id")"
+          [[ "$ID" =~ ^[0-9]+$ ]] || { echo '확인된 AAB를 찾지 못했습니다.'; exit 1; }
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$ID/zip" > "$WORK/verified.zip"
+          python3 -I -c "import sys,zipfile; z=zipfile.ZipFile(sys.argv[1]); n=sorted(z.namelist()); assert len(n)==2 and 'cheonsu-play-aab.json' in n, n; z.extractall(sys.argv[2])" "$WORK/verified.zip" "$WORK/in"
+          echo "PLAY_SIGN_DIR=$WORK" >> "$GITHUB_ENV"
+      - name: Sign with the Play upload key only
+        env:
+          PLAY_UPLOAD_KEYSTORE_B64: ${{ secrets.PLAY_UPLOAD_KEYSTORE_B64 }}
+          PLAY_UPLOAD_STORE_PASSWORD: ${{ secrets.PLAY_UPLOAD_STORE_PASSWORD }}
+          PLAY_UPLOAD_KEY_ALIAS: ${{ secrets.PLAY_UPLOAD_KEY_ALIAS }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          set +x
+          ulimit -c 0
+          umask 077
+          [ -n "${PLAY_UPLOAD_KEYSTORE_B64:-}" ] && [ -n "${PLAY_UPLOAD_STORE_PASSWORD:-}" ] && [ -n "${PLAY_UPLOAD_KEY_ALIAS:-}" ] || { echo 'Play 업로드 키가 아직 없습니다. Play upload key setup을 먼저 실행합니다.'; exit 1; }
+          W="$PLAY_SIGN_DIR"
+          RECORD="$W/in/cheonsu-play-aab.json"
+          FILE="$(node -p "require('$RECORD').file")"; VERSION="$(node -p "require('$RECORD').versionName")"
+          node -e 'const r=require(process.argv[1]);const b=require("fs").readFileSync(process.argv[2]);if(require("crypto").createHash("sha256").update(b).digest("hex")!==r.sha256)process.exit(1)' "$RECORD" "$W/in/$FILE"
+          KEYDIR="$(mktemp -d "$RUNNER_TEMP/k.XXXXXX")"
+          trap 'rm -rf -- "$KEYDIR"' EXIT
+          printf '%s' "$PLAY_UPLOAD_KEYSTORE_B64" | base64 -d > "$KEYDIR/upload.p12"
+          SIGNED="$W/out/cheonsu-play-$VERSION.aab"
+          jarsigner -storetype PKCS12 -keystore "$KEYDIR/upload.p12" -storepass:env PLAY_UPLOAD_STORE_PASSWORD -keypass:env PLAY_UPLOAD_STORE_PASSWORD \
+            -sigalg SHA256withRSA -digestalg SHA-256 -signedjar "$SIGNED" "$W/in/$FILE" "$PLAY_UPLOAD_KEY_ALIAS" >/dev/null
+          rm -rf -- "$KEYDIR"
+          # 업로드 키는 자체 서명 인증서라 -strict는 항상 경고로 실패합니다. 서명 자체의 검증 결과만 봅니다.
+          jarsigner -verify "$SIGNED" 2>/dev/null | grep -qx 'jar verified.' || { echo '서명 검증에 실패했습니다.'; exit 1; }
+          CERT="$(keytool -printcert -jarfile "$SIGNED" | grep -E '^[[:space:]]*SHA(1|256):' | sed 's/^[[:space:]]*//')"
+          SHA="$(sha256sum "$SIGNED" | cut -d' ' -f1)"; SIZE="$(stat -c %s "$SIGNED")"
+          {
+            echo '### Play 제출용 AAB'
+            echo "- 파일: \`cheonsu-play-$VERSION.aab\` ($SIZE 바이트)"
+            echo "- SHA-256: \`$SHA\`"
+            echo '- 업로드 인증서:'
+            echo '```'; echo "$CERT"; echo '```'
+            echo '아래 Artifacts의 zip을 받아 풀고, 안의 .aab를 Play Console 테스트 트랙에 올립니다.'
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "PLAY_SIGNED_FILE=$SIGNED" >> "$GITHUB_ENV"
+          echo "PLAY_SIGNED_NAME=cheonsu-play-$VERSION-signed-$GITHUB_RUN_ID" >> "$GITHUB_ENV"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ${{ env.PLAY_SIGNED_NAME }}
+          path: ${{ env.PLAY_SIGNED_FILE }}
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0

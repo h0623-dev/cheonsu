@@ -1,0 +1,77 @@
+# Google Play 업로드 키를 한 번 만들어 cheonsu-play-release Environment 비밀로 넣습니다.
+# - 소유자가 main에서 수동 실행할 때만 돕니다. 기존 cheonsu-release(APK/OTA 키)와 별개입니다.
+# - 키·비밀번호 값은 출력하지 않고 runner 밖으로 내보내지 않습니다. 공개 인증서 지문만 요약에 남깁니다.
+# - 이미 키가 있으면 덮어쓰지 않고 멈춥니다.
+# - 필요한 한시 비밀: PLAY_KEY_SETUP_TOKEN (이 공개 저장소 하나만, Environments·Secrets 쓰기, 하루 만료).
+#   실행이 끝나면 소유자가 토큰과 이 비밀을 지웁니다.
+# - 업로드 키를 잃어도 Play App Signing에서는 Play Console의 업로드 키 재설정으로 복구할 수 있습니다.
+name: Play upload key setup
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: '새 Play 업로드 키를 만들려면 create 를 입력합니다'
+        type: string
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: cheonsu-play-key-setup
+  cancel-in-progress: false
+jobs:
+  create-key:
+    if: github.repository == 'h0623-dev/cheonsu' && github.repository_id == '1430565223' && github.event.repository.private == false && github.ref == 'refs/heads/main' && github.actor == 'h0623-dev' && github.triggering_actor == 'h0623-dev' && inputs.confirm == 'create'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: cheonsu-play-release
+    steps:
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Create the upload key and store it only in the protected Environment
+        env:
+          GH_TOKEN: ${{ secrets.PLAY_KEY_SETUP_TOKEN }}
+          REPOSITORY: h0623-dev/cheonsu
+          ENVIRONMENT_NAME: cheonsu-play-release
+          KEY_ALIAS: cheonsu-upload
+        shell: bash
+        run: |
+          set -euo pipefail
+          set +x
+          ulimit -c 0
+          umask 077
+          [ -n "${GH_TOKEN:-}" ] || { echo 'Environment 비밀 PLAY_KEY_SETUP_TOKEN이 없습니다.'; exit 1; }
+          EXISTING="$(gh api "repos/$REPOSITORY/environments/$ENVIRONMENT_NAME/secrets" --jq '.secrets[].name')"
+          if printf '%s\n' "$EXISTING" | grep -qx PLAY_UPLOAD_KEYSTORE_B64; then
+            echo '이미 업로드 키가 있습니다. 덮어쓰지 않고 멈춥니다.'; exit 1
+          fi
+          WORK="$(mktemp -d "$RUNNER_TEMP/play-key.XXXXXX")"
+          trap 'rm -rf -- "$WORK"' EXIT
+          PLAY_STORE_PASSWORD="$(openssl rand -base64 48 | tr -dc 'A-Za-z0-9' | head -c 40)"
+          [ "${#PLAY_STORE_PASSWORD}" -eq 40 ]
+          echo "::add-mask::$PLAY_STORE_PASSWORD"
+          export PLAY_STORE_PASSWORD
+          # PKCS12 키 저장소는 저장소·키 비밀번호가 같습니다.
+          keytool -genkeypair -storetype PKCS12 -keystore "$WORK/upload.p12" -alias "$KEY_ALIAS" \
+            -keyalg RSA -keysize 4096 -validity 10950 -dname 'CN=Steey, O=Steey, C=KR' \
+            -storepass:env PLAY_STORE_PASSWORD -keypass:env PLAY_STORE_PASSWORD >/dev/null 2>&1
+          base64 -w0 "$WORK/upload.p12" > "$WORK/upload.b64"
+          gh secret set PLAY_UPLOAD_KEYSTORE_B64 --repo "$REPOSITORY" --env "$ENVIRONMENT_NAME" < "$WORK/upload.b64"
+          printf '%s' "$PLAY_STORE_PASSWORD" | gh secret set PLAY_UPLOAD_STORE_PASSWORD --repo "$REPOSITORY" --env "$ENVIRONMENT_NAME"
+          printf '%s' "$KEY_ALIAS" | gh secret set PLAY_UPLOAD_KEY_ALIAS --repo "$REPOSITORY" --env "$ENVIRONMENT_NAME"
+          AFTER="$(gh api "repos/$REPOSITORY/environments/$ENVIRONMENT_NAME/secrets" --jq '.secrets[].name')"
+          for name in PLAY_UPLOAD_KEYSTORE_B64 PLAY_UPLOAD_STORE_PASSWORD PLAY_UPLOAD_KEY_ALIAS; do
+            printf '%s\n' "$AFTER" | grep -qx "$name" || { echo "$name 저장을 확인하지 못했습니다."; exit 1; }
+          done
+          FINGERPRINTS="$(keytool -list -v -storetype PKCS12 -keystore "$WORK/upload.p12" -storepass:env PLAY_STORE_PASSWORD -alias "$KEY_ALIAS" | grep -E '^[[:space:]]*SHA(1|256):' | sed 's/^[[:space:]]*//')"
+          {
+            echo '### Play 업로드 키 생성 완료'
+            echo "Environment \`$ENVIRONMENT_NAME\`에 비밀 3개(키 저장소, 비밀번호, 별칭)를 넣었습니다. 값은 출력하지 않았습니다."
+            echo
+            echo '업로드 인증서 지문(공개 정보, Firebase에도 등록합니다):'
+            echo '```'
+            echo "$FINGERPRINTS"
+            echo '```'
+            echo '다음: PLAY_KEY_SETUP_TOKEN 비밀과 그 토큰을 지웁니다.'
+          } >> "$GITHUB_STEP_SUMMARY"
